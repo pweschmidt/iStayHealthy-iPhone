@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Efavirenz, Emtricitabine, Tenofovir</string>
+		<string>Atripla</string>
+		<string>combination tablet</string>
+		<string>atripla</string>
+	</array>
+	<array>
+		<string>Zidovudine, Lamivudine</string>
+		<string>Combivir</string>
+		<string>combination tablet</string>
+		<string>combivir</string>
+	</array>
+	<array>
+		<string>Emtricitabine, Rilpivirine, Tenofovir</string>
+		<string>Complera</string>
+		<string>combination tablet</string>
+		<string>complera</string>
+	</array>
+	<array>
+		<string>Lopinavir/Ritonavir</string>
+		<string>Kaletra/Aluvia</string>
+		<string>combination tablet</string>
+		<string>kaletra</string>
+	</array>
+	<array>
+		<string>Abacavir, Lamivudine</string>
+		<string>Kivexa/Epzicom</string>
+		<string>combination tablet</string>
+		<string>kivexa</string>
+	</array>
+	<array>
+		<string>Lamivudine, Stavudine, Nevirapine</string>
+		<string>Triomune</string>
+		<string>combination tablet</string>
+		<string>triomune</string>
+	</array>
+	<array>
+		<string>Zidovudine, Lamivudine, Abacavir</string>
+		<string>Trizivir</string>
+		<string>combination tablet</string>
+		<string>trizivir</string>
+	</array>
+	<array>
+		<string>Tenofovir, Emtricitabine</string>
+		<string>Truvada</string>
+		<string>combination tablet</string>
+		<string>truvada</string>
+	</array>
+	<array>
+		<string>Zidovudine,Lamivudine</string>
+		<string>Zidovudine/Lamivudine (generic)</string>
+		<string>combination tablet</string>
+		<string>combivir</string>
+	</array>
+	<array>
+		<string>Didanosine</string>
+		<string>Didanosine (generic)</string>
+		<string>NRTI/NtRTI</string>
+		<string>didanosine</string>
+	</array>
+	<array>
+		<string>Emtricitabine</string>
+		<string>Emtriva</string>
+		<string>NRTI/NtRTI</string>
+		<string>emtriva</string>
+	</array>
+	<array>
+		<string>Lamivudine</string>
+		<string>Epivir</string>
+		<string>NRTI/NtRTI</string>
+		<string>epivir</string>
+	</array>
+	<array>
+		<string>Zidovudine</string>
+		<string>Retrovir</string>
+		<string>NRTI/NtRTI</string>
+		<string>retrovir</string>
+	</array>
+	<array>
+		<string>Stavudine</string>
+		<string>Stavudine (generic)</string>
+		<string>NRTI/NtRTI</string>
+		<string>stavudine</string>
+	</array>
+	<array>
+		<string>Didanosine</string>
+		<string>Videx</string>
+		<string>NRTI/NtRTI</string>
+		<string>videx</string>
+	</array>
+	<array>
+		<string>Tenofovir</string>
+		<string>Viread</string>
+		<string>NRTI/NtRTI</string>
+		<string>viread</string>
+	</array>
+	<array>
+		<string>Stavudine</string>
+		<string>Zerit</string>
+		<string>NRTI/NtRTI</string>
+		<string>zerit</string>
+	</array>
+	<array>
+		<string>Abacavir</string>
+		<string>Ziagen</string>
+		<string>NRTI/NtRTI</string>
+		<string>ziagen</string>
+	</array>
+	<array>
+		<string>Zidovudine</string>
+		<string>Zidovudine (generic)</string>
+		<string>NRTI/NtRTI</string>
+		<string>zidovudine</string>
+	</array>
+	<array>
+		<string>Tipranavir</string>
+		<string>Aptivus</string>
+		<string>Protease Inhibitor</string>
+		<string>aptivus</string>
+	</array>
+	<array>
+		<string>Indinavir</string>
+		<string>Crixivan</string>
+		<string>Protease Inhibitor</string>
+		<string>crixivan</string>
+	</array>
+	<array>
+		<string>Saquinavir</string>
+		<string>Invirase</string>
+		<string>Protease Inhibitor</string>
+		<string>invirase</string>
+	</array>
+	<array>
+		<string>Fosamprenavir</string>
+		<string>Lexiva/Telzir</string>
+		<string>Protease Inhibitor</string>
+		<string>lexiva</string>
+	</array>
+	<array>
+		<string>Ritonavir</string>
+		<string>Norvir</string>
+		<string>Protease Inhibitor</string>
+		<string>norvir</string>
+	</array>
+	<array>
+		<string>Darunavir</string>
+		<string>Prezista</string>
+		<string>Protease Inhibitor</string>
+		<string>prezista</string>
+	</array>
+	<array>
+		<string>Atazanavir</string>
+		<string>Reyataz</string>
+		<string>Protease Inhibitor</string>
+		<string>reyataz</string>
+	</array>
+	<array>
+		<string>Nelfinavir</string>
+		<string>Viracept</string>
+		<string>Protease Inhibitor</string>
+		<string>viracept</string>
+	</array>
+	<array>
+		<string>Rilpivirine</string>
+		<string>Edurant</string>
+		<string>NNRTI</string>
+		<string>edurant</string>
+	</array>
+	<array>
+		<string>Etravirine</string>
+		<string>Intelence</string>
+		<string>NNRTI</string>
+		<string>intelence</string>
+	</array>
+	<array>
+		<string>Delavirdine</string>
+		<string>Rescriptor</string>
+		<string>NNRTI</string>
+		<string>rescriptor</string>
+	</array>
+	<array>
+		<string>Efavirenz</string>
+		<string>Sustiva/Stocrin</string>
+		<string>NNRTI</string>
+		<string>sustiva</string>
+	</array>
+	<array>
+		<string>Nevirapine</string>
+		<string>Viramune XR</string>
+		<string>NNRTI</string>
+		<string>viramune</string>
+	</array>
+	<array>
+		<string>Maraviroc</string>
+		<string>Celsentri/Selzentry</string>
+		<string>Fusion/Entry Inhibitor</string>
+		<string>celsentri</string>
+	</array>
+	<array>
+		<string>Enfuvirtide</string>
+		<string>Fuzeon</string>
+		<string>Fusion/Entry Inhibitor</string>
+		<string>fuzeon</string>
+	</array>
+	<array>
+		<string>Raltegravir</string>
+		<string>Isentress</string>
+		<string>Integrase Inhibitor</string>
+		<string>isentress</string>
+	</array>
+</array>
+</plist>

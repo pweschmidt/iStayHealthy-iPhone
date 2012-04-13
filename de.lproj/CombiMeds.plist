@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Efavirenz, Emtricitabin, Tenofovir</string>
+		<string>Atripla</string>
+		<string>NNRTI, NRTI, NRTI</string>
+		<string>atripla</string>
+	</array>
+	<array>
+		<string>Zidovudin, Lamivudin</string>
+		<string>Combivir</string>
+		<string>NRTI, NRTI</string>
+		<string>combivir</string>
+	</array>
+	<array>
+		<string>Emtricitabin, Rilpivirin, Tenofovir</string>
+		<string>Complera/Eviplera</string>
+		<string>NRTI, NNRTI, NRTI</string>
+		<string>complera</string>
+	</array>
+	<array>
+		<string>Lopinavir/Ritonavir</string>
+		<string>Kaletra/Aluvia</string>
+		<string>PI, PI</string>
+		<string>kaletra</string>
+	</array>
+	<array>
+		<string>Abacavir, Lamivudin</string>
+		<string>Kivexa(EU)/Epzicom(US)</string>
+		<string>NRTI, NRTI</string>
+		<string>kivexa</string>
+	</array>
+	<array>
+		<string>Zidovudin, Lamivudin, Abacavir</string>
+		<string>Trizivir</string>
+		<string>NRTI, NRTI, NRTI</string>
+		<string>trizivir</string>
+	</array>
+	<array>
+		<string>Tenofovir, Emtricitabin</string>
+		<string>Truvada</string>
+		<string>NRTI, NRTI</string>
+		<string>truvada</string>
+	</array>
+</array>
+</plist>

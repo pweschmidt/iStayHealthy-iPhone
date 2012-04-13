@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Maraviroc</string>
+		<string>Celsentri/Selzentry(US)</string>
+		<string>Entry Inhibitor</string>
+		<string>celsentri</string>
+	</array>
+	<array>
+		<string>Enfuvirtide</string>
+		<string>Fuzeon</string>
+		<string>Entry Inhibitor</string>
+		<string>fuzeon</string>
+	</array>
+</array>
+</plist>

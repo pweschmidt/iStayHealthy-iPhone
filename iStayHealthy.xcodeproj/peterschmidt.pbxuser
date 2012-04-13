@@ -1,0 +1,2029 @@
+// !$*UTF8*$!
+{
+	1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 594}}";
+			sepNavSelRange = "{262, 21}";
+			sepNavVisRange = "{0, 1296}";
+		};
+	};
+	1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {2371, 4706}}";
+			sepNavSelRange = "{4172, 0}";
+			sepNavVisRange = "{0, 1178}";
+		};
+	};
+	1D6058900D05DD3D006BFB54 /* iStayHealthy */ = {
+		activeExec = 0;
+		executables = (
+			C4B8032F12D3657800A5A38F /* iStayHealthy */,
+		);
+	};
+	28C3AD890F43EF2300507BA6 /* iStayHealthy.xcdatamodel */ = {
+		uiCtxt = {
+			"Xdesign Model Editor Bookmark Key" = {
+				UIContextForDetailArea = {
+					_indexOfSelectedPane = 0;
+					_indexOfSelectedView = 0;
+				};
+				UIContextForEntityArea = {
+					_indexOfSelectedView = 0;
+					chosenTableColumnns = (
+						"ET Entity",
+						"ET Abstract",
+						"ET Class",
+					);
+					chosenTableColumnns_sortDirections = (
+						YES,
+					);
+					chosenTableColumnns_sortKeys = (
+						name,
+					);
+					chosenTableColumnns_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableWidths = (
+						103.000000,
+						22.000000,
+						45.080078,
+					);
+				};
+				UIContextForLayoutManager = {
+					detailSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {591, 218}}",
+							"{{596, 0}, {310, 218}}",
+						);
+					};
+					diagramSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {906, 220}}",
+							"{{0, 225}, {906, 355}}",
+						);
+					};
+					tableSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {195, 218}}",
+							"{{200, 0}, {391, 218}}",
+						);
+					};
+				};
+				UIContextForPropertyArea = {
+					_indexOfSelectedView = 0;
+					chosenTableColumnnFRTs = (
+						"FT Fetch Request",
+						"FT Predicate",
+					);
+					chosenTableColumnnFRTs_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnFRTs_sortKeys = (
+						name,
+					);
+					chosenTableColumnnFRTs_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsAT = (
+						"AT Attribute",
+						"AT Type",
+					);
+					chosenTableColumnnsAT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsAT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsAT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsFPT = (
+						"FP FetchedProperty",
+						"FP Destination",
+						"FP Predicate",
+					);
+					chosenTableColumnnsFPT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsFPT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsFPT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsPT = (
+						"PT Property",
+						"PT Kind",
+						"PT SharedKeyOne",
+					);
+					chosenTableColumnnsPT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsPT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsPT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsRT = (
+						"RT Relationship",
+						"RT Destination",
+					);
+					chosenTableColumnnsRT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsRT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsRT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableWidthsAT = (
+						128.000000,
+						64.000000,
+					);
+					chosenTableWidthsFPT = (
+						128.000000,
+						64.000000,
+						144.764160,
+					);
+					chosenTableWidthsFRT = (
+						128.000000,
+						249.764160,
+					);
+					chosenTableWidthsPT = (
+						128.000000,
+						108.110840,
+						128.570801,
+					);
+					chosenTableWidthsRT = (
+						128.000000,
+						64.000000,
+					);
+				};
+				"xdesign model browser state key - shown/hidden" = 1;
+				"xdesign model diagram view visible rect key" = "{{-97, 0}, {891, 340}}";
+			};
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Distribution;
+		activeExecutable = C4B8032F12D3657800A5A38F /* iStayHealthy */;
+		activeSDKPreference = iphoneos4.2;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* iStayHealthy */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* iStayHealthy */,
+		);
+		breakpoints = (
+			C4398E5612F44CC100FE77EB /* RepeatAlertDetailViewController.m:57 */,
+		);
+		codeSenseManager = C4B8033712D3658800A5A38F /* Code sense */;
+		executables = (
+			C4B8032F12D3657800A5A38F /* iStayHealthy */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					563,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					675,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXSymbolsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXSymbolsDataSource_SymbolNameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					16,
+					200,
+					50,
+					615,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXSymbolsDataSource_SymbolTypeIconID,
+					PBXSymbolsDataSource_SymbolNameID,
+					PBXSymbolsDataSource_SymbolTypeID,
+					PBXSymbolsDataSource_ReferenceNameID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					635,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 320264869;
+			PBXWorkspaceStateSaveDate = 320264869;
+		};
+		perUserProjectItems = {
+			C41FDF0313144E080017FC3C /* PBXTextBookmark */ = C41FDF0313144E080017FC3C /* PBXTextBookmark */;
+			C4276CE512DB6DBF001DDCD2 /* PBXTextBookmark */ = C4276CE512DB6DBF001DDCD2 /* PBXTextBookmark */;
+			C4276D3812DB740D001DDCD2 /* PBXTextBookmark */ = C4276D3812DB740D001DDCD2 /* PBXTextBookmark */;
+			C4398F8A12F48BED00FE77EB /* PBXTextBookmark */ = C4398F8A12F48BED00FE77EB /* PBXTextBookmark */;
+			C4646EB11311376A00E2EB92 /* PBXTextBookmark */ = C4646EB11311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB21311376A00E2EB92 /* PBXTextBookmark */ = C4646EB21311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB31311376A00E2EB92 /* PBXTextBookmark */ = C4646EB31311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB41311376A00E2EB92 /* PBXTextBookmark */ = C4646EB41311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB51311376A00E2EB92 /* PBXTextBookmark */ = C4646EB51311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB61311376A00E2EB92 /* PBXTextBookmark */ = C4646EB61311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB71311376A00E2EB92 /* PBXTextBookmark */ = C4646EB71311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB81311376A00E2EB92 /* PBXTextBookmark */ = C4646EB81311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EB91311376A00E2EB92 /* PBXTextBookmark */ = C4646EB91311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EBA1311376A00E2EB92 /* PBXTextBookmark */ = C4646EBA1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EBD1311376A00E2EB92 /* PBXTextBookmark */ = C4646EBD1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EBE1311376A00E2EB92 /* PBXTextBookmark */ = C4646EBE1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EBF1311376A00E2EB92 /* PBXTextBookmark */ = C4646EBF1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EC11311376A00E2EB92 /* PBXTextBookmark */ = C4646EC11311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EC41311376A00E2EB92 /* PBXTextBookmark */ = C4646EC41311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EC51311376A00E2EB92 /* PBXTextBookmark */ = C4646EC51311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EC61311376A00E2EB92 /* PBXTextBookmark */ = C4646EC61311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EC71311376A00E2EB92 /* PBXTextBookmark */ = C4646EC71311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EC81311376A00E2EB92 /* PBXTextBookmark */ = C4646EC81311376A00E2EB92 /* PBXTextBookmark */;
+			C4646EC91311376A00E2EB92 /* PBXTextBookmark */ = C4646EC91311376A00E2EB92 /* PBXTextBookmark */;
+			C4646ECA1311376A00E2EB92 /* PlistBookmark */ = C4646ECA1311376A00E2EB92 /* PlistBookmark */;
+			C4646ECB1311376A00E2EB92 /* PBXTextBookmark */ = C4646ECB1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646ECC1311376A00E2EB92 /* PBXTextBookmark */ = C4646ECC1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646ECD1311376A00E2EB92 /* PBXTextBookmark */ = C4646ECD1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646ECE1311376A00E2EB92 /* PBXTextBookmark */ = C4646ECE1311376A00E2EB92 /* PBXTextBookmark */;
+			C4646ECF1311376A00E2EB92 /* PBXTextBookmark */ = C4646ECF1311376A00E2EB92 /* PBXTextBookmark */;
+			C47D7D5113115FC6004A76A2 /* PBXTextBookmark */ = C47D7D5113115FC6004A76A2 /* PBXTextBookmark */;
+			C47D7D5213115FC6004A76A2 /* PBXTextBookmark */ = C47D7D5213115FC6004A76A2 /* PBXTextBookmark */;
+			C47D7D5413115FC6004A76A2 /* PBXTextBookmark */ = C47D7D5413115FC6004A76A2 /* PBXTextBookmark */;
+			C48AEB36130F19A100C979AB /* PBXTextBookmark */ = C48AEB36130F19A100C979AB /* PBXTextBookmark */;
+			C4920B3F12D8D48900A6B1AD /* PBXTextBookmark */ = C4920B3F12D8D48900A6B1AD /* PBXTextBookmark */;
+			C4920C3112D8F13C00A6B1AD /* XDModelBookmark */ = C4920C3112D8F13C00A6B1AD /* XDModelBookmark */;
+			C4920C3212D8F13C00A6B1AD /* XDModelBookmark */ = C4920C3212D8F13C00A6B1AD /* XDModelBookmark */;
+			C4920C3312D8F13C00A6B1AD /* PBXTextBookmark */ = C4920C3312D8F13C00A6B1AD /* PBXTextBookmark */;
+			C4920C3412D8F13C00A6B1AD /* XDModelBookmark */ = C4920C3412D8F13C00A6B1AD /* XDModelBookmark */;
+			C4920C3612D8F13C00A6B1AD /* PBXTextBookmark */ = C4920C3612D8F13C00A6B1AD /* PBXTextBookmark */;
+			C4920C3712D8F13C00A6B1AD /* PBXTextBookmark */ = C4920C3712D8F13C00A6B1AD /* PBXTextBookmark */;
+			C4B803FC12D3708A00A5A38F /* PBXTextBookmark */ = C4B803FC12D3708A00A5A38F /* PBXTextBookmark */;
+			C4B803FE12D3708A00A5A38F /* PBXTextBookmark */ = C4B803FE12D3708A00A5A38F /* PBXTextBookmark */;
+			C4B8054912D397AB00A5A38F /* PBXTextBookmark */ = C4B8054912D397AB00A5A38F /* PBXTextBookmark */;
+			C4C349B9130F0E70004BE854 /* PBXTextBookmark */ = C4C349B9130F0E70004BE854 /* PBXTextBookmark */;
+			C4C349BB130F0E70004BE854 /* PBXTextBookmark */ = C4C349BB130F0E70004BE854 /* PBXTextBookmark */;
+			C4C349BC130F0E70004BE854 /* PBXTextBookmark */ = C4C349BC130F0E70004BE854 /* PBXTextBookmark */;
+			C4C349BD130F0E70004BE854 /* PBXTextBookmark */ = C4C349BD130F0E70004BE854 /* PBXTextBookmark */;
+			C4C349DF130F12AC004BE854 /* PBXTextBookmark */ = C4C349DF130F12AC004BE854 /* PBXTextBookmark */;
+			C4C3AA171316DE4C000FC699 /* PBXTextBookmark */ = C4C3AA171316DE4C000FC699 /* PBXTextBookmark */;
+			C4C3AA181316DE4C000FC699 /* PBXTextBookmark */ = C4C3AA181316DE4C000FC699 /* PBXTextBookmark */;
+			C4C3AA191316DE4C000FC699 /* PBXTextBookmark */ = C4C3AA191316DE4C000FC699 /* PBXTextBookmark */;
+			C4C3AA391316DFBF000FC699 /* PBXBookmark */ = C4C3AA391316DFBF000FC699 /* PBXBookmark */;
+			C4C3AA5E1316E425000FC699 /* PlistBookmark */ = C4C3AA5E1316E425000FC699 /* PlistBookmark */;
+			C4C3AA621316EEBC000FC699 /* PBXTextBookmark */ = C4C3AA621316EEBC000FC699 /* PBXTextBookmark */;
+			C4C3AA631316EEBC000FC699 /* PlistBookmark */ = C4C3AA631316EEBC000FC699 /* PlistBookmark */;
+			C4C50B2D13143899007DB156 /* PBXTextBookmark */ = C4C50B2D13143899007DB156 /* PBXTextBookmark */;
+			C4CC60BD12F56B5B00C5EAE2 /* PBXBookmark */ = C4CC60BD12F56B5B00C5EAE2 /* PBXBookmark */;
+			C4CC60C412F56B5B00C5EAE2 /* PBXTextBookmark */ = C4CC60C412F56B5B00C5EAE2 /* PBXTextBookmark */;
+			C4CD002812EB41C30030EADE /* PBXTextBookmark */ = C4CD002812EB41C30030EADE /* PBXTextBookmark */;
+			C4D1604A13144BD800559A93 /* PBXTextBookmark */ = C4D1604A13144BD800559A93 /* PBXTextBookmark */;
+			C4EB1FDA12FD8EB100A8712D /* PBXTextBookmark */ = C4EB1FDA12FD8EB100A8712D /* PBXTextBookmark */;
+			C4EB200212FD918300A8712D /* PBXTextBookmark */ = C4EB200212FD918300A8712D /* PBXTextBookmark */;
+			C4EB200312FD918300A8712D /* PBXTextBookmark */ = C4EB200312FD918300A8712D /* PBXTextBookmark */;
+			C4EB201112FD923600A8712D /* PBXTextBookmark */ = C4EB201112FD923600A8712D /* PBXTextBookmark */;
+			C4EB203112FD944500A8712D /* PBXTextBookmark */ = C4EB203112FD944500A8712D /* PBXTextBookmark */;
+			C4EB204912FD967B00A8712D /* PBXTextBookmark */ = C4EB204912FD967B00A8712D /* PBXTextBookmark */;
+			C4EB204B12FD967B00A8712D /* PBXTextBookmark */ = C4EB204B12FD967B00A8712D /* PBXTextBookmark */;
+			C4EE812F1306DAAE0097B903 /* PBXBookmark */ = C4EE812F1306DAAE0097B903 /* PBXBookmark */;
+			C4EE81301306DAAE0097B903 /* PBXBookmark */ = C4EE81301306DAAE0097B903 /* PBXBookmark */;
+			C4EE81311306DAAE0097B903 /* PBXBookmark */ = C4EE81311306DAAE0097B903 /* PBXBookmark */;
+			C4EE81321306DAAE0097B903 /* PBXBookmark */ = C4EE81321306DAAE0097B903 /* PBXBookmark */;
+			C4EE81331306DAAE0097B903 /* PBXTextBookmark */ = C4EE81331306DAAE0097B903 /* PBXTextBookmark */;
+			C4EE81371306DAAE0097B903 /* PBXTextBookmark */ = C4EE81371306DAAE0097B903 /* PBXTextBookmark */;
+			C4EE81381306DAAE0097B903 /* PBXTextBookmark */ = C4EE81381306DAAE0097B903 /* PBXTextBookmark */;
+			C4EE813F1306DAAE0097B903 /* PBXTextBookmark */ = C4EE813F1306DAAE0097B903 /* PBXTextBookmark */;
+			C4EE81431306DAAE0097B903 /* PBXTextBookmark */ = C4EE81431306DAAE0097B903 /* PBXTextBookmark */;
+			C4EE81D61306F7B60097B903 /* PBXTextBookmark */ = C4EE81D61306F7B60097B903 /* PBXTextBookmark */;
+			C4EE81E01306F7B60097B903 /* PBXTextBookmark */ = C4EE81E01306F7B60097B903 /* PBXTextBookmark */;
+			C4EE81E21306F7B60097B903 /* PBXTextBookmark */ = C4EE81E21306F7B60097B903 /* PBXTextBookmark */;
+			C4EE81EB1306F7B60097B903 /* PBXTextBookmark */ = C4EE81EB1306F7B60097B903 /* PBXTextBookmark */;
+			C4EE81ED1306F7B60097B903 /* PBXTextBookmark */ = C4EE81ED1306F7B60097B903 /* PBXTextBookmark */;
+			C4EE81F11306F7B60097B903 /* PlistBookmark */ = C4EE81F11306F7B60097B903 /* PlistBookmark */;
+		};
+		sourceControlManager = C4B8033612D3658800A5A38F /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 479}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 370}";
+		};
+	};
+	32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 479}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 364}";
+		};
+	};
+	8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {
+		uiCtxt = {
+			sepNavWindowFrame = "{{84, 14}, {1113, 738}}";
+		};
+	};
+	C413271912D7282F0002DC1F /* HIVMedications.plist */ = {
+		uiCtxt = {
+			sepNavWindowFrame = "{{61, 0}, {1113, 778}}";
+		};
+	};
+	C41FDEF113144DB50017FC3C /* iStayHealthy.xcent */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = text.xml;
+		name = iStayHealthy.xcent;
+		path = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/build/iStayHealthy.build/Distribution-iphoneos/iStayHealthy.build/iStayHealthy.xcent";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {726, 217}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 429}";
+		};
+	};
+	C41FDF0313144E080017FC3C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8043F12D37A4200A5A38F /* iStayHealthyTableViewController.m */;
+		name = "iStayHealthyTableViewController.m: 61";
+		rLen = 0;
+		rLoc = 1638;
+		rType = 0;
+		vrLen = 1012;
+		vrLoc = 2391;
+	};
+	C4276CE512DB6DBF001DDCD2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B804DD12D38BCE00A5A38F /* NSArray-Set.m */;
+		name = "NSArray-Set.m: 14";
+		rLen = 0;
+		rLoc = 318;
+		rType = 0;
+		vrLen = 824;
+		vrLoc = 0;
+	};
+	C4276D3812DB740D001DDCD2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920C1012D8EEBE00A6B1AD /* OtherMedication.h */;
+		name = "OtherMedication.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 532;
+		vrLoc = 0;
+	};
+	C4276D4512DB74CE001DDCD2 /* OtherMedicationViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 581}}";
+			sepNavSelRange = "{565, 0}";
+			sepNavVisRange = "{0, 570}";
+		};
+	};
+	C4276D4612DB74CE001DDCD2 /* OtherMedicationViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1286, 2379}}";
+			sepNavSelRange = "{4611, 0}";
+			sepNavVisRange = "{0, 1542}";
+		};
+	};
+	C4276D4812DB755B001DDCD2 /* OtherMedicationDetailViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 463}}";
+			sepNavSelRange = "{626, 0}";
+			sepNavVisRange = "{0, 837}";
+		};
+	};
+	C4276D4912DB755B001DDCD2 /* OtherMedicationDetailViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 2509}}";
+			sepNavSelRange = "{1700, 0}";
+			sepNavVisRange = "{2155, 1309}";
+		};
+	};
+	C4398E4C12F44BF500FE77EB /* RepeatAlertDetailViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 599}}";
+			sepNavSelRange = "{450, 65}";
+			sepNavVisRange = "{0, 623}";
+		};
+	};
+	C4398E4D12F44BF500FE77EB /* RepeatAlertDetailViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {922, 2106}}";
+			sepNavSelRange = "{3473, 0}";
+			sepNavVisRange = "{2601, 1281}";
+		};
+	};
+	C4398E5612F44CC100FE77EB /* RepeatAlertDetailViewController.m:57 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = C4398E4D12F44BF500FE77EB /* RepeatAlertDetailViewController.m */;
+		functionName = "-tableView:numberOfRowsInSection:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 57;
+		modificationTime = 318000359.005043;
+		originalNumberOfMultipleMatches = 0;
+		state = 2;
+	};
+	C4398F5C12F4847500FE77EB /* AlertCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 587}}";
+			sepNavSelRange = "{283, 63}";
+			sepNavVisRange = "{0, 543}";
+		};
+	};
+	C4398F5D12F4847500FE77EB /* AlertCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1131}}";
+			sepNavSelRange = "{1990, 0}";
+			sepNavVisRange = "{0, 1093}";
+		};
+	};
+	C4398F8A12F48BED00FE77EB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE02D512D6156E005C0043 /* StatusViewCell.h */;
+		name = "StatusViewCell.h: 26";
+		rLen = 78;
+		rLoc = 712;
+		rType = 0;
+		vrLen = 847;
+		vrLoc = 0;
+	};
+	C4398FC012F48F7A00FE77EB /* MedAlertEditViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 599}}";
+			sepNavSelRange = "{868, 0}";
+			sepNavVisRange = "{0, 874}";
+		};
+	};
+	C4398FC112F48F7A00FE77EB /* MedAlertEditViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1125, 2834}}";
+			sepNavSelRange = "{2330, 0}";
+			sepNavVisRange = "{4988, 715}";
+		};
+	};
+	C4646EB11311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE021212D5E82A005C0043 /* EditableTableCell.m */;
+		name = "EditableTableCell.m: 113";
+		rLen = 0;
+		rLoc = 2877;
+		rType = 0;
+		vrLen = 947;
+		vrLoc = 0;
+	};
+	C4646EB21311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE024A12D5FA2B005C0043 /* SegmentedControlCell.m */;
+		name = "SegmentedControlCell.m: 39";
+		rLen = 0;
+		rLoc = 909;
+		rType = 0;
+		vrLen = 1438;
+		vrLoc = 256;
+	};
+	C4646EB31311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE025212D601D5005C0043 /* DateLabelCell.m */;
+		name = "DateLabelCell.m: 74";
+		rLen = 0;
+		rLoc = 1903;
+		rType = 0;
+		vrLen = 1109;
+		vrLoc = 0;
+	};
+	C4646EB41311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE02D612D6156E005C0043 /* StatusViewCell.m */;
+		name = "StatusViewCell.m: 100";
+		rLen = 0;
+		rLoc = 3028;
+		rType = 0;
+		vrLen = 1178;
+		vrLoc = 0;
+	};
+	C4646EB51311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920B3B12D8CFC700A6B1AD /* HIVMedicationCell.m */;
+		name = "HIVMedicationCell.m: 100";
+		rLen = 0;
+		rLoc = 2714;
+		rType = 0;
+		vrLen = 1132;
+		vrLoc = 0;
+	};
+	C4646EB61311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4D227F812E6191E00CED26D /* ResultCell.m */;
+		name = "ResultCell.m: 108";
+		rLen = 0;
+		rLoc = 3217;
+		rType = 0;
+		vrLen = 1109;
+		vrLoc = 2289;
+	};
+	C4646EB71311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4D2282F12E620B600CED26D /* MedicationCell.m */;
+		name = "MedicationCell.m: 119";
+		rLen = 0;
+		rLoc = 3567;
+		rType = 0;
+		vrLen = 1219;
+		vrLoc = 0;
+	};
+	C4646EB81311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4398F5D12F4847500FE77EB /* AlertCell.m */;
+		name = "AlertCell.m: 76";
+		rLen = 0;
+		rLoc = 1990;
+		rType = 0;
+		vrLen = 1093;
+		vrLoc = 0;
+	};
+	C4646EB91311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4EB208212FDA04500A8712D /* SoundSelectCell.m */;
+		name = "SoundSelectCell.m: 50";
+		rLen = 0;
+		rLoc = 1161;
+		rType = 0;
+		vrLen = 999;
+		vrLoc = 242;
+	};
+	C4646EBA1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8036712D3662800A5A38F /* StatusViewController.h */;
+		name = "StatusViewController.h: 34";
+		rLen = 34;
+		rLoc = 1091;
+		rType = 0;
+		vrLen = 1130;
+		vrLoc = 0;
+	};
+	C4646EBD1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8036B12D3665300A5A38F /* ResultsListViewController.m */;
+		name = "ResultsListViewController.m: 189";
+		rLen = 0;
+		rLoc = 5334;
+		rType = 0;
+		vrLen = 1303;
+		vrLoc = 3497;
+	};
+	C4646EBE1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8036E12D3666E00A5A38F /* MedicationViewController.m */;
+		name = "MedicationViewController.m: 156";
+		rLen = 0;
+		rLoc = 4852;
+		rType = 0;
+		vrLen = 1521;
+		vrLoc = 0;
+	};
+	C4646EBF1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8037112D3669E00A5A38F /* AlertViewController.m */;
+		name = "AlertViewController.m: 75";
+		rLen = 0;
+		rLoc = 2319;
+		rType = 0;
+		vrLen = 1237;
+		vrLoc = 4509;
+	};
+	C4646EC11311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4276D4612DB74CE001DDCD2 /* OtherMedicationViewController.m */;
+		name = "OtherMedicationViewController.m: 150";
+		rLen = 0;
+		rLoc = 4611;
+		rType = 0;
+		vrLen = 1542;
+		vrLoc = 0;
+	};
+	C4646EC41311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477558F12D49341003D5DCC /* ChartView.h */;
+		name = "ChartView.h: 48";
+		rLen = 0;
+		rLoc = 1494;
+		rType = 0;
+		vrLen = 1460;
+		vrLoc = 3;
+	};
+	C4646EC51311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477559712D49642003D5DCC /* ChartViewPortrait.m */;
+		name = "ChartViewPortrait.m: 195";
+		rLen = 0;
+		rLoc = 6110;
+		rType = 0;
+		vrLen = 852;
+		vrLoc = 5439;
+	};
+	C4646EC61311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477559E12D49865003D5DCC /* ChartViewLandscape.m */;
+		name = "ChartViewLandscape.m: 184";
+		rLen = 0;
+		rLoc = 6024;
+		rType = 0;
+		vrLen = 1211;
+		vrLoc = 4925;
+	};
+	C4646EC71311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8041412D3724E00A5A38F /* ResultDetailViewController.m */;
+		name = "ResultDetailViewController.m: 223";
+		rLen = 0;
+		rLoc = 6318;
+		rType = 0;
+		vrLen = 803;
+		vrLoc = 5684;
+	};
+	C4646EC81311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920B2912D8CDA600A6B1AD /* MedicationDetailViewController.m */;
+		name = "MedicationDetailViewController.m: 243";
+		rLen = 0;
+		rLoc = 7298;
+		rType = 0;
+		vrLen = 1635;
+		vrLoc = 166;
+	};
+	C4646EC91311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4276D4912DB755B001DDCD2 /* OtherMedicationDetailViewController.m */;
+		name = "OtherMedicationDetailViewController.m: 52";
+		rLen = 0;
+		rLoc = 1700;
+		rType = 0;
+		vrLen = 1309;
+		vrLoc = 2155;
+	};
+	C4646ECA1311376A00E2EB92 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = C4EB207F12FD9DF900A8712D /* SoundList.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/SoundList.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	C4646ECB1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4F3425112F442E400B41F7D /* MedAlertDetailViewController.m */;
+		name = "MedAlertDetailViewController.m: 204";
+		rLen = 0;
+		rLoc = 6421;
+		rType = 0;
+		vrLen = 606;
+		vrLoc = 8411;
+	};
+	C4646ECC1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4398E4D12F44BF500FE77EB /* RepeatAlertDetailViewController.m */;
+		name = "RepeatAlertDetailViewController.m: 140";
+		rLen = 0;
+		rLoc = 3473;
+		rType = 0;
+		vrLen = 1281;
+		vrLoc = 2601;
+	};
+	C4646ECD1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4398FC112F48F7A00FE77EB /* MedAlertEditViewController.m */;
+		name = "MedAlertEditViewController.m: 67";
+		rLen = 0;
+		rLoc = 2330;
+		rType = 0;
+		vrLen = 715;
+		vrLoc = 4988;
+	};
+	C4646ECE1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4EB207612FD9CEA00A8712D /* SoundSelectDetailViewController.m */;
+		name = "SoundSelectDetailViewController.m: 183";
+		rLen = 0;
+		rLoc = 5059;
+		rType = 0;
+		vrLen = 783;
+		vrLoc = 5252;
+	};
+	C4646ECF1311376A00E2EB92 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4EB212212FDB16600A8712D /* InfoDetailViewController.m */;
+		name = "InfoDetailViewController.m: 43";
+		rLen = 0;
+		rLoc = 759;
+		rType = 0;
+		vrLen = 807;
+		vrLoc = 0;
+	};
+	C477558E12D492DA003D5DCC /* ChartSettings.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 587}}";
+			sepNavSelRange = "{162, 95}";
+			sepNavVisRange = "{0, 1142}";
+			sepNavWindowFrame = "{{60, 35}, {1113, 738}}";
+		};
+	};
+	C477558F12D49341003D5DCC /* ChartView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 650}}";
+			sepNavSelRange = "{1494, 0}";
+			sepNavVisRange = "{3, 1460}";
+		};
+	};
+	C477559012D49341003D5DCC /* ChartView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {950, 6721}}";
+			sepNavSelRange = "{6160, 7}";
+			sepNavVisRange = "{6033, 755}";
+		};
+	};
+	C477559612D49642003D5DCC /* ChartViewPortrait.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 606}}";
+			sepNavSelRange = "{699, 0}";
+			sepNavVisRange = "{0, 935}";
+		};
+	};
+	C477559712D49642003D5DCC /* ChartViewPortrait.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {873, 2717}}";
+			sepNavSelRange = "{6110, 0}";
+			sepNavVisRange = "{5439, 852}";
+		};
+	};
+	C477559D12D49865003D5DCC /* ChartViewLandscape.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 587}}";
+			sepNavSelRange = "{639, 0}";
+			sepNavVisRange = "{0, 639}";
+		};
+	};
+	C477559E12D49865003D5DCC /* ChartViewLandscape.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 2535}}";
+			sepNavSelRange = "{6024, 0}";
+			sepNavVisRange = "{4925, 1211}";
+		};
+	};
+	C477561A12D4A5EA003D5DCC /* StatusViewControllerLandscape.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 598}}";
+			sepNavSelRange = "{602, 0}";
+			sepNavVisRange = "{0, 903}";
+		};
+	};
+	C477561B12D4A5EA003D5DCC /* StatusViewControllerLandscape.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1195, 2574}}";
+			sepNavSelRange = "{1371, 0}";
+			sepNavVisRange = "{1133, 1512}";
+		};
+	};
+	C47D7D5113115FC6004A76A2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */;
+		name = "iStayHealthyAppDelegate.m: 125";
+		rLen = 0;
+		rLoc = 4172;
+		rType = 0;
+		vrLen = 1178;
+		vrLoc = 0;
+	};
+	C47D7D5213115FC6004A76A2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */;
+		name = "iStayHealthyAppDelegate.h: 12";
+		rLen = 21;
+		rLoc = 262;
+		rType = 0;
+		vrLen = 1296;
+		vrLoc = 0;
+	};
+	C47D7D5413115FC6004A76A2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477561B12D4A5EA003D5DCC /* StatusViewControllerLandscape.m */;
+		name = "StatusViewControllerLandscape.m: 49";
+		rLen = 0;
+		rLoc = 1371;
+		rType = 0;
+		vrLen = 1512;
+		vrLoc = 1133;
+	};
+	C48AEB36130F19A100C979AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477561A12D4A5EA003D5DCC /* StatusViewControllerLandscape.h */;
+		name = "StatusViewControllerLandscape.h: 20";
+		rLen = 0;
+		rLoc = 602;
+		rType = 0;
+		vrLen = 903;
+		vrLoc = 0;
+	};
+	C4920B2812D8CDA600A6B1AD /* MedicationDetailViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {957, 599}}";
+			sepNavSelRange = "{797, 0}";
+			sepNavVisRange = "{0, 1073}";
+			sepNavWindowFrame = "{{61, 35}, {1113, 738}}";
+		};
+	};
+	C4920B2912D8CDA600A6B1AD /* MedicationDetailViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 3614}}";
+			sepNavSelRange = "{7298, 0}";
+			sepNavVisRange = "{166, 1635}";
+			sepNavWindowFrame = "{{61, 35}, {1113, 738}}";
+		};
+	};
+	C4920B3A12D8CFC700A6B1AD /* HIVMedicationCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 587}}";
+			sepNavSelRange = "{654, 0}";
+			sepNavVisRange = "{0, 654}";
+		};
+	};
+	C4920B3B12D8CFC700A6B1AD /* HIVMedicationCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1456}}";
+			sepNavSelRange = "{2714, 0}";
+			sepNavVisRange = "{0, 1132}";
+		};
+	};
+	C4920B3F12D8D48900A6B1AD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE024912D5FA2B005C0043 /* SegmentedControlCell.h */;
+		name = "SegmentedControlCell.h: 19";
+		rLen = 60;
+		rLoc = 478;
+		rType = 0;
+		vrLen = 543;
+		vrLoc = 0;
+	};
+	C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {
+		uiCtxt = {
+			"Xdesign Model Editor Bookmark Key" = {
+				UIContextForDetailArea = {
+					_indexOfSelectedPane = 0;
+					_indexOfSelectedView = 1;
+				};
+				UIContextForEntityArea = {
+					_indexOfSelectedView = 0;
+					chosenTableColumnns = (
+						"ET Entity",
+						"ET Abstract",
+						"ET Class",
+					);
+					chosenTableColumnns_sortDirections = (
+						YES,
+					);
+					chosenTableColumnns_sortKeys = (
+						name,
+					);
+					chosenTableColumnns_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableWidths = (
+						103.000000,
+						22.000000,
+						41.080078,
+					);
+				};
+				UIContextForLayoutManager = {
+					detailSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {590, 218}}",
+							"{{595, 0}, {311, 218}}",
+						);
+					};
+					diagramSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {906, 220}}",
+							"{{0, 225}, {906, 355}}",
+						);
+					};
+					tableSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {191, 218}}",
+							"{{196, 0}, {392, 218}}",
+						);
+					};
+				};
+				UIContextForPropertyArea = {
+					_indexOfSelectedView = 0;
+					chosenTableColumnnFRTs = (
+						"FT Fetch Request",
+						"FT Predicate",
+					);
+					chosenTableColumnnFRTs_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnFRTs_sortKeys = (
+						name,
+					);
+					chosenTableColumnnFRTs_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsAT = (
+						"AT Attribute",
+						"AT Type",
+					);
+					chosenTableColumnnsAT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsAT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsAT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsFPT = (
+						"FP FetchedProperty",
+						"FP Destination",
+						"FP Predicate",
+					);
+					chosenTableColumnnsFPT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsFPT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsFPT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsPT = (
+						"PT Property",
+						"PT Kind",
+						"PT SharedKeyOne",
+					);
+					chosenTableColumnnsPT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsPT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsPT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsRT = (
+						"RT Relationship",
+						"RT Destination",
+					);
+					chosenTableColumnnsRT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsRT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsRT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableWidthsAT = (
+						128.000000,
+						64.000000,
+					);
+					chosenTableWidthsFPT = (
+						128.000000,
+						64.000000,
+						144.764160,
+					);
+					chosenTableWidthsFRT = (
+						128.000000,
+						249.764160,
+					);
+					chosenTableWidthsPT = (
+						128.000000,
+						108.110840,
+						129.570801,
+					);
+					chosenTableWidthsRT = (
+						128.000000,
+						64.000000,
+					);
+				};
+				"xdesign model browser state key - shown/hidden" = 1;
+				"xdesign model diagram view visible rect key" = "{{-97, 75}, {891, 340}}";
+			};
+		};
+	};
+	C4920C0C12D8EEBE00A6B1AD /* iStayHealthyRecord.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {847, 572}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1111}";
+		};
+	};
+	C4920C1012D8EEBE00A6B1AD /* OtherMedication.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {847, 557}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 532}";
+		};
+	};
+	C4920C1112D8EEBE00A6B1AD /* OtherMedication.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {847, 540}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 347}";
+		};
+	};
+	C4920C1212D8EEBE00A6B1AD /* Medication.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {847, 540}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 523}";
+		};
+	};
+	C4920C3112D8F13C00A6B1AD /* XDModelBookmark */ = {
+		isa = XDModelBookmark;
+		fRef = C4B803DE12D3700700A5A38F /* iStayHealthy 2.xcdatamodel */;
+		fallbackIsa = PBXBookmark;
+	};
+	C4920C3212D8F13C00A6B1AD /* XDModelBookmark */ = {
+		isa = XDModelBookmark;
+		fRef = C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */;
+		fallbackIsa = PBXBookmark;
+	};
+	C4920C3312D8F13C00A6B1AD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920C0C12D8EEBE00A6B1AD /* iStayHealthyRecord.h */;
+		name = "iStayHealthyRecord.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1111;
+		vrLoc = 0;
+	};
+	C4920C3412D8F13C00A6B1AD /* XDModelBookmark */ = {
+		isa = XDModelBookmark;
+		fRef = 28C3AD890F43EF2300507BA6 /* iStayHealthy.xcdatamodel */;
+		fallbackIsa = PBXBookmark;
+	};
+	C4920C3612D8F13C00A6B1AD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920C1112D8EEBE00A6B1AD /* OtherMedication.m */;
+		name = "OtherMedication.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 347;
+		vrLoc = 0;
+	};
+	C4920C3712D8F13C00A6B1AD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920C1212D8EEBE00A6B1AD /* Medication.h */;
+		name = "Medication.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 523;
+		vrLoc = 0;
+	};
+	C4B8032F12D3657800A5A38F /* iStayHealthy */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = iStayHealthy;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	C4B8033612D3658800A5A38F /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	C4B8033712D3658800A5A38F /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	C4B8036712D3662800A5A38F /* StatusViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 596}}";
+			sepNavSelRange = "{1091, 34}";
+			sepNavVisRange = "{0, 1130}";
+		};
+	};
+	C4B8036812D3662800A5A38F /* StatusViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1034, 5213}}";
+			sepNavSelRange = "{2223, 0}";
+			sepNavVisRange = "{701, 1783}";
+			sepNavWindowFrame = "{{61, 35}, {1113, 738}}";
+		};
+	};
+	C4B8036A12D3665300A5A38F /* ResultsListViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 606}}";
+			sepNavSelRange = "{455, 85}";
+			sepNavVisRange = "{0, 545}";
+		};
+	};
+	C4B8036B12D3665300A5A38F /* ResultsListViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1048, 3055}}";
+			sepNavSelRange = "{5334, 0}";
+			sepNavVisRange = "{3497, 1303}";
+		};
+	};
+	C4B8036D12D3666E00A5A38F /* MedicationViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 606}}";
+			sepNavSelRange = "{456, 93}";
+			sepNavVisRange = "{0, 554}";
+		};
+	};
+	C4B8036E12D3666E00A5A38F /* MedicationViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1251, 2457}}";
+			sepNavSelRange = "{4852, 0}";
+			sepNavVisRange = "{0, 1521}";
+		};
+	};
+	C4B8037012D3669E00A5A38F /* AlertViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 581}}";
+			sepNavSelRange = "{396, 0}";
+			sepNavVisRange = "{0, 443}";
+		};
+	};
+	C4B8037112D3669E00A5A38F /* AlertViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1237, 2392}}";
+			sepNavSelRange = "{2319, 0}";
+			sepNavVisRange = "{4509, 1237}";
+		};
+	};
+	C4B803DE12D3700700A5A38F /* iStayHealthy 2.xcdatamodel */ = {
+		uiCtxt = {
+			"Xdesign Model Editor Bookmark Key" = {
+				UIContextForDetailArea = {
+					_indexOfSelectedPane = 0;
+					_indexOfSelectedView = 1;
+				};
+				UIContextForEntityArea = {
+					_indexOfSelectedView = 0;
+					chosenTableColumnns = (
+						"ET Entity",
+						"ET Abstract",
+						"ET Class",
+					);
+					chosenTableColumnns_sortDirections = (
+						YES,
+					);
+					chosenTableColumnns_sortKeys = (
+						name,
+					);
+					chosenTableColumnns_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableWidths = (
+						103.000000,
+						22.000000,
+						43.080078,
+					);
+				};
+				UIContextForLayoutManager = {
+					detailSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {590, 220}}",
+							"{{595, 0}, {311, 220}}",
+						);
+					};
+					diagramSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {906, 220}}",
+							"{{0, 225}, {906, 355}}",
+						);
+					};
+					tableSplitGeometry = {
+						_collapsingFrameDimension = 0;
+						_indexOfCollapsedView = 0;
+						_percentageOfCollapsedView = 0;
+						isCollapsed = yes;
+						sizes = (
+							"{{0, 0}, {193, 220}}",
+							"{{198, 0}, {390, 220}}",
+						);
+					};
+				};
+				UIContextForPropertyArea = {
+					_indexOfSelectedView = 0;
+					chosenTableColumnnFRTs = (
+						"FT Fetch Request",
+						"FT Predicate",
+					);
+					chosenTableColumnnFRTs_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnFRTs_sortKeys = (
+						name,
+					);
+					chosenTableColumnnFRTs_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsAT = (
+						"AT Attribute",
+						"AT Type",
+					);
+					chosenTableColumnnsAT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsAT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsAT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsFPT = (
+						"FP FetchedProperty",
+						"FP Destination",
+						"FP Predicate",
+					);
+					chosenTableColumnnsFPT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsFPT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsFPT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsPT = (
+						"PT Property",
+						"PT Kind",
+						"PT SharedKeyOne",
+					);
+					chosenTableColumnnsPT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsPT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsPT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableColumnnsRT = (
+						"RT Relationship",
+						"RT Destination",
+					);
+					chosenTableColumnnsRT_sortDirections = (
+						YES,
+					);
+					chosenTableColumnnsRT_sortKeys = (
+						name,
+					);
+					chosenTableColumnnsRT_sortSelectors = (
+						"_xdcaseInsensitiveNumericCompare:",
+					);
+					chosenTableWidthsAT = (
+						128.000000,
+						64.000000,
+					);
+					chosenTableWidthsFPT = (
+						128.000000,
+						64.000000,
+						144.764160,
+					);
+					chosenTableWidthsFRT = (
+						128.000000,
+						249.764160,
+					);
+					chosenTableWidthsPT = (
+						128.000000,
+						108.110840,
+						127.570801,
+					);
+					chosenTableWidthsRT = (
+						128.000000,
+						64.000000,
+					);
+				};
+				"xdesign model browser state key - shown/hidden" = 1;
+				"xdesign model diagram view visible rect key" = "{{-97, 75}, {891, 340}}";
+			};
+		};
+	};
+	C4B803E212D3703500A5A38F /* Results.m */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.objc;
+		name = Results.m;
+		path = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/Results.m";
+		sourceTree = "<absolute>";
+	};
+	C4B803E412D3703500A5A38F /* Medication.m */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.objc;
+		name = Medication.m;
+		path = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/Medication.m";
+		sourceTree = "<absolute>";
+	};
+	C4B803E612D3703500A5A38F /* iStayHealthyRecord.m */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.objc;
+		name = iStayHealthyRecord.m;
+		path = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/iStayHealthyRecord.m";
+		sourceTree = "<absolute>";
+	};
+	C4B803FC12D3708A00A5A38F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B803E212D3703500A5A38F /* Results.m */;
+		name = "Results.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 303;
+		vrLoc = 0;
+	};
+	C4B803FE12D3708A00A5A38F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B803E412D3703500A5A38F /* Medication.m */;
+		name = "Medication.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 307;
+		vrLoc = 0;
+	};
+	C4B8041312D3724E00A5A38F /* ResultDetailViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 581}}";
+			sepNavSelRange = "{520, 0}";
+			sepNavVisRange = "{0, 953}";
+		};
+	};
+	C4B8041412D3724E00A5A38F /* ResultDetailViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 3081}}";
+			sepNavSelRange = "{6318, 0}";
+			sepNavVisRange = "{5684, 803}";
+		};
+	};
+	C4B8043E12D37A4200A5A38F /* iStayHealthyTableViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {887, 312}}";
+			sepNavSelRange = "{539, 86}";
+			sepNavVisRange = "{58, 663}";
+			sepNavWindowFrame = "{{61, 35}, {1113, 738}}";
+		};
+	};
+	C4B8043F12D37A4200A5A38F /* iStayHealthyTableViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1195, 2756}}";
+			sepNavSelRange = "{1638, 0}";
+			sepNavVisRange = "{2391, 1012}";
+		};
+	};
+	C4B804DC12D38BCE00A5A38F /* NSArray-Set.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {847, 579}}";
+			sepNavSelRange = "{179, 0}";
+			sepNavVisRange = "{0, 440}";
+		};
+	};
+	C4B804DD12D38BCE00A5A38F /* NSArray-Set.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {847, 557}}";
+			sepNavSelRange = "{318, 0}";
+			sepNavVisRange = "{0, 824}";
+		};
+	};
+	C4B8054912D397AB00A5A38F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B804DC12D38BCE00A5A38F /* NSArray-Set.h */;
+		name = "NSArray-Set.h: 10";
+		rLen = 0;
+		rLoc = 179;
+		rType = 0;
+		vrLen = 440;
+		vrLoc = 0;
+	};
+	C4C349B9130F0E70004BE854 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4398E4C12F44BF500FE77EB /* RepeatAlertDetailViewController.h */;
+		name = "RepeatAlertDetailViewController.h: 19";
+		rLen = 65;
+		rLoc = 450;
+		rType = 0;
+		vrLen = 623;
+		vrLoc = 0;
+	};
+	C4C349BB130F0E70004BE854 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920B2812D8CDA600A6B1AD /* MedicationDetailViewController.h */;
+		name = "MedicationDetailViewController.h: 26";
+		rLen = 0;
+		rLoc = 797;
+		rType = 0;
+		vrLen = 1073;
+		vrLoc = 0;
+	};
+	C4C349BC130F0E70004BE854 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4398FC012F48F7A00FE77EB /* MedAlertEditViewController.h */;
+		name = "MedAlertEditViewController.h: 27";
+		rLen = 0;
+		rLoc = 868;
+		rType = 0;
+		vrLen = 874;
+		vrLoc = 0;
+	};
+	C4C349BD130F0E70004BE854 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4F3425012F442E400B41F7D /* MedAlertDetailViewController.h */;
+		name = "MedAlertDetailViewController.h: 23";
+		rLen = 0;
+		rLoc = 602;
+		rType = 0;
+		vrLen = 1075;
+		vrLoc = 0;
+	};
+	C4C349DF130F12AC004BE854 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4EB207512FD9CEA00A8712D /* SoundSelectDetailViewController.h */;
+		name = "SoundSelectDetailViewController.h: 20";
+		rLen = 0;
+		rLoc = 521;
+		rType = 0;
+		vrLen = 992;
+		vrLoc = 0;
+	};
+	C4C3AA171316DE4C000FC699 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477559012D49341003D5DCC /* ChartView.m */;
+		name = "ChartView.m: 217";
+		rLen = 7;
+		rLoc = 6160;
+		rType = 0;
+		vrLen = 1442;
+		vrLoc = 5501;
+	};
+	C4C3AA181316DE4C000FC699 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */;
+		name = "iStayHealthy_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 364;
+		vrLoc = 0;
+	};
+	C4C3AA191316DE4C000FC699 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 370;
+		vrLoc = 0;
+	};
+	C4C3AA391316DFBF000FC699 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = C413268D12D6F0B10002DC1F /* tablets.png */;
+	};
+	C4C3AA5E1316E425000FC699 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/iStayHealthy-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	C4C3AA621316EEBC000FC699 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C41FDEF113144DB50017FC3C /* iStayHealthy.xcent */;
+		name = "iStayHealthy.xcent: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 429;
+		vrLoc = 0;
+	};
+	C4C3AA631316EEBC000FC699 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			NSMainNibFile,
+		);
+		name = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/iStayHealthy-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	C4C50B2D13143899007DB156 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8036812D3662800A5A38F /* StatusViewController.m */;
+		name = "StatusViewController.m: 67";
+		rLen = 0;
+		rLoc = 2223;
+		rType = 0;
+		vrLen = 1783;
+		vrLoc = 701;
+	};
+	C4CC60BD12F56B5B00C5EAE2 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = C4CE682512DB070500FBCFF4 /* combi-small.png */;
+	};
+	C4CC60C412F56B5B00C5EAE2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4276D4812DB755B001DDCD2 /* OtherMedicationDetailViewController.h */;
+		name = "OtherMedicationDetailViewController.h: 23";
+		rLen = 0;
+		rLoc = 626;
+		rType = 0;
+		vrLen = 837;
+		vrLoc = 0;
+	};
+	C4CD002812EB41C30030EADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE025112D601D5005C0043 /* DateLabelCell.h */;
+		name = "DateLabelCell.h: 19";
+		rLen = 48;
+		rLoc = 384;
+		rType = 0;
+		vrLen = 437;
+		vrLoc = 0;
+	};
+	C4D1604A13144BD800559A93 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8043E12D37A4200A5A38F /* iStayHealthyTableViewController.h */;
+		name = "iStayHealthyTableViewController.h: 20";
+		rLen = 86;
+		rLoc = 539;
+		rType = 0;
+		vrLen = 663;
+		vrLoc = 58;
+	};
+	C4D227F712E6191E00CED26D /* ResultCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 587}}";
+			sepNavSelRange = "{352, 456}";
+			sepNavVisRange = "{0, 814}";
+		};
+	};
+	C4D227F812E6191E00CED26D /* ResultCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1573}}";
+			sepNavSelRange = "{3217, 0}";
+			sepNavVisRange = "{2289, 1109}";
+		};
+	};
+	C4D2282E12E620B600CED26D /* MedicationCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 587}}";
+			sepNavSelRange = "{363, 13}";
+			sepNavVisRange = "{0, 917}";
+		};
+	};
+	C4D2282F12E620B600CED26D /* MedicationCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1729}}";
+			sepNavSelRange = "{3567, 0}";
+			sepNavVisRange = "{0, 1219}";
+		};
+	};
+	C4DE021112D5E82A005C0043 /* EditableTableCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 581}}";
+			sepNavSelRange = "{250, 29}";
+			sepNavVisRange = "{0, 541}";
+		};
+	};
+	C4DE021212D5E82A005C0043 /* EditableTableCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1586}}";
+			sepNavSelRange = "{2877, 0}";
+			sepNavVisRange = "{0, 947}";
+		};
+	};
+	C4DE024612D5F99C005C0043 /* GeneralSettings.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 587}}";
+			sepNavSelRange = "{752, 0}";
+			sepNavVisRange = "{0, 752}";
+		};
+	};
+	C4DE024912D5FA2B005C0043 /* SegmentedControlCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {847, 565}}";
+			sepNavSelRange = "{478, 60}";
+			sepNavVisRange = "{0, 543}";
+		};
+	};
+	C4DE024A12D5FA2B005C0043 /* SegmentedControlCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1209}}";
+			sepNavSelRange = "{909, 0}";
+			sepNavVisRange = "{256, 1438}";
+		};
+	};
+	C4DE025112D601D5005C0043 /* DateLabelCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 518}}";
+			sepNavSelRange = "{384, 48}";
+			sepNavVisRange = "{0, 437}";
+		};
+	};
+	C4DE025212D601D5005C0043 /* DateLabelCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1092}}";
+			sepNavSelRange = "{1903, 0}";
+			sepNavVisRange = "{0, 1109}";
+		};
+	};
+	C4DE02D512D6156E005C0043 /* StatusViewCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 498}}";
+			sepNavSelRange = "{712, 78}";
+			sepNavVisRange = "{0, 847}";
+		};
+	};
+	C4DE02D612D6156E005C0043 /* StatusViewCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 1482}}";
+			sepNavSelRange = "{3028, 0}";
+			sepNavVisRange = "{0, 1178}";
+		};
+	};
+	C4EB1FDA12FD8EB100A8712D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477559D12D49865003D5DCC /* ChartViewLandscape.h */;
+		name = "ChartViewLandscape.h: 25";
+		rLen = 0;
+		rLoc = 639;
+		rType = 0;
+		vrLen = 639;
+		vrLoc = 0;
+	};
+	C4EB200212FD918300A8712D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477558E12D492DA003D5DCC /* ChartSettings.h */;
+		name = "ChartSettings.h: 12";
+		rLen = 95;
+		rLoc = 162;
+		rType = 0;
+		vrLen = 1142;
+		vrLoc = 0;
+	};
+	C4EB200312FD918300A8712D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE024612D5F99C005C0043 /* GeneralSettings.h */;
+		name = "GeneralSettings.h: 16";
+		rLen = 0;
+		rLoc = 752;
+		rType = 0;
+		vrLen = 752;
+		vrLoc = 0;
+	};
+	C4EB201112FD923600A8712D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4D227F712E6191E00CED26D /* ResultCell.h */;
+		name = "ResultCell.h: 20";
+		rLen = 456;
+		rLoc = 352;
+		rType = 0;
+		vrLen = 814;
+		vrLoc = 0;
+	};
+	C4EB203112FD944500A8712D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4398F5C12F4847500FE77EB /* AlertCell.h */;
+		name = "AlertCell.h: 17";
+		rLen = 63;
+		rLoc = 283;
+		rType = 0;
+		vrLen = 543;
+		vrLoc = 0;
+	};
+	C4EB204912FD967B00A8712D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4920B3A12D8CFC700A6B1AD /* HIVMedicationCell.h */;
+		name = "HIVMedicationCell.h: 27";
+		rLen = 0;
+		rLoc = 654;
+		rType = 0;
+		vrLen = 654;
+		vrLoc = 0;
+	};
+	C4EB204B12FD967B00A8712D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4D2282E12E620B600CED26D /* MedicationCell.h */;
+		name = "MedicationCell.h: 18";
+		rLen = 13;
+		rLoc = 363;
+		rType = 0;
+		vrLen = 917;
+		vrLoc = 0;
+	};
+	C4EB207512FD9CEA00A8712D /* SoundSelectDetailViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 599}}";
+			sepNavSelRange = "{521, 0}";
+			sepNavVisRange = "{0, 992}";
+		};
+	};
+	C4EB207612FD9CEA00A8712D /* SoundSelectDetailViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1216, 2964}}";
+			sepNavSelRange = "{5059, 0}";
+			sepNavVisRange = "{5252, 783}";
+		};
+	};
+	C4EB207F12FD9DF900A8712D /* SoundList.plist */ = {
+		uiCtxt = {
+			sepNavWindowFrame = "{{61, 0}, {1113, 778}}";
+		};
+	};
+	C4EB208112FDA04500A8712D /* SoundSelectCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 581}}";
+			sepNavSelRange = "{318, 29}";
+			sepNavVisRange = "{0, 352}";
+		};
+	};
+	C4EB208212FDA04500A8712D /* SoundSelectCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 767}}";
+			sepNavSelRange = "{1161, 0}";
+			sepNavVisRange = "{242, 999}";
+		};
+	};
+	C4EB212112FDB16600A8712D /* InfoDetailViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 581}}";
+			sepNavSelRange = "{443, 0}";
+			sepNavVisRange = "{0, 448}";
+		};
+	};
+	C4EB212212FDB16600A8712D /* InfoDetailViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 689}}";
+			sepNavSelRange = "{759, 0}";
+			sepNavVisRange = "{0, 807}";
+		};
+	};
+	C4EE812F1306DAAE0097B903 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = C4EE80BB1306B9060097B903 /* cd4On-small.png */;
+	};
+	C4EE81301306DAAE0097B903 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = C4EE80BD1306B9060097B903 /* viralOn-small.png */;
+	};
+	C4EE81311306DAAE0097B903 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = C4EE80BC1306B9060097B903 /* viralOff-small.png */;
+	};
+	C4EE81321306DAAE0097B903 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = C4EE80BA1306B9060097B903 /* cd4Off-small.png */;
+	};
+	C4EE81331306DAAE0097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C477559612D49642003D5DCC /* ChartViewPortrait.h */;
+		name = "ChartViewPortrait.h: 27";
+		rLen = 0;
+		rLoc = 699;
+		rType = 0;
+		vrLen = 935;
+		vrLoc = 0;
+	};
+	C4EE81371306DAAE0097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8036D12D3666E00A5A38F /* MedicationViewController.h */;
+		name = "MedicationViewController.h: 18";
+		rLen = 93;
+		rLoc = 456;
+		rType = 0;
+		vrLen = 554;
+		vrLoc = 0;
+	};
+	C4EE81381306DAAE0097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8036A12D3665300A5A38F /* ResultsListViewController.h */;
+		name = "ResultsListViewController.h: 17";
+		rLen = 85;
+		rLoc = 455;
+		rType = 0;
+		vrLen = 545;
+		vrLoc = 0;
+	};
+	C4EE813F1306DAAE0097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8037012D3669E00A5A38F /* AlertViewController.h */;
+		name = "AlertViewController.h: 16";
+		rLen = 0;
+		rLoc = 396;
+		rType = 0;
+		vrLen = 443;
+		vrLoc = 0;
+	};
+	C4EE81431306DAAE0097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4276D4512DB74CE001DDCD2 /* OtherMedicationViewController.h */;
+		name = "OtherMedicationViewController.h: 20";
+		rLen = 0;
+		rLoc = 565;
+		rType = 0;
+		vrLen = 570;
+		vrLoc = 0;
+	};
+	C4EE81D61306F7B60097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B8041312D3724E00A5A38F /* ResultDetailViewController.h */;
+		name = "ResultDetailViewController.h: 20";
+		rLen = 0;
+		rLoc = 520;
+		rType = 0;
+		vrLen = 953;
+		vrLoc = 0;
+	};
+	C4EE81E01306F7B60097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4EB212112FDB16600A8712D /* InfoDetailViewController.h */;
+		name = "InfoDetailViewController.h: 19";
+		rLen = 0;
+		rLoc = 443;
+		rType = 0;
+		vrLen = 448;
+		vrLoc = 0;
+	};
+	C4EE81E21306F7B60097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4DE021112D5E82A005C0043 /* EditableTableCell.h */;
+		name = "EditableTableCell.h: 13";
+		rLen = 29;
+		rLoc = 250;
+		rType = 0;
+		vrLen = 541;
+		vrLoc = 0;
+	};
+	C4EE81EB1306F7B60097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4EB208112FDA04500A8712D /* SoundSelectCell.h */;
+		name = "SoundSelectCell.h: 17";
+		rLen = 29;
+		rLoc = 318;
+		rType = 0;
+		vrLen = 352;
+		vrLoc = 0;
+	};
+	C4EE81ED1306F7B60097B903 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C4B803E612D3703500A5A38F /* iStayHealthyRecord.m */;
+		name = "iStayHealthyRecord.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 357;
+		vrLoc = 0;
+	};
+	C4EE81F11306F7B60097B903 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = C413271912D7282F0002DC1F /* HIVMedications.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			4,
+		);
+		name = "/Users/peterschmidt/iPhone Apps/Releases/iStayHealthy/HIVMedications.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	C4F3425012F442E400B41F7D /* MedAlertDetailViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {853, 599}}";
+			sepNavSelRange = "{602, 0}";
+			sepNavVisRange = "{0, 1075}";
+		};
+	};
+	C4F3425112F442E400B41F7D /* MedAlertDetailViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1132, 4433}}";
+			sepNavSelRange = "{6421, 0}";
+			sepNavVisRange = "{8411, 606}";
+		};
+	};
+}

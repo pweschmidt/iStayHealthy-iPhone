@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Emtricitabine</string>
+		<string>Emtriva</string>
+		<string>NRTI</string>
+		<string>emtriva</string>
+	</array>
+	<array>
+		<string>Lamivudine</string>
+		<string>Epivir</string>
+		<string>NRTI</string>
+		<string>epivir</string>
+	</array>
+	<array>
+		<string>Zidovudine</string>
+		<string>Retrovir</string>
+		<string>NRTI</string>
+		<string>retrovir</string>
+	</array>
+	<array>
+		<string>Didanosine</string>
+		<string>Videx</string>
+		<string>NRTI</string>
+		<string>videx</string>
+	</array>
+	<array>
+		<string>Tenofovir</string>
+		<string>Viread</string>
+		<string>NRTI</string>
+		<string>viread</string>
+	</array>
+	<array>
+		<string>Stavudine</string>
+		<string>Zerit</string>
+		<string>NRTI</string>
+		<string>zerit</string>
+	</array>
+	<array>
+		<string>Abacavir</string>
+		<string>Ziagen</string>
+		<string>NRTI</string>
+		<string>ziagen</string>
+	</array>
+</array>
+</plist>

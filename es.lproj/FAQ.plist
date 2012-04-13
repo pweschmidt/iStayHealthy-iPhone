@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>¿Qué es el recuento de CD4?</string>
+		<string>Las células CD4 (ayudas de T4) son células inmunológicas. El recuento se mide por unidad (mm3) de sangre e indica el estado de salud del sistema inmunológico. El rango normal se encuentra entre 500 – 1500 mm3.</string>
+	</array>
+	<array>
+		<string>¿Qué es el porcentaje de CD4?</string>
+		<string>La proporción entre dos células inmunológicos diferentes, las células T4 (ayudas de los CD4) y las T8 (CD8 asesinos). La proporción se expresa en %. El valor en porcentaje de CD4 indica el estado de salud del sistema inmunológico. El porcentaje de CD4 suele fluctuar menos que el recuento de CD4. El rango normal se encuentra entre 20 y 40%.</string>
+	</array>
+	<array>
+		<string>¿Qué es la carga viral?</string>
+		<string>La cantidad de virus de VIH en sangre (se mide en unidades por mm3 de sangre).</string>
+	</array>
+	<array>
+		<string>¿Qué significa “indetectable”?</string>
+		<string>Indetectable se refiere a un recuento muy bajo de virus de VIH en sangre. El umbral para que sea “indetectable” depende del examen de la carga viral y puede variar entre 50 a cerca de 200. Indetectable no significa que el virus no se encuentre en el cuerpo.</string>
+	</array>
+	<array>
+		<string>¿Cuándo comenzar un tratamiento para VIH?</string>
+		<string>Las pautas actuales recomiendan iniciar el tratamiento cuando el recuento de CD4 sea menor o igual a 350 de forma persistente.</string>
+	</array>
+	<array>
+		<string>¿Qué fármacos hay disponibles para combatir el VIH?</string>
+		<string>Una gran variedad de distintos fármacos se encuentra disponible y siempre están desarrollándose nuevos fármacos. Los 5 tipos principales son: los inhibidores de la proteasa, los NRTI (nucleótidos), los NNRTI (no nucleótidos), los inhibidores de fusión/entrada y los inhibidores de la integrasa. A menudo, a los pacientes se les receta fármacos que combinan más de un tipo (por ej. Atripla).</string>
+	</array>
+	<array>
+		<string>¿Cómo funcionan los fármacos para combatir el VIH?</string>
+		<string>Cuando el VIH infecta una célula “reprograma” la célula para que produzca nuevas copias del virus. Esto típicamente produce la muerte de la célula infectada. Los fármacos para el VIH evitan que el virus se multiplique dentro de la célula infectada.</string>
+	</array>
+	<array>
+		<string>¿Qué es la adherencia y por qué es importante que tome mis medicamentos regularmente?</string>
+		<string>El medicamento para combatir el VIH debe tomarse regularmente, en general con una diferencia máxima de +/- 1 hora de la hora indicada. Respetar el régimen del fármaco se domina “adherencia”. Es importante para evitar que el virus se torne resistente al medicamento.</string>
+	</array>
+</array>
+</plist>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Rilpivirine</string>
+		<string>Edurant</string>
+		<string>NNRTI</string>
+		<string>edurant</string>
+	</array>
+	<array>
+		<string>Etravirine</string>
+		<string>Intelence</string>
+		<string>NNRTI</string>
+		<string>intelence</string>
+	</array>
+	<array>
+		<string>Delavirdine</string>
+		<string>Rescriptor</string>
+		<string>NNRTI</string>
+		<string>rescriptor</string>
+	</array>
+	<array>
+		<string>Efavirenz</string>
+		<string>Sustiva/Stocrin</string>
+		<string>NNRTI</string>
+		<string>sustiva</string>
+	</array>
+	<array>
+		<string>Nevirapine</string>
+		<string>Viramune XR</string>
+		<string>NNRTI</string>
+		<string>viramune</string>
+	</array>
+</array>
+</plist>

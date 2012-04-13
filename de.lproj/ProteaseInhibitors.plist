@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Tipranavir</string>
+		<string>Aptivus</string>
+		<string>PI</string>
+		<string>aptivus</string>
+	</array>
+	<array>
+		<string>Indinavir</string>
+		<string>Crixivan</string>
+		<string>PI</string>
+		<string>crixivan</string>
+	</array>
+	<array>
+		<string>Saquinavir</string>
+		<string>Invirase</string>
+		<string>PI</string>
+		<string>invirase</string>
+	</array>
+	<array>
+		<string>Fosamprenavir</string>
+		<string>Lexiva(US)/Telzir(EU)</string>
+		<string>PI</string>
+		<string>lexiva</string>
+	</array>
+	<array>
+		<string>Ritonavir</string>
+		<string>Norvir</string>
+		<string>PI</string>
+		<string>norvir</string>
+	</array>
+	<array>
+		<string>Darunavir</string>
+		<string>Prezista</string>
+		<string>PI</string>
+		<string>prezista</string>
+	</array>
+	<array>
+		<string>Atazanavir</string>
+		<string>Reyataz</string>
+		<string>PI</string>
+		<string>reyataz</string>
+	</array>
+	<array>
+		<string>Nelfinavir</string>
+		<string>Viracept</string>
+		<string>PI</string>
+		<string>viracept</string>
+	</array>
+</array>
+</plist>
