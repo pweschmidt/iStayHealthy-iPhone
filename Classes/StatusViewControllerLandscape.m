@@ -49,62 +49,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-#ifdef APPDEBUG	
-	NSLog(@"StatusViewControllerLandscape:viewWillAppear reset chart");
-#endif
-	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-	
-	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
-    
-	NSSet *results = masterRecord.results;
-	NSSet *meds = masterRecord.medications;
-    NSSet *missedMeds = masterRecord.missedMedications;
-    if (0 < [self.events.allChartEvents count]) {
-        [self.events.allChartEvents removeAllObjects];
-    }
-
-	if (0 != [results count]) {
-#ifdef APPDEBUG	
-		NSLog(@"having %d data entries in landscape mode",[results count]);
-#endif
-		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
-	}
-	else {
-		self.allResults = (NSMutableArray *)results;
-#ifdef APPDEBUG	
-		NSLog(@"**** StatusViewController count should be %d",[self.allResults count]);
-#endif
-	}
-	if (0 != [meds count]) {
-#ifdef APPDEBUG	
-		NSLog(@"having %d med entries in landscape mode",[meds count]);
-#endif
-		self.allMeds = [NSArray arrayByOrderingSet:meds byKey:@"StartDate" ascending:YES reverseOrder:NO];
-	}
-	else {
-		self.allMeds = (NSMutableArray *)meds;
-#ifdef APPDEBUG	
-		NSLog(@"**** StatusViewController count should be %d",[self.allMeds count]);
-#endif
-	}
-    if (0 != [missedMeds count]) {
-        self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
-    }
-    else
-        self.allMissedMeds = (NSMutableArray *)masterRecord.missedMedications;
-
-/*
-	chartView.allResults = self.allResults;
-	chartView.allMeds = self.allMeds;
-*/	
-    [self.events loadResult:self.allResults];
-    [self.events loadMedication:self.allMeds];
-    [self.events loadMissedMedication:self.allMissedMeds];
-    [self.events sortEventsAscending:YES];
-    
-	[chartView setNeedsDisplay];
-//    oldStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
+    [self setUpData];
 }
 
 
@@ -121,10 +66,62 @@
 }
 
 /**
+ */
+- (void)setUpData{
+	NSArray *objects = [self.fetchedResultsController fetchedObjects];
+	
+	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
+    
+	NSSet *results = masterRecord.results;
+	NSSet *meds = masterRecord.medications;
+    NSSet *missedMeds = masterRecord.missedMedications;
+    if (0 < [self.events.allChartEvents count]) {
+        [self.events.allChartEvents removeAllObjects];
+    }
+    
+	if (0 != [results count]) {
+		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
+	}
+	else {
+		self.allResults = (NSMutableArray *)results;
+	}
+	if (0 != [meds count]) {
+		self.allMeds = [NSArray arrayByOrderingSet:meds byKey:@"StartDate" ascending:YES reverseOrder:NO];
+	}
+	else {
+		self.allMeds = (NSMutableArray *)meds;
+	}
+    if (0 != [missedMeds count]) {
+        self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
+    }
+    else
+        self.allMissedMeds = (NSMutableArray *)masterRecord.missedMedications;
+    
+    [self.events loadResult:self.allResults];
+    [self.events loadMedication:self.allMeds];
+    [self.events loadMissedMedication:self.allMissedMeds];
+    [self.events sortEventsAscending:YES];
+    
+	[chartView setNeedsDisplay];
+}
+
+/**
+ called when being notifed about any changes
+ */
+- (void)reloadData:(NSNotification *)note{
+    if (0 < [self.events.allChartEvents count]) {
+        [self.events.allChartEvents removeAllObjects];
+    }
+    [self setUpData];
+}
+
+/**
  loaded once. sets up the landscape chart view
  */
 - (void)viewDidLoad{
 	[super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
+    
 #ifdef APPDEBUG	
 	NSLog(@"StatusViewControllerLandscape:viewDidLoad reset chart");
 #endif
@@ -148,6 +145,8 @@
         [alert release];
 	}
 }
+
+
 
 /**
  only landscape mode allowed

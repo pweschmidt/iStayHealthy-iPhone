@@ -35,4 +35,6 @@
 @property (nonatomic, retain) iStayHealthyRecord *masterRecord;
 @property (nonatomic, retain) NSMutableArray *allMissedMeds;
 @property (nonatomic, retain) ChartEvents *events;
+- (void)reloadData:(NSNotification*)note;
+- (void)setUpData;
 @end

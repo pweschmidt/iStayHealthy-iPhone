@@ -72,6 +72,19 @@
     [tmpEvents release];
 }
 
+- (void)reloadData:(NSNotification *)note{
+    [super reloadData:note];
+    if (0 < [self.events.allChartEvents count]) {
+        [self.events.allChartEvents removeAllObjects];
+    }
+    
+    [self.events loadResult:self.allResults];
+    [self.events loadMedication:self.allMeds];
+    [self.events loadMissedMedication:self.allMissedMeds];
+    [self.events sortEventsAscending:YES];
+    [self.chartView setNeedsDisplay];
+}
+
 /**
  viewDidUnload
  */

@@ -92,9 +92,45 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     return YES;
 }
 
+
+/**
+ */
+- (void)handleFileImport:(NSURL *)url{
+    NSData *importedData = [NSData dataWithContentsOfURL:url];
+    NSError *error = nil;
+    if(nil != error){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"iStayHealthy Import" message:@"Error in Importing Data" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Ok", nil];
+        [alert show];        
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"iStayHealthyImport" object:self];
+    }
+}
+
+/**
+ */
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    BOOL isShared = [[DBSession sharedSession] handleOpenURL:url];
+    BOOL isImported = NO;
+    if (nil != url) {
+        NSLog(@"called from openURL");
+        [self handleFileImport:url];
+        isImported = YES;
+    }
+    return (isImported && isShared);
+}
+
+
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     BOOL isShared = [[DBSession sharedSession] handleOpenURL:url];
-	return isShared;
+    BOOL isImported = NO;
+    if (nil != url) {
+        NSLog(@"called from openURL");
+        [self handleFileImport:url];
+        isImported = YES;
+    }
+    return (isImported && isShared);
 }
 
 
