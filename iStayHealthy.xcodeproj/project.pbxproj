@@ -21,7 +21,6 @@
 		C40835981359F3620020813A /* MedicationChangeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C40835961359F3620020813A /* MedicationChangeTableViewController.xib */; };
 		C40882A11448B1C600AE43F7 /* NewAlertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C408829F1448B1C600AE43F7 /* NewAlertDetailViewController.m */; };
 		C40882A21448B1C600AE43F7 /* NewAlertDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C40882A01448B1C600AE43F7 /* NewAlertDetailViewController.xib */; };
-		C40AEA4A14E7FF9100213151 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40AEA4914E7FF9100213151 /* DropboxSDK.framework */; };
 		C40C7D47140E81A8008E2915 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C40C7D46140E81A8008E2915 /* Utilities.m */; };
 		C41F544413685C230086B431 /* FAQDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C41F544313685C230086B431 /* FAQDetailCell.m */; };
 		C4276D4B12DB755B001DDCD2 /* OtherMedicationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4276D4912DB755B001DDCD2 /* OtherMedicationDetailViewController.m */; };
@@ -86,6 +85,7 @@
 		C462398F148EC083009F0D04 /* ProcedureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C462398E148EC082009F0D04 /* ProcedureCell.m */; };
 		C4623991148EC160009F0D04 /* ClinicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4623990148EC15F009F0D04 /* ClinicCell.xib */; };
 		C4623994148EC219009F0D04 /* ClinicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4623993148EC218009F0D04 /* ClinicCell.m */; };
+		C4629D5B1542B0660031966E /* UINavigationBar-Button.m in Sources */ = {isa = PBXBuildFile; fileRef = C4629D5A1542B0660031966E /* UINavigationBar-Button.m */; };
 		C465975C13EE9C8C00006F72 /* DataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C465975B13EE9C8C00006F72 /* DataLoader.m */; };
 		C46BA14C13F68B3800E77E1B /* DropBoxBackupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BA14A13F68B3800E77E1B /* DropBoxBackupViewController.m */; };
 		C46BA14D13F68B3800E77E1B /* DropBoxBackupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46BA14B13F68B3800E77E1B /* DropBoxBackupViewController.xib */; };
@@ -301,6 +301,7 @@
 		C4FCBCE8152F460900E3F082 /* resultsnavbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBCEA152F460900E3F082 /* resultsnavbar@2x.png */; };
 		C4FCBCEE152F461600E3F082 /* chartsnavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBCF0152F461600E3F082 /* chartsnavbar.png */; };
 		C4FCBCF4152F462500E3F082 /* chartsnavbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBCF6152F462500E3F082 /* chartsnavbar@2x.png */; };
+		C4FFC4CA1541743000607989 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC4C91541743000607989 /* DropboxSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -325,7 +326,6 @@
 		C408829E1448B1C600AE43F7 /* NewAlertDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAlertDetailViewController.h; sourceTree = "<group>"; };
 		C408829F1448B1C600AE43F7 /* NewAlertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAlertDetailViewController.m; sourceTree = "<group>"; };
 		C40882A01448B1C600AE43F7 /* NewAlertDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewAlertDetailViewController.xib; path = Classes/NewAlertDetailViewController.xib; sourceTree = "<group>"; };
-		C40AEA4914E7FF9100213151 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C40C7D45140E81A8008E2915 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		C40C7D46140E81A8008E2915 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -438,6 +438,8 @@
 		C4623990148EC15F009F0D04 /* ClinicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicCell.xib; sourceTree = "<group>"; };
 		C4623992148EC218009F0D04 /* ClinicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicCell.h; sourceTree = "<group>"; };
 		C4623993148EC218009F0D04 /* ClinicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicCell.m; sourceTree = "<group>"; };
+		C4629D591542B0660031966E /* UINavigationBar-Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar-Button.h"; sourceTree = "<group>"; };
+		C4629D5A1542B0660031966E /* UINavigationBar-Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar-Button.m"; sourceTree = "<group>"; };
 		C464737C13E2FC2B00F7EAD4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C464737D13E303D600F7EAD4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C465974013EE848B00006F72 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -784,6 +786,7 @@
 		C4FCBCF7152F462A00E3F082 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = "de.lproj/chartsnavbar@2x.png"; sourceTree = "<group>"; };
 		C4FCBCF8152F462C00E3F082 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/chartsnavbar@2x.png"; sourceTree = "<group>"; };
 		C4FCBCF9152F462F00E3F082 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = "fr.lproj/chartsnavbar@2x.png"; sourceTree = "<group>"; };
+		C4FFC4C91541743000607989 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -806,7 +809,7 @@
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
-				C40AEA4A14E7FF9100213151 /* DropboxSDK.framework in Frameworks */,
+				C4FFC4CA1541743000607989 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,8 +917,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C4FFC4C91541743000607989 /* DropboxSDK.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
-				C40AEA4914E7FF9100213151 /* DropboxSDK.framework */,
 				C490250A14DD630700BDD906 /* CoreLocation.framework */,
 				C490250814DD62BF00BDD906 /* StoreKit.framework */,
 				C4F337EE14D43B4700C4F573 /* SystemConfiguration.framework */,
@@ -1217,6 +1220,8 @@
 				C4B804DD12D38BCE00A5A38F /* NSArray-Set.m */,
 				C40C7D45140E81A8008E2915 /* Utilities.h */,
 				C40C7D46140E81A8008E2915 /* Utilities.m */,
+				C4629D591542B0660031966E /* UINavigationBar-Button.h */,
+				C4629D5A1542B0660031966E /* UINavigationBar-Button.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1651,6 +1656,7 @@
 				C42AB5721494F7FB005E9A0F /* MedSelectionCell.m in Sources */,
 				C42AB57714950351005E9A0F /* SummaryCell.m in Sources */,
 				C42AB57C14950DB8005E9A0F /* SettingsCell.m in Sources */,
+				C4629D5B1542B0660031966E /* UINavigationBar-Button.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

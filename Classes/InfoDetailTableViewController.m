@@ -9,6 +9,7 @@
 #import "InfoDetailTableViewController.h"
 #import "FAQDetailCell.h"
 #import "WebViewController.h"
+#import "UINavigationBar-Button.h"
 
 @implementation InfoDetailTableViewController
 @synthesize faqList, headerLabel, adButton, bannerButton;
@@ -57,12 +58,7 @@
     self.headerLabel.text = [NSString stringWithFormat:@"iStayHealthy version %@",version];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
-        CGRect pozFrame = CGRectMake(CGRectGetMinX(navBar.bounds) + 70.0, CGRectGetMinY(navBar.bounds)+7, 180, 29);
-        UIButton *pozButton = [[[UIButton alloc]initWithFrame:pozFrame]autorelease];
-        [pozButton setBackgroundColor:[UIColor clearColor]];
-        [pozButton setImage:[UIImage imageNamed:@"gloassarynavbar.png"] forState:UIControlStateNormal];
-        [pozButton addTarget:self action:@selector(gotoPOZ) forControlEvents:UIControlEventTouchUpInside];
-        [navBar addSubview:pozButton];
+        [navBar addButtonWithImageName:@"gloassarynavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 
     [tmpMedList release];

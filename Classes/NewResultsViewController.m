@@ -15,6 +15,7 @@
 #import "GeneralSettings.h"
 #import "ResultChangeViewController.h"
 #import "ResultListCell.h"
+#import "UINavigationBar-Button.h"
 
 @implementation NewResultsViewController
 
@@ -47,12 +48,7 @@
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
-        CGRect pozFrame = CGRectMake(CGRectGetMinX(navBar.bounds) + 70.0, CGRectGetMinY(navBar.bounds)+7, 180, 29);
-        UIButton *pozButton = [[[UIButton alloc]initWithFrame:pozFrame]autorelease];
-        [pozButton setBackgroundColor:[UIColor clearColor]];
-        [pozButton setImage:[UIImage imageNamed:@"resultsnavbar.png"] forState:UIControlStateNormal];
-        [pozButton addTarget:self action:@selector(gotoPOZ) forControlEvents:UIControlEventTouchUpInside];
-        [navBar addSubview:pozButton];
+        [navBar addButtonWithImageName:@"resultsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 }
 

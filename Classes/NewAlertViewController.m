@@ -12,6 +12,7 @@
 #import "iStayHealthyAppDelegate.h"
 #import "iStayHealthyRecord.h"
 #import "AlertListCell.h"
+#import "UINavigationBar-Button.h"
 
 @implementation NewAlertViewController
 @synthesize notificationsArray;
@@ -45,12 +46,7 @@
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedAlertDetailViewController)]autorelease];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
-        CGRect pozFrame = CGRectMake(CGRectGetMinX(navBar.bounds) + 70.0, CGRectGetMinY(navBar.bounds)+7, 180, 29);
-        UIButton *pozButton = [[[UIButton alloc]initWithFrame:pozFrame]autorelease];
-        [pozButton setBackgroundColor:[UIColor clearColor]];
-        [pozButton setImage:[UIImage imageNamed:@"alertsnavbar.png"] forState:UIControlStateNormal];
-        [pozButton addTarget:self action:@selector(gotoPOZ) forControlEvents:UIControlEventTouchUpInside];
-        [navBar addSubview:pozButton];
+        [navBar addButtonWithImageName:@"alertsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
     self.tableView.rowHeight = 57.0;
 	self.notificationsArray = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];

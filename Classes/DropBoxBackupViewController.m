@@ -52,7 +52,6 @@
  */
 - (void) dealloc{    
     [restClient release];
-//    [iStayHealthyPath release];
     self.iStayHealthyPath = nil;
     [super dealloc];
 }
@@ -68,33 +67,6 @@
     self.iStayHealthyPath = nil;
     dropBoxFileExists = NO;
     isBackup = NO;
-    /*
-     DropBox session handling - with v1.2 of Dropbox this is handled in AppDelegate
-     */
-    /** 
-    NSString* consumerKey = @"sekt4gbt7526j0y";
-	NSString* consumerSecret = @"drg5hompcf9vbd2";
-    NSString* root = kDBRootDropbox;
-	
-	NSString* errorMsg = nil;
-	if ([consumerKey rangeOfCharacterFromSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]].location != NSNotFound) {
-		errorMsg = @"Make sure you set the consumer key correctly in your app.";
-	} else if ([consumerSecret rangeOfCharacterFromSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]].location != NSNotFound) {
-		errorMsg = @"Make sure you set the consumer secret correctly in your app";
-	}
-	
-	DBSession* session = [[[DBSession alloc]initWithAppKey:consumerKey appSecret:consumerSecret root:root]autorelease];
-	session.delegate = self; 
-	[DBSession setSharedSession:session];
-
-	if (errorMsg != nil) {
-		[[[[UIAlertView alloc]
-		   initWithTitle:@"Error Configuring DropBox Session" message:errorMsg 
-		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		  autorelease]
-		 show];
-	}
-    */
 
 }
 
@@ -324,27 +296,14 @@
  */
 - (void)restore{
     NSString *dataPath = [self dropBoxFileTmpPath];
-#ifdef APPDEBUG
-    NSLog(@"DropBoxBackupViewController::restore temporary directory is in %@",dataPath);
-#endif    
     
     [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.xml" intoPath:dataPath];
     NSData *xmlData = [[[NSData alloc]initWithContentsOfFile:dataPath]autorelease];
-#ifdef APPDEBUG
-    NSLog(@"DropBoxBackupViewController::restore loading XML file ");
-#endif    
     XMLLoader *xmlLoader = [[[XMLLoader alloc]initWithData:xmlData]autorelease];
-#ifdef APPDEBUG
-    NSLog(@"DropBoxBackupViewController::restore finished loading XML file. Start Parsing ");
-#endif    
-    [xmlLoader startParsing];
-#ifdef APPDEBUG
-    NSLog(@"DropBoxBackupViewController::restore finished parsing XML file ");
-#endif    
+    NSError *error = nil;
+    [xmlLoader startParsing:&error];
+    
     [xmlLoader synchronise];
-#ifdef APPDEBUG
-    NSLog(@"DropBoxBackupViewController::restore finished syncing XML file with SQL data");
-#endif    
     [[[[UIAlertView alloc] 
        initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.xml.",nil)
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]

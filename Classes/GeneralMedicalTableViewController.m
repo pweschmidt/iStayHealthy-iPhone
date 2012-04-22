@@ -23,6 +23,7 @@
 #import "ClinicCell.h"
 #import "OtherMedCell.h"
 #import "WebViewController.h"
+#import "UINavigationBar-Button.h"
 
 @implementation GeneralMedicalTableViewController
 @synthesize selectedContactRow;
@@ -51,12 +52,7 @@
     [super viewDidLoad];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
-        CGRect pozFrame = CGRectMake(CGRectGetMinX(navBar.bounds) + 70.0, CGRectGetMinY(navBar.bounds)+7, 180, 29);
-        UIButton *pozButton = [[[UIButton alloc]initWithFrame:pozFrame]autorelease];
-        [pozButton setBackgroundColor:[UIColor clearColor]];
-        [pozButton setImage:[UIImage imageNamed:@"generalnavbar.png"] forState:UIControlStateNormal];
-        [pozButton addTarget:self action:@selector(gotoPOZ) forControlEvents:UIControlEventTouchUpInside];
-        [navBar addSubview:pozButton];
+        [navBar addButtonWithImageName:@"generalnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 //	self.navigationItem.title = NSLocalizedString(@"General", @"General");
 }

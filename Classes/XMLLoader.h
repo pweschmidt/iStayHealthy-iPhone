@@ -12,6 +12,7 @@
 
 @interface XMLLoader : NSObject <NSXMLParserDelegate>{
     NSXMLParser *xmlParser;
+    NSError     **error;
     XMLDocument *document;
     XMLElement *results;
     XMLElement *medications;
@@ -33,6 +34,7 @@
 @property (nonatomic, retain) XMLElement *procedures;
 @property (nonatomic, retain) XMLElement *sideEffects;
 - (id)initWithData:(NSData *)data;
-- (void)startParsing;
+- (BOOL)startParsing:(NSError **)parseError;
 - (void)synchronise;
++ (BOOL)isXML:(NSData *)data;
 @end

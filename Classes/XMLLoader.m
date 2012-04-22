@@ -26,6 +26,17 @@
     return self;
 }
 
+
++ (BOOL)isXML:(NSData *)data{
+    NSString *testString = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
+    if ([testString hasPrefix:XMLPREAMBLE]) {
+        return YES;
+    }
+    return NO;
+}
+
+
+
 /**
  */
 - (id)initWithData:(NSData *)data{
@@ -47,11 +58,16 @@
 /**
  parse the XML file
  */
-- (void)startParsing{
+- (BOOL)startParsing:(NSError **)parseError{
 #ifdef APPDEBUG
     NSLog(@"XMLLoader:startParsing");
 #endif
+    error = parseError;
     [xmlParser parse];    
+    if (nil == &error) {
+        return YES;
+    }
+    return NO;
 }
 
 /**
@@ -328,6 +344,7 @@
  */
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
 	NSLog(@"Error on XML Parse: %@", [parseError localizedDescription] );
+    *error = [NSError errorWithDomain:[parseError domain] code:[parseError code] userInfo:[parseError userInfo]];
 }
 
 

@@ -18,6 +18,7 @@
 #import "MissedMedViewController.h"
 #import "HIVMedListCell.h"
 #import "HIVMedSupportCell.h"
+#import "UINavigationBar-Button.h"
 
 @implementation HIVMedicationViewController
 
@@ -47,12 +48,7 @@
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedicationDetailViewController)]autorelease];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
-        CGRect pozFrame = CGRectMake(CGRectGetMinX(navBar.bounds) + 70.0, CGRectGetMinY(navBar.bounds)+7, 180, 29);
-        UIButton *pozButton = [[[UIButton alloc]initWithFrame:pozFrame]autorelease];
-        [pozButton setBackgroundColor:[UIColor clearColor]];
-        [pozButton setImage:[UIImage imageNamed:@"hivnavbar.png"] forState:UIControlStateNormal];
-        [pozButton addTarget:self action:@selector(gotoPOZ) forControlEvents:UIControlEventTouchUpInside];
-        [navBar addSubview:pozButton];
+        [navBar addButtonWithImageName:@"hivnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 }
 
