@@ -17,6 +17,10 @@
     UISwitch *passwordSwitch;
     UITextField *passwordField;
     UITextField *passConfirmField;
+    UIImageView *firstRightView;
+    UIImageView *firstWrongView;
+    UIImageView *secondRightView;
+    UIImageView *secondWrongView;
     NSString *firstPassword;
     NSString *secondPassword;
     BOOL firstIsSet;
@@ -34,6 +38,10 @@
 @property (nonatomic, retain) UISwitch *passwordSwitch;
 @property (nonatomic, retain) UITextField *passwordField;
 @property (nonatomic, retain) UITextField *passConfirmField;
+@property (nonatomic, retain) UIImageView *firstRightView;
+@property (nonatomic, retain) UIImageView *firstWrongView;
+@property (nonatomic, retain) UIImageView *secondRightView;
+@property (nonatomic, retain) UIImageView *secondWrongView;
 - (IBAction) done:				(id) sender;
 - (IBAction) switchPasswordEnabling:(id)sender;
 

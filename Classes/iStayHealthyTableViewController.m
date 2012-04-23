@@ -13,6 +13,7 @@
 #import "WebViewController.h"
 #import "GeneralSettings.h"
 #import "NSArray-Set.h"
+#import "Utilities.h"
 
 
 @implementation iStayHealthyTableViewController
@@ -72,46 +73,13 @@
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
 												 name:UIDeviceOrientationDidChangeNotification object:nil];
-//    [self.bannerButton setBackgroundImage:[UIImage imageNamed:@"pozbanner2.png"] forState:UIControlStateNormal];    
-#ifdef APPDEBUG    
-    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    NSLog(@"<<<<iStayHealthyTableViewController the used language code is %@>>>>",language);
-#endif
     
     CGRect adFrame = CGRectMake(20.0, 1.0, 280, 29);
     UIButton *addButton = [[UIButton alloc]initWithFrame:adFrame]; 
     [addButton setBackgroundColor:[UIColor clearColor]];
 	[addButton addTarget:self action:@selector(loadURL) forControlEvents:UIControlEventTouchUpInside];
-    NSLocale *locale = [NSLocale currentLocale];
-    NSString *currentLocaleID = [locale localeIdentifier]; 
-    UIImageView *imageView = nil;
-    
-    if ([currentLocaleID hasPrefix:@"en"]) {
-        if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"]) {
-            imageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pozbanner.png"]]autorelease];       
-        }
-        else {
-            imageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"gaydarbanner.png"]]autorelease];       
-        }
-    }
-    else if ([currentLocaleID hasPrefix:@"de"]) {
-        imageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dahbanner.png"]]autorelease];       
-    }
-    else if ([currentLocaleID hasPrefix:@"fr"]) {
-        if ([currentLocaleID isEqualToString:@"fr_CA"]) {
-            imageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pozbanner.png"]]autorelease];       
-        }
-        else {
-            imageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"gaydarbanner.png"]]autorelease];       
-        }
-    }
-    else if ([currentLocaleID hasPrefix:@"es"]) {
-        imageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pozbannerES.png"]]autorelease];       
-    }
-    else {
-        imageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pozbanner.png"]]autorelease];       
-    }
+    UIImageView *imageView = [[[UIImageView alloc] initWithImage:[Utilities bannerImageFromLocale]]autorelease];
+
     if (nil != imageView) {
         [addButton addSubview:imageView];
     }

@@ -230,6 +230,8 @@
 		C4EB207212FD9C7300A8712D /* ringtone2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4EB206A12FD9C7300A8712D /* ringtone2.caf */; };
 		C4EB207412FD9C7300A8712D /* xylophone.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4EB206C12FD9C7300A8712D /* xylophone.caf */; };
 		C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4EB207F12FD9DF900A8712D /* SoundList.plist */; };
+		C4ECA85C1545A9B30028E3D2 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ECA85A1545A9B30028E3D2 /* right.png */; };
+		C4ECA85D1545A9B30028E3D2 /* wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ECA85B1545A9B30028E3D2 /* wrong.png */; };
 		C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE811D1306D9890097B903 /* AudioToolbox.framework */; };
 		C4F337C414D42C7C00C4F573 /* pozicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F337C314D42C7C00C4F573 /* pozicon.png */; };
 		C4F337C614D42C8D00C4F573 /* istayhealthypozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */; };
@@ -667,6 +669,8 @@
 		C4EB206A12FD9C7300A8712D /* ringtone2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone2.caf; sourceTree = "<group>"; };
 		C4EB206C12FD9C7300A8712D /* xylophone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = xylophone.caf; sourceTree = "<group>"; };
 		C4EB207F12FD9DF900A8712D /* SoundList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SoundList.plist; sourceTree = "<group>"; };
+		C4ECA85A1545A9B30028E3D2 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
+		C4ECA85B1545A9B30028E3D2 /* wrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrong.png; sourceTree = "<group>"; };
 		C4EE811D1306D9890097B903 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C4F337C314D42C7C00C4F573 /* pozicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pozicon.png; sourceTree = "<group>"; };
 		C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = istayhealthypozbanner.png; sourceTree = "<group>"; };
@@ -960,6 +964,8 @@
 		C4B8033512D3658800A5A38F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C4ECA85A1545A9B30028E3D2 /* right.png */,
+				C4ECA85B1545A9B30028E3D2 /* wrong.png */,
 				C4FCBCA8152F456F00E3F082 /* gloassarynavbar.png */,
 				C4FCBCAE152F457F00E3F082 /* gloassarynavbar@2x.png */,
 				C4FCBCB4152F458E00E3F082 /* extrasnavbar.png */,
@@ -1574,6 +1580,8 @@
 				C4FCBCE8152F460900E3F082 /* resultsnavbar@2x.png in Resources */,
 				C4FCBCEE152F461600E3F082 /* chartsnavbar.png in Resources */,
 				C4FCBCF4152F462500E3F082 /* chartsnavbar@2x.png in Resources */,
+				C4ECA85C1545A9B30028E3D2 /* right.png in Resources */,
+				C4ECA85D1545A9B30028E3D2 /* wrong.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -261,11 +261,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/iStayHealthyTableViewController.m"
-         timestampString = "355510311.417629"
+         timestampString = "356888330.280417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "366"
-         endingLineNumber = "366"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-fetchedResultsController"
          landmarkType = "5">
       </FileBreakpoint>
@@ -275,11 +275,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/iStayHealthyTableViewController.m"
-         timestampString = "344289258.046034"
+         timestampString = "356888330.280417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
+         startingLineNumber = "22"
+         endingLineNumber = "22"
          landmarkName = "@synthesize allMeds, allMissedMeds, allResults, allResultsInReverseOrder;"
          landmarkType = "19">
       </FileBreakpoint>
@@ -331,11 +331,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/iStayHealthyTableViewController.m"
-         timestampString = "355510311.417629"
+         timestampString = "356888330.280417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "296"
-         endingLineNumber = "296"
+         startingLineNumber = "264"
+         endingLineNumber = "264"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>

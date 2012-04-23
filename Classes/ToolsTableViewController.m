@@ -18,24 +18,22 @@
 @synthesize firstPassword, secondPassword, masterRecord;
 @synthesize firstIsSet, secondIsSet, isConsistent, isPasswordEnabled;
 @synthesize fetchedResultsController = fetchedResultsController_;
+@synthesize firstRightView, firstWrongView, secondRightView, secondWrongView;
 /**
  dealloc
  */
 - (void)dealloc {
-    /*
-    [passwordSwitch release];
-    [passwordField release];
-    [passConfirmField release];
-    [firstPassword release];
-    [secondPassword release];
-     */
 	[fetchedResultsController_ release];
 	[masterRecord release];
-    passwordSwitch = nil;
-    passwordField = nil;
-    passConfirmField = nil;
-    firstPassword = nil;
-    secondPassword = nil;
+    self.passwordSwitch = nil;
+    self.passwordField = nil;
+    self.passConfirmField = nil;
+    self.firstPassword = nil;
+    self.secondPassword = nil;
+    self.firstRightView = nil;
+    self.firstWrongView = nil;
+    self.secondRightView = nil;
+    self.secondWrongView = nil;
     [super dealloc];
 }
 
@@ -94,20 +92,16 @@
  @id
  */
 - (IBAction) done: (id) sender{
-    if (self.firstIsSet && self.secondIsSet && self.isConsistent) {
+    if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled) {
         NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
         self.masterRecord.UID = [Utilities GUID];
-#ifdef APPDEBUG
-        NSLog(@"password string == %@",self.passwordField.text);
-#endif
         self.masterRecord.Password = self.passwordField.text;
         NSError *error = nil;
         if (![context save:&error]) {
-#ifdef APPDEBUG
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-#endif
             abort();
         }    
+        UIAlertView *isDone = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil]autorelease];
+        [isDone show];
     }
     else{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -154,6 +148,10 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     [textField setSecureTextEntry:TRUE];
+    if (20 == textField.tag && self.secondIsSet && !self.isConsistent) {
+        self.secondRightView.hidden = YES;
+        self.secondWrongView.hidden = YES;
+    }
     return YES;
 }
 
@@ -165,10 +163,12 @@
                 self.passwordField.text = NSLocalizedString(@"Password too short", @"Password too short");
                 self.passwordField.textColor = DARK_RED;
                 self.passwordField.secureTextEntry = NO;
+                self.firstWrongView.hidden = NO;
             }
             else{
                 self.firstPassword = textField.text;
                 self.firstIsSet = YES;
+                self.firstRightView.hidden = NO;
             }
             break;
         case 20:
@@ -180,12 +180,14 @@
     if (self.firstIsSet && self.secondIsSet) {
         if ([self.firstPassword isEqualToString:self.secondPassword]) {
             self.isConsistent = YES;
+            self.secondRightView.hidden = NO;
         }
         else{
             self.isConsistent = NO;
             self.passConfirmField.text = NSLocalizedString(@"Try Again", @"Try Again");
             self.passConfirmField.textColor = DARK_RED;
             self.passConfirmField.secureTextEntry = NO;
+            self.secondWrongView.hidden = NO;
         }
     }
 }
@@ -195,6 +197,12 @@
     self.passwordSwitch = nil;
     self.passwordField = nil;
     self.passConfirmField = nil;
+    self.firstPassword = nil;
+    self.secondPassword = nil;
+    self.firstRightView = nil;
+    self.firstWrongView = nil;
+    self.secondRightView = nil;
+    self.secondWrongView = nil;
     [super viewDidUnload];
 }
 
@@ -268,7 +276,7 @@
                 label.text = NSLocalizedString(@"Password", @"Password");
                 [cell addSubview:label];
                 
-                CGRect textframe = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+14.0, 145.0, 22.0);
+                CGRect textframe = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+14.0, 120.0, 22.0);
                 UITextField *field = [[[UITextField alloc] initWithFrame:textframe]autorelease];
                 field.borderStyle = UITextBorderStyleNone;
                 field.textColor = [UIColor lightGrayColor];
@@ -287,6 +295,24 @@
                 [cell addSubview:field];
                 self.passwordField = field;
                 self.passwordField.tag = 10;
+                
+                
+                CGRect rightFrame = CGRectMake(CGRectGetMinX(cell.bounds) + 270.0, CGRectGetMinY(cell.bounds) + 14.0, 17.0, 17.0);
+                UIImageView *firstView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right.png"]]autorelease];
+                [firstView setFrame:rightFrame];
+                [firstView setBackgroundColor:[UIColor clearColor]];
+                self.firstRightView = firstView;
+                self.firstRightView.hidden = YES;
+                [cell addSubview:firstView];
+
+                UIImageView *secondView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong.png"]]autorelease];
+                [secondView setFrame:rightFrame];
+                [secondView setBackgroundColor:[UIColor clearColor]];
+                self.firstWrongView = secondView;
+                self.firstWrongView.hidden = YES;
+                [cell addSubview:secondView];
+                
+                
                 return cell;
             }
             else if(1 == indexPath.row){
@@ -307,7 +333,7 @@
                 label.text = NSLocalizedString(@"Confirm", @"Confirm");
                 [cell addSubview:label];
                 
-                CGRect textframe = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+14.0, 145.0, 22.0);
+                CGRect textframe = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+14.0, 120.0, 22.0);
                 UITextField *field = [[[UITextField alloc] initWithFrame:textframe]autorelease];
                 field.borderStyle = UITextBorderStyleNone;
                 field.textColor = [UIColor lightGrayColor];
@@ -326,6 +352,23 @@
                 [cell addSubview:field];
                 self.passConfirmField = field;     
                 self.passConfirmField.tag = 20;
+
+                CGRect rightFrame = CGRectMake(CGRectGetMinX(cell.bounds) + 270.0, CGRectGetMinY(cell.bounds) + 14.0, 17.0, 17.0);
+                UIImageView *firstView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right.png"]]autorelease];
+                [firstView setFrame:rightFrame];
+                [firstView setBackgroundColor:[UIColor clearColor]];
+                self.secondRightView = firstView;
+                self.secondRightView.hidden = YES;
+                [cell addSubview:firstView];
+                
+                UIImageView *secondView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong.png"]]autorelease];
+                [secondView setFrame:rightFrame];
+                [secondView setBackgroundColor:[UIColor clearColor]];
+                self.secondWrongView = secondView;
+                self.secondWrongView.hidden = YES;
+                [cell addSubview:secondView];
+                
+                
                 return cell;
             }
         }
@@ -334,44 +377,6 @@
     return nil;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

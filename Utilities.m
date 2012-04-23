@@ -36,6 +36,48 @@
     return YES;
 }
 
++ (UIImage *)bannerImageFromLocale{
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *currentLocaleID = [locale localeIdentifier]; 
+    
+    if ([currentLocaleID hasPrefix:@"en"]) {
+        if ([currentLocaleID isEqualToString:@"en_US"]
+            ||[currentLocaleID isEqualToString:@"en_CA"]) {
+            return [UIImage imageNamed:@"pozbanner.png"];
+        }
+        else {
+            return [UIImage imageNamed:@"gaydarbanner.png"];
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"de"]) {
+        return [UIImage imageNamed:@"dahbanner.png"];
+    }
+    else if ([currentLocaleID hasPrefix:@"fr"]) {
+        if ([currentLocaleID isEqualToString:@"fr_CA"]) {
+            return [UIImage imageNamed:@"pozbanner.png"];
+        }
+        else {
+            return [UIImage imageNamed:@"gaydarbanner.png"];
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"es"]) {
+        if ([currentLocaleID isEqualToString:@"es_ES"]) {
+            return [UIImage imageNamed:@"gaydarbanner.png"];
+        }
+        else {
+            return [UIImage imageNamed:@"pozbannerES.png"];
+        }
+    }
+    //main EUROZONE get the gaydar banner
+    else if([currentLocaleID hasPrefix:@"nl"] || [currentLocaleID hasPrefix:@"da"] || [currentLocaleID hasPrefix:@"it"] || [currentLocaleID hasPrefix:@"no"] || [currentLocaleID hasPrefix:@"sv"] ||
+            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"]){
+        return [UIImage imageNamed:@"gaydarbanner.png"];
+    }
+    else {
+        return [UIImage imageNamed:@"pozbannerES.png"];
+    }
+    
+}
 
 
 @end

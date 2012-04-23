@@ -21,4 +21,5 @@
 @interface Utilities : NSObject
 + (NSString *)GUID;
 + (BOOL)hasFloatingPoint:(NSNumber *)number;
++ (UIImage *)bannerImageFromLocale;
 @end
