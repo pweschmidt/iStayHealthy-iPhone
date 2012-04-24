@@ -12,10 +12,12 @@
 @interface DropBoxBackupViewController : UITableViewController{
     NSString *iStayHealthyPath;
     DBRestClient* restClient;   
+    IBOutlet UIActivityIndicatorView *activityIndicator;
     BOOL dropBoxFileExists;
     BOOL isBackup;
 }
 @property (nonatomic, retain) NSString *iStayHealthyPath;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 - (NSString *)dropBoxFileTmpPath;
 - (NSString *)uploadFileTmpPath;
 - (void)backup;

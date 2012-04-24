@@ -85,9 +85,9 @@
 "Unlink DropBox"="Séparer de DropBox";
 "Save to DropBox" = "Sauvegarder sur DropBox";
 "Get from DropBox" = "Restaurer à partir DropBox";
-"Backup Started"="Sauvegarde a Commencé";
+"Backup Started"="Sauvegarde terminée";
 "Data were sent to DropBox iStayHealthy.xml."="Données sont copiées sur DropBox iStayHealthy.xml.";
-"Restore Data"="Restaurer";
+"Restore Data"="Restauration terminée";
 "Data were copied from DropBox iStayHealthy.xml."="Données sont copié de DropBox iStayHealthy.xml.";
 "Set Time"="Régler l'Heure";
 "per day" = "par jour";

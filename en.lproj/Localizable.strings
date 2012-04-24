@@ -84,9 +84,9 @@
 "Unlink DropBox"="Unlink DropBox";
 "Save to DropBox" = "Save to DropBox";
 "Get from DropBox" = "Get from DropBox";
-"Backup Started"="Backup Started";
+"Backup Finished"="Backup Finished";
 "Data were sent to DropBox iStayHealthy.xml."="Data were sent to DropBox iStayHealthy.xml.";
-"Restore Data"="Restore Data";
+"Restore Data"="Restore Data is finished";
 "Data were copied from DropBox iStayHealthy.xml."="Data were copied from DropBox iStayHealthy.xml.";
 "Set Time"="Set Time";
 "per day" = "per day";

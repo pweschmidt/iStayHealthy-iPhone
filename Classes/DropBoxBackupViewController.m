@@ -23,7 +23,7 @@
 @end
 
 @implementation DropBoxBackupViewController
-@synthesize iStayHealthyPath;
+@synthesize iStayHealthyPath, activityIndicator;
 
 /**
  initWithStyle
@@ -53,6 +53,7 @@
 - (void) dealloc{    
     [restClient release];
     self.iStayHealthyPath = nil;
+    self.activityIndicator = nil;
     [super dealloc];
 }
 
@@ -76,6 +77,8 @@
 
 - (void)viewDidUnload
 {
+    self.iStayHealthyPath = nil;
+    self.activityIndicator = nil;
     [super viewDidUnload];
 }
 
@@ -265,6 +268,7 @@
  */
 - (void)backup{
     NSString *dataPath = [self uploadFileTmpPath];
+    [self.activityIndicator startAnimating];
 #ifdef APPDEBUG
     NSLog(@"DropBoxBackupViewController::backup temporary directory is in %@",dataPath);
 #endif    
@@ -282,11 +286,6 @@
 	}
     else{
         [[self restClient]uploadFile:@"iStayHealthy.xml" toPath:@"/iStayHealthy" withParentRev:nil fromPath:dataPath];
-        [[[[UIAlertView alloc] 
-           initWithTitle:NSLocalizedString(@"Backup Started",@"Backup Started") message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.xml.",nil)
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-          autorelease]
-         show];
     }        
 
 }
@@ -296,19 +295,15 @@
  */
 - (void)restore{
     NSString *dataPath = [self dropBoxFileTmpPath];
-    
+    [self.activityIndicator startAnimating];    
     [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.xml" intoPath:dataPath];
     NSData *xmlData = [[[NSData alloc]initWithContentsOfFile:dataPath]autorelease];
     XMLLoader *xmlLoader = [[[XMLLoader alloc]initWithData:xmlData]autorelease];
     NSError *error = nil;
-    [xmlLoader startParsing:&error];
+    if([xmlLoader startParsing:&error]){
+        [xmlLoader synchronise];
+    }
     
-    [xmlLoader synchronise];
-    [[[[UIAlertView alloc] 
-       initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.xml.",nil)
-       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
-     show];
 }
 
 
@@ -368,9 +363,18 @@
 - (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
               from:(NSString*)srcPath metadata:(DBMetadata*)metadata {
     
+    if (![[DBSession sharedSession]isLinked]) {
+        return;
+    }
 #ifdef APPDEBUG
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 #endif
+    [self.activityIndicator stopAnimating];
+    [[[[UIAlertView alloc] 
+       initWithTitle:NSLocalizedString(@"Backup Finished",@"Backup Finished") message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.xml.",nil)
+       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+      autorelease]
+     show];
 }
 
 
@@ -383,6 +387,7 @@
     if (![[DBSession sharedSession]isLinked]) {
         return;
     }
+    [self.activityIndicator stopAnimating];
     [[[[UIAlertView alloc] 
        initWithTitle:@"Error Uploading to DropBox" message:@"There was an error uploading data to DropBox." 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
@@ -394,9 +399,18 @@
 /**
  */
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)localPath {
+    if (![[DBSession sharedSession]isLinked]) {
+        return;
+    }
 #ifdef APPDEBUG
     NSLog(@"File downloaded successfully to path: %@", localPath);
 #endif
+    [self.activityIndicator stopAnimating];
+    [[[[UIAlertView alloc] 
+       initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.xml.",nil)
+       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+      autorelease]
+     show];        
 }
 
 /**
@@ -405,6 +419,7 @@
     if (![[DBSession sharedSession]isLinked]) {
         return;
     }
+    [self.activityIndicator stopAnimating];
     [[[[UIAlertView alloc] 
        initWithTitle:@"Error Loading file from DropBox" message:@"There was an error loading a file from DropBox." 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]

@@ -358,7 +358,7 @@
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
         
     /* Results in chronological/reverse order */
-	NSSet *results = masterRecord.results;
+	NSSet *results = self.masterRecord.results;
 	if (0 != [results count]) {
 		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
 		self.allResultsInReverseOrder = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:YES];
@@ -369,7 +369,7 @@
     }
         
     /* HIV Meds in chronological oder */
-	NSSet *hivmeds = masterRecord.medications;
+	NSSet *hivmeds = self.masterRecord.medications;
 	if (0 != [hivmeds count]) {
 		self.allMeds = [NSArray arrayByOrderingSet:hivmeds byKey:@"StartDate" ascending:YES reverseOrder:NO];
 	}
@@ -377,7 +377,7 @@
         self.allMeds = (NSArray *)hivmeds;
     
     /* Missed HIV Meds in chronological oder */
-    NSSet *missedMeds = masterRecord.missedMedications;
+    NSSet *missedMeds = self.masterRecord.missedMedications;
     if (0 != [missedMeds count]) {
         self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
     }
@@ -385,7 +385,7 @@
         self.allMissedMeds = (NSArray *)missedMeds;
     
     /* OtherMedication ordered by name */
-    NSSet *meds = masterRecord.otherMedications;
+    NSSet *meds = self.masterRecord.otherMedications;
     if (0 != [meds count]) {
         self.allPills = [NSArray arrayByOrderingSet:meds byKey:@"Name" ascending:YES reverseOrder:NO];
     }
@@ -394,7 +394,7 @@
     }
     
     /* Procedures */
-    NSSet *procSet = masterRecord.procedures;
+    NSSet *procSet = self.masterRecord.procedures;
     if(0 != [procSet count]){
         self.allProcedures = [NSArray arrayByOrderingSet:procSet byKey:@"Name" ascending:YES reverseOrder:NO];
     }
@@ -403,20 +403,20 @@
     }
 
     //arrays that need no ordering
-    NSSet *contactSet = masterRecord.contacts;
+    NSSet *contactSet = self.masterRecord.contacts;
     if(0 != [contactSet count]){
         self.allContacts = [NSArray arrayByOrderingSet:contactSet byKey:@"ClinicName" ascending:YES reverseOrder:NO];
     }
     else{
-        self.allContacts = (NSArray *)masterRecord.contacts;
+        self.allContacts = (NSArray *)self.masterRecord.contacts;
     }
     
-    NSSet *effectSet = masterRecord.sideeffects;
+    NSSet *effectSet = self.masterRecord.sideeffects;
     if(0 != [effectSet count]){
         self.allSideEffects = [NSArray arrayByOrderingSet:effectSet byKey:@"SideEffect" ascending:YES reverseOrder:NO];
     }
     else{
-        self.allSideEffects = (NSArray *)masterRecord.sideeffects;
+        self.allSideEffects = (NSArray *)self.masterRecord.sideeffects;
     }
 #ifdef APPDEBUG
     NSLog(@"iStayHealthyTableViewController::setUpData hivMeds %d ",[self.allMeds count]);

@@ -43,7 +43,7 @@
     if ([currentLocaleID hasPrefix:@"en"]) {
         if ([currentLocaleID isEqualToString:@"en_US"]
             ||[currentLocaleID isEqualToString:@"en_CA"]) {
-            return [UIImage imageNamed:@"pozbanner.png"];
+            return [UIImage imageNamed:@"pozbannerEmpty.png"];
         }
         else {
             return [UIImage imageNamed:@"gaydarbanner.png"];
@@ -54,7 +54,7 @@
     }
     else if ([currentLocaleID hasPrefix:@"fr"]) {
         if ([currentLocaleID isEqualToString:@"fr_CA"]) {
-            return [UIImage imageNamed:@"pozbanner.png"];
+            return [UIImage imageNamed:@"pozbannerEmpty.png"];
         }
         else {
             return [UIImage imageNamed:@"gaydarbanner.png"];
@@ -74,7 +74,7 @@
         return [UIImage imageNamed:@"gaydarbanner.png"];
     }
     else {
-        return [UIImage imageNamed:@"pozbannerES.png"];
+        return [UIImage imageNamed:@"pozbannerEmpty.png"];
     }
     
 }

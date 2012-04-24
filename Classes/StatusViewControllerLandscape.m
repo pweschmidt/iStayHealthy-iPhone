@@ -30,6 +30,9 @@
  */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+#ifdef APPDEBUG	
+	NSLog(@"StatusViewControllerLandscape:initWithNibName");
+#endif
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
 	{
@@ -43,11 +46,45 @@
 }
 
 /**
+ loaded once. sets up the landscape chart view
+ */
+- (void)viewDidLoad{
+	[super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
+    
+#ifdef APPDEBUG	
+	NSLog(@"StatusViewControllerLandscape:viewDidLoad reset chart");
+#endif
+	CGRect frame = CGRectMake(0.0, 20.0, 480.0, 300.0);
+    HealthChartsViewLandscape *chart = [[HealthChartsViewLandscape alloc]initWithFrame:frame];
+    //	ChartViewLandscape *chart = [[ChartViewLandscape alloc]initWithFrame:frame];
+    [self.view addSubview:chart];
+    self.chartView = chart;
+    self.chartView.events = self.events;
+    [chart release];
+    
+	NSError *error = nil;
+	if (![[self fetchedResultsController] performFetch:&error]) {
+		UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
+							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
+							  delegate:self 
+							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
+							  otherButtonTitles:nil];
+		[alert show];
+        [alert release];
+	}
+}
+
+/**
  called each time this view is shown
  @animated
  */
 - (void)viewWillAppear:(BOOL)animated
 {
+#ifdef APPDEBUG	
+	NSLog(@"StatusViewControllerLandscape:viewWillAppear");
+#endif
     [super viewWillAppear:animated];
     [self setUpData];
 }
@@ -68,21 +105,30 @@
 /**
  */
 - (void)setUpData{
+#ifdef APPDEBUG	
+	NSLog(@"StatusViewControllerLandscape:setUpData");
+#endif
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
 	
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
     
-	NSSet *results = masterRecord.results;
-	NSSet *meds = masterRecord.medications;
-    NSSet *missedMeds = masterRecord.missedMedications;
+	NSSet *results = self.masterRecord.results;
+	NSSet *meds = self.masterRecord.medications;
+    NSSet *missedMeds = self.masterRecord.missedMedications;
     if (0 < [self.events.allChartEvents count]) {
         [self.events.allChartEvents removeAllObjects];
     }
     
 	if (0 != [results count]) {
 		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
+#ifdef APPDEBUG	
+        NSLog(@"StatusViewControllerLandscape:setUpData Results array has %d entries",[results count]);
+#endif
 	}
 	else {
+#ifdef APPDEBUG	
+        NSLog(@"StatusViewControllerLandscape:setUpData Results array is empty. Why?");
+#endif
 		self.allResults = (NSMutableArray *)results;
 	}
 	if (0 != [meds count]) {
@@ -102,7 +148,6 @@
     [self.events loadMissedMedication:self.allMissedMeds];
     [self.events sortEventsAscending:YES];
     
-	[chartView setNeedsDisplay];
 }
 
 /**
@@ -113,38 +158,9 @@
         [self.events.allChartEvents removeAllObjects];
     }
     [self setUpData];
+	[chartView setNeedsDisplay];
 }
 
-/**
- loaded once. sets up the landscape chart view
- */
-- (void)viewDidLoad{
-	[super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
-    
-#ifdef APPDEBUG	
-	NSLog(@"StatusViewControllerLandscape:viewDidLoad reset chart");
-#endif
-	CGRect frame = CGRectMake(0.0, 20.0, 480.0, 300.0);
-    HealthChartsViewLandscape *chart = [[HealthChartsViewLandscape alloc]initWithFrame:frame];
-    //	ChartViewLandscape *chart = [[ChartViewLandscape alloc]initWithFrame:frame];
-    [self.view addSubview:chart];
-    self.chartView = chart;
-    self.chartView.events = self.events;
-    [chart release];
-     
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
-							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
-							  delegate:self 
-							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
-							  otherButtonTitles:nil];
-		[alert show];
-        [alert release];
-	}
-}
 
 
 
