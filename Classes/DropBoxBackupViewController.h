@@ -14,12 +14,13 @@
     DBRestClient* restClient;   
     IBOutlet UIActivityIndicatorView *activityIndicator;
     BOOL dropBoxFileExists;
+    BOOL newDropboxFileExists;
     BOOL isBackup;
 }
+@property BOOL dropBoxFileExists;
+@property BOOL newDropboxFileExists;
 @property (nonatomic, retain) NSString *iStayHealthyPath;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 - (NSString *)dropBoxFileTmpPath;
 - (NSString *)uploadFileTmpPath;
-- (void)backup;
-- (void)restore;
 @end

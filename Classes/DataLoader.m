@@ -62,18 +62,15 @@
     [super dealloc];
 }
 
-/**
- returns a string of comma-separated-values. to be used in sending per e-mail
- */
-- (NSData *)csvData{
-    NSMutableString *csvString = [NSMutableString stringWithString:@"iStayHealthy\r"];
+- (NSString *)csvString{
+    NSMutableString *csv = [NSMutableString stringWithString:@"iStayHealthy\r"];
     NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
     formatter.dateFormat = DATEFORMATSTYLE;
     BOOL isFirst = YES;
     for (Results *results in allResults) {
         if (isFirst) {
-            [csvString appendString:@"Results\r"];
-            [csvString appendString:@"ResultsDate, CD4Count, CD4%%, ViralLoad\r"];
+            [csv appendString:@"Results\r"];
+            [csv appendString:@"ResultsDate, CD4Count, CD4%%, ViralLoad\r"];
             isFirst = NO;
         }
         NSString *cd4 = (0.0 < [results.CD4 floatValue]) ? [results.CD4 stringValue] : @"";
@@ -86,14 +83,14 @@
         if (0.0 < [results.ViralLoad floatValue]) {
             vl = [results.ViralLoad stringValue];
         }
-        [csvString appendFormat:@"%@, %@, %@, %@\r",date, cd4, cd4Percent, vl];
+        [csv appendFormat:@"%@, %@, %@, %@\r",date, cd4, cd4Percent, vl];
     }
-
+    
     isFirst = YES;
     for (Medication *medication in allMedications) {
         if (isFirst) {
-            [csvString appendString:@"HIV Medication\r"];
-            [csvString appendString:@"StartDate, Name, Drugs, MedicationForm, EndDate\r"];
+            [csv appendString:@"HIV Medication\r"];
+            [csv appendString:@"StartDate, Name, Drugs, MedicationForm, EndDate\r"];
             isFirst = NO;
         }
         NSString *date = [formatter stringFromDate:medication.StartDate];
@@ -107,40 +104,40 @@
         if ([endDate isEqualToString:@""]) {
             endDate = @"ongoing";
         }
-        [csvString appendFormat:@"%@, %@, %@, %@, %@\r",date, name, drugs, form, endDate];        
+        [csv appendFormat:@"%@, %@, %@, %@, %@\r",date, name, drugs, form, endDate];        
     }
     
     isFirst = YES;
     for (MissedMedication *missedMed in allMissedMeds) {
         if (isFirst) {
-            [csvString appendString:@"Missed HIV Medication\r"];
-            [csvString appendString:@"Missed, Name, Drugs\r"];
+            [csv appendString:@"Missed HIV Medication\r"];
+            [csv appendString:@"Missed, Name, Drugs\r"];
             isFirst = NO;
         }
         NSString *date = [formatter stringFromDate:missedMed.MissedDate];
         NSString *name = missedMed.Name;
         NSString *drug = missedMed.Drug;
-        [csvString appendFormat:@"%@, %@, %@\r",date, name, drug];
+        [csv appendFormat:@"%@, %@, %@\r",date, name, drug];
     }
     
     isFirst = YES;
     for (SideEffects *effect in self.allSideEffects) {
         if (isFirst) {
-            [csvString appendString:@"SideEffects\r"];
-            [csvString appendString:@"Date, SideEffect, DrugName\r"];
+            [csv appendString:@"SideEffects\r"];
+            [csv appendString:@"Date, SideEffect, DrugName\r"];
             isFirst = NO;
         }
         NSString *date = [formatter stringFromDate:effect.SideEffectDate];
         NSString *effectName = effect.SideEffect;
         NSString *name = effect.Name;
-        [csvString appendFormat:@"%@, %@, %@\r",date, effectName, name];
+        [csv appendFormat:@"%@, %@, %@\r",date, effectName, name];
     }
     
     isFirst = YES;
     for (OtherMedication *otherMed in allOtherMeds) {
         if (isFirst) {
-            [csvString appendString:@"Other Medications\r"];
-            [csvString appendString:@"StartDate, Name, Dose, EndDate\r"];
+            [csv appendString:@"Other Medications\r"];
+            [csv appendString:@"StartDate, Name, Dose, EndDate\r"];
             isFirst = NO;
         }
         NSString *date = [formatter stringFromDate:otherMed.StartDate];
@@ -153,23 +150,31 @@
         if ([endDate isEqualToString:@""]) {
             endDate = @"ongoing";
         }
-        [csvString appendFormat:@"%@, %@, %@, %@\r", date, name, dose, endDate];
+        [csv appendFormat:@"%@, %@, %@, %@\r", date, name, dose, endDate];
     }
     
     isFirst = YES;
     for (Procedures *procs in self.allProcedures) {
         if (isFirst) {
-            [csvString appendString:@"Illness & Procedures\r"];
-            [csvString appendString:@"Date, Illness, Procedure\r"];
+            [csv appendString:@"Illness & Procedures\r"];
+            [csv appendString:@"Date, Illness, Procedure\r"];
             isFirst = NO;
         }
         NSString *date = [formatter stringFromDate:procs.Date];
         NSString *illness = procs.Illness;
         NSString *name = procs.Name;
-        [csvString appendFormat:@"%@, %@, %@\r", date, illness, name];
+        [csv appendFormat:@"%@, %@, %@\r", date, illness, name];
     }
-    
-    return [csvString dataUsingEncoding:NSUTF8StringEncoding];
+    return csv;
+}
+
+
+
+/**
+ returns a string of comma-separated-values. to be used in sending per e-mail
+ */
+- (NSData *)csvData{
+    return [[self csvString] dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 

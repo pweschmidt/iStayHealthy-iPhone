@@ -144,12 +144,15 @@
         NSLog(@"SettingsDetailViewController::startEmailMessageView called from iPhone Simulator");
 #endif
     }
-    NSString *tmpFile = [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.csv"];
+//    NSString *tmpFile = [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.csv"];
+    NSString *tmpXMLFile = [NSTemporaryDirectory() stringByAppendingFormat:@"iStayHealthy.isth"];
     DataLoader *loader = [[[DataLoader alloc]init] autorelease];
     [loader getSQLData];
-    NSData *csvData = [loader csvData];
+//    NSData *csvData = [loader csvData];
+    NSString *msgBody = [loader csvString];
+    NSData *xmlData = [loader xmlData];
 	NSError *error = nil;
-    [csvData writeToFile:tmpFile options:NSDataWritingAtomic error:&error];
+    [xmlData writeToFile:tmpXMLFile options:NSDataWritingAtomic error:&error];
 	if (error != nil) {
 		[[[[UIAlertView alloc]
 		   initWithTitle:@"Error writing CSV data to tmp directory" message:[error localizedDescription] 
@@ -157,18 +160,17 @@
 		  autorelease]
 		 show];
 	}
+ 
     else{
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-        mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-        
+        mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];        
         mailController.mailComposeDelegate = self;
         [mailController setSubject:@"iStayHealthy Data (attached)"];
-        [mailController addAttachmentData:csvData mimeType:@"text/csv" fileName:tmpFile];
+        [mailController setMessageBody:msgBody isHTML:NO];
+        [mailController addAttachmentData:xmlData mimeType:@"application/iStayHeathy" fileName:tmpXMLFile];
         [self presentModalViewController:mailController animated:YES];
         [mailController release];        
     }
-
-    
     
 }
 
@@ -378,10 +380,10 @@
                 break;
                 
             case 1:
-                [self startEmailResultsMessageView];
+                [self startEmailMessageView];        
                 break;
             case 2:
-                [self startEmailMessageView];        
+                [self startEmailResultsMessageView];
                 break;
                 /*
             case 3:

@@ -35,6 +35,7 @@
 - (void)getSQLData;
 - (NSData *)xmlData;
 - (NSData *)csvData;
+- (NSString *)csvString;
 - (void) addResults:(XMLElement *)resultsParent;
 - (void) addMedications:(XMLElement *)medicationParent;
 - (void) addMissedMedications:(XMLElement *)missedMedicationParent;

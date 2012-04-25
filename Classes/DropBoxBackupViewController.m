@@ -16,14 +16,15 @@
 @interface DropBoxBackupViewController ()<DBRestClientDelegate>
 - (void)unlinkDropBox;
 - (void)showDBError;
-- (void)loadDefaultPath;
 - (void)backup;
 - (void)restore;
+- (void)createIStayHealthyFolder;
+- (void)copyOldFileToNew;
 @property (nonatomic, readonly) DBRestClient* restClient;
 @end
 
 @implementation DropBoxBackupViewController
-@synthesize iStayHealthyPath, activityIndicator;
+@synthesize iStayHealthyPath, activityIndicator, dropBoxFileExists, newDropboxFileExists;
 
 /**
  initWithStyle
@@ -57,20 +58,6 @@
     [super dealloc];
 }
 
-#pragma mark - View lifecycle
-/**
- viewDidLoad
- */
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Set these variables before launching the app
-    self.iStayHealthyPath = nil;
-    dropBoxFileExists = NO;
-    isBackup = NO;
-
-}
-
 /**
  viewDidUnload
  */
@@ -83,31 +70,35 @@
 }
 
 /**
+ viewDidLoad
+ */
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+#ifdef APPDEBUG
+    NSLog(@"DropboxController viewDidLoad");
+#endif
+	// Set these variables before launching the app
+    [self restClient];
+    self.iStayHealthyPath = nil;
+    self.dropBoxFileExists = NO;
+    self.newDropboxFileExists = NO;
+    isBackup = NO;
+    if(nil != restClient)
+        [[self restClient] loadMetadata:@"/"];
+
+}
+
+
+/**
  viewWillAppear
  */
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (![[DBSession sharedSession] isLinked]) {
-    }
-    else{
-#ifdef APPDEBUG
-        [[[[UIAlertView alloc] 
-           initWithTitle:@"Account Linked!" message:@"Your dropbox account is already linked" 
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-          autorelease]
-         show];        
-#endif
-    }
-    if (nil == restClient) {
-#ifdef APPDEBUG
-        NSLog(@"DropBoxBackupViewController viewWillAppear - restClient is null");
-#endif
-    }    
-    else{
-        [self loadDefaultPath];
-    }
+    [[self restClient] loadMetadata:@"/iStayHealthy"];
+    
 }
 
 
@@ -219,7 +210,7 @@
 }
 
 - (NSString *)uploadFileTmpPath{
-    return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.xml"];    
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];    
 }
 
 /**
@@ -251,15 +242,24 @@
     
 }
 
+/**
+ called to create the iStayHealthy folder if it doesn't exist
+ */
+- (void)createIStayHealthyFolder{
+#ifdef APPDEBUG
+    NSLog(@"creating the iStayHealthy folder");
+#endif
+    [[self restClient] createFolder:@"/iStayHealthy"];    
+}
 
 /**
- (void)loadDefaultPath 
+ called to copy the file ending with .xml to the file ending with .isth. The isth extension is recognised by the system.
  */
-- (void)loadDefaultPath{
-    [[self restClient] loadMetadata:@"/"];
-    if (nil == self.iStayHealthyPath) {
-        [[self restClient] createFolder:@"iStayHealthy"];
-    }    
+- (void)copyOldFileToNew{
+#ifdef APPDEBUG
+    NSLog(@"copying iStayHealthy.xml to iStayHealthy.isth");
+#endif
+    [[self restClient] copyFrom:@"/iStayHealthy/iStayHealthy.xml" toPath:@"/iStayHealthy/iStayHealthy.isth"];
 }
 
 
@@ -285,7 +285,7 @@
 		 show];
 	}
     else{
-        [[self restClient]uploadFile:@"iStayHealthy.xml" toPath:@"/iStayHealthy" withParentRev:nil fromPath:dataPath];
+        [[self restClient]uploadFile:@"iStayHealthy.isth" toPath:@"/iStayHealthy" withParentRev:nil fromPath:dataPath];
     }        
 
 }
@@ -294,14 +294,23 @@
  (void)restore 
  */
 - (void)restore{
+    if (!self.dropBoxFileExists && !self.newDropboxFileExists) {
+        UIAlertView *noFile = [[[UIAlertView alloc]initWithTitle:@"No data" message:@"No saved data on Dropbox" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil]autorelease];
+        [noFile show];
+        return;
+    }
+    [self.activityIndicator startAnimating];   
     NSString *dataPath = [self dropBoxFileTmpPath];
-    [self.activityIndicator startAnimating];    
-    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.xml" intoPath:dataPath];
+    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
     NSData *xmlData = [[[NSData alloc]initWithContentsOfFile:dataPath]autorelease];
     XMLLoader *xmlLoader = [[[XMLLoader alloc]initWithData:xmlData]autorelease];
     NSError *error = nil;
     if([xmlLoader startParsing:&error]){
         [xmlLoader synchronise];
+    }
+    else {
+        UIAlertView *errorInXML = [[[UIAlertView alloc]initWithTitle:@"Parsing error" message:@"Error parsing iStayHealthy Data" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil]autorelease];
+        [errorInXML show];
     }
     
 }
@@ -314,6 +323,9 @@
  (DBRestClient*)restClient
  */
 - (DBRestClient *)restClient {
+#ifdef APPDEBUG
+    NSLog(@"DropboxController restClient");
+#endif
     if (!restClient) {
         restClient =
         [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
@@ -324,20 +336,69 @@
 
 
 - (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata {
+    NSString *path = [metadata path];
+    if ([path isEqualToString:@"/"]) {
+        for (DBMetadata *child in metadata.contents) {
+            NSString *pathName = [child path];
+            if ([child isDirectory] && [pathName isEqualToString:@"/iStayHealthy"]) {
 #ifdef APPDEBUG
-    NSLog(@"calling DBRestClient::loadedMetadata");
+                NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy folder");
 #endif
-    for (DBMetadata *child in metadata.contents) {
-        NSString *pathName = [child path];
-        if ([child isDirectory] && [pathName isEqualToString:@"iStayHealthy"]) {
-            self.iStayHealthyPath = pathName;
+                self.iStayHealthyPath = pathName;
+            }
         }
-        else if([pathName isEqualToString:@"iStayHealthy.xml"]){
-            dropBoxFileExists = YES;            
+        if (nil == self.iStayHealthyPath) {
+            [self createIStayHealthyFolder];
+        }          
+    }
+    if ([path isEqualToString:@"/iStayHealthy"]) {
+        for (DBMetadata *child in metadata.contents) {
+            NSString *pathName = [child path];
+            if([pathName hasSuffix:@"iStayHealthy.xml"]){
+#ifdef APPDEBUG
+                NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.xml file");
+#endif
+                self.dropBoxFileExists = YES;            
+            }
+            else if([pathName hasSuffix:@"iStayHealthy.isth"]){
+#ifdef APPDEBUG
+                NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.isth file");
+#endif
+                self.newDropboxFileExists = YES;            
+            }
+        }
+        if(self.dropBoxFileExists && !self.newDropboxFileExists){
+#ifdef APPDEBUG
+            NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.xml but not the isth file");
+#endif
+            [self copyOldFileToNew];
         }
     }
     
 }
+
+/**
+ */
+- (void)restClient:(DBRestClient *)client createdFolder:(DBMetadata *)folder{
+    
+}
+
+- (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error{
+    UIAlertView *errorAlert = [[[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil]autorelease];
+    [errorAlert show];    
+}
+
+- (void)restClient:(DBRestClient *)client copiedPath:(NSString *)fromPath to:(DBMetadata *)to{
+    if ([fromPath isEqualToString:@"/iStayHealthy/iStayHealthy.xml"] && [[to path] isEqualToString:@"/iStayHealthy/iStayHealthy.isth"]) {
+        newDropboxFileExists = YES;
+    }
+}
+
+- (void)restClient:(DBRestClient *)client copyPathFailedWithError:(NSError *)error{
+    UIAlertView *errorAlert = [[[UIAlertView alloc] initWithTitle:@"Dropbox Copy error" message:[NSString stringWithFormat:@"Error copying file %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil]autorelease];
+    [errorAlert show];
+}
+
 
 /**
  (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path
