@@ -194,7 +194,15 @@
                 break;
             case 1:
                 isBackup = NO;
-                [self restore];
+                if (!self.dropBoxFileExists && !self.newDropboxFileExists) {
+                    UIAlertView *noFile = [[[UIAlertView alloc]initWithTitle:@"No data" message:@"No saved data on Dropbox" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil]autorelease];
+                    [noFile show];
+                }
+                else {
+                    [self.activityIndicator startAnimating];   
+                    NSString *dataPath = [self dropBoxFileTmpPath];
+                    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
+                }
                 break;    
         }
     }
@@ -294,24 +302,18 @@
  (void)restore 
  */
 - (void)restore{
-    if (!self.dropBoxFileExists && !self.newDropboxFileExists) {
-        UIAlertView *noFile = [[[UIAlertView alloc]initWithTitle:@"No data" message:@"No saved data on Dropbox" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil]autorelease];
-        [noFile show];
-        return;
-    }
-    [self.activityIndicator startAnimating];   
     NSString *dataPath = [self dropBoxFileTmpPath];
-    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
     NSData *xmlData = [[[NSData alloc]initWithContentsOfFile:dataPath]autorelease];
     XMLLoader *xmlLoader = [[[XMLLoader alloc]initWithData:xmlData]autorelease];
     NSError *error = nil;
-    if([xmlLoader startParsing:&error]){
-        [xmlLoader synchronise];
-    }
-    else {
-        UIAlertView *errorInXML = [[[UIAlertView alloc]initWithTitle:@"Parsing error" message:@"Error parsing iStayHealthy Data" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil]autorelease];
-        [errorInXML show];
-    }
+    [xmlLoader startParsing:&error];
+    [xmlLoader synchronise];
+    [self.activityIndicator stopAnimating];
+    [[[[UIAlertView alloc] 
+       initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.xml.",nil)
+       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+      autorelease]
+     show];        
     
 }
 
@@ -466,12 +468,7 @@
 #ifdef APPDEBUG
     NSLog(@"File downloaded successfully to path: %@", localPath);
 #endif
-    [self.activityIndicator stopAnimating];
-    [[[[UIAlertView alloc] 
-       initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.xml.",nil)
-       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
-     show];        
+    [self restore];
 }
 
 /**

@@ -518,7 +518,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+MARGINLEFT/2, CGRectGetMinY(cell.bounds), CGRectGetWidth(cell.bounds) - MARGINLEFT*1.5, CHARTCELLHEIGHT-5.0);
         HealthChartsViewPortrait *chart = [[HealthChartsViewPortrait alloc] initWithFrame:frame];
-        chart.events = self.events;
+        [chart setEvents:self.events];
+//        chart.events = self.events;
         
 		[cell.contentView addSubview:chart];
 		self.chartView = chart;

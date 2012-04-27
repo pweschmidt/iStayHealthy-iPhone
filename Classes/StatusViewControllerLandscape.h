@@ -15,7 +15,6 @@
 
 @interface StatusViewControllerLandscape : UIViewController <UIAlertViewDelegate, NSFetchedResultsControllerDelegate>{
 	UIStatusBarStyle oldStatusBarStyle;
-//	ChartViewLandscape *chartView;
 	HealthChartsViewLandscape *chartView;
 	NSMutableArray *allResults;
 	NSMutableArray *allMeds;
@@ -27,7 +26,6 @@
 	iStayHealthyRecord *masterRecord;
     ChartEvents *events;
 }
-//@property (nonatomic, retain) ChartViewLandscape *chartView;
 @property (nonatomic, retain) HealthChartsViewLandscape *chartView;
 @property (nonatomic, retain) NSMutableArray *allResults;
 @property (nonatomic, retain) NSMutableArray *allMeds;

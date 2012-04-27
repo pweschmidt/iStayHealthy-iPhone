@@ -46,6 +46,7 @@
 {
     [self drawXAxis:UIGraphicsGetCurrentContext()];
     [self drawYAxis:UIGraphicsGetCurrentContext()];
+    [self drawStartAndEndDate:UIGraphicsGetCurrentContext()];
     [self drawMedicationStartLine:UIGraphicsGetCurrentContext()];
     [self drawMissedMedicationWarning:UIGraphicsGetCurrentContext()];
 }
@@ -54,7 +55,7 @@
  */
 - (void)dealloc
 {
-    [events release];
+    self.events = nil;
     [super dealloc];
 }
 
@@ -88,9 +89,6 @@
 	CGContextSetLineWidth(context, TICKWIDTH);
     for (int tick = 1; tick < CD4TICKS ; ++tick) {
         float yOffset = [Trafo mapCD4CountToYAxis:(100*tick) forHeight:height];
-#ifdef APPDEBUG
-        NSLog(@"drawCD4Ticks: tick=%d yOffset=%f",tick,yOffset);
-#endif
 		CGContextMoveToPoint(context, MARGINLEFT - MAJORTICKLENGTH / 2.0, yOffset);
 		CGContextAddLineToPoint(context, MARGINLEFT + MAJORTICKLENGTH / 2.0, yOffset);
 		CGContextStrokePath(context);
@@ -118,9 +116,6 @@
     float factor = 10.0;
     for (int tick = 1; tick < VIRALLOADTICKS; ++tick) {
         float yOffset = [Trafo mapLogViralLoadToYAxis:factor forHeight:height];
-#ifdef APPDEBUG
-        NSLog(@"drawViralLoadTicks: tick=%d yOffset=%f",tick,yOffset);
-#endif
 		CGContextMoveToPoint(context, xOffset - MAJORTICKLENGTH / 2.0, yOffset);
 		CGContextAddLineToPoint(context, xOffset + MAJORTICKLENGTH / 2.0, yOffset);
 		CGContextStrokePath(context);
@@ -189,14 +184,6 @@
             float majorYOffset = [Trafo mapCD4PercentToYAxis:cd4Value forHeight:height] - 2.0;
             CGContextShowTextAtPoint(context, xOffset, majorYOffset, [cd4Label UTF8String], [cd4Label length]);
         }
-        /*
-        else{
-            NSString *cd4Label = (tick < (CD4PERCENTTICKS - 1)) ? [NSString stringWithFormat:@" %d%%",cd4Value] :
-            [NSString stringWithFormat:@">%d%%",cd4Value];
-            float majorYOffset = [Trafo mapCD4PercentToYAxis:cd4Value forHeight:height] - 2.0;
-            CGContextShowTextAtPoint(context, xOffset+MARGINLEFT, majorYOffset, [cd4Label UTF8String], [cd4Label length]);            
-        }
-         */
 	}
     
 }
@@ -263,6 +250,64 @@
 #pragma mark -
 #pragma mark data drawing methods
 
+- (void)drawStartAndEndDate:(CGContextRef)context{
+#ifdef APPDEBUG
+    NSLog(@"HealthChartsView::drawStartAndEndDate");
+#endif
+    int count = [self.events.allChartEvents count];
+    if (0 == count) {
+#ifdef APPDEBUG
+        NSLog(@"HealthChartsView::drawCD4Count events array is empty");
+#endif
+        return;
+    }
+    float xStart = [Trafo xStart:width forCount:count];
+    float xDistance = floorf(width/count);
+    int index = 0;
+    float xValue = xStart;
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    formatter.dateFormat = @"MMM YY";
+    float dateYValue = MARGINTOP + height + 3.0;
+    for (ChartEvent *event in self.events.allChartEvents) {
+        if (0 == index) {
+            UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
+            label.text = [formatter stringFromDate:event.date];
+            label.font = [UIFont systemFontOfSize:8.0];	
+            label.textColor = [UIColor lightGrayColor];
+            label.backgroundColor = BRIGHT_BACKGROUND;
+            [self addSubview:label];
+        }
+        else if( 1 <= index && index < count - 1){
+            if (event.missedName || event.medicationName) {
+                UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
+                label.text = [formatter stringFromDate:event.date];
+                label.font = [UIFont systemFontOfSize:8.0];	
+                label.textColor = [UIColor lightGrayColor];
+                label.backgroundColor = BRIGHT_BACKGROUND;
+                [self addSubview:label];
+            }
+        }
+        else{
+            UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
+            label.text = [formatter stringFromDate:event.date];
+            label.font = [UIFont systemFontOfSize:8.0];	
+            label.textColor = [UIColor lightGrayColor];
+            label.backgroundColor = BRIGHT_BACKGROUND;
+            [self addSubview:label];
+            
+        }
+        xValue += xDistance;
+        index++;
+    }    
+    
+    
+    
+    
+    
+}
+
+
+
 /**
  plots the CD4 count
  */
@@ -270,13 +315,7 @@
 #ifdef APPDEBUG
     NSLog(@"HealthChartsView::drawCD4Count");
 #endif
-    if (!events) {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawCD4Count events array is nil");
-#endif
-        return;
-    }
-    int count = [events.allChartEvents count];
+    int count = [self.events.allChartEvents count];
     if (0 == count) {
 #ifdef APPDEBUG
         NSLog(@"HealthChartsView::drawCD4Count events array is empty");
@@ -287,7 +326,7 @@
     float xStart = [Trafo xStart:width forCount:count];
     float xDistance = floorf(width/count);
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawCD4Count count is %d, width is %f, xStart is %f",count, width, xStart);
+    NSLog(@"HealthChartsView::drawCD4Count count is %d, width is %f, xStart is %f and distance is %f",count, width, xStart, xDistance);
 #endif
     
 	CGContextSetLineWidth(context, 1.5);
@@ -298,8 +337,7 @@
     float previousYValue = -99.0;
     float previousXValue = -99.0;
     int point = 0;
-    NSDate *lastDate = nil;
-    for (ChartEvent *event in events.allChartEvents) {
+    for (ChartEvent *event in self.events.allChartEvents) {
         if (event.CD4Count) {
             float yValue = [Trafo mapCD4CountToYAxis:[event.CD4Count floatValue] forHeight:height];
             if ( (DATAPOINTSIZE * 2.5) < xDistance) {
@@ -312,52 +350,23 @@
             }
             previousYValue = yValue;
             previousXValue = xValue;
-            if (0 == point) {
-                NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-                formatter.dateFormat = @"MMM YY";
-                float dateYValue = MARGINTOP + height + 3.0;
-                UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
-                label.text = [formatter stringFromDate:event.date];
-                label.font = [UIFont systemFontOfSize:8.0];	
-                label.textColor = [UIColor lightGrayColor];
-                label.backgroundColor = BRIGHT_BACKGROUND;
-                [self addSubview:label];
-            }
             ++point;
-            lastDate = event.date;
         }
         xValue += xDistance;
     }
-    if (1 < point && lastDate) {
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-        formatter.dateFormat = @"MMM YY";
-        float dateYValue = MARGINTOP + height + 3.0;
-        UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(previousXValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
-        label.text = [formatter stringFromDate:lastDate];
-        label.font = [UIFont systemFontOfSize:8.0];	
-        label.textColor = [UIColor lightGrayColor];
-        label.backgroundColor = BRIGHT_BACKGROUND;
-        [self addSubview:label];        
-    }
+    
+#ifdef APPDEBUG
+    NSLog(@"HealthChartsView::drawCD4Count we have found %d results",point);
+#endif
+    
+    
 }
 /**
  plots the CD4%
  */
 - (void)drawCD4Percentages:(CGContextRef)context{
-#ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawCD4Percentages");
-#endif
-    if (!events) {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawCD4Percentages events array is nil");
-#endif
-        return;
-    }
-    int count = [events.allChartEvents count];
+    int count = [self.events.allChartEvents count];
     if (0 == count) {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawCD4Percentages events array is empty");
-#endif
         return;
     }
     
@@ -371,7 +380,7 @@
     float xValue = xStart;
     float previousYValue = -99.0;
     float previousXValue = -99.0;
-    for (ChartEvent *event in events.allChartEvents) {
+    for (ChartEvent *event in self.events.allChartEvents) {
         if (event.CD4Percent) {
             float yValue = [Trafo mapCD4PercentToYAxis:[event.CD4Percent floatValue] forHeight:height];
             if ( (DATAPOINTSIZE * 2.5) < xDistance) {
@@ -392,20 +401,8 @@
  plots the log10 viral load values
  */
 - (void)drawViralLoadCounts:(CGContextRef)context{
-#ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawViralLoadCounts");
-#endif
-    if (!events) {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawViralLoadCounts events array is nil");
-#endif
-        return;
-    }
-    int count = [events.allChartEvents count];
+    int count = [self.events.allChartEvents count];
     if (0 == count) {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawViralLoadCounts events array is empty");
-#endif
         return;
     }
     
@@ -420,7 +417,7 @@
     float xValue = xStart;
     float previousYValue = -99.0;
     float previousXValue = -99.0;
-    for (ChartEvent *event in events.allChartEvents) {
+    for (ChartEvent *event in self.events.allChartEvents) {
         if (event.ViralLoad) {
             float yValue = [Trafo mapLogViralLoadToYAxis:[event.ViralLoad floatValue] forHeight:height];
             if ( (DATAPOINTSIZE * 2.5) < xDistance) {
@@ -446,13 +443,7 @@
 #ifdef APPDEBUG
     NSLog(@"HealthChartsView::drawMedicationStartLine");
 #endif
-    if (!events) {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawMedicationStartLine events array is nil");
-#endif
-        return;
-    }
-    int count = [events.allChartEvents count];
+    int count = [self.events.allChartEvents count];
     if (0 == count) {
 #ifdef APPDEBUG
         NSLog(@"HealthChartsView::drawMedicationStartLine events array is empty");
@@ -461,7 +452,10 @@
     }
     
     float xStart = [Trafo xStart:width forCount:count];
-    float xDistance = width/count;
+    float xDistance = floorf(width/count);
+#ifdef APPDEBUG
+    NSLog(@"HealthChartsView::drawMedicationStartLine count is %d, width is %f, xStart is %f and distance is %f",count, width, xStart, xDistance);
+#endif
     
     
 	CGContextSetLineWidth(context, 1.0);
@@ -471,23 +465,14 @@
 	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     
     float xValue = xStart;
-    for (ChartEvent *event in events.allChartEvents) {
+    for (ChartEvent *event in self.events.allChartEvents) {
         if (event.medicationName) {
             CGContextMoveToPoint(context, xValue, MARGINTOP);
             CGContextAddLineToPoint(context, xValue, MARGINTOP + height);
             CGContextStrokePath(context);			
-            NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-            formatter.dateFormat = @"MMM YY";
-            float yValue = MARGINTOP + height + 3.0;
-            UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, yValue, 40.0, 10.0)]autorelease];
-            label.text = [formatter stringFromDate:event.date];
-            label.font = [UIFont systemFontOfSize:8.0];	
-            label.textColor = [UIColor lightGrayColor];
-            label.backgroundColor = BRIGHT_BACKGROUND;
-            [self addSubview:label];
             CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+xValue - 10.0, CGRectGetMinY(self.bounds)+MARGINTOP + height - 25.0, 20.0, 20.0);
             UILabel *imagelabel = [[UILabel alloc] initWithFrame:frame];
-            label.backgroundColor = BRIGHT_BACKGROUND;
+            imagelabel.backgroundColor = BRIGHT_BACKGROUND;
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"combi-label-small.png"]] autorelease];
             
             [imagelabel addSubview:imageView];
@@ -506,24 +491,18 @@
  */
 - (void)drawMissedMedicationWarning:(CGContextRef)context{
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawMedicationStartLine");
+    NSLog(@"HealthChartsView::drawMissedMedicationWarning");
 #endif
-    if (!events) {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawMedicationStartLine events array is nil");
-#endif
-        return;
-    }
-    int count = [events.allChartEvents count];
+    int count = [self.events.allChartEvents count];
     if (0 == count) {
 #ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawMedicationStartLine events array is empty");
+        NSLog(@"HealthChartsView::drawMissedMedicationWarning events array is empty");
 #endif
         return;
     }
     
     float xStart = [Trafo xStart:width forCount:count];
-    float xDistance = width/count;
+    float xDistance = floorf(width/count);
     
 	CGContextSetLineWidth(context, 1.0);
 	CGContextSetLineDash(context, 0, dashPattern, DASHCOUNT);
@@ -532,23 +511,14 @@
 	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     
     float xValue = xStart;
-    for (ChartEvent *event in events.allChartEvents) {
+    for (ChartEvent *event in self.events.allChartEvents) {
         if (event.missedName) {
             CGContextMoveToPoint(context, xValue, MARGINTOP);
             CGContextAddLineToPoint(context, xValue, MARGINTOP + height);
-            CGContextStrokePath(context);			
-            NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-            formatter.dateFormat = @"dd MMM";
-            float yValue = MARGINTOP + height + 3.0;
-            UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, yValue, 40.0, 10.0)]autorelease];
-            label.text = [formatter stringFromDate:event.date];
-            label.font = [UIFont systemFontOfSize:8.0];	
-            label.textColor = [UIColor lightGrayColor];
-            label.backgroundColor = BRIGHT_BACKGROUND;
-            [self addSubview:label];
+            CGContextStrokePath(context);	
             CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+xValue - 10.0, CGRectGetMinY(self.bounds)+MARGINTOP + height - 25.0, 20.0, 20.0);
             UILabel *imagelabel = [[UILabel alloc] initWithFrame:frame];
-            label.backgroundColor = BRIGHT_BACKGROUND;
+            imagelabel.backgroundColor = BRIGHT_BACKGROUND;
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"missedsmall.png"]] autorelease];
             
             [imagelabel addSubview:imageView];

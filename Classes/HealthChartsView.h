@@ -32,5 +32,6 @@
 - (void)drawViralLoadCounts:(CGContextRef)context;
 - (void)drawMedicationStartLine:(CGContextRef)context;
 - (void)drawMissedMedicationWarning:(CGContextRef)context;
+- (void)drawStartAndEndDate:(CGContextRef)context;
 
 @end

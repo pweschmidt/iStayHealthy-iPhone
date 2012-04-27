@@ -57,10 +57,9 @@
 #endif
 	CGRect frame = CGRectMake(0.0, 20.0, 480.0, 300.0);
     HealthChartsViewLandscape *chart = [[HealthChartsViewLandscape alloc]initWithFrame:frame];
-    //	ChartViewLandscape *chart = [[ChartViewLandscape alloc]initWithFrame:frame];
     [self.view addSubview:chart];
     self.chartView = chart;
-    self.chartView.events = self.events;
+    [self.chartView setEvents:self.events];
     [chart release];
     
 	NSError *error = nil;
@@ -98,8 +97,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-//    [[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:NO];    
 }
 
 /**
@@ -115,10 +112,11 @@
 	NSSet *results = self.masterRecord.results;
 	NSSet *meds = self.masterRecord.medications;
     NSSet *missedMeds = self.masterRecord.missedMedications;
+
     if (0 < [self.events.allChartEvents count]) {
         [self.events.allChartEvents removeAllObjects];
     }
-    
+    //set results
 	if (0 != [results count]) {
 		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
 #ifdef APPDEBUG	
@@ -131,12 +129,14 @@
 #endif
 		self.allResults = (NSMutableArray *)results;
 	}
+    //set meds
 	if (0 != [meds count]) {
 		self.allMeds = [NSArray arrayByOrderingSet:meds byKey:@"StartDate" ascending:YES reverseOrder:NO];
 	}
 	else {
 		self.allMeds = (NSMutableArray *)meds;
 	}
+    //set missed meds
     if (0 != [missedMeds count]) {
         self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
     }
@@ -158,7 +158,7 @@
         [self.events.allChartEvents removeAllObjects];
     }
     [self setUpData];
-	[chartView setNeedsDisplay];
+	[self.chartView setNeedsDisplay];
 }
 
 
@@ -214,7 +214,7 @@
 #endif
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
-	[chartView setNeedsDisplay];
+	[self.chartView setNeedsDisplay];
 }
 
 #pragma mark -
@@ -230,6 +230,12 @@
  unload
  */
 - (void)viewDidUnload {
+    self.allMeds = nil;
+    self.allResults = nil;
+    self.allMissedMeds = nil;
+    self.chartView = nil;
+    self.events = nil;
+    self.masterRecord = nil;
     [super viewDidUnload];
 }
 
@@ -237,15 +243,14 @@
  dealloc
  */
 - (void)dealloc {
-	[allMeds release];
-	[allResults release];
-    [allMissedMeds release];
+    self.allMeds = nil;
+    self.allResults = nil;
+    self.allMissedMeds = nil;
     self.chartView = nil;
-//	[chartView release];
-	[masterRecord release];
+    self.events = nil;
+    self.masterRecord = nil;
 //    self.fetchedResultsController = nil;
 	[_fetchedResultsController release];
-    [events release];
     [super dealloc];
 }
 

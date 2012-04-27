@@ -18,14 +18,14 @@
 - (id)init{
     self = [super init];
     if (self) {
-        allChartEvents = [[NSMutableArray alloc]initWithCapacity:0];
+        self.allChartEvents = [[NSMutableArray alloc]initWithCapacity:0];
     }
     return self;
 }
 
 - (void)sortEventsAscending:(BOOL)ascending{
 	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:ascending];
-    [allChartEvents sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];  
+    [self.allChartEvents sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];  
     [descriptor release];
 }
 
@@ -53,7 +53,7 @@
             else
                 event.ViralLoad = result.ViralLoad;
         }
-        [allChartEvents addObject:event];
+        [self.allChartEvents addObject:event];
     }
 }
 
@@ -93,13 +93,13 @@
         ChartEvent *event = [[[ChartEvent alloc] init]autorelease];
         event.date = missedMedication.MissedDate;
         event.missedName = missedMedication.Name;
-        [allChartEvents addObject:event];
+        [self.allChartEvents addObject:event];
     }
 }
 
 
 - (void)dealloc{
-    [allChartEvents release];
+    self.allChartEvents = nil;
     [super dealloc];
 }
 

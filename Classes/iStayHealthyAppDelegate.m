@@ -49,7 +49,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     
 	application.applicationIconBadgeNumber = 0;
     
-    [self checkForiCloud];        
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
@@ -66,8 +65,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 		  autorelease]
 		 show];
-	}
-    
+	}    
     
     if (isPasswordEnabled) {
         iStayHealthyPasswordController *tmpPassController =
@@ -84,6 +82,8 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         [self.window makeKeyAndVisible];
         [tmpBarController release];
     }
+    //finally see if iCloud is available or not
+    [self checkForiCloud];        
     return YES;
 }
 

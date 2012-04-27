@@ -162,18 +162,10 @@
 	if(qName) {
 		elementName = qName;
 	}
-#ifdef APPDEBUG
-    NSLog(@"XMLLoader:didStartElement %@",elementName);
-#endif
 
     XMLElement *root = [document root];
     if ([elementName isEqualToString:ROOT]) {
 
-#ifdef APPDEBUG
-        NSLog(@"%@ = %@",DBVERSION, [attributeDict valueForKey:DBVERSION]);
-        NSLog(@"%@ = %@",FROMDEVICE, [attributeDict valueForKey:FROMDEVICE]);
-        NSLog(@"%@ = %@",FROMDATE, [attributeDict valueForKey:FROMDATE]);
-#endif 
 
         [root addAttribute:DBVERSION andValue:[attributeDict valueForKey:DBVERSION]];
         [root addAttribute:FROMDEVICE andValue:[attributeDict valueForKey:FROMDEVICE]];
@@ -216,12 +208,6 @@
     }
     //child elements
     else if([elementName isEqualToString:RESULT] && (nil != results)){
-#ifdef APPDEBUG
-        NSLog(@"%@ = %@",RESULTSDATE, [attributeDict valueForKey:RESULTSDATE]);
-        NSLog(@"%@ = %@",CD4COUNT, [attributeDict valueForKey:CD4COUNT]);
-        NSLog(@"%@ = %@",CD4PERCENT, [attributeDict valueForKey:CD4PERCENT]);
-        NSLog(@"%@ = %@",VIRALLOAD, [attributeDict valueForKey:VIRALLOAD]);
-#endif 
         XMLElement *result = [[XMLElement alloc]initWithName:RESULT];
         [result addAttribute:RESULTSDATE andValue:[attributeDict valueForKey:RESULTSDATE]];
         [result addAttribute:CD4COUNT andValue:[attributeDict valueForKey:CD4COUNT]];
@@ -311,9 +297,6 @@
 	if(qName) {
 		elementName = qName;
 	}
-#ifdef APPDEBUG
-    NSLog(@"XMLLoader:didEndElement %@",elementName);
-#endif
     XMLElement *root = [document root];
     if ([elementName isEqualToString:RESULTS] && (nil != self.results)) {
         [root addChild:self.results];
@@ -343,7 +326,9 @@
  handle parsing errors
  */
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
+#ifdef APPDEBUG
 	NSLog(@"Error on XML Parse: %@", [parseError localizedDescription] );
+#endif
     *error = [NSError errorWithDomain:[parseError domain] code:[parseError code] userInfo:[parseError userInfo]];
 }
 
