@@ -21,16 +21,19 @@
  dealloc
  */
 - (void)dealloc {
-    /*
-	[dateCell release];
-	[startDate release];
-	[record release];
-     */
     self.dateCell = nil;
     self.startDate = nil;
     self.name = nil;
     self.illness = nil;
     [super dealloc];
+}
+
+- (void)viewDidUnload{
+    self.dateCell = nil;
+    self.startDate = nil;
+    self.name = nil;
+    self.illness = nil;
+    [super viewDidUnload];
 }
 
 - (id)initWithRecord:(iStayHealthyRecord *)masterrecord{
@@ -128,7 +131,7 @@
  */
 - (void)changeStartDate{
 	NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
-	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil]autorelease];
+	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set", nil), nil]autorelease];
 	[actionSheet showInView:self.view];
 	
 	

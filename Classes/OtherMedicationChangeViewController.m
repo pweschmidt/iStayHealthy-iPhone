@@ -10,10 +10,12 @@
 #import "OtherMedication.h"
 #import "DosageCell.h"
 #import "iStayHealthyRecord.h"
+#import "SetDateCell.h"
 #import "Utilities.h"
+#import "GeneralSettings.h"
 
 @implementation OtherMedicationChangeViewController
-@synthesize otherMed,record,name, number, unit;
+@synthesize otherMed,record,name, number, unit, changeDate, changeDateCell;
 
 
 - (id)initWithOtherMedication:(OtherMedication *)_other withMasterRecord:(iStayHealthyRecord *)masterRecord{
@@ -27,6 +29,7 @@
         if (nil == self.unit) {
             self.unit = @"mg";
         }
+        self.changeDate = self.otherMed.StartDate;
     }
     return self;
 }
@@ -35,11 +38,11 @@
 
 - (void)dealloc
 {
-//    [otherMed release];
-//    [record release];
+    self.changeDate = nil;
     self.name = nil;
     self.number = nil;
     self.unit = nil;
+    self.changeDateCell = nil;
     [super dealloc];
 }
 
@@ -69,16 +72,23 @@
 
 - (void)viewDidUnload
 {
+    self.changeDate = nil;
+    self.name = nil;
+    self.number = nil;
+    self.unit = nil;
+    self.changeDateCell = nil;
     [super viewDidUnload];
 }
 
 - (IBAction) save:					(id) sender{
     NSManagedObjectContext *context = [self.otherMed managedObjectContext];
+    self.otherMed.StartDate = self.changeDate;
     self.otherMed.Dose = self.number;
     self.otherMed.Name = self.name;
     self.otherMed.Unit = self.unit;
     self.otherMed.UID = [Utilities GUID];
     self.record.UID = [Utilities GUID];
+    
     NSError *error = nil;
     if (![context save:&error]) {
 #ifdef APPDEBUG
@@ -88,6 +98,39 @@
     }
  	[self dismissModalViewControllerAnimated:YES];
 }
+
+/**
+ brings up a new view to change the date
+ */
+- (void)changeStartDate{
+	NSString *title =  @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
+	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set", nil), nil]autorelease];
+	[actionSheet showInView:self.view];
+	
+	
+	UIDatePicker *datePicker = [[[UIDatePicker alloc] init] autorelease];
+	datePicker.tag = 101;
+	datePicker.datePickerMode = UIDatePickerModeDate;
+    datePicker.date = self.changeDate;
+	[actionSheet addSubview:datePicker];
+}
+
+/**
+ sets the label and resultsdate to the one selected
+ @actionSheet
+ @buttonIndex
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
+	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+	formatter.dateFormat = @"dd MMM YY";	
+	NSString *timestamp = [formatter stringFromDate:datePicker.date];
+    self.changeDateCell.value.text = timestamp;
+	self.changeDate = datePicker.date;
+}
+
+
 
 /**
  shows the Alert view when user clicks the Trash button
@@ -155,7 +198,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -164,7 +207,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (1 == indexPath.section) {
+    if (2 == indexPath.section) {
         return 80;
     }
     return 48;
@@ -173,6 +216,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.section) {
+        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+        formatter.dateFormat = @"dd MMM YY";
+        
+        NSString *identifier = @"SetDateCell";
+        SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == _dateCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
+            for (id currentObject in cellObjects) {
+                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+                    _dateCell = (SetDateCell *)currentObject;
+                    break;
+                }
+            }  
+        }
+        [[_dateCell value]setText:[formatter stringFromDate:self.changeDate]];
+        [_dateCell setTag:indexPath.row];
+        [[_dateCell title]setText:NSLocalizedString(@"Change", @"Change")];
+        [[_dateCell title]setTextColor:TEXTCOLOUR];
+        self.changeDateCell = _dateCell;
+        return _dateCell;
+    }
+    if (1 == indexPath.section) {
         NSString *identifier = @"ClinicAddressCell";
         ClinicAddressCell *clinicCell = (ClinicAddressCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         if (nil == clinicCell) {
@@ -192,7 +257,7 @@
         return clinicCell;
     }
     
-    if (1 == indexPath.section) {
+    if (2 == indexPath.section) {
         NSString *identifier = @"DosageCell";
         DosageCell *doseCell = (DosageCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         if (nil == doseCell) {
@@ -234,14 +299,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if (0 == indexPath.section) {
+        if (0 == indexPath.row) {
+            [self changeStartDate];
+        }
+    }
 }
 
 @end

@@ -56,18 +56,6 @@
  */
 - (void)dealloc
 {
-    /*
-	[startDate release];
-	[record release];
-    [combiTablets release];
-    [proteaseInhibitors release];
-    [nRTInihibtors release];
-    [nNRTInhibitors release];
-    [integraseInhibitors release];
-    [entryInhibitors release];
-    [stateDictionary release];
-    [dateCell release];
-     */
     self.startDate = nil;
     self.combiTablets = nil;
     self.proteaseInhibitors = nil;
@@ -196,7 +184,7 @@
  */
 - (void)changeStartDate{
     NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
-	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil]autorelease];
+	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil]autorelease];
 	[actionSheet showInView:self.view];
 	
 	

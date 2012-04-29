@@ -9,7 +9,7 @@
 #import "SwitcherCell.h"
 
 @implementation SwitcherCell
-@synthesize switcher, _delegate;
+@synthesize switcher, _delegate, label;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

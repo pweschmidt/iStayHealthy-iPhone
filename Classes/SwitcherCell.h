@@ -10,9 +10,11 @@
 @protocol SwitcherCellProtocol;
 
 @interface SwitcherCell : UITableViewCell{
+    IBOutlet UILabel *label;
     IBOutlet UISwitch *switcher;
     id<SwitcherCellProtocol>_delegate;
 }
+@property (nonatomic, retain) IBOutlet UILabel *label;
 @property (nonatomic, retain) IBOutlet UISwitch *switcher;
 @property (nonatomic, assign) id<SwitcherCellProtocol>_delegate;
 - (void)setDelegate:(id)viewControllerDelegate;

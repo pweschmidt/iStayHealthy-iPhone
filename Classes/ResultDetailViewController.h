@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ResultValueCell.h"
-@class iStayHealthyRecord, SetDateCell;
+@class iStayHealthyRecord, SetDateCell, Results;
 
 @interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, ResultValueCellDelegate>{
 @private

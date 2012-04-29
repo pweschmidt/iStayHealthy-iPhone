@@ -8,15 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "ClinicAddressCell.h"
-@class iStayHealthyRecord, Procedures;
-@interface ProcedureChangeViewController : UITableViewController<UIAlertViewDelegate, ClinicAddressCellDelegate>{
+@class iStayHealthyRecord, Procedures, SetDateCell;
+@interface ProcedureChangeViewController : UITableViewController<UIAlertViewDelegate, ClinicAddressCellDelegate, UIActionSheetDelegate>{
 @private
+	SetDateCell			*changeDateCell;
+	NSDate *changeDate;
     Procedures *procedures;
     iStayHealthyRecord *record;
     NSString *name;
     NSString *illness;
     
 }
+@property (nonatomic, retain) SetDateCell *changeDateCell;
+@property (nonatomic, retain) NSDate *changeDate;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *illness;
 @property (nonatomic, assign) Procedures *procedures;
@@ -24,5 +28,6 @@
 - (IBAction) save:					(id) sender;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;
+- (void)changeStartDate;
 - (id)initWithProcedure:(Procedures *)_procs withMasterRecord:(iStayHealthyRecord *)masterRecord;
 @end

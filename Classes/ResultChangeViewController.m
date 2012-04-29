@@ -17,7 +17,7 @@
 
 @implementation ResultChangeViewController
 @synthesize results, record;
-@synthesize cd4,cd4Percent,vlHIV,vlHepC;
+@synthesize cd4,cd4Percent,vlHIV,vlHepC, resultsDate, changeDateCell;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -50,6 +50,12 @@
         if (nil != results.HepCViralLoad) {
             self.vlHepC = results.HepCViralLoad;
         }
+        if (nil != results.ResultsDate) {
+            self.resultsDate = results.ResultsDate;
+        }
+        else {
+            self.resultsDate = [NSDate date];
+        }
     }
     return self;
 }
@@ -69,11 +75,14 @@
     self.cd4Percent = nil;
     self.vlHIV = nil;
     self.vlHepC = nil;
+    self.resultsDate = nil;
+    self.changeDateCell = nil;
     [super dealloc];
 }
 
 - (IBAction) save:					(id) sender{
 	NSManagedObjectContext *context = [results managedObjectContext];
+    results.ResultsDate = self.resultsDate;
     results.CD4 = self.cd4;
     results.CD4Percent = self.cd4Percent;
     results.ViralLoad = self.vlHIV;
@@ -126,6 +135,40 @@
     }
     return [NSNumber numberWithFloat:[string floatValue]];    
 }
+
+
+/**
+ brings up a new view to change the date
+ */
+- (void)changeResultsDate{
+	NSString *title =  @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
+	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set", nil), nil]autorelease];
+	[actionSheet showInView:self.view];
+	
+	
+	UIDatePicker *datePicker = [[[UIDatePicker alloc] init] autorelease];
+	datePicker.tag = 101;
+	datePicker.datePickerMode = UIDatePickerModeDate;
+    datePicker.date = self.resultsDate;
+	[actionSheet addSubview:datePicker];
+}
+
+/**
+ sets the label and resultsdate to the one selected
+ @actionSheet
+ @buttonIndex
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
+	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+	formatter.dateFormat = @"dd MMM YY";
+	
+	NSString *timestamp = [formatter stringFromDate:datePicker.date];
+    self.changeDateCell.value.text = timestamp;
+	self.resultsDate = datePicker.date;
+}
+
 
 /**
  shows the Alert view when user clicks the Trash button
@@ -182,6 +225,12 @@
 
 - (void)viewDidUnload
 {
+    self.cd4 = nil;
+    self.cd4Percent = nil;
+    self.vlHIV = nil;
+    self.vlHepC = nil;
+    self.resultsDate = nil;
+    self.changeDateCell = nil;
     [super viewDidUnload];
 }
 
@@ -210,16 +259,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+	if (0 == section) {
+		return 1;
+	}
     return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (1 == indexPath.section) {
+    if (2 == indexPath.section) {
         return 80;
     }
 	return 48.0;
@@ -228,6 +280,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.section) {
+        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+        formatter.dateFormat = @"dd MMM YY";
+        
+        NSString *identifier = @"SetDateCell";
+        SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == dateCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
+            for (id currentObject in cellObjects) {
+                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+                    dateCell = (SetDateCell *)currentObject;
+                    break;
+                }
+            }  
+        }
+        [[dateCell value]setText:[formatter stringFromDate:self.resultsDate]];
+        [dateCell setTag:indexPath.row];
+        [[dateCell title]setText:NSLocalizedString(@"Change", @"Change")];
+        [[dateCell title]setTextColor:TEXTCOLOUR];
+        self.changeDateCell = dateCell;
+        return dateCell;
+    }
+    if (1 == indexPath.section) {
         int tag = indexPath.row + 100;
         
         NSString *identifier = @"ResultValueCell";
@@ -263,7 +337,7 @@
         [resultCell setTag:tag];
         return resultCell;        
     }
-    if (1 == indexPath.section) {
+    if (2 == indexPath.section) {
         int tag = indexPath.row + 10;
         
         NSString *identifier = @"ResultSegmentedCell";    
@@ -334,6 +408,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+	if (0 == indexPath.section) {
+		[self changeResultsDate];
+	}
 }
 
 @end

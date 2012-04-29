@@ -17,7 +17,8 @@
 
 @implementation MedicationChangeTableViewController
 @synthesize date, record, selectedMedication, isMissed, effectString,effectIsSet, dateCell, medName;
-
+@synthesize missedDate, effectDate, state, missedSwitchCell, effectSwitchCell;
+@synthesize missedDateCell, effectDateCell;
 /**
  init - loads NIB file and sets the master SQL record
  */
@@ -28,9 +29,15 @@
         self.selectedMedication = medication;
         self.isMissed = NO;
         self.effectIsSet = NO;
-        self.date = [NSDate date];
+        self.date = self.selectedMedication.StartDate;
+        if (nil == self.date) {
+            self.date = [NSDate date];
+        }
         self.effectString = @"";
         self.medName = medication.Name;
+        self.missedDate = [NSDate date];
+        self.effectDate = [NSDate date];
+        self.state = CHANGEDATE;
     }
     return self;
 }
@@ -38,14 +45,15 @@
 
 - (void)dealloc
 {
-//    [selectedMedication release];
-//    [record release];
-//    [dateCell release];
-//    self.selectedMedication = nil;
-//    self.record = nil;
     self.dateCell = nil;
     self.date = nil;
     self.effectString = nil;
+    self.effectDate = nil;
+    self.missedDate = nil;
+    self.missedSwitchCell = nil;
+    self.effectSwitchCell = nil;
+    self.missedDateCell = nil;
+    self.effectDateCell = nil;
     [super dealloc];
 }
 
@@ -74,6 +82,13 @@
 
 - (void)viewDidUnload
 {
+    self.dateCell = nil;
+    self.date = nil;
+    self.effectString = nil;
+    self.effectDate = nil;
+    self.missedDate = nil;
+    self.missedSwitchCell = nil;
+    self.effectSwitchCell = nil;
     [super viewDidUnload];
 }
 
@@ -197,6 +212,7 @@
 #endif	
     
 	NSString *timestamp = [formatter stringFromDate:datePicker.date];
+    
     self.date = datePicker.date;
     self.dateCell.value.text = timestamp;
 }
@@ -216,7 +232,25 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (0 == section) {
+        return 1;
+    }
+    else if (1 == section) {
+        if (self.effectSwitchCell.selected) {
+            return 3;
+        }
+        else {
+            return 1;
+        }
+    }
+    else {
+        if (self.missedSwitchCell.selected) {
+            return 2;
+        }
+        else {
+            return 1;
+        }
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -229,10 +263,9 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-        formatter.dateFormat = @"dd MMM YY";
-        
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    formatter.dateFormat = @"dd MMM YY";
+    if (0 == indexPath.section) {        
         NSString *identifier = @"SetDateCell";
         SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         if (nil == _dateCell) {
@@ -246,43 +279,104 @@
         }
         [[_dateCell value]setText:[formatter stringFromDate:self.date]];
         [_dateCell setTag:indexPath.row];
-        [[_dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
+        [[_dateCell title]setText:NSLocalizedString(@"Change", @"Change")];
         [[_dateCell title]setTextColor:TEXTCOLOUR];
         self.dateCell= _dateCell;
         return _dateCell;
     }
     if (1 == indexPath.section) {
-        NSString *identifier = @"ClinicAddressCell";
-        ClinicAddressCell *cell = (ClinicAddressCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[ClinicAddressCell class]]) {
-                    cell = (ClinicAddressCell *)currentObject;
-                    break;
-                }
-            }  
-            [cell setDelegate:self];
+        if (0 == indexPath.row) {
+            NSString *identifier = @"SwitcherCell";
+            SwitcherCell *cell = (SwitcherCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == cell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SwitcherCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[SwitcherCell class]]) {
+                        cell = (SwitcherCell *)currentObject;
+                        break;
+                    }
+                } 
+                [cell setDelegate:self];
+            }
+            [[cell label]setText:@"Side Effect"];
+            [[cell switcher]setOn:FALSE];
+            self.effectSwitchCell = cell;
+            return cell;
         }
-        [[cell title]setText:NSLocalizedString(@"Side Effects",@"Side Effects")];
-        [[cell valueField]setText:NSLocalizedString(@"Enter Effects",@"Enter Effects")];
-        return cell;
+        if (1 == indexPath.row) {
+            NSString *identifier = @"SetDateCell";
+            SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == _dateCell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[SetDateCell class]]) {
+                        _dateCell = (SetDateCell *)currentObject;
+                        break;
+                    }
+                }  
+            }
+            [[_dateCell value]setText:[formatter stringFromDate:self.effectDate]];
+            [_dateCell setTag:indexPath.row];
+            [[_dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
+            [[_dateCell title]setTextColor:TEXTCOLOUR];
+            self.effectDateCell= _dateCell;
+            return _dateCell;
+        }
+        if (2 == indexPath.row) {
+            NSString *identifier = @"ClinicAddressCell";
+            ClinicAddressCell *cell = (ClinicAddressCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == cell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[ClinicAddressCell class]]) {
+                        cell = (ClinicAddressCell *)currentObject;
+                        break;
+                    }
+                }  
+                [cell setDelegate:self];
+            }
+            [[cell title]setText:NSLocalizedString(@"Side Effects",@"Side Effects")];
+            [[cell valueField]setText:NSLocalizedString(@"Enter Effects",@"Enter Effects")];
+            return cell;
+        }
     }
     if (2 == indexPath.section) {
-        NSString *identifier = @"ClinicAddressCell";
-        SwitcherCell *cell = (SwitcherCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SwitcherCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SwitcherCell class]]) {
-                    cell = (SwitcherCell *)currentObject;
-                    break;
-                }
-            } 
-            [cell setDelegate:self];
+        if (0 == indexPath.row) {
+            NSString *identifier = @"SwitcherCell";
+            SwitcherCell *cell = (SwitcherCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == cell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SwitcherCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[SwitcherCell class]]) {
+                        cell = (SwitcherCell *)currentObject;
+                        break;
+                    }
+                } 
+                [cell setDelegate:self];
+            }
+            [[cell switcher]setOn:FALSE];
+            self.missedSwitchCell = cell;
+            return cell;        
         }
-        [[cell switcher]setOn:FALSE];
-        return cell;        
+        if (1 == indexPath.row) {
+            NSString *identifier = @"SetDateCell";
+            SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == _dateCell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[SetDateCell class]]) {
+                        _dateCell = (SetDateCell *)currentObject;
+                        break;
+                    }
+                }  
+            }
+            [[_dateCell value]setText:[formatter stringFromDate:self.missedDate]];
+            [_dateCell setTag:indexPath.row];
+            [[_dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
+            [[_dateCell title]setTextColor:TEXTCOLOUR];
+            self.missedDateCell= _dateCell;
+            return _dateCell;
+        }
     }
     return nil;
 }
@@ -294,6 +388,7 @@
 {
     if (0 == indexPath.section && 0 == indexPath.row) {
         [self changeDate];
+        self.state = CHANGEDATE;
     }
 }
 

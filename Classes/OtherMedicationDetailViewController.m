@@ -267,6 +267,11 @@
  unload view
  */
 - (void)viewDidUnload {
+    self.dateCell = nil;
+    self.name = nil;
+    self.number = nil;
+    self.unit = nil;
+    self.startDate = nil;
 	[super viewDidUnload];
 }
 
@@ -279,10 +284,6 @@
     self.number = nil;
     self.unit = nil;
     self.startDate = nil;
-    /*
-	[dateCell release];
-	[record release];
-     */
     [super dealloc];
 }
 
