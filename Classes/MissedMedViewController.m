@@ -32,10 +32,6 @@
     return self;
 }
 - (void)dealloc{
-    /*
-    [record release];
-    [missedMeds release];
-     */
     self.missedMeds = nil;
     [super dealloc];
 }
@@ -66,6 +62,7 @@
 
 - (void)viewDidUnload
 {
+    self.missedMeds = nil;
     [super viewDidUnload];
 }
 

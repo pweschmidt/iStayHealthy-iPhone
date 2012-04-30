@@ -86,8 +86,11 @@
  */
 - (void)viewDidUnload
 {
-    selectedSoundCell = nil;
-    dateCell = nil;
+    self.soundName = nil;
+    self.dateCell = nil;
+    self.selectedSoundCell = nil;
+    self.startTime =nil;
+    self.alertText = nil;
     [super viewDidUnload];
 }
 

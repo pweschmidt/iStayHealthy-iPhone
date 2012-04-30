@@ -63,14 +63,6 @@
 
 - (void)dealloc
 {
-    /*
-    [results release];
-    [record release];
-    [cd4 release];
-    [cd4Percent release];
-    [vlHIV release];
-    [vlHepC release];
-     */
     self.cd4 = nil;
     self.cd4Percent = nil;
     self.vlHIV = nil;

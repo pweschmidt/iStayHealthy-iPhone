@@ -49,22 +49,22 @@
 }
 
 - (void)dealloc{
-    /*
-	[record release];
-    [idString release];
-    [name release];
-    [www release];
-    [email release];
-    [number release];
-    [emergencynumber release];
-    [contacts release];
-     */
     self.idString = nil;
     self.name = nil;
     self.www = nil;
     self.email = nil;
     self.emergencynumber = nil;
     [super dealloc];
+}
+
+- (void)viewDidUnload{
+    self.idString = nil;
+    self.name = nil;
+    self.www = nil;
+    self.email = nil;
+    self.emergencynumber = nil;
+
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning

@@ -26,7 +26,7 @@
 - (void)dealloc
 {
 //    [faqList release];
-//    headerLabel = nil;
+    self.headerLabel = nil;
     self.headerLabel = nil;
     self.adButton = nil;
     self.bannerButton = nil;
@@ -129,9 +129,12 @@
 
 - (void)viewDidUnload
 {
+    self.headerLabel = nil;
+    self.headerLabel = nil;
+    self.adButton = nil;
+    self.bannerButton = nil;
+    self.faqList = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

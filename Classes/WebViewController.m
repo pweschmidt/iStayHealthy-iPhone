@@ -78,9 +78,11 @@
 
 - (void)viewDidUnload
 {
+    self.url = nil;
+    self.webView = nil;
+    self.activityIndicatorView = nil;
+    self.toolBar = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

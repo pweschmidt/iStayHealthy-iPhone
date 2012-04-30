@@ -30,7 +30,7 @@
  dealloc
  */
 - (void)dealloc {
-	[notificationsArray release];
+    self.notificationsArray = nil;
     [super dealloc];
 }
 
@@ -54,6 +54,7 @@
 
 - (void)viewDidUnload
 {
+    self.notificationsArray = nil;
     [super viewDidUnload];
 }
 

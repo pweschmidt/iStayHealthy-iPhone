@@ -495,6 +495,16 @@
  unload view
  */
 - (void)viewDidUnload {
+    self.masterRecord = nil;
+    self.landscapeController = nil;
+    self.allContacts = nil;
+    self.allMeds = nil;
+    self.allMissedMeds = nil;
+    self.allPills = nil;
+    self.allResults = nil;
+    self.allResultsInReverseOrder = nil;
+    self.allSideEffects = nil;
+    self.allProcedures = nil;
     self.headerView = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 	[super viewDidUnload];
@@ -505,16 +515,16 @@
  */
 - (void)dealloc {
 	[fetchedResultsController_ release];
-	[masterRecord release];
-    [landscapeController release];
-    [allContacts release];
-    [allMeds release];
-    [allMissedMeds release];
-    [allPills release];
-    [allResults release];
-    [allResultsInReverseOrder release];
-    [allSideEffects release];
-    [allProcedures release];
+    self.masterRecord = nil;
+    self.landscapeController = nil;
+    self.allContacts = nil;
+    self.allMeds = nil;
+    self.allMissedMeds = nil;
+    self.allPills = nil;
+    self.allResults = nil;
+    self.allResultsInReverseOrder = nil;
+    self.allSideEffects = nil;
+    self.allProcedures = nil;
     self.headerView = nil;
     [super dealloc];
 }

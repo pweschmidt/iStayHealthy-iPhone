@@ -312,6 +312,12 @@
  unloads view
  */
 - (void)viewDidUnload {
+    self.resultsDate = nil;
+    self.setDateCell = nil;
+    self.cd4 = nil;
+    self.cd4Percent = nil;
+    self.vlHIV = nil;
+    self.vlHepC = nil;
 	[super viewDidUnload];
 }
 

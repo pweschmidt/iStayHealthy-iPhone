@@ -86,31 +86,6 @@
 	[self dismissModalViewControllerAnimated:YES];    
 }
 
-/**
- Tintabee testing
-- (void)testTintabee{
-#ifdef APPDEBUG
-    NSLog(@"SettingsDetailViewController::testTintabee");
-#endif
-    NSURL *tintabeeURL = [NSURL URLWithString:@"http://www.tintabee.co.uk/webapp/object.php?login"];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:tintabeeURL];
-    [request setUsername:@"peter.we.schmidt@gmail.com"];
-    [request setPassword:@"ggdd6247"];
-#ifdef APPDEBUG
-    BOOL isFinished = [request isFinished];
-    BOOL isReady = [request isReady];
-    NSLog(@"SettingsDetailViewController::testTintabee isFinished=%d isReady=%d",isFinished,isReady);
-#endif
-    
-    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.xml"];
-    DataLoader *loader = [[[DataLoader alloc]init] autorelease];
-    [loader getSQLData];
-    NSURL *putURL = [NSURL URLWithString:@"http://www.tintabee.co.uk/webapp/object.php?objectISH/person/peter.we.schmidt@gmail.com"];
-    ASIFormDataRequest *putRequest = [ASIFormDataRequest requestWithURL:putURL];
-    [putRequest setData:[loader xmlData] withFileName:path andContentType:@"text/xml" forKey:@"xml"];
-}
- */
-
 
 /**
  backup/syn from DropBox
@@ -134,18 +109,14 @@
 #endif
         return;
     }
-//    NSString *deviceType = [[UIDevice currentDevice]model];
-//    if ([deviceType hasSuffix:@"Simulator"]) {
     if (DEVICE_IS_SIMULATOR) {
 #ifdef APPDEBUG
         NSLog(@"SettingsDetailViewController::startEmailMessageView called from iPhone Simulator");
 #endif
     }
-//    NSString *tmpFile = [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.csv"];
     NSString *tmpXMLFile = [NSTemporaryDirectory() stringByAppendingFormat:@"iStayHealthy.isth"];
     DataLoader *loader = [[[DataLoader alloc]init] autorelease];
     [loader getSQLData];
-//    NSData *csvData = [loader csvData];
     NSString *msgBody = [loader csvString];
     NSData *xmlData = [loader xmlData];
 	NSError *error = nil;

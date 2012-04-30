@@ -111,23 +111,23 @@
 - (id)init{
     self = [super init];
     if (self) {
-        date = nil;
-        CD4Count = nil;
-        CD4Percent = nil;
-        ViralLoad = nil;
-        medicationName = nil;
-        missedName = nil;
+        self.date = nil;
+        self.CD4Count = nil;
+        self.CD4Percent = nil;
+        self.ViralLoad = nil;
+        self.medicationName = nil;
+        self.missedName = nil;
     }
     return self;
 }
 
 - (void)dealloc{
-    [date release];
-    [CD4Count release];
-    [CD4Percent release];
-    [ViralLoad release];
-    [medicationName release];
-    [missedName release];
+    self.date = nil;
+    self.CD4Count = nil;
+    self.CD4Percent = nil;
+    self.ViralLoad = nil;
+    self.medicationName = nil;
+    self.missedName = nil;
     [super dealloc];
 }
 @end

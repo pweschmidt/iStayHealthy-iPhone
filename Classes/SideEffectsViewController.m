@@ -33,10 +33,13 @@
 }
 
 - (void)dealloc{
-//    [record release];
-//    [sideeffects release];
     self.sideeffects = nil;
     [super dealloc];
+}
+
+- (void)viewDidUnload{
+    self.sideeffects = nil;
+    [super viewDidUnload];
 }
 
 - (IBAction) done:				(id) sender{

@@ -38,8 +38,8 @@
  dealloc
  */
 - (void)dealloc {
-	[chartView release];
-    [events release];
+    self.chartView = nil;
+    self.events = nil;
     [super dealloc];
 }
 
@@ -86,9 +86,9 @@
  */
 - (void)viewDidUnload
 {
+    self.chartView = nil;
+    self.events = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 /**

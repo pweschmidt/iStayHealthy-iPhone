@@ -84,13 +84,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     }
     //finally see if iCloud is available or not
     [self checkForiCloud];  
-    /*
-    NSURL *isthFileURL = [launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
-    NSLog(@"in didFinishLaunchingWithOptions");
-    if(nil != isthFileURL && [isthFileURL isFileURL]){
-        [self handleFileImport:isthFileURL];
-    }
-     */
     return YES;
 }
 

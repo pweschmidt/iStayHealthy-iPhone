@@ -28,7 +28,7 @@
 
 
 + (BOOL)isXML:(NSData *)data{
-    NSString *testString = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
+    NSString *testString = [[[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding]autorelease];
     if ([testString hasPrefix:XMLPREAMBLE]) {
         return YES;
     }

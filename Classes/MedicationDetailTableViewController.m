@@ -68,6 +68,18 @@
     [super dealloc];
 }
 
+- (void)viewDidUnload{
+    self.startDate = nil;
+    self.combiTablets = nil;
+    self.proteaseInhibitors = nil;
+    self.nRTInihibtors = nil;
+    self.nNRTInhibitors = nil;
+    self.integraseInhibitors = nil;
+    self.entryInhibitors = nil;
+    self.stateDictionary = nil;
+    self.dateCell = nil;
+    [super viewDidUnload];    
+}
 /**
  didReceiveMemoryWarning
  */
