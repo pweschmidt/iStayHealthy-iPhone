@@ -83,7 +83,14 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         [tmpBarController release];
     }
     //finally see if iCloud is available or not
-    [self checkForiCloud];        
+    [self checkForiCloud];  
+    /*
+    NSURL *isthFileURL = [launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+    NSLog(@"in didFinishLaunchingWithOptions");
+    if(nil != isthFileURL && [isthFileURL isFileURL]){
+        [self handleFileImport:isthFileURL];
+    }
+     */
     return YES;
 }
 
@@ -91,22 +98,24 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 /**
  */
 - (BOOL)handleFileImport:(NSURL *)url{
-    
+#ifdef APPDEBUG
+    NSLog(@"in handleFileImport");
+#endif
+    if (nil == url || ![url isFileURL]) {
+        return NO;
+    }
     NSData *importedData = [NSData dataWithContentsOfURL:url];
     if (![XMLLoader isXML:importedData]) {
         return NO;
     }
     XMLLoader *xmlLoader = [[[XMLLoader alloc]initWithData:importedData]autorelease];
     NSError* error = nil;
-    if (![xmlLoader startParsing:&error]) {
-        //error handling
-    }
-    else {
-        [xmlLoader synchronise];
-        NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self];
-        
-        [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-    }
+    [xmlLoader startParsing:&error];        
+    [xmlLoader synchronise];
+    NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+    
         
     return YES;
 }
@@ -115,9 +124,9 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
  acc to Apple Doc - this should replace handleOpenURL method below
  */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    if (nil == url) {
-        return NO;
-    }
+#ifdef APPDEBUG
+    NSLog(@"in openURL");
+#endif
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
             //any app calls?
@@ -132,10 +141,10 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
  this is a deprecated method, but we'll retain it here just in case
  */
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    if (nil == url) {
-        return NO;
-    }
     if ([[DBSession sharedSession] handleOpenURL:url]) {
+#ifdef APPDEBUG
+        NSLog(@"in deprecated handleOpenURL method");
+#endif
         if ([[DBSession sharedSession] isLinked]) {
             //any app calls?
         }

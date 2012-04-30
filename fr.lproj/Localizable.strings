@@ -33,7 +33,7 @@
 "Sound" = "Sonnerie";
 "default" = "défaut";
 "None" = "Aucun";
-"Start Date" = "Démarrer Date";
+"Start Date" = "Date de Débute";
 "Combination Tablet" = "Comprimés anti-VIH";
 "Combination Tablets" = "Comprimés à association";
 "Fusion/Entry Inhibitors" = "Inhibiteurs de Fusions/d'Entrée";
@@ -144,4 +144,5 @@
 "AdURL"="http://app.gaydar.net";
 "PasswordSet"="Mot de passe est réglé";
 "Change"="Changer";
+"Treatment Start Date"="Date de Début de Traitement";
 

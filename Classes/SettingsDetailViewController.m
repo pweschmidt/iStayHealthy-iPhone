@@ -13,8 +13,6 @@
 #import "DataLoader.h"
 #import "ToolsTableViewController.h"
 #import "SettingsCell.h"
-//#import "ASIHTTPRequest.h"
-//#import "ASIFormDataRequest.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "Utilities.h"
 #import "WebViewController.h"
@@ -42,7 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.navigationItem.title = NSLocalizedString(@"Extras", @"Extras");
 	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                               target:self action:@selector(done:)] autorelease];
@@ -155,7 +152,7 @@
     [xmlData writeToFile:tmpXMLFile options:NSDataWritingAtomic error:&error];
 	if (error != nil) {
 		[[[[UIAlertView alloc]
-		   initWithTitle:@"Error writing CSV data to tmp directory" message:[error localizedDescription] 
+		   initWithTitle:@"Error writing XML data to tmp directory" message:[error localizedDescription] 
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 		  autorelease]
 		 show];
@@ -167,7 +164,7 @@
         mailController.mailComposeDelegate = self;
         [mailController setSubject:@"iStayHealthy Data (attached)"];
         [mailController setMessageBody:msgBody isHTML:NO];
-        [mailController addAttachmentData:xmlData mimeType:@"application/iStayHeathy" fileName:tmpXMLFile];
+        [mailController addAttachmentData:xmlData mimeType:@"text/xml" fileName:tmpXMLFile];
         [self presentModalViewController:mailController animated:YES];
         [mailController release];        
     }

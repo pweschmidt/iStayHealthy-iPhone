@@ -99,6 +99,7 @@
 	
 	UIDatePicker *datePicker = [[[UIDatePicker alloc] init] autorelease];
 	datePicker.tag = 101;
+    datePicker.date = self.changeDate;
 	datePicker.datePickerMode = UIDatePickerModeDate;
 	[actionSheet addSubview:datePicker];
 }

@@ -9,10 +9,10 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array>
-				<string>icon-rounded-small-flat</string>
-			</array>
+            <key>CFBundleTypeIconFiles</key>
+            <array>
+                <string>icon-rounded-small-flat.png</string>
+            </array>
 			<key>CFBundleTypeName</key>
 			<string>iStayHealthy Document</string>
 			<key>CFBundleTypeRole</key>
@@ -103,8 +103,10 @@
 			<array>
 				<string>public.data</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>iStayHealthy Document</string>  
 			<key>UTTypeIdentifier</key>
-			<string>com.pweschmidt.iStayHeathy.isth</string>
+			<string>com.pweschmidt.iStayHealthy.isth</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -112,6 +114,8 @@
 				<key>public.mime-type</key>
 				<string>application/iStayHealthy</string>
 			</dict>
+            <key>UTTypeIconFile</key>
+            <string>icon-rounded-small-flat.png</string>
 		</dict>
 	</array>
 </dict>
