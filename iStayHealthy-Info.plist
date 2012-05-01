@@ -9,10 +9,10 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-            <key>CFBundleTypeIconFiles</key>
-            <array>
-                <string>icon-rounded-small-flat.png</string>
-            </array>
+			<key>CFBundleTypeIconFiles</key>
+			<array>
+				<string>icon-rounded-small-flat.png</string>
+			</array>
 			<key>CFBundleTypeName</key>
 			<string>iStayHealthy Document</string>
 			<key>CFBundleTypeRole</key>
@@ -48,17 +48,6 @@
 			<key>UIPrerenderedIcon</key>
 			<true/>
 		</dict>
-		<key>UINewsstandIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string></string>
-			</array>
-			<key>UINewsstandBindingEdge</key>
-			<string>UINewsstandBindingEdgeLeft</string>
-			<key>UINewsstandBindingType</key>
-			<string>UINewsstandBindingTypeMagazine</string>
-		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.pweschmidt.iStayHealthy</string>
@@ -69,7 +58,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.1.0</string>
+	<string>3.1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -82,7 +71,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3.1.0</string>
+	<string>3.1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -104,7 +93,9 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>iStayHealthy Document</string>  
+			<string>iStayHealthy Document</string>
+			<key>UTTypeIconFile</key>
+			<string>icon-rounded-small-flat.png</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.pweschmidt.iStayHealthy.isth</string>
 			<key>UTTypeTagSpecification</key>
@@ -114,8 +105,6 @@
 				<key>public.mime-type</key>
 				<string>application/iStayHealthy</string>
 			</dict>
-            <key>UTTypeIconFile</key>
-            <string>icon-rounded-small-flat.png</string>
 		</dict>
 	</array>
 </dict>
