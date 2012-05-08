@@ -134,47 +134,9 @@
 /**
  */
 - (void)loadURL{
-    NSLocale *locale = [NSLocale currentLocale];
-    NSString *currentLocaleID = [locale localeIdentifier]; 
-    //    NSString *preferredLanguage = (NSString *)[[NSLocale preferredLanguages]objectAtIndex:0];
-#ifdef APPDEBUG
-    NSLog(@"current locale is %@",currentLocaleID);
-#endif
-    NSString *url = @"http://www.poz.com";
-    NSString *title = @"POZ Magazine";
-    if ([currentLocaleID hasPrefix:@"en"]) {
-        if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"]) {
-            url =  @"http://www.poz.com";
-            title = @"POZ Magazine";
-        }
-        else {
-            url = @"http://app.gaydar.net";
-            title = @"Gaydar";
-        }
-    }
-    else if ([currentLocaleID hasPrefix:@"de"]) {
-        url = @"http://www.aidshilfe.de";
-        title = @"Deutsche AIDS Hilfe";
-    }
-    else if ([currentLocaleID hasPrefix:@"fr"]) {
-        if ([currentLocaleID isEqualToString:@"fr_CA"]) {
-            url =  @"http://www.poz.com";
-            title = @"POZ Magazine";
-        }
-        else {
-            url = @"http://app.gaydar.net";
-            title = @"Gaydar";
-        }
-    }
-    else if ([currentLocaleID hasPrefix:@"es"]) {
-        url =  @"http://www.poz.com/latino";
-        title = @"POZ Magazine";        
-    }
-    else {
-        url =  @"http://www.poz.com";
-        title = @"POZ Magazine";
-    }
+    NSString *url = [Utilities urlStringFromLocale];
+    NSString *title = [Utilities titleFromLocale];
+        
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:url withTitle:title];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
