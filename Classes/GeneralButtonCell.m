@@ -22,7 +22,7 @@
 }
 
 - (void)setDelegate:(id)viewControllerDelegate{
-    self.delegate = viewControllerDelegate;
+    self.generalButtonCellDelegate = viewControllerDelegate;
 }
 
 - (IBAction)selectMed:(id)sender{
