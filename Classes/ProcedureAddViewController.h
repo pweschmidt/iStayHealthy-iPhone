@@ -14,15 +14,15 @@
 @private
 	SetDateCell			*dateCell;
 	NSDate *startDate;
-	iStayHealthyRecord *record;
+	iStayHealthyRecord *__unsafe_unretained record;
     NSString *name;
     NSString *illness;
 }
-@property (nonatomic, retain) SetDateCell *dateCell;
-@property (nonatomic, retain) NSDate *startDate;
-@property (nonatomic, assign) iStayHealthyRecord *record;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *illness;
+@property (nonatomic, strong) SetDateCell *dateCell;
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *illness;
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
 - (void)changeStartDate;

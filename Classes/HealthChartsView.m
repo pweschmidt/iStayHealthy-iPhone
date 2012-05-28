@@ -53,11 +53,6 @@
 
 /**
  */
-- (void)dealloc
-{
-    self.events = nil;
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark co-ordinate axes and major ticks on y-axis
@@ -265,12 +260,12 @@
     float xDistance = floorf(width/count);
     int index = 0;
     float xValue = xStart;
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"MMM YY";
     float dateYValue = MARGINTOP + height + 3.0;
     for (ChartEvent *event in self.events.allChartEvents) {
         if (0 == index) {
-            UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)];
             label.text = [formatter stringFromDate:event.date];
             label.font = [UIFont systemFontOfSize:8.0];	
             label.textColor = [UIColor lightGrayColor];
@@ -279,7 +274,7 @@
         }
         else if( 1 <= index && index < count - 1){
             if (event.missedName || event.medicationName) {
-                UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
+                UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)];
                 label.text = [formatter stringFromDate:event.date];
                 label.font = [UIFont systemFontOfSize:8.0];	
                 label.textColor = [UIColor lightGrayColor];
@@ -288,7 +283,7 @@
             }
         }
         else{
-            UILabel *label = [[[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)]autorelease];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)];
             label.text = [formatter stringFromDate:event.date];
             label.font = [UIFont systemFontOfSize:8.0];	
             label.textColor = [UIColor lightGrayColor];
@@ -473,12 +468,11 @@
             CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+xValue - 10.0, CGRectGetMinY(self.bounds)+MARGINTOP + height - 25.0, 20.0, 20.0);
             UILabel *imagelabel = [[UILabel alloc] initWithFrame:frame];
             imagelabel.backgroundColor = BRIGHT_BACKGROUND;
-            UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"combi-label-small.png"]] autorelease];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"combi-label-small.png"]];
             
             [imagelabel addSubview:imageView];
             
             [self addSubview:imagelabel];
-            [imagelabel release];
 
         }
         xValue += xDistance;
@@ -519,12 +513,11 @@
             CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+xValue - 10.0, CGRectGetMinY(self.bounds)+MARGINTOP + height - 25.0, 20.0, 20.0);
             UILabel *imagelabel = [[UILabel alloc] initWithFrame:frame];
             imagelabel.backgroundColor = BRIGHT_BACKGROUND;
-            UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"missedsmall.png"]] autorelease];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"missedsmall.png"]];
             
             [imagelabel addSubview:imageView];
             
             [self addSubview:imagelabel];
-            [imagelabel release];
         }
         xValue += xDistance;
     }    

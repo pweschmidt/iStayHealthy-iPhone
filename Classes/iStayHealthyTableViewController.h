@@ -14,7 +14,7 @@
 @class StatusViewControllerLandscape;
 @interface iStayHealthyTableViewController : UITableViewController <UIAlertViewDelegate, NSFetchedResultsControllerDelegate>{
 	BOOL isShowingLandscapeView;
-	NSFetchedResultsController *fetchedResultsController_;
+	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
 	iStayHealthyRecord *masterRecord;
 	StatusViewControllerLandscape *landscapeController;
     IBOutlet UIView *headerView;
@@ -30,18 +30,18 @@
 
     
 }
-@property (nonatomic, retain) NSArray *allMeds;
-@property (nonatomic, retain) NSArray *allMissedMeds;
-@property (nonatomic, retain) NSArray *allSideEffects;
-@property (nonatomic, retain) NSArray *allResults;
-@property (nonatomic, retain) NSArray *allResultsInReverseOrder;
-@property (nonatomic, retain) NSArray *allContacts;
-@property (nonatomic, retain) NSArray *allPills;
-@property (nonatomic, retain) NSArray *allProcedures;
-@property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) iStayHealthyRecord *masterRecord;
-@property (nonatomic, retain) StatusViewControllerLandscape *landscapeController;
-@property (nonatomic, retain) IBOutlet UIView *headerView;
+@property (nonatomic, strong) NSArray *allMeds;
+@property (nonatomic, strong) NSArray *allMissedMeds;
+@property (nonatomic, strong) NSArray *allSideEffects;
+@property (nonatomic, strong) NSArray *allResults;
+@property (nonatomic, strong) NSArray *allResultsInReverseOrder;
+@property (nonatomic, strong) NSArray *allContacts;
+@property (nonatomic, strong) NSArray *allPills;
+@property (nonatomic, strong) NSArray *allProcedures;
+@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
+@property (nonatomic, strong) StatusViewControllerLandscape *landscapeController;
+@property (nonatomic, strong) IBOutlet UIView *headerView;
 - (void)setUpMasterRecord;
 - (IBAction)loadWebView:(id)sender;
 - (IBAction)loadAd:(id)sender;

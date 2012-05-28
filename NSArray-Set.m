@@ -25,7 +25,6 @@
 		[sortedArray sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
 	}
 
-	[descriptor release];
 	return sortedArray;
 }
 

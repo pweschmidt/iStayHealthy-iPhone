@@ -47,7 +47,6 @@
 							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
 							  otherButtonTitles:nil];
 		[alert show];
-        [alert release];
 	}
 	
 #ifdef APPDEBUG
@@ -78,15 +77,13 @@
     UIButton *addButton = [[UIButton alloc]initWithFrame:adFrame]; 
     [addButton setBackgroundColor:[UIColor clearColor]];
 	[addButton addTarget:self action:@selector(loadURL) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *imageView = [[[UIImageView alloc] initWithImage:[Utilities bannerImageFromLocale]]autorelease];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[Utilities bannerImageFromLocale]];
 
     if (nil != imageView) {
         [addButton addSubview:imageView];
     }
 
     [self.headerView addSubview:addButton];
-    [addButton release];
-	[landscape release];
 }
 
 /**
@@ -105,7 +102,6 @@
 							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
 							  otherButtonTitles:nil];
 		[alert show];
-        [alert release];
 	}
     if (note) {
         [self setUpData];
@@ -124,8 +120,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];    
     
 }
 
@@ -143,8 +137,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];    
 }
 
 
@@ -167,8 +159,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];
 }
 
 - (IBAction)loadAd:(id)sender{
@@ -184,8 +174,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];
 }
 
 
@@ -269,7 +257,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     return cell;
@@ -305,9 +293,6 @@
 	tmpFetchController.delegate = self;
 	fetchedResultsController_ = tmpFetchController;
 	
-	[request release];
-    [allDescriptors release];
-    [sortDescriptor release];
 	return fetchedResultsController_;
 	
 }	
@@ -475,21 +460,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-	[fetchedResultsController_ release];
-    self.masterRecord = nil;
-    self.landscapeController = nil;
-    self.allContacts = nil;
-    self.allMeds = nil;
-    self.allMissedMeds = nil;
-    self.allPills = nil;
-    self.allResults = nil;
-    self.allResultsInReverseOrder = nil;
-    self.allSideEffects = nil;
-    self.allProcedures = nil;
-    self.headerView = nil;
-    [super dealloc];
-}
 
 
 @end

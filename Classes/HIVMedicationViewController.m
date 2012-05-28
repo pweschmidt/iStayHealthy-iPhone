@@ -31,10 +31,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -45,7 +41,7 @@
 #endif
     [super viewDidLoad];
 
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedicationDetailViewController)]autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedicationDetailViewController)];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
         [navBar addButtonWithImageName:@"hivnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
@@ -76,8 +72,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];
-    [newMedsView release];
 }
 
 /**
@@ -90,8 +84,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];
-    [changedMedsView release];
 }
 
 - (void)loadSideEffectsController{
@@ -100,8 +92,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];
-    [sideController release];
 }
 
 - (void)loadMissedMedicationsController{
@@ -110,8 +100,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];  
-    [missedController release];
 }
 
 
@@ -197,7 +185,7 @@
             }
         }
         Medication *medication = (Medication *)[self.allMeds objectAtIndex:indexPath.row];
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
         formatter.dateFormat = @"dd MMM YYYY";
         [[cell date]setText:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Start Date", nil),[formatter stringFromDate:medication.StartDate]]];
         [[cell name]setText:medication.Name];

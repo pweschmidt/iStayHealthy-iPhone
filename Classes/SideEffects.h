@@ -13,11 +13,11 @@
 
 @interface SideEffects : NSManagedObject
 
-@property (nonatomic, retain) NSString * SideEffect;
-@property (nonatomic, retain) NSDate * SideEffectDate;
-@property (nonatomic, retain) NSString * Name;
-@property (nonatomic, retain) NSString * UID;
-@property (nonatomic, retain) NSString * Drug;
-@property (nonatomic, retain) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSString * SideEffect;
+@property (nonatomic, strong) NSDate * SideEffectDate;
+@property (nonatomic, strong) NSString * Name;
+@property (nonatomic, strong) NSString * UID;
+@property (nonatomic, strong) NSString * Drug;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end

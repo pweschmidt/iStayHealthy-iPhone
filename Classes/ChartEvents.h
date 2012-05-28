@@ -12,7 +12,7 @@
 @interface ChartEvents : NSObject {
     NSMutableArray *allChartEvents;
 }
-@property (nonatomic, retain) NSMutableArray *allChartEvents;
+@property (nonatomic) NSMutableArray *allChartEvents;
 - (void)loadResult:(NSArray *)results;
 - (void)loadMedication:(NSArray *)medications;
 - (void)loadMissedMedication:(NSArray *)missedMedications;
@@ -27,11 +27,11 @@
     NSString    *medicationName;
     NSString    *missedName;        
 }
-@property (nonatomic, retain) NSDate *date;
-@property (nonatomic, retain) NSNumber *CD4Count;
-@property (nonatomic, retain) NSNumber *CD4Percent;
-@property (nonatomic, retain) NSNumber *ViralLoad;
-@property (nonatomic, retain) NSString *missedName;
-@property (nonatomic, retain) NSString *medicationName;
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSNumber *CD4Count;
+@property (nonatomic, strong) NSNumber *CD4Percent;
+@property (nonatomic, strong) NSNumber *ViralLoad;
+@property (nonatomic, strong) NSString *missedName;
+@property (nonatomic, strong) NSString *medicationName;
 
 @end

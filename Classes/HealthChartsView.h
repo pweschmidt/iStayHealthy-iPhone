@@ -18,7 +18,7 @@
     float height;
     ChartEvents *events;
 }
-@property (nonatomic, retain) ChartEvents *events;
+@property (nonatomic, strong) ChartEvents *events;
 - (void)drawXAxis:(CGContextRef)context;
 - (void)drawYAxis:(CGContextRef)context;
 - (void)drawCD4Ticks:(CGContextRef)context;

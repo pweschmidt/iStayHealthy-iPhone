@@ -14,8 +14,8 @@
     IBOutlet UILabel *drug;
     IBOutlet UIImageView *imageView;
 }
-@property (nonatomic, retain) IBOutlet UILabel *effect;
-@property (nonatomic, retain) IBOutlet UILabel *date;
-@property (nonatomic, retain) IBOutlet UILabel *drug;
-@property (nonatomic, retain) IBOutlet UIImageView  *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *effect;
+@property (nonatomic, strong) IBOutlet UILabel *date;
+@property (nonatomic, strong) IBOutlet UILabel *drug;
+@property (nonatomic, strong) IBOutlet UIImageView  *imageView;
 @end

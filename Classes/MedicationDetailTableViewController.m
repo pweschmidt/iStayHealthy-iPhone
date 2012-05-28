@@ -23,27 +23,27 @@
     if (self) {
         self.record = masterrecord;
         NSString *combipath = [[NSBundle mainBundle] pathForResource:@"CombiMeds" ofType:@"plist"];
-        NSArray *tmp1 = [[[NSArray alloc]initWithContentsOfFile:combipath]autorelease];
+        NSArray *tmp1 = [[NSArray alloc]initWithContentsOfFile:combipath];
         self.combiTablets = tmp1;
         
         NSString *nrtiPath = [[NSBundle mainBundle] pathForResource:@"NRTI" ofType:@"plist"];
-        NSArray *tmp2 = [[[NSArray alloc]initWithContentsOfFile:nrtiPath]autorelease];
+        NSArray *tmp2 = [[NSArray alloc]initWithContentsOfFile:nrtiPath];
         self.nRTInihibtors = tmp2;
         
         NSString *proteasePath = [[NSBundle mainBundle] pathForResource:@"ProteaseInhibitors" ofType:@"plist"];
-        NSArray *tmp3 = [[[NSArray alloc]initWithContentsOfFile:proteasePath]autorelease];
+        NSArray *tmp3 = [[NSArray alloc]initWithContentsOfFile:proteasePath];
         self.proteaseInhibitors = tmp3;
         
         NSString *nnrtiPath = [[NSBundle mainBundle] pathForResource:@"NNRTI" ofType:@"plist"];
-        NSArray *tmp4 = [[[NSArray alloc]initWithContentsOfFile:nnrtiPath]autorelease];
+        NSArray *tmp4 = [[NSArray alloc]initWithContentsOfFile:nnrtiPath];
         self.nNRTInhibitors = tmp4;
         
         NSString *entryPath = [[NSBundle mainBundle] pathForResource:@"EntryInhibitors" ofType:@"plist"];
-        NSArray *tmp5 = [[[NSArray alloc]initWithContentsOfFile:entryPath]autorelease];
+        NSArray *tmp5 = [[NSArray alloc]initWithContentsOfFile:entryPath];
         self.entryInhibitors = tmp5;
         
         NSString *integrasePath = [[NSBundle mainBundle] pathForResource:@"IntegraseInhibitors" ofType:@"plist"];
-        NSArray *tmp6 = [[[NSArray alloc]initWithContentsOfFile:integrasePath]autorelease];
+        NSArray *tmp6 = [[NSArray alloc]initWithContentsOfFile:integrasePath];
         self.integraseInhibitors = tmp6;
         
         self.startDate = [NSDate date];
@@ -54,19 +54,6 @@
 /**
  dealloc
  */
-- (void)dealloc
-{
-    self.startDate = nil;
-    self.combiTablets = nil;
-    self.proteaseInhibitors = nil;
-    self.nRTInihibtors = nil;
-    self.nNRTInhibitors = nil;
-    self.integraseInhibitors = nil;
-    self.entryInhibitors = nil;
-    self.stateDictionary = nil;
-    self.dateCell = nil;
-    [super dealloc];
-}
 
 - (void)viewDidUnload{
     self.startDate = nil;
@@ -104,12 +91,12 @@
 	NSLog(@"MedicationDetailTableViewController: viewDidLoad ENTERING");
 #endif
 	self.navigationItem.title = NSLocalizedString(@"Add HIV Drugs",nil);
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                            target:self action:@selector(cancel:)] autorelease];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
+                                            target:self action:@selector(cancel:)];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
-                                            target:self action:@selector(save:)] autorelease];	
+                                            target:self action:@selector(save:)];	
     
 }
 
@@ -196,11 +183,11 @@
  */
 - (void)changeStartDate{
     NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
-	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil]autorelease];
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
 	[actionSheet showInView:self.view];
 	
 	
-	UIDatePicker *datePicker = [[[UIDatePicker alloc] init] autorelease];
+	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = 101;
 	datePicker.datePickerMode = UIDatePickerModeDate;
 	[actionSheet addSubview:datePicker];
@@ -212,7 +199,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd MMM YY";
 	
 	NSString *timestamp = [formatter stringFromDate:datePicker.date];
@@ -314,7 +301,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.section) {
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"dd MMM YY";
         
         NSString *identifier = @"SetDateCell";

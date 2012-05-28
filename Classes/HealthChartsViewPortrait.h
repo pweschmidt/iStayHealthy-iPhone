@@ -15,9 +15,9 @@
 	UIButton *viralLoadButton;
     NSUInteger state;
 }
-@property (nonatomic, retain) IBOutlet UIButton *cd4Button;
-@property (nonatomic, retain) IBOutlet UIButton *cd4PercentButton;
-@property (nonatomic, retain) IBOutlet UIButton *viralLoadButton;
+@property (nonatomic, strong) IBOutlet UIButton *cd4Button;
+@property (nonatomic, strong) IBOutlet UIButton *cd4PercentButton;
+@property (nonatomic, strong) IBOutlet UIButton *viralLoadButton;
 - (void)drawCD4Button;
 - (void)drawCD4PercentButton;
 - (void)drawViralLoadButton;

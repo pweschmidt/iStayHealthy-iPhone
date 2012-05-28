@@ -13,8 +13,8 @@
 	UILabel *cd4TitleLabel;
 	UILabel *viralLoadTitleLabel;    
 }
-@property (nonatomic, retain) IBOutlet UILabel *cd4TitleLabel;
-@property (nonatomic, retain) IBOutlet UILabel *viralLoadTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *cd4TitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *viralLoadTitleLabel;
 - (void)drawRightYAxis:(CGContextRef)context;
 - (void)drawCD4Title;
 - (void)drawViralLoadTitle;

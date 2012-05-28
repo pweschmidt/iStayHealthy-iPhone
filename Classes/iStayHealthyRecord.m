@@ -39,7 +39,6 @@
     [self willChangeValueForKey:@"results" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"results"] addObject:value];
     [self didChangeValueForKey:@"results" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)removeResultsObject:(Results *)value {
@@ -47,7 +46,6 @@
     [self willChangeValueForKey:@"results" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"results"] removeObject:value];
     [self didChangeValueForKey:@"results" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)addResults:(NSSet *)value {    
@@ -71,7 +69,6 @@
     [self willChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"otherMedications"] addObject:value];
     [self didChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)removeOtherMedicationsObject:(OtherMedication *)value {
@@ -79,7 +76,6 @@
     [self willChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"otherMedications"] removeObject:value];
     [self didChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)addOtherMedications:(NSSet *)value {    
@@ -103,7 +99,6 @@
     [self willChangeValueForKey:@"medications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"medications"] addObject:value];
     [self didChangeValueForKey:@"medications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)removeMedicationsObject:(Medication *)value {
@@ -111,7 +106,6 @@
     [self willChangeValueForKey:@"medications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"medications"] removeObject:value];
     [self didChangeValueForKey:@"medications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)addMedications:(NSSet *)value {    
@@ -135,7 +129,6 @@
     [self willChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"missedMedications"] addObject:value];
     [self didChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)removeMissedMedicationsObject:(MissedMedication *)value {
@@ -143,7 +136,6 @@
     [self willChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"missedMedications"] removeObject:value];
     [self didChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)addMissedMedications:(NSSet *)value {    
@@ -167,7 +159,6 @@
     [self willChangeValueForKey:@"contacts" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"contacts"] addObject:value];
     [self didChangeValueForKey:@"contacts" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)removeContactsObject:(Contacts *)value {
@@ -175,7 +166,6 @@
     [self willChangeValueForKey:@"contacts" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"contacts"] removeObject:value];
     [self didChangeValueForKey:@"contacts" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)addContacts:(NSSet *)value {    
@@ -198,7 +188,6 @@
     [self willChangeValueForKey:@"sideeffects" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"sideeffects"] addObject:value];
     [self didChangeValueForKey:@"sideeffects" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
     
 }
 
@@ -207,7 +196,6 @@
     [self willChangeValueForKey:@"sideeffects" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"sideeffects"] removeObject:value];
     [self didChangeValueForKey:@"sideeffects" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];    
 }
 
 - (void)addSideeffects:(NSSet *)values{
@@ -230,7 +218,6 @@
     [self willChangeValueForKey:@"procedures" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"procedures"] addObject:value];
     [self didChangeValueForKey:@"procedures" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
     
 }
 
@@ -239,7 +226,6 @@
     [self willChangeValueForKey:@"procedures" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"procedures"] removeObject:value];
     [self didChangeValueForKey:@"procedures" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];    
 }
 
 - (void)addProcedures:(NSSet *)values{

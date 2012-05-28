@@ -13,10 +13,10 @@
 
 @interface MissedMedication : NSManagedObject
 
-@property (nonatomic, retain) NSString * UID;
-@property (nonatomic, retain) NSString * Name;
-@property (nonatomic, retain) NSDate * MissedDate;
-@property (nonatomic, retain) NSString * Drug;
-@property (nonatomic, retain) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSString * UID;
+@property (nonatomic, strong) NSString * Name;
+@property (nonatomic, strong) NSDate * MissedDate;
+@property (nonatomic, strong) NSString * Drug;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end

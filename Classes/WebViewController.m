@@ -29,13 +29,6 @@
     return self;
 }
 
-- (void)dealloc{
-    self.url = nil;
-    self.webView = nil;
-    self.activityIndicatorView = nil;
-    self.toolBar = nil;
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -59,9 +52,9 @@
 {
     [super viewDidLoad];
 	self.navigationItem.title = self.webNavtitle;
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                              target:self action:@selector(done:)] autorelease];
+                                              target:self action:@selector(done:)];
 
     CGRect titleFrame = CGRectMake(CGRectGetMinX(toolBar.bounds)+290.0, CGRectGetMinY(toolBar.bounds)+12.0, 20.0, 20.0);
     UIActivityIndicatorView *actView = [[UIActivityIndicatorView alloc]initWithFrame:titleFrame];
@@ -70,7 +63,6 @@
     [self.toolBar addSubview:actView];
     self.webView.scalesPageToFit = YES;
     self.activityIndicatorView = actView;
-    [actView release];
 	
 	NSURLRequest *requestObj = [NSURLRequest requestWithURL:self.url];
 	[self.webView loadRequest:requestObj];
@@ -134,12 +126,12 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
 #ifdef APPDEBUG
     NSLog(@"Stop Loading page");
-    UIAlertView *alert = [[[UIAlertView alloc]
+    UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Error Loading Data",@"Error Loading Data") 
                           message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
                           delegate:self 
                           cancelButtonTitle:NSLocalizedString(@"Ouch, Pooh",@"Ouch, Pooh") 
-                          otherButtonTitles:nil]autorelease];
+                          otherButtonTitles:nil];
     [alert show];
 #endif
 }

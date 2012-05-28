@@ -31,9 +31,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 #pragma mark - View lifecycle
@@ -44,7 +41,10 @@
     NSLog(@"NewResultsViewController viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadResultDetailViewController)]autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadResultDetailViewController)];
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(loadSetUpViewController)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
@@ -75,8 +75,6 @@
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
 	newRecordView.record = masterRecord;
-	[navigationController release];
-    [newRecordView release];
 }
 
 /**
@@ -90,9 +88,13 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];
-    [changeRecordView release];
 }
+
+- (void)loadSetUpViewController{
+    
+}
+
+
 
 #pragma mark - Table view data source
 
@@ -150,7 +152,7 @@
         
     }
 	Results *current = (Results *)[self.allResultsInReverseOrder objectAtIndex:indexPath.row];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd MMM YYYY";
     [[cell dateLabel]setText:[formatter stringFromDate:current.ResultsDate]];
     [[cell cd4Title]setText:NSLocalizedString(@"CD4 Count",nil)];

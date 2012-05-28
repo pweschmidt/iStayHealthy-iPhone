@@ -13,7 +13,7 @@
 @class iStayHealthyRecord, XMLElement;
 
 @interface DataLoader : NSObject <NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *fetchedResultsController_;
+	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
 	iStayHealthyRecord *masterRecord;
     NSArray *allResults;
     NSArray *allMedications;
@@ -23,15 +23,15 @@
     NSArray *allSideEffects;
     NSArray *allProcedures;
 }
-@property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) iStayHealthyRecord *masterRecord;
-@property (nonatomic, retain) NSArray *allResults;
-@property (nonatomic, retain) NSArray *allMedications;
-@property (nonatomic, retain) NSArray *allMissedMeds;
-@property (nonatomic, retain) NSArray *allOtherMeds;
-@property (nonatomic, retain) NSArray *allContacts;
-@property (nonatomic, retain) NSArray *allSideEffects;
-@property (nonatomic, retain) NSArray *allProcedures;
+@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
+@property (nonatomic, strong) NSArray *allResults;
+@property (nonatomic, strong) NSArray *allMedications;
+@property (nonatomic, strong) NSArray *allMissedMeds;
+@property (nonatomic, strong) NSArray *allOtherMeds;
+@property (nonatomic, strong) NSArray *allContacts;
+@property (nonatomic, strong) NSArray *allSideEffects;
+@property (nonatomic, strong) NSArray *allProcedures;
 - (void)getSQLData;
 - (NSData *)xmlData;
 - (NSData *)csvData;

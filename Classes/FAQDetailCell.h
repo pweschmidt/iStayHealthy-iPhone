@@ -12,6 +12,6 @@
 @interface FAQDetailCell : UITableViewCell {
     UITextView *explanationView;
 }
-@property (nonatomic, retain) IBOutlet UITextView *explanationView;
+@property (nonatomic, strong) IBOutlet UITextView *explanationView;
 - (void)setUpExplanationView;
 @end

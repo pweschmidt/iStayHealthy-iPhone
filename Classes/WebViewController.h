@@ -13,13 +13,13 @@
     IBOutlet UIWebView *webView;
     IBOutlet UIToolbar *toolBar;
     NSURL *url;
-    NSString *webNavtitle;
+    NSString *__unsafe_unretained webNavtitle;
 }
-@property (nonatomic, assign) NSString *webNavtitle;
-@property (nonatomic, retain) NSURL *url;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolBar;
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, unsafe_unretained) NSString *webNavtitle;
+@property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) IBOutlet UIToolbar *toolBar;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 - (IBAction) goBack:(id) sender;
 - (IBAction) goForward:(id) sender;
 - (IBAction) gotoAddress:(id)sender forURL:(NSURL *)url;

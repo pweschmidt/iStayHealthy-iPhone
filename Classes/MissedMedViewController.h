@@ -10,11 +10,11 @@
 
 @class iStayHealthyRecord;
 @interface MissedMedViewController : UITableViewController{
-	iStayHealthyRecord *record;    
+	iStayHealthyRecord *__unsafe_unretained record;    
     NSMutableArray *missedMeds;
 }
-@property (nonatomic, assign) iStayHealthyRecord *record;
-@property (nonatomic, retain) NSMutableArray *missedMeds;
+@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSMutableArray *missedMeds;
 - (IBAction) done:					(id) sender;
 - (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
 - (NSString *)getStringFromName:(NSString *)name;

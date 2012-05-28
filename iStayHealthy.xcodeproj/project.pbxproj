@@ -2040,6 +2040,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				COPY_PHASE_STRIP = NO;
@@ -2053,7 +2054,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -2070,6 +2071,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				COPY_PHASE_STRIP = YES;
@@ -2081,7 +2083,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",
@@ -2166,7 +2168,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",

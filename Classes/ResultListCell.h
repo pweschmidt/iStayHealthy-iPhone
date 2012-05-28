@@ -17,13 +17,13 @@
     IBOutlet UILabel *cd4PercentValue;
     IBOutlet UILabel *vlValue;
 }
-@property (nonatomic, retain) IBOutlet UILabel *dateLabel;
-@property (nonatomic, retain) IBOutlet UILabel *cd4Title;
-@property (nonatomic, retain) IBOutlet UILabel *cd4PercentTitle;
-@property (nonatomic, retain) IBOutlet UILabel *vlTitle;
-@property (nonatomic, retain) IBOutlet UILabel *cd4Value;
-@property (nonatomic, retain) IBOutlet UILabel *cd4PercentValue;
-@property (nonatomic, retain) IBOutlet UILabel *vlValue;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UILabel *cd4Title;
+@property (nonatomic, strong) IBOutlet UILabel *cd4PercentTitle;
+@property (nonatomic, strong) IBOutlet UILabel *vlTitle;
+@property (nonatomic, strong) IBOutlet UILabel *cd4Value;
+@property (nonatomic, strong) IBOutlet UILabel *cd4PercentValue;
+@property (nonatomic, strong) IBOutlet UILabel *vlValue;
 - (void)setCD4:(NSNumber *)value;
 - (void)setCD4Percent:(NSNumber *)value;
 - (void)setViralLoad:(NSNumber *)value;

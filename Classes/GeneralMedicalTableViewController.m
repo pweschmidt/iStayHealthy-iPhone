@@ -31,9 +31,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 
@@ -77,7 +74,6 @@
     CGRect frame = CGRectMake(0, 0, 320, 480);
     [contactSheet showFromRect:frame inView:self.view animated:YES];
 //    [contactSheet showInView:self.view];
-    [contactSheet release];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -149,8 +145,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];    
 }
 
 
@@ -171,7 +165,6 @@
     [mailController setToRecipients:toRecipient];
     [mailController setSubject:@"Message from iStayHealthy..."];
     [self presentModalViewController:mailController animated:YES];
-    [mailController release];
     
 }
 
@@ -187,20 +180,27 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
+        {
             break;
+        }
         case MFMailComposeResultSent:
+        {
             break;
+        }
         case MFMailComposeResultFailed:
+        {
             resultText = @"Result: failed";
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"iStayHealthy Email" 
                                                                 message:resultText delegate:nil
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
             [alertView show];
-            [alertView release];
             break;
+        }
         case MFMailComposeResultSaved:
+        {
             break;
+        }
     }
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -216,8 +216,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];
-    [newClinicController release];
 }
 
 - (void)loadClinicChangeViewController{
@@ -226,8 +224,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];  
-    [changeController release];
 }
 
 
@@ -239,8 +235,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];
-    [newMedsView release];
     
 }
 
@@ -252,8 +246,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];  
-    [changeMedsView release];
 }
 
 #pragma mark - Procedure Controllers
@@ -263,8 +255,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];  
-    [newProcController release];
 }
 
 - (void)loadProcedureChangeViewController:(int)row{
@@ -274,8 +264,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release]; 
-    [changeProcController release];
 }
 
 #pragma mark - Cell management
@@ -321,7 +309,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
 	formatter.dateFormat = @"dd MMM YYYY";
     if (0 == indexPath.section) {
         NSString *identifier = @"GeneralButtonCell";

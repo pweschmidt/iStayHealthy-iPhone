@@ -12,7 +12,7 @@
 @interface NewAlertViewController : iStayHealthyTableViewController{
 	NSArray *notificationsArray;    
 }
-@property (nonatomic, retain) NSArray *notificationsArray;
+@property (nonatomic, strong) NSArray *notificationsArray;
 - (void)loadMedAlertDetailViewController;
 - (void)loadMedAlertChangeViewController:(int)row;
 @end

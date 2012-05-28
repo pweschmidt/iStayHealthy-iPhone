@@ -55,7 +55,6 @@
     [attribute setName:withName];
     [attribute setValue:withValue];
     [attributes addObject:attribute];   
-    [attribute release];
 }
 
 - (NSMutableString *)tabs{
@@ -124,12 +123,5 @@
 /**
  dealloc
  */
-- (void)dealloc{
-    [name release];
-    [value release];
-    [attributes release];
-    [childElements release];
-    [super dealloc];
-}
 
 @end

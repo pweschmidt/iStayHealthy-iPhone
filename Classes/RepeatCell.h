@@ -12,10 +12,10 @@
 @protocol RepeatCellDelegate;
 @interface RepeatCell : UITableViewCell{
     IBOutlet UISegmentedControl *segmentedControl;
-    id<RepeatCellDelegate>_delegate;
+    id<RepeatCellDelegate>__unsafe_unretained _delegate;
 }
-@property (nonatomic, assign) id<RepeatCellDelegate>_delegate;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, unsafe_unretained) id<RepeatCellDelegate>_delegate;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 - (void)setDelegate:(id)viewControllerDelegate;
 - (IBAction)toggleRepeats:(id)sender;
 @end

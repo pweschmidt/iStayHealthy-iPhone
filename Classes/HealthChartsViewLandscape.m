@@ -98,13 +98,5 @@
 
 /**
  */
-- (void)dealloc
-{
-    [cd4TitleLabel release];
-    [viralLoadTitleLabel release];
-    cd4TitleLabel = nil;
-    viralLoadTitleLabel = nil;
-    [super dealloc];
-}
 
 @end

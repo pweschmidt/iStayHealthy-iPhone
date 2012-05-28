@@ -13,7 +13,7 @@
 @interface XMLDocument : NSObject{
     XMLElement *root;
 }
-@property (nonatomic, retain) XMLElement *root;
+@property (nonatomic, strong) XMLElement *root;
 -(NSMutableString *)xmlString;
 -(XMLElement *)elementForName:(NSString *)name;
 @end

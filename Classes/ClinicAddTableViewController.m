@@ -48,14 +48,6 @@
     return self;
 }
 
-- (void)dealloc{
-    self.idString = nil;
-    self.name = nil;
-    self.www = nil;
-    self.email = nil;
-    self.emergencynumber = nil;
-    [super dealloc];
-}
 
 - (void)viewDidUnload{
     self.idString = nil;
@@ -83,24 +75,24 @@
     if (self.isInChangeMode) {
         self.navigationItem.title = NSLocalizedString(@"Edit Clinic",nil);
         
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
-                                                  target:self action:@selector(showAlertView:)] autorelease];
+                                                  target:self action:@selector(showAlertView:)];
         
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
                                                    initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                   target:self action:@selector(saveEditedEntry:)] autorelease];	
+                                                   target:self action:@selector(saveEditedEntry:)];	
     }
     else{
         self.navigationItem.title = NSLocalizedString(@"Add Clinic",nil);
         
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                  target:self action:@selector(cancel:)] autorelease];
+                                                  target:self action:@selector(cancel:)];
         
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
                                                    initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
-                                                   target:self action:@selector(saveNewEntry:)] autorelease];	
+                                                   target:self action:@selector(saveNewEntry:)];	
     }
 }
 
@@ -108,7 +100,7 @@
  shows the Alert view when user clicks the Trash button
  */
 - (IBAction) showAlertView:			(id) sender{
-    UIAlertView *alert = [[[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil]autorelease];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
     
     [alert show];    
 }

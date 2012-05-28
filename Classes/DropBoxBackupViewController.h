@@ -19,8 +19,8 @@
 }
 @property BOOL dropBoxFileExists;
 @property BOOL newDropboxFileExists;
-@property (nonatomic, retain) NSString *iStayHealthyPath;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) NSString *iStayHealthyPath;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 - (NSString *)dropBoxFileTmpPath;
 - (NSString *)uploadFileTmpPath;
 @end

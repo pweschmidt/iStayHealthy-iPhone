@@ -155,12 +155,5 @@
 /**
  dealloc
  */
-- (void)dealloc
-{
-    self.cd4Button = nil;
-    self.cd4PercentButton = nil;
-    self.viralLoadButton = nil;
-    [super dealloc];
-}
 
 @end

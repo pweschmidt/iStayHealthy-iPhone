@@ -12,7 +12,7 @@
     NSString *name;
     NSString *value;
 }
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *value;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *value;
 -(NSString *)toString;
 @end

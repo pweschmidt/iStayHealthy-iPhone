@@ -18,7 +18,8 @@
 - (id)init{
     self = [super init];
     if (self) {
-        self.allChartEvents = [[NSMutableArray alloc]initWithCapacity:0];
+        NSMutableArray *tmpArray = [NSMutableArray array];
+        self.allChartEvents = tmpArray;
     }
     return self;
 }
@@ -26,7 +27,6 @@
 - (void)sortEventsAscending:(BOOL)ascending{
 	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:ascending];
     [self.allChartEvents sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];  
-    [descriptor release];
 }
 
 
@@ -38,7 +38,7 @@
         return;
     }
     for (Results *result in results) {
-        ChartEvent *event = [[[ChartEvent alloc] init]autorelease];
+        ChartEvent *event = [[ChartEvent alloc] init];
         event.date = result.ResultsDate;
         if (0.0 < [result.CD4 floatValue]) {
             event.CD4Count = result.CD4;
@@ -66,7 +66,7 @@
     }
     NSDate *previousDate = nil;
     for (Medication *medication in medications) {
-        ChartEvent *event = [[[ChartEvent alloc] init]autorelease];
+        ChartEvent *event = [[ChartEvent alloc] init];
         event.date = medication.StartDate;
         event.medicationName = medication.Name;
         if (nil == previousDate) {
@@ -90,7 +90,7 @@
         return;
     }
     for (MissedMedication *missedMedication in missedMedications) {
-        ChartEvent *event = [[[ChartEvent alloc] init]autorelease];
+        ChartEvent *event = [[ChartEvent alloc] init];
         event.date = missedMedication.MissedDate;
         event.missedName = missedMedication.Name;
         [self.allChartEvents addObject:event];
@@ -98,10 +98,6 @@
 }
 
 
-- (void)dealloc{
-    self.allChartEvents = nil;
-    [super dealloc];
-}
 
 @end
 
@@ -121,14 +117,5 @@
     return self;
 }
 
-- (void)dealloc{
-    self.date = nil;
-    self.CD4Count = nil;
-    self.CD4Percent = nil;
-    self.ViralLoad = nil;
-    self.medicationName = nil;
-    self.missedName = nil;
-    [super dealloc];
-}
 @end
 

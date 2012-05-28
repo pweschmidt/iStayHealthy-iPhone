@@ -12,7 +12,7 @@
     IBOutlet UILabel *title;
     IBOutlet UILabel *text;
 }
-@property (nonatomic, retain) IBOutlet UILabel *title;
-@property (nonatomic, retain) IBOutlet UILabel *text;
+@property (nonatomic, strong) IBOutlet UILabel *title;
+@property (nonatomic, strong) IBOutlet UILabel *text;
 
 @end

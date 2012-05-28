@@ -14,12 +14,12 @@
     IBOutlet UIButton *medButton;
     IBOutlet UIButton *procButton;
     IBOutlet UIButton *clinicButton;
-    id<GeneralButtonCellDelegate>_delegate;
+    id<GeneralButtonCellDelegate>__unsafe_unretained _delegate;
 }
-@property (nonatomic, retain) IBOutlet UIButton *medButton;
-@property (nonatomic, retain) IBOutlet UIButton *procButton;
-@property (nonatomic, retain) IBOutlet UIButton *clinicButton;
-@property (nonatomic, assign) id<GeneralButtonCellDelegate>_delegate;
+@property (nonatomic, strong) IBOutlet UIButton *medButton;
+@property (nonatomic, strong) IBOutlet UIButton *procButton;
+@property (nonatomic, strong) IBOutlet UIButton *clinicButton;
+@property (nonatomic, unsafe_unretained) id<GeneralButtonCellDelegate>_delegate;
 - (void)setDelegate:(id)viewControllerDelegate;
 - (IBAction)selectMed:(id)sender;
 - (IBAction)selectProcedure:(id)sender;

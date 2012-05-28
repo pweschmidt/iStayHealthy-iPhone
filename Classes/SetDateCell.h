@@ -13,6 +13,6 @@
     IBOutlet UILabel *value;
     BOOL hasChanged;
 }
-@property (nonatomic, retain) IBOutlet UILabel *title;
-@property (nonatomic, retain) IBOutlet UILabel *value;
+@property (nonatomic, strong) IBOutlet UILabel *title;
+@property (nonatomic, strong) IBOutlet UILabel *value;
 @end

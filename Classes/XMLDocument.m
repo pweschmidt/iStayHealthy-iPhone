@@ -27,7 +27,7 @@
 -(NSMutableString *)xmlString{
     [root addAttribute:DBVERSION andValue:@"13"];
     [root addAttribute:FROMDEVICE andValue:[[UIDevice currentDevice]model]];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd-MMM-YY HH:mm:ss";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     [root addAttribute:FROMDATE andValue:dateString];
@@ -51,10 +51,6 @@
 /**
  
  */
-- (void)dealloc{
-    [root release];
-    [super dealloc];     
-}
 
 
 @end

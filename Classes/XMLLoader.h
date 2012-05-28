@@ -12,7 +12,7 @@
 
 @interface XMLLoader : NSObject <NSXMLParserDelegate>{
     NSXMLParser *xmlParser;
-    NSError     **error;
+    NSError     *error;
     XMLDocument *document;
     XMLElement *results;
     XMLElement *medications;
@@ -23,16 +23,16 @@
     XMLElement *procedures;
     XMLElement *sideEffects;
 }
-@property (nonatomic, retain) NSXMLParser *xmlParser;
-@property (nonatomic, retain) XMLDocument *document;
-@property (nonatomic, retain) XMLElement *medications;
-@property (nonatomic, retain) XMLElement *missedMedications;
-@property (nonatomic, retain) XMLElement *alerts;
-@property (nonatomic, retain) XMLElement *results;
-@property (nonatomic, retain) XMLElement *otherMedications;
-@property (nonatomic, retain) XMLElement *contacts;
-@property (nonatomic, retain) XMLElement *procedures;
-@property (nonatomic, retain) XMLElement *sideEffects;
+@property (nonatomic, strong) NSXMLParser *xmlParser;
+@property (nonatomic, strong) XMLDocument *document;
+@property (nonatomic, strong) XMLElement *medications;
+@property (nonatomic, strong) XMLElement *missedMedications;
+@property (nonatomic, strong) XMLElement *alerts;
+@property (nonatomic, strong) XMLElement *results;
+@property (nonatomic, strong) XMLElement *otherMedications;
+@property (nonatomic, strong) XMLElement *contacts;
+@property (nonatomic, strong) XMLElement *procedures;
+@property (nonatomic, strong) XMLElement *sideEffects;
 - (id)initWithData:(NSData *)data;
 - (BOOL)startParsing:(NSError **)parseError;
 - (void)synchronise;

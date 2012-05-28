@@ -14,19 +14,19 @@
 @private
 	NSDate *resultsDate;
     SetDateCell *setDateCell;
-	iStayHealthyRecord *record;
+	iStayHealthyRecord *__unsafe_unretained record;
     NSNumber *cd4;
     NSNumber *cd4Percent;
     NSNumber *vlHIV;
     NSNumber *vlHepC;
 }
-@property (nonatomic, retain) NSDate *resultsDate;
-@property (nonatomic, assign) iStayHealthyRecord *record;
-@property (nonatomic, retain) SetDateCell *setDateCell;
-@property (nonatomic, retain) NSNumber *cd4;
-@property (nonatomic, retain) NSNumber *cd4Percent;
-@property (nonatomic, retain) NSNumber *vlHIV;
-@property (nonatomic, retain) NSNumber *vlHepC;
+@property (nonatomic, strong) NSDate *resultsDate;
+@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) SetDateCell *setDateCell;
+@property (nonatomic, strong) NSNumber *cd4;
+@property (nonatomic, strong) NSNumber *cd4Percent;
+@property (nonatomic, strong) NSNumber *vlHIV;
+@property (nonatomic, strong) NSNumber *vlHepC;
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
 - (void)changeResultsDate;

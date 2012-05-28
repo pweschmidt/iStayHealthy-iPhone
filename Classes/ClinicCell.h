@@ -11,5 +11,5 @@
 @interface ClinicCell : UITableViewCell{
     IBOutlet UILabel *clinicCell;
 }
-@property (nonatomic, retain) IBOutlet UILabel *clinicCell;
+@property (nonatomic, strong) IBOutlet UILabel *clinicCell;
 @end

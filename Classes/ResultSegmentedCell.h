@@ -13,8 +13,8 @@
     IBOutlet UILabel *query;
     IBOutlet UISwitch *switchControl;    
 }
-@property (nonatomic, retain) IBOutlet UILabel *query;
-@property (nonatomic, retain) IBOutlet UISwitch *switchControl;    
+@property (nonatomic, strong) IBOutlet UILabel *query;
+@property (nonatomic, strong) IBOutlet UISwitch *switchControl;    
 - (void)setDelegate:(id)viewControllerDelegate;
 - (IBAction)isUndetectable:(id)sender;
 @end

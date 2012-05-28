@@ -32,7 +32,6 @@
 
 	self.explanationView = view;
 	[self.contentView addSubview:self.explanationView];
-	[view release];	        
 }
 
 
@@ -43,10 +42,5 @@
     // Configure the view for the selected state
 }
 
-- (void)dealloc
-{
-    [explanationView release];
-    [super dealloc];
-}
 
 @end

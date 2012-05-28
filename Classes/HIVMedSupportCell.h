@@ -13,7 +13,7 @@
     IBOutlet UILabel *support;
     IBOutlet UILabel *count;
 }
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UILabel *support;
-@property (nonatomic, retain) IBOutlet UILabel *count;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *support;
+@property (nonatomic, strong) IBOutlet UILabel *count;
 @end

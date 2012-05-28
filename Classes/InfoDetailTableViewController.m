@@ -23,16 +23,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-//    [faqList release];
-    self.headerLabel = nil;
-    self.headerLabel = nil;
-    self.adButton = nil;
-    self.bannerButton = nil;
-    self.faqList = nil;
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,9 +38,9 @@
 {
     [super viewDidLoad];
 //    self.navigationItem.title = NSLocalizedString(@"Glossary", @"Glossary");
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                              target:self action:@selector(done:)] autorelease];
+                                              target:self action:@selector(done:)];
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"FAQ" ofType:@"plist"];
 	NSMutableArray *tmpMedList = [[NSMutableArray alloc]initWithContentsOfFile:path];
     self.faqList = tmpMedList;
@@ -61,7 +51,6 @@
         [navBar addButtonWithImageName:@"gloassarynavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 
-    [tmpMedList release];
 }
 /**
  */
@@ -74,8 +63,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];    
     
 }
 
@@ -97,8 +84,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];
 }
 
 - (IBAction)loadAd:(id)sender{
@@ -114,8 +99,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];
 }
 
 
@@ -184,7 +167,7 @@
     
     FAQDetailCell *cell = (FAQDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[FAQDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[FAQDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSArray *faqItem = (NSArray *)[self.faqList objectAtIndex:indexPath.section];
     cell.explanationView.text = (NSString *)[faqItem objectAtIndex:1];

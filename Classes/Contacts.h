@@ -13,28 +13,28 @@
 
 @interface Contacts : NSManagedObject
 
-@property (nonatomic, retain) NSString * InsuranceID;
-@property (nonatomic, retain) NSString * InsuranceName;
-@property (nonatomic, retain) NSString * AppointmentContactNumber;
-@property (nonatomic, retain) NSString * ClinicCountry;
-@property (nonatomic, retain) NSString * EmergencyContactNumber;
-@property (nonatomic, retain) NSString * UID;
-@property (nonatomic, retain) NSString * ClinicName;
-@property (nonatomic, retain) NSString * ClinicCity;
-@property (nonatomic, retain) NSString * ClinicPostcode;
-@property (nonatomic, retain) NSString * ClinicID;
-@property (nonatomic, retain) NSString * ConsultantName;
-@property (nonatomic, retain) NSString * InsuranceAuthorisationCode;
-@property (nonatomic, retain) NSString * EmergencyContactNumber2;
-@property (nonatomic, retain) NSString * ClinicNurseName;
-@property (nonatomic, retain) NSString * InsuranceContactNumber;
-@property (nonatomic, retain) NSString * ResultsContactNumber;
-@property (nonatomic, retain) NSString * ContactName;
-@property (nonatomic, retain) NSString * ClinicContactNumber;
-@property (nonatomic, retain) NSString * ClinicStreet;
-@property (nonatomic, retain) NSString * ClinicEmailAddress;
-@property (nonatomic, retain) NSString * ClinicWebSite;
-@property (nonatomic, retain) NSString * InsuranceWebSite;
-@property (nonatomic, retain) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSString * InsuranceID;
+@property (nonatomic, strong) NSString * InsuranceName;
+@property (nonatomic, strong) NSString * AppointmentContactNumber;
+@property (nonatomic, strong) NSString * ClinicCountry;
+@property (nonatomic, strong) NSString * EmergencyContactNumber;
+@property (nonatomic, strong) NSString * UID;
+@property (nonatomic, strong) NSString * ClinicName;
+@property (nonatomic, strong) NSString * ClinicCity;
+@property (nonatomic, strong) NSString * ClinicPostcode;
+@property (nonatomic, strong) NSString * ClinicID;
+@property (nonatomic, strong) NSString * ConsultantName;
+@property (nonatomic, strong) NSString * InsuranceAuthorisationCode;
+@property (nonatomic, strong) NSString * EmergencyContactNumber2;
+@property (nonatomic, strong) NSString * ClinicNurseName;
+@property (nonatomic, strong) NSString * InsuranceContactNumber;
+@property (nonatomic, strong) NSString * ResultsContactNumber;
+@property (nonatomic, strong) NSString * ContactName;
+@property (nonatomic, strong) NSString * ClinicContactNumber;
+@property (nonatomic, strong) NSString * ClinicStreet;
+@property (nonatomic, strong) NSString * ClinicEmailAddress;
+@property (nonatomic, strong) NSString * ClinicWebSite;
+@property (nonatomic, strong) NSString * InsuranceWebSite;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end

@@ -14,8 +14,8 @@
     IBOutlet UISegmentedControl *segmentedControl;
     NSString *unitName;
 }
-@property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
-@property (nonatomic, retain) NSString *unitName;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, strong) NSString *unitName;
 - (void)setDelegate:(id)viewControllerDelegate;
 - (IBAction)setUnit:(id)sender;
 @end

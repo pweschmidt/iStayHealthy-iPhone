@@ -20,7 +20,7 @@
 - (void)restore;
 - (void)createIStayHealthyFolder;
 - (void)copyOldFileToNew;
-@property (nonatomic, readonly) DBRestClient* restClient;
+@property (unsafe_unretained, unsafe_unretained, nonatomic, readonly) DBRestClient* restClient;
 @end
 
 @implementation DropBoxBackupViewController
@@ -51,12 +51,6 @@
 /** 
  dealloc
  */
-- (void) dealloc{    
-    [restClient release];
-    self.iStayHealthyPath = nil;
-    self.activityIndicator = nil;
-    [super dealloc];
-}
 
 /**
  viewDidUnload
@@ -131,16 +125,16 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+4.0, 118.0, 40.0);
-    UIImageView *view = [[[UIImageView alloc]initWithFrame:frame]autorelease];
+    UIImageView *view = [[UIImageView alloc]initWithFrame:frame];
     [view setImage:[UIImage imageNamed:@"dropbox-small.png"]];
     [cell.contentView addSubview:view];
     
     if (0 == indexPath.section) {
         CGRect textFrame = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+17.0, 100, 14);
-        UILabel *textLabel = [[[UILabel alloc]initWithFrame:textFrame]autorelease];
+        UILabel *textLabel = [[UILabel alloc]initWithFrame:textFrame];
         textLabel.textColor = TEXTCOLOUR;
         textLabel.font = [UIFont systemFontOfSize:12.0];
         textLabel.textAlignment = UITextAlignmentLeft;
@@ -156,7 +150,7 @@
     }
     else{
         CGRect textFrame = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+19.0, 100, 12);
-        UILabel *textLabel = [[[UILabel alloc]initWithFrame:textFrame]autorelease];
+        UILabel *textLabel = [[UILabel alloc]initWithFrame:textFrame];
         textLabel.textColor = TEXTCOLOUR;
         textLabel.font = [UIFont systemFontOfSize:12.0];
         textLabel.textAlignment = UITextAlignmentLeft;
@@ -195,7 +189,7 @@
             case 1:
                 isBackup = NO;
                 if (!self.dropBoxFileExists && !self.newDropboxFileExists) {
-                    UIAlertView *noFile = [[[UIAlertView alloc]initWithTitle:@"No data" message:@"No saved data on Dropbox" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil]autorelease];
+                    UIAlertView *noFile = [[UIAlertView alloc]initWithTitle:@"No data" message:@"No saved data on Dropbox" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     [noFile show];
                 }
                 else {
@@ -227,10 +221,9 @@
 - (void)unlinkDropBox{
     [[DBSession sharedSession] unlinkAll];
 #ifdef APPDEBUG
-    [[[[UIAlertView alloc] 
+    [[[UIAlertView alloc] 
        initWithTitle:@"Account Unlinked!" message:@"Your dropbox account has been unlinked" 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
      show];
 #endif   
 }
@@ -242,10 +235,9 @@
     if (![[DBSession sharedSession]isLinked]) {
         return;
     }
-    [[[[UIAlertView alloc] 
+    [[[UIAlertView alloc] 
        initWithTitle:@"Error Loading DropBox data" message:@"There was an error loading data from DropBox." 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
      show];
     
 }
@@ -280,16 +272,15 @@
 #ifdef APPDEBUG
     NSLog(@"DropBoxBackupViewController::backup temporary directory is in %@",dataPath);
 #endif    
-    DataLoader *loader = [[[DataLoader alloc]init] autorelease];
+    DataLoader *loader = [[DataLoader alloc]init];
     [loader getSQLData];
     NSData *xmlData = [loader xmlData];
 	NSError *error = nil;
     [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&error];
 	if (error != nil) {
-		[[[[UIAlertView alloc]
+		[[[UIAlertView alloc]
 		   initWithTitle:@"Error writing XML data to tmp directory" message:[error localizedDescription] 
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		  autorelease]
 		 show];
 	}
     else{
@@ -303,16 +294,15 @@
  */
 - (void)restore{
     NSString *dataPath = [self dropBoxFileTmpPath];
-    NSData *xmlData = [[[NSData alloc]initWithContentsOfFile:dataPath]autorelease];
-    XMLLoader *xmlLoader = [[[XMLLoader alloc]initWithData:xmlData]autorelease];
+    NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
+    XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:xmlData];
     NSError *error = nil;
     [xmlLoader startParsing:&error];
     [xmlLoader synchronise];
     [self.activityIndicator stopAnimating];
-    [[[[UIAlertView alloc] 
+    [[[UIAlertView alloc] 
        initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.xml.",nil)
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
      show];        
     
 }
@@ -386,7 +376,7 @@
 }
 
 - (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error{
-    UIAlertView *errorAlert = [[[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil]autorelease];
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     [errorAlert show];    
 }
 
@@ -397,7 +387,7 @@
 }
 
 - (void)restClient:(DBRestClient *)client copyPathFailedWithError:(NSError *)error{
-    UIAlertView *errorAlert = [[[UIAlertView alloc] initWithTitle:@"Dropbox Copy error" message:[NSString stringWithFormat:@"Error copying file %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil]autorelease];
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Copy error" message:[NSString stringWithFormat:@"Error copying file %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     [errorAlert show];
 }
 
@@ -433,10 +423,9 @@
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 #endif
     [self.activityIndicator stopAnimating];
-    [[[[UIAlertView alloc] 
+    [[[UIAlertView alloc] 
        initWithTitle:NSLocalizedString(@"Backup Finished",@"Backup Finished") message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.xml.",nil)
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
      show];
 }
 
@@ -451,10 +440,9 @@
         return;
     }
     [self.activityIndicator stopAnimating];
-    [[[[UIAlertView alloc] 
+    [[[UIAlertView alloc] 
        initWithTitle:@"Error Uploading to DropBox" message:@"There was an error uploading data to DropBox." 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
      show];
     
 }
@@ -478,10 +466,9 @@
         return;
     }
     [self.activityIndicator stopAnimating];
-    [[[[UIAlertView alloc] 
+    [[[UIAlertView alloc] 
        initWithTitle:@"Error Loading file from DropBox" message:@"There was an error loading a file from DropBox." 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-      autorelease]
      show];
     
 }

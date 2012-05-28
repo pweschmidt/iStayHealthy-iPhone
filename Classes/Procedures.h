@@ -13,13 +13,13 @@
 
 @interface Procedures : NSManagedObject
 
-@property (nonatomic, retain) NSString * Illness;
-@property (nonatomic, retain) NSDate * Date;
-@property (nonatomic, retain) NSDate * EndDate;
-@property (nonatomic, retain) NSString * Name;
-@property (nonatomic, retain) NSString * Notes;
-@property (nonatomic, retain) NSString * CausedBy;
-@property (nonatomic, retain) NSString * UID;
-@property (nonatomic, retain) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSString * Illness;
+@property (nonatomic, strong) NSDate * Date;
+@property (nonatomic, strong) NSDate * EndDate;
+@property (nonatomic, strong) NSString * Name;
+@property (nonatomic, strong) NSString * Notes;
+@property (nonatomic, strong) NSString * CausedBy;
+@property (nonatomic, strong) NSString * UID;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end

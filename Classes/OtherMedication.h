@@ -13,14 +13,14 @@
 
 @interface OtherMedication : NSManagedObject
 
-@property (nonatomic, retain) NSString * UID;
-@property (nonatomic, retain) NSNumber * Dose;
-@property (nonatomic, retain) NSDate * StartDate;
-@property (nonatomic, retain) NSDate * EndDate;
-@property (nonatomic, retain) NSString * Name;
-@property (nonatomic, retain) NSData * Image;
-@property (nonatomic, retain) NSString * MedicationForm;
-@property (nonatomic, retain) NSString * Unit;
-@property (nonatomic, retain) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSString * UID;
+@property (nonatomic, strong) NSNumber * Dose;
+@property (nonatomic, strong) NSDate * StartDate;
+@property (nonatomic, strong) NSDate * EndDate;
+@property (nonatomic, strong) NSString * Name;
+@property (nonatomic, strong) NSData * Image;
+@property (nonatomic, strong) NSString * MedicationForm;
+@property (nonatomic, strong) NSString * Unit;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end

@@ -51,15 +51,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    self.sounds = nil;
-    self.dateCell = nil;
-    self.selectedSoundCell = nil;
-    self.startTime = nil;
-    self.alertText = nil;
-    self.soundName = nil;
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -70,12 +61,12 @@
 {
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Add Alert",@"Add Alert");
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                              target:self action:@selector(cancel:)] autorelease];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
+                                              target:self action:@selector(cancel:)];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
-                                               target:self action:@selector(save:)] autorelease];	
+                                               target:self action:@selector(save:)];	
     NSString *path = [[NSBundle mainBundle] pathForResource:@"SoundList" ofType:@"plist"];
     self.sounds = [NSArray arrayWithContentsOfFile:path];
     self.isFirstLoad = YES;
@@ -132,7 +123,6 @@
 #ifdef APPDEBUG
         NSLog(@"NewAlertDetailViewController::save the alert setting is %@",medAlert);
 #endif
-        [medAlert release];
     }
     
     [self dismissModalViewControllerAnimated:YES];
@@ -175,12 +165,11 @@
 	[actionSheet showInView:self.view];
 	
 	
-	UIDatePicker *datePicker = [[[UIDatePicker alloc] init] autorelease];
+	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = 101;
 	datePicker.datePickerMode = UIDatePickerModeTime;
     datePicker.minuteInterval = 5;
 	[actionSheet addSubview:datePicker];
-	[actionSheet release];
 }
 
 /**
@@ -189,7 +178,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"HH:mm";
 	
 	NSString *timestamp = [formatter stringFromDate:datePicker.date];
@@ -260,7 +249,7 @@
                 }
             }  
         }
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"HH:mm";
         [[timeCell value]setText:[formatter stringFromDate:self.startTime]];
         [timeCell setTag:indexPath.row];
@@ -380,7 +369,7 @@
 	if ([soundFileName isEqualToString:@"default"]) {
         return;
 	}
-	NSURL *fileURL = [[[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:soundFileName ofType:@"caf"]]autorelease];	
+	NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:soundFileName ofType:@"caf"]];	
     NSError *err;
 	player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&err];	
 	if (player) {

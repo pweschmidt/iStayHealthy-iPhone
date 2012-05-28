@@ -20,8 +20,8 @@
 	HealthChartsViewPortrait *chartView;
     ChartEvents *events;
 }
-@property (nonatomic, retain) HealthChartsViewPortrait *chartView;
-@property (nonatomic, retain) ChartEvents *events;
+@property (nonatomic, strong) HealthChartsViewPortrait *chartView;
+@property (nonatomic, strong) ChartEvents *events;
 - (void)configureCD4Cell:(SummaryCell *)cell;
 - (void)configureCD4PercentCell:(SummaryCell *)cell;
 - (void)configureViralLoadCell:(SummaryCell *)cell;

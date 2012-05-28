@@ -32,10 +32,6 @@
     return self;
 }
 
-- (void)dealloc{
-    self.sideeffects = nil;
-    [super dealloc];
-}
 
 - (void)viewDidUnload{
     self.sideeffects = nil;
@@ -60,9 +56,9 @@
 {
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Side Effects", @"Side Effects");
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                              target:self action:@selector(done:)] autorelease];
+                                              target:self action:@selector(done:)];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.tableView.rowHeight = 57.0;
 }
@@ -105,7 +101,7 @@
         }  
     }
     SideEffects *effect = (SideEffects *)[self.sideeffects objectAtIndex:indexPath.row];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
 	formatter.dateFormat = @"dd MMM YYYY";
     [[cell date]setText:[formatter stringFromDate:effect.SideEffectDate]];
     [[cell effect]setText:effect.SideEffect];

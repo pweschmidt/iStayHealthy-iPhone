@@ -26,13 +26,13 @@
 	iStayHealthyRecord *masterRecord;
     ChartEvents *events;
 }
-@property (nonatomic, retain) HealthChartsViewLandscape *chartView;
-@property (nonatomic, retain) NSMutableArray *allResults;
-@property (nonatomic, retain) NSMutableArray *allMeds;
-@property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) iStayHealthyRecord *masterRecord;
-@property (nonatomic, retain) NSMutableArray *allMissedMeds;
-@property (nonatomic, retain) ChartEvents *events;
+@property (nonatomic, strong) HealthChartsViewLandscape *chartView;
+@property (nonatomic, strong) NSMutableArray *allResults;
+@property (nonatomic, strong) NSMutableArray *allMeds;
+@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
+@property (nonatomic, strong) NSMutableArray *allMissedMeds;
+@property (nonatomic, strong) ChartEvents *events;
 - (void)reloadData:(NSNotification*)note;
 - (void)setUpData;
 @end

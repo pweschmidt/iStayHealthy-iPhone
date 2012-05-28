@@ -40,42 +40,42 @@
 {
     [super viewDidLoad];
     NSMutableArray *viewControllersArray = 
-    [[[NSMutableArray alloc]initWithCapacity:5]autorelease];
+    [[NSMutableArray alloc]initWithCapacity:5];
     
-    NewStatusViewController *statusView = [[[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil]autorelease];
+    NewStatusViewController *statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil];
 //    statusView.title = NSLocalizedString(@"Charts", @"Charts");
-    statusView.tabBarItem = [[[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Charts", @"Charts") image:[UIImage imageNamed:@"status-small.png"] tag:0]autorelease];
-    UINavigationController *statusNavController = [[[UINavigationController alloc]initWithRootViewController:statusView]autorelease];
+    statusView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Charts", @"Charts") image:[UIImage imageNamed:@"status-small.png"] tag:0];
+    UINavigationController *statusNavController = [[UINavigationController alloc]initWithRootViewController:statusView];
     statusNavController.navigationBar.tintColor = [UIColor blackColor];
     [viewControllersArray addObject:statusNavController];
     
-    NewResultsViewController *resultsView = [[[NewResultsViewController alloc]initWithNibName:@"NewResultsViewController" bundle:nil]autorelease];
+    NewResultsViewController *resultsView = [[NewResultsViewController alloc]initWithNibName:@"NewResultsViewController" bundle:nil];
 //    resultsView.title = NSLocalizedString(@"Results", @"Results");
-    resultsView.tabBarItem = [[[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Results", @"Results") image:[UIImage imageNamed:@"list-small.png"] tag:1]autorelease];
-    UINavigationController *resultsNavController = [[[UINavigationController alloc]initWithRootViewController:resultsView]autorelease];
+    resultsView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Results", @"Results") image:[UIImage imageNamed:@"list-small.png"] tag:1];
+    UINavigationController *resultsNavController = [[UINavigationController alloc]initWithRootViewController:resultsView];
     resultsNavController.navigationBar.tintColor = [UIColor blackColor];
     [viewControllersArray addObject:resultsNavController];
     
-    HIVMedicationViewController *hivMedsView = [[[HIVMedicationViewController alloc]initWithNibName:@"HIVMedicationViewController" bundle:nil]autorelease];
+    HIVMedicationViewController *hivMedsView = [[HIVMedicationViewController alloc]initWithNibName:@"HIVMedicationViewController" bundle:nil];
 //    hivMedsView.title = NSLocalizedString(@"HIV Drugs", @"HIV Drugs");
-    hivMedsView.tabBarItem = [[[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"HIV Drugs", @"HIV Drugs") image:[UIImage imageNamed:@"combi-small.png"] tag:2]autorelease];
-    UINavigationController *hivMedsNavController = [[[UINavigationController alloc]initWithRootViewController:hivMedsView]autorelease];
+    hivMedsView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"HIV Drugs", @"HIV Drugs") image:[UIImage imageNamed:@"combi-small.png"] tag:2];
+    UINavigationController *hivMedsNavController = [[UINavigationController alloc]initWithRootViewController:hivMedsView];
     hivMedsNavController.navigationBar.tintColor = [UIColor blackColor];
     [viewControllersArray addObject:hivMedsNavController];
     
-    NewAlertViewController *alertsView = [[[NewAlertViewController alloc]initWithNibName:@"NewAlertViewController" bundle:nil]autorelease];
+    NewAlertViewController *alertsView = [[NewAlertViewController alloc]initWithNibName:@"NewAlertViewController" bundle:nil];
 //    alertsView.title = NSLocalizedString(@"Alerts", @"Alerts");
-    alertsView.tabBarItem = [[[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Alerts", @"Alerts") image:[UIImage imageNamed:@"Alarm-Clock-32.png"] tag:3]autorelease];
-    UINavigationController *alertsNavController = [[[UINavigationController alloc]initWithRootViewController:alertsView]autorelease];
+    alertsView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Alerts", @"Alerts") image:[UIImage imageNamed:@"Alarm-Clock-32.png"] tag:3];
+    UINavigationController *alertsNavController = [[UINavigationController alloc]initWithRootViewController:alertsView];
     alertsNavController.navigationBar.tintColor = [UIColor blackColor];
     [viewControllersArray addObject:alertsNavController];
 
 
-    GeneralMedicalTableViewController *generalView = [[[GeneralMedicalTableViewController alloc]
-                                                       initWithNibName:@"GeneralMedicalTableViewController" bundle:nil]autorelease];
+    GeneralMedicalTableViewController *generalView = [[GeneralMedicalTableViewController alloc]
+                                                       initWithNibName:@"GeneralMedicalTableViewController" bundle:nil];
 //    generalView.title = NSLocalizedString(@"General", "General");
-    generalView.tabBarItem = [[[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"General", @"General") image:[UIImage imageNamed:@"cross-small.png"] tag:4]autorelease];
-    UINavigationController *generalNavController = [[[UINavigationController alloc]initWithRootViewController:generalView]autorelease];
+    generalView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"General", @"General") image:[UIImage imageNamed:@"cross-small.png"] tag:4];
+    UINavigationController *generalNavController = [[UINavigationController alloc]initWithRootViewController:generalView];
     generalNavController.navigationBar.tintColor = [UIColor blackColor];
     [viewControllersArray addObject:generalNavController];
     

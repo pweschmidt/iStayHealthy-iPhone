@@ -56,14 +56,13 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     NSString* consumerKey = @"sekt4gbt7526j0y";
 	NSString* consumerSecret = @"drg5hompcf9vbd2";
     NSString* root = kDBRootDropbox;//could also be kDBRootAppFolder
-	DBSession* session = [[[DBSession alloc]initWithAppKey:consumerKey appSecret:consumerSecret root:root]autorelease];
+	DBSession* session = [[DBSession alloc]initWithAppKey:consumerKey appSecret:consumerSecret root:root];
 	[DBSession setSharedSession:session];
 	NSString* errorMsg = nil;    
 	if (errorMsg != nil) {
-		[[[[UIAlertView alloc]
+		[[[UIAlertView alloc]
 		   initWithTitle:@"Error Configuring DropBox Session" message:errorMsg 
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		  autorelease]
 		 show];
 	}    
     
@@ -73,14 +72,12 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         self.passController = tmpPassController;
         [self.window addSubview:tmpPassController.view];
         [self.window makeKeyAndVisible];
-        [tmpPassController release];
     }    
     else{
         iStayHealthyTabBarController *tmpBarController = [[iStayHealthyTabBarController alloc]initWithNibName:nil bundle:nil];
         self.tabBarController = tmpBarController;
         [self.window addSubview:tmpBarController.view];
         [self.window makeKeyAndVisible];
-        [tmpBarController release];
     }
     //finally see if iCloud is available or not
     [self checkForiCloud];  
@@ -101,7 +98,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     if (![XMLLoader isXML:importedData]) {
         return NO;
     }
-    XMLLoader *xmlLoader = [[[XMLLoader alloc]initWithData:importedData]autorelease];
+    XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:importedData];
     NSError* error = nil;
     [xmlLoader startParsing:&error];        
     [xmlLoader synchronise];
@@ -204,7 +201,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         [[iStayHealthyPasswordController alloc]initWithNibName:@"iStayHealthyPasswordController" bundle:nil];
         self.passController = tmpPassController;
         [self.window addSubview:tmpPassController.view];
-        [tmpPassController release];
     }    
     [self saveContext];
 }
@@ -243,7 +239,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         [[iStayHealthyPasswordController alloc]initWithNibName:@"iStayHealthyPasswordController" bundle:nil];
         self.passController = tmpPassController;
         [self.window addSubview:tmpPassController.view];
-        [tmpPassController release];
     }    
     [self saveContext];
 }
@@ -445,7 +440,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
 							  otherButtonTitles:nil];
 		[alert show];
-        [alert release];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
 	if (nil != records) {
@@ -494,9 +488,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 	tmpFetchController.delegate = self;
 	fetchedResultsController_ = tmpFetchController;
 	
-	[request release];
-    [allDescriptors release];
-    [sortDescriptor release];
 	return fetchedResultsController_;
 	
 }	
@@ -526,17 +517,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 
-- (void)dealloc {
-    
-	[fetchedResultsController_ release];
-    [managedObjectContext_ release];
-    [managedObjectModel_ release];
-    [persistentStoreCoordinator_ release];
-    [window release];
-    [tabBarController release];
-    [passController release];
-    [super dealloc];
-}
 
 /*
  Notification alert
@@ -547,18 +527,16 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 											  cancelButtonTitle:@"OK"
 											  otherButtonTitles:nil];
 	[alertView show];
-	[alertView release];
 }
 
 #pragma mark -
 #pragma mark DBSessionDelegate methods
 
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session userId:(NSString *)userId {
-	relinkUserId = [userId retain];
-	[[[[UIAlertView alloc] 
+	relinkUserId = userId;
+	[[[UIAlertView alloc] 
 	   initWithTitle:@"Dropbox Session Ended" message:@"Do you want to relink?" delegate:self 
 	   cancelButtonTitle:@"Cancel" otherButtonTitles:@"Relink", nil]
-	  autorelease]
 	 show];
 }
 
@@ -569,7 +547,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 	if (index != alertView.cancelButtonIndex) {
 		[[DBSession sharedSession] linkUserId:relinkUserId];
 	}
-	[relinkUserId release];
 	relinkUserId = nil;
 }
 

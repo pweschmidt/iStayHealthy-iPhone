@@ -28,7 +28,7 @@
 
 
 + (BOOL)isXML:(NSData *)data{
-    NSString *testString = [[[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding]autorelease];
+    NSString *testString = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
     if ([testString hasPrefix:XMLPREAMBLE]) {
         return YES;
     }
@@ -62,7 +62,7 @@
 #ifdef APPDEBUG
     NSLog(@"XMLLoader:startParsing");
 #endif
-    error = parseError;
+    error = nil;
     [xmlParser parse];    
     if (nil == &error) {
         return YES;
@@ -81,7 +81,7 @@
     if (nil == [document root]) {
         return;
     }
-    DataLoader *loader = [[[DataLoader alloc]init] autorelease];
+    DataLoader *loader = [[DataLoader alloc]init];
     [loader getSQLData];
     XMLElement *_results = [document elementForName:RESULTS];
     if (nil != _results) {
@@ -174,37 +174,30 @@
     else if ([elementName isEqualToString:RESULTS] && (nil == self.results)) {
         XMLElement *tmpElement = [[XMLElement alloc]initWithName:RESULTS];
         self.results = tmpElement;
-        [tmpElement release];
     }
     else if ([elementName isEqualToString:MEDICATIONS] && (nil == self.medications)) {
         XMLElement *tmpElement = [[XMLElement alloc]initWithName:MEDICATIONS];
         self.medications = tmpElement;
-        [tmpElement release];
     }
     else if ([elementName isEqualToString:OTHERMEDICATIONS] && (nil == self.otherMedications)) {
         XMLElement *tmpElement = [[XMLElement alloc]initWithName:OTHERMEDICATIONS];
         self.otherMedications = tmpElement;
-        [tmpElement release];
     }
     else if ([elementName isEqualToString:MISSEDMEDICATIONS] && (nil == self.missedMedications)) {
         XMLElement *tmpElement = [[XMLElement alloc]initWithName:MISSEDMEDICATIONS];
         self.missedMedications = tmpElement;
-        [tmpElement release];
     }
     else if ([elementName isEqualToString:CLINICALCONTACTS] && (nil == self.contacts)) {
         XMLElement *tmpElement = [[XMLElement alloc]initWithName:CLINICALCONTACTS];
         self.contacts = tmpElement;
-        [tmpElement release];
     }
     else if ([elementName isEqualToString:HIVSIDEEFFECTS] && (nil == self.sideEffects)) {
         XMLElement *tmpElement = [[XMLElement alloc]initWithName:HIVSIDEEFFECTS];
         self.sideEffects = tmpElement;
-        [tmpElement release];
     }
     else if ([elementName isEqualToString:ILLNESSANDPROCEDURES] && (nil == self.procedures)) {
         XMLElement *tmpElement = [[XMLElement alloc]initWithName:ILLNESSANDPROCEDURES];
         self.procedures = tmpElement;
-        [tmpElement release];
     }
     //child elements
     else if([elementName isEqualToString:RESULT] && (nil != results)){
@@ -220,7 +213,6 @@
             [result addAttribute:VIRALLOAD andValue:vl];
         [result addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
         [results addChild:result];
-        [result release];
     }
     else if([elementName isEqualToString:MEDICATION] && (nil != self.medications)){
         XMLElement *medication = [[XMLElement alloc]initWithName:MEDICATION];
@@ -233,7 +225,6 @@
         [medication addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
         
         [self.medications addChild:medication];
-        [medication release];
     }
     else if([elementName isEqualToString:MISSEDMEDICATION] && (nil != self.missedMedications)){
         XMLElement *missedMedication = [[XMLElement alloc]initWithName:MISSEDMEDICATION];
@@ -242,7 +233,6 @@
         [missedMedication addAttribute:DRUG andValue:[attributeDict valueForKey:DRUG]];
         [missedMedication addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
         [self.missedMedications addChild:missedMedication];
-        [missedMedication release];
     }
     else if([elementName isEqualToString:OTHERMEDICATION] && (nil != self.otherMedications)){
         XMLElement *otherMedication = [[XMLElement alloc]initWithName:OTHERMEDICATION];
@@ -254,7 +244,6 @@
         [otherMedication addAttribute:DOSE andValue:[attributeDict valueForKey:DOSE]];
         [otherMedication addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
         [self.otherMedications addChild:otherMedication];
-        [otherMedication release];
     }
     else if([elementName isEqualToString:CONTACTS] && (nil != self.contacts)){
         XMLElement *contact = [[XMLElement alloc]initWithName:CONTACTS];
@@ -268,7 +257,6 @@
         [contact addAttribute:APPOINTMENTCONTACTNUMBER andValue:[attributeDict valueForKey:APPOINTMENTCONTACTNUMBER]];
         
         [self.contacts addChild:contact];
-        [contact release];
     }
     else if([elementName isEqualToString:SIDEEFFECTS] && (nil != self.sideEffects)){
         XMLElement *effect = [[XMLElement alloc]initWithName:SIDEEFFECTS];
@@ -277,7 +265,6 @@
         [effect addAttribute:NAME andValue:[attributeDict valueForKey:NAME]];
         [effect addAttribute:DRUG andValue:[attributeDict valueForKey:DRUG]];
         [self.sideEffects addChild:effect];
-        [effect release];
     }
     else if([elementName isEqualToString:PROCEDURES] && (nil != self.procedures)){
         XMLElement *procs = [[XMLElement alloc]initWithName:PROCEDURES];
@@ -285,7 +272,6 @@
         [procs addAttribute:ILLNESS andValue:[attributeDict valueForKey:ILLNESS]];
         [procs addAttribute:DATE andValue:[attributeDict valueForKey:DATE]];
         [self.procedures addChild:procs];
-        [procs release];
     }
 }
 
@@ -329,35 +315,12 @@
 #ifdef APPDEBUG
 	NSLog(@"Error on XML Parse: %@", [parseError localizedDescription] );
 #endif
-    *error = [NSError errorWithDomain:[parseError domain] code:[parseError code] userInfo:[parseError userInfo]];
+//    *error = &parseError;
 }
 
 
 /**
  dealloc
  */
-- (void)dealloc{
-    [xmlParser release];
-    [document release];
-    [results release];
-    [medications release];
-    [missedMedications release];
-    [alerts release];
-    [otherMedications release];
-    [contacts release];
-    [procedures release];
-    [sideEffects release];
-    xmlParser = nil;
-    document = nil;
-    results = nil;
-    medications = nil;
-    missedMedications = nil;
-    alerts = nil;
-    otherMedications = nil;
-    contacts = nil;
-    procedures = nil;
-    sideEffects = nil;
-    [super dealloc];
-}
 
 @end

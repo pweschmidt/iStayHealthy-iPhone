@@ -28,10 +28,5 @@
 }
 
 
-- (void)dealloc{
-    [name release];
-    [value release];
-    [super dealloc];
-}
 
 @end

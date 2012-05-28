@@ -9,18 +9,18 @@
 #import <UIKit/UIKit.h>
 @class iStayHealthyTabBarController;
 @interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *fetchedResultsController_;
+	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
     iStayHealthyTabBarController *tabBarController;
     IBOutlet UITextField *passwordField;
     IBOutlet UILabel *label;
     IBOutlet UILabel *versionLabel;
     NSString *passwordString;
 }
-@property (nonatomic, retain) IBOutlet UITextField *passwordField;
-@property (nonatomic, retain) IBOutlet UILabel *label;
-@property (nonatomic, retain) IBOutlet UILabel *versionLabel;
-@property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) iStayHealthyTabBarController *tabBarController;
+@property (nonatomic, strong) IBOutlet UITextField *passwordField;
+@property (nonatomic, strong) IBOutlet UILabel *label;
+@property (nonatomic, strong) IBOutlet UILabel *versionLabel;
+@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
 - (void)loadTabController;
 - (IBAction)testLoad:(id)sender;
 - (IBAction)textFieldDoneEditing:(id)sender;

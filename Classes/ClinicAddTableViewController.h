@@ -12,8 +12,8 @@
 @class iStayHealthyRecord, Contacts;
 @interface ClinicAddTableViewController : UITableViewController<ClinicAddressCellDelegate, UIAlertViewDelegate>{
 @private
-	iStayHealthyRecord *record;
-    Contacts *contacts;    
+	iStayHealthyRecord *__unsafe_unretained record;
+    Contacts *__unsafe_unretained contacts;    
     NSString *name;
     NSString *idString;
     NSString *www;
@@ -23,14 +23,14 @@
     BOOL isInChangeMode;
 }
 @property BOOL isInChangeMode;
-@property (nonatomic, assign) iStayHealthyRecord *record;
-@property (nonatomic, assign) Contacts *contacts;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *idString;
-@property (nonatomic, retain) NSString *www;
-@property (nonatomic, retain) NSString *email;
-@property (nonatomic, retain) NSString *number;
-@property (nonatomic, retain) NSString *emergencynumber;
+@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, unsafe_unretained) Contacts *contacts;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *idString;
+@property (nonatomic, strong) NSString *www;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *number;
+@property (nonatomic, strong) NSString *emergencynumber;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;
 - (IBAction) saveNewEntry:			(id) sender;

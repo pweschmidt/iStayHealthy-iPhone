@@ -37,11 +37,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    self.chartView = nil;
-    self.events = nil;
-    [super dealloc];
-}
 
 
 #pragma mark - View lifecycle
@@ -54,10 +49,10 @@
 
 	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 	[infoButton addTarget:self action:@selector(showInfoView:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *actionButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSettingsView:)]autorelease];
+	UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSettingsView:)];
     
     
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton]autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
     self.navigationItem.leftBarButtonItem = actionButton;
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
@@ -65,7 +60,6 @@
     }
     ChartEvents *tmpEvents = [[ChartEvents alloc]init];
 	self.events = tmpEvents;
-    [tmpEvents release];
 }
 
 - (void)reloadData:(NSNotification *)note{
@@ -126,8 +120,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-	[infoViewController release];
-    [navigationController release];
 }
 
 
@@ -141,8 +133,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
     [self.navigationController presentModalViewController:navigationController animated:YES];
-    [navigationController release]; 
-    [settingsViewController release];
 }
 
 
@@ -512,7 +502,7 @@
         NSString *identifier = @"ChartViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 		if (nil == cell) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 		}
 		cell.backgroundColor = BRIGHT_BACKGROUND;			
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -523,7 +513,6 @@
         
 		[cell.contentView addSubview:chart];
 		self.chartView = chart;
-		[chart release];
         return cell;
 	}
     return nil;

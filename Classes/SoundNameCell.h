@@ -11,6 +11,6 @@
 @interface SoundNameCell : UITableViewCell{
     IBOutlet UILabel *soundName;
 }
-@property (nonatomic, retain) IBOutlet UILabel *soundName;
+@property (nonatomic, strong) IBOutlet UILabel *soundName;
 
 @end

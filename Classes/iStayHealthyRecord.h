@@ -13,17 +13,17 @@
 
 @interface iStayHealthyRecord : NSManagedObject
 
-@property (nonatomic, retain) NSString * UID;
-@property (nonatomic, retain) NSNumber * isPasswordEnabled;
-@property (nonatomic, retain) NSString * Password;
-@property (nonatomic, retain) NSString * Name;
-@property (nonatomic, retain) NSSet *otherMedications;
-@property (nonatomic, retain) NSSet *missedMedications;
-@property (nonatomic, retain) NSSet *contacts;
-@property (nonatomic, retain) NSSet *results;
-@property (nonatomic, retain) NSSet *medications;
-@property (nonatomic, retain) NSSet *sideeffects;
-@property (nonatomic, retain) NSSet *procedures;
+@property (nonatomic, strong) NSString * UID;
+@property (nonatomic, strong) NSNumber * isPasswordEnabled;
+@property (nonatomic, strong) NSString * Password;
+@property (nonatomic, strong) NSString * Name;
+@property (nonatomic, strong) NSSet *otherMedications;
+@property (nonatomic, strong) NSSet *missedMedications;
+@property (nonatomic, strong) NSSet *contacts;
+@property (nonatomic, strong) NSSet *results;
+@property (nonatomic, strong) NSSet *medications;
+@property (nonatomic, strong) NSSet *sideeffects;
+@property (nonatomic, strong) NSSet *procedures;
 @end
 
 @interface iStayHealthyRecord (CoreDataGeneratedAccessors)

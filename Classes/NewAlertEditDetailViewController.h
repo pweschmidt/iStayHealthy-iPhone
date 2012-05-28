@@ -23,18 +23,18 @@
 	AVAudioPlayer *player;
     NSString *alertText;
     NSString *soundName;
-	UILocalNotification *previousNotification;	    
+	UILocalNotification *__unsafe_unretained previousNotification;	    
 }
-@property (nonatomic, assign) UILocalNotification *previousNotification;
+@property (nonatomic, unsafe_unretained) UILocalNotification *previousNotification;
 @property BOOL isFirstLoad;
 @property int firstSelectedRow;
-@property (nonatomic, retain) NSString *alertText;
-@property (nonatomic, retain) NSString *soundName;
-@property (nonatomic, retain) NSArray *sounds;
-@property (nonatomic, retain) SetDateCell *dateCell;
-@property (nonatomic, retain) SoundNameCell *selectedSoundCell;
-@property (nonatomic, assign)	AVAudioPlayer	*player;
-@property (nonatomic, retain) NSDate *startTime;
+@property (nonatomic, strong) NSString *alertText;
+@property (nonatomic, strong) NSString *soundName;
+@property (nonatomic, strong) NSArray *sounds;
+@property (nonatomic, strong) SetDateCell *dateCell;
+@property (nonatomic, strong) SoundNameCell *selectedSoundCell;
+@property (nonatomic, strong)	AVAudioPlayer	*player;
+@property (nonatomic, strong) NSDate *startTime;
 - (IBAction) done:					(id) sender;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeNotification;

@@ -37,13 +37,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc{
-	[fetchedResultsController_ release];
-    self.label = nil;
-    self.passwordField = nil;
-    self.versionLabel = nil;
-    [super dealloc];
-}
 
 #pragma mark - Text Editing and Processing
 
@@ -101,7 +94,6 @@
     self.tabBarController = tmpBarController;
     tmpBarController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:tmpBarController animated:YES];
-    [tmpBarController release];
 }
 
 - (void)dismissTabBarController{
@@ -123,7 +115,6 @@
 							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
 							  otherButtonTitles:nil];
 		[alert show];
-        [alert release];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
     /*
@@ -183,9 +174,6 @@
 	tmpFetchController.delegate = self;
 	fetchedResultsController_ = tmpFetchController;
 	
-	[request release];
-    [allDescriptors release];
-    [sortDescriptor release];
 	return fetchedResultsController_;
 	
 }	

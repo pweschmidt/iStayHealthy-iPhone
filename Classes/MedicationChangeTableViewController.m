@@ -45,23 +45,6 @@
 }
 
 
-- (void)dealloc
-{
-    self.dateCell = nil;
-    self.date = nil;
-    self.effectString = nil;
-    self.effectDate = nil;
-    self.missedDate = nil;
-    self.missedSwitchCell = nil;
-    self.effectSwitchCell = nil;
-    self.missedDateCell = nil;
-    self.effectDateCell = nil;
-    self.effectsCell = nil;
-    
-    self.effectSwitch = nil;
-    self.missedSwitch = nil;
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -77,12 +60,12 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = self.medName;
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
-                                            target:self action:@selector(showAlertView:)] autorelease];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
+                                            target:self action:@selector(showAlertView:)];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                            target:self action:@selector(save:)] autorelease];	
+                                            target:self action:@selector(save:)];	
 }
 
 - (void)viewDidUnload
@@ -155,7 +138,7 @@
  shows the Alert view when user clicks the Trash button
  */
 - (IBAction) showAlertView:			(id) sender{
-    UIAlertView *alert = [[[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil]autorelease];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
     
     [alert show];    
 }
@@ -224,11 +207,11 @@
  */
 - (void)changeDate{
 	NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
-	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",@"Set"), nil]autorelease];
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",@"Set"), nil];
 	[actionSheet showInView:self.view];
 	
 	
-	UIDatePicker *datePicker = [[[UIDatePicker alloc] init] autorelease];
+	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = 101;
     if (self.state == CHANGEDATE) {
         datePicker.date = self.date;
@@ -243,7 +226,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd MMM YY";
 #ifdef APPDEBUG
     NSLog(@"MedicationChangeTableViewController:actionSheet buttonIndex == %d",buttonIndex);
@@ -325,7 +308,7 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd MMM YY";
     if (0 == indexPath.section) {        
         NSString *identifier = @"SetDateCell";
@@ -351,18 +334,18 @@
             NSString *identifier = @"SwitcherCell";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             }
             cell.backgroundColor = [UIColor whiteColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 112.0, 22.0);
-            UILabel *label = [[[UILabel alloc] initWithFrame:frame]autorelease];
+            UILabel *label = [[UILabel alloc] initWithFrame:frame];
             label.textColor = TEXTCOLOUR;
             label.textAlignment = UITextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:15.0];
             
             CGRect frameSwitch = CGRectMake(215.0, 10.0, 94.0, 27.0);
-            UISwitch *switchEnabled = [[[UISwitch alloc] initWithFrame:frameSwitch]autorelease];
+            UISwitch *switchEnabled = [[UISwitch alloc] initWithFrame:frameSwitch];
             [switchEnabled addTarget:self action:@selector(switchSideEffects:) forControlEvents:UIControlEventValueChanged];
             
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")) {
@@ -420,18 +403,18 @@
             NSString *identifier = @"SwitcherCell";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             }
             cell.backgroundColor = [UIColor whiteColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 112.0, 22.0);
-            UILabel *label = [[[UILabel alloc] initWithFrame:frame]autorelease];
+            UILabel *label = [[UILabel alloc] initWithFrame:frame];
             label.textColor = TEXTCOLOUR;
             label.textAlignment = UITextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:15.0];
             
             CGRect frameSwitch = CGRectMake(215.0, 10.0, 94.0, 27.0);
-            UISwitch *switchEnabled = [[[UISwitch alloc] initWithFrame:frameSwitch]autorelease];
+            UISwitch *switchEnabled = [[UISwitch alloc] initWithFrame:frameSwitch];
             [switchEnabled addTarget:self action:@selector(switchMissedDose:) forControlEvents:UIControlEventValueChanged];
             
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")) {

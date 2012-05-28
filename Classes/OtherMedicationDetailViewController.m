@@ -39,13 +39,13 @@
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Add Other Drugs",nil);
     
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                            target:self action:@selector(cancel:)] autorelease];
+                                            target:self action:@selector(cancel:)];
      
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
-                                            target:self action:@selector(save:)] autorelease];	
+                                            target:self action:@selector(save:)];	
 	
 }
 
@@ -113,11 +113,11 @@
  */
 - (void)changeStartDate{
 	NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
-	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil]autorelease];
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
 	[actionSheet showInView:self.view];
 	
 	
-	UIDatePicker *datePicker = [[[UIDatePicker alloc] init] autorelease];
+	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = 101;
 	datePicker.datePickerMode = UIDatePickerModeDate;
 	[actionSheet addSubview:datePicker];
@@ -128,7 +128,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd MMM YY";
 	
 	NSString *timestamp = [formatter stringFromDate:datePicker.date];
@@ -172,7 +172,7 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (0 == indexPath.section) {
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"dd MMM YY";
         
         NSString *identifier = @"SetDateCell";
@@ -278,14 +278,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    self.dateCell = nil;
-    self.name = nil;
-    self.number = nil;
-    self.unit = nil;
-    self.startDate = nil;
-    [super dealloc];
-}
 
 
 @end

@@ -13,7 +13,7 @@
     IBOutlet UILabel *procLabel;
     IBOutlet UILabel *illnessLabel;
 }
-@property (nonatomic, retain) IBOutlet UILabel *dateLabel;
-@property (nonatomic, retain) IBOutlet UILabel *procLabel;
-@property (nonatomic, retain) IBOutlet UILabel *illnessLabel;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UILabel *procLabel;
+@property (nonatomic, strong) IBOutlet UILabel *illnessLabel;
 @end

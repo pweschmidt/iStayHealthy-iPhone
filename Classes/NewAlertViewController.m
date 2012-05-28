@@ -29,10 +29,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    self.notificationsArray = nil;
-    [super dealloc];
-}
 
 
 #pragma mark - View lifecycle
@@ -43,7 +39,7 @@
     NSLog(@"NewAlertViewController viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedAlertDetailViewController)]autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedAlertDetailViewController)];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
         [navBar addButtonWithImageName:@"alertsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
@@ -77,8 +73,6 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-    [navigationController release];
-    [newAlertView release];
 }
 /*
 loads the NewAlertEditDetailViewController to edit an existing alert
@@ -91,8 +85,6 @@ loads the NewAlertEditDetailViewController to edit an existing alert
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];	
-    [navigationController release];
-    [medEditController release];
     
 }
 
@@ -147,7 +139,7 @@ loads the NewAlertEditDetailViewController to edit an existing alert
         }
     }
 	UILocalNotification *notifcation = [self.notificationsArray objectAtIndex:indexPath.row];
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     [[cell title]setText:[dateFormatter stringFromDate:notifcation.fireDate]];
     [[cell text]setText:notifcation.alertBody];

@@ -40,31 +40,10 @@
 /**
  dealloc
  */
-- (void)dealloc {
-	[fetchedResultsController_ release];
-    self.masterRecord = nil;
-    self.allMissedMeds = nil;
-    self.allMedications = nil;
-    self.allOtherMeds = nil;
-    self.allContacts = nil;
-    self.allSideEffects = nil;
-    self.allProcedures = nil;
-    /*
-	[masterRecord release];
-    [allAlarms release];
-    [allMissedMeds release];
-    [allMedications release];
-    [allOtherMeds release];
-    [allContacts release];
-    [allSideEffects release];
-    [allProcedures release];
-     */
-    [super dealloc];
-}
 
 - (NSString *)csvString{
     NSMutableString *csv = [NSMutableString stringWithString:@"iStayHealthy\r"];
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     BOOL isFirst = YES;
     for (Results *results in allResults) {
@@ -201,50 +180,49 @@
     [root addAttribute:@"UID" andValue:masterUID];
     
     if (0 < [self.allResults count]) {
-        XMLElement *results = [[[XMLElement alloc]initWithName:@"Results"]autorelease];
+        XMLElement *results = [[XMLElement alloc]initWithName:@"Results"];
         [self addResults:results];
         [root addChild:results];
     }
     
     if (0 < [self.allMedications count]) {
-        XMLElement *medications = [[[XMLElement alloc]initWithName:@"Medications"]autorelease];
+        XMLElement *medications = [[XMLElement alloc]initWithName:@"Medications"];
         [self addMedications:medications];
         [root addChild:medications];
     }
     
     if (0 < [self.allMissedMeds count]) {
-        XMLElement *missedMedications = [[[XMLElement alloc]initWithName:@"MissedMedications"]autorelease];
+        XMLElement *missedMedications = [[XMLElement alloc]initWithName:@"MissedMedications"];
         [self addMissedMedications:missedMedications];
         [root addChild:missedMedications];
     }
         
     if (0 < [self.allOtherMeds count]) {
-        XMLElement *otherMedications = [[[XMLElement alloc]initWithName:@"OtherMedications"]autorelease];
+        XMLElement *otherMedications = [[XMLElement alloc]initWithName:@"OtherMedications"];
         [self addOtherMeds:otherMedications];        
         [root addChild:otherMedications];
     }
     
     if (0 < [self.allContacts count]) {
-        XMLElement *contacts = [[[XMLElement alloc]initWithName:@"ClinicalContacts"]autorelease];
+        XMLElement *contacts = [[XMLElement alloc]initWithName:@"ClinicalContacts"];
         [self addContacts:contacts];
         [root addChild:contacts];
     }
     
     if (0 < [self.allSideEffects count]) {
-        XMLElement *sideEffects = [[[XMLElement alloc]initWithName:@"HIVSideEffects"]autorelease];
+        XMLElement *sideEffects = [[XMLElement alloc]initWithName:@"HIVSideEffects"];
         [self addSideEffects:sideEffects];
         [root addChild:sideEffects];
     }
     
     if (0 < [self.allProcedures count]) {
-        XMLElement *procedures = [[[XMLElement alloc]initWithName:@"IllnessesAndProcedures"]autorelease];
+        XMLElement *procedures = [[XMLElement alloc]initWithName:@"IllnessesAndProcedures"];
         [self addProcedures:procedures];
         [root addChild:procedures];        
     }
 
     NSString *xmlString = [document xmlString];
     NSLog(@"XML string = %@",xmlString);
-    [document release];
 
     return [xmlString dataUsingEncoding:NSUTF8StringEncoding];
 }
@@ -255,8 +233,8 @@
 - (void) addResults:(XMLElement *)resultsParent
 {
     for (Results *results in allResults) {
-        XMLElement *resultElement = [[[XMLElement alloc]initWithName:@"Result"]autorelease];
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+        XMLElement *resultElement = [[XMLElement alloc]initWithName:@"Result"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
         [resultElement addAttribute:@"ResultsDate" andValue:[formatter stringFromDate:results.ResultsDate]];
         if (0.0 < [results.CD4 floatValue]) {
@@ -303,8 +281,8 @@
  */
 - (void) addMedications:(XMLElement *)medicationParent{
     for (Medication *medication in allMedications) {
-        XMLElement *medElement = [[[XMLElement alloc]initWithName:@"Medication"]autorelease];
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+        XMLElement *medElement = [[XMLElement alloc]initWithName:@"Medication"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
         [medElement addAttribute:@"StartDate" andValue:[formatter stringFromDate:medication.StartDate]];
         [medElement addAttribute:@"Name" andValue:medication.Name];
@@ -341,8 +319,8 @@
  */
 - (void) addMissedMedications:(XMLElement *)missedMedicationParent{
     for (MissedMedication *missedMed in allMissedMeds) {
-        XMLElement *missedMedElement = [[[XMLElement alloc]initWithName:@"MissedMedication"]autorelease];
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+        XMLElement *missedMedElement = [[XMLElement alloc]initWithName:@"MissedMedication"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
         [missedMedElement addAttribute:@"MissedDate" andValue:[formatter stringFromDate:missedMed.MissedDate]];
         [missedMedElement addAttribute:@"Name" andValue:missedMed.Name];
@@ -371,8 +349,8 @@
  */
 - (void) addOtherMeds:(XMLElement *)otherMedsParent{
     for (OtherMedication *otherMed in self.allOtherMeds) {
-        XMLElement *otherMedElement = [[[XMLElement alloc]initWithName:@"OtherMedication"]autorelease];
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+        XMLElement *otherMedElement = [[XMLElement alloc]initWithName:@"OtherMedication"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
         [otherMedElement addAttribute:@"StartDate" andValue:[formatter stringFromDate:otherMed.StartDate]];
         [otherMedElement addAttribute:@"Name" andValue:otherMed.Name];
@@ -416,7 +394,7 @@
 
 - (void) addContacts:(XMLElement *)contactsParent{
     for (Contacts *contacts in self.allContacts) {
-        XMLElement *contactElement = [[[XMLElement alloc]initWithName:@"Contacts"]autorelease];
+        XMLElement *contactElement = [[XMLElement alloc]initWithName:@"Contacts"];
         [contactElement addAttribute:@"ClinicName" andValue:contacts.ClinicName];
         [contactElement addAttribute:@"ClinicID" andValue:contacts.ClinicID];
         [contactElement addAttribute:@"ClinicEmailAddress" andValue:contacts.ClinicEmailAddress];
@@ -444,9 +422,9 @@
 
 - (void) addSideEffects:(XMLElement *)sideEffectsParent{
     for (SideEffects *effects in self.allSideEffects) {
-        XMLElement *sideEffect = [[[XMLElement alloc]initWithName:@"SideEffects"]autorelease];
+        XMLElement *sideEffect = [[XMLElement alloc]initWithName:@"SideEffects"];
         [sideEffect addAttribute:@"SideEffect" andValue:effects.SideEffect];
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
 
         [sideEffect addAttribute:@"SideEffectDate" andValue:[formatter stringFromDate:effects.SideEffectDate]];
@@ -472,9 +450,9 @@
 
 - (void) addProcedures:(XMLElement *)proceduresParent{
     for (Procedures *procedure in self.allProcedures) {
-        XMLElement *procElement = [[[XMLElement alloc]initWithName:@"Procedures"]autorelease];
+        XMLElement *procElement = [[XMLElement alloc]initWithName:@"Procedures"];
         [procElement addAttribute:@"Illness" andValue:procedure.Illness];
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
         [procElement addAttribute:@"Date" andValue:[formatter stringFromDate:procedure.Date]];
         [procElement addAttribute:@"Name" andValue:procedure.Name];
@@ -623,7 +601,7 @@
     NSManagedObjectContext *context = [masterRecord managedObjectContext];
     Results *result = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
     [masterRecord addResultsObject:result];
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     result.ResultsDate = [formatter dateFromString:[resultElement attributeValue:@"ResultsDate"]];
     if (nil != [resultElement elementUID]) {
@@ -638,7 +616,7 @@
     NSString *_vl = [resultElement attributeValue:@"ViralLoad"];
     NSString *_vlHepC = [resultElement attributeValue:@"HepCViralLoad"];
 
-    NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc]init]autorelease];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     if (nil != _cd4) {
         result.CD4 = [numberFormatter numberFromString:_cd4];
@@ -694,7 +672,7 @@
     NSManagedObjectContext *context = [masterRecord managedObjectContext];
     Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:@"Medication" inManagedObjectContext:context];
     [masterRecord addMedicationsObject:medication];
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     medication.StartDate = [formatter dateFromString:[medicationElement attributeValue:@"StartDate"]];
     if (nil != [medicationElement elementUID]) {
@@ -720,7 +698,7 @@
 	if (nil != _form) {
         medication.MedicationForm = _form;
     }
-    NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc]init]autorelease];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     if (nil != _dose) {
         medication.Dose = [numberFormatter numberFromString:_dose];
@@ -746,7 +724,7 @@
     NSManagedObjectContext *context = [masterRecord managedObjectContext];
     MissedMedication *missedMed = [NSEntityDescription insertNewObjectForEntityForName:@"MissedMedication" inManagedObjectContext:context];
     [masterRecord addMissedMedicationsObject:missedMed];
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     missedMed.MissedDate = [formatter dateFromString:[missedMedicationElement attributeValue:@"MissedDate"]];
     if (nil!= [missedMedicationElement elementUID]) {
@@ -781,7 +759,7 @@
     NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
     OtherMedication *otherMed = [NSEntityDescription insertNewObjectForEntityForName:@"OtherMedication" inManagedObjectContext:context];
     [self.masterRecord addOtherMedicationsObject:otherMed];
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     otherMed.StartDate = [formatter dateFromString:[otherMedicationsElement attributeValue:@"StartDate"]];
     if (nil != [otherMedicationsElement elementUID]) {
@@ -804,7 +782,7 @@
 	if (nil != _form) {
         otherMed.MedicationForm = _form;
     }
-    NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc]init]autorelease];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     if (nil != _dose) {
         otherMed.Dose = [numberFormatter numberFromString:_dose];
@@ -880,7 +858,7 @@
 
     SideEffects *effect = [NSEntityDescription insertNewObjectForEntityForName:@"SideEffects" inManagedObjectContext:context];
     [self.masterRecord addSideeffectsObject:effect];
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     if (nil != [sideEffectsElement elementUID]) {
         effect.UID = [sideEffectsElement elementUID];
@@ -922,7 +900,7 @@
     NSString *_illness = [proceduresElement attributeValue:@"Illness"];
     NSString *_name = [proceduresElement attributeValue:@"Name"];
 
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init]autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     procedures.Date = [formatter dateFromString:[proceduresElement attributeValue:@"Date"]];
     
@@ -957,7 +935,6 @@
 							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
 							  otherButtonTitles:nil];
 		[alert show];
-        [alert release];
 	}
     NSArray *records = [self.fetchedResultsController fetchedObjects];
 	self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
@@ -1031,9 +1008,6 @@
 	tmpFetchController.delegate = self;
 	fetchedResultsController_ = tmpFetchController;
 	
-	[request release];
-    [allDescriptors release];
-    [sortDescriptor release];
 	return fetchedResultsController_;
 	
 }	

@@ -22,20 +22,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-	[fetchedResultsController_ release];
-	[masterRecord release];
-    self.passwordSwitch = nil;
-    self.passwordField = nil;
-    self.passConfirmField = nil;
-    self.firstPassword = nil;
-    self.secondPassword = nil;
-    self.firstRightView = nil;
-    self.firstWrongView = nil;
-    self.secondRightView = nil;
-    self.secondWrongView = nil;
-    [super dealloc];
-}
 
 
 - (void)didReceiveMemoryWarning
@@ -52,9 +38,9 @@
 {
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Password", @"Password");
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                              target:self action:@selector(done:)] autorelease];
+                                              target:self action:@selector(done:)];
 
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error]) {
@@ -65,7 +51,6 @@
 							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
 							  otherButtonTitles:nil];
 		[alert show];
-        [alert release];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
 	self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
@@ -100,7 +85,7 @@
         if (![context save:&error]) {
             abort();
         }    
-        UIAlertView *isDone = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil]autorelease];
+        UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [isDone show];
     }
     else{
@@ -232,18 +217,18 @@
         NSString *identifier = @"UITableViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 112.0, 22.0);
-        UILabel *label = [[[UILabel alloc] initWithFrame:frame]autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:frame];
         label.textColor = TEXTCOLOUR;
         label.textAlignment = UITextAlignmentLeft;
         label.font = [UIFont systemFontOfSize:15.0];
 
         CGRect frameSwitch = CGRectMake(215.0, 10.0, 94.0, 27.0);
-        UISwitch *switchEnabled = [[[UISwitch alloc] initWithFrame:frameSwitch]autorelease];
+        UISwitch *switchEnabled = [[UISwitch alloc] initWithFrame:frameSwitch];
         [switchEnabled addTarget:self action:@selector(switchPasswordEnabling:) forControlEvents:UIControlEventValueChanged];
         
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")) {
@@ -264,12 +249,12 @@
                 NSString *identifier = @"firstPasswordCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
                 if (cell == nil) {
-                    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
                 }
                 cell.backgroundColor = [UIColor whiteColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 112.0, 22.0);
-                UILabel *label = [[[UILabel alloc] initWithFrame:frame]autorelease];
+                UILabel *label = [[UILabel alloc] initWithFrame:frame];
                 label.textColor = TEXTCOLOUR;
                 label.textAlignment = UITextAlignmentLeft;
                 label.font = [UIFont systemFontOfSize:15.0];
@@ -277,7 +262,7 @@
                 [cell addSubview:label];
                 
                 CGRect textframe = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+14.0, 120.0, 22.0);
-                UITextField *field = [[[UITextField alloc] initWithFrame:textframe]autorelease];
+                UITextField *field = [[UITextField alloc] initWithFrame:textframe];
                 field.borderStyle = UITextBorderStyleNone;
                 field.textColor = [UIColor lightGrayColor];
                 field.textAlignment = UITextAlignmentLeft;
@@ -298,14 +283,14 @@
                 
                 
                 CGRect rightFrame = CGRectMake(CGRectGetMinX(cell.bounds) + 270.0, CGRectGetMinY(cell.bounds) + 14.0, 17.0, 17.0);
-                UIImageView *firstView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right.png"]]autorelease];
+                UIImageView *firstView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right.png"]];
                 [firstView setFrame:rightFrame];
                 [firstView setBackgroundColor:[UIColor clearColor]];
                 self.firstRightView = firstView;
                 self.firstRightView.hidden = YES;
                 [cell addSubview:firstView];
 
-                UIImageView *secondView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong.png"]]autorelease];
+                UIImageView *secondView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong.png"]];
                 [secondView setFrame:rightFrame];
                 [secondView setBackgroundColor:[UIColor clearColor]];
                 self.firstWrongView = secondView;
@@ -319,12 +304,12 @@
                 NSString *identifier = @"secondPasswordCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
                 if (cell == nil) {
-                    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
                 }
                 cell.backgroundColor = [UIColor whiteColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 112.0, 22.0);
-                UILabel *label = [[[UILabel alloc] initWithFrame:frame]autorelease];
+                UILabel *label = [[UILabel alloc] initWithFrame:frame];
                 label.textColor = TEXTCOLOUR;
                 label.textAlignment = UITextAlignmentLeft;
                 label.font = [UIFont systemFontOfSize:15.0];
@@ -334,7 +319,7 @@
                 [cell addSubview:label];
                 
                 CGRect textframe = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+14.0, 120.0, 22.0);
-                UITextField *field = [[[UITextField alloc] initWithFrame:textframe]autorelease];
+                UITextField *field = [[UITextField alloc] initWithFrame:textframe];
                 field.borderStyle = UITextBorderStyleNone;
                 field.textColor = [UIColor lightGrayColor];
                 field.textAlignment = UITextAlignmentLeft;
@@ -354,14 +339,14 @@
                 self.passConfirmField.tag = 20;
 
                 CGRect rightFrame = CGRectMake(CGRectGetMinX(cell.bounds) + 270.0, CGRectGetMinY(cell.bounds) + 14.0, 17.0, 17.0);
-                UIImageView *firstView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right.png"]]autorelease];
+                UIImageView *firstView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right.png"]];
                 [firstView setFrame:rightFrame];
                 [firstView setBackgroundColor:[UIColor clearColor]];
                 self.secondRightView = firstView;
                 self.secondRightView.hidden = YES;
                 [cell addSubview:firstView];
                 
-                UIImageView *secondView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong.png"]]autorelease];
+                UIImageView *secondView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong.png"]];
                 [secondView setFrame:rightFrame];
                 [secondView setBackgroundColor:[UIColor clearColor]];
                 self.secondWrongView = secondView;
@@ -417,9 +402,6 @@
 	tmpFetchController.delegate = self;
 	fetchedResultsController_ = tmpFetchController;
 	
-	[request release];
-    [allDescriptors release];
-    [sortDescriptor release];
 	return fetchedResultsController_;
 	
 }	

@@ -40,7 +40,6 @@
 		self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         ChartEvents *tmpEvents = [[ChartEvents alloc]init];
         self.events = tmpEvents;
-        [tmpEvents release];
     }
     return self;
 }
@@ -60,7 +59,6 @@
     [self.view addSubview:chart];
     self.chartView = chart;
     [self.chartView setEvents:self.events];
-    [chart release];
     
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error]) {
@@ -71,7 +69,6 @@
 							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
 							  otherButtonTitles:nil];
 		[alert show];
-        [alert release];
 	}
 }
 
@@ -199,9 +196,6 @@
 	tmpFetchController.delegate = self;
 	_fetchedResultsController = tmpFetchController;
 	
-	[request release];
-    [allDescriptors release];
-    [sortDescriptor release];
 	return _fetchedResultsController;
 	
 }	
@@ -242,17 +236,6 @@
 /**
  dealloc
  */
-- (void)dealloc {
-    self.allMeds = nil;
-    self.allResults = nil;
-    self.allMissedMeds = nil;
-    self.chartView = nil;
-    self.events = nil;
-    self.masterRecord = nil;
-//    self.fetchedResultsController = nil;
-	[_fetchedResultsController release];
-    [super dealloc];
-}
 
 
 @end

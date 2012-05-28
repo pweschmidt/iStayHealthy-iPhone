@@ -12,11 +12,11 @@
 @interface ResultValueCell : UITableViewCell<UITextFieldDelegate>{
     IBOutlet UILabel *title;
     IBOutlet UITextField *valueField;
-    id<ResultValueCellDelegate>_delegate;
+    id<ResultValueCellDelegate>__unsafe_unretained _delegate;
 }
-@property (nonatomic, retain) IBOutlet UILabel *title;
-@property (nonatomic, retain) IBOutlet UITextField *valueField;
-@property (nonatomic, assign) id<ResultValueCellDelegate>_delegate;
+@property (nonatomic, strong) IBOutlet UILabel *title;
+@property (nonatomic, strong) IBOutlet UITextField *valueField;
+@property (nonatomic, unsafe_unretained) id<ResultValueCellDelegate>_delegate;
 - (void)setDelegate:(id)viewControllerDelegate;
 @end
 

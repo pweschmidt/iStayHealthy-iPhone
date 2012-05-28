@@ -13,18 +13,18 @@
 @private
 	SetDateCell			*changeDateCell;
 	NSDate *changeDate;
-    Procedures *procedures;
-    iStayHealthyRecord *record;
+    Procedures *__unsafe_unretained procedures;
+    iStayHealthyRecord *__unsafe_unretained record;
     NSString *name;
     NSString *illness;
     
 }
-@property (nonatomic, retain) SetDateCell *changeDateCell;
-@property (nonatomic, retain) NSDate *changeDate;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *illness;
-@property (nonatomic, assign) Procedures *procedures;
-@property (nonatomic, assign) iStayHealthyRecord *record;
+@property (nonatomic, strong) SetDateCell *changeDateCell;
+@property (nonatomic, strong) NSDate *changeDate;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *illness;
+@property (nonatomic, unsafe_unretained) Procedures *procedures;
+@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
 - (IBAction) save:					(id) sender;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;

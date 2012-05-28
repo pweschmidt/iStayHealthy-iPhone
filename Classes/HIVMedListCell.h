@@ -14,9 +14,9 @@
     IBOutlet UILabel *name;
     IBOutlet UILabel *content;
 }
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UILabel *date;
-@property (nonatomic, retain) IBOutlet UILabel *name;
-@property (nonatomic, retain) IBOutlet UILabel *content;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *date;
+@property (nonatomic, strong) IBOutlet UILabel *name;
+@property (nonatomic, strong) IBOutlet UILabel *content;
 
 @end

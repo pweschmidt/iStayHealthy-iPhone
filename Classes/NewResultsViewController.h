@@ -13,5 +13,5 @@
 }
 - (void)loadResultDetailViewController;
 - (void)loadResultChangeViewController:(int)row;
-
+- (void)loadSetUpViewController;
 @end

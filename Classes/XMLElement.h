@@ -15,10 +15,10 @@
     NSMutableArray *childElements;
     int nodeLevel;    
 }
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *value;
-@property (nonatomic, retain) NSMutableArray *attributes;
-@property (nonatomic, retain) NSMutableArray *childElements;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *value;
+@property (nonatomic, strong) NSMutableArray *attributes;
+@property (nonatomic, strong) NSMutableArray *childElements;
 - (id)initWithName:(NSString *)elementName;
 - (void)setNodeLevel:(int)level;
 - (void)addChild:(XMLElement *)element;

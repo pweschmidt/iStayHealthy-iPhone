@@ -31,10 +31,6 @@
     }
     return self;
 }
-- (void)dealloc{
-    self.missedMeds = nil;
-    [super dealloc];
-}
 
 - (IBAction) done:				(id) sender{
     [self dismissModalViewControllerAnimated:YES];
@@ -54,9 +50,9 @@
 {
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Missed", @"Missed");
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                              target:self action:@selector(done:)] autorelease];
+                                              target:self action:@selector(done:)];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
@@ -111,7 +107,7 @@
         }  
     }
     MissedMedication *missed = (MissedMedication *)[self.missedMeds objectAtIndex:indexPath.row];
-	NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
 	formatter.dateFormat = @"dd MMM YYYY";
     [[cell effect]setText:[formatter stringFromDate:missed.MissedDate]];
     [[cell drug]setText:missed.Name];

@@ -10,7 +10,7 @@
 @class iStayHealthyRecord;
 
 @interface ToolsTableViewController : UITableViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *fetchedResultsController_;
+	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
 	iStayHealthyRecord *masterRecord;
     BOOL isPasswordEnabled;
     BOOL hasPassword;
@@ -27,21 +27,21 @@
     BOOL secondIsSet;
     BOOL isConsistent;
 }
-@property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) iStayHealthyRecord *masterRecord;
+@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) iStayHealthyRecord *masterRecord;
 @property BOOL isPasswordEnabled;
 @property BOOL firstIsSet;
 @property BOOL secondIsSet;
 @property BOOL isConsistent;
-@property (nonatomic, retain) NSString *firstPassword;
-@property (nonatomic, retain) NSString *secondPassword;
-@property (nonatomic, retain) UISwitch *passwordSwitch;
-@property (nonatomic, retain) UITextField *passwordField;
-@property (nonatomic, retain) UITextField *passConfirmField;
-@property (nonatomic, retain) UIImageView *firstRightView;
-@property (nonatomic, retain) UIImageView *firstWrongView;
-@property (nonatomic, retain) UIImageView *secondRightView;
-@property (nonatomic, retain) UIImageView *secondWrongView;
+@property (nonatomic, strong) NSString *firstPassword;
+@property (nonatomic, strong) NSString *secondPassword;
+@property (nonatomic, strong) UISwitch *passwordSwitch;
+@property (nonatomic, strong) UITextField *passwordField;
+@property (nonatomic, strong) UITextField *passConfirmField;
+@property (nonatomic, strong) UIImageView *firstRightView;
+@property (nonatomic, strong) UIImageView *firstWrongView;
+@property (nonatomic, strong) UIImageView *secondRightView;
+@property (nonatomic, strong) UIImageView *secondWrongView;
 - (IBAction) done:				(id) sender;
 - (IBAction) switchPasswordEnabling:(id)sender;
 

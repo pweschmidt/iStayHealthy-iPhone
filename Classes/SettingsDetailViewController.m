@@ -40,9 +40,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] 
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                              target:self action:@selector(done:)] autorelease];
+                                              target:self action:@selector(done:)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
@@ -71,8 +71,6 @@
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
-    [webViewController release];
-    [navigationController release];    
     
 }
 
@@ -97,7 +95,6 @@
     DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc]
                                                       initWithNibName:@"DropBoxBackupViewController" bundle:nil];
     [self.navigationController pushViewController:dropBoxController animated:YES];
-    [dropBoxController release];
 }
 
 /**
@@ -115,17 +112,16 @@
 #endif
     }
     NSString *tmpXMLFile = [NSTemporaryDirectory() stringByAppendingFormat:@"iStayHealthy.isth"];
-    DataLoader *loader = [[[DataLoader alloc]init] autorelease];
+    DataLoader *loader = [[DataLoader alloc]init];
     [loader getSQLData];
     NSString *msgBody = [loader csvString];
     NSData *xmlData = [loader xmlData];
 	NSError *error = nil;
     [xmlData writeToFile:tmpXMLFile options:NSDataWritingAtomic error:&error];
 	if (error != nil) {
-		[[[[UIAlertView alloc]
+		[[[UIAlertView alloc]
 		   initWithTitle:@"Error writing XML data to tmp directory" message:[error localizedDescription] 
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		  autorelease]
 		 show];
 	}
  
@@ -137,7 +133,6 @@
         [mailController setMessageBody:msgBody isHTML:NO];
         [mailController addAttachmentData:xmlData mimeType:@"text/xml" fileName:tmpXMLFile];
         [self presentModalViewController:mailController animated:YES];
-        [mailController release];        
     }
     
 }
@@ -167,7 +162,6 @@
     [mailController setToRecipients:toRecipient];
     [mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
     [self presentModalViewController:mailController animated:YES];
-    [mailController release];
 }
 
 /**
@@ -181,18 +175,23 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
+        {
 //            resultText = @"Result: canceled";
 #ifdef APPDEBUG
             NSLog(@"Result: canceled");
 #endif
             break;
+        }
         case MFMailComposeResultSent:
+        {
 //            resultText = @"Result: sent";
 #ifdef APPDEBUG
             NSLog(@"Result: sent");
 #endif
             break;
+        }
         case MFMailComposeResultFailed:
+        {
             resultText = @"Result: failed";
 #ifdef APPDEBUG
             NSLog(@"Result: failed");
@@ -202,14 +201,16 @@
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
             [alertView show];
-            [alertView release];
             break;
+        }
         case MFMailComposeResultSaved:
+        {
 //            resultText = @"Result: saved";
 #ifdef APPDEBUG
             NSLog(@"Result: saved");
 #endif
             break;
+        }
     }
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -222,9 +223,9 @@
  */
 - (void)startPasswordController{
     ToolsTableViewController *toolsController =
-    [[[ToolsTableViewController alloc] initWithNibName:@"ToolsTableViewController" bundle:nil]autorelease];
-    UINavigationController *navigationController = [[[UINavigationController alloc]
-                                                     initWithRootViewController:toolsController]autorelease];
+    [[ToolsTableViewController alloc] initWithNibName:@"ToolsTableViewController" bundle:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc]
+                                                     initWithRootViewController:toolsController];
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];    

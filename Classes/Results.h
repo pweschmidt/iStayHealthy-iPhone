@@ -13,25 +13,25 @@
 
 @interface Results : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * ViralLoad;
-@property (nonatomic, retain) NSNumber * Systole;
-@property (nonatomic, retain) NSNumber * HDL;
-@property (nonatomic, retain) NSNumber * LDL;
-@property (nonatomic, retain) NSNumber * Weight;
-@property (nonatomic, retain) NSString * UID;
-@property (nonatomic, retain) NSNumber * OxygenLevel;
-@property (nonatomic, retain) NSNumber * CD4;
-@property (nonatomic, retain) NSNumber * Diastole;
-@property (nonatomic, retain) NSNumber * HeartRate;
-@property (nonatomic, retain) NSDate * ResultsDate;
-@property (nonatomic, retain) NSNumber * CD4Percent;
-@property (nonatomic, retain) NSNumber * TotalCholesterol;
-@property (nonatomic, retain) NSNumber * Triglyceride;
-@property (nonatomic, retain) NSNumber * Glucose;
-@property (nonatomic, retain) NSNumber * HepCViralLoad;
-@property (nonatomic, retain) NSNumber * Hemoglobulin;
-@property (nonatomic, retain) NSNumber * WhiteBloodCellCount;
-@property (nonatomic, retain) NSNumber * PlateletCount;
-@property (nonatomic, retain) iStayHealthyRecord *record;
+@property (nonatomic, strong) NSNumber * ViralLoad;
+@property (nonatomic, strong) NSNumber * Systole;
+@property (nonatomic, strong) NSNumber * HDL;
+@property (nonatomic, strong) NSNumber * LDL;
+@property (nonatomic, strong) NSNumber * Weight;
+@property (nonatomic, strong) NSString * UID;
+@property (nonatomic, strong) NSNumber * OxygenLevel;
+@property (nonatomic, strong) NSNumber * CD4;
+@property (nonatomic, strong) NSNumber * Diastole;
+@property (nonatomic, strong) NSNumber * HeartRate;
+@property (nonatomic, strong) NSDate * ResultsDate;
+@property (nonatomic, strong) NSNumber * CD4Percent;
+@property (nonatomic, strong) NSNumber * TotalCholesterol;
+@property (nonatomic, strong) NSNumber * Triglyceride;
+@property (nonatomic, strong) NSNumber * Glucose;
+@property (nonatomic, strong) NSNumber * HepCViralLoad;
+@property (nonatomic, strong) NSNumber * Hemoglobulin;
+@property (nonatomic, strong) NSNumber * WhiteBloodCellCount;
+@property (nonatomic, strong) NSNumber * PlateletCount;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end
