@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class iStayHealthyTabBarController;
 @interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
+	NSFetchedResultsController * fetchedResultsController_;
     iStayHealthyTabBarController *tabBarController;
     IBOutlet UITextField *passwordField;
     IBOutlet UILabel *label;
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
-@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
 - (void)loadTabController;
 - (IBAction)testLoad:(id)sender;

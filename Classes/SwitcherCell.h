@@ -12,11 +12,11 @@
 @interface SwitcherCell : UITableViewCell{
     IBOutlet UILabel *label;
     IBOutlet UISwitch *switcher;
-    id<SwitcherCellProtocol>__unsafe_unretained _delegate;
+    id<SwitcherCellProtocol>switcherCellDelegate;
 }
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UISwitch *switcher;
-@property (nonatomic, unsafe_unretained) id<SwitcherCellProtocol>_delegate;
+@property (nonatomic, weak) id<SwitcherCellProtocol>switcherCellDelegate;
 - (void)setDelegate:(id)viewControllerDelegate;
 - (IBAction)valueChanged:(id)sender;
 @end

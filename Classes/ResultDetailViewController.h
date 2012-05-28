@@ -14,14 +14,14 @@
 @private
 	NSDate *resultsDate;
     SetDateCell *setDateCell;
-	iStayHealthyRecord *__unsafe_unretained record;
+	iStayHealthyRecord *record;
     NSNumber *cd4;
     NSNumber *cd4Percent;
     NSNumber *vlHIV;
     NSNumber *vlHepC;
 }
 @property (nonatomic, strong) NSDate *resultsDate;
-@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) SetDateCell *setDateCell;
 @property (nonatomic, strong) NSNumber *cd4;
 @property (nonatomic, strong) NSNumber *cd4Percent;

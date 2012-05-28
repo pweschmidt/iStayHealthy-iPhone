@@ -10,7 +10,7 @@
 @class iStayHealthyRecord;
 
 @interface ToolsTableViewController : UITableViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
+	NSFetchedResultsController *fetchedResultsController_;
 	iStayHealthyRecord *masterRecord;
     BOOL isPasswordEnabled;
     BOOL hasPassword;
@@ -27,8 +27,8 @@
     BOOL secondIsSet;
     BOOL isConsistent;
 }
-@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic) iStayHealthyRecord *masterRecord;
+@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property BOOL isPasswordEnabled;
 @property BOOL firstIsSet;
 @property BOOL secondIsSet;

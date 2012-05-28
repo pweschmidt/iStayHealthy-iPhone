@@ -20,7 +20,7 @@
 - (void)restore;
 - (void)createIStayHealthyFolder;
 - (void)copyOldFileToNew;
-@property (unsafe_unretained, unsafe_unretained, nonatomic, readonly) DBRestClient* restClient;
+@property (nonatomic, strong, readonly) DBRestClient* restClient;
 @end
 
 @implementation DropBoxBackupViewController

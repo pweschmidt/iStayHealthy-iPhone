@@ -9,10 +9,11 @@
 #import "ClinicAddressCell.h"
 
 @implementation ClinicAddressCell
-@synthesize title, valueField, _delegate;
+@synthesize title, valueField;
+@synthesize clinicAddressCellDelegate=_clinicAddressCellDelegate;
 
 - (void)setDelegate:(id)viewControllerDelegate{
-    self._delegate = viewControllerDelegate;
+    self.clinicAddressCellDelegate = viewControllerDelegate;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -34,7 +35,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    [self._delegate setValueString:textField.text withTag:self.tag];
+    [self.clinicAddressCellDelegate setValueString:textField.text withTag:self.tag];
 }
 
 

@@ -9,7 +9,8 @@
 #import "GeneralButtonCell.h"
 
 @implementation GeneralButtonCell
-@synthesize medButton, procButton, clinicButton, _delegate;
+@synthesize medButton, procButton, clinicButton;
+@synthesize generalButtonCellDelegate=_generalButtonCellDelegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -21,19 +22,19 @@
 }
 
 - (void)setDelegate:(id)viewControllerDelegate{
-    self._delegate = viewControllerDelegate;
+    self.delegate = viewControllerDelegate;
 }
 
 - (IBAction)selectMed:(id)sender{
-    [self._delegate loadOtherMedicationDetailViewController];
+    [self.generalButtonCellDelegate loadOtherMedicationDetailViewController];
 }
 
 - (IBAction)selectProcedure:(id)sender{
-    [self._delegate loadProcedureAddViewController];
+    [self.generalButtonCellDelegate loadProcedureAddViewController];
 }
 
 - (IBAction)selectClinic:(id)sender{
-    [self._delegate loadClinicAddViewController];
+    [self.generalButtonCellDelegate loadClinicAddViewController];
 }
 
 

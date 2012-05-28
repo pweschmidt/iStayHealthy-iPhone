@@ -23,9 +23,9 @@
 	AVAudioPlayer *player;
     NSString *alertText;
     NSString *soundName;
-	UILocalNotification *__unsafe_unretained previousNotification;	    
+	UILocalNotification *previousNotification;	    
 }
-@property (nonatomic, unsafe_unretained) UILocalNotification *previousNotification;
+@property (nonatomic, strong) UILocalNotification *previousNotification;
 @property BOOL isFirstLoad;
 @property int firstSelectedRow;
 @property (nonatomic, strong) NSString *alertText;

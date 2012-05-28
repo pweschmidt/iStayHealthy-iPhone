@@ -10,7 +10,7 @@
 
 @implementation ResultValueCell
 @synthesize title,valueField;
-@synthesize _delegate;
+@synthesize resultValueDelegate=_resultValueDelegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,7 +24,7 @@
     return self;
 }
 - (void)setDelegate:(id)viewControllerDelegate{
-    self._delegate = viewControllerDelegate;
+    self.resultValueDelegate = viewControllerDelegate;
 }
 
 
@@ -38,7 +38,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    [self._delegate setValueString:textField.text withTag:self.tag];
+    [self.resultValueDelegate setValueString:textField.text withTag:self.tag];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

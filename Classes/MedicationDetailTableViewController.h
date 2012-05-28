@@ -23,7 +23,7 @@
 	NSMutableDictionary     *stateDictionary;
     BOOL                    isInitialLoad;
 	NSDate *startDate;
-	iStayHealthyRecord *__unsafe_unretained record;
+	iStayHealthyRecord *record;
 }
 @property (nonatomic, strong) NSArray *combiTablets;
 @property (nonatomic, strong) NSArray *proteaseInhibitors;
@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSArray *entryInhibitors;
 @property (nonatomic, strong) NSMutableDictionary *stateDictionary;
 @property (nonatomic, strong) NSDate *startDate;
-@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) SetDateCell *dateCell;
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;

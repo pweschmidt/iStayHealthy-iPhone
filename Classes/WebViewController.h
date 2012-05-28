@@ -13,9 +13,9 @@
     IBOutlet UIWebView *webView;
     IBOutlet UIToolbar *toolBar;
     NSURL *url;
-    NSString *__unsafe_unretained webNavtitle;
+    NSString *webNavtitle;
 }
-@property (nonatomic, unsafe_unretained) NSString *webNavtitle;
+@property (nonatomic, strong) NSString *webNavtitle;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolBar;

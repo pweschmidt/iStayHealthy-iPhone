@@ -13,9 +13,9 @@
 @interface ResultChangeViewController : UITableViewController <UIAlertViewDelegate, ResultValueCellDelegate, UIActionSheetDelegate>{
 @private
 	NSDate *resultsDate;
-    Results                 *__unsafe_unretained results;
+    Results                 *results;
     SetDateCell *changeDateCell;    
-    iStayHealthyRecord *__unsafe_unretained record;
+    iStayHealthyRecord *record;
     NSNumber *cd4;
     NSNumber *cd4Percent;
     NSNumber *vlHIV;
@@ -23,8 +23,8 @@
 }
 @property (nonatomic, strong) NSDate *resultsDate;
 @property (nonatomic, strong) SetDateCell *changeDateCell;
-@property (nonatomic, unsafe_unretained) Results *results;
-@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) Results *results;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) NSNumber *cd4;
 @property (nonatomic, strong) NSNumber *cd4Percent;
 @property (nonatomic, strong) NSNumber *vlHIV;

@@ -9,7 +9,8 @@
 #import "RepeatCell.h"
 
 @implementation RepeatCell
-@synthesize segmentedControl,_delegate;
+@synthesize segmentedControl;
+@synthesize repeatCellDelegate=_repeatCellDelegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -21,10 +22,10 @@
 }
 
 - (void)setDelegate:(id)viewControllerDelegate{
-    self._delegate = viewControllerDelegate;    
+    self.repeatCellDelegate = viewControllerDelegate;    
 }
 - (IBAction)toggleRepeats:(id)sender{
-    [self._delegate setRepeats:self.segmentedControl.selectedSegmentIndex + 1];
+    [self.repeatCellDelegate setRepeats:self.segmentedControl.selectedSegmentIndex + 1];
 }
 
 

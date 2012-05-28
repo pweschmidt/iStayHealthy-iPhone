@@ -12,8 +12,8 @@
 @class iStayHealthyRecord, Contacts;
 @interface ClinicAddTableViewController : UITableViewController<ClinicAddressCellDelegate, UIAlertViewDelegate>{
 @private
-	iStayHealthyRecord *__unsafe_unretained record;
-    Contacts *__unsafe_unretained contacts;    
+	iStayHealthyRecord *record;
+    Contacts * contacts;    
     NSString *name;
     NSString *idString;
     NSString *www;
@@ -23,8 +23,8 @@
     BOOL isInChangeMode;
 }
 @property BOOL isInChangeMode;
-@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
-@property (nonatomic, unsafe_unretained) Contacts *contacts;
+@property (nonatomic, strong) iStayHealthyRecord *record;
+@property (nonatomic, strong) Contacts *contacts;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *idString;
 @property (nonatomic, strong) NSString *www;

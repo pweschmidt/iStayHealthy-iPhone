@@ -18,7 +18,7 @@
 @end
 
 @implementation iStayHealthyAppDelegate
-@synthesize window, tabBarController, passController, cloudURL;
+@synthesize window, tabBarController, passController;
 @synthesize fetchedResultsController = fetchedResultsController_;
 NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
@@ -154,10 +154,10 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         return;
     }    
     
-    self.cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
-    if (self.cloudURL) {
+    cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
+    if (cloudURL) {
 #ifdef APPDEBUG
-        NSLog(@"iCloud is available with the URL being %@",self.cloudURL);
+        NSLog(@"iCloud is available with the URL being %@",cloudURL);
 #endif
         iCloudIsAvailable = TRUE;
     }
@@ -390,7 +390,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             // this needs to match the entitlements and provisioning profile
  //           NSURL *cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
             NSDictionary *cloudOptions = nil;
-            if (self.cloudURL) {//this is just a precaution. We should have iCloud enabled already
+            if (cloudURL) {//this is just a precaution. We should have iCloud enabled already
                 NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"data"];
                 
                 NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];

@@ -9,8 +9,8 @@
 #import "SwitcherCell.h"
 
 @implementation SwitcherCell
-@synthesize switcher, _delegate, label;
-
+@synthesize switcher, label;
+@synthesize switcherCellDelegate=_switcherCellDelegate;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -21,11 +21,11 @@
 }
 
 - (void)setDelegate:(id)viewControllerDelegate{
-    self._delegate = viewControllerDelegate;    
+    self.switcherCellDelegate = viewControllerDelegate;    
 }
 
 - (IBAction)valueChanged:(id)sender{
-    [self._delegate setMissed:self.switcher.isOn];
+    [self.switcherCellDelegate setMissed:self.switcher.isOn];
 }
 
 

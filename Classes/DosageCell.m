@@ -27,16 +27,16 @@
 - (IBAction)setUnit:(id)sender{
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
-            [super._delegate setUnitString:@"[g]"];
+            [super.clinicAddressCellDelegate setUnitString:@"[g]"];
             break;
         case 1:
-            [super._delegate setUnitString:@"[mg]"];
+            [super.clinicAddressCellDelegate setUnitString:@"[mg]"];
             break;
         case 2:
-            [super._delegate setUnitString:@"[ml]"];
+            [super.clinicAddressCellDelegate setUnitString:@"[ml]"];
             break;
         case 3:
-            [super._delegate setUnitString:@""];
+            [super.clinicAddressCellDelegate setUnitString:@""];
             break;
     }
 }

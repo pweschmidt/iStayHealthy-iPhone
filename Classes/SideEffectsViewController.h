@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 @class iStayHealthyRecord;
 @interface SideEffectsViewController : UITableViewController{
-	iStayHealthyRecord *__unsafe_unretained record;    
+	iStayHealthyRecord *record;    
     NSMutableArray *sideeffects;
 }
-@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) NSMutableArray *sideeffects;
 - (IBAction) done:					(id) sender;
 - (id)initWithRecord:(iStayHealthyRecord *)masterrecord;

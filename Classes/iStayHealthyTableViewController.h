@@ -14,7 +14,7 @@
 @class StatusViewControllerLandscape;
 @interface iStayHealthyTableViewController : UITableViewController <UIAlertViewDelegate, NSFetchedResultsControllerDelegate>{
 	BOOL isShowingLandscapeView;
-	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
+	NSFetchedResultsController *fetchedResultsController_;
 	iStayHealthyRecord *masterRecord;
 	StatusViewControllerLandscape *landscapeController;
     IBOutlet UIView *headerView;
@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSArray *allContacts;
 @property (nonatomic, strong) NSArray *allPills;
 @property (nonatomic, strong) NSArray *allProcedures;
-@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) StatusViewControllerLandscape *landscapeController;
 @property (nonatomic, strong) IBOutlet UIView *headerView;

@@ -16,7 +16,7 @@
 #import "SetDateCell.h"
 
 @implementation MedicationChangeTableViewController
-@synthesize date, record, selectedMedication, isMissed, effectString,effectIsSet, dateCell, medName;
+@synthesize date, record, selectedMedication, isMissed, effectString,effectIsSet, dateCell;
 @synthesize missedDate, effectDate, state, missedSwitchCell, effectSwitchCell;
 @synthesize missedDateCell, effectDateCell, effectsCell;
 @synthesize effectSwitch, missedSwitch, dateChanged;
@@ -36,7 +36,7 @@
             self.date = [NSDate date];
         }
         self.effectString = @"";
-        self.medName = medication.Name;
+        medName = medication.Name;
         self.missedDate = [NSDate date];
         self.effectDate = [NSDate date];
         self.state = CHANGEDATE;
@@ -59,7 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = self.medName;
+    self.navigationItem.title = medName;
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
                                             target:self action:@selector(showAlertView:)];

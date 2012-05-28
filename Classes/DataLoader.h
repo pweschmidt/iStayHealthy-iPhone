@@ -13,7 +13,7 @@
 @class iStayHealthyRecord, XMLElement;
 
 @interface DataLoader : NSObject <NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *__unsafe_unretained fetchedResultsController_;
+	NSFetchedResultsController *fetchedResultsController_;
 	iStayHealthyRecord *masterRecord;
     NSArray *allResults;
     NSArray *allMedications;
@@ -23,7 +23,7 @@
     NSArray *allSideEffects;
     NSArray *allProcedures;
 }
-@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) NSArray *allResults;
 @property (nonatomic, strong) NSArray *allMedications;

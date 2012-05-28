@@ -29,7 +29,7 @@
 @property (nonatomic, strong) HealthChartsViewLandscape *chartView;
 @property (nonatomic, strong) NSMutableArray *allResults;
 @property (nonatomic, strong) NSMutableArray *allMeds;
-@property (unsafe_unretained, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) NSMutableArray *allMissedMeds;
 @property (nonatomic, strong) ChartEvents *events;

@@ -28,12 +28,12 @@
     if (self.switchControl.isOn) {
         super.valueField.text = NSLocalizedString(@"undetectable", @"undetectable");
         super.valueField.enabled = NO;
-        [super._delegate setValueString:NSLocalizedString(@"undetectable", @"undetectable") withTag:self.tag];
+        [super.resultValueDelegate setValueString:NSLocalizedString(@"undetectable", @"undetectable") withTag:self.tag];
     }
     else{
         super.valueField.text = @"";
         super.valueField.enabled = YES;
-        [super._delegate setValueString:@"" withTag:self.tag];        
+        [super.resultValueDelegate setValueString:@"" withTag:self.tag];        
     }
 }
 

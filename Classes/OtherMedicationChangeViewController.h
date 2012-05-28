@@ -11,14 +11,14 @@
 
 @class OtherMedication,iStayHealthyRecord, SetDateCell;
 @interface OtherMedicationChangeViewController : UITableViewController <UIAlertViewDelegate, ClinicAddressCellDelegate, UIActionSheetDelegate>{
-    OtherMedication *__unsafe_unretained otherMed;
+    OtherMedication *otherMed;
     NSString *drugName;
     NSString *doseAmount;
     NSDate                  *changeDate;
     NSString                *name;
     NSNumber                *number;
     NSString                *unit;
-    iStayHealthyRecord *__unsafe_unretained record;
+    iStayHealthyRecord *record;
     SetDateCell *changeDateCell;    
 }
 @property (nonatomic, strong) SetDateCell *changeDateCell;
@@ -26,8 +26,8 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSNumber *number;
 @property (nonatomic, strong) NSString *unit;
-@property (nonatomic, unsafe_unretained) OtherMedication *otherMed;
-@property (nonatomic, unsafe_unretained) iStayHealthyRecord *record;
+@property (nonatomic, strong) OtherMedication *otherMed;
+@property (nonatomic, strong) iStayHealthyRecord *record;
 - (IBAction) save:					(id) sender;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;

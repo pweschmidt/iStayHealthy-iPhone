@@ -13,11 +13,11 @@
 @interface ClinicAddressCell : UITableViewCell<UITextFieldDelegate>{
     IBOutlet UILabel *title;
     IBOutlet UITextField *valueField;
-    id<ClinicAddressCellDelegate> __unsafe_unretained _delegate;
+    id<ClinicAddressCellDelegate> clinicAddressCellDelegate;
 }
 @property (nonatomic, strong) IBOutlet UILabel *title;
 @property (nonatomic, strong) IBOutlet UITextField *valueField;
-@property (nonatomic, unsafe_unretained) id<ClinicAddressCellDelegate> _delegate;
+@property (nonatomic, weak) id<ClinicAddressCellDelegate> clinicAddressCellDelegate;
 - (void)setDelegate:(id)viewControllerDelegate;
 @end
 @protocol ClinicAddressCellDelegate <NSObject>
