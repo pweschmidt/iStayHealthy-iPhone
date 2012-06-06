@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Epivir</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Fatigue</string>
+			<string>Nausea</string>
+			<string>Diarrhoea</string>
+			<string>Decreased appetite</string>
+			<string>Skin rash</string>
+			<string>Abdominal pain</string>
+			<string>Pancreatitis</string>
+			<string>Peripheral neuropathy</string>
+			<string>Anaemia</string>
+			<string>Decreased neutrophil count</string>
+			<string>Increased liver enzymes</string>
+			<string>Neutropenia (low white blood cell count)</string>
+			<string>Lipodistrophy (fat redistribution)</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Monotrim (trimethoprim)</string>
+			<string>Septrin (cotrimoxazole)</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Foscavir (foscarnet)</string>
+			<string>Cymevene (ganciclovir)</string>
+		</array>
+	</dict>
+	<key>Ziagen</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Nausea</string>
+			<string>Vomiting</string>
+			<string>Lethargy, fatigue</string>
+			<string>Fever</string>
+			<string>Loss of appetite</string>
+			<string>Lactic acidosis</string>
+			<string>Hypersensitivity reaction</string>
+			<string>Cardiovascular disease</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Reyataz</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Hyperbilirubinaemia (high bilirubin levels)</string>
+			<string>Headache</string>
+			<string>Nausea</string>
+			<string>Vomiting</string>
+			<string>Rash</string>
+			<string>Diarrhoea</string>
+			<string>Lipodystrophy</string>
+			<string>Cardiovascular disease</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Omeprazole (Losec)</string>
+			<string>Esomeprazole (Nexius)</string>
+			<string>Klaricid (Clarithromycin)</string>
+			<string>Tildiem, Angiozem, Optil (diltiazem)</string>
+			<string>Mycobutin (rifabutin)</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Astemizole</string>
+			<string>Bepridil</string>
+			<string>Cisapride</string>
+			<string>Cafergot, Migril (ergotamine tartate)</string>
+			<string>Tambocor (flecainide acetate)</string>
+			<string>Flixotide (fluticasone propionate)</string>
+			<string>Halofantrine</string>
+			<string>St John&apos;s wort (hypericin)</string>
+			<string>Lovastatin</string>
+			<string>Lumefantrine</string>
+			<string>Hypnovel (midozolam)</string>
+			<string>Orap (pimozide)</string>
+			<string>Arythmol (propafenone)</string>
+			<string>Kinidin Durules (quinidine)</string>
+			<string>Rifadin, Rimactane (rifampicin)</string>
+			<string>Zocor (simvastatin)</string>
+			<string>Terfenadine</string>
+			<string>Triazolam</string>
+			<string>Vfend (voriconazole)</string>
+		</array>
+	</dict>
+	<key>Atripla</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Dizziness</string>
+			<string>Drowsiness</string>
+			<string>Insomnia</string>
+			<string>Nightmares</string>
+			<string>Vivid dreams</string>
+			<string>Impaired concentration</string>
+			<string>Memory loss</string>
+			<string>Hallucinations</string>
+			<string>Depression</string>
+			<string>Aggression</string>
+			<string>Confusion</string>
+			<string>Agitation</string>
+			<string>Euphoria</string>
+			<string>Delusions</string>
+			<string>Rash</string>
+			<string>Headache</string>
+			<string>Alcohol intolerance</string>
+			<string>Fever</string>
+			<string>Pain, aches</string>
+			<string>Fluid retention in hands and feet</string>
+			<string>Dry mouth</string>
+			<string>Fatigue</string>
+			<string>Asthma</string>
+			<string>Changes to vision and taste</string>
+			<string>Skin discoloration</string>
+			<string>Skin pigmentation on palms, soles</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Abnormal kidney function</string>
+			<string>Lactic acidosis</string>
+		</array>
+		<key>CombinationDrugs</key>
+		<array>
+			<string>Sustiva (efavirenz)</string>
+			<string>Emtriva (emtricitabine)</string>
+			<string>Viread (tenofovir)</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Retrovir</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Nausea</string>
+			<string>Vomiting</string>
+			<string>Dizziness</string>
+			<string>Fatigue</string>
+			<string>Weakness</string>
+			<string>Muscle pain</string>
+			<string>Rash</string>
+			<string>Severe muscle pain and inflammation</string>
+			<string>Insomnia</string>
+			<string>Nail discoloration</string>
+			<string>Kidney disorders</string>
+			<string>Bone marrow damage</string>
+			<string>Anaemia</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Fungilin, Fingizone (amphotericin)</string>
+			<string>Aspirin</string>
+			<string>Dyspamet, Tagamet (cimetidine)</string>
+			<string>Clofibrate</string>
+			<string>Codeine</string>
+			<string>Dapsone</string>
+			<string>Rimacid (Indometacin)</string>
+			<string>Orudis, Orovail (ketoprofen)</string>
+			<string>Lorazepam</string>
+			<string>Naprosyn, Synflex (naproxen)</string>
+			<string>Oxazepam</string>
+			<string>Flucytosine</string>
+			<string>Intron-A, Roferon-A, Viraferon (Interferon alfa)</string>
+			<string>Pentacarinat (systemic pentadimine)</string>
+			<string>Velbe (vinblastine)</string>
+			<string>Oncovin (vincristine)</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Zerit, Staduvine (d4T)</string>
+			<string>Copegus, Rebeto, Virazole (ribavirin)</string>
+		</array>
+	</dict>
+	<key>Combivir</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Nausea</string>
+			<string>Vomiting</string>
+			<string>Dizziness</string>
+			<string>Fatigue</string>
+			<string>Weakness</string>
+			<string>Muscle pain</string>
+			<string>Rash</string>
+			<string>Severe muscle pain and inflammation</string>
+			<string>Insomnia</string>
+			<string>Nail discoloration</string>
+			<string>Kidney disorders</string>
+			<string>Bone marrow damage</string>
+			<string>Anaemia</string>
+			<string>Decreased appetite</string>
+			<string>Abdominal pain</string>
+			<string>Pancreatitis</string>
+			<string>Peripheral neuropathy</string>
+			<string>Decreased neutrophil count</string>
+			<string>Increased liver enzymes</string>
+			<string>Neutropenia (low white blood cell count)</string>
+			<string>Lipodistrophy (fat redistribution)</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Zerit</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Peripheral neuropathy</string>
+			<string>Lipodystrophy</string>
+			<string>Nausea</string>
+			<string>Vomiting</string>
+			<string>Listlessness</string>
+			<string>Chills</string>
+			<string>Fever</string>
+			<string>Diarrhoea</string>
+			<string>Constipation</string>
+			<string>Dehydration</string>
+			<string>Headache</string>
+			<string>Abdominal pain</string>
+			<string>Lactic acidosis</string>
+			<string>Pancreatitis</string>
+			<string>Increased liver enzymes</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Copegus, Rebetol, Virazole (ribavirin)</string>
+			<string>Kemicetine (chloramphenicol)</string>
+			<string>Platinex (cisplatin)</string>
+			<string>Dapsone</string>
+			<string>Hivid, zalcitabine (ddC)</string>
+			<string>Videx, VidexEC, didanosine (ddI)</string>
+			<string>Ethambutol</string>
+			<string>Ethionamide</string>
+			<string>Aprelosine (hydralazine)</string>
+			<string>Isoniazid </string>
+			<string>Camcolit, Liskonum, Priadel (lithium)</string>
+			<string>Flagyl, Metrolyl (metronidazole)</string>
+			<string>Furadantin, Macrobid, Macrodantin (nitrofurantoin)</string>
+			<string>Epanutin (phenytoin)</string>
+			<string>Oncovin (vincristine)</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Retrovir (AZT)</string>
+		</array>
+	</dict>
+	<key>Prezista</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Nausea</string>
+			<string>Diarrhoea</string>
+			<string>Headache</string>
+			<string>Skin rash</string>
+			<string>Liver damage</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Lipitor (atorvastatin)</string>
+			<string>Bepidril</string>
+			<string>Neoral, Sandimmun (ciclosporin)</string>
+			<string>Dexamethasone</string>
+			<string>Sustiva (efavirenz)</string>
+			<string>Plendil (felodipine)</string>
+			<string>Flixotide (fluticasone proprionate)</string>
+			<string>Crixivan (indinavir)</string>
+			<string>Sporanox (itraconazole)</string>
+			<string>Nizoral (ketoconazole)</string>
+			<string>Lidocaine</string>
+			<string>Methadose (methadone hydrochloride)</string>
+			<string>Cardene (nicardipine hyrdochloride)</string>
+			<string>Adalat, Adipine, Cardilate, Coracten, Fortipine, Hypolar Retard, Nifedipress, Nifopress Retard, Slofedipine, Tensipine (nifedipine)</string>
+			<string>Seroxat (paroxetine)</string>
+			<string>Lipostat (pravastatin sodium)</string>
+			<string>Mycobutin (rifabutin)</string>
+			<string>Kaletra</string>
+			<string>Quinidine</string>
+			<string>Lustral (sertraline)</string>
+			<string>Viagra</string>
+			<string>Rapamune (sirolimus)</string>
+			<string>Prograf (tacrolimus)</string>
+			<string>Cialis (tadalafil)</string>
+			<string>Molipaxin (trazodone hydrochloride)</string>
+			<string>Levitra (vardenafil)</string>
+			<string>Vfendl (voriconazole)</string>
+			<string>Warfarin</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Astemizole</string>
+			<string>Tegretol (carbamazepine)</string>
+			<string>Cisapride</string>
+			<string>Dihydroergotamine</string>
+			<string>Ergonovine</string>
+			<string>Cafergot, Migril (ergotamine tartate)</string>
+			<string>St John&apos;s wort (hypericin)</string>
+			<string>Lovastatin</string>
+			<string>Methylergonovine</string>
+			<string>Hypnovel (midazolam)</string>
+			<string>Phenobarbital</string>
+			<string>Epanutin (phenytoin)</string>
+			<string>Orap (pimozide)</string>
+			<string>Rifadin, rimactane (rifampicin)</string>
+			<string>Zocor (simvastatin)</string>
+			<string>Terfenadine</string>
+			<string>Triazolam</string>
+		</array>
+	</dict>
+	<key>Videx</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Peripheral neuropathy</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Vomiting</string>
+			<string>Chills</string>
+			<string>Fever</string>
+			<string>Headache</string>
+			<string>Pancreatitis</string>
+			<string>Liver damage</string>
+			<string>Lactic acidosis</string>
+			<string>Hyperuricaemia (gout)</string>
+			<string>Body fat loss</string>
+			<string>Pain</string>
+			<string>Insomnia</string>
+			<string>Confusion</string>
+			<string>Pneumonia</string>
+			<string>Dry mouth</string>
+			<string>Seizures, convulsions</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Methadose (methadone hydrochloride)</string>
+			<string>Ciproxin (ciprofloxacin)</string>
+			<string>Dapsone</string>
+			<string>Sporanox (itraconazole)</string>
+			<string>Nizoral (ketoconazole)</string>
+			<string>Tavanic (levofloxacin)</string>
+			<string>Avelox (moxifloxacin)</string>
+			<string>Uriben (naldixic acid)</string>
+			<string>Utinor (norfloxacin)</string>
+			<string>Tarivid (orfloxacin)</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Zerit</string>
+			<string>Ledermycin (demeclocycline hydrochloride)</string>
+			<string>Vibramycin (doxycycline)</string>
+			<string>Hydrea (hydroxycarbamide)</string>
+			<string>Tretralysal 300 (lymecycline)</string>
+			<string>Minocin MR, Sebomin MR (minocyclin)</string>
+			<string>Oxytetracycline</string>
+			<string>Pentacarinat (pentamidine isetionate)</string>
+			<string>Tetracycline</string>
+			<string>Alcohol</string>
+			<string>Rifadin, Rimactane (rifampicin)</string>
+			<string>Mycobutin (rifabutin)</string>
+			<string>Cymevene (ganciclovir)</string>
+			<string>Intron-A, Roferon-A, Viraferon (interferon alfa)</string>
+			<string>Dopegus, Rebetol, Virazole (ribavirin)</string>
+			<string>Septrin (cotrimoxazole)</string>
+			<string>Omeprazole</string>
+		</array>
+	</dict>
+	<key>Rescriptor</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Rash</string>
+			<string>Headache</string>
+			<string>Lesions on lips, genitals</string>
+			<string>Fatigue</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Crixivan</string>
+			<string>Viramune</string>
+			<string>Sustiva</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Astemizole</string>
+			<string>Xanax (alprazolam)</string>
+			<string>Cordarone X (amiodarone)</string>
+			<string>Tegretol, Carbagen, Teril Retard, Timonil Retard (carbamazepine)</string>
+			<string>Cisapride</string>
+			<string>Cafergot, Migril (ergotamine tartate)</string>
+			<string>St John&apos;s wort (hypericin)</string>
+			<string>Lovastatin</string>
+			<string>hypnovel (midazolam)</string>
+			<string>Phenobarbital</string>
+			<string>Epanutin (phenytoin)</string>
+			<string>Orap (pimozide)</string>
+			<string>Kinidin Dureles (quinidine)</string>
+			<string>Mycobutin (rifabutin)</string>
+			<string>Rifadin, Rimactane (rifampicin)</string>
+			<string>Zocor (simvastatin)</string>
+			<string>Terfenadine</string>
+			<string>Triazolam</string>
+		</array>
+	</dict>
+	<key>Sustiva/Stocrin</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Dizziness</string>
+			<string>Drowsiness</string>
+			<string>Insomnia</string>
+			<string>Nightmares</string>
+			<string>Vivid dreams</string>
+			<string>Impaired concentration</string>
+			<string>Memory loss</string>
+			<string>Hallucinations</string>
+			<string>Depression</string>
+			<string>Aggression</string>
+			<string>Confusion</string>
+			<string>Agitation</string>
+			<string>Euphoria</string>
+			<string>Delusions</string>
+			<string>Rash</string>
+			<string>Headache</string>
+			<string>Alcohol intolerance</string>
+			<string>Fever</string>
+			<string>Pain, aches</string>
+			<string>Fluid retention in hands and feet</string>
+			<string>Dry mouth</string>
+			<string>Fatigue</string>
+			<string>Asthma</string>
+			<string>Changes to vision and taste</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Reyataz</string>
+			<string>Prezista</string>
+			<string>Lexiva, Telzir</string>
+			<string>Crixivan</string>
+			<string>Kaletra</string>
+			<string>Viracept</string>
+			<string>Invirase</string>
+			<string>Aptivus</string>
+			<string>Celsentri, Selzentry</string>
+			<string>Isentress</string>
+			<string>Warfarin</string>
+			<string>Epanutin, Dilantin</string>
+			<string>Zoloft (sertraline)</string>
+			<string>Sporanox (itraconazole)</string>
+			<string>Mycobutin (rifabutin)</string>
+			<string>Anti-Malaria drugs</string>
+			<string>Chemotherapy agents: tamoxifen, vinblastine, vincristine</string>
+			<string>Contraceptives (ethinyl estradiol)</string>
+			<string>Neoral, Sandimmune (cyclosporine)</string>
+			<string>Methadose (methadone hydrochloride)</string>
+			<string>Lipitor (avastatin)</string>
+			<string>Pravachol (pravastatin)</string>
+			<string>Zocor (simvastatin)</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Hispaniola, Astemizole</string>
+			<string>Visor, Bepridil</string>
+			<string>Cafatine, Ergomar, Migranal</string>
+			<string>Hyponovel, Versed (midazolam)</string>
+			<string>Orap (primozide) </string>
+			<string>Triludine, Teldane, Seldane (terfenadine)</string>
+			<string>Halcion, Triazolam</string>
+		</array>
+	</dict>
+	<key>Fuzeon</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Itchy rash</string>
+			<string>Red swollen or puffy skin</string>
+			<string>Hardened skin</string>
+			<string>Cysts, nodules</string>
+			<string>Lymphadenopathy (swollen glands)</string>
+			<string>Pneumonia</string>
+			<string>Abscess</string>
+			<string>Headache</string>
+			<string>Insomnia</string>
+			<string>Peripheral neuropathy</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Intelence</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Toxic epidermal necrolysis (TEN)</string>
+			<string>Rash </string>
+			<string>Fever</string>
+			<string>General malaise</string>
+			<string>Fatigue</string>
+			<string>Muscle pain</string>
+			<string>Blisters</string>
+			<string>Oral lesions</string>
+			<string>Conjunctivitis</string>
+			<string>Hepatitis</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Invirase</string>
+			<string>Crixivan</string>
+			<string>Celsentri, Selzentry</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Aptivus</string>
+			<string>Lexiva</string>
+			<string>Norvir</string>
+			<string>Reyataz</string>
+			<string>Carbamazepine</string>
+			<string>Phenobarbital</string>
+			<string>Phenytoin</string>
+			<string>Rifabutin</string>
+			<string>St John&apos;s wort</string>
+		</array>
+	</dict>
+	<key>Lexiva/Telzir</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Nausea</string>
+			<string>Rash</string>
+			<string>Diarrhoea</string>
+			<string>Vomiting</string>
+			<string>Fatigue</string>
+			<string>Severe skin reactions</string>
+			<string>Diabetes</string>
+			<string>Increased blood sugar</string>
+			<string>Lipodystrophy</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Sustiva</string>
+			<string>Viramune</string>
+			<string>Kaletra</string>
+			<string>Invirase</string>
+			<string>Reyataz</string>
+			<string>Viagra</string>
+			<string>Cialis (tadalafil)</string>
+			<string>Levitra (vardenafil)</string>
+			<string>Lipitor (atorvastatin)</string>
+			<string>Cordarone X (amioderone hydrochloride)</string>
+			<string>Amitriptyline hydrochloride</string>
+			<string>Istin (Amlodipine)</string>
+			<string>Bepidril</string>
+			<string>Tegretol, Carbagen (carbamazepine)</string>
+			<string>Neoral, Sandimmun (ciclosporin)</string>
+			<string>Dexamethasone hydrochloride</string>
+			<string>Tildiem, Adizem, Angitil, Calcicard, Dilcardia, Dilzem, Slozem, Viazem, Zemtard (diltiazem)</string>
+			<string>Plendil (felodipine)</string>
+			<string>Imipramine hydrochloride</string>
+			<string>Sporanox (itraconazole)</string>
+			<string>Nizoral (ketoconazole)</string>
+			<string>Minijet, Lignocaine, Xylocaine (lidocaine hydrochloride)</string>
+			<string>Cardene (nicardipine hydrochloride)</string>
+			<string>Adalat, Adipine, Cardilate, Coracten, Fortipine, Hypolar Retard, Nifedipress, Nifopress, Slofedipine, Tensipine (nifedipine)</string>
+			<string>Nimotoph (nimodipine)</string>
+			<string>Syscor MR (nisoldipine)</string>
+			<string>Phenobarbital</string>
+			<string>Phenytoin</string>
+			<string>Kindin Dureles (quinidine)</string>
+			<string>Rapamycin</string>
+			<string>Prograf, Protopic (tacrolimus)</string>
+			<string>Cordilox, Securon, Univer, Verapress, Vertab (verapamil hydrochloride)</string>
+			<string>Warfarin</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Astemizole</string>
+			<string>Cisapride</string>
+			<string>Diazepam</string>
+			<string>Cafergot, Migril (ergotamine tartate)</string>
+			<string>Tambocor (flecainide acetate)</string>
+			<string>Dalmane (flurazepam)</string>
+			<string>Flixotide (fluticasone propionate)</string>
+			<string>Halofantrine</string>
+			<string>St John&apos;s wort (hypericin)</string>
+			<string>Lovastatin</string>
+			<string>Lumefantrine</string>
+			<string>Hyponovel (midazolam)</string>
+			<string>Orap (pimozide)</string>
+			<string>Arythmol (propafenone)</string>
+			<string>Rifadin, Rimactane (rifampicin)</string>
+			<string>Zocor (simvastatin)</string>
+			<string>Terfenadine</string>
+			<string>Triazolam</string>
+		</array>
+	</dict>
+	<key>Emtriva</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Rash</string>
+			<string>Skin discoloration</string>
+			<string>Skin pigmentation on palms, soles</string>
+			<string>Headache</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Abnormal kidney function</string>
+			<string>Lactic acidosis</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Crixivan</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Kidney stones</string>
+			<string>Hyperbilirubinaemia (high bilirubin levels)</string>
+			<string>Headache</string>
+			<string>Nausea</string>
+			<string>Fatigue</string>
+			<string>Abdominal pain</string>
+			<string>Vomiting</string>
+			<string>Rash</string>
+			<string>Dry skin</string>
+			<string>Bloating, flatulence</string>
+			<string>ingrowing toe nails</string>
+			<string>severe dryness of lips</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Videx</string>
+			<string>Sustiva</string>
+			<string>Viramune</string>
+			<string>Invirase</string>
+			<string>Istin (amlodipine)</string>
+			<string>Lipitor (atorvastatin)</string>
+			<string>Tildiem, Adizem, Angitil, Calcicard, Dilvardia, Dilzem, Viazem, Zemtard (diltiaem hydrochloride)</string>
+			<string>Sporanox (itraconazole)</string>
+			<string>Nizoral (ketoconazole)</string>
+			<string>Mycobutin (rifabutin)</string>
+			<string>Viagra</string>
+			<string>Cialis</string>
+			<string>Efexor (venlafaxine)</string>
+			<string>Chemotherapy agents adriamycin, cyclophosphamide (Endoxana), Oncovin, prednisolone (CHOP)</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Xanax (alprazolam)</string>
+			<string>Cordarone X (amioderone hydrochloride)</string>
+			<string>Astemizole</string>
+			<string>Reyataz</string>
+			<string>Cisapride</string>
+			<string>Cafergot, Migril (ergotamine tartate)</string>
+			<string>Tambocor (flecainide)</string>
+			<string>Halofantrine</string>
+			<string>St John&apos;s wort (hypericin)</string>
+			<string>Lovastatin</string>
+			<string>Lumefartrine</string>
+			<string>Hyponovel (midazolam)</string>
+			<string>Orap (primozide)</string>
+			<string>Kinidin Dureles (quinidine)</string>
+			<string>Rifadin, Rimactane (rifampicin)</string>
+			<string>Zocor (simvastatin)</string>
+			<string>Terfenadine</string>
+			<string>Triazolam</string>
+			<string>Levitra (vardenafil)</string>
+		</array>
+	</dict>
+	<key>Kivexa/Epzicom</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Fatigue</string>
+			<string>Nausea</string>
+			<string>Diarrhoea</string>
+			<string>Vomiting</string>
+			<string>Fever</string>
+			<string>Loss of appetite</string>
+			<string>Skin rash</string>
+			<string>Abdominal pain</string>
+			<string>Pancreatitis</string>
+			<string>Peripheral neuropathy</string>
+			<string>Anaemia</string>
+			<string>Decreased neutrophil count</string>
+			<string>Increased liver enzymes</string>
+			<string>Neutropenia (low white blood cell count)</string>
+			<string>Lipodistrophy (fat redistribution)</string>
+			<string>Lactic acidosis</string>
+			<string>Hypersensitivity reaction</string>
+			<string>Cardiovascular disease</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+		<key>CombinationDrugs</key>
+		<array>
+			<string>Epivir</string>
+			<string>Ziagen</string>
+		</array>
+	</dict>
+	<key>Kaletra/Aluvia</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Increase of body fat</string>
+			<string>Increase liver enzymes</string>
+			<string>Fatigue</string>
+			<string>Muscle weakness</string>
+			<string>Headache</string>
+			<string>Abdominal pain</string>
+			<string>Vomiting</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Telzir</string>
+			<string>Crixivan</string>
+			<string>Viracept</string>
+			<string>Invirase</string>
+			<string>Aptivus</string>
+			<string>Xatral (alfuzosin hydrochloride)</string>
+			<string>Bepedril</string>
+			<string>Tegretol (carbamazepine)</string>
+			<string>Piriton (chlorphenamine maleate)</string>
+			<string>Neoral, Sandimmun (ciclosporin)</string>
+			<string>Klaricid (clarithromycin)</string>
+			<string>Erymax, Erythoped (erythromycin)</string>
+			<string>Plendil (felodipine)</string>
+			<string>Flixotide (fluticasone propionate)</string>
+			<string>Minijet Lignocaine (lidocaine)</string>
+			<string>Nizoral (ketoconazole)</string>
+			<string>Methadose (methadone hydrochloride)</string>
+			<string>Cardene (nicardipine)</string>
+			<string>Adalat (nifedipine)</string>
+			<string>Phenobarbital</string>
+			<string>Phenytoin</string>
+			<string>Kinidin Dureles (quinidine)</string>
+			<string>Mycobutin (rifabutin)</string>
+			<string>Viagra</string>
+			<string>Prograf (tacrolimus)</string>
+			<string>Cialis</string>
+			<string>Levitra (vardenafil)</string>
+			<string>Warfarin</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>Cordarone X (amioderone hydrochloride)</string>
+			<string>Astemizole</string>
+			<string>Cisapride</string>
+			<string>Cafergot, Migril (ergotamine tartate)</string>
+			<string>Tambocor (flecainide)</string>
+			<string>Halofantrine</string>
+			<string>St John&apos;s wort (hypericin)</string>
+			<string>Lovastatin</string>
+			<string>Lumefantrine</string>
+			<string>Hyponovel (midazolam)</string>
+			<string>Orap (pimozide)</string>
+			<string>Arythmol (propafenone)</string>
+			<string>Rifadin, Rimactane (rifampicin)</string>
+			<string>Zocor (simvastatin)</string>
+			<string>Terfenadine</string>
+			<string>Triazolam</string>
+			<string>Vfend (voriconazole)</string>
+		</array>
+	</dict>
+	<key>Truvada</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Rash</string>
+			<string>Skin discoloration</string>
+			<string>Skin pigmentation on palms, soles</string>
+			<string>Headache</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Abnormal kidney function</string>
+			<string>Lactic acidosis</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+		<key>CombinationDrugs</key>
+		<array>
+			<string>Viread</string>
+			<string>Emtriva</string>
+		</array>
+	</dict>
+	<key>Trizivir</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Fatigue</string>
+			<string>Nausea</string>
+			<string>Diarrhoea</string>
+			<string>Dizziness</string>
+			<string>Vomiting</string>
+			<string>Fever</string>
+			<string>Weakness</string>
+			<string>Rash</string>
+			<string>Muscle pain</string>
+			<string>Decreased appetite</string>
+			<string>Skin rash</string>
+			<string>Abdominal pain</string>
+			<string>Pancreatitis</string>
+			<string>Peripheral neuropathy</string>
+			<string>Anaemia</string>
+			<string>Decreased neutrophil count</string>
+			<string>Increased liver enzymes</string>
+			<string>Neutropenia (low white blood cell count)</string>
+			<string>Lipodistrophy (fat redistribution)</string>
+			<string>Lactic acidosis</string>
+			<string>Hypersensitivity reaction</string>
+			<string>Cardiovascular disease</string>
+			<string>Severe muscle pain and inflammation</string>
+			<string>Nail discoloration</string>
+			<string>Kidney disorders</string>
+			<string>Bone marrow damage</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+		<key>CombinationDrugs</key>
+		<array>
+			<string>Retrovir</string>
+			<string>Epivir</string>
+			<string>Ziagen</string>
+		</array>
+	</dict>
+	<key>Complera/Eviplera</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Rash</string>
+			<string>Insomnia</string>
+			<string>Depression</string>
+			<string>Anxiety</string>
+			<string>Restlessness</string>
+			<string>Rash</string>
+			<string>Skin discoloration</string>
+			<string>Skin pigmentation on palms, soles</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Abnormal kidney function</string>
+			<string>Lactic acidosis</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+		<key>CombinationDrugs</key>
+		<array>
+			<string>Edurant</string>
+			<string>Viread</string>
+			<string>Emtriva</string>
+		</array>
+	</dict>
+	<key>Edurant</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Headache</string>
+			<string>Rash</string>
+			<string>Insomnia</string>
+			<string>Depression</string>
+			<string>Anxiety</string>
+			<string>Restlessness</string>
+		</array>
+		<key>Interaction</key>
+		<array>
+			<string>Antacids</string>
+			<string>Biaxin (clarithromycin)</string>
+			<string>Tao (troleandomycin)</string>
+			<string>Methadone</string>
+			<string>Antifungal medication</string>
+		</array>
+		<key>DoNotTakeWith</key>
+		<array>
+			<string>St John&apos;s wort (hypericin)</string>
+			<string>Tegretol</string>
+			<string>Trileptal</string>
+			<string>Phenobarbital</string>
+			<string>Phenytoin</string>
+			<string>Mycobutin (rifabutin)</string>
+			<string>Rifadin (rifampin)</string>
+			<string>Priftin (rifapentine)</string>
+			<string>Nexium (esomeprazole)</string>
+			<string>Prevacid (lanzoprozole)</string>
+			<string>Omeprazole</string>
+			<string>Protonix (pantroprazole)</string>
+			<string>Aciphex (rabeprazole)</string>
+			<string>Steriods</string>
+		</array>
+	</dict>
+</dict>
+</plist>
