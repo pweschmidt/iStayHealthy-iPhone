@@ -14,9 +14,9 @@
 		28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
-		C4073E27157FC3A000E3DDDA /* DashboardViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4073E25157FC3A000E3DDDA /* DashboardViewControllerViewController.m */; };
-		C4073E28157FC3A000E3DDDA /* DashboardViewControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4073E26157FC3A000E3DDDA /* DashboardViewControllerViewController.xib */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
+		C4073E2C157FCE7F00E3DDDA /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4073E2B157FCE7F00E3DDDA /* DashboardViewController.xib */; };
+		C4073E2F157FCE9100E3DDDA /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4073E2E157FCE9100E3DDDA /* DashboardViewController.m */; };
 		C408358C1359DD860020813A /* FAQ.plist in Resources */ = {isa = PBXBuildFile; fileRef = C408358E1359DD860020813A /* FAQ.plist */; };
 		C40835921359E87F0020813A /* InfoDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40835901359E87E0020813A /* InfoDetailTableViewController.m */; };
 		C40835931359E87F0020813A /* InfoDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C40835911359E87E0020813A /* InfoDetailTableViewController.xib */; };
@@ -326,10 +326,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		C4073E24157FC3A000E3DDDA /* DashboardViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewControllerViewController.h; sourceTree = "<group>"; };
-		C4073E25157FC3A000E3DDDA /* DashboardViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewControllerViewController.m; sourceTree = "<group>"; };
-		C4073E26157FC3A000E3DDDA /* DashboardViewControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DashboardViewControllerViewController.xib; path = Classes/DashboardViewControllerViewController.xib; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C4073E2B157FCE7F00E3DDDA /* DashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DashboardViewController.xib; path = Classes/DashboardViewController.xib; sourceTree = "<group>"; };
+		C4073E2D157FCE9100E3DDDA /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
+		C4073E2E157FCE9100E3DDDA /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		C408358D1359DD860020813A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C408358F1359E87D0020813A /* InfoDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoDetailTableViewController.h; sourceTree = "<group>"; };
 		C40835901359E87E0020813A /* InfoDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoDetailTableViewController.m; sourceTree = "<group>"; };
@@ -894,7 +894,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C4073E26157FC3A000E3DDDA /* DashboardViewControllerViewController.xib */,
+				C4073E2B157FCE7F00E3DDDA /* DashboardViewController.xib */,
 				C4A77A56157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib */,
 				C4B41FB7141E5EF2009B0694 /* iStayHealthy.entitlements */,
 				C48A513D140BFD89004AE872 /* MainWindow.xib */,
@@ -1140,6 +1140,8 @@
 		C4B8036612D3660600A5A38F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C4073E2D157FCE9100E3DDDA /* DashboardViewController.h */,
+				C4073E2E157FCE9100E3DDDA /* DashboardViewController.m */,
 				C488756F1469B95A0068020F /* GeneralMedicalTableViewController.h */,
 				C48875701469B95A0068020F /* GeneralMedicalTableViewController.m */,
 				C477561A12D4A5EA003D5DCC /* StatusViewControllerLandscape.h */,
@@ -1154,8 +1156,6 @@
 				C442540E140BB67E0078FA62 /* HIVMedicationViewController.m */,
 				C4425412140BB8700078FA62 /* NewAlertViewController.h */,
 				C4425413140BB8700078FA62 /* NewAlertViewController.m */,
-				C4073E24157FC3A000E3DDDA /* DashboardViewControllerViewController.h */,
-				C4073E25157FC3A000E3DDDA /* DashboardViewControllerViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1615,7 +1615,7 @@
 				C4EFD406154D71A90059A2BA /* pozbannerEmpty@2x.png in Resources */,
 				C4F2810F157A178600B5595F /* CommonSideEffects.plist in Resources */,
 				C4A77A58157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib in Resources */,
-				C4073E28157FC3A000E3DDDA /* DashboardViewControllerViewController.xib in Resources */,
+				C4073E2C157FCE7F00E3DDDA /* DashboardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1700,7 +1700,7 @@
 				C42AB57C14950DB8005E9A0F /* SettingsCell.m in Sources */,
 				C4629D5B1542B0660031966E /* UINavigationBar-Button.m in Sources */,
 				C4A77A57157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m in Sources */,
-				C4073E27157FC3A000E3DDDA /* DashboardViewControllerViewController.m in Sources */,
+				C4073E2F157FCE9100E3DDDA /* DashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
