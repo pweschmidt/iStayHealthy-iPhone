@@ -145,4 +145,23 @@
 "PasswordSet"="Kennwort ist eingestellt";
 "Change"="Ändern";
 "Treatment Start Date"="Behandlungsbeginn";
+"HDL"="HDL cholesterol";
+"LDL"="LDL cholesterol";
+"Triglyceride"="Triglyceride cholesterol";
+"Total Cholesterol"="Total Cholesterol";
+"Glucose"="Blood sugar";
+"Hemoglobulin"="Hemoglobulin";
+"White Blood Cells"="White Blood Cells";
+"Platelet"="Red Blood Cells";
+"Oxygen"="Oxygen Level";
+"Heart Rate"="Heart Rate";
+"Blood Pressure"="Blood Pressure";
+"Gender"="Sex";
+"DOB"="Date of Birth";
+"Smoker"="Smoker?";
+"Diabetic"="Diabetic";
+"Weight"="Weight";
+"HIVResults"="HIV/Hepatitis C";
+"GeneralBloods"="Other Blood Results";
+"GeneralWellBeing"="General";
 

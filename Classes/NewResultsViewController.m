@@ -16,9 +16,9 @@
 #import "ResultChangeViewController.h"
 #import "ResultListCell.h"
 #import "UINavigationBar-Button.h"
+#import "ResultsSettingsTableViewController.h"
 
 @implementation NewResultsViewController
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -91,7 +91,8 @@
 }
 
 - (void)loadSetUpViewController{
-    
+    ResultsSettingsTableViewController *settingsController = [[ResultsSettingsTableViewController alloc]initWithRecord:masterRecord];
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 

@@ -128,6 +128,8 @@
 		C491B373147805DC000A4229 /* MissedMedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C491B371147805DB000A4229 /* MissedMedViewController.xib */; };
 		C4959F6614B883B8000B3F10 /* gaydarad.png in Resources */ = {isa = PBXBuildFile; fileRef = C4959F6514B883B8000B3F10 /* gaydarad.png */; };
 		C4959F6914B883F0000B3F10 /* pozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4959F6B14B883F0000B3F10 /* pozbanner.png */; };
+		C49C17F2158384B800D4FE2A /* ResultsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49C17F0158384B800D4FE2A /* ResultsSettingsTableViewController.m */; };
+		C49C17F3158384B800D4FE2A /* ResultsSettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49C17F1158384B800D4FE2A /* ResultsSettingsTableViewController.xib */; };
 		C49C4600148D4C77009C81A6 /* ResultListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49C45FF148D4C77009C81A6 /* ResultListCell.xib */; };
 		C49C4603148D5247009C81A6 /* ResultListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C49C4602148D5247009C81A6 /* ResultListCell.m */; };
 		C49C4605148D5C1E009C81A6 /* SetDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49C4604148D5C1D009C81A6 /* SetDateCell.xib */; };
@@ -534,6 +536,9 @@
 		C4959F6C14B883FA000B3F10 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = de.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6D14B883FE000B3F10 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = es.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6E14B88401000B3F10 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = fr.lproj/pozbanner.png; sourceTree = "<group>"; };
+		C49C17EF158384B800D4FE2A /* ResultsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsSettingsTableViewController.h; sourceTree = "<group>"; };
+		C49C17F0158384B800D4FE2A /* ResultsSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsSettingsTableViewController.m; sourceTree = "<group>"; };
+		C49C17F1158384B800D4FE2A /* ResultsSettingsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResultsSettingsTableViewController.xib; path = Classes/ResultsSettingsTableViewController.xib; sourceTree = "<group>"; };
 		C49C45FF148D4C77009C81A6 /* ResultListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultListCell.xib; sourceTree = "<group>"; };
 		C49C4601148D5247009C81A6 /* ResultListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultListCell.h; sourceTree = "<group>"; };
 		C49C4602148D5247009C81A6 /* ResultListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultListCell.m; sourceTree = "<group>"; };
@@ -894,6 +899,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C49C17F1158384B800D4FE2A /* ResultsSettingsTableViewController.xib */,
 				C4073E2B157FCE7F00E3DDDA /* DashboardViewController.xib */,
 				C4A77A56157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib */,
 				C4B41FB7141E5EF2009B0694 /* iStayHealthy.entitlements */,
@@ -1242,6 +1248,8 @@
 				C491B370147805DA000A4229 /* MissedMedViewController.m */,
 				C4A77A54157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.h */,
 				C4A77A55157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m */,
+				C49C17EF158384B800D4FE2A /* ResultsSettingsTableViewController.h */,
+				C49C17F0158384B800D4FE2A /* ResultsSettingsTableViewController.m */,
 			);
 			name = DetailViewControllers;
 			sourceTree = "<group>";
@@ -1616,6 +1624,7 @@
 				C4F2810F157A178600B5595F /* CommonSideEffects.plist in Resources */,
 				C4A77A58157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib in Resources */,
 				C4073E2C157FCE7F00E3DDDA /* DashboardViewController.xib in Resources */,
+				C49C17F3158384B800D4FE2A /* ResultsSettingsTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1701,6 +1710,7 @@
 				C4629D5B1542B0660031966E /* UINavigationBar-Button.m in Sources */,
 				C4A77A57157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m in Sources */,
 				C4073E2F157FCE9100E3DDDA /* DashboardViewController.m in Sources */,
+				C49C17F2158384B800D4FE2A /* ResultsSettingsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

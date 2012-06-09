@@ -12,13 +12,6 @@
 
 @interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, ResultValueCellDelegate>{
 @private
-	NSDate *resultsDate;
-    SetDateCell *setDateCell;
-	iStayHealthyRecord *record;
-    NSNumber *cd4;
-    NSNumber *cd4Percent;
-    NSNumber *vlHIV;
-    NSNumber *vlHepC;
 }
 @property (nonatomic, strong) NSDate *resultsDate;
 @property (nonatomic, strong) iStayHealthyRecord *record;

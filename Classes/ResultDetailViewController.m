@@ -14,11 +14,17 @@
 #import "ResultValueCell.h"
 #import "ResultSegmentedCell.h"
 #import "GeneralSettings.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ResultDetailViewController
-@synthesize resultsDate, setDateCell;
-@synthesize record;
-@synthesize vlHIV,vlHepC, cd4, cd4Percent;
+@synthesize resultsDate = _resultsDate;
+@synthesize setDateCell = _setDateCell;
+@synthesize record = _record;
+@synthesize vlHIV = _vlHIV;
+@synthesize vlHepC = _vlHepC;
+@synthesize cd4 = _cd4;
+@synthesize cd4Percent = _cd4Percent;
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -66,10 +72,10 @@
  @id
  */
 - (IBAction) save: (id) sender{
-	NSManagedObjectContext *context = [record managedObjectContext];
+	NSManagedObjectContext *context = [self.record managedObjectContext];
 	Results *result = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
-	[record addResultsObject:result];
-    record.UID = [Utilities GUID];
+	[self.record addResultsObject:result];
+    self.record.UID = [Utilities GUID];
     result.UID = [Utilities GUID];
     result.ResultsDate = self.resultsDate;
     result.ViralLoad = self.vlHIV;
@@ -164,7 +170,7 @@
 #pragma mark -
 #pragma mark Table view data source
 /**
- @return 2 sections
+ @return 3 sections
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -178,7 +184,12 @@
 	if (0 == section) {
 		return 1;
 	}
-    return 2;
+    else if(1 == section){
+        return 2;
+    }
+    else {
+        return 8;
+    }
 }
 
 /**
@@ -188,10 +199,53 @@
  @return height as CGFloat
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (2 == indexPath.section) {
+    if (1 == indexPath.section) {
         return 80;
     }
 	return 48.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (0 == section) {
+        return 10;
+    }
+    else {
+        return 25;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (0 == section) {
+        UIView *sectionHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 10)];
+        sectionHeaderView.backgroundColor = [UIColor clearColor];
+        return sectionHeaderView;
+    }
+    else {
+        CGRect frame = CGRectMake(20, 20, 280, 25);
+        UIView *sectionHeaderView = [[UIView alloc] initWithFrame:frame];
+        CGRect colourCodeFrame = CGRectMake(20, 0, 10, 20);
+        CGRect titleFrame = CGRectMake(35,0,255,25);
+        
+        UIView *colourCodeView = [[UIView alloc]initWithFrame:colourCodeFrame];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.textColor = [UIColor darkGrayColor];
+        titleLabel.textAlignment = UITextAlignmentCenter;
+        switch (section) {
+            case 1:
+                colourCodeView.layer.backgroundColor = [UIColor blueColor].CGColor;
+                titleLabel.text = NSLocalizedString(@"HIVResults", @"HIVResults");
+                break;
+            case 2:
+                colourCodeView.layer.backgroundColor = [UIColor redColor].CGColor;
+                titleLabel.text = NSLocalizedString(@"GeneralBloods", @"GeneralBloods");
+                break;
+        }
+        
+        [sectionHeaderView addSubview:colourCodeView];
+        [sectionHeaderView addSubview:titleLabel];
+        return sectionHeaderView;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -214,12 +268,13 @@
         [dateCell setTag:indexPath.row];
         [[dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
         [[dateCell title]setTextColor:TEXTCOLOUR];
+        [dateCell setTag:1];
         self.setDateCell = dateCell;
         return dateCell;
     }
-    if (1 == indexPath.section) {
+    if (2 == indexPath.section) {
         int tag = indexPath.row + 100;
-
+        
         NSString *identifier = @"ResultValueCell";
         ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         if (nil == resultCell) {
@@ -241,11 +296,29 @@
             case 1:
                 [[resultCell title]setText:NSLocalizedString(@"CD4 %", @"CD4 %")];
                 break;
+            case 2:
+                [[resultCell title]setText:NSLocalizedString(@"Glucose", @"Glucose")];
+                break;
+            case 3:
+                [[resultCell title]setText:NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol")];
+                break;
+            case 4:
+                [[resultCell title]setText:NSLocalizedString(@"HDL", @"HDL")];
+                break;
+            case 5:
+                [[resultCell title]setText:NSLocalizedString(@"LDL", @"LDL")];
+                break;
+            case 6:
+                [[resultCell title]setText:NSLocalizedString(@"Weight", @"Weight")];
+                break;
+            case 7:
+                [[resultCell title]setText:NSLocalizedString(@"Blood Pressure", @"Blood Pressure")];
+                break;
         }
         [resultCell setTag:tag];
         return resultCell;        
     }
-    if (2 == indexPath.section) {
+    if (1 == indexPath.section) {
         int tag = 10 + indexPath.row;
         
         NSString *identifier = @"ResultSegmentedCell";    
@@ -280,7 +353,6 @@
         [segCell setTag:tag];
         return segCell;        
     }
-    
     return nil;
 }
 
