@@ -222,8 +222,6 @@
 		C4D82EB9138584CB00C07379 /* HealthChartsViewPortrait.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D82EB8138584CB00C07379 /* HealthChartsViewPortrait.m */; };
 		C4D82EBC138585B400C07379 /* HealthChartsViewLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D82EBB138585B400C07379 /* HealthChartsViewLandscape.m */; };
 		C4D82EBF1385988C00C07379 /* Trafo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D82EBE1385988C00C07379 /* Trafo.m */; };
-		C4DA394C148DEFC700ED00E2 /* separator-large.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DA394A148DEFC700ED00E2 /* separator-large.png */; };
-		C4DA394D148DEFC700ED00E2 /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DA394B148DEFC700ED00E2 /* separator.png */; };
 		C4DEB1F9137E84DF0093113F /* OtherMedicationChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DEB1F7137E84DF0093113F /* OtherMedicationChangeViewController.m */; };
 		C4DEB1FA137E84DF0093113F /* OtherMedicationChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4DEB1F8137E84DF0093113F /* OtherMedicationChangeViewController.xib */; };
 		C4DEB207137E98AC0093113F /* ResultChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DEB205137E98AB0093113F /* ResultChangeViewController.m */; };
@@ -288,8 +286,6 @@
 		C4FCBC64152F210900E3F082 /* neutralflat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC3D152F210800E3F082 /* neutralflat@2x.png */; };
 		C4FCBC65152F210900E3F082 /* procedure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC3E152F210800E3F082 /* procedure@2x.png */; };
 		C4FCBC66152F210900E3F082 /* redcross-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC3F152F210800E3F082 /* redcross-small@2x.png */; };
-		C4FCBC67152F210900E3F082 /* separator-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC40152F210800E3F082 /* separator-large@2x.png */; };
-		C4FCBC68152F210900E3F082 /* separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC41152F210800E3F082 /* separator@2x.png */; };
 		C4FCBC69152F210900E3F082 /* status-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC42152F210800E3F082 /* status-small@2x.png */; };
 		C4FCBC6E152F229600E3F082 /* viralOff-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC70152F229600E3F082 /* viralOff-small@2x.png */; };
 		C4FCBC74152F22AE00E3F082 /* viralOn-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC76152F22AE00E3F082 /* viralOn-small@2x.png */; };
@@ -671,8 +667,6 @@
 		C4D82EBB138585B400C07379 /* HealthChartsViewLandscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthChartsViewLandscape.m; sourceTree = "<group>"; };
 		C4D82EBD1385988C00C07379 /* Trafo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trafo.h; sourceTree = "<group>"; };
 		C4D82EBE1385988C00C07379 /* Trafo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trafo.m; sourceTree = "<group>"; };
-		C4DA394A148DEFC700ED00E2 /* separator-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "separator-large.png"; sourceTree = "<group>"; };
-		C4DA394B148DEFC700ED00E2 /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
 		C4DE024612D5F99C005C0043 /* GeneralSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralSettings.h; sourceTree = "<group>"; };
 		C4DEB1F6137E84DF0093113F /* OtherMedicationChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherMedicationChangeViewController.h; sourceTree = "<group>"; };
 		C4DEB1F7137E84DF0093113F /* OtherMedicationChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherMedicationChangeViewController.m; sourceTree = "<group>"; };
@@ -740,8 +734,6 @@
 		C4FCBC3D152F210800E3F082 /* neutralflat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neutralflat@2x.png"; sourceTree = "<group>"; };
 		C4FCBC3E152F210800E3F082 /* procedure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "procedure@2x.png"; sourceTree = "<group>"; };
 		C4FCBC3F152F210800E3F082 /* redcross-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redcross-small@2x.png"; sourceTree = "<group>"; };
-		C4FCBC40152F210800E3F082 /* separator-large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "separator-large@2x.png"; sourceTree = "<group>"; };
-		C4FCBC41152F210800E3F082 /* separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "separator@2x.png"; sourceTree = "<group>"; };
 		C4FCBC42152F210800E3F082 /* status-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-small@2x.png"; sourceTree = "<group>"; };
 		C4FCBC6F152F229600E3F082 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/viralOff-small@2x.png"; sourceTree = "<group>"; };
 		C4FCBC71152F229F00E3F082 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = "de.lproj/viralOff-small@2x.png"; sourceTree = "<group>"; };
@@ -1057,8 +1049,6 @@
 				C4FCBC3D152F210800E3F082 /* neutralflat@2x.png */,
 				C4FCBC3E152F210800E3F082 /* procedure@2x.png */,
 				C4FCBC3F152F210800E3F082 /* redcross-small@2x.png */,
-				C4FCBC40152F210800E3F082 /* separator-large@2x.png */,
-				C4FCBC41152F210800E3F082 /* separator@2x.png */,
 				C4FCBC42152F210800E3F082 /* status-small@2x.png */,
 				C4C26D8114FEC1AA00CDA2B4 /* downgreenweb.png */,
 				C4C26D8214FEC1AA00CDA2B4 /* downredweb.png */,
@@ -1072,8 +1062,6 @@
 				C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */,
 				C4959F6B14B883F0000B3F10 /* pozbanner.png */,
 				C4959F6514B883B8000B3F10 /* gaydarad.png */,
-				C4DA394A148DEFC700ED00E2 /* separator-large.png */,
-				C4DA394B148DEFC700ED00E2 /* separator.png */,
 				C44587BC148A691B00F453FB /* iconroundedsmall.png */,
 				C4DF7E4C14857D17009C46E6 /* missedsmall.png */,
 				C491B34A1477DE96000A4229 /* alarm.png */,
@@ -1523,8 +1511,6 @@
 				C49C4605148D5C1E009C81A6 /* SetDateCell.xib in Resources */,
 				C49C460A148D5E78009C81A6 /* ResultValueCell.xib in Resources */,
 				C49C460F148D62F9009C81A6 /* ResultSegmentedCell.xib in Resources */,
-				C4DA394C148DEFC700ED00E2 /* separator-large.png in Resources */,
-				C4DA394D148DEFC700ED00E2 /* separator.png in Resources */,
 				C4623980148EB6F3009F0D04 /* GeneralButtonCell.xib in Resources */,
 				C4623987148EBAFC009F0D04 /* OtherMedCell.xib in Resources */,
 				C462398C148EBF4A009F0D04 /* ProcedureCell.xib in Resources */,
@@ -1590,8 +1576,6 @@
 				C4FCBC64152F210900E3F082 /* neutralflat@2x.png in Resources */,
 				C4FCBC65152F210900E3F082 /* procedure@2x.png in Resources */,
 				C4FCBC66152F210900E3F082 /* redcross-small@2x.png in Resources */,
-				C4FCBC67152F210900E3F082 /* separator-large@2x.png in Resources */,
-				C4FCBC68152F210900E3F082 /* separator@2x.png in Resources */,
 				C4FCBC69152F210900E3F082 /* status-small@2x.png in Resources */,
 				C4FCBC6E152F229600E3F082 /* viralOff-small@2x.png in Resources */,
 				C4FCBC74152F22AE00E3F082 /* viralOn-small@2x.png in Resources */,

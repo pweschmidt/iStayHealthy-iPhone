@@ -24,6 +24,13 @@
 @synthesize vlHepC = _vlHepC;
 @synthesize cd4 = _cd4;
 @synthesize cd4Percent = _cd4Percent;
+@synthesize glucose = _glucose;
+@synthesize ldl = _ldl;
+@synthesize hdl = _hdl;
+@synthesize cholesterol = _cholesterol;
+@synthesize weight = _weight;
+@synthesize bloodpressure = _bloodpressure;
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -153,6 +160,24 @@
         case 101:
             self.cd4Percent = number;
             break;
+        case 102:
+            self.glucose = number;
+            break;
+        case 103:
+            self.cholesterol = number;
+            break;
+        case 104:
+            self.hdl = number;
+            break;
+        case 105:
+            self.ldl = number;
+            break;
+        case 106:
+            self.weight = number;
+            break;
+        case 107:
+            self.bloodpressure = valueString;
+            break;
     }
 }
 
@@ -264,59 +289,12 @@
                 }
             }  
         }
-        [[dateCell value]setText:[formatter stringFromDate:self.resultsDate]];
-        [dateCell setTag:indexPath.row];
-        [[dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
-        [[dateCell title]setTextColor:TEXTCOLOUR];
-        [dateCell setTag:1];
+        dateCell.value.text = [formatter stringFromDate:self.resultsDate];
+        dateCell.tag = 1;
+        dateCell.title.text = NSLocalizedString(@"Set Date", @"Set Date");
+        dateCell.title.textColor = TEXTCOLOUR;
         self.setDateCell = dateCell;
         return dateCell;
-    }
-    if (2 == indexPath.section) {
-        int tag = indexPath.row + 100;
-        
-        NSString *identifier = @"ResultValueCell";
-        ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == resultCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[ResultValueCell class]]) {
-                    resultCell = (ResultValueCell *)currentObject;
-                    break;
-                }
-            } 
-            [resultCell setDelegate:self];
-        }
-        [[resultCell title]setTextColor:TEXTCOLOUR];
-        int row = indexPath.row;
-        switch (row) {
-            case 0:
-                [[resultCell title]setText:NSLocalizedString(@"CD4 Count", @"CD4 Count")];
-                break;
-            case 1:
-                [[resultCell title]setText:NSLocalizedString(@"CD4 %", @"CD4 %")];
-                break;
-            case 2:
-                [[resultCell title]setText:NSLocalizedString(@"Glucose", @"Glucose")];
-                break;
-            case 3:
-                [[resultCell title]setText:NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol")];
-                break;
-            case 4:
-                [[resultCell title]setText:NSLocalizedString(@"HDL", @"HDL")];
-                break;
-            case 5:
-                [[resultCell title]setText:NSLocalizedString(@"LDL", @"LDL")];
-                break;
-            case 6:
-                [[resultCell title]setText:NSLocalizedString(@"Weight", @"Weight")];
-                break;
-            case 7:
-                [[resultCell title]setText:NSLocalizedString(@"Blood Pressure", @"Blood Pressure")];
-                break;
-        }
-        [resultCell setTag:tag];
-        return resultCell;        
     }
     if (1 == indexPath.section) {
         int tag = 10 + indexPath.row;
@@ -334,24 +312,78 @@
             [segCell setDelegate:self];
         }
         int row = indexPath.row;
+        segCell.inputValueKind = INTEGERINPUT;
+        segCell.inputTitle.textColor = TEXTCOLOUR;
+        segCell.query.text = NSLocalizedString(@"undetectable?",@"undetectable?");
+        segCell.query.textColor = TEXTCOLOUR;
+        segCell.tag = tag;
         switch (row) {
             case 0:
-                [[segCell title]setText:NSLocalizedString(@"Viral Load",@"Viral Load")];
-                [[segCell title]setTextColor:TEXTCOLOUR];
-                [[segCell switchControl]setOn:FALSE];
+                segCell.inputTitle.text = NSLocalizedString(@"Viral Load",@"Viral Load");
+                segCell.inputValueField.enabled = NO;
+                [segCell.switchControl setOn:FALSE];
                 break;
             case 1:
-                [[segCell title]setText:NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC")];
-                [[segCell title]setTextColor:TEXTCOLOUR];
-                [[segCell valueField]setEnabled:FALSE];
-                [[segCell switchControl]setOn:TRUE];
+                segCell.inputTitle.text = NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC");
+                segCell.inputValueField.enabled = YES;
+                [segCell.switchControl setOn:TRUE];
                 break;
         }
-        
-        [[segCell query]setText:NSLocalizedString(@"undetectable?",@"undetectable?")];
-        [[segCell query]setTextColor:TEXTCOLOUR];
-        [segCell setTag:tag];
         return segCell;        
+    }
+    if (2 == indexPath.section) {
+        int tag = indexPath.row + 100;
+        
+        NSString *identifier = @"ResultValueCell";
+        ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == resultCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
+            for (id currentObject in cellObjects) {
+                if ([currentObject isKindOfClass:[ResultValueCell class]]) {
+                    resultCell = (ResultValueCell *)currentObject;
+                    break;
+                }
+            } 
+            [resultCell setDelegate:self];
+        }
+        resultCell.inputTitle.textColor = TEXTCOLOUR;
+        int row = indexPath.row;
+        switch (row) {
+            case 0:
+                resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
+                resultCell.inputValueKind = INTEGERINPUT;
+                break;
+            case 1:
+                resultCell.inputTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
+                resultCell.inputValueKind = FLOATINPUT;
+                break;
+            case 2:
+                resultCell.inputTitle.text = NSLocalizedString(@"Glucose", @"Glucose");
+                resultCell.inputValueKind = FLOATINPUT;
+                break;
+            case 3:
+                resultCell.inputTitle.text = NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol");
+                resultCell.inputValueKind = FLOATINPUT;
+                break;
+            case 4:
+                resultCell.inputTitle.text = NSLocalizedString(@"HDL", @"HDL");
+                resultCell.inputValueKind = FLOATINPUT;
+                break;
+            case 5:
+                resultCell.inputTitle.text = NSLocalizedString(@"LDL", @"LDL");
+                resultCell.inputValueKind = FLOATINPUT;
+                break;
+            case 6:
+                resultCell.inputTitle.text = NSLocalizedString(@"Weight", @"Weight");
+                resultCell.inputValueKind = FLOATINPUT;
+                break;
+            case 7:
+                resultCell.inputTitle.text = NSLocalizedString(@"Blood Pressure", @"Blood Pressure");
+                resultCell.inputValueKind = BLOODPRESSUREINPUT;
+                break;
+        }
+        [resultCell setTag:tag];
+        return resultCell;        
     }
     return nil;
 }

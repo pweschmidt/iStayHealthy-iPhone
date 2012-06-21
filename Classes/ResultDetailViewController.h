@@ -20,6 +20,13 @@
 @property (nonatomic, strong) NSNumber *cd4Percent;
 @property (nonatomic, strong) NSNumber *vlHIV;
 @property (nonatomic, strong) NSNumber *vlHepC;
+@property (nonatomic, strong) NSNumber *glucose;
+@property (nonatomic, strong) NSNumber *hdl;
+@property (nonatomic, strong) NSNumber *ldl;
+@property (nonatomic, strong) NSNumber *cholesterol;
+@property (nonatomic, strong) NSNumber *weight;
+@property (nonatomic, strong) NSString *bloodpressure;
+
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
 - (void)changeResultsDate;

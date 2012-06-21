@@ -10,11 +10,9 @@
 #import "ResultValueCell.h"
 
 @interface ResultSegmentedCell : ResultValueCell{
-    IBOutlet UILabel *query;
-    IBOutlet UISwitch *switchControl;    
 }
-@property (nonatomic, strong) IBOutlet UILabel *query;
-@property (nonatomic, strong) IBOutlet UISwitch *switchControl;    
+@property (nonatomic, weak) IBOutlet UILabel *query;
+@property (nonatomic, weak) IBOutlet UISwitch *switchControl;    
 - (void)setDelegate:(id)viewControllerDelegate;
 - (IBAction)isUndetectable:(id)sender;
 @end

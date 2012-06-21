@@ -7,16 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
+#define INTEGERINPUT 1
+#define FLOATINPUT 2
+#define BLOODPRESSUREINPUT 3
+
 @protocol ResultValueCellDelegate;
 
 @interface ResultValueCell : UITableViewCell<UITextFieldDelegate>{
-    IBOutlet UILabel *title;
-    IBOutlet UITextField *valueField;
     id<ResultValueCellDelegate> resultValueDelegate;
 }
-@property (nonatomic, strong) IBOutlet UILabel *title;
-@property (nonatomic, strong) IBOutlet UITextField *valueField;
+@property (nonatomic, weak) IBOutlet UILabel *inputTitle;
+@property (nonatomic, weak) IBOutlet UITextField *inputValueField;
 @property (nonatomic, weak) id<ResultValueCellDelegate> resultValueDelegate;
+@property NSInteger inputValueKind;
 - (void)setDelegate:(id)viewControllerDelegate;
 @end
 

@@ -9,7 +9,8 @@
 #import "ResultSegmentedCell.h"
 
 @implementation ResultSegmentedCell
-@synthesize query,switchControl;    
+@synthesize query = _query;
+@synthesize switchControl = _switchControl;    
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -26,13 +27,13 @@
 
 - (IBAction)isUndetectable:(id)sender{
     if (self.switchControl.isOn) {
-        super.valueField.text = NSLocalizedString(@"undetectable", @"undetectable");
-        super.valueField.enabled = NO;
+        super.inputValueField.text = NSLocalizedString(@"undetectable", @"undetectable");
+        super.inputValueField.enabled = NO;
         [super.resultValueDelegate setValueString:NSLocalizedString(@"undetectable", @"undetectable") withTag:self.tag];
     }
     else{
-        super.valueField.text = @"";
-        super.valueField.enabled = YES;
+        super.inputValueField.text = @"";
+        super.inputValueField.enabled = YES;
         [super.resultValueDelegate setValueString:@"" withTag:self.tag];        
     }
 }

@@ -298,21 +298,21 @@
             } 
             [resultCell setDelegate:self];
         }
-        [[resultCell title]setTextColor:TEXTCOLOUR];
+        [[resultCell inputTitle]setTextColor:TEXTCOLOUR];
         int row = indexPath.row;
         switch (row) {
             case 0:
-                [[resultCell title]setText:NSLocalizedString(@"CD4 Count", @"CD4 Count")];
+                [[resultCell inputTitle]setText:NSLocalizedString(@"CD4 Count", @"CD4 Count")];
                 if (0 < [self.cd4 intValue]) {
-                    [[resultCell valueField]setText:[NSString stringWithFormat:@"%d",[self.cd4 intValue]]];
-                    [[resultCell valueField]setTextColor:[UIColor blackColor]];
+                    [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.cd4 intValue]]];
+                    [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                 }
                 break;
             case 1:
-                [[resultCell title]setText:NSLocalizedString(@"CD4 %", @"CD4 %")];
+                [[resultCell inputTitle]setText:NSLocalizedString(@"CD4 %", @"CD4 %")];
                 if (0 < [self.cd4Percent floatValue]) {
-                    [[resultCell valueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]]];
-                    [[resultCell valueField]setTextColor:[UIColor blackColor]];
+                    [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]]];
+                    [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                 }
                 break;
         }
@@ -337,44 +337,44 @@
         int row = indexPath.row;
         switch (row) {
             case 0:
-                [[segCell title]setText:NSLocalizedString(@"Viral Load",@"Viral Load")];
-                [[segCell title]setTextColor:TEXTCOLOUR];
+                [[segCell inputTitle]setText:NSLocalizedString(@"Viral Load",@"Viral Load")];
+                [[segCell inputTitle]setTextColor:TEXTCOLOUR];
                 [[segCell query]setText:NSLocalizedString(@"undetectable?",@"undetectable?")];
                 [[segCell query]setTextColor:TEXTCOLOUR];
                 if (40 <= [self.vlHIV intValue]) {
-                    [[segCell valueField]setText:[NSString stringWithFormat:@"%d",[self.vlHIV intValue]]];
-                    [[segCell valueField]setTextColor:[UIColor blackColor]];
+                    [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHIV intValue]]];
+                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
                     [[segCell switchControl]setOn:FALSE];
                 }
                 if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue]){
-                    [[segCell valueField]setTextColor:[UIColor blackColor]];
-                    [[segCell valueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
-                    [[segCell valueField]setEnabled:NO];
+                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
+                    [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
+                    [[segCell inputValueField]setEnabled:NO];
                     [[segCell switchControl]setOn:TRUE];
                 }
                 if(0 > [self.vlHIV intValue]){
-                    [[segCell valueField]setEnabled:YES];
+                    [[segCell inputValueField]setEnabled:YES];
                     [[segCell switchControl]setOn:FALSE];
                 }
                 break;
             case 1:
-                [[segCell title]setText:NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC")];
-                [[segCell title]setTextColor:TEXTCOLOUR];
+                [[segCell inputTitle]setText:NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC")];
+                [[segCell inputTitle]setTextColor:TEXTCOLOUR];
                 [[segCell query]setText:NSLocalizedString(@"undetectable?",@"undetectable?")];
                 [[segCell query]setTextColor:TEXTCOLOUR];
                 if (40 <= [self.vlHepC intValue]) {
-                    [[segCell valueField]setText:[NSString stringWithFormat:@"%d",[self.vlHepC intValue]]];
-                    [[segCell valueField]setTextColor:[UIColor blackColor]];
+                    [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHepC intValue]]];
+                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
                     [[segCell switchControl]setOn:FALSE];
                 }
                 if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue]){
-                    [[segCell valueField]setTextColor:[UIColor blackColor]];
-                    [[segCell valueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
-                    [[segCell valueField]setEnabled:NO];
+                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
+                    [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
+                    [[segCell inputValueField]setEnabled:NO];
                     [[segCell switchControl]setOn:TRUE];
                 }
                 if(0 > [self.vlHepC intValue]){
-                    [[segCell valueField]setEnabled:NO];
+                    [[segCell inputValueField]setEnabled:NO];
                     [[segCell switchControl]setOn:TRUE];
                 }
                 break;
