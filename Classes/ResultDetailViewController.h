@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ResultValueCell.h"
+#import "MoreResultsViewController.h"
 @class iStayHealthyRecord, SetDateCell, Results;
 
-@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, ResultValueCellDelegate>{
+@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, ResultValueCellDelegate, MoreBloodResultsDelegate>{
 @private
 }
 @property (nonatomic, strong) NSDate *resultsDate;
@@ -25,8 +26,8 @@
 @property (nonatomic, strong) NSNumber *ldl;
 @property (nonatomic, strong) NSNumber *cholesterol;
 @property (nonatomic, strong) NSNumber *weight;
-@property (nonatomic, strong) NSString *bloodpressure;
-
+@property (nonatomic, strong) NSNumber *systole;
+@property (nonatomic, strong) NSNumber *diastole;
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
 - (void)changeResultsDate;

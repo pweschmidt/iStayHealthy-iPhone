@@ -12,12 +12,31 @@
 #import "Utilities.h"
 #import "SetDateCell.h"
 #import "ResultValueCell.h"
+#import "MoreResultsCell.h"
 #import "ResultSegmentedCell.h"
 #import "GeneralSettings.h"
+#import "ChartSettings.h"
+#import "MoreOtherResultsViewController.h"
+#import "MoreBloodResultsViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ResultChangeViewController
-@synthesize results, record;
-@synthesize cd4,cd4Percent,vlHIV,vlHepC, resultsDate, changeDateCell;
+@synthesize resultsDate = _resultsDate;
+@synthesize results = _results;
+@synthesize record = _record;
+@synthesize vlHIV = _vlHIV;
+@synthesize vlHepC = _vlHepC;
+@synthesize cd4 = _cd4;
+@synthesize cd4Percent = _cd4Percent;
+@synthesize glucose = _glucose;
+@synthesize ldl = _ldl;
+@synthesize hdl = _hdl;
+@synthesize cholesterol = _cholesterol;
+@synthesize weight = _weight;
+@synthesize systole = _systole;
+@synthesize diastole = _diastole;
+@synthesize changeDateCell = _changeDateCell;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,33 +47,61 @@
     return self;
 }
 
-- (id)initWithResults:(Results *)_results withMasterRecord:(iStayHealthyRecord *)masterRecord{
+- (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord{
     self = [super initWithNibName:@"ResultChangeViewController" bundle:nil];
     if (self) {
-        self.results = _results;
+        self.results = storedResults;
         self.record = masterRecord;
         self.vlHIV = [NSNumber numberWithFloat:-1.0];
         self.vlHepC = [NSNumber numberWithFloat:-1.0];
         self.cd4 = [NSNumber numberWithFloat:-1.0];
         self.cd4Percent = [NSNumber numberWithFloat:-1.0];
+        self.glucose = [NSNumber numberWithFloat:-1.0];
+        self.cholesterol = [NSNumber numberWithFloat:-1.0];
+        self.hdl = [NSNumber numberWithFloat:-1.0];
+        self.ldl = [NSNumber numberWithFloat:-1.0];
+        self.weight = [NSNumber numberWithFloat:-1.0];
+        self.systole = [NSNumber numberWithFloat:-1.0];
+        self.diastole = [NSNumber numberWithFloat:-1.0];
+        self.resultsDate = [NSDate date];
 
-        if (nil != results.ViralLoad) {
-            self.vlHIV = results.ViralLoad;
+        if (nil != self.results.ViralLoad) {
+            self.vlHIV = self.results.ViralLoad;
         }
-        if (nil != results.CD4) {
-            self.cd4 = results.CD4;
+        if (nil != self.results.CD4) {
+            self.cd4 = self.results.CD4;
         }        
-        if (nil != results.CD4Percent) {
-            self.cd4Percent = results.CD4Percent;            
+        if (nil != self.results.CD4Percent) {
+            self.cd4Percent = self.results.CD4Percent;            
         }
-        if (nil != results.HepCViralLoad) {
-            self.vlHepC = results.HepCViralLoad;
+        if (nil != self.results.HepCViralLoad) {
+            self.vlHepC = self.results.HepCViralLoad;
         }
-        if (nil != results.ResultsDate) {
-            self.resultsDate = results.ResultsDate;
+        if (nil != self.results.ResultsDate) {
+            self.resultsDate = self.results.ResultsDate;
+        }
+        if (nil != self.results.Glucose) {
+            self.glucose = self.results.Glucose;
+        }
+        if (nil != self.results.TotalCholesterol) {
+            self.cholesterol = self.results.TotalCholesterol;
+        }
+        if (nil != self.results.HDL) {
+            self.hdl = self.results.HDL;
+        }
+        if (nil != self.results.LDL) {
+            self.ldl = self.results.LDL;
+        }
+        if (nil != self.results.Weight) {
+            self.weight = self.results.Weight;
+        }
+        if (nil != self.results.Systole) {
+            self.systole = self.results.Systole;
+        }
+        if (nil != self.results.Diastole) {
+            self.diastole = self.results.Diastole;
         }
         else {
-            self.resultsDate = [NSDate date];
         }
     }
     return self;
@@ -63,14 +110,21 @@
 
 
 - (IBAction) save:					(id) sender{
-	NSManagedObjectContext *context = [results managedObjectContext];
-    results.ResultsDate = self.resultsDate;
-    results.CD4 = self.cd4;
-    results.CD4Percent = self.cd4Percent;
-    results.ViralLoad = self.vlHIV;
-    results.HepCViralLoad = self.vlHepC;
-    results.UID = [Utilities GUID];
-    record.UID = [Utilities GUID];
+	NSManagedObjectContext *context = [self.results managedObjectContext];
+    self.results.ResultsDate = self.resultsDate;
+    self.results.CD4 = self.cd4;
+    self.results.CD4Percent = self.cd4Percent;
+    self.results.ViralLoad = self.vlHIV;
+    self.results.HepCViralLoad = self.vlHepC;
+    self.results.Systole = self.systole;
+    self.results.Diastole = self.diastole;
+    self.results.Weight = self.weight;
+    self.results.Glucose = self.glucose;
+    self.results.TotalCholesterol = self.cholesterol;
+    self.results.HDL = self.hdl;
+    self.results.LDL = self.ldl;
+    self.results.UID = [Utilities GUID];
+    self.record.UID = [Utilities GUID];
     
 	NSError *error = nil;
 	if (![context save:&error]) {
@@ -103,6 +157,27 @@
             break;
         case 101:
             self.cd4Percent = number;
+            break;
+        case 1000:
+            self.glucose = number;
+            break;
+        case 1001:
+            self.cholesterol = number;
+            break;
+        case 1002:
+            self.hdl = number;
+            break;
+        case 1003:
+            self.ldl = number;
+            break;
+        case 100000:
+            self.weight = number;
+            break;
+        case 11000:
+            self.systole = number;
+            break;
+        case 12000:
+            self.diastole = number;
             break;
     }
 }
@@ -173,9 +248,9 @@
 
 
 - (void) removeSQLEntry{
-    [record removeResultsObject:results];
-    NSManagedObjectContext *context = results.managedObjectContext;
-    [context deleteObject:results];
+    [self.record removeResultsObject:self.results];
+    NSManagedObjectContext *context = self.results.managedObjectContext;
+    [context deleteObject:self.results];
     NSError *error = nil;
     if (![context save:&error]) {
 #ifdef APPDEBUG
@@ -239,24 +314,36 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 3;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 4;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (0 == section) {
 		return 1;
 	}
-    return 2;
+    else if(1 == section){
+        return 2;
+    }
+    else if(2 == section){
+        return 2;
+    }
+    else{
+        return 2;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (2 == indexPath.section) {
-        return 80;
+        return 69;
     }
-	return 48.0;
+    else if (2 > indexPath.section ){
+        return 48;
+    }
+    else {
+        return 44;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -316,6 +403,7 @@
                 }
                 break;
         }
+        resultCell.colourCodeView.layer.cornerRadius = 5;
         [resultCell setTag:tag];
         return resultCell;        
     }
@@ -334,6 +422,7 @@
             }  
             [segCell setDelegate:self];
         }
+        segCell.colourCodeView.layer.cornerRadius = 5;
         int row = indexPath.row;
         switch (row) {
             case 0:
@@ -382,6 +471,33 @@
         [segCell setTag:tag];
         return segCell;        
     }
+    if (3 == indexPath.section) {
+        NSString *identifier = @"MoreResultsCell";
+        MoreResultsCell *moreResultsCell = (MoreResultsCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == moreResultsCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MoreResultsCell" owner:self options:nil];
+            for (id currentObject in cellObjects) {
+                if ([currentObject isKindOfClass:[MoreResultsCell class]]) {
+                    moreResultsCell = (MoreResultsCell *)currentObject;
+                    break;
+                }
+            } 
+        }
+        moreResultsCell.moreTitleLabel.textColor = TEXTCOLOUR;
+        moreResultsCell.hasMoreLabel.text = @"";
+        moreResultsCell.colourCodeView.layer.cornerRadius = 5;
+        if (0 == indexPath.row) 
+        {
+            moreResultsCell.moreTitleLabel.text = @"More Blood Results";
+            moreResultsCell.colourCodeView.backgroundColor = DARK_RED;
+        }
+        else 
+        {
+            moreResultsCell.moreTitleLabel.text = @"More Other Results";
+            moreResultsCell.colourCodeView.backgroundColor = DARK_GREEN;
+        }
+        return moreResultsCell;
+    }
     return nil;    
 }
 
@@ -394,6 +510,34 @@
 	if (0 == indexPath.section) {
 		[self changeResultsDate];
 	}
+    if (3 == indexPath.section) 
+    {
+        if (0 == indexPath.row) 
+        {
+            NSArray *keys = [NSArray arrayWithObjects:@"glucose", @"cholesterol", @"hdl", @"ldl", nil];
+            NSArray *values = [NSArray arrayWithObjects:self.glucose, self.cholesterol, self.hdl, self.ldl, nil];
+            NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+            MoreBloodResultsViewController *bloodController = [[MoreBloodResultsViewController alloc] initWithResults:resultsDictionary];
+            [bloodController setResultDelegate:self];
+            [self.navigationController pushViewController:bloodController animated:YES];
+        }
+        else 
+        {
+            NSArray *keys = [NSArray arrayWithObjects:@"weight", @"systole", @"diastole", nil];
+            NSArray *values = [NSArray arrayWithObjects:self.weight, self.systole, self.diastole,nil];
+            NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+            MoreOtherResultsViewController *otherController = [[MoreOtherResultsViewController alloc] initWithResults:resultsDictionary systoleTag:11000 diastoleTag:12000];
+            [otherController setResultDelegate:self];
+            [self.navigationController pushViewController:otherController animated:YES];
+        }
+    }
 }
+
+#pragma mark - delegate methods
+
+- (void)setResultString:(NSString *)valueString forTag:(NSInteger)tag{
+    [self setValueString:valueString withTag:tag];
+}
+
 
 @end

@@ -8,18 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ResultValueCell.h"
+#import "MoreResultsViewController.h"
 
 @class Results, iStayHealthyRecord, SetDateCell;
-@interface ResultChangeViewController : UITableViewController <UIAlertViewDelegate, ResultValueCellDelegate, UIActionSheetDelegate>{
-@private
-	NSDate *resultsDate;
-    Results                 *results;
-    SetDateCell *changeDateCell;    
-    iStayHealthyRecord *record;
-    NSNumber *cd4;
-    NSNumber *cd4Percent;
-    NSNumber *vlHIV;
-    NSNumber *vlHepC;
+@interface ResultChangeViewController : UITableViewController <UIAlertViewDelegate, ResultValueCellDelegate, UIActionSheetDelegate, MoreBloodResultsDelegate>{
 }
 @property (nonatomic, strong) NSDate *resultsDate;
 @property (nonatomic, strong) SetDateCell *changeDateCell;
@@ -29,10 +21,17 @@
 @property (nonatomic, strong) NSNumber *cd4Percent;
 @property (nonatomic, strong) NSNumber *vlHIV;
 @property (nonatomic, strong) NSNumber *vlHepC;
+@property (nonatomic, strong) NSNumber *glucose;
+@property (nonatomic, strong) NSNumber *hdl;
+@property (nonatomic, strong) NSNumber *ldl;
+@property (nonatomic, strong) NSNumber *cholesterol;
+@property (nonatomic, strong) NSNumber *weight;
+@property (nonatomic, strong) NSNumber *systole;
+@property (nonatomic, strong) NSNumber *diastole;
 - (IBAction) save:					(id) sender;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;
-- (id)initWithResults:(Results *)_results withMasterRecord:(iStayHealthyRecord *)masterRecord;
+- (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord;
 - (NSNumber *)valueFromString:(NSString *)string;
 - (void)changeResultsDate;
 @end

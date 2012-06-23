@@ -14,6 +14,10 @@
 #import "ResultValueCell.h"
 #import "ResultSegmentedCell.h"
 #import "GeneralSettings.h"
+#import "MoreResultsCell.h"
+#import "ChartSettings.h"
+#import "MoreOtherResultsViewController.h"
+#import "MoreBloodResultsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ResultDetailViewController
@@ -29,8 +33,8 @@
 @synthesize hdl = _hdl;
 @synthesize cholesterol = _cholesterol;
 @synthesize weight = _weight;
-@synthesize bloodpressure = _bloodpressure;
-
+@synthesize systole = _systole;
+@synthesize diastole = _diastole;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -45,6 +49,13 @@
         self.cd4 = [NSNumber numberWithFloat:-1.0];
         self.cd4Percent = [NSNumber numberWithFloat:-1.0];
         self.vlHepC = [NSNumber numberWithFloat:-1.0];
+        self.glucose = [NSNumber numberWithFloat:-1.0];
+        self.cholesterol = [NSNumber numberWithFloat:-1.0];
+        self.hdl = [NSNumber numberWithFloat:-1.0];
+        self.ldl = [NSNumber numberWithFloat:-1.0];
+        self.weight = [NSNumber numberWithFloat:-1.0];
+        self.systole = [NSNumber numberWithFloat:-1.0];
+        self.diastole = [NSNumber numberWithFloat:-1.0];
     }
     return self;
 }
@@ -79,16 +90,23 @@
  @id
  */
 - (IBAction) save: (id) sender{
-	NSManagedObjectContext *context = [self.record managedObjectContext];
-	Results *result = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
-	[self.record addResultsObject:result];
+    NSManagedObjectContext *context = [self.record managedObjectContext];
+    Results *results = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
+	[self.record addResultsObject:results];
     self.record.UID = [Utilities GUID];
-    result.UID = [Utilities GUID];
-    result.ResultsDate = self.resultsDate;
-    result.ViralLoad = self.vlHIV;
-    result.HepCViralLoad = self.vlHepC;
-    result.CD4 = self.cd4;
-    result.CD4Percent = self.cd4Percent;
+    results.UID = [Utilities GUID];
+    results.ResultsDate = self.resultsDate;
+    results.ViralLoad = self.vlHIV;
+    results.HepCViralLoad = self.vlHepC;
+    results.CD4 = self.cd4;
+    results.CD4Percent = self.cd4Percent;
+    results.Systole = self.systole;
+    results.Diastole = self.diastole;
+    results.Weight = self.weight;
+    results.Glucose = self.glucose;
+    results.TotalCholesterol = self.cholesterol;
+    results.HDL = self.hdl;
+    results.LDL = self.ldl;
     
 	NSError *error = nil;
 	if (![context save:&error]) {
@@ -160,23 +178,26 @@
         case 101:
             self.cd4Percent = number;
             break;
-        case 102:
+        case 1000:
             self.glucose = number;
             break;
-        case 103:
+        case 1001:
             self.cholesterol = number;
             break;
-        case 104:
+        case 1002:
             self.hdl = number;
             break;
-        case 105:
+        case 1003:
             self.ldl = number;
             break;
-        case 106:
+        case 100000:
             self.weight = number;
             break;
-        case 107:
-            self.bloodpressure = valueString;
+        case 11000:
+            self.systole = number;
+            break;
+        case 12000:
+            self.diastole = number;
             break;
     }
 }
@@ -194,17 +215,10 @@
 
 #pragma mark -
 #pragma mark Table view data source
-/**
- @return 3 sections
- */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 3;
+    return 4;
 }
 
-/**
- @return 2 rows for section 0, 1 for section 1 (resultsdate)
- */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (0 == section) {
 		return 1;
@@ -212,66 +226,27 @@
     else if(1 == section){
         return 2;
     }
-    else {
-        return 8;
+    else if(2 == section){
+        return 2;
+    }
+    else{
+        return 2;
     }
 }
 
-/**
- for viralload we get more height as with have a togglebutton in there
- @tableView
- @indexPath
- @return height as CGFloat
- */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (1 == indexPath.section) {
-        return 80;
+    if (2 == indexPath.section) {
+        return 69;
     }
-	return 48.0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (0 == section) {
-        return 10;
+    else if (2 > indexPath.section ){
+        return 48;
     }
     else {
-        return 25;
+        return 44;
     }
+        
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (0 == section) {
-        UIView *sectionHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 10)];
-        sectionHeaderView.backgroundColor = [UIColor clearColor];
-        return sectionHeaderView;
-    }
-    else {
-        CGRect frame = CGRectMake(20, 20, 280, 25);
-        UIView *sectionHeaderView = [[UIView alloc] initWithFrame:frame];
-        CGRect colourCodeFrame = CGRectMake(20, 0, 10, 20);
-        CGRect titleFrame = CGRectMake(35,0,255,25);
-        
-        UIView *colourCodeView = [[UIView alloc]initWithFrame:colourCodeFrame];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textColor = [UIColor darkGrayColor];
-        titleLabel.textAlignment = UITextAlignmentCenter;
-        switch (section) {
-            case 1:
-                colourCodeView.layer.backgroundColor = [UIColor blueColor].CGColor;
-                titleLabel.text = NSLocalizedString(@"HIVResults", @"HIVResults");
-                break;
-            case 2:
-                colourCodeView.layer.backgroundColor = [UIColor redColor].CGColor;
-                titleLabel.text = NSLocalizedString(@"GeneralBloods", @"GeneralBloods");
-                break;
-        }
-        
-        [sectionHeaderView addSubview:colourCodeView];
-        [sectionHeaderView addSubview:titleLabel];
-        return sectionHeaderView;
-    }
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (0 == indexPath.section) {
@@ -297,6 +272,39 @@
         return dateCell;
     }
     if (1 == indexPath.section) {
+        int tag = indexPath.row + 100;
+        
+        NSString *identifier = @"ResultValueCell";
+        ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == resultCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
+            for (id currentObject in cellObjects) {
+                if ([currentObject isKindOfClass:[ResultValueCell class]]) {
+                    resultCell = (ResultValueCell *)currentObject;
+                    break;
+                }
+            } 
+            [resultCell setDelegate:self];
+        }
+        resultCell.inputTitle.textColor = TEXTCOLOUR;
+        resultCell.colourCodeView.backgroundColor = DARK_YELLOW;
+        resultCell.colourCodeView.layer.cornerRadius = 5;
+        
+        int row = indexPath.row;
+        switch (row) {
+            case 0:
+                resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
+                resultCell.inputValueKind = INTEGERINPUT;
+                break;
+            case 1:
+                resultCell.inputTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
+                resultCell.inputValueKind = FLOATINPUT;
+                break;
+        }
+        [resultCell setTag:tag];
+        return resultCell;        
+    }
+    if (2 == indexPath.section) {
         int tag = 10 + indexPath.row;
         
         NSString *identifier = @"ResultSegmentedCell";    
@@ -316,6 +324,8 @@
         segCell.inputTitle.textColor = TEXTCOLOUR;
         segCell.query.text = NSLocalizedString(@"undetectable?",@"undetectable?");
         segCell.query.textColor = TEXTCOLOUR;
+        segCell.colourCodeView.backgroundColor = DARK_BLUE;
+        segCell.colourCodeView.layer.cornerRadius = 5;
         segCell.tag = tag;
         switch (row) {
             case 0:
@@ -331,61 +341,34 @@
         }
         return segCell;        
     }
-    if (2 == indexPath.section) {
-        int tag = indexPath.row + 100;
-        
-        NSString *identifier = @"ResultValueCell";
-        ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == resultCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
+    if (3 == indexPath.section) {
+        NSString *identifier = @"MoreResultsCell";
+        MoreResultsCell *moreResultsCell = (MoreResultsCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == moreResultsCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MoreResultsCell" owner:self options:nil];
             for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[ResultValueCell class]]) {
-                    resultCell = (ResultValueCell *)currentObject;
+                if ([currentObject isKindOfClass:[MoreResultsCell class]]) {
+                    moreResultsCell = (MoreResultsCell *)currentObject;
                     break;
                 }
             } 
-            [resultCell setDelegate:self];
         }
-        resultCell.inputTitle.textColor = TEXTCOLOUR;
-        int row = indexPath.row;
-        switch (row) {
-            case 0:
-                resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
-                resultCell.inputValueKind = INTEGERINPUT;
-                break;
-            case 1:
-                resultCell.inputTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
-                resultCell.inputValueKind = FLOATINPUT;
-                break;
-            case 2:
-                resultCell.inputTitle.text = NSLocalizedString(@"Glucose", @"Glucose");
-                resultCell.inputValueKind = FLOATINPUT;
-                break;
-            case 3:
-                resultCell.inputTitle.text = NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol");
-                resultCell.inputValueKind = FLOATINPUT;
-                break;
-            case 4:
-                resultCell.inputTitle.text = NSLocalizedString(@"HDL", @"HDL");
-                resultCell.inputValueKind = FLOATINPUT;
-                break;
-            case 5:
-                resultCell.inputTitle.text = NSLocalizedString(@"LDL", @"LDL");
-                resultCell.inputValueKind = FLOATINPUT;
-                break;
-            case 6:
-                resultCell.inputTitle.text = NSLocalizedString(@"Weight", @"Weight");
-                resultCell.inputValueKind = FLOATINPUT;
-                break;
-            case 7:
-                resultCell.inputTitle.text = NSLocalizedString(@"Blood Pressure", @"Blood Pressure");
-                resultCell.inputValueKind = BLOODPRESSUREINPUT;
-                break;
+        moreResultsCell.moreTitleLabel.textColor = TEXTCOLOUR;
+        moreResultsCell.hasMoreLabel.text = @"";
+        moreResultsCell.colourCodeView.layer.cornerRadius = 5;
+        if (0 == indexPath.row) 
+        {
+            moreResultsCell.moreTitleLabel.text = @"More Blood Results";
+            moreResultsCell.colourCodeView.backgroundColor = DARK_RED;
         }
-        [resultCell setTag:tag];
-        return resultCell;        
+        else 
+        {
+            moreResultsCell.moreTitleLabel.text = @"More Other Results";
+            moreResultsCell.colourCodeView.backgroundColor = DARK_GREEN;
+        }
+        return moreResultsCell;
     }
-    return nil;
+   return nil;
 }
 
 
@@ -401,8 +384,35 @@
 	if (0 == indexPath.section) {
 		[self changeResultsDate];
 	}
+    if (3 == indexPath.section) 
+    {
+        if (0 == indexPath.row) 
+        {
+            NSArray *keys = [NSArray arrayWithObjects:@"glucose", @"cholesterol", @"hdl", @"ldl", nil];
+            NSArray *values = [NSArray arrayWithObjects:self.glucose, self.cholesterol, self.hdl, self.ldl, nil];
+            NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+            MoreBloodResultsViewController *bloodController = [[MoreBloodResultsViewController alloc] initWithResults:resultsDictionary];
+            [bloodController setResultDelegate:self];
+            [self.navigationController pushViewController:bloodController animated:YES];
+        }
+        else 
+        {
+            NSArray *keys = [NSArray arrayWithObjects:@"weight", @"systole", @"diastole", nil];
+            NSArray *values = [NSArray arrayWithObjects:self.weight, self.systole, self.diastole,nil];
+            NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+            MoreOtherResultsViewController *otherController = [[MoreOtherResultsViewController alloc] initWithResults:resultsDictionary systoleTag:11000 diastoleTag:12000];
+            [otherController setResultDelegate:self];
+            [self.navigationController pushViewController:otherController animated:YES];
+        }
+    }
 }
 
+
+#pragma mark - delegate methods
+
+- (void)setResultString:(NSString *)valueString forTag:(NSInteger)tag{
+    [self setValueString:valueString withTag:tag];
+}
 
 #pragma mark -
 #pragma mark Memory management

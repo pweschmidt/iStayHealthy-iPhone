@@ -13,10 +13,12 @@
 #import "NSArray-Set.h"
 #import "Results.h"
 #import "GeneralSettings.h"
+#import "ChartSettings.h"
 #import "ResultChangeViewController.h"
 #import "ResultListCell.h"
 #import "UINavigationBar-Button.h"
 #import "ResultsSettingsTableViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation NewResultsViewController
 
@@ -155,6 +157,38 @@
 	Results *current = (Results *)[self.allResultsInReverseOrder objectAtIndex:indexPath.row];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd MMM YYYY";
+    cell.bloodView.layer.cornerRadius = 5;
+    cell.serumsView.layer.cornerRadius = 5;
+    cell.cd4ColourView.layer.cornerRadius = 5;
+    cell.otherView.layer.cornerRadius = 5;
+    
+    if ( 0 < [current.CD4 floatValue] || 0 < [current.CD4Percent floatValue]) {
+        cell.cd4ColourView.backgroundColor = DARK_YELLOW;
+    }
+    else {
+        cell.cd4ColourView.backgroundColor = [UIColor clearColor];
+    }
+    
+    if (0 <= [current.ViralLoad floatValue] || 0 <= [current.HepCViralLoad floatValue]) {
+        cell.serumsView.backgroundColor = DARK_BLUE;
+    }
+    else {
+        cell.serumsView.backgroundColor = [UIColor clearColor];
+    }
+    if (0 < [current.Glucose floatValue] || 0 < [current.HDL floatValue] || [current.LDL floatValue] || 0 < [current.TotalCholesterol floatValue]) {
+        cell.bloodView.backgroundColor = DARK_RED;
+    }
+    else {
+        cell.bloodView.backgroundColor = [UIColor clearColor];
+    }
+    
+    if (0 < [current.Weight floatValue] || (0 < [current.Systole floatValue] && 0 < [current.Diastole floatValue])) {
+        cell.otherView.backgroundColor = DARK_GREEN;
+    }
+    else {
+        cell.otherView.backgroundColor = [UIColor clearColor];
+    }
+    
     [[cell dateLabel]setText:[formatter stringFromDate:current.ResultsDate]];
     [[cell cd4Title]setText:NSLocalizedString(@"CD4 Count",nil)];
     [[cell cd4Title]setTextColor:TEXTCOLOUR];

@@ -11,6 +11,11 @@
 @implementation ResultListCell
 @synthesize dateLabel, cd4Title, cd4PercentTitle, vlTitle, cd4Value, cd4PercentValue, vlValue;
 
+
+@synthesize cd4ColourView = _cd4ColourView;
+@synthesize serumsView = _serumsView;
+@synthesize bloodView = _bloodView;
+@synthesize otherView = _otherView;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *inputValueField;
 @property (nonatomic, weak) id<ResultValueCellDelegate> resultValueDelegate;
 @property NSInteger inputValueKind;
+@property (nonatomic, weak) IBOutlet UIView *colourCodeView;
 - (void)setDelegate:(id)viewControllerDelegate;
 @end
 

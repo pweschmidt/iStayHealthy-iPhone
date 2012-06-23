@@ -1,33 +1,32 @@
 //
-//  ResultValueCell.m
+//  PressureCell.m
 //  iStayHealthy
 //
-//  Created by peterschmidt on 05/12/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by peterschmidt on 22/06/2012.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ResultValueCell.h"
+#import "PressureCell.h"
 
-@implementation ResultValueCell
-@synthesize inputTitle = _inputTitle;
-@synthesize inputValueField = _inputValueField;
-@synthesize resultValueDelegate =_resultValueDelegate;
-@synthesize inputValueKind = _inputValueKind;
+@implementation PressureCell
+@synthesize pressureLabel = _pressureLabel;
+@synthesize systoleField = _systoleField;
+@synthesize diastoleField = _diastoleField;
+@synthesize pressureDelegate = _pressureDelegate;
 @synthesize colourCodeView = _colourCodeView;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-#ifdef APPDEBUG
-    NSLog(@"ResultValueCell initWithStyle");
-#endif
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        // Initialization code
     }
     return self;
 }
-- (void)setDelegate:(id)viewControllerDelegate{
-    self.resultValueDelegate = viewControllerDelegate;
-}
 
+- (void)setDelegate:(id)viewControllerDelegate
+{
+    self.pressureDelegate = viewControllerDelegate;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -39,7 +38,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    [self.resultValueDelegate setValueString:textField.text withTag:self.tag];
+//    [self.resultValueDelegate setValueString:textField.text withTag:self.tag];
 }
 
 /**
@@ -55,28 +54,12 @@
  
  Finally, to ensure that we can convert a float value from continental comma separation to dot separation
  we replace any occurrances of , with .
-*/
+ */
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-
-    NSString *separator = [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];
+    
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSString *expression = nil;
-    if (INTEGERINPUT == self.inputValueKind) {
-        expression = @"^([0-9]+)?$";
-    }
-    else if(FLOATINPUT == self.inputValueKind){
-        if ([@"." isEqualToString:separator]) {
-            expression = @"^([0-9]{1,3})?(\\.([0-9]{1,2})?)?$";
-        }
-        else 
-        {
-            expression = @"^([0-9]{1,3})?(,([0-9]{1,2})?)?$";
-        }
-    }
-    else if(BLOODPRESSUREINPUT == self.inputValueKind){
-        expression = @"^([0-9]{1,3})?(\\\([0-9]{1,2})?)?$";
-    }
-
+    NSString *expression = @"^([0-9]{1,3})?$";
+    
     NSError *error = nil;
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:expression 
@@ -91,17 +74,18 @@
     
     
     if (0 < numberOfMatches) {
-        NSString *normalisedString = [newString stringByReplacingOccurrencesOfString:@"," withString:@"."];
-        [self.resultValueDelegate setValueString:normalisedString withTag:self.tag];
+        [self.pressureDelegate setSystole:self.systoleField.text diastole:self.diastoleField.text];
+//        [self.resultValueDelegate setValueString:normalisedString withTag:self.tag];
         return YES;
     }
     return NO;
 }
 
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
+
     // Configure the view for the selected state
 }
 
