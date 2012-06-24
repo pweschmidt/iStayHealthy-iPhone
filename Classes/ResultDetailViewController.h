@@ -28,6 +28,11 @@
 @property (nonatomic, strong) NSNumber *weight;
 @property (nonatomic, strong) NSNumber *systole;
 @property (nonatomic, strong) NSNumber *diastole;
+@property (nonatomic, strong) NSNumber *hemoglobulin;
+@property (nonatomic, strong) NSNumber *whiteCells;
+@property (nonatomic, strong) NSNumber *redCells;
+@property (nonatomic, strong) NSNumber *platelets;
+
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
 - (void)changeResultsDate;

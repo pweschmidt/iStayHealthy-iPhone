@@ -8,15 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ResultListCell : UITableViewCell{
-    IBOutlet UILabel *dateLabel;
-    IBOutlet UILabel *cd4Title;
-    IBOutlet UILabel *cd4PercentTitle;
-    IBOutlet UILabel *vlTitle;
-    IBOutlet UILabel *cd4Value;
-    IBOutlet UILabel *cd4PercentValue;
-    IBOutlet UILabel *vlValue;
-}
+@interface ResultListCell : UITableViewCell
+
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, strong) IBOutlet UILabel *cd4Title;
 @property (nonatomic, strong) IBOutlet UILabel *cd4PercentTitle;

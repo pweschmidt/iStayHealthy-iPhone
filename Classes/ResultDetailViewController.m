@@ -35,6 +35,10 @@
 @synthesize weight = _weight;
 @synthesize systole = _systole;
 @synthesize diastole = _diastole;
+@synthesize hemoglobulin = _hemoglobulin;
+@synthesize whiteCells = _whiteCells;
+@synthesize redCells = _redCells;
+@synthesize platelets = _platelets;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -56,6 +60,10 @@
         self.weight = [NSNumber numberWithFloat:-1.0];
         self.systole = [NSNumber numberWithFloat:-1.0];
         self.diastole = [NSNumber numberWithFloat:-1.0];
+        self.hemoglobulin = [NSNumber numberWithFloat:-1.0];
+        self.whiteCells = [NSNumber numberWithFloat:-1.0];
+        self.redCells = [NSNumber numberWithFloat:-1.0];
+        self.platelets = [NSNumber numberWithFloat:-1.0];
     }
     return self;
 }
@@ -107,6 +115,10 @@
     results.TotalCholesterol = self.cholesterol;
     results.HDL = self.hdl;
     results.LDL = self.ldl;
+    results.Hemoglobulin = self.hemoglobulin;
+    results.WhiteBloodCellCount = self.whiteCells;
+    results.PlateletCount = self.platelets;
+//TODO - add to data model    results.RedBloodCellCount = self.redCells;
     
 	NSError *error = nil;
 	if (![context save:&error]) {
@@ -190,6 +202,18 @@
         case 1003:
             self.ldl = number;
             break;
+        case 1004:
+            self.hemoglobulin = number;
+            break;
+        case 1005:
+            self.whiteCells = number;
+            break;
+        case 1006:
+            self.redCells = number;
+            break;
+        case 1007:
+            self.platelets = number;
+            break;            
         case 100000:
             self.weight = number;
             break;
@@ -388,8 +412,8 @@
     {
         if (0 == indexPath.row) 
         {
-            NSArray *keys = [NSArray arrayWithObjects:@"glucose", @"cholesterol", @"hdl", @"ldl", nil];
-            NSArray *values = [NSArray arrayWithObjects:self.glucose, self.cholesterol, self.hdl, self.ldl, nil];
+            NSArray *keys = [NSArray arrayWithObjects:@"glucose", @"cholesterol", @"hdl", @"ldl", @"hemoglobulin", @"whiteCells", @"redCells", @"platelets", nil];
+            NSArray *values = [NSArray arrayWithObjects:self.glucose, self.cholesterol, self.hdl, self.ldl, self.hemoglobulin, self.whiteCells, self.redCells, self.platelets, nil];
             NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
             MoreBloodResultsViewController *bloodController = [[MoreBloodResultsViewController alloc] initWithResults:resultsDictionary];
             [bloodController setResultDelegate:self];

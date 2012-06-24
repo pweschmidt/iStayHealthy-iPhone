@@ -6,20 +6,11 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Minor to mild side effects</string>
 			<string>Headache</string>
 			<string>Fatigue</string>
 			<string>Nausea</string>
 			<string>Diarrhoea</string>
-			<string>Decreased appetite</string>
-			<string>Skin rash</string>
-			<string>Abdominal pain</string>
-			<string>Pancreatitis</string>
-			<string>Peripheral neuropathy</string>
-			<string>Anaemia</string>
-			<string>Decreased neutrophil count</string>
-			<string>Increased liver enzymes</string>
-			<string>Neutropenia (low white blood cell count)</string>
-			<string>Lipodistrophy (fat redistribution)</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -36,14 +27,14 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have some side effects</string>
 			<string>Nausea</string>
 			<string>Vomiting</string>
-			<string>Lethargy, fatigue</string>
 			<string>Fever</string>
-			<string>Loss of appetite</string>
+			<string>Skin rash</string>
 			<string>Lactic acidosis</string>
 			<string>Hypersensitivity reaction</string>
-			<string>Cardiovascular disease</string>
+			<string>Cardiovascular problems</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -54,14 +45,13 @@
 	<dict>
 		<key>Effects</key>
 		<array>
-			<string>Hyperbilirubinaemia (high bilirubin levels)</string>
-			<string>Headache</string>
+			<string>Can have some serious side effects</string>
 			<string>Nausea</string>
 			<string>Vomiting</string>
-			<string>Rash</string>
+			<string>Jaundice</string>
 			<string>Diarrhoea</string>
-			<string>Lipodystrophy</string>
-			<string>Cardiovascular disease</string>
+			<string>Abnormal fat metabolism</string>
+			<string>Kidney stones</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -98,36 +88,23 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Dizziness</string>
-			<string>Drowsiness</string>
 			<string>Insomnia</string>
-			<string>Nightmares</string>
 			<string>Vivid dreams</string>
 			<string>Impaired concentration</string>
 			<string>Memory loss</string>
-			<string>Hallucinations</string>
 			<string>Depression</string>
-			<string>Aggression</string>
-			<string>Confusion</string>
-			<string>Agitation</string>
-			<string>Euphoria</string>
-			<string>Delusions</string>
-			<string>Rash</string>
+			<string>Liver damage (hepatitis)</string>
+			<string>Abnormal fat metabolism</string>
 			<string>Headache</string>
-			<string>Alcohol intolerance</string>
-			<string>Fever</string>
-			<string>Pain, aches</string>
-			<string>Fluid retention in hands and feet</string>
-			<string>Dry mouth</string>
-			<string>Fatigue</string>
-			<string>Asthma</string>
-			<string>Changes to vision and taste</string>
-			<string>Skin discoloration</string>
+			<string>Problems during pregnancy</string>
 			<string>Skin pigmentation on palms, soles</string>
+			<string>Headache</string>
 			<string>Diarrhoea</string>
 			<string>Nausea</string>
-			<string>Abnormal kidney function</string>
-			<string>Lactic acidosis</string>
+			<string>Bone marrow (reduction)</string>
+			<string>Renal damage (Kidney)</string>
 		</array>
 		<key>CombinationDrugs</key>
 		<array>
@@ -144,20 +121,20 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Headache</string>
 			<string>Nausea</string>
 			<string>Vomiting</string>
 			<string>Dizziness</string>
 			<string>Fatigue</string>
-			<string>Weakness</string>
 			<string>Muscle pain</string>
 			<string>Rash</string>
-			<string>Severe muscle pain and inflammation</string>
-			<string>Insomnia</string>
 			<string>Nail discoloration</string>
 			<string>Kidney disorders</string>
-			<string>Bone marrow damage</string>
+			<string>Lactic acidosis</string>
 			<string>Anaemia</string>
+			<string>Lipodystrophy</string>
+			<string>Abnormal fat metabolism</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -188,28 +165,21 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Headache</string>
 			<string>Nausea</string>
+			<string>Fatigue</string>
+			<string>Diarrhoea</string>
 			<string>Vomiting</string>
 			<string>Dizziness</string>
-			<string>Fatigue</string>
-			<string>Weakness</string>
 			<string>Muscle pain</string>
 			<string>Rash</string>
-			<string>Severe muscle pain and inflammation</string>
-			<string>Insomnia</string>
 			<string>Nail discoloration</string>
 			<string>Kidney disorders</string>
-			<string>Bone marrow damage</string>
+			<string>Lactic acidosis</string>
 			<string>Anaemia</string>
-			<string>Decreased appetite</string>
-			<string>Abdominal pain</string>
-			<string>Pancreatitis</string>
-			<string>Peripheral neuropathy</string>
-			<string>Decreased neutrophil count</string>
-			<string>Increased liver enzymes</string>
-			<string>Neutropenia (low white blood cell count)</string>
-			<string>Lipodistrophy (fat redistribution)</string>
+			<string>Lipodystrophy (fat loss/redistribution)</string>
+			<string>Abnormal fat metabolism</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -220,21 +190,15 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Peripheral neuropathy</string>
-			<string>Lipodystrophy</string>
+			<string>Lipodystrophy (fat loss/redistribution)</string>
+			<string>Abnormal fat metabolism</string>
 			<string>Nausea</string>
 			<string>Vomiting</string>
-			<string>Listlessness</string>
-			<string>Chills</string>
-			<string>Fever</string>
 			<string>Diarrhoea</string>
-			<string>Constipation</string>
-			<string>Dehydration</string>
-			<string>Headache</string>
-			<string>Abdominal pain</string>
 			<string>Lactic acidosis</string>
 			<string>Pancreatitis</string>
-			<string>Increased liver enzymes</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -267,7 +231,7 @@
 			<string>Diarrhoea</string>
 			<string>Headache</string>
 			<string>Skin rash</string>
-			<string>Liver damage</string>
+			<string>Abnormal fat metabolism</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -329,20 +293,13 @@
 			<string>Diarrhoea</string>
 			<string>Nausea</string>
 			<string>Vomiting</string>
-			<string>Chills</string>
 			<string>Fever</string>
 			<string>Headache</string>
 			<string>Pancreatitis</string>
 			<string>Liver damage</string>
 			<string>Lactic acidosis</string>
 			<string>Hyperuricaemia (gout)</string>
-			<string>Body fat loss</string>
-			<string>Pain</string>
-			<string>Insomnia</string>
-			<string>Confusion</string>
-			<string>Pneumonia</string>
-			<string>Dry mouth</string>
-			<string>Seizures, convulsions</string>
+			<string>Cardiovascular</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -421,30 +378,18 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Dizziness</string>
-			<string>Drowsiness</string>
 			<string>Insomnia</string>
-			<string>Nightmares</string>
 			<string>Vivid dreams</string>
 			<string>Impaired concentration</string>
 			<string>Memory loss</string>
-			<string>Hallucinations</string>
+			<string>Mood changes</string>
 			<string>Depression</string>
-			<string>Aggression</string>
-			<string>Confusion</string>
-			<string>Agitation</string>
-			<string>Euphoria</string>
-			<string>Delusions</string>
-			<string>Rash</string>
+			<string>Liver damage (hepatitis)</string>
+			<string>Abnormal fat metabolism</string>
 			<string>Headache</string>
-			<string>Alcohol intolerance</string>
-			<string>Fever</string>
-			<string>Pain, aches</string>
-			<string>Fluid retention in hands and feet</string>
-			<string>Dry mouth</string>
-			<string>Fatigue</string>
-			<string>Asthma</string>
-			<string>Changes to vision and taste</string>
+			<string>Problems during pregnancy</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -487,16 +432,13 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have some side effects</string>
 			<string>Itchy rash</string>
 			<string>Red swollen or puffy skin</string>
 			<string>Hardened skin</string>
 			<string>Cysts, nodules</string>
-			<string>Lymphadenopathy (swollen glands)</string>
 			<string>Pneumonia</string>
 			<string>Abscess</string>
-			<string>Headache</string>
-			<string>Insomnia</string>
-			<string>Peripheral neuropathy</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -507,16 +449,13 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have some side effects</string>
 			<string>Toxic epidermal necrolysis (TEN)</string>
 			<string>Rash </string>
 			<string>Fever</string>
-			<string>General malaise</string>
-			<string>Fatigue</string>
-			<string>Muscle pain</string>
 			<string>Blisters</string>
+			<string>Hypersensitivity</string>
 			<string>Oral lesions</string>
-			<string>Conjunctivitis</string>
-			<string>Hepatitis</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -541,16 +480,11 @@
 	<dict>
 		<key>Effects</key>
 		<array>
-			<string>Headache</string>
 			<string>Nausea</string>
-			<string>Rash</string>
 			<string>Diarrhoea</string>
-			<string>Vomiting</string>
-			<string>Fatigue</string>
-			<string>Severe skin reactions</string>
-			<string>Diabetes</string>
-			<string>Increased blood sugar</string>
-			<string>Lipodystrophy</string>
+			<string>Skin Rash</string>
+			<string>Abnormal fat metabolism</string>
+			<string>Cardiovascular problems</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -614,14 +548,11 @@
 	<dict>
 		<key>Effects</key>
 		<array>
-			<string>Rash</string>
-			<string>Skin discoloration</string>
+			<string>Minor to mild side effects</string>
 			<string>Skin pigmentation on palms, soles</string>
 			<string>Headache</string>
 			<string>Diarrhoea</string>
 			<string>Nausea</string>
-			<string>Abnormal kidney function</string>
-			<string>Lactic acidosis</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -632,18 +563,17 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Kidney stones</string>
-			<string>Hyperbilirubinaemia (high bilirubin levels)</string>
-			<string>Headache</string>
+			<string>Diabetes mellitus</string>
 			<string>Nausea</string>
-			<string>Fatigue</string>
-			<string>Abdominal pain</string>
+			<string>Diarrhoea</string>
 			<string>Vomiting</string>
-			<string>Rash</string>
 			<string>Dry skin</string>
-			<string>Bloating, flatulence</string>
-			<string>ingrowing toe nails</string>
-			<string>severe dryness of lips</string>
+			<string>abnormal growth of toe/finger nails</string>
+			<string>Jaundice</string>
+			<string>Cardiovascular problems</string>
+			<string>Abnormal fat metabolism</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -689,25 +619,17 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Headache</string>
 			<string>Fatigue</string>
 			<string>Nausea</string>
 			<string>Diarrhoea</string>
 			<string>Vomiting</string>
 			<string>Fever</string>
-			<string>Loss of appetite</string>
 			<string>Skin rash</string>
-			<string>Abdominal pain</string>
-			<string>Pancreatitis</string>
-			<string>Peripheral neuropathy</string>
-			<string>Anaemia</string>
-			<string>Decreased neutrophil count</string>
-			<string>Increased liver enzymes</string>
-			<string>Neutropenia (low white blood cell count)</string>
-			<string>Lipodistrophy (fat redistribution)</string>
 			<string>Lactic acidosis</string>
 			<string>Hypersensitivity reaction</string>
-			<string>Cardiovascular disease</string>
+			<string>Cardiovascular problems</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -723,15 +645,11 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Diarrhoea</string>
 			<string>Nausea</string>
-			<string>Increase of body fat</string>
-			<string>Increase liver enzymes</string>
-			<string>Fatigue</string>
-			<string>Muscle weakness</string>
-			<string>Headache</string>
-			<string>Abdominal pain</string>
-			<string>Vomiting</string>
+			<string>Abnormal fat metabolism</string>
+			<string>Cardiovascular problems</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -789,14 +707,13 @@
 	<dict>
 		<key>Effects</key>
 		<array>
-			<string>Rash</string>
-			<string>Skin discoloration</string>
+			<string>Can have some side effects</string>
 			<string>Skin pigmentation on palms, soles</string>
 			<string>Headache</string>
 			<string>Diarrhoea</string>
 			<string>Nausea</string>
-			<string>Abnormal kidney function</string>
-			<string>Lactic acidosis</string>
+			<string>Bone marrow (reduction)</string>
+			<string>Renal damage (Kidney)</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -812,33 +729,26 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have serious side effects</string>
 			<string>Headache</string>
 			<string>Fatigue</string>
+			<string>Dizziness</string>
 			<string>Nausea</string>
 			<string>Diarrhoea</string>
-			<string>Dizziness</string>
 			<string>Vomiting</string>
 			<string>Fever</string>
-			<string>Weakness</string>
-			<string>Rash</string>
-			<string>Muscle pain</string>
-			<string>Decreased appetite</string>
 			<string>Skin rash</string>
-			<string>Abdominal pain</string>
-			<string>Pancreatitis</string>
-			<string>Peripheral neuropathy</string>
-			<string>Anaemia</string>
-			<string>Decreased neutrophil count</string>
-			<string>Increased liver enzymes</string>
-			<string>Neutropenia (low white blood cell count)</string>
-			<string>Lipodistrophy (fat redistribution)</string>
 			<string>Lactic acidosis</string>
 			<string>Hypersensitivity reaction</string>
-			<string>Cardiovascular disease</string>
-			<string>Severe muscle pain and inflammation</string>
+			<string>Cardiovascular problems</string>
+			<string>Muscle pain</string>
+			<string>Rash</string>
 			<string>Nail discoloration</string>
 			<string>Kidney disorders</string>
-			<string>Bone marrow damage</string>
+			<string>Lactic acidosis</string>
+			<string>Anaemia</string>
+			<string>Lipodystrophy</string>
+			<string>Abnormal fat metabolism</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -855,19 +765,14 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have some side effects</string>
 			<string>Headache</string>
-			<string>Rash</string>
 			<string>Insomnia</string>
-			<string>Depression</string>
-			<string>Anxiety</string>
-			<string>Restlessness</string>
-			<string>Rash</string>
-			<string>Skin discoloration</string>
+			<string>Bone marrow (reduction)</string>
+			<string>Renal damage (Kidney)</string>
 			<string>Skin pigmentation on palms, soles</string>
 			<string>Diarrhoea</string>
 			<string>Nausea</string>
-			<string>Abnormal kidney function</string>
-			<string>Lactic acidosis</string>
 		</array>
 		<key>Interaction</key>
 		<array/>
@@ -884,12 +789,9 @@
 	<dict>
 		<key>Effects</key>
 		<array>
+			<string>Can have some side effects</string>
 			<string>Headache</string>
-			<string>Rash</string>
 			<string>Insomnia</string>
-			<string>Depression</string>
-			<string>Anxiety</string>
-			<string>Restlessness</string>
 		</array>
 		<key>Interaction</key>
 		<array>
@@ -916,6 +818,118 @@
 			<string>Aciphex (rabeprazole)</string>
 			<string>Steriods</string>
 		</array>
+	</dict>
+	<key>Viread</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Some side effects</string>
+			<string>Bone marrow (reduction)</string>
+			<string>Renal damage (Kidney)</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Viramune</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Can have some side effects</string>
+			<string>Skin rash</string>
+			<string>Liver damage (hepatitis)</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Aptivus</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Can have serious side effects</string>
+			<string>Abnormal fat metabolism</string>
+			<string>Diarrhoea</string>
+			<string>Brain damage (bleeding)</string>
+			<string>Liver damage (hepatitis)</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Invirase</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Can have some side effects</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Cardiovascular problems (ECG)</string>
+			<string>Lipodystrophy</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Viracept</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Can have some side effects</string>
+			<string>Diarrhoea</string>
+			<string>Nausea</string>
+			<string>Abnormal fat metabolism</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Celsentri/Selzentry(US)</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Can have serious side effects</string>
+			<string>Liver damage (hepatitis)</string>
+			<string>Infections</string>
+			<string>Cardiovascular problems</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Isentress</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Can have some side effects</string>
+			<string>Nausea</string>
+			<string>Muscle pain</string>
+			<string>Headache</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
+	</dict>
+	<key>Norvir</key>
+	<dict>
+		<key>Effects</key>
+		<array>
+			<string>Can have some side effects</string>
+			<string>Nausea</string>
+			<string>Vomiting</string>
+			<string>Diarrhoea</string>
+		</array>
+		<key>Interaction</key>
+		<array/>
+		<key>DoNotTakeWith</key>
+		<array/>
 	</dict>
 </dict>
 </plist>

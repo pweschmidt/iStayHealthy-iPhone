@@ -9,7 +9,13 @@
 #import "ResultListCell.h"
 #import "GeneralSettings.h"
 @implementation ResultListCell
-@synthesize dateLabel, cd4Title, cd4PercentTitle, vlTitle, cd4Value, cd4PercentValue, vlValue;
+@synthesize dateLabel = _dateLabel; 
+@synthesize cd4Title = _cd4Title;
+@synthesize cd4PercentTitle = _cd4PercentTitle;
+@synthesize vlTitle = _vlTitle;
+@synthesize cd4Value = _cd4Value;
+@synthesize cd4PercentValue = _cd4PercentValue;
+@synthesize vlValue = _vlValue;
 
 
 @synthesize cd4ColourView = _cd4ColourView;

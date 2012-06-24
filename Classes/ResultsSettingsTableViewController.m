@@ -11,6 +11,7 @@
 #import "SetDateCell.h"
 #import "SwitcherCell.h"
 #import "GeneralSettings.h"
+#import "UnitCell.h"
 
 @interface ResultsSettingsTableViewController ()
 
@@ -62,7 +63,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -133,6 +134,35 @@
         }
         
         return cell;
+    }
+    if (2 == indexPath.section) {
+        NSString *identifier = @"UnitCell";
+        UnitCell *unitCell = (UnitCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == unitCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"UnitCell" owner:self options:nil];
+            for (id currentObject in cellObjects) {
+                if ([currentObject isKindOfClass:[UnitCell class]]) {
+                    unitCell = (UnitCell *)currentObject;
+                    break;
+                }
+            } 
+        }
+        unitCell.unitTitle.textColor = TEXTCOLOUR;
+        switch (indexPath.row) {
+            case 0:
+                unitCell.unitTitle.text = NSLocalizedString(@"Chol., Sugar Unit", @"unit for sugar/cholesterol");
+                [unitCell.segControl setTitle:@"mmol/L" forSegmentAtIndex:0];
+                [unitCell.segControl setTitle:@"mg/dL" forSegmentAtIndex:1];
+                break;
+            case 1:
+                unitCell.unitTitle.text = NSLocalizedString(@"Weight Unit", @"unit for sugar/cholesterol");
+                [unitCell.segControl setTitle:@"kg" forSegmentAtIndex:0];
+                [unitCell.segControl setTitle:@"lb" forSegmentAtIndex:1];
+                break;
+        }
+        
+        
+        return unitCell;
     }
     
         

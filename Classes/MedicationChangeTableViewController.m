@@ -14,6 +14,7 @@
 #import "GeneralSettings.h"
 #import "SideEffects.h"
 #import "SetDateCell.h"
+#import "MoreResultsCell.h"
 
 @implementation MedicationChangeTableViewController
 @synthesize date, record, selectedMedication, isMissed, effectString,effectIsSet, dateCell;

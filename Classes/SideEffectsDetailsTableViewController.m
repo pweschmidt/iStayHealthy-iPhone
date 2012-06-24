@@ -15,7 +15,7 @@
 @property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) Medication *hivMedication;
 @property (nonatomic, strong) NSArray *effects;
-@property (nonatomic, strong)NSMutableDictionary *stateDictionary;
+@property (nonatomic, strong) NSMutableDictionary *stateDictionary;
 @end
 
 @implementation SideEffectsDetailsTableViewController
@@ -50,7 +50,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"CommonSideEffects" ofType:@"plist"];
     NSString *medName = self.hivMedication.Name;
     NSDictionary *tmpDict = [[NSDictionary dictionaryWithContentsOfFile:path] objectForKey:medName];
-    if (tmpDict) 
+    if (nil != tmpDict) 
     {
         self.effects = [tmpDict objectForKey:@"Effects"];
         if (nil == self.effects) {

@@ -36,6 +36,10 @@
 @synthesize systole = _systole;
 @synthesize diastole = _diastole;
 @synthesize changeDateCell = _changeDateCell;
+@synthesize hemoglobulin = _hemoglobulin;
+@synthesize whiteCells = _whiteCells;
+@synthesize redCells = _redCells;
+@synthesize platelets = _platelets;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -64,6 +68,10 @@
         self.systole = [NSNumber numberWithFloat:-1.0];
         self.diastole = [NSNumber numberWithFloat:-1.0];
         self.resultsDate = [NSDate date];
+        self.hemoglobulin = [NSNumber numberWithFloat:-1.0];
+        self.whiteCells = [NSNumber numberWithFloat:-1.0];
+        self.redCells = [NSNumber numberWithFloat:-1.0];
+        self.platelets = [NSNumber numberWithFloat:-1.0];
 
         if (nil != self.results.ViralLoad) {
             self.vlHIV = self.results.ViralLoad;
@@ -101,8 +109,18 @@
         if (nil != self.results.Diastole) {
             self.diastole = self.results.Diastole;
         }
-        else {
+        if (nil != self.results.Hemoglobulin) {
+            self.hemoglobulin = self.results.Hemoglobulin;
         }
+        if (nil != self.results.WhiteBloodCellCount) {
+            self.whiteCells = self.results.WhiteBloodCellCount;
+        }
+        if (nil != self.results.PlateletCount) {
+            self.platelets = self.results.PlateletCount;
+        }
+//        if (nil != self.results.RedBloodCellCount) {
+//            self.redCells = self.results.RedBloodCellCount;
+//        }
     }
     return self;
 }
@@ -123,7 +141,11 @@
     self.results.TotalCholesterol = self.cholesterol;
     self.results.HDL = self.hdl;
     self.results.LDL = self.ldl;
+    self.results.Hemoglobulin = self.hemoglobulin;
+    self.results.WhiteBloodCellCount = self.whiteCells;
+    self.results.PlateletCount = self.platelets;
     self.results.UID = [Utilities GUID];
+    //self.results.RedBloodCellCount = self.redCells;
     self.record.UID = [Utilities GUID];
     
 	NSError *error = nil;
@@ -170,6 +192,18 @@
         case 1003:
             self.ldl = number;
             break;
+        case 1004:
+            self.hemoglobulin = number;
+            break;
+        case 1005:
+            self.whiteCells = number;
+            break;
+        case 1006:
+            self.redCells = number;
+            break;
+        case 1007:
+            self.platelets = number;
+            break;            
         case 100000:
             self.weight = number;
             break;
@@ -514,8 +548,8 @@
     {
         if (0 == indexPath.row) 
         {
-            NSArray *keys = [NSArray arrayWithObjects:@"glucose", @"cholesterol", @"hdl", @"ldl", nil];
-            NSArray *values = [NSArray arrayWithObjects:self.glucose, self.cholesterol, self.hdl, self.ldl, nil];
+            NSArray *keys = [NSArray arrayWithObjects:@"glucose", @"cholesterol", @"hdl", @"ldl", @"hemoglobulin", @"whiteCells", @"redCells", @"platelets", nil];
+            NSArray *values = [NSArray arrayWithObjects:self.glucose, self.cholesterol, self.hdl, self.ldl, self.hemoglobulin, self.whiteCells, self.redCells, self.platelets, nil];
             NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
             MoreBloodResultsViewController *bloodController = [[MoreBloodResultsViewController alloc] initWithResults:resultsDictionary];
             [bloodController setResultDelegate:self];
