@@ -9,7 +9,9 @@
 #import "AlertListCell.h"
 
 @implementation AlertListCell
-@synthesize title,text;
+@synthesize title = _title;
+@synthesize text = _text;
+@synthesize timeLeftLabel = _timeLeftLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

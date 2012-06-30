@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AlertListCell : UITableViewCell{
-    IBOutlet UILabel *title;
-    IBOutlet UILabel *text;
-}
+@interface AlertListCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *title;
 @property (nonatomic, strong) IBOutlet UILabel *text;
+@property (nonatomic, weak) IBOutlet UILabel *timeLeftLabel;
 
 @end

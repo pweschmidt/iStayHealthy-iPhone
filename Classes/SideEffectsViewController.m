@@ -12,6 +12,11 @@
 #import "NSArray-Set.h"
 #import "GeneralSettings.h"
 #import "SideEffectListCell.h"
+#import "SideEffectDetailViewController.h"
+
+@interface SideEffectsViewController()
+- (void)pushSideEffectsController;
+@end
 
 @implementation SideEffectsViewController
 @synthesize record, sideeffects;
@@ -59,10 +64,14 @@
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                               target:self action:@selector(done:)];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pushSideEffectsController)];
     self.tableView.rowHeight = 57.0;
 }
 
+- (void)pushSideEffectsController{
+    SideEffectDetailViewController *sideEffectsController = [[SideEffectDetailViewController alloc]initWithNibName:@"SideEffectDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:sideEffectsController animated:YES];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -119,7 +128,6 @@
  @tableView
  @editingStyle
  @indexPath
- */
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete && 0 == indexPath.section) {
@@ -137,6 +145,11 @@
 			abort();
 		}
     }   
+}
+ */
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
 }
 
 

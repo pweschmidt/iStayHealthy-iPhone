@@ -105,7 +105,7 @@
         
         UILocalNotification *medAlert = [[notificationClass alloc]init];
         medAlert.fireDate = (0 == addedSeconds) ? self.startTime : [self.startTime dateByAddingTimeInterval:addedSeconds];
-        medAlert.timeZone = [NSTimeZone defaultTimeZone];
+        medAlert.timeZone = [NSTimeZone localTimeZone];
         medAlert.repeatInterval = NSDayCalendarUnit;
         medAlert.userInfo = userDictionary;
         

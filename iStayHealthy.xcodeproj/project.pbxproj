@@ -118,6 +118,8 @@
 		C48A513A140BFD80004AE872 /* HIVMedicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48A513B140BFD80004AE872 /* HIVMedicationViewController.xib */; };
 		C48A513C140BFD89004AE872 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48A513D140BFD89004AE872 /* MainWindow.xib */; };
 		C48A513E140BFDBF004AE872 /* ResultDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48A513F140BFDBF004AE872 /* ResultDetailViewController.xib */; };
+		C48CAA14159B696200F39942 /* SideEffectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C48CAA12159B696200F39942 /* SideEffectDetailViewController.m */; };
+		C48CAA15159B696200F39942 /* SideEffectDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48CAA13159B696200F39942 /* SideEffectDetailViewController.xib */; };
 		C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250814DD62BF00BDD906 /* StoreKit.framework */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
 		C491B3501477DE96000A4229 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34A1477DE96000A4229 /* alarm.png */; };
@@ -147,8 +149,6 @@
 		C49C4612148D65D2009C81A6 /* ResultSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C49C4611148D65D2009C81A6 /* ResultSegmentedCell.m */; };
 		C49F82B013DEE02C00D5891F /* viralOff-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82B213DEE02C00D5891F /* viralOff-small.png */; };
 		C49F82C213DEE06500D5891F /* viralOn-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82C413DEE06500D5891F /* viralOn-small.png */; };
-		C4A77A57157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A77A55157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m */; };
-		C4A77A58157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4A77A56157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib */; };
 		C4ABBC7A149262F200E88465 /* ClinicAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4ABBC79149262F200E88465 /* ClinicAddressCell.xib */; };
 		C4ABBC7D1492649600E88465 /* ClinicAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4ABBC7C1492649600E88465 /* ClinicAddressCell.m */; };
 		C4ACF8561476DF9000FA5E80 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C4ACF8551476DF9000FA5E80 /* Results.m */; };
@@ -236,6 +236,7 @@
 		C4DEB207137E98AC0093113F /* ResultChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DEB205137E98AB0093113F /* ResultChangeViewController.m */; };
 		C4DEB208137E98AC0093113F /* ResultChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4DEB206137E98AB0093113F /* ResultChangeViewController.xib */; };
 		C4DF7E4D14857D17009C46E6 /* missedsmall.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF7E4C14857D17009C46E6 /* missedsmall.png */; };
+		C4E6FF38159A34EC001C5B8B /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4E6FF37159A34EC001C5B8B /* SideEffects.plist */; };
 		C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */; };
 		C4E978C81594DA3400FDC38E /* PressureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E978C71594DA3400FDC38E /* PressureCell.xib */; };
 		C4E978CB1594DBE300FDC38E /* PressureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E978CA1594DBE300FDC38E /* PressureCell.m */; };
@@ -253,7 +254,6 @@
 		C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE811D1306D9890097B903 /* AudioToolbox.framework */; };
 		C4EFD405154D71A90059A2BA /* pozbannerEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EFD403154D71A90059A2BA /* pozbannerEmpty.png */; };
 		C4EFD406154D71A90059A2BA /* pozbannerEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EFD404154D71A90059A2BA /* pozbannerEmpty@2x.png */; };
-		C4F2810F157A178600B5595F /* CommonSideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4F2810E157A178600B5595F /* CommonSideEffects.plist */; };
 		C4F337C414D42C7C00C4F573 /* pozicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F337C314D42C7C00C4F573 /* pozicon.png */; };
 		C4F337C614D42C8D00C4F573 /* istayhealthypozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */; };
 		C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */; };
@@ -528,6 +528,9 @@
 		C48A513B140BFD80004AE872 /* HIVMedicationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HIVMedicationViewController.xib; path = Classes/HIVMedicationViewController.xib; sourceTree = "<group>"; };
 		C48A513D140BFD89004AE872 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		C48A513F140BFDBF004AE872 /* ResultDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ResultDetailViewController.xib; path = Classes/ResultDetailViewController.xib; sourceTree = "<group>"; };
+		C48CAA11159B696200F39942 /* SideEffectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideEffectDetailViewController.h; sourceTree = "<group>"; };
+		C48CAA12159B696200F39942 /* SideEffectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideEffectDetailViewController.m; sourceTree = "<group>"; };
+		C48CAA13159B696200F39942 /* SideEffectDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SideEffectDetailViewController.xib; path = Classes/SideEffectDetailViewController.xib; sourceTree = "<group>"; };
 		C48CC47A137C3BA30051D7FA /* iStayHealthy 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 5.xcdatamodel"; sourceTree = "<group>"; };
 		C490250814DD62BF00BDD906 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C490250A14DD630700BDD906 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -577,9 +580,6 @@
 		C49F82C513DEE06A00D5891F /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = "de.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C613DEE06C00D5891F /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C713DEE06E00D5891F /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = "fr.lproj/viralOn-small.png"; sourceTree = "<group>"; };
-		C4A77A54157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideEffectsDetailsTableViewController.h; sourceTree = "<group>"; };
-		C4A77A55157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideEffectsDetailsTableViewController.m; sourceTree = "<group>"; };
-		C4A77A56157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SideEffectsDetailsTableViewController.xib; path = Classes/SideEffectsDetailsTableViewController.xib; sourceTree = "<group>"; };
 		C4ABBC79149262F200E88465 /* ClinicAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicAddressCell.xib; sourceTree = "<group>"; };
 		C4ABBC7B1492649600E88465 /* ClinicAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicAddressCell.h; sourceTree = "<group>"; };
 		C4ABBC7C1492649600E88465 /* ClinicAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicAddressCell.m; sourceTree = "<group>"; };
@@ -700,6 +700,7 @@
 		C4DEB205137E98AB0093113F /* ResultChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultChangeViewController.m; sourceTree = "<group>"; };
 		C4DEB206137E98AB0093113F /* ResultChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResultChangeViewController.xib; path = Classes/ResultChangeViewController.xib; sourceTree = "<group>"; };
 		C4DF7E4C14857D17009C46E6 /* missedsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missedsmall.png; sourceTree = "<group>"; };
+		C4E6FF37159A34EC001C5B8B /* SideEffects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SideEffects.plist; sourceTree = "<group>"; };
 		C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4E978C71594DA3400FDC38E /* PressureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PressureCell.xib; sourceTree = "<group>"; };
 		C4E978C91594DBE300FDC38E /* PressureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PressureCell.h; sourceTree = "<group>"; };
@@ -718,7 +719,6 @@
 		C4EE811D1306D9890097B903 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C4EFD403154D71A90059A2BA /* pozbannerEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pozbannerEmpty.png; sourceTree = "<group>"; };
 		C4EFD404154D71A90059A2BA /* pozbannerEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pozbannerEmpty@2x.png"; sourceTree = "<group>"; };
-		C4F2810E157A178600B5595F /* CommonSideEffects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommonSideEffects.plist; sourceTree = "<group>"; };
 		C4F337C314D42C7C00C4F573 /* pozicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pozicon.png; sourceTree = "<group>"; };
 		C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = istayhealthypozbanner.png; sourceTree = "<group>"; };
 		C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -919,11 +919,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C48CAA13159B696200F39942 /* SideEffectDetailViewController.xib */,
 				C453D00F1595CF3D0062A142 /* MoreOtherResultsViewController.xib */,
 				C453D00A1595CEA40062A142 /* MoreBloodResultsViewController.xib */,
 				C49C17F1158384B800D4FE2A /* ResultsSettingsTableViewController.xib */,
 				C4073E2B157FCE7F00E3DDDA /* DashboardViewController.xib */,
-				C4A77A56157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib */,
 				C4B41FB7141E5EF2009B0694 /* iStayHealthy.entitlements */,
 				C48A513D140BFD89004AE872 /* MainWindow.xib */,
 				C4C0151A134251B4005E889D /* HIVMedications.plist */,
@@ -963,7 +963,7 @@
 				C4897FD7140FD0730033C61C /* NNRTI.plist */,
 				C4897FDD140FD0850033C61C /* EntryInhibitors.plist */,
 				C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */,
-				C4F2810E157A178600B5595F /* CommonSideEffects.plist */,
+				C4E6FF37159A34EC001C5B8B /* SideEffects.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1264,8 +1264,6 @@
 				C491B36B147800DE000A4229 /* SideEffectsViewController.m */,
 				C491B36F147805DA000A4229 /* MissedMedViewController.h */,
 				C491B370147805DA000A4229 /* MissedMedViewController.m */,
-				C4A77A54157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.h */,
-				C4A77A55157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m */,
 				C49C17EF158384B800D4FE2A /* ResultsSettingsTableViewController.h */,
 				C49C17F0158384B800D4FE2A /* ResultsSettingsTableViewController.m */,
 				C453D0081595CEA40062A142 /* MoreBloodResultsViewController.h */,
@@ -1274,6 +1272,8 @@
 				C453D00E1595CF3D0062A142 /* MoreOtherResultsViewController.m */,
 				C453D0121596031F0062A142 /* MoreResultsViewController.h */,
 				C453D0131596031F0062A142 /* MoreResultsViewController.m */,
+				C48CAA11159B696200F39942 /* SideEffectDetailViewController.h */,
+				C48CAA12159B696200F39942 /* SideEffectDetailViewController.m */,
 			);
 			name = DetailViewControllers;
 			sourceTree = "<group>";
@@ -1650,8 +1650,6 @@
 				C4B681F01549B24200503339 /* gaydarbanner@2x.png in Resources */,
 				C4EFD405154D71A90059A2BA /* pozbannerEmpty.png in Resources */,
 				C4EFD406154D71A90059A2BA /* pozbannerEmpty@2x.png in Resources */,
-				C4F2810F157A178600B5595F /* CommonSideEffects.plist in Resources */,
-				C4A77A58157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.xib in Resources */,
 				C4073E2C157FCE7F00E3DDDA /* DashboardViewController.xib in Resources */,
 				C49C17F3158384B800D4FE2A /* ResultsSettingsTableViewController.xib in Resources */,
 				C4E978C81594DA3400FDC38E /* PressureCell.xib in Resources */,
@@ -1659,6 +1657,8 @@
 				C453D00C1595CEA40062A142 /* MoreBloodResultsViewController.xib in Resources */,
 				C453D0111595CF3D0062A142 /* MoreOtherResultsViewController.xib in Resources */,
 				C4B2ABF41596334000C73545 /* UnitCell.xib in Resources */,
+				C4E6FF38159A34EC001C5B8B /* SideEffects.plist in Resources */,
+				C48CAA15159B696200F39942 /* SideEffectDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1742,7 +1742,6 @@
 				C42AB57714950351005E9A0F /* SummaryCell.m in Sources */,
 				C42AB57C14950DB8005E9A0F /* SettingsCell.m in Sources */,
 				C4629D5B1542B0660031966E /* UINavigationBar-Button.m in Sources */,
-				C4A77A57157B7DE9000C8AE9 /* SideEffectsDetailsTableViewController.m in Sources */,
 				C4073E2F157FCE9100E3DDDA /* DashboardViewController.m in Sources */,
 				C49C17F2158384B800D4FE2A /* ResultsSettingsTableViewController.m in Sources */,
 				C4E978CB1594DBE300FDC38E /* PressureCell.m in Sources */,
@@ -1751,6 +1750,7 @@
 				C453D0101595CF3D0062A142 /* MoreOtherResultsViewController.m in Sources */,
 				C453D0141596031F0062A142 /* MoreResultsViewController.m in Sources */,
 				C4B2ABF71596342400C73545 /* UnitCell.m in Sources */,
+				C48CAA14159B696200F39942 /* SideEffectDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

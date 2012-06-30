@@ -14,9 +14,14 @@
 #import "AlertListCell.h"
 #import "UINavigationBar-Button.h"
 
+@interface NewAlertViewController ()
+@property (nonatomic, strong) NSTimer *timeLeftUpdater;
+- (void)updateTimeLeftLabel:(UILabel *)timeLeftLabel;
+@end
+
 @implementation NewAlertViewController
 @synthesize notificationsArray;
-
+@synthesize timeLeftUpdater = _timeLeftUpdater;
 
 - (void)didReceiveMemoryWarning
 {
@@ -141,9 +146,24 @@ loads the NewAlertEditDetailViewController to edit an existing alert
 	UILocalNotification *notifcation = [self.notificationsArray objectAtIndex:indexPath.row];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
-    [[cell title]setText:[dateFormatter stringFromDate:notifcation.fireDate]];
-    [[cell text]setText:notifcation.alertBody];
+    NSDate *now = [NSDate date];
+    NSTimeInterval elapsedTime = [now timeIntervalSinceDate:notifcation.fireDate];
+    NSTimeInterval dayInSeconds = 24 * 60 * 60;
+    int days = elapsedTime / dayInSeconds;
+    NSTimeInterval lasttime = days * dayInSeconds;
+    NSTimeInterval nexttime = lasttime + dayInSeconds;
+    NSTimeInterval difference = nexttime - elapsedTime;
+    NSString *timeLeft = [NSString stringWithFormat:@"%02li:%02li",
+                          lround(floor(difference / 3600.)) % 100,
+                          lround(floor(difference / 60.)) % 60];
+    cell.timeLeftLabel.text = timeLeft;
+    
+    cell.title.text = [dateFormatter stringFromDate:notifcation.fireDate];
+    cell.text.text = notifcation.alertBody;
     return cell;
+}
+
+- (void)updateTimeLeftLabel:(UILabel *)timeLeftLabel{
 }
 
 
