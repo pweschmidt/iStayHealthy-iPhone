@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SideEffectDetailViewController.h"
 @class iStayHealthyRecord;
-@interface SideEffectsViewController : UITableViewController{
-	iStayHealthyRecord *record;    
-    NSMutableArray *sideeffects;
-}
+@interface SideEffectsViewController : UITableViewController <SideEffectUpdateDelegate>
 @property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) NSMutableArray *sideeffects;
 - (IBAction) done:					(id) sender;

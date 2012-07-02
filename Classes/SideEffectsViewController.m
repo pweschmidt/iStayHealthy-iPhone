@@ -12,21 +12,21 @@
 #import "NSArray-Set.h"
 #import "GeneralSettings.h"
 #import "SideEffectListCell.h"
-#import "SideEffectDetailViewController.h"
 
 @interface SideEffectsViewController()
 - (void)pushSideEffectsController;
 @end
 
 @implementation SideEffectsViewController
-@synthesize record, sideeffects;
+@synthesize record = _record;
+@synthesize sideeffects = _sideeffects;
 
 - (id)initWithRecord:(iStayHealthyRecord *)masterrecord
 {
     self = [super initWithNibName:@"SideEffectsViewController" bundle:nil];
     if (self) {
         self.record = masterrecord;
-        NSSet *effectSet = record.sideeffects;
+        NSSet *effectSet = self.record.sideeffects;
         if (0 != [effectSet count]) {
             self.sideeffects = [NSArray arrayByOrderingSet:effectSet byKey:@"SideEffectDate" ascending:YES reverseOrder:YES];
         }
@@ -39,6 +39,7 @@
 
 
 - (void)viewDidUnload{
+    self.record = nil;
     self.sideeffects = nil;
     [super viewDidUnload];
 }
@@ -69,7 +70,8 @@
 }
 
 - (void)pushSideEffectsController{
-    SideEffectDetailViewController *sideEffectsController = [[SideEffectDetailViewController alloc]initWithNibName:@"SideEffectDetailViewController" bundle:nil];
+    
+    SideEffectDetailViewController *sideEffectsController = [[SideEffectDetailViewController alloc] initWithRecord:self.record effectDelegate:self];
     [self.navigationController pushViewController:sideEffectsController animated:YES];
 }
 
@@ -78,6 +80,9 @@
     [super viewWillAppear:animated];    
 }
 
+- (void)updateSideEffectTable{
+    [self.tableView reloadData];
+}
 
 #pragma mark - Table view data source
 

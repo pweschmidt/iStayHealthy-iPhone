@@ -8,6 +8,9 @@
 
 #import "SideEffectDetailViewController.h"
 #import "GeneralSettings.h"
+#import "iStayHealthyRecord.h"
+#import "SideEffects.h"
+#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SideEffectDetailViewController ()
@@ -16,6 +19,9 @@
 @property (nonatomic, strong) NSNumber *seriousnessIndex;
 @property (nonatomic, strong) NSDate *effectDate;
 @property (nonatomic, strong) NSDateFormatter *formatter;
+@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
+@property (nonatomic, strong) SideEffects *sideEffects;
+@property BOOL isEditingExistingEffect;
 @end
 
 @implementation SideEffectDetailViewController
@@ -28,14 +34,40 @@
 @synthesize dateButton = _dateButton;
 @synthesize effectDate = _effectDate;
 @synthesize formatter = _formatter;
+@synthesize selectedSideEffectLabel = _selectedSideEffectLabel;
+@synthesize isEditingExistingEffect = _isEditingExistingEffect;
+@synthesize masterRecord = _masterRecord;
+@synthesize sideEffects = _sideEffects;
+@synthesize sideEffectDelegate = _sideEffectDelegate;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.isEditingExistingEffect = NO;
     }
     return self;
 }
+
+- (id)initWithRecord:(iStayHealthyRecord *)record effectDelegate:(id)effectDelegate{
+    return [self initWithRecord:record sideEffects:nil effectDelegate:effectDelegate];
+}
+
+- (id)initWithRecord:(iStayHealthyRecord *)record sideEffects:(SideEffects *)effects effectDelegate:(id)effectDelegate{
+    self = [self initWithNibName:@"SideEffectDetailViewController" bundle:nil];
+    if (self) {
+        self.sideEffectDelegate = effectDelegate;
+        self.masterRecord = record;
+        self.sideEffects = effects;
+        self.effectDate = [NSDate date];
+        if (nil != effects) {
+            self.isEditingExistingEffect = YES;
+            self.effectDate = self.sideEffects.SideEffectDate;
+        }
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad
 {
@@ -45,7 +77,7 @@
     NSArray *list = [dict valueForKey:@"SideEffectArray"];
     
     self.sideEffectArray = [NSMutableArray arrayWithArray:list];
-    
+    self.selectedSideEffectLabel.text = @"";
     self.sideEffectTableView.layer.cornerRadius = 20.0;
     self.sideEffectTableView.layer.frame = CGRectInset(self.sideEffectTableView.frame, 20.0, 20.0);
     self.sideEffectTableView.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -62,11 +94,39 @@
     self.selectedCell = nil;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    if (nil != self.selectedCell) {
+        NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
+        NSError *error = nil;
+        if (!self.isEditingExistingEffect && ![self.selectedSideEffectLabel.text isEqualToString:@""]) {
+            SideEffects *newEffect = [NSEntityDescription insertNewObjectForEntityForName:@"SideEffects" inManagedObjectContext:context];
+            [self.masterRecord addSideeffectsObject:newEffect];
+            self.masterRecord.UID = [Utilities GUID];
+            newEffect.SideEffectDate = self.effectDate;
+            newEffect.SideEffect = self.selectedSideEffectLabel.text;
+            if (![context save:&error]) {
+#ifdef APPDEBUG
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+#endif
+                abort();
+            }
+        }
+    }
+    if ([self.sideEffectDelegate respondsToSelector:@selector(updateSideEffectTable)]) {
+        [self.sideEffectDelegate updateSideEffectTable];
+    }
+}
+
+
 - (void)viewDidUnload
 {
     self.selectedCell = nil;
     self.sideEffectArray = nil;
     self.seriousnessIndex = nil;
+    self.effectDate = nil;
+    self.formatter = nil;
+    self.masterRecord = nil;
+    self.sideEffects = nil;
     [super viewDidUnload];
 }
 
@@ -75,7 +135,15 @@
 }
 
 - (IBAction)setDate:(id)sender{
-    
+    NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
+	[actionSheet showInView:self.view];
+	
+	
+	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+	datePicker.tag = 101;
+	datePicker.datePickerMode = UIDatePickerModeDate;
+	[actionSheet addSubview:datePicker];    
 }
 
 
@@ -89,6 +157,21 @@
 	[self.sideEffectTableView 
      deselectRowAtIndexPath:[self.sideEffectTableView indexPathForSelectedRow] 
      animated:YES];
+}
+
+#pragma mark Actionsheet Delegate methods
+/**
+ sets the label and resultsdate to the one selected
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"dd MMM YY";
+	
+	NSString *timestamp = [formatter stringFromDate:datePicker.date];
+	self.dateLabel.text = timestamp;
+	self.effectDate = datePicker.date;
 }
 
 
@@ -116,9 +199,7 @@
     if ([cell.textLabel.text isEqualToString:[self.sideEffectArray lastObject]]) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    else {
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    }
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     if (cell == self.selectedCell) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -128,12 +209,13 @@
 }
 
 #pragma mark Table Delegate
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     NSLog(@"SideEffectDetailViewController::selected row %d",indexPath.row);
 
     if (indexPath.row == self.sideEffectArray.count - 1) {
         NSLog(@"SideEffectDetailViewController::selected row %d. Is last row",indexPath.row);
+        [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
         return;
     }
     if (nil != self.selectedCell) {
@@ -143,6 +225,7 @@
     UITableViewCell *cell = [self.sideEffectTableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     self.selectedCell = cell;
+    self.selectedSideEffectLabel.text = cell.textLabel.text;
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
 
