@@ -18,29 +18,9 @@
 @end
 
 @implementation SideEffectsViewController
-@synthesize record = _record;
-@synthesize sideeffects = _sideeffects;
-
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
-{
-    self = [super initWithNibName:@"SideEffectsViewController" bundle:nil];
-    if (self) {
-        self.record = masterrecord;
-        NSSet *effectSet = self.record.sideeffects;
-        if (0 != [effectSet count]) {
-            self.sideeffects = [NSArray arrayByOrderingSet:effectSet byKey:@"SideEffectDate" ascending:YES reverseOrder:YES];
-        }
-        else {//if empty - simply map to empty set
-            self.sideeffects = (NSMutableArray *)effectSet;
-        }
-    }
-    return self;
-}
 
 
 - (void)viewDidUnload{
-    self.record = nil;
-    self.sideeffects = nil;
     [super viewDidUnload];
 }
 
@@ -63,15 +43,16 @@
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Side Effects", @"Side Effects");
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                               target:self action:@selector(done:)];
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pushSideEffectsController)];
     self.tableView.rowHeight = 57.0;
 }
 
 - (void)pushSideEffectsController{
     
-    SideEffectDetailViewController *sideEffectsController = [[SideEffectDetailViewController alloc] initWithRecord:self.record effectDelegate:self];
+    SideEffectDetailViewController *sideEffectsController = [[SideEffectDetailViewController alloc] initWithRecord:self.masterRecord effectDelegate:self];
     [self.navigationController pushViewController:sideEffectsController animated:YES];
 }
 
@@ -93,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.sideeffects count];
+    return [self.allSideEffects count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -114,13 +95,14 @@
             }
         }  
     }
-    SideEffects *effect = (SideEffects *)[self.sideeffects objectAtIndex:indexPath.row];
+    SideEffects *effect = (SideEffects *)[self.allSideEffects objectAtIndex:indexPath.row];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
 	formatter.dateFormat = @"dd MMM YYYY";
     [[cell date]setText:[formatter stringFromDate:effect.SideEffectDate]];
     [[cell effect]setText:effect.SideEffect];
     [[cell drug]setText:effect.Name];
     [[cell imageView]setImage:[UIImage imageNamed:@"sideeffects.png"]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -153,8 +135,10 @@
 }
  */
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SideEffects *effects = (SideEffects *)[self.allSideEffects objectAtIndex:indexPath.row];
+    SideEffectDetailViewController *sideEffectController = [[SideEffectDetailViewController alloc] initWithRecord:self.masterRecord sideEffects:effects effectDelegate:self];
+    [self.navigationController pushViewController:sideEffectController animated:YES];
 }
 
 

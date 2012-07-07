@@ -22,6 +22,8 @@
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) SideEffects *sideEffects;
 @property BOOL isEditingExistingEffect;
+- (IBAction) showAlertView:			(id) sender;
+- (void)removeSQLEntry;
 @end
 
 @implementation SideEffectDetailViewController
@@ -58,9 +60,9 @@
     if (self) {
         self.sideEffectDelegate = effectDelegate;
         self.masterRecord = record;
-        self.sideEffects = effects;
         self.effectDate = [NSDate date];
         if (nil != effects) {
+            self.sideEffects = effects;
             self.isEditingExistingEffect = YES;
             self.effectDate = self.sideEffects.SideEffectDate;
         }
@@ -92,13 +94,54 @@
     self.dateLabel.textColor = TEXTCOLOUR;
     self.dateLabel.text = [self.formatter stringFromDate:self.effectDate];
     self.selectedCell = nil;
+    if (self.isEditingExistingEffect && nil != self.sideEffects) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
+                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
+                                                 target:self action:@selector(showAlertView:)];
+        self.selectedSideEffectLabel.text = self.sideEffects.SideEffect;
+    }
 }
+
+/**
+ shows the Alert view when user clicks the Trash button
+ */
+- (IBAction) showAlertView:			(id) sender{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+    
+    [alert show];    
+}
+
+/**
+ if user really wants to delete the entry call removeSQLEntry
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")]) {
+        [self removeSQLEntry];
+    }
+}
+
+
+- (void) removeSQLEntry{
+    [self.masterRecord removeSideeffectsObject:self.sideEffects];
+    NSManagedObjectContext *context = self.sideEffects.managedObjectContext;
+    [context deleteObject:self.sideEffects];
+    NSError *error = nil;
+    if (![context save:&error]) {
+#ifdef APPDEBUG
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+#endif
+        abort();
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     if (nil != self.selectedCell) {
-        NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-        NSError *error = nil;
         if (!self.isEditingExistingEffect && ![self.selectedSideEffectLabel.text isEqualToString:@""]) {
+            NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
+            NSError *error = nil;
             SideEffects *newEffect = [NSEntityDescription insertNewObjectForEntityForName:@"SideEffects" inManagedObjectContext:context];
             [self.masterRecord addSideeffectsObject:newEffect];
             self.masterRecord.UID = [Utilities GUID];
@@ -110,6 +153,21 @@
 #endif
                 abort();
             }
+        }
+        if (self.isEditingExistingEffect && ![self.selectedSideEffectLabel.text isEqualToString:@""]) {
+            NSManagedObjectContext *context = [self.sideEffects managedObjectContext];
+            NSError *error = nil;
+            self.sideEffects.UID = [Utilities GUID];
+            self.sideEffects.SideEffectDate = self.effectDate;
+            self.sideEffects.SideEffect = self.selectedSideEffectLabel.text;
+            if (![context save:&error]) {
+#ifdef APPDEBUG
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+#endif
+                abort();
+            }
+            
+            
         }
     }
     if ([self.sideEffectDelegate respondsToSelector:@selector(updateSideEffectTable)]) {
@@ -200,7 +258,9 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    
+    if (self.isEditingExistingEffect && [self.selectedSideEffectLabel.text isEqualToString:cell.textLabel.text]){
+        self.selectedCell = cell;        
+    }
     if (cell == self.selectedCell) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }

@@ -87,7 +87,7 @@
 }
 
 - (void)loadSideEffectsController{
-    SideEffectsViewController *sideController = [[SideEffectsViewController alloc]initWithRecord:masterRecord];
+    SideEffectsViewController *sideController = [[SideEffectsViewController alloc] initWithNibName:@"SideEffectsViewController" bundle:nil];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:sideController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];

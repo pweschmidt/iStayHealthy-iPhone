@@ -10,7 +10,7 @@
 @class iStayHealthyRecord, SideEffects;
 @protocol SideEffectUpdateDelegate;
 
-@interface SideEffectDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+@interface SideEffectDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *sideEffectTableView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *seriousnessControl;
 @property (nonatomic, weak) IBOutlet UIButton *dateButton;
