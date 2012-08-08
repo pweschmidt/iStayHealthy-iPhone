@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ResultValueCell.h"
-#import "MoreResultsViewController.h"
+#import "PressureCell.h"
 @class iStayHealthyRecord, SetDateCell, Results;
 
-@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, ResultValueCellDelegate, MoreBloodResultsDelegate>{
+@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, ResultValueCellDelegate, PressureCellDelegate>{
 @private
 }
 @property (nonatomic, strong) NSDate *resultsDate;
@@ -32,10 +32,12 @@
 @property (nonatomic, strong) NSNumber *whiteCells;
 @property (nonatomic, strong) NSNumber *redCells;
 @property (nonatomic, strong) NSNumber *platelets;
+@property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
 
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
 - (void)changeResultsDate;
 - (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
 - (NSNumber *)valueFromString:(NSString *)string;
+- (void)indexDidChangeForSegment;
 @end
