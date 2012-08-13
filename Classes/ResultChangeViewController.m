@@ -40,6 +40,7 @@
 @synthesize whiteCells = _whiteCells;
 @synthesize redCells = _redCells;
 @synthesize platelets = _platelets;
+@synthesize resultsSegmentControl = _resultsSegmentControl;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -312,7 +313,24 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                             target:self action:@selector(save:)];	
+    NSArray *segmentArray = [NSArray arrayWithObjects:NSLocalizedString(@"HIV Results", nil), NSLocalizedString(@"Blood Results", nil), NSLocalizedString(@"Other Results", nil), nil];
+    
+    self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:segmentArray];
+    
+    CGFloat width = self.tableView.bounds.size.width;
+    CGFloat segmentWidth = width - 2 * 20;
+    self.resultsSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
+    self.resultsSegmentControl.tintColor = TINTCOLOUR;
+    self.resultsSegmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    self.resultsSegmentControl.selectedSegmentIndex = 0;
+    [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 }
+
+- (void)indexDidChangeForSegment{
+    [self.tableView reloadData];
+}
+
+
 
 - (void)viewDidUnload
 {
@@ -349,7 +367,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -357,27 +375,63 @@
 		return 1;
 	}
     else if(1 == section){
-        return 2;
-    }
-    else if(2 == section){
-        return 2;
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+            return 2;
+        }
+        else if (1 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
+            return 4;
+        }
+        else{
+            return 1;
+        }
     }
     else{
-        return 2;
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+            return 2;
+        }
+        else if (1 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
+            return 4;
+        }
+        else{
+            return 1;
+        }
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (2 == indexPath.section) {
-        return 69;
-    }
-    else if (2 > indexPath.section ){
-        return 48;
-    }
-    else {
+    if (0 == indexPath.section) {
         return 44;
     }
-    
+    else{
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex && 2 == indexPath.section) {
+            return 69;
+        }
+        else{
+            return 48;
+        }
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (1 == section) {
+        return 40;
+    }
+    else
+        return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headerView = nil;
+    if (1 == section) {
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
+        [headerView addSubview:self.resultsSegmentControl];
+    }
+    else{
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
+    }
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -405,7 +459,7 @@
         return dateCell;
     }
     if (1 == indexPath.section) {
-        int tag = indexPath.row + 100;
+        int tag = 0;
         
         NSString *identifier = @"ResultValueCell";
         ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
@@ -421,116 +475,252 @@
         }
         [[resultCell inputTitle]setTextColor:TEXTCOLOUR];
         int row = indexPath.row;
-        switch (row) {
-            case 0:
-                [[resultCell inputTitle]setText:NSLocalizedString(@"CD4 Count", @"CD4 Count")];
-                if (0 < [self.cd4 intValue]) {
-                    [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.cd4 intValue]]];
-                    [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
-                }
-                break;
-            case 1:
-                [[resultCell inputTitle]setText:NSLocalizedString(@"CD4 %", @"CD4 %")];
-                if (0 < [self.cd4Percent floatValue]) {
-                    [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]]];
-                    [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
-                }
-                break;
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+            tag = indexPath.row + 100;
+            resultCell.colourCodeView.backgroundColor = DARK_YELLOW;
+            resultCell.colourCodeView.layer.cornerRadius = 5;
+            switch (row) {
+                case 0:
+                    resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
+                    if (0 < [self.cd4 intValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.cd4 intValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    resultCell.inputValueKind = INTEGERINPUT;
+                    break;
+                case 1:
+                    resultCell.inputTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
+                    if (0 < [self.cd4Percent floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    resultCell.inputValueKind = FLOATINPUT;
+                    break;
+            }
         }
-        resultCell.colourCodeView.layer.cornerRadius = 5;
-        [resultCell setTag:tag];
+        else if (1 == self.resultsSegmentControl.selectedSegmentIndex){
+            tag = indexPath.row + 1000;
+            resultCell.colourCodeView.backgroundColor = DARK_RED;
+            resultCell.colourCodeView.layer.cornerRadius = 5;
+            switch (row) {
+                case 0:
+                    resultCell.inputTitle.text = NSLocalizedString(@"Glucose", @"Glucose");
+                    resultCell.inputValueKind = INTEGERINPUT;
+                    if (0 < [self.glucose floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.glucose floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    break;
+                case 1:
+                {
+                    resultCell.inputTitle.text = NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol");
+                    resultCell.inputValueKind = FLOATINPUT;
+                    if (0 < [self.cholesterol floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cholesterol floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    resultCell.inputTitle.text = NSLocalizedString(@"HDL", @"HDL");
+                    resultCell.inputValueKind = FLOATINPUT;
+                    if (0 < [self.hdl floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.hdl floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    resultCell.inputTitle.text = NSLocalizedString(@"LDL", @"LDL");
+                    resultCell.inputValueKind = FLOATINPUT;
+                    if (0 < [self.ldl floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.ldl floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    break;
+                }
+            }
+        }
+        else{
+            tag = indexPath.row + 100000;
+            resultCell.colourCodeView.backgroundColor = DARK_GREEN;
+            resultCell.colourCodeView.layer.cornerRadius = 5;
+            resultCell.inputTitle.text = NSLocalizedString(@"Weight", @"Weight");
+            if (0 < [self.weight floatValue]) {
+                [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.weight floatValue]]];
+                [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+            }
+            resultCell.inputValueKind = FLOATINPUT;
+            resultCell.tag = tag;
+        }
         return resultCell;        
     }
     if (2 == indexPath.section) {
-        int tag = indexPath.row + 10;
         
-        NSString *identifier = @"ResultSegmentedCell";    
-        ResultSegmentedCell *segCell = (ResultSegmentedCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == segCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultSegmentedCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[ResultSegmentedCell class]]) {
-                    segCell = (ResultSegmentedCell *)currentObject;
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+            int tag = 10 + indexPath.row;
+            
+            NSString *identifier = @"ResultSegmentedCell";
+            ResultSegmentedCell *segCell = (ResultSegmentedCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == segCell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultSegmentedCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[ResultSegmentedCell class]]) {
+                        segCell = (ResultSegmentedCell *)currentObject;
+                        break;
+                    }
+                }
+                [segCell setDelegate:self];
+            }
+            int row = indexPath.row;
+            segCell.inputValueKind = INTEGERINPUT;
+            segCell.inputTitle.textColor = TEXTCOLOUR;
+            segCell.query.text = NSLocalizedString(@"undetectable?",@"undetectable?");
+            segCell.query.textColor = TEXTCOLOUR;
+            segCell.colourCodeView.backgroundColor = DARK_BLUE;
+            segCell.colourCodeView.layer.cornerRadius = 5;
+            segCell.tag = tag;
+            switch (row) {
+                case 0:
+                    [[segCell inputTitle]setText:NSLocalizedString(@"Viral Load",@"Viral Load")];
+                    [[segCell inputTitle]setTextColor:TEXTCOLOUR];
+                    [[segCell query]setText:NSLocalizedString(@"undetectable?",@"undetectable?")];
+                    [[segCell query]setTextColor:TEXTCOLOUR];
+                    if (40 <= [self.vlHIV intValue]) {
+                        [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHIV intValue]]];
+                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
+                        [[segCell switchControl]setOn:FALSE];
+                    }
+                    if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue]){
+                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
+                        [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
+                        [[segCell inputValueField]setEnabled:NO];
+                        [[segCell switchControl]setOn:TRUE];
+                    }
+                    if(0 > [self.vlHIV intValue]){
+                        [[segCell inputValueField]setEnabled:YES];
+                        [[segCell switchControl]setOn:FALSE];
+                    }
+                    break;
+                case 1:
+                    [[segCell inputTitle]setText:NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC")];
+                    [[segCell inputTitle]setTextColor:TEXTCOLOUR];
+                    [[segCell query]setText:NSLocalizedString(@"undetectable?",@"undetectable?")];
+                    [[segCell query]setTextColor:TEXTCOLOUR];
+                    if (40 <= [self.vlHepC intValue]) {
+                        [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHepC intValue]]];
+                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
+                        [[segCell switchControl]setOn:FALSE];
+                    }
+                    if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue]){
+                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
+                        [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
+                        [[segCell inputValueField]setEnabled:NO];
+                        [[segCell switchControl]setOn:TRUE];
+                    }
+                    if(0 > [self.vlHepC intValue]){
+                        [[segCell inputValueField]setEnabled:NO];
+                        [[segCell switchControl]setOn:TRUE];
+                    }
+                    break;
+            }
+            return segCell;
+        }
+        else if (1 == self.resultsSegmentControl.selectedSegmentIndex){
+            int tag = indexPath.row + 1004;
+            NSString *identifier = @"ResultValueCell";
+            ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == resultCell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[ResultValueCell class]]) {
+                        resultCell = (ResultValueCell *)currentObject;
+                        break;
+                    }
+                }
+                [resultCell setDelegate:self];
+            }
+            resultCell.inputTitle.textColor = TEXTCOLOUR;
+            resultCell.colourCodeView.backgroundColor = DARK_RED;
+            resultCell.colourCodeView.layer.cornerRadius = 5;
+            resultCell.tag = tag;
+            int row = indexPath.row;
+            switch (row) {
+                case 0:
+                {
+                    resultCell.inputTitle.text = NSLocalizedString(@"Hemoglobulin", @"Hemoglobulin");
+                    resultCell.inputValueKind = FLOATINPUT;
+                    if (0 < [self.hemoglobulin floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.hemoglobulin floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
                     break;
                 }
-            }  
-            [segCell setDelegate:self];
-        }
-        segCell.colourCodeView.layer.cornerRadius = 5;
-        int row = indexPath.row;
-        switch (row) {
-            case 0:
-                [[segCell inputTitle]setText:NSLocalizedString(@"Viral Load",@"Viral Load")];
-                [[segCell inputTitle]setTextColor:TEXTCOLOUR];
-                [[segCell query]setText:NSLocalizedString(@"undetectable?",@"undetectable?")];
-                [[segCell query]setTextColor:TEXTCOLOUR];
-                if (40 <= [self.vlHIV intValue]) {
-                    [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHIV intValue]]];
-                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                    [[segCell switchControl]setOn:FALSE];
-                }
-                if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue]){
-                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                    [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
-                    [[segCell inputValueField]setEnabled:NO];
-                    [[segCell switchControl]setOn:TRUE];
-                }
-                if(0 > [self.vlHIV intValue]){
-                    [[segCell inputValueField]setEnabled:YES];
-                    [[segCell switchControl]setOn:FALSE];
-                }
-                break;
-            case 1:
-                [[segCell inputTitle]setText:NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC")];
-                [[segCell inputTitle]setTextColor:TEXTCOLOUR];
-                [[segCell query]setText:NSLocalizedString(@"undetectable?",@"undetectable?")];
-                [[segCell query]setTextColor:TEXTCOLOUR];
-                if (40 <= [self.vlHepC intValue]) {
-                    [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHepC intValue]]];
-                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                    [[segCell switchControl]setOn:FALSE];
-                }
-                if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue]){
-                    [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                    [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
-                    [[segCell inputValueField]setEnabled:NO];
-                    [[segCell switchControl]setOn:TRUE];
-                }
-                if(0 > [self.vlHepC intValue]){
-                    [[segCell inputValueField]setEnabled:NO];
-                    [[segCell switchControl]setOn:TRUE];
-                }
-                break;
-        }
-        [segCell setTag:tag];
-        return segCell;        
-    }
-    if (3 == indexPath.section) {
-        NSString *identifier = @"MoreResultsCell";
-        MoreResultsCell *moreResultsCell = (MoreResultsCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == moreResultsCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MoreResultsCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[MoreResultsCell class]]) {
-                    moreResultsCell = (MoreResultsCell *)currentObject;
+                case 1:
+                {
+                    resultCell.inputTitle.text = NSLocalizedString(@"White Blood Cells", @"White Blood Cells");
+                    resultCell.inputValueKind = FLOATINPUT;
+                    if (0 < [self.whiteCells floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.whiteCells floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
                     break;
                 }
-            } 
+                case 2:
+                {
+                    resultCell.inputTitle.text = NSLocalizedString(@"Red Blood Cells", @"Red Blood Cells");
+                    resultCell.inputValueKind = FLOATINPUT;
+                    if (0 < [self.redCells floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.redCells floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    resultCell.inputTitle.text = NSLocalizedString(@"Platelets", @"Platelets");
+                    resultCell.inputValueKind = FLOATINPUT;
+                    if (0 < [self.platelets floatValue]) {
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.platelets floatValue]]];
+                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                    }
+                    break;
+                }
+            }
+            return resultCell;
         }
-        moreResultsCell.moreTitleLabel.textColor = TEXTCOLOUR;
-        moreResultsCell.hasMoreLabel.text = @"";
-        moreResultsCell.colourCodeView.layer.cornerRadius = 5;
-        if (0 == indexPath.row) 
-        {
-            moreResultsCell.moreTitleLabel.text = @"More Blood Results";
-            moreResultsCell.colourCodeView.backgroundColor = DARK_RED;
+        else{//other results
+            NSString *identifier = @"PressureCell";
+            PressureCell *pressureCell = (PressureCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (nil == pressureCell) {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"PressureCell" owner:self options:nil];
+                for (id currentObject in cellObjects) {
+                    if ([currentObject isKindOfClass:[PressureCell class]]) {
+                        pressureCell = (PressureCell *)currentObject;
+                        break;
+                    }
+                }
+                [pressureCell setDelegate:self];
+            }
+            pressureCell.pressureLabel.textColor = TEXTCOLOUR;
+            pressureCell.pressureLabel.text = NSLocalizedString(@"Blood Pressure", @"Blood Pressure");
+            pressureCell.systoleField.tag = 11000;
+            pressureCell.diastoleField.tag = 12000;
+            
+            if (0 < [self.systole intValue] && 0 < [self.diastole intValue]) {
+                pressureCell.systoleField.text = [NSString stringWithFormat:@"%d",[self.systole intValue]];
+                pressureCell.diastoleField.text = [NSString stringWithFormat:@"%d",[self.diastole intValue]];
+            }
+            
+            pressureCell.colourCodeView.backgroundColor = DARK_GREEN;
+            pressureCell.colourCodeView.layer.cornerRadius = 5;
+            [pressureCell setDelegate:self];
+            return pressureCell;
+            
         }
-        else 
-        {
-            moreResultsCell.moreTitleLabel.text = @"More Other Results";
-            moreResultsCell.colourCodeView.backgroundColor = DARK_GREEN;
-        }
-        return moreResultsCell;
+        
     }
     return nil;    
 }
@@ -544,34 +734,14 @@
 	if (0 == indexPath.section) {
 		[self changeResultsDate];
 	}
-    if (3 == indexPath.section) 
-    {
-        if (0 == indexPath.row) 
-        {
-            NSArray *keys = [NSArray arrayWithObjects:@"glucose", @"cholesterol", @"hdl", @"ldl", @"hemoglobulin", @"whiteCells", @"redCells", @"platelets", nil];
-            NSArray *values = [NSArray arrayWithObjects:self.glucose, self.cholesterol, self.hdl, self.ldl, self.hemoglobulin, self.whiteCells, self.redCells, self.platelets, nil];
-            NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
-            MoreBloodResultsViewController *bloodController = [[MoreBloodResultsViewController alloc] initWithResults:resultsDictionary];
-            [bloodController setResultDelegate:self];
-            [self.navigationController pushViewController:bloodController animated:YES];
-        }
-        else 
-        {
-            NSArray *keys = [NSArray arrayWithObjects:@"weight", @"systole", @"diastole", nil];
-            NSArray *values = [NSArray arrayWithObjects:self.weight, self.systole, self.diastole,nil];
-            NSDictionary *resultsDictionary = [NSDictionary dictionaryWithObjects:values forKeys:keys];
-            MoreOtherResultsViewController *otherController = [[MoreOtherResultsViewController alloc] initWithResults:resultsDictionary systoleTag:11000 diastoleTag:12000];
-            [otherController setResultDelegate:self];
-            [self.navigationController pushViewController:otherController animated:YES];
-        }
-    }
 }
 
 #pragma mark - delegate methods
 
-- (void)setResultString:(NSString *)valueString forTag:(NSInteger)tag{
-    [self setValueString:valueString withTag:tag];
-}
 
+- (void)setSystole:(NSString *)systole diastole:(NSString *)diastole{
+    self.systole = [self valueFromString:systole];
+    self.diastole = [self valueFromString:diastole];
+}
 
 @end

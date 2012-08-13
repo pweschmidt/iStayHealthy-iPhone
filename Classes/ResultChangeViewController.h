@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ResultValueCell.h"
 #import "MoreResultsViewController.h"
+#import "PressureCell.h"
 
 @class Results, iStayHealthyRecord, SetDateCell;
-@interface ResultChangeViewController : UITableViewController <UIAlertViewDelegate, ResultValueCellDelegate, UIActionSheetDelegate, MoreBloodResultsDelegate>{
+@interface ResultChangeViewController : UITableViewController <UIAlertViewDelegate, ResultValueCellDelegate, UIActionSheetDelegate, PressureCellDelegate>{
 }
 @property (nonatomic, strong) NSDate *resultsDate;
 @property (nonatomic, strong) SetDateCell *changeDateCell;
@@ -32,10 +33,13 @@
 @property (nonatomic, strong) NSNumber *whiteCells;
 @property (nonatomic, strong) NSNumber *redCells;
 @property (nonatomic, strong) NSNumber *platelets;
+@property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
+
 - (IBAction) save:					(id) sender;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;
 - (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord;
 - (NSNumber *)valueFromString:(NSString *)string;
 - (void)changeResultsDate;
+- (void)indexDidChangeForSegment;
 @end

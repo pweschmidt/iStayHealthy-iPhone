@@ -368,6 +368,7 @@
             tag = indexPath.row + 100;
             resultCell.colourCodeView.backgroundColor = DARK_YELLOW;
             resultCell.colourCodeView.layer.cornerRadius = 5;
+            resultCell.tag = tag;
             switch (row) {
                 case 0:
                     resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
@@ -383,6 +384,7 @@
             tag = indexPath.row + 1000;
             resultCell.colourCodeView.backgroundColor = DARK_RED;
             resultCell.colourCodeView.layer.cornerRadius = 5;
+            resultCell.tag = tag;
             switch (row) {
                 case 0:
                     resultCell.inputTitle.text = NSLocalizedString(@"Glucose", @"Glucose");
@@ -416,7 +418,6 @@
             resultCell.inputValueKind = FLOATINPUT;
             resultCell.tag = tag;            
         }
-        [resultCell setTag:tag];
         return resultCell;        
     }
     if (2 == indexPath.section) {
