@@ -76,6 +76,7 @@
 		C4574AF01493B40700793164 /* RepeatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4574AEF1493B40600793164 /* RepeatCell.m */; };
 		C4574AF21493B61C00793164 /* SoundNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4574AF11493B61B00793164 /* SoundNameCell.xib */; };
 		C4574AF51493B69F00793164 /* SoundNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4574AF41493B69F00793164 /* SoundNameCell.m */; };
+		C45E027415DFFDC800277E66 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45E027315DFFDC800277E66 /* DropboxSDK.framework */; };
 		C46067E61472D7DC00FCA76D /* MissedMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C46067E51472D7DC00FCA76D /* MissedMedication.m */; };
 		C46067EC1472D7DC00FCA76D /* Medication.m in Sources */ = {isa = PBXBuildFile; fileRef = C46067EB1472D7DC00FCA76D /* Medication.m */; };
 		C46067F51472D7DD00FCA76D /* iStayHealthyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C46067F41472D7DD00FCA76D /* iStayHealthyRecord.m */; };
@@ -319,7 +320,6 @@
 		C4FCBCE8152F460900E3F082 /* resultsnavbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBCEA152F460900E3F082 /* resultsnavbar@2x.png */; };
 		C4FCBCEE152F461600E3F082 /* chartsnavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBCF0152F461600E3F082 /* chartsnavbar.png */; };
 		C4FCBCF4152F462500E3F082 /* chartsnavbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBCF6152F462500E3F082 /* chartsnavbar@2x.png */; };
-		C4FFC4CA1541743000607989 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC4C91541743000607989 /* DropboxSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -438,6 +438,7 @@
 		C4574AF11493B61B00793164 /* SoundNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoundNameCell.xib; sourceTree = "<group>"; };
 		C4574AF31493B69E00793164 /* SoundNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundNameCell.h; sourceTree = "<group>"; };
 		C4574AF41493B69F00793164 /* SoundNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundNameCell.m; sourceTree = "<group>"; };
+		C45E027315DFFDC800277E66 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C46067E01472D5ED00FCA76D /* iStayHealthy 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 10.xcdatamodel"; sourceTree = "<group>"; };
 		C46067E41472D7DC00FCA76D /* MissedMedication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissedMedication.h; sourceTree = "<group>"; };
 		C46067E51472D7DC00FCA76D /* MissedMedication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissedMedication.m; sourceTree = "<group>"; };
@@ -828,7 +829,6 @@
 		C4FCBCF7152F462A00E3F082 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = "de.lproj/chartsnavbar@2x.png"; sourceTree = "<group>"; };
 		C4FCBCF8152F462C00E3F082 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/chartsnavbar@2x.png"; sourceTree = "<group>"; };
 		C4FCBCF9152F462F00E3F082 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = "fr.lproj/chartsnavbar@2x.png"; sourceTree = "<group>"; };
-		C4FFC4C91541743000607989 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -852,7 +852,7 @@
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
-				C4FFC4CA1541743000607989 /* DropboxSDK.framework in Frameworks */,
+				C45E027415DFFDC800277E66 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -965,8 +965,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C45E027315DFFDC800277E66 /* DropboxSDK.framework */,
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
-				C4FFC4C91541743000607989 /* DropboxSDK.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
 				C490250A14DD630700BDD906 /* CoreLocation.framework */,
 				C490250814DD62BF00BDD906 /* StoreKit.framework */,

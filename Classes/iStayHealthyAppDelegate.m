@@ -55,8 +55,10 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
     NSString* consumerKey = @"sekt4gbt7526j0y";
 	NSString* consumerSecret = @"drg5hompcf9vbd2";
-    NSString* root = kDBRootDropbox;//could also be kDBRootAppFolder
-	DBSession* session = [[DBSession alloc]initWithAppKey:consumerKey appSecret:consumerSecret root:root];
+    NSString* root = kDBRootDropbox;
+	DBSession* session = [[DBSession alloc]initWithAppKey:consumerKey
+                                                appSecret:consumerSecret
+                                                     root:root];
 	[DBSession setSharedSession:session];
 	NSString* errorMsg = nil;    
 	if (errorMsg != nil) {
@@ -545,7 +547,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index {
 	if (index != alertView.cancelButtonIndex) {
-		[[DBSession sharedSession] linkUserId:relinkUserId];
+		[[DBSession sharedSession] linkUserId:relinkUserId fromController:self.tabBarController];
 	}
 	relinkUserId = nil;
 }

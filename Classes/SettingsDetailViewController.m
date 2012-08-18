@@ -90,7 +90,7 @@
  */
 - (void)startDropBox{
     if (![[DBSession sharedSession] isLinked]) {
-		[[DBSession sharedSession] link];
+		[[DBSession sharedSession] linkFromController:self];
     }
     DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc]
                                                       initWithNibName:@"DropBoxBackupViewController" bundle:nil];

@@ -406,7 +406,7 @@
  */
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error {
 #ifdef APPDEBUG
-    NSLog(@"Error loading metadata: %@", error);
+    NSLog(@"Error loading metadata: %@ (%@)", error, [error localizedDescription]);
 #endif
     [self showDBError];
 }
