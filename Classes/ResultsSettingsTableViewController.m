@@ -93,8 +93,7 @@
         }
         [[dateCell value]setText:[formatter stringFromDate:self.dateOfBirth]];
         [dateCell setTag:indexPath.row];
-        [[dateCell title]setText:NSLocalizedString(@"DOB", @"Birthdate")];
-        [[dateCell title]setTextColor:TEXTCOLOUR];
+        dateCell.labelImageView.image = [UIImage imageNamed:@"appointments.png"];
         [dateCell setTag:1];
         self.setDateCell = dateCell;
         return dateCell;

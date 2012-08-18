@@ -11,11 +11,12 @@
 #import "PressureCell.h"
 @class iStayHealthyRecord, SetDateCell, Results;
 
-@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, ResultValueCellDelegate, PressureCellDelegate>{
+@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate,ResultValueCellDelegate, PressureCellDelegate>{
 @private
 }
 @property (nonatomic, strong) NSDate *resultsDate;
 @property (nonatomic, strong) iStayHealthyRecord *record;
+@property (nonatomic, strong) Results *results;
 @property (nonatomic, strong) SetDateCell *setDateCell;
 @property (nonatomic, strong) NSNumber *cd4;
 @property (nonatomic, strong) NSNumber *cd4Percent;
@@ -33,10 +34,13 @@
 @property (nonatomic, strong) NSNumber *redCells;
 @property (nonatomic, strong) NSNumber *platelets;
 @property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
-
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
+- (IBAction) changeUnits:           (id) sender;
 - (void)changeResultsDate;
+- (void)removeSQLEntry;
+- (IBAction) showAlertView:			(id) sender;
+- (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord;
 - (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
 - (NSNumber *)valueFromString:(NSString *)string;
 - (void)indexDidChangeForSegment;

@@ -229,7 +229,10 @@
  @return height as CGFloat
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	if (3 == indexPath.section) {
+    if (0 == indexPath.section) {
+        return 60;
+    }
+	else if (3 == indexPath.section) {
         return 44.0;
 	}
 	return 48.0;
@@ -253,8 +256,7 @@
         formatter.dateFormat = @"HH:mm";
         [[timeCell value]setText:[formatter stringFromDate:self.startTime]];
         [timeCell setTag:indexPath.row];
-        [[timeCell title]setText:NSLocalizedString(@"Set Time", @"Set Time")];
-        [[timeCell title]setTextColor:TEXTCOLOUR];
+        timeCell.labelImageView.image = [UIImage imageNamed:@"alarm.png"];
         self.dateCell = timeCell;
         return timeCell;
     }

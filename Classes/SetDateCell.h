@@ -8,11 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SetDateCell : UITableViewCell{
-    IBOutlet UILabel *title;
-    IBOutlet UILabel *value;
-    BOOL hasChanged;
-}
+@interface SetDateCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *title;
 @property (nonatomic, strong) IBOutlet UILabel *value;
+@property (nonatomic, weak) IBOutlet UIImageView *labelImageView;
 @end

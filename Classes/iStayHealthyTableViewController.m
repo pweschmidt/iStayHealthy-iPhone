@@ -14,6 +14,7 @@
 #import "GeneralSettings.h"
 #import "NSArray-Set.h"
 #import "Utilities.h"
+#import "Medication.h"
 
 
 @implementation iStayHealthyTableViewController
@@ -318,7 +319,27 @@
     /* HIV Meds in chronological oder */
 	NSSet *hivmeds = self.masterRecord.medications;
 	if (0 != [hivmeds count]) {
-		self.allMeds = [NSArray arrayByOrderingSet:hivmeds byKey:@"StartDate" ascending:YES reverseOrder:NO];
+		NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:[NSArray arrayByOrderingSet:hivmeds byKey:@"StartDate" ascending:YES reverseOrder:NO]];
+        NSMutableArray *indexArrayToBeRemoved = [NSMutableArray array];
+        int index = 0;
+        for (Medication *med in tmpArray) {
+            NSDate *endDate = med.EndDate;
+            if(nil != endDate)
+            {
+                NSDate *startdate = med.StartDate;
+                if ([startdate compare:endDate] == NSOrderedAscending) {
+                    [indexArrayToBeRemoved addObject:[NSNumber numberWithInt:index]];
+                }
+            }
+            index++;
+        }
+        if (0 != indexArrayToBeRemoved.count) {
+            for (NSNumber *number in indexArrayToBeRemoved) {
+                int valueIndex = [number intValue];
+                [tmpArray removeObjectAtIndex:valueIndex];
+            }
+        }
+        self.allMeds = [NSArray arrayWithArray:tmpArray];        
 	}
     else
         self.allMeds = (NSArray *)hivmeds;

@@ -14,7 +14,6 @@
 #import "Results.h"
 #import "GeneralSettings.h"
 #import "ChartSettings.h"
-#import "ResultChangeViewController.h"
 #import "ResultListCell.h"
 #import "UINavigationBar-Button.h"
 #import "ResultsSettingsTableViewController.h"
@@ -84,7 +83,7 @@
  */
 - (void)loadResultChangeViewController:(int)row{
     Results *results = (Results *)[self.allResultsInReverseOrder objectAtIndex:row];
-	ResultChangeViewController *changeRecordView = [[ResultChangeViewController alloc] initWithResults:results withMasterRecord:masterRecord];
+	ResultDetailViewController *changeRecordView = [[ResultDetailViewController alloc] initWithResults:results withMasterRecord:masterRecord];
     
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changeRecordView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];

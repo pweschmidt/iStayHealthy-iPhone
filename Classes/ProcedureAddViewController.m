@@ -173,6 +173,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (0 == indexPath.section) {
+        return 60;
+    }
     return 48;
 }
 
@@ -196,8 +199,7 @@
         }
         [[_dateCell value]setText:[formatter stringFromDate:self.startDate]];
         [_dateCell setTag:indexPath.row];
-        [[_dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
-        [[_dateCell title]setTextColor:TEXTCOLOUR];
+        _dateCell.labelImageView.image = [UIImage imageNamed:@"appointments.png"];
         self.dateCell = _dateCell;
         return _dateCell;
     }

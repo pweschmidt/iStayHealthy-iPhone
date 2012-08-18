@@ -156,7 +156,8 @@ loads the NewAlertEditDetailViewController to edit an existing alert
     NSString *timeLeft = [NSString stringWithFormat:@"%02li:%02li",
                           lround(floor(difference / 3600.)) % 100,
                           lround(floor(difference / 60.)) % 60];
-    cell.timeLeftLabel.text = timeLeft;
+    NSString *fullTimeLeftText = [NSString stringWithFormat:@"%@ %@",timeLeft, NSLocalizedString(@"remaining", @"remaining")];
+    cell.timeLeftLabel.text = fullTimeLeftText;
     
     cell.title.text = [dateFormatter stringFromDate:notifcation.fireDate];
     cell.text.text = notifcation.alertBody;

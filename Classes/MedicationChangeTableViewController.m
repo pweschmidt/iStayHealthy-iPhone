@@ -15,12 +15,19 @@
 #import "SideEffects.h"
 #import "SetDateCell.h"
 #import "MoreResultsCell.h"
+#import "GradientButton.h"
+
 
 @implementation MedicationChangeTableViewController
-@synthesize date, record, selectedMedication, isMissed, effectString,effectIsSet, dateCell;
-@synthesize missedDate, effectDate, state, missedSwitchCell, effectSwitchCell;
-@synthesize missedDateCell, effectDateCell, effectsCell;
-@synthesize effectSwitch, missedSwitch, dateChanged;
+@synthesize startDate = _startDate;
+@synthesize record = _record;
+@synthesize selectedMedication = _selectedMedication;
+@synthesize startDateCell = _startDateCell;
+@synthesize endDateCell = _endDateCell;
+@synthesize startDateChanged = _startDateChanged;
+@synthesize endDateChanged = _endDateChanged;
+@synthesize medName = _medName;
+@synthesize state = _state;
 /**
  init - loads NIB file and sets the master SQL record
  */
@@ -29,18 +36,14 @@
     if (self) {
         self.record = masterRecord;
         self.selectedMedication = medication;
-        self.isMissed = NO;
-        self.effectIsSet = NO;
-        self.dateChanged = NO;
-        self.date = self.selectedMedication.StartDate;
-        if (nil == self.date) {
-            self.date = [NSDate date];
+        self.startDateChanged = NO;
+        self.endDateChanged = NO;
+        self.startDate = self.selectedMedication.StartDate;
+        if (nil == self.startDate) {
+            self.startDate = [NSDate date];
         }
-        self.effectString = @"";
-        medName = medication.Name;
-        self.missedDate = [NSDate date];
-        self.effectDate = [NSDate date];
-        self.state = CHANGEDATE;
+        self.state = 0;
+        self.medName = medication.Name;
     }
     return self;
 }
@@ -60,27 +63,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = medName;
+    self.navigationItem.title = self.medName;
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
-                                            target:self action:@selector(showAlertView:)];
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                            target:self action:@selector(cancel:)];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                               initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                             target:self action:@selector(save:)];	
 }
 
 - (void)viewDidUnload
 {
-    self.dateCell = nil;
-    self.date = nil;
-    self.effectString = nil;
-    self.effectDate = nil;
-    self.missedDate = nil;
-    self.missedSwitchCell = nil;
-    self.effectSwitchCell = nil;
-    self.effectsCell = nil;
-    self.effectSwitch = nil;
-    self.missedSwitch = nil;
+    self.startDate = nil;
+    self.startDateCell = nil;
+    self.endDateCell = nil;
+    self.endDate = nil;
+    self.medName = nil;
     [super viewDidUnload];
 }
 
@@ -88,42 +86,11 @@
  save the changes and/or dismiss
  */
 - (IBAction) save:					(id) sender{
-    NSManagedObjectContext *context = [record managedObjectContext];
+    NSManagedObjectContext *context = [self.record managedObjectContext];
     NSError *error = nil;
-    if (self.isMissed) {
-        MissedMedication *missedMed = [NSEntityDescription insertNewObjectForEntityForName:@"MissedMedication" inManagedObjectContext:context];
-        [self.record addMissedMedicationsObject:missedMed];
+    if (self.startDateChanged) {
         self.record.UID = [Utilities GUID];
-        
-        missedMed.MissedDate = self.missedDate;   
-        missedMed.Name = selectedMedication.Name;
-        missedMed.Drug = selectedMedication.Drug;
-        missedMed.UID = [Utilities GUID];
-        if (![context save:&error]) {
-#ifdef APPDEBUG
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-#endif
-            abort();
-        }
-        
-    }
-    if (self.effectIsSet) {
-        SideEffects *effects = [NSEntityDescription insertNewObjectForEntityForName:@"SideEffects" inManagedObjectContext:context];
-        [record addSideeffectsObject:effects];
-        self.record.UID = [Utilities GUID];
-        effects.SideEffectDate = self.effectDate;
-        effects.Name = self.selectedMedication.Name;
-        effects.SideEffect = self.effectString;
-        if (![context save:&error]) {
-#ifdef APPDEBUG
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-#endif
-            abort();
-        }
-    }
-    if (self.dateChanged) {
-        self.record.UID = [Utilities GUID];
-        self.selectedMedication.StartDate = self.date;
+        self.selectedMedication.StartDate = self.startDate;
         self.selectedMedication.UID = [Utilities GUID];
         if (![context save:&error]) {
 #ifdef APPDEBUG
@@ -132,8 +99,19 @@
             abort();
         }
     }
+    if (self.endDateChanged) {
+        self.record.UID = [Utilities GUID];
+        self.selectedMedication.EndDate = self.endDate;
+        self.selectedMedication.UID = [Utilities GUID];
+    }
+    
 	[self dismissModalViewControllerAnimated:YES];        
 }
+
+- (IBAction) cancel: (id) sender{
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 
 /**
  shows the Alert view when user clicks the Trash button
@@ -159,9 +137,9 @@
  really want to delete it
  */
 - (void) removeSQLEntry{
-    [record removeMedicationsObject:selectedMedication];
-    NSManagedObjectContext *context = selectedMedication.managedObjectContext;
-    [context deleteObject:selectedMedication];
+    [self.record removeMedicationsObject:self.selectedMedication];
+    NSManagedObjectContext *context = self.selectedMedication.managedObjectContext;
+    [context deleteObject:self.selectedMedication];
     NSError *error = nil;
     if (![context save:&error]) {
 #ifdef APPDEBUG
@@ -172,34 +150,6 @@
 	[self dismissModalViewControllerAnimated:YES];        
 }
 
-- (IBAction)switchSideEffects:(id)sender{
-    if (self.effectSwitch.isOn) {
-        self.effectIsSet = YES;
-    }
-    else {
-        self.effectIsSet = NO;
-    }
-    [self.tableView reloadData];
-}
-
-- (IBAction)switchMissedDose:(id)sender{
-    if (self.missedSwitch.isOn) {
-        self.isMissed = YES;
-    }
-    else {
-        self.isMissed = NO;
-    }
-    [self.tableView reloadData];
-}
-
-
-
-- (void)setValueString:(NSString *)valueString withTag:(int)tag{
-    self.effectString = valueString;
-}
-- (void)setUnitString:(NSString *)unitString{
-    //nothing to do here
-}
 
 
 
@@ -214,8 +164,8 @@
 	
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = 101;
-    if (self.state == CHANGEDATE) {
-        datePicker.date = self.date;
+    if (self.state == 0) {
+        datePicker.date = self.startDate;
     }
 	datePicker.datePickerMode = UIDatePickerModeDate;
 	[actionSheet addSubview:datePicker];
@@ -234,20 +184,19 @@
 #endif	
     
 	NSString *timestamp = [formatter stringFromDate:datePicker.date];
-    switch (self.state) {
-        case CHANGEDATE:
-            self.date = datePicker.date;
-            self.dateChanged = YES;
-            self.dateCell.value.text = timestamp;
-            break;
-        case EFFECTSDATE:
-            self.effectDate = datePicker.date;
-            self.effectDateCell.value.text = timestamp;
-            break;
-        case MISSEDDATE:
-            self.missedDate = datePicker.date;
-            self.missedDateCell.value.text = timestamp;
-            break;
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        switch (self.state) {
+            case 0:
+                self.startDate = datePicker.date;
+                self.startDateChanged = YES;
+                self.startDateCell.value.text = timestamp;
+                break;
+            case 1:
+                self.endDate = datePicker.date;
+                self.endDateCell.value.text = timestamp;
+                self.endDateChanged = YES;
+                break;
+        }
     }
 }
 
@@ -258,7 +207,7 @@
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 /**
@@ -266,43 +215,43 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section) {
-        return 1;
-    }
-    else if (1 == section) {
-        if (self.effectIsSet) {
-            return 3;
-        }
-        else {
-            return 1;
-        }
-    }
-    else {
-        if (self.isMissed) {
-            return 2;
-        }
-        else {
-            return 1;
-        }
-    }
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 48.0;
+    return 60.0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (0 == section) {
         return NSLocalizedString(@"Treatment Start Date", @"Treatment Start Date");
     }
-    if (1 == section) {
-        return NSLocalizedString(@"Side Effects", @"Side Effects");
+    else{
+        return NSLocalizedString(@"Treatment End Date", @"Treatment End Date");
     }
-    if (2 == section) {
-        return NSLocalizedString(@"Missed", @"Missed");
-    }
-    return @"";
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    CGFloat height = 10;
+    if (1 == section) {
+        height = 90;
+    }
+    return height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *footerView = nil;
+    footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
+    if (1 == section){
+        footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 90);
+        CGRect deleteFrame = CGRectMake(10, 45, tableView.bounds.size.width - 20 , 37);
+        GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
+        [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
+        [footerView addSubview:deleteButton];
+    }    
+    return footerView;
+}
+
 
 /**
  configure the cells
@@ -313,144 +262,39 @@
     formatter.dateFormat = @"dd MMM YY";
     if (0 == indexPath.section) {        
         NSString *identifier = @"SetDateCell";
-        SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == _dateCell) {
+        SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == dateCell) {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
             for (id currentObject in cellObjects) {
                 if ([currentObject isKindOfClass:[SetDateCell class]]) {
-                    _dateCell = (SetDateCell *)currentObject;
+                    dateCell = (SetDateCell *)currentObject;
                     break;
                 }
             }  
         }
-        [[_dateCell value]setText:[formatter stringFromDate:self.date]];
-        [_dateCell setTag:indexPath.row];
-        [[_dateCell title]setText:NSLocalizedString(@"Change", @"Change")];
-        [[_dateCell title]setTextColor:TEXTCOLOUR];
-        self.dateCell= _dateCell;
-        return _dateCell;
+        dateCell.value.text = [formatter stringFromDate:self.startDate];
+        dateCell.tag = indexPath.row;
+        dateCell.labelImageView.image = [UIImage imageNamed:@"appointments.png"];
+        self.startDateCell= dateCell;
+        return dateCell;
     }
-    if (1 == indexPath.section) {
-        if (0 == indexPath.row) {
-            NSString *identifier = @"SwitcherCell";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    else{
+        NSString *identifier = @"SetDateCell";
+        SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == dateCell) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
+            for (id currentObject in cellObjects) {
+                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+                    dateCell = (SetDateCell *)currentObject;
+                    break;
+                }
             }
-            cell.backgroundColor = [UIColor whiteColor];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 112.0, 22.0);
-            UILabel *label = [[UILabel alloc] initWithFrame:frame];
-            label.textColor = TEXTCOLOUR;
-            label.textAlignment = UITextAlignmentLeft;
-            label.font = [UIFont systemFontOfSize:15.0];
-            
-            CGRect frameSwitch = CGRectMake(215.0, 10.0, 94.0, 27.0);
-            UISwitch *switchEnabled = [[UISwitch alloc] initWithFrame:frameSwitch];
-            [switchEnabled addTarget:self action:@selector(switchSideEffects:) forControlEvents:UIControlEventValueChanged];
-            
-            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")) {
-                switchEnabled.onTintColor = TINTCOLOUR;
-            }
-            cell.accessoryView = switchEnabled;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [label setText:NSLocalizedString(@"Side Effects", @"Side Effects")];
-            [cell addSubview:label];
-            self.effectSwitchCell = cell;
-            self.effectSwitch = switchEnabled;
-            [self.effectSwitch setOn:self.effectIsSet];
-            return cell;
         }
-        if (1 == indexPath.row && self.effectIsSet) {
-            NSString *identifier = @"SetDateCell";
-            SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == _dateCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[SetDateCell class]]) {
-                        _dateCell = (SetDateCell *)currentObject;
-                        break;
-                    }
-                }  
-            }
-            [[_dateCell value]setText:[formatter stringFromDate:self.effectDate]];
-            [_dateCell setTag:indexPath.row];
-            [[_dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
-            [[_dateCell title]setTextColor:TEXTCOLOUR];
-            self.effectDateCell= _dateCell;
-            return _dateCell;
-        }
-        if (2 == indexPath.row && self.effectIsSet) {
-            NSString *identifier = @"ClinicAddressCell";
-            ClinicAddressCell *cell = (ClinicAddressCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == cell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[ClinicAddressCell class]]) {
-                        cell = (ClinicAddressCell *)currentObject;
-                        break;
-                    }
-                }  
-                [cell setDelegate:self];
-            }
-            [[cell title]setText:NSLocalizedString(@"Side Effects",@"Side Effects")];
-            [[cell valueField]setText:NSLocalizedString(@"Enter Effects",@"Enter Effects")];
-            self.effectsCell = cell;
-            return cell;
-        }
-    }
-    if (2 == indexPath.section) {
-        if (0 == indexPath.row) {
-            NSString *identifier = @"SwitcherCell";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            }
-            cell.backgroundColor = [UIColor whiteColor];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 112.0, 22.0);
-            UILabel *label = [[UILabel alloc] initWithFrame:frame];
-            label.textColor = TEXTCOLOUR;
-            label.textAlignment = UITextAlignmentLeft;
-            label.font = [UIFont systemFontOfSize:15.0];
-            
-            CGRect frameSwitch = CGRectMake(215.0, 10.0, 94.0, 27.0);
-            UISwitch *switchEnabled = [[UISwitch alloc] initWithFrame:frameSwitch];
-            [switchEnabled addTarget:self action:@selector(switchMissedDose:) forControlEvents:UIControlEventValueChanged];
-            
-            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")) {
-                switchEnabled.onTintColor = TINTCOLOUR;
-            }
-            [switchEnabled setOn:self.isMissed];
-            cell.accessoryView = switchEnabled;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [label setText:NSLocalizedString(@"Missed?", @"Missed?")];
-            [cell addSubview:label];
-            
-            self.missedSwitch = switchEnabled;
-            [self.missedSwitch setOn:self.isMissed];
-            self.missedSwitchCell = cell;
-            return cell;        
-        }
-        if (1 == indexPath.row && self.isMissed) {
-            NSString *identifier = @"SetDateCell";
-            SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == _dateCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[SetDateCell class]]) {
-                        _dateCell = (SetDateCell *)currentObject;
-                        break;
-                    }
-                }  
-            }
-            [[_dateCell value]setText:[formatter stringFromDate:self.missedDate]];
-            [_dateCell setTag:indexPath.row];
-            [[_dateCell title]setText:NSLocalizedString(@"Set Date", @"Set Date")];
-            [[_dateCell title]setTextColor:TEXTCOLOUR];
-            self.missedDateCell= _dateCell;
-            return _dateCell;
-        }
+        dateCell.value.text = @"----";
+        dateCell.tag = indexPath.row;
+        dateCell.labelImageView.image = [UIImage imageNamed:@"stop.png"];
+        self.endDateCell= dateCell;
+        return dateCell;        
     }
     return nil;
 }
@@ -460,18 +304,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section && 0 == indexPath.row) {
-        self.state = CHANGEDATE;
-        [self changeDate];
+    if (0 == indexPath.section) {
+        self.state = 0;
     }
-    if (1 == indexPath.section && 1 == indexPath.row) {
-        self.state = EFFECTSDATE;
-        [self changeDate];
+    else{
+        self.state = 1;
     }
-    if (2 == indexPath.section && 1 == indexPath.row) {
-        self.state = MISSEDDATE;
-        [self changeDate];
-    }
+    [self changeDate];
 }
 
 @end
