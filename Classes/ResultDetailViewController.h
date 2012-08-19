@@ -11,9 +11,8 @@
 #import "PressureCell.h"
 @class iStayHealthyRecord, SetDateCell, Results;
 
-@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate,ResultValueCellDelegate, PressureCellDelegate>{
-@private
-}
+@interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate,ResultValueCellDelegate, PressureCellDelegate>
+
 @property (nonatomic, strong) NSDate *resultsDate;
 @property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) Results *results;

@@ -12,9 +12,10 @@
 #import "NSArray-Set.h"
 #import "GeneralSettings.h"
 #import "SideEffectListCell.h"
+#import "SideEffectsDetailTableViewController.h"
 
 @interface SideEffectsViewController()
-- (void)pushSideEffectsController;
+- (void)loadSideEffectsController;
 @end
 
 @implementation SideEffectsViewController
@@ -46,14 +47,17 @@
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                               target:self action:@selector(done:)];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pushSideEffectsController)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadSideEffectsController)];
     self.tableView.rowHeight = 57.0;
 }
 
-- (void)pushSideEffectsController{
+- (void)loadSideEffectsController{
     
-    SideEffectDetailViewController *sideEffectsController = [[SideEffectDetailViewController alloc] initWithRecord:self.masterRecord effectDelegate:self];
-    [self.navigationController pushViewController:sideEffectsController animated:YES];
+	SideEffectsDetailTableViewController *newSideEffectController = [[SideEffectsDetailTableViewController alloc] initWithRecord:masterRecord medication:self.allMeds];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,8 +141,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SideEffects *effects = (SideEffects *)[self.allSideEffects objectAtIndex:indexPath.row];
-    SideEffectDetailViewController *sideEffectController = [[SideEffectDetailViewController alloc] initWithRecord:self.masterRecord sideEffects:effects effectDelegate:self];
-    [self.navigationController pushViewController:sideEffectController animated:YES];
+	SideEffectsDetailTableViewController *newSideEffectController = [[SideEffectsDetailTableViewController alloc] initWithResults:effects masterRecord:self.masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
 }
 
 

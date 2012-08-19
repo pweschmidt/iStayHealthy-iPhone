@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "iStayHealthyTableViewController.h"
-#import "SideEffectDetailViewController.h"
-@class iStayHealthyRecord;
-@interface SideEffectsViewController : iStayHealthyTableViewController <SideEffectUpdateDelegate>
+@interface SideEffectsViewController : iStayHealthyTableViewController
 - (IBAction) done:					(id) sender;
 
 @end
