@@ -95,7 +95,7 @@
 }
 
 - (void)loadMissedMedicationsController{
-    MissedMedViewController *missedController = [[MissedMedViewController alloc]initWithRecord:masterRecord];
+    MissedMedViewController *missedController = [[MissedMedViewController alloc]initWithNibName:@"MissedMedViewController" bundle:nil];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:missedController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];

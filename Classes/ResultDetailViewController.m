@@ -19,6 +19,7 @@
 #import "ChartSettings.h"
 #import "GradientButton.h"
 #import "Results.h"
+#import "UnitTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ResultDetailViewController ()
@@ -193,7 +194,8 @@
 }
 
 - (IBAction) changeUnits:           (id) sender{
-    
+    UnitTableViewController *unitController = [[UnitTableViewController alloc] initWithNibName:@"UnitTableViewController" bundle:nil];
+    [self.navigationController pushViewController:unitController animated:YES];    
 }
 
 

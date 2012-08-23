@@ -100,6 +100,8 @@
 		C46BA15013F6C3D100E77E1B /* XMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BA14F13F6C3D100E77E1B /* XMLDocument.m */; };
 		C46BA15313F6CB6900E77E1B /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BA15213F6CB6900E77E1B /* XMLElement.m */; };
 		C46BA15613F6CEBF00E77E1B /* XMLAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BA15513F6CEBF00E77E1B /* XMLAttribute.m */; };
+		C46E1CEC15E6BDF90011C0F9 /* UnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46E1CEA15E6BDF90011C0F9 /* UnitTableViewController.m */; };
+		C46E1CED15E6BDF90011C0F9 /* UnitTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46E1CEB15E6BDF90011C0F9 /* UnitTableViewController.xib */; };
 		C477561D12D4A5EA003D5DCC /* StatusViewControllerLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = C477561B12D4A5EA003D5DCC /* StatusViewControllerLandscape.m */; };
 		C477561E12D4A5EA003D5DCC /* StatusViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = C477561C12D4A5EA003D5DCC /* StatusViewControllerLandscape.xib */; };
 		C48875721469B95A0068020F /* GeneralMedicalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C48875701469B95A0068020F /* GeneralMedicalTableViewController.m */; };
@@ -486,6 +488,9 @@
 		C46BA15213F6CB6900E77E1B /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
 		C46BA15413F6CEBF00E77E1B /* XMLAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLAttribute.h; sourceTree = "<group>"; };
 		C46BA15513F6CEBF00E77E1B /* XMLAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLAttribute.m; sourceTree = "<group>"; };
+		C46E1CE915E6BDF90011C0F9 /* UnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTableViewController.h; sourceTree = "<group>"; };
+		C46E1CEA15E6BDF90011C0F9 /* UnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTableViewController.m; sourceTree = "<group>"; };
+		C46E1CEB15E6BDF90011C0F9 /* UnitTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UnitTableViewController.xib; path = Classes/UnitTableViewController.xib; sourceTree = "<group>"; };
 		C46F86E213E5D1A20026BC08 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C477558E12D492DA003D5DCC /* ChartSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartSettings.h; sourceTree = "<group>"; };
 		C477561A12D4A5EA003D5DCC /* StatusViewControllerLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewControllerLandscape.h; sourceTree = "<group>"; };
@@ -921,6 +926,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C46E1CEB15E6BDF90011C0F9 /* UnitTableViewController.xib */,
 				C4BA70B115E0D79000CEE75E /* MissedMedsDetailTableViewController.xib */,
 				C4BA70AC15E0D74600CEE75E /* SideEffectsDetailTableViewController.xib */,
 				C48CAA13159B696200F39942 /* SideEffectDetailViewController.xib */,
@@ -1274,6 +1280,8 @@
 				C4BA70AB15E0D74600CEE75E /* SideEffectsDetailTableViewController.m */,
 				C4BA70AF15E0D79000CEE75E /* MissedMedsDetailTableViewController.h */,
 				C4BA70B015E0D79000CEE75E /* MissedMedsDetailTableViewController.m */,
+				C46E1CE915E6BDF90011C0F9 /* UnitTableViewController.h */,
+				C46E1CEA15E6BDF90011C0F9 /* UnitTableViewController.m */,
 			);
 			name = DetailViewControllers;
 			sourceTree = "<group>";
@@ -1665,6 +1673,7 @@
 				C49B5C5F15DFE4BA00D3AF3B /* appointments.png in Resources */,
 				C4BA70AE15E0D74600CEE75E /* SideEffectsDetailTableViewController.xib in Resources */,
 				C4BA70B315E0D79000CEE75E /* MissedMedsDetailTableViewController.xib in Resources */,
+				C46E1CED15E6BDF90011C0F9 /* UnitTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1755,6 +1764,7 @@
 				C49B5C5015DF9C7E00D3AF3B /* GradientButton.m in Sources */,
 				C4BA70AD15E0D74600CEE75E /* SideEffectsDetailTableViewController.m in Sources */,
 				C4BA70B215E0D79000CEE75E /* MissedMedsDetailTableViewController.m in Sources */,
+				C46E1CEC15E6BDF90011C0F9 /* UnitTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

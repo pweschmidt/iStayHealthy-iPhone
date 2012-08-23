@@ -7,15 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iStayHealthyTableViewController.h"
 
 @class iStayHealthyRecord;
-@interface MissedMedViewController : UITableViewController{
-	iStayHealthyRecord *record;    
-    NSMutableArray *missedMeds;
-}
-@property (nonatomic, strong) iStayHealthyRecord *record;
-@property (nonatomic, strong) NSMutableArray *missedMeds;
+@interface MissedMedViewController : iStayHealthyTableViewController
 - (IBAction) done:					(id) sender;
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
 - (NSString *)getStringFromName:(NSString *)name;
 @end

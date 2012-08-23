@@ -12,25 +12,13 @@
 #import "NSArray-Set.h"
 #import "GeneralSettings.h"
 #import "SideEffectListCell.h"
+#import "MissedMedsDetailTableViewController.h"
+
+@interface MissedMedViewController ()
+- (void)loadMissedMedsTableViewController;
+@end
 
 @implementation MissedMedViewController
-@synthesize record, missedMeds;
-
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
-{
-    self = [super initWithNibName:@"MissedMedViewController" bundle:nil];
-    if (self) {
-        self.record = masterrecord;
-        NSSet *missedSet = record.missedMedications;
-        if (0 != [missedSet count]) {
-            self.missedMeds = [NSArray arrayByOrderingSet:missedSet byKey:@"MissedDate" ascending:YES reverseOrder:YES];
-        }
-        else {//if empty - simply map to empty set
-            self.missedMeds = (NSMutableArray *)missedSet;
-        }    
-    }
-    return self;
-}
 
 - (IBAction) done:				(id) sender{
     [self dismissModalViewControllerAnimated:YES];
@@ -50,15 +38,26 @@
 {
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Missed", @"Missed");
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                              target:self action:@selector(done:)];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                             target:self action:@selector(done:)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMissedMedsTableViewController)];
 }
+
+- (void)loadMissedMedsTableViewController{
+    
+	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithRecord:self.masterRecord medication:self.allMeds];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
+}
+
+
 
 - (void)viewDidUnload
 {
-    self.missedMeds = nil;
     [super viewDidUnload];
 }
 
@@ -76,7 +75,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.missedMeds count];
+    return [self.allMissedMeds count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -106,7 +105,7 @@
             }
         }  
     }
-    MissedMedication *missed = (MissedMedication *)[self.missedMeds objectAtIndex:indexPath.row];
+    MissedMedication *missed = (MissedMedication *)[self.allMissedMeds objectAtIndex:indexPath.row];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
 	formatter.dateFormat = @"dd MMM YYYY";
     [[cell effect]setText:[formatter stringFromDate:missed.MissedDate]];
@@ -119,29 +118,14 @@
 
 #pragma mark - Table view delegate
 
-/**
- only row deletion is enabled. row is removed and entry is deleted from the database
- @tableView
- @editingStyle
- @indexPath
- */
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete && 0 == indexPath.section) {
-		MissedMedication *missed = (MissedMedication *)[self.missedMeds objectAtIndex:indexPath.row];
-        [record removeMissedMedicationsObject:missed];
-		[self.missedMeds removeObject:missed];
-		NSManagedObjectContext *context = missed.managedObjectContext;
-		[context deleteObject:missed];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-		NSError *error = nil;
-		if (![context save:&error]) {
-#ifdef APPDEBUG
-			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-#endif
-			abort();
-		}
-    }   
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MissedMedication *missed = (MissedMedication *)[self.allMissedMeds objectAtIndex:indexPath.row];
+	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithMissedMeds:missed masterRecord:self.masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
 }
 
 @end
