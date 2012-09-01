@@ -19,10 +19,18 @@
 
 @implementation iStayHealthyTableViewController
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize masterRecord, landscapeController, headerView;
-@synthesize allMeds, allMissedMeds, allResults, allResultsInReverseOrder;
-@synthesize allPills, allContacts, allProcedures, allSideEffects;
-
+@synthesize masterRecord = _masterRecord;
+@synthesize landscapeController = _landscapeController;
+@synthesize headerView = _headerView;
+@synthesize allMeds = _allMeds;
+@synthesize allMissedMeds = _allMissedMeds;
+@synthesize allResults = _allResults;
+@synthesize allResultsInReverseOrder = _allResultsInReverseOrder;
+@synthesize allPills = _allPills;
+@synthesize allContacts = _allContacts;
+@synthesize allProcedures = _allProcedures;
+@synthesize allSideEffects = _allSideEffects;
+@synthesize isShowingLandscape = _isShowingLandscape;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -30,7 +38,8 @@
 /**
  loads the view
  */
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
@@ -40,7 +49,8 @@
 #endif
 
 	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
 							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
@@ -80,7 +90,8 @@
 	[addButton addTarget:self action:@selector(loadURL) forControlEvents:UIControlEventTouchUpInside];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[Utilities bannerImageFromLocale]];
 
-    if (nil != imageView) {
+    if (nil != imageView)
+    {
         [addButton addSubview:imageView];
     }
 
@@ -90,12 +101,14 @@
 /**
  reloads the data when getting notified by the app data that iCloud data have changed
  */
-- (void)reloadData:(NSNotification*)note{
+- (void)reloadData:(NSNotification*)note
+{
 #ifdef APPDEBUG
     NSLog(@"We are getting notified to reload the data");
 #endif
     NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
 							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
@@ -104,7 +117,8 @@
 							  otherButtonTitles:nil];
 		[alert show];
 	}
-    if (note) {
+    if (note)
+    {
         [self setUpData];
         [self.tableView reloadData];        
     }
@@ -112,7 +126,8 @@
 
 /**
  */
-- (void)gotoPOZ{
+- (void)gotoPOZ
+{
     NSString *url = @"http://www.poz.com";
     NSString *title = @"POZ Magazine";
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:url withTitle:title];
@@ -128,7 +143,8 @@
 
 /**
  */
-- (void)loadURL{
+- (void)loadURL
+{
     NSString *url = [Utilities urlStringFromLocale];
     NSString *title = [Utilities titleFromLocale];
         
@@ -146,7 +162,8 @@
 /**
  loads the Webview
  */
-- (IBAction)loadWebView:(id)sender{
+- (IBAction)loadWebView:(id)sender
+{
 //    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
 	NSString *urlAddress = NSLocalizedString(@"BannerURL", @"BannerURL");
     /*
@@ -162,7 +179,8 @@
     [self presentModalViewController:navigationController animated:YES];
 }
 
-- (IBAction)loadAd:(id)sender{
+- (IBAction)loadAd:(id)sender
+{
 	NSString *urlAddress = NSLocalizedString(@"AdURL", @"AdURL");
     /*
      if ([language isEqualToString:@"de"]) {
@@ -183,7 +201,8 @@
  the master record is set up at the first time the application is launched.
  the record contains the relationships to results and medications, which will be added to the master record.
  */
-- (void)setUpMasterRecord{
+- (void)setUpMasterRecord
+{
 #ifdef APPDEBUG
 	NSLog(@"iStayHealthyTableViewController:setUpMasterRecord ENTERING");
 #endif
@@ -195,7 +214,8 @@
 	NSLog(@"iStayHealthyTableViewController:setUpMasterRecord before saving data");
 #endif
 	NSError *error = nil;
-	if (![newRecord.managedObjectContext save:&error]) {
+	if (![newRecord.managedObjectContext save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
@@ -211,10 +231,12 @@
  but I decided to be on the safe side.
  @animated
  */
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-	if (0 == [objects count]) {
+	if (0 == [objects count])
+    {
 #ifdef APPDEBUG		
 		NSLog(@"iStayHealthyTableViewController::viewWillAppear no master record yet");
 #endif
@@ -232,7 +254,8 @@
  will be set by subclass
  @tableView
  */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     // Return the number of sections.
     return 0;
 }
@@ -242,7 +265,8 @@
  @tableView
  @section
  */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     // Return the number of rows in the section.
     return 0;
 }
@@ -257,7 +281,8 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
@@ -273,8 +298,10 @@
  this handles the fetching of the objects
  @return NSFetchedResultsController
  */
-- (NSFetchedResultsController *)fetchedResultsController{
-	if (fetchedResultsController_ != nil) {
+- (NSFetchedResultsController *)fetchedResultsController
+{
+	if (fetchedResultsController_ != nil)
+    {
 		return fetchedResultsController_;
 	}
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -301,40 +328,48 @@
 /**
  set up the data tables
  */
-- (void)setUpData{
+- (void)setUpData
+{
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
         
     /* Results in chronological/reverse order */
 	NSSet *results = self.masterRecord.results;
-	if (0 != [results count]) {
+	if (0 != [results count])
+    {
 		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
 		self.allResultsInReverseOrder = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:YES];
 	}
-    else{
+    else
+    {
         self.allResults = (NSArray *)results;
         self.allResultsInReverseOrder = (NSArray *)results;
     }
         
     /* HIV Meds in chronological oder */
 	NSSet *hivmeds = self.masterRecord.medications;
-	if (0 != [hivmeds count]) {
+	if (0 != [hivmeds count])
+    {
 		NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:[NSArray arrayByOrderingSet:hivmeds byKey:@"StartDate" ascending:YES reverseOrder:NO]];
         NSMutableArray *indexArrayToBeRemoved = [NSMutableArray array];
         int index = 0;
-        for (Medication *med in tmpArray) {
+        for (Medication *med in tmpArray)
+        {
             NSDate *endDate = med.EndDate;
             if(nil != endDate)
             {
                 NSDate *startdate = med.StartDate;
-                if ([startdate compare:endDate] == NSOrderedAscending) {
+                if ([startdate compare:endDate] == NSOrderedAscending)
+                {
                     [indexArrayToBeRemoved addObject:[NSNumber numberWithInt:index]];
                 }
             }
             index++;
         }
-        if (0 != indexArrayToBeRemoved.count) {
-            for (NSNumber *number in indexArrayToBeRemoved) {
+        if (0 != indexArrayToBeRemoved.count)
+        {
+            for (NSNumber *number in indexArrayToBeRemoved)
+            {
                 int valueIndex = [number intValue];
                 [tmpArray removeObjectAtIndex:valueIndex];
             }
@@ -346,7 +381,8 @@
     
     /* Missed HIV Meds in chronological oder */
     NSSet *missedMeds = self.masterRecord.missedMedications;
-    if (0 != [missedMeds count]) {
+    if (0 != [missedMeds count])
+    {
         self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
     }
     else
@@ -354,36 +390,44 @@
     
     /* OtherMedication ordered by name */
     NSSet *meds = self.masterRecord.otherMedications;
-    if (0 != [meds count]) {
+    if (0 != [meds count])
+    {
         self.allPills = [NSArray arrayByOrderingSet:meds byKey:@"Name" ascending:YES reverseOrder:NO];
     }
-    else {
+    else
+    {
         self.allPills = (NSArray *)meds;
     }
     
     /* Procedures */
     NSSet *procSet = self.masterRecord.procedures;
-    if(0 != [procSet count]){
+    if(0 != [procSet count])
+    {
         self.allProcedures = [NSArray arrayByOrderingSet:procSet byKey:@"Name" ascending:YES reverseOrder:NO];
     }
-    else{
+    else
+    {
         self.allProcedures = (NSArray *)procSet;
     }
 
     //arrays that need no ordering
     NSSet *contactSet = self.masterRecord.contacts;
-    if(0 != [contactSet count]){
+    if(0 != [contactSet count])
+    {
         self.allContacts = [NSArray arrayByOrderingSet:contactSet byKey:@"ClinicName" ascending:YES reverseOrder:NO];
     }
-    else{
+    else
+    {
         self.allContacts = (NSArray *)self.masterRecord.contacts;
     }
     
     NSSet *effectSet = self.masterRecord.sideeffects;
-    if(0 != [effectSet count]){
+    if(0 != [effectSet count])
+    {
         self.allSideEffects = [NSArray arrayByOrderingSet:effectSet byKey:@"SideEffect" ascending:YES reverseOrder:NO];
     }
-    else{
+    else
+    {
         self.allSideEffects = (NSArray *)self.masterRecord.sideeffects;
     }
 #ifdef APPDEBUG
@@ -394,7 +438,8 @@
  notified when changes to the database
  @controller
  */
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
 #ifdef APPDEBUG
     NSLog(@"iStayHealthyTableViewController::controllerDidChangeContent");
 #endif
@@ -429,24 +474,24 @@
 - (void)updateLandscapeView
 {
     UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    if (deviceOrientation == UIDeviceOrientationLandscapeLeft && !isShowingLandscapeView)
+    if (deviceOrientation == UIDeviceOrientationLandscapeLeft && !self.isShowingLandscape)
 	{
         [self presentModalViewController:self.landscapeController animated:YES];
-        isShowingLandscapeView = YES;
+        self.isShowingLandscape = YES;
     }
-    else if(deviceOrientation == UIDeviceOrientationLandscapeRight && !isShowingLandscapeView){
+    else if(deviceOrientation == UIDeviceOrientationLandscapeRight && !self.isShowingLandscape){
         [self presentModalViewController:self.landscapeController animated:YES];
-        isShowingLandscapeView = YES;
+        self.isShowingLandscape = YES;
         
     }
-	else if (deviceOrientation == UIDeviceOrientationPortrait && isShowingLandscapeView)
+	else if (deviceOrientation == UIDeviceOrientationPortrait && self.isShowingLandscape)
 	{
         [self dismissModalViewControllerAnimated:YES];
-        isShowingLandscapeView = NO;
+        self.isShowingLandscape = NO;
     }    
-    else if (deviceOrientation == UIDeviceOrientationPortraitUpsideDown && isShowingLandscapeView){
+    else if (deviceOrientation == UIDeviceOrientationPortraitUpsideDown && self.isShowingLandscape){
         [self dismissModalViewControllerAnimated:YES];
-        isShowingLandscapeView = NO;        
+        self.isShowingLandscape = NO;        
     }
 }
 
@@ -456,13 +501,15 @@
 /**
  handle memory warnings
  */
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
 /**
  unload view
  */
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     self.masterRecord = nil;
     self.landscapeController = nil;
     self.allContacts = nil;

@@ -12,13 +12,15 @@
 #import "Trafo.h"
 
 @implementation HealthChartsViewLandscape
-@synthesize cd4TitleLabel, viralLoadTitleLabel;
+@synthesize cd4TitleLabel = _cd4TitleLabel;
+@synthesize viralLoadTitleLabel = _viralLoadTitleLabel;
 /**
  */
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         [self drawCD4Title];
         [self drawViralLoadTitle];
     }
@@ -27,32 +29,35 @@
 
 /**
  */
-- (void)drawCD4Title{
+- (void)drawCD4Title
+{
 	float xValue = CGRectGetMinX(self.bounds)  + 55.0;
 	float yValue = CGRectGetMinY(self.bounds) + 3.0;
-	cd4TitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(xValue, yValue, 100.0, 15.5)];
-	cd4TitleLabel.text = NSLocalizedString(@"CD4 Count",nil);
-	cd4TitleLabel.textColor = DARK_YELLOW;
-	cd4TitleLabel.backgroundColor = BRIGHT_BACKGROUND;
-	[self addSubview:cd4TitleLabel];    
+	self.cd4TitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(xValue, yValue, 100.0, 15.5)];
+	self.cd4TitleLabel.text = NSLocalizedString(@"CD4 Count",nil);
+	self.cd4TitleLabel.textColor = DARK_YELLOW;
+	self.cd4TitleLabel.backgroundColor = BRIGHT_BACKGROUND;
+	[self addSubview:self.cd4TitleLabel];    
 }
 
 /**
  */
-- (void)drawViralLoadTitle{
+- (void)drawViralLoadTitle
+{
 	float xValue = CGRectGetMinX(self.bounds)  + width - 100.0;
 	float yValue = CGRectGetMinY(self.bounds) + 3.0;
-	viralLoadTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(xValue, yValue, 100.0, 15.5)];
-	viralLoadTitleLabel.text = NSLocalizedString(@"Viral Load",nil);
-	viralLoadTitleLabel.textColor = DARK_BLUE;
-	viralLoadTitleLabel.backgroundColor = BRIGHT_BACKGROUND;
-	[self addSubview:viralLoadTitleLabel];    
+	self.viralLoadTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(xValue, yValue, 100.0, 15.5)];
+	self.viralLoadTitleLabel.text = NSLocalizedString(@"Viral Load",nil);
+	self.viralLoadTitleLabel.textColor = DARK_BLUE;
+	self.viralLoadTitleLabel.backgroundColor = BRIGHT_BACKGROUND;
+	[self addSubview:self.viralLoadTitleLabel];    
 }
 
 
 /**
  */
-- (void)drawRightYAxis:(CGContextRef)context{
+- (void)drawRightYAxis:(CGContextRef)context
+{
 	CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0);
 	CGContextSetLineWidth(context, 2.0);
 	CGContextMoveToPoint(context, width, MARGINTOP);
@@ -60,13 +65,15 @@
 	CGContextStrokePath(context);        
 }
 
-- (void)drawGridLines:(CGContextRef)context{
+- (void)drawGridLines:(CGContextRef)context
+{
 	CGContextSetLineWidth(context, 1.0);
 	CGContextSetLineDash(context, 0, dateDashPattern, DASHCOUNT);
 	CGContextSetRGBStrokeColor(context, 0.8, 0.8, 0.8, 1.0);
 	CGContextSetRGBFillColor(context, 0.8, 0.8, 0.8, 1.0);
 
-    for (int tick = 1; tick < CD4TICKS ; ++tick) {
+    for (int tick = 1; tick < CD4TICKS ; ++tick)
+    {
         float yOffset = [Trafo mapCD4CountToYAxis:(100*tick) forHeight:height];
 #ifdef APPDEBUG
         NSLog(@"drawCD4Ticks: tick=%d yOffset=%f",tick,yOffset);

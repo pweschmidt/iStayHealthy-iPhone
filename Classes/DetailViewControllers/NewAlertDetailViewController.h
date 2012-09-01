@@ -13,19 +13,7 @@
 #import "RepeatCell.h"
 @class SetDateCell, SoundNameCell;
 
-@interface NewAlertDetailViewController : UITableViewController <UIActionSheetDelegate, AVAudioPlayerDelegate, ClinicAddressCellDelegate, RepeatCellDelegate> {
-@private
-    NSArray *sounds;
-    SetDateCell *dateCell;
-    SoundNameCell *selectedSoundCell;
-    BOOL isFirstLoad;
-	NSDate *startTime;
-	AVAudioPlayer *player;
-    int howMany;
-    NSString *alertText;
-    NSString *soundName;
-}
-@property int howMany;
+@interface NewAlertDetailViewController : UITableViewController <UIActionSheetDelegate, AVAudioPlayerDelegate, ClinicAddressCellDelegate, RepeatCellDelegate> @property int howMany;
 @property BOOL isFirstLoad;
 @property (nonatomic, strong) NSString *alertText;
 @property (nonatomic, strong) NSString *soundName;

@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface ChartEvents : NSObject {
-    NSMutableArray *allChartEvents;
-}
+@interface ChartEvents : NSObject 
 @property (nonatomic) NSMutableArray *allChartEvents;
 - (void)loadResult:(NSArray *)results;
 - (void)loadMedication:(NSArray *)medications;
@@ -19,14 +17,7 @@
 - (void)sortEventsAscending:(BOOL)ascending;
 @end
 
-@interface ChartEvent : NSObject {
-    NSDate      *date;   
-    NSNumber    *CD4Count;
-    NSNumber    *CD4Percent;
-    NSNumber    *ViralLoad;
-    NSString    *medicationName;
-    NSString    *missedName;        
-}
+@interface ChartEvent : NSObject 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSNumber *CD4Count;
 @property (nonatomic, strong) NSNumber *CD4Percent;

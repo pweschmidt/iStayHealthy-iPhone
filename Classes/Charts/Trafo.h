@@ -10,9 +10,7 @@
 #import "ChartSettings.h"
 
 
-@interface Trafo : NSObject {
-    
-}
+@interface Trafo : NSObject
 + (float)mapCD4CountToYAxis:(float)cd4Value forHeight:(float)height;
 + (float)mapCD4PercentToYAxis:(float)cd4PercentValue forHeight:(float)height;
 + (float)mapLogViralLoadToYAxis:(float)viralLoadValue forHeight:(float)height;

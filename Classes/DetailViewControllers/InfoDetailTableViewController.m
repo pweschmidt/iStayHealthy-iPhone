@@ -12,12 +12,16 @@
 #import "UINavigationBar-Button.h"
 
 @implementation InfoDetailTableViewController
-@synthesize faqList, headerLabel, adButton, bannerButton;
+@synthesize faqList = _faqList;
+@synthesize headerLabel = _headerLabel;
+@synthesize adButton = _adButton;
+@synthesize bannerButton = _bannerButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -47,14 +51,16 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     self.headerLabel.text = [NSString stringWithFormat:@"iStayHealthy version %@",version];
     UINavigationBar *navBar = self.navigationController.navigationBar;
-    if (navBar) {
+    if (navBar)
+    {
         [navBar addButtonWithImageName:@"gloassarynavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 
 }
 /**
  */
-- (void)gotoPOZ{
+- (void)gotoPOZ
+{
     NSString *url = @"http://www.poz.com";
     NSString *title = @"POZ Magazine";
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:url withTitle:title];
@@ -70,7 +76,8 @@
 /**
  loads the Webview
  */
-- (IBAction)loadWebView:(id)sender{
+- (IBAction)loadWebView:(id)sender
+{
     //    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
 	NSString *urlAddress = NSLocalizedString(@"BannerURL", @"BannerURL");
     /*
@@ -86,7 +93,8 @@
     [self presentModalViewController:navigationController animated:YES];
 }
 
-- (IBAction)loadAd:(id)sender{
+- (IBAction)loadAd:(id)sender
+{
 	NSString *urlAddress = NSLocalizedString(@"AdURL", @"AdURL");
     /*
      if ([language isEqualToString:@"de"]) {
@@ -105,7 +113,8 @@
 /**
  return to parent root controller
  */
-- (IBAction) done:	(id) sender{
+- (IBAction) done:	(id) sender
+{
 	[self dismissModalViewControllerAnimated:YES];    
 }
 
@@ -166,7 +175,8 @@
     static NSString *CellIdentifier = @"Cell";
     
     FAQDetailCell *cell = (FAQDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[FAQDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSArray *faqItem = (NSArray *)[self.faqList objectAtIndex:indexPath.section];
@@ -176,57 +186,11 @@
     return (UITableViewCell *)cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
 }
 
 @end

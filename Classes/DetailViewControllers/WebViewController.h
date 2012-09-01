@@ -8,13 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WebViewController : UIViewController<UIWebViewDelegate>{
-    UIActivityIndicatorView *activityIndicatorView;
-    IBOutlet UIWebView *webView;
-    IBOutlet UIToolbar *toolBar;
-    NSURL *url;
-    NSString *webNavtitle;
-}
+@interface WebViewController : UIViewController<UIWebViewDelegate>
 @property (nonatomic, strong) NSString *webNavtitle;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) IBOutlet UIWebView *webView;

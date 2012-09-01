@@ -23,8 +23,8 @@
 #import "UINavigationBar-Button.h"
 
 @implementation NewStatusViewController
-@synthesize chartView;
-@synthesize events;
+@synthesize chartView = _chartView;
+@synthesize events = _events;
 
 - (void)didReceiveMemoryWarning
 {
@@ -62,9 +62,11 @@
 	self.events = tmpEvents;
 }
 
-- (void)reloadData:(NSNotification *)note{
+- (void)reloadData:(NSNotification *)note
+{
     [super reloadData:note];
-    if (0 < [self.events.allChartEvents count]) {
+    if (0 < [self.events.allChartEvents count])
+    {
         [self.events.allChartEvents removeAllObjects];
     }
     
@@ -96,7 +98,8 @@
 	NSLog(@"**** NewStatusViewController::viewWillAppear ENTERING");
 #endif
     [super viewWillAppear:animated];
-    if (0 < [self.events.allChartEvents count]) {
+    if (0 < [self.events.allChartEvents count])
+    {
         [self.events.allChartEvents removeAllObjects];
     }
     
@@ -114,7 +117,8 @@
  loads the info viewer with short explanations on CD4 counts and Viral Loads
  @id sender
  */
-- (void) showInfoView:(id)sender{
+- (void) showInfoView:(id)sender
+{
 	InfoDetailTableViewController *infoViewController = [[InfoDetailTableViewController alloc] initWithNibName:@"InfoDetailTableViewController" bundle:nil];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -127,7 +131,8 @@
  loads the settings view
  @id sender
  */
-- (void) showSettingsView:(id)sender{
+- (void) showSettingsView:(id)sender
+{
     SettingsDetailViewController *settingsViewController = [[SettingsDetailViewController alloc] initWithNibName:@"SettingsDetailViewController" bundle:nil];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -140,33 +145,44 @@
 /**
  the latest result
  */
-- (Results *)latestResult:(NSString *)type{
-    if (!self.allResults) {
+- (Results *)latestResult:(NSString *)type
+{
+    if (!self.allResults)
+    {
         return nil;
     }
-    if (0 == [self.allResults count]) {
+    if (0 == [self.allResults count])
+    {
         return nil;
     }
     Results *result = nil;
     BOOL isFound = NO;
     int limit = [self.allResults count] -1;
-    for (int i = limit; i >= 0; --i) {
+    for (int i = limit; i >= 0; --i)
+    {
         Results *current = (Results *)[self.allResults objectAtIndex:i];
-        if (!isFound) {
-            if ([type isEqualToString:@"CD4Count"]) {
-                if (0 < [current.CD4 intValue]) {
+        if (!isFound)
+        {
+            if ([type isEqualToString:@"CD4Count"])
+            {
+                if (0 < [current.CD4 intValue])
+                {
                     result = current;
                     isFound = YES;
                 }
             }
-            if ([type isEqualToString:@"CD4Percent"]) {
-                if (0.0 < [current.CD4Percent floatValue]) {
+            if ([type isEqualToString:@"CD4Percent"])
+            {
+                if (0.0 < [current.CD4Percent floatValue])
+                {
                     result = current;
                     isFound = YES;
                 }
             }
-            if ([type isEqualToString:@"ViralLoad"]) {
-                if (0 <= [current.ViralLoad intValue]) {
+            if ([type isEqualToString:@"ViralLoad"])
+            {
+                if (0 <= [current.ViralLoad intValue])
+                {
                     result = current;
                     isFound = YES;
                 }
@@ -180,38 +196,49 @@
  the previous result (or nil if none exists)
  */
 
-- (Results *)previousResult:(NSString *)type{
-    if (!self.allResults) {
+- (Results *)previousResult:(NSString *)type
+{
+    if (!self.allResults)
+    {
         return nil;
     }
-    if (2 > [self.allResults count]) {
+    if (2 > [self.allResults count])
+    {
         return nil;
     }
     Results *result = nil;
     BOOL isFound = NO;
     int limit = [self.allResults count] -1;
     int count = 0;
-    for (int i = limit; i >= 0; --i) {
+    for (int i = limit; i >= 0; --i)
+    {
         Results *previous = (Results *)[self.allResults objectAtIndex:i];
-        if (!isFound) {
-            if ([type isEqualToString:@"CD4Count"]) {
-                if (0 < [previous.CD4 intValue] && 1 == count) {
+        if (!isFound)
+        {
+            if ([type isEqualToString:@"CD4Count"])
+            {
+                if (0 < [previous.CD4 intValue] && 1 == count)
+                {
                     result = previous;
                     isFound = YES;
                 }
                 else
                     ++count;
             }
-            if ([type isEqualToString:@"CD4Percent"]) {
-                if (0.0 < [previous.CD4Percent floatValue] && 1 == count) {
+            if ([type isEqualToString:@"CD4Percent"])
+            {
+                if (0.0 < [previous.CD4Percent floatValue] && 1 == count)
+                {
                     result = previous;
                     isFound = YES;
                 }
                 else
                     ++count;
             }
-            if ([type isEqualToString:@"ViralLoad"]) {
-                if (0 <= [previous.ViralLoad intValue] && 1 == count) {
+            if ([type isEqualToString:@"ViralLoad"])
+            {
+                if (0 <= [previous.ViralLoad intValue] && 1 == count)
+                {
                     result = previous;
                     isFound = YES;
                 }
@@ -232,7 +259,8 @@
  2 sections. section 0 contains 2 status cells (CD4/Viral Load), section 1 contains 1 cell with the charts
  @tableView 
  */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     // Return the number of sections.
     return 2;
 }
@@ -242,9 +270,11 @@
  @tableView
  @section
  */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     // Return the number of rows in the section.
-	if (0 == section) {
+	if (0 == section)
+    {
 		return 3;
 	}
     return 1;
@@ -255,11 +285,14 @@
  @tableView
  @indexPath
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	if (0 == indexPath.section) {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (0 == indexPath.section)
+    {
 		return TEXTCELLHEIGHT;
 	}
-	else {
+	else
+    {
 		return CHARTCELLHEIGHT;
 	}
 }
@@ -267,61 +300,72 @@
 /**
  configure the CD4 Count status cell
  */
-- (void)configureCD4Cell:(SummaryCell *)cell{
+- (void)configureCD4Cell:(SummaryCell *)cell
+{
     [[cell title]setText:NSLocalizedString(@"CD4 Count", nil)];
     [[cell title]setTextColor:DARK_YELLOW];
     
-	if (!self.allResults) {
+	if (!self.allResults)
+    {
 		return;
 	}
 	NSUInteger count = [self.allResults count];
         
-	if (0 == count) {
+	if (0 == count)
+    {
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 		return;
 	}
     Results *current = [self latestResult:@"CD4Count"];
-    if (!current) {
+    if (!current)
+    {
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 		return;
     }
 	
 	int cd4Count = [current.CD4 intValue];
-	if (0 < cd4Count) {
+	if (0 < cd4Count)
+    {
         [[cell result]setText:[NSString stringWithFormat:@"%d",cd4Count]];
 	}
 	
 	Results *previous = [self previousResult:@"CD4Count"];
-	if (previous) {
+	if (previous)
+    {
 		int previousCD4 = [previous.CD4 intValue];
-		if (0 < previousCD4 && 0 < cd4Count) {
+		if (0 < previousCD4 && 0 < cd4Count)
+        {
 			int diff = cd4Count - previousCD4;
             [[cell change]setText:[NSString stringWithFormat:@"%d", diff]];
 			
-			if (0 > diff) {
+			if (0 > diff)
+            {
                 [[cell change]setTextColor:DARK_RED];
-                [[cell imageView]setImage:[UIImage imageNamed:@"downredweb.png"]];
+                [[cell summaryImageView]setImage:[UIImage imageNamed:@"downredweb.png"]];
 			}
-			else if (0 < diff){
+			else if (0 < diff)
+            {
                 [[cell change]setTextColor:DARK_GREEN];
-                [[cell imageView]setImage:[UIImage imageNamed:@"upgreenweb.png"]];
+                [[cell summaryImageView]setImage:[UIImage imageNamed:@"upgreenweb.png"]];
 			}
-            else{
+            else
+            {
                 [[cell change]setText:@""];
                 [[cell change]setTextColor:[UIColor lightGrayColor]];            
-                [[cell imageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
+                [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
             }
 		}
 	}
-	else {
+	else
+    {
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 	}    
 	
 }
@@ -329,64 +373,75 @@
  configure the CD4 Percent status cell
  */
 
-- (void)configureCD4PercentCell:(SummaryCell *)cell{
+- (void)configureCD4PercentCell:(SummaryCell *)cell
+{
     [[cell title]setText:NSLocalizedString(@"CD4 %", nil)];
     [[cell title]setTextColor:DARK_YELLOW];
     
-	if (!self.allResults) {
+	if (!self.allResults)
+    {
 		return;
 	}
 	NSUInteger count = [self.allResults count];
     
     
-	if (0 == count) {
+	if (0 == count)
+    {
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 		return;
 	}
     Results *current = [self latestResult:@"CD4Percent"];
-    if (!current) {
+    if (!current)
+    {
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 		return;
     }
 	
 	float cd4Percent = [current.CD4Percent floatValue];
-	if (0.0 < cd4Percent) {
+	if (0.0 < cd4Percent)
+    {
         [[cell result]setText:[NSString stringWithFormat:@"%2.1f%%",cd4Percent]];
 	}
 	
 	Results *previous = [self previousResult:@"CD4Percent"];
-	if (previous) {
+	if (previous)
+    {
         //		previous = (Results *)[self.allResults objectAtIndex:(count - 2)];
 		float previousCD4Percent = [previous.CD4Percent floatValue];
-		if (0.0 < previousCD4Percent && 0 < cd4Percent) {
+		if (0.0 < previousCD4Percent && 0 < cd4Percent)
+        {
 			float diff = cd4Percent - previousCD4Percent;
             [[cell change]setText:[NSString stringWithFormat:@"%2.1f%%", diff]];
 			
-			if (0 > diff) {
+			if (0 > diff)
+            {
                 [[cell change]setTextColor:DARK_RED];
-                [[cell imageView]setImage:[UIImage imageNamed:@"downredweb.png"]];
+                [[cell summaryImageView]setImage:[UIImage imageNamed:@"downredweb.png"]];
 			}
-			else if (0 < diff){
+			else if (0 < diff)
+            {
                 [[cell change]setTextColor:DARK_GREEN];
-                [[cell imageView]setImage:[UIImage imageNamed:@"upgreenweb.png"]];
+                [[cell summaryImageView]setImage:[UIImage imageNamed:@"upgreenweb.png"]];
 			}
-            else{
+            else
+            {
                 [[cell change]setText:@""];
                 [[cell change]setTextColor:[UIColor lightGrayColor]];                        
-                [[cell imageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
+                [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
             }
             
 		}
 	}
-	else {
+	else
+    {
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 	}
     
     
@@ -395,70 +450,84 @@
 /**
  configure the viral load status cell
  */
-- (void)configureViralLoadCell:(SummaryCell *)cell{
+- (void)configureViralLoadCell:(SummaryCell *)cell
+{
     [[cell title]setText:NSLocalizedString(@"Viral Load", nil)];
     [[cell title]setTextColor:DARK_BLUE];
-	if (!self.allResults) {
+	if (!self.allResults)
+    {
 		return;
 	}
 	NSUInteger count = [self.allResults count];
-	if (0 == count) {
+	if (0 == count)
+    {
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 		return;
 	}
     Results *current = [self latestResult:@"ViralLoad"];
-    if (!current) {
+    if (!current)
+    {
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell imageView]setImage:nil];
+        [[cell summaryImageView]setImage:nil];
 		return;
     }
 	int vlCount = [current.ViralLoad intValue];
     
-	if (10 < vlCount) {
+	if (10 < vlCount)
+    {
         [[cell result]setText:[NSString stringWithFormat:@"%d",vlCount]];
 	}
-	if(0 <= vlCount && 10 >= vlCount){
+	if(0 <= vlCount && 10 >= vlCount)
+    {
         [[cell result]setText:NSLocalizedString(@"undetectable", nil)];
 	}
-    if (0 > vlCount) {
+    if (0 > vlCount)
+    {
         [[cell result]setText:NSLocalizedString(@"n/a", nil)];
     }
     
 	
 	Results *previous = [self previousResult:@"ViralLoad"];
-	if (previous) {
+	if (previous)
+    {
         //		previous = (Results *)[self.allResults objectAtIndex:(count - 2)];
 		int previousVL = [previous.ViralLoad intValue];
-		if (10 < vlCount && 10 < previousVL) {
+		if (10 < vlCount && 10 < previousVL)
+        {
             int diff = vlCount - previousVL;
             [[cell change]setText:[NSString stringWithFormat:@"%d", diff]];
             
-			if (0 > diff) {
+			if (0 > diff)
+            {
                 [[cell change]setTextColor:DARK_GREEN];
-                [[cell imageView]setImage:[UIImage imageNamed:@"downgreenweb.png"]];
+                [[cell summaryImageView]setImage:[UIImage imageNamed:@"downgreenweb.png"]];
 			}
-			if (0 < diff){
+			if (0 < diff)
+            {
                 [[cell change]setTextColor:DARK_RED];
-                [[cell imageView]setImage:[UIImage imageNamed:@"upredweb.png"]];
+                [[cell summaryImageView]setImage:[UIImage imageNamed:@"upredweb.png"]];
 			}
-            if (0 == diff) {
+            if (0 == diff)
+            {
                 [[cell change]setText:@""];
                 [[cell change]setTextColor:[UIColor lightGrayColor]];
-                [[cell imageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
+                [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
             }
 		}
-        if ((0 <= vlCount && 10 >= vlCount) && (0 <= previousVL && 10 >= previousVL)) {
+        if ((0 <= vlCount && 10 >= vlCount) && (0 <= previousVL && 10 >= previousVL))
+        {
             [[cell change]setText:@"0"];
             [[cell change]setTextColor:[UIColor lightGrayColor]];
-            [[cell imageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
+            [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
         }
 	}
-	else {
+	else
+    {
         [[cell change]setText:@""];
         [[cell imageView]setImage:nil];
 	}    
@@ -469,23 +538,31 @@
  @tableView
  @indexPath
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-	if (0 == indexPath.section) {
+	if (0 == indexPath.section)
+    {
         NSString *identifier = @"SummaryCell";
         SummaryCell *cell = (SummaryCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SummaryCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SummaryCell class]]) {
+        if (cell == nil)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SummaryCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SummaryCell class]])
+                {
                     cell = (SummaryCell *)currentObject;
                     break;
                 }
             }
         }
         int row = indexPath.row;
-        switch (row) {
+        switch (row)
+        {
             case 0:
                 [self configureCD4Cell:cell];
                 break;
@@ -498,11 +575,14 @@
         }
         return cell;        
 	}
-	if (1 == indexPath.section) {
+	if (1 == indexPath.section)
+    {
         NSString *identifier = @"ChartViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-		if (nil == cell) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+		if (nil == cell)
+        {
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:identifier];
 		}
 		cell.backgroundColor = BRIGHT_BACKGROUND;			
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -531,17 +611,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
-        switch (indexPath.row) {
+        switch (indexPath.row)
+        {
             case 0:
-                [chartView showCD4];
+                [self.chartView showCD4];
                 break;
             case 1:
-                [chartView showCD4Percent];
+                [self.chartView showCD4Percent];
                 break;
             case 2:
-                [chartView showViralLoad];
+                [self.chartView showViralLoad];
                 break;
         }
     }

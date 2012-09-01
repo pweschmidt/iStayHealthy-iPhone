@@ -10,11 +10,8 @@
 
 @protocol ClinicAddressCellDelegate;
 
-@interface ClinicAddressCell : UITableViewCell<UITextFieldDelegate>{
-    IBOutlet UILabel *title;
-    IBOutlet UITextField *valueField;
-    id<ClinicAddressCellDelegate> clinicAddressCellDelegate;
-}
+@interface ClinicAddressCell : UITableViewCell<UITextFieldDelegate>
+
 @property (nonatomic, strong) IBOutlet UILabel *title;
 @property (nonatomic, strong) IBOutlet UITextField *valueField;
 @property (nonatomic, weak) id<ClinicAddressCellDelegate> clinicAddressCellDelegate;

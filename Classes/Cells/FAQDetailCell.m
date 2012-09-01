@@ -10,19 +10,21 @@
 
 
 @implementation FAQDetailCell
-@synthesize explanationView;
+@synthesize explanationView = _explanationView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         [self setUpExplanationView];
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
 
-- (void)setUpExplanationView{
+- (void)setUpExplanationView
+{
 	CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+20.0, CGRectGetMinY(self.bounds)+7.5, 255.0, 85.0);
 	UITextView *view = [[UITextView alloc] initWithFrame:frame];
     view.textColor = [UIColor darkGrayColor];

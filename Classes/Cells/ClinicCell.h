@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ClinicCell : UITableViewCell{
-    IBOutlet UILabel *clinicCell;
-}
+@interface ClinicCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *clinicCell;
 @end

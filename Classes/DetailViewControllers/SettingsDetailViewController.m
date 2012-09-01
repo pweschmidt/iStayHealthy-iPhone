@@ -45,7 +45,8 @@
                                               target:self action:@selector(done:)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
-    if (navBar) {
+    if (navBar)
+    {
         [navBar addButtonWithImageName:@"extrasnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 
@@ -62,7 +63,8 @@
 
 /**
  */
-- (void)gotoPOZ{
+- (void)gotoPOZ
+{
     NSString *url = @"http://www.poz.com";
     NSString *title = @"POZ Magazine";
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:url withTitle:title];
@@ -80,7 +82,8 @@
 /**
  return to parent root controller
  */
-- (IBAction) done:	(id) sender{
+- (IBAction) done:	(id) sender
+{
 	[self dismissModalViewControllerAnimated:YES];    
 }
 
@@ -88,8 +91,10 @@
 /**
  backup/syn from DropBox
  */
-- (void)startDropBox{
-    if (![[DBSession sharedSession] isLinked]) {
+- (void)startDropBox
+{
+    if (![[DBSession sharedSession] isLinked])
+    {
 		[[DBSession sharedSession] linkFromController:self];
     }
     DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc]
@@ -99,14 +104,17 @@
 
 /**
  */
-- (void)startEmailResultsMessageView{
-    if (![MFMailComposeViewController canSendMail]) {
+- (void)startEmailResultsMessageView
+{
+    if (![MFMailComposeViewController canSendMail])
+    {
 #ifdef APPDEBUG
         NSLog(@"MFMailComposeViewController not configured to send mails");
 #endif
         return;
     }
-    if (DEVICE_IS_SIMULATOR) {
+    if (DEVICE_IS_SIMULATOR)
+    {
 #ifdef APPDEBUG
         NSLog(@"SettingsDetailViewController::startEmailMessageView called from iPhone Simulator");
 #endif
@@ -118,14 +126,16 @@
     NSData *xmlData = [loader xmlData];
 	NSError *error = nil;
     [xmlData writeToFile:tmpXMLFile options:NSDataWritingAtomic error:&error];
-	if (error != nil) {
+	if (error != nil)
+    {
 		[[[UIAlertView alloc]
 		   initWithTitle:@"Error writing XML data to tmp directory" message:[error localizedDescription] 
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 		 show];
 	}
  
-    else{
+    else
+    {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];        
         mailController.mailComposeDelegate = self;
@@ -141,14 +151,17 @@
 /**
  start the E-mail Message Viewer
  */
-- (void)startEmailMessageView{
-    if (![MFMailComposeViewController canSendMail]) {
+- (void)startEmailMessageView
+{
+    if (![MFMailComposeViewController canSendMail])
+    {
 #ifdef APPDEBUG
         NSLog(@"MFMailComposeViewController not configured to send mails");
 #endif
         return;
     }
-    if (DEVICE_IS_SIMULATOR) {
+    if (DEVICE_IS_SIMULATOR)
+    {
 #ifdef APPDEBUG
         NSLog(@"SettingsDetailViewController::startEmailMessageView called from iPhone Simulator");
 #endif
@@ -221,7 +234,8 @@
 
 /**
  */
-- (void)startPasswordController{
+- (void)startPasswordController
+{
     ToolsTableViewController *toolsController =
     [[ToolsTableViewController alloc] initWithNibName:@"ToolsTableViewController" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc]
@@ -262,39 +276,47 @@
  @indexPath
  @return height as CGFloat
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 60.0;
 }
 
 /**
  (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         NSString *identifier = @"SettingsCell";
         SettingsCell *cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         if (nil == cell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SettingsCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SettingsCell class]]) {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SettingsCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SettingsCell class]])
+                {
                     cell = (SettingsCell *)currentObject;
                     break;
                 }
             }  
         }
         int row = indexPath.row;
-        switch (row) {
+        switch (row)
+        {
             case 0:
-                [[cell imageView]setImage:[UIImage imageNamed:@"dropbox-small.png"]];
+                [[cell settingsImageView]setImage:[UIImage imageNamed:@"dropbox-small.png"]];
                 [[cell label]setText:NSLocalizedString(@"Backup", @"Backup")];
                 break;
             case 1:
-                [[cell imageView]setImage:[UIImage imageNamed:@"feedback-small.png"]];
+                [[cell settingsImageView]setImage:[UIImage imageNamed:@"feedback-small.png"]];
                 [[cell label]setText:NSLocalizedString(@"Feedback?", @"Feedback?")];
                 break;
             case 2:
-                [[cell imageView]setImage:[UIImage imageNamed:@"e-mail-small.png"]];
+                [[cell settingsImageView]setImage:[UIImage imageNamed:@"e-mail-small.png"]];
                 [[cell label]setText:NSLocalizedString(@"Email Results", @"Email Results")];
                 break;
                 /*
@@ -306,13 +328,19 @@
         return cell;
         
     }
-    if (1 == indexPath.section) {
+    if (1 == indexPath.section)
+    {
         NSString *identifier = @"PasswordCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"PasswordCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[UITableViewCell class]]) {
+        if (nil == cell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"PasswordCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[UITableViewCell class]])
+                {
                     cell = (UITableViewCell *)currentObject;
                     break;
                 }
@@ -342,8 +370,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
-    if (0 == indexPath.section) {
-        switch (indexPath.row) {
+    if (0 == indexPath.section)
+    {
+        switch (indexPath.row)
+        {
             case 0:
                 [self startDropBox];
                 break;
@@ -361,7 +391,8 @@
                  */
         }
     }
-    else{
+    else
+    {
         [self startPasswordController];
     }
 }

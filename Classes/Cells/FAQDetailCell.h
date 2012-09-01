@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FAQDetailCell : UITableViewCell {
-    UITextView *explanationView;
-}
+@interface FAQDetailCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UITextView *explanationView;
 - (void)setUpExplanationView;
 @end

@@ -9,12 +9,15 @@
 #import "HIVMedSupportCell.h"
 
 @implementation HIVMedSupportCell
-@synthesize imageView, support, count;
+@synthesize medImageView = _medImageView;
+@synthesize support = _support;
+@synthesize count = _count;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;

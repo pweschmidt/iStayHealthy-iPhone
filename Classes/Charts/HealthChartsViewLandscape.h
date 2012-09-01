@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HealthChartsView.h"
 
-@interface HealthChartsViewLandscape : HealthChartsView {
-	UILabel *cd4TitleLabel;
-	UILabel *viralLoadTitleLabel;    
-}
+@interface HealthChartsViewLandscape : HealthChartsView 
 @property (nonatomic, strong) IBOutlet UILabel *cd4TitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *viralLoadTitleLabel;
 - (void)drawRightYAxis:(CGContextRef)context;

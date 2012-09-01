@@ -16,7 +16,6 @@
 	CGFloat dateDashPattern[3];
     float width;
     float height;
-    ChartEvents *events;
 }
 @property (nonatomic, strong) ChartEvents *events;
 - (void)drawXAxis:(CGContextRef)context;

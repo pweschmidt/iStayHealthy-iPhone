@@ -23,7 +23,8 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -55,7 +56,7 @@
 
 - (void)loadDetailOtherMedsController
 {
-	OtherMedsDetailViewController *newMedsController = [[OtherMedsDetailViewController alloc] initWithRecord:masterRecord];
+	OtherMedsDetailViewController *newMedsController = [[OtherMedsDetailViewController alloc] initWithRecord:self.masterRecord];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMedsController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -65,7 +66,7 @@
 - (void)loadEditMedsControllerForId:(NSUInteger)rowId
 {
     OtherMedication *otherMed = (OtherMedication *)[self.allPills objectAtIndex:rowId];
-    OtherMedsDetailViewController *editMedsController = [[OtherMedsDetailViewController alloc] initWithOtherMedication:otherMed withMasterRecord:masterRecord];
+    OtherMedsDetailViewController *editMedsController = [[OtherMedsDetailViewController alloc] initWithOtherMedication:otherMed withMasterRecord:self.masterRecord];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:editMedsController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -101,10 +102,15 @@
 {
     NSString *identifer = @"OtherMedCell";
     OtherMedCell *cell = (OtherMedCell *)[tableView dequeueReusableCellWithIdentifier:identifer];
-    if(nil == cell){
-        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"OtherMedCell" owner:self options:nil];
-        for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[OtherMedCell class]]) {
+    if(nil == cell)
+    {
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"OtherMedCell"
+                                                            owner:self
+                                                          options:nil];
+        for (id currentObject in cellObjects)
+        {
+            if ([currentObject isKindOfClass:[OtherMedCell class]])
+            {
                 cell = (OtherMedCell *)currentObject;
                 break;
             }

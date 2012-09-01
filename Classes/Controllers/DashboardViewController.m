@@ -139,12 +139,15 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if(nil == cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    if(nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:identifier];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@ at row %d",identifier, indexPath.row];
     return cell;
@@ -165,7 +168,8 @@
 #pragma mark Scroll View Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.isPageControlled) {
+    if (self.isPageControlled)
+    {
         return;
     }
     CGFloat pageWidth = scrollView.frame.size.width;

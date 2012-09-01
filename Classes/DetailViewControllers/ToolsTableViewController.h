@@ -9,27 +9,11 @@
 #import <UIKit/UIKit.h>
 @class iStayHealthyRecord;
 
-@interface ToolsTableViewController : UITableViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *fetchedResultsController_;
-	iStayHealthyRecord *masterRecord;
-    BOOL isPasswordEnabled;
-    BOOL hasPassword;
-    UISwitch *passwordSwitch;
-    UITextField *passwordField;
-    UITextField *passConfirmField;
-    UIImageView *firstRightView;
-    UIImageView *firstWrongView;
-    UIImageView *secondRightView;
-    UIImageView *secondWrongView;
-    NSString *firstPassword;
-    NSString *secondPassword;
-    BOOL firstIsSet;
-    BOOL secondIsSet;
-    BOOL isConsistent;
-}
+@interface ToolsTableViewController : UITableViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property BOOL isPasswordEnabled;
+@property BOOL hasPassword;
 @property BOOL firstIsSet;
 @property BOOL secondIsSet;
 @property BOOL isConsistent;

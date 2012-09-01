@@ -15,23 +15,28 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;
 }
 
-- (void)setDelegate:(id)viewControllerDelegate{
+- (void)setDelegate:(id)viewControllerDelegate
+{
     [super setDelegate:viewControllerDelegate];
 }
 
-- (IBAction)isUndetectable:(id)sender{
-    if (self.switchControl.isOn) {
+- (IBAction)isUndetectable:(id)sender
+{
+    if (self.switchControl.isOn)
+    {
         super.inputValueField.text = NSLocalizedString(@"undetectable", @"undetectable");
         super.inputValueField.enabled = NO;
         [super.resultValueDelegate setValueString:NSLocalizedString(@"undetectable", @"undetectable") withTag:self.tag];
     }
-    else{
+    else
+    {
         super.inputValueField.text = @"";
         super.inputValueField.enabled = YES;
         [super.resultValueDelegate setValueString:@"" withTag:self.tag];        

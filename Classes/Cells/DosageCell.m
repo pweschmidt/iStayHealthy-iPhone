@@ -9,23 +9,28 @@
 #import "DosageCell.h"
 
 @implementation DosageCell
-@synthesize segmentedControl,unitName;
+@synthesize segmentedControl = _segmentedControl;
+@synthesize unitName = _unitName;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;
 }
 
-- (void)setDelegate:(id)viewControllerDelegate{
+- (void)setDelegate:(id)viewControllerDelegate
+{
     [super setDelegate:viewControllerDelegate];
 }
 
-- (IBAction)setUnit:(id)sender{
-    switch (self.segmentedControl.selectedSegmentIndex) {
+- (IBAction)setUnit:(id)sender
+{
+    switch (self.segmentedControl.selectedSegmentIndex)
+    {
         case 0:
             [super.clinicAddressCellDelegate setUnitString:@"[g]"];
             break;

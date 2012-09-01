@@ -14,11 +14,21 @@
 #import "iStayHealthyAppDelegate.h"
 
 @implementation ToolsTableViewController
-@synthesize passwordSwitch, passwordField, passConfirmField;
-@synthesize firstPassword, secondPassword, masterRecord;
-@synthesize firstIsSet, secondIsSet, isConsistent, isPasswordEnabled;
+@synthesize passwordSwitch = _passwordSwitch;
+@synthesize passwordField = _passwordField;
+@synthesize passConfirmField = _passConfirmField;
+@synthesize firstPassword = _firstPassword;
+@synthesize secondPassword = _secondPassword;
+@synthesize masterRecord = _masterRecord;
+@synthesize firstIsSet = _firstIsSet;
+@synthesize secondIsSet = _secondIsSet;
+@synthesize isConsistent = _isConsistent;
+@synthesize isPasswordEnabled = _isPasswordEnabled;
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize firstRightView, firstWrongView, secondRightView, secondWrongView;
+@synthesize firstRightView = _firstRightView;
+@synthesize firstWrongView = _firstWrongView;
+@synthesize secondRightView = _secondRightView;
+@synthesize secondWrongView = _secondWrongView;
 /**
  dealloc
  */
@@ -43,7 +53,8 @@
                                               target:self action:@selector(done:)];
 
 	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
 							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
@@ -57,17 +68,19 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.firstIsSet = NO;
     self.secondIsSet = NO;
     self.isConsistent = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
+    self.isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
     NSString *passwordString = self.masterRecord.Password;
-    hasPassword = TRUE;
-    if (nil == passwordString || [passwordString isEqualToString:@""]) {
-        hasPassword = FALSE;
+    self.hasPassword = TRUE;
+    if (nil == passwordString || [passwordString isEqualToString:@""])
+    {
+        self.hasPassword = FALSE;
     }
     [self.tableView reloadData];
 }
@@ -76,35 +89,42 @@
  dismiss view without saving
  @id
  */
-- (IBAction) done: (id) sender{
-    if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled) {
+- (IBAction) done: (id) sender
+{
+    if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled)
+    {
         NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
         self.masterRecord.UID = [Utilities GUID];
         self.masterRecord.Password = self.passwordField.text;
         NSError *error = nil;
-        if (![context save:&error]) {
+        if (![context save:&error])
+        {
             abort();
         }    
         UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [isDone show];
     }
-    else{
+    else
+    {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:FALSE forKey:@"isPasswordEnabled"];        
     }
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction) switchPasswordEnabling:(id)sender{
+- (IBAction) switchPasswordEnabling:(id)sender
+{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (passwordSwitch.on) {
+    if (self.passwordSwitch.on)
+    {
         [defaults setBool:TRUE forKey:@"isPasswordEnabled"];
-        isPasswordEnabled = TRUE;  
+        self.isPasswordEnabled = TRUE;
         self.masterRecord.Password = self.passwordField.text;
     }
-    else{
+    else
+    {
         [defaults setBool:FALSE forKey:@"isPasswordEnabled"];
-        isPasswordEnabled = FALSE;        
+        self.isPasswordEnabled = FALSE;
         self.masterRecord.Password = @"";
     }
     [defaults synchronize];
@@ -117,7 +137,8 @@
  @textField
  @return BOOL
  */
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
 	[textField resignFirstResponder];
 	return YES;
 }
@@ -126,14 +147,17 @@
  changes the text colour to black once we start editing
  @textField
  */
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     [textField setSecureTextEntry:YES];
 	textField.textColor = [UIColor blackColor];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
     [textField setSecureTextEntry:TRUE];
-    if (20 == textField.tag && self.secondIsSet && !self.isConsistent) {
+    if (20 == textField.tag && self.secondIsSet && !self.isConsistent)
+    {
         self.secondRightView.hidden = YES;
         self.secondWrongView.hidden = YES;
     }
@@ -142,15 +166,18 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     int tag = textField.tag;
-    switch (tag) {
+    switch (tag)
+    {
         case 10:
-            if (4 > [textField.text length]) {
+            if (4 > [textField.text length])
+            {
                 self.passwordField.text = NSLocalizedString(@"Password too short", @"Password too short");
                 self.passwordField.textColor = DARK_RED;
                 self.passwordField.secureTextEntry = NO;
                 self.firstWrongView.hidden = NO;
             }
-            else{
+            else
+            {
                 self.firstPassword = textField.text;
                 self.firstIsSet = YES;
                 self.firstRightView.hidden = NO;
@@ -162,12 +189,15 @@
             break;
     }
     //check that passwords are consistent
-    if (self.firstIsSet && self.secondIsSet) {
-        if ([self.firstPassword isEqualToString:self.secondPassword]) {
+    if (self.firstIsSet && self.secondIsSet)
+    {
+        if ([self.firstPassword isEqualToString:self.secondPassword])
+        {
             self.isConsistent = YES;
             self.secondRightView.hidden = NO;
         }
-        else{
+        else
+        {
             self.isConsistent = NO;
             self.passConfirmField.text = NSLocalizedString(@"Try Again", @"Try Again");
             self.passConfirmField.textColor = DARK_RED;
@@ -201,23 +231,29 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section) {
+    if (0 == section)
+    {
         return 1;
     }
-    if (1 == section && self.isPasswordEnabled) {
+    if (1 == section && self.isPasswordEnabled)
+    {
         return 2;
     }
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
         
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         NSString *identifier = @"UITableViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:identifier];
         }
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -231,25 +267,28 @@
         UISwitch *switchEnabled = [[UISwitch alloc] initWithFrame:frameSwitch];
         [switchEnabled addTarget:self action:@selector(switchPasswordEnabling:) forControlEvents:UIControlEventValueChanged];
         
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")) {
-            switchEnabled.onTintColor = TINTCOLOUR;
-        }
+        switchEnabled.onTintColor = TINTCOLOUR;
         
         cell.accessoryView = switchEnabled;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.passwordSwitch = switchEnabled;
-        [self.passwordSwitch setOn:isPasswordEnabled];
+        [self.passwordSwitch setOn:self.isPasswordEnabled];
         label.text = NSLocalizedString(@"Enable?", @"Enable?");
         [cell addSubview:label];
         return cell;
     }
-    if (1 == indexPath.section) {
-        if (isPasswordEnabled) {
-            if (0 == indexPath.row) {
+    if (1 == indexPath.section)
+    {
+        if (self.isPasswordEnabled)
+        {
+            if (0 == indexPath.row)
+            {
                 NSString *identifier = @"firstPasswordCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-                if (cell == nil) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                if (cell == nil)
+                {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                  reuseIdentifier:identifier];
                 }
                 cell.backgroundColor = [UIColor whiteColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -300,11 +339,14 @@
                 
                 return cell;
             }
-            else if(1 == indexPath.row){
+            else if(1 == indexPath.row)
+            {
                 NSString *identifier = @"secondPasswordCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-                if (cell == nil) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                if (cell == nil)
+                {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                  reuseIdentifier:identifier];
                 }
                 cell.backgroundColor = [UIColor whiteColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -367,22 +409,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
 }
 
 /**
  this handles the fetching of the objects
  @return NSFetchedResultsController
  */
-- (NSFetchedResultsController *)fetchedResultsController{
-	if (fetchedResultsController_ != nil) {
+- (NSFetchedResultsController *)fetchedResultsController
+{
+	if (fetchedResultsController_ != nil)
+    {
 		return fetchedResultsController_;
 	}
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];

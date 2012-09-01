@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OtherMedCell : UITableViewCell{
-    IBOutlet UILabel *dateLabel;
-    IBOutlet UILabel *nameLabel;
-    IBOutlet UILabel *drugLabel;
-}
+@interface OtherMedCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *drugLabel;

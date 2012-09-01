@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "iStayHealthyTableViewController.h"
 
-@interface NewAlertViewController : iStayHealthyTableViewController{
-	NSArray *notificationsArray;    
-}
+@interface NewAlertViewController : iStayHealthyTableViewController
 @property (nonatomic, strong) NSArray *notificationsArray;
 - (void)loadMedAlertDetailViewController;
 - (void)loadMedAlertChangeViewController:(int)row;

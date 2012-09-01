@@ -11,6 +11,7 @@
 #import "Contacts.h"
 #import "GeneralSettings.h"
 #import "UINavigationBar-Button.h"
+#import "ClinicsDetailViewController.h"
 
 @interface ClinicsTableViewController ()
 
@@ -21,7 +22,8 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -33,7 +35,7 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadClinicDetailViewController)];
     
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(done:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
 }
@@ -57,11 +59,22 @@
 
 - (void)loadClinicDetailViewController
 {
+    ClinicsDetailViewController *newClinicController = [[ClinicsDetailViewController alloc] initWithRecord:self.masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newClinicController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
     
 }
 
 - (void)loadClinicEditViewControllerForContactId:(NSUInteger) rowId
 {
+    Contacts *contacts = (Contacts *)[self.allContacts objectAtIndex:rowId];
+    ClinicsDetailViewController *newClinicController = [[ClinicsDetailViewController alloc] initWithContacts:contacts masterRecord:self.masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newClinicController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
     
 }
 
@@ -83,14 +96,19 @@
     return 75;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = @"ClinicCell";
     ClinicCell *cell = (ClinicCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (nil == cell) {
-        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicCell" owner:self options:nil];
+    if (nil == cell)
+    {
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicCell"
+                                                            owner:self
+                                                          options:nil];
         for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[ClinicCell class]]) {
+            if ([currentObject isKindOfClass:[ClinicCell class]])
+            {
                 cell = (ClinicCell *)currentObject;
                 break;
             }

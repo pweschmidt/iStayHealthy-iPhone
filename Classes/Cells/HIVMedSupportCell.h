@@ -8,12 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HIVMedSupportCell : UITableViewCell{
-    IBOutlet UIImageView *imageView;
-    IBOutlet UILabel *support;
-    IBOutlet UILabel *count;
-}
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@interface HIVMedSupportCell : UITableViewCell
+@property (nonatomic, strong) IBOutlet UIImageView *medImageView;
 @property (nonatomic, strong) IBOutlet UILabel *support;
 @property (nonatomic, strong) IBOutlet UILabel *count;
 @end

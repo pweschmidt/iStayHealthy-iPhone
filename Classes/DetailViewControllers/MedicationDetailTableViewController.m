@@ -15,12 +15,23 @@
 #import "GeneralSettings.h"
 
 @implementation MedicationDetailTableViewController
-@synthesize startDate, record, stateDictionary,dateCell;
-@synthesize combiTablets, proteaseInhibitors, nRTInihibtors, nNRTInhibitors, integraseInhibitors, entryInhibitors;
+@synthesize startDate = _startDate;
+@synthesize record = _record;
+@synthesize stateDictionary = _stateDictionary;
+@synthesize dateCell = _dateCell;
+@synthesize isInitialLoad = _isInitialLoad;
+@synthesize combiTablets = _combiTablets;
+@synthesize proteaseInhibitors = _proteaseInhibitors;
+@synthesize nRTInihibtors = _nRTInihibtors;
+@synthesize nNRTInhibitors = _nNRTInhibitors;
+@synthesize integraseInhibitors = _integraseInhibitors;
+@synthesize entryInhibitors = _entryInhibitors;
 
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord{
+- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+{
     self = [super initWithNibName:@"MedicationDetailTableViewController" bundle:nil];
-    if (self) {
+    if (self)
+    {
         self.record = masterrecord;
         NSString *combipath = [[NSBundle mainBundle] pathForResource:@"CombiMeds" ofType:@"plist"];
         NSArray *tmp1 = [[NSArray alloc]initWithContentsOfFile:combipath];
@@ -55,7 +66,8 @@
  dealloc
  */
 
-- (void)viewDidUnload{
+- (void)viewDidUnload
+{
     self.startDate = nil;
     self.combiTablets = nil;
     self.proteaseInhibitors = nil;
@@ -85,7 +97,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    isInitialLoad = YES;
+    self.isInitialLoad = YES;
 	self.stateDictionary = [NSMutableDictionary dictionary];
 #ifdef APPDEBUG
 	NSLog(@"MedicationDetailTableViewController: viewDidLoad ENTERING");
@@ -104,7 +116,8 @@
  just before view is called. n
  @animated
  */
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
 }
 
@@ -112,50 +125,60 @@
  asks for the start date for the medication, stores the selected meds in the database then dismisses the view
  @id sender
  */
-- (IBAction) save: (id) sender{
-    for (NSString *key in self.stateDictionary) {
+- (IBAction) save: (id) sender
+{
+    for (NSString *key in self.stateDictionary)
+    {
         NSNumber *checked = [self.stateDictionary objectForKey:key];
         BOOL isChecked = [checked boolValue];
-        if (isChecked) {
+        if (isChecked)
+        {
 #ifdef APPDEBUG
             NSLog(@"MedicationDetailTableViewController::save adding drug at index %d",[key intValue]);
 #endif
             NSArray *medDescription = nil;
             int keyValue = [key intValue];
-            if (100 > keyValue) {
+            if (100 > keyValue)
+            {
                 medDescription = (NSArray *)[self.combiTablets objectAtIndex:keyValue];
             }
-            else if(100 <= keyValue && 1000>keyValue){
+            else if(100 <= keyValue && 1000>keyValue)
+            {
                 medDescription = (NSArray *)[self.entryInhibitors objectAtIndex:(keyValue - 100)];                
             }
-            else if(1000 <= keyValue && 10000>keyValue){
+            else if(1000 <= keyValue && 10000>keyValue)
+            {
                 medDescription = (NSArray *)[self.integraseInhibitors objectAtIndex:(keyValue - 1000)];
                 
             }
-            else if(10000 <= keyValue && 100000>keyValue){
+            else if(10000 <= keyValue && 100000>keyValue)
+            {
                 medDescription = (NSArray *)[self.nNRTInhibitors objectAtIndex:(keyValue - 10000)];
                 
             }
-            else if(100000 <= keyValue && 1000000>keyValue){
+            else if(100000 <= keyValue && 1000000>keyValue)
+            {
                 medDescription = (NSArray *)[self.nRTInihibtors objectAtIndex:(keyValue - 100000)];
                 
             }
-            else if(1000000 <= keyValue){
+            else if(1000000 <= keyValue)
+            {
                 medDescription = (NSArray *)[self.proteaseInhibitors objectAtIndex:(keyValue - 1000000)];                
             }
             
-            NSManagedObjectContext *context = [record managedObjectContext];
+            NSManagedObjectContext *context = [self.record managedObjectContext];
             Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:@"Medication" inManagedObjectContext:context];
-            [record addMedicationsObject:medication];
+            [self.record addMedicationsObject:medication];
             medication.Name = (NSString *)[medDescription objectAtIndex:1];
             medication.Drug = (NSString *)[medDescription objectAtIndex:0];
             medication.MedicationForm = (NSString *)[medDescription objectAtIndex:2];
             medication.StartDate = self.startDate;
 
             medication.UID = [Utilities GUID];
-            record.UID = [Utilities GUID];
+            self.record.UID = [Utilities GUID];
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -172,7 +195,8 @@
  no save: dismisses the view
  @id sender
  */
-- (IBAction) cancel: (id) sender{
+- (IBAction) cancel: (id) sender
+{
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -181,7 +205,8 @@
 /**
  brings up a new view to change the date
  */
-- (void)changeStartDate{
+- (void)changeStartDate
+{
     NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
 	[actionSheet showInView:self.view];
@@ -229,7 +254,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {  
     int rows = 1;
-    switch (section) {
+    switch (section)
+    {
         case 1:
             rows = [self.combiTablets count];
             break;
@@ -252,9 +278,11 @@
     return rows;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
     NSString *text = @"";
-    switch (section) {
+    switch (section)
+    {
         case 1:
             text = NSLocalizedString(@"Combination Tablets",nil);
             break;
@@ -282,7 +310,8 @@
  @tableView
  @indexPath
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 60.0;
 }
 
@@ -293,37 +322,46 @@
  @indexPath
  @return UITableViewCell
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"dd MMM YY";
         
         NSString *identifier = @"SetDateCell";
-        SetDateCell *_dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == _dateCell) {
+        SetDateCell *cell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == cell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SetDateCell class]]) {
-                    _dateCell = (SetDateCell *)currentObject;
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SetDateCell class]])
+                {
+                    cell = (SetDateCell *)currentObject;
                     break;
                 }
             }  
         }
-        [[_dateCell value]setText:[formatter stringFromDate:self.startDate]];
-        [_dateCell setTag:indexPath.row];
-        _dateCell.labelImageView.image = [UIImage imageNamed:@"appointments.png"];
-        self.dateCell = _dateCell;
-        return _dateCell;
+        [[cell value]setText:[formatter stringFromDate:self.startDate]];
+        [cell setTag:indexPath.row];
+        cell.labelImageView.image = [UIImage imageNamed:@"appointments.png"];
+        self.dateCell = cell;
+        return cell;
     }
-    if( 1 == indexPath.section ){
+    if( 1 == indexPath.section )
+    {
         NSString *key = [NSString stringWithFormat:@"%d",indexPath.row];
         NSString *identifier = @"MedSelectionCell";
         MedSelectionCell *cell = (MedSelectionCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
+        if (nil == cell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MedSelectionCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[MedSelectionCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[MedSelectionCell class]])
+                {
                     cell = (MedSelectionCell *)currentObject;
                     break;
                 }
@@ -335,7 +373,7 @@
         [[cell type]setText:(NSString *)[medDescription objectAtIndex:2]];
         NSString *name = (NSString *)[medDescription objectAtIndex:3];
         NSString *pillPath = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
-        [[cell imageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
+        [[cell medImageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
         
         NSNumber *checked = [self.stateDictionary objectForKey:key];
         if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
@@ -344,15 +382,19 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }
-    if( 2 == indexPath.section ){
+    if( 2 == indexPath.section )
+    {
         int row = 100 + indexPath.row;
         NSString *key = [NSString stringWithFormat:@"%d",row];
         NSString *identifier = @"MedSelectionCell";
         MedSelectionCell *cell = (MedSelectionCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
+        if (nil == cell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MedSelectionCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[MedSelectionCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[MedSelectionCell class]])
+                {
                     cell = (MedSelectionCell *)currentObject;
                     break;
                 }
@@ -364,7 +406,7 @@
         [[cell type]setText:(NSString *)[medDescription objectAtIndex:2]];
         NSString *name = (NSString *)[medDescription objectAtIndex:3];
         NSString *pillPath = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
-        [[cell imageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
+        [[cell medImageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
         
         NSNumber *checked = [self.stateDictionary objectForKey:key];
         if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
@@ -373,15 +415,19 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }
-    if( 3 == indexPath.section ){
+    if( 3 == indexPath.section )
+    {
         int row = 1000 + indexPath.row;
         NSString *key = [NSString stringWithFormat:@"%d",row];
         NSString *identifier = @"MedSelectionCell";
         MedSelectionCell *cell = (MedSelectionCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
+        if (nil == cell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MedSelectionCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[MedSelectionCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[MedSelectionCell class]])
+                {
                     cell = (MedSelectionCell *)currentObject;
                     break;
                 }
@@ -393,7 +439,7 @@
         [[cell type]setText:(NSString *)[medDescription objectAtIndex:2]];
         NSString *name = (NSString *)[medDescription objectAtIndex:3];
         NSString *pillPath = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
-        [[cell imageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
+        [[cell medImageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
         
         NSNumber *checked = [self.stateDictionary objectForKey:key];
         if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
@@ -402,15 +448,19 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }
-    if( 4 == indexPath.section ){
+    if( 4 == indexPath.section )
+    {
         int row = 10000 + indexPath.row;
         NSString *key = [NSString stringWithFormat:@"%d",row];
         NSString *identifier = @"MedSelectionCell";
         MedSelectionCell *cell = (MedSelectionCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
+        if (nil == cell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MedSelectionCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[MedSelectionCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[MedSelectionCell class]])
+                {
                     cell = (MedSelectionCell *)currentObject;
                     break;
                 }
@@ -422,7 +472,7 @@
         [[cell type]setText:(NSString *)[medDescription objectAtIndex:2]];
         NSString *name = (NSString *)[medDescription objectAtIndex:3];
         NSString *pillPath = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
-        [[cell imageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
+        [[cell medImageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
         
         NSNumber *checked = [self.stateDictionary objectForKey:key];
         if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
@@ -431,15 +481,19 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }
-    if( 5 == indexPath.section ){
+    if( 5 == indexPath.section )
+    {
         int row = 100000 + indexPath.row;
         NSString *key = [NSString stringWithFormat:@"%d",row];
         NSString *identifier = @"MedSelectionCell";
         MedSelectionCell *cell = (MedSelectionCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
+        if (nil == cell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MedSelectionCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[MedSelectionCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[MedSelectionCell class]])
+                {
                     cell = (MedSelectionCell *)currentObject;
                     break;
                 }
@@ -451,7 +505,7 @@
         [[cell type]setText:(NSString *)[medDescription objectAtIndex:2]];
         NSString *name = (NSString *)[medDescription objectAtIndex:3];
         NSString *pillPath = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
-        [[cell imageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
+        [[cell medImageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
         
         NSNumber *checked = [self.stateDictionary objectForKey:key];
         if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
@@ -460,15 +514,19 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         return cell;
     }
-    if( 6 == indexPath.section ){
+    if( 6 == indexPath.section )
+    {
         int row = 1000000 + indexPath.row;
         NSString *key = [NSString stringWithFormat:@"%d",row];
         NSString *identifier = @"MedSelectionCell";
         MedSelectionCell *cell = (MedSelectionCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == cell) {
+        if (nil == cell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"MedSelectionCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[MedSelectionCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[MedSelectionCell class]])
+                {
                     cell = (MedSelectionCell *)currentObject;
                     break;
                 }
@@ -480,7 +538,7 @@
         [[cell type]setText:(NSString *)[medDescription objectAtIndex:2]];
         NSString *name = (NSString *)[medDescription objectAtIndex:3];
         NSString *pillPath = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
-        [[cell imageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
+        [[cell medImageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
         
         NSNumber *checked = [self.stateDictionary objectForKey:key];
         if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
@@ -506,14 +564,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-	if (0 == indexPath.section) {
+	if (0 == indexPath.section)
+    {
 		[self changeStartDate];
     }
-    else if(0 < indexPath.section && 7 > indexPath.section){
+    else if(0 < indexPath.section && 7 > indexPath.section)
+    {
         MedSelectionCell *cell = (MedSelectionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         int rowKey = indexPath.row;
         int section = indexPath.section;
-        switch (section) {
+        switch (section)
+        {
             case 2:
                 rowKey = 100 + rowKey;
                 break;

@@ -10,21 +10,8 @@
 
 @class iStayHealthyRecord, SetDateCell;
 
-@interface MedicationDetailTableViewController : UITableViewController <UIActionSheetDelegate> {
-
-@private
-	SetDateCell			*dateCell;
-	NSArray             *combiTablets;
-    NSArray             *proteaseInhibitors;
-    NSArray             *nRTInihibtors;
-    NSArray             *nNRTInhibitors;
-    NSArray             *integraseInhibitors;
-    NSArray             *entryInhibitors;
-	NSMutableDictionary     *stateDictionary;
-    BOOL                    isInitialLoad;
-	NSDate *startDate;
-	iStayHealthyRecord *record;
-}
+@interface MedicationDetailTableViewController : UITableViewController <UIActionSheetDelegate>
+@property BOOL isInitialLoad;
 @property (nonatomic, strong) NSArray *combiTablets;
 @property (nonatomic, strong) NSArray *proteaseInhibitors;
 @property (nonatomic, strong) NSArray *nRTInihibtors;

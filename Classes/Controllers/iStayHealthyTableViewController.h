@@ -12,24 +12,7 @@
 #import <UIKit/UIKit.h>
 @class iStayHealthyRecord;
 @class StatusViewControllerLandscape;
-@interface iStayHealthyTableViewController : UITableViewController <UIAlertViewDelegate, NSFetchedResultsControllerDelegate>{
-	BOOL isShowingLandscapeView;
-	NSFetchedResultsController *fetchedResultsController_;
-	iStayHealthyRecord *masterRecord;
-	StatusViewControllerLandscape *landscapeController;
-    IBOutlet UIView *headerView;
-    
-	NSArray *allMeds;
-    NSArray *allMissedMeds;
-    NSArray *allSideEffects;
-	NSArray *allResults;
-    NSArray *allResultsInReverseOrder;
-    NSArray *allPills;
-    NSArray *allContacts;
-    NSArray *allProcedures;
-
-    
-}
+@interface iStayHealthyTableViewController : UITableViewController <UIAlertViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSArray *allMeds;
 @property (nonatomic, strong) NSArray *allMissedMeds;
 @property (nonatomic, strong) NSArray *allSideEffects;
@@ -42,6 +25,7 @@
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) StatusViewControllerLandscape *landscapeController;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property BOOL isShowingLandscape;
 - (void)setUpMasterRecord;
 - (IBAction)loadWebView:(id)sender;
 - (IBAction)loadAd:(id)sender;

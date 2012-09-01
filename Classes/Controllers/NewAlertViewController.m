@@ -20,7 +20,7 @@
 @end
 
 @implementation NewAlertViewController
-@synthesize notificationsArray;
+@synthesize notificationsArray = _notificationsArray;
 @synthesize timeLeftUpdater = _timeLeftUpdater;
 
 - (void)didReceiveMemoryWarning
@@ -46,7 +46,8 @@
     [super viewDidLoad];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedAlertDetailViewController)];
     UINavigationBar *navBar = self.navigationController.navigationBar;
-    if (navBar) {
+    if (navBar)
+    {
         [navBar addButtonWithImageName:@"alertsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
     self.tableView.rowHeight = 57.0;
@@ -72,7 +73,8 @@
 /**
  loads the MedAlertDetailViewController to create a new alert
  */
-- (void)loadMedAlertDetailViewController{
+- (void)loadMedAlertDetailViewController
+{
 	NewAlertDetailViewController *newAlertView = [[NewAlertDetailViewController alloc] initWithNibName:@"NewAlertDetailViewController" bundle:nil];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newAlertView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -82,7 +84,8 @@
 /*
 loads the NewAlertEditDetailViewController to edit an existing alert
  */
-- (void)loadMedAlertChangeViewController:(int)row{
+- (void)loadMedAlertChangeViewController:(int)row
+{
     UILocalNotification *notification = (UILocalNotification *)[self.notificationsArray objectAtIndex:row];
 	NewAlertEditDetailViewController *medEditController = [[NewAlertEditDetailViewController alloc] initWithNotification:notification];    
 	
@@ -98,7 +101,8 @@ loads the NewAlertEditDetailViewController to edit an existing alert
  @tableView
  @return 1 = only 1 section
  */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
@@ -107,7 +111,8 @@ loads the NewAlertEditDetailViewController to edit an existing alert
  @section
  @return NSInteger the number of rows == the number of saved alerts
  */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
 #ifdef APPDEBUG
 	NSLog(@"numberOfRowsInSection:: number of notifications is %d",[self.notificationsArray count]);
 #endif
@@ -119,25 +124,35 @@ loads the NewAlertEditDetailViewController to edit an existing alert
  @tableView
  @indexPath
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	return 70.0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (0 == [self.notificationsArray count]) {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (0 == [self.notificationsArray count])
+    {
         return NSLocalizedString(@"No Alerts Set",nil);
     }
     else
         return @"";
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSString *identifier = @"AlertListCell";
     AlertListCell *cell = (AlertListCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (nil == cell) {
-        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"AlertListCell" owner:self options:nil];
-        for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[AlertListCell class]]) {
+    if (nil == cell)
+    {
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"AlertListCell"
+                                                            owner:self
+                                                          options:nil];
+        for (id currentObject in cellObjects)
+        {
+            if ([currentObject isKindOfClass:[AlertListCell class]])
+            {
                 cell = (AlertListCell *)currentObject;
                 break;
             }
@@ -164,7 +179,8 @@ loads the NewAlertEditDetailViewController to edit an existing alert
     return cell;
 }
 
-- (void)updateTimeLeftLabel:(UILabel *)timeLeftLabel{
+- (void)updateTimeLeftLabel:(UILabel *)timeLeftLabel
+{
 }
 
 
@@ -175,7 +191,8 @@ loads the NewAlertEditDetailViewController to edit an existing alert
  @tableView
  @indexPath
  */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [self loadMedAlertChangeViewController:indexPath.row];
 }
 

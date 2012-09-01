@@ -20,7 +20,8 @@
 
 @implementation MissedMedViewController
 
-- (IBAction) done:				(id) sender{
+- (IBAction) done:				(id) sender
+{
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -45,7 +46,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMissedMedsTableViewController)];
 }
 
-- (void)loadMissedMedsTableViewController{
+- (void)loadMissedMedsTableViewController
+{
     
 	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithRecord:self.masterRecord medication:self.allMeds];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
@@ -86,20 +88,25 @@
 /**
  gets the string from the medname. This could contain a / 
  */
-- (NSString *)getStringFromName:(NSString *)name{
+- (NSString *)getStringFromName:(NSString *)name
+{
     NSArray *stringArray = [name componentsSeparatedByString:@"/"];
     NSString *imageName = [(NSString *)[stringArray objectAtIndex:0]lowercaseString];
     return imageName;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = @"SideEffectListCell";
     SideEffectListCell *cell = (SideEffectListCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (nil == cell) {
+    if (nil == cell)
+    {
         NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SideEffectListCell" owner:self options:nil];
-        for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[SideEffectListCell class]]) {
+        for (id currentObject in cellObjects)
+        {
+            if ([currentObject isKindOfClass:[SideEffectListCell class]])
+            {
                 cell = (SideEffectListCell *)currentObject;
                 break;
             }
@@ -110,7 +117,7 @@
 	formatter.dateFormat = @"dd MMM YYYY";
     [[cell effect]setText:[formatter stringFromDate:missed.MissedDate]];
     [[cell drug]setText:missed.Name];
-    [[cell imageView]setImage:[UIImage imageNamed:@"missed.png"]];
+    [[cell effectsImageView]setImage:[UIImage imageNamed:@"missed.png"]];
     
     return cell;
 }
@@ -119,7 +126,8 @@
 #pragma mark - Table view delegate
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     MissedMedication *missed = (MissedMedication *)[self.allMissedMeds objectAtIndex:indexPath.row];
 	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithMissedMeds:missed masterRecord:self.masterRecord];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];

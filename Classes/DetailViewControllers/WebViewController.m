@@ -9,19 +9,27 @@
 #import "WebViewController.h"
 
 @implementation WebViewController
-@synthesize webView, activityIndicatorView, toolBar, url, webNavtitle;
+@synthesize webView = _webView;
+@synthesize activityIndicatorView = _activityIndicatorView;
+@synthesize toolBar = _toolBar;
+@synthesize url = _url;
+@synthesize webNavtitle = _webNavtitle;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (id)initWithURLString:(NSString *)urlString withTitle:(NSString *)navTitle{
+- (id)initWithURLString:(NSString *)urlString withTitle:(NSString *)navTitle
+{
     self = [super initWithNibName:@"WebViewController" bundle:nil];
-    if (self) {
+    if (self)
+    {
         self.url = [NSURL URLWithString:urlString];
         self.webNavtitle = navTitle;
     }
@@ -42,7 +50,8 @@
  dismisses the view without saving
  @id 
  */
-- (IBAction) done:(id)sender{
+- (IBAction) done:(id)sender
+{
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -56,7 +65,7 @@
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                               target:self action:@selector(done:)];
 
-    CGRect titleFrame = CGRectMake(CGRectGetMinX(toolBar.bounds)+290.0, CGRectGetMinY(toolBar.bounds)+12.0, 20.0, 20.0);
+    CGRect titleFrame = CGRectMake(CGRectGetMinX(self.toolBar.bounds)+290.0, CGRectGetMinY(self.toolBar.bounds)+12.0, 20.0, 20.0);
     UIActivityIndicatorView *actView = [[UIActivityIndicatorView alloc]initWithFrame:titleFrame];
     actView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     actView.hidesWhenStopped = YES;
@@ -82,13 +91,16 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
+{
 #ifdef APPDEBUG
     NSLog(@"Start Loading page");
 #endif
-	if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+	if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
 		NSURL *URL = [request URL];	
-		if ([[URL scheme] isEqualToString:@"http"]) {
+		if ([[URL scheme] isEqualToString:@"http"])
+        {
 			[self gotoAddress:nil forURL:URL];
 		}	 
 		return NO;
@@ -96,34 +108,40 @@
 	return YES;   
 }
 
--(IBAction) goBack:(id)sender {
+-(IBAction) goBack:(id)sender
+{
 	[self.webView goBack];
 }
 
--(IBAction) goForward:(id)sender {
+-(IBAction) goForward:(id)sender
+{
 	[self.webView goForward];
 }
--(IBAction)gotoAddress:(id) sender  forURL:(NSURL *)urlString{
+-(IBAction)gotoAddress:(id) sender  forURL:(NSURL *)urlString
+{
 	NSURLRequest *requestObj = [NSURLRequest requestWithURL:urlString];
 	
 	[self.webView loadRequest:requestObj];
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
 #ifdef APPDEBUG
     NSLog(@"Start Loading page");
 #endif
-	[activityIndicatorView startAnimating];
+	[self.activityIndicatorView startAnimating];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
 #ifdef APPDEBUG
     NSLog(@"Stop Loading page");
 #endif
-	[activityIndicatorView stopAnimating];
+	[self.activityIndicatorView stopAnimating];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
 #ifdef APPDEBUG
     NSLog(@"Stop Loading page");
     UIAlertView *alert = [[UIAlertView alloc]

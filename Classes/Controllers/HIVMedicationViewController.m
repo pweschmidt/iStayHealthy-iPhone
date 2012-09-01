@@ -43,7 +43,8 @@
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedicationDetailViewController)];
     UINavigationBar *navBar = self.navigationController.navigationBar;
-    if (navBar) {
+    if (navBar)
+    {
         [navBar addButtonWithImageName:@"hivnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 }
@@ -65,8 +66,9 @@
 /**
  loads the MedicationDetailViewController - to add new Combi therapy
  */
-- (void)loadMedicationDetailViewController{
-	MedicationDetailTableViewController *newMedsView = [[MedicationDetailTableViewController alloc] initWithRecord:masterRecord];
+- (void)loadMedicationDetailViewController
+{
+	MedicationDetailTableViewController *newMedsView = [[MedicationDetailTableViewController alloc] initWithRecord:self.masterRecord];
 	newMedsView.record = self.masterRecord;
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMedsView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -77,8 +79,9 @@
 /**
  loads the MedicationChangeDetailViewController - to add new Combi therapy
  */
-- (void)loadMedicationChangeDetailViewController:(NSIndexPath *)selectedIndexPath{
-    Medication *med = (Medication *)[allMeds objectAtIndex:selectedIndexPath.row];    
+- (void)loadMedicationChangeDetailViewController:(NSIndexPath *)selectedIndexPath
+{
+    Medication *med = (Medication *)[self.allMeds objectAtIndex:selectedIndexPath.row];
 	MedicationChangeTableViewController *changedMedsView = [[MedicationChangeTableViewController alloc]initWithMasterRecord:self.masterRecord withMedication:med];    
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changedMedsView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -86,7 +89,8 @@
 	[self presentModalViewController:navigationController animated:YES];
 }
 
-- (void)loadSideEffectsController{
+- (void)loadSideEffectsController
+{
     SideEffectsViewController *sideController = [[SideEffectsViewController alloc] initWithNibName:@"SideEffectsViewController" bundle:nil];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:sideController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -94,7 +98,8 @@
 	[self presentModalViewController:navigationController animated:YES];
 }
 
-- (void)loadMissedMedicationsController{
+- (void)loadMissedMedicationsController
+{
     MissedMedViewController *missedController = [[MissedMedViewController alloc]initWithNibName:@"MissedMedViewController" bundle:nil];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:missedController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -110,7 +115,8 @@
  2 sections: the first for the number of current HIV drugs. the second for the number of missed doses (if any)
  @tableView
  */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 2;
 }
 
@@ -119,7 +125,8 @@
  @tableView
  @section
  */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if (0 == section) {
         return [self.allMeds count];
     }
@@ -133,11 +140,13 @@
  @tableView
  @indexPath
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 70.0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
     NSString *title = @"";
     if (0 == section) {
         if (0 < [self.allMeds count]) {
@@ -156,7 +165,8 @@
 /**
  gets the string from the medname. This could contain a / 
  */
-- (NSString *)getStringFromName:(NSString *)name{
+- (NSString *)getStringFromName:(NSString *)name
+{
     NSArray *stringArray = [name componentsSeparatedByString:@"/"];
     NSString *imageName = [(NSString *)[stringArray objectAtIndex:0]lowercaseString];
     NSArray *finalArray = [imageName componentsSeparatedByString:@" "];
@@ -172,14 +182,20 @@
  @tableView
  @indexPath
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         NSString *identifier = @"HIVMedListCell";
         HIVMedListCell *cell = (HIVMedListCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"HIVMedListCell" owner:self options:nil];
-        for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[HIVMedListCell class]]) {
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"HIVMedListCell"
+                                                            owner:self
+                                                          options:nil];
+        for (id currentObject in cellObjects)
+        {
+            if ([currentObject isKindOfClass:[HIVMedListCell class]])
+            {
                 cell = (HIVMedListCell *)currentObject;
                 break;
             }
@@ -193,24 +209,30 @@
         NSString *shortenedName = [self getStringFromName:medication.Name];
         NSString *pillPath = [[NSBundle mainBundle] 
                               pathForResource:[shortenedName lowercaseString] ofType:@"png"];
-        [[cell imageView]setImage:[UIImage imageWithContentsOfFile:pillPath]];
+        cell.medImageView.image = [UIImage imageWithContentsOfFile:pillPath];
         return cell;
     }
-    if (1 == indexPath.section) {
+    if (1 == indexPath.section)
+    {
         NSString *identifier = @"HIVMedSupportCell";
         HIVMedSupportCell *cell = (HIVMedSupportCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"HIVMedSupportCell" owner:self options:nil];
-        for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[HIVMedSupportCell class]]) {
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"HIVMedSupportCell"
+                                                            owner:self
+                                                          options:nil];
+        for (id currentObject in cellObjects)
+        {
+            if ([currentObject isKindOfClass:[HIVMedSupportCell class]])
+            {
                 cell = (HIVMedSupportCell *)currentObject;
                 break;
             }
         }
         
         int row = indexPath.row;
-        switch (row) {
+        switch (row)
+        {
             case 0:
-                [[cell imageView] setImage:[UIImage imageNamed:@"sideeffects.png"]];
+                cell.medImageView.image = [UIImage imageNamed:@"sideeffects.png"];
                 [[cell support]setText:NSLocalizedString(@"Side Effects", @"Side Effects")];
                 [[cell count]setText:[NSString stringWithFormat:@"%d",[self.allSideEffects count]]];
                 if (0 < [self.allSideEffects count]) {
@@ -218,7 +240,7 @@
                 }
                 break;
             case 1:
-                [[cell imageView] setImage:[UIImage imageNamed:@"missed.png"]];
+                cell.medImageView.image = [UIImage imageNamed:@"missed.png"];
                 [[cell support]setText:NSLocalizedString(@"Missed", @"Missed")];
                 [[cell count]setText:[NSString stringWithFormat:@"%d",[self.allMissedMeds count]]];
                 if (0 < [self.allMissedMeds count]) {
@@ -240,14 +262,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         [self loadMedicationChangeDetailViewController:indexPath];
     }
-    else{
-        if (0 == indexPath.row) {
+    else
+    {
+        if (0 == indexPath.row)
+        {
             [self loadSideEffectsController];
         }
-        if(1 == indexPath.row){
+        if(1 == indexPath.row)
+        {
             [self loadMissedMedicationsController];
         }
     }

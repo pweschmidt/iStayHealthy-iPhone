@@ -9,12 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "HealthChartsView.h"
 
-@interface HealthChartsViewPortrait : HealthChartsView {
-	UIButton *cd4Button;
-    UIButton *cd4PercentButton;
-	UIButton *viralLoadButton;
-    NSUInteger state;
-}
+@interface HealthChartsViewPortrait : HealthChartsView 
+@property NSUInteger state;
 @property (nonatomic, strong) IBOutlet UIButton *cd4Button;
 @property (nonatomic, strong) IBOutlet UIButton *cd4PercentButton;
 @property (nonatomic, strong) IBOutlet UIButton *viralLoadButton;

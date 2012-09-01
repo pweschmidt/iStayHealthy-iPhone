@@ -32,7 +32,8 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
 #ifdef APPDEBUG
         NSLog(@"DropBoxBackupViewController initWithStyle - do we reach this point?");
 #endif
@@ -110,7 +111,8 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section) {
+    if (0 == section)
+    {
         return 2;
     }
     return 1;
@@ -119,26 +121,31 @@
 /**
  (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
     }
     CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+4.0, 118.0, 40.0);
     UIImageView *view = [[UIImageView alloc]initWithFrame:frame];
     [view setImage:[UIImage imageNamed:@"dropbox-small.png"]];
     [cell.contentView addSubview:view];
     
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         CGRect textFrame = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+17.0, 100, 14);
         UILabel *textLabel = [[UILabel alloc]initWithFrame:textFrame];
         textLabel.textColor = TEXTCOLOUR;
         textLabel.font = [UIFont systemFontOfSize:12.0];
         textLabel.textAlignment = UITextAlignmentLeft;
-        switch (indexPath.row) {
+        switch (indexPath.row)
+        {
             case 0:
                 textLabel.text = NSLocalizedString(@"Save to Dropbox",@"Save to Dropbox");
                 break;            
@@ -148,7 +155,8 @@
         }
         [cell.contentView addSubview:textLabel];
     }
-    else{
+    else
+    {
         CGRect textFrame = CGRectMake(CGRectGetMinX(cell.bounds)+150.0, CGRectGetMinY(cell.bounds)+19.0, 100, 12);
         UILabel *textLabel = [[UILabel alloc]initWithFrame:textFrame];
         textLabel.textColor = TEXTCOLOUR;
@@ -180,19 +188,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
-        switch (indexPath.row) {
+    if (0 == indexPath.section)
+    {
+        switch (indexPath.row)
+        {
             case 0:
                 isBackup = YES;
                 [self backup];
                 break;
             case 1:
                 isBackup = NO;
-                if (!self.dropBoxFileExists && !self.newDropboxFileExists) {
+                if (!self.dropBoxFileExists && !self.newDropboxFileExists)
+                {
                     UIAlertView *noFile = [[UIAlertView alloc]initWithTitle:@"No data" message:@"No saved data on Dropbox" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     [noFile show];
                 }
-                else {
+                else
+                {
                     [self.activityIndicator startAnimating];   
                     NSString *dataPath = [self dropBoxFileTmpPath];
                     [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
@@ -200,25 +212,29 @@
                 break;    
         }
     }
-    else{
+    else
+    {
         [self unlinkDropBox];        
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
 
 #pragma mark - DropBox actions
-- (NSString *)dropBoxFileTmpPath{
+- (NSString *)dropBoxFileTmpPath
+{
     return [NSTemporaryDirectory() stringByAppendingPathComponent:@"fromDropBox.xml"];
 }
 
-- (NSString *)uploadFileTmpPath{
+- (NSString *)uploadFileTmpPath
+{
     return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];    
 }
 
 /**
  (void)unlinkDropBox 
  */
-- (void)unlinkDropBox{
+- (void)unlinkDropBox
+{
     [[DBSession sharedSession] unlinkAll];
 #ifdef APPDEBUG
     [[[UIAlertView alloc] 
@@ -231,8 +247,10 @@
 /**
  (void)showDBError 
  */
-- (void)showDBError{
-    if (![[DBSession sharedSession]isLinked]) {
+- (void)showDBError
+{
+    if (![[DBSession sharedSession]isLinked])
+    {
         return;
     }
     [[[UIAlertView alloc] 
@@ -245,7 +263,8 @@
 /**
  called to create the iStayHealthy folder if it doesn't exist
  */
-- (void)createIStayHealthyFolder{
+- (void)createIStayHealthyFolder
+{
 #ifdef APPDEBUG
     NSLog(@"creating the iStayHealthy folder");
 #endif
@@ -255,7 +274,8 @@
 /**
  called to copy the file ending with .xml to the file ending with .isth. The isth extension is recognised by the system.
  */
-- (void)copyOldFileToNew{
+- (void)copyOldFileToNew
+{
 #ifdef APPDEBUG
     NSLog(@"copying iStayHealthy.xml to iStayHealthy.isth");
 #endif
@@ -266,7 +286,8 @@
 /**
  (void)backup 
  */
-- (void)backup{
+- (void)backup
+{
     NSString *dataPath = [self uploadFileTmpPath];
     [self.activityIndicator startAnimating];
 #ifdef APPDEBUG
@@ -277,13 +298,15 @@
     NSData *xmlData = [loader xmlData];
 	NSError *error = nil;
     [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&error];
-	if (error != nil) {
+	if (error != nil)
+    {
 		[[[UIAlertView alloc]
 		   initWithTitle:@"Error writing XML data to tmp directory" message:[error localizedDescription] 
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 		 show];
 	}
-    else{
+    else
+    {
         [[self restClient]uploadFile:@"iStayHealthy.isth" toPath:@"/iStayHealthy" withParentRev:nil fromPath:dataPath];
     }        
 
@@ -292,7 +315,8 @@
 /**
  (void)restore 
  */
-- (void)restore{
+- (void)restore
+{
     NSString *dataPath = [self dropBoxFileTmpPath];
     NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
     XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:xmlData];
@@ -314,11 +338,13 @@
 /**
  (DBRestClient*)restClient
  */
-- (DBRestClient *)restClient {
+- (DBRestClient *)restClient
+{
 #ifdef APPDEBUG
     NSLog(@"DropboxController restClient");
 #endif
-    if (!restClient) {
+    if (!restClient)
+    {
         restClient =
         [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
         restClient.delegate = self;
@@ -327,39 +353,49 @@
 }
 
 
-- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata {
+- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata
+{
     NSString *path = [metadata path];
-    if ([path isEqualToString:@"/"]) {
-        for (DBMetadata *child in metadata.contents) {
+    if ([path isEqualToString:@"/"])
+    {
+        for (DBMetadata *child in metadata.contents)
+        {
             NSString *pathName = [child path];
-            if ([child isDirectory] && [pathName isEqualToString:@"/iStayHealthy"]) {
+            if ([child isDirectory] && [pathName isEqualToString:@"/iStayHealthy"])
+            {
 #ifdef APPDEBUG
                 NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy folder");
 #endif
                 self.iStayHealthyPath = pathName;
             }
         }
-        if (nil == self.iStayHealthyPath) {
+        if (nil == self.iStayHealthyPath)
+        {
             [self createIStayHealthyFolder];
         }          
     }
-    if ([path isEqualToString:@"/iStayHealthy"]) {
-        for (DBMetadata *child in metadata.contents) {
+    if ([path isEqualToString:@"/iStayHealthy"])
+    {
+        for (DBMetadata *child in metadata.contents)
+        {
             NSString *pathName = [child path];
-            if([pathName hasSuffix:@"iStayHealthy.xml"]){
+            if([pathName hasSuffix:@"iStayHealthy.xml"])
+            {
 #ifdef APPDEBUG
                 NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.xml file");
 #endif
                 self.dropBoxFileExists = YES;            
             }
-            else if([pathName hasSuffix:@"iStayHealthy.isth"]){
+            else if([pathName hasSuffix:@"iStayHealthy.isth"])
+            {
 #ifdef APPDEBUG
                 NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.isth file");
 #endif
                 self.newDropboxFileExists = YES;            
             }
         }
-        if(self.dropBoxFileExists && !self.newDropboxFileExists){
+        if(self.dropBoxFileExists && !self.newDropboxFileExists)
+        {
 #ifdef APPDEBUG
             NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.xml but not the isth file");
 #endif
@@ -371,22 +407,27 @@
 
 /**
  */
-- (void)restClient:(DBRestClient *)client createdFolder:(DBMetadata *)folder{
+- (void)restClient:(DBRestClient *)client createdFolder:(DBMetadata *)folder
+{
     
 }
 
-- (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error{
+- (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error
+{
     UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     [errorAlert show];    
 }
 
-- (void)restClient:(DBRestClient *)client copiedPath:(NSString *)fromPath to:(DBMetadata *)to{
-    if ([fromPath isEqualToString:@"/iStayHealthy/iStayHealthy.xml"] && [[to path] isEqualToString:@"/iStayHealthy/iStayHealthy.isth"]) {
+- (void)restClient:(DBRestClient *)client copiedPath:(NSString *)fromPath to:(DBMetadata *)to
+{
+    if ([fromPath isEqualToString:@"/iStayHealthy/iStayHealthy.xml"] && [[to path] isEqualToString:@"/iStayHealthy/iStayHealthy.isth"])
+    {
         newDropboxFileExists = YES;
     }
 }
 
-- (void)restClient:(DBRestClient *)client copyPathFailedWithError:(NSError *)error{
+- (void)restClient:(DBRestClient *)client copyPathFailedWithError:(NSError *)error
+{
     UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Copy error" message:[NSString stringWithFormat:@"Error copying file %@",[error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     [errorAlert show];
 }
@@ -395,7 +436,8 @@
 /**
  (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path
  */
-- (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path {
+- (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path
+{
 #ifdef APPDEBUG
     NSLog(@"Metadata unchanged!");
 #endif
@@ -404,7 +446,8 @@
 /**
  (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
  */
-- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error {
+- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
+{
 #ifdef APPDEBUG
     NSLog(@"Error loading metadata: %@ (%@)", error, [error localizedDescription]);
 #endif
@@ -414,9 +457,11 @@
 /**
  */
 - (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
-              from:(NSString*)srcPath metadata:(DBMetadata*)metadata {
+              from:(NSString*)srcPath metadata:(DBMetadata*)metadata
+{
     
-    if (![[DBSession sharedSession]isLinked]) {
+    if (![[DBSession sharedSession]isLinked])
+    {
         return;
     }
 #ifdef APPDEBUG
@@ -432,11 +477,13 @@
 
 /**
  */
-- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error{
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
+{
 #ifdef APPDEBUG
     NSLog(@"Error uploading file: %@", error);
 #endif
-    if (![[DBSession sharedSession]isLinked]) {
+    if (![[DBSession sharedSession]isLinked])
+    {
         return;
     }
     [self.activityIndicator stopAnimating];
@@ -449,8 +496,10 @@
 
 /**
  */
-- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)localPath {
-    if (![[DBSession sharedSession]isLinked]) {
+- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)localPath
+{
+    if (![[DBSession sharedSession]isLinked])
+    {
         return;
     }
 #ifdef APPDEBUG
@@ -462,7 +511,8 @@
 /**
  */
 - (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error{
-    if (![[DBSession sharedSession]isLinked]) {
+    if (![[DBSession sharedSession]isLinked])
+    {
         return;
     }
     [self.activityIndicator stopAnimating];

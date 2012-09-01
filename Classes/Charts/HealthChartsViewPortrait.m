@@ -14,7 +14,10 @@
 
 
 @implementation HealthChartsViewPortrait
-@synthesize cd4Button, cd4PercentButton, viralLoadButton;
+@synthesize cd4Button = _cd4Button;
+@synthesize cd4PercentButton = _cd4PercentButton;
+@synthesize viralLoadButton = _viralLoadButton;
+@synthesize state = _state;
 
 /**
  initWithFrame
@@ -22,8 +25,9 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        state = CD4CHARTSTATE;
+    if (self)
+    {
+        self.state = CD4CHARTSTATE;
         [self drawCD4Button];
         [self drawCD4PercentButton];
         [self drawViralLoadButton];
@@ -37,7 +41,8 @@
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    switch (state) {
+    switch (self.state)
+    {
         case CD4CHARTSTATE:
             [super drawCD4Ticks:UIGraphicsGetCurrentContext()];
             [super drawCD4Labels:UIGraphicsGetCurrentContext() atOffset:0.0];
@@ -56,24 +61,27 @@
     }
 }
 
-- (void)showCD4{
-	state = CD4CHARTSTATE;
+- (void)showCD4
+{
+	self.state = CD4CHARTSTATE;
 	[self.cd4Button setBackgroundImage:[UIImage imageNamed:@"cd4On-small.png"] forState:UIControlStateNormal];
 	[self.cd4PercentButton setBackgroundImage:[UIImage imageNamed:@"cd4PercentOff-small.png"] forState:UIControlStateNormal];
 	[self.viralLoadButton setBackgroundImage:[UIImage imageNamed:@"viralOff-small.png"] forState:UIControlStateNormal];
 	[self setNeedsDisplay];
     
 }
-- (void)showCD4Percent{
-	state = CD4PERCENTCHARTSTATE;
+- (void)showCD4Percent
+{
+	self.state = CD4PERCENTCHARTSTATE;
 	[self.cd4Button setBackgroundImage:[UIImage imageNamed:@"cd4Off-small.png"] forState:UIControlStateNormal];
 	[self.cd4PercentButton setBackgroundImage:[UIImage imageNamed:@"cd4PercentOn-small.png"] forState:UIControlStateNormal];
 	[self.viralLoadButton setBackgroundImage:[UIImage imageNamed:@"viralOff-small.png"] forState:UIControlStateNormal];
 	[self setNeedsDisplay];    
     
 }
-- (void)showViralLoad{
-	state = VIRALCHARTSTATE;
+- (void)showViralLoad
+{
+	self.state = VIRALCHARTSTATE;
 	[self.cd4Button setBackgroundImage:[UIImage imageNamed:@"cd4Off-small.png"] forState:UIControlStateNormal];
 	[self.cd4PercentButton setBackgroundImage:[UIImage imageNamed:@"cd4PercentOff-small.png"] forState:UIControlStateNormal];
 	[self.viralLoadButton setBackgroundImage:[UIImage imageNamed:@"viralOn-small.png"] forState:UIControlStateNormal];
@@ -84,8 +92,9 @@
 /**
  selectCD4
  */
-- (IBAction) selectCD4:	(id) sender{
-	state = CD4CHARTSTATE;
+- (IBAction) selectCD4:	(id) sender
+{
+	self.state = CD4CHARTSTATE;
 	[self.cd4Button setBackgroundImage:[UIImage imageNamed:@"cd4On-small.png"] forState:UIControlStateNormal];
 	[self.cd4PercentButton setBackgroundImage:[UIImage imageNamed:@"cd4PercentOff-small.png"] forState:UIControlStateNormal];
 	[self.viralLoadButton setBackgroundImage:[UIImage imageNamed:@"viralOff-small.png"] forState:UIControlStateNormal];
@@ -96,8 +105,9 @@
 /**
  selectCD4Percent
  */
-- (IBAction) selectCD4Percent: (id) sender{
-	state = CD4PERCENTCHARTSTATE;
+- (IBAction) selectCD4Percent: (id) sender
+{
+	self.state = CD4PERCENTCHARTSTATE;
 	[self.cd4Button setBackgroundImage:[UIImage imageNamed:@"cd4Off-small.png"] forState:UIControlStateNormal];
 	[self.cd4PercentButton setBackgroundImage:[UIImage imageNamed:@"cd4PercentOn-small.png"] forState:UIControlStateNormal];
 	[self.viralLoadButton setBackgroundImage:[UIImage imageNamed:@"viralOff-small.png"] forState:UIControlStateNormal];
@@ -107,8 +117,9 @@
 /**
  selectViralLoad
  */
-- (IBAction) selectViralLoad: (id) sender{
-	state = VIRALCHARTSTATE;
+- (IBAction) selectViralLoad: (id) sender
+{
+	self.state = VIRALCHARTSTATE;
 	[self.cd4Button setBackgroundImage:[UIImage imageNamed:@"cd4Off-small.png"] forState:UIControlStateNormal];
 	[self.cd4PercentButton setBackgroundImage:[UIImage imageNamed:@"cd4PercentOff-small.png"] forState:UIControlStateNormal];
 	[self.viralLoadButton setBackgroundImage:[UIImage imageNamed:@"viralOn-small.png"] forState:UIControlStateNormal];
@@ -118,37 +129,40 @@
 /**
  drawCD4Button
  */
-- (void)drawCD4Button{
+- (void)drawCD4Button
+{
     CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+ 30.0, CGRectGetMinY(self.bounds) + 1.0, 80.0, 20.0);
 	self.cd4Button = [UIButton buttonWithType:UIButtonTypeCustom];
 	[self.cd4Button setFrame:frame];
 	[self.cd4Button addTarget:self action:@selector(selectCD4:) forControlEvents:UIControlEventTouchUpInside];
 	[self.cd4Button setBackgroundImage:[UIImage imageNamed:@"cd4On-small.png"] forState:UIControlStateNormal];
-	[self addSubview:cd4Button];
+	[self addSubview:self.cd4Button];
 }
 
 /**
  drawCD4PercentButton
  */
-- (void)drawCD4PercentButton{
+- (void)drawCD4PercentButton
+{
     CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+ 115.0, CGRectGetMinY(self.bounds) + 1.0, 50.0, 20.0);
 	self.cd4PercentButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[self.cd4PercentButton setFrame:frame];
 	[self.cd4PercentButton addTarget:self action:@selector(selectCD4Percent:) forControlEvents:UIControlEventTouchUpInside];
 	[self.cd4PercentButton setBackgroundImage:[UIImage imageNamed:@"cd4PercentOff-small.png"] forState:UIControlStateNormal];
-	[self addSubview:cd4PercentButton];    
+	[self addSubview:self.cd4PercentButton];    
 }
 
 /**
  drawViralLoadButton
  */
-- (void)drawViralLoadButton{
+- (void)drawViralLoadButton
+{
     CGRect frame = CGRectMake(CGRectGetMinX(self.bounds)+ 170.0, CGRectGetMinY(self.bounds) + 1.0, 80.0, 20.0);
 	self.viralLoadButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[self.viralLoadButton setFrame:frame];
 	[self.viralLoadButton addTarget:self action:@selector(selectViralLoad:) forControlEvents:UIControlEventTouchUpInside];
 	[self.viralLoadButton setBackgroundImage:[UIImage imageNamed:@"viralOff-small.png"] forState:UIControlStateNormal];
-	[self addSubview:viralLoadButton];        
+	[self addSubview:self.viralLoadButton];        
 }
 
 

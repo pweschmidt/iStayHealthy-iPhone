@@ -16,10 +16,7 @@
 @class ChartEvents;
 @class Results;
 
-@interface NewStatusViewController : iStayHealthyTableViewController{
-	HealthChartsViewPortrait *chartView;
-    ChartEvents *events;
-}
+@interface NewStatusViewController : iStayHealthyTableViewController
 @property (nonatomic, strong) HealthChartsViewPortrait *chartView;
 @property (nonatomic, strong) ChartEvents *events;
 - (void)configureCD4Cell:(SummaryCell *)cell;

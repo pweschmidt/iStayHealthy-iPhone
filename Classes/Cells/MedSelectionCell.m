@@ -9,12 +9,16 @@
 #import "MedSelectionCell.h"
 
 @implementation MedSelectionCell
-@synthesize imageView,name,type,content;
+@synthesize medImageView = _medImageView;
+@synthesize name = _name;
+@synthesize type = _type;
+@synthesize content = _content;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;

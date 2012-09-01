@@ -8,13 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HIVMedListCell : UITableViewCell{
-    IBOutlet UIImageView *imageView;
-    IBOutlet UILabel *date;
-    IBOutlet UILabel *name;
-    IBOutlet UILabel *content;
-}
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@interface HIVMedListCell : UITableViewCell
+@property (nonatomic, strong) IBOutlet UIImageView *medImageView;
 @property (nonatomic, strong) IBOutlet UILabel *date;
 @property (nonatomic, strong) IBOutlet UILabel *name;
 @property (nonatomic, strong) IBOutlet UILabel *content;

@@ -13,19 +13,11 @@
 @class iStayHealthyRecord;
 @class ChartEvents;
 
-@interface StatusViewControllerLandscape : UIViewController <UIAlertViewDelegate, NSFetchedResultsControllerDelegate>{
-	UIStatusBarStyle oldStatusBarStyle;
-	HealthChartsViewLandscape *chartView;
-	NSMutableArray *allResults;
-	NSMutableArray *allMeds;
-    NSMutableArray *allMissedMeds;
-//	NSFetchedResultsController *fetchedResultsController_;
-    BOOL hasNoResults;
-    BOOL hasNoMedications;
-    BOOL hasNoMissedDates;
-	iStayHealthyRecord *masterRecord;
-    ChartEvents *events;
-}
+@interface StatusViewControllerLandscape : UIViewController <UIAlertViewDelegate, NSFetchedResultsControllerDelegate>
+@property UIStatusBarStyle oldStatusBarStyle;
+@property BOOL hasNoResults;
+@property BOOL hasNoMedication;
+@property BOOL hasNoMissedDates;
 @property (nonatomic, strong) HealthChartsViewLandscape *chartView;
 @property (nonatomic, strong) NSMutableArray *allResults;
 @property (nonatomic, strong) NSMutableArray *allMeds;

@@ -16,13 +16,16 @@
 #import "ChartEvents.h"
 
 @implementation StatusViewControllerLandscape
-@synthesize chartView=_chartView;
+@synthesize chartView =_chartView;
 @synthesize allResults = _allResults;
 @synthesize allMeds = _allMeds;
 @synthesize masterRecord = _masterRecord;
 @synthesize allMissedMeds = _allMissedMeds;
 @synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize events;
+@synthesize events = _events;
+@synthesize hasNoMedication = _hasNoMedication;
+@synthesize hasNoResults = _hasNoResults;
+@synthesize hasNoMissedDates = _hasNoMissedDates;
 /**
  inits the ViewController
  @nibNameOrNil - the NIB file name for the landscape controller
@@ -47,7 +50,8 @@
 /**
  loaded once. sets up the landscape chart view
  */
-- (void)viewDidLoad{
+- (void)viewDidLoad
+{
 	[super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
     
@@ -61,7 +65,8 @@
     [self.chartView setEvents:self.events];
     
 	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
 							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
@@ -98,7 +103,8 @@
 
 /**
  */
-- (void)setUpData{
+- (void)setUpData
+{
 #ifdef APPDEBUG	
 	NSLog(@"StatusViewControllerLandscape:setUpData");
 #endif
@@ -110,35 +116,41 @@
 	NSSet *meds = self.masterRecord.medications;
     NSSet *missedMeds = self.masterRecord.missedMedications;
 
-    if (0 < [self.events.allChartEvents count]) {
+    if (0 < [self.events.allChartEvents count])
+    {
         [self.events.allChartEvents removeAllObjects];
     }
     //set results
-	if (0 != [results count]) {
+	if (0 != [results count])
+    {
 		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
 #ifdef APPDEBUG	
         NSLog(@"StatusViewControllerLandscape:setUpData Results array has %d entries",[results count]);
 #endif
 	}
-	else {
+	else
+    {
 #ifdef APPDEBUG	
         NSLog(@"StatusViewControllerLandscape:setUpData Results array is empty. Why?");
 #endif
 		self.allResults = (NSMutableArray *)results;
 	}
     //set meds
-	if (0 != [meds count]) {
+	if (0 != [meds count])
+    {
 		self.allMeds = [NSArray arrayByOrderingSet:meds byKey:@"StartDate" ascending:YES reverseOrder:NO];
 	}
-	else {
+	else
+    {
 		self.allMeds = (NSMutableArray *)meds;
 	}
     //set missed meds
-    if (0 != [missedMeds count]) {
+    if (0 != [missedMeds count])
+    {
         self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
     }
     else
-        self.allMissedMeds = (NSMutableArray *)masterRecord.missedMedications;
+        self.allMissedMeds = (NSMutableArray *)self.masterRecord.missedMedications;
     
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
@@ -150,8 +162,10 @@
 /**
  called when being notifed about any changes
  */
-- (void)reloadData:(NSNotification *)note{
-    if (0 < [self.events.allChartEvents count]) {
+- (void)reloadData:(NSNotification *)note
+{
+    if (0 < [self.events.allChartEvents count])
+    {
         [self.events.allChartEvents removeAllObjects];
     }
     [self setUpData];
@@ -174,8 +188,10 @@
  fetchedResultsController
  @return NSFetchedResultsController
  */
-- (NSFetchedResultsController *)fetchedResultsController{
-	if (_fetchedResultsController != nil) {
+- (NSFetchedResultsController *)fetchedResultsController
+{
+	if (_fetchedResultsController != nil)
+    {
 		return _fetchedResultsController;
 	}
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -216,14 +232,16 @@
 /**
  handle memory warning
  */
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
 
 /**
  unload
  */
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     self.allMeds = nil;
     self.allResults = nil;
     self.allMissedMeds = nil;

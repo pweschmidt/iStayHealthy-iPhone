@@ -25,44 +25,55 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;
 }
 
-- (void)setCD4:(NSNumber *)value{
+- (void)setCD4:(NSNumber *)value
+{
     int cd4 = [value intValue];
     self.cd4Value.text = [NSString stringWithFormat:@"%d",cd4];
-	if (350 <= cd4) {
+	if (350 <= cd4)
+    {
 		self.cd4Value.textColor = DARK_GREEN;
 	}
-	else if (200 <= cd4 && 350 > cd4){
+	else if (200 <= cd4 && 350 > cd4)
+    {
 		self.cd4Value.textColor = DARK_YELLOW;
 	}
-	else if( 200 > cd4 && 0 < cd4){
+	else if( 200 > cd4 && 0 < cd4)
+    {
 		self.cd4Value.textColor = DARK_RED;
 	}
-    else{
+    else
+    {
         self.cd4Value.text = NSLocalizedString(@"n/a",nil);
         self.cd4Value.textColor = [UIColor lightGrayColor];
     }
     
 }
 
-- (void)setCD4Percent:(NSNumber *)value{
+- (void)setCD4Percent:(NSNumber *)value
+{
     float cd4Percent = [value floatValue];
     self.cd4PercentValue.text = [NSString stringWithFormat:@"%2.1f%%",cd4Percent];
-    if (21.0 <= cd4Percent) {
+    if (21.0 <= cd4Percent)
+    {
         self.cd4PercentValue.textColor = DARK_GREEN;
     }
-    else if (15.0 <= cd4Percent && 21.0 > cd4Percent) {
+    else if (15.0 <= cd4Percent && 21.0 > cd4Percent)
+    {
         self.cd4PercentValue.textColor = DARK_YELLOW;
     }
-    else if(15.0 > cd4Percent && 0.0 < cd4Percent){
+    else if(15.0 > cd4Percent && 0.0 < cd4Percent)
+    {
         self.cd4PercentValue.textColor = DARK_RED;
     }
-    else{
+    else
+    {
         self.cd4PercentValue.text = NSLocalizedString(@"n/a",nil);
         self.cd4PercentValue.textColor = [UIColor lightGrayColor];
     }
@@ -70,22 +81,28 @@
     
 }
 
-- (void)setViralLoad:(NSNumber *)value{
+- (void)setViralLoad:(NSNumber *)value
+{
     int vl = [value intValue];
-	if (10 > vl && 0 <= vl) {
+	if (10 > vl && 0 <= vl)
+    {
         self.vlValue.text = NSLocalizedString(@"undetectable",nil);
 		self.vlValue.textColor = DARK_GREEN;
 	}
-    else if(0 > vl){
+    else if(0 > vl)
+    {
         self.vlValue.text = NSLocalizedString(@"n/a",nil);
         self.vlValue.textColor = [UIColor lightGrayColor];
     }
-	else {
+	else
+    {
 		self.vlValue.text = [NSString stringWithFormat:@"%d",vl];
-		if (100000 <= vl && 500000 > vl) {
+		if (100000 <= vl && 500000 > vl)
+        {
 			self.vlValue.textColor = DARK_YELLOW;
 		}
-		if (500000 <= vl) {
+		if (500000 <= vl)
+        {
 			self.vlValue.textColor = DARK_RED;
 		}
 	}

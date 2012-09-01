@@ -17,7 +17,8 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;
@@ -28,16 +29,19 @@
     self.pressureDelegate = viewControllerDelegate;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     textField.textColor = [UIColor blackColor];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
 //    [self.resultValueDelegate setValueString:textField.text withTag:self.tag];
 }
 
@@ -55,7 +59,8 @@
  Finally, to ensure that we can convert a float value from continental comma separation to dot separation
  we replace any occurrances of , with .
  */
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     NSString *expression = @"^([0-9]{1,3})?$";
@@ -65,7 +70,8 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:expression 
                                                                            options:NSRegularExpressionCaseInsensitive 
                                                                              error:&error];
-    if (error) {
+    if (error)
+    {
         return YES;
     }
     NSUInteger numberOfMatches = [regex numberOfMatchesInString:newString
@@ -73,7 +79,8 @@
                                                           range:NSMakeRange(0, [newString length])];   
     
     
-    if (0 < numberOfMatches) {
+    if (0 < numberOfMatches)
+    {
         [self.pressureDelegate setSystole:self.systoleField.text diastole:self.diastoleField.text];
 //        [self.resultValueDelegate setValueString:normalisedString withTag:self.tag];
         return YES;

@@ -8,15 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SummaryCell : UITableViewCell{
-    IBOutlet UILabel *title;
-    IBOutlet UILabel *result;
-    IBOutlet UIImageView *imageView;
-    IBOutlet UILabel *change;
-}
+@interface SummaryCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *title;
 @property (nonatomic, strong) IBOutlet UILabel *result;
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView *summaryImageView;
 @property (nonatomic, strong) IBOutlet UILabel *change;
 
 @end

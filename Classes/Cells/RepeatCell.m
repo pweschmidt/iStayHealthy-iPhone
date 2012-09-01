@@ -9,22 +9,26 @@
 #import "RepeatCell.h"
 
 @implementation RepeatCell
-@synthesize segmentedControl;
+@synthesize segmentedControl = _segmentedControl;
 @synthesize repeatCellDelegate=_repeatCellDelegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;
 }
 
-- (void)setDelegate:(id)viewControllerDelegate{
+- (void)setDelegate:(id)viewControllerDelegate
+{
     self.repeatCellDelegate = viewControllerDelegate;    
 }
-- (IBAction)toggleRepeats:(id)sender{
+
+- (IBAction)toggleRepeats:(id)sender
+{
     [self.repeatCellDelegate setRepeats:self.segmentedControl.selectedSegmentIndex + 1];
 }
 

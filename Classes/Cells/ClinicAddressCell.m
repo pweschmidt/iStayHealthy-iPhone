@@ -9,32 +9,38 @@
 #import "ClinicAddressCell.h"
 
 @implementation ClinicAddressCell
-@synthesize title, valueField;
+@synthesize title = _title;
+@synthesize valueField = _valueField;
 @synthesize clinicAddressCellDelegate=_clinicAddressCellDelegate;
 
-- (void)setDelegate:(id)viewControllerDelegate{
+- (void)setDelegate:(id)viewControllerDelegate
+{
     self.clinicAddressCellDelegate = viewControllerDelegate;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     textField.textColor = [UIColor blackColor];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
     [self.clinicAddressCellDelegate setValueString:textField.text withTag:self.tag];
 }
 

@@ -8,11 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsCell : UITableViewCell{
-    IBOutlet UIImageView *imageView;
-    IBOutlet UILabel *label;
-}
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@interface SettingsCell : UITableViewCell
+@property (nonatomic, strong) IBOutlet UIImageView *settingsImageView;
 @property (nonatomic, strong) IBOutlet UILabel *label;
 
 @end

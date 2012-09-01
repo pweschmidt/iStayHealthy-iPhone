@@ -9,12 +9,16 @@
 #import "HIVMedListCell.h"
 
 @implementation HIVMedListCell
-@synthesize imageView,date,name,content;
+@synthesize medImageView = _medImageView;
+@synthesize date = _date;
+@synthesize name = _name;
+@synthesize content = _content;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
     return self;

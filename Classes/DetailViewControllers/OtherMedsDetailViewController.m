@@ -32,7 +32,8 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -125,7 +126,8 @@
     }
     
     
-    if (![context save:&error]) {
+    if (![context save:&error])
+    {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -142,7 +144,8 @@
 /**
  brings up a new view to change the date
  */
-- (void)changeStartDate{
+- (void)changeStartDate
+{
 	NSString *title =  @"\n\n\n\n\n\n\n\n\n\n\n\n" ;
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set", nil), nil];
 	[actionSheet showInView:self.view];
@@ -175,7 +178,8 @@
     NSManagedObjectContext *context = self.otherMeds.managedObjectContext;
     [context deleteObject:self.otherMeds];
     NSError *error = nil;
-    if (![context save:&error]) {
+    if (![context save:&error])
+    {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -187,7 +191,8 @@
 /**
  shows the Alert view when user clicks the Trash button
  */
-- (IBAction) showAlertView:			(id) sender{
+- (IBAction) showAlertView:			(id) sender
+{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
     
     [alert show];
@@ -196,16 +201,20 @@
 /**
  if user really wants to delete the entry call removeSQLEntry
  */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")]) {
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
+    {
         [self removeSQLEntry];
     }
 }
 
 #pragma mark - ClinicAddressCellDelegate Protocol implementation
-- (void)setValueString:(NSString *)valueString withTag:(int)tag{
-    switch (tag) {
+- (void)setValueString:(NSString *)valueString withTag:(int)tag
+{
+    switch (tag)
+    {
         case 10:
             self.name = valueString;
             break;
@@ -214,12 +223,15 @@
             break;
     }
 }
-- (void)setUnitString:(NSString *)unitString{
+- (void)setUnitString:(NSString *)unitString
+{
     self.unit = unitString;
 }
 
-- (NSNumber *)valueFromString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
+- (NSNumber *)valueFromString:(NSString *)string
+{
+    if ([string isEqualToString:@""])
+    {
         return [NSNumber numberWithFloat:-1.0];
     }
     return [NSNumber numberWithFloat:[string floatValue]];
@@ -240,10 +252,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         return 60;
     }
-    if (2 == indexPath.section) {
+    if (2 == indexPath.section)
+    {
         return 80;
     }
     return 48;
@@ -270,6 +284,7 @@
     footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
     if (self.isEdit && 2 == section)
     {
+        footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 90);
         CGRect deleteFrame = CGRectMake(10, 45, tableView.bounds.size.width - 20 , 37);
         GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
         [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
@@ -280,18 +295,25 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"dd MMM YY";
         
         NSString *identifier = @"SetDateCell";
         SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == dateCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+        if (nil == dateCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SetDateCell class]])
+                {
                     dateCell = (SetDateCell *)currentObject;
                     break;
                 }
@@ -303,13 +325,19 @@
         self.setDateCell = dateCell;
         return dateCell;
     }
-    if (1 == indexPath.section) {
+    if (1 == indexPath.section)
+    {
         NSString *identifier = @"ClinicAddressCell";
         ClinicAddressCell *clinicCell = (ClinicAddressCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == clinicCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[ClinicAddressCell class]]) {
+        if (nil == clinicCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[ClinicAddressCell class]])
+                {
                     clinicCell = (ClinicAddressCell *)currentObject;
                     break;
                 }
@@ -330,13 +358,19 @@
         return clinicCell;
     }
     
-    if (2 == indexPath.section) {
+    if (2 == indexPath.section)
+    {
         NSString *identifier = @"DosageCell";
         DosageCell *doseCell = (DosageCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == doseCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"DosageCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[DosageCell class]]) {
+        if (nil == doseCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"DosageCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[DosageCell class]])
+                {
                     doseCell = (DosageCell *)currentObject;
                     break;
                 }
@@ -357,8 +391,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-    if (0 == indexPath.section) {
-        if (0 == indexPath.row) {
+    if (0 == indexPath.section)
+    {
+        if (0 == indexPath.row)
+        {
             [self changeStartDate];
         }
     }

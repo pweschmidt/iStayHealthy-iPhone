@@ -52,9 +52,11 @@
 #pragma mark View lifecycle
 
 
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord{
+- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+{
     self = [super initWithNibName:@"ResultDetailViewController" bundle:nil];
-    if (self) {
+    if (self)
+    {
         self.record = masterrecord;
         self.resultsDate = [NSDate date];
         self.vlHIV = [NSNumber numberWithFloat:-1.0];
@@ -79,9 +81,11 @@
     return self;
 }
 
-- (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord{
+- (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord
+{
     self = [super initWithNibName:@"ResultChangeViewController" bundle:nil];
-    if (self) {
+    if (self)
+    {
         self.isInEditMode = YES;
         self.results = storedResults;
         self.record = masterRecord;
@@ -102,52 +106,68 @@
         self.redCells = [NSNumber numberWithFloat:-1.0];
         self.platelets = [NSNumber numberWithFloat:-1.0];
         
-        if (nil != self.results.ViralLoad) {
+        if (nil != self.results.ViralLoad)
+        {
             self.vlHIV = self.results.ViralLoad;
         }
-        if (nil != self.results.CD4) {
+        if (nil != self.results.CD4)
+        {
             self.cd4 = self.results.CD4;
         }
-        if (nil != self.results.CD4Percent) {
+        if (nil != self.results.CD4Percent)
+        {
             self.cd4Percent = self.results.CD4Percent;
         }
-        if (nil != self.results.HepCViralLoad) {
+        if (nil != self.results.HepCViralLoad)
+        {
             self.vlHepC = self.results.HepCViralLoad;
         }
-        if (nil != self.results.ResultsDate) {
+        if (nil != self.results.ResultsDate)
+        {
             self.resultsDate = self.results.ResultsDate;
         }
-        if (nil != self.results.Glucose) {
+        if (nil != self.results.Glucose)
+        {
             self.glucose = self.results.Glucose;
         }
-        if (nil != self.results.TotalCholesterol) {
+        if (nil != self.results.TotalCholesterol)
+        {
             self.cholesterol = self.results.TotalCholesterol;
         }
-        if (nil != self.results.HDL) {
+        if (nil != self.results.HDL)
+        {
             self.hdl = self.results.HDL;
         }
-        if (nil != self.results.LDL) {
+        if (nil != self.results.LDL)
+        {
             self.ldl = self.results.LDL;
         }
-        if (nil != self.results.Weight) {
+        if (nil != self.results.Weight)
+        {
             self.weight = self.results.Weight;
         }
-        if (nil != self.results.Systole) {
+        if (nil != self.results.Systole)
+        {
             self.systole = self.results.Systole;
         }
-        if (nil != self.results.Diastole) {
+        if (nil != self.results.Diastole)
+        {
             self.diastole = self.results.Diastole;
         }
-        if (nil != self.results.Hemoglobulin) {
+        if (nil != self.results.Hemoglobulin)
+        {
             self.hemoglobulin = self.results.Hemoglobulin;
         }
-        if (nil != self.results.WhiteBloodCellCount) {
+        if (nil != self.results.WhiteBloodCellCount)
+        {
             self.whiteCells = self.results.WhiteBloodCellCount;
         }
-        if (nil != self.results.PlateletCount) {
+        if (nil != self.results.PlateletCount)
+        {
             self.platelets = self.results.PlateletCount;
         }
-        //        if (nil != self.results.RedBloodCellCount) {
+        //        if (nil != self.results.RedBloodCellCount)
+        //        {
         //            self.redCells = self.results.RedBloodCellCount;
         //        }
     }
@@ -159,7 +179,8 @@
  loads/sets up the view
  */
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 #ifdef APPDEBUG
     NSString *translated = NSLocalizedString(@"Add Results", @"Add Results");
@@ -189,11 +210,13 @@
     
 }
 
-- (void)indexDidChangeForSegment{
+- (void)indexDidChangeForSegment
+{
     [self.tableView reloadData];
 }
 
-- (IBAction) changeUnits:           (id) sender{
+- (IBAction) changeUnits:           (id) sender
+{
     UnitTableViewController *unitController = [[UnitTableViewController alloc] initWithNibName:@"UnitTableViewController" bundle:nil];
     [self.navigationController pushViewController:unitController animated:YES];    
 }
@@ -206,9 +229,11 @@
  when clicked it saves the entries for CD4 and Viral load to the database. then the view is dismissed
  @id
  */
-- (IBAction) save: (id) sender{
+- (IBAction) save: (id) sender
+{
     NSManagedObjectContext *context = nil;
-    if (self.isInEditMode) {
+    if (self.isInEditMode)
+    {
         context = [self.results managedObjectContext];
         self.results.ResultsDate = self.resultsDate;
         self.results.CD4 = self.cd4;
@@ -229,7 +254,8 @@
         //self.results.RedBloodCellCount = self.redCells;
         self.record.UID = [Utilities GUID];
     }
-    else{
+    else
+    {
         context = [self.record managedObjectContext];
         Results *results = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
         [self.record addResultsObject:results];
@@ -253,9 +279,11 @@
     }
 //TODO - add to data model    results.RedBloodCellCount = self.redCells;
     
-    if (nil != context) {
+    if (nil != context)
+    {
         NSError *error = nil;
-        if (![context save:&error]) {
+        if (![context save:&error])
+        {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
@@ -268,16 +296,19 @@
  dismisses the view without saving
  @id 
  */
-- (IBAction) cancel: (id) sender{
+- (IBAction) cancel: (id) sender
+{
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (void) removeSQLEntry{
+- (void) removeSQLEntry
+{
     [self.record removeResultsObject:self.results];
     NSManagedObjectContext *context = self.results.managedObjectContext;
     [context deleteObject:self.results];
     NSError *error = nil;
-    if (![context save:&error]) {
+    if (![context save:&error])
+    {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -289,7 +320,8 @@
 /**
  shows the Alert view when user clicks the Trash button
  */
-- (IBAction) showAlertView:			(id) sender{
+- (IBAction) showAlertView:			(id) sender
+{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
     
     [alert show];
@@ -298,9 +330,11 @@
 /**
  if user really wants to delete the entry call removeSQLEntry
  */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")]) {
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
+    {
         [self removeSQLEntry];
     }
 }
@@ -311,7 +345,8 @@
 /**
  brings up a new view to change the date
  */
-- (void)changeResultsDate{
+- (void)changeResultsDate
+{
 	NSString *title =  @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set", nil), nil];
 	[actionSheet showInView:self.view];
@@ -341,12 +376,14 @@
 
 #pragma mark -
 #pragma mark ResultValueCell delegate method
-- (void)setValueString:(NSString *)valueString withTag:(int)tag{
+- (void)setValueString:(NSString *)valueString withTag:(int)tag
+{
 #ifdef APPDEBUG
     NSLog(@"ResultDetailViewController setValueString %@ with tag %d",valueString, tag);
 #endif
     NSNumber *number = [self valueFromString:valueString];
-    switch (tag) {
+    switch (tag)
+    {
         case 10:
             self.vlHIV = number;
             break;
@@ -395,11 +432,14 @@
     }
 }
 
-- (NSNumber *)valueFromString:(NSString *)string{
-    if ([string isEqualToString:NSLocalizedString(@"undetectable",@"undetectable")]) {
+- (NSNumber *)valueFromString:(NSString *)string
+{
+    if ([string isEqualToString:NSLocalizedString(@"undetectable",@"undetectable")])
+    {
         return [NSNumber numberWithFloat:0.0];
     }
-    if ([string isEqualToString:@""]) {
+    if ([string isEqualToString:@""])
+    {
         return [NSNumber numberWithFloat:-1.0];            
     }
     return [NSNumber numberWithFloat:[string floatValue]];
@@ -408,97 +448,121 @@
 
 #pragma mark -
 #pragma mark Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 3;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (0 == section) {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	if (0 == section)
+    {
 		return 1;
 	}
-    else if(1 == section){
-        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+    else if(1 == section)
+    {
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
             return 2;
         }
         else if (1 == self.resultsSegmentControl.selectedSegmentIndex)
         {
             return 4;
         }
-        else{
+        else
+        {
             return 1;
         }
     }
     else{
-        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
             return 2;
         }
         else if (1 == self.resultsSegmentControl.selectedSegmentIndex)
         {
             return 4;
         }
-        else{
+        else
+        {
             return 1;
         }
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (0 == indexPath.section) {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section)
+    {
         return 60;
     }
     else{
-        if (0 == self.resultsSegmentControl.selectedSegmentIndex && 2 == indexPath.section) {
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex && 2 == indexPath.section)
+        {
             return 69;
         }
-        else{
+        else
+        {
             return 48;
         }
     }        
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (1 == section) {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (1 == section)
+    {
         return 40;
     }
     else
         return 10;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
     CGFloat height = 10;
-    if (2 == section) {
-        if (self.isInEditMode) {
+    if (2 == section)
+    {
+        if (self.isInEditMode)
+        {
             height = 90;
         }
-        else{
+        else
+        {
             height = 40;            
         }
     }
     return height;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
     UIView *headerView = nil;
-    if (1 == section) {
+    if (1 == section)
+    {
         headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
         [headerView addSubview:self.resultsSegmentControl];
     }
-    else{
+    else
+    {
         headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
     }
     return headerView;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
     UIView *footerView = nil;
     footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
-    if (2 == section){
+    if (2 == section)
+    {
         footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 40);
         CGRect buttonFrame = CGRectMake(10, 1.5, tableView.bounds.size.width - 20 , 37);
         GradientButton *gradButton = [[GradientButton alloc] initWithFrame:buttonFrame colour:Green title:NSLocalizedString(@"Change Units", @"Change Units")];
         [gradButton addTarget:self action:@selector(changeUnits:) forControlEvents:UIControlEventTouchUpInside];
         [footerView addSubview:gradButton];
-        if (self.isInEditMode) {
+        if (self.isInEditMode)
+        {
             CGRect deleteFrame = CGRectMake(10, 45, tableView.bounds.size.width - 20 , 37);
             GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
             [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
@@ -509,17 +573,25 @@
     return footerView;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (0 == indexPath.section) {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section)
+    {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"dd MMM YY";
 
         NSString *identifier = @"SetDateCell";
         SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == dateCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+        if (nil == dateCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SetDateCell class]])
+                {
                     dateCell = (SetDateCell *)currentObject;
                     break;
                 }
@@ -532,16 +604,23 @@
         self.setDateCell = dateCell;
         return dateCell;
     }
-    if (1 == indexPath.section) {
+    if (1 == indexPath.section)
+    {
         int tag = 0;
         int row = indexPath.row;
-        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
             NSString *identifier = @"CD4ValueCell";
             ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == resultCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[ResultValueCell class]]) {
+            if (nil == resultCell)
+            {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell"
+                                                                    owner:self
+                                                                  options:nil];
+                for (id currentObject in cellObjects)
+                {
+                    if ([currentObject isKindOfClass:[ResultValueCell class]])
+                    {
                         resultCell = (ResultValueCell *)currentObject;
                         break;
                     }
@@ -553,10 +632,12 @@
             resultCell.colourCodeView.backgroundColor = DARK_YELLOW;
             resultCell.colourCodeView.layer.cornerRadius = 5;
             resultCell.tag = tag;
-            switch (row) {
+            switch (row)
+            {
                 case 0:
                     resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
-                    if (0 < [self.cd4 intValue]) {
+                    if (0 < [self.cd4 intValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.cd4 intValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -564,7 +645,8 @@
                     break;
                 case 1:
                     resultCell.inputTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
-                    if (0 < [self.cd4Percent floatValue]) {
+                    if (0 < [self.cd4Percent floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -574,14 +656,20 @@
             
             return resultCell;
         }
-        else if (1 == self.resultsSegmentControl.selectedSegmentIndex){
+        else if (1 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
             tag = indexPath.row + 1000;
             NSString *identifier = @"BloodValueCell";
             ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == resultCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[ResultValueCell class]]) {
+            if (nil == resultCell)
+            {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell"
+                                                                    owner:self
+                                                                  options:nil];
+                for (id currentObject in cellObjects)
+                {
+                    if ([currentObject isKindOfClass:[ResultValueCell class]])
+                    {
                         resultCell = (ResultValueCell *)currentObject;
                         break;
                     }
@@ -592,10 +680,12 @@
             resultCell.colourCodeView.backgroundColor = DARK_RED;
             resultCell.colourCodeView.layer.cornerRadius = 5;
             resultCell.tag = tag;
-            switch (row) {
+            switch (row)
+            {
                 case 0:
                     resultCell.inputTitle.text = NSLocalizedString(@"Glucose", @"Glucose");
-                    if (0 < [self.glucose floatValue]) {
+                    if (0 < [self.glucose floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.glucose floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -604,7 +694,8 @@
                 case 1:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol");
-                    if (0 < [self.cholesterol floatValue]) {
+                    if (0 < [self.cholesterol floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cholesterol floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -614,7 +705,8 @@
                 case 2:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"HDL", @"HDL");
-                    if (0 < [self.hdl floatValue]) {
+                    if (0 < [self.hdl floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.hdl floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -624,7 +716,8 @@
                 case 3:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"LDL", @"LDL");
-                    if (0 < [self.ldl floatValue]) {
+                    if (0 < [self.ldl floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.ldl floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -639,10 +732,15 @@
             tag = indexPath.row + 100000;
             NSString *identifier = @"WeightCell";
             ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == resultCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[ResultValueCell class]]) {
+            if (nil == resultCell)
+            {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell"
+                                                                    owner:self
+                                                                  options:nil];
+                for (id currentObject in cellObjects)
+                {
+                    if ([currentObject isKindOfClass:[ResultValueCell class]])
+                    {
                         resultCell = (ResultValueCell *)currentObject;
                         break;
                     }
@@ -652,7 +750,8 @@
             resultCell.colourCodeView.backgroundColor = DARK_GREEN;
             resultCell.colourCodeView.layer.cornerRadius = 5;
             resultCell.inputTitle.text = NSLocalizedString(@"Weight", @"Weight");
-            if (0 < [self.weight floatValue]) {
+            if (0 < [self.weight floatValue])
+            {
                 [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.weight floatValue]]];
                 [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
             }
@@ -661,16 +760,23 @@
             return resultCell;
         }
     }
-    if (2 == indexPath.section) {
-        if (0 == self.resultsSegmentControl.selectedSegmentIndex) {
+    if (2 == indexPath.section)
+    {
+        if (0 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
             int tag = 10 + indexPath.row;
             
             NSString *identifier = @"ResultSegmentedCell";
             ResultSegmentedCell *segCell = (ResultSegmentedCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == segCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultSegmentedCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[ResultSegmentedCell class]]) {
+            if (nil == segCell)
+            {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultSegmentedCell"
+                                                                    owner:self
+                                                                  options:nil];
+                for (id currentObject in cellObjects)
+                {
+                    if ([currentObject isKindOfClass:[ResultSegmentedCell class]])
+                    {
                         segCell = (ResultSegmentedCell *)currentObject;
                         break;
                     }
@@ -685,22 +791,26 @@
             segCell.colourCodeView.backgroundColor = DARK_BLUE;
             segCell.colourCodeView.layer.cornerRadius = 5;
             segCell.tag = tag;
-            switch (row) {
+            switch (row)
+            {
                 case 0:
                     segCell.inputTitle.text = NSLocalizedString(@"Viral Load",@"Viral Load");
                     segCell.inputValueField.enabled = NO;
-                    if (40 <= [self.vlHIV intValue]) {
+                    if (40 <= [self.vlHIV intValue])
+                    {
                         [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHIV intValue]]];
                         [[segCell inputValueField]setTextColor:[UIColor blackColor]];
                         [[segCell switchControl]setOn:FALSE];
                     }
-                    if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue]){
+                    if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue])
+                    {
                         [[segCell inputValueField]setTextColor:[UIColor blackColor]];
                         [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
                         [[segCell inputValueField]setEnabled:NO];
                         [[segCell switchControl]setOn:TRUE];
                     }
-                    if(0 > [self.vlHIV intValue]){
+                    if(0 > [self.vlHIV intValue])
+                    {
                         [[segCell inputValueField]setEnabled:YES];
                         [[segCell switchControl]setOn:FALSE];
                     }
@@ -709,18 +819,21 @@
                 case 1:
                     segCell.inputTitle.text = NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC");
                     segCell.inputValueField.enabled = YES;
-                    if (40 <= [self.vlHepC intValue]) {
+                    if (40 <= [self.vlHepC intValue])
+                    {
                         [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHepC intValue]]];
                         [[segCell inputValueField]setTextColor:[UIColor blackColor]];
                         [[segCell switchControl]setOn:FALSE];
                     }
-                    if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue]){
+                    if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue])
+                    {
                         [[segCell inputValueField]setTextColor:[UIColor blackColor]];
                         [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
                         [[segCell inputValueField]setEnabled:NO];
                         [[segCell switchControl]setOn:TRUE];
                     }
-                    if(0 > [self.vlHepC intValue]){
+                    if(0 > [self.vlHepC intValue])
+                    {
                         [[segCell inputValueField]setEnabled:NO];
                         [[segCell switchControl]setOn:TRUE];
                     }
@@ -729,14 +842,20 @@
             }
             return segCell;        
         }
-        else if (1 == self.resultsSegmentControl.selectedSegmentIndex){
+        else if (1 == self.resultsSegmentControl.selectedSegmentIndex)
+        {
             int tag = indexPath.row + 1004;
             NSString *identifier = @"BloodCountCell";
             ResultValueCell *resultCell = (ResultValueCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == resultCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[ResultValueCell class]]) {
+            if (nil == resultCell)
+            {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultValueCell"
+                                                                    owner:self
+                                                                  options:nil];
+                for (id currentObject in cellObjects)
+                {
+                    if ([currentObject isKindOfClass:[ResultValueCell class]])
+                    {
                         resultCell = (ResultValueCell *)currentObject;
                         break;
                     }
@@ -748,11 +867,13 @@
             resultCell.colourCodeView.layer.cornerRadius = 5;
             resultCell.tag = tag;
             int row = indexPath.row;
-            switch (row) {
+            switch (row)
+            {
                 case 0:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Hemoglobulin", @"Hemoglobulin");
-                    if (0 < [self.hemoglobulin floatValue]) {
+                    if (0 < [self.hemoglobulin floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.hemoglobulin floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -762,7 +883,8 @@
                 case 1:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"White Blood Cells", @"White Blood Cells");
-                    if (0 < [self.whiteCells floatValue]) {
+                    if (0 < [self.whiteCells floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.whiteCells floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -772,7 +894,8 @@
                 case 2:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Red Blood Cells", @"Red Blood Cells");
-                    if (0 < [self.redCells floatValue]) {
+                    if (0 < [self.redCells floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.redCells floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -782,7 +905,8 @@
                 case 3:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Platelets", @"Platelets");
-                    if (0 < [self.platelets floatValue]) {
+                    if (0 < [self.platelets floatValue])
+                    {
                         [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.platelets floatValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
@@ -792,13 +916,19 @@
             }
             return resultCell;            
         }
-        else{//other results
+        else
+        {//other results
             NSString *identifier = @"PressureCell";
             PressureCell *pressureCell = (PressureCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-            if (nil == pressureCell) {
-                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"PressureCell" owner:self options:nil];
-                for (id currentObject in cellObjects) {
-                    if ([currentObject isKindOfClass:[PressureCell class]]) {
+            if (nil == pressureCell)
+            {
+                NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"PressureCell"
+                                                                    owner:self
+                                                                  options:nil];
+                for (id currentObject in cellObjects)
+                {
+                    if ([currentObject isKindOfClass:[PressureCell class]])
+                    {
                         pressureCell = (PressureCell *)currentObject;
                         break;
                     }
@@ -809,7 +939,8 @@
             pressureCell.pressureLabel.text = NSLocalizedString(@"Blood Pressure", @"Blood Pressure");
             pressureCell.systoleField.tag = 11000;
             pressureCell.diastoleField.tag = 12000;
-            if (0 < [self.systole intValue] && 0 < [self.diastole intValue]) {
+            if (0 < [self.systole intValue] && 0 < [self.diastole intValue])
+            {
                 pressureCell.systoleField.text = [NSString stringWithFormat:@"%d",[self.systole intValue]];
                 pressureCell.diastoleField.text = [NSString stringWithFormat:@"%d",[self.diastole intValue]];
             }
@@ -831,9 +962,11 @@
  @tableView
  @indexPath
  */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-	if (0 == indexPath.section) {
+	if (0 == indexPath.section)
+    {
 		[self changeResultsDate];
 	}
 }
@@ -846,7 +979,8 @@
 }
 */
 
-- (void)setSystole:(NSString *)systole diastole:(NSString *)diastole{
+- (void)setSystole:(NSString *)systole diastole:(NSString *)diastole
+{
     self.systole = [self valueFromString:systole];
     self.diastole = [self valueFromString:diastole];
 }
@@ -856,13 +990,15 @@
 /**
  handles memory warnings
  */
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
 /**
  unloads view
  */
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     self.resultsDate = nil;
     self.setDateCell = nil;
     self.cd4 = nil;

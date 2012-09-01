@@ -33,13 +33,15 @@
  */
 - (id)initWithMasterRecord:(iStayHealthyRecord *)masterRecord withMedication:(Medication *)medication{
     self = [super initWithNibName:@"MedicationChangeTableViewController" bundle:nil];
-    if (self) {
+    if (self)
+    {
         self.record = masterRecord;
         self.selectedMedication = medication;
         self.startDateChanged = NO;
         self.endDateChanged = NO;
         self.startDate = self.selectedMedication.StartDate;
-        if (nil == self.startDate) {
+        if (nil == self.startDate)
+        {
             self.startDate = [NSDate date];
         }
         self.state = 0;
@@ -85,21 +87,25 @@
 /**
  save the changes and/or dismiss
  */
-- (IBAction) save:					(id) sender{
+- (IBAction) save:					(id) sender
+{
     NSManagedObjectContext *context = [self.record managedObjectContext];
     NSError *error = nil;
-    if (self.startDateChanged) {
+    if (self.startDateChanged)
+    {
         self.record.UID = [Utilities GUID];
         self.selectedMedication.StartDate = self.startDate;
         self.selectedMedication.UID = [Utilities GUID];
-        if (![context save:&error]) {
+        if (![context save:&error])
+        {
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
             abort();
         }
     }
-    if (self.endDateChanged) {
+    if (self.endDateChanged)
+    {
         self.record.UID = [Utilities GUID];
         self.selectedMedication.EndDate = self.endDate;
         self.selectedMedication.UID = [Utilities GUID];
@@ -108,7 +114,8 @@
 	[self dismissModalViewControllerAnimated:YES];        
 }
 
-- (IBAction) cancel: (id) sender{
+- (IBAction) cancel: (id) sender
+{
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -116,7 +123,8 @@
 /**
  shows the Alert view when user clicks the Trash button
  */
-- (IBAction) showAlertView:			(id) sender{
+- (IBAction) showAlertView:			(id) sender
+{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
     
     [alert show];    
@@ -125,9 +133,11 @@
 /**
  if user really wants to delete the entry call removeSQLEntry
  */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")]) {
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
+    {
         [self removeSQLEntry];
     }
 }
@@ -136,12 +146,14 @@
  remove the medication from the database - only called after user confirms that we 
  really want to delete it
  */
-- (void) removeSQLEntry{
+- (void) removeSQLEntry
+{
     [self.record removeMedicationsObject:self.selectedMedication];
     NSManagedObjectContext *context = self.selectedMedication.managedObjectContext;
     [context deleteObject:self.selectedMedication];
     NSError *error = nil;
-    if (![context save:&error]) {
+    if (![context save:&error])
+    {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -156,7 +168,8 @@
 /**
  changes the start date for this medication
  */
-- (void)changeDate{
+- (void)changeDate
+{
 	NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",@"Set"), nil];
 	[actionSheet showInView:self.view];
@@ -164,7 +177,8 @@
 	
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = 101;
-    if (self.state == 0) {
+    if (self.state == 0)
+    {
         datePicker.date = self.startDate;
     }
 	datePicker.datePickerMode = UIDatePickerModeDate;
@@ -184,8 +198,10 @@
 #endif	
     
 	NSString *timestamp = [formatter stringFromDate:datePicker.date];
-    if (buttonIndex != actionSheet.cancelButtonIndex) {
-        switch (self.state) {
+    if (buttonIndex != actionSheet.cancelButtonIndex)
+    {
+        switch (self.state)
+        {
             case 0:
                 self.startDate = datePicker.date;
                 self.startDateChanged = YES;
@@ -223,7 +239,8 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (0 == section) {
+    if (0 == section)
+    {
         return NSLocalizedString(@"Treatment Start Date", @"Treatment Start Date");
     }
     else{
@@ -231,18 +248,22 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
     CGFloat height = 10;
-    if (1 == section) {
+    if (1 == section)
+    {
         height = 90;
     }
     return height;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
     UIView *footerView = nil;
     footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
-    if (1 == section){
+    if (1 == section)
+    {
         footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 90);
         CGRect deleteFrame = CGRectMake(10, 45, tableView.bounds.size.width - 20 , 37);
         GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
@@ -256,17 +277,22 @@
 /**
  configure the cells
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd MMM YY";
-    if (0 == indexPath.section) {        
+    if (0 == indexPath.section)
+    {
         NSString *identifier = @"SetDateCell";
         SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == dateCell) {
+        if (nil == dateCell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SetDateCell class]])
+                {
                     dateCell = (SetDateCell *)currentObject;
                     break;
                 }
@@ -278,13 +304,17 @@
         self.startDateCell= dateCell;
         return dateCell;
     }
-    else{
+    else
+    {
         NSString *identifier = @"SetDateCell";
         SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == dateCell) {
+        if (nil == dateCell)
+        {
             NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SetDateCell class]])
+                {
                     dateCell = (SetDateCell *)currentObject;
                     break;
                 }
@@ -304,10 +334,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         self.state = 0;
     }
-    else{
+    else
+    {
         self.state = 1;
     }
     [self changeDate];

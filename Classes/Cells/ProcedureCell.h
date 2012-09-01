@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProcedureCell : UITableViewCell{
-    IBOutlet UILabel *dateLabel;
-    IBOutlet UILabel *procLabel;
-    IBOutlet UILabel *illnessLabel;
-}
+@interface ProcedureCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, strong) IBOutlet UILabel *procLabel;
 @property (nonatomic, strong) IBOutlet UILabel *illnessLabel;

@@ -9,7 +9,8 @@
 #import "SettingsCell.h"
 
 @implementation SettingsCell
-@synthesize imageView,label;
+@synthesize settingsImageView = _settingsImageView;
+@synthesize label = _label;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

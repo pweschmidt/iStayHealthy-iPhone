@@ -15,9 +15,7 @@
 
 @protocol ResultValueCellDelegate;
 
-@interface ResultValueCell : UITableViewCell<UITextFieldDelegate>{
-    id<ResultValueCellDelegate> resultValueDelegate;
-}
+@interface ResultValueCell : UITableViewCell<UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UILabel *inputTitle;
 @property (nonatomic, weak) IBOutlet UITextField *inputValueField;
 @property (nonatomic, weak) id<ResultValueCellDelegate> resultValueDelegate;

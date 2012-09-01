@@ -13,14 +13,16 @@
 /**
  shifts the log value by 1. So instead of 100 we would get 10, if the shiftBy factor is set to 1.
  */
-+ (float)logValue:(float)y shiftBy:(float)value{
++ (float)logValue:(float)y shiftBy:(float)value
+{
     return ( (0.0 < y) ? ( y - value ) : y);
 }
 
 /**
  linear scaling factor
  */
-+ (float)scaleYValue:(float)y by:(float)yMax{
++ (float)scaleYValue:(float)y by:(float)yMax
+{
     return (y / yMax);
 }
 
@@ -28,7 +30,8 @@
 /**
  returns the lowest integer multiple
  */
-+ (float)yValue:(float)y forTicks:(float)ticks{
++ (float)yValue:(float)y forTicks:(float)ticks
+{
     int iYValue = y/ticks;
     return (iYValue * ticks);
 }
@@ -36,8 +39,10 @@
 /**
  maps the cd4 count value to the y-axis 
  */
-+ (float)mapCD4CountToYAxis:(float)cd4Value forHeight:(float)height{
-	if (MAXCD4COUNT < cd4Value) {
++ (float)mapCD4CountToYAxis:(float)cd4Value forHeight:(float)height
+{
+	if (MAXCD4COUNT < cd4Value)
+    {
 		cd4Value = MAXCD4COUNT;
 	}
     float maxYValue = [Trafo yValue:height forTicks:CD4TICKS];
@@ -49,8 +54,10 @@
 /**
  maps the cd4% value to the y-axis
  */
-+ (float)mapCD4PercentToYAxis:(float)cd4PercentValue forHeight:(float)height{
-    if (MAXCD4PERCENT < cd4PercentValue) {
++ (float)mapCD4PercentToYAxis:(float)cd4PercentValue forHeight:(float)height
+{
+    if (MAXCD4PERCENT < cd4PercentValue)
+    {
         cd4PercentValue = MAXCD4PERCENT;
     }
     float maxYValue = [Trafo yValue:height forTicks:CD4PERCENTTICKS];
@@ -62,13 +69,16 @@
  takes the actual viral load value, converts it into log_10 based value and maps the log10(viralload) value
  to the y-axis
  */
-+ (float)mapLogViralLoadToYAxis:(float)viralLoadValue forHeight:(float)height{
++ (float)mapLogViralLoadToYAxis:(float)viralLoadValue forHeight:(float)height
+{
 	float maxLogValue = log10(MAXVIRALLOAD);
 
-	if (0.0 == viralLoadValue) {
+	if (0.0 == viralLoadValue)
+    {
 		viralLoadValue = 1.0;
 	}
-	if (MAXVIRALLOAD < viralLoadValue) {
+	if (MAXVIRALLOAD < viralLoadValue)
+    {
 		viralLoadValue = MAXVIRALLOAD;
 	}
     float maxYValue = [Trafo yValue:height forTicks:VIRALLOADTICKS];
@@ -79,12 +89,15 @@
 	return yValue;
 }
 
-+ (float)xStart:(float)width forCount:(int)count{
++ (float)xStart:(float)width forCount:(int)count
+{
     float xStart = (width/count);    
-    if (10 > count) {
+    if (10 > count)
+    {
         xStart = width/(count + 1);
     }
-    if (xStart < MARGINLEFT) {
+    if (xStart < MARGINLEFT)
+    {
         xStart = MARGINLEFT;
     }  
     return xStart;

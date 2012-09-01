@@ -12,7 +12,7 @@
 #import "ChartEvents.h"
 
 @implementation HealthChartsView
-@synthesize events;
+@synthesize events = _events;
 #pragma mark -
 #pragma mark UIView methods
 
@@ -21,7 +21,8 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
 		self.backgroundColor = BRIGHT_BACKGROUND;
 		self.opaque = YES;
 		self.clearsContextBeforeDrawing = YES;
@@ -59,7 +60,8 @@
 
 /**
  */
-- (void)drawXAxis:(CGContextRef)context{
+- (void)drawXAxis:(CGContextRef)context
+{
 	CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0);
 	CGContextSetLineWidth(context, 2.0);
 	CGContextMoveToPoint(context, MARGINLEFT, height+MARGINTOP);
@@ -69,7 +71,8 @@
 
 /**
  */
-- (void)drawYAxis:(CGContextRef)context{
+- (void)drawYAxis:(CGContextRef)context
+{
 	CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0);
 	CGContextSetLineWidth(context, 2.0);
 	CGContextMoveToPoint(context, MARGINLEFT, MARGINTOP);
@@ -79,10 +82,12 @@
 
 /**
  */
-- (void)drawCD4Ticks:(CGContextRef)context{
+- (void)drawCD4Ticks:(CGContextRef)context
+{
 	CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0);
 	CGContextSetLineWidth(context, TICKWIDTH);
-    for (int tick = 1; tick < CD4TICKS ; ++tick) {
+    for (int tick = 1; tick < CD4TICKS ; ++tick)
+    {
         float yOffset = [Trafo mapCD4CountToYAxis:(100*tick) forHeight:height];
 		CGContextMoveToPoint(context, MARGINLEFT - MAJORTICKLENGTH / 2.0, yOffset);
 		CGContextAddLineToPoint(context, MARGINLEFT + MAJORTICKLENGTH / 2.0, yOffset);
@@ -92,10 +97,12 @@
 
 /**
  */
-- (void)drawCD4PercentTicks:(CGContextRef)context{
+- (void)drawCD4PercentTicks:(CGContextRef)context
+{
 	CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0);
 	CGContextSetLineWidth(context, TICKWIDTH);
-    for (int tick = 1; tick < CD4PERCENTTICKS; ++tick) {
+    for (int tick = 1; tick < CD4PERCENTTICKS; ++tick)
+    {
         float yOffset = [Trafo mapCD4PercentToYAxis:(5*tick) forHeight:height];
 		CGContextMoveToPoint(context, MARGINLEFT - MAJORTICKLENGTH / 2.0, yOffset);
 		CGContextAddLineToPoint(context, MARGINLEFT + MAJORTICKLENGTH / 2.0, yOffset);
@@ -105,11 +112,13 @@
 
 /**
  */
-- (void)drawViralLoadTicks:(CGContextRef)context atOffset:(float)xOffset{
+- (void)drawViralLoadTicks:(CGContextRef)context atOffset:(float)xOffset
+{
 	CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0);
 	CGContextSetLineWidth(context, TICKWIDTH);
     float factor = 10.0;
-    for (int tick = 1; tick < VIRALLOADTICKS; ++tick) {
+    for (int tick = 1; tick < VIRALLOADTICKS; ++tick)
+    {
         float yOffset = [Trafo mapLogViralLoadToYAxis:factor forHeight:height];
 		CGContextMoveToPoint(context, xOffset - MAJORTICKLENGTH / 2.0, yOffset);
 		CGContextAddLineToPoint(context, xOffset + MAJORTICKLENGTH / 2.0, yOffset);
@@ -122,21 +131,26 @@
 #pragma mark labels for CD4, CD4% and Viral Loads
 /**
  */
-- (void)drawCD4Labels:(CGContextRef)context atOffset:(float)xOffset{
+- (void)drawCD4Labels:(CGContextRef)context atOffset:(float)xOffset
+{
 	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
 	CGContextSelectFont(context, LABELFONTTYPE, LABELFONTSIZESMALL, kCGEncodingMacRoman);
 	CGContextSetTextDrawingMode(context, kCGTextStroke);
-	for (int tick = 1; tick < CD4TICKS; ++tick) {
+	for (int tick = 1; tick < CD4TICKS; ++tick)
+    {
 		int cd4Value = tick * 100;
-		if (200 >= cd4Value) {
+		if (200 >= cd4Value)
+        {
 			CGContextSetRGBStrokeColor(context, 0.8, 0.0, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 0.8, 0.0, 0.0, 1.0);
 		}
-		else if(400 > cd4Value){
+		else if(400 > cd4Value)
+        {
 			CGContextSetRGBStrokeColor(context, 1.0, 0.4, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 1.0, 0.4, 0.0, 1.0);
 		}
-		else {
+		else
+        {
 			CGContextSetRGBStrokeColor(context, 0.0, 0.4, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 0.0, 0.4, 0.0, 1.0);
 		}
@@ -153,27 +167,33 @@
 
 /**
  */
-- (void)drawCD4PercentLabels:(CGContextRef)context atOffset:(float)xOffset{
+- (void)drawCD4PercentLabels:(CGContextRef)context atOffset:(float)xOffset
+{
 	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
 	CGContextSelectFont(context, LABELFONTTYPE, LABELFONTSIZESMALL, kCGEncodingMacRoman);
 	CGContextSetTextDrawingMode(context, kCGTextStroke);
-	for (int tick = 1; tick < CD4PERCENTTICKS; ++tick) {
+	for (int tick = 1; tick < CD4PERCENTTICKS; ++tick)
+    {
 		int cd4Value = tick * 5;
-		if (15 > cd4Value) {
+		if (15 > cd4Value)
+        {
 			CGContextSetRGBStrokeColor(context, 0.8, 0.0, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 0.8, 0.0, 0.0, 1.0);
 		}
-		else if(25 > cd4Value){
+		else if(25 > cd4Value)
+        {
 			CGContextSetRGBStrokeColor(context, 1.0, 0.4, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 1.0, 0.4, 0.0, 1.0);
 		}
-		else {
+		else
+        {
 			CGContextSetRGBStrokeColor(context, 0.0, 0.4, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 0.0, 0.4, 0.0, 1.0);
 		}
         
         
-		if ( 0 == ( tick % 2 )) {
+		if ( 0 == ( tick % 2 ))
+        {
             NSString *cd4Label = (tick < (CD4PERCENTTICKS - 1)) ? [NSString stringWithFormat:@" %d%%",cd4Value] :
             [NSString stringWithFormat:@">%d%%",cd4Value];
             float majorYOffset = [Trafo mapCD4PercentToYAxis:cd4Value forHeight:height] - 2.0;
@@ -185,7 +205,8 @@
 
 /**
  */
-- (void)drawViralLoadLogLabels:(CGContextRef)context atOffset:(float)xOffset{
+- (void)drawViralLoadLogLabels:(CGContextRef)context atOffset:(float)xOffset
+{
 	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     float majorYOffset = [Trafo mapLogViralLoadToYAxis:10.0 forHeight:height] - 2.0;
     CGContextSetRGBStrokeColor(context, 0.0, 0.4, 0.0, 1.0);
@@ -193,35 +214,43 @@
     NSString *undetectedLabel = NSLocalizedString(@"und.", nil);
     CGContextSelectFont(context, LABELSMALLFONTTYPE, LABELFONTSIZESMALL, kCGEncodingMacRoman);
     CGContextSetTextDrawingMode(context, kCGTextStroke);
-    if (width <= xOffset) {
+    if (width <= xOffset)
+    {
         CGContextShowTextAtPoint(context, xOffset+3.0, majorYOffset, [undetectedLabel UTF8String], [undetectedLabel length]);
     }
-    else{
+    else
+    {
         CGContextShowTextAtPoint(context, xOffset/*+MARGINLEFT+3.5*/, majorYOffset, [undetectedLabel UTF8String], [undetectedLabel length]);        
     }
     
     float exponential = 100;
-	for (int tick = 2; tick < VIRALLOADTICKS; ++tick) {
+	for (int tick = 2; tick < VIRALLOADTICKS; ++tick)
+    {
         majorYOffset = [Trafo mapLogViralLoadToYAxis:exponential forHeight:height] - 2.0;
-		if (4 > tick){
+		if (4 > tick)
+        {
 			CGContextSetRGBStrokeColor(context, 1.0, 0.4, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 1.0, 0.4, 0.0, 1.0);
 		}
-		else {
+		else
+        {
 			CGContextSetRGBStrokeColor(context, 0.8, 0.0, 0.0, 1.0);
 			CGContextSetRGBFillColor(context, 0.8, 0.0, 0.0, 1.0);
 		}
         
         
-		if (3 >= tick) {
+		if (3 >= tick)
+        {
 			NSString *vlLabel = [NSString stringWithFormat:@"%d",(int)exponential];
 			CGContextSelectFont(context, LABELFONTTYPE, LABELFONTSIZESMALL, kCGEncodingMacRoman);
 			CGContextSetTextDrawingMode(context, kCGTextStroke);
 			CGContextShowTextAtPoint(context, xOffset, majorYOffset, [vlLabel UTF8String], [vlLabel length]);
 		}
-		else {
+		else
+        {
 			NSString *vlLogLabel = @"10";
-            if ( (VIRALLOADTICKS - 1) == tick) {
+            if ( (VIRALLOADTICKS - 1) == tick)
+            {
                 vlLogLabel = @">10";
             }
 			NSString *vlExponent = [NSString stringWithFormat:@"%d",tick];
@@ -232,7 +261,8 @@
 			CGContextSetTextDrawingMode(context, kCGTextStroke);
 			majorYOffset = majorYOffset - 5.0;
             float expOffset = xOffset + 12.0;
-            if ( (VIRALLOADTICKS - 1) == tick) {
+            if ( (VIRALLOADTICKS - 1) == tick)
+            {
                 expOffset = xOffset + 17.5;
             }
 			CGContextShowTextAtPoint(context, expOffset, majorYOffset, [vlExponent UTF8String], [vlExponent length]);
@@ -245,12 +275,14 @@
 #pragma mark -
 #pragma mark data drawing methods
 
-- (void)drawStartAndEndDate:(CGContextRef)context{
+- (void)drawStartAndEndDate:(CGContextRef)context
+{
 #ifdef APPDEBUG
     NSLog(@"HealthChartsView::drawStartAndEndDate");
 #endif
     int count = [self.events.allChartEvents count];
-    if (0 == count) {
+    if (0 == count)
+    {
 #ifdef APPDEBUG
         NSLog(@"HealthChartsView::drawCD4Count events array is empty");
 #endif
@@ -263,8 +295,10 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"MMM YY";
     float dateYValue = MARGINTOP + height + 3.0;
-    for (ChartEvent *event in self.events.allChartEvents) {
-        if (0 == index) {
+    for (ChartEvent *event in self.events.allChartEvents)
+    {
+        if (0 == index)
+        {
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)];
             label.text = [formatter stringFromDate:event.date];
             label.font = [UIFont systemFontOfSize:8.0];	
@@ -272,8 +306,10 @@
             label.backgroundColor = BRIGHT_BACKGROUND;
             [self addSubview:label];
         }
-        else if( 1 <= index && index < count - 1){
-            if (event.missedName || event.medicationName) {
+        else if( 1 <= index && index < count - 1)
+        {
+            if (event.missedName || event.medicationName)
+            {
                 UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)];
                 label.text = [formatter stringFromDate:event.date];
                 label.font = [UIFont systemFontOfSize:8.0];	
@@ -282,7 +318,8 @@
                 [self addSubview:label];
             }
         }
-        else{
+        else
+        {
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(xValue - 12.0, dateYValue, 40.0, 10.0)];
             label.text = [formatter stringFromDate:event.date];
             label.font = [UIFont systemFontOfSize:8.0];	
@@ -306,12 +343,14 @@
 /**
  plots the CD4 count
  */
-- (void)drawCD4Counts:(CGContextRef)context{
+- (void)drawCD4Counts:(CGContextRef)context
+{
 #ifdef APPDEBUG
     NSLog(@"HealthChartsView::drawCD4Count");
 #endif
     int count = [self.events.allChartEvents count];
-    if (0 == count) {
+    if (0 == count)
+    {
 #ifdef APPDEBUG
         NSLog(@"HealthChartsView::drawCD4Count events array is empty");
 #endif
@@ -332,13 +371,17 @@
     float previousYValue = -99.0;
     float previousXValue = -99.0;
     int point = 0;
-    for (ChartEvent *event in self.events.allChartEvents) {
-        if (event.CD4Count) {
+    for (ChartEvent *event in self.events.allChartEvents)
+    {
+        if (event.CD4Count)
+        {
             float yValue = [Trafo mapCD4CountToYAxis:[event.CD4Count floatValue] forHeight:height];
-            if ( (DATAPOINTSIZE * 2.5) < xDistance) {
+            if ( (DATAPOINTSIZE * 2.5) < xDistance)
+            {
                 CGContextFillRect(context, CGRectMake(xValue - DATAPOINTRADIUS, yValue - DATAPOINTRADIUS, DATAPOINTSIZE, DATAPOINTSIZE));
             }
-            if (0.0 < previousYValue) {
+            if (0.0 < previousYValue)
+            {
                 CGContextMoveToPoint(context, xValue, yValue);
                 CGContextAddLineToPoint(context, previousXValue, previousYValue);
                 CGContextStrokePath(context);			
@@ -359,9 +402,11 @@
 /**
  plots the CD4%
  */
-- (void)drawCD4Percentages:(CGContextRef)context{
+- (void)drawCD4Percentages:(CGContextRef)context
+{
     int count = [self.events.allChartEvents count];
-    if (0 == count) {
+    if (0 == count)
+    {
         return;
     }
     
@@ -375,13 +420,17 @@
     float xValue = xStart;
     float previousYValue = -99.0;
     float previousXValue = -99.0;
-    for (ChartEvent *event in self.events.allChartEvents) {
-        if (event.CD4Percent) {
+    for (ChartEvent *event in self.events.allChartEvents)
+    {
+        if (event.CD4Percent)
+        {
             float yValue = [Trafo mapCD4PercentToYAxis:[event.CD4Percent floatValue] forHeight:height];
-            if ( (DATAPOINTSIZE * 2.5) < xDistance) {
+            if ( (DATAPOINTSIZE * 2.5) < xDistance)
+            {
                 CGContextFillRect(context, CGRectMake(xValue - DATAPOINTRADIUS, yValue - DATAPOINTRADIUS, DATAPOINTSIZE, DATAPOINTSIZE));
             }
-            if (0.0 < previousYValue) {
+            if (0.0 < previousYValue)
+            {
                 CGContextMoveToPoint(context, xValue, yValue);
                 CGContextAddLineToPoint(context, previousXValue, previousYValue);
                 CGContextStrokePath(context);			
@@ -395,9 +444,11 @@
 /**
  plots the log10 viral load values
  */
-- (void)drawViralLoadCounts:(CGContextRef)context{
+- (void)drawViralLoadCounts:(CGContextRef)context
+{
     int count = [self.events.allChartEvents count];
-    if (0 == count) {
+    if (0 == count)
+    {
         return;
     }
     
@@ -412,13 +463,17 @@
     float xValue = xStart;
     float previousYValue = -99.0;
     float previousXValue = -99.0;
-    for (ChartEvent *event in self.events.allChartEvents) {
-        if (event.ViralLoad) {
+    for (ChartEvent *event in self.events.allChartEvents)
+    {
+        if (event.ViralLoad)
+        {
             float yValue = [Trafo mapLogViralLoadToYAxis:[event.ViralLoad floatValue] forHeight:height];
-            if ( (DATAPOINTSIZE * 2.5) < xDistance) {
+            if ( (DATAPOINTSIZE * 2.5) < xDistance)
+            {
                 CGContextFillRect(context, CGRectMake(xValue - DATAPOINTRADIUS, yValue - DATAPOINTRADIUS, DATAPOINTSIZE, DATAPOINTSIZE));
             }
-            if (0.0 <= previousYValue) {
+            if (0.0 <= previousYValue)
+            {
                 CGContextMoveToPoint(context, xValue, yValue);
                 CGContextAddLineToPoint(context, previousXValue, previousYValue);
                 CGContextStrokePath(context);			
@@ -434,12 +489,14 @@
 /**
  draws a vertical dashed line at the start/change of medication and an icon indicating the HIV drug taken
  */
-- (void)drawMedicationStartLine:(CGContextRef)context{
+- (void)drawMedicationStartLine:(CGContextRef)context
+{
 #ifdef APPDEBUG
     NSLog(@"HealthChartsView::drawMedicationStartLine");
 #endif
     int count = [self.events.allChartEvents count];
-    if (0 == count) {
+    if (0 == count)
+    {
 #ifdef APPDEBUG
         NSLog(@"HealthChartsView::drawMedicationStartLine events array is empty");
 #endif
@@ -460,8 +517,10 @@
 	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     
     float xValue = xStart;
-    for (ChartEvent *event in self.events.allChartEvents) {
-        if (event.medicationName) {
+    for (ChartEvent *event in self.events.allChartEvents)
+    {
+        if (event.medicationName)
+        {
             CGContextMoveToPoint(context, xValue, MARGINTOP);
             CGContextAddLineToPoint(context, xValue, MARGINTOP + height);
             CGContextStrokePath(context);			
@@ -483,12 +542,14 @@
 /**
  draws a warning sign for each missed drug
  */
-- (void)drawMissedMedicationWarning:(CGContextRef)context{
+- (void)drawMissedMedicationWarning:(CGContextRef)context
+{
 #ifdef APPDEBUG
     NSLog(@"HealthChartsView::drawMissedMedicationWarning");
 #endif
     int count = [self.events.allChartEvents count];
-    if (0 == count) {
+    if (0 == count)
+    {
 #ifdef APPDEBUG
         NSLog(@"HealthChartsView::drawMissedMedicationWarning events array is empty");
 #endif
@@ -505,8 +566,10 @@
 	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     
     float xValue = xStart;
-    for (ChartEvent *event in self.events.allChartEvents) {
-        if (event.missedName) {
+    for (ChartEvent *event in self.events.allChartEvents)
+    {
+        if (event.missedName)
+        {
             CGContextMoveToPoint(context, xValue, MARGINTOP);
             CGContextAddLineToPoint(context, xValue, MARGINTOP + height);
             CGContextStrokePath(context);	

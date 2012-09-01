@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "iStayHealthyTableViewController.h"
 
-@interface NewResultsViewController : iStayHealthyTableViewController{
-}
+@interface NewResultsViewController : iStayHealthyTableViewController
 - (void)loadResultDetailViewController;
 - (void)loadResultChangeViewController:(int)row;
 - (void)loadSetUpViewController;

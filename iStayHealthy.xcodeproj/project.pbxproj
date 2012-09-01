@@ -36,7 +36,6 @@
 		C462002C140934C500E70B5B /* retrovir.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620027140934C500E70B5B /* retrovir.png */; };
 		C462002D140934C500E70B5B /* viracept.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620028140934C500E70B5B /* viracept.png */; };
 		C462002E140934C500E70B5B /* viramune.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620029140934C500E70B5B /* viramune.png */; };
-		C4623980148EB6F3009F0D04 /* GeneralButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4623982148EB6F3009F0D04 /* GeneralButtonCell.xib */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
 		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
@@ -128,7 +127,6 @@
 		C4C4192815F1383000882416 /* ClinicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C418E215F1383000882416 /* ClinicCell.xib */; };
 		C4C4192915F1383000882416 /* DosageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418E415F1383000882416 /* DosageCell.m */; };
 		C4C4192A15F1383000882416 /* FAQDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418E615F1383000882416 /* FAQDetailCell.m */; };
-		C4C4192B15F1383000882416 /* GeneralButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418E815F1383000882416 /* GeneralButtonCell.m */; };
 		C4C4192C15F1383000882416 /* HIVMedListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418EA15F1383000882416 /* HIVMedListCell.m */; };
 		C4C4192D15F1383000882416 /* HIVMedListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C418EB15F1383000882416 /* HIVMedListCell.xib */; };
 		C4C4192E15F1383000882416 /* HIVMedSupportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418ED15F1383000882416 /* HIVMedSupportCell.m */; };
@@ -189,7 +187,6 @@
 		C4C4199E15F13AAD00882416 /* OtherMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4199115F13AAD00882416 /* OtherMedsTableViewController.m */; };
 		C4C4199F15F13AAD00882416 /* ProcedureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4199315F13AAD00882416 /* ProcedureTableViewController.m */; };
 		C4C419A015F13AAD00882416 /* StatusViewControllerLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4199515F13AAD00882416 /* StatusViewControllerLandscape.m */; };
-		C4C419CD15F13C6F00882416 /* ClinicAddTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419A215F13C6F00882416 /* ClinicAddTableViewController.m */; };
 		C4C419CE15F13C6F00882416 /* DropBoxBackupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419A415F13C6F00882416 /* DropBoxBackupViewController.m */; };
 		C4C419CF15F13C6F00882416 /* InfoDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419A615F13C6F00882416 /* InfoDetailTableViewController.m */; };
 		C4C419D015F13C6F00882416 /* MedicationChangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419A815F13C6F00882416 /* MedicationChangeTableViewController.m */; };
@@ -198,8 +195,6 @@
 		C4C419D315F13C6F00882416 /* MissedMedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419AE15F13C6F00882416 /* MissedMedViewController.m */; };
 		C4C419D415F13C6F00882416 /* NewAlertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419B015F13C6F00882416 /* NewAlertDetailViewController.m */; };
 		C4C419D515F13C6F00882416 /* NewAlertEditDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419B215F13C6F00882416 /* NewAlertEditDetailViewController.m */; };
-		C4C419D915F13C6F00882416 /* ProcedureAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419BA15F13C6F00882416 /* ProcedureAddViewController.m */; };
-		C4C419DA15F13C6F00882416 /* ProcedureChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419BC15F13C6F00882416 /* ProcedureChangeViewController.m */; };
 		C4C419DB15F13C6F00882416 /* ResultDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419BE15F13C6F00882416 /* ResultDetailViewController.m */; };
 		C4C419DC15F13C6F00882416 /* ResultsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419C015F13C6F00882416 /* ResultsSettingsTableViewController.m */; };
 		C4C419DD15F13C6F00882416 /* SettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419C215F13C6F00882416 /* SettingsDetailViewController.m */; };
@@ -208,7 +203,6 @@
 		C4C419E015F13C6F00882416 /* ToolsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419C815F13C6F00882416 /* ToolsTableViewController.m */; };
 		C4C419E115F13C6F00882416 /* UnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419CA15F13C6F00882416 /* UnitTableViewController.m */; };
 		C4C419E215F13C6F00882416 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419CC15F13C6F00882416 /* WebViewController.m */; };
-		C4C419F715F13EFA00882416 /* ClinicAddTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E315F13EFA00882416 /* ClinicAddTableViewController.xib */; };
 		C4C419F815F13EFA00882416 /* DropBoxBackupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E415F13EFA00882416 /* DropBoxBackupViewController.xib */; };
 		C4C419F915F13EFA00882416 /* InfoDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E515F13EFA00882416 /* InfoDetailTableViewController.xib */; };
 		C4C419FA15F13EFA00882416 /* MedicationChangeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E615F13EFA00882416 /* MedicationChangeTableViewController.xib */; };
@@ -217,8 +211,6 @@
 		C4C419FD15F13EFA00882416 /* MissedMedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E915F13EFA00882416 /* MissedMedViewController.xib */; };
 		C4C419FE15F13EFA00882416 /* NewAlertDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419EA15F13EFA00882416 /* NewAlertDetailViewController.xib */; };
 		C4C419FF15F13EFA00882416 /* NewAlertEditDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419EB15F13EFA00882416 /* NewAlertEditDetailViewController.xib */; };
-		C4C41A0215F13EFA00882416 /* ProcedureAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419EE15F13EFA00882416 /* ProcedureAddViewController.xib */; };
-		C4C41A0315F13EFA00882416 /* ProcedureChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419EF15F13EFA00882416 /* ProcedureChangeViewController.xib */; };
 		C4C41A0415F13EFA00882416 /* ResultDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419F015F13EFA00882416 /* ResultDetailViewController.xib */; };
 		C4C41A0515F13EFA00882416 /* ResultsSettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419F115F13EFA00882416 /* ResultsSettingsTableViewController.xib */; };
 		C4C41A0615F13EFA00882416 /* SettingsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419F215F13EFA00882416 /* SettingsDetailViewController.xib */; };
@@ -253,6 +245,8 @@
 		C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */; };
 		C4CDED5F138D7CD7005BAC87 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CDED5E138D7CD7005BAC87 /* edurant.png */; };
 		C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CE682512DB070500FBCFF4 /* combi-small.png */; };
+		C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D6B4C315F237C3003C7AB5 /* ClinicsDetailViewController.m */; };
+		C4D6B4C615F237C3003C7AB5 /* ClinicsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4D6B4C415F237C3003C7AB5 /* ClinicsDetailViewController.xib */; };
 		C4DF7E4D14857D17009C46E6 /* missedsmall.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF7E4C14857D17009C46E6 /* missedsmall.png */; };
 		C4DF910B15EE79560042211E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DF910A15EE79560042211E /* Constants.m */; };
 		C4E6FF38159A34EC001C5B8B /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4E6FF37159A34EC001C5B8B /* SideEffects.plist */; };
@@ -382,10 +376,6 @@
 		C4620027140934C500E70B5B /* retrovir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retrovir.png; sourceTree = "<group>"; };
 		C4620028140934C500E70B5B /* viracept.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viracept.png; sourceTree = "<group>"; };
 		C4620029140934C500E70B5B /* viramune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viramune.png; sourceTree = "<group>"; };
-		C4623981148EB6F3009F0D04 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GeneralButtonCell.xib; sourceTree = "<group>"; };
-		C4623983148EB6FE009F0D04 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/GeneralButtonCell.xib; sourceTree = "<group>"; };
-		C4623984148EB701009F0D04 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/GeneralButtonCell.xib; sourceTree = "<group>"; };
-		C4623985148EB704009F0D04 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/GeneralButtonCell.xib; sourceTree = "<group>"; };
 		C464737C13E2FC2B00F7EAD4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C464737D13E303D600F7EAD4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C465974013EE848B00006F72 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -535,8 +525,6 @@
 		C4C418E415F1383000882416 /* DosageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DosageCell.m; path = Cells/DosageCell.m; sourceTree = "<group>"; };
 		C4C418E515F1383000882416 /* FAQDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FAQDetailCell.h; path = Cells/FAQDetailCell.h; sourceTree = "<group>"; };
 		C4C418E615F1383000882416 /* FAQDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FAQDetailCell.m; path = Cells/FAQDetailCell.m; sourceTree = "<group>"; };
-		C4C418E715F1383000882416 /* GeneralButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeneralButtonCell.h; path = Cells/GeneralButtonCell.h; sourceTree = "<group>"; };
-		C4C418E815F1383000882416 /* GeneralButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneralButtonCell.m; path = Cells/GeneralButtonCell.m; sourceTree = "<group>"; };
 		C4C418E915F1383000882416 /* HIVMedListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HIVMedListCell.h; path = Cells/HIVMedListCell.h; sourceTree = "<group>"; };
 		C4C418EA15F1383000882416 /* HIVMedListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HIVMedListCell.m; path = Cells/HIVMedListCell.m; sourceTree = "<group>"; };
 		C4C418EB15F1383000882416 /* HIVMedListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HIVMedListCell.xib; path = Cells/HIVMedListCell.xib; sourceTree = "<group>"; };
@@ -641,8 +629,6 @@
 		C4C4199315F13AAD00882416 /* ProcedureTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProcedureTableViewController.m; path = Controllers/ProcedureTableViewController.m; sourceTree = "<group>"; };
 		C4C4199415F13AAD00882416 /* StatusViewControllerLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusViewControllerLandscape.h; path = Controllers/StatusViewControllerLandscape.h; sourceTree = "<group>"; };
 		C4C4199515F13AAD00882416 /* StatusViewControllerLandscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusViewControllerLandscape.m; path = Controllers/StatusViewControllerLandscape.m; sourceTree = "<group>"; };
-		C4C419A115F13C6F00882416 /* ClinicAddTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClinicAddTableViewController.h; path = DetailViewControllers/ClinicAddTableViewController.h; sourceTree = "<group>"; };
-		C4C419A215F13C6F00882416 /* ClinicAddTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicAddTableViewController.m; path = DetailViewControllers/ClinicAddTableViewController.m; sourceTree = "<group>"; };
 		C4C419A315F13C6F00882416 /* DropBoxBackupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropBoxBackupViewController.h; path = DetailViewControllers/DropBoxBackupViewController.h; sourceTree = "<group>"; };
 		C4C419A415F13C6F00882416 /* DropBoxBackupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropBoxBackupViewController.m; path = DetailViewControllers/DropBoxBackupViewController.m; sourceTree = "<group>"; };
 		C4C419A515F13C6F00882416 /* InfoDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoDetailTableViewController.h; path = DetailViewControllers/InfoDetailTableViewController.h; sourceTree = "<group>"; };
@@ -659,10 +645,6 @@
 		C4C419B015F13C6F00882416 /* NewAlertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewAlertDetailViewController.m; path = DetailViewControllers/NewAlertDetailViewController.m; sourceTree = "<group>"; };
 		C4C419B115F13C6F00882416 /* NewAlertEditDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewAlertEditDetailViewController.h; path = DetailViewControllers/NewAlertEditDetailViewController.h; sourceTree = "<group>"; };
 		C4C419B215F13C6F00882416 /* NewAlertEditDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewAlertEditDetailViewController.m; path = DetailViewControllers/NewAlertEditDetailViewController.m; sourceTree = "<group>"; };
-		C4C419B915F13C6F00882416 /* ProcedureAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProcedureAddViewController.h; path = DetailViewControllers/ProcedureAddViewController.h; sourceTree = "<group>"; };
-		C4C419BA15F13C6F00882416 /* ProcedureAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProcedureAddViewController.m; path = DetailViewControllers/ProcedureAddViewController.m; sourceTree = "<group>"; };
-		C4C419BB15F13C6F00882416 /* ProcedureChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProcedureChangeViewController.h; path = DetailViewControllers/ProcedureChangeViewController.h; sourceTree = "<group>"; };
-		C4C419BC15F13C6F00882416 /* ProcedureChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProcedureChangeViewController.m; path = DetailViewControllers/ProcedureChangeViewController.m; sourceTree = "<group>"; };
 		C4C419BD15F13C6F00882416 /* ResultDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultDetailViewController.h; path = DetailViewControllers/ResultDetailViewController.h; sourceTree = "<group>"; };
 		C4C419BE15F13C6F00882416 /* ResultDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultDetailViewController.m; path = DetailViewControllers/ResultDetailViewController.m; sourceTree = "<group>"; };
 		C4C419BF15F13C6F00882416 /* ResultsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsSettingsTableViewController.h; path = DetailViewControllers/ResultsSettingsTableViewController.h; sourceTree = "<group>"; };
@@ -679,7 +661,6 @@
 		C4C419CA15F13C6F00882416 /* UnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTableViewController.m; path = DetailViewControllers/UnitTableViewController.m; sourceTree = "<group>"; };
 		C4C419CB15F13C6F00882416 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = DetailViewControllers/WebViewController.h; sourceTree = "<group>"; };
 		C4C419CC15F13C6F00882416 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = DetailViewControllers/WebViewController.m; sourceTree = "<group>"; };
-		C4C419E315F13EFA00882416 /* ClinicAddTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClinicAddTableViewController.xib; path = Classes/DetailViewControllers/ClinicAddTableViewController.xib; sourceTree = "<group>"; };
 		C4C419E415F13EFA00882416 /* DropBoxBackupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropBoxBackupViewController.xib; path = Classes/DetailViewControllers/DropBoxBackupViewController.xib; sourceTree = "<group>"; };
 		C4C419E515F13EFA00882416 /* InfoDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfoDetailTableViewController.xib; path = Classes/DetailViewControllers/InfoDetailTableViewController.xib; sourceTree = "<group>"; };
 		C4C419E615F13EFA00882416 /* MedicationChangeTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MedicationChangeTableViewController.xib; path = Classes/DetailViewControllers/MedicationChangeTableViewController.xib; sourceTree = "<group>"; };
@@ -688,8 +669,6 @@
 		C4C419E915F13EFA00882416 /* MissedMedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MissedMedViewController.xib; path = Classes/DetailViewControllers/MissedMedViewController.xib; sourceTree = "<group>"; };
 		C4C419EA15F13EFA00882416 /* NewAlertDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewAlertDetailViewController.xib; path = Classes/DetailViewControllers/NewAlertDetailViewController.xib; sourceTree = "<group>"; };
 		C4C419EB15F13EFA00882416 /* NewAlertEditDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewAlertEditDetailViewController.xib; path = Classes/DetailViewControllers/NewAlertEditDetailViewController.xib; sourceTree = "<group>"; };
-		C4C419EE15F13EFA00882416 /* ProcedureAddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProcedureAddViewController.xib; path = Classes/DetailViewControllers/ProcedureAddViewController.xib; sourceTree = "<group>"; };
-		C4C419EF15F13EFA00882416 /* ProcedureChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProcedureChangeViewController.xib; path = Classes/DetailViewControllers/ProcedureChangeViewController.xib; sourceTree = "<group>"; };
 		C4C419F015F13EFA00882416 /* ResultDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResultDetailViewController.xib; path = Classes/DetailViewControllers/ResultDetailViewController.xib; sourceTree = "<group>"; };
 		C4C419F115F13EFA00882416 /* ResultsSettingsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResultsSettingsTableViewController.xib; path = Classes/DetailViewControllers/ResultsSettingsTableViewController.xib; sourceTree = "<group>"; };
 		C4C419F215F13EFA00882416 /* SettingsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsDetailViewController.xib; path = Classes/DetailViewControllers/SettingsDetailViewController.xib; sourceTree = "<group>"; };
@@ -729,6 +708,9 @@
 		C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-label-small.png"; sourceTree = "<group>"; };
 		C4CDED5E138D7CD7005BAC87 /* edurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edurant.png; path = Images/edurant.png; sourceTree = "<group>"; };
 		C4CE682512DB070500FBCFF4 /* combi-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-small.png"; sourceTree = "<group>"; };
+		C4D6B4C215F237C3003C7AB5 /* ClinicsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClinicsDetailViewController.h; path = DetailViewControllers/ClinicsDetailViewController.h; sourceTree = "<group>"; };
+		C4D6B4C315F237C3003C7AB5 /* ClinicsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicsDetailViewController.m; path = DetailViewControllers/ClinicsDetailViewController.m; sourceTree = "<group>"; };
+		C4D6B4C415F237C3003C7AB5 /* ClinicsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClinicsDetailViewController.xib; path = Classes/DetailViewControllers/ClinicsDetailViewController.xib; sourceTree = "<group>"; };
 		C4DE024612D5F99C005C0043 /* GeneralSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralSettings.h; sourceTree = "<group>"; };
 		C4DF7E4C14857D17009C46E6 /* missedsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missedsmall.png; sourceTree = "<group>"; };
 		C4DF910915EE79560042211E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -943,6 +925,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4D6B4C415F237C3003C7AB5 /* ClinicsDetailViewController.xib */,
 				C491AE6215F167BE00EB1CF8 /* ProcedureDetailViewController.xib */,
 				C491AE5D15F15B8500EB1CF8 /* OtherMedsDetailViewController.xib */,
 				C4C41A0B15F1404000882416 /* ClinicsTableViewController.xib */,
@@ -955,7 +938,6 @@
 				C4C41A1215F1404000882416 /* OtherMedsTableViewController.xib */,
 				C4C41A1315F1404000882416 /* ProcedureTableViewController.xib */,
 				C4C41A1415F1404000882416 /* StatusViewControllerLandscape.xib */,
-				C4C419E315F13EFA00882416 /* ClinicAddTableViewController.xib */,
 				C4C419E415F13EFA00882416 /* DropBoxBackupViewController.xib */,
 				C4C419E515F13EFA00882416 /* InfoDetailTableViewController.xib */,
 				C4C419E615F13EFA00882416 /* MedicationChangeTableViewController.xib */,
@@ -964,8 +946,6 @@
 				C4C419E915F13EFA00882416 /* MissedMedViewController.xib */,
 				C4C419EA15F13EFA00882416 /* NewAlertDetailViewController.xib */,
 				C4C419EB15F13EFA00882416 /* NewAlertEditDetailViewController.xib */,
-				C4C419EE15F13EFA00882416 /* ProcedureAddViewController.xib */,
-				C4C419EF15F13EFA00882416 /* ProcedureChangeViewController.xib */,
 				C4C419F015F13EFA00882416 /* ResultDetailViewController.xib */,
 				C4C419F115F13EFA00882416 /* ResultsSettingsTableViewController.xib */,
 				C4C419F215F13EFA00882416 /* SettingsDetailViewController.xib */,
@@ -1265,8 +1245,6 @@
 		C4B8041212D3723100A5A38F /* DetailViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C4C419A115F13C6F00882416 /* ClinicAddTableViewController.h */,
-				C4C419A215F13C6F00882416 /* ClinicAddTableViewController.m */,
 				C4C419A315F13C6F00882416 /* DropBoxBackupViewController.h */,
 				C4C419A415F13C6F00882416 /* DropBoxBackupViewController.m */,
 				C4C419A515F13C6F00882416 /* InfoDetailTableViewController.h */,
@@ -1283,10 +1261,6 @@
 				C4C419B015F13C6F00882416 /* NewAlertDetailViewController.m */,
 				C4C419B115F13C6F00882416 /* NewAlertEditDetailViewController.h */,
 				C4C419B215F13C6F00882416 /* NewAlertEditDetailViewController.m */,
-				C4C419B915F13C6F00882416 /* ProcedureAddViewController.h */,
-				C4C419BA15F13C6F00882416 /* ProcedureAddViewController.m */,
-				C4C419BB15F13C6F00882416 /* ProcedureChangeViewController.h */,
-				C4C419BC15F13C6F00882416 /* ProcedureChangeViewController.m */,
 				C4C419BD15F13C6F00882416 /* ResultDetailViewController.h */,
 				C4C419BE15F13C6F00882416 /* ResultDetailViewController.m */,
 				C4C419BF15F13C6F00882416 /* ResultsSettingsTableViewController.h */,
@@ -1307,6 +1281,8 @@
 				C491AE5C15F15B8500EB1CF8 /* OtherMedsDetailViewController.m */,
 				C491AE6015F167BD00EB1CF8 /* ProcedureDetailViewController.h */,
 				C491AE6115F167BD00EB1CF8 /* ProcedureDetailViewController.m */,
+				C4D6B4C215F237C3003C7AB5 /* ClinicsDetailViewController.h */,
+				C4D6B4C315F237C3003C7AB5 /* ClinicsDetailViewController.m */,
 			);
 			name = DetailViewControllers;
 			sourceTree = "<group>";
@@ -1358,8 +1334,6 @@
 				C4C418E415F1383000882416 /* DosageCell.m */,
 				C4C418E515F1383000882416 /* FAQDetailCell.h */,
 				C4C418E615F1383000882416 /* FAQDetailCell.m */,
-				C4C418E715F1383000882416 /* GeneralButtonCell.h */,
-				C4C418E815F1383000882416 /* GeneralButtonCell.m */,
 				C4C418E915F1383000882416 /* HIVMedListCell.h */,
 				C4C418EA15F1383000882416 /* HIVMedListCell.m */,
 				C4C418EB15F1383000882416 /* HIVMedListCell.xib */,
@@ -1413,7 +1387,6 @@
 				C4C4192015F1383000882416 /* UnitCell.h */,
 				C4C4192115F1383000882416 /* UnitCell.m */,
 				C4C4192215F1383000882416 /* UnitCell.xib */,
-				C4623982148EB6F3009F0D04 /* GeneralButtonCell.xib */,
 				C4574ADE14938F7E00793164 /* DosageCell.xib */,
 				C42AB56A1494F119005E9A0F /* SwitcherCell.xib */,
 				C42AB58114950EE5005E9A0F /* PasswordCell.xib */,
@@ -1557,7 +1530,6 @@
 				C491B3551477DE96000A4229 /* sideeffects.png in Resources */,
 				C4DF7E4D14857D17009C46E6 /* missedsmall.png in Resources */,
 				C44587BD148A691B00F453FB /* iconroundedsmall.png in Resources */,
-				C4623980148EB6F3009F0D04 /* GeneralButtonCell.xib in Resources */,
 				C4574ADC14938F7E00793164 /* DosageCell.xib in Resources */,
 				C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */,
 				C42AB57F14950EE5005E9A0F /* PasswordCell.xib in Resources */,
@@ -1662,7 +1634,6 @@
 				C4C4194915F1383000882416 /* SoundNameCell.xib in Resources */,
 				C4C4194D15F1383000882416 /* SummaryCell.xib in Resources */,
 				C4C4195115F1383000882416 /* UnitCell.xib in Resources */,
-				C4C419F715F13EFA00882416 /* ClinicAddTableViewController.xib in Resources */,
 				C4C419F815F13EFA00882416 /* DropBoxBackupViewController.xib in Resources */,
 				C4C419F915F13EFA00882416 /* InfoDetailTableViewController.xib in Resources */,
 				C4C419FA15F13EFA00882416 /* MedicationChangeTableViewController.xib in Resources */,
@@ -1671,8 +1642,6 @@
 				C4C419FD15F13EFA00882416 /* MissedMedViewController.xib in Resources */,
 				C4C419FE15F13EFA00882416 /* NewAlertDetailViewController.xib in Resources */,
 				C4C419FF15F13EFA00882416 /* NewAlertEditDetailViewController.xib in Resources */,
-				C4C41A0215F13EFA00882416 /* ProcedureAddViewController.xib in Resources */,
-				C4C41A0315F13EFA00882416 /* ProcedureChangeViewController.xib in Resources */,
 				C4C41A0415F13EFA00882416 /* ResultDetailViewController.xib in Resources */,
 				C4C41A0515F13EFA00882416 /* ResultsSettingsTableViewController.xib in Resources */,
 				C4C41A0615F13EFA00882416 /* SettingsDetailViewController.xib in Resources */,
@@ -1699,6 +1668,7 @@
 				C4C41A3D15F1445400882416 /* xylophone.caf in Resources */,
 				C491AE5F15F15B8500EB1CF8 /* OtherMedsDetailViewController.xib in Resources */,
 				C491AE6415F167BE00EB1CF8 /* ProcedureDetailViewController.xib in Resources */,
+				C4D6B4C615F237C3003C7AB5 /* ClinicsDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1725,7 +1695,6 @@
 				C4C4192715F1383000882416 /* ClinicCell.m in Sources */,
 				C4C4192915F1383000882416 /* DosageCell.m in Sources */,
 				C4C4192A15F1383000882416 /* FAQDetailCell.m in Sources */,
-				C4C4192B15F1383000882416 /* GeneralButtonCell.m in Sources */,
 				C4C4192C15F1383000882416 /* HIVMedListCell.m in Sources */,
 				C4C4192E15F1383000882416 /* HIVMedSupportCell.m in Sources */,
 				C4C4193015F1383000882416 /* MedSelectionCell.m in Sources */,
@@ -1769,7 +1738,6 @@
 				C4C4199E15F13AAD00882416 /* OtherMedsTableViewController.m in Sources */,
 				C4C4199F15F13AAD00882416 /* ProcedureTableViewController.m in Sources */,
 				C4C419A015F13AAD00882416 /* StatusViewControllerLandscape.m in Sources */,
-				C4C419CD15F13C6F00882416 /* ClinicAddTableViewController.m in Sources */,
 				C4C419CE15F13C6F00882416 /* DropBoxBackupViewController.m in Sources */,
 				C4C419CF15F13C6F00882416 /* InfoDetailTableViewController.m in Sources */,
 				C4C419D015F13C6F00882416 /* MedicationChangeTableViewController.m in Sources */,
@@ -1778,8 +1746,6 @@
 				C4C419D315F13C6F00882416 /* MissedMedViewController.m in Sources */,
 				C4C419D415F13C6F00882416 /* NewAlertDetailViewController.m in Sources */,
 				C4C419D515F13C6F00882416 /* NewAlertEditDetailViewController.m in Sources */,
-				C4C419D915F13C6F00882416 /* ProcedureAddViewController.m in Sources */,
-				C4C419DA15F13C6F00882416 /* ProcedureChangeViewController.m in Sources */,
 				C4C419DB15F13C6F00882416 /* ResultDetailViewController.m in Sources */,
 				C4C419DC15F13C6F00882416 /* ResultsSettingsTableViewController.m in Sources */,
 				C4C419DD15F13C6F00882416 /* SettingsDetailViewController.m in Sources */,
@@ -1795,6 +1761,7 @@
 				C4C41A2E15F1432E00882416 /* Utilities.m in Sources */,
 				C491AE5E15F15B8500EB1CF8 /* OtherMedsDetailViewController.m in Sources */,
 				C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */,
+				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1855,17 +1822,6 @@
 				C4574AE114938F8A00793164 /* fr */,
 			);
 			name = DosageCell.xib;
-			sourceTree = "<group>";
-		};
-		C4623982148EB6F3009F0D04 /* GeneralButtonCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C4623981148EB6F3009F0D04 /* en */,
-				C4623983148EB6FE009F0D04 /* de */,
-				C4623984148EB701009F0D04 /* es */,
-				C4623985148EB704009F0D04 /* fr */,
-			);
-			name = GeneralButtonCell.xib;
 			sourceTree = "<group>";
 		};
 		C4897FC5140FD0360033C61C /* CombiMeds.plist */ = {

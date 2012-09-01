@@ -14,6 +14,7 @@
 @synthesize resultValueDelegate =_resultValueDelegate;
 @synthesize inputValueKind = _inputValueKind;
 @synthesize colourCodeView = _colourCodeView;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
 #ifdef APPDEBUG

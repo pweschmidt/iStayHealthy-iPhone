@@ -10,10 +10,7 @@
 #import "ClinicAddressCell.h"
 
 @protocol RepeatCellDelegate;
-@interface RepeatCell : UITableViewCell{
-    IBOutlet UISegmentedControl *segmentedControl;
-    id<RepeatCellDelegate>repeatCellDelegate;
-}
+@interface RepeatCell : UITableViewCell
 @property (nonatomic, weak) id<RepeatCellDelegate>repeatCellDelegate;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 - (void)setDelegate:(id)viewControllerDelegate;

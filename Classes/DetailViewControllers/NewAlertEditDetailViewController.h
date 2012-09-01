@@ -12,19 +12,7 @@
 #import "ClinicAddressCell.h"
 @class SetDateCell, SoundNameCell;
 
-@interface NewAlertEditDetailViewController : UITableViewController<UIActionSheetDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate,ClinicAddressCellDelegate>{
-@private
-    NSArray *sounds;
-    SetDateCell *dateCell;
-    SoundNameCell *selectedSoundCell;
-    BOOL isFirstLoad;
-    int firstSelectedRow;
-	NSDate *startTime;
-	AVAudioPlayer *player;
-    NSString *alertText;
-    NSString *soundName;
-	UILocalNotification *previousNotification;	    
-}
+@interface NewAlertEditDetailViewController : UITableViewController<UIActionSheetDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate,ClinicAddressCellDelegate>
 @property (nonatomic, strong) UILocalNotification *previousNotification;
 @property BOOL isFirstLoad;
 @property int firstSelectedRow;

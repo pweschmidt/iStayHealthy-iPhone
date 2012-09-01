@@ -10,10 +10,7 @@
 #import "ClinicAddressCell.h"
 
 
-@interface DosageCell : ClinicAddressCell{
-    IBOutlet UISegmentedControl *segmentedControl;
-    NSString *unitName;
-}
+@interface DosageCell : ClinicAddressCell
 @property (nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) NSString *unitName;
 - (void)setDelegate:(id)viewControllerDelegate;

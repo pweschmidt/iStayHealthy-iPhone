@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface SettingsDetailViewController : UITableViewController <MFMailComposeViewControllerDelegate>{
-    
-}
+@interface SettingsDetailViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 - (IBAction) done:	(id) sender;
 - (void)startEmailMessageView;
 - (void)startEmailResultsMessageView;

@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SoundNameCell : UITableViewCell{
-    IBOutlet UILabel *soundName;
-}
+@interface SoundNameCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *soundName;
 
 @end

@@ -13,22 +13,32 @@
 #import "GeneralSettings.h"
 
 @implementation NewAlertDetailViewController
-@synthesize sounds, dateCell, selectedSoundCell, howMany, isFirstLoad;
-@synthesize player, startTime, alertText, soundName;
+@synthesize sounds = _sounds;
+@synthesize dateCell = _dateCell;
+@synthesize selectedSoundCell = _selectedSoundCell;
+@synthesize howMany = _howMany;
+@synthesize isFirstLoad = _isFirstLoad;
+@synthesize player = _player;
+@synthesize startTime = _startTime;
+@synthesize alertText = _alertText;
+@synthesize soundName = _soundName;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (id)init{
+- (id)init
+{
     self = [super initWithNibName:@"NewAlertDetailViewController" bundle:nil];
-    if (self) {
+    if (self)
+    {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"SoundList" ofType:@"plist"];
 //        NSArray *tmpSoundList = [[[NSArray alloc]initWithContentsOfFile:path]autorelease];
         self.sounds = [NSArray arrayWithContentsOfFile:path];
@@ -91,17 +101,20 @@
  create UINotifications for selected options and then dismiss view
  @id
  */
-- (IBAction) save:(id)sender{
+- (IBAction) save:(id)sender
+{
     [self stopPlayer];
     Class notificationClass = NSClassFromString(@"UILocalNotification");
-    if (nil == notificationClass) {
+    if (nil == notificationClass)
+    {
         [self dismissModalViewControllerAnimated:YES];
         return;
     }
     NSTimeInterval timeInterval = 24.0/(double)self.howMany * 60.0 * 60.0;
-    for (int alarmIndex = 0; alarmIndex < self.howMany; alarmIndex++) {
+    for (int alarmIndex = 0; alarmIndex < self.howMany; alarmIndex++)
+    {
         NSTimeInterval addedSeconds = alarmIndex * timeInterval;
-        NSDictionary *userDictionary = [NSDictionary dictionaryWithObject:alertText forKey:MEDICATIONALERTKEY];
+        NSDictionary *userDictionary = [NSDictionary dictionaryWithObject:self.alertText forKey:MEDICATIONALERTKEY];
         
         UILocalNotification *medAlert = [[notificationClass alloc]init];
         medAlert.fireDate = (0 == addedSeconds) ? self.startTime : [self.startTime dateByAddingTimeInterval:addedSeconds];
@@ -109,12 +122,14 @@
         medAlert.repeatInterval = NSDayCalendarUnit;
         medAlert.userInfo = userDictionary;
         
-        medAlert.alertBody = alertText;
+        medAlert.alertBody = self.alertText;
         medAlert.alertAction = @"Show me";
-        if ([self.soundName isEqualToString:@"default"]) {
+        if ([self.soundName isEqualToString:@"default"])
+        {
             medAlert.soundName = UILocalNotificationDefaultSoundName;
         }
-        else {
+        else
+        {
             medAlert.soundName = [NSString stringWithFormat:@"%@.caf",self.soundName];
         }
         
@@ -132,23 +147,28 @@
  view is dismissed without generating a UILocalNotification
  @id
  */
-- (IBAction) cancel: (id) sender{
+- (IBAction) cancel: (id) sender
+{
     [self stopPlayer];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - ClinicAddressCellDelegate Protocol implementation
-- (void)setValueString:(NSString *)valueString withTag:(int)tag{
-    if (10 == tag) {
+- (void)setValueString:(NSString *)valueString withTag:(int)tag
+{
+    if (10 == tag)
+    {
         self.alertText = valueString;
     }
 }
 
-- (void)setUnitString:(NSString *)unitString{
+- (void)setUnitString:(NSString *)unitString
+{
     //nothing today
 }
 
-- (void)setRepeats:(int)repeats{
+- (void)setRepeats:(int)repeats
+{
     self.howMany = repeats;
 }
 
@@ -158,7 +178,8 @@
 /**
  brings up a new view to change the date
  */
-- (void)changeTime{
+- (void)changeTime
+{
 	NSString *title = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? @"\n\n\n\n\n\n\n\n\n" : @"\n\n\n\n\n\n\n\n\n\n\n\n" ;
 	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
@@ -202,21 +223,26 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (3 == section) {
+    if (3 == section)
+    {
         return [self.sounds count];
     }
-    else{
+    else
+    {
         return 1;
     }
 }
 
 /**
  */
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (3 == section) {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (3 == section)
+    {
         return NSLocalizedString(@"Sound Selection", @"Sound Selection");
     }
-    else{
+    else
+    {
         return @"";
     }
 }
@@ -228,25 +254,35 @@
  @indexPath
  @return height as CGFloat
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (0 == indexPath.section) {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section)
+    {
         return 60;
     }
-	else if (3 == indexPath.section) {
+	else if (3 == indexPath.section)
+    {
         return 44.0;
 	}
 	return 48.0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {        
+    if (0 == indexPath.section)
+    {
         NSString *identifier = @"SetDateCell";
         SetDateCell *timeCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == timeCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+        if (nil == timeCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SetDateCell class]])
+                {
                     timeCell = (SetDateCell *)currentObject;
                     break;
                 }
@@ -260,13 +296,19 @@
         self.dateCell = timeCell;
         return timeCell;
     }
-    if (1 == indexPath.section) {
+    if (1 == indexPath.section)
+    {
         NSString *identifier = @"ClinicAddressCell";
         ClinicAddressCell *clinicCell = (ClinicAddressCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == clinicCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[ClinicAddressCell class]]) {
+        if (nil == clinicCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[ClinicAddressCell class]])
+                {
                     clinicCell = (ClinicAddressCell *)currentObject;
                     break;
                 }
@@ -278,13 +320,19 @@
         [clinicCell setTag:10];
         return clinicCell;
     }
-    if (2 == indexPath.section) {
+    if (2 == indexPath.section)
+    {
         NSString *identifier = @"RepeatCell";
         RepeatCell *repeatCell = (RepeatCell *)[tableView dequeueReusableCellWithIdentifier:identifier];        
-        if (nil == repeatCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"RepeatCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[RepeatCell class]]) {
+        if (nil == repeatCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"RepeatCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[RepeatCell class]])
+                {
                     repeatCell = (RepeatCell *)currentObject;
                     break;
                 }
@@ -293,20 +341,26 @@
         }
         return repeatCell;
     }
-    if (3 == indexPath.section) {
+    if (3 == indexPath.section)
+    {
         NSString *identifier = @"SoundNameCell";
         SoundNameCell *soundCell = (SoundNameCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == soundCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SoundNameCell" owner:self options:nil];
+        if (nil == soundCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SoundNameCell"
+                                                                owner:self
+                                                              options:nil];
             for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SoundNameCell class]]) {
+                if ([currentObject isKindOfClass:[SoundNameCell class]])
+                {
                     soundCell = (SoundNameCell *)currentObject;
                     break;
                 }
             }  
         }
-        if (0 == indexPath.row && isFirstLoad) {
-            isFirstLoad = NO;
+        if (0 == indexPath.row && self.isFirstLoad)
+        {
+            self.isFirstLoad = NO;
             soundCell.accessoryType = UITableViewCellAccessoryCheckmark;
             self.selectedSoundCell = soundCell;
             self.soundName = [self.sounds objectAtIndex:0];
@@ -335,19 +389,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self stopPlayer];
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         [self changeTime];
     }
-    if(3 == indexPath.section){
-        if(nil != selectedSoundCell)
-            selectedSoundCell.accessoryType = UITableViewCellAccessoryNone;
+    if(3 == indexPath.section)
+    {
+        if(nil != self.selectedSoundCell)
+            self.selectedSoundCell.accessoryType = UITableViewCellAccessoryNone;
         SoundNameCell *selectedCell = (SoundNameCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         int row = indexPath.row;
         NSString *name = (NSString *)[self.sounds objectAtIndex:row];
         selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-        if (![name isEqualToString:@"default"]) {
+        if (![name isEqualToString:@"default"])
+        {
             [self loadSoundFile:name];
-            if (self.player && !self.player.playing) {
+            if (self.player && !self.player.playing)
+            {
                 [self.player prepareToPlay];
                 [self.player play];
             }
@@ -364,25 +422,28 @@
  loads the sound file
  @soundFileName
  */
-- (void)loadSoundFile:(NSString *)soundFileName{
+- (void)loadSoundFile:(NSString *)soundFileName
+{
 #ifdef APPDEBUG
     NSLog(@"NewAlertDetailViewController::loadSoundFile with sound file %@",soundFileName);
 #endif
-	if ([soundFileName isEqualToString:@"default"]) {
+	if ([soundFileName isEqualToString:@"default"])
+    {
         return;
 	}
 	NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:soundFileName ofType:@"caf"]];	
     NSError *err;
-	player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&err];	
-	if (player) {
-		player.numberOfLoops = 0;
-		player.delegate = self;
+	self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&err];
+	if (self.player) {
+		self.player.numberOfLoops = 0;
+		self.player.delegate = self;
 	}
 }
 
 /**
  */
-- (void)stopPlayer{
+- (void)stopPlayer
+{
     if(nil == self.player)
         return;
     if(!self.player.playing)

@@ -9,11 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol SwitcherCellProtocol;
 
-@interface SwitcherCell : UITableViewCell{
-    IBOutlet UILabel *label;
-    IBOutlet UISwitch *switcher;
-    id<SwitcherCellProtocol>switcherCellDelegate;
-}
+@interface SwitcherCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UISwitch *switcher;
 @property (nonatomic, weak) id<SwitcherCellProtocol>switcherCellDelegate;

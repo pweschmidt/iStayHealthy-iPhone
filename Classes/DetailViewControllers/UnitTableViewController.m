@@ -19,7 +19,8 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -56,14 +57,20 @@
     return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = @"UnitCell";
     UnitCell *unitCell = (UnitCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (nil == unitCell) {
-        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"UnitCell" owner:self options:nil];
-        for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[UnitCell class]]) {
+    if (nil == unitCell)
+    {
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"UnitCell"
+                                                            owner:self
+                                                          options:nil];
+        for (id currentObject in cellObjects)
+        {
+            if ([currentObject isKindOfClass:[UnitCell class]])
+            {
                 unitCell = (UnitCell *)currentObject;
                 break;
             }
@@ -71,7 +78,8 @@
     }
     unitCell.unitTitle.textColor = TEXTCOLOUR;
     unitCell.tag = indexPath.row;
-    switch (indexPath.row) {
+    switch (indexPath.row)
+    {
         case 0:
             unitCell.unitTitle.text = NSLocalizedString(@"Cholesterol", @"unit for sugar/cholesterol");
             [unitCell.segControl setTitle:@"mmol/L" forSegmentAtIndex:0];

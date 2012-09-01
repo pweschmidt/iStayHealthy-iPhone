@@ -48,7 +48,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(loadSetUpViewController)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
-    if (navBar) {
+    if (navBar)
+    {
         [navBar addButtonWithImageName:@"resultsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
     }
 }
@@ -69,21 +70,22 @@
 /**
  loads the ResultDetailViewController
  */
-- (void)loadResultDetailViewController{
-	ResultDetailViewController *newRecordView = [[ResultDetailViewController alloc] initWithRecord:masterRecord];
+- (void)loadResultDetailViewController
+{
+	ResultDetailViewController *newRecordView = [[ResultDetailViewController alloc] initWithRecord:self.masterRecord];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newRecordView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
-	newRecordView.record = masterRecord;
 }
 
 /**
  loads the ResultsChangeViewController
  */
-- (void)loadResultChangeViewController:(int)row{
+- (void)loadResultChangeViewController:(int)row
+{
     Results *results = (Results *)[self.allResultsInReverseOrder objectAtIndex:row];
-	ResultDetailViewController *changeRecordView = [[ResultDetailViewController alloc] initWithResults:results withMasterRecord:masterRecord];
+	ResultDetailViewController *changeRecordView = [[ResultDetailViewController alloc] initWithResults:results withMasterRecord:self.masterRecord];
     
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changeRecordView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -91,8 +93,9 @@
 	[self presentModalViewController:navigationController animated:YES];
 }
 
-- (void)loadSetUpViewController{
-    ResultsSettingsTableViewController *settingsController = [[ResultsSettingsTableViewController alloc]initWithRecord:masterRecord];
+- (void)loadSetUpViewController
+{
+    ResultsSettingsTableViewController *settingsController = [[ResultsSettingsTableViewController alloc]initWithRecord:self.masterRecord];
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
@@ -104,7 +107,8 @@
  only 1 section
  @tableView
  */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
@@ -113,7 +117,8 @@
  @tableView
  @section
  */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [self.allResultsInReverseOrder count];
 }
 
@@ -122,12 +127,15 @@
  @tableView
  @indexPath
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	return 60.0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (0 == [self.allResultsInReverseOrder count]) {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (0 == [self.allResultsInReverseOrder count])
+    {
         return NSLocalizedString(@"No Results Entered",nil);
     }
     else
@@ -139,14 +147,19 @@
  @tableView
  @indexPath
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     static NSString *CellIdentifier = @"ResultListCell";
     ResultListCell *cell = (ResultListCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ResultListCell" owner:self options:nil];
-        for (id currentObject in cellObjects) {
-            if ([currentObject isKindOfClass:[ResultListCell class]]) {
+        for (id currentObject in cellObjects)
+        {
+            if ([currentObject isKindOfClass:[ResultListCell class]])
+            {
                 cell = (ResultListCell *)currentObject;
                 break;
             }
@@ -161,30 +174,38 @@
     cell.cd4ColourView.layer.cornerRadius = 5;
     cell.otherView.layer.cornerRadius = 5;
     
-    if ( 0 < [current.CD4 floatValue] || 0 < [current.CD4Percent floatValue]) {
+    if ( 0 < [current.CD4 floatValue] || 0 < [current.CD4Percent floatValue])
+    {
         cell.cd4ColourView.backgroundColor = DARK_YELLOW;
     }
-    else {
+    else
+    {
         cell.cd4ColourView.backgroundColor = [UIColor clearColor];
     }
     
-    if (0 <= [current.ViralLoad floatValue] || 0 <= [current.HepCViralLoad floatValue]) {
+    if (0 <= [current.ViralLoad floatValue] || 0 <= [current.HepCViralLoad floatValue])
+    {
         cell.serumsView.backgroundColor = DARK_BLUE;
     }
-    else {
+    else
+    {
         cell.serumsView.backgroundColor = [UIColor clearColor];
     }
-    if (0 < [current.Glucose floatValue] || 0 < [current.HDL floatValue] || [current.LDL floatValue] || 0 < [current.TotalCholesterol floatValue]) {
+    if (0 < [current.Glucose floatValue] || 0 < [current.HDL floatValue] || [current.LDL floatValue] || 0 < [current.TotalCholesterol floatValue])
+    {
         cell.bloodView.backgroundColor = DARK_RED;
     }
-    else {
+    else
+    {
         cell.bloodView.backgroundColor = [UIColor clearColor];
     }
     
-    if (0 < [current.Weight floatValue] || (0 < [current.Systole floatValue] && 0 < [current.Diastole floatValue])) {
+    if (0 < [current.Weight floatValue] || (0 < [current.Systole floatValue] && 0 < [current.Diastole floatValue]))
+    {
         cell.otherView.backgroundColor = DARK_GREEN;
     }
-    else {
+    else
+    {
         cell.otherView.backgroundColor = [UIColor clearColor];
     }
     

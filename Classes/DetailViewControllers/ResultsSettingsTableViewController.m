@@ -26,15 +26,18 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (id)initWithRecord:(iStayHealthyRecord *)masterRecord{
+- (id)initWithRecord:(iStayHealthyRecord *)masterRecord
+{
     self = [super initWithNibName:@"ResultsSettingsTableViewController" bundle:nil];
-    if (self) {
+    if (self)
+    {
         self.record = masterRecord;            
     }
     return self;
@@ -68,24 +71,32 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section) {
+    if (0 == section)
+    {
         return 1;
     }
     return 2;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section) {
+    if (0 == indexPath.section)
+    {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"dd MMM YY";
         
         NSString *identifier = @"SetDateCell";
         SetDateCell *dateCell = (SetDateCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == dateCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[SetDateCell class]]) {
+        if (nil == dateCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"SetDateCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[SetDateCell class]])
+                {
                     dateCell = (SetDateCell *)currentObject;
                     break;
                 }
@@ -98,11 +109,14 @@
         self.setDateCell = dateCell;
         return dateCell;
     }
-    if (1 == indexPath.section) {
+    if (1 == indexPath.section)
+    {
         NSString *identifier = @"SwitcherCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:identifier];
         }
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -117,7 +131,8 @@
         switchEnabled.onTintColor = TINTCOLOUR;
         cell.accessoryView = switchEnabled;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        switch (indexPath.row) {
+        switch (indexPath.row)
+        {
             case 0:
                 [label setText:NSLocalizedString(@"Smoker", @"Smoker")];
                 [switchEnabled addTarget:self action:@selector(switchSmoker:) forControlEvents:UIControlEventValueChanged];
@@ -134,20 +149,27 @@
         
         return cell;
     }
-    if (2 == indexPath.section) {
+    if (2 == indexPath.section)
+    {
         NSString *identifier = @"UnitCell";
         UnitCell *unitCell = (UnitCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (nil == unitCell) {
-            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"UnitCell" owner:self options:nil];
-            for (id currentObject in cellObjects) {
-                if ([currentObject isKindOfClass:[UnitCell class]]) {
+        if (nil == unitCell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"UnitCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[UnitCell class]])
+                {
                     unitCell = (UnitCell *)currentObject;
                     break;
                 }
             } 
         }
         unitCell.unitTitle.textColor = TEXTCOLOUR;
-        switch (indexPath.row) {
+        switch (indexPath.row)
+        {
             case 0:
                 unitCell.unitTitle.text = NSLocalizedString(@"Chol., Sugar Unit", @"unit for sugar/cholesterol");
                 [unitCell.segControl setTitle:@"mmol/L" forSegmentAtIndex:0];
@@ -175,24 +197,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
-- (IBAction)switchSmoker:(id)sender{
+- (IBAction)switchSmoker:(id)sender
+{
     
 }
 
-- (IBAction)switchDiabetic:(id)sender{
+- (IBAction)switchDiabetic:(id)sender
+{
     
 }
 
-- (void)changeDateOfBirth{
+- (void)changeDateOfBirth
+{
 	NSString *title =  @"\n\n\n\n\n\n\n\n\n\n\n\n" ;	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set", nil), nil];
 	[actionSheet showInView:self.view];

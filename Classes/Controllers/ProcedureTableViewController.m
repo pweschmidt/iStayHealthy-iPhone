@@ -12,6 +12,7 @@
 #import "Procedures.h"
 #import "Utilities.h"
 #import "ProcedureCell.h"
+#import "ProcedureDetailViewController.h"
 
 @interface ProcedureTableViewController ()
 @property (nonatomic, strong) NSDateFormatter * formatter;
@@ -22,7 +23,8 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -36,17 +38,28 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadDetailProcedureViewController)];
     
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(done:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
 }
 
 - (void)loadDetailProcedureViewController
 {
+    ProcedureDetailViewController *newProcController = [[ProcedureDetailViewController alloc]initWithRecord:self.masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newProcController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
     
 }
 - (void)loadEditProcedureViewControllerForId:(NSUInteger)rowId
 {
+    Procedures *proc = (Procedures *)[self.allProcedures objectAtIndex:rowId];
+    ProcedureDetailViewController *newProcController = [[ProcedureDetailViewController alloc] initWithProcedure:proc masterRecord:self.masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newProcController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
     
 }
 - (IBAction)done:(id)sender

@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ResultValueCell.h"
 
-@interface ResultSegmentedCell : ResultValueCell{
-}
+@interface ResultSegmentedCell : ResultValueCell
 @property (nonatomic, weak) IBOutlet UILabel *query;
 @property (nonatomic, weak) IBOutlet UISwitch *switchControl;    
 - (void)setDelegate:(id)viewControllerDelegate;

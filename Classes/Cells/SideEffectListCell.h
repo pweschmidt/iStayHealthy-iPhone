@@ -8,14 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SideEffectListCell : UITableViewCell{
-    IBOutlet UILabel *effect;
-    IBOutlet UILabel *date;
-    IBOutlet UILabel *drug;
-    IBOutlet UIImageView *imageView;
-}
+@interface SideEffectListCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *effect;
 @property (nonatomic, strong) IBOutlet UILabel *date;
 @property (nonatomic, strong) IBOutlet UILabel *drug;
-@property (nonatomic, strong) IBOutlet UIImageView  *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView  *effectsImageView;
 @end
