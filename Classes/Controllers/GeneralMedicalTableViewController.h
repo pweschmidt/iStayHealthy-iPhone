@@ -18,9 +18,6 @@
 }
 @property int selectedContactRow;
 - (void) showActionSheetForContact:(int)row;
-- (void)loadOtherMedicationChangeViewController:(int) row;
-- (void)loadProcedureChangeViewController:(int)row;
-- (void)loadClinicChangeViewController;
 - (void)startEmailMessageView:(NSString *)emailAddress;
 - (void)loadClinicWebview:(NSString *)url withTitle:(NSString *)navTitle;
 @end

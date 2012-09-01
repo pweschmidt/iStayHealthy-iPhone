@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iStayHealthyTableViewController.h"
 
-@interface ClinicsTableViewController : UITableViewController
-
+@interface ClinicsTableViewController : iStayHealthyTableViewController
+- (void)loadClinicDetailViewController;
+- (void)loadClinicEditViewControllerForContactId:(NSUInteger) rowId;
+- (IBAction)done:(id)sender;
 @end

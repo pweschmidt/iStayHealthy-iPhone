@@ -10,8 +10,6 @@
 #import "iStayHealthyRecord.h"
 #import "GeneralSettings.h"
 #import "NSArray-Set.h"
-#import "OtherMedicationDetailViewController.h"
-#import "OtherMedicationChangeViewController.h"
 #import "OtherMedication.h"
 #import "Contacts.h"
 #import "ClinicAddTableViewController.h"
@@ -24,6 +22,16 @@
 #import "OtherMedCell.h"
 #import "WebViewController.h"
 #import "UINavigationBar-Button.h"
+
+#import "ClinicsTableViewController.h"
+#import "OtherMedsTableViewController.h"
+#import "ProcedureTableViewController.h"
+
+@interface GeneralMedicalTableViewController ()
+- (void)loadClinicsController;
+- (void)loadOtherMedsController;
+- (void)loadProcedureController;
+@end
 
 @implementation GeneralMedicalTableViewController
 @synthesize selectedContactRow;
@@ -76,6 +84,7 @@
 //    [contactSheet showInView:self.view];
 }
 
+/*
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     Contacts *contact = (Contacts *)[self.allContacts objectAtIndex:self.selectedContactRow];
@@ -131,6 +140,7 @@
     }
         
 }
+*/
 
 - (void)loadClinicWebview:(NSString *)url withTitle:(NSString *)navTitle{
     NSString *webURL = url;
@@ -205,68 +215,34 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
-
-#pragma mark - Clinic Controllers
-
-
-- (void)loadClinicAddViewController{
-    ClinicAddTableViewController *newClinicController = [[ClinicAddTableViewController alloc] initWithRecord:self.masterRecord];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newClinicController];
+- (void)loadClinicsController
+{
+    ClinicsTableViewController *clinicController = [[ClinicsTableViewController alloc] initWithNibName:@"ClinicsTableViewController" bundle:nil];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:clinicController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:navigationController animated:YES];
+	[self presentModalViewController:navigationController animated:YES];    
+    
 }
-
-- (void)loadClinicChangeViewController{
-    ClinicAddTableViewController *changeController = [[ClinicAddTableViewController alloc]initWithContacts:(Contacts *)[self.allContacts objectAtIndex:selectedContactRow] WithRecord:masterRecord];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changeController];
-	UINavigationBar *navigationBar = [navigationController navigationBar];
-	navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:navigationController animated:YES];
-}
-
-
-#pragma mark - Other Medication Controllers
-
-- (void)loadOtherMedicationDetailViewController{
-	OtherMedicationDetailViewController *newMedsView = [[OtherMedicationDetailViewController alloc] initWithRecord:masterRecord];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMedsView];
+- (void)loadOtherMedsController
+{
+    OtherMedsTableViewController *medsController = [[OtherMedsTableViewController alloc] initWithNibName:@"OtherMedsTableViewController" bundle:nil];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:medsController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
     
 }
 
-- (void)loadOtherMedicationChangeViewController:(int) row{
-    OtherMedication *otherMed = (OtherMedication *)[self.allPills objectAtIndex:row];
-	OtherMedicationChangeViewController *changeMedsView = 
-    [[OtherMedicationChangeViewController alloc] initWithOtherMedication:otherMed withMasterRecord:self.masterRecord];    
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changeMedsView];
+- (void)loadProcedureController
+{
+    ProcedureTableViewController *procController = [[ProcedureTableViewController alloc] initWithNibName:@"ProcedureTableViewController" bundle:nil];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:procController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
+    
 }
-
-#pragma mark - Procedure Controllers
-- (void)loadProcedureAddViewController{
-    ProcedureAddViewController *newProcController = [[ProcedureAddViewController alloc] initWithRecord:self.masterRecord];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newProcController];
-	UINavigationBar *navigationBar = [navigationController navigationBar];
-	navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:navigationController animated:YES];
-}
-
-- (void)loadProcedureChangeViewController:(int)row{
-    ProcedureChangeViewController *changeProcController = [[ProcedureChangeViewController alloc]
-                                                           initWithProcedure:(Procedures *)[self.allProcedures objectAtIndex:row] withMasterRecord:self.masterRecord];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changeProcController];
-	UINavigationBar *navigationBar = [navigationController navigationBar];
-	navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:navigationController animated:YES];
-}
-
-#pragma mark - Cell management
 
 
 
@@ -274,11 +250,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+    /*
     if (0 == section) {
         return 1;
     }
@@ -295,18 +273,64 @@
         return [self.allContacts count];
     }
     return 0;
+     */
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 
-
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == indexPath.section) {
         return 90.0;
     }
 	return 70.0;
 }
+*/
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = @"GeneralButtonCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    
+    CGRect imageFrame = CGRectMake(20, 3, 55, 55);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
+    CGRect labelFrame = CGRectMake(80, 10, 200, 40);
+    UILabel *labelView = [[UILabel alloc]initWithFrame:labelFrame];
+    labelView.backgroundColor = [UIColor clearColor];
+    labelView.font = [UIFont boldSystemFontOfSize:15];
+    labelView.textColor = TEXTCOLOUR;
+    switch (indexPath.section)
+    {
+        case 0:
+            imageView.image = [UIImage imageNamed:@"redcross-small.png"];
+            labelView.text = NSLocalizedString(@"Other Meds", nil);
+            break;
+        case 1:
+            imageView.image = [UIImage imageNamed:@"procedure.png"];
+            labelView.text = NSLocalizedString(@"Illness", nil);
+            break;
+        case 2:
+            imageView.image = [UIImage imageNamed:@"clinic.png"];
+            labelView.text = NSLocalizedString(@"Clinics", nil);
+            break;
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = DEFAULT_BACKGROUND;
+    tableView.separatorColor = [UIColor clearColor];
+    [cell addSubview:imageView];
+    [cell addSubview:labelView];
+    
+    return cell;
+}
 
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
@@ -398,6 +422,7 @@
     }
     return nil;
 }
+ */
 
 #pragma mark - Table view delegate
 
@@ -405,16 +430,15 @@
 {
     int section = indexPath.section;
     switch (section) {
+        case 0:
+            [self loadOtherMedsController];
+            break;
         case 1:
-            [self loadOtherMedicationChangeViewController:indexPath.row];
+            [self loadProcedureController];
             break;
         case 2:
-            [self loadProcedureChangeViewController:indexPath.row];
+            [self loadClinicsController];
             break;
-        case 3:
-            self.selectedContactRow = indexPath.row;
-            [self showActionSheetForContact:indexPath.row];
-            break;            
     }
 }
 

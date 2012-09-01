@@ -7,13 +7,19 @@
 //
 
 #import "OtherMedsTableViewController.h"
+#import "OtherMedCell.h"
+#import "Utilities.h"
+#import "GeneralSettings.h"
+#import "iStayHealthyRecord.h"
+#import "OtherMedication.h"
+#import "OtherMedsDetailViewController.h"
 
 @interface OtherMedsTableViewController ()
-
+@property (nonatomic, strong) NSDateFormatter *formatter;
 @end
 
 @implementation OtherMedsTableViewController
-
+@synthesize formatter = _formatter;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -26,19 +32,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	self.formatter = [[NSDateFormatter alloc]init];
+	self.formatter.dateFormat = @"dd MMM YYYY";
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadDetailOtherMedsController)];
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    
+    UINavigationBar *navBar = self.navigationController.navigationBar;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.formatter = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -46,82 +53,78 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)loadDetailOtherMedsController
+{
+	OtherMedsDetailViewController *newMedsController = [[OtherMedsDetailViewController alloc] initWithRecord:masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMedsController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];    
+}
+
+- (void)loadEditMedsControllerForId:(NSUInteger)rowId
+{
+    OtherMedication *otherMed = (OtherMedication *)[self.allPills objectAtIndex:rowId];
+    OtherMedsDetailViewController *editMedsController = [[OtherMedsDetailViewController alloc] initWithOtherMedication:otherMed withMasterRecord:masterRecord];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:editMedsController];
+	UINavigationBar *navigationBar = [navigationController navigationBar];
+	navigationBar.tintColor = [UIColor blackColor];
+	[self presentModalViewController:navigationController animated:YES];
+    
+}
+
+- (IBAction)done:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.allPills.count;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *identifer = @"OtherMedCell";
+    OtherMedCell *cell = (OtherMedCell *)[tableView dequeueReusableCellWithIdentifier:identifer];
+    if(nil == cell){
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"OtherMedCell" owner:self options:nil];
+        for (id currentObject in cellObjects) {
+            if ([currentObject isKindOfClass:[OtherMedCell class]]) {
+                cell = (OtherMedCell *)currentObject;
+                break;
+            }
+        }
+    }
+    OtherMedication *med = (OtherMedication *)[self.allPills objectAtIndex:indexPath.row];
+    [[cell dateLabel]setText:[self.formatter stringFromDate:med.StartDate]];
+    [[cell nameLabel]setText:med.Name];
+    [[cell drugLabel]setText:[NSString stringWithFormat:@"%2.2f %@",[med.Dose floatValue], med.Unit]];
     
-    // Configure the cell...
-    
+    tableView.separatorColor = [UIColor lightGrayColor];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self loadEditMedsControllerForId:indexPath.row];
 }
 
 @end

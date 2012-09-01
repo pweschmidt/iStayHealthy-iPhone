@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iStayHealthyTableViewController.h"
 
-@interface OtherMedsTableViewController : UITableViewController
-
+@interface OtherMedsTableViewController : iStayHealthyTableViewController
+- (void)loadDetailOtherMedsController;
+- (void)loadEditMedsControllerForId:(NSUInteger)rowId;
+- (IBAction)done:(id)sender;
 @end

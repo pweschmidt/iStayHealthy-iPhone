@@ -7,13 +7,18 @@
 //
 
 #import "ProcedureTableViewController.h"
+#import "iStayHealthyRecord.h"
+#import "GeneralSettings.h"
+#import "Procedures.h"
+#import "Utilities.h"
+#import "ProcedureCell.h"
 
 @interface ProcedureTableViewController ()
-
+@property (nonatomic, strong) NSDateFormatter * formatter;
 @end
 
 @implementation ProcedureTableViewController
-
+@synthesize formatter = _formatter;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -26,12 +31,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	self.formatter = [[NSDateFormatter alloc]init];
+	self.formatter.dateFormat = @"dd MMM YYYY";
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadDetailProcedureViewController)];
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(done:)];
+    
+    UINavigationBar *navBar = self.navigationController.navigationBar;
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void)loadDetailProcedureViewController
+{
+    
+}
+- (void)loadEditProcedureViewControllerForId:(NSUInteger)rowId
+{
+    
+}
+- (IBAction)done:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewDidUnload
@@ -50,78 +70,58 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.allProcedures.count;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    
+    NSString *identifier = @"ProcedureCell";
+    ProcedureCell *cell = (ProcedureCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+    if (nil == cell) {
+        NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ProcedureCell" owner:self options:nil];
+        for (id currentObject in cellObjects) {
+            if ([currentObject isKindOfClass:[ProcedureCell class]]) {
+                cell = (ProcedureCell *)currentObject;
+                break;
+            }
+        }
+    }
+    Procedures *procs = (Procedures *)[self.allProcedures objectAtIndex:indexPath.row];
+    NSString *procString = procs.Name;
+    NSString *illString = procs.Illness;
+    if ([procString isEqualToString:@""] && ![illString isEqualToString:@""]) {
+        [[cell procLabel]setText:illString];
+        [[cell illnessLabel]setText:@""];
+    }
+    if (![procString isEqualToString:@""] && [illString isEqualToString:@""]) {
+        [[cell procLabel]setText:procString];
+        [[cell illnessLabel]setText:@""];
+    }
+    if (![procString isEqualToString:@""] && ![illString isEqualToString:@""]) {
+        [[cell procLabel]setText:procString];
+        [[cell illnessLabel]setText:illString];
+    }
+    [[cell dateLabel]setText:[self.formatter stringFromDate:procs.Date]];
+    tableView.separatorColor = [UIColor lightGrayColor];
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self loadEditProcedureViewControllerForId:indexPath.row];
 }
 
 @end
