@@ -12,6 +12,7 @@
 #import "HIVMedicationViewController.h"
 #import "NewAlertViewController.h"
 #import "GeneralMedicalTableViewController.h"
+#import "DashboardViewController.h"
 
 @implementation iStayHealthyTabBarController
 
@@ -42,7 +43,8 @@
     NSMutableArray *viewControllersArray = 
     [[NSMutableArray alloc]initWithCapacity:5];
     
-    NewStatusViewController *statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil];
+//    NewStatusViewController *statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil];
+    DashboardViewController *statusView = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:nil];
 //    statusView.title = NSLocalizedString(@"Charts", @"Charts");
     statusView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Charts", @"Charts") image:[UIImage imageNamed:@"status-small.png"] tag:0];
     UINavigationController *statusNavController = [[UINavigationController alloc]initWithRootViewController:statusView];
