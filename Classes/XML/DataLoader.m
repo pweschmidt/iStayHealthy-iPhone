@@ -24,13 +24,20 @@
 
 @implementation DataLoader
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize masterRecord, allResults, allMedications, allMissedMeds, allOtherMeds;
-@synthesize allContacts, allProcedures, allSideEffects;
+@synthesize masterRecord = _masterRecord;
+@synthesize allResults = _allResults;
+@synthesize allMedications = _allMedications;
+@synthesize allMissedMeds = _allMissedMeds;
+@synthesize allOtherMeds = _allOtherMeds;
+@synthesize allContacts = _allContacts;
+@synthesize allProcedures = _allProcedures;
+@synthesize allSideEffects = _allSideEffects;
 
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (nil != self)
+    {
         // Initialization code here.
     }
     
@@ -41,13 +48,16 @@
  dealloc
  */
 
-- (NSString *)csvString{
+- (NSString *)csvString
+{
     NSMutableString *csv = [NSMutableString stringWithString:@"iStayHealthy\r"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     BOOL isFirst = YES;
-    for (Results *results in allResults) {
-        if (isFirst) {
+    for (Results *results in self.allResults)
+    {
+        if (isFirst)
+        {
             [csv appendString:@"Results\r"];
             [csv appendString:@"ResultsDate, CD4Count, CD4%%, ViralLoad\r"];
             isFirst = NO;
@@ -56,18 +66,22 @@
         NSString *cd4Percent = (0.0 < [results.CD4Percent floatValue]) ?[results.CD4Percent stringValue] : @"";
         NSString *date = [formatter stringFromDate:results.ResultsDate];
         NSString *vl = @"";
-        if (0.0 == [results.ViralLoad floatValue]) {
+        if (0.0 == [results.ViralLoad floatValue])
+        {
             vl = @"undetectable";
         }
-        if (0.0 < [results.ViralLoad floatValue]) {
+        if (0.0 < [results.ViralLoad floatValue])
+        {
             vl = [results.ViralLoad stringValue];
         }
         [csv appendFormat:@"%@, %@, %@, %@\r",date, cd4, cd4Percent, vl];
     }
     
     isFirst = YES;
-    for (Medication *medication in allMedications) {
-        if (isFirst) {
+    for (Medication *medication in self.allMedications)
+    {
+        if (isFirst)
+        {
             [csv appendString:@"HIV Medication\r"];
             [csv appendString:@"StartDate, Name, Drugs, MedicationForm, EndDate\r"];
             isFirst = NO;
@@ -77,18 +91,22 @@
         NSString *drugs = medication.Drug;
         NSString *form = medication.MedicationForm;
         NSString *endDate = [formatter stringFromDate:medication.EndDate];
-        if (nil == endDate) {
+        if (nil == endDate)
+        {
             endDate = @"ongoing";
         }
-        if ([endDate isEqualToString:@""]) {
+        if ([endDate isEqualToString:@""])
+        {
             endDate = @"ongoing";
         }
         [csv appendFormat:@"%@, %@, %@, %@, %@\r",date, name, drugs, form, endDate];        
     }
     
     isFirst = YES;
-    for (MissedMedication *missedMed in allMissedMeds) {
-        if (isFirst) {
+    for (MissedMedication *missedMed in self.allMissedMeds)
+    {
+        if (isFirst)
+        {
             [csv appendString:@"Missed HIV Medication\r"];
             [csv appendString:@"Missed, Name, Drugs\r"];
             isFirst = NO;
@@ -100,8 +118,10 @@
     }
     
     isFirst = YES;
-    for (SideEffects *effect in self.allSideEffects) {
-        if (isFirst) {
+    for (SideEffects *effect in self.allSideEffects)
+    {
+        if (isFirst)
+        {
             [csv appendString:@"SideEffects\r"];
             [csv appendString:@"Date, SideEffect, DrugName\r"];
             isFirst = NO;
@@ -113,8 +133,10 @@
     }
     
     isFirst = YES;
-    for (OtherMedication *otherMed in allOtherMeds) {
-        if (isFirst) {
+    for (OtherMedication *otherMed in self.allOtherMeds)
+    {
+        if (isFirst)
+        {
             [csv appendString:@"Other Medications\r"];
             [csv appendString:@"StartDate, Name, Dose, EndDate\r"];
             isFirst = NO;
@@ -123,18 +145,22 @@
         NSString *name = otherMed.Name;
         NSString *dose = [otherMed.Dose stringValue];
         NSString *endDate = [formatter stringFromDate:otherMed.EndDate];
-        if (nil == endDate) {
+        if (nil == endDate)
+        {
             endDate = @"ongoing";
         }
-        if ([endDate isEqualToString:@""]) {
+        if ([endDate isEqualToString:@""])
+        {
             endDate = @"ongoing";
         }
         [csv appendFormat:@"%@, %@, %@, %@\r", date, name, dose, endDate];
     }
     
     isFirst = YES;
-    for (Procedures *procs in self.allProcedures) {
-        if (isFirst) {
+    for (Procedures *procs in self.allProcedures)
+    {
+        if (isFirst)
+        {
             [csv appendString:@"Illness & Procedures\r"];
             [csv appendString:@"Date, Illness, Procedure\r"];
             isFirst = NO;
@@ -152,7 +178,8 @@
 /**
  returns a string of comma-separated-values. to be used in sending per e-mail
  */
-- (NSData *)csvData{
+- (NSData *)csvData
+{
     return [[self csvString] dataUsingEncoding:NSUTF8StringEncoding];
 }
 
@@ -160,16 +187,19 @@
 /**
  returns the XML document as a pointer to a NSData object
  */
-- (NSData *)xmlData{
+- (NSData *)xmlData
+{
     XMLDocument *document = [[XMLDocument alloc] init];
     XMLElement *root = [document root];
     NSString *masterUID = self.masterRecord.UID;
-    if (nil == masterUID || [masterUID isEqualToString:@""]) {
+    if (nil == masterUID || [masterUID isEqualToString:@""])
+    {
         masterUID = [Utilities GUID];
         NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
         self.masterRecord.UID = masterUID;
         NSError *error = nil;
-        if (![context save:&error]) {
+        if (![context save:&error])
+        {
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -179,43 +209,50 @@
     }
     [root addAttribute:@"UID" andValue:masterUID];
     
-    if (0 < [self.allResults count]) {
+    if (0 < [self.allResults count])
+    {
         XMLElement *results = [[XMLElement alloc]initWithName:@"Results"];
         [self addResults:results];
         [root addChild:results];
     }
     
-    if (0 < [self.allMedications count]) {
+    if (0 < [self.allMedications count])
+    {
         XMLElement *medications = [[XMLElement alloc]initWithName:@"Medications"];
         [self addMedications:medications];
         [root addChild:medications];
     }
     
-    if (0 < [self.allMissedMeds count]) {
+    if (0 < [self.allMissedMeds count])
+    {
         XMLElement *missedMedications = [[XMLElement alloc]initWithName:@"MissedMedications"];
         [self addMissedMedications:missedMedications];
         [root addChild:missedMedications];
     }
         
-    if (0 < [self.allOtherMeds count]) {
+    if (0 < [self.allOtherMeds count])
+    {
         XMLElement *otherMedications = [[XMLElement alloc]initWithName:@"OtherMedications"];
         [self addOtherMeds:otherMedications];        
         [root addChild:otherMedications];
     }
     
-    if (0 < [self.allContacts count]) {
+    if (0 < [self.allContacts count])
+    {
         XMLElement *contacts = [[XMLElement alloc]initWithName:@"ClinicalContacts"];
         [self addContacts:contacts];
         [root addChild:contacts];
     }
     
-    if (0 < [self.allSideEffects count]) {
+    if (0 < [self.allSideEffects count])
+    {
         XMLElement *sideEffects = [[XMLElement alloc]initWithName:@"HIVSideEffects"];
         [self addSideEffects:sideEffects];
         [root addChild:sideEffects];
     }
     
-    if (0 < [self.allProcedures count]) {
+    if (0 < [self.allProcedures count])
+    {
         XMLElement *procedures = [[XMLElement alloc]initWithName:@"IllnessesAndProcedures"];
         [self addProcedures:procedures];
         [root addChild:procedures];        
@@ -232,38 +269,47 @@
  */
 - (void) addResults:(XMLElement *)resultsParent
 {
-    for (Results *results in allResults) {
+    for (Results *results in self.allResults)
+    {
         XMLElement *resultElement = [[XMLElement alloc]initWithName:@"Result"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
         [resultElement addAttribute:@"ResultsDate" andValue:[formatter stringFromDate:results.ResultsDate]];
-        if (0.0 < [results.CD4 floatValue]) {
+        if (0.0 < [results.CD4 floatValue])
+        {
             [resultElement addAttribute:@"CD4" andValue:[results.CD4 stringValue]];
         }
-        if (0.0 < [results.CD4Percent floatValue]) {
+        if (0.0 < [results.CD4Percent floatValue])
+        {
             [resultElement addAttribute:@"CD4Percent" andValue:[results.CD4Percent stringValue]];
         }
-        if (0.0 <= [results.ViralLoad floatValue]) {
-            if (0.0 == [results.ViralLoad floatValue]) {
+        if (0.0 <= [results.ViralLoad floatValue])
+        {
+            if (0.0 == [results.ViralLoad floatValue])
+            {
                 [resultElement addAttribute:@"ViralLoad" andValue:@"undetectable"];
             }
             else
                 [resultElement addAttribute:@"ViralLoad" andValue:[results.ViralLoad stringValue]];
         }
-        if (0.0 <= [results.HepCViralLoad floatValue]) {
-            if (0.0 == [results.HepCViralLoad floatValue]) {
+        if (0.0 <= [results.HepCViralLoad floatValue])
+        {
+            if (0.0 == [results.HepCViralLoad floatValue])
+            {
                 [resultElement addAttribute:@"HepCViralLoad" andValue:@"undetectable"];                
             }
             else
                 [resultElement addAttribute:@"HepCViralLoad" andValue:[results.HepCViralLoad stringValue]];
         }
         NSString *uid = results.UID;
-        if (nil == uid) {
+        if (nil == uid)
+        {
             uid = [Utilities GUID];
             NSManagedObjectContext *context = [results managedObjectContext];
             results.UID = uid;
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -279,8 +325,10 @@
 /**
  adds the HIV drugs to the XML doc
  */
-- (void) addMedications:(XMLElement *)medicationParent{
-    for (Medication *medication in allMedications) {
+- (void) addMedications:(XMLElement *)medicationParent
+{
+    for (Medication *medication in self.allMedications)
+    {
         XMLElement *medElement = [[XMLElement alloc]initWithName:@"Medication"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
@@ -289,19 +337,23 @@
         [medElement addAttribute:@"Drug" andValue:medication.Drug];
         [medElement addAttribute:@"MedicationForm" andValue:medication.MedicationForm];
         NSDate *endDate = medication.EndDate;
-        if (nil != endDate) {
+        if (nil != endDate)
+        {
             [medElement addAttribute:@"EndDate" andValue:[formatter stringFromDate:medication.EndDate]];
         }
-        if (0.0 < [medication.Dose floatValue]) {
+        if (0.0 < [medication.Dose floatValue])
+        {
             [medElement addAttribute:@"Dose" andValue:[medication.Dose stringValue]];
         }        
         NSString *uid = medication.UID;
-        if (nil == uid) {
+        if (nil == uid)
+        {
             uid = [Utilities GUID];
             NSManagedObjectContext *context = [medication managedObjectContext];
             medication.UID = uid;
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -317,8 +369,10 @@
 /**
  adds the missed HIV drugs to the XML doc
  */
-- (void) addMissedMedications:(XMLElement *)missedMedicationParent{
-    for (MissedMedication *missedMed in allMissedMeds) {
+- (void) addMissedMedications:(XMLElement *)missedMedicationParent
+{
+    for (MissedMedication *missedMed in self.allMissedMeds)
+    {
         XMLElement *missedMedElement = [[XMLElement alloc]initWithName:@"MissedMedication"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
@@ -326,12 +380,14 @@
         [missedMedElement addAttribute:@"Name" andValue:missedMed.Name];
         [missedMedElement addAttribute:@"Drug" andValue:missedMed.Drug];
         NSString *uid = missedMed.UID;
-        if (nil == uid) {
+        if (nil == uid)
+        {
             uid = [Utilities GUID];
             NSManagedObjectContext *context = [missedMed managedObjectContext];
             missedMed.UID = uid;
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -347,38 +403,46 @@
 /**
  adds the list of general meds to the XML doc
  */
-- (void) addOtherMeds:(XMLElement *)otherMedsParent{
-    for (OtherMedication *otherMed in self.allOtherMeds) {
+- (void) addOtherMeds:(XMLElement *)otherMedsParent
+{
+    for (OtherMedication *otherMed in self.allOtherMeds)
+    {
         XMLElement *otherMedElement = [[XMLElement alloc]initWithName:@"OtherMedication"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
         [otherMedElement addAttribute:@"StartDate" andValue:[formatter stringFromDate:otherMed.StartDate]];
         [otherMedElement addAttribute:@"Name" andValue:otherMed.Name];
 
-        if (nil != otherMed.MedicationForm) {
+        if (nil != otherMed.MedicationForm)
+        {
             [otherMedElement addAttribute:@"MedicationForm" andValue:otherMed.MedicationForm];
         }
 
         NSDate *endDate = otherMed.EndDate;
-        if (nil != endDate) {
+        if (nil != endDate)
+        {
             [otherMedElement addAttribute:@"EndDate" andValue:[formatter stringFromDate:otherMed.EndDate]];
         }
-        if (0.0 < [otherMed.Dose floatValue]) {
+        if (0.0 < [otherMed.Dose floatValue])
+        {
             [otherMedElement addAttribute:@"Dose" andValue:[otherMed.Dose stringValue]];
         }   
         
         NSString *unit = otherMed.Unit;
-        if (nil != unit) {
+        if (nil != unit)
+        {
             [otherMedElement addAttribute:@"Unit" andValue:unit];
         }
         
         NSString *uid = otherMed.UID;
-        if (nil == uid) {
+        if (nil == uid)
+        {
             uid = [Utilities GUID];
             NSManagedObjectContext *context = [otherMed managedObjectContext];
             otherMed.UID = uid;
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -392,8 +456,10 @@
     
 }
 
-- (void) addContacts:(XMLElement *)contactsParent{
-    for (Contacts *contacts in self.allContacts) {
+- (void) addContacts:(XMLElement *)contactsParent
+{
+    for (Contacts *contacts in self.allContacts)
+    {
         XMLElement *contactElement = [[XMLElement alloc]initWithName:@"Contacts"];
         [contactElement addAttribute:@"ClinicName" andValue:contacts.ClinicName];
         [contactElement addAttribute:@"ClinicID" andValue:contacts.ClinicID];
@@ -402,12 +468,14 @@
         [contactElement addAttribute:@"ClinicContactNumber" andValue:contacts.ClinicContactNumber];
         [contactElement addAttribute:@"EmergencyContactNumber" andValue:contacts.EmergencyContactNumber];
         NSString *uid = contacts.UID;
-        if (nil == uid) {
+        if (nil == uid)
+        {
             uid = [Utilities GUID];
             NSManagedObjectContext *context = [contacts managedObjectContext];
             contacts.UID = uid;
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -420,8 +488,10 @@
     
 }
 
-- (void) addSideEffects:(XMLElement *)sideEffectsParent{
-    for (SideEffects *effects in self.allSideEffects) {
+- (void) addSideEffects:(XMLElement *)sideEffectsParent
+{
+    for (SideEffects *effects in self.allSideEffects)
+    {
         XMLElement *sideEffect = [[XMLElement alloc]initWithName:@"SideEffects"];
         [sideEffect addAttribute:@"SideEffect" andValue:effects.SideEffect];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -431,12 +501,14 @@
         [sideEffect addAttribute:@"Name" andValue:effects.Name];
         [sideEffect addAttribute:@"Drug" andValue:effects.Drug];
         NSString *uid = effects.UID;
-        if (nil == uid) {
+        if (nil == uid)
+        {
             uid = [Utilities GUID];
             NSManagedObjectContext *context = [effects managedObjectContext];
             effects.UID = uid;
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -448,8 +520,10 @@
     }
 }
 
-- (void) addProcedures:(XMLElement *)proceduresParent{
-    for (Procedures *procedure in self.allProcedures) {
+- (void) addProcedures:(XMLElement *)proceduresParent
+{
+    for (Procedures *procedure in self.allProcedures)
+    {
         XMLElement *procElement = [[XMLElement alloc]initWithName:@"Procedures"];
         [procElement addAttribute:@"Illness" andValue:procedure.Illness];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -457,12 +531,14 @@
         [procElement addAttribute:@"Date" andValue:[formatter stringFromDate:procedure.Date]];
         [procElement addAttribute:@"Name" andValue:procedure.Name];
         NSString *uid = procedure.UID;
-        if (nil == uid) {
+        if (nil == uid)
+        {
             uid = [Utilities GUID];
             NSManagedObjectContext *context = [procedure managedObjectContext];
             procedure.UID = uid;
             NSError *error = nil;
-            if (![context save:&error]) {
+            if (![context save:&error])
+            {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -480,15 +556,20 @@
 #pragma mark Utilities for Core Data Management 
 /**
  */
-- (BOOL) containsResultsUID:(NSString *)UID{
-    if (nil == UID) {
+- (BOOL) containsResultsUID:(NSString *)UID
+{
+    if (nil == UID)
+    {
         return NO;
     }
-    if (0 == [self.allResults count]) {
+    if (0 == [self.allResults count])
+    {
         return NO;
     }
-    for (Results *results in self.allResults) {
-        if ([UID isEqualToString:results.UID]) {
+    for (Results *results in self.allResults)
+    {
+        if ([UID isEqualToString:results.UID])
+        {
             return YES;
         }
     }
@@ -496,15 +577,20 @@
 }
 /**
  */
-- (BOOL) containsMedicationsUID:(NSString *)UID{
-    if (nil == UID) {
+- (BOOL) containsMedicationsUID:(NSString *)UID
+{
+    if (nil == UID)
+    {
         return NO;
     }
-    if (0 == [self.allMedications count]) {
+    if (0 == [self.allMedications count])
+    {
         return NO;
     }
-    for (Medication *med in self.allMedications) {
-        if ([UID isEqualToString:med.UID]) {
+    for (Medication *med in self.allMedications)
+    {
+        if ([UID isEqualToString:med.UID])
+        {
             return YES;
         }
     }
@@ -512,15 +598,20 @@
 }
 /**
  */
-- (BOOL) containsMissedMedicationsUID:(NSString *)UID{
-    if (nil == UID) {
+- (BOOL) containsMissedMedicationsUID:(NSString *)UID
+{
+    if (nil == UID)
+    {
         return NO;
     }
-    if (0 == [self.allMissedMeds count]) {
+    if (0 == [self.allMissedMeds count])
+    {
         return NO;
     }
-    for (MissedMedication *missedMed in self.allMissedMeds) {
-        if ([UID isEqualToString:missedMed.UID]) {
+    for (MissedMedication *missedMed in self.allMissedMeds)
+    {
+        if ([UID isEqualToString:missedMed.UID])
+        {
             return YES;
         }
     }
@@ -528,60 +619,80 @@
 }
 /**
  */
-- (BOOL) containsOtherMedicationsUID:(NSString *)UID{
-    if (nil == UID) {
+- (BOOL) containsOtherMedicationsUID:(NSString *)UID
+{
+    if (nil == UID)
+    {
         return NO;
     }
-    if (0 == [self.allOtherMeds count]) {
+    if (0 == [self.allOtherMeds count])
+    {
         return NO;
     }
-    for (OtherMedication *otherMed in self.allOtherMeds) {
-        if ([UID isEqualToString:otherMed.UID]) {
+    for (OtherMedication *otherMed in self.allOtherMeds)
+    {
+        if ([UID isEqualToString:otherMed.UID])
+        {
             return YES;
         }
     }
     return NO;
 }
 
-- (BOOL) containsProceduresUID:(NSString *)UID{
-    if (nil == UID) {
+- (BOOL) containsProceduresUID:(NSString *)UID
+{
+    if (nil == UID)
+    {
         return NO;
     }
-    if (0 == [self.allProcedures count]) {
+    if (0 == [self.allProcedures count])
+    {
         return NO;
     }
-    for (Procedures *procs in self.allProcedures) {
-        if ([UID isEqualToString:procs.UID]) {
+    for (Procedures *procs in self.allProcedures)
+    {
+        if ([UID isEqualToString:procs.UID])
+        {
             return YES;
         }
     }
     return NO;
 }
 
-- (BOOL) containsSideEffectsUID:(NSString *)UID{
-    if (nil == UID) {
+- (BOOL) containsSideEffectsUID:(NSString *)UID
+{
+    if (nil == UID)
+    {
         return NO;
     }
-    if (0 == [self.allSideEffects count]) {
+    if (0 == [self.allSideEffects count])
+    {
         return NO;
     }
-    for (SideEffects *effects in self.allSideEffects) {
-        if ([UID isEqualToString:effects.UID]) {
+    for (SideEffects *effects in self.allSideEffects)
+    {
+        if ([UID isEqualToString:effects.UID])
+        {
             return YES;
         }
     }
     return NO;
     
 }
-- (BOOL) containsContactsUID:(NSString *)UID{
-    if (nil == UID) {
+- (BOOL) containsContactsUID:(NSString *)UID
+{
+    if (nil == UID)
+    {
         return NO;
     }
-    if (0 == [self.allContacts count]) {
+    if (0 == [self.allContacts count])
+    {
         return NO;
     }
-    for (Contacts *contact in self.allContacts) {
-        if ([UID isEqualToString:contact.UID]) {
+    for (Contacts *contact in self.allContacts)
+    {
+        if ([UID isEqualToString:contact.UID])
+        {
             return YES;
         }
     }
@@ -594,20 +705,24 @@
 /**
  only adds result if the UID doesn't exist
  */
-- (void) addResultsToSQL:(XMLElement *)resultElement{
-    if ([self containsResultsUID:[resultElement elementUID]]) {
+- (void) addResultsToSQL:(XMLElement *)resultElement
+{
+    if ([self containsResultsUID:[resultElement elementUID]])
+    {
         return;
     }
-    NSManagedObjectContext *context = [masterRecord managedObjectContext];
+    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
     Results *result = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
-    [masterRecord addResultsObject:result];
+    [self.masterRecord addResultsObject:result];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     result.ResultsDate = [formatter dateFromString:[resultElement attributeValue:@"ResultsDate"]];
-    if (nil != [resultElement elementUID]) {
+    if (nil != [resultElement elementUID])
+    {
         result.UID = [resultElement elementUID];
     }
-    else{
+    else
+    {
         result.UID = [Utilities GUID]; 
     }
 
@@ -618,46 +733,57 @@
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    if (nil != _cd4) {
+    if (nil != _cd4)
+    {
         result.CD4 = [numberFormatter numberFromString:_cd4];
     }
-    else{
+    else
+    {
         result.CD4 = [NSNumber numberWithFloat:(-1.0)];
     }
 
-    if (nil != _cd4Percent) {
+    if (nil != _cd4Percent)
+    {
         result.CD4Percent = [numberFormatter numberFromString:_cd4Percent];
     }
-    else{
+    else
+    {
         result.CD4Percent = [NSNumber numberWithFloat:(-1.0)];
     }
 
-    if (nil != _vl) {
-        if ([_vl isEqualToString:@"undetectable"]) {
+    if (nil != _vl)
+    {
+        if ([_vl isEqualToString:@"undetectable"])
+        {
             result.ViralLoad = [NSNumber numberWithFloat:(0.0)];
         }
         else
             result.ViralLoad = [numberFormatter numberFromString:_vl];
     }
-    else{
+    else
+    {
         result.ViralLoad = [NSNumber numberWithFloat:(-1.0)];
     }
     
-    if (nil != _vlHepC) {
-        if ([_vlHepC isEqualToString:@"undetectable"]) {
+    if (nil != _vlHepC)
+    {
+        if ([_vlHepC isEqualToString:@"undetectable"])
+        {
             result.HepCViralLoad = [NSNumber numberWithFloat:(0.0)];
         }
         else
             result.HepCViralLoad = [numberFormatter numberFromString:_vlHepC];
     }
-    else{
+    else
+    {
         result.HepCViralLoad = [NSNumber numberWithFloat:(-1.0)];
     }
     
     
     
 	NSError *error = nil;
-	if (![context save:&error]) {
+	if (![context save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
@@ -665,20 +791,24 @@
 /**
  only adds medication if the UID doesn't exist
  */
-- (void) addMedicationsToSQL:(XMLElement *)medicationElement{
-    if ([self containsMedicationsUID:[medicationElement elementUID]]) {
+- (void) addMedicationsToSQL:(XMLElement *)medicationElement
+{
+    if ([self containsMedicationsUID:[medicationElement elementUID]])
+    {
         return;
     }
-    NSManagedObjectContext *context = [masterRecord managedObjectContext];
+    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
     Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:@"Medication" inManagedObjectContext:context];
-    [masterRecord addMedicationsObject:medication];
+    [self.masterRecord addMedicationsObject:medication];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     medication.StartDate = [formatter dateFromString:[medicationElement attributeValue:@"StartDate"]];
-    if (nil != [medicationElement elementUID]) {
+    if (nil != [medicationElement elementUID])
+    {
         medication.UID = [medicationElement elementUID];
     }
-    else{
+    else
+    {
         medication.UID = [Utilities GUID];
     }
 
@@ -689,26 +819,32 @@
     NSString *_dose = [medicationElement attributeValue:@"Dose"];
     NSString *_endDate = [medicationElement attributeValue:@"EndDate"];
     
-    if (nil != _name) {
+    if (nil != _name)
+    {
         medication.Name = _name;
     }
-    if (nil != _drug) {
+    if (nil != _drug)
+    {
         medication.Drug = _drug;
     }
-	if (nil != _form) {
+	if (nil != _form)
+    {
         medication.MedicationForm = _form;
     }
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    if (nil != _dose) {
+    if (nil != _dose)
+    {
         medication.Dose = [numberFormatter numberFromString:_dose];
     }
-    if (nil != _endDate) {
+    if (nil != _endDate)
+    {
         medication.EndDate = [formatter dateFromString:_endDate];
     }
     
     NSError *error = nil;
-	if (![context save:&error]) {
+	if (![context save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
@@ -717,34 +853,41 @@
 /**
  only adds missedMedication if the UID doesn't exist
  */
-- (void) addMissedMedicationToSQL:(XMLElement *)missedMedicationElement{
-    if ([self containsMissedMedicationsUID:[missedMedicationElement elementUID]]) {
+- (void) addMissedMedicationToSQL:(XMLElement *)missedMedicationElement
+{
+    if ([self containsMissedMedicationsUID:[missedMedicationElement elementUID]])
+    {
         return;
     }
-    NSManagedObjectContext *context = [masterRecord managedObjectContext];
+    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
     MissedMedication *missedMed = [NSEntityDescription insertNewObjectForEntityForName:@"MissedMedication" inManagedObjectContext:context];
-    [masterRecord addMissedMedicationsObject:missedMed];
+    [self.masterRecord addMissedMedicationsObject:missedMed];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     missedMed.MissedDate = [formatter dateFromString:[missedMedicationElement attributeValue:@"MissedDate"]];
-    if (nil!= [missedMedicationElement elementUID]) {
+    if (nil!= [missedMedicationElement elementUID])
+    {
         missedMed.UID = [missedMedicationElement elementUID];        
     }
-    else{
+    else
+    {
         missedMed.UID = [Utilities GUID];
     }
     NSString *_name = [missedMedicationElement attributeValue:@"Name"];
     NSString *_drug = [missedMedicationElement attributeValue:@"Drug"];
 
-    if (nil != _name) {
+    if (nil != _name)
+    {
         missedMed.Name = _name;
     }
-    if (nil != _drug) {
+    if (nil != _drug)
+    {
         missedMed.Drug = _drug;
     }
     
     NSError *error = nil;
-	if (![context save:&error]) {
+	if (![context save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
@@ -752,8 +895,10 @@
 /**
  only adds other medication if the UID doesn't exist
  */
-- (void) addOtherMedicationsToSQL:(XMLElement *)otherMedicationsElement{
-    if ([self containsOtherMedicationsUID:[otherMedicationsElement elementUID]]) {
+- (void) addOtherMedicationsToSQL:(XMLElement *)otherMedicationsElement
+{
+    if ([self containsOtherMedicationsUID:[otherMedicationsElement elementUID]])
+    {
         return;
     }
     NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
@@ -762,10 +907,12 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     otherMed.StartDate = [formatter dateFromString:[otherMedicationsElement attributeValue:@"StartDate"]];
-    if (nil != [otherMedicationsElement elementUID]) {
+    if (nil != [otherMedicationsElement elementUID])
+    {
         otherMed.UID = [otherMedicationsElement elementUID];
     }
-    else{
+    else
+    {
         otherMed.UID = [Utilities GUID];        
     }
     
@@ -776,42 +923,51 @@
     NSString *_endDate = [otherMedicationsElement attributeValue:@"EndDate"];
     NSString *_unit = [otherMedicationsElement attributeValue:@"Unit"];
     
-    if (nil != _name) {
+    if (nil != _name)
+    {
         otherMed.Name = _name;
     }
-	if (nil != _form) {
+	if (nil != _form)
+    {
         otherMed.MedicationForm = _form;
     }
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    if (nil != _dose) {
+    if (nil != _dose)
+    {
         otherMed.Dose = [numberFormatter numberFromString:_dose];
     }
-    if (nil != _endDate) {
+    if (nil != _endDate)
+    {
         otherMed.EndDate = [formatter dateFromString:_endDate];
     }
     
-    if (nil != _unit) {
+    if (nil != _unit)
+    {
         otherMed.Unit = _unit;
     }
     
     NSError *error = nil;
-	if (![context save:&error]) {
+	if (![context save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
     
 }
 
-- (void) addClinicsToSQL:(XMLElement *)contactsElement{
-    if ([self containsContactsUID:[contactsElement elementUID]]) {
+- (void) addClinicsToSQL:(XMLElement *)contactsElement
+{
+    if ([self containsContactsUID:[contactsElement elementUID]])
+    {
         return;
     }
     NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
     Contacts *contacts = [NSEntityDescription insertNewObjectForEntityForName:@"Contacts" inManagedObjectContext:context];
     [self.masterRecord addContactsObject:contacts];
     
-    if (nil != [contactsElement elementUID]) {
+    if (nil != [contactsElement elementUID])
+    {
         contacts.UID = [contactsElement elementUID];
     }
     else
@@ -823,35 +979,44 @@
     NSString *_clinicWWW = [contactsElement attributeValue:@"ClinicWebSite"];
     NSString *_clinicNumber = [contactsElement attributeValue:@"ClinicContactNumber"];
     NSString *_emergency = [contactsElement attributeValue:@"EmergencyContactNumber"];
-    if (nil != _clinicName) {
+    if (nil != _clinicName)
+    {
         contacts.ClinicName = _clinicName;
     }
-    if (nil != _clinicID) {
+    if (nil != _clinicID)
+    {
         contacts.ClinicID = _clinicID;
     }
-    if (nil != _clinicEmail) {
+    if (nil != _clinicEmail)
+    {
         contacts.ClinicEmailAddress = _clinicEmail;
     }
-    if (nil != _clinicWWW) {
+    if (nil != _clinicWWW)
+    {
         contacts.ClinicWebSite = _clinicWWW;
     }
-    if (nil != _clinicNumber) {
+    if (nil != _clinicNumber)
+    {
         contacts.ClinicContactNumber = _clinicNumber;
     }
-    if (nil != _emergency) {
+    if (nil != _emergency)
+    {
         contacts.EmergencyContactNumber = _emergency;
     }
                 
     NSError *error = nil;
-	if (![context save:&error]) {
+	if (![context save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
     
 }
 
-- (void) addSideEffectsToSQL:(XMLElement *)sideEffectsElement{
-    if ([self containsSideEffectsUID:[sideEffectsElement elementUID]]) {
+- (void) addSideEffectsToSQL:(XMLElement *)sideEffectsElement
+{
+    if ([self containsSideEffectsUID:[sideEffectsElement elementUID]])
+    {
         return;
     }
     NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
@@ -860,7 +1025,8 @@
     [self.masterRecord addSideeffectsObject:effect];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
-    if (nil != [sideEffectsElement elementUID]) {
+    if (nil != [sideEffectsElement elementUID])
+    {
         effect.UID = [sideEffectsElement elementUID];
     }
     else
@@ -876,22 +1042,26 @@
         effect.Drug = _drug;    
     
     NSError *error = nil;
-	if (![context save:&error]) {
+	if (![context save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
     
 }
 
-- (void) addProceduresToSQL:(XMLElement *)proceduresElement{
-    if ([self containsProceduresUID:[proceduresElement elementUID]]) {
+- (void) addProceduresToSQL:(XMLElement *)proceduresElement
+{
+    if ([self containsProceduresUID:[proceduresElement elementUID]])
+    {
         return;
     }
     NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
     Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:@"Procedures" inManagedObjectContext:context];
     [self.masterRecord addProceduresObject:procedures];
     
-    if (nil != [proceduresElement elementUID]) {
+    if (nil != [proceduresElement elementUID])
+    {
         procedures.UID = [proceduresElement elementUID];
     }
     else
@@ -904,16 +1074,19 @@
     formatter.dateFormat = DATEFORMATSTYLE;
     procedures.Date = [formatter dateFromString:[proceduresElement attributeValue:@"Date"]];
     
-    if (nil != _illness) {
+    if (nil != _illness)
+    {
         procedures.Illness = _illness;
     }
     
-    if (nil != _name) {
+    if (nil != _name)
+    {
         procedures.Name = _name;
     }
     
     NSError *error = nil;
-	if (![context save:&error]) {
+	if (![context save:&error])
+    {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}    
@@ -925,9 +1098,11 @@
 /**
  fetch the latest data from the SQL database
  */
-- (void)getSQLData{
+- (void)getSQLData
+{
 	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
 							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
@@ -939,42 +1114,49 @@
     NSArray *records = [self.fetchedResultsController fetchedObjects];
 	self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
     
-	if (0 != [self.masterRecord.results count]) {
+	if (0 != [self.masterRecord.results count])
+    {
 		self.allResults = [NSArray arrayByOrderingSet:self.masterRecord.results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
 	}
     else
         self.allResults = (NSArray *)self.masterRecord.results;
     
-	if (0 != [self.masterRecord.medications count]) {
+	if (0 != [self.masterRecord.medications count])
+    {
 		self.allMedications = [NSArray arrayByOrderingSet:self.masterRecord.medications byKey:@"StartDate" ascending:YES reverseOrder:NO];
 	}
     else
         self.allMedications = (NSArray *)self.masterRecord.medications;
     
-    if (0 != [self.masterRecord.missedMedications count]) {
+    if (0 != [self.masterRecord.missedMedications count])
+    {
         self.allMissedMeds = [NSArray arrayByOrderingSet:self.masterRecord.missedMedications byKey:@"MissedDate" ascending:YES reverseOrder:NO];
     }
     else
         self.allMissedMeds = (NSArray *)self.masterRecord.missedMedications;
     
-    if(0 != [self.masterRecord.otherMedications count]){
+    if(0 != [self.masterRecord.otherMedications count])
+    {
         self.allOtherMeds = [NSArray arrayByOrderingSet:self.masterRecord.otherMedications byKey:@"StartDate" ascending:YES reverseOrder:NO];
     }
     else
         self.allOtherMeds = (NSArray *)self.masterRecord.otherMedications;
     
 
-    if(0 != [self.masterRecord.procedures count]){
+    if(0 != [self.masterRecord.procedures count])
+    {
         self.allProcedures = [NSArray arrayByOrderingSet:self.masterRecord.procedures byKey:@"Date" ascending:YES reverseOrder:NO];
     }
     else{
         self.allProcedures = (NSArray *)self.masterRecord.procedures;
     }
     
-    if (0 != [self.masterRecord.sideeffects count]) {
+    if (0 != [self.masterRecord.sideeffects count])
+    {
         self.allSideEffects = [NSArray arrayByOrderingSet:self.masterRecord.sideeffects byKey:@"SideEffectDate" ascending:YES reverseOrder:NO];
     }
-    else{
+    else
+    {
         self.allSideEffects = (NSArray *)self.masterRecord.sideeffects;
     }
     // no particular order is needed for contacts
@@ -987,8 +1169,10 @@
  this handles the fetching of the objects
  @return NSFetchedResultsController
  */
-- (NSFetchedResultsController *)fetchedResultsController{
-	if (fetchedResultsController_ != nil) {
+- (NSFetchedResultsController *)fetchedResultsController
+{
+	if (fetchedResultsController_ != nil)
+    {
 		return fetchedResultsController_;
 	}
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -1016,7 +1200,8 @@
  notified when changes to the database
  @controller
  */
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{	
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
 }

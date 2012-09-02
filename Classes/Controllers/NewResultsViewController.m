@@ -44,9 +44,10 @@
     [super viewDidLoad];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadResultDetailViewController)];
     
-    
+    /*
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(loadSetUpViewController)];
-    
+
+     */
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
     {

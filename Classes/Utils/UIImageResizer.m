@@ -11,7 +11,8 @@
 
 @implementation UIImage (Resize)
 
-- (UIImage*)scaleToSize:(CGSize)size {
+- (UIImage*)scaleToSize:(CGSize)size
+{
     UIGraphicsBeginImageContext(size);
     
     CGContextRef context = UIGraphicsGetCurrentContext();

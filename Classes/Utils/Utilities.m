@@ -21,144 +21,185 @@
     return self;
 }
 
-+ (NSString *)GUID{
++ (NSString *)GUID
+{
     CFUUIDRef theUUID = CFUUIDCreate(NULL);
     CFStringRef string = CFUUIDCreateString(NULL, theUUID);
     CFRelease(theUUID);
     return (__bridge NSString *)string;    
 }
 
-+ (BOOL)hasFloatingPoint:(NSNumber *)number{
++ (BOOL)hasFloatingPoint:(NSNumber *)number
+{
     float fValue = [number floatValue];
-    if (fmod(fValue, 1)) {
+    if (fmod(fValue, 1))
+    {
         return NO;
     }
     return YES;
 }
 
-+ (UIImage *)bannerImageFromLocale{
++ (UIImage *)bannerImageFromLocale
+{
     NSLocale *locale = [NSLocale currentLocale];
     NSString *currentLocaleID = [locale localeIdentifier]; 
     
-    if ([currentLocaleID hasPrefix:@"en"]) {
+    if ([currentLocaleID hasPrefix:@"en"])
+    {
         if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"]) {
+            ||[currentLocaleID isEqualToString:@"en_CA"])
+        {
             return [UIImage imageNamed:@"pozbannerEmpty.png"];
         }
-        else {
+        else
+        {
             return [UIImage imageNamed:@"gaydarbanner.png"];
         }
     }
-    else if ([currentLocaleID hasPrefix:@"de"]) {
+    else if ([currentLocaleID hasPrefix:@"de"])
+    {
         return [UIImage imageNamed:@"dahbanner.png"];
     }
-    else if ([currentLocaleID hasPrefix:@"fr"]) {
-        if ([currentLocaleID isEqualToString:@"fr_CA"]) {
+    else if ([currentLocaleID hasPrefix:@"fr"])
+    {
+        if ([currentLocaleID isEqualToString:@"fr_CA"])
+        {
             return [UIImage imageNamed:@"pozbannerEmpty.png"];
         }
-        else {
+        else
+        {
             return [UIImage imageNamed:@"gaydarbanner.png"];
         }
     }
-    else if ([currentLocaleID hasPrefix:@"es"]) {
-        if ([currentLocaleID isEqualToString:@"es_ES"]) {
+    else if ([currentLocaleID hasPrefix:@"es"])
+    {
+        if ([currentLocaleID isEqualToString:@"es_ES"])
+        {
             return [UIImage imageNamed:@"gaydarbanner.png"];
         }
-        else {
+        else
+        {
             return [UIImage imageNamed:@"pozbannerES.png"];
         }
     }
     //main EUROZONE get the gaydar banner
     else if([currentLocaleID hasPrefix:@"nl"] || [currentLocaleID hasPrefix:@"da"] || [currentLocaleID hasPrefix:@"it"] || [currentLocaleID hasPrefix:@"no"] || [currentLocaleID hasPrefix:@"sv"] ||
-            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"]){
+            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"])
+    {
         return [UIImage imageNamed:@"gaydarbanner.png"];
     }
-    else {
+    else
+    {
         return [UIImage imageNamed:@"pozbannerEmpty.png"];
     }
     
 }
 
-+ (NSString *)urlStringFromLocale{
++ (NSString *)urlStringFromLocale
+{
     NSLocale *locale = [NSLocale currentLocale];
     NSString *currentLocaleID = [locale localeIdentifier]; 
     
     if ([currentLocaleID hasPrefix:@"en"]) {
         if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"]) {
+            ||[currentLocaleID isEqualToString:@"en_CA"])
+        {
             return @"http://www.poz.com";
         }
-        else {
+        else
+        {
             return @"http://app.gaydar.net";
         }
     }
-    else if ([currentLocaleID hasPrefix:@"de"]) {
+    else if ([currentLocaleID hasPrefix:@"de"])
+    {
         return @"http://www.aidshilfe.de";
     }
-    else if ([currentLocaleID hasPrefix:@"fr"]) {
-        if ([currentLocaleID isEqualToString:@"fr_CA"]) {
+    else if ([currentLocaleID hasPrefix:@"fr"])
+    {
+        if ([currentLocaleID isEqualToString:@"fr_CA"])
+        {
             return @"http://www.poz.com";
         }
-        else {
+        else
+        {
             return @"http://app.gaydar.net";
         }
     }
-    else if ([currentLocaleID hasPrefix:@"es"]) {
-        if ([currentLocaleID isEqualToString:@"es_ES"]) {
+    else if ([currentLocaleID hasPrefix:@"es"])
+    {
+        if ([currentLocaleID isEqualToString:@"es_ES"])
+        {
             return @"http://app.gaydar.net";
         }
-        else {
+        else
+        {
             return @"http://www.poz.com/latino";
         }
     }
     //main EUROZONE get the gaydar banner
     else if([currentLocaleID hasPrefix:@"nl"] || [currentLocaleID hasPrefix:@"da"] || [currentLocaleID hasPrefix:@"it"] || [currentLocaleID hasPrefix:@"no"] || [currentLocaleID hasPrefix:@"sv"] ||
-            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"]){
+            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"])
+    {
         return @"http://app.gaydar.net";
     }
-    else {
+    else
+    {
         return @"http://www.poz.com";
     }    
 }
 
-+ (NSString *)titleFromLocale{
++ (NSString *)titleFromLocale
+{
     NSLocale *locale = [NSLocale currentLocale];
     NSString *currentLocaleID = [locale localeIdentifier]; 
     
-    if ([currentLocaleID hasPrefix:@"en"]) {
+    if ([currentLocaleID hasPrefix:@"en"])
+    {
         if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"]) {
+            ||[currentLocaleID isEqualToString:@"en_CA"])
+        {
             return @"POZ Magazine";
         }
-        else {
+        else
+        {
             return @"Gaydar.net";
         }
     }
-    else if ([currentLocaleID hasPrefix:@"de"]) {
+    else if ([currentLocaleID hasPrefix:@"de"])
+    {
         return @"Deutsche AIDS Hilfe";
     }
-    else if ([currentLocaleID hasPrefix:@"fr"]) {
-        if ([currentLocaleID isEqualToString:@"fr_CA"]) {
+    else if ([currentLocaleID hasPrefix:@"fr"])
+    {
+        if ([currentLocaleID isEqualToString:@"fr_CA"])
+        {
             return @"POZ Magazine";
         }
-        else {
+        else
+        {
             return @"Gaydar.net";
         }
     }
-    else if ([currentLocaleID hasPrefix:@"es"]) {
-        if ([currentLocaleID isEqualToString:@"es_ES"]) {
+    else if ([currentLocaleID hasPrefix:@"es"])
+    {
+        if ([currentLocaleID isEqualToString:@"es_ES"])
+        {
             return @"Gaydar.net";
         }
-        else {
+        else
+        {
             return @"POZ Magazine ES";
         }
     }
     //main EUROZONE get the gaydar banner
     else if([currentLocaleID hasPrefix:@"nl"] || [currentLocaleID hasPrefix:@"da"] || [currentLocaleID hasPrefix:@"it"] || [currentLocaleID hasPrefix:@"no"] || [currentLocaleID hasPrefix:@"sv"] ||
-            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"]){
+            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"])
+    {
         return @"Gaydar.net";
     }
-    else {
+    else
+    {
         return @"POZ Magazine";
     }        
 }

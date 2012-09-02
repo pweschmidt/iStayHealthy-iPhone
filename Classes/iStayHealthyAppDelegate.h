@@ -12,20 +12,10 @@
 
 @class iStayHealthyTabBarController, iStayHealthyPasswordController;
 
-@interface iStayHealthyAppDelegate : NSObject <UIApplicationDelegate, NSFetchedResultsControllerDelegate> {
-    
-    UIWindow *window;
-    iStayHealthyTabBarController *tabBarController;
-    iStayHealthyPasswordController *passController;
-	NSString *relinkUserId;
-    BOOL     iCloudIsAvailable;
-    NSURL   *cloudURL;
-@private
-	NSFetchedResultsController *fetchedResultsController_;
-    NSManagedObjectContext *managedObjectContext_;
-    NSManagedObjectModel *managedObjectModel_;
-    NSPersistentStoreCoordinator *persistentStoreCoordinator_;
-}
+@interface iStayHealthyAppDelegate : NSObject <UIApplicationDelegate, NSFetchedResultsControllerDelegate> 
+@property BOOL iCloudIsAvailable;
+@property (nonatomic, strong) NSURL *cloudURL;
+@property (nonatomic, strong) NSString *relinkUserId;
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) iStayHealthyPasswordController *passController;
 @property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;

@@ -9,7 +9,8 @@
 #import "UINavigationBar-Button.h"
 
 @implementation UINavigationBar(Button)
-- (UIButton *)buttonWithImageName:(NSString *)name{
+- (UIButton *)buttonWithImageName:(NSString *)name
+{
     CGRect pozFrame = CGRectMake(CGRectGetMinX(self.bounds) + 60.0, CGRectGetMinY(self.bounds)+2, 190, 40);
     UIButton *pozButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [pozButton setFrame:pozFrame];
@@ -19,7 +20,8 @@
     return pozButton;
 }
 
-- (void)addButtonWithImageName:(NSString *)name withTarget:(id)target withSelector:(SEL)selector{
+- (void)addButtonWithImageName:(NSString *)name withTarget:(id)target withSelector:(SEL)selector
+{
     CGRect pozFrame = CGRectMake(CGRectGetMinX(self.bounds) + 60.0, CGRectGetMinY(self.bounds)+2, 190, 40);
     UIButton *pozButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [pozButton setFrame:pozFrame];

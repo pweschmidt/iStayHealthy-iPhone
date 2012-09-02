@@ -10,18 +10,22 @@
 
 
 @implementation NSArray(Set)
-+ (id)arrayByOrderingSet:(NSSet *)set byKey:(NSString *)key ascending:(BOOL)ascending reverseOrder:(BOOL)reverse{
++ (id)arrayByOrderingSet:(NSSet *)set byKey:(NSString *)key ascending:(BOOL)ascending reverseOrder:(BOOL)reverse
+{
 		
 	NSMutableArray *sortedArray = [NSMutableArray arrayWithCapacity:[set count]];
-	for (id oneObject in set) {
+	for (id oneObject in set)
+    {
 		[sortedArray addObject:oneObject];
 	}
 	
 	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:ascending];
-	if (reverse) {
+	if (reverse)
+    {
 		[sortedArray sortUsingDescriptors:[NSArray arrayWithObject:[descriptor reversedSortDescriptor]]];
 	}
-	else {
+	else
+    {
 		[sortedArray sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
 	}
 

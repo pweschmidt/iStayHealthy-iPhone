@@ -8,8 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface iStayHealthyTabBarController : UITabBarController{
-    
-}
-
+@interface iStayHealthyTabBarController : UITabBarController
 @end

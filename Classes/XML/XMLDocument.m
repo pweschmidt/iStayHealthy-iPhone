@@ -11,37 +11,42 @@
 #import "XMLDefinitions.h"
 
 @implementation XMLDocument
-@synthesize root;
+@synthesize root = _root;
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (nil != self)
+    {
         NSLog(@"initializing XMLDocument");
-        root = [[XMLElement alloc]initWithName:ROOT];
-        [root setNodeLevel:0];
+        self.root = [[XMLElement alloc]initWithName:ROOT];
+        self.root.nodeLevel = 0;
     }
     
     return self;
 }
 
--(NSMutableString *)xmlString{
-    [root addAttribute:DBVERSION andValue:@"13"];
-    [root addAttribute:FROMDEVICE andValue:[[UIDevice currentDevice]model]];
+-(NSMutableString *)xmlString
+{
+    [self.root addAttribute:DBVERSION andValue:@"13"];
+    [self.root addAttribute:FROMDEVICE andValue:[[UIDevice currentDevice]model]];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd-MMM-YY HH:mm:ss";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
-    [root addAttribute:FROMDATE andValue:dateString];
+    [self.root addAttribute:FROMDATE andValue:dateString];
     NSMutableString *xml = [NSMutableString stringWithString:XMLPREAMBLE];
-    NSString *elementText = [root toString];
+    NSString *elementText = [self.root toString];
     [xml appendFormat:@"\r%@",elementText];
     return xml;
 }
 
--(XMLElement *)elementForName:(NSString *)name{
+-(XMLElement *)elementForName:(NSString *)name
+{
     XMLElement *foundElement = nil;
-    NSMutableArray *children = [root childElements];
-    for (XMLElement *child in children) {
-        if ([child.name isEqualToString:name]) {
+    NSMutableArray *children = [self.root childElements];
+    for (XMLElement *child in children)
+    {
+        if ([child.name isEqualToString:name])
+        {
             foundElement = child;
         }
     }

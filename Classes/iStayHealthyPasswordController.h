@@ -8,14 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @class iStayHealthyTabBarController;
-@interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController * fetchedResultsController_;
-    iStayHealthyTabBarController *tabBarController;
-    IBOutlet UITextField *passwordField;
-    IBOutlet UILabel *label;
-    IBOutlet UILabel *versionLabel;
-    NSString *passwordString;
-}
+@interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>
+@property (nonatomic, strong) NSString * passwordString;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;

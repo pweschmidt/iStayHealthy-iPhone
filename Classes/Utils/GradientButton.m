@@ -45,8 +45,10 @@
     return gradButton;
 }
 
-- (void)setColourIndex:(NSInteger)index{
-    switch (index) {
+- (void)setColourIndex:(NSInteger)index
+{
+    switch (index)
+    {
         case Red:
             [self useRedDeleteStyle];
             break;
@@ -70,14 +72,16 @@
 - (id)initWithFrame:(CGRect)frame colour:(int)colourIndex title:(NSString *)titleText
 {
     self = [super initWithFrame:frame];
-    if (nil != self) {
+    if (nil != self)
+    {
 		[self setOpaque:NO];
         self.backgroundColor = [UIColor clearColor];
         self.cornerRadius = 9.f;
         [self setTitle:titleText forState:UIControlStateNormal];
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-        switch (colourIndex) {
+        switch (colourIndex)
+        {
             case Red:
                 [self useRedDeleteStyle];
                 break;
@@ -103,7 +107,8 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
 		[self setOpaque:NO];
         self.backgroundColor = [UIColor clearColor];
         self.cornerRadius = 9.f;

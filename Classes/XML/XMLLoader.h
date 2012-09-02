@@ -10,19 +10,7 @@
 @class XMLDocument;
 @class XMLElement;
 
-@interface XMLLoader : NSObject <NSXMLParserDelegate>{
-    NSXMLParser *xmlParser;
-    NSError     *error;
-    XMLDocument *document;
-    XMLElement *results;
-    XMLElement *medications;
-    XMLElement *missedMedications;
-    XMLElement *alerts;
-    XMLElement *otherMedications;
-    XMLElement *contacts;
-    XMLElement *procedures;
-    XMLElement *sideEffects;
-}
+@interface XMLLoader : NSObject <NSXMLParserDelegate>
 @property (nonatomic, strong) NSXMLParser *xmlParser;
 @property (nonatomic, strong) XMLDocument *document;
 @property (nonatomic, strong) XMLElement *medications;

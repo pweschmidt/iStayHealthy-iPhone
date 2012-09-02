@@ -8,19 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XMLElement : NSObject{
-    NSString *name;
-    NSString *value;
-    NSMutableArray *attributes;
-    NSMutableArray *childElements;
-    int nodeLevel;    
-}
+@interface XMLElement : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, strong) NSMutableArray *attributes;
 @property (nonatomic, strong) NSMutableArray *childElements;
+@property NSUInteger nodeLevel;
 - (id)initWithName:(NSString *)elementName;
-- (void)setNodeLevel:(int)level;
 - (void)addChild:(XMLElement *)element;
 - (void)addAttribute:(NSString *)withName andValue:(NSString *)withValue;
 - (void)addValue:(NSString *)valueText;

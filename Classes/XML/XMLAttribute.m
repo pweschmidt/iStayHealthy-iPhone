@@ -10,21 +10,24 @@
 #import "XMLDefinitions.h"
 
 @implementation XMLAttribute
-@synthesize name, value;
+@synthesize name = _name;
+@synthesize value = _value;
 - (id)init
 {
     self = [super init];
-    if (self) {
-        name = @"";
-        value = @"";
+    if (nil != self)
+    {
+        self.name = @"";
+        self.value = @"";
     }
     
     return self;
 }
 
 
--(NSString *)toString{
-    return [NSString stringWithFormat:@" %@=\"%@\"",name,value];
+-(NSString *)toString
+{
+    return [NSString stringWithFormat:@" %@=\"%@\"",self.name,self.value];
 }
 
 

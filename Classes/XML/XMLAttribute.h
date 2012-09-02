@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XMLAttribute : NSObject{
-    NSString *name;
-    NSString *value;
-}
+@interface XMLAttribute : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *value;
 -(NSString *)toString;

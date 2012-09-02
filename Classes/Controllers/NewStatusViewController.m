@@ -94,9 +94,6 @@
  */
 - (void)viewWillAppear:(BOOL)animated
 {
-#ifdef APPDEBUG	
-	NSLog(@"**** NewStatusViewController::viewWillAppear ENTERING");
-#endif
     [super viewWillAppear:animated];
     if (0 < [self.events.allChartEvents count])
     {
@@ -107,9 +104,6 @@
     [self.events loadMedication:self.allMeds];
     [self.events loadMissedMedication:self.allMissedMeds];
     [self.events sortEventsAscending:YES];
-#ifdef APPDEBUG	
-	NSLog(@"**** NewStatusViewController::viewWillAppear LEAVING");
-#endif
 }
 
 

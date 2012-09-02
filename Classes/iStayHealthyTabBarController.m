@@ -19,7 +19,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -43,8 +44,8 @@
     NSMutableArray *viewControllersArray = 
     [[NSMutableArray alloc]initWithCapacity:5];
     
-//    NewStatusViewController *statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil];
-    DashboardViewController *statusView = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:nil];
+    NewStatusViewController *statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil];
+//    DashboardViewController *statusView = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:nil];
 //    statusView.title = NSLocalizedString(@"Charts", @"Charts");
     statusView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Charts", @"Charts") image:[UIImage imageNamed:@"status-small.png"] tag:0];
     UINavigationController *statusNavController = [[UINavigationController alloc]initWithRootViewController:statusView];
@@ -94,7 +95,9 @@
 #endif
     [super viewDidUnload];
 }
-- (void)viewWillDisappear:(BOOL)animated {
+
+- (void)viewWillDisappear:(BOOL)animated
+{
 #ifdef APPDEBUG
     NSLog(@"in iStayHealthyTabBarController::viewWillDisappear");
 #endif

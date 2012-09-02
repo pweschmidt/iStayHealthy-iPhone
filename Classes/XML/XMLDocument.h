@@ -10,9 +10,7 @@
 
 @class XMLElement;
 
-@interface XMLDocument : NSObject{
-    XMLElement *root;
-}
+@interface XMLDocument : NSObject
 @property (nonatomic, strong) XMLElement *root;
 -(NSMutableString *)xmlString;
 -(XMLElement *)elementForName:(NSString *)name;

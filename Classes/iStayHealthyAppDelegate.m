@@ -18,8 +18,17 @@
 @end
 
 @implementation iStayHealthyAppDelegate
-@synthesize window, tabBarController, passController;
+@synthesize window = _window;
+@synthesize tabBarController = _tabBarController;
+@synthesize passController = _passController;
 @synthesize fetchedResultsController = fetchedResultsController_;
+@synthesize relinkUserId = _relinkUserId;
+@synthesize cloudURL = _cloudURL;
+@synthesize iCloudIsAvailable = _iCloudIsAvailable;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize managedObjectModel = _managedObjectModel;
+
 NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
 #pragma mark -
@@ -27,7 +36,8 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 /**
  apart from launching the UI, it sets up the notification and a DropBox session
  */
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 
 #ifdef APPDEBUG
 	NSLog(@"If you can see this we are in DEBUG mode");
@@ -35,11 +45,13 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 	
     
 	Class cls = NSClassFromString(@"UILocalNotification");
-	if (cls) {
+	if (cls)
+    {
 		UILocalNotification *notification = [launchOptions objectForKey:
 											 UIApplicationLaunchOptionsLocalNotificationKey];
 		
-		if (notification) {
+		if (notification)
+        {
 			NSString *reminderText = [notification.userInfo 
 									  objectForKey:MEDICATIONALERTKEY];
 			[self showReminder:reminderText];
@@ -61,21 +73,25 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
                                                      root:root];
 	[DBSession setSharedSession:session];
 	NSString* errorMsg = nil;    
-	if (errorMsg != nil) {
+	if (errorMsg != nil)
+    {
 		[[[UIAlertView alloc]
 		   initWithTitle:@"Error Configuring DropBox Session" message:errorMsg 
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 		 show];
 	}    
     
-    if (isPasswordEnabled) {
+    if (isPasswordEnabled)
+    {
         iStayHealthyPasswordController *tmpPassController =
         [[iStayHealthyPasswordController alloc]initWithNibName:@"iStayHealthyPasswordController" bundle:nil];
         self.passController = tmpPassController;
         [self.window addSubview:tmpPassController.view];
         [self.window makeKeyAndVisible];
     }    
-    else{
+    else
+    
+    {
         iStayHealthyTabBarController *tmpBarController = [[iStayHealthyTabBarController alloc]initWithNibName:nil bundle:nil];
         self.tabBarController = tmpBarController;
         [self.window addSubview:tmpBarController.view];
@@ -89,15 +105,18 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
 /**
  */
-- (BOOL)handleFileImport:(NSURL *)url{
+- (BOOL)handleFileImport:(NSURL *)url
+{
 #ifdef APPDEBUG
     NSLog(@"in handleFileImport");
 #endif
-    if (nil == url || ![url isFileURL]) {
+    if (nil == url || ![url isFileURL])
+    {
         return NO;
     }
     NSData *importedData = [NSData dataWithContentsOfURL:url];
-    if (![XMLLoader isXML:importedData]) {
+    if (![XMLLoader isXML:importedData])
+    {
         return NO;
     }
     XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:importedData];
@@ -115,12 +134,15 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 /**
  acc to Apple Doc - this should replace handleOpenURL method below
  */
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
 #ifdef APPDEBUG
     NSLog(@"in openURL");
 #endif
-    if ([[DBSession sharedSession] handleOpenURL:url]) {
-        if ([[DBSession sharedSession] isLinked]) {
+    if ([[DBSession sharedSession] handleOpenURL:url])
+    {
+        if ([[DBSession sharedSession] isLinked])
+        {
             //any app calls?
         }
         return YES;
@@ -132,12 +154,15 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 /**
  this is a deprecated method, but we'll retain it here just in case
  */
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    if ([[DBSession sharedSession] handleOpenURL:url]) {
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    if ([[DBSession sharedSession] handleOpenURL:url])
+    {
 #ifdef APPDEBUG
         NSLog(@"in deprecated handleOpenURL method");
 #endif
-        if ([[DBSession sharedSession] isLinked]) {
+        if ([[DBSession sharedSession] isLinked])
+        {
             //any app calls?
         }
         return YES;
@@ -150,30 +175,35 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
  check for the right version and device. If we are a Simulator - iCloud won't work.
  Same holds for devices below version iOS 5.0
  */
-- (void)checkForiCloud{
-    iCloudIsAvailable = FALSE;
-    if (DEVICE_IS_SIMULATOR || SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+- (void)checkForiCloud
+{
+    self.iCloudIsAvailable = FALSE;
+    if (DEVICE_IS_SIMULATOR)
+    {
         return;
     }    
     
-    cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
-    if (cloudURL) {
+    self.cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
+    if (self.cloudURL)
+    {
 #ifdef APPDEBUG
-        NSLog(@"iCloud is available with the URL being %@",cloudURL);
+        NSLog(@"iCloud is available with the URL being %@",self.cloudURL);
 #endif
-        iCloudIsAvailable = TRUE;
+        self.iCloudIsAvailable = TRUE;
     }
-    else {
+    else
+    {
 #ifdef APPDEBUG
         NSLog(@"iCloud is NOT available");
 #endif
-        iCloudIsAvailable = FALSE;
+        self.iCloudIsAvailable = FALSE;
     }    
 }
 
 
 
-- (void)applicationWillResignActive:(UIApplication *)application {
+- (void)applicationWillResignActive:(UIApplication *)application
+{
     [self saveContext];
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -182,7 +212,8 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 }
 
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
@@ -193,10 +224,12 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
     
-    if (isPasswordEnabled) {
+    if (isPasswordEnabled)
+    {
         [self.passController dismissModalViewControllerAnimated:NO];
         self.passController = nil;
-        for (UIView *view in [self.window subviews]) {
+        for (UIView *view in [self.window subviews])
+        {
             [view removeFromSuperview];
         }
         iStayHealthyPasswordController *tmpPassController =
@@ -208,13 +241,15 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 }
 
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
 	application.applicationIconBadgeNumber = 0;
     [self saveContext];
 }
 
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
@@ -224,17 +259,20 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 /**
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
  */
-- (void)applicationWillTerminate:(UIApplication *)application {
+- (void)applicationWillTerminate:(UIApplication *)application
+{
 #ifdef APPDEBUG
     NSLog(@"in iStayHealthyAppDelegate::applicationWillTerminate");
 #endif
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
     
-    if (isPasswordEnabled) {
+    if (isPasswordEnabled)
+    {
         [self.passController dismissModalViewControllerAnimated:NO];
         self.passController = nil;
-        for (UIView *view in [self.window subviews]) {
+        for (UIView *view in [self.window subviews])
+        {
             [view removeFromSuperview];
         }
         iStayHealthyPasswordController *tmpPassController =
@@ -248,11 +286,13 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 /**
  */
 - (void)application:(UIApplication *)application 
-didReceiveLocalNotification:(UILocalNotification *)notification {
+didReceiveLocalNotification:(UILocalNotification *)notification
+{
 	
 	UIApplicationState state = [application applicationState];
 	application.applicationIconBadgeNumber = 0;
-	if (state == UIApplicationStateInactive) {
+	if (state == UIApplicationStateInactive)
+    {
         NSString *reminderText = [notification.userInfo
                                   objectForKey:MEDICATIONALERTKEY];
         [self showReminder:reminderText];	
@@ -263,12 +303,15 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 
 /**
  */
-- (void)saveContext {
+- (void)saveContext
+{
     
     NSError *error = nil;
 	NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+    if (managedObjectContext != nil)
+    {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
+        {
             /*
              Replace this implementation with code to handle the error appropriately.
              
@@ -290,21 +333,26 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
  Returns the managed object context for the application.
  If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
  */
-- (NSManagedObjectContext *)managedObjectContext {
+- (NSManagedObjectContext *)managedObjectContext
+{
     
-    if (managedObjectContext_ != nil) {
-        return managedObjectContext_;
+    if (_managedObjectContext != nil)
+    {
+        return _managedObjectContext;
     }
    
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (nil == coordinator) {
-        return managedObjectContext_;
+    if (nil == coordinator)
+    {
+        return _managedObjectContext;
     }
-    if (!iCloudIsAvailable) {
-        managedObjectContext_ = [[NSManagedObjectContext alloc] init];
-        [managedObjectContext_ setPersistentStoreCoordinator:coordinator];            
+    if (!self.iCloudIsAvailable)
+    {
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
-    else {
+    else
+    {
         NSManagedObjectContext* moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         
         [moc performBlockAndWait:^{
@@ -312,10 +360,10 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             
             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
         }];
-        managedObjectContext_ = moc;            
+        _managedObjectContext = moc;
     }
     
-    return managedObjectContext_;
+    return _managedObjectContext;
 }
 
 
@@ -323,20 +371,23 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
  Returns the managed object model for the application.
  If the model doesn't already exist, it is created from the application's model.
  */
-- (NSManagedObjectModel *)managedObjectModel {
+- (NSManagedObjectModel *)managedObjectModel
+{
     
-    if (managedObjectModel_ != nil) {
-        return managedObjectModel_;
+    if (_managedObjectModel != nil)
+    {
+        return _managedObjectModel;
     }
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"iStayHealthy" withExtension:@"momd"];
-    managedObjectModel_ = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
-    return managedObjectModel_;
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
 }
 
 /**
  iOS5.x method for merging changes from iCloud
  */
-- (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc {
+- (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc
+{
     [moc mergeChangesFromContextDidSaveNotification:note]; 
     
     NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self  userInfo:[note userInfo]];
@@ -350,7 +401,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 // NSNotifications are posted synchronously on the caller's thread
 // make sure to vector this back to the thread we want, in this case
 // the main thread for our views & controller
-- (void)mergeChangesFrom_iCloud:(NSNotification *)notification {
+- (void)mergeChangesFrom_iCloud:(NSNotification *)notification
+{
     NSManagedObjectContext* moc = [self managedObjectContext];
     
     // this only works if you used NSMainQueueConcurrencyType
@@ -365,35 +417,41 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
  Returns the persistent store coordinator for the application.
  If the coordinator doesn't already exist, it is created and the application's store added to it.
  */
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
     
-    if (persistentStoreCoordinator_ != nil) {
-        return persistentStoreCoordinator_;
+    if (_persistentStoreCoordinator != nil)
+    {
+        return _persistentStoreCoordinator;
     }
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"iStayHealthy.sqlite"];
     
-    persistentStoreCoordinator_ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSPersistentStoreCoordinator* psc = persistentStoreCoordinator_;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSPersistentStoreCoordinator* psc = _persistentStoreCoordinator;
 
     
-    if (!iCloudIsAvailable) {
+    if (!self.iCloudIsAvailable)
+    {
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
 
         NSError *error = nil;
-        if (![persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
+        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
+        {
             
             abort();
         }    
     }
-    else{
+    else
+    {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         
             // this needs to match the entitlements and provisioning profile
  //           NSURL *cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
             NSDictionary *cloudOptions = nil;
-            if (cloudURL) {//this is just a precaution. We should have iCloud enabled already
-                NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"data"];
+            if (self.cloudURL)
+            {//this is just a precaution. We should have iCloud enabled already
+                NSString* coreDataCloudContent = [[self.cloudURL path] stringByAppendingPathComponent:@"data"];
                 
                 NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
                 
@@ -404,7 +462,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                                 amendedCloudURL, NSPersistentStoreUbiquitousContentURLKey,
                                 nil];
             }
-            else {
+            else
+            {
                 cloudOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
             }
             
@@ -426,15 +485,17 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         
     }
     
-    return persistentStoreCoordinator_;
+    return _persistentStoreCoordinator;
 }
 
 /**
  creates the Master record the very first time we run this application
  */
-- (void)setUpMasterRecord{
+- (void)setUpMasterRecord
+{
 	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
 							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
@@ -444,13 +505,16 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 		[alert show];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
-	if (nil != records) {
-		if (0 < [records count]) {
+	if (nil != records)
+    {
+		if (0 < [records count])
+        {
 			return;
 		}
 	}
 #ifdef APPDEBUG
-	else {
+	else
+    {
 		NSLog(@"Record is nil???? should this really happen");
 	}
 	NSLog(@"AppDelegate::setUpMasterRecord create/save a new master record to the data base");	
@@ -458,7 +522,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 	NSManagedObject *newRecord = [NSEntityDescription insertNewObjectForEntityForName:@"iStayHealthyRecord" inManagedObjectContext:[self.fetchedResultsController managedObjectContext]];
 	[newRecord setValue:@"YourName" forKey:@"Name"];
 	error = nil;
-	if (![newRecord.managedObjectContext save:&error]) {
+	if (![newRecord.managedObjectContext save:&error])
+    {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
@@ -468,8 +533,10 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 
 /**
  */
-- (NSFetchedResultsController *)fetchedResultsController{
-	if (fetchedResultsController_ != nil) {
+- (NSFetchedResultsController *)fetchedResultsController
+{
+	if (fetchedResultsController_ != nil)
+    {
 		return fetchedResultsController_;
 	}
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -501,7 +568,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 /**
  Returns the URL to the application's Documents directory.
  */
-- (NSURL *)applicationDocumentsDirectory {
+- (NSURL *)applicationDocumentsDirectory
+{
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
  
@@ -512,7 +580,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 #pragma mark -
 #pragma mark Memory management
 
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
@@ -523,7 +592,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 /*
  Notification alert
  */
-- (void)showReminder:(NSString *)text {
+- (void)showReminder:(NSString *)text
+{
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"iStayHealthy Alert" 
 														message:text delegate:nil
 											  cancelButtonTitle:@"OK"
@@ -534,8 +604,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 #pragma mark -
 #pragma mark DBSessionDelegate methods
 
-- (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session userId:(NSString *)userId {
-	relinkUserId = userId;
+- (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session userId:(NSString *)userId
+{
+	self.relinkUserId = userId;
 	[[[UIAlertView alloc] 
 	   initWithTitle:@"Dropbox Session Ended" message:@"Do you want to relink?" delegate:self 
 	   cancelButtonTitle:@"Cancel" otherButtonTitles:@"Relink", nil]
@@ -545,11 +616,13 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 #pragma mark -
 #pragma mark UIAlertViewDelegate methods
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index {
-	if (index != alertView.cancelButtonIndex) {
-		[[DBSession sharedSession] linkUserId:relinkUserId fromController:self.tabBarController];
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
+{
+	if (index != alertView.cancelButtonIndex)
+    {
+		[[DBSession sharedSession] linkUserId:self.relinkUserId fromController:self.tabBarController];
 	}
-	relinkUserId = nil;
+	self.relinkUserId = nil;
 }
 
 

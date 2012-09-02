@@ -12,17 +12,7 @@
 
 @class iStayHealthyRecord, XMLElement;
 
-@interface DataLoader : NSObject <NSFetchedResultsControllerDelegate>{
-	NSFetchedResultsController *fetchedResultsController_;
-	iStayHealthyRecord *masterRecord;
-    NSArray *allResults;
-    NSArray *allMedications;
-    NSArray *allMissedMeds;
-    NSArray *allOtherMeds;
-    NSArray *allContacts;
-    NSArray *allSideEffects;
-    NSArray *allProcedures;
-}
+@interface DataLoader : NSObject <NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) NSArray *allResults;

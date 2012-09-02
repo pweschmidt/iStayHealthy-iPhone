@@ -14,14 +14,18 @@
 #import "GeneralSettings.h"
 
 @implementation iStayHealthyPasswordController
-@synthesize passwordField, label, versionLabel;
+@synthesize passwordField = _passwordField;
+@synthesize label = _label;
+@synthesize versionLabel = _versionLabel;
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize tabBarController;
+@synthesize tabBarController = _tabBarController;
+@synthesize passwordString = _passwordString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -40,16 +44,19 @@
 
 #pragma mark - Text Editing and Processing
 
-- (IBAction)textFieldDoneEditing:(id)sender{
+- (IBAction)textFieldDoneEditing:(id)sender
+{
     [sender resignFirstResponder];
     NSString *suggestedPassword = self.passwordField.text;
 #ifdef APPDEBUG
-    NSLog(@"stored password is %@",passwordString);
+    NSLog(@"stored password is %@",self.passwordString);
 #endif
-    if ([passwordString isEqualToString:suggestedPassword] ) {
+    if ([self.passwordString isEqualToString:suggestedPassword] )
+    {
         [self loadTabController];
     }
-    else{
+    else
+    {
         self.label.text = NSLocalizedString(@"Wrong Password! Try again", @"Wrong Password! Try again");
         self.label.textColor = DARK_RED;
         self.passwordField.text = @"";
@@ -61,10 +68,12 @@
  changes the text colour to black once we start editing
  @textField
  */
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
 }
 
 
@@ -73,7 +82,8 @@
  @textField
  @return BOOL
  */
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
 	[textField resignFirstResponder];
 	return YES;
 }
@@ -83,12 +93,14 @@
 
 
 #pragma mark - View lifecycle
-- (IBAction)testLoad:(id)sender{
+- (IBAction)testLoad:(id)sender
+{
     [self loadTabController];
 }
 
 
-- (void)loadTabController{
+- (void)loadTabController
+{
     iStayHealthyTabBarController *tmpBarController = 
     [[iStayHealthyTabBarController alloc]initWithNibName:nil bundle:nil];
     self.tabBarController = tmpBarController;
@@ -96,8 +108,10 @@
     [self presentModalViewController:tmpBarController animated:YES];
 }
 
-- (void)dismissTabBarController{
-    if (0 != self.tabBarController.view && 0 < [self.tabBarController.viewControllers count]) {
+- (void)dismissTabBarController
+{
+    if (0 != self.tabBarController.view && 0 < [self.tabBarController.viewControllers count])
+    {
         [self.tabBarController dismissModalViewControllerAnimated:NO];
     }
 }
@@ -107,7 +121,8 @@
 {
     [super viewDidLoad];
 	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
 							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
@@ -125,11 +140,13 @@
 #endif
      */
 	int count = [records count];
-    if (0 < count) {
+    if (0 < count)
+    {
         iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
-        passwordString = masterRecord.Password;
+        self.passwordString = masterRecord.Password;
     }
-    else{//shouldn't really happen
+    else
+    {//shouldn't really happen
         [self loadTabController];
     }
     self.label.text = NSLocalizedString(@"Enter Password", @"Enter Password");
@@ -152,7 +169,8 @@
  this handles the fetching of the objects
  @return NSFetchedResultsController
  */
-- (NSFetchedResultsController *)fetchedResultsController{
+- (NSFetchedResultsController *)fetchedResultsController
+{
 	if (fetchedResultsController_ != nil) {
 		return fetchedResultsController_;
 	}
