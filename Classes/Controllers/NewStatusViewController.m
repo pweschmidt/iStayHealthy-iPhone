@@ -56,7 +56,7 @@
     self.navigationItem.leftBarButtonItem = actionButton;
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
-        [navBar addButtonWithImageName:@"chartsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
+        [navBar addButtonWithTitle:@"Charts" target:self selector:@selector(gotoPOZ)];
     }
     ChartEvents *tmpEvents = [[ChartEvents alloc]init];
 	self.events = tmpEvents;

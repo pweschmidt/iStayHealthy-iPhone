@@ -31,4 +31,39 @@
     [self addSubview:pozButton];    
 }
 
+- (void)addButtonWithTitle:(NSString *)title target:(id)target selector:(SEL)selector
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGSize size = self.bounds.size;
+    float xOffset = size.width/2 - 100;
+    CGRect buttonFrame = CGRectMake(xOffset, CGRectGetMinY(self.bounds) + 2, 190, 40);
+    button.frame = buttonFrame;
+    
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon-rounded-small-flat.png"]];
+    
+    iconView.frame = CGRectMake(1, 7, 29, 29);
+    
+    UIImageView *pozView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pozicon.png"]];
+    float pozXOffset = 190 - 46;
+    pozView.frame = CGRectMake(pozXOffset, 7, 45, 29);
+
+    UILabel *label = [[UILabel alloc]init];
+    label.frame = CGRectMake(30, 0, 114, 44);
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor whiteColor];
+    label.text = NSLocalizedString(title, title);
+    label.textAlignment = UITextAlignmentCenter;
+    label.numberOfLines = 0;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.font = [UIFont boldSystemFontOfSize:20];
+    
+    [button addSubview:label];
+    [button addSubview:iconView];
+    [button addSubview:pozView];
+    button.backgroundColor = [UIColor clearColor];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:button];
+}
+
+
 @end

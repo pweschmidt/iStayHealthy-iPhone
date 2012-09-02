@@ -45,7 +45,7 @@
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
     {
-        [navBar addButtonWithImageName:@"hivnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
+        [navBar addButtonWithTitle:@"HIV Drugs" target:self selector:@selector(gotoPOZ)];
     }
 }
 

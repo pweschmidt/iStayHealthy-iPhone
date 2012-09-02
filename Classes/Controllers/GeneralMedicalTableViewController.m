@@ -45,7 +45,7 @@
     [super viewDidLoad];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
-        [navBar addButtonWithImageName:@"generalnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
+        [navBar addButtonWithTitle:@"General" target:self selector:@selector(gotoPOZ)];
     }
 //	self.navigationItem.title = NSLocalizedString(@"General", @"General");
 }

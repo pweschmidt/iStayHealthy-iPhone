@@ -38,6 +38,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
+    if (navBar)
+    {
+        [navBar addButtonWithTitle:@"Clinics" target:self selector:@selector(gotoPOZ)];
+    }
 }
 
 - (void)viewDidUnload

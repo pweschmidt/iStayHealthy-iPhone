@@ -51,7 +51,7 @@
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
     {
-        [navBar addButtonWithImageName:@"resultsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
+        [navBar addButtonWithTitle:@"Results" target:self selector:@selector(gotoPOZ)];
     }
 }
 

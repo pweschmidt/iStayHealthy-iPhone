@@ -48,7 +48,7 @@
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
     {
-        [navBar addButtonWithImageName:@"alertsnavbar.png" withTarget:self withSelector:@selector(gotoPOZ)];
+        [navBar addButtonWithTitle:@"Alerts" target:self selector:@selector(gotoPOZ)];
     }
     self.tableView.rowHeight = 57.0;
 	self.notificationsArray = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];

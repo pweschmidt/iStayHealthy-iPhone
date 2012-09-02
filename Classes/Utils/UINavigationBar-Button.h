@@ -12,4 +12,5 @@
 @interface UINavigationBar(Button)
 - (UIButton *)buttonWithImageName:(NSString *)name;
 - (void)addButtonWithImageName:(NSString *)name withTarget:(id)target withSelector:(SEL)selector;
+- (void)addButtonWithTitle:(NSString *)title target:(id)target selector:(SEL)selector;
 @end

@@ -12,6 +12,7 @@
 #import "GeneralSettings.h"
 #import "iStayHealthyRecord.h"
 #import "OtherMedication.h"
+#import "UINavigationBar-Button.h"
 #import "OtherMedsDetailViewController.h"
 
 @interface OtherMedsTableViewController ()
@@ -41,6 +42,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
+    if (navBar)
+    {
+        [navBar addButtonWithTitle:@"Other Meds" target:self selector:@selector(gotoPOZ)];
+    }
 }
 
 - (void)viewDidUnload

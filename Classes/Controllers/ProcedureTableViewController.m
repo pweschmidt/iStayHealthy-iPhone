@@ -13,6 +13,7 @@
 #import "Utilities.h"
 #import "ProcedureCell.h"
 #import "ProcedureDetailViewController.h"
+#import "UINavigationBar-Button.h"
 
 @interface ProcedureTableViewController ()
 @property (nonatomic, strong) NSDateFormatter * formatter;
@@ -41,6 +42,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
+    if (navBar)
+    {
+        [navBar addButtonWithTitle:@"Illness/Surgery" target:self selector:@selector(gotoPOZ)];
+    }
 }
 
 - (void)loadDetailProcedureViewController
