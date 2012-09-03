@@ -310,8 +310,7 @@
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
-		return;
+        return;
 	}
     Results *current = [self latestResult:@"CD4Count"];
     if (!current)
@@ -319,7 +318,6 @@
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
 		return;
     }
 	
@@ -341,25 +339,24 @@
 			if (0 > diff)
             {
                 [[cell change]setTextColor:DARK_RED];
-                [[cell summaryImageView]setImage:[UIImage imageNamed:@"downredweb.png"]];
+                [cell indicator:self hasShape:downward isGood:NO];
 			}
 			else if (0 < diff)
             {
                 [[cell change]setTextColor:DARK_GREEN];
-                [[cell summaryImageView]setImage:[UIImage imageNamed:@"upgreenweb.png"]];
+                [cell indicator:self hasShape:upward isGood:YES];
 			}
             else
             {
                 [[cell change]setText:@""];
-                [[cell change]setTextColor:[UIColor lightGrayColor]];            
-                [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
+                [[cell change]setTextColor:[UIColor lightGrayColor]];
+                [cell indicator:self hasShape:neutral isGood:YES];
             }
 		}
 	}
 	else
     {
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
 	}    
 	
 }
@@ -384,7 +381,6 @@
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
 		return;
 	}
     Results *current = [self latestResult:@"CD4Percent"];
@@ -393,7 +389,6 @@
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
 		return;
     }
 	
@@ -416,18 +411,18 @@
 			if (0 > diff)
             {
                 [[cell change]setTextColor:DARK_RED];
-                [[cell summaryImageView]setImage:[UIImage imageNamed:@"downredweb.png"]];
+                [cell indicator:self hasShape:downward isGood:NO];
 			}
 			else if (0 < diff)
             {
                 [[cell change]setTextColor:DARK_GREEN];
-                [[cell summaryImageView]setImage:[UIImage imageNamed:@"upgreenweb.png"]];
+                [cell indicator:self hasShape:upward isGood:YES];
 			}
             else
             {
                 [[cell change]setText:@""];
-                [[cell change]setTextColor:[UIColor lightGrayColor]];                        
-                [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
+                [[cell change]setTextColor:[UIColor lightGrayColor]];
+                [cell indicator:self hasShape:neutral isGood:YES];
             }
             
 		}
@@ -435,7 +430,6 @@
 	else
     {
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
 	}
     
     
@@ -458,7 +452,6 @@
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
 		return;
 	}
     Results *current = [self latestResult:@"ViralLoad"];
@@ -467,7 +460,6 @@
         [[cell result]setText:NSLocalizedString(@"No results", nil)];
         [[cell result]setTextColor:[UIColor lightGrayColor]];
         [[cell change]setText:@""];
-        [[cell summaryImageView]setImage:nil];
 		return;
     }
 	int vlCount = [current.ViralLoad intValue];
@@ -499,25 +491,24 @@
 			if (0 > diff)
             {
                 [[cell change]setTextColor:DARK_GREEN];
-                [[cell summaryImageView]setImage:[UIImage imageNamed:@"downgreenweb.png"]];
+                [cell indicator:self hasShape:downward isGood:YES];
 			}
 			if (0 < diff)
             {
                 [[cell change]setTextColor:DARK_RED];
-                [[cell summaryImageView]setImage:[UIImage imageNamed:@"upredweb.png"]];
+                [cell indicator:self hasShape:upward isGood:NO];
 			}
             if (0 == diff)
             {
                 [[cell change]setText:@""];
                 [[cell change]setTextColor:[UIColor lightGrayColor]];
-                [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
+                [cell indicator:self hasShape:neutral isGood:NO];
             }
 		}
         if ((0 <= vlCount && 10 >= vlCount) && (0 <= previousVL && 10 >= previousVL))
         {
             [[cell change]setText:@"0"];
             [[cell change]setTextColor:[UIColor lightGrayColor]];
-            [[cell summaryImageView] setImage:[UIImage imageNamed:@"neutralflat.png"]];
         }
 	}
 	else

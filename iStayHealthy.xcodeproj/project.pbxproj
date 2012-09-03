@@ -105,11 +105,6 @@
 		C4C0156613425268005E889D /* ziagen.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C0154413425268005E889D /* ziagen.png */; };
 		C4C0156713425268005E889D /* zidovudine.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C0154513425268005E889D /* zidovudine.png */; };
 		C4C26D8014FEC06D00CDA2B4 /* icon-rounded-small-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C26D7F14FEC06D00CDA2B4 /* icon-rounded-small-flat.png */; };
-		C4C26D8614FEC1AA00CDA2B4 /* downgreenweb.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C26D8114FEC1AA00CDA2B4 /* downgreenweb.png */; };
-		C4C26D8714FEC1AA00CDA2B4 /* downredweb.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C26D8214FEC1AA00CDA2B4 /* downredweb.png */; };
-		C4C26D8814FEC1AA00CDA2B4 /* neutralflat.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C26D8314FEC1AA00CDA2B4 /* neutralflat.png */; };
-		C4C26D8914FEC1AA00CDA2B4 /* upgreenweb.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C26D8414FEC1AA00CDA2B4 /* upgreenweb.png */; };
-		C4C26D8A14FEC1AA00CDA2B4 /* upredweb.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C26D8514FEC1AA00CDA2B4 /* upredweb.png */; };
 		C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C3494F130EF201004BE854 /* AVFoundation.framework */; };
 		C4C3AA2A1316DF70000FC699 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C3AA271316DF70000FC699 /* Icon-72.png */; };
 		C4C3AA2B1316DF70000FC699 /* Icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C3AA281316DF70000FC699 /* Icon-small.png */; };
@@ -478,11 +473,6 @@
 		C4C0154513425268005E889D /* zidovudine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zidovudine.png; sourceTree = "<group>"; };
 		C4C0300E136842210080A9FE /* iStayHealthy 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 4.xcdatamodel"; sourceTree = "<group>"; };
 		C4C26D7F14FEC06D00CDA2B4 /* icon-rounded-small-flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-rounded-small-flat.png"; sourceTree = "<group>"; };
-		C4C26D8114FEC1AA00CDA2B4 /* downgreenweb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downgreenweb.png; sourceTree = "<group>"; };
-		C4C26D8214FEC1AA00CDA2B4 /* downredweb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downredweb.png; sourceTree = "<group>"; };
-		C4C26D8314FEC1AA00CDA2B4 /* neutralflat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neutralflat.png; sourceTree = "<group>"; };
-		C4C26D8414FEC1AA00CDA2B4 /* upgreenweb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upgreenweb.png; sourceTree = "<group>"; };
-		C4C26D8514FEC1AA00CDA2B4 /* upredweb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upredweb.png; sourceTree = "<group>"; };
 		C4C3494F130EF201004BE854 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C4C3AA271316DF70000FC699 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		C4C3AA281316DF70000FC699 /* Icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-small.png"; sourceTree = "<group>"; };
@@ -1005,11 +995,6 @@
 				C4FCBC3E152F210800E3F082 /* procedure@2x.png */,
 				C4FCBC3F152F210800E3F082 /* redcross-small@2x.png */,
 				C4FCBC42152F210800E3F082 /* status-small@2x.png */,
-				C4C26D8114FEC1AA00CDA2B4 /* downgreenweb.png */,
-				C4C26D8214FEC1AA00CDA2B4 /* downredweb.png */,
-				C4C26D8314FEC1AA00CDA2B4 /* neutralflat.png */,
-				C4C26D8414FEC1AA00CDA2B4 /* upgreenweb.png */,
-				C4C26D8514FEC1AA00CDA2B4 /* upredweb.png */,
 				C4C26D7F14FEC06D00CDA2B4 /* icon-rounded-small-flat.png */,
 				C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */,
 				C4F337C314D42C7C00C4F573 /* pozicon.png */,
@@ -1456,11 +1441,6 @@
 				C4F337C414D42C7C00C4F573 /* pozicon.png in Resources */,
 				C4F337C614D42C8D00C4F573 /* istayhealthypozbanner.png in Resources */,
 				C4C26D8014FEC06D00CDA2B4 /* icon-rounded-small-flat.png in Resources */,
-				C4C26D8614FEC1AA00CDA2B4 /* downgreenweb.png in Resources */,
-				C4C26D8714FEC1AA00CDA2B4 /* downredweb.png in Resources */,
-				C4C26D8814FEC1AA00CDA2B4 /* neutralflat.png in Resources */,
-				C4C26D8914FEC1AA00CDA2B4 /* upgreenweb.png in Resources */,
-				C4C26D8A14FEC1AA00CDA2B4 /* upredweb.png in Resources */,
 				C4FCBC43152F210900E3F082 /* cd4PercentOn-small@2x.png in Resources */,
 				C4FCBC44152F210900E3F082 /* cd4Off-small@2x.png in Resources */,
 				C4FCBC45152F210900E3F082 /* cd4PercentOff-small@2x.png in Resources */,
