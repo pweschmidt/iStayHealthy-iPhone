@@ -30,7 +30,6 @@
 		C452630813F5422B0004C80F /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C452630A13F5422B0004C80F /* WebViewController.xib */; };
 		C4574ADC14938F7E00793164 /* DosageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4574ADE14938F7E00793164 /* DosageCell.xib */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
-		C45E027415DFFDC800277E66 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45E027315DFFDC800277E66 /* DropboxSDK.framework */; };
 		C462002A140934C500E70B5B /* complera.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620025140934C500E70B5B /* complera.png */; };
 		C462002B140934C500E70B5B /* norvir.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620026140934C500E70B5B /* norvir.png */; };
 		C462002C140934C500E70B5B /* retrovir.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620027140934C500E70B5B /* retrovir.png */; };
@@ -43,6 +42,8 @@
 		C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FDD140FD0850033C61C /* EntryInhibitors.plist */; };
 		C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */; };
 		C48A513C140BFD89004AE872 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48A513D140BFD89004AE872 /* MainWindow.xib */; };
+		C48A90CB15F6789400640664 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A90CA15F6789400640664 /* DropboxSDK.framework */; };
+		C48A90CD15F67AD300640664 /* stribild.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A90CC15F67AD300640664 /* stribild.png */; };
 		C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250814DD62BF00BDD906 /* StoreKit.framework */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
 		C491AE5E15F15B8500EB1CF8 /* OtherMedsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C491AE5C15F15B8500EB1CF8 /* OtherMedsDetailViewController.m */; };
@@ -350,7 +351,6 @@
 		C4574AE014938F8700793164 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE114938F8A00793164 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
-		C45E027315DFFDC800277E66 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C46067E01472D5ED00FCA76D /* iStayHealthy 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 10.xcdatamodel"; sourceTree = "<group>"; };
 		C4620025140934C500E70B5B /* complera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complera.png; sourceTree = "<group>"; };
 		C4620026140934C500E70B5B /* norvir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = norvir.png; sourceTree = "<group>"; };
@@ -388,6 +388,8 @@
 		C4897FE5140FD09C0033C61C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/IntegraseInhibitors.plist; sourceTree = "<group>"; };
 		C4897FE6140FD09F0033C61C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/IntegraseInhibitors.plist; sourceTree = "<group>"; };
 		C48A513D140BFD89004AE872 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		C48A90CA15F6789400640664 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		C48A90CC15F67AD300640664 /* stribild.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stribild.png; sourceTree = "<group>"; };
 		C48CC47A137C3BA30051D7FA /* iStayHealthy 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 5.xcdatamodel"; sourceTree = "<group>"; };
 		C490250814DD62BF00BDD906 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C490250A14DD630700BDD906 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -781,7 +783,7 @@
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
-				C45E027415DFFDC800277E66 /* DropboxSDK.framework in Frameworks */,
+				C48A90CB15F6789400640664 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,7 +899,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C45E027315DFFDC800277E66 /* DropboxSDK.framework */,
+				C48A90CA15F6789400640664 /* DropboxSDK.framework */,
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
 				C490250A14DD630700BDD906 /* CoreLocation.framework */,
@@ -941,6 +943,7 @@
 		C4B8033512D3658800A5A38F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C48A90CC15F67AD300640664 /* stribild.png */,
 				C49B5C5E15DFE4BA00D3AF3B /* appointments.png */,
 				C49B5C5715DFCC6300D3AF3B /* stop.png */,
 				C49B5C5515DFCC4600D3AF3B /* stop@2x.png */,
@@ -1551,6 +1554,7 @@
 				C491AE5F15F15B8500EB1CF8 /* OtherMedsDetailViewController.xib in Resources */,
 				C491AE6415F167BE00EB1CF8 /* ProcedureDetailViewController.xib in Resources */,
 				C4D6B4C615F237C3003C7AB5 /* ClinicsDetailViewController.xib in Resources */,
+				C48A90CD15F67AD300640664 /* stribild.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

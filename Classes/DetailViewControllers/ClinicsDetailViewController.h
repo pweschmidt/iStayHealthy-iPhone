@@ -23,8 +23,8 @@
 @property (nonatomic, strong) NSString *number;
 @property (nonatomic, strong) NSString *emergencynumber;
 
-- (void)startEmailMessageView:(NSString *)emailAddress;
-- (void)loadClinicWebview:(NSString *)url withTitle:(NSString *)navTitle;
+- (void)startEmailMessageView;
+- (void)loadClinicWebview;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;
 - (IBAction) save:                  (id) sender;

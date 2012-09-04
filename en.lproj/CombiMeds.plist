@@ -44,5 +44,11 @@
 		<string>NRTI, NRTI</string>
 		<string>truvada</string>
 	</array>
+	<array>
+		<string>Elvitegravir, Tenofovir, Emtricitabine, Cobicistat</string>
+		<string>Stribild</string>
+		<string>NRTI, NRTI, Integrase Inhibitor, Booster</string>
+		<string>stribild</string>
+	</array>
 </array>
 </plist>

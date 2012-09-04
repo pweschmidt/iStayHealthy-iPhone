@@ -23,6 +23,7 @@
 @property (nonatomic, strong) SoundNameCell *selectedSoundCell;
 @property (nonatomic, strong)	AVAudioPlayer	*player;
 @property (nonatomic, strong) NSDate *startTime;
+- (IBAction) cancel:                (id) sender;
 - (IBAction) done:					(id) sender;
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeNotification;

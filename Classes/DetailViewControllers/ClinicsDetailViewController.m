@@ -18,6 +18,8 @@
 @interface ClinicsDetailViewController ()
 @property BOOL isEdit;
 @property NSUInteger buttonCount;
+- (void)callNumber;
+- (void)callEmergencyNumber;
 @end
 
 @implementation ClinicsDetailViewController
@@ -222,12 +224,26 @@
     GradientButton *callButton = [[GradientButton alloc] initWithFrame:callFrame
                                                                 colour:Green
                                                                  title:NSLocalizedString(@"Call", @"Call")];
+    [callButton addTarget:self
+                   action:@selector(callNumber)
+         forControlEvents:UIControlEventTouchUpInside];
+
     GradientButton *emergencyButton = [[GradientButton alloc] initWithFrame:emergencyFrame
                                                                      colour:Orange
                                                                       title:NSLocalizedString(@"Emergency", @"Call")];
+    [emergencyButton addTarget:self
+                        action:@selector(callEmergencyNumber)
+              forControlEvents:UIControlEventTouchUpInside];
+
     GradientButton *emailButton = [[GradientButton alloc] initWithFrame:emailFrame colour:Green title:NSLocalizedString(@"Send email", @"Send email")];
-    GradientButton *wwwButton = [[GradientButton alloc] initWithFrame:wwwFrame colour:Green title:NSLocalizedString(@"Go to Website", @"Go to Website")];
+    [emailButton addTarget:self
+                    action:@selector(startEmailMessageView)
+          forControlEvents:UIControlEventTouchUpInside];
     
+    GradientButton *wwwButton = [[GradientButton alloc] initWithFrame:wwwFrame colour:Green title:NSLocalizedString(@"Go to Website", @"Go to Website")];
+    [wwwButton addTarget:self
+                  action:@selector(loadClinicWebview)
+        forControlEvents:UIControlEventTouchUpInside];
     
     [headerView addSubview:callButton];
     [headerView addSubview:emergencyButton];
@@ -483,7 +499,7 @@
 }
 
 #pragma mark - messaging and email
-- (void)startEmailMessageView:(NSString *)emailAddress
+- (void)startEmailMessageView
 {
     if (![MFMailComposeViewController canSendMail])
     {
@@ -497,7 +513,7 @@
     MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
     mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
-    NSArray *toRecipient = [NSArray arrayWithObjects:emailAddress, nil];
+    NSArray *toRecipient = [NSArray arrayWithObjects:self.email, nil];
     mailController.mailComposeDelegate = self;
     [mailController setToRecipients:toRecipient];
     [mailController setSubject:@"Message from iStayHealthy..."];
@@ -543,20 +559,43 @@
 }
 
 #pragma mark WebView
-- (void)loadClinicWebview:(NSString *)url withTitle:(NSString *)navTitle{
-    NSString *webURL = url;
-    if (![url hasPrefix:@"http://"] && ![url hasPrefix:@"https://"])
+- (void)loadClinicWebview
+{
+    NSString *webURL = self.www;
+    if (![self.www hasPrefix:@"http://"] && ![self.www hasPrefix:@"https://"])
     {
-        webURL = [NSString stringWithFormat:@"http://%@",url];
+        webURL = [NSString stringWithFormat:@"http://%@",self.www];
     }
     
     
-    WebViewController *webViewController = [[WebViewController alloc]initWithURLString:webURL withTitle:navTitle];
+    WebViewController *webViewController = [[WebViewController alloc]initWithURLString:webURL withTitle:self.name];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
     UINavigationBar *navigationBar = [navigationController navigationBar];
     navigationBar.tintColor = [UIColor blackColor];
     [self presentModalViewController:navigationController animated:YES];
 }
+
+- (void)callNumber
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSString *cleanedString = [[self.number componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSString *escapedPhoneNumber = [cleanedString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", escapedPhoneNumber]];
+    [app openURL:telURL];
+    
+}
+
+- (void)callEmergencyNumber
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSString *cleanedString = [[self.emergencynumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSString *escapedPhoneNumber = [cleanedString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", escapedPhoneNumber]];
+    [app openURL:telURL];
+    
+}
+
+
 
 @end

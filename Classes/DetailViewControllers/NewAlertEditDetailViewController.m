@@ -11,6 +11,7 @@
 #import "GeneralSettings.h"
 #import "SetDateCell.h"
 #import "SoundNameCell.h"
+#import "GradientButton.h"
 
 @implementation NewAlertEditDetailViewController
 @synthesize sounds = _sounds;
@@ -71,10 +72,10 @@
     [super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Edit Alert",@"Edit Alert");
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
-                                              target:self action:@selector(showAlertView:)];
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                              target:self action:@selector(cancel:)];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                               initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
                                                target:self action:@selector(done:)];	
 }
 
@@ -143,6 +144,16 @@
 #endif
     [self dismissModalViewControllerAnimated:YES];
 }
+
+/**
+ dismisses the view without saving
+ @id
+ */
+- (IBAction) cancel: (id) sender
+{
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 
 /**
  shows the Alert view when user clicks the Trash button
@@ -285,6 +296,32 @@
         return 44.0;
 	}
 	return 48.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    CGFloat height = 10;
+    if (2 == section)
+    {
+        height = 90;
+    }
+    return height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footerView = nil;
+    footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
+    if (2 == section)
+    {
+        footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 90);
+        CGRect deleteFrame = CGRectMake(10, 45, tableView.bounds.size.width - 20 , 37);
+        GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
+        [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
+        [footerView addSubview:deleteButton];
+    }
+    
+    return footerView;
 }
 
 
