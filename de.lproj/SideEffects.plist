@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SideEffectArray</key>
+	<array>
+		<string>Kopfschmerz</string>
+		<string>Müdigkeit</string>
+		<string>Übelkeit</string>
+		<string>Durchfall</string>
+		<string>Übergeben</string>
+		<string>Fieber</string>
+		<string>Hautausschlag</string>
+		<string>Lactic acidosis</string>
+		<string>Übersensibilität</string>
+		<string>Herz und Kreislauf</string>
+		<string>Gelbsucht</string>
+		<string>Nierensteine</string>
+		<string>Schwindel</string>
+		<string>Schlaflosigkeit</string>
+		<string>Lebhafte Träume</string>
+		<string>Konzentrationslos</string>
+		<string>Gedächtnisschwund</string>
+		<string>Depression</string>
+		<string>Leberschaden (Hepatitis)</string>
+		<string>Schwangerschaftsprobleme</string>
+		<string>Hautverfärbung (Hände, Füsse)</string>
+		<string>Muskelschmerzen</string>
+		<string>Verfärbung der Nägel</string>
+		<string>Lipoatrophie</string>
+		<string>Periphäre Neuropathie</string>
+		<string>Pankreatitis</string>
+		<string>Leberschaden</string>
+		<string>Gicht</string>
+		<string>Entzündung an Lippen, Genitalien</string>
+		<string>Hautschwellungen, entzündungen</string>
+		<string>Gehärtete Haut</string>
+		<string>Zysten</string>
+		<string>Lungenentzündung</string>
+		<string>Abszess</string>
+		<string>Toxic epidermal necrolysis (TEN)</string>
+		<string>Blasenbildung</string>
+		<string>Entzündungen im Mundbereich</string>
+		<string>Trockene Haut</string>
+		<string>Abnormaler Nagelwuchs</string>
+	</array>
+</dict>
+</plist>

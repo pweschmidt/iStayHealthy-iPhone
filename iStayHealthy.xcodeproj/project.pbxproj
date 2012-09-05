@@ -23,6 +23,17 @@
 		C43423321466BDFC00F06DC6 /* iStayHealthyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43423311466BDFC00F06DC6 /* iStayHealthyTabBarController.m */; };
 		C43423361466BE3700F06DC6 /* iStayHealthyPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43423341466BE3700F06DC6 /* iStayHealthyPasswordController.m */; };
 		C43423371466BE3700F06DC6 /* iStayHealthyPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C43423351466BE3700F06DC6 /* iStayHealthyPasswordController.xib */; };
+		C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE56F15F7C5B600108EF8 /* Contacts.m */; };
+		C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57215F7C5CD00108EF8 /* iStayHealthyRecord.m */; };
+		C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57515F7C5CD00108EF8 /* Medication.m */; };
+		C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57815F7C5CE00108EF8 /* OtherMedication.m */; };
+		C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57B15F7C5CE00108EF8 /* MissedMedication.m */; };
+		C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57E15F7C5CE00108EF8 /* SideEffects.m */; };
+		C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58115F7C5CE00108EF8 /* Procedures.m */; };
+		C43BE58515F7C5CE00108EF8 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58415F7C5CE00108EF8 /* Results.m */; };
+		C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */; };
+		C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58A15F7C5CE00108EF8 /* Wellness.m */; };
+		C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43BE58E15F7CBE400108EF8 /* SideEffects.plist */; };
 		C44587BD148A691B00F453FB /* iconroundedsmall.png in Resources */ = {isa = PBXBuildFile; fileRef = C44587BC148A691B00F453FB /* iconroundedsmall.png */; };
 		C44B4884140CDEBE00BDC418 /* dropbox-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C44B4883140CDEBE00BDC418 /* dropbox-small.png */; };
 		C44B4886140CF1C200BDC418 /* feedback-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C44B4885140CF1C200BDC418 /* feedback-small.png */; };
@@ -164,14 +175,6 @@
 		C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4195C15F138B900882416 /* HealthChartsViewPortrait.m */; };
 		C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4195E15F138B900882416 /* ResultsAnalysis.m */; };
 		C4C4196715F138B900882416 /* Trafo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4196015F138B900882416 /* Trafo.m */; };
-		C4C4197815F1395F00882416 /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4196915F1395F00882416 /* Contacts.m */; };
-		C4C4197915F1395F00882416 /* iStayHealthyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4196B15F1395F00882416 /* iStayHealthyRecord.m */; };
-		C4C4197A15F1395F00882416 /* Medication.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4196D15F1395F00882416 /* Medication.m */; };
-		C4C4197B15F1395F00882416 /* MissedMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4196F15F1395F00882416 /* MissedMedication.m */; };
-		C4C4197C15F1395F00882416 /* OtherMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4197115F1395F00882416 /* OtherMedication.m */; };
-		C4C4197D15F1395F00882416 /* Procedures.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4197315F1395F00882416 /* Procedures.m */; };
-		C4C4197E15F1395F00882416 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4197515F1395F00882416 /* Results.m */; };
-		C4C4197F15F1395F00882416 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4197715F1395F00882416 /* SideEffects.m */; };
 		C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198115F13AAD00882416 /* ClinicsTableViewController.m */; };
 		C4C4199715F13AAD00882416 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198315F13AAD00882416 /* DashboardViewController.m */; };
 		C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198515F13AAD00882416 /* GeneralMedicalTableViewController.m */; };
@@ -243,7 +246,6 @@
 		C4D6B4C615F237C3003C7AB5 /* ClinicsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4D6B4C415F237C3003C7AB5 /* ClinicsDetailViewController.xib */; };
 		C4DF7E4D14857D17009C46E6 /* missedsmall.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF7E4C14857D17009C46E6 /* missedsmall.png */; };
 		C4DF910B15EE79560042211E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DF910A15EE79560042211E /* Constants.m */; };
-		C4E6FF38159A34EC001C5B8B /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4E6FF37159A34EC001C5B8B /* SideEffects.plist */; };
 		C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */; };
 		C4EB1FE412FD8FA800A8712D /* combi-label-medium.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EB1FE312FD8FA800A8712D /* combi-label-medium.png */; };
 		C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4EB207F12FD9DF900A8712D /* SoundList.plist */; };
@@ -336,6 +338,31 @@
 		C43423331466BE3700F06DC6 /* iStayHealthyPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyPasswordController.h; sourceTree = "<group>"; };
 		C43423341466BE3700F06DC6 /* iStayHealthyPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iStayHealthyPasswordController.m; sourceTree = "<group>"; };
 		C43423351466BE3700F06DC6 /* iStayHealthyPasswordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = iStayHealthyPasswordController.xib; path = Classes/iStayHealthyPasswordController.xib; sourceTree = "<group>"; };
+		C43BE56D15F7C14400108EF8 /* iStayHealthy 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iStayHealthy 13.xcdatamodel"; sourceTree = "<group>"; };
+		C43BE56E15F7C5B600108EF8 /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contacts.h; path = DataModelClasses/Contacts.h; sourceTree = "<group>"; };
+		C43BE56F15F7C5B600108EF8 /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contacts.m; path = DataModelClasses/Contacts.m; sourceTree = "<group>"; };
+		C43BE57115F7C5CD00108EF8 /* iStayHealthyRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iStayHealthyRecord.h; path = DataModelClasses/iStayHealthyRecord.h; sourceTree = "<group>"; };
+		C43BE57215F7C5CD00108EF8 /* iStayHealthyRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iStayHealthyRecord.m; path = DataModelClasses/iStayHealthyRecord.m; sourceTree = "<group>"; };
+		C43BE57415F7C5CD00108EF8 /* Medication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Medication.h; path = DataModelClasses/Medication.h; sourceTree = "<group>"; };
+		C43BE57515F7C5CD00108EF8 /* Medication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Medication.m; path = DataModelClasses/Medication.m; sourceTree = "<group>"; };
+		C43BE57715F7C5CE00108EF8 /* OtherMedication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedication.h; path = DataModelClasses/OtherMedication.h; sourceTree = "<group>"; };
+		C43BE57815F7C5CE00108EF8 /* OtherMedication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedication.m; path = DataModelClasses/OtherMedication.m; sourceTree = "<group>"; };
+		C43BE57A15F7C5CE00108EF8 /* MissedMedication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissedMedication.h; path = DataModelClasses/MissedMedication.h; sourceTree = "<group>"; };
+		C43BE57B15F7C5CE00108EF8 /* MissedMedication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissedMedication.m; path = DataModelClasses/MissedMedication.m; sourceTree = "<group>"; };
+		C43BE57D15F7C5CE00108EF8 /* SideEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideEffects.h; path = DataModelClasses/SideEffects.h; sourceTree = "<group>"; };
+		C43BE57E15F7C5CE00108EF8 /* SideEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffects.m; path = DataModelClasses/SideEffects.m; sourceTree = "<group>"; };
+		C43BE58015F7C5CE00108EF8 /* Procedures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Procedures.h; path = DataModelClasses/Procedures.h; sourceTree = "<group>"; };
+		C43BE58115F7C5CE00108EF8 /* Procedures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Procedures.m; path = DataModelClasses/Procedures.m; sourceTree = "<group>"; };
+		C43BE58315F7C5CE00108EF8 /* Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Results.h; path = DataModelClasses/Results.h; sourceTree = "<group>"; };
+		C43BE58415F7C5CE00108EF8 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
+		C43BE58615F7C5CE00108EF8 /* PreviousMedication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviousMedication.h; path = DataModelClasses/PreviousMedication.h; sourceTree = "<group>"; };
+		C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviousMedication.m; path = DataModelClasses/PreviousMedication.m; sourceTree = "<group>"; };
+		C43BE58915F7C5CE00108EF8 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
+		C43BE58A15F7C5CE00108EF8 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
+		C43BE58D15F7CBE400108EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/SideEffects.plist; sourceTree = "<group>"; };
+		C43BE58F15F7CBEE00108EF8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/SideEffects.plist; sourceTree = "<group>"; };
+		C43BE59015F7CBF400108EF8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/SideEffects.plist; sourceTree = "<group>"; };
+		C43BE59115F7CBFD00108EF8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/SideEffects.plist; sourceTree = "<group>"; };
 		C44587BC148A691B00F453FB /* iconroundedsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconroundedsmall.png; sourceTree = "<group>"; };
 		C44B4883140CDEBE00BDC418 /* dropbox-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropbox-small.png"; sourceTree = "<group>"; };
 		C44B4885140CF1C200BDC418 /* feedback-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback-small.png"; sourceTree = "<group>"; };
@@ -567,22 +594,6 @@
 		C4C4195E15F138B900882416 /* ResultsAnalysis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsAnalysis.m; path = Charts/ResultsAnalysis.m; sourceTree = "<group>"; };
 		C4C4195F15F138B900882416 /* Trafo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trafo.h; path = Charts/Trafo.h; sourceTree = "<group>"; };
 		C4C4196015F138B900882416 /* Trafo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Trafo.m; path = Charts/Trafo.m; sourceTree = "<group>"; };
-		C4C4196815F1395F00882416 /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contacts.h; path = DataModelClasses/Contacts.h; sourceTree = "<group>"; };
-		C4C4196915F1395F00882416 /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contacts.m; path = DataModelClasses/Contacts.m; sourceTree = "<group>"; };
-		C4C4196A15F1395F00882416 /* iStayHealthyRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iStayHealthyRecord.h; path = DataModelClasses/iStayHealthyRecord.h; sourceTree = "<group>"; };
-		C4C4196B15F1395F00882416 /* iStayHealthyRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iStayHealthyRecord.m; path = DataModelClasses/iStayHealthyRecord.m; sourceTree = "<group>"; };
-		C4C4196C15F1395F00882416 /* Medication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Medication.h; path = DataModelClasses/Medication.h; sourceTree = "<group>"; };
-		C4C4196D15F1395F00882416 /* Medication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Medication.m; path = DataModelClasses/Medication.m; sourceTree = "<group>"; };
-		C4C4196E15F1395F00882416 /* MissedMedication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissedMedication.h; path = DataModelClasses/MissedMedication.h; sourceTree = "<group>"; };
-		C4C4196F15F1395F00882416 /* MissedMedication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissedMedication.m; path = DataModelClasses/MissedMedication.m; sourceTree = "<group>"; };
-		C4C4197015F1395F00882416 /* OtherMedication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedication.h; path = DataModelClasses/OtherMedication.h; sourceTree = "<group>"; };
-		C4C4197115F1395F00882416 /* OtherMedication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedication.m; path = DataModelClasses/OtherMedication.m; sourceTree = "<group>"; };
-		C4C4197215F1395F00882416 /* Procedures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Procedures.h; path = DataModelClasses/Procedures.h; sourceTree = "<group>"; };
-		C4C4197315F1395F00882416 /* Procedures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Procedures.m; path = DataModelClasses/Procedures.m; sourceTree = "<group>"; };
-		C4C4197415F1395F00882416 /* Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Results.h; path = DataModelClasses/Results.h; sourceTree = "<group>"; };
-		C4C4197515F1395F00882416 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
-		C4C4197615F1395F00882416 /* SideEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideEffects.h; path = DataModelClasses/SideEffects.h; sourceTree = "<group>"; };
-		C4C4197715F1395F00882416 /* SideEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffects.m; path = DataModelClasses/SideEffects.m; sourceTree = "<group>"; };
 		C4C4198015F13AAD00882416 /* ClinicsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClinicsTableViewController.h; path = Controllers/ClinicsTableViewController.h; sourceTree = "<group>"; };
 		C4C4198115F13AAD00882416 /* ClinicsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicsTableViewController.m; path = Controllers/ClinicsTableViewController.m; sourceTree = "<group>"; };
 		C4C4198215F13AAD00882416 /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashboardViewController.h; path = Controllers/DashboardViewController.h; sourceTree = "<group>"; };
@@ -688,7 +699,6 @@
 		C4DF7E4C14857D17009C46E6 /* missedsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missedsmall.png; sourceTree = "<group>"; };
 		C4DF910915EE79560042211E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C4DF910A15EE79560042211E /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		C4E6FF37159A34EC001C5B8B /* SideEffects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SideEffects.plist; sourceTree = "<group>"; };
 		C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4EB1FE312FD8FA800A8712D /* combi-label-medium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-label-medium.png"; sourceTree = "<group>"; };
 		C4EB207F12FD9DF900A8712D /* SoundList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SoundList.plist; sourceTree = "<group>"; };
@@ -885,7 +895,7 @@
 				C4897FD7140FD0730033C61C /* NNRTI.plist */,
 				C4897FDD140FD0850033C61C /* EntryInhibitors.plist */,
 				C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */,
-				C4E6FF37159A34EC001C5B8B /* SideEffects.plist */,
+				C43BE58E15F7CBE400108EF8 /* SideEffects.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1100,22 +1110,26 @@
 		C4B803C112D36E6700A5A38F /* DataModelClasses */ = {
 			isa = PBXGroup;
 			children = (
-				C4C4196815F1395F00882416 /* Contacts.h */,
-				C4C4196915F1395F00882416 /* Contacts.m */,
-				C4C4196A15F1395F00882416 /* iStayHealthyRecord.h */,
-				C4C4196B15F1395F00882416 /* iStayHealthyRecord.m */,
-				C4C4196C15F1395F00882416 /* Medication.h */,
-				C4C4196D15F1395F00882416 /* Medication.m */,
-				C4C4196E15F1395F00882416 /* MissedMedication.h */,
-				C4C4196F15F1395F00882416 /* MissedMedication.m */,
-				C4C4197015F1395F00882416 /* OtherMedication.h */,
-				C4C4197115F1395F00882416 /* OtherMedication.m */,
-				C4C4197215F1395F00882416 /* Procedures.h */,
-				C4C4197315F1395F00882416 /* Procedures.m */,
-				C4C4197415F1395F00882416 /* Results.h */,
-				C4C4197515F1395F00882416 /* Results.m */,
-				C4C4197615F1395F00882416 /* SideEffects.h */,
-				C4C4197715F1395F00882416 /* SideEffects.m */,
+				C43BE58915F7C5CE00108EF8 /* Wellness.h */,
+				C43BE58A15F7C5CE00108EF8 /* Wellness.m */,
+				C43BE58615F7C5CE00108EF8 /* PreviousMedication.h */,
+				C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */,
+				C43BE58315F7C5CE00108EF8 /* Results.h */,
+				C43BE58415F7C5CE00108EF8 /* Results.m */,
+				C43BE58015F7C5CE00108EF8 /* Procedures.h */,
+				C43BE58115F7C5CE00108EF8 /* Procedures.m */,
+				C43BE57D15F7C5CE00108EF8 /* SideEffects.h */,
+				C43BE57E15F7C5CE00108EF8 /* SideEffects.m */,
+				C43BE57A15F7C5CE00108EF8 /* MissedMedication.h */,
+				C43BE57B15F7C5CE00108EF8 /* MissedMedication.m */,
+				C43BE57715F7C5CE00108EF8 /* OtherMedication.h */,
+				C43BE57815F7C5CE00108EF8 /* OtherMedication.m */,
+				C43BE57415F7C5CD00108EF8 /* Medication.h */,
+				C43BE57515F7C5CD00108EF8 /* Medication.m */,
+				C43BE57115F7C5CD00108EF8 /* iStayHealthyRecord.h */,
+				C43BE57215F7C5CD00108EF8 /* iStayHealthyRecord.m */,
+				C43BE56E15F7C5B600108EF8 /* Contacts.h */,
+				C43BE56F15F7C5B600108EF8 /* Contacts.m */,
 			);
 			name = DataModelClasses;
 			sourceTree = "<group>";
@@ -1333,6 +1347,7 @@
 				pt,
 				it,
 				nl,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1487,7 +1502,7 @@
 				C4B681F01549B24200503339 /* gaydarbanner@2x.png in Resources */,
 				C4EFD405154D71A90059A2BA /* pozbannerEmpty.png in Resources */,
 				C4EFD406154D71A90059A2BA /* pozbannerEmpty@2x.png in Resources */,
-				C4E6FF38159A34EC001C5B8B /* SideEffects.plist in Resources */,
+				C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */,
 				C49B5C5615DFCC4600D3AF3B /* stop@2x.png in Resources */,
 				C49B5C5815DFCC6300D3AF3B /* stop.png in Resources */,
 				C49B5C5F15DFE4BA00D3AF3B /* appointments.png in Resources */,
@@ -1596,14 +1611,6 @@
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
 				C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */,
 				C4C4196715F138B900882416 /* Trafo.m in Sources */,
-				C4C4197815F1395F00882416 /* Contacts.m in Sources */,
-				C4C4197915F1395F00882416 /* iStayHealthyRecord.m in Sources */,
-				C4C4197A15F1395F00882416 /* Medication.m in Sources */,
-				C4C4197B15F1395F00882416 /* MissedMedication.m in Sources */,
-				C4C4197C15F1395F00882416 /* OtherMedication.m in Sources */,
-				C4C4197D15F1395F00882416 /* Procedures.m in Sources */,
-				C4C4197E15F1395F00882416 /* Results.m in Sources */,
-				C4C4197F15F1395F00882416 /* SideEffects.m in Sources */,
 				C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */,
 				C4C4199715F13AAD00882416 /* DashboardViewController.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
@@ -1638,6 +1645,16 @@
 				C491AE5E15F15B8500EB1CF8 /* OtherMedsDetailViewController.m in Sources */,
 				C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */,
 				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
+				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
+				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
+				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
+				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
+				C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */,
+				C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */,
+				C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */,
+				C43BE58515F7C5CE00108EF8 /* Results.m in Sources */,
+				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
+				C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1675,6 +1692,17 @@
 				C42AB58414950EF7005E9A0F /* fr */,
 			);
 			name = PasswordCell.xib;
+			sourceTree = "<group>";
+		};
+		C43BE58E15F7CBE400108EF8 /* SideEffects.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C43BE58D15F7CBE400108EF8 /* en */,
+				C43BE58F15F7CBEE00108EF8 /* de */,
+				C43BE59015F7CBF400108EF8 /* es */,
+				C43BE59115F7CBFD00108EF8 /* fr */,
+			);
+			name = SideEffects.plist;
 			sourceTree = "<group>";
 		};
 		C452630A13F5422B0004C80F /* WebViewController.xib */ = {
@@ -2015,6 +2043,7 @@
 				C4B3A6B21466E36D00D03C3B /* iStayHealthy 9.xcdatamodel */,
 				C4B3A6AE1466D8BC00D03C3B /* iStayHealthy 8.xcdatamodel */,
 				28C3AD890F43EF2300507BA6 /* iStayHealthy.xcdatamodel */,
+				C43BE56D15F7C14400108EF8 /* iStayHealthy 13.xcdatamodel */,
 				C4B228A214794AB200AEAED8 /* iStayHealthy 12.xcdatamodel */,
 				C46067E01472D5ED00FCA76D /* iStayHealthy 10.xcdatamodel */,
 				C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */,

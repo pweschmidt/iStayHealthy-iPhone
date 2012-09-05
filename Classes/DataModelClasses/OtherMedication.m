@@ -2,8 +2,8 @@
 //  OtherMedication.m
 //  iStayHealthy
 //
-//  Created by peterschmidt on 18/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Peter Schmidt on 05/09/2012.
+//
 //
 
 #import "OtherMedication.h"
@@ -18,8 +18,8 @@
 @dynamic EndDate;
 @dynamic Name;
 @dynamic Image;
-@dynamic MedicationForm;
 @dynamic Unit;
+@dynamic MedicationForm;
 @dynamic record;
 
 @end

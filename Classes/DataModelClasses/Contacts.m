@@ -2,8 +2,8 @@
 //  Contacts.m
 //  iStayHealthy
 //
-//  Created by peterschmidt on 20/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Peter Schmidt on 05/09/2012.
+//
 //
 
 #import "Contacts.h"
@@ -15,6 +15,7 @@
 @dynamic InsuranceID;
 @dynamic InsuranceName;
 @dynamic AppointmentContactNumber;
+@dynamic InsuranceWebSite;
 @dynamic ClinicCountry;
 @dynamic EmergencyContactNumber;
 @dynamic UID;
@@ -22,18 +23,17 @@
 @dynamic ClinicCity;
 @dynamic ClinicPostcode;
 @dynamic ClinicID;
+@dynamic ClinicWebSite;
 @dynamic ConsultantName;
 @dynamic InsuranceAuthorisationCode;
+@dynamic InsuranceContactNumber;
 @dynamic EmergencyContactNumber2;
 @dynamic ClinicNurseName;
-@dynamic InsuranceContactNumber;
 @dynamic ResultsContactNumber;
+@dynamic ClinicEmailAddress;
 @dynamic ContactName;
 @dynamic ClinicContactNumber;
 @dynamic ClinicStreet;
-@dynamic ClinicEmailAddress;
-@dynamic ClinicWebSite;
-@dynamic InsuranceWebSite;
 @dynamic record;
 
 @end

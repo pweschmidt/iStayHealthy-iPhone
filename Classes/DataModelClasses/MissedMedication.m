@@ -2,8 +2,8 @@
 //  MissedMedication.m
 //  iStayHealthy
 //
-//  Created by peterschmidt on 15/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Peter Schmidt on 05/09/2012.
+//
 //
 
 #import "MissedMedication.h"
@@ -16,6 +16,7 @@
 @dynamic Name;
 @dynamic MissedDate;
 @dynamic Drug;
+@dynamic missedReason;
 @dynamic record;
 
 @end

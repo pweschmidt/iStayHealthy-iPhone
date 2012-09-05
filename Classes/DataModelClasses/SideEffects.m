@@ -2,8 +2,8 @@
 //  SideEffects.m
 //  iStayHealthy
 //
-//  Created by peterschmidt on 20/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Peter Schmidt on 05/09/2012.
+//
 //
 
 #import "SideEffects.h"
@@ -17,6 +17,7 @@
 @dynamic Name;
 @dynamic UID;
 @dynamic Drug;
+@dynamic seriousness;
 @dynamic record;
 
 @end

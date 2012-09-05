@@ -2,8 +2,8 @@
 //  MissedMedication.h
 //  iStayHealthy
 //
-//  Created by peterschmidt on 15/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Peter Schmidt on 05/09/2012.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString * Name;
 @property (nonatomic, strong) NSDate * MissedDate;
 @property (nonatomic, strong) NSString * Drug;
+@property (nonatomic, strong) NSString * missedReason;
 @property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end

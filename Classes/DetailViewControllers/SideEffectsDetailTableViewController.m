@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSDateFormatter *formatter;
 @property (nonatomic, strong) NSNumber *seriousnessIndex;
 @property (nonatomic, strong) NSString *selectedSideEffectLabel;
+@property (nonatomic, strong) NSString *seriousness;
 @end
 
 @implementation SideEffectsDetailTableViewController
@@ -40,6 +41,7 @@
 @synthesize selectedCell = _selectedCell;
 @synthesize formatter = _formatter;
 @synthesize seriousnessIndex = _seriousnessIndex;
+@synthesize seriousness = _seriousness;
 @synthesize selectedSideEffectLabel = _selectedSideEffectLabel;
 @synthesize currentMeds = _currentMeds;
 
@@ -67,6 +69,27 @@
         self.selectedCell = nil;
         self.formatter = [[NSDateFormatter alloc] init];
         self.formatter.dateFormat = @"dd MMM YY";
+        self.seriousness = self.sideEffects.seriousness;
+        if (nil == self.seriousness)
+        {
+            self.seriousnessIndex = [NSNumber numberWithInt:0];
+        }
+        else
+        {
+            if ([self.seriousness isEqualToString:@"Minor"])
+            {
+                self.seriousnessIndex = [NSNumber numberWithInt:0];
+            }
+            else if ([self.seriousness isEqualToString:@"Major"])
+            {
+                self.seriousnessIndex = [NSNumber numberWithInt:1];
+            }
+            else
+            {
+                self.seriousnessIndex = [NSNumber numberWithInt:2];
+            }            
+        }
+        NSLog(@"Seriousness is %@",self.seriousness);
     }
     return self;
 }
@@ -89,6 +112,7 @@
         self.selectedCell = nil;
         self.formatter = [[NSDateFormatter alloc] init];
         self.formatter.dateFormat = @"dd MMM YY";
+        self.seriousnessIndex = [NSNumber numberWithInt:0];
     }
     return self;
 }
@@ -107,8 +131,9 @@
     NSString *effectsList = [[NSBundle mainBundle] pathForResource:@"SideEffects" ofType:@"plist"];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:effectsList];
     NSArray *list = [dict valueForKey:@"SideEffectArray"];
+    NSArray *sortedList = [list sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 
-    self.sideEffectArray = [NSMutableArray arrayWithArray:list];
+    self.sideEffectArray = [NSMutableArray arrayWithArray:sortedList];
 
     NSArray *segmentArray = [NSArray arrayWithObjects:NSLocalizedString(@"Minor", @"Minor"), NSLocalizedString(@"Major", @"Major"), NSLocalizedString(@"Serious", @"Serious"), nil];
     
@@ -119,9 +144,8 @@
     self.seriousnessControl.frame = CGRectMake(20, 3, segmentWidth, 30);
     self.seriousnessControl.tintColor = TINTCOLOUR;
     self.seriousnessControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    self.seriousnessControl.selectedSegmentIndex = 0;
+    self.seriousnessControl.selectedSegmentIndex = [self.seriousnessIndex intValue];
     [self.seriousnessControl addTarget:self action:@selector(seriousnessChanged:) forControlEvents:UIControlEventValueChanged];
-    self.seriousnessIndex = [NSNumber numberWithInt:0];
 }
 
 - (void)viewDidUnload
@@ -132,13 +156,25 @@
 
 - (IBAction) save:					(id) sender
 {
+    switch ([self.seriousnessIndex intValue])
+    {
+        case 0:
+            self.seriousness =@"Minor";
+            break;
+        case 1:
+            self.seriousness = @"Major";
+            break;
+        case 2:
+            self.seriousness = @"Serious";
+            break;
+    }
     NSManagedObjectContext *context = nil;
     if (self.isEditMode)
     {
         context = [self.sideEffects managedObjectContext];
         self.sideEffects.SideEffect = self.selectedSideEffectLabel;
         self.sideEffects.SideEffectDate = self.effectsDate;
-        //self.sideEffects.Seriousness = self.seriousnessIndex;
+        self.sideEffects.seriousness = self.seriousness;
         self.sideEffects.UID = [Utilities GUID];
         self.record.UID = [Utilities GUID];
     }
@@ -158,7 +194,7 @@
             [effectedDrugs appendFormat:@"%@ ",name];
         }
         newEffects.Name = effectedDrugs;
-        //newEffects.Seriousness = self.seriousnessIndex;
+        newEffects.seriousness = self.seriousness;
     }
     if (nil != context)
     {
@@ -371,15 +407,13 @@
         }
         cell.textLabel.textColor = TEXTCOLOUR;
         cell.textLabel.text = [self.sideEffectArray objectAtIndex:indexPath.row];
-        if ([cell.textLabel.text isEqualToString:[self.sideEffectArray lastObject]])
-        {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        if (self.isEditMode && [self.selectedSideEffectLabel isEqualToString:cell.textLabel.text])
+        if (self.isEditMode && [self.sideEffects.SideEffect isEqualToString:cell.textLabel.text])
         {
+            self.selectedSideEffectLabel = self.sideEffects.SideEffect;
             self.selectedCell = cell;
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
         if (cell == self.selectedCell)
         {

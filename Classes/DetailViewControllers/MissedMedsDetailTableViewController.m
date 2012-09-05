@@ -64,6 +64,7 @@
         self.selectedCell = nil;
         self.formatter = [[NSDateFormatter alloc] init];
         self.formatter.dateFormat = @"dd MMM YY";
+        self.selectedReasonLabel = self.missedMeds.missedReason;
     }
     return self;
 }
@@ -84,6 +85,7 @@
         self.selectedCell = nil;
         self.formatter = [[NSDateFormatter alloc] init];
         self.formatter.dateFormat = @"dd MMM YY";
+        self.selectedReasonLabel = nil;
     }
     return self;
 }
@@ -121,7 +123,7 @@
     {
         context = [self.missedMeds managedObjectContext];
         self.missedMeds.MissedDate = self.missedDate;
-        //self.missedMeds.Reason = self.selectedCell.textLabel.text;
+        self.missedMeds.missedReason = self.selectedReasonLabel;
         self.missedMeds.UID = [Utilities GUID];
         self.record.UID = [Utilities GUID];
     }
@@ -132,7 +134,7 @@
         [self.record addMissedMedicationsObject:newMissedMeds];
         self.record.UID = [Utilities GUID];
         newMissedMeds.UID = [Utilities GUID];
-        //newMissedMeds.Reason = self.selectedCell.textLabel.text;
+        newMissedMeds.missedReason = self.selectedReasonLabel;
         newMissedMeds.MissedDate = self.missedDate;
         NSMutableString *effectedDrugs = [NSMutableString string];
         for (Medication *med in self.currentMedArray) {
@@ -253,7 +255,7 @@
     CGFloat height = 10;
     if (1 == section)
     {
-        height = 40;
+        height = 50;
     }
     return height;
 }
@@ -266,8 +268,8 @@
     {
         if (self.isEditMode)
         {
-            footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 40);
-            CGRect deleteFrame = CGRectMake(10, 1.5, tableView.bounds.size.width - 20 , 37);
+            footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 50);
+            CGRect deleteFrame = CGRectMake(10, 10, tableView.bounds.size.width - 20 , 37);
             GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
             [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
             [footerView addSubview:deleteButton];
@@ -319,9 +321,13 @@
         cell.textLabel.text = [self.reasonArray objectAtIndex:indexPath.row];
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        if (self.isEditMode && [self.selectedCell.textLabel.text isEqualToString:cell.textLabel.text])
+        if (self.isEditMode && nil != self.selectedReasonLabel)
         {
-            self.selectedCell = cell;
+            if ([self.selectedReasonLabel isEqualToString:cell.textLabel.text])
+            {
+                self.selectedCell = cell;
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }
         }
         if (cell == self.selectedCell)
         {
@@ -357,6 +363,7 @@
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.selectedCell = cell;
+        self.selectedReasonLabel = cell.textLabel.text;
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
         
     }

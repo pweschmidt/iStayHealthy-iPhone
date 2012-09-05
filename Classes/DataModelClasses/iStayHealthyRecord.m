@@ -2,8 +2,8 @@
 //  iStayHealthyRecord.m
 //  iStayHealthy
 //
-//  Created by peterschmidt on 15/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Peter Schmidt on 05/09/2012.
+//
 //
 
 #import "iStayHealthyRecord.h"
@@ -14,6 +14,8 @@
 #import "Procedures.h"
 #import "Results.h"
 #import "SideEffects.h"
+#import "Wellness.h"
+#import "PreviousMedication.h"
 
 
 @implementation iStayHealthyRecord
@@ -22,19 +24,24 @@
 @dynamic isPasswordEnabled;
 @dynamic Password;
 @dynamic Name;
+@dynamic isSmoker;
+@dynamic yearOfBirth;
+@dynamic isDiabetic;
+@dynamic gender;
 @dynamic otherMedications;
 @dynamic missedMedications;
 @dynamic contacts;
 @dynamic results;
 @dynamic medications;
-@dynamic sideeffects;
 @dynamic procedures;
-
+@dynamic sideeffects;
+@dynamic wellness;
+@dynamic previousMedications;
 
 /**
  Results
  */
-- (void)addResultsObject:(Results *)value {    
+- (void)addResultsObject:(Results *)value {
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"results" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"results"] addObject:value];
@@ -48,7 +55,7 @@
     [self didChangeValueForKey:@"results" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
 }
 
-- (void)addResults:(NSSet *)value {    
+- (void)addResults:(NSSet *)value {
     [self willChangeValueForKey:@"results" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
     [[self primitiveValueForKey:@"results"] unionSet:value];
     [self didChangeValueForKey:@"results" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
@@ -64,7 +71,7 @@
  OtherMedication
  */
 
-- (void)addOtherMedicationsObject:(OtherMedication *)value {    
+- (void)addOtherMedicationsObject:(OtherMedication *)value {
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"otherMedications"] addObject:value];
@@ -78,7 +85,7 @@
     [self didChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
 }
 
-- (void)addOtherMedications:(NSSet *)value {    
+- (void)addOtherMedications:(NSSet *)value {
     [self willChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
     [[self primitiveValueForKey:@"otherMedications"] unionSet:value];
     [self didChangeValueForKey:@"otherMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
@@ -94,7 +101,7 @@
  Medication
  */
 
-- (void)addMedicationsObject:(Medication *)value {    
+- (void)addMedicationsObject:(Medication *)value {
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"medications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"medications"] addObject:value];
@@ -108,7 +115,7 @@
     [self didChangeValueForKey:@"medications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
 }
 
-- (void)addMedications:(NSSet *)value {    
+- (void)addMedications:(NSSet *)value {
     [self willChangeValueForKey:@"medications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
     [[self primitiveValueForKey:@"medications"] unionSet:value];
     [self didChangeValueForKey:@"medications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
@@ -124,7 +131,7 @@
  MissedMedication
  */
 
-- (void)addMissedMedicationsObject:(MissedMedication *)value {    
+- (void)addMissedMedicationsObject:(MissedMedication *)value {
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"missedMedications"] addObject:value];
@@ -138,7 +145,7 @@
     [self didChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
 }
 
-- (void)addMissedMedications:(NSSet *)value {    
+- (void)addMissedMedications:(NSSet *)value {
     [self willChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
     [[self primitiveValueForKey:@"missedMedications"] unionSet:value];
     [self didChangeValueForKey:@"missedMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
@@ -154,7 +161,7 @@
  Contacts
  */
 
-- (void)addContactsObject:(Contacts *)value {    
+- (void)addContactsObject:(Contacts *)value {
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"contacts" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"contacts"] addObject:value];
@@ -168,7 +175,7 @@
     [self didChangeValueForKey:@"contacts" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
 }
 
-- (void)addContacts:(NSSet *)value {    
+- (void)addContacts:(NSSet *)value {
     [self willChangeValueForKey:@"contacts" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
     [[self primitiveValueForKey:@"contacts"] unionSet:value];
     [self didChangeValueForKey:@"contacts" withSetMutation:NSKeyValueUnionSetMutation usingObjects:value];
@@ -201,7 +208,7 @@
 - (void)addSideeffects:(NSSet *)values{
     [self willChangeValueForKey:@"sideeffects" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
     [[self primitiveValueForKey:@"sideeffects"] unionSet:values];
-    [self didChangeValueForKey:@"sideeffects" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];    
+    [self didChangeValueForKey:@"sideeffects" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
 }
 
 - (void)removeSideeffects:(NSSet *)values{
@@ -231,13 +238,85 @@
 - (void)addProcedures:(NSSet *)values{
     [self willChangeValueForKey:@"procedures" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
     [[self primitiveValueForKey:@"procedures"] unionSet:values];
-    [self didChangeValueForKey:@"procedures" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];    
+    [self didChangeValueForKey:@"procedures" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
 }
 
 - (void)removeProcedures:(NSSet *)values{
     [self willChangeValueForKey:@"procedures" withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
     [[self primitiveValueForKey:@"procedures"] minusSet:values];
     [self didChangeValueForKey:@"procedures" withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+}
+
+/**
+ Wellness
+ */
+- (void)addWellnessObject:(Wellness *)value
+{
+    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
+    [self willChangeValueForKey:@"wellness" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
+    [[self primitiveValueForKey:@"wellness"] addObject:value];
+    [self didChangeValueForKey:@"wellness" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];    
+}
+
+- (void)removeWellnessObject:(Wellness *)value
+{
+    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
+    [self willChangeValueForKey:@"wellness" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
+    [[self primitiveValueForKey:@"wellness"] removeObject:value];
+    [self didChangeValueForKey:@"wellness" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
+    
+}
+
+- (void)addWellness:(NSSet *)values
+{
+    [self willChangeValueForKey:@"wellness" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
+    [[self primitiveValueForKey:@"wellness"] unionSet:values];
+    [self didChangeValueForKey:@"wellness" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
+    
+}
+
+- (void)removeWellness:(NSSet *)values
+{
+    [self willChangeValueForKey:@"wellness" withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+    [[self primitiveValueForKey:@"wellness"] minusSet:values];
+    [self didChangeValueForKey:@"wellness" withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+}
+
+/**
+ Previous Medications
+ */
+- (void)addPreviousMedicationsObject:(PreviousMedication *)value
+{
+    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
+    [self willChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
+    [[self primitiveValueForKey:@"previousMedications"] addObject:value];
+    [self didChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
+    
+}
+
+- (void)removePreviousMedicationsObject:(PreviousMedication *)value
+{
+    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
+    [self willChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
+    [[self primitiveValueForKey:@"previousMedications"] removeObject:value];
+    [self didChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
+    
+}
+
+- (void)addPreviousMedications:(NSSet *)values
+{
+    [self willChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
+    [[self primitiveValueForKey:@"previousMedications"] unionSet:values];
+    [self didChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
+    
+}
+
+- (void)removePreviousMedications:(NSSet *)values
+{
+    [self willChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+    [[self primitiveValueForKey:@"previousMedications"] minusSet:values];
+    [self didChangeValueForKey:@"previousMedications" withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+    
 }
 
 

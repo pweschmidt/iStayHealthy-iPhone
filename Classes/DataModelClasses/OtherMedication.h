@@ -2,8 +2,8 @@
 //  OtherMedication.h
 //  iStayHealthy
 //
-//  Created by peterschmidt on 18/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Peter Schmidt on 05/09/2012.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -19,8 +19,8 @@
 @property (nonatomic, strong) NSDate * EndDate;
 @property (nonatomic, strong) NSString * Name;
 @property (nonatomic, strong) NSData * Image;
-@property (nonatomic, strong) NSString * MedicationForm;
 @property (nonatomic, strong) NSString * Unit;
+@property (nonatomic, strong) NSString * MedicationForm;
 @property (nonatomic, strong) iStayHealthyRecord *record;
 
 @end

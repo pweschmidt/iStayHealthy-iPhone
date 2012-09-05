@@ -164,3 +164,15 @@
 "HIVResults"="Viral Measures";
 "GeneralBloods"="Blood and Other Results";
 "GeneralWellBeing"="General";
+"Minor"="Minor";
+"Major"="Major";
+"Serious"="Serious";
+"Forgotten"="Forgotten";
+"Ran out of meds"="Ran out of meds";
+"Could not take the pills"="Could not take the pills";
+"Didn't want to take the meds"="Didn't want to take the meds";
+"No particular reason"="No particular reason";
+"Red Blood Cells"="Red Blood Cells";
+
+
+

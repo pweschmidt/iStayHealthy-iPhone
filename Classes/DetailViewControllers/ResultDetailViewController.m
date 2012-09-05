@@ -165,10 +165,10 @@
         {
             self.platelets = self.results.PlateletCount;
         }
-        //        if (nil != self.results.RedBloodCellCount)
-        //        {
-        //            self.redCells = self.results.RedBloodCellCount;
-        //        }
+        if (nil != self.results.redBloodCellCount)
+        {
+            self.redCells = self.results.redBloodCellCount;
+        }
     }
     return self;
 }
@@ -244,7 +244,7 @@
         self.results.WhiteBloodCellCount = self.whiteCells;
         self.results.PlateletCount = self.platelets;
         self.results.UID = [Utilities GUID];
-        //self.results.RedBloodCellCount = self.redCells;
+        self.results.redBloodCellCount = self.redCells;
         self.record.UID = [Utilities GUID];
     }
     else
@@ -268,9 +268,9 @@
         results.LDL = self.ldl;
         results.Hemoglobulin = self.hemoglobulin;
         results.WhiteBloodCellCount = self.whiteCells;
-        results.PlateletCount = self.platelets;        
+        results.PlateletCount = self.platelets;
+        results.redBloodCellCount = self.redCells;
     }
-//TODO - add to data model    results.RedBloodCellCount = self.redCells;
     
     if (nil != context)
     {
@@ -860,10 +860,10 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"Hemoglobulin", @"Hemoglobulin");
                     if (0 < [self.hemoglobulin floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.hemoglobulin floatValue]]];
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.hemoglobulin intValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
-                    resultCell.inputValueKind = FLOATINPUT;
+                    resultCell.inputValueKind = INTEGERINPUT;
                     break;
                 }
                 case 1:
@@ -871,10 +871,10 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"White Blood Cells", @"White Blood Cells");
                     if (0 < [self.whiteCells floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.whiteCells floatValue]]];
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.whiteCells intValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
-                    resultCell.inputValueKind = FLOATINPUT;
+                    resultCell.inputValueKind = INTEGERINPUT;
                     break;
                 }
                 case 2:
@@ -882,10 +882,10 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"Red Blood Cells", @"Red Blood Cells");
                     if (0 < [self.redCells floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.redCells floatValue]]];
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.redCells intValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
-                    resultCell.inputValueKind = FLOATINPUT;
+                    resultCell.inputValueKind = INTEGERINPUT;
                     break;
                 }
                 case 3:
@@ -893,10 +893,10 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"Platelets", @"Platelets");
                     if (0 < [self.platelets floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.platelets floatValue]]];
+                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.platelets intValue]]];
                         [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
                     }
-                    resultCell.inputValueKind = FLOATINPUT;
+                    resultCell.inputValueKind = INTEGERINPUT;
                     break;
                 }
             }

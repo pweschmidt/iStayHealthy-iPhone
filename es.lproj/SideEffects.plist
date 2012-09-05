@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SideEffectArray</key>
+	<array>
+		<string>Headache</string>
+		<string>Fatigue</string>
+		<string>Nausea</string>
+		<string>Diarrhoea</string>
+		<string>Vomiting</string>
+		<string>Fever</string>
+		<string>Skin rash</string>
+		<string>Lactic acidosis</string>
+		<string>Hypersensitivity reaction</string>
+		<string>Cardiovascular problems</string>
+		<string>Jaundice</string>
+		<string>Kidney stones</string>
+		<string>Dizziness</string>
+		<string>Insomnia</string>
+		<string>Vivid dreams</string>
+		<string>Impaired concentration</string>
+		<string>Memory loss</string>
+		<string>Depression</string>
+		<string>Liver damage (hepatitis)</string>
+		<string>Problems during pregnancy</string>
+		<string>Skin pigmentation on palms, soles</string>
+		<string>Muscle pain</string>
+		<string>Nail discoloration</string>
+		<string>Lipodystrophy</string>
+		<string>Peripheral neuropathy</string>
+		<string>Pancreatitis</string>
+		<string>Liver damage</string>
+		<string>Gout</string>
+		<string>Lesions on lips, genitals</string>
+		<string>Red swollen or puffy skin</string>
+		<string>Hardened skin</string>
+		<string>Cysts, nodules</string>
+		<string>Pneumonia</string>
+		<string>Abscess</string>
+		<string>Toxic epidermal necrolysis (TEN)</string>
+		<string>Blisters</string>
+		<string>Oral lesions</string>
+		<string>Dry skin</string>
+		<string>Abnormal nail growth</string>
+	</array>
+</dict>
+</plist>
