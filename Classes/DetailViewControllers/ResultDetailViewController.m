@@ -19,7 +19,6 @@
 #import "ChartSettings.h"
 #import "GradientButton.h"
 #import "Results.h"
-#import "UnitTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ResultDetailViewController ()
@@ -213,12 +212,6 @@
 - (void)indexDidChangeForSegment
 {
     [self.tableView reloadData];
-}
-
-- (IBAction) changeUnits:           (id) sender
-{
-    UnitTableViewController *unitController = [[UnitTableViewController alloc] initWithNibName:@"UnitTableViewController" bundle:nil];
-    [self.navigationController pushViewController:unitController animated:YES];    
 }
 
 
@@ -525,7 +518,7 @@
     {
         if (self.isInEditMode)
         {
-            height = 90;
+            height = 50;
         }
         else
         {
@@ -554,20 +547,13 @@
 {
     UIView *footerView = nil;
     footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
-    if (2 == section)
+    if (2 == section && self.isInEditMode)
     {
-        footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 40);
-        CGRect buttonFrame = CGRectMake(10, 1.5, tableView.bounds.size.width - 20 , 37);
-        GradientButton *gradButton = [[GradientButton alloc] initWithFrame:buttonFrame colour:Green title:NSLocalizedString(@"Change Units", @"Change Units")];
-        [gradButton addTarget:self action:@selector(changeUnits:) forControlEvents:UIControlEventTouchUpInside];
-        [footerView addSubview:gradButton];
-        if (self.isInEditMode)
-        {
-            CGRect deleteFrame = CGRectMake(10, 45, tableView.bounds.size.width - 20 , 37);
-            GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
-            [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
-            [footerView addSubview:deleteButton];
-        }
+        footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 50);
+        CGRect deleteFrame = CGRectMake(10, 10, tableView.bounds.size.width - 20 , 37);
+        GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
+        [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
+        [footerView addSubview:deleteButton];
     }
         
     return footerView;

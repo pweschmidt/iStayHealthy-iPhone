@@ -35,7 +35,6 @@
 @property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
-- (IBAction) changeUnits:           (id) sender;
 - (void)changeResultsDate;
 - (void)removeSQLEntry;
 - (IBAction) showAlertView:			(id) sender;
