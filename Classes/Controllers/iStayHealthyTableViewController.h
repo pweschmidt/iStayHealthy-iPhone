@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSArray *allContacts;
 @property (nonatomic, strong) NSArray *allPills;
 @property (nonatomic, strong) NSArray *allProcedures;
+@property (nonatomic, strong) NSArray *allPreviousMedications;
+@property (nonatomic, strong) NSArray *allWellnes;
 @property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) StatusViewControllerLandscape *landscapeController;

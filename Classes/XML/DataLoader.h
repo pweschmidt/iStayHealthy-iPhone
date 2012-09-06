@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSArray *allContacts;
 @property (nonatomic, strong) NSArray *allSideEffects;
 @property (nonatomic, strong) NSArray *allProcedures;
+@property (nonatomic, strong) NSArray *allPreviousMedications;
+@property (nonatomic, strong) NSArray *allWellness;
 - (void)getSQLData;
 - (NSData *)xmlData;
 - (NSData *)csvData;
@@ -33,6 +35,8 @@
 - (void) addContacts:(XMLElement *)contactsParent;
 - (void) addSideEffects:(XMLElement *)sideEffectsParent;
 - (void) addProcedures:(XMLElement *)proceduresParent;
+- (void) addPreviousMedications:(XMLElement *)previousMedsParent;
+- (void) addWellness:(XMLElement *)wellnessParent;
 - (BOOL) containsResultsUID:(NSString *)UID;
 - (BOOL) containsMedicationsUID:(NSString *)UID;
 - (BOOL) containsMissedMedicationsUID:(NSString *)UID;
@@ -40,6 +44,8 @@
 - (BOOL) containsProceduresUID:(NSString *)UID;
 - (BOOL) containsSideEffectsUID:(NSString *)UID;
 - (BOOL) containsContactsUID:(NSString *)UID;
+- (BOOL) containsPreviousMedsUID:(NSString *)UID;
+- (BOOL) containsWellnessUID:(NSString *)UID;
 - (void) addResultsToSQL:(XMLElement *)resultElement;
 - (void) addMedicationsToSQL:(XMLElement *)medicationElement;
 - (void) addMissedMedicationToSQL:(XMLElement *)missedMedicationElement;
@@ -47,4 +53,6 @@
 - (void) addClinicsToSQL:(XMLElement *)contactsElement;
 - (void) addSideEffectsToSQL:(XMLElement *)sideEffectsElement;
 - (void) addProceduresToSQL:(XMLElement *)proceduresElement;
+- (void) addPreviousMedicationsToSQL:(XMLElement *)previousElement;
+- (void) addWellnessToSQL:(XMLElement *)wellnessElement;
 @end

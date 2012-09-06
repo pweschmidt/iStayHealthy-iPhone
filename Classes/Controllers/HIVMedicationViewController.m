@@ -20,8 +20,13 @@
 #import "HIVMedSupportCell.h"
 #import "UINavigationBar-Button.h"
 
-@implementation HIVMedicationViewController
 
+@interface HIVMedicationViewController ()
+@property NSUInteger stateIndex;
+@end
+
+@implementation HIVMedicationViewController
+@synthesize stateIndex = _stateIndex;
 
 - (void)didReceiveMemoryWarning
 {
@@ -56,9 +61,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-#ifdef APPDEBUG
-    NSLog(@"HIVMedicationViewController viewWillAppear");
-#endif
     [super viewWillAppear:animated];
 }
 
@@ -127,11 +129,18 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section) {
-        return [self.allMeds count];
+    if (0 == section)
+    {
+        return self.allMeds.count;
     }
-    else{
-        return 2;
+    else
+    {
+        if (self.allPreviousMedications.count == 0 && self.allMeds.count == 0)
+        {
+            return 0;
+        }
+        else
+            return 3;
     }
 }
 
@@ -147,19 +156,28 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *title = @"";
-    if (0 == section) {
-        if (0 < [self.allMeds count]) {
-            title = NSLocalizedString(@"Current HIV Treatment",nil);
-        }
-        else{
-            title = NSLocalizedString(@"No HIV Treatment Listed", @"No HIV Treatment Listed");                        
+    if (0 == self.allMeds.count && 0 == self.allPreviousMedications.count)
+    {
+        if (0 == section)
+        {
+            return NSLocalizedString(@"No HIV Treatment Listed", @"No HIV Treatment Listed");
         }
     }
-    if (1 == section) {
-        title = NSLocalizedString(@"Side Effects/Missed Medication", @"Side Effects/Missed Medication");
+    else
+    {
+        if (0 == section)
+        {
+            if (0 == self.allMeds.count)
+            {
+                return NSLocalizedString(@"No Current HIV Treatment", @"No HIV Treatment Listed");
+            }
+            else
+            {
+                return NSLocalizedString(@"Current HIV Treatment",nil);
+            }
+        }
     }
-    return title;
+    return @"";
 }
 
 /**
@@ -207,12 +225,12 @@
         [[cell name]setText:medication.Name];
         [[cell content]setText:medication.Drug];
         NSString *shortenedName = [self getStringFromName:medication.Name];
-        NSString *pillPath = [[NSBundle mainBundle] 
+        NSString *pillPath = [[NSBundle mainBundle]
                               pathForResource:[shortenedName lowercaseString] ofType:@"png"];
         cell.medImageView.image = [UIImage imageWithContentsOfFile:pillPath];
         return cell;
     }
-    if (1 == indexPath.section)
+    else
     {
         NSString *identifier = @"HIVMedSupportCell";
         HIVMedSupportCell *cell = (HIVMedSupportCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
@@ -247,26 +265,33 @@
                     [[cell count]setTextColor:DARK_RED];
                 }
                 break;
+            case 2:
+                cell.medImageView.image = [UIImage imageNamed:@"stop.png"];
+                cell.support.text = NSLocalizedString(@"Previous Medication", @"Previous");
+                cell.count.text = [NSString stringWithFormat:@"%d",self.allPreviousMedications.count];
+                if (0 < self.allPreviousMedications.count)
+                {
+                    cell.count.textColor = DARK_YELLOW;
+                }
+                break;
         }
         
         return cell;
     }
-    
-    
-    
-    return nil;
+
 }
 #pragma mark -
 #pragma mark Table view delegate
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    
     if (0 == indexPath.section)
     {
         [self loadMedicationChangeDetailViewController:indexPath];
     }
-    else
+    else if(1 == indexPath.section)
     {
         if (0 == indexPath.row)
         {

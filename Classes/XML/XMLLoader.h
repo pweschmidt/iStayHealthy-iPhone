@@ -21,6 +21,8 @@
 @property (nonatomic, strong) XMLElement *contacts;
 @property (nonatomic, strong) XMLElement *procedures;
 @property (nonatomic, strong) XMLElement *sideEffects;
+@property (nonatomic, strong) XMLElement *previousMedications;
+@property (nonatomic, strong) XMLElement *wellness;
 - (id)initWithData:(NSData *)data;
 - (BOOL)startParsing:(NSError **)parseError;
 - (void)synchronise;

@@ -433,15 +433,15 @@ didReceiveLocalNotification:(UILocalNotification *)notification
     
     if (!self.iCloudIsAvailable)
     {
-//        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-        NSString* coreDataCloudContent = [[self.cloudURL path] stringByAppendingPathComponent:@"data"];
-        NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-         [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-         [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-         @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store", NSPersistentStoreUbiquitousContentNameKey,
-         amendedCloudURL, NSPersistentStoreUbiquitousContentURLKey,
-         nil];
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+//        NSString* coreDataCloudContent = [[self.cloudURL path] stringByAppendingPathComponent:@"data"];
+//        NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+//        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+//         [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+//         [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+//         @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store", NSPersistentStoreUbiquitousContentNameKey,
+//         amendedCloudURL, NSPersistentStoreUbiquitousContentURLKey,
+//         nil];
         NSError *error = nil;
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
         {

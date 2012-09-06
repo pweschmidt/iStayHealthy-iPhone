@@ -100,9 +100,9 @@
     layer.anchorPoint = CGPointMake(0, 0);
     layer.position = CGPointMake(0, 0);
     layer.bounds = self.changeIndicatorView.bounds;
-    layer.shadowOffset = CGSizeMake(0, 3);
-    layer.shadowRadius = 5;
-    layer.shadowOpacity = 0.8;
+    layer.shadowOffset = CGSizeMake(0, 2);
+    layer.shadowRadius = 2;
+    layer.shadowOpacity = 0.5;
     layer.shadowColor = [UIColor darkGrayColor].CGColor;
     return layer;
 }
@@ -126,9 +126,9 @@
     layer.anchorPoint = CGPointMake(0, 0);
     layer.position = CGPointMake(0, 0);
     layer.bounds = self.changeIndicatorView.bounds;
-    layer.shadowOffset = CGSizeMake(0, 3);
-    layer.shadowRadius = 5;
-    layer.shadowOpacity = 0.8;
+    layer.shadowOffset = CGSizeMake(0, 2);
+    layer.shadowRadius = 2;
+    layer.shadowOpacity = 0.5;
     layer.shadowColor = [UIColor darkGrayColor].CGColor;
     return layer;
 }
@@ -143,9 +143,9 @@
     layer.backgroundColor = [UIColor darkGrayColor].CGColor;
     layer.position = CGPointMake(0, 0);
     layer.anchorPoint = CGPointMake(0, 0);
-    layer.shadowOffset = CGSizeMake(0, 3);
-    layer.shadowRadius = 5;
-    layer.shadowOpacity = 0.8;
+    layer.shadowOffset = CGSizeMake(0, 2);
+    layer.shadowRadius = 2;
+    layer.shadowOpacity = 0.5;
     layer.shadowColor = [UIColor darkGrayColor].CGColor;
     return layer;
 }

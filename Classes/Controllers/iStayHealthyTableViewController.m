@@ -30,6 +30,8 @@
 @synthesize allContacts = _allContacts;
 @synthesize allProcedures = _allProcedures;
 @synthesize allSideEffects = _allSideEffects;
+@synthesize allPreviousMedications = _allPreviousMedications;
+@synthesize allWellnes = _allWellnes;
 @synthesize isShowingLandscape = _isShowingLandscape;
 
 #pragma mark -
@@ -351,33 +353,19 @@
 	if (0 != [hivmeds count])
     {
 		NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:[NSArray arrayByOrderingSet:hivmeds byKey:@"StartDate" ascending:YES reverseOrder:NO]];
-        NSMutableArray *indexArrayToBeRemoved = [NSMutableArray array];
-        int index = 0;
-        for (Medication *med in tmpArray)
-        {
-            NSDate *endDate = med.EndDate;
-            if(nil != endDate)
-            {
-                NSDate *startdate = med.StartDate;
-                if ([startdate compare:endDate] == NSOrderedAscending)
-                {
-                    [indexArrayToBeRemoved addObject:[NSNumber numberWithInt:index]];
-                }
-            }
-            index++;
-        }
-        if (0 != indexArrayToBeRemoved.count)
-        {
-            for (NSNumber *number in indexArrayToBeRemoved)
-            {
-                int valueIndex = [number intValue];
-                [tmpArray removeObjectAtIndex:valueIndex];
-            }
-        }
-        self.allMeds = [NSArray arrayWithArray:tmpArray];        
+        self.allMeds = [NSArray arrayWithArray:tmpArray];
 	}
     else
         self.allMeds = (NSArray *)hivmeds;
+    
+    NSSet *previousMedications = self.masterRecord.previousMedications;
+    if (0 != previousMedications.count)
+    {
+        NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:[NSArray arrayByOrderingSet:previousMedications byKey:@"EndDate" ascending:YES reverseOrder:NO]];
+        self.allPreviousMedications = [NSArray arrayWithArray:tmpArray];
+    }
+    else
+        self.allPreviousMedications = (NSArray *)previousMedications;
     
     /* Missed HIV Meds in chronological oder */
     NSSet *missedMeds = self.masterRecord.missedMedications;
@@ -430,9 +418,14 @@
     {
         self.allSideEffects = (NSArray *)self.masterRecord.sideeffects;
     }
-#ifdef APPDEBUG
-    NSLog(@"iStayHealthyTableViewController::setUpData hivMeds %d ",[self.allMeds count]);
-#endif
+    
+    NSSet *wellnessSet = self.masterRecord.wellness;
+    if (0 != wellnessSet.count)
+    {
+        self.allWellnes = [NSArray arrayByOrderingSet:wellnessSet byKey:@"sleepBarometer" ascending:YES reverseOrder:NO];
+    }
+    else
+        self.allWellnes = (NSArray *)wellnessSet;
 }
 /**
  notified when changes to the database

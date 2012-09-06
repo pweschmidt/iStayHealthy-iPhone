@@ -16,6 +16,8 @@
 #import "OtherMedication.h"
 #import "Procedures.h"
 #import "SideEffects.h"
+#import "PreviousMedication.h"
+#import "Wellness.h"
 #import "NSArray-Set.h"
 #import "XMLDocument.h"
 #import "XMLElement.h"
@@ -32,6 +34,8 @@
 @synthesize allContacts = _allContacts;
 @synthesize allProcedures = _allProcedures;
 @synthesize allSideEffects = _allSideEffects;
+@synthesize allPreviousMedications = _allPreviousMedications;
+@synthesize allWellness = _allWellness;
 
 - (id)init
 {
@@ -256,6 +260,20 @@
         XMLElement *procedures = [[XMLElement alloc]initWithName:@"IllnessesAndProcedures"];
         [self addProcedures:procedures];
         [root addChild:procedures];        
+    }
+    
+    if (0 < self.allPreviousMedications.count)
+    {
+        XMLElement *previousMeds = [[XMLElement alloc]initWithName:@"PreviousMedications"];
+        [self addPreviousMedications:previousMeds];
+        [root addChild:previousMeds];
+    }
+    
+    if (0 < self.allWellness.count)
+    {
+        XMLElement *wellness = [[XMLElement alloc]initWithName:@"Wellness"];
+        [self addWellness:wellness];
+        [root addChild:wellness];
     }
 
     NSString *xmlString = [document xmlString];
@@ -550,6 +568,15 @@
     }
 }
 
+- (void) addPreviousMedications:(XMLElement *)previousMedsParent
+{
+    
+}
+
+- (void) addWellness:(XMLElement *)wellnessParent
+{
+    
+}
 
 
 #pragma mark -
@@ -700,6 +727,14 @@
     
 }
 
+- (BOOL) containsPreviousMedsUID:(NSString *)UID
+{
+    return NO;
+}
+- (BOOL) containsWellnessUID:(NSString *)UID
+{
+    return NO;
+}
 
 
 /**
@@ -1090,6 +1125,16 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}    
+}
+
+- (void) addPreviousMedicationsToSQL:(XMLElement *)previousElement
+{
+    
+}
+
+- (void) addWellnessToSQL:(XMLElement *)wellnessElement
+{
+    
 }
 
 

@@ -24,7 +24,8 @@
 @synthesize contacts = _contacts;
 @synthesize sideEffects = _sideEffects;
 @synthesize procedures = _procedures;
-
+@synthesize previousMedications = _previousMedications;
+@synthesize wellness = _wellness;
 - (id)init
 {
     self = [super init];
