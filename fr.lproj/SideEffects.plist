@@ -4,45 +4,45 @@
 <dict>
 	<key>SideEffectArray</key>
 	<array>
-		<string>Headache</string>
+		<string>Mal de tête</string>
 		<string>Fatigue</string>
-		<string>Nausea</string>
-		<string>Diarrhoea</string>
-		<string>Vomiting</string>
-		<string>Fever</string>
-		<string>Skin rash</string>
+		<string>Nausée</string>
+		<string>Diarrhée</string>
+		<string>Vomissement</string>
+		<string>Fièvre</string>
+		<string>Eruption Cutanée</string>
 		<string>Lactic acidosis</string>
-		<string>Hypersensitivity reaction</string>
-		<string>Cardiovascular problems</string>
-		<string>Jaundice</string>
-		<string>Kidney stones</string>
-		<string>Dizziness</string>
-		<string>Insomnia</string>
-		<string>Vivid dreams</string>
-		<string>Impaired concentration</string>
-		<string>Memory loss</string>
-		<string>Depression</string>
-		<string>Liver damage (hepatitis)</string>
-		<string>Problems during pregnancy</string>
-		<string>Skin pigmentation on palms, soles</string>
-		<string>Muscle pain</string>
-		<string>Nail discoloration</string>
-		<string>Lipodystrophy</string>
-		<string>Peripheral neuropathy</string>
-		<string>Pancreatitis</string>
-		<string>Liver damage</string>
-		<string>Gout</string>
-		<string>Lesions on lips, genitals</string>
-		<string>Red swollen or puffy skin</string>
-		<string>Hardened skin</string>
-		<string>Cysts, nodules</string>
-		<string>Pneumonia</string>
-		<string>Abscess</string>
-		<string>Toxic epidermal necrolysis (TEN)</string>
-		<string>Blisters</string>
-		<string>Oral lesions</string>
-		<string>Dry skin</string>
-		<string>Abnormal nail growth</string>
+		<string>Réaction d&apos;Hypersensibilité</string>
+		<string>Problèmes Cardiovasculaires</string>
+		<string>Jaunisse</string>
+		<string>Calculs Rénaux</string>
+		<string>Vertiges</string>
+		<string>Insomnie</string>
+		<string>Rêves Vifs</string>
+		<string>Troubles de la Concentration</string>
+		<string>Perte de Mémoire</string>
+		<string>Dépression</string>
+		<string>Dommages au Foie (Hépatite)</string>
+		<string>Problèmes pendant la Grossesse</string>
+		<string>Pigmentation de la Peau sur Paumes, Semelles</string>
+		<string>Douleurs Musculaires</string>
+		<string>Décoloration des Ongles</string>
+		<string>Lipodystrophie</string>
+		<string>Neuropathie périphérique</string>
+		<string>Pancréatite</string>
+		<string>Dommages au Foie</string>
+		<string>Goutte</string>
+		<string>Lésions sur Lèvres, Organes génitaux</string>
+		<string>Rouge Peau enflée ou gonflée</string>
+		<string>Durcissement de la Peau</string>
+		<string>Kystes, Nodules</string>
+		<string>Pneumonie</string>
+		<string>Abcès</string>
+		<string>Syndrome de Lyell (TEN)</string>
+		<string>Cloques</string>
+		<string>Lésions Buccales</string>
+		<string>Peau sèche</string>
+		<string>Croissance anormale des Ongles</string>
 	</array>
 </dict>
 </plist>

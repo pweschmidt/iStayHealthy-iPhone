@@ -4,45 +4,45 @@
 <dict>
 	<key>SideEffectArray</key>
 	<array>
-		<string>Headache</string>
-		<string>Fatigue</string>
-		<string>Nausea</string>
-		<string>Diarrhoea</string>
-		<string>Vomiting</string>
-		<string>Fever</string>
-		<string>Skin rash</string>
-		<string>Lactic acidosis</string>
-		<string>Hypersensitivity reaction</string>
-		<string>Cardiovascular problems</string>
-		<string>Jaundice</string>
-		<string>Kidney stones</string>
-		<string>Dizziness</string>
-		<string>Insomnia</string>
-		<string>Vivid dreams</string>
-		<string>Impaired concentration</string>
-		<string>Memory loss</string>
-		<string>Depression</string>
-		<string>Liver damage (hepatitis)</string>
-		<string>Problems during pregnancy</string>
-		<string>Skin pigmentation on palms, soles</string>
-		<string>Muscle pain</string>
-		<string>Nail discoloration</string>
-		<string>Lipodystrophy</string>
-		<string>Peripheral neuropathy</string>
+		<string>Dolor de cabeza</string>
+		<string>Fatiga</string>
+		<string>Náusea</string>
+		<string>Diarrea</string>
+		<string>Vómitos</string>
+		<string>Fiebre</string>
+		<string>Erupción Cutánea</string>
+		<string>Acidosis Láctica</string>
+		<string>Hipersensibilidad</string>
+		<string>Problemas Cardiovasculares</string>
+		<string>Ictericia</string>
+		<string>Cálculos Renales</string>
+		<string>Mareo</string>
+		<string>Insomnio</string>
+		<string>Sueños Vívidos</string>
+		<string>Deterioro de la Concentración</string>
+		<string>Pérdida de la Memoria</string>
+		<string>Depresión</string>
+		<string>Daño Hepático (hepatitis)</string>
+		<string>Problemas durante Embarazo</string>
+		<string>Pigmentación de la piel en palmas, soles</string>
+		<string>Dolor Muscular</string>
+		<string>Decoloración de Uñas</string>
+		<string>Lipodistrofia</string>
+		<string>Neuropatía Periférica</string>
 		<string>Pancreatitis</string>
-		<string>Liver damage</string>
-		<string>Gout</string>
-		<string>Lesions on lips, genitals</string>
-		<string>Red swollen or puffy skin</string>
-		<string>Hardened skin</string>
-		<string>Cysts, nodules</string>
-		<string>Pneumonia</string>
-		<string>Abscess</string>
-		<string>Toxic epidermal necrolysis (TEN)</string>
-		<string>Blisters</string>
-		<string>Oral lesions</string>
-		<string>Dry skin</string>
-		<string>Abnormal nail growth</string>
+		<string>Daño Hepático</string>
+		<string>Gota</string>
+		<string>Lesiones en Labios, Genitales</string>
+		<string>Piel enrojecida inflamada o hinchada</string>
+		<string>Piel endurecida</string>
+		<string>Quistes, Nódulos</string>
+		<string>Neumonía</string>
+		<string>Absceso</string>
+		<string>Necrólisis epidérmica tóxica (NET)</string>
+		<string>Ampollas</string>
+		<string>Lesiones orales</string>
+		<string>Piel seca</string>
+		<string>Crecimiento de Uñas anormales</string>
 	</array>
 </dict>
 </plist>
