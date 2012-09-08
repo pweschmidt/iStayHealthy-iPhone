@@ -8,7 +8,7 @@
 
 #import "XMLElement.h"
 #import "XMLAttribute.h"
-#import "XMLDefinitions.h"
+//#import "XMLDefinitions.h"
 
 @implementation XMLElement
 @synthesize name = _name;
@@ -114,7 +114,7 @@
     NSString *uid = nil;
     for (XMLAttribute *attribute in self.attributes)
     {
-        if ([attribute.name isEqualToString:@"UID"])
+        if ([attribute.name isEqualToString:@"UID"] || [attribute.name isEqualToString:@"uID"] || [attribute.name isEqualToString:@"GUID"])
         {
             if (![attribute.value isEqualToString:@""])
             {

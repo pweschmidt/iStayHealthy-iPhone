@@ -10,7 +10,8 @@
 #import "XMLDocument.h"
 #import "XMLElement.h"
 #import "XMLAttribute.h"
-#import "XMLDefinitions.h"
+//#import "XMLDefinitions.h"
+#import "XMLConstants.h"
 #import "DataLoader.h"
 
 @implementation XMLLoader
@@ -40,7 +41,7 @@
 + (BOOL)isXML:(NSData *)data
 {
     NSString *testString = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
-    if ([testString hasPrefix:XMLPREAMBLE])
+    if ([testString hasPrefix:kXMLPreamble])
     {
         return YES;
     }
@@ -102,7 +103,7 @@
     }
     DataLoader *loader = [[DataLoader alloc]init];
     [loader getSQLData];
-    XMLElement *results = [self.document elementForName:RESULTS];
+    XMLElement *results = [self.document elementForName:kXMLElementResults];
     if (nil != results)
     {
         NSMutableArray *children = [results childElements];
@@ -111,7 +112,7 @@
             [loader addResultsToSQL:element];
         }
     }
-    XMLElement *meds = [self.document elementForName:MEDICATIONS];
+    XMLElement *meds = [self.document elementForName:kXMLElementMedications];
     if (nil != meds)
     {
         NSMutableArray *children = [meds childElements];
@@ -120,7 +121,7 @@
             [loader addMedicationsToSQL:element];
         }
     }
-    XMLElement *missedMeds = [self.document elementForName:MISSEDMEDICATIONS];
+    XMLElement *missedMeds = [self.document elementForName:kXMLElementMissedMedications];
     if (nil != missedMeds)
     {
         NSMutableArray *children = [missedMeds childElements];
@@ -129,7 +130,7 @@
             [loader addMissedMedicationToSQL:element];
         }
     }
-    XMLElement *otherMeds = [self.document elementForName:OTHERMEDICATIONS];
+    XMLElement *otherMeds = [self.document elementForName:kXMLElementOtherMedications];
     if (nil != otherMeds)
     {
         NSMutableArray *children = [otherMeds childElements];
@@ -139,7 +140,7 @@
         }
     }
     
-    XMLElement *contacts = [self.document elementForName:CLINICALCONTACTS];
+    XMLElement *contacts = [self.document elementForName:kXMLElementClinicalContacts];
     if (nil != contacts) {
         NSMutableArray *children = [contacts childElements];
         for (XMLElement *element in children) {
@@ -147,7 +148,7 @@
         }
     }
     
-    XMLElement *procedures = [self.document elementForName:ILLNESSANDPROCEDURES];
+    XMLElement *procedures = [self.document elementForName:kXMLElementIllnessAndProcedures];
     if(nil !=  procedures)
     {
         NSMutableArray *children = [procedures childElements];
@@ -157,13 +158,23 @@
         }
     }
 
-    XMLElement *effects = [self.document elementForName:HIVSIDEEFFECTS];
+    XMLElement *effects = [self.document elementForName:kXMLElementHIVSideEffects];
     if(nil !=  effects)
     {
         NSMutableArray *children = [effects childElements];
         for (XMLElement *element in children)
         {
             [loader addSideEffectsToSQL:element];
+        }
+    }
+    
+    XMLElement *previousMeds = [self.document elementForName:kXMLElementPreviousMedications];
+    if (nil != previousMeds)
+    {
+        NSMutableArray *children = [previousMeds childElements];
+        for (XMLElement *element in children)
+        {
+            
         }
     }
     
@@ -183,6 +194,7 @@
     self.sideEffects = nil;
     self.procedures = nil;
     self.contacts = nil;
+    self.previousMedications = nil;
 }
 
 
@@ -198,130 +210,170 @@
 	}
 
     XMLElement *root = [self.document root];
-    if ([elementName isEqualToString:ROOT])
+    if ([elementName isEqualToString:kXMLElementRoot])
     {
 
 
-        [root addAttribute:DBVERSION andValue:[attributeDict valueForKey:DBVERSION]];
-        [root addAttribute:FROMDEVICE andValue:[attributeDict valueForKey:FROMDEVICE]];
-        [root addAttribute:FROMDATE andValue:[attributeDict valueForKey:FROMDATE]];
+        [root addAttribute:kXMLAttributeDBVersion andValue:[attributeDict valueForKey:kXMLAttributeDBVersion]];
+        [root addAttribute:kXMLAttributeFromDevice andValue:[attributeDict valueForKey:kXMLAttributeFromDevice]];
+        [root addAttribute:kXMLAttributeFromDate andValue:[attributeDict valueForKey:kXMLAttributeFromDate]];
     }
-    else if ([elementName isEqualToString:RESULTS] && (nil == self.results))
+    else if ([elementName isEqualToString:kXMLElementResults] && (nil == self.results))
     {
-        XMLElement *tmpElement = [[XMLElement alloc]initWithName:RESULTS];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementResults];
         self.results = tmpElement;
     }
-    else if ([elementName isEqualToString:MEDICATIONS] && (nil == self.medications))
+    else if ([elementName isEqualToString:kXMLElementMedications] && (nil == self.medications))
     {
-        XMLElement *tmpElement = [[XMLElement alloc]initWithName:MEDICATIONS];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementMedications];
         self.medications = tmpElement;
     }
-    else if ([elementName isEqualToString:OTHERMEDICATIONS] && (nil == self.otherMedications))
+    else if ([elementName isEqualToString:kXMLElementOtherMedications] && (nil == self.otherMedications))
     {
-        XMLElement *tmpElement = [[XMLElement alloc]initWithName:OTHERMEDICATIONS];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementOtherMedications];
         self.otherMedications = tmpElement;
     }
-    else if ([elementName isEqualToString:MISSEDMEDICATIONS] && (nil == self.missedMedications))
+    else if ([elementName isEqualToString:kXMLElementMissedMedications] && (nil == self.missedMedications))
     {
-        XMLElement *tmpElement = [[XMLElement alloc]initWithName:MISSEDMEDICATIONS];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementMissedMedications];
         self.missedMedications = tmpElement;
     }
-    else if ([elementName isEqualToString:CLINICALCONTACTS] && (nil == self.contacts))
+    else if ([elementName isEqualToString:kXMLElementClinicalContacts] && (nil == self.contacts))
     {
-        XMLElement *tmpElement = [[XMLElement alloc]initWithName:CLINICALCONTACTS];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementClinicalContacts];
         self.contacts = tmpElement;
     }
-    else if ([elementName isEqualToString:HIVSIDEEFFECTS] && (nil == self.sideEffects))
+    else if ([elementName isEqualToString:kXMLElementHIVSideEffects] && (nil == self.sideEffects))
     {
-        XMLElement *tmpElement = [[XMLElement alloc]initWithName:HIVSIDEEFFECTS];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementHIVSideEffects];
         self.sideEffects = tmpElement;
     }
-    else if ([elementName isEqualToString:ILLNESSANDPROCEDURES] && (nil == self.procedures))
+    else if ([elementName isEqualToString:kXMLElementIllnessAndProcedures] && (nil == self.procedures))
     {
-        XMLElement *tmpElement = [[XMLElement alloc]initWithName:ILLNESSANDPROCEDURES];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementIllnessAndProcedures];
         self.procedures = tmpElement;
     }
-    //child elements
-    else if([elementName isEqualToString:RESULT] && (nil != self.results))
+    else if ([elementName isEqualToString:kXMLElementPreviousMedications] && (nil == self.previousMedications))
     {
-        XMLElement *result = [[XMLElement alloc]initWithName:RESULT];
-        [result addAttribute:RESULTSDATE andValue:[attributeDict valueForKey:RESULTSDATE]];
-        [result addAttribute:CD4COUNT andValue:[attributeDict valueForKey:CD4COUNT]];
-        [result addAttribute:CD4PERCENT andValue:[attributeDict valueForKey:CD4PERCENT]];        
-        NSString *vl = [attributeDict valueForKey:VIRALLOAD];
+        XMLElement *tmpElement = [[XMLElement alloc]initWithName:kXMLElementPreviousMedications];
+        self.previousMedications = tmpElement;
+    }
+
+    //child elements
+    else if([elementName isEqualToString:kXMLElementResult] && (nil != self.results))
+    {
+        XMLElement *result = [[XMLElement alloc]initWithName:kXMLElementResult];
+        [result addAttribute:kXMLAttributeResultsDate andValue:[attributeDict valueForKey:kXMLAttributeResultsDate]];
+        [result addAttribute:kXMLAttributeCD4 andValue:[attributeDict valueForKey:kXMLAttributeCD4]];
+        [result addAttribute:kXMLAttributeCD4Percent andValue:[attributeDict valueForKey:kXMLAttributeCD4Percent]];        
+        NSString *vl = [attributeDict valueForKey:kXMLAttributeViralLoad];
         if ([vl isEqualToString:@"undetectable"])
         {
-            [result addAttribute:VIRALLOAD andValue:@"0"];
+            [result addAttribute:kXMLAttributeViralLoad andValue:@"0"];
         }
         else
-            [result addAttribute:VIRALLOAD andValue:vl];
-        [result addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
+            [result addAttribute:kXMLAttributeViralLoad andValue:vl];
+        
+        NSString *hepVl = [attributeDict valueForKey:kXMLAttributeHepCViralLoad];
+        if ([hepVl isEqualToString:@"undetectable"])
+        {
+            [result addAttribute:kXMLAttributeHepCViralLoad andValue:@"0"];
+        }
+        else
+            [result addAttribute:kXMLAttributeHepCViralLoad andValue:hepVl];
+        
+        [result addAttribute:kXMLAttributeGlucose andValue:[attributeDict valueForKey:kXMLAttributeGlucose]];
+        [result addAttribute:kXMLAttributeTotalCholesterol andValue:[attributeDict valueForKey:kXMLAttributeTotalCholesterol]];
+        [result addAttribute:kXMLAttributeLDL andValue:[attributeDict valueForKey:kXMLAttributeLDL]];
+        [result addAttribute:kXMLAttributeHDL andValue:[attributeDict valueForKey:kXMLAttributeHDL]];
+
+        [result addAttribute:kXMLAttributeHemoglobulin andValue:[attributeDict valueForKey:kXMLAttributeHemoglobulin]];
+        [result addAttribute:kXMLAttributePlatelet andValue:[attributeDict valueForKey:kXMLAttributePlatelet]];
+        [result addAttribute:kXMLAttributeWhiteBloodCells andValue:[attributeDict valueForKey:kXMLAttributeWhiteBloodCells]];
+        [result addAttribute:kXMLAttributeRedBloodCells andValue:[attributeDict valueForKey:kXMLAttributeRedBloodCells]];
+        
+        [result addAttribute:kXMLAttributeWeight andValue:[attributeDict valueForKey:kXMLAttributeWeight]];
+        [result addAttribute:kXMLAttributeSystole andValue:[attributeDict valueForKey:kXMLAttributeSystole]];
+        [result addAttribute:kXMLAttributeDiastole andValue:[attributeDict valueForKey:kXMLAttributeDiastole]];
+        [result addAttribute:kXMLAttributeUID andValue:[attributeDict valueForKey:kXMLAttributeUID]];
         [self.results addChild:result];
     }
-    else if([elementName isEqualToString:MEDICATION] && (nil != self.medications))
+    else if([elementName isEqualToString:kXMLElementMedication] && (nil != self.medications))
     {
-        XMLElement *medication = [[XMLElement alloc]initWithName:MEDICATION];
-        [medication addAttribute:STARTDATE andValue:[attributeDict valueForKey:STARTDATE]];
-        [medication addAttribute:ENDDATE andValue:[attributeDict valueForKey:ENDDATE]];
-        [medication addAttribute:NAME andValue:[attributeDict valueForKey:NAME]];
-        [medication addAttribute:DRUG andValue:[attributeDict valueForKey:DRUG]];
-        [medication addAttribute:MEDICATIONFORM andValue:[attributeDict valueForKey:MEDICATIONFORM]];
-        [medication addAttribute:DOSE andValue:[attributeDict valueForKey:DOSE]];
-        [medication addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
+        XMLElement *medication = [[XMLElement alloc]initWithName:kXMLElementMedication];
+        [medication addAttribute:kXMLAttributeStartDate andValue:[attributeDict valueForKey:kXMLAttributeStartDate]];
+        [medication addAttribute:kXMLAttributeName andValue:[attributeDict valueForKey:kXMLAttributeName]];
+        [medication addAttribute:kXMLAttributeDrug andValue:[attributeDict valueForKey:kXMLAttributeDrug]];
+        [medication addAttribute:kXMLAttributeMedicationForm andValue:[attributeDict valueForKey:kXMLAttributeMedicationForm]];
+        [medication addAttribute:kXMLAttributeDose andValue:[attributeDict valueForKey:kXMLAttributeDose]];
+        [medication addAttribute:kXMLAttributeUID andValue:[attributeDict valueForKey:kXMLAttributeUID]];
         
         [self.medications addChild:medication];
     }
-    else if([elementName isEqualToString:MISSEDMEDICATION] && (nil != self.missedMedications))
+    else if([elementName isEqualToString:kXMLElementMissedMedication] && (nil != self.missedMedications))
     {
-        XMLElement *missedMedication = [[XMLElement alloc]initWithName:MISSEDMEDICATION];
-        [missedMedication addAttribute:MISSEDDATE andValue:[attributeDict valueForKey:MISSEDDATE]];
-        [missedMedication addAttribute:NAME andValue:[attributeDict valueForKey:NAME]];
-        [missedMedication addAttribute:DRUG andValue:[attributeDict valueForKey:DRUG]];
-        [missedMedication addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
+        XMLElement *missedMedication = [[XMLElement alloc]initWithName:kXMLElementMissedMedication];
+        [missedMedication addAttribute:kXMLAttributeMissedDate andValue:[attributeDict valueForKey:kXMLAttributeMissedDate]];
+        [missedMedication addAttribute:kXMLAttributeName andValue:[attributeDict valueForKey:kXMLAttributeName]];
+        [missedMedication addAttribute:kXMLAttributeDrug andValue:[attributeDict valueForKey:kXMLAttributeDrug]];
+        [missedMedication addAttribute:kXMLAttributeUID andValue:[attributeDict valueForKey:kXMLAttributeUID]];
+        [missedMedication addAttribute:kXMLAttributeMissedReason andValue:[attributeDict valueForKey:kXMLAttributeMissedReason]];
         [self.missedMedications addChild:missedMedication];
     }
-    else if([elementName isEqualToString:OTHERMEDICATION] && (nil != self.otherMedications))
+    else if([elementName isEqualToString:kXMLElementOtherMedication] && (nil != self.otherMedications))
     {
-        XMLElement *otherMedication = [[XMLElement alloc]initWithName:OTHERMEDICATION];
-        [otherMedication addAttribute:STARTDATE andValue:[attributeDict valueForKey:STARTDATE]];
-        [otherMedication addAttribute:ENDDATE andValue:[attributeDict valueForKey:ENDDATE]];
-        [otherMedication addAttribute:NAME andValue:[attributeDict valueForKey:NAME]];
-        [otherMedication addAttribute:DRUG andValue:[attributeDict valueForKey:DRUG]];
-        [otherMedication addAttribute:MEDICATIONFORM andValue:[attributeDict valueForKey:MEDICATIONFORM]];
-        [otherMedication addAttribute:DOSE andValue:[attributeDict valueForKey:DOSE]];
-        [otherMedication addAttribute:GUID andValue:[attributeDict valueForKey:GUID]];
+        XMLElement *otherMedication = [[XMLElement alloc]initWithName:kXMLElementOtherMedication];
+        [otherMedication addAttribute:kXMLAttributeStartDate andValue:[attributeDict valueForKey:kXMLAttributeStartDate]];
+        [otherMedication addAttribute:kXMLAttributeName andValue:[attributeDict valueForKey:kXMLAttributeName]];
+        [otherMedication addAttribute:kXMLAttributeDrug andValue:[attributeDict valueForKey:kXMLAttributeDrug]];
+        [otherMedication addAttribute:kXMLAttributeMedicationForm andValue:[attributeDict valueForKey:kXMLAttributeMedicationForm]];
+        [otherMedication addAttribute:kXMLAttributeDose andValue:[attributeDict valueForKey:kXMLAttributeDose]];
+        [otherMedication addAttribute:kXMLAttributeUnit andValue:[attributeDict valueForKey:kXMLAttributeUnit]];
+        [otherMedication addAttribute:kXMLAttributeUID andValue:[attributeDict valueForKey:kXMLAttributeUID]];
         [self.otherMedications addChild:otherMedication];
     }
-    else if([elementName isEqualToString:CONTACTS] && (nil != self.contacts))
+    else if([elementName isEqualToString:kXMLElementContacts] && (nil != self.contacts))
     {
-        XMLElement *contact = [[XMLElement alloc]initWithName:CONTACTS];
-        [contact addAttribute:CLINICNAME andValue:[attributeDict valueForKey:CLINICNAME]];
-        [contact addAttribute:CLINICID andValue:[attributeDict valueForKey:CLINICID]];
-        [contact addAttribute:CLINICSTREET andValue:[attributeDict valueForKey:CLINICSTREET]];
-        [contact addAttribute:CLINICPOSTCODE andValue:[attributeDict valueForKey:CLINICPOSTCODE]];
-        [contact addAttribute:CLINICCITY andValue:[attributeDict valueForKey:CLINICCITY]];
-        [contact addAttribute:CLINICCONTACTNUMBER andValue:[attributeDict valueForKey:CLINICCONTACTNUMBER]];
-        [contact addAttribute:RESULTSCONTACTNUMBER andValue:[attributeDict valueForKey:RESULTSCONTACTNUMBER]];
-        [contact addAttribute:APPOINTMENTCONTACTNUMBER andValue:[attributeDict valueForKey:APPOINTMENTCONTACTNUMBER]];
+        XMLElement *contact = [[XMLElement alloc]initWithName:kXMLElementContacts];
+        [contact addAttribute:kXMLAttributeClinicName andValue:[attributeDict valueForKey:kXMLAttributeClinicName]];
+        [contact addAttribute:kXMLAttributeClinicID andValue:[attributeDict valueForKey:kXMLAttributeClinicID]];
+        [contact addAttribute:kXMLAttributeClinicStreet andValue:[attributeDict valueForKey:kXMLAttributeClinicStreet]];
+        [contact addAttribute:kXMLAttributeClinicPostcode andValue:[attributeDict valueForKey:kXMLAttributeClinicPostcode]];
+        [contact addAttribute:kXMLAttributeClinicCity andValue:[attributeDict valueForKey:kXMLAttributeClinicCity]];
+        [contact addAttribute:kXMLAttributeClinicContactNumber andValue:[attributeDict valueForKey:kXMLAttributeClinicContactNumber]];
+        [contact addAttribute:kXMLAttributeEmergencyContactNumber andValue:[attributeDict valueForKey:kXMLAttributeEmergencyContactNumber]];
+        [contact addAttribute:kXMLAttributeClinicEmailAddress andValue:[attributeDict valueForKey:kXMLAttributeClinicEmailAddress]];
+        [contact addAttribute:kXMLAttributeClinicWebSite andValue:[attributeDict valueForKey:kXMLAttributeClinicWebSite]];
         
         [self.contacts addChild:contact];
     }
-    else if([elementName isEqualToString:SIDEEFFECTS] && (nil != self.sideEffects))
+    else if([elementName isEqualToString:kXMLElementSideEffects] && (nil != self.sideEffects))
     {
-        XMLElement *effect = [[XMLElement alloc]initWithName:SIDEEFFECTS];
-        [effect addAttribute:SIDEEFFECT andValue:[attributeDict valueForKey:SIDEEFFECT]];
-        [effect addAttribute:SIDEEFFECTDATE andValue:[attributeDict valueForKey:SIDEEFFECTDATE]];
-        [effect addAttribute:NAME andValue:[attributeDict valueForKey:NAME]];
-        [effect addAttribute:DRUG andValue:[attributeDict valueForKey:DRUG]];
+        XMLElement *effect = [[XMLElement alloc]initWithName:kXMLElementSideEffects];
+        [effect addAttribute:kXMLAttributeSideEffect andValue:[attributeDict valueForKey:kXMLAttributeSideEffect]];
+        [effect addAttribute:kXMLAttributeSideEffectDate andValue:[attributeDict valueForKey:kXMLAttributeSideEffectDate]];
+        [effect addAttribute:kXMLAttributeName andValue:[attributeDict valueForKey:kXMLAttributeName]];
+        [effect addAttribute:kXMLAttributeDrug andValue:[attributeDict valueForKey:kXMLAttributeDrug]];
+        [effect addAttribute:kXMLAttributeSeriousness andValue:[attributeDict valueForKey:kXMLAttributeSeriousness]];
         [self.sideEffects addChild:effect];
     }
-    else if([elementName isEqualToString:PROCEDURES] && (nil != self.procedures))
+    else if([elementName isEqualToString:kXMLElementProcedures] && (nil != self.procedures))
     {
-        XMLElement *procs = [[XMLElement alloc]initWithName:PROCEDURES];
-        [procs addAttribute:NAME andValue:[attributeDict valueForKey:NAME]];
-        [procs addAttribute:ILLNESS andValue:[attributeDict valueForKey:ILLNESS]];
-        [procs addAttribute:DATE andValue:[attributeDict valueForKey:DATE]];
+        XMLElement *procs = [[XMLElement alloc]initWithName:kXMLElementProcedures];
+        [procs addAttribute:kXMLAttributeName andValue:[attributeDict valueForKey:kXMLAttributeName]];
+        [procs addAttribute:kXMLAttributeIllness andValue:[attributeDict valueForKey:kXMLAttributeIllness]];
+        [procs addAttribute:kXMLAttributeDate andValue:[attributeDict valueForKey:kXMLAttributeDate]];
         [self.procedures addChild:procs];
+    }
+    else if ([elementName isEqualToString:kXMLElementPreviousMedication] && (nil != self.previousMedications))
+    {
+        XMLElement *prev = [[XMLElement alloc] initWithName:kXMLElementPreviousMedication];
+        [prev addAttribute:kXMLAttributeStartDateLowerCase andValue:[attributeDict valueForKey:kXMLAttributeStartDateLowerCase]];
+        [prev addAttribute:kXMLAttributeEndDateLowerCase andValue:[attributeDict valueForKey:kXMLAttributeEndDateLowerCase]];
+        [prev addAttribute:kXMLAttributeNameLowerCase andValue:[attributeDict valueForKey:kXMLAttributeNameLowerCase]];
+        [prev addAttribute:kXMLAttributeDrugLowerCase andValue:[attributeDict valueForKey:kXMLAttributeDrugLowerCase]];
+        [prev addAttribute:kXMLAttributeIsART andValue:[attributeDict valueForKey:kXMLAttributeIsART]];
+        [self.previousMedications addChild:prev];
     }
 }
 
@@ -336,33 +388,37 @@
 		elementName = qName;
 	}
     XMLElement *root = [self.document root];
-    if ([elementName isEqualToString:RESULTS] && (nil != self.results))
+    if ([elementName isEqualToString:kXMLElementResults] && (nil != self.results))
     {
         [root addChild:self.results];
     }
-    else if ([elementName isEqualToString:MEDICATIONS] && (nil != self.medications))
+    else if ([elementName isEqualToString:kXMLElementMedications] && (nil != self.medications))
     {
         [root addChild:self.medications];
     }
-    else if ([elementName isEqualToString:OTHERMEDICATIONS] && (nil != self.otherMedications))
+    else if ([elementName isEqualToString:kXMLElementOtherMedications] && (nil != self.otherMedications))
     {
         [root addChild:self.otherMedications];
     }
-    else if ([elementName isEqualToString:MISSEDMEDICATIONS] && (nil != self.missedMedications))
+    else if ([elementName isEqualToString:kXMLElementMissedMedications] && (nil != self.missedMedications))
     {
         [root addChild:self.missedMedications];
     }
-    else if ([elementName isEqualToString:CLINICALCONTACTS] && (nil != self.contacts))
+    else if ([elementName isEqualToString:kXMLElementClinicalContacts] && (nil != self.contacts))
     {
         [root addChild:self.contacts];
     }
-    else if ([elementName isEqualToString:HIVSIDEEFFECTS] && (nil != self.sideEffects))
+    else if ([elementName isEqualToString:kXMLElementHIVSideEffects] && (nil != self.sideEffects))
     {
         [root addChild:self.sideEffects];
     }
-    else if ([elementName isEqualToString:ILLNESSANDPROCEDURES] && (nil != self.procedures))
+    else if ([elementName isEqualToString:kXMLElementIllnessAndProcedures] && (nil != self.procedures))
     {
         [root addChild:self.procedures];
+    }
+    else if ([elementName isEqualToString:kXMLElementPreviousMedications] && (nil != self.previousMedications))
+    {
+        [root addChild:self.previousMedications];
     }
     
 }

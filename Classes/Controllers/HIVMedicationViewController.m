@@ -16,6 +16,7 @@
 #import "GeneralSettings.h"
 #import "SideEffectsViewController.h"
 #import "MissedMedViewController.h"
+#import "PreviousMedViewController.h"
 #import "HIVMedListCell.h"
 #import "HIVMedSupportCell.h"
 #import "UINavigationBar-Button.h"
@@ -23,6 +24,7 @@
 
 @interface HIVMedicationViewController ()
 @property NSUInteger stateIndex;
+- (void)loadPreviousMedsController;
 @end
 
 @implementation HIVMedicationViewController
@@ -64,6 +66,11 @@
     [super viewWillAppear:animated];
 }
 
+- (void)loadPreviousMedsController
+{
+    PreviousMedViewController *viewController = [[PreviousMedViewController alloc]initWithRecord:self.masterRecord];
+    [self.navigationController pushViewController:viewController animated:YES];    
+}
 
 /**
  loads the MedicationDetailViewController - to add new Combi therapy
@@ -71,7 +78,6 @@
 - (void)loadMedicationDetailViewController
 {
 	MedicationDetailTableViewController *newMedsView = [[MedicationDetailTableViewController alloc] initWithRecord:self.masterRecord];
-	newMedsView.record = self.masterRecord;
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMedsView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -300,6 +306,10 @@
         if(1 == indexPath.row)
         {
             [self loadMissedMedicationsController];
+        }
+        if (2 == indexPath.row)
+        {
+            [self loadPreviousMedsController];
         }
     }
 }

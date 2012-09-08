@@ -90,14 +90,14 @@
     [self.scrollView setAlwaysBounceVertical:NO];
     [self.scrollView setAlwaysBounceHorizontal:YES];
     
+    /*
     for (int i = 0; i < kNumberOfChartViews; ++i) {
         CGFloat xOffset = (CGFloat)i * self.scrollView.frame.size.width;
         CGRect chartFrame = CGRectMake(xOffset, 0, scrollFrame.size.width, scrollFrame.size.height);
-        /*
         ChartScrollView *chartView = [[ChartScrollView alloc]initWithPageNumber:i andFrame:chartFrame];
         [self.scrollView addSubview:chartView];
-         */
     }
+     */
     
     [self.view addSubview:self.scrollView];
     

@@ -8,6 +8,7 @@
 
 #import "MedicationChangeTableViewController.h"
 #import "MissedMedication.h"
+#import "PreviousMedication.h"
 #import "Medication.h"
 #import "iStayHealthyRecord.h"
 #import "Utilities.h"
@@ -89,10 +90,11 @@
  */
 - (IBAction) save:					(id) sender
 {
-    NSManagedObjectContext *context = [self.record managedObjectContext];
+    NSManagedObjectContext *context = nil;
     NSError *error = nil;
     if (self.startDateChanged)
     {
+        context = [self.selectedMedication managedObjectContext];
         self.record.UID = [Utilities GUID];
         self.selectedMedication.StartDate = self.startDate;
         self.selectedMedication.UID = [Utilities GUID];
@@ -103,15 +105,30 @@
 #endif
             abort();
         }
+        [self dismissModalViewControllerAnimated:YES];
     }
     if (self.endDateChanged)
     {
+        context = [self.record managedObjectContext];
+        PreviousMedication *previousMed = [NSEntityDescription insertNewObjectForEntityForName:@"PreviousMedication" inManagedObjectContext:context];
+        [self.record addPreviousMedicationsObject:previousMed];
+        previousMed.uID = [Utilities GUID];
         self.record.UID = [Utilities GUID];
-        self.selectedMedication.EndDate = self.endDate;
-        self.selectedMedication.UID = [Utilities GUID];
+        previousMed.name = self.selectedMedication.Name;
+        previousMed.startDate = self.selectedMedication.StartDate;
+        previousMed.endDate = self.endDate;
+        previousMed.isART = [NSNumber numberWithBool:YES];
+        previousMed.drug = self.selectedMedication.Drug;
+        if (![context save:&error])
+        {
+#ifdef APPDEBUG
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+#endif
+            abort();
+        }
+        [self removeSQLEntry];
     }
     
-	[self dismissModalViewControllerAnimated:YES];        
 }
 
 - (IBAction) cancel: (id) sender

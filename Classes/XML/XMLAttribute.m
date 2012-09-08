@@ -7,7 +7,7 @@
 //
 
 #import "XMLAttribute.h"
-#import "XMLDefinitions.h"
+//#import "XMLDefinitions.h"
 
 @implementation XMLAttribute
 @synthesize name = _name;
