@@ -19,6 +19,8 @@
 @interface NewStatusViewController : iStayHealthyTableViewController
 @property (nonatomic, strong) HealthChartsViewPortrait *chartView;
 @property (nonatomic, strong) ChartEvents *events;
+@property (nonatomic, strong) NSNumber * sizeOfSummaryCell;
+@property (nonatomic, strong) NSNumber * sizeOfChartCell;
 - (void)configureCD4Cell:(SummaryCell *)cell;
 - (void)configureCD4PercentCell:(SummaryCell *)cell;
 - (void)configureViralLoadCell:(SummaryCell *)cell;

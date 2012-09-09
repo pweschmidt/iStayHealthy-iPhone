@@ -21,25 +21,30 @@
     NSLog(@"ResultValueCell initWithStyle");
 #endif
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (nil != self)
+    {
     }
     return self;
 }
-- (void)setDelegate:(id)viewControllerDelegate{
+- (void)setDelegate:(id)viewControllerDelegate
+{
     self.resultValueDelegate = viewControllerDelegate;
 }
 
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     textField.textColor = [UIColor blackColor];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
     [self.resultValueDelegate setValueString:textField.text withTag:self.tag];
 }
 
@@ -57,16 +62,20 @@
  Finally, to ensure that we can convert a float value from continental comma separation to dot separation
  we replace any occurrances of , with .
 */
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
 
     NSString *separator = [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     NSString *expression = nil;
-    if (INTEGERINPUT == self.inputValueKind) {
+    if (INTEGERINPUT == self.inputValueKind)
+    {
         expression = @"^([0-9]+)?$";
     }
-    else if(FLOATINPUT == self.inputValueKind){
-        if ([@"." isEqualToString:separator]) {
+    else if(FLOATINPUT == self.inputValueKind)
+    {
+        if ([@"." isEqualToString:separator])
+        {
             expression = @"^([0-9]{1,3})?(\\.([0-9]{1,2})?)?$";
         }
         else 
@@ -74,7 +83,8 @@
             expression = @"^([0-9]{1,3})?(,([0-9]{1,2})?)?$";
         }
     }
-    else if(BLOODPRESSUREINPUT == self.inputValueKind){
+    else if(BLOODPRESSUREINPUT == self.inputValueKind)
+    {
         expression = @"^([0-9]{1,3})?(\\\([0-9]{1,2})?)?$";
     }
 
@@ -83,7 +93,8 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:expression 
                                                                            options:NSRegularExpressionCaseInsensitive 
                                                                              error:&error];
-    if (error) {
+    if (error)
+    {
         return YES;
     }
     NSUInteger numberOfMatches = [regex numberOfMatchesInString:newString
@@ -91,7 +102,8 @@
                                                           range:NSMakeRange(0, [newString length])];   
     
     
-    if (0 < numberOfMatches) {
+    if (0 < numberOfMatches)
+    {
         NSString *normalisedString = [newString stringByReplacingOccurrencesOfString:@"," withString:@"."];
         [self.resultValueDelegate setValueString:normalisedString withTag:self.tag];
         return YES;

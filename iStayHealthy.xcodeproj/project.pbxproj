@@ -516,7 +516,6 @@
 		C4C418CB15F1363C00882416 /* DataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataLoader.m; path = XML/DataLoader.m; sourceTree = "<group>"; };
 		C4C418CC15F1363C00882416 /* XMLAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLAttribute.h; path = XML/XMLAttribute.h; sourceTree = "<group>"; };
 		C4C418CD15F1363C00882416 /* XMLAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLAttribute.m; path = XML/XMLAttribute.m; sourceTree = "<group>"; };
-		C4C418CE15F1363C00882416 /* XMLDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDefinitions.h; path = XML/XMLDefinitions.h; sourceTree = "<group>"; };
 		C4C418CF15F1363C00882416 /* XMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDocument.h; path = XML/XMLDocument.h; sourceTree = "<group>"; };
 		C4C418D015F1363C00882416 /* XMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDocument.m; path = XML/XMLDocument.m; sourceTree = "<group>"; };
 		C4C418D115F1363C00882416 /* XMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLElement.h; path = XML/XMLElement.h; sourceTree = "<group>"; };
@@ -942,7 +941,6 @@
 				C4C418CB15F1363C00882416 /* DataLoader.m */,
 				C4C418CC15F1363C00882416 /* XMLAttribute.h */,
 				C4C418CD15F1363C00882416 /* XMLAttribute.m */,
-				C4C418CE15F1363C00882416 /* XMLDefinitions.h */,
 				C4C418CF15F1363C00882416 /* XMLDocument.h */,
 				C4C418D015F1363C00882416 /* XMLDocument.m */,
 				C4C418D115F1363C00882416 /* XMLElement.h */,

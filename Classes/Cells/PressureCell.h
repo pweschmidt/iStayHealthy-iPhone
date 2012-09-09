@@ -21,5 +21,5 @@
 @protocol PressureCellDelegate <NSObject>
 
 - (void)setSystole:(NSString *)systole diastole:(NSString *)diastole;
-
+- (void)setValue:(NSString *)value tag:(NSInteger)tag;
 @end

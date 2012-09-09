@@ -42,7 +42,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-//    [self.resultValueDelegate setValueString:textField.text withTag:self.tag];
+    [self.pressureDelegate setValue:textField.text tag:textField.tag];
 }
 
 /**
@@ -81,7 +81,9 @@
     
     if (0 < numberOfMatches)
     {
-        [self.pressureDelegate setSystole:self.systoleField.text diastole:self.diastoleField.text];
+        [self.pressureDelegate setValue:newString tag:textField.tag];
+        
+//        [self.pressureDelegate setSystole:self.systoleField.text diastole:self.diastoleField.text];
 //        [self.resultValueDelegate setValueString:normalisedString withTag:self.tag];
         return YES;
     }

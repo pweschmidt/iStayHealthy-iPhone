@@ -624,8 +624,8 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
                     if (0 < [self.cd4 intValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.cd4 intValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.cd4 intValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
                     }
                     resultCell.inputValueKind = INTEGERINPUT;
                     break;
@@ -633,8 +633,8 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
                     if (0 < [self.cd4Percent floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -672,18 +672,18 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"Glucose", @"Glucose");
                     if (0 < [self.glucose floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.glucose floatValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.glucose floatValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
                     }
-                    resultCell.inputValueKind = INTEGERINPUT;
+                    resultCell.inputValueKind = FLOATINPUT;
                     break;
                 case 1:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol");
                     if (0 < [self.cholesterol floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.cholesterol floatValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.cholesterol floatValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -693,8 +693,8 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"HDL", @"HDL");
                     if (0 < [self.hdl floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.hdl floatValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.hdl floatValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -704,8 +704,8 @@
                     resultCell.inputTitle.text = NSLocalizedString(@"LDL", @"LDL");
                     if (0 < [self.ldl floatValue])
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.ldl floatValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.ldl floatValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -733,13 +733,14 @@
                 }
                 [resultCell setDelegate:self];
             }
+            resultCell.inputTitle.textColor = TEXTCOLOUR;
             resultCell.colourCodeView.backgroundColor = DARK_GREEN;
             resultCell.colourCodeView.layer.cornerRadius = 5;
             resultCell.inputTitle.text = NSLocalizedString(@"Weight", @"Weight");
             if (0 < [self.weight floatValue])
             {
-                [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%2.1f",[self.weight floatValue]]];
-                [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.weight floatValue]];
+                resultCell.inputValueField.textColor = [UIColor blackColor];
             }
             resultCell.inputValueKind = FLOATINPUT;
             resultCell.tag = tag;
@@ -784,21 +785,22 @@
                     segCell.inputValueField.enabled = NO;
                     if (40 <= [self.vlHIV intValue])
                     {
-                        [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHIV intValue]]];
-                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                        [[segCell switchControl]setOn:FALSE];
+                        segCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.vlHIV intValue]];
+                        segCell.inputValueField.textColor = [UIColor blackColor];
+                        segCell.inputValueField.enabled = YES;
+                        segCell.switchControl.on = NO;
                     }
                     if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue])
                     {
-                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                        [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
-                        [[segCell inputValueField]setEnabled:NO];
-                        [[segCell switchControl]setOn:TRUE];
+                        segCell.inputValueField.textColor = [UIColor blackColor];
+                        segCell.inputValueField.text = NSLocalizedString(@"undetectable",@"undetectable");
+                        segCell.inputValueField.enabled = NO;
+                        segCell.switchControl.on = YES;
                     }
                     if(0 > [self.vlHIV intValue])
                     {
-                        [[segCell inputValueField]setEnabled:YES];
-                        [[segCell switchControl]setOn:FALSE];
+                        segCell.inputValueField.enabled = YES;
+                        segCell.switchControl.on = NO;
                     }
                     [segCell.switchControl setOn:FALSE];
                     break;
@@ -807,21 +809,22 @@
                     segCell.inputValueField.enabled = YES;
                     if (40 <= [self.vlHepC intValue])
                     {
-                        [[segCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.vlHepC intValue]]];
-                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                        [[segCell switchControl]setOn:FALSE];
+                        segCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.vlHepC intValue]];
+                        segCell.inputValueField.textColor = [UIColor blackColor];
+                        segCell.inputValueField.enabled = YES;
+                        segCell.switchControl.on = NO;
                     }
                     if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue])
                     {
-                        [[segCell inputValueField]setTextColor:[UIColor blackColor]];
-                        [[segCell inputValueField]setText:NSLocalizedString(@"undetectable",@"undetectable")];
-                        [[segCell inputValueField]setEnabled:NO];
-                        [[segCell switchControl]setOn:TRUE];
+                        segCell.inputValueField.textColor = [UIColor blackColor];
+                        segCell.inputValueField.text = NSLocalizedString(@"undetectable",@"undetectable");
+                        segCell.inputValueField.enabled = NO;
+                        segCell.switchControl.on = YES;
                     }
                     if(0 > [self.vlHepC intValue])
                     {
-                        [[segCell inputValueField]setEnabled:NO];
-                        [[segCell switchControl]setOn:TRUE];
+                        segCell.inputValueField.enabled = NO;
+                        segCell.switchControl.on = YES;
                     }
                     [segCell.switchControl setOn:TRUE];
                     break;
@@ -970,6 +973,19 @@
     self.systole = [self valueFromString:systole];
     self.diastole = [self valueFromString:diastole];
 }
+
+- (void)setValue:(NSString *)value tag:(NSInteger)tag
+{
+    if (11000 == tag)
+    {
+        self.systole = [self valueFromString:value];
+    }
+    if (12000 == tag)
+    {
+        self.diastole = [self valueFromString:value];
+    }
+}
+
 
 #pragma mark -
 #pragma mark Memory management

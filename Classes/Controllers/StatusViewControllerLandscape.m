@@ -58,7 +58,8 @@
 #ifdef APPDEBUG	
 	NSLog(@"StatusViewControllerLandscape:viewDidLoad reset chart");
 #endif
-	CGRect frame = CGRectMake(0.0, 20.0, 480.0, 300.0);
+    CGSize size = self.view.bounds.size;
+	CGRect frame = CGRectMake(0.0, 20.0, size.height, size.width - 20);
     HealthChartsViewLandscape *chart = [[HealthChartsViewLandscape alloc]initWithFrame:frame];
     [self.view addSubview:chart];
     self.chartView = chart;

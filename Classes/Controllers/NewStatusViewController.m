@@ -25,6 +25,8 @@
 @implementation NewStatusViewController
 @synthesize chartView = _chartView;
 @synthesize events = _events;
+@synthesize sizeOfChartCell = _sizeOfChartCell;
+@synthesize sizeOfSummaryCell = _sizeOfSummaryCell;
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,6 +62,11 @@
     }
     ChartEvents *tmpEvents = [[ChartEvents alloc]init];
 	self.events = tmpEvents;
+    CGSize size = self.view.bounds.size;
+    float cellHeight = size.height * 0.066;
+    self.sizeOfSummaryCell = [NSNumber numberWithFloat:cellHeight];
+    float chartHeight = size.height * 0.45;
+    self.sizeOfChartCell = [NSNumber numberWithFloat:chartHeight];
 }
 
 - (void)reloadData:(NSNotification *)note
@@ -283,11 +290,11 @@
 {
 	if (0 == indexPath.section)
     {
-		return TEXTCELLHEIGHT;
+		return [self.sizeOfSummaryCell floatValue];
 	}
 	else
     {
-		return CHARTCELLHEIGHT;
+		return [self.sizeOfChartCell floatValue];
 	}
 }
 
@@ -571,7 +578,7 @@
 		}
 		cell.backgroundColor = BRIGHT_BACKGROUND;			
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+MARGINLEFT/2, CGRectGetMinY(cell.bounds), CGRectGetWidth(cell.bounds) - MARGINLEFT*1.5, CHARTCELLHEIGHT-5.0);
+        CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+MARGINLEFT/2, CGRectGetMinY(cell.bounds), CGRectGetWidth(cell.bounds) - MARGINLEFT*1.5, [self.sizeOfChartCell floatValue]-5.0);
         HealthChartsViewPortrait *chart = [[HealthChartsViewPortrait alloc] initWithFrame:frame];
         [chart setEvents:self.events];
 //        chart.events = self.events;

@@ -115,9 +115,11 @@
     MissedMedication *missed = (MissedMedication *)[self.allMissedMeds objectAtIndex:indexPath.row];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
 	formatter.dateFormat = @"dd MMM YYYY";
-    [[cell effect]setText:[formatter stringFromDate:missed.MissedDate]];
-    [[cell drug]setText:missed.Name];
-    [[cell effectsImageView]setImage:[UIImage imageNamed:@"missed.png"]];
+    cell.date.text = [formatter stringFromDate:missed.MissedDate];
+    cell.effect.text = missed.Name;
+    cell.drug.text = missed.missedReason;
+    cell.effectsImageView.image = [UIImage imageNamed:@"missed.png"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
