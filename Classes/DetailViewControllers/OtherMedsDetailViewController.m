@@ -284,8 +284,8 @@
     footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
     if (self.isEdit && 2 == section)
     {
-        footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 90);
-        CGRect deleteFrame = CGRectMake(10, 45, tableView.bounds.size.width - 20 , 37);
+        footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 50);
+        CGRect deleteFrame = CGRectMake(10, 10, tableView.bounds.size.width - 20 , 37);
         GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
         [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
         [footerView addSubview:deleteButton];

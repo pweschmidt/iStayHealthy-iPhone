@@ -17,7 +17,9 @@
     self = [super init];
     if (nil != self)
     {
+#ifdef APPDEBUG
         NSLog(@"initializing XMLDocument");
+#endif
         self.root = [[XMLElement alloc]initWithName:kXMLElementRoot];
         self.root.nodeLevel = 0;
     }

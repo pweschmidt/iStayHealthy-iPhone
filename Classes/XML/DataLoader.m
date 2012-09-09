@@ -279,8 +279,9 @@
     }
 
     NSString *xmlString = [document xmlString];
+#ifdef APPDEBUG
     NSLog(@"XML string = %@",xmlString);
-
+#endif
     return [xmlString dataUsingEncoding:NSUTF8StringEncoding];
 }
 

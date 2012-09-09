@@ -12,6 +12,7 @@
 #import "iStayHealthyAppDelegate.h"
 #import "iStayHealthyRecord.h"
 #import "AlertListCell.h"
+#import "GeneralSettings.h"
 #import "UINavigationBar-Button.h"
 
 @interface NewAlertViewController ()
@@ -164,15 +165,25 @@ loads the NewAlertEditDetailViewController to edit an existing alert
     NSDate *now = [NSDate date];
     NSTimeInterval elapsedTime = [now timeIntervalSinceDate:notifcation.fireDate];
     NSTimeInterval dayInSeconds = 24 * 60 * 60;
+    NSTimeInterval hourInSeconds = 3600;
     int days = elapsedTime / dayInSeconds;
     NSTimeInterval lasttime = days * dayInSeconds;
     NSTimeInterval nexttime = lasttime + dayInSeconds;
     NSTimeInterval difference = nexttime - elapsedTime;
+    if (dayInSeconds < difference)
+    {
+        difference = difference - dayInSeconds;
+    }
     NSString *timeLeft = [NSString stringWithFormat:@"%02li:%02li",
                           lround(floor(difference / 3600.)) % 100,
                           lround(floor(difference / 60.)) % 60];
     NSString *fullTimeLeftText = [NSString stringWithFormat:@"%@ %@",timeLeft, NSLocalizedString(@"remaining", @"remaining")];
+    if (difference <= hourInSeconds)
+    {
+        cell.timeLeftLabel.textColor = DARK_RED;
+    }
     cell.timeLeftLabel.text = fullTimeLeftText;
+    
     
     cell.title.text = [dateFormatter stringFromDate:notifcation.fireDate];
     cell.text.text = notifcation.alertBody;

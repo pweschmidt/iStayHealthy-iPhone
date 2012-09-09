@@ -38,7 +38,9 @@
         self.attributes = [[NSMutableArray alloc]initWithCapacity:0];
         self.childElements = [[NSMutableArray alloc]initWithCapacity:0];
     }
+#ifdef APPDEBUG
     NSLog(@"XMLElement::initWithName %@",elementName);
+#endif
     return self;
 }
 
@@ -78,7 +80,9 @@
 
 - (NSMutableString *)toString
 {
+#ifdef APPDEBUG
     NSLog(@"toString elementName %@",self.name);
+#endif
     NSMutableString *tabs = [self tabs];
     NSMutableString *xmlString = [NSMutableString stringWithFormat:@"\r%@<%@",tabs,self.name];
     if (0 < [self.attributes count] )

@@ -484,7 +484,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
             [psc unlock];
             
             dispatch_async(dispatch_get_main_queue(), ^{
+#ifdef APPDEBUG
                 NSLog(@"asynchronously added persistent store!");
+#endif
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
             });
             

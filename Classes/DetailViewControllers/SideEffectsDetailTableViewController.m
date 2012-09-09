@@ -89,7 +89,9 @@
                 self.seriousnessIndex = [NSNumber numberWithInt:2];
             }            
         }
+#ifdef APPDEBUG
         NSLog(@"Seriousness is %@",self.seriousness);
+#endif
     }
     return self;
 }
@@ -354,8 +356,8 @@
     {
         if (self.isEditMode)
         {
-            footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 40);
-            CGRect deleteFrame = CGRectMake(10, 1.5, tableView.bounds.size.width - 20 , 37);
+            footerView.frame = CGRectMake(0, 0, tableView.bounds.size.width, 50);
+            CGRect deleteFrame = CGRectMake(10, 10, tableView.bounds.size.width - 20 , 37);
             GradientButton *deleteButton = [[GradientButton alloc] initWithFrame:deleteFrame colour:Red title:NSLocalizedString(@"Delete", @"Delete")];
             [deleteButton addTarget:self action:@selector(showAlertView:) forControlEvents:UIControlEventTouchUpInside];
             [footerView addSubview:deleteButton];

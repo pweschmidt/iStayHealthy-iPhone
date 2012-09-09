@@ -44,7 +44,7 @@
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
     {
-        [navBar addButtonWithTitle:@"Illness/Surgery" target:self selector:@selector(gotoPOZ)];
+        [navBar addButtonWithTitle:@"Illness" target:self selector:@selector(gotoPOZ)];
     }
 }
 
