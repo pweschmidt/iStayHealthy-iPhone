@@ -76,7 +76,7 @@
 "Results" = "Résultats";
 "HIV Drugs" = "Médication VIH";
 "Alerts" = "Alertes";
-"Other Meds" = "Médicaments";
+"Other Meds" = "Autres Méd's";
 "Backup" = "Sauvegarder";
 "Restore" = "Restaurer";
 "Suggestions?" = "Suggestions?";
@@ -178,4 +178,5 @@
 "Blood Results"="Rés. Sanguins";
 "Other Results"="Autres Rés.";
 "remaining"="restant";
+"Previous Medication"="Traitement antérieur";
 

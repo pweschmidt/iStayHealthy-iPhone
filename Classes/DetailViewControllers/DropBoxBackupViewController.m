@@ -325,7 +325,7 @@
     [xmlLoader synchronise];
     [self.activityIndicator stopAnimating];
     [[[UIAlertView alloc] 
-       initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.xml.",nil)
+       initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.isth.",nil)
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
      show];        
     

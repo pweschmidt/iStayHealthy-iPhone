@@ -76,7 +76,7 @@
 "Results" = "Werte";
 "HIV Drugs" = "HIV Behandlung";
 "Alerts" = "Wecker";
-"Other Meds" = "Medikamente";
+"Other Meds" = "Allg. Med.";
 "Backup" = "Sichern";
 "Restore" = "Wiederherstellen";
 "Suggestions?" = "Vorschläge?";
@@ -178,4 +178,5 @@
 "Blood Results"="Blutwerte";
 "Other Results"="Anderes";
 "remaining"="verbleibend";
+"Previous Medication"="Vorherige Behandl.";
 

@@ -82,7 +82,7 @@
 
 - (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord
 {
-    self = [super initWithNibName:@"ResultChangeViewController" bundle:nil];
+    self = [super initWithNibName:@"ResultDetailViewController" bundle:nil];
     if (self)
     {
         self.isInEditMode = YES;
