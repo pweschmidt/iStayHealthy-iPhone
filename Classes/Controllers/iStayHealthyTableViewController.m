@@ -80,7 +80,17 @@
 		[self setUpMasterRecord];
 	}
 
-	StatusViewControllerLandscape *landscape = [[StatusViewControllerLandscape alloc]initWithNibName:@"StatusViewControllerLandscape" bundle:nil];
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    StatusViewControllerLandscape *landscape = nil;
+    if (height < 568)
+    {
+        landscape = [[StatusViewControllerLandscape alloc]initWithNibName:@"StatusViewControllerLandscape" bundle:nil];
+    }
+    else
+    {
+        landscape = [[StatusViewControllerLandscape alloc]initWithNibName:@"StatusViewControllerLandscape_iPhone5" bundle:nil];        
+    }
+    
 	self.landscapeController = landscape;
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)

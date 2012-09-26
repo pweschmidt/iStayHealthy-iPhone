@@ -386,7 +386,7 @@
 #endif
                 self.dropBoxFileExists = YES;            
             }
-            else if([pathName hasSuffix:@"iStayHealthy.isth"])
+            if([pathName hasSuffix:@"iStayHealthy.isth"])
             {
 #ifdef APPDEBUG
                 NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.isth file");

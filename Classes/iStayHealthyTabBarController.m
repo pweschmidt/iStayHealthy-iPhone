@@ -41,10 +41,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSMutableArray *viewControllersArray = 
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+#ifdef APPDEBUG
+    NSLog(@"The screensize/height is %f ",height);
+#endif
+    NSMutableArray *viewControllersArray =
     [[NSMutableArray alloc]initWithCapacity:5];
-    
-    NewStatusViewController *statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil];
+    NewStatusViewController *statusView = nil;
+    if (height < 568)
+    {
+        statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController" bundle:nil];
+    }
+    else
+    {
+        statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController_iPhone5" bundle:nil];
+    }
 //    DashboardViewController *statusView = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:nil];
 //    statusView.title = NSLocalizedString(@"Charts", @"Charts");
     statusView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Charts", @"Charts") image:[UIImage imageNamed:@"status-small.png"] tag:0];

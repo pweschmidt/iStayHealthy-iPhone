@@ -71,6 +71,15 @@
     NSManagedObjectContext *context = nil;
     if (self.isEdit)
     {
+        context = [self.procedures managedObjectContext];
+        self.record.UID = [Utilities GUID];
+        self.procedures.UID = [Utilities GUID];
+        self.procedures.Illness = self.illness;
+        self.procedures.Name = self.name;
+        self.procedures.Date = self.startDate;
+    }
+    else
+    {
         context = [self.record managedObjectContext];
         Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:@"Procedures" inManagedObjectContext:context];
         [self.record addProceduresObject:procedures];
@@ -79,15 +88,6 @@
         procedures.Illness = self.illness;
         procedures.UID = [Utilities GUID];
         self.record.UID = [Utilities GUID];
-    }
-    else
-    {
-        context = [self.procedures managedObjectContext];
-        self.record.UID = [Utilities GUID];
-        self.procedures.UID = [Utilities GUID];
-        self.procedures.Illness = self.illness;
-        self.procedures.Name = self.name;
-        self.procedures.Date = self.startDate;        
     }
     if (![context save:&error])
     {

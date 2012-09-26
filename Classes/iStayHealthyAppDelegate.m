@@ -177,12 +177,35 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
  */
 - (void)checkForiCloud
 {
+#ifdef APPDEBUG
+    NSLog(@"in checkForiCloud");
+#endif
     self.iCloudIsAvailable = FALSE;
     if (DEVICE_IS_SIMULATOR)
     {
         return;
     }    
-    
+    self.cloudURL = nil;
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(globalQueue, ^{
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
+        NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^{
+            if (nil != ubiquityContainer)
+            {
+#ifdef APPDEBUG
+                NSLog(@"in checkForiCloud: we checked the store for the iCloud data ");
+#endif
+                self.cloudURL = ubiquityContainer;
+                self.iCloudIsAvailable = YES;
+                NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self];
+                
+                [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+            }
+        });
+    });
+    /*
     self.cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
     if (self.cloudURL)
     {
@@ -198,12 +221,16 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 #endif
         self.iCloudIsAvailable = FALSE;
     }    
+     */
 }
 
 
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+#ifdef APPDEBUG
+    NSLog(@"in applicationWillResignActive");
+#endif
     [self saveContext];
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -243,6 +270,9 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+#ifdef APPDEBUG
+    NSLog(@"in applicationWillEnterForeground");
+#endif
 	application.applicationIconBadgeNumber = 0;
     [self saveContext];
 }
@@ -250,6 +280,9 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+#ifdef APPDEBUG
+    NSLog(@"in applicationDidBecomeActive");
+#endif
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
@@ -289,6 +322,9 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 didReceiveLocalNotification:(UILocalNotification *)notification
 {
 	
+#ifdef APPDEBUG
+    NSLog(@"in didReceiveLocalNotification");
+#endif
 	UIApplicationState state = [application applicationState];
 	application.applicationIconBadgeNumber = 0;
 	if (state == UIApplicationStateInactive)
@@ -306,6 +342,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 - (void)saveContext
 {
     
+#ifdef APPDEBUG
+    NSLog(@"in saveContext");
+#endif
     NSError *error = nil;
 	NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil)
@@ -335,6 +374,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
  */
 - (NSManagedObjectContext *)managedObjectContext
 {
+#ifdef APPDEBUG
+    NSLog(@"in managedObjectContext");
+#endif
     
     if (_managedObjectContext != nil)
     {
@@ -348,11 +390,17 @@ didReceiveLocalNotification:(UILocalNotification *)notification
     }
     if (!self.iCloudIsAvailable)
     {
+#ifdef APPDEBUG
+        NSLog(@"in managedObjectContext if iCloud is not available");
+#endif
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     else
     {
+#ifdef APPDEBUG
+        NSLog(@"in managedObjectContext if iCloud IS available");
+#endif
         NSManagedObjectContext* moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         
         [moc performBlockAndWait:^{
@@ -373,6 +421,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
  */
 - (NSManagedObjectModel *)managedObjectModel
 {
+#ifdef APPDEBUG
+    NSLog(@"in managedObjectModel ");
+#endif
     
     if (_managedObjectModel != nil)
     {
@@ -388,7 +439,10 @@ didReceiveLocalNotification:(UILocalNotification *)notification
  */
 - (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc
 {
-    [moc mergeChangesFromContextDidSaveNotification:note]; 
+#ifdef APPDEBUG
+    NSLog(@"in mergeiCloudChanges ");
+#endif
+    [moc mergeChangesFromContextDidSaveNotification:note];
     
     NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self  userInfo:[note userInfo]];
     
@@ -403,6 +457,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 // the main thread for our views & controller
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification
 {
+#ifdef APPDEBUG
+    NSLog(@"in mergeChangesFrom_iCloud ");
+#endif
     NSManagedObjectContext* moc = [self managedObjectContext];
     
     // this only works if you used NSMainQueueConcurrencyType
@@ -420,6 +477,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     
+#ifdef APPDEBUG
+    NSLog(@"in persistentStoreCoordinator ");
+#endif
     if (_persistentStoreCoordinator != nil)
     {
         return _persistentStoreCoordinator;
@@ -433,6 +493,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
     
     if (!self.iCloudIsAvailable)
     {
+#ifdef APPDEBUG
+        NSLog(@"in persistentStoreCoordinator : iCloud is NOT available");
+#endif
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
 //        NSString* coreDataCloudContent = [[self.cloudURL path] stringByAppendingPathComponent:@"data"];
 //        NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
@@ -451,6 +514,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
     }
     else
     {
+#ifdef APPDEBUG
+        NSLog(@"in persistentStoreCoordinator : iCloud IS available");
+#endif
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         
             // this needs to match the entitlements and provisioning profile
@@ -502,6 +568,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
  */
 - (void)setUpMasterRecord
 {
+#ifdef APPDEBUG
+    NSLog(@"in setUpMasterRecord ");
+#endif
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
     {
@@ -544,6 +613,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
  */
 - (NSFetchedResultsController *)fetchedResultsController
 {
+#ifdef APPDEBUG
+    NSLog(@"in fetchedResultsController ");
+#endif
 	if (fetchedResultsController_ != nil)
     {
 		return fetchedResultsController_;
@@ -579,6 +651,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
  */
 - (NSURL *)applicationDocumentsDirectory
 {
+#ifdef APPDEBUG
+    NSLog(@"in applicationDocumentsDirectory ");
+#endif
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
  
@@ -591,6 +666,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
+#ifdef APPDEBUG
+    NSLog(@"in applicationDidReceiveMemoryWarning ");
+#endif
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
@@ -615,6 +693,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session userId:(NSString *)userId
 {
+#ifdef APPDEBUG
+    NSLog(@"in sessionDidReceiveAuthorizationFailure ");
+#endif
 	self.relinkUserId = userId;
 	[[[UIAlertView alloc] 
 	   initWithTitle:@"Dropbox Session Ended" message:@"Do you want to relink?" delegate:self 
