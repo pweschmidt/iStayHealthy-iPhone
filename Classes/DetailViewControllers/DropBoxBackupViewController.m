@@ -207,7 +207,8 @@
                 {
                     [self.activityIndicator startAnimating];   
                     NSString *dataPath = [self dropBoxFileTmpPath];
-                    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
+                    [[self restClient] loadRevisionsForFile:@"/iStayHealthy/iStayHealthy.isth" limit:1000];
+//                    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
                 }
                 break;    
         }
@@ -310,6 +311,30 @@
         [[self restClient]uploadFile:@"iStayHealthy.isth" toPath:@"/iStayHealthy" withParentRev:nil fromPath:dataPath];
     }        
 
+}
+
+- (void)restClient:(DBRestClient *)client loadedRevisions:(NSArray *)revisions forFile:(NSString *)path
+{
+#ifdef APPDEBUG
+    NSLog(@"loaded Revisions with %d entries for path %@",revisions.count, path);
+    for (DBMetadata *metadata in revisions)
+    {
+        NSLog(@"revision is %@, and modified at %@", metadata.rev, metadata.lastModifiedDate);
+    }
+#endif
+    
+    if (0 < revisions.count)
+    {
+        DBMetadata *latestFileMetadata = (DBMetadata *)[revisions objectAtIndex:0];
+        NSString *dataPath = [self dropBoxFileTmpPath];
+        [[self restClient] loadFile:path atRev:latestFileMetadata.rev intoPath:dataPath];
+    }
+}
+
+- (void)restClient:(DBRestClient *)client loadRevisionsFailedWithError:(NSError *)error
+{
+    NSLog(@"loadRevisionsFailedWithError error message is %@ with code %d", [error localizedDescription], [error code]);
+    [self.activityIndicator stopAnimating];
 }
 
 /**

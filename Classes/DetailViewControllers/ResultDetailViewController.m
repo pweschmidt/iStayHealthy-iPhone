@@ -73,8 +73,8 @@
         self.whiteCells = [NSNumber numberWithFloat:-1.0];
         self.redCells = [NSNumber numberWithFloat:-1.0];
         self.platelets = [NSNumber numberWithFloat:-1.0];
-        self.systole = [NSNumber numberWithFloat:-1];
-        self.diastole = [NSNumber numberWithFloat:-1];
+        self.systole = [NSNumber numberWithFloat:-1.0];
+        self.diastole = [NSNumber numberWithFloat:-1.0];
         self.isInEditMode = NO;
     }
     return self;

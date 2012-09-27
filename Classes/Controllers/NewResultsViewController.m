@@ -192,7 +192,9 @@
     {
         cell.serumsView.backgroundColor = [UIColor clearColor];
     }
-    if (0 < [current.Glucose floatValue] || 0 < [current.HDL floatValue] || [current.LDL floatValue] || 0 < [current.TotalCholesterol floatValue])
+    if ([current.Glucose floatValue] > 0.0 || [current.HDL floatValue] > 0.0 || [current.LDL floatValue] > 0.0 ||  [current.TotalCholesterol floatValue] > 0.0 || [current.WhiteBloodCellCount floatValue] > 0.0 ||
+        [current.redBloodCellCount floatValue] > 0.0 || [current.Hemoglobulin floatValue] > 0.0 ||
+        [current.PlateletCount floatValue] > 0.0)
     {
         cell.bloodView.backgroundColor = DARK_RED;
     }
