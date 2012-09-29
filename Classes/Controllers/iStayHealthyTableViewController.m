@@ -15,7 +15,11 @@
 #import "NSArray-Set.h"
 #import "Utilities.h"
 #import "Medication.h"
+#import "ViewWithActivityIndicator.h"
 
+@interface iStayHealthyTableViewController ()
+@property (nonatomic, strong) ViewWithActivityIndicator * activityView;
+@end
 
 @implementation iStayHealthyTableViewController
 @synthesize fetchedResultsController = fetchedResultsController_;
@@ -33,7 +37,7 @@
 @synthesize allPreviousMedications = _allPreviousMedications;
 @synthesize allWellnes = _allWellnes;
 @synthesize isShowingLandscape = _isShowingLandscape;
-
+@synthesize activityView = _activityView;
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -45,7 +49,8 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
-
+    
+    
 #ifdef APPDEBUG
 	NSLog(@"iStayHealthyTableViewController::viewDidLoad setup fetchResultsController");
 #endif
@@ -77,7 +82,7 @@
 #ifdef APPDEBUG		
 		NSLog(@"iStayHealthyTableViewController::viewDidLoad no master record yet");
 #endif
-		[self setUpMasterRecord];
+//		[self setUpMasterRecord];
 	}
 
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
@@ -108,7 +113,11 @@
     }
 
     [self.headerView addSubview:addButton];
+    self.activityView =[[ViewWithActivityIndicator alloc] init];
+    [self.tableView addSubview:self.activityView];
+    [self.tableView bringSubviewToFront:self.activityView];
 }
+
 
 /**
  reloads the data when getting notified by the app data that iCloud data have changed
@@ -131,8 +140,11 @@
 	}
     if (note)
     {
+        
+        [self setUpMasterRecord];
         [self setUpData];
-        [self.tableView reloadData];        
+        [self.tableView reloadData];
+        [self.activityView stop];
     }
 }
 
@@ -252,10 +264,13 @@
 #ifdef APPDEBUG		
 		NSLog(@"iStayHealthyTableViewController::viewWillAppear no master record yet");
 #endif
-		[self setUpMasterRecord];
+//		[self setUpMasterRecord];
 	}
-	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
-    [self setUpData];
+    else
+    {
+        self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
+        [self setUpData];
+    }
 }
 
 
@@ -343,6 +358,19 @@
 - (void)setUpData
 {
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
+    if (nil == objects || 0 == objects.count)
+    {
+        self.allResults = [NSMutableArray array];
+        self.allResultsInReverseOrder = [NSMutableArray array];
+        self.allMeds = [NSMutableArray array];
+        self.allPreviousMedications  = [NSMutableArray array];
+        self.allPills = [NSMutableArray array];
+        self.allMissedMeds = [NSMutableArray array];
+        self.allContacts = [NSMutableArray array];
+        self.allSideEffects = [NSMutableArray array];
+        self.allProcedures = [NSMutableArray array];
+        return;
+    }
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
         
     /* Results in chronological/reverse order */

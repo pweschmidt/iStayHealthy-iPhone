@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #define BACKGROUNDCOLOUR [UIColor colorWithRed:253.0/255.0 green:255.0/255.0 blue:240.0/255.0 alpha:1.0]
 
-@class iStayHealthyTabBarController, iStayHealthyPasswordController;
+@class iStayHealthyTabBarController, iStayHealthyPasswordController, SQLiteHelper;
 
 @interface iStayHealthyAppDelegate : NSObject <UIApplicationDelegate, NSFetchedResultsControllerDelegate> 
 @property BOOL iCloudIsAvailable;
@@ -23,6 +23,7 @@
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong, readonly) SQLiteHelper *sqlHelper;
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;

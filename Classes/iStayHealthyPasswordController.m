@@ -41,6 +41,40 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)reloadData:(NSNotification*)note
+{
+	NSError *error = nil;
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
+		UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+							  delegate:self
+							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
+							  otherButtonTitles:nil];
+		[alert show];
+	}
+	NSArray *records = [self.fetchedResultsController fetchedObjects];
+    /*
+     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+     self.navigationItem.title = [NSString stringWithFormat:@"iStayHealthy v%@",version];
+     #ifdef APPDEBUG
+     NSLog(@"version string == %@",version);
+     #endif
+     */
+	int count = [records count];
+    if (0 < count)
+    {
+        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+        self.passwordString = masterRecord.Password;
+    }
+    else
+    {//shouldn't really happen
+        [self loadTabController];
+    }
+    
+}
+
 
 #pragma mark - Text Editing and Processing
 
@@ -120,6 +154,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
     {

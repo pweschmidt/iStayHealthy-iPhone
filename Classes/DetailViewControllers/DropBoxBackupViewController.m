@@ -206,7 +206,7 @@
                 else
                 {
                     [self.activityIndicator startAnimating];   
-                    NSString *dataPath = [self dropBoxFileTmpPath];
+//                    NSString *dataPath = [self dropBoxFileTmpPath];
                     [[self restClient] loadRevisionsForFile:@"/iStayHealthy/iStayHealthy.isth" limit:1000];
 //                    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
                 }
