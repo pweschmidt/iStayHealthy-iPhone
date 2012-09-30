@@ -14,6 +14,7 @@ extern NSString * const kSQLiteNoiCloudStore;
 @interface SQLiteHelper : NSObject
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * persistentStoreCoordinator;
 @property (nonatomic, strong, readonly) NSManagedObjectContext * mainObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext * localObjectContext;
 @property (nonatomic, strong, readonly) NSURL * cloudURL;
 - (void)loadSQLitePersistentStore;
 @end

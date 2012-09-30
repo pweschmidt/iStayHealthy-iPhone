@@ -31,7 +31,6 @@
 - (void)setUpMasterRecord;
 - (void)mergeiCloudChanges:(NSNotification*)note 
                 forContext:(NSManagedObjectContext*)moc;
-- (void)checkForiCloud;
 - (BOOL)handleFileImport:(NSURL *)url;
 extern NSString *MEDICATIONALERTKEY;
 @end

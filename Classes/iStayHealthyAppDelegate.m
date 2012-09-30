@@ -110,13 +110,8 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
                                              selector:@selector(postNotificationWithNote:)
                                                  name:NSPersistentStoreCoordinatorStoresDidChangeNotification
                                                object:self.sqlHelper.persistentStoreCoordinator];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mergeChangesFrom_iCloud:)
-                                                 name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                               object:self.sqlHelper.persistentStoreCoordinator];
     [self.sqlHelper loadSQLitePersistentStore];
     [self.window makeKeyAndVisible];
-//    [self checkForiCloud];
     return YES;
 }
 
@@ -187,61 +182,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     }
     return [self handleFileImport:url];
 }
-
-
-/**
- check for the right version and device. If we are a Simulator - iCloud won't work.
- Same holds for devices below version iOS 5.0
- */
-- (void)checkForiCloud
-{
-#ifdef APPDEBUG
-    NSLog(@"in checkForiCloud");
-#endif
-    self.iCloudIsAvailable = FALSE;
-    if (DEVICE_IS_SIMULATOR)
-    {
-        return;
-    }    
-    self.cloudURL = nil;
-    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(globalQueue, ^{
-        NSFileManager *fileManager = [[NSFileManager alloc] init];
-        NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
-        dispatch_queue_t mainQueue = dispatch_get_main_queue();
-        dispatch_async(mainQueue, ^{
-            if (nil != ubiquityContainer)
-            {
-#ifdef APPDEBUG
-                NSLog(@"in checkForiCloud: we checked the store for the iCloud data and found it");
-#endif
-                self.cloudURL = ubiquityContainer;
-                self.iCloudIsAvailable = YES;
-                NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self];
-                
-                [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-            }
-        });
-    });
-    /*
-    self.cloudURL = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:@"5Y4HL833A4.com.pweschmidt.iStayHealthy"];
-    if (self.cloudURL)
-    {
-#ifdef APPDEBUG
-        NSLog(@"iCloud is available with the URL being %@",self.cloudURL);
-#endif
-        self.iCloudIsAvailable = TRUE;
-    }
-    else
-    {
-#ifdef APPDEBUG
-        NSLog(@"iCloud is NOT available");
-#endif
-        self.iCloudIsAvailable = FALSE;
-    }    
-     */
-}
-
 
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -480,6 +420,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification
      */
 }
 
+/*
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification
 {
 #ifdef APPDEBUG
@@ -493,13 +434,12 @@ didReceiveLocalNotification:(UILocalNotification *)notification
         [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
         
     }];
-    /*
-    NSManagedObjectContext* moc = [self managedObjectContext];
-    [moc performBlock:^{
-        [self mergeiCloudChanges:notification forContext:moc];
-    }];
-     */
+--    NSManagedObjectContext* moc = [self managedObjectContext];
+--    [moc performBlock:^{
+--        [self mergeiCloudChanges:notification forContext:moc];
+--    }];
 }
+ */
 
 
 /**
