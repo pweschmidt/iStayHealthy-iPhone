@@ -26,6 +26,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 
 @interface SQLiteHelper ()
 @property (nonatomic, strong, readwrite) NSPersistentStoreCoordinator * persistentStoreCoordinator;
+@property (nonatomic, strong, readwrite) NSPersistentStoreCoordinator * localStoreCoordinator;
 @property (nonatomic, strong, readwrite) NSManagedObjectContext * mainObjectContext;
 @property (nonatomic, strong, readwrite) NSManagedObjectContext * localObjectContext;
 @property (nonatomic, strong, readwrite) NSURL * storeURL;
@@ -40,8 +41,8 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 - (BOOL)loadLocalSQLiteStore:(NSError *__autoreleasing *)error;
 - (BOOL)loadSQLiteStoreFromiCloud:(NSError *__autoreleasing *)error;
 - (NSURL *)applicationDocumentsDirectory;
-- (void)setUpNoniCloudStore;
-- (void)addMasterRecordWithObjectContext:(NSManagedObjectContext *)context;
+- (BOOL)addMasterRecordWithObjectContext:(NSManagedObjectContext *)context;
+- (BOOL)isEmptyMasterRecord;
 - (void)transferDataToLocalStore;
 - (void)addResult:(Results *)result store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
 - (void)addHIVMed:(Medication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
@@ -53,6 +54,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 - (void)addProcedure:(Procedures *)procedure store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
 - (void)addWellness:(Wellness *)wellness store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification;
+//- (void)mergeLocalChangesIntoNoniCloudStore:(NSNotification *)notification;
 @end
 
 
@@ -80,7 +82,6 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
         self.universalLock = [[NSLock alloc] init];
         self.useLocalStore = NO;
         [self setUpCoordinatorAndContext];
-        [self setUpNoniCloudStore];
     }
     return self;
 }
@@ -96,12 +97,13 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     NSLog(@"SQLiteHelper:loadSQLitePersistentStore ENTERING");
 #endif
     __weak SQLiteHelper *weakSelf = self;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"startLoading" object:self userInfo:nil];
     [self.mainQueue addOperationWithBlock:^{
-        BOOL locked = NO;
+        BOOL isLocked = NO;
         @try
         {
             [weakSelf.universalLock lock];
-            locked = YES;
+            isLocked = YES;
             NSError *error;
             if (DEVICE_IS_SIMULATOR)
             {
@@ -113,10 +115,10 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
             }    
         } @finally
         {
-            if (locked)
+            if (isLocked)
             {
                 [weakSelf.universalLock unlock];
-                locked = NO;
+                isLocked = NO;
             }
         }
         
@@ -131,8 +133,9 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
  called first when initialising. This sets up the main object context on the main thread, the
  persistentstorecoordinator, the URLs for both iCloud store (which is the same as the local store for Simulator)
  and the non iCloud Store. This method is being called on the main thread.
- We also setup the store options for non-cloud.
- NOTE: we do not create the persistent stores themselves here. This is done asynchronously in a separate step.
+ We also create the noniCloud store, its main context and store coordinator in full here.  
+ NOTE: we do not create the persistent stores for iCloud itself here. This is done asynchronously in a separate step.
+ Same holds when using Simulator (which only uses the local store)
  */
 
 - (void)setUpCoordinatorAndContext
@@ -140,72 +143,76 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 #ifdef APPDEBUG
     NSLog(@"SQLiteHelper:setUpCoordinatorAndContext ENTERING");
 #endif
+    NSMergePolicy *policy = [[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType];
+
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"iStayHealthy" withExtension:@"momd"];
     NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    
+    
     self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-    self.mainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    self.mainObjectContext          = [[NSManagedObjectContext alloc]
+                                       initWithConcurrencyType:NSMainQueueConcurrencyType];
     [self.mainObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+    [self.mainObjectContext setMergePolicy:policy];
 
-    self.storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kSQLiteiCloudStore];
+    self.storeURL           = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kSQLiteiCloudStore];
 
-    self.noiCloudStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kSQLiteNoiCloudStore];
+    self.noiCloudStoreURL   = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kSQLiteNoiCloudStore];
+
 #ifdef APPDEBUG
     NSLog(@"store URL = %@ and fallback store URL is %@", [self.storeURL path], [self.noiCloudStoreURL path]);
 #endif
     
-    self.localStoreOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
 
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0"))
-    {
-        self.currentUbiquityToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
-    }
 #ifdef APPDEBUG
-    NSLog(@"SQLiteHelper:setUpCoordinatorAndContext LEAVING");
+    NSLog(@"SQLiteHelper:setUpCoordinatorAndContext setting up local store");
 #endif
 
+    
+    self.localStoreOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    self.localStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    self.localObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [self.localObjectContext setPersistentStoreCoordinator:self.localStoreCoordinator];
+    [self.mainObjectContext setMergePolicy:policy];
+    NSError *error = nil;
+    NSPersistentStore *store = [self.localStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                                        configuration:nil
+                                                                                  URL:self.noiCloudStoreURL
+                                                                              options:self.localStoreOptions
+                                                                                error:&error];
+    if (nil != store)
+    {
+        self.noniCloudStore = store;
+        [self.localObjectContext save:&error];
+    }
+    else
+    {
+        self.noniCloudStore = nil;
+    }
+
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(mergeChangesFrom_iCloud:)
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                object:self.persistentStoreCoordinator];
-}
-
-/**
- This is the second call in the initialiser.
- Here we set up the backup/non-iCloud store. Since this store is ALWAYS local on the device we can create the store
- straightaway. 
- */
-- (void)setUpNoniCloudStore
-{
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"iStayHealthy" withExtension:@"momd"];
-    NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    NSPersistentStoreCoordinator *storeCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-    NSError *error = nil;
-    NSPersistentStore *store = [storeCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                              configuration:nil
-                                                                        URL:self.noiCloudStoreURL
-                                                                    options:self.localStoreOptions
-                                                                      error:&error];
-    if (nil != store)
-    {
-#ifdef APPDEBUG
-        NSLog(@"SQLiteHelper:setUpNoniCloudStore we created the fallback store");
-#endif
-        self.noniCloudStore = store;
-        self.localObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [self.localObjectContext setPersistentStoreCoordinator:storeCoordinator];
-    }
-    else
-    {
-#ifdef APPDEBUG
-        NSLog(@"SQLiteHelper:setUpNoniCloudStore we were NOT successful to create the fallback store");
-#endif
-        self.noniCloudStore = nil;
-    }    
-    
+    /*
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mergeLocalChangesIntoNoniCloudStore:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                                object:nil];
+     */
 }
 
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification
 {
+    if (nil == notification)
+    {
+        return;
+    }
+#ifdef APPDEBUG
+    NSLog(@"SQLiteHelper:mergeChangesFrom_iCloud we are about to merge changes that come from iCloud");
+#endif
     [self.mainObjectContext performBlock:^{
         [self.mainObjectContext mergeChangesFromContextDidSaveNotification:notification];
         NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData"
@@ -214,6 +221,35 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
         [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
     }];
 }
+
+/*
+- (void)mergeLocalChangesIntoNoniCloudStore:(NSNotification *)notification
+{
+    if (nil == self.localObjectContext || nil == self.noniCloudStore)
+    {
+        return;
+    }
+    if (nil == notification)
+    {
+        return;
+    }
+#ifdef APPDEBUG
+    NSLog(@"SQLiteHelper:mergeLocalChangesIntoNoniCloudStore we are about to merge changes into the fallback store");
+#endif
+    NSManagedObjectContext *saveContext = [notification object];
+    if (self.mainObjectContext == saveContext)
+    {
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [context setPersistentStoreCoordinator:self.localStoreCoordinator];
+        [context performBlock:^{
+            [context mergeChangesFromContextDidSaveNotification:notification];
+        }];
+        [self.localObjectContext performBlock:^{
+            [self.localObjectContext mergeChangesFromContextDidSaveNotification:notification];
+        }];
+    }
+}
+ */
 
 
 /**
@@ -240,7 +276,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     else
     {
         [self addMasterRecordWithObjectContext:self.mainObjectContext];
-        [self addMasterRecordWithObjectContext:self.localObjectContext];
+        [self transferDataToLocalStore];
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             NSLog(@"SQLiteHelper:loadLocalSQLiteStore we now got the store");
@@ -333,7 +369,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
  This method ensures that we always have a master record available.
  The master record contains relationships to all other records. Only 1 can ever be present.
  */
-- (void)addMasterRecordWithObjectContext:(NSManagedObjectContext *)context
+- (BOOL)addMasterRecordWithObjectContext:(NSManagedObjectContext *)context
 {
 #ifdef APPDEBUG
     NSLog(@"SQLiteHelper:addMasterRecordWithObjectContext ENTERING");
@@ -363,7 +399,29 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
             NSLog(@"SQLiteHelper:addMasterRecordWithObjectContext we already have 1 master record in the store");            
         }
 #endif
-    }    
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (BOOL)isEmptyMasterRecord
+{
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"iStayHealthyRecord"];
+    NSArray *records = [self.localObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (nil == records)
+    {
+        return YES;
+    }
+    if (0 == records.count)
+    {
+        return YES;
+    }
+    
+    return NO;
 }
 
 
@@ -376,17 +434,23 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     {
         return;
     }
+    if (![self isEmptyMasterRecord])
+    {
+        return;
+    }
+    if (![self addMasterRecordWithObjectContext:self.localObjectContext])
+    {
+        return;
+    }
     NSError *error = nil;
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
     [context setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"iStayHealthyRecord"];
     NSArray *records = [context executeFetchRequest:fetchRequest error:&error];
-
     if (nil == records)
     {
         return;
     }
-
     if (0 == records.count)
     {
         return;
@@ -395,7 +459,6 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     NSManagedObjectContext *subContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     NSPersistentStoreCoordinator *localCoordinator = [self.noniCloudStore persistentStoreCoordinator];
     [subContext setPersistentStoreCoordinator:localCoordinator];
-    [self addMasterRecordWithObjectContext:subContext];
     
     iStayHealthyRecord *record = (iStayHealthyRecord *)[records objectAtIndex:0];
     NSArray *results = [record.results allObjects];
@@ -504,6 +567,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [result entity];
     Results *copiedResult = [[Results alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedResult.record addResultsObject:copiedResult];
     copiedResult.UID = result.UID;
     copiedResult.ResultsDate = result.ResultsDate;
     copiedResult.CD4 = result.CD4;
@@ -543,6 +607,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [med entity];
     Medication *copiedMed = [[Medication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedMed.record addMedicationsObject:copiedMed];
     copiedMed.UID = med.UID;
     copiedMed.StartDate = med.StartDate;
     copiedMed.Name = med.Name;
@@ -556,6 +621,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [med entity];
     PreviousMedication *copiedMed = [[PreviousMedication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedMed.record addPreviousMedicationsObject:copiedMed];
     copiedMed.uID = med.uID;
     copiedMed.startDate = med.startDate;
     copiedMed.endDate = med.endDate;
@@ -570,6 +636,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [med entity];
     OtherMedication *copiedMed = [[OtherMedication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedMed.record addOtherMedicationsObject:copiedMed];
     copiedMed.UID = med.UID;
     copiedMed.Unit = med.Unit;
     copiedMed.StartDate = med.StartDate;
@@ -585,6 +652,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [med entity];
     MissedMedication *copiedMed = [[MissedMedication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedMed.record addMissedMedicationsObject:copiedMed];
     copiedMed.UID = med.UID;
     copiedMed.missedReason = med.missedReason;
     copiedMed.MissedDate = med.MissedDate;
@@ -596,6 +664,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [effect entity];
     SideEffects *copiedEffect = [[SideEffects alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedEffect.record addSideeffectsObject:copiedEffect];
     copiedEffect.UID = effect.UID;
     copiedEffect.SideEffect = effect.SideEffect;
     copiedEffect.SideEffectDate = effect.SideEffectDate;
@@ -609,6 +678,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [contact entity];
     Contacts *copiedContact = [[Contacts alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedContact.record addContactsObject:copiedContact];
     copiedContact.UID = contact.UID;
     copiedContact.ClinicCity = contact.ClinicCity;
     copiedContact.ClinicContactNumber = contact.ClinicContactNumber;
@@ -638,6 +708,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [procedure entity];
     Procedures *copiedProcedure = [[Procedures alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedProcedure.record addProceduresObject:copiedProcedure];
     copiedProcedure.UID = procedure.UID;
     copiedProcedure.Date = procedure.Date;
     copiedProcedure.Illness = procedure.Illness;
@@ -652,6 +723,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 {
     NSEntityDescription *entity = [wellness entity];
     Wellness *copiedWellness = [[Wellness alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [copiedWellness.record addWellnessObject:copiedWellness];
     copiedWellness.uID = wellness.uID;
     copiedWellness.sleepBarometer = wellness.sleepBarometer;
     copiedWellness.moodBarometer = wellness.moodBarometer;

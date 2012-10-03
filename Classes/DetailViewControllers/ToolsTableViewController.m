@@ -64,7 +64,14 @@
 		[alert show];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
-	self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+    if (0 < records.count)
+    {
+        self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+    }
+    else
+    {
+        self.masterRecord = nil;
+    }
 
 }
 
@@ -76,6 +83,11 @@
     self.isConsistent = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
+    if (nil == self.masterRecord)
+    {
+        self.hasPassword = NO;
+        return;
+    }
     NSString *passwordString = self.masterRecord.Password;
     self.hasPassword = TRUE;
     if (nil == passwordString || [passwordString isEqualToString:@""])
@@ -91,6 +103,10 @@
  */
 - (IBAction) done: (id) sender
 {
+    if (nil == self.masterRecord)
+    {
+        return;
+    }
     if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled)
     {
         NSManagedObjectContext *context = [self.masterRecord managedObjectContext];

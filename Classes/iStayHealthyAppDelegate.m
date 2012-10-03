@@ -409,16 +409,16 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 }
  */
 
+/*
 - (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc
 {
-    /*
     [moc mergeChangesFromContextDidSaveNotification:note];
     
     NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self  userInfo:[note userInfo]];
     
     [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-     */
 }
+ */
 
 /*
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification
@@ -527,7 +527,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 
 /**
  creates the Master record the very first time we run this application
- */
 - (void)setUpMasterRecord
 {
 #ifdef APPDEBUG
@@ -570,6 +569,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 		abort();
 	}
 }
+ */
 
 /**
  */

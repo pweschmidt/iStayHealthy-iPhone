@@ -28,9 +28,9 @@
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;
 - (void)showReminder:(NSString *)text;
-- (void)setUpMasterRecord;
-- (void)mergeiCloudChanges:(NSNotification*)note 
-                forContext:(NSManagedObjectContext*)moc;
+//- (void)setUpMasterRecord;
+//- (void)mergeiCloudChanges:(NSNotification*)note
+//                forContext:(NSManagedObjectContext*)moc;
 - (BOOL)handleFileImport:(NSURL *)url;
 extern NSString *MEDICATIONALERTKEY;
 @end

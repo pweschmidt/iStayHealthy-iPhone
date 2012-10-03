@@ -27,8 +27,9 @@
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) StatusViewControllerLandscape *landscapeController;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 @property BOOL isShowingLandscape;
-- (void)setUpMasterRecord;
+//- (void)setUpMasterRecord;
 - (IBAction)loadWebView:(id)sender;
 - (IBAction)loadAd:(id)sender;
 - (void)setUpData;

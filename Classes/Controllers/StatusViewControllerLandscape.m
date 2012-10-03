@@ -53,7 +53,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
     
 #ifdef APPDEBUG	
 	NSLog(@"StatusViewControllerLandscape:viewDidLoad reset chart");
@@ -110,7 +110,19 @@
 	NSLog(@"StatusViewControllerLandscape:setUpData");
 #endif
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-	
+	if ( 0 == objects.count)
+    {
+        self.allResults = [NSMutableArray array];
+        self.allMeds = [NSMutableArray array];
+        self.allMissedMeds = [NSMutableArray array];
+        if (0 < [self.events.allChartEvents count])
+        {
+            [self.events.allChartEvents removeAllObjects];
+        }
+        return;
+    }
+    
+    
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
     
 	NSSet *results = self.masterRecord.results;
@@ -165,9 +177,9 @@
  */
 - (void)reloadData:(NSNotification *)note
 {
-    if (0 < [self.events.allChartEvents count])
+    if (nil == note)
     {
-        [self.events.allChartEvents removeAllObjects];
+        return;
     }
     [self setUpData];
 	[self.chartView setNeedsDisplay];

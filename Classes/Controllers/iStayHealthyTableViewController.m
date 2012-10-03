@@ -15,10 +15,10 @@
 #import "NSArray-Set.h"
 #import "Utilities.h"
 #import "Medication.h"
-#import "ViewWithActivityIndicator.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface iStayHealthyTableViewController ()
-@property (nonatomic, strong) ViewWithActivityIndicator * activityView;
+- (void)start;
 @end
 
 @implementation iStayHealthyTableViewController
@@ -37,7 +37,7 @@
 @synthesize allPreviousMedications = _allPreviousMedications;
 @synthesize allWellnes = _allWellnes;
 @synthesize isShowingLandscape = _isShowingLandscape;
-@synthesize activityView = _activityView;
+@synthesize activityIndicator = _activityIndicator;
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -48,8 +48,16 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:[[UIApplication sharedApplication] delegate]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startLoading" object:nil];
+    
+    CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.activityIndicator.frame = frame;
+    self.activityIndicator.layer.cornerRadius = 10;
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
     
 #ifdef APPDEBUG
 	NSLog(@"iStayHealthyTableViewController::viewDidLoad setup fetchResultsController");
@@ -66,25 +74,7 @@
 							  otherButtonTitles:nil];
 		[alert show];
 	}
-	
-#ifdef APPDEBUG
-	NSLog(@"iStayHealthyTableViewController::viewDidLoad setup get data");
-#endif
-
-	NSArray *records = [self.fetchedResultsController fetchedObjects];
-	int count = [records count];
-
-#ifdef APPDEBUG
-	NSLog(@"iStayHealthyTableViewController::viewDidLoad number of fetched records is %d",count);
-#endif
-	
-	if (0 == count) {
-#ifdef APPDEBUG		
-		NSLog(@"iStayHealthyTableViewController::viewDidLoad no master record yet");
-#endif
-//		[self setUpMasterRecord];
-	}
-
+		
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     StatusViewControllerLandscape *landscape = nil;
     if (height < 568)
@@ -113,11 +103,12 @@
     }
 
     [self.headerView addSubview:addButton];
-    self.activityView =[[ViewWithActivityIndicator alloc] init];
-    [self.tableView addSubview:self.activityView];
-    [self.tableView bringSubviewToFront:self.activityView];
 }
 
+- (void)start
+{
+    [self.activityIndicator startAnimating];
+}
 
 /**
  reloads the data when getting notified by the app data that iCloud data have changed
@@ -138,13 +129,11 @@
 							  otherButtonTitles:nil];
 		[alert show];
 	}
-    if (note)
-    {
-        
-        [self setUpMasterRecord];
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {        
         [self setUpData];
         [self.tableView reloadData];
-        [self.activityView stop];
     }
 }
 
@@ -224,7 +213,6 @@
 /**
  the master record is set up at the first time the application is launched.
  the record contains the relationships to results and medications, which will be added to the master record.
- */
 - (void)setUpMasterRecord
 {
 #ifdef APPDEBUG
@@ -248,6 +236,7 @@
 	NSLog(@"iStayHealthyTableViewController:setUpMasterRecord LEAVING");
 #endif
 }
+ */
 
 /**
  setting up the view just before it appears. Sanity check to see we got all the data we need.
@@ -259,18 +248,11 @@
 {
     [super viewWillAppear:animated];
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-	if (0 == [objects count])
-    {
-#ifdef APPDEBUG		
-		NSLog(@"iStayHealthyTableViewController::viewWillAppear no master record yet");
-#endif
-//		[self setUpMasterRecord];
-	}
-    else
+	if (0 < objects.count)
     {
         self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
         [self setUpData];
-    }
+	}
 }
 
 
@@ -351,6 +333,19 @@
 	return fetchedResultsController_;
 	
 }	
+
+/**
+ notified when changes to the database
+ @controller
+ */
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+#ifdef APPDEBUG
+    NSLog(@"iStayHealthyTableViewController::controllerDidChangeContent");
+#endif
+    [self setUpData];
+	[self.tableView reloadData];
+}
 
 /**
  set up the data tables
@@ -464,18 +459,6 @@
     }
     else
         self.allWellnes = (NSArray *)wellnessSet;
-}
-/**
- notified when changes to the database
- @controller
- */
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-#ifdef APPDEBUG
-    NSLog(@"iStayHealthyTableViewController::controllerDidChangeContent");
-#endif
-    [self setUpData];
-	[self.tableView reloadData];
 }
 
 #pragma mark - Device Orientation

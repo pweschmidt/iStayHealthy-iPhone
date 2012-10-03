@@ -56,6 +56,10 @@
 - (NSString *)csvString
 {
     NSMutableString *csv = [NSMutableString stringWithString:@"iStayHealthy\r"];
+    if (nil == self.masterRecord)
+    {
+        return csv;
+    }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     BOOL isFirst = YES;
@@ -197,6 +201,13 @@
 {
     XMLDocument *document = [[XMLDocument alloc] init];
     XMLElement *root = [document root];
+    if (nil == self.masterRecord)
+    {
+        NSString *xmlString = [document xmlString];
+        return [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    
     NSString *masterUID = self.masterRecord.UID;
     if (nil == masterUID || [masterUID isEqualToString:@""])
     {
@@ -1395,6 +1406,20 @@
 		[alert show];
 	}
     NSArray *records = [self.fetchedResultsController fetchedObjects];
+    if (0 == records.count)
+    {
+        self.allResults = [NSMutableArray array];
+        self.allMedications = [NSMutableArray array];
+        self.allMissedMeds = [NSMutableArray array];
+        self.allOtherMeds = [NSMutableArray array];
+        self.allContacts = [NSMutableArray array];
+        self.allSideEffects = [NSMutableArray array];
+        self.allProcedures = [NSMutableArray array];
+        self.allPreviousMedications = [NSMutableArray array];
+        self.allWellness = [NSMutableArray array];
+        self.masterRecord = nil;
+        return;
+    }
 	self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
     
 	if (0 != [self.masterRecord.results count])
@@ -1486,6 +1511,10 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
+    if (0 == objects.count)
+    {
+        return;
+    }
 	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
 }
 
