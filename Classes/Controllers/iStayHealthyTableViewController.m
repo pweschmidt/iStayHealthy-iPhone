@@ -386,7 +386,7 @@
     NSSet *missedMeds = self.masterRecord.missedMedications;
     if (0 != [missedMeds count])
     {
-        self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
+        self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:YES];
     }
     else
         self.allMissedMeds = (NSArray *)missedMeds;
@@ -427,7 +427,7 @@
     NSSet *effectSet = self.masterRecord.sideeffects;
     if(0 != [effectSet count])
     {
-        self.allSideEffects = [NSArray arrayByOrderingSet:effectSet byKey:@"SideEffect" ascending:YES reverseOrder:NO];
+        self.allSideEffects = [NSArray arrayByOrderingSet:effectSet byKey:@"SideEffectDate" ascending:YES reverseOrder:YES];
     }
     else
     {
