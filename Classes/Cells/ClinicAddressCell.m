@@ -44,6 +44,17 @@
     [self.clinicAddressCellDelegate setValueString:textField.text withTag:self.tag];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range
+                                                                  withString:string];
+    if ([self.clinicAddressCellDelegate
+         respondsToSelector:@selector(setValueString:withTag:)])
+    {
+        [self.clinicAddressCellDelegate setValueString:newString withTag:self.tag];
+    }
+    return YES;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

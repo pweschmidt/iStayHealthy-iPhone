@@ -26,7 +26,9 @@
 @property (nonatomic, strong) UIImageView *firstWrongView;
 @property (nonatomic, strong) UIImageView *secondRightView;
 @property (nonatomic, strong) UIImageView *secondWrongView;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 - (IBAction) done:				(id) sender;
 - (IBAction) switchPasswordEnabling:(id)sender;
+- (void)reloadData:(NSNotification*)note;
 
 @end

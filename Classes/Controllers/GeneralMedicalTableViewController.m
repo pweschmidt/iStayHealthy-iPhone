@@ -160,6 +160,7 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = DEFAULT_BACKGROUND;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     tableView.separatorColor = [UIColor clearColor];
     [cell addSubview:imageView];
     [cell addSubview:labelView];

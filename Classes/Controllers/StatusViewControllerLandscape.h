@@ -25,6 +25,7 @@
 @property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) NSMutableArray *allMissedMeds;
 @property (nonatomic, strong) ChartEvents *events;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 - (void)reloadData:(NSNotification*)note;
 - (void)setUpData;
 @end

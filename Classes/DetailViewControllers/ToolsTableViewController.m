@@ -12,6 +12,11 @@
 #import "NSArray-Set.h"
 #import "Utilities.h"
 #import "iStayHealthyAppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface ToolsTableViewController ()
+- (void)start;
+@end
 
 @implementation ToolsTableViewController
 @synthesize passwordSwitch = _passwordSwitch;
@@ -29,6 +34,7 @@
 @synthesize firstWrongView = _firstWrongView;
 @synthesize secondRightView = _secondRightView;
 @synthesize secondWrongView = _secondWrongView;
+@synthesize activityIndicator = _activityIndicator;
 /**
  dealloc
  */
@@ -52,6 +58,22 @@
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                               target:self action:@selector(done:)];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startLoading" object:nil];
+    
+    
+    
+    CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.activityIndicator.frame = frame;
+    self.activityIndicator.layer.cornerRadius = 10;
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
+    
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
     {
@@ -74,6 +96,39 @@
     }
 
 }
+- (void)reloadData:(NSNotification*)note
+{
+#ifdef APPDEBUG
+    NSLog(@"We are getting notified to reload the data");
+#endif
+    NSError *error = nil;
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
+		UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+							  delegate:self
+							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
+							  otherButtonTitles:nil];
+		[alert show];
+	}
+    [self.activityIndicator stopAnimating];
+	NSArray *records = [self.fetchedResultsController fetchedObjects];
+    if (0 < records.count)
+    {
+        self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+    }
+    else
+    {
+        self.masterRecord = nil;
+    }
+    
+}
+- (void)start
+{
+    [self.activityIndicator startAnimating];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {

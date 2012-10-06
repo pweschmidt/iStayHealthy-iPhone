@@ -12,6 +12,11 @@
 #import "iStayHealthyAppDelegate.h"
 #import "WebViewController.h"
 #import "GeneralSettings.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface iStayHealthyPasswordController ()
+- (void)start;
+@end
 
 @implementation iStayHealthyPasswordController
 @synthesize passwordField = _passwordField;
@@ -20,6 +25,7 @@
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize tabBarController = _tabBarController;
 @synthesize passwordString = _passwordString;
+@synthesize activityIndicator = _activityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,6 +68,7 @@
      NSLog(@"version string == %@",version);
      #endif
      */
+    [self.activityIndicator stopAnimating];
 	int count = [records count];
     if (0 < count)
     {
@@ -73,6 +80,11 @@
         [self loadTabController];
     }
     
+}
+
+- (void)start
+{
+    [self.activityIndicator startAnimating];
 }
 
 
@@ -155,6 +167,14 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startLoading" object:nil];
+    
+    CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.activityIndicator.frame = frame;
+    self.activityIndicator.layer.cornerRadius = 10;
+    [self.view addSubview:self.activityIndicator];
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
     {
@@ -174,8 +194,7 @@
     NSLog(@"version string == %@",version);
 #endif
      */
-	int count = [records count];
-    if (0 < count)
+    if (0 < records.count)
     {
         iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
         self.passwordString = masterRecord.Password;

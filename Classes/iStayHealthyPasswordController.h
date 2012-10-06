@@ -15,6 +15,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
 @property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 - (void)loadTabController;
 - (IBAction)testLoad:(id)sender;
 - (IBAction)textFieldDoneEditing:(id)sender;

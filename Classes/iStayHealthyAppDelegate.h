@@ -12,7 +12,7 @@
 
 @class iStayHealthyTabBarController, iStayHealthyPasswordController, SQLiteHelper;
 
-@interface iStayHealthyAppDelegate : NSObject <UIApplicationDelegate, NSFetchedResultsControllerDelegate> 
+@interface iStayHealthyAppDelegate : NSObject <UIApplicationDelegate> 
 @property BOOL iCloudIsAvailable;
 @property (nonatomic, strong) NSURL *cloudURL;
 @property (nonatomic, strong) NSString *relinkUserId;
@@ -22,15 +22,11 @@
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong, readonly) SQLiteHelper *sqlHelper;
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;
 - (void)showReminder:(NSString *)text;
-//- (void)setUpMasterRecord;
-//- (void)mergeiCloudChanges:(NSNotification*)note
-//                forContext:(NSManagedObjectContext*)moc;
 - (BOOL)handleFileImport:(NSURL *)url;
 extern NSString *MEDICATIONALERTKEY;
 @end

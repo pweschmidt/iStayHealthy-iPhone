@@ -14,6 +14,11 @@
 #import "iStayHealthyRecord.h"
 #import "NSArray-Set.h"
 #import "ChartEvents.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface StatusViewControllerLandscape ()
+- (void)start;
+@end
 
 @implementation StatusViewControllerLandscape
 @synthesize chartView =_chartView;
@@ -26,6 +31,7 @@
 @synthesize hasNoMedication = _hasNoMedication;
 @synthesize hasNoResults = _hasNoResults;
 @synthesize hasNoMissedDates = _hasNoMissedDates;
+@synthesize activityIndicator = _activityIndicator;
 /**
  inits the ViewController
  @nibNameOrNil - the NIB file name for the landscape controller
@@ -53,9 +59,22 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(start)
+                                                 name:@"startLoading"
+                                               object:nil];
     
-#ifdef APPDEBUG	
+    CGRect activityFrame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.activityIndicator.frame = activityFrame;
+    self.activityIndicator.layer.cornerRadius = 10;
+    [self.view addSubview:self.activityIndicator];
+#ifdef APPDEBUG
 	NSLog(@"StatusViewControllerLandscape:viewDidLoad reset chart");
 #endif
     CGSize size = self.view.bounds.size;
@@ -181,21 +200,42 @@
     {
         return;
     }
+    [self.activityIndicator stopAnimating];
     [self setUpData];
 	[self.chartView setNeedsDisplay];
 }
 
+- (void)start
+{
+    [self.activityIndicator startAnimating];
+}
 
 
+
+#ifdef __IPHONE_6_0
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+#endif
+
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));
+}
+#endif
 
 /**
  only landscape mode allowed
  @interfaceOrientation
  */
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));
-}
 
 /**
  fetchedResultsController

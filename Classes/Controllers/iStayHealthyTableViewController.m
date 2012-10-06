@@ -19,6 +19,8 @@
 
 @interface iStayHealthyTableViewController ()
 - (void)start;
+- (void)orientationChanged:(NSNotification *)notification;
+- (void)updateLandscapeView;
 @end
 
 @implementation iStayHealthyTableViewController
@@ -48,10 +50,13 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startLoading" object:nil];
-    
+        
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -88,8 +93,11 @@
     
 	self.landscapeController = landscape;
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
-												 name:UIDeviceOrientationDidChangeNotification object:nil];
+	[[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(orientationChanged:)
+     name:UIDeviceOrientationDidChangeNotification
+     object:nil];
     
     CGRect adFrame = CGRectMake(20.0, 1.0, 280, 29);
     UIButton *addButton = [[UIButton alloc]initWithFrame:adFrame]; 
@@ -177,13 +185,7 @@
  */
 - (IBAction)loadWebView:(id)sender
 {
-//    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
 	NSString *urlAddress = NSLocalizedString(@"BannerURL", @"BannerURL");
-    /*
-    if ([language isEqualToString:@"de"]) {
-        urlAddress = @"http://www.aidshilfe.de";
-    }
-     */
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlAddress withTitle:NSLocalizedString(@"POZ Magazine", @"POZ Magazine")];
         
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
@@ -195,11 +197,6 @@
 - (IBAction)loadAd:(id)sender
 {
 	NSString *urlAddress = NSLocalizedString(@"AdURL", @"AdURL");
-    /*
-     if ([language isEqualToString:@"de"]) {
-     urlAddress = @"http://www.aidshilfe.de";
-     }
-     */
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlAddress withTitle:NSLocalizedString(@"Gaydar.Net", @"Gaydar.net")];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
@@ -209,34 +206,6 @@
 }
 
 
-
-/**
- the master record is set up at the first time the application is launched.
- the record contains the relationships to results and medications, which will be added to the master record.
-- (void)setUpMasterRecord
-{
-#ifdef APPDEBUG
-	NSLog(@"iStayHealthyTableViewController:setUpMasterRecord ENTERING");
-#endif
-
-	NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-	NSManagedObject *newRecord = [NSEntityDescription insertNewObjectForEntityForName:@"iStayHealthyRecord" inManagedObjectContext:context];
-	[newRecord setValue:@"Master Record" forKey:@"Name"];
-#ifdef APPDEBUG
-	NSLog(@"iStayHealthyTableViewController:setUpMasterRecord before saving data");
-#endif
-	NSError *error = nil;
-	if (![newRecord.managedObjectContext save:&error])
-    {
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
-	}
-
-#ifdef APPDEBUG
-	NSLog(@"iStayHealthyTableViewController:setUpMasterRecord LEAVING");
-#endif
-}
- */
 
 /**
  setting up the view just before it appears. Sanity check to see we got all the data we need.
@@ -461,16 +430,32 @@
         self.allWellnes = (NSArray *)wellnessSet;
 }
 
-#pragma mark - Device Orientation
+#pragma mark - Device Rotation
 
-/** 
- allow device rotation
- @interfaceOrientation the actual orientation of the device
- */
+
+#ifdef __IPHONE_6_0
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+#endif
+
+
+
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
+#endif
+
+
 
 
 /**
@@ -479,7 +464,12 @@
  */
 - (void)orientationChanged:(NSNotification *)notification
 {
-    [self performSelector:@selector(updateLandscapeView) withObject:nil afterDelay:0];
+#ifdef APPDEBUG
+    NSLog(@"orientationChanged");
+#endif
+    [self performSelector:@selector(updateLandscapeView)
+               withObject:nil
+               afterDelay:0];
 }
 
 /**
@@ -487,6 +477,9 @@
  */
 - (void)updateLandscapeView
 {
+#ifdef APPDEBUG
+    NSLog(@"updateLandscapeView");
+#endif
     UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
     if (deviceOrientation == UIDeviceOrientationLandscapeLeft && !self.isShowingLandscape)
 	{
@@ -502,13 +495,12 @@
 	{
         [self dismissModalViewControllerAnimated:YES];
         self.isShowingLandscape = NO;
-    }    
+    }
     else if (deviceOrientation == UIDeviceOrientationPortraitUpsideDown && self.isShowingLandscape){
         [self dismissModalViewControllerAnimated:YES];
-        self.isShowingLandscape = NO;        
+        self.isShowingLandscape = NO;
     }
 }
-
 
 #pragma mark -
 #pragma mark Memory management
@@ -517,11 +509,26 @@
  */
 - (void)didReceiveMemoryWarning
 {
+    self.masterRecord = nil;
+    self.landscapeController = nil;
+    self.allContacts = nil;
+    self.allMeds = nil;
+    self.allMissedMeds = nil;
+    self.allPills = nil;
+    self.allResults = nil;
+    self.allResultsInReverseOrder = nil;
+    self.allSideEffects = nil;
+    self.allProcedures = nil;
+    self.headerView = nil;
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super didReceiveMemoryWarning];
 }
 /**
  unload view
  */
+
+
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.masterRecord = nil;
@@ -538,7 +545,7 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 	[super viewDidUnload];
 }
-
+#endif
 /**
  dealloc
  */
