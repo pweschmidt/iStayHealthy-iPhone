@@ -55,11 +55,13 @@
 	self.notificationsArray = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.notificationsArray = nil;
     [super viewDidUnload];
 }
+#endif
 
 - (void)viewWillAppear:(BOOL)animated
 {

@@ -55,11 +55,6 @@
     }
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-}
-
 /**
  before view appears the data tables are being updated
  */

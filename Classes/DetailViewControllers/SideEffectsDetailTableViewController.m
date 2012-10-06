@@ -150,10 +150,6 @@
     [self.seriousnessControl addTarget:self action:@selector(seriousnessChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-}
 
 
 - (IBAction) save:					(id) sender

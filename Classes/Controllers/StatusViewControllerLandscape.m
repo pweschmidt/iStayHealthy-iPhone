@@ -287,12 +287,20 @@
  */
 - (void)didReceiveMemoryWarning
 {
+    self.allMeds = nil;
+    self.allResults = nil;
+    self.allMissedMeds = nil;
+    self.chartView = nil;
+    self.events = nil;
+    self.masterRecord = nil;
+    self.activityIndicator = nil;
     [super didReceiveMemoryWarning];
 }
 
 /**
  unload
  */
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.allMeds = nil;
@@ -301,9 +309,10 @@
     self.chartView = nil;
     self.events = nil;
     self.masterRecord = nil;
+    self.activityIndicator = nil;
     [super viewDidUnload];
 }
-
+#endif
 /**
  dealloc
  */

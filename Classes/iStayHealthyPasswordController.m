@@ -61,13 +61,6 @@
 		[alert show];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
-    /*
-     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-     self.navigationItem.title = [NSString stringWithFormat:@"iStayHealthy v%@",version];
-     #ifdef APPDEBUG
-     NSLog(@"version string == %@",version);
-     #endif
-     */
     [self.activityIndicator stopAnimating];
 	int count = [records count];
     if (0 < count)
@@ -109,6 +102,19 @@
     }
     self.passwordField.text = @"";
 }
+
+
+#ifdef __IPHONE_6_0
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown);
+}
+#endif
 
 /**
  changes the text colour to black once we start editing
@@ -187,13 +193,6 @@
 		[alert show];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
-    /*
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    self.navigationItem.title = [NSString stringWithFormat:@"iStayHealthy v%@",version];
-#ifdef APPDEBUG
-    NSLog(@"version string == %@",version);
-#endif
-     */
     if (0 < records.count)
     {
         iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
@@ -209,6 +208,7 @@
     
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -216,6 +216,8 @@
     self.passwordField = nil;
     self.versionLabel = nil;
 }
+#endif
+
 #pragma mark -
 #pragma mark Table view delegate
 

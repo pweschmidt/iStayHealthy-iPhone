@@ -99,21 +99,15 @@
     
 }
 
-- (void)viewDidUnload
+#ifdef __IPHONE_6_0
+- (BOOL)shouldAutorotate
 {
-#ifdef APPDEBUG
-    NSLog(@"in iStayHealthyTabBarController::viewDidUnload");
-#endif
-    [super viewDidUnload];
+    return NO;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (NSUInteger)supportedInterfaceOrientations
 {
-#ifdef APPDEBUG
-    NSLog(@"in iStayHealthyTabBarController::viewWillDisappear");
-#endif
-    [super viewWillDisappear:animated];
+    return (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown);
 }
-
-
+#endif
 @end

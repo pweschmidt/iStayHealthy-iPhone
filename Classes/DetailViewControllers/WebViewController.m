@@ -77,6 +77,7 @@
 	[self.webView loadRequest:requestObj];
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.url = nil;
@@ -85,6 +86,7 @@
     self.toolBar = nil;
     [super viewDidUnload];
 }
+#endif
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

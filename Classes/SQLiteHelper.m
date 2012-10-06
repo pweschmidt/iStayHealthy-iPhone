@@ -44,15 +44,15 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 - (BOOL)addMasterRecordWithObjectContext:(NSManagedObjectContext *)context;
 - (BOOL)hasMasterRecord:(NSManagedObjectContext *)context;
 - (void)transferDataToLocalStore:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addResult:(Results *)result store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addHIVMed:(Medication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addPreviousMed:(PreviousMedication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addOtherMed:(OtherMedication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addMissedMed:(MissedMedication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addSideEffect:(SideEffects *)effect store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addContact:(Contacts *)contact store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addProcedure:(Procedures *)procedure store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
-- (void)addWellness:(Wellness *)wellness store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context;
+- (void)addResult:(Results *)result record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addHIVMed:(Medication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addPreviousMed:(PreviousMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addOtherMed:(OtherMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addMissedMed:(MissedMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addSideEffect:(SideEffects *)effect record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addContact:(Contacts *)contact record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addProcedure:(Procedures *)procedure record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addWellness:(Wellness *)wellness record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification;
 //- (void)mergeLocalChangesIntoNoniCloudStore:(NSNotification *)notification;
 @end
@@ -176,12 +176,6 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
                                              selector:@selector(mergeChangesFrom_iCloud:)
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                object:self.persistentStoreCoordinator];
-    /*
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mergeLocalChangesIntoNoniCloudStore:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                                object:nil];
-     */
 }
 
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification
@@ -490,6 +484,11 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     {
         return;
     }
+#ifdef APPDEBUG
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"SQLiteHelper:transferDataToLocalStore ready to transfer data to fallback store");
+    }];
+#endif
 
     
     iStayHealthyRecord *record = (iStayHealthyRecord *)[records objectAtIndex:0];
@@ -505,90 +504,68 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     BOOL success = YES;
     for (Results *result in results)
     {
-        [self addResult:result store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addResult:result record:record  context:context];
     }
+
     for (Medication *hivmed in hivMeds)
     {
-        [self addHIVMed:hivmed store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addHIVMed:hivmed record:record  context:context];
     }
+
     for (OtherMedication *med in meds)
     {
-        [self addOtherMed:med store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addOtherMed:med record:record  context:context];
     }
+
     for (SideEffects *effect in effects)
     {
-        [self addSideEffect:effect store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addSideEffect:effect record:record  context:context];
     }
+
     for (MissedMedication *mis in missed)
     {
-        [self addMissedMed:mis store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addMissedMed:mis record:record  context:context];
     }
+
     for (Procedures *proc in procs)
     {
-        [self addProcedure:proc store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addProcedure:proc record:record  context:context];
     }
+
     for (Contacts *contact in contacts)
     {
-        [self addContact:contact store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addContact:contact record:record  context:context];
     }
+
     for (PreviousMedication *old in previous)
     {
-        [self addPreviousMed:old store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addPreviousMed:old record:record  context:context];
     }
+
     for (Wellness *well in wellness)
     {
-        [self addWellness:well store:store context:context];
-        success = [context save:&error];
-        if (!success)
-        {
-            break;
-        }
+        [self addWellness:well record:record  context:context];
     }
+
     if ([context hasChanges])
     {
         success = [context save:&error];
+        if (!success)
+        {
+#ifdef APPDEBUG
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"SQLiteHelper:transferDataToLocalStore error saving context data");
+            }];
+#endif
+        }
     }
 #ifdef APPDEBUG
+    else
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"SQLiteHelper:transferDataToLocalStore context doesn't have any changes to save");
+        }];        
+    }
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"SQLiteHelper:transferDataToLocalStore LEAVING");
     }];
@@ -596,11 +573,10 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 }
 
 #pragma mark - adding the data to the store
-- (void)addResult:(Results *)result store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addResult:(Results *)result record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [result entity];
-    Results *copiedResult = [[Results alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedResult.record addResultsObject:copiedResult];
+    Results *copiedResult = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
+    [record addResultsObject:copiedResult];
     copiedResult.UID = result.UID;
     copiedResult.ResultsDate = result.ResultsDate;
     copiedResult.CD4 = result.CD4;
@@ -633,28 +609,26 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     copiedResult.liverAlkalinePhosphatase = result.liverAlkalinePhosphatase;
     copiedResult.liverAspartateTransaminase = result.liverAspartateTransaminase;
     copiedResult.liverGammaGlutamylTranspeptidase = result.liverGammaGlutamylTranspeptidase;
-    [context assignObject:copiedResult toPersistentStore:store];
 }
 
-- (void)addHIVMed:(Medication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addHIVMed:(Medication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [med entity];
-    Medication *copiedMed = [[Medication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedMed.record addMedicationsObject:copiedMed];
+    Medication *copiedMed = [NSEntityDescription insertNewObjectForEntityForName:@"Medication" inManagedObjectContext:context];
+    [record addMedicationsObject:copiedMed];
     copiedMed.UID = med.UID;
     copiedMed.StartDate = med.StartDate;
     copiedMed.Name = med.Name;
     copiedMed.Dose = med.Dose;
     copiedMed.Drug = med.Drug;
     copiedMed.MedicationForm = med.MedicationForm;
-    [context assignObject:copiedMed toPersistentStore:store];
 }
 
-- (void)addPreviousMed:(PreviousMedication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addPreviousMed:(PreviousMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [med entity];
-    PreviousMedication *copiedMed = [[PreviousMedication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedMed.record addPreviousMedicationsObject:copiedMed];
+    PreviousMedication *copiedMed = [NSEntityDescription
+                                     insertNewObjectForEntityForName:@"PreviousMedication"
+                                     inManagedObjectContext:context];
+    [record addPreviousMedicationsObject:copiedMed];
     copiedMed.uID = med.uID;
     copiedMed.startDate = med.startDate;
     copiedMed.endDate = med.endDate;
@@ -662,14 +636,14 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     copiedMed.drug = med.drug;
     copiedMed.isART = med.isART;
     copiedMed.reasonEnded = med.reasonEnded;
-    [context assignObject:copiedMed toPersistentStore:store];
 }
 
-- (void)addOtherMed:(OtherMedication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addOtherMed:(OtherMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [med entity];
-    OtherMedication *copiedMed = [[OtherMedication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedMed.record addOtherMedicationsObject:copiedMed];
+    OtherMedication *copiedMed = [NSEntityDescription
+                                  insertNewObjectForEntityForName:@"OtherMedication"
+                                  inManagedObjectContext:context];
+    [record addOtherMedicationsObject:copiedMed];
     copiedMed.UID = med.UID;
     copiedMed.Unit = med.Unit;
     copiedMed.StartDate = med.StartDate;
@@ -678,40 +652,40 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     copiedMed.Dose = med.Dose;
     copiedMed.MedicationForm = med.MedicationForm;
     copiedMed.Image = med.Image;
-    [context assignObject:copiedMed toPersistentStore:store];
 }
 
-- (void)addMissedMed:(MissedMedication *)med store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addMissedMed:(MissedMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [med entity];
-    MissedMedication *copiedMed = [[MissedMedication alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedMed.record addMissedMedicationsObject:copiedMed];
+    MissedMedication *copiedMed = [NSEntityDescription
+                                   insertNewObjectForEntityForName:@"MissedMedication"
+                                   inManagedObjectContext:context];
+    [record addMissedMedicationsObject:copiedMed];
     copiedMed.UID = med.UID;
     copiedMed.missedReason = med.missedReason;
     copiedMed.MissedDate = med.MissedDate;
     copiedMed.Name = med.Name;
     copiedMed.Drug = med.Drug;
-    [context assignObject:copiedMed toPersistentStore:store];
 }
-- (void)addSideEffect:(SideEffects *)effect store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addSideEffect:(SideEffects *)effect record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [effect entity];
-    SideEffects *copiedEffect = [[SideEffects alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedEffect.record addSideeffectsObject:copiedEffect];
+    SideEffects *copiedEffect = [NSEntityDescription
+                                 insertNewObjectForEntityForName:@"SideEffects"
+                                 inManagedObjectContext:context];
+    [record addSideeffectsObject:copiedEffect];
     copiedEffect.UID = effect.UID;
     copiedEffect.SideEffect = effect.SideEffect;
     copiedEffect.SideEffectDate = effect.SideEffectDate;
     copiedEffect.seriousness = effect.seriousness;
     copiedEffect.Name = effect.Name;
     copiedEffect.Drug = effect.Drug;
-    [context assignObject:copiedEffect toPersistentStore:store];
 }
 
-- (void)addContact:(Contacts *)contact store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addContact:(Contacts *)contact record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [contact entity];
-    Contacts *copiedContact = [[Contacts alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedContact.record addContactsObject:copiedContact];
+    Contacts *copiedContact = [NSEntityDescription
+                               insertNewObjectForEntityForName:@"Contacts"
+                               inManagedObjectContext:context];
+    [record addContactsObject:copiedContact];
     copiedContact.UID = contact.UID;
     copiedContact.ClinicCity = contact.ClinicCity;
     copiedContact.ClinicContactNumber = contact.ClinicContactNumber;
@@ -734,14 +708,14 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     copiedContact.InsuranceName = contact.InsuranceName;
     copiedContact.InsuranceWebSite = contact.InsuranceWebSite;
     copiedContact.ResultsContactNumber = contact.ResultsContactNumber;
-    [context assignObject:copiedContact toPersistentStore:store];
 }
 
-- (void)addProcedure:(Procedures *)procedure store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addProcedure:(Procedures *)procedure record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [procedure entity];
-    Procedures *copiedProcedure = [[Procedures alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedProcedure.record addProceduresObject:copiedProcedure];
+    Procedures *copiedProcedure = [NSEntityDescription
+                                  insertNewObjectForEntityForName:@"Procedures"
+                                  inManagedObjectContext:context];
+    [record addProceduresObject:copiedProcedure];
     copiedProcedure.UID = procedure.UID;
     copiedProcedure.Date = procedure.Date;
     copiedProcedure.Illness = procedure.Illness;
@@ -749,19 +723,18 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     copiedProcedure.Notes = procedure.Notes;
     copiedProcedure.EndDate = procedure.EndDate;
     copiedProcedure.CausedBy = procedure.CausedBy;
-    [context assignObject:copiedProcedure toPersistentStore:store];
 }
 
-- (void)addWellness:(Wellness *)wellness store:(NSPersistentStore *)store context:(NSManagedObjectContext *)context
+- (void)addWellness:(Wellness *)wellness record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [wellness entity];
-    Wellness *copiedWellness = [[Wellness alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    [copiedWellness.record addWellnessObject:copiedWellness];
+    Wellness *copiedWellness = [NSEntityDescription
+                                insertNewObjectForEntityForName:@"Wellness"
+                                inManagedObjectContext:context];
+    [record addWellnessObject:copiedWellness];
     copiedWellness.uID = wellness.uID;
     copiedWellness.sleepBarometer = wellness.sleepBarometer;
     copiedWellness.moodBarometer = wellness.moodBarometer;
     copiedWellness.wellnessBarometer = wellness.wellnessBarometer;
-    [context assignObject:copiedWellness toPersistentStore:store];
 }
 
 

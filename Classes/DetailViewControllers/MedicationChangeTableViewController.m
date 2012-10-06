@@ -75,6 +75,7 @@
                                             target:self action:@selector(save:)];	
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.startDate = nil;
@@ -84,7 +85,7 @@
     self.medName = nil;
     [super viewDidUnload];
 }
-
+#endif
 /**
  save the changes and/or dismiss
  */

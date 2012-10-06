@@ -90,6 +90,7 @@
 
 /**
  */
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.soundName = nil;
@@ -99,7 +100,7 @@
     self.alertText = nil;
     [super viewDidUnload];
 }
-
+#endif
 /**
  create UINotifications for selected options and then dismiss view
  @id

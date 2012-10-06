@@ -520,6 +520,7 @@
     self.allSideEffects = nil;
     self.allProcedures = nil;
     self.headerView = nil;
+    self.activityIndicator = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super didReceiveMemoryWarning];
 }
@@ -542,6 +543,7 @@
     self.allSideEffects = nil;
     self.allProcedures = nil;
     self.headerView = nil;
+    self.activityIndicator = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 	[super viewDidUnload];
 }

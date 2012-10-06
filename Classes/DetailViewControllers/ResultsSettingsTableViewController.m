@@ -49,6 +49,7 @@
 
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.dateOfBirth = nil;
@@ -56,6 +57,7 @@
     self.record = nil;
     [super viewDidUnload];
 }
+#endif
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

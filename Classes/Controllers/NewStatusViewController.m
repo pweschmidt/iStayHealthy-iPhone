@@ -87,13 +87,14 @@
 /**
  viewDidUnload
  */
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.chartView = nil;
     self.events = nil;
     [super viewDidUnload];
 }
-
+#endif
 /**
  viewWillAppear called each time this view controller is shown. At this stage we make sure we reload the arrays
  that are needed to display the cell content and charts

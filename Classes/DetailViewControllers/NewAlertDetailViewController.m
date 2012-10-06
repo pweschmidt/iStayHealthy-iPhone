@@ -85,6 +85,7 @@
     self.startTime = [NSDate date];
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.sounds = nil;
@@ -95,7 +96,7 @@
     self.soundName = nil;
     [super viewDidUnload];
 }
-
+#endif
 
 /**
  create UINotifications for selected options and then dismiss view

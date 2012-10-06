@@ -149,6 +149,7 @@
                                               target:self action:@selector(save:)];
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.idString = nil;
@@ -159,7 +160,7 @@
     
     [super viewDidUnload];
 }
-
+#endif
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

@@ -108,13 +108,6 @@
                         NSLocalizedString(@"No particular reason",@"No reason"),nil];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 
 - (IBAction) save:					(id) sender
 {

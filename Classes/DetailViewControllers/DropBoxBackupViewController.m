@@ -57,13 +57,14 @@
  viewDidUnload
  */
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.iStayHealthyPath = nil;
     self.activityIndicator = nil;
     [super viewDidUnload];
 }
-
+#endif
 /**
  viewDidLoad
  */

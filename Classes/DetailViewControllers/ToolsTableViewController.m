@@ -278,6 +278,7 @@
     }
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     self.passwordSwitch = nil;
@@ -291,7 +292,7 @@
     self.secondWrongView = nil;
     [super viewDidUnload];
 }
-
+#endif
 
 #pragma mark - Table view data source
 

@@ -59,17 +59,21 @@
     self.detailedTableView.layer.masksToBounds = YES;
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+#endif
+
+#ifdef __IPHONE_6_0
+#endif
 
 - (void)setUpScrollView
 {

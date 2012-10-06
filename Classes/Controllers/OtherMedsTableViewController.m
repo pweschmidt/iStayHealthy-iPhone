@@ -48,16 +48,13 @@
     }
 }
 
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
     self.formatter = nil;
+    [super viewDidUnload];
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
+#endif
 
 - (void)loadDetailOtherMedsController
 {

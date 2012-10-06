@@ -21,10 +21,6 @@
 @implementation SideEffectsViewController
 
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-}
 
 - (IBAction) done:				(id) sender
 {
