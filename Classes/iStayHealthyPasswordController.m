@@ -173,8 +173,9 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startLoading" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startAnimation" object:nil];
+
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -205,7 +206,6 @@
     self.label.text = NSLocalizedString(@"Enter Password", @"Enter Password");
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     self.versionLabel.text = [NSString stringWithFormat:@"version %@",version];
-    
 }
 
 #if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)

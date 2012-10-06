@@ -21,6 +21,7 @@
 #import "Contacts.h"
 
 #define USE_FALLBACK_STORE NO
+#define TEST_DATA_TRANSFER NO
 
 NSString * const kSQLiteiCloudStore = @"iStayHealthy.sqlite";
 NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
@@ -54,7 +55,6 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 - (void)addProcedure:(Procedures *)procedure record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
 - (void)addWellness:(Wellness *)wellness record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification;
-//- (void)mergeLocalChangesIntoNoniCloudStore:(NSNotification *)notification;
 @end
 
 
@@ -96,9 +96,15 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     NSLog(@"SQLiteHelper:loadSQLitePersistentStore ENTERING");
 #endif
     __weak SQLiteHelper *weakSelf = self;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"startLoading" object:self userInfo:nil];
     [self.mainQueue addOperationWithBlock:^{
         BOOL isLocked = NO;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSNotification* animateNotification = [NSNotification
+                                                   notificationWithName:@"startAnimation"
+                                                   object:self
+                                                   userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+        }];
         @try
         {
             [weakSelf.universalLock lock];
@@ -206,7 +212,43 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"SQLiteHelper:loadLocalSQLiteStore ENTERING");
     }];
+    
+    if (USE_FALLBACK_STORE == YES)
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"SQLiteHelper:loadLocalSQLiteStore using FALLBACK store");
+        }];
+        NSPersistentStore *testStore = [self.persistentStoreCoordinator
+                                         addPersistentStoreWithType:NSSQLiteStoreType
+                                         configuration:nil
+                                         URL:self.noiCloudStoreURL
+                                         options:self.localStoreOptions
+                                         error:error];
+        if (testStore != nil)
+        {
+            if (![self hasMasterRecord:self.mainObjectContext])
+            {
+                [self addMasterRecordWithObjectContext:self.mainObjectContext];
+            }
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"SQLiteHelper:loadLocalSQLiteStore we now got the store");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData"
+                                                                    object:self
+                                                                  userInfo:nil];
+            }];
+        }
+        else
+        {
+            abort();
+        }
+        return YES;
+    }
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"SQLiteHelper:loadLocalSQLiteStore using normal store");
+    }];
+    
 #endif
+    
     NSPersistentStore *localStore = [self.persistentStoreCoordinator
                                      addPersistentStoreWithType:NSSQLiteStoreType
                                      configuration:nil
@@ -222,6 +264,39 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
         if (![self hasMasterRecord:self.mainObjectContext])
         {
             [self addMasterRecordWithObjectContext:self.mainObjectContext];
+        }
+        if (TEST_DATA_TRANSFER == YES && DEVICE_IS_SIMULATOR)
+        {
+#ifdef APPDEBUG
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"SQLiteHelper:loadLocalSQLiteStore testing transfer");
+            }];
+#endif
+            NSManagedObjectContext *subContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"iStayHealthy" withExtension:@"momd"];
+            NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+            NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+            NSError *error = nil;
+            NSPersistentStore *localStore = [coordinator
+                                             addPersistentStoreWithType:NSSQLiteStoreType
+                                             configuration:nil
+                                             URL:self.noiCloudStoreURL
+                                             options:self.localStoreOptions
+                                             error:&error];
+            if (nil != localStore)
+            {
+                [subContext setPersistentStoreCoordinator:coordinator];
+                if (![self hasMasterRecord:subContext])
+                {
+#ifdef APPDEBUG
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        NSLog(@"SQLiteHelper:loadLocalSQLiteStore the fallback store doesn't have a master record");
+                    }];
+#endif
+                    [self addMasterRecordWithObjectContext:subContext];
+                }
+                [self transferDataToLocalStore:localStore context:subContext];                
+            }
         }
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             NSLog(@"SQLiteHelper:loadLocalSQLiteStore we now got the store");
@@ -475,7 +550,8 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     NSManagedObjectContext *topcontext = [[NSManagedObjectContext alloc] init];
     [topcontext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"iStayHealthyRecord"];
-    NSArray *records = [context executeFetchRequest:fetchRequest error:&error];
+    NSArray *records = [self.mainObjectContext executeFetchRequest:fetchRequest
+                                                             error:&error];
     if (nil == records)
     {
         return;
@@ -484,12 +560,22 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     {
         return;
     }
+
+    NSArray *fallbackRecords = [context executeFetchRequest:fetchRequest error:&error];
+    if (nil == fallbackRecords)
+    {
+        return;
+    }
+    if (0 == fallbackRecords.count)
+    {
+        return;
+    }
+
 #ifdef APPDEBUG
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"SQLiteHelper:transferDataToLocalStore ready to transfer data to fallback store");
     }];
 #endif
-
     
     iStayHealthyRecord *record = (iStayHealthyRecord *)[records objectAtIndex:0];
     NSArray *results = [record.results allObjects];
@@ -502,49 +588,52 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     NSArray *previous = [record.previousMedications allObjects];
     NSArray *wellness = [record.wellness allObjects];
     BOOL success = YES;
+    
+    
+    iStayHealthyRecord *fallbackRecord = (iStayHealthyRecord *)[fallbackRecords objectAtIndex:0];
     for (Results *result in results)
     {
-        [self addResult:result record:record  context:context];
+        [self addResult:result record:fallbackRecord  context:context];
     }
 
     for (Medication *hivmed in hivMeds)
     {
-        [self addHIVMed:hivmed record:record  context:context];
+        [self addHIVMed:hivmed record:fallbackRecord  context:context];
     }
 
     for (OtherMedication *med in meds)
     {
-        [self addOtherMed:med record:record  context:context];
+        [self addOtherMed:med record:fallbackRecord  context:context];
     }
 
     for (SideEffects *effect in effects)
     {
-        [self addSideEffect:effect record:record  context:context];
+        [self addSideEffect:effect record:fallbackRecord  context:context];
     }
 
     for (MissedMedication *mis in missed)
     {
-        [self addMissedMed:mis record:record  context:context];
+        [self addMissedMed:mis record:fallbackRecord  context:context];
     }
 
     for (Procedures *proc in procs)
     {
-        [self addProcedure:proc record:record  context:context];
+        [self addProcedure:proc record:fallbackRecord  context:context];
     }
 
     for (Contacts *contact in contacts)
     {
-        [self addContact:contact record:record  context:context];
+        [self addContact:contact record:fallbackRecord  context:context];
     }
 
     for (PreviousMedication *old in previous)
     {
-        [self addPreviousMed:old record:record  context:context];
+        [self addPreviousMed:old record:fallbackRecord  context:context];
     }
 
     for (Wellness *well in wellness)
     {
-        [self addWellness:well record:record  context:context];
+        [self addWellness:well record:fallbackRecord  context:context];
     }
 
     if ([context hasChanges])

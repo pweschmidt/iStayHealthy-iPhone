@@ -62,9 +62,7 @@
                                              selector:@selector(reloadData:)
                                                  name:@"RefetchAllDatabaseData"
                                                object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startLoading" object:nil];
-    
+        
     
     
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);

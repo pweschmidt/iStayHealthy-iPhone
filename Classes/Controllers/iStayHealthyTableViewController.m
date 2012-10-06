@@ -18,7 +18,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface iStayHealthyTableViewController ()
-- (void)start;
 - (void)orientationChanged:(NSNotification *)notification;
 - (void)updateLandscapeView;
 @end
@@ -54,9 +53,12 @@
                                              selector:@selector(reloadData:)
                                                  name:@"RefetchAllDatabaseData"
                                                object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startLoading" object:nil];
-        
+            
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(start)
+                                                 name:@"startAnimation"
+                                               object:nil];
+
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -115,6 +117,9 @@
 
 - (void)start
 {
+#ifdef APPDEBUG
+    NSLog(@"We are getting notified to start the activityIndicator");
+#endif
     [self.activityIndicator startAnimating];
 }
 

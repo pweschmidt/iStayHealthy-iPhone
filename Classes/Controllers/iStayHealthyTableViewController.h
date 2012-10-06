@@ -36,4 +36,5 @@
 - (void)loadURL;
 - (void)gotoPOZ;
 - (void)reloadData:(NSNotification*)note;
+- (void)start;
 @end
