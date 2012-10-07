@@ -15,7 +15,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface iStayHealthyPasswordController ()
+@property BOOL hasReloadedData;
 - (void)start;
+
 @end
 
 @implementation iStayHealthyPasswordController
@@ -26,6 +28,7 @@
 @synthesize tabBarController = _tabBarController;
 @synthesize passwordString = _passwordString;
 @synthesize activityIndicator = _activityIndicator;
+@synthesize hasReloadedData = _hasReloadedData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,6 +64,7 @@
 		[alert show];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
+    self.hasReloadedData = YES;
     [self.activityIndicator stopAnimating];
 	int count = [records count];
     if (0 < count)
@@ -77,7 +81,10 @@
 
 - (void)start
 {
-    [self.activityIndicator startAnimating];
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
 }
 
 
@@ -172,6 +179,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startAnimation" object:nil];

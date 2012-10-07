@@ -29,6 +29,7 @@
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 @property BOOL isShowingLandscape;
+@property BOOL hasReloadedData;
 //- (void)setUpMasterRecord;
 - (IBAction)loadWebView:(id)sender;
 - (IBAction)loadAd:(id)sender;

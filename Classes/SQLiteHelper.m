@@ -195,9 +195,10 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
 #endif
     [self.mainObjectContext performBlock:^{
         [self.mainObjectContext mergeChangesFromContextDidSaveNotification:notification];
-        NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData"
-                                                                            object:self
-                                                                          userInfo:[notification userInfo]];
+        NSNotification* refreshNotification = [NSNotification
+                                               notificationWithName:@"RefetchAllDatabaseData"
+                                               object:self
+                                               userInfo:[notification userInfo]];
         [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
     }];
 }
@@ -212,7 +213,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"SQLiteHelper:loadLocalSQLiteStore ENTERING");
     }];
-    
+/*
     if (USE_FALLBACK_STORE == YES)
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -247,7 +248,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"SQLiteHelper:loadLocalSQLiteStore using normal store");
     }];
-    
+*/    
 #endif
     
     NSPersistentStore *localStore = [self.persistentStoreCoordinator
@@ -269,6 +270,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
         {
             [self addMasterRecordWithObjectContext:self.mainObjectContext];
         }
+        /*
         if (TEST_DATA_TRANSFER == YES && DEVICE_IS_SIMULATOR)
         {
 #ifdef APPDEBUG
@@ -302,13 +304,14 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
                 [self transferDataToLocalStore:localStore context:subContext];                
             }
         }
+         */
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-#ifdef APPDEBUG
-            NSLog(@"SQLiteHelper:loadLocalSQLiteStore we now got the store");
-#endif
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData"
-                                                                object:self
-                                                              userInfo:nil];
+            NSLog(@"about to send refresh notification");
+            NSNotification* refreshNotification = [NSNotification
+                                                   notificationWithName:@"RefetchAllDatabaseData"
+                                                   object:self
+                                                   userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
         }];
     }
     return YES;
@@ -424,8 +427,11 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
             
             
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
-            }];            
+                NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                                                                    object:self
+                                                                                  userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+            }];
         }
         
     }
@@ -455,9 +461,11 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
                 if (nil == error)
                 {
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData"
-                                                                            object:self
-                                                                          userInfo:nil];
+                        NSNotification* refreshNotification = [NSNotification
+                                                               notificationWithName:@"RefetchAllDatabaseData"
+                                                               object:self
+                                                               userInfo:nil];
+                        [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
                     }];
                 }
             }

@@ -26,7 +26,4 @@
 - (void)configureViralLoadCell:(SummaryCell *)cell;
 - (void) showInfoView:(id)sender;
 - (void) showSettingsView:(id)sender;
-- (Results *)latestResult:(NSString *)type;
-- (Results *)previousResult:(NSString *)type;
-
 @end

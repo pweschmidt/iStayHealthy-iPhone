@@ -39,6 +39,7 @@
 @synthesize allWellnes = _allWellnes;
 @synthesize isShowingLandscape = _isShowingLandscape;
 @synthesize activityIndicator = _activityIndicator;
+@synthesize hasReloadedData = _hasReloadedData;
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -48,7 +49,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.hasReloadedData = NO;
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadData:)
                                                  name:@"RefetchAllDatabaseData"
@@ -128,7 +130,10 @@
 #ifdef APPDEBUG
     NSLog(@"We are getting notified to start the activityIndicator");
 #endif
-    [self.activityIndicator startAnimating];
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
 }
 
 /**
@@ -150,6 +155,7 @@
 							  otherButtonTitles:nil];
 		[alert show];
 	}
+    self.hasReloadedData = YES;
     [self.activityIndicator stopAnimating];
     if (nil != note)
     {        

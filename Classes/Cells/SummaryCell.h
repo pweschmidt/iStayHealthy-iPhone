@@ -20,4 +20,5 @@ enum  {
 @property (nonatomic, strong) IBOutlet UILabel *change;
 @property (nonatomic, strong) IBOutlet UIView *changeIndicatorView;
 -(IBAction)indicator:(id)sender hasShape:(NSInteger)shapeIndex isGood:(BOOL)isGood;
+- (void)clearIndicatorsFromLayer;
 @end

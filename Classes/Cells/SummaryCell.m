@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SummaryCell ()
+@property (nonatomic, strong) CALayer * addedLayer;
 - (CAShapeLayer *)upwardTriangleWithColour:(UIColor *)colour;
 - (CAShapeLayer *)downwardTriangleWithColour:(UIColor *)colour;
 - (CALayer *)circle;
@@ -21,6 +22,7 @@
 @synthesize result = _result;
 @synthesize change = _change;
 @synthesize changeIndicatorView = _changeIndicatorView;
+@synthesize addedLayer = _addedLayer;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -39,6 +41,15 @@
     // Configure the view for the selected state
 }
 
+- (void)clearIndicatorsFromLayer
+{
+    if (nil != self.addedLayer)
+    {
+        [self.addedLayer removeFromSuperlayer];
+    }    
+}
+
+
 -(IBAction)indicator:(id)sender hasShape:(NSInteger)shapeIndex isGood:(BOOL)isGood
 {
     self.changeIndicatorView.backgroundColor = [UIColor clearColor];
@@ -48,6 +59,7 @@
         {
             CALayer *neutralLayer = [self circle];
             [self.changeIndicatorView.layer addSublayer:neutralLayer];
+            self.addedLayer = neutralLayer;
             break;
         }
         case upward:
@@ -62,6 +74,7 @@
                 shape = [self upwardTriangleWithColour:DARK_RED];
             }
             [self.changeIndicatorView.layer addSublayer:shape];
+            self.addedLayer = shape;
             break;
         }
         case downward:
@@ -76,6 +89,7 @@
                 shape = [self downwardTriangleWithColour:DARK_RED];
             }
             [self.changeIndicatorView.layer addSublayer:shape];
+            self.addedLayer = shape;
             break;
         }
     }
@@ -96,7 +110,7 @@
     CAShapeLayer *layer = [CAShapeLayer layer];
     layer.path = path;
     layer.fillColor = colour.CGColor;
-    layer.strokeColor = [UIColor darkGrayColor].CGColor;
+    layer.strokeColor = [UIColor lightGrayColor].CGColor;
     layer.anchorPoint = CGPointMake(0, 0);
     layer.position = CGPointMake(0, 0);
     layer.bounds = self.changeIndicatorView.bounds;
@@ -122,7 +136,7 @@
     CAShapeLayer *layer = [CAShapeLayer layer];
     layer.path = path;
     layer.fillColor = colour.CGColor;
-    layer.strokeColor = [UIColor darkGrayColor].CGColor;
+    layer.strokeColor = [UIColor lightGrayColor].CGColor;
     layer.anchorPoint = CGPointMake(0, 0);
     layer.position = CGPointMake(0, 0);
     layer.bounds = self.changeIndicatorView.bounds;
