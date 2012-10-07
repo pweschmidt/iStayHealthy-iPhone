@@ -180,4 +180,6 @@
 "remaining"="restant";
 "Previous Medication"="Traitement antérieur";
 "Loading"="Chargement";
+"Error Saving" = "Données de sauvegarde d'Erreur";
+"Save error message" = "Une erreur s'est produite lors de l'enregistrement de vos données. Essayez à nouveau ou redémarrez iStayHealthy.";
 

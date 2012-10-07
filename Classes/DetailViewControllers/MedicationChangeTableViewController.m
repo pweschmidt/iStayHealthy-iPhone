@@ -104,7 +104,12 @@
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-            abort();
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                        message:NSLocalizedString(@"Save error message", nil)
+                                       delegate:nil
+                              cancelButtonTitle:@"Ok"
+                              otherButtonTitles: nil]
+             show];
         }
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -125,7 +130,12 @@
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-            abort();
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                        message:NSLocalizedString(@"Save error message", nil)
+                                       delegate:nil
+                              cancelButtonTitle:@"Ok"
+                              otherButtonTitles: nil]
+             show];
         }
         [self removeSQLEntry];
     }
@@ -175,7 +185,12 @@
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-        abort();
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
     }
 	[self dismissModalViewControllerAnimated:YES];        
 }

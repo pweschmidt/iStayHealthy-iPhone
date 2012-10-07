@@ -395,7 +395,7 @@
     NSSet *meds = self.masterRecord.otherMedications;
     if (0 != [meds count])
     {
-        self.allPills = [NSArray arrayByOrderingSet:meds byKey:@"Name" ascending:YES reverseOrder:NO];
+        self.allPills = [NSArray arrayByOrderingSet:meds byKey:@"StartDate" ascending:YES reverseOrder:YES];
     }
     else
     {
@@ -406,7 +406,7 @@
     NSSet *procSet = self.masterRecord.procedures;
     if(0 != [procSet count])
     {
-        self.allProcedures = [NSArray arrayByOrderingSet:procSet byKey:@"Name" ascending:YES reverseOrder:NO];
+        self.allProcedures = [NSArray arrayByOrderingSet:procSet byKey:@"Date" ascending:YES reverseOrder:YES];
     }
     else
     {

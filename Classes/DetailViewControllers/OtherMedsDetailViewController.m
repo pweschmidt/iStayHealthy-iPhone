@@ -18,6 +18,8 @@
 
 @interface OtherMedsDetailViewController ()
 @property BOOL isEdit;
++ (NSUInteger)unitIndexForString:(NSString *)unitString;
++ (NSString *)unitStringFromIndex:(NSUInteger)unitIndex;
 @end
 
 @implementation OtherMedsDetailViewController
@@ -29,6 +31,8 @@
 @synthesize name = _name;
 @synthesize number = _number;
 @synthesize unit = _unit;
+@synthesize dosageCell = _dosageCell;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -48,7 +52,26 @@
         self.isEdit = YES;
         self.record = masterRecord;
         self.otherMeds = otherMeds;
-        self.startDate = otherMeds.StartDate;
+        if (nil != otherMeds.StartDate)
+        {
+            self.startDate = otherMeds.StartDate;
+        }
+        else
+        {
+            self.startDate = [NSDate date];
+        }
+        if (nil != otherMeds.Name)
+        {
+            self.name = otherMeds.Name;
+        }
+        if (nil != otherMeds.Dose)
+        {
+            self.number = otherMeds.Dose;
+        }
+        if (nil != otherMeds.Unit)
+        {
+            self.unit = otherMeds.Unit;
+        }
     }
     return self;
 }
@@ -116,7 +139,7 @@
         medication.StartDate = self.startDate;
         medication.Name = self.name;
         medication.Dose = self.number;
-        medication.Unit = self.unit;        
+        medication.Unit = [OtherMedsDetailViewController unitStringFromIndex:self.dosageCell.segmentedControl.selectedSegmentIndex];
     }
     
     
@@ -125,7 +148,12 @@
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-        abort();
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
     }
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -177,7 +205,12 @@
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-        abort();
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
     }
 	[self dismissModalViewControllerAnimated:YES];
     
@@ -371,9 +404,19 @@
             }
             [doseCell setDelegate:self];
         }
-        doseCell.segmentedControl.selectedSegmentIndex = 1;
+        if (self.isEdit)
+        {
+            doseCell.valueField.text = [NSString stringWithFormat:@"%2.2f",[self.number floatValue]];
+            doseCell.segmentedControl.selectedSegmentIndex = [OtherMedsDetailViewController unitIndexForString:self.unit];
+        }
+        else
+        {
+            doseCell.valueField.text = NSLocalizedString(@"Enter Value", @"Enter Value");
+            doseCell.segmentedControl.selectedSegmentIndex = 1;
+        }
         doseCell.valueField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         doseCell.tag = 100;
+        self.dosageCell = doseCell;
         return  doseCell;
     }
     
@@ -393,5 +436,52 @@
         }
     }
 }
+
+#pragma private
++ (NSUInteger)unitIndexForString:(NSString *)unitString
+{
+    if (nil == unitString)
+    {
+        return 3;
+    }
+    if ([unitString isEqualToString:@""])
+    {
+        return 3;
+    }
+    if ([unitString isEqualToString:@"[g]"])
+    {
+        return 0;
+    }
+    if ([unitString isEqualToString:@"[mg]"])
+    {
+        return 1;
+    }
+    if ([unitString isEqualToString:@"[ml]"])
+    {
+        return 2;
+    }
+    return 3;
+}
+
++ (NSString *)unitStringFromIndex:(NSUInteger)unitIndex
+{
+    NSString *unit = @"";
+    switch (unitIndex)
+    {
+        case 0:
+            unit = @"[g]";
+            break;
+        case 1:
+            unit = @"[mg]";
+            break;
+        case 2:
+            unit = @"[ml]";
+            break;
+        default:
+            break;
+    }
+    return unit;
+}
+
 
 @end

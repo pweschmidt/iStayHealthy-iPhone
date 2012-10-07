@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 @class DBRestClient;
 
-@interface DropBoxBackupViewController : UITableViewController{
+@interface DropBoxBackupViewController : UITableViewController
+{
     NSString *iStayHealthyPath;
     DBRestClient* restClient;   
     IBOutlet UIActivityIndicatorView *activityIndicator;

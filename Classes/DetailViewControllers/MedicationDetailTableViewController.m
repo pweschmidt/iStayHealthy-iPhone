@@ -182,7 +182,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         

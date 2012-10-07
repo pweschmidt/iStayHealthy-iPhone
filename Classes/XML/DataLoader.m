@@ -220,7 +220,12 @@
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-            abort();
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                        message:NSLocalizedString(@"Save error message", nil)
+                                       delegate:nil
+                              cancelButtonTitle:@"Ok"
+                              otherButtonTitles: nil]
+             show];
         }
         
     }
@@ -393,7 +398,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [resultElement addAttribute:kXMLAttributeUID andValue:uid];
@@ -428,7 +438,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [medElement addAttribute:kXMLAttributeUID andValue:uid];
@@ -463,7 +478,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [missedMedElement addAttribute:kXMLAttributeUID andValue:uid];
@@ -508,7 +528,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [otherMedElement addAttribute:kXMLAttributeUID andValue:uid];
@@ -542,7 +567,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [contactElement addAttribute:kXMLAttributeUID andValue:uid];
@@ -576,7 +606,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [sideEffect addAttribute:kXMLAttributeUID andValue:uid];
@@ -606,7 +641,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [procElement addAttribute:kXMLAttributeUID andValue:uid];
@@ -646,7 +686,12 @@
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
         [prevElement addAttribute:kXMLAttributeUIDLowerCase andValue:uid];
@@ -1015,8 +1060,15 @@
 	NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
 	}
 }
 /**
@@ -1071,8 +1123,15 @@
     NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
 	}
     
 }
@@ -1119,8 +1178,15 @@
     NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
 	}
 }
 /**
@@ -1176,8 +1242,15 @@
     NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
 	}
     
 }
@@ -1233,8 +1306,15 @@
     NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
 	}
     
 }
@@ -1280,8 +1360,15 @@
     NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
 	}
     
 }
@@ -1323,9 +1410,16 @@
     NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
-	}    
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
+	}
 }
 
 - (void) addPreviousMedicationsToSQL:(XMLElement *)previousElement
@@ -1375,8 +1469,15 @@
     NSError *error = nil;
 	if (![context save:&error])
     {
+#ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+#endif
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
 	}
     
 }

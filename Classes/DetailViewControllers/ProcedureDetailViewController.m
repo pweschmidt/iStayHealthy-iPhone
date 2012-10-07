@@ -57,9 +57,30 @@
         self.isEdit = YES;
         self.procedures = procedure;
         self.record = masterRecord;
-        self.startDate = procedure.Date;
-        self.name = procedure.Name;
-        self.illness = procedure.Illness;
+        if (nil != procedure.Date)
+        {
+            self.startDate = procedure.Date;
+        }
+        else
+        {
+            self.startDate = [NSDate date];
+        }
+        if (nil != procedure.Name)
+        {
+            self.name = procedure.Name;
+        }
+        else
+        {
+            self.name = NSLocalizedString(@"Enter Name", @"Enter Name");
+        }
+        if (nil != procedure.Illness)
+        {
+            self.illness = procedure.Illness;
+        }
+        else
+        {
+            self.illness = NSLocalizedString(@"Enter Name", @"Enter Name");
+        }
     }
     return self;
     
@@ -94,7 +115,12 @@
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-        abort();
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
     }
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -169,7 +195,12 @@
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-        abort();
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
     }
 	[self dismissModalViewControllerAnimated:YES];
 }

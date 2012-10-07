@@ -180,4 +180,6 @@
 "remaining"="verbleibend";
 "Previous Medication"="Vorherige Behandl.";
 "Loading"="Laden...";
+"Error Saving" = "Speicherfehlmeldung";
+"Save error message" = "Fehler beim Datenspeichern. Starten Sie bitte iStayHealthy neu.";
 

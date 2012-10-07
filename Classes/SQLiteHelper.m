@@ -239,6 +239,7 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
         }
         else
         {
+            NSLog(@"Error in loadLocalSQLiteStore: %@ code %d", [*error localizedDescription], [*error code]);
             abort();
         }
         return YES;
@@ -257,6 +258,9 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
                                      error:error];
     if (nil == localStore)
     {
+#ifdef APPDEBUG
+        NSLog(@"Error in loadLocalSQLiteStore: %@ code %d", [*error localizedDescription], [*error code]);
+#endif
         abort();
     }
     else
@@ -299,7 +303,9 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
             }
         }
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+#ifdef APPDEBUG
             NSLog(@"SQLiteHelper:loadLocalSQLiteStore we now got the store");
+#endif
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData"
                                                                 object:self
                                                               userInfo:nil];

@@ -306,7 +306,12 @@ didReceiveLocalNotification:(UILocalNotification *)notification
             BOOL success = [currentObjectContext save:&error];
             if (!success)
             {
-                abort();
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                            message:NSLocalizedString(@"Save error message", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles: nil]
+                 show];
             }
         }
     }];

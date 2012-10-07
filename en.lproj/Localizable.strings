@@ -180,4 +180,5 @@
 "remaining"="remaining";
 "Previous Medication"="Previous Medication";
 "Loading"="Loading...";
-
+"Error Saving" = "Error Saving Data";
+"Save error message" = "An error occurred while saving your data. Try again or restart iStayHealthy.";

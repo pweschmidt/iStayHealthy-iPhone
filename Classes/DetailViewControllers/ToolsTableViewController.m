@@ -168,10 +168,18 @@
         NSError *error = nil;
         if (![context save:&error])
         {
-            abort();
-        }    
-        UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [isDone show];
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                        message:NSLocalizedString(@"Save error message", nil)
+                                       delegate:nil
+                              cancelButtonTitle:@"Ok"
+                              otherButtonTitles: nil]
+             show];
+        }
+        else
+        {
+            UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [isDone show];
+        }
     }
     else
     {

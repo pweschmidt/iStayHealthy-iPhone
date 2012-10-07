@@ -244,6 +244,7 @@
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
      show];
 #endif   
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /**
@@ -329,6 +330,11 @@
         DBMetadata *latestFileMetadata = (DBMetadata *)[revisions objectAtIndex:0];
         NSString *dataPath = [self dropBoxFileTmpPath];
         [[self restClient] loadFile:path atRev:latestFileMetadata.rev intoPath:dataPath];
+    }
+    else
+    {
+        NSString *dataPath = [self dropBoxFileTmpPath];
+        [[self restClient] loadFile:path intoPath:dataPath];
     }
 }
 
@@ -477,7 +483,7 @@
 #ifdef APPDEBUG
     NSLog(@"Error loading metadata: %@ (%@)", error, [error localizedDescription]);
 #endif
-    [self showDBError];
+//    [self showDBError];
 }
 
 /**
