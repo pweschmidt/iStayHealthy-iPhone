@@ -90,9 +90,11 @@
     {
 		[[DBSession sharedSession] linkFromController:self];
     }
-    DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc]
-                                                      initWithNibName:@"DropBoxBackupViewController" bundle:nil];
-    [self.navigationController pushViewController:dropBoxController animated:YES];
+    else
+    {
+        DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc] initWithNibName:@"DropBoxBackupViewController" bundle:nil];
+        [self.navigationController pushViewController:dropBoxController animated:YES];
+    }
 }
 
 /**

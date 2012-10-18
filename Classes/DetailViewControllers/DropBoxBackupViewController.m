@@ -20,12 +20,22 @@
 - (void)restore;
 - (void)createIStayHealthyFolder;
 - (void)copyOldFileToNew;
-@property (nonatomic, strong, readonly) DBRestClient* restClient;
+- (void)setRestClient;
+@property (nonatomic, strong) DBRestClient* restClient;
+@property BOOL dropBoxFileExists;
+@property BOOL newDropboxFileExists;
+@property BOOL isBackup;
+@property (nonatomic, strong) NSString *iStayHealthyPath;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation DropBoxBackupViewController
-@synthesize iStayHealthyPath, activityIndicator, dropBoxFileExists, newDropboxFileExists;
-
+@synthesize iStayHealthyPath  = _iStayHealthyPath;
+@synthesize activityIndicator = _activityIndicator;
+@synthesize dropBoxFileExists = _dropBoxFileExists;
+@synthesize newDropboxFileExists = _newDropboxFileExists;
+@synthesize restClient = _restClient;
+@synthesize isBackup = _isBackup;
 /**
  initWithStyle
  */
@@ -75,14 +85,11 @@
     NSLog(@"DropboxController viewDidLoad");
 #endif
 	// Set these variables before launching the app
-    [self restClient];
     self.iStayHealthyPath = nil;
     self.dropBoxFileExists = NO;
     self.newDropboxFileExists = NO;
-    isBackup = NO;
-    if(nil != restClient)
-        [[self restClient] loadMetadata:@"/"];
-
+    self.isBackup = NO;
+    [self setRestClient];
 }
 
 
@@ -93,8 +100,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[self restClient] loadMetadata:@"/iStayHealthy"];
-    
+    if (nil != self.restClient)
+    {
+        [self.restClient loadMetadata:@"/iStayHealthy"];
+    }
+
 }
 
 
@@ -120,7 +130,6 @@
 }
 
 /**
- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -194,24 +203,21 @@
         switch (indexPath.row)
         {
             case 0:
-                isBackup = YES;
+                self.isBackup = YES;
                 [self backup];
                 break;
             case 1:
-                isBackup = NO;
-                if (!self.dropBoxFileExists && !self.newDropboxFileExists)
+                self.isBackup = NO;
+                if ([[DBSession sharedSession] isLinked])
                 {
-                    UIAlertView *noFile = [[UIAlertView alloc]initWithTitle:@"No data" message:@"No saved data on Dropbox" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                    [noFile show];
+                    [self.activityIndicator startAnimating];
+                    NSString *dataPath = [self dropBoxFileTmpPath];
+                    //                    [[self restClient] loadRevisionsForFile:@"/iStayHealthy/iStayHealthy.isth" limit:1000];
+                    [self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
+                                        atRev:nil
+                                     intoPath:dataPath];
                 }
-                else
-                {
-                    [self.activityIndicator startAnimating];   
-//                    NSString *dataPath = [self dropBoxFileTmpPath];
-                    [[self restClient] loadRevisionsForFile:@"/iStayHealthy/iStayHealthy.isth" limit:1000];
-//                    [[self restClient] loadFile:@"/iStayHealthy/iStayHealthy.isth" intoPath:dataPath];
-                }
-                break;    
+                break;
         }
     }
     else
@@ -222,6 +228,18 @@
 }
 
 #pragma mark - DropBox actions
+
+- (void)setRestClient
+{
+    if (![[DBSession sharedSession]isLinked])
+    {
+        return;
+    }
+    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    self.restClient.delegate = self;    
+}
+
+
 - (NSString *)dropBoxFileTmpPath
 {
     return [NSTemporaryDirectory() stringByAppendingPathComponent:@"fromDropBox.xml"];
@@ -271,7 +289,7 @@
 #ifdef APPDEBUG
     NSLog(@"creating the iStayHealthy folder");
 #endif
-    [[self restClient] createFolder:@"/iStayHealthy"];    
+    [self.restClient createFolder:@"/iStayHealthy"];
 }
 
 /**
@@ -282,7 +300,7 @@
 #ifdef APPDEBUG
     NSLog(@"copying iStayHealthy.xml to iStayHealthy.isth");
 #endif
-    [[self restClient] copyFrom:@"/iStayHealthy/iStayHealthy.xml" toPath:@"/iStayHealthy/iStayHealthy.isth"];
+    [self.restClient copyFrom:@"/iStayHealthy/iStayHealthy.xml" toPath:@"/iStayHealthy/iStayHealthy.isth"];
 }
 
 
@@ -291,6 +309,10 @@
  */
 - (void)backup
 {
+    if (![[DBSession sharedSession]isLinked])
+    {
+        return;
+    }
     NSString *dataPath = [self uploadFileTmpPath];
     [self.activityIndicator startAnimating];
 #ifdef APPDEBUG
@@ -310,11 +332,15 @@
 	}
     else
     {
-        [[self restClient]uploadFile:@"iStayHealthy.isth" toPath:@"/iStayHealthy" withParentRev:nil fromPath:dataPath];
+        [self.restClient uploadFile:@"iStayHealthy.isth"
+                             toPath:@"/iStayHealthy"
+                      withParentRev:nil
+                           fromPath:dataPath];
     }        
 
 }
 
+/*
 - (void)restClient:(DBRestClient *)client loadedRevisions:(NSArray *)revisions forFile:(NSString *)path
 {
 #ifdef APPDEBUG
@@ -343,7 +369,7 @@
     NSLog(@"loadRevisionsFailedWithError error message is %@ with code %d", [error localizedDescription], [error code]);
     [self.activityIndicator stopAnimating];
 }
-
+*/
 /**
  (void)restore 
  */
@@ -375,13 +401,13 @@
 #ifdef APPDEBUG
     NSLog(@"DropboxController restClient");
 #endif
-    if (!restClient)
+    if (!_restClient)
     {
-        restClient =
+        _restClient =
         [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        restClient.delegate = self;
+        _restClient.delegate = self;
     }
-    return restClient;
+    return _restClient;
 }
 
 
@@ -450,11 +476,13 @@
     [errorAlert show];    
 }
 
-- (void)restClient:(DBRestClient *)client copiedPath:(NSString *)fromPath to:(DBMetadata *)to
+- (void)restClient:(DBRestClient *)client
+        copiedPath:(NSString *)fromPath
+                to:(DBMetadata *)to
 {
     if ([fromPath isEqualToString:@"/iStayHealthy/iStayHealthy.xml"] && [[to path] isEqualToString:@"/iStayHealthy/iStayHealthy.isth"])
     {
-        newDropboxFileExists = YES;
+        self.newDropboxFileExists = YES;
     }
 }
 
@@ -466,7 +494,6 @@
 
 
 /**
- (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path
  */
 - (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path
 {
@@ -476,14 +503,13 @@
 }
 
 /**
- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
  */
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
 {
 #ifdef APPDEBUG
     NSLog(@"Error loading metadata: %@ (%@)", error, [error localizedDescription]);
 #endif
-//    [self showDBError];
+    [self showDBError];
 }
 
 /**
@@ -491,11 +517,6 @@
 - (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
               from:(NSString*)srcPath metadata:(DBMetadata*)metadata
 {
-    
-    if (![[DBSession sharedSession]isLinked])
-    {
-        return;
-    }
 #ifdef APPDEBUG
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 #endif
@@ -514,10 +535,6 @@
 #ifdef APPDEBUG
     NSLog(@"Error uploading file: %@", error);
 #endif
-    if (![[DBSession sharedSession]isLinked])
-    {
-        return;
-    }
     [self.activityIndicator stopAnimating];
     [[[UIAlertView alloc] 
        initWithTitle:@"Error Uploading to DropBox" message:@"There was an error uploading data to DropBox." 
@@ -530,10 +547,6 @@
  */
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)localPath
 {
-    if (![[DBSession sharedSession]isLinked])
-    {
-        return;
-    }
 #ifdef APPDEBUG
     NSLog(@"File downloaded successfully to path: %@", localPath);
 #endif
@@ -543,16 +556,11 @@
 /**
  */
 - (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error{
-    if (![[DBSession sharedSession]isLinked])
-    {
-        return;
-    }
     [self.activityIndicator stopAnimating];
     [[[UIAlertView alloc] 
        initWithTitle:@"Error Loading file from DropBox" message:@"There was an error loading a file from DropBox." 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
-    
+     show];    
 }
 
 
