@@ -16,8 +16,6 @@
 
 @interface iStayHealthyPasswordController ()
 @property BOOL hasReloadedData;
-- (void)start;
-
 @end
 
 @implementation iStayHealthyPasswordController
@@ -52,39 +50,43 @@
 
 - (void)reloadData:(NSNotification*)note
 {
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error])
-    {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
-							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
-							  delegate:self
-							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-							  otherButtonTitles:nil];
-		[alert show];
-	}
-	NSArray *records = [self.fetchedResultsController fetchedObjects];
-    self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
-	int count = [records count];
-    if (0 < count)
-    {
-        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
-        self.passwordString = masterRecord.Password;
-    }
-    else
-    {//shouldn't really happen
-        [self loadTabController];
-    }
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSError *error = nil;
+        if (![[self fetchedResultsController] performFetch:&error])
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+                                  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+                                  delegate:self
+                                  cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        NSArray *records = [self.fetchedResultsController fetchedObjects];
+        self.hasReloadedData = YES;
+        [self.activityIndicator stopAnimating];
+        int count = [records count];
+        if (0 < count)
+        {
+            iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+            self.passwordString = masterRecord.Password;
+        }
+        else
+        {//shouldn't really happen
+            [self loadTabController];
+        }
+    }];
     
 }
 
 - (void)start
 {
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
-    }
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+        {
+            [self.activityIndicator startAnimating];
+        }
+    }];
 }
 
 

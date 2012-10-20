@@ -127,13 +127,15 @@
 
 - (void)start
 {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 #ifdef APPDEBUG
-    NSLog(@"We are getting notified to start the activityIndicator");
+        NSLog(@"We are getting notified to start the activityIndicator");
 #endif
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
-    }
+        if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+        {
+            [self.activityIndicator startAnimating];
+        }
+    }];
 }
 
 /**
@@ -141,27 +143,29 @@
  */
 - (void)reloadData:(NSNotification*)note
 {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 #ifdef APPDEBUG
-    NSLog(@"We are getting notified to reload the data");
+        NSLog(@"We are getting notified to reload the data");
 #endif
-    NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error])
-    {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
-							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
-							  delegate:self 
-							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
-							  otherButtonTitles:nil];
-		[alert show];
-	}
-    self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
-    if (nil != note)
-    {        
-        [self setUpData];
-        [self.tableView reloadData];
-    }
+        NSError *error = nil;
+        if (![[self fetchedResultsController] performFetch:&error])
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+                                  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+                                  delegate:self
+                                  cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        self.hasReloadedData = YES;
+        [self.activityIndicator stopAnimating];
+        if (nil != note)
+        {        
+            [self setUpData];
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 /**
@@ -297,14 +301,23 @@
  */
 - (NSFetchedResultsController *)fetchedResultsController
 {
+#ifdef APPDEBUG
+    NSLog(@"iStayHealthyTableViewController::fetchedResultsController");
+#endif
 	if (fetchedResultsController_ != nil)
     {
 		return fetchedResultsController_;
 	}
+#ifdef APPDEBUG
+    NSLog(@"iStayHealthyTableViewController::fetchedResultsController about to create fetch request");
+#endif
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
 	NSManagedObjectContext *context = appDelegate.managedObjectContext;
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"iStayHealthyRecord" inManagedObjectContext:context];
+#ifdef APPDEBUG
+    NSLog(@"iStayHealthyTableViewController::fetchedResultsController created entity iStayHealthyRecord");
+#endif
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"Name" ascending:YES];
 	NSArray *allDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:allDescriptors];	

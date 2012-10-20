@@ -28,4 +28,5 @@
 @property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 - (void)reloadData:(NSNotification*)note;
 - (void)setUpData;
+- (void)start;
 @end

@@ -438,6 +438,13 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
     else
     {
         NSError *error = nil;
+        /*
+#ifdef APPDEBUG
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"SQLiteHelper:loadSQLiteStoreFromiCloud We DO NOT have an iCloud store available");
+        }];
+#endif
+        NSError *error = nil;
         NSManagedObjectContext *subContext = [[NSManagedObjectContext alloc] init];
         NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"iStayHealthy" withExtension:@"momd"];
         NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
@@ -450,8 +457,18 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
                                          error:&error];
         if (nil != localStore)
         {
+#ifdef APPDEBUG
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"SQLiteHelper:loadSQLiteStoreFromiCloud checking the noniCloud store for master record");
+            }];
+#endif
             if ([self hasMasterRecord:subContext])
             {
+#ifdef APPDEBUG
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    NSLog(@"SQLiteHelper:loadSQLiteStoreFromiCloud  the noniCloud store has a master record");
+                }];
+#endif
                 [self.persistentStoreCoordinator
                  addPersistentStoreWithType:NSSQLiteStoreType
                  configuration:nil
@@ -478,6 +495,8 @@ NSString * const kSQLiteNoiCloudStore = @"iStayHealthyNoiCloud.sqlite";
         {
             [self loadLocalSQLiteStore:&error];            
         }
+         */
+        [self loadLocalSQLiteStore:&error];
         
     }
     return YES;

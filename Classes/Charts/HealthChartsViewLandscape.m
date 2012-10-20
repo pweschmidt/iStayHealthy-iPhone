@@ -76,7 +76,7 @@
     {
         float yOffset = [Trafo mapCD4CountToYAxis:(100*tick) forHeight:height];
 #ifdef APPDEBUG
-        NSLog(@"drawCD4Ticks: tick=%d yOffset=%f",tick,yOffset);
+//        NSLog(@"drawCD4Ticks: tick=%d yOffset=%f",tick,yOffset);
 #endif
 		CGContextMoveToPoint(context, MARGINLEFT, yOffset);
 		CGContextAddLineToPoint(context,width, yOffset);

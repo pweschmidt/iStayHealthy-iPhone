@@ -17,7 +17,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface StatusViewControllerLandscape ()
-- (void)start;
 @end
 
 @implementation StatusViewControllerLandscape
@@ -204,18 +203,28 @@
  */
 - (void)reloadData:(NSNotification *)note
 {
-    if (nil == note)
-    {
-        return;
-    }
-    [self.activityIndicator stopAnimating];
-    [self setUpData];
-	[self.chartView setNeedsDisplay];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if (nil == note)
+        {
+            return;
+        }
+        [self.activityIndicator stopAnimating];
+        [self setUpData];
+        [self.chartView setNeedsDisplay];
+    }];
 }
 
 - (void)start
 {
-    [self.activityIndicator startAnimating];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if (nil != self.activityIndicator)
+        {
+            if (!self.activityIndicator.isAnimating)
+            {
+                [self.activityIndicator startAnimating];
+            }
+        }
+    }];
 }
 
 

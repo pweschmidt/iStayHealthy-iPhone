@@ -277,15 +277,9 @@
 
 - (void)drawStartAndEndDate:(CGContextRef)context
 {
-#ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawStartAndEndDate");
-#endif
     int count = [self.events.allChartEvents count];
     if (0 == count)
     {
-#ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawCD4Count events array is empty");
-#endif
         return;
     }
     float xStart = [Trafo xStart:width forCount:count];
@@ -346,13 +340,13 @@
 - (void)drawCD4Counts:(CGContextRef)context
 {
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawCD4Count");
+//    NSLog(@"HealthChartsView::drawCD4Count");
 #endif
     int count = [self.events.allChartEvents count];
     if (0 == count)
     {
 #ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawCD4Count events array is empty");
+//        NSLog(@"HealthChartsView::drawCD4Count events array is empty");
 #endif
         return;
     }
@@ -360,7 +354,7 @@
     float xStart = [Trafo xStart:width forCount:count];
     float xDistance = floorf(width/count);
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawCD4Count count is %d, width is %f, xStart is %f and distance is %f",count, width, xStart, xDistance);
+//    NSLog(@"HealthChartsView::drawCD4Count count is %d, width is %f, xStart is %f and distance is %f",count, width, xStart, xDistance);
 #endif
     
 	CGContextSetLineWidth(context, 1.5);
@@ -394,7 +388,7 @@
     }
     
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawCD4Count we have found %d results",point);
+//    NSLog(@"HealthChartsView::drawCD4Count we have found %d results",point);
 #endif
     
     
@@ -492,13 +486,13 @@
 - (void)drawMedicationStartLine:(CGContextRef)context
 {
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawMedicationStartLine");
+//    NSLog(@"HealthChartsView::drawMedicationStartLine");
 #endif
     int count = [self.events.allChartEvents count];
     if (0 == count)
     {
 #ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawMedicationStartLine events array is empty");
+//        NSLog(@"HealthChartsView::drawMedicationStartLine events array is empty");
 #endif
         return;
     }
@@ -506,7 +500,7 @@
     float xStart = [Trafo xStart:width forCount:count];
     float xDistance = floorf(width/count);
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawMedicationStartLine count is %d, width is %f, xStart is %f and distance is %f",count, width, xStart, xDistance);
+//    NSLog(@"HealthChartsView::drawMedicationStartLine count is %d, width is %f, xStart is %f and distance is %f",count, width, xStart, xDistance);
 #endif
     
     
@@ -545,13 +539,13 @@
 - (void)drawMissedMedicationWarning:(CGContextRef)context
 {
 #ifdef APPDEBUG
-    NSLog(@"HealthChartsView::drawMissedMedicationWarning");
+//    NSLog(@"HealthChartsView::drawMissedMedicationWarning");
 #endif
     int count = [self.events.allChartEvents count];
     if (0 == count)
     {
 #ifdef APPDEBUG
-        NSLog(@"HealthChartsView::drawMissedMedicationWarning events array is empty");
+//        NSLog(@"HealthChartsView::drawMissedMedicationWarning events array is empty");
 #endif
         return;
     }

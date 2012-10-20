@@ -50,6 +50,7 @@
 		C462002C140934C500E70B5B /* retrovir.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620027140934C500E70B5B /* retrovir.png */; };
 		C462002D140934C500E70B5B /* viracept.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620028140934C500E70B5B /* viracept.png */; };
 		C462002E140934C500E70B5B /* viramune.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620029140934C500E70B5B /* viramune.png */; };
+		C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46231441632E21D005DD746 /* SQLDatabaseManager.m */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
 		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
@@ -395,6 +396,8 @@
 		C4620027140934C500E70B5B /* retrovir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retrovir.png; sourceTree = "<group>"; };
 		C4620028140934C500E70B5B /* viracept.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viracept.png; sourceTree = "<group>"; };
 		C4620029140934C500E70B5B /* viramune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viramune.png; sourceTree = "<group>"; };
+		C46231431632E21D005DD746 /* SQLDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseManager.h; sourceTree = "<group>"; };
+		C46231441632E21D005DD746 /* SQLDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseManager.m; sourceTree = "<group>"; };
 		C464737C13E2FC2B00F7EAD4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C464737D13E303D600F7EAD4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C465974013EE848B00006F72 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -832,6 +835,8 @@
 				C4DF910A15EE79560042211E /* Constants.m */,
 				C49238581616EFFB005E9B2C /* SQLiteHelper.h */,
 				C49238591616EFFB005E9B2C /* SQLiteHelper.m */,
+				C46231431632E21D005DD746 /* SQLDatabaseManager.h */,
+				C46231441632E21D005DD746 /* SQLDatabaseManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1687,6 +1692,7 @@
 				C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */,
 				C402283015FB99EC00120B1F /* XMLConstants.m in Sources */,
 				C492385A1616EFFB005E9B2C /* SQLiteHelper.m in Sources */,
+				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1921,7 +1927,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "FAB72515-6BAA-4CE8-96FD-FD67A3DB768B";
+				PROVISIONING_PROFILE = "B01EF5B1-D0C0-4517-98E0-4A7C93A8248D";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1949,7 +1955,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "FAB72515-6BAA-4CE8-96FD-FD67A3DB768B";
+				PROVISIONING_PROFILE = "B01EF5B1-D0C0-4517-98E0-4A7C93A8248D";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -2021,10 +2027,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt";

@@ -13,10 +13,10 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "Utilities.h"
 #import "XMLLoader.h"
-#import "SQLiteHelper.h"
+#import "SQLDatabaseManager.h"
 
 @interface iStayHealthyAppDelegate() <DBSessionDelegate>
-@property (nonatomic, strong, readwrite) SQLiteHelper *sqlHelper;
+@property (nonatomic, strong, readwrite) SQLDatabaseManager *sqlHelper;
 - (void)postNotificationWithNote:(NSNotification *)note;
 @end
 
@@ -49,7 +49,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     }
 #endif
     
-	self.sqlHelper = [[SQLiteHelper alloc] init];
+	self.sqlHelper = [[SQLDatabaseManager alloc] init];
     _managedObjectContext = self.sqlHelper.mainObjectContext;
 
 	Class cls = NSClassFromString(@"UILocalNotification");
@@ -188,7 +188,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 #ifdef APPDEBUG
     NSLog(@"in applicationWillResignActive");
 #endif
-    [self saveContext];
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -231,7 +230,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     NSLog(@"in applicationWillEnterForeground");
 #endif
 	application.applicationIconBadgeNumber = 0;
-    [self saveContext];
 }
 
 
@@ -326,9 +324,10 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 #ifdef APPDEBUG
     NSLog(@"iStayHealthyAppDelegate::postNotificationWithNote");
 #endif
-    NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData"
-                                                                        object:self
-                                                                      userInfo:[note userInfo]];
+    NSNotification* refreshNotification = [NSNotification
+                                           notificationWithName:@"RefetchAllDatabaseData"
+                                           object:self
+                                           userInfo:[note userInfo]];
     [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];    
 }
 
