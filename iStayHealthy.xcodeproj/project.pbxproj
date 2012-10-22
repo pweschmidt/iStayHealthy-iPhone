@@ -70,7 +70,6 @@
 		C491B3531477DE96000A4229 /* missed.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34D1477DE96000A4229 /* missed.png */; };
 		C491B3541477DE96000A4229 /* procedure.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34E1477DE96000A4229 /* procedure.png */; };
 		C491B3551477DE96000A4229 /* sideeffects.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34F1477DE96000A4229 /* sideeffects.png */; };
-		C492385A1616EFFB005E9B2C /* SQLiteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C49238591616EFFB005E9B2C /* SQLiteHelper.m */; };
 		C4959F6614B883B8000B3F10 /* gaydarad.png in Resources */ = {isa = PBXBuildFile; fileRef = C4959F6514B883B8000B3F10 /* gaydarad.png */; };
 		C4959F6914B883F0000B3F10 /* pozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4959F6B14B883F0000B3F10 /* pozbanner.png */; };
 		C49B5C5615DFCC4600D3AF3B /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B5C5515DFCC4600D3AF3B /* stop@2x.png */; };
@@ -445,8 +444,6 @@
 		C491B34E1477DE96000A4229 /* procedure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = procedure.png; sourceTree = "<group>"; };
 		C491B34F1477DE96000A4229 /* sideeffects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideeffects.png; sourceTree = "<group>"; };
 		C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 3.xcdatamodel"; sourceTree = "<group>"; };
-		C49238581616EFFB005E9B2C /* SQLiteHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteHelper.h; sourceTree = "<group>"; };
-		C49238591616EFFB005E9B2C /* SQLiteHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteHelper.m; sourceTree = "<group>"; };
 		C4959F6514B883B8000B3F10 /* gaydarad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gaydarad.png; sourceTree = "<group>"; };
 		C4959F6A14B883F0000B3F10 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6C14B883FA000B3F10 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = de.lproj/pozbanner.png; sourceTree = "<group>"; };
@@ -833,8 +830,6 @@
 				C43423341466BE3700F06DC6 /* iStayHealthyPasswordController.m */,
 				C4DF910915EE79560042211E /* Constants.h */,
 				C4DF910A15EE79560042211E /* Constants.m */,
-				C49238581616EFFB005E9B2C /* SQLiteHelper.h */,
-				C49238591616EFFB005E9B2C /* SQLiteHelper.m */,
 				C46231431632E21D005DD746 /* SQLDatabaseManager.h */,
 				C46231441632E21D005DD746 /* SQLDatabaseManager.m */,
 			);
@@ -1691,7 +1686,6 @@
 				C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */,
 				C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */,
 				C402283015FB99EC00120B1F /* XMLConstants.m in Sources */,
-				C492385A1616EFFB005E9B2C /* SQLiteHelper.m in Sources */,
 				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

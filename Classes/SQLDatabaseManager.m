@@ -24,15 +24,15 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 @property (nonatomic, strong, readwrite) NSURL *backupStoreURL;
 @property (nonatomic, strong, readwrite) NSOperationQueue * mainQueue;
 @property (nonatomic, strong, readwrite) NSLock * universalLock;
+@property BOOL backupStoreExists;
+@property BOOL mainStoreExists;
 
 - (void)storeAndContext;
 - (void)selectStoreAndMigrate:(NSError *__autoreleasing *)error;
 - (NSURL *)applicationDocumentsDirectory;
-- (void)backupMainStore:(NSPersistentStore *)mainStore;
-- (void)recoverFromBackupStore:(NSPersistentStore *)backupStore;
+- (void)migrateMainStore;
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification;
-- (void)removeFaultyDataSource;
-- (void)removeBackupStore;
+- (void)createMasterRecord;
 @end
 
 
@@ -44,6 +44,10 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 @synthesize mainQueue = _mainQueue;
 @synthesize universalLock = _universalLock;
 @synthesize isUsingiCloud = _isUsingiCloud;
+@synthesize backupStoreExists = _backupStoreExists;
+@synthesize mainStoreExists = _mainStoreExists;
+/**
+ */
 - (id)init
 {
     self = [super init];
@@ -52,11 +56,15 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
         self.mainQueue = [[NSOperationQueue alloc] init];
         self.universalLock = [[NSLock alloc] init];
         self.isUsingiCloud = NO;
+        self.backupStoreExists = NO;
+        self.mainStoreExists = NO;
         [self storeAndContext];
     }
     return self;
 }
 
+/**
+ */
 - (void)loadSQLitePersistentStore
 {
     __weak SQLDatabaseManager *weakSelf = self;
@@ -82,6 +90,8 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 
 #pragma private methods
 
+/**
+ */
 - (void)storeAndContext
 {
 #ifdef APPDEBUG
@@ -102,26 +112,20 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
     self.mainStoreURL           = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kMainDataSource];
     
     self.backupStoreURL   = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kBackupDataSource];
-    
-/*
+
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-    if (![fileManager fileExistsAtPath:[self.backupStoreURL path]])
+    if ([fileManager fileExistsAtPath:[self.backupStoreURL path]])
     {
-        NSError *error = nil;
-        NSDictionary *targetOptions = [NSDictionary
-                                       dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
-                                       NSMigratePersistentStoresAutomaticallyOption,
-                                       [NSNumber numberWithBool:YES],
-                                       NSInferMappingModelAutomaticallyOption, nil];
-        
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
-        NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-        [context setPersistentStoreCoordinator:coordinator];
-        [context setMergePolicy:policy];
-        [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.backupStoreURL options:targetOptions error:&error];
-        
+#ifdef APPDEBUG
+        NSLog(@"backupstore exists");
+#endif
+        self.backupStoreExists = YES;
     }
-*/
+    
+    if ([fileManager fileExistsAtPath:[self.mainStoreURL path]])
+    {
+        self.mainStoreExists = YES;
+    }
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -137,6 +141,8 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
     
 }
 
+/**
+ */
 - (void)selectStoreAndMigrate:(NSError *__autoreleasing *)error
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -149,7 +155,6 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
                                            userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
     }];
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSDictionary *dbStoreOptions = nil;
     NSURL *storeURL = nil;
     NSPersistentStore * store = nil;
@@ -175,11 +180,12 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 #endif
         if (MIGRATE_STORE_FOR_SIMULATOR)
         {
-            [self backupMainStore:store];
+            [self migrateMainStore];
         }
     }
     else
     {
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
         NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
         if (nil != ubiquityContainer)
         {
@@ -203,9 +209,9 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
                      options:dbStoreOptions
                      error:error];
             self.isUsingiCloud = YES;
-            if (![fileManager fileExistsAtPath:[self.backupStoreURL path]])
+            if (!self.backupStoreExists)
             {
-                [self backupMainStore:store];
+                [self migrateMainStore];
             }
         }
         else
@@ -247,7 +253,6 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
         }];
         
     }
-    [self removeFaultyDataSource];
 #ifdef APPDEBUG
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"selectStoreAndMigrate LEAVING");
@@ -255,100 +260,113 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 #endif
 }
 
-- (void)backupMainStore:(NSPersistentStore *)mainStore
+/**
+ */
+- (void)migrateMainStore
 {
+#ifdef APPDEBUG
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"migrateMainStore ENTERING");
+    }];
+#endif
+    
+    NSPersistentStore *mainStore = [self.persistentStoreCoordinator persistentStoreForURL:self.mainStoreURL];
     if (nil == mainStore)
     {
 #ifdef APPDEBUG
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            NSLog(@"backupMainStore mainStore is NIL");
+            NSLog(@"migrateMainStore the mainstore is NIL - and we return straight away");
         }];
 #endif
         return;
     }
-    NSString *path = [[mainStore URL] path];
-    if ([path isEqualToString:[self.backupStoreURL path]])
-    {
-#ifdef APPDEBUG
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            NSLog(@"backupMainStore mainStore has same URL as backupstore. store shouldn't migrate onto itself.");
-        }];
-#endif
-        return;
-    }
+    
 #ifdef APPDEBUG
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"backupMainStore ENTERING");
+        NSLog(@"migrateMainStore we are trying to migrate the store");
+        [self.mainQueue addOperationWithBlock:^{
+            NSURL *modelURL = [[NSBundle mainBundle]
+                               URLForResource:@"iStayHealthy"
+                               withExtension:@"momd"];
+            NSManagedObjectModel *model = [[NSManagedObjectModel alloc]
+                                           initWithContentsOfURL:modelURL];
+            NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]
+                                                 initWithManagedObjectModel:model];
+            NSDictionary *backupOptions = @{ NSReadOnlyPersistentStoreOption : [NSNumber numberWithBool:YES] };
+            NSError *error = nil;
+            NSPersistentStore *mainStore = [psc addPersistentStoreWithType:NSSQLiteStoreType
+                                                             configuration:nil
+                                                                       URL:self.mainStoreURL
+                                                                   options:backupOptions
+                                                                     error:&error];
+            
+            if (self.backupStoreExists)
+            {
+                NSError *deleteError = nil;
+                NSFileManager *fileManager = [[NSFileManager alloc] init];
+                [fileManager removeItemAtPath:[self.backupStoreURL path] error:&deleteError];
+                if (nil == deleteError)
+                {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        NSLog(@"the deletion of the backupstore was successful");
+                    }];
+                }
+                else
+                {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        NSLog(@"the deletion of the backupstore failed with error message %@ and code %d", [deleteError localizedDescription], [deleteError code]);
+                    }];
+                }
+            }
+            
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"We are in the background thread migrating the store");
+            }];
+            NSDictionary *targetOptions = [NSDictionary
+                                           dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
+                                           NSMigratePersistentStoresAutomaticallyOption,
+                                           [NSNumber numberWithBool:YES],
+                                           NSInferMappingModelAutomaticallyOption, nil];
+            
+            [psc migratePersistentStore:mainStore
+                                  toURL:self.backupStoreURL
+                                options:targetOptions
+                               withType:NSSQLiteStoreType
+                                  error:&error];
+            
+            if (nil == error)
+            {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    NSLog(@"the migration was successful");
+                }];
+            }
+            else
+            {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    NSLog(@"the migration failed with error message %@ and code %d", [error localizedDescription], [error code]);
+                }];
+            }
+            
+            
+        }];
     }];
 #endif
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    if ([fileManager fileExistsAtPath:[self.backupStoreURL path]])
-    {
-#ifdef APPDEBUG
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            NSLog(@"backupMainStore we already have a backup store. Remove the existing store, so we migrate to a fresh copy");
-        }];
-#endif
-        return;
-    }
-    else
-    {
-#ifdef APPDEBUG
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            NSLog(@"backupMainStore we DO NOT have a backup store yet");
-        }];
-#endif
-        
-    }
     
-    NSError *error = nil;
-    NSDictionary *targetOptions = [NSDictionary
-                                   dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
-                                   NSMigratePersistentStoresAutomaticallyOption,
-                                   [NSNumber numberWithBool:YES],
-                                   NSInferMappingModelAutomaticallyOption, nil];
     
-    [self.persistentStoreCoordinator migratePersistentStore:mainStore
-                                                      toURL:self.backupStoreURL
-                                                    options:targetOptions
-                                                   withType:NSSQLiteStoreType
-                                                      error:&error];
+    
 #ifdef APPDEBUG
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"backupMainStore LEAVING");
+        NSLog(@"migrateMainStore LEAVING");
     }];
 #endif
+    
 }
 
 
-- (void)removeBackupStore
-{
-#ifdef APPDEBUG
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"removeBackupStore ENTERING");
-    }];
-#endif
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NSError *error = nil;
-    if ([fileManager fileExistsAtPath:[self.backupStoreURL path]])
-    {
-        [fileManager removeItemAtPath:[self.backupStoreURL path] error:&error];
-    }
-    
-#ifdef APPDEBUG
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"backupMainStore LEAVING");
-    }];
-#endif
-    
-}
 
-
-- (void)recoverFromBackupStore:(NSPersistentStore *)backupStore
-{
-    
-}
-
+/**
+ */
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification
 {
     if (nil == notification)
@@ -369,6 +387,8 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 }
 
 
+/**
+ */
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager]
@@ -376,42 +396,9 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
              inDomains:NSUserDomainMask] lastObject];
 }
 
-/**
- version 3.2.1 introduced a faulty store which caused crashes. Remove from the document folder
- if present
- */
-- (void)removeFaultyDataSource
+
+- (void)createMasterRecord
 {
-#ifdef APPDEBUG
-    NSLog(@"SQLiteHelper:removeFaultyDataSource ENTERING");
-#endif
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NSURL *faultyURL = [[self applicationDocumentsDirectory]
-                        URLByAppendingPathComponent:kFaultyDataSource];
-    if ([fileManager fileExistsAtPath:[faultyURL path]])
-    {
-#ifdef APPDEBUG
-        NSLog(@"SQLiteHelper:removeFaultyDataSource deleting faulty store");
-#endif
-        NSError *error = nil;
-        [fileManager removeItemAtPath:[faultyURL path] error:&error];
-        
-#ifdef APPDEBUG
-        if (nil != error)
-        {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                NSLog(@"error in deleting file at path %@", [faultyURL path]);
-            }];
-        }
-#endif
-    }
-#ifdef APPDEBUG
-    else
-    {
-        NSLog(@"SQLiteHelper:removeFaultyDataSource faulty store is not there");        
-    }
-    NSLog(@"SQLiteHelper:removeFaultyDataSource LEAVING");
-#endif
     
 }
 
