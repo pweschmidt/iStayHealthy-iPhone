@@ -13,6 +13,5 @@
 @property (nonatomic, strong, readonly) NSManagedObjectContext * mainObjectContext;
 @property (nonatomic, strong, readonly) NSURL *mainStoreURL;
 @property (nonatomic, strong, readonly) NSURL *backupStoreURL;
-@property BOOL isUsingiCloud;
 - (void)loadSQLitePersistentStore;
 @end

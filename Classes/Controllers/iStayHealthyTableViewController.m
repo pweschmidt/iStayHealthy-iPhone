@@ -127,15 +127,15 @@
 
 - (void)start
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 #ifdef APPDEBUG
-        NSLog(@"We are getting notified to start the activityIndicator");
+    NSLog(@"We are getting notified to start the activityIndicator");
 #endif
-        if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-        {
-            [self.activityIndicator startAnimating];
-        }
-    }];
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//    }];
 }
 
 /**
@@ -143,29 +143,29 @@
  */
 - (void)reloadData:(NSNotification*)note
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 #ifdef APPDEBUG
-        NSLog(@"We are getting notified to reload the data");
+    NSLog(@"We are getting notified to reload the data");
 #endif
-        NSError *error = nil;
-        if (![[self fetchedResultsController] performFetch:&error])
-        {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
-                                  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
-                                  delegate:self
-                                  cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
-        self.hasReloadedData = YES;
-        [self.activityIndicator stopAnimating];
-        if (nil != note)
-        {        
-            [self setUpData];
-            [self.tableView reloadData];
-        }
-    }];
+    NSError *error = nil;
+    if (![[self fetchedResultsController] performFetch:&error])
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+                              delegate:self
+                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {
+        [self setUpData];
+        [self.tableView reloadData];
+    }
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//    }];
 }
 
 /**
