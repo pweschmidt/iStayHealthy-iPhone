@@ -10,10 +10,12 @@
 #import "Utilities.h"
 #import "iStayHealthyRecord.h"
 
-NSString * const kMainDataSource = @"iStayHealthy.sqlite";
-NSString * const kBackupDataSource = @"iStayHealthyBackup.sqlite";
-NSString * const kFaultyDataSource = @"iStayHealthyNoiCloud.sqlite";
+NSString * const kMainDataSource    = @"iStayHealthy.sqlite";
+NSString * const kBackupDataSource  = @"iStayHealthyBackup.sqlite";
+NSString * const kiCloudDataSource  = @"iStayHealthyiCloud.sqlite";
+NSString * const kFaultyDataSource  = @"iStayHealthyNoiCloud.sqlite";
 NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store";
+NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
 
 #define MIGRATE_STORE_FOR_SIMULATOR NO
 #define USE_BACKUP_STORE NO
@@ -25,11 +27,15 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 @property (nonatomic, strong, readwrite) NSURL *backupStoreURL;
 @property (nonatomic, strong, readwrite) NSOperationQueue * mainQueue;
 @property (nonatomic, strong, readwrite) NSLock * universalLock;
+@property (nonatomic, strong, readwrite) id ubiquityToken;
+@property (nonatomic, strong, readwrite) NSPersistentStore *mainStore;
+@property (nonatomic, strong, readwrite) NSPersistentStore *backupStore;
 @property BOOL backupStoreExists;
 @property BOOL mainStoreExists;
 
 - (void)storeAndContext;
 - (void)selectStoreAndMigrate:(NSError *__autoreleasing *)error;
+- (void)selectStoreAndMigrateInSimulator:(NSError *__autoreleasing *)error;
 - (NSURL *)applicationDocumentsDirectory;
 - (void)migrateMainStore;
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification;
@@ -37,6 +43,7 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 - (BOOL)loadCloudStore:(NSURL *)ubiquityContainerURL error:(NSError *__autoreleasing *)error;
 - (BOOL)loadBackupStoreLocally:(NSError *__autoreleasing *)error;
 - (void)addMasterRecord;
+- (void)iCloudStoreChanged;
 @end
 
 
@@ -49,6 +56,8 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 @synthesize universalLock = _universalLock;
 @synthesize backupStoreExists = _backupStoreExists;
 @synthesize mainStoreExists = _mainStoreExists;
+@synthesize mainStore = _mainStore;
+@synthesize backupStore = _backupStore;
 /**
  init 
  */
@@ -61,6 +70,9 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
         self.universalLock = [[NSLock alloc] init];
         self.backupStoreExists = NO;
         self.mainStoreExists = NO;
+        self.ubiquityToken = nil;
+        self.mainStore = nil;
+        self.backupStore = nil;
         [self storeAndContext];
     }
     return self;
@@ -79,7 +91,14 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
             [weakSelf.universalLock lock];
             isLocked = YES;
             NSError *error = nil;
-            [self selectStoreAndMigrate:&error];
+            if (DEVICE_IS_SIMULATOR)
+            {
+                [self selectStoreAndMigrateInSimulator:&error];
+            }
+            else
+            {
+                [self selectStoreAndMigrate:&error];
+            }
         } @finally
         {
             if (isLocked)
@@ -141,8 +160,33 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
      selector:@selector(mergeChangesFrom_iCloud:)
      name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
      object:self.persistentStoreCoordinator];
+
+
+/*
+#ifdef __IPHONE_6_0
+    NSLog(@"SQLDatabaseManager::storeAndContext We are running at least version iOS 6");
+    self.ubiquityToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
     
-    
+    if (nil != self.ubiquityToken)
+    {
+        NSLog(@"we have iCloud enabled");
+        NSData *currentTokenData = [NSKeyedArchiver archivedDataWithRootObject:self.ubiquityToken];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:currentTokenData forKey:@"com.pweschmidt.iStayHealthy.ubiquityToken"];
+        [defaults synchronize];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"com.pweschmidt.iStayHealthy.ubiquityToken"];
+    }
+
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(iCloudStoreChanged)
+     name:NSUbiquityIdentityDidChangeNotification
+     object:nil];
+#endif
+ */
 #ifdef APPDEBUG
     NSLog(@"store URL = %@ and fallback store URL is %@", [self.mainStoreURL path], [self.backupStoreURL path]);
     NSLog(@"SQLiteHelper:setUpCoordinatorAndContext LEAVING");
@@ -171,6 +215,10 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
     {
         return NO;
     }
+    self.mainStore = store;
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"Local MAIN store should have been created successfully");
+    }];
     return YES;
 }
 
@@ -195,7 +243,11 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
     {
         return NO;
     }
-    return YES;    
+    self.backupStore = store;
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"BACKUP store should have been created successfully");
+    }];
+    return YES;
 }
 
 /**
@@ -230,10 +282,70 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
         }];
         return NO;
     }
+    self.mainStore = store;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"iCloud store should have been created successfully");
     }];
     return YES;
+}
+
+/**
+ this gets run only when we are in Simulator mode
+ */
+- (void)selectStoreAndMigrateInSimulator:(NSError *__autoreleasing *)error
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+#ifdef APPDEBUG
+        NSLog(@"selectStoreAndMigrateInSimulator ENTERING");
+#endif
+        NSNotification* animateNotification = [NSNotification
+                                               notificationWithName:@"startAnimation"
+                                               object:self
+                                               userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+    }];
+    BOOL success = NO;
+    if (USE_BACKUP_STORE)
+    {
+        success = [self loadBackupStoreLocally:error];
+    }
+    else
+    {
+        success = [self loadMainStoreLocally:error];
+    }
+    
+    if (success)
+    {
+        [self addMasterRecord];
+        if (MIGRATE_STORE_FOR_SIMULATOR && !USE_BACKUP_STORE)
+        {
+            [self migrateMainStore];
+        }
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"posting a reload notification");
+            
+            NSNotification* refreshNotification =
+            [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                          object:self
+                                        userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+            
+            NSLog(@"LEAVING selectStoreAndMigrate");
+        }];
+    }
+#ifdef APPDEBUG
+    else
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"we failed to load the store. Error message is %@ with code %d", [*error localizedDescription], [*error code]);
+        }];
+    }
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"selectStoreAndMigrateInSimulator LEAVING");        
+    }];
+#endif
+    
 }
 
 
@@ -259,10 +371,8 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
                 * If yes, change the NSUserDefault setting and say we don't use iCloud
                 * If no, there is no reason to load the backup store, use the main store with local options
             - 
- 
- 
- 
  */
+
 - (void)selectStoreAndMigrate:(NSError *__autoreleasing *)error
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -275,27 +385,81 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
                                            userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
     }];
-    if (DEVICE_IS_SIMULATOR)
+    BOOL storeLoadingSuccess = NO;
+    BOOL shouldUseLocalStore = NO;
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kTeamId];
+
+    if (nil != ubiquityContainer)
     {
-        BOOL success = NO;
-        if (USE_BACKUP_STORE)
+        storeLoadingSuccess = [self loadCloudStore:ubiquityContainer error:error];
+        if (storeLoadingSuccess)
         {
-            success = [self loadBackupStoreLocally:error];
+            shouldUseLocalStore = NO;
+
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setBool:YES forKey:@"isUsingiCloud"];
+            [defaults synchronize];
+            
+            [self addMasterRecord];
+            
+//            [self migrateMainStore];
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"posting a reload notification and USING iCloud");
+                NSNotification* refreshNotification =
+                [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                              object:self
+                                            userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+                [self migrateMainStore];
+                NSLog(@"LEAVING selectStoreAndMigrate");
+            }];
         }
         else
         {
-            success = [self loadMainStoreLocally:error];
+            shouldUseLocalStore = YES;
         }
-        
-        if (success)
+    }
+    else
+    {
+        shouldUseLocalStore = YES;
+    }
+    
+    if (shouldUseLocalStore)
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        BOOL hasUsediCloudBefore = [defaults boolForKey:@"isUsingiCloud"];
+        storeLoadingSuccess = NO;
+        if (self.backupStoreExists)
         {
-            [self addMasterRecord];
-            if (MIGRATE_STORE_FOR_SIMULATOR && !USE_BACKUP_STORE)
-            {
-                [self migrateMainStore];
-            }
+#ifdef APPDEBUG
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                NSLog(@"posting a reload notification");
+                NSLog(@"selectStoreAndMigrate we are using the BACKUP store locally");
+            }];
+#endif
+            
+            storeLoadingSuccess = [self loadBackupStoreLocally:error];
+        }
+        else
+        {
+#ifdef APPDEBUG
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"selectStoreAndMigrate we are using the MAIN store locally");
+            }];
+#endif
+            storeLoadingSuccess = [self loadMainStoreLocally:error];
+        }
+        if (storeLoadingSuccess)
+        {
+#ifdef APPDEBUG
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"selectStoreAndMigrate we succeeded loading the store");
+            }];
+#endif
+            [self addMasterRecord];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"posting a reload notification NOT using iCloud store");
                 
                 NSNotification* refreshNotification =
                 [NSNotification notificationWithName:@"RefetchAllDatabaseData"
@@ -304,124 +468,21 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
                 [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
                 
                 NSLog(@"LEAVING selectStoreAndMigrate");
-            }];
-        }
-#ifdef APPDEBUG
-        else
-        {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                NSLog(@"we failed to load the store. Error message is %@ with code %d", [*error localizedDescription], [*error code]);
-            }];
-        }
-#endif
-    }
-    else
-    {
-        BOOL shouldUseLocalStore = NO;
-        NSFileManager *fileManager = [[NSFileManager alloc] init];
-        NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
-        if (nil != ubiquityContainer)
-        {
-            BOOL success = [self loadCloudStore:ubiquityContainer error:error];
-            if (success)
-            {
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setBool:YES forKey:@"isUsingiCloud"];
-                [defaults synchronize];
-
-                shouldUseLocalStore = NO;
-
-                [self addMasterRecord];
-
-                [self migrateMainStore];
-                if (!self.backupStoreExists)
-                {
-                }
-
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSLog(@"posting a reload notification and USING iCloud");
-                    NSNotification* refreshNotification =
-                    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
-                                                  object:self
-                                                userInfo:nil];
-                    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-
-                    
-                    
-                    NSLog(@"LEAVING selectStoreAndMigrate");
-                }];
-            }
-            else
-            {
-                shouldUseLocalStore = YES;
-            }
-        }
-        else
-        {
-            shouldUseLocalStore = YES;
-        }
-        
-        if (shouldUseLocalStore)
-        {
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            BOOL hasUsediCloudBefore = [defaults boolForKey:@"isUsingiCloud"];
-            BOOL finalSuccess = NO;
-            if (self.backupStoreExists && hasUsediCloudBefore)
-            {
-#ifdef APPDEBUG
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSLog(@"selectStoreAndMigrate we are using the BACKUP store locally");
-                }];
-#endif
                 
-                finalSuccess = [self loadBackupStoreLocally:error];            
-            }
-            else
-            {
+            }];
+        }
+        else
+        {
 #ifdef APPDEBUG
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSLog(@"selectStoreAndMigrate we are using the MAIN store locally");
-                }];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"selectStoreAndMigrate we failed loading the store locally. Error code is %@ and code is %d", [*error localizedDescription], [*error code]);
+            }];
 #endif
-                finalSuccess = [self loadMainStoreLocally:error];
-            }
-            if (finalSuccess)
-            {
-#ifdef APPDEBUG
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSLog(@"selectStoreAndMigrate we succeeded loading the store");
-                }];
-#endif
-                [self addMasterRecord];
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                    [defaults setBool:NO forKey:@"isUsingiCloud"];
-                    [defaults synchronize];
-                    NSLog(@"posting a reload notification NOT using iCloud store");
-                    
-                    NSNotification* refreshNotification =
-                    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
-                                                  object:self
-                                                userInfo:nil];
-                    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-                    
-                    NSLog(@"LEAVING selectStoreAndMigrate");
-                    
-                }];
-            }
-            else
-            {
-#ifdef APPDEBUG
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSLog(@"selectStoreAndMigrate we failed loading the store locally. Error code is %@ and code is %d", [*error localizedDescription], [*error code]);
-                }];
-#endif                
-            }
-            
         }
         
     }
     
+
 }
 
 /**
@@ -429,13 +490,12 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
 - (void)migrateMainStore
 {
 #ifdef APPDEBUG
+    NSLog(@"migrateMainStore ENTERING");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"migrateMainStore ENTERING");
     }];
 #endif
     
-    NSPersistentStore *mainStore = [self.persistentStoreCoordinator persistentStoreForURL:self.mainStoreURL];
-    if (nil == mainStore)
+    if (nil == self.mainStore)
     {
 #ifdef APPDEBUG
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -446,82 +506,82 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
     }
     
 #ifdef APPDEBUG
+#endif
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"migrateMainStore we are trying to migrate the store");
-        [self.mainQueue addOperationWithBlock:^{
-            NSURL *modelURL = [[NSBundle mainBundle]
-                               URLForResource:@"iStayHealthy"
-                               withExtension:@"momd"];
-            NSManagedObjectModel *model = [[NSManagedObjectModel alloc]
-                                           initWithContentsOfURL:modelURL];
-            NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]
-                                                 initWithManagedObjectModel:model];
-            NSDictionary *backupOptions = @{ NSReadOnlyPersistentStoreOption : [NSNumber numberWithBool:YES] };
-            NSError *error = nil;
-            NSPersistentStore *mainStore = [psc addPersistentStoreWithType:NSSQLiteStoreType
-                                                             configuration:nil
-                                                                       URL:self.mainStoreURL
-                                                                   options:backupOptions
-                                                                     error:&error];
-            
-            if (self.backupStoreExists)
-            {
-                NSError *deleteError = nil;
-                NSFileManager *fileManager = [[NSFileManager alloc] init];
-                [fileManager removeItemAtPath:[self.backupStoreURL path] error:&deleteError];
-                if (nil == deleteError)
-                {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        NSLog(@"the deletion of the backupstore was successful");
-                    }];
-                }
-                else
-                {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        NSLog(@"the deletion of the backupstore failed with error message %@ and code %d", [deleteError localizedDescription], [deleteError code]);
-                    }];
-                }
-            }
-            
-            
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                NSLog(@"We are in the background thread migrating the store");
-            }];
-            NSDictionary *targetOptions = [NSDictionary
-                                           dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
-                                           NSMigratePersistentStoresAutomaticallyOption,
-                                           [NSNumber numberWithBool:YES],
-                                           NSInferMappingModelAutomaticallyOption, nil];
-            
-            [psc migratePersistentStore:mainStore
-                                  toURL:self.backupStoreURL
-                                options:targetOptions
-                               withType:NSSQLiteStoreType
-                                  error:&error];
-            
-            if (nil == error)
+    }];
+    
+    NSLog(@"migrateMainStore we are trying to migrate the store");
+    [self.mainQueue addOperationWithBlock:^{
+        NSURL *modelURL = [[NSBundle mainBundle]
+                           URLForResource:@"iStayHealthy"
+                           withExtension:@"momd"];
+        NSManagedObjectModel *model = [[NSManagedObjectModel alloc]
+                                       initWithContentsOfURL:modelURL];
+        NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]
+                                             initWithManagedObjectModel:model];
+        NSDictionary *backupOptions = @{ NSReadOnlyPersistentStoreOption : [NSNumber numberWithBool:YES] };
+        NSError *error = nil;
+        NSPersistentStore *mainStore = [psc addPersistentStoreWithType:NSSQLiteStoreType
+                                                         configuration:nil
+                                                                   URL:self.mainStoreURL
+                                                               options:backupOptions
+                                                                 error:&error];
+        
+        if (self.backupStoreExists)
+        {
+            NSError *deleteError = nil;
+            NSFileManager *fileManager = [[NSFileManager alloc] init];
+            [fileManager removeItemAtPath:[self.backupStoreURL path] error:&deleteError];
+            if (nil == deleteError)
             {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSLog(@"the migration was successful");
+                    NSLog(@"the deletion of the backupstore was successful");
                 }];
             }
             else
             {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    NSLog(@"the migration failed with error message %@ and code %d", [error localizedDescription], [error code]);
+                    NSLog(@"the deletion of the backupstore failed with error message %@ and code %d", [deleteError localizedDescription], [deleteError code]);
                 }];
             }
-            
-            
+        }
+        
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"We are in the background thread migrating the store");
         }];
+        
+        NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
+        NSError *migrationError = nil;
+        __block NSError *internalError = nil;
+        [fileCoordinator coordinateReadingItemAtURL:self.mainStoreURL options:NSFileCoordinatorReadingWithoutChanges error:&migrationError byAccessor:^(NSURL *newURL){
+            [psc migratePersistentStore:mainStore
+                                  toURL:self.backupStoreURL
+                                options:nil
+                               withType:NSSQLiteStoreType
+                                  error:&internalError];
+        }];
+        
+        if (nil == internalError)
+        {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"the migration was successful");
+            }];
+        }
+        else
+        {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"the migration failed with error message %@ and code %d", [error localizedDescription], [error code]);
+            }];
+        }
+        
+        
     }];
-#endif
-    
     
     
 #ifdef APPDEBUG
+    NSLog(@"migrateMainStore LEAVING");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"migrateMainStore LEAVING");
     }];
 #endif
     
@@ -584,6 +644,11 @@ NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.s
             
         }
     }
+    
+}
+
+- (void)iCloudStoreChanged
+{
     
 }
 

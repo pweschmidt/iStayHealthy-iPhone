@@ -203,28 +203,28 @@
  */
 - (void)reloadData:(NSNotification *)note
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        if (nil == note)
-        {
-            return;
-        }
-        [self.activityIndicator stopAnimating];
-        [self setUpData];
-        [self.chartView setNeedsDisplay];
-    }];
+    if (nil == note)
+    {
+        return;
+    }
+    [self.activityIndicator stopAnimating];
+    [self setUpData];
+    [self.chartView setNeedsDisplay];
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//    }];
 }
 
 - (void)start
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        if (nil != self.activityIndicator)
+    if (nil != self.activityIndicator)
+    {
+        if (!self.activityIndicator.isAnimating)
         {
-            if (!self.activityIndicator.isAnimating)
-            {
-                [self.activityIndicator startAnimating];
-            }
+            [self.activityIndicator startAnimating];
         }
-    }];
+    }
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//    }];
 }
 
 
