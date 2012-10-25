@@ -9,6 +9,16 @@
 #import "SQLDatabaseManager.h"
 #import "Utilities.h"
 #import "iStayHealthyRecord.h"
+#import "NSArray-Set.h"
+#import "Wellness.h"
+#import "PreviousMedication.h"
+#import "Results.h"
+#import "Procedures.h"
+#import "SideEffects.h"
+#import "MissedMedication.h"
+#import "OtherMedication.h"
+#import "Medication.h"
+#import "Contacts.h"
 
 NSString * const kMainDataSource    = @"iStayHealthy.sqlite";
 NSString * const kBackupDataSource  = @"iStayHealthyBackup.sqlite";
@@ -44,6 +54,19 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
 - (BOOL)loadBackupStoreLocally:(NSError *__autoreleasing *)error;
 - (void)addMasterRecord;
 - (void)iCloudStoreChanged;
+- (void)assignDataToBackupStore;
+
+- (void)addResult:(Results *)result record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addHIVMed:(Medication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addPreviousMed:(PreviousMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addOtherMed:(OtherMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addMissedMed:(MissedMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addSideEffect:(SideEffects *)effect record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addContact:(Contacts *)contact record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addProcedure:(Procedures *)procedure record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+- (void)addWellness:(Wellness *)wellness record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context;
+
+
 @end
 
 
@@ -390,7 +413,7 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kTeamId];
 
-    if (nil != ubiquityContainer)
+    if (nil != ubiquityContainer && !USE_BACKUP_STORE)
     {
         storeLoadingSuccess = [self loadCloudStore:ubiquityContainer error:error];
         if (storeLoadingSuccess)
@@ -412,7 +435,8 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
                                               object:self
                                             userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-                [self migrateMainStore];
+//                [self migrateMainStore];
+                [self assignDataToBackupStore];
                 NSLog(@"LEAVING selectStoreAndMigrate");
             }];
         }
@@ -428,8 +452,6 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
     
     if (shouldUseLocalStore)
     {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        BOOL hasUsediCloudBefore = [defaults boolForKey:@"isUsingiCloud"];
         storeLoadingSuccess = NO;
         if (self.backupStoreExists)
         {
@@ -517,6 +539,23 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
                            withExtension:@"momd"];
         NSManagedObjectModel *model = [[NSManagedObjectModel alloc]
                                        initWithContentsOfURL:modelURL];
+        NSError *modelError = nil;
+        NSMappingModel *mappingModel = [NSMappingModel inferredMappingModelForSourceModel:model destinationModel:model error:&modelError];
+        
+        if (nil == mappingModel)
+        {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"mapping returns an error with %@ and code %d", [modelError localizedDescription], [modelError code]);
+            }];
+        }
+        else
+        {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"Mapping was successful");
+            }];
+            
+        }
+        
         NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]
                                              initWithManagedObjectModel:model];
         NSDictionary *backupOptions = @{ NSReadOnlyPersistentStoreOption : [NSNumber numberWithBool:YES] };
@@ -555,11 +594,23 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
         NSError *migrationError = nil;
         __block NSError *internalError = nil;
         [fileCoordinator coordinateReadingItemAtURL:self.mainStoreURL options:NSFileCoordinatorReadingWithoutChanges error:&migrationError byAccessor:^(NSURL *newURL){
+            if (mappingModel)
+            {
+                NSDictionary *dbStoreOptions = [NSDictionary
+                                                dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
+                                                NSMigratePersistentStoresAutomaticallyOption,
+                                                [NSNumber numberWithBool:YES],
+                                                NSInferMappingModelAutomaticallyOption, nil];
+                NSMigrationManager *migrationManager = [[NSMigrationManager alloc] initWithSourceModel:model destinationModel:model];
+                BOOL success = [migrationManager migrateStoreFromURL:self.mainStoreURL type:NSSQLiteStoreType options:backupOptions withMappingModel:mappingModel toDestinationURL:self.backupStoreURL destinationType:NSSQLiteStoreType destinationOptions:dbStoreOptions error:&internalError];
+            }
+            /*
             [psc migratePersistentStore:mainStore
                                   toURL:self.backupStoreURL
                                 options:nil
                                withType:NSSQLiteStoreType
                                   error:&internalError];
+             */
         }];
         
         if (nil == internalError)
@@ -584,6 +635,150 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
     }];
 #endif
+    
+}
+
+- (void)assignDataToBackupStore
+{
+    [self.mainQueue addOperationWithBlock:^{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"assignDataToBackupStore ENTERING");
+        }];
+        if (self.backupStoreExists)
+        {
+            NSError *deleteError = nil;
+            NSFileManager *fileManager = [[NSFileManager alloc] init];
+            [fileManager removeItemAtPath:[self.backupStoreURL path] error:&deleteError];
+            if (nil == deleteError)
+            {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    NSLog(@"the deletion of the backupstore was successful");
+                }];
+            }
+            else
+            {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    NSLog(@"the deletion of the backupstore failed with error message %@ and code %d", [deleteError localizedDescription], [deleteError code]);
+                }];
+            }
+        }
+        
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"assignDataToBackupStore about to create the temp stores");
+        }];
+        NSError *error = nil;
+        NSURL *modelURL = [[NSBundle mainBundle]
+                           URLForResource:@"iStayHealthy"
+                           withExtension:@"momd"];
+        NSManagedObjectModel *model = [[NSManagedObjectModel alloc]
+                                       initWithContentsOfURL:modelURL];
+
+        NSPersistentStoreCoordinator *mainPSC = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+        NSDictionary *seedStoreOptions = @{ NSReadOnlyPersistentStoreOption : [NSNumber numberWithBool:YES] };
+        NSPersistentStore *mainStore = [mainPSC addPersistentStoreWithType:NSSQLiteStoreType
+                                                             configuration:nil
+                                                                       URL:self.mainStoreURL
+                                                                   options:seedStoreOptions
+                                                                     error:&error];
+        
+        
+        NSPersistentStoreCoordinator *backupPSC = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+        
+        NSDictionary *dbStoreOptions = [NSDictionary
+                                        dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
+                                        NSMigratePersistentStoresAutomaticallyOption,
+                                        [NSNumber numberWithBool:YES],
+                                        NSInferMappingModelAutomaticallyOption, nil];
+        
+        NSPersistentStore *backupStore = [backupPSC addPersistentStoreWithType:NSSQLiteStoreType
+                                                               configuration:nil
+                                                                         URL:self.backupStoreURL
+                                                                     options:dbStoreOptions
+                                                                       error:&error];
+        
+        if (mainStore && backupStore)
+        {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                NSLog(@"assignDataToBackupStore successfully created the temp stores");
+            }];
+            NSManagedObjectContext *seedMOC = [[NSManagedObjectContext alloc] init];
+            [seedMOC setPersistentStoreCoordinator:mainPSC];
+            NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"iStayHealthyRecord"];
+//            NSUInteger batchSize = 5000;
+//            [fr setFetchBatchSize:batchSize];
+            NSArray *records = [seedMOC executeFetchRequest:fr error:&error];
+
+            NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            [moc setPersistentStoreCoordinator:backupPSC];
+            if (records)
+            {
+                if (0 < records.count)
+                {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        NSLog(@"assignDataToBackupStore about to seed the backup store. We have %d records in the system", records.count);
+                    }];
+                    iStayHealthyRecord *record = (iStayHealthyRecord *)[records lastObject];
+                    NSEntityDescription *newEntity = [record entity];
+                    iStayHealthyRecord *newMasterRecord = [[iStayHealthyRecord alloc] initWithEntity:newEntity insertIntoManagedObjectContext:moc];
+                    newMasterRecord.Name = record.Name;
+                    newMasterRecord.isPasswordEnabled = record.isPasswordEnabled;
+                    newMasterRecord.Password = record.Password;
+                    newMasterRecord.UID = record.UID;
+                    for (Contacts *contacts in record.contacts)
+                    {
+                        [self addContact:contacts record:newMasterRecord context:moc];
+                    }
+                    for (Results *results in record.results)
+                    {
+                        [self addResult:results record:newMasterRecord context:moc];
+                    }
+                    for (MissedMedication *missed in record.missedMedications)
+                    {
+                        [self addMissedMed:missed record:newMasterRecord context:moc];
+                    }
+                    for (Medication *med in record.medications)
+                    {
+                        [self addHIVMed:med record:newMasterRecord context:moc];
+                    }
+                    for (OtherMedication *med in record.otherMedications)
+                    {
+                        [self addOtherMed:med record:newMasterRecord context:moc];
+                    }
+                    for (PreviousMedication *med in record.previousMedications)
+                    {
+                        [self addPreviousMed:med record:newMasterRecord context:moc];
+                    }
+                    for (SideEffects *effects in record.sideeffects)
+                    {
+                        [self addSideEffect:effects record:newMasterRecord context:moc];
+                    }
+                    for (Procedures *procs in record.procedures)
+                    {
+                        [self addProcedure:procs record:newMasterRecord context:moc];
+                    }
+                    for (Wellness *well in record.wellness)
+                    {
+                        [self addWellness:well record:newMasterRecord context:moc];
+                    }
+                    [moc assignObject:newMasterRecord toPersistentStore:backupStore];
+                    BOOL success = [moc save:&error];
+                    if (success)
+                    {
+                        [moc reset];
+                    }
+                }
+                if ([moc hasChanges])
+                {
+                    BOOL success = [moc save:&error];
+                    if (success)
+                    {
+                        [moc reset];
+                    }                
+                }
+            }
+        }
+    }];
     
 }
 
@@ -650,6 +845,170 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
 - (void)iCloudStoreChanged
 {
     
+}
+
+- (void)addResult:(Results *)result record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    Results *copiedResult = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
+    [record addResultsObject:copiedResult];
+    copiedResult.UID = result.UID;
+    copiedResult.ResultsDate = result.ResultsDate;
+    copiedResult.CD4 = result.CD4;
+    copiedResult.CD4Percent = result.CD4Percent;
+    copiedResult.ViralLoad = result.ViralLoad;
+    copiedResult.HepCViralLoad = result.HepCViralLoad;
+    copiedResult.Hemoglobulin = result.Hemoglobulin;
+    copiedResult.WhiteBloodCellCount = result.WhiteBloodCellCount;
+    copiedResult.redBloodCellCount = result.redBloodCellCount;
+    copiedResult.PlateletCount = result.PlateletCount;
+    
+    copiedResult.Glucose = result.Glucose;
+    copiedResult.cholesterolRatio = result.cholesterolRatio;
+    copiedResult.TotalCholesterol = result.TotalCholesterol;
+    copiedResult.Triglyceride = result.Triglyceride;
+    copiedResult.HDL = result.HDL;
+    copiedResult.LDL = result.LDL;
+    
+    copiedResult.Weight = result.Weight;
+    copiedResult.Systole = result.Systole;
+    copiedResult.Diastole = result.Diastole;
+    
+    copiedResult.HeartRate = result.HeartRate;
+    copiedResult.hepBTiter = result.hepBTiter;
+    copiedResult.hepCTiter = result.hepCTiter;
+    copiedResult.liverAlanineDirectBilirubin = result.liverAlanineDirectBilirubin;
+    copiedResult.liverAlanineTotalBilirubin = result.liverAlanineTotalBilirubin;
+    copiedResult.liverAlanineTransaminase = result.liverAlanineTransaminase;
+    copiedResult.liverAlbumin = result.liverAlbumin;
+    copiedResult.liverAlkalinePhosphatase = result.liverAlkalinePhosphatase;
+    copiedResult.liverAspartateTransaminase = result.liverAspartateTransaminase;
+    copiedResult.liverGammaGlutamylTranspeptidase = result.liverGammaGlutamylTranspeptidase;
+}
+
+- (void)addHIVMed:(Medication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    Medication *copiedMed = [NSEntityDescription insertNewObjectForEntityForName:@"Medication" inManagedObjectContext:context];
+    [record addMedicationsObject:copiedMed];
+    copiedMed.UID = med.UID;
+    copiedMed.StartDate = med.StartDate;
+    copiedMed.Name = med.Name;
+    copiedMed.Dose = med.Dose;
+    copiedMed.Drug = med.Drug;
+    copiedMed.MedicationForm = med.MedicationForm;
+}
+
+- (void)addPreviousMed:(PreviousMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    PreviousMedication *copiedMed = [NSEntityDescription
+                                     insertNewObjectForEntityForName:@"PreviousMedication"
+                                     inManagedObjectContext:context];
+    [record addPreviousMedicationsObject:copiedMed];
+    copiedMed.uID = med.uID;
+    copiedMed.startDate = med.startDate;
+    copiedMed.endDate = med.endDate;
+    copiedMed.name = med.name;
+    copiedMed.drug = med.drug;
+    copiedMed.isART = med.isART;
+    copiedMed.reasonEnded = med.reasonEnded;
+}
+
+- (void)addOtherMed:(OtherMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    OtherMedication *copiedMed = [NSEntityDescription
+                                  insertNewObjectForEntityForName:@"OtherMedication"
+                                  inManagedObjectContext:context];
+    [record addOtherMedicationsObject:copiedMed];
+    copiedMed.UID = med.UID;
+    copiedMed.Unit = med.Unit;
+    copiedMed.StartDate = med.StartDate;
+    copiedMed.EndDate = med.EndDate;
+    copiedMed.Name = med.Name;
+    copiedMed.Dose = med.Dose;
+    copiedMed.MedicationForm = med.MedicationForm;
+    copiedMed.Image = med.Image;
+}
+
+- (void)addMissedMed:(MissedMedication *)med record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    MissedMedication *copiedMed = [NSEntityDescription
+                                   insertNewObjectForEntityForName:@"MissedMedication"
+                                   inManagedObjectContext:context];
+    [record addMissedMedicationsObject:copiedMed];
+    copiedMed.UID = med.UID;
+    copiedMed.missedReason = med.missedReason;
+    copiedMed.MissedDate = med.MissedDate;
+    copiedMed.Name = med.Name;
+    copiedMed.Drug = med.Drug;
+}
+- (void)addSideEffect:(SideEffects *)effect record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    SideEffects *copiedEffect = [NSEntityDescription
+                                 insertNewObjectForEntityForName:@"SideEffects"
+                                 inManagedObjectContext:context];
+    [record addSideeffectsObject:copiedEffect];
+    copiedEffect.UID = effect.UID;
+    copiedEffect.SideEffect = effect.SideEffect;
+    copiedEffect.SideEffectDate = effect.SideEffectDate;
+    copiedEffect.seriousness = effect.seriousness;
+    copiedEffect.Name = effect.Name;
+    copiedEffect.Drug = effect.Drug;
+}
+
+- (void)addContact:(Contacts *)contact record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    Contacts *copiedContact = [NSEntityDescription
+                               insertNewObjectForEntityForName:@"Contacts"
+                               inManagedObjectContext:context];
+    [record addContactsObject:copiedContact];
+    copiedContact.UID = contact.UID;
+    copiedContact.ClinicCity = contact.ClinicCity;
+    copiedContact.ClinicContactNumber = contact.ClinicContactNumber;
+    copiedContact.ClinicCountry = contact.ClinicCountry;
+    copiedContact.ClinicEmailAddress = contact.ClinicEmailAddress;
+    copiedContact.ClinicID = contact.ClinicID;
+    copiedContact.ClinicName = contact.ClinicName;
+    copiedContact.ClinicNurseName = contact.ClinicNurseName;
+    copiedContact.ClinicPostcode = contact.ClinicPostcode;
+    copiedContact.ClinicStreet = contact.ClinicStreet;
+    copiedContact.ClinicWebSite = contact.ClinicWebSite;
+    copiedContact.ConsultantName = contact.ConsultantName;
+    copiedContact.ContactName = contact.ContactName;
+    copiedContact.AppointmentContactNumber = contact.AppointmentContactNumber;
+    copiedContact.EmergencyContactNumber = contact.EmergencyContactNumber;
+    copiedContact.EmergencyContactNumber2 = contact.EmergencyContactNumber2;
+    copiedContact.InsuranceAuthorisationCode = contact.InsuranceAuthorisationCode;
+    copiedContact.InsuranceContactNumber = contact.InsuranceContactNumber;
+    copiedContact.InsuranceID = contact.InsuranceID;
+    copiedContact.InsuranceName = contact.InsuranceName;
+    copiedContact.InsuranceWebSite = contact.InsuranceWebSite;
+    copiedContact.ResultsContactNumber = contact.ResultsContactNumber;
+}
+
+- (void)addProcedure:(Procedures *)procedure record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    Procedures *copiedProcedure = [NSEntityDescription
+                                   insertNewObjectForEntityForName:@"Procedures"
+                                   inManagedObjectContext:context];
+    [record addProceduresObject:copiedProcedure];
+    copiedProcedure.UID = procedure.UID;
+    copiedProcedure.Date = procedure.Date;
+    copiedProcedure.Illness = procedure.Illness;
+    copiedProcedure.Name = procedure.Name;
+    copiedProcedure.Notes = procedure.Notes;
+    copiedProcedure.EndDate = procedure.EndDate;
+    copiedProcedure.CausedBy = procedure.CausedBy;
+}
+
+- (void)addWellness:(Wellness *)wellness record:(iStayHealthyRecord *)record context:(NSManagedObjectContext *)context
+{
+    Wellness *copiedWellness = [NSEntityDescription
+                                insertNewObjectForEntityForName:@"Wellness"
+                                inManagedObjectContext:context];
+    [record addWellnessObject:copiedWellness];
+    copiedWellness.uID = wellness.uID;
+    copiedWellness.sleepBarometer = wellness.sleepBarometer;
+    copiedWellness.moodBarometer = wellness.moodBarometer;
+    copiedWellness.wellnessBarometer = wellness.wellnessBarometer;
 }
 
 

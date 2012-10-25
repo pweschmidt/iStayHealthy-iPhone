@@ -86,7 +86,7 @@
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
     if (0 < records.count)
     {
-        self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+        self.masterRecord = (iStayHealthyRecord *)[records lastObject];
     }
     else
     {
@@ -114,7 +114,7 @@
     NSArray *records = [self.fetchedResultsController fetchedObjects];
     if (0 < records.count)
     {
-        self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+        self.masterRecord = (iStayHealthyRecord *)[records lastObject];
     }
     else
     {

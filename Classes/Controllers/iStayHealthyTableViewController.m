@@ -239,12 +239,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-	if (0 < objects.count)
-    {
-        self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
-        [self setUpData];
-	}
+    [self setUpData];
 }
 
 
@@ -365,9 +360,19 @@
         self.allContacts = [NSMutableArray array];
         self.allSideEffects = [NSMutableArray array];
         self.allProcedures = [NSMutableArray array];
+#ifdef APPDEBUG
+        NSLog(@"iStayHealthyTableViewController::setUpData there doesn't seem to be a masterRecord");
+#endif
         return;
     }
-	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
+    else
+    {
+#ifdef APPDEBUG
+        NSLog(@"iStayHealthyTableViewController::setUpData we have %d masterRecord entries", objects.count);
+#endif
+        
+    }
+	self.masterRecord = (iStayHealthyRecord *)[objects lastObject];
         
     /* Results in chronological/reverse order */
 	NSSet *results = self.masterRecord.results;

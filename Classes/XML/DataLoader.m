@@ -1521,7 +1521,7 @@
         self.masterRecord = nil;
         return;
     }
-	self.masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+	self.masterRecord = (iStayHealthyRecord *)[records lastObject];
     
 	if (0 != [self.masterRecord.results count])
     {
@@ -1616,7 +1616,7 @@
     {
         return;
     }
-	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
+	self.masterRecord = (iStayHealthyRecord *)[objects lastObject];
 }
 
 

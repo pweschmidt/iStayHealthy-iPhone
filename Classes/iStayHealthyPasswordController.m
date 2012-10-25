@@ -67,7 +67,7 @@
     int count = [records count];
     if (0 < count)
     {
-        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records lastObject];
         self.passwordString = masterRecord.Password;
     }
     else
@@ -214,7 +214,7 @@
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
     if (0 < records.count)
     {
-        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records objectAtIndex:0];
+        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records lastObject];
         self.passwordString = masterRecord.Password;
     }
     else

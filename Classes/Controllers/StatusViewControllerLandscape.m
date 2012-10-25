@@ -149,7 +149,7 @@
     }
     
     
-	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
+	self.masterRecord = (iStayHealthyRecord *)[objects lastObject];
     
 	NSSet *results = self.masterRecord.results;
 	NSSet *meds = self.masterRecord.medications;
@@ -293,8 +293,11 @@
 	NSLog(@"---> in landscape mode. data changed");
 #endif
 	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-	self.masterRecord = (iStayHealthyRecord *)[objects objectAtIndex:0];
-	[self.chartView setNeedsDisplay];
+    if (nil != objects && 0 < objects.count)
+    {
+        self.masterRecord = (iStayHealthyRecord *)[objects lastObject];
+        [self.chartView setNeedsDisplay];
+    }
 }
 
 #pragma mark -
