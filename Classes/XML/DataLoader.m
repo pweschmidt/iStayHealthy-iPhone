@@ -43,10 +43,43 @@
     self = [super init];
     if (nil != self)
     {
-        // Initialization code here.
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadData:)
+                                                     name:@"RefetchAllDatabaseData"
+                                                   object:nil];
     }
     
     return self;
+}
+
+- (void)reloadData:(NSNotification*)note
+{
+#ifdef APPDEBUG
+    NSLog(@"We are getting notified to reload the data");
+#endif
+    NSError *error = nil;
+    if (![[self fetchedResultsController] performFetch:&error])
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+                              delegate:self
+                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    NSArray *records = [self.fetchedResultsController fetchedObjects];
+    if (0 < records.count)
+    {
+        self.masterRecord = (iStayHealthyRecord *)[records lastObject];
+    }
+    else
+    {
+        self.masterRecord = nil;
+    }
+    //    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    //    }];
+    
 }
 
 /**
@@ -1493,7 +1526,7 @@
 /**
  fetch the latest data from the SQL database
  */
-- (void)getSQLData
+- (BOOL)getSQLData
 {
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
@@ -1507,8 +1540,11 @@
 		[alert show];
 	}
     NSArray *records = [self.fetchedResultsController fetchedObjects];
-    if (0 == records.count)
+    if(nil == records)
     {
+#ifdef APPDEBUG
+        NSLog(@"DataLoader::getSQLData records array is NIL");
+#endif
         self.allResults = [NSMutableArray array];
         self.allMedications = [NSMutableArray array];
         self.allMissedMeds = [NSMutableArray array];
@@ -1519,7 +1555,24 @@
         self.allPreviousMedications = [NSMutableArray array];
         self.allWellness = [NSMutableArray array];
         self.masterRecord = nil;
-        return;
+        return NO;
+    }
+    if (0 == records.count)
+    {
+#ifdef APPDEBUG
+        NSLog(@"DataLoader::getSQLData records array is empty");
+#endif
+        self.allResults = [NSMutableArray array];
+        self.allMedications = [NSMutableArray array];
+        self.allMissedMeds = [NSMutableArray array];
+        self.allOtherMeds = [NSMutableArray array];
+        self.allContacts = [NSMutableArray array];
+        self.allSideEffects = [NSMutableArray array];
+        self.allProcedures = [NSMutableArray array];
+        self.allPreviousMedications = [NSMutableArray array];
+        self.allWellness = [NSMutableArray array];
+        self.masterRecord = nil;
+        return NO;
     }
 	self.masterRecord = (iStayHealthyRecord *)[records lastObject];
     
@@ -1570,7 +1623,7 @@
     }
     // no particular order is needed for contacts
     self.allContacts = (NSArray *)self.masterRecord.contacts;
-    
+    return YES;
     
 }
 

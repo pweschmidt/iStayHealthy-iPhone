@@ -44,3 +44,9 @@ extern NSString * const kRedBloodCellCount;
 extern NSString * const kHemoglobulin;
 
 
+extern NSString * const kMainDataSource;
+extern NSString * const kBackupDataSource;
+extern NSString * const kiCloudDataSource;
+extern NSString * const kFaultyDataSource;
+extern NSString * const kUbiquitousKeyPath;
+extern NSString * const kTeamId;

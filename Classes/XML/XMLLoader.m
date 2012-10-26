@@ -91,18 +91,22 @@
  sync up with what we have in the database. Only add those elements for which we haven't
  got an existing UID
  */
-- (void)synchronise
+- (BOOL)synchronise
 {
     if (nil == self.document)
     {
-        return;
+        return NO;
     }
     if (nil == [self.document root])
     {
-        return;
+        return NO;
     }
     DataLoader *loader = [[DataLoader alloc]init];
-    [loader getSQLData];
+    BOOL success = [loader getSQLData];
+    if (!success)
+    {
+        return NO;
+    }
     XMLElement *results = [self.document elementForName:kXMLElementResults];
     if (nil != results)
     {
@@ -177,7 +181,7 @@
             
         }
     }
-    
+    return YES;
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser

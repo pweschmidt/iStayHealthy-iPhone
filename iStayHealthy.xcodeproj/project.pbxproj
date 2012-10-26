@@ -51,6 +51,7 @@
 		C462002D140934C500E70B5B /* viracept.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620028140934C500E70B5B /* viracept.png */; };
 		C462002E140934C500E70B5B /* viramune.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620029140934C500E70B5B /* viramune.png */; };
 		C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46231441632E21D005DD746 /* SQLDatabaseManager.m */; };
+		C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
 		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
@@ -402,6 +403,8 @@
 		C465974013EE848B00006F72 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		C465974213EE849600006F72 /* libxslt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxslt.dylib; path = usr/lib/libxslt.dylib; sourceTree = SDKROOT; };
 		C46F86E213E5D1A20026BC08 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/FAQ.plist; sourceTree = "<group>"; };
+		C47B705D163ACABB0092C439 /* SQLBackupStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLBackupStoreManager.h; sourceTree = "<group>"; };
+		C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLBackupStoreManager.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
 		C4897FC4140FD0360033C61C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC6140FD03F0033C61C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/CombiMeds.plist; sourceTree = "<group>"; };
@@ -832,6 +835,8 @@
 				C4DF910A15EE79560042211E /* Constants.m */,
 				C46231431632E21D005DD746 /* SQLDatabaseManager.h */,
 				C46231441632E21D005DD746 /* SQLDatabaseManager.m */,
+				C47B705D163ACABB0092C439 /* SQLBackupStoreManager.h */,
+				C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1687,6 +1692,7 @@
 				C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */,
 				C402283015FB99EC00120B1F /* XMLConstants.m in Sources */,
 				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
+				C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

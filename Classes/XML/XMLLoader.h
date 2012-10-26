@@ -25,6 +25,6 @@
 @property (nonatomic, strong) XMLElement *wellness;
 - (id)initWithData:(NSData *)data;
 - (BOOL)startParsing:(NSError **)parseError;
-- (void)synchronise;
+- (BOOL)synchronise;
 + (BOOL)isXML:(NSData *)data;
 @end

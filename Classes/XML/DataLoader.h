@@ -24,10 +24,11 @@
 @property (nonatomic, strong) NSArray *allProcedures;
 @property (nonatomic, strong) NSArray *allPreviousMedications;
 @property (nonatomic, strong) NSArray *allWellness;
-- (void)getSQLData;
+- (BOOL)getSQLData;
 - (NSData *)xmlData;
 - (NSData *)csvData;
 - (NSString *)csvString;
+- (void)reloadData:(NSNotification*)note;
 - (void) addResults:(XMLElement *)resultsParent;
 - (void) addMedications:(XMLElement *)medicationParent;
 - (void) addMissedMedications:(XMLElement *)missedMedicationParent;

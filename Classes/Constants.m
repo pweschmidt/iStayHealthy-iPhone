@@ -43,3 +43,10 @@ NSString * const kPlateletCount = @"PlateletCount";
 NSString * const kRedBloodCellCount = @"RedBloodCellCount";
 NSString * const kHemoglobulin = @"Hemoglobulin";
 
+NSString * const kMainDataSource    = @"iStayHealthy.sqlite";
+NSString * const kBackupDataSource  = @"iStayHealthyBackup.sqlite";
+NSString * const kiCloudDataSource  = @"iStayHealthyiCloud.sqlite";
+NSString * const kFaultyDataSource  = @"iStayHealthyNoiCloud.sqlite";
+NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store";
+NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
+
