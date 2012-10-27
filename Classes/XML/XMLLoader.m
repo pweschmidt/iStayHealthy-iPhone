@@ -178,7 +178,7 @@
         NSMutableArray *children = [previousMeds childElements];
         for (XMLElement *element in children)
         {
-            
+            [loader addPreviousMedicationsToSQL:element];
         }
     }
     return YES;

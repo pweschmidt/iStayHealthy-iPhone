@@ -105,10 +105,12 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         self.window.rootViewController = self.tabBarController;
 //        [self.window addSubview:tmpBarController.view];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(postNotificationWithNote:)
-                                                 name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-                                               object:self.sqlHelper.persistentStoreCoordinator];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(postNotificationWithNote:)
+     name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+     object:self.sqlHelper.persistentStoreCoordinator];
+    
     [self.sqlHelper loadSQLitePersistentStore];
     [self.window makeKeyAndVisible];
     return YES;
@@ -316,8 +318,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 }    
 
 
-#pragma mark -
-#pragma mark Core Data stack
+#pragma mark post notification and other utility methods
 
 - (void)postNotificationWithNote:(NSNotification *)note
 {
@@ -330,11 +331,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification
                                            userInfo:[note userInfo]];
     [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];    
 }
-
-
-
-#pragma mark -
-#pragma mark Application's Documents directory
 
 /**
  Returns the URL to the application's Documents directory.

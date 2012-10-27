@@ -61,17 +61,20 @@
                                                  name:@"startAnimation"
                                                object:nil];
 
-    CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
+    CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2-70, 140, 140);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     self.activityIndicator.frame = frame;
     self.activityIndicator.layer.cornerRadius = 10;
-    CGRect labelFrame = CGRectMake(10, 80, 70, 15);
+    CGRect labelFrame = CGRectMake(15, 90, 100, 30);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.text = NSLocalizedString(@"Loading", "Loading");
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = UITextAlignmentCenter;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
+
     label.font = [UIFont boldSystemFontOfSize:12];
     [self.activityIndicator addSubview:label];
     [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];

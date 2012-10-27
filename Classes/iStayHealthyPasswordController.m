@@ -74,8 +74,6 @@
     {//shouldn't really happen
         [self loadTabController];
     }
-//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//    }];
     
 }
 
@@ -85,8 +83,6 @@
     {
         [self.activityIndicator startAnimating];
     }
-//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//    }];
 }
 
 
@@ -270,6 +266,20 @@
 	
 }	
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+	NSArray *objects = [self.fetchedResultsController fetchedObjects];
+    if (nil == objects)
+    {
+        return;
+    }
+    if (0 == objects.count)
+    {
+        return;
+    }
+    iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[objects lastObject];
+    self.passwordString = masterRecord.Password;
+}
 
 
 @end

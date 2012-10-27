@@ -27,6 +27,7 @@
 @property BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) DataLoader *dataLoader;
 @end
 
 @implementation DropBoxBackupViewController
@@ -36,6 +37,7 @@
 @synthesize newDropboxFileExists = _newDropboxFileExists;
 @synthesize restClient = _restClient;
 @synthesize isBackup = _isBackup;
+@synthesize dataLoader = _dataLoader;
 /**
  initWithStyle
  */
@@ -100,6 +102,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.dataLoader = [[DataLoader alloc] init];
     if (nil != self.restClient)
     {
         [self.restClient loadMetadata:@"/iStayHealthy"];
@@ -318,9 +321,8 @@
 #ifdef APPDEBUG
     NSLog(@"DropBoxBackupViewController::backup temporary directory is in %@",dataPath);
 #endif    
-    DataLoader *loader = [[DataLoader alloc]init];
-    [loader getSQLData];
-    NSData *xmlData = [loader xmlData];
+    [self.dataLoader getSQLData];
+    NSData *xmlData = [self.dataLoader xmlData];
 	NSError *error = nil;
     [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&error];
 	if (error != nil)

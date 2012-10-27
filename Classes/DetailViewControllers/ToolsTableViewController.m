@@ -120,8 +120,6 @@
     {
         self.masterRecord = nil;
     }
-//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//    }];
     
 }
 - (void)start
@@ -133,8 +131,6 @@
             [self.activityIndicator startAnimating];
         }
     }
-//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
- //   }];
 }
 
 
