@@ -749,18 +749,20 @@
     {
         return NO;
     }
-    if (0 == [self.allResults count])
+    if (0 == self.allResults.count)
     {
         return NO;
     }
+    BOOL contains = NO;
     for (Results *results in self.allResults)
     {
         if ([UID isEqualToString:results.UID])
         {
-            return YES;
+            contains = YES;
+            break;
         }
     }
-    return NO;
+    return contains;
 }
 /**
  */
@@ -770,18 +772,20 @@
     {
         return NO;
     }
-    if (0 == [self.allMedications count])
+    if (0 == self.allMedications.count)
     {
         return NO;
     }
+    BOOL contains = NO;
     for (Medication *med in self.allMedications)
     {
         if ([UID isEqualToString:med.UID])
         {
-            return YES;
+            contains = YES;
+            break;
         }
     }
-    return NO;
+    return contains;
 }
 /**
  */
@@ -791,18 +795,20 @@
     {
         return NO;
     }
-    if (0 == [self.allMissedMeds count])
+    if (0 == self.allMissedMeds.count)
     {
         return NO;
     }
+    BOOL contains = NO;
     for (MissedMedication *missedMed in self.allMissedMeds)
     {
         if ([UID isEqualToString:missedMed.UID])
         {
-            return YES;
+            contains = YES;
+            break;
         }
     }
-    return NO;
+    return contains;
 }
 /**
  */
@@ -812,18 +818,20 @@
     {
         return NO;
     }
-    if (0 == [self.allOtherMeds count])
+    if (0 == self.allOtherMeds.count)
     {
         return NO;
     }
+    BOOL contains = NO;
     for (OtherMedication *otherMed in self.allOtherMeds)
     {
         if ([UID isEqualToString:otherMed.UID])
         {
-            return YES;
+            contains = YES;
+            break;
         }
     }
-    return NO;
+    return contains;
 }
 
 - (BOOL) containsProceduresUID:(NSString *)UID
@@ -832,18 +840,20 @@
     {
         return NO;
     }
-    if (0 == [self.allProcedures count])
+    if (0 == self.allProcedures.count)
     {
         return NO;
     }
+    BOOL contains = NO;
     for (Procedures *procs in self.allProcedures)
     {
         if ([UID isEqualToString:procs.UID])
         {
-            return YES;
+            contains = YES;
+            break;
         }
     }
-    return NO;
+    return contains;
 }
 
 - (BOOL) containsSideEffectsUID:(NSString *)UID
@@ -852,18 +862,20 @@
     {
         return NO;
     }
-    if (0 == [self.allSideEffects count])
+    if (0 == self.allSideEffects.count)
     {
         return NO;
     }
+    BOOL contains = NO;
     for (SideEffects *effects in self.allSideEffects)
     {
         if ([UID isEqualToString:effects.UID])
         {
-            return YES;
+            contains = YES;
+            break;
         }
     }
-    return NO;
+    return contains;
     
 }
 - (BOOL) containsContactsUID:(NSString *)UID
@@ -872,28 +884,64 @@
     {
         return NO;
     }
-    if (0 == [self.allContacts count])
+    if (0 == self.allContacts.count)
     {
         return NO;
     }
+    BOOL contains = NO;
     for (Contacts *contact in self.allContacts)
     {
         if ([UID isEqualToString:contact.UID])
         {
-            return YES;
+            contains = YES;
+            break;
         }
     }
-    return NO;
+    return contains;
     
 }
 
 - (BOOL) containsPreviousMedsUID:(NSString *)UID
 {
-    return NO;
+    if (nil == UID)
+    {
+        return NO;
+    }
+    if (0 == self.allPreviousMedications.count)
+    {
+        return NO;
+    }
+    BOOL contains = NO;
+    for (PreviousMedication *previous in self.allPreviousMedications)
+    {
+        if ([UID isEqualToString:previous.uID])
+        {
+            contains = YES;
+            break;
+        }
+    }
+    return contains;
 }
 - (BOOL) containsWellnessUID:(NSString *)UID
 {
-    return NO;
+    if (nil == UID)
+    {
+        return NO;
+    }
+    if (0 == self.allWellness.count)
+    {
+        return NO;
+    }
+    BOOL contains = NO;
+    for (Wellness *well in self.allWellness)
+    {
+        if ([UID isEqualToString:well.uID])
+        {
+            contains = YES;
+            break;
+        }
+    }
+    return contains;
 }
 
 

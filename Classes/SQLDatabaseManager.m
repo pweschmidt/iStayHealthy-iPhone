@@ -37,7 +37,7 @@
 - (BOOL)loadBackupStoreLocally:(NSError *__autoreleasing *)error;
 - (void)addMasterRecord;
 - (void)iCloudStoreChanged;
-
+- (void)manageChangesToiCloudStore;
 
 @end
 
@@ -156,10 +156,23 @@
      name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
      object:self.persistentStoreCoordinator];
 
+    [self manageChangesToiCloudStore];
+    
+#ifdef APPDEBUG
+    NSLog(@"store URL = %@ and fallback store URL is %@", [self.mainStoreURL path], [self.backupStoreURL path]);
+    NSLog(@"SQLiteHelper:setUpCoordinatorAndContext LEAVING");
+#endif
+    
+}
 
-/*
+- (void)manageChangesToiCloudStore
+{
+#if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
+    return;
+#endif
+
 #ifdef __IPHONE_6_0
-    NSLog(@"SQLDatabaseManager::storeAndContext We are running at least version iOS 6");
+    NSLog(@"SQLDatabaseManager::manageChangesToiCloudStore We are running at least version iOS 6");
     self.ubiquityToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
     
     if (nil != self.ubiquityToken)
@@ -174,17 +187,12 @@
     {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"com.pweschmidt.iStayHealthy.ubiquityToken"];
     }
-
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(iCloudStoreChanged)
      name:NSUbiquityIdentityDidChangeNotification
      object:nil];
-#endif
- */
-#ifdef APPDEBUG
-    NSLog(@"store URL = %@ and fallback store URL is %@", [self.mainStoreURL path], [self.backupStoreURL path]);
-    NSLog(@"SQLiteHelper:setUpCoordinatorAndContext LEAVING");
 #endif
     
 }
@@ -206,14 +214,25 @@
                                  options:dbStoreOptions
                                  error:error];
     
-    if (nil == store || nil != *error)
+    if (nil == store)
     {
+#ifdef APPDEBUG
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSLog(@"Local MAIN store is NIL or returns an error with message %@ and code %d", [*error localizedDescription], [*error code]);
+            if (nil == store)
+            {
+                NSLog(@"The MAIN store is in fact NIL");
+            }
+        }];
+#endif
         return NO;
     }
     self.mainStore = store;
+#ifdef APPDEBUG
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"Local MAIN store should have been created successfully");
     }];
+#endif
     return YES;
 }
 
@@ -234,14 +253,25 @@
                                  options:dbStoreOptions
                                  error:error];
     
-    if (nil == store || nil != *error)
+    if (nil == store)
     {
+#ifdef APPDEBUG
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if (nil == store)
+            {
+                NSLog(@"BACKUP the store is NIL");
+            }
+//            NSLog(@"BACKUP we failed creating the backup store with message %@ and code %d", [*error localizedDescription], [*error code]);
+        }];
+#endif
         return NO;
     }
     self.backupStore = store;
+#ifdef APPDEBUG
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"BACKUP store should have been created successfully");
     }];
+#endif
     return YES;
 }
 
@@ -270,17 +300,22 @@
                                  options:dbStoreOptions
                                  error:error];
     
-    if (nil == store || nil != *error)
+    if (nil == store)
     {
+#ifdef APPDEBUG
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            NSLog(@"iCloud store is either NIL or we have an error message when loading the cloud store");
+            NSLog(@"iCloud store is either NIL or we have an error message when loading the cloud store. ");
         }];
+#endif
         return NO;
     }
     self.mainStore = store;
+
+#ifdef APPDEBUG
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSLog(@"iCloud store should have been created successfully");
     }];
+#endif
     return YES;
 }
 
@@ -382,9 +417,10 @@
         [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
     }];
     BOOL storeLoadingSuccess = NO;
+    BOOL isRecoveringFromFailure = NO;
     BOOL shouldUseLocalStore = NO;
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kTeamId];
+    NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
 
     if (nil != ubiquityContainer && !USE_BACKUP_STORE)
     {
@@ -417,9 +453,21 @@
 #endif
             }];
         }
-        else
-        {
+        else // loading the iCloud store failed
+        {            
+            if (nil != self.mainStore)
+            {
+                NSError *removeError = nil;
+                [self.persistentStoreCoordinator removePersistentStore:self.mainStore error:&removeError];
+#ifdef APPDEBUG
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    NSLog(@"we need to remove a store if we have any, otherwise we might get a conflict loading it locally");
+                }];
+#endif
+                self.mainStore = nil;
+            }
             shouldUseLocalStore = YES;
+            isRecoveringFromFailure = YES;
         }
     }
     else
@@ -430,7 +478,7 @@
     if (shouldUseLocalStore)
     {
         storeLoadingSuccess = NO;
-        if (self.backupStoreExists)
+        if (self.backupStoreExists || isRecoveringFromFailure)
         {
 #ifdef APPDEBUG
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -474,7 +522,14 @@
         {
 #ifdef APPDEBUG
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                NSLog(@"selectStoreAndMigrate we failed loading the store locally. Error code is %@ and code is %d", [*error localizedDescription], [*error code]);
+                if (nil != error && nil != *error)
+                {
+                    NSLog(@"selectStoreAndMigrate we failed loading the store locally. Error code is %@ and code is %d", [*error localizedDescription], [*error code]);
+                }
+                else
+                {
+                    NSLog(@"we were not successful in creating ANY store, but can't access the error message ");
+                }
             }];
 #endif
         }
@@ -496,13 +551,16 @@
 #ifdef APPDEBUG
     NSLog(@"SQLiteHelper:mergeChangesFrom_iCloud we are about to merge changes that come from iCloud");
 #endif
-    [self.mainObjectContext performBlockAndWait:^{
+    [self.mainObjectContext performBlock:^{
         [self.mainObjectContext mergeChangesFromContextDidSaveNotification:notification];
-        NSNotification* refreshNotification = [NSNotification
-                                               notificationWithName:@"RefetchAllDatabaseData"
-                                               object:self
-                                               userInfo:[notification userInfo]];
-        [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+        [self.mainObjectContext processPendingChanges];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            NSNotification* refreshNotification = [NSNotification
+                                                   notificationWithName:@"RefetchAllDatabaseData"
+                                                   object:self
+                                                   userInfo:[notification userInfo]];
+            [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+        }];
     }];
 }
 

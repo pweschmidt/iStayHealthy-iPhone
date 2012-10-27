@@ -74,7 +74,6 @@
     label.textAlignment = UITextAlignmentCenter;
     label.lineBreakMode = UILineBreakModeWordWrap;
     label.numberOfLines = 0;
-
     label.font = [UIFont boldSystemFontOfSize:12];
     [self.activityIndicator addSubview:label];
     [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];

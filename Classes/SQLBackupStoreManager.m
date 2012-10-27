@@ -189,7 +189,6 @@
     }];
 }
 
-#warning this is not fully implemented
 ///TODO: we need to be EXTREMELY careful when transferring the data from the
 // backup store to the iCloud store. We don't want to duplicate all records, just the
 // ones we added while iCloud was inoperatives
