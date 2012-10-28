@@ -229,21 +229,24 @@
     }
 
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-    [fileManager removeItemAtPath:[self.backupStoreURL path] error:error];
-    if (nil == *error)
+    BOOL success = [fileManager removeItemAtPath:[self.backupStoreURL path] error:error];
+
+#ifdef APPDEBUG
+    if (success)
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             NSLog(@"the deletion of the backupstore was successful");
         }];
-        return YES;
     }
     else
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            NSLog(@"the deletion of the backupstore failed with error message %@ and code %d", [*error localizedDescription], [*error code]);
+            NSLog(@"the deletion of the backupstore failed.");
         }];
-        return NO;
     }
+#endif
+    
+    return success;
 }
 
 - (BOOL)backupStoreExists
