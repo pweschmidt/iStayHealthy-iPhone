@@ -30,9 +30,9 @@
 @property BOOL iOS6FeaturesAvailable;
 
 - (void)storeAndContext;
-- (void)selectStoreAndMigrate:(NSError *__autoreleasing *)error;
+- (void)selectStoreAndMigrate;
 - (void)selectStoreAndMigrateForiOS6;
-- (void)selectStoreAndMigrateInSimulator:(NSError *__autoreleasing *)error;
+- (void)selectStoreAndMigrateInSimulator;
 - (NSURL *)applicationDocumentsDirectory;
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification;
 - (BOOL)loadMainStoreLocally:(NSError *__autoreleasing *)error;
@@ -95,10 +95,9 @@
         {
             [weakSelf.universalLock lock];
             isLocked = YES;
-            NSError *error = nil;
             if (DEVICE_IS_SIMULATOR)
             {
-                [self selectStoreAndMigrateInSimulator:&error];
+                [self selectStoreAndMigrateInSimulator];
             }
             else
             {
@@ -108,7 +107,7 @@
                 }
                 else
                 {
-                    [self selectStoreAndMigrate:&error];
+                    [self selectStoreAndMigrate];
                 }
             }
         } @finally
@@ -319,7 +318,7 @@
 /**
  this gets run only when we are in Simulator mode
  */
-- (void)selectStoreAndMigrateInSimulator:(NSError *__autoreleasing *)error
+- (void)selectStoreAndMigrateInSimulator
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self sendDebugMessage:@"selectStoreAndMigrateInSimulator ENTERING" onMainThread:YES];
@@ -331,13 +330,14 @@
     }];
     
     BOOL success = NO;
+    NSError *error = nil;
     if (USE_BACKUP_STORE)
     {
-        success = [self loadBackupStoreLocally:error];
+        success = [self loadBackupStoreLocally:&error];
     }
     else
     {
-        success = [self loadMainStoreLocally:error];
+        success = [self loadMainStoreLocally:&error];
     }
     
     if (success)
@@ -377,7 +377,6 @@
                                                userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
     }];
-    BOOL storeLoadingSuccess = NO;
     BOOL isRecoveringFromFailure = NO;
     BOOL shouldUseLocalStore = NO;
     NSError *error = nil;
@@ -389,8 +388,7 @@
         NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kTeamId];
         if (nil != ubiquityContainer && !USE_BACKUP_STORE)
         {
-            storeLoadingSuccess = [self loadCloudStore:ubiquityContainer error:&error];
-            if (!storeLoadingSuccess)
+            if (![self loadCloudStore:ubiquityContainer error:&error])
             {
                 [self sendDebugMessage:@"selectStoreAndMigrateForiOS6 failure to load iCloud store" onMainThread:NO];
                 shouldUseLocalStore = YES;
@@ -437,7 +435,7 @@
     if (shouldUseLocalStore)
     {
         NSError *localError = nil;
-        storeLoadingSuccess = NO;
+        BOOL storeLoadingSuccess = NO;
         if (self.backupStoreExists || isRecoveringFromFailure)
         {
             storeLoadingSuccess = [self loadBackupStoreLocally:&localError];
@@ -494,7 +492,7 @@
             - 
  */
 
-- (void)selectStoreAndMigrate:(NSError *__autoreleasing *)error
+- (void)selectStoreAndMigrate
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self sendDebugMessage:@"selectStoreAndMigrate ENTERING" onMainThread:YES];
@@ -504,7 +502,6 @@
                                            userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
     }];
-    BOOL storeLoadingSuccess = NO;
     BOOL isRecoveringFromFailure = NO;
     BOOL shouldUseLocalStore = NO;
     NSFileManager *fileManager = [[NSFileManager alloc] init];
@@ -512,8 +509,8 @@
 
     if (nil != ubiquityContainer && !USE_BACKUP_STORE)
     {
-        storeLoadingSuccess = [self loadCloudStore:ubiquityContainer error:error];
-        if (storeLoadingSuccess)
+        NSError *error = nil;
+        if ([self loadCloudStore:ubiquityContainer error:&error])
         {
             shouldUseLocalStore = NO;
 
@@ -557,18 +554,19 @@
     
     if (shouldUseLocalStore)
     {
-        storeLoadingSuccess = NO;
         __block BOOL isForTransfer = NO;
+        NSError *error = nil;
+        BOOL storeLoadingSuccess = NO;
         if (self.backupStoreExists || isRecoveringFromFailure)
         {
             [self sendDebugMessage:@"selectStoreAndMigrate using BACKUP store" onMainThread:NO];
-            storeLoadingSuccess = [self loadBackupStoreLocally:error];
+            storeLoadingSuccess = [self loadBackupStoreLocally:&error];
             isForTransfer = NO;
         }
         else
         {
             [self sendDebugMessage:@"selectStoreAndMigrate using LOCAL MAIN store" onMainThread:NO];
-            storeLoadingSuccess = [self loadMainStoreLocally:error];
+            storeLoadingSuccess = [self loadMainStoreLocally:&error];
             isForTransfer = YES;
         }
         if (storeLoadingSuccess)

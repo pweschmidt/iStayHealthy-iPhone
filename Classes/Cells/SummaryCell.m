@@ -118,6 +118,10 @@
     layer.shadowRadius = 2;
     layer.shadowOpacity = 0.5;
     layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    if (path)
+    {
+        CGPathRelease(path);
+    }
     return layer;
 }
 
@@ -144,6 +148,10 @@
     layer.shadowRadius = 2;
     layer.shadowOpacity = 0.5;
     layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    if (path)
+    {
+        CGPathRelease(path);
+    }
     return layer;
 }
 

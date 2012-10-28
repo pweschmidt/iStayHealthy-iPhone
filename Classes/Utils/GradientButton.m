@@ -9,14 +9,12 @@
 #import "GradientButton.h"
 
 @interface GradientButton ()
-@property (nonatomic, assign) CGGradientRef standardNormalGradient;
-@property (nonatomic, assign) CGGradientRef standardHighlightGradient;
+@property (nonatomic, readonly) CGGradientRef normalGradient;
+@property (nonatomic, readonly) CGGradientRef highlightGradient;
 - (void)useRedDeleteStyle;
 - (void)useWhiteStyle;
 - (void)useSimpleOrangeStyle;
 - (void)useGreenConfirmStyle;
-- (void)setNormalGradient;
-- (void)setHighlightGradient;
 - (void)hesitateUpdate; 
 @end
 
@@ -28,8 +26,8 @@
 @synthesize cornerRadius = _cornerRadius;
 @synthesize strokeWeight = _strokeWeight;
 @synthesize strokeColor = _strokeColor;
-@synthesize standardHighlightGradient = _standardHighlightGradient;
-@synthesize standardNormalGradient = _standardNormalGradient;
+@synthesize normalGradient = _normalGradient;
+@synthesize highlightGradient = _highlightGradient;
 
 #pragma mark initialise methods
 + (GradientButton *)buttonWithFrame:(CGRect)frame title:(NSString *)titleText
@@ -44,6 +42,7 @@
     gradButton.backgroundColor = [UIColor clearColor];
     return gradButton;
 }
+
 
 - (void)setColourIndex:(NSInteger)index
 {
@@ -64,8 +63,6 @@
             break;
     }
     self.cornerRadius = 9.f;
-    [self setNormalGradient];
-    [self setHighlightGradient];    
 }
 
 
@@ -96,8 +93,6 @@
                 [self useWhiteStyle];
                 break;
         }
-        [self setNormalGradient];
-        [self setHighlightGradient];
         
     }
     return self;
@@ -113,10 +108,17 @@
         self.backgroundColor = [UIColor clearColor];
         self.cornerRadius = 9.f;
         [self useWhiteStyle];
-        [self setNormalGradient];
-        [self setHighlightGradient];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    if (_normalGradient != NULL)
+        CGGradientRelease(_normalGradient);
+    if (_highlightGradient != NULL)
+        CGGradientRelease(_highlightGradient);
+    
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -299,9 +301,8 @@
     
 }
 
-- (void)setNormalGradient
+- (CGGradientRef)normalGradient
 {
-    CGGradientRef gradient = nil;
     int locCount = self.normalGradientLocations.count;
     CGFloat locations[locCount];
     for (int i = 0; i < [self.normalGradientLocations count]; i++)
@@ -311,14 +312,16 @@
     }
     CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
     
-    gradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)self.normalGradientColors, locations);
-    CGColorSpaceRelease(space);
-    self.standardNormalGradient = gradient;
+    _normalGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)self.normalGradientColors, locations);
+    if (space)
+    {
+        CGColorSpaceRelease(space);
+    }
+    return _normalGradient;
 }
 
-- (void)setHighlightGradient
+- (CGGradientRef)highlightGradient
 {
-    CGGradientRef gradient = nil;
     
     CGFloat locations[[self.highlightGradientLocations count]];
     for (int i = 0; i < [self.highlightGradientLocations count]; i++)
@@ -328,9 +331,12 @@
     }
     CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
     
-    gradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)self.highlightGradientColors, locations);
-    CGColorSpaceRelease(space);
-    self.standardHighlightGradient = gradient;
+    _highlightGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)self.highlightGradientColors, locations);
+    if (space)
+    {
+        CGColorSpaceRelease(space);
+    }
+    return _highlightGradient;
 }
 
 
@@ -421,9 +427,9 @@
 	CGPathCloseSubpath(path);
     
     if (self.state == UIControlStateHighlighted)
-        gradient = self.standardHighlightGradient;
+        gradient = self.highlightGradient;
     else
-        gradient = self.standardNormalGradient;
+        gradient = self.normalGradient;
     
 	CGContextAddPath(context, path);
 	CGContextSaveGState(context);
