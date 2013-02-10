@@ -17,6 +17,7 @@
 		C402283015FB99EC00120B1F /* XMLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C402282F15FB99EC00120B1F /* XMLConstants.m */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C408358C1359DD860020813A /* FAQ.plist in Resources */ = {isa = PBXBuildFile; fileRef = C408358E1359DD860020813A /* FAQ.plist */; };
+		C41F150E16B78BBC0033C1C5 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41F150D16B78BBC0033C1C5 /* DropboxSDK.framework */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
 		C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB56A1494F119005E9A0F /* SwitcherCell.xib */; };
@@ -42,9 +43,9 @@
 		C44B4886140CF1C200BDC418 /* feedback-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C44B4885140CF1C200BDC418 /* feedback-small.png */; };
 		C44B4888140CF94B00BDC418 /* e-mail-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C44B4887140CF94B00BDC418 /* e-mail-small.png */; };
 		C452630813F5422B0004C80F /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C452630A13F5422B0004C80F /* WebViewController.xib */; };
+		C4572E4316C7A39700EB0119 /* SQLMasterRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4572E4216C7A39700EB0119 /* SQLMasterRecordManager.m */; };
 		C4574ADC14938F7E00793164 /* DosageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4574ADE14938F7E00793164 /* DosageCell.xib */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
-		C4598462160B372B003A615C /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4598461160B372B003A615C /* DropboxSDK.framework */; };
 		C462002A140934C500E70B5B /* complera.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620025140934C500E70B5B /* complera.png */; };
 		C462002B140934C500E70B5B /* norvir.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620026140934C500E70B5B /* norvir.png */; };
 		C462002C140934C500E70B5B /* retrovir.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620027140934C500E70B5B /* retrovir.png */; };
@@ -333,6 +334,7 @@
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C408358D1359DD860020813A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/FAQ.plist; sourceTree = "<group>"; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
+		C41F150D16B78BBC0033C1C5 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C4276D6D12DB7AED001DDCD2 /* cross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small.png"; sourceTree = "<group>"; };
 		C4279EFC146AEDCA00D93B34 /* clinic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clinic.png; sourceTree = "<group>"; };
 		C42AB5691494F119005E9A0F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SwitcherCell.xib; sourceTree = "<group>"; };
@@ -384,12 +386,13 @@
 		C452630B13F542320004C80F /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		C452630C13F542350004C80F /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		C452630D13F542380004C80F /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/WebViewController.xib; sourceTree = "<group>"; };
+		C4572E4116C7A39700EB0119 /* SQLMasterRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLMasterRecordManager.h; sourceTree = "<group>"; };
+		C4572E4216C7A39700EB0119 /* SQLMasterRecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLMasterRecordManager.m; sourceTree = "<group>"; };
 		C4574ADD14938F7E00793164 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574ADF14938F8500793164 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE014938F8700793164 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE114938F8A00793164 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
-		C4598461160B372B003A615C /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C46067E01472D5ED00FCA76D /* iStayHealthy 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 10.xcdatamodel"; sourceTree = "<group>"; };
 		C4620025140934C500E70B5B /* complera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complera.png; sourceTree = "<group>"; };
 		C4620026140934C500E70B5B /* norvir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = norvir.png; sourceTree = "<group>"; };
@@ -807,7 +810,7 @@
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
-				C4598462160B372B003A615C /* DropboxSDK.framework in Frameworks */,
+				C41F150E16B78BBC0033C1C5 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +840,8 @@
 				C46231441632E21D005DD746 /* SQLDatabaseManager.m */,
 				C47B705D163ACABB0092C439 /* SQLBackupStoreManager.h */,
 				C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */,
+				C4572E4116C7A39700EB0119 /* SQLMasterRecordManager.h */,
+				C4572E4216C7A39700EB0119 /* SQLMasterRecordManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -929,7 +934,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C4598461160B372B003A615C /* DropboxSDK.framework */,
+				C41F150D16B78BBC0033C1C5 /* DropboxSDK.framework */,
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
 				C490250A14DD630700BDD906 /* CoreLocation.framework */,
@@ -1360,7 +1365,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iStayHealthy" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1693,6 +1698,7 @@
 				C402283015FB99EC00120B1F /* XMLConstants.m in Sources */,
 				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
 				C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */,
+				C4572E4316C7A39700EB0119 /* SQLMasterRecordManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,7 +1926,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -1949,7 +1955,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",
@@ -1967,7 +1973,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos4.3]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1975,7 +1982,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1987,7 +1994,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos4.3]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1995,7 +2003,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -2007,7 +2015,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos4.3]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt";
@@ -2015,7 +2024,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "26AF60ED-18C6-49E5-BC99-9194A88F6AA1";
@@ -2040,7 +2049,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",

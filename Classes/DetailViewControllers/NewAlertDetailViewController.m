@@ -80,6 +80,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"SoundList" ofType:@"plist"];
     self.sounds = [NSArray arrayWithContentsOfFile:path];
     self.isFirstLoad = YES;
+    self.alertText = NSLocalizedString(@"Label Text", @"Label Text");
 //    self.player = nil;
     self.howMany = 1;
     self.startTime = [NSDate date];
@@ -291,8 +292,8 @@
         }
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"HH:mm";
-        [[timeCell value]setText:[formatter stringFromDate:self.startTime]];
-        [timeCell setTag:indexPath.row];
+        timeCell.value.text = [formatter stringFromDate:self.startTime];
+        timeCell.tag = indexPath.row;
         timeCell.labelImageView.image = [UIImage imageNamed:@"alarm.png"];
         self.dateCell = timeCell;
         return timeCell;
@@ -313,12 +314,12 @@
                     clinicCell = (ClinicAddressCell *)currentObject;
                     break;
                 }
-            }  
+            }
             [clinicCell setDelegate:self];
         }
-        [[clinicCell title]setText:NSLocalizedString(@"Alert Label", @"Alert Label")];
-        [[clinicCell valueField]setText:NSLocalizedString(@"Label Text", @"Label Text")];
-        [clinicCell setTag:10];
+        clinicCell.title.text = NSLocalizedString(@"Alert Label", @"Alert Label");
+        clinicCell.valueField.text = NSLocalizedString(@"Label Text", @"Label Text");
+        clinicCell.tag = 10;
         return clinicCell;
     }
     if (2 == indexPath.section)
@@ -366,7 +367,7 @@
             self.selectedSoundCell = soundCell;
             self.soundName = [self.sounds objectAtIndex:0];
         }
-        [[soundCell soundName]setText:[self.sounds objectAtIndex:indexPath.row]];
+        soundCell.soundName.text = [self.sounds objectAtIndex:indexPath.row];
         return soundCell;
     }
     

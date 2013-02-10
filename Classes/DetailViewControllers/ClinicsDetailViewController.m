@@ -367,7 +367,7 @@
             cell.valueField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             if (self.isEdit && ![self.emergencynumber isEqualToString:@""])
             {
-                cell.valueField.text = self.number;
+                cell.valueField.text = self.emergencynumber;
                 cell.valueField.textColor = [UIColor blackColor];
             }
             else
