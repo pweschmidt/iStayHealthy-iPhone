@@ -504,7 +504,7 @@
     else{
         if (0 == self.resultsSegmentControl.selectedSegmentIndex && 2 == indexPath.section)
         {
-            return 69;
+            return 75;
         }
         else
         {
