@@ -14,17 +14,6 @@
 #import "GradientButton.h"
 
 @implementation NewAlertEditDetailViewController
-@synthesize sounds = _sounds;
-@synthesize dateCell = _dateCell;
-@synthesize selectedSoundCell = _selectedSoundCell;
-@synthesize isFirstLoad = _isFirstLoad;
-@synthesize firstSelectedRow = _firstSelectedRow;
-@synthesize player = _player;
-@synthesize startTime = _startTime;
-@synthesize alertText = _alertText;
-@synthesize soundName = _soundName;
-@synthesize previousNotification = _previousNotification;
-
 
 - (id)initWithNotification:(UILocalNotification *)notification
 {

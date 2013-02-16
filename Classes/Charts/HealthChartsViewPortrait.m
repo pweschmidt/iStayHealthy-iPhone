@@ -14,10 +14,6 @@
 
 
 @implementation HealthChartsViewPortrait
-@synthesize cd4Button = _cd4Button;
-@synthesize cd4PercentButton = _cd4PercentButton;
-@synthesize viralLoadButton = _viralLoadButton;
-@synthesize state = _state;
 
 /**
  initWithFrame

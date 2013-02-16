@@ -10,6 +10,7 @@
 #import "ChartSettings.h"
 #import "HealthChartsView.h"
 #import "HealthChartsViewPortrait.h"
+#import "iStayHealthyAppDelegate.h"
 #import "iStayHealthyRecord.h"
 #import "Results.h"
 #import "Medication.h"
@@ -21,6 +22,8 @@
 #import "WebViewController.h"
 #import "SummaryCell.h"
 #import "UINavigationBar-Button.h"
+#import "SQLDataTableController.h"
+#import "Utilities.h"
 
 @interface NewStatusViewController ()
 @property (nonatomic, strong) NSNumber *latestCD4Count;
@@ -29,22 +32,21 @@
 @property (nonatomic, strong) NSNumber *previousCD4Count;
 @property (nonatomic, strong) NSNumber *previousCD4Percent;
 @property (nonatomic, strong) NSNumber *previousVL;
+@property (nonatomic, strong) NSArray *allResults;
+@property (nonatomic, strong) NSArray *allMeds;
+@property (nonatomic, strong) NSArray *allMissedMeds;
+@property (nonatomic, strong) SQLDataTableController *resultsController;
+@property (nonatomic, strong) SQLDataTableController *medsController;
+@property (nonatomic, strong) SQLDataTableController *missedController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
 - (NSNumber *)latestValueForType:(NSString *)type;
 - (NSNumber *)previousValueForType:(NSString *)type;
 - (void)getStats;
 @end
 
 @implementation NewStatusViewController
-@synthesize chartView = _chartView;
-@synthesize events = _events;
-@synthesize sizeOfChartCell = _sizeOfChartCell;
-@synthesize sizeOfSummaryCell = _sizeOfSummaryCell;
-@synthesize latestCD4Count = _latestCD4Count;
-@synthesize latestCD4Percent = _latestCD4Percent;
-@synthesize latestVL = _latestVL;
-@synthesize previousCD4Count = _previousCD4Count;
-@synthesize previousCD4Percent = _previousCD4Percent;
-@synthesize previousVL = _previousVL;
 
 - (void)didReceiveMemoryWarning
 {
@@ -54,10 +56,26 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-/**
- dealloc
- */
-
+- (void)setUpData
+{
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.resultsController = [[SQLDataTableController alloc] initForEntityName:@"Results"
+                                                                        sortBy:@"ResultsDate"
+                                                                   isAscending:NO context:self.context];
+    
+    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+                                                                        sortBy:@"MissedDate"
+                                                                   isAscending:NO context:self.context];
+    
+    self.medsController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
+                                                                       sortBy:@"StartDate"
+                                                                  isAscending:NO context:self.context];
+    
+    self.allResults = [self.resultsController entriesForEntity];
+    self.allMeds = [self.medsController entriesForEntity];
+    self.allMissedMeds  = [self.missedController entriesForEntity];
+}
 
 #pragma mark - View lifecycle
 /**
@@ -66,6 +84,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 
 	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 	[infoButton addTarget:self action:@selector(showInfoView:) forControlEvents:UIControlEventTouchUpInside];
@@ -85,15 +105,23 @@
     self.sizeOfSummaryCell = [NSNumber numberWithFloat:cellHeight];
     float chartHeight = size.height * 0.45;
     self.sizeOfChartCell = [NSNumber numberWithFloat:chartHeight];
+    
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)reloadData:(NSNotification *)note
 {
-    [super reloadData:note];
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];
     }
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    self.allResults = [self.resultsController entriesForEntity];
+    self.allMeds = [self.medsController entriesForEntity];
+    self.allMissedMeds  = [self.missedController entriesForEntity];
     
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
@@ -103,6 +131,15 @@
     [self.chartView setNeedsDisplay];
     [self.tableView reloadData];
 }
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+}
+
 
 /**
  viewDidUnload
@@ -187,16 +224,16 @@
 
 - (NSNumber *)latestValueForType:(NSString *)type
 {
-    if (nil == self.allResultsInReverseOrder)
+    if (nil == self.allResults)
     {
         return nil;
     }
-    if (0 == self.allResultsInReverseOrder.count)
+    if (0 == self.allResults.count)
     {
         return nil;
     }
     NSNumber *latestResult = nil;
-    for (Results *result in self.allResultsInReverseOrder)
+    for (Results *result in self.allResults)
     {
         NSNumber *cd4 = result.CD4;
         NSNumber *cd4Percent = result.CD4Percent;
@@ -224,7 +261,7 @@
             {
                 latestResult = vl;
                 break;
-            }            
+            }
         }
     }
     return latestResult;    
@@ -232,17 +269,17 @@
 
 - (NSNumber *)previousValueForType:(NSString *)type
 {
-    if (nil == self.allResultsInReverseOrder)
+    if (nil == self.allResults)
     {
         return nil;
     }
-    if (self.allResultsInReverseOrder.count < 2)
+    if (self.allResults.count < 2)
     {
         return nil;
     }
     NSNumber *previousResult = nil;
     BOOL isFirstFound = NO;
-    for (Results *result in self.allResultsInReverseOrder)
+    for (Results *result in self.allResults)
     {
         NSNumber *cd4 = result.CD4;
         NSNumber *cd4Percent = result.CD4Percent;
@@ -352,7 +389,7 @@
     cell.title.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
     cell.title.textColor = DARK_YELLOW;
     [cell clearIndicatorsFromLayer];
-	if (nil == self.allResults || nil ==self.allResultsInReverseOrder)
+	if (nil == self.allResults )
     {
         cell.result.text = NSLocalizedString(@"No results", nil);
         cell.result.textColor = [UIColor lightGrayColor];
@@ -360,7 +397,7 @@
 		return;
 	}
         
-	if (0 == self.allResultsInReverseOrder.count || nil == self.latestCD4Count)
+	if (0 == self.allResults.count || nil == self.latestCD4Count)
     {
         cell.result.text = NSLocalizedString(@"No results", nil);
         cell.result.textColor = [UIColor lightGrayColor];
@@ -415,7 +452,7 @@
     cell.title.text = NSLocalizedString(@"CD4 %", @"CD4 %");
     cell.title.textColor = DARK_YELLOW;
     [cell clearIndicatorsFromLayer];
-	if (nil == self.allResults || nil ==self.allResultsInReverseOrder)
+	if (nil == self.allResults)
     {
         cell.result.text = NSLocalizedString(@"No results", nil);
         cell.result.textColor = [UIColor lightGrayColor];
@@ -423,7 +460,7 @@
 		return;
 	}
     
-	if (0 == self.allResultsInReverseOrder.count || nil == self.latestCD4Percent)
+	if (0 == self.allResults.count || nil == self.latestCD4Percent)
     {
         cell.result.text = NSLocalizedString(@"No results", nil);
         cell.result.textColor = [UIColor lightGrayColor];
@@ -482,7 +519,7 @@
     cell.title.textColor = DARK_BLUE;
     [cell clearIndicatorsFromLayer];
     
-	if (nil == self.allResults || nil ==self.allResultsInReverseOrder)
+	if (nil == self.allResults)
     {
         cell.result.text = NSLocalizedString(@"No results", nil);
         cell.result.textColor = [UIColor lightGrayColor];
@@ -490,7 +527,7 @@
 		return;
 	}
     
-	if (0 == self.allResultsInReverseOrder.count || nil == self.latestCD4Percent)
+	if (0 == self.allResults.count || nil == self.latestCD4Percent)
     {
         cell.result.text = NSLocalizedString(@"No results", nil);
         cell.result.textColor = [UIColor lightGrayColor];

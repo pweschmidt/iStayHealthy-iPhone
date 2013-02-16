@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class iStayHealthyRecord;
 
 @interface PreviousMedViewController : UITableViewController 
-@property (nonatomic, strong) iStayHealthyRecord * record;
 @property (nonatomic, strong) NSMutableArray * allPreviousMedications;
 - (IBAction)removeEntry:(id)sender;
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
+- (id)initWithContext:(NSManagedObjectContext *)context;
+- (void)reloadData:(NSNotification*)note;
 @end

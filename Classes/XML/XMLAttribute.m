@@ -10,8 +10,6 @@
 //#import "XMLDefinitions.h"
 
 @implementation XMLAttribute
-@synthesize name = _name;
-@synthesize value = _value;
 - (id)init
 {
     self = [super init];

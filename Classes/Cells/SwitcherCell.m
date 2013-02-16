@@ -9,9 +9,6 @@
 #import "SwitcherCell.h"
 
 @implementation SwitcherCell
-@synthesize switcher = _switcher;
-@synthesize label = _label;
-@synthesize switcherCellDelegate=_switcherCellDelegate;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

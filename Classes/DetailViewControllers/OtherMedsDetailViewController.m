@@ -8,7 +8,6 @@
 
 #import "OtherMedsDetailViewController.h"
 #import "OtherMedication.h"
-#import "iStayHealthyRecord.h"
 #import "Utilities.h"
 #import "SetDateCell.h"
 #import "GradientButton.h"
@@ -18,20 +17,13 @@
 
 @interface OtherMedsDetailViewController ()
 @property BOOL isEdit;
+@property (nonatomic, strong) NSManagedObjectContext *context;
 + (NSUInteger)unitIndexForString:(NSString *)unitString;
 + (NSString *)unitStringFromIndex:(NSUInteger)unitIndex;
+- (void)postNotification;
 @end
 
 @implementation OtherMedsDetailViewController
-@synthesize startDate = _startDate;
-@synthesize record = _record;
-@synthesize otherMeds = _otherMeds;
-@synthesize setDateCell = _setDateCell;
-@synthesize isEdit = _isEdit;
-@synthesize name = _name;
-@synthesize number = _number;
-@synthesize unit = _unit;
-@synthesize dosageCell = _dosageCell;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -43,46 +35,46 @@
     return self;
 }
 
-- (id)initWithOtherMedication:(OtherMedication *)otherMeds
-             withMasterRecord:(iStayHealthyRecord *)masterRecord
-{
-    self = [super initWithNibName:@"OtherMedsDetailViewController" bundle:nil];
-    if (nil != self)
-    {
-        self.isEdit = YES;
-        self.record = masterRecord;
-        self.otherMeds = otherMeds;
-        if (nil != otherMeds.StartDate)
-        {
-            self.startDate = otherMeds.StartDate;
-        }
-        else
-        {
-            self.startDate = [NSDate date];
-        }
-        if (nil != otherMeds.Name)
-        {
-            self.name = otherMeds.Name;
-        }
-        if (nil != otherMeds.Dose)
-        {
-            self.number = otherMeds.Dose;
-        }
-        if (nil != otherMeds.Unit)
-        {
-            self.unit = otherMeds.Unit;
-        }
-    }
-    return self;
-}
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+- (id)initWithContext:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"OtherMedsDetailViewController" bundle:nil];
     if (nil != self)
     {
         self.isEdit = NO;
-        self.record = masterrecord;
+        self.context = context;
         self.startDate = [NSDate date];
+    }
+    return self;
+    
+}
+- (id)initWithOtherMedication:(OtherMedication *)otherMedication
+{
+    self = [super initWithNibName:@"OtherMedsDetailViewController" bundle:nil];
+    if (nil != self)
+    {
+        self.isEdit = YES;
+        self.context = otherMedication.managedObjectContext;
+        self.otherMeds = otherMedication;
+        if (nil != otherMedication.StartDate)
+        {
+            self.startDate = otherMedication.StartDate;
+        }
+        else
+        {
+            self.startDate = [NSDate date];
+        }
+        if (nil != otherMedication.Name)
+        {
+            self.name = otherMedication.Name;
+        }
+        if (nil != otherMedication.Dose)
+        {
+            self.number = otherMedication.Dose;
+        }
+        if (nil != otherMedication.Unit)
+        {
+            self.unit = otherMedication.Unit;
+        }
     }
     return self;
     
@@ -118,23 +110,18 @@
 - (IBAction) save:					(id) sender
 {
 	NSError *error = nil;
-    NSManagedObjectContext *context = nil;
     if (self.isEdit)
     {
-        context = [self.otherMeds managedObjectContext];
         self.otherMeds.StartDate = self.startDate;
         self.otherMeds.Dose = self.number;
         self.otherMeds.Name = self.name;
         self.otherMeds.Unit = self.unit;
         self.otherMeds.UID = [Utilities GUID];
-        self.record.UID = [Utilities GUID];
     }
     else
     {
-        context = [self.record managedObjectContext];
-        OtherMedication *medication = [NSEntityDescription insertNewObjectForEntityForName:@"OtherMedication" inManagedObjectContext:context];
-        [self.record addOtherMedicationsObject:medication];
-        self.record.UID = [Utilities GUID];
+        OtherMedication *medication = [NSEntityDescription insertNewObjectForEntityForName:@"OtherMedication"
+                                                                    inManagedObjectContext:self.context];
         medication.UID = [Utilities GUID];
         medication.StartDate = self.startDate;
         medication.Name = self.name;
@@ -143,7 +130,7 @@
     }
     
     
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -155,6 +142,7 @@
                           otherButtonTitles: nil]
          show];
     }
+    [self postNotification];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -162,6 +150,22 @@
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+}
+
 
 /**
  brings up a new view to change the date
@@ -196,11 +200,9 @@
 
 - (void)removeSQLEntry
 {
-    [self.record removeOtherMedicationsObject:self.otherMeds];
-    NSManagedObjectContext *context = self.otherMeds.managedObjectContext;
-    [context deleteObject:self.otherMeds];
+    [self.context deleteObject:self.otherMeds];
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -212,6 +214,7 @@
                           otherButtonTitles: nil]
          show];
     }
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];
     
 }

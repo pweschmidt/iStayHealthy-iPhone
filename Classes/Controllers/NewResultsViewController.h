@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iStayHealthyTableViewController.h"
+#import "SQLDataTableController.h"
+#import "StatusViewControllerLandscape.h"
+#import "BasicViewController.h"
 
-@interface NewResultsViewController : iStayHealthyTableViewController
+@interface NewResultsViewController : BasicViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 - (void)loadResultDetailViewController;
 - (void)loadResultChangeViewController:(int)row;
-- (void)loadSetUpViewController;
+- (void)reloadData:(NSNotification*)note;
+- (void)start;
 @end

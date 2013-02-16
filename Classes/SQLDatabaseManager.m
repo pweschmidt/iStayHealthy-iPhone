@@ -47,18 +47,6 @@
 
 
 @implementation SQLDatabaseManager
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize mainObjectContext = _mainObjectContext;
-@synthesize mainStoreURL = _firstStoreURL;
-@synthesize backupStoreURL = _secondStoreURL;
-@synthesize mainQueue = _mainQueue;
-@synthesize universalLock = _universalLock;
-@synthesize backupStoreExists = _backupStoreExists;
-@synthesize mainStoreExists = _mainStoreExists;
-@synthesize mainStore = _mainStore;
-@synthesize backupStore = _backupStore;
-@synthesize iCloudIsAvailable = _iCloudIsAvailable;
-@synthesize iOS6FeaturesAvailable = _iOS6FeaturesAvailable;
 /**
  init 
  */

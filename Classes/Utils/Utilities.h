@@ -24,4 +24,6 @@
 + (UIImage *)bannerImageFromLocale;
 + (NSString *)urlStringFromLocale;
 + (NSString *)titleFromLocale;
++ (CGRect)frameFromSize:(CGSize)size;
++ (UIActivityIndicatorView *)activityIndicatorViewWithFrame:(CGRect)frame;
 @end

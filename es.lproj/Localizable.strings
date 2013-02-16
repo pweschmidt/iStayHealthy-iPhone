@@ -141,7 +141,6 @@
 "Clinics"="Clínica";
 "Current HIV Treatment"="Actual Fármacos para VIH";
 "BannerURL"="http://www.poz.com/latino";
-"AdURL"="http://app.gaydar.net";
 "PasswordSet"="Contraseña está establecida";
 "Change"="Cambiar";
 "Treatment Start Date"="Fecha de inicio del tratamiento";
@@ -182,5 +181,7 @@
 "Loading"="Por favor espere. Carga...";
 "Error Saving" = "Error al guardar Datos";
 "Save error message" = "Se produjo un error al guardar los datos. Inténtelo de nuevo o reiniciar iStayHealthy.";
+"Password Reset" = "Restablecimiento de Contraseña";
+"Empty Password" = "Su contraseña almacenada parece estar vacío. Por favor, vaya a la aplicación y volver a crearla.";
 
 

@@ -15,18 +15,6 @@
 #import "DataLoader.h"
 
 @implementation XMLLoader
-@synthesize xmlParser = _xmlParser;
-@synthesize document = _document;
-@synthesize results = _results;
-@synthesize medications = _medications;
-@synthesize missedMedications = _missedMedications;
-@synthesize alerts = _alerts;
-@synthesize otherMedications = _otherMedications;
-@synthesize contacts = _contacts;
-@synthesize sideEffects = _sideEffects;
-@synthesize procedures = _procedures;
-@synthesize previousMedications = _previousMedications;
-@synthesize wellness = _wellness;
 - (id)init
 {
     self = [super init];

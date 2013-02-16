@@ -9,9 +9,6 @@
 #import "ClinicAddressCell.h"
 
 @implementation ClinicAddressCell
-@synthesize title = _title;
-@synthesize valueField = _valueField;
-@synthesize clinicAddressCellDelegate=_clinicAddressCellDelegate;
 
 - (void)setDelegate:(id)viewControllerDelegate
 {

@@ -9,9 +9,6 @@
 #import "MoreResultsCell.h"
 
 @implementation MoreResultsCell
-@synthesize colourCodeView = _colourCodeView;
-@synthesize moreTitleLabel = _moreTitleLabel;
-@synthesize hasMoreLabel = _hasMoreLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

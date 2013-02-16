@@ -141,7 +141,6 @@
 "Wrong Password! Try again"="Falsches Kennwort! Nochmal versuchen";
 "Current HIV Treatment"="Aktuelle HIV Behandlung";
 "BannerURL"="http://www.aidshilfe.de";
-"AdURL"="http://app.gaydar.net";
 "PasswordSet"="Kennwort ist eingestellt";
 "Change"="Ändern";
 "Treatment Start Date"="Behandlungsbeginn";
@@ -182,4 +181,6 @@
 "Loading"="Bitte warten. Laden...";
 "Error Saving" = "Speicherfehlmeldung";
 "Save error message" = "Fehler beim Datenspeichern. Starten Sie bitte iStayHealthy neu.";
+"Password Reset" = "Kennwort Zurückgestellt";
+"Empty Password" = "Das gespeicherte Kennwort wurde nicht gefunden. Bitte geben Sie ein neues ein.";
 

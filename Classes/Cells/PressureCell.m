@@ -9,11 +9,6 @@
 #import "PressureCell.h"
 
 @implementation PressureCell
-@synthesize pressureLabel = _pressureLabel;
-@synthesize systoleField = _systoleField;
-@synthesize diastoleField = _diastoleField;
-@synthesize pressureDelegate = _pressureDelegate;
-@synthesize colourCodeView = _colourCodeView;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

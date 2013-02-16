@@ -11,11 +11,6 @@
 //#import "XMLDefinitions.h"
 
 @implementation XMLElement
-@synthesize name = _name;
-@synthesize value = _value;
-@synthesize attributes = _attributes;
-@synthesize childElements = _childElements;
-@synthesize nodeLevel = _nodeLevel;
 
 - (id)init
 {

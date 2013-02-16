@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SQLDataTableController.h"
 #define TMPFILE @"iStayHealthy.xml"
 #define DATEFORMATSTYLE @"dd-MMM-yy HH:mm:ss"
 
-@class iStayHealthyRecord, XMLElement;
+@class XMLElement;
 
-@interface DataLoader : NSObject <NSFetchedResultsControllerDelegate>
-@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
+@interface DataLoader : NSObject
 @property (nonatomic, strong) NSArray *allResults;
 @property (nonatomic, strong) NSArray *allMedications;
 @property (nonatomic, strong) NSArray *allMissedMeds;

@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iStayHealthyTableViewController.h"
+#import "SQLDataTableController.h"
+#import "StatusViewControllerLandscape.h"
+#import "BasicViewController.h"
 
-@interface OtherMedsTableViewController : iStayHealthyTableViewController
+@interface OtherMedsTableViewController : BasicViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 - (void)loadDetailOtherMedsController;
 - (void)loadEditMedsControllerForId:(NSUInteger)rowId;
 - (IBAction)done:(id)sender;
+- (void)reloadData:(NSNotification*)note;
+- (void)start;
 @end

@@ -13,15 +13,6 @@
 #import "GeneralSettings.h"
 
 @implementation NewAlertDetailViewController
-@synthesize sounds = _sounds;
-@synthesize dateCell = _dateCell;
-@synthesize selectedSoundCell = _selectedSoundCell;
-@synthesize howMany = _howMany;
-@synthesize isFirstLoad = _isFirstLoad;
-@synthesize player = _player;
-@synthesize startTime = _startTime;
-@synthesize alertText = _alertText;
-@synthesize soundName = _soundName;
 
 
 - (id)initWithStyle:(UITableViewStyle)style

@@ -7,9 +7,9 @@
 //
 
 #import "HIVMedicationViewController.h"
+#import "iStayHealthyAppDelegate.h"
 #import "MedicationDetailTableViewController.h"
 #import "MedicationChangeTableViewController.h"
-#import "iStayHealthyRecord.h"
 #import "NSArray-Set.h"
 #import "Medication.h"
 #import "MissedMedication.h"
@@ -20,24 +20,89 @@
 #import "HIVMedListCell.h"
 #import "HIVMedSupportCell.h"
 #import "UINavigationBar-Button.h"
+#import "Utilities.h"
 
 
 @interface HIVMedicationViewController ()
+@property (nonatomic, strong) NSArray *allMeds;
+@property (nonatomic, strong) NSArray *allMissedMeds;
+@property (nonatomic, strong) NSArray *allSideEffects;
+@property (nonatomic, strong) NSArray *allPreviousMedications;
+@property (nonatomic, strong) SQLDataTableController *medController;
+@property (nonatomic, strong) SQLDataTableController *missedController;
+@property (nonatomic, strong) SQLDataTableController *previousController;
+@property (nonatomic, strong) SQLDataTableController *effectsController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
 @property NSUInteger stateIndex;
 - (void)loadPreviousMedsController;
 @end
 
 @implementation HIVMedicationViewController
-@synthesize stateIndex = _stateIndex;
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
 
-/**
- dealloc
- */
+- (void)setUpData
+{
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.medController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
+                                                                    sortBy:@"StartDate"
+                                                               isAscending:NO
+                                                                   context:self.context];
+    
+    self.allMeds = [self.medController entriesForEntity];
+
+    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+                                                                    sortBy:@"MissedDate"
+                                                               isAscending:NO
+                                                                   context:self.context];
+    
+    self.allMissedMeds = [self.missedController entriesForEntity];
+
+    self.previousController = [[SQLDataTableController alloc] initForEntityName:@"PreviousMedication"
+                                                                    sortBy:@"endDate"
+                                                               isAscending:NO
+                                                                   context:self.context];
+    
+    self.allPreviousMedications = [self.previousController entriesForEntity];
+
+    self.effectsController = [[SQLDataTableController alloc] initForEntityName:@"SideEffects"
+                                                                    sortBy:@"SideEffectDate"
+                                                               isAscending:YES
+                                                                   context:self.context];
+    
+    self.allSideEffects = [self.effectsController entriesForEntity];
+
+
+}
+
+- (void)reloadData:(NSNotification *)note
+{
+    NSLog(@"reloadData");
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {
+        self.allMeds = [self.medController entriesForEntity];
+        self.allMissedMeds = [self.missedController entriesForEntity];
+        self.allPreviousMedications = [self.previousController entriesForEntity];
+        self.allSideEffects = [self.effectsController entriesForEntity];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+}
 
 #pragma mark - View lifecycle
 
@@ -47,6 +112,8 @@
     NSLog(@"HIVMedicationViewController viewDidLoad");
 #endif
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedicationDetailViewController)];
     UINavigationBar *navBar = self.navigationController.navigationBar;
@@ -54,6 +121,9 @@
     {
         [navBar addButtonWithTitle:@"HIV Drugs" target:self selector:@selector(gotoPOZ)];
     }
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,7 +133,7 @@
 
 - (void)loadPreviousMedsController
 {
-    PreviousMedViewController *viewController = [[PreviousMedViewController alloc]initWithRecord:self.masterRecord];
+    PreviousMedViewController *viewController = [[PreviousMedViewController alloc]initWithContext:self.context];
     [self.navigationController pushViewController:viewController animated:YES];    
 }
 
@@ -72,7 +142,7 @@
  */
 - (void)loadMedicationDetailViewController
 {
-	MedicationDetailTableViewController *newMedsView = [[MedicationDetailTableViewController alloc] initWithRecord:self.masterRecord];
+	MedicationDetailTableViewController *newMedsView = [[MedicationDetailTableViewController alloc] initWithContext:self.context];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMedsView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -85,7 +155,7 @@
 - (void)loadMedicationChangeDetailViewController:(NSIndexPath *)selectedIndexPath
 {
     Medication *med = (Medication *)[self.allMeds objectAtIndex:selectedIndexPath.row];
-	MedicationChangeTableViewController *changedMedsView = [[MedicationChangeTableViewController alloc]initWithMasterRecord:self.masterRecord withMedication:med];    
+	MedicationChangeTableViewController *changedMedsView = [[MedicationChangeTableViewController alloc]initWithMedication:med context:self.context];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changedMedsView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -94,7 +164,8 @@
 
 - (void)loadSideEffectsController
 {
-    SideEffectsViewController *sideController = [[SideEffectsViewController alloc] initWithNibName:@"SideEffectsViewController" bundle:nil];
+    SideEffectsViewController *sideController = [[SideEffectsViewController alloc] initWithContext:self.context
+                                                                                       medications:self.allMeds];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:sideController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -103,7 +174,7 @@
 
 - (void)loadMissedMedicationsController
 {
-    MissedMedViewController *missedController = [[MissedMedViewController alloc]initWithNibName:@"MissedMedViewController" bundle:nil];
+    MissedMedViewController *missedController = [[MissedMedViewController alloc] initWithContext:self.context medications:self.allMeds];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:missedController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];

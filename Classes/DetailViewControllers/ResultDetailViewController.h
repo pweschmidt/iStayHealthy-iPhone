@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ResultValueCell.h"
 #import "PressureCell.h"
-@class iStayHealthyRecord, SetDateCell, Results;
+@class SetDateCell, Results;
 
 @interface ResultDetailViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate,ResultValueCellDelegate, PressureCellDelegate>
 
 @property (nonatomic, strong) NSDate *resultsDate;
-@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) Results *results;
 @property (nonatomic, strong) SetDateCell *setDateCell;
 @property (nonatomic, strong) NSNumber *cd4;
@@ -33,13 +32,16 @@
 @property (nonatomic, strong) NSNumber *redCells;
 @property (nonatomic, strong) NSNumber *platelets;
 @property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
+@property (nonatomic, strong) UISwitch * undetectableSwitch;
 - (IBAction) save:					(id) sender;
 - (IBAction) cancel:				(id) sender;
 - (void)changeResultsDate;
 - (void)removeSQLEntry;
 - (IBAction) showAlertView:			(id) sender;
-- (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord;
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
+
+- (id)initWithContext:(NSManagedObjectContext *)context;
+- (id)initWithResults:(Results *)results context:(NSManagedObjectContext *)context;
+
 - (NSNumber *)valueFromString:(NSString *)string;
 - (void)indexDidChangeForSegment;
 @end

@@ -19,12 +19,6 @@
 @end
 
 @implementation DashboardViewController
-@synthesize detailedTableView = _detailedTableView;
-@synthesize scrollView = _scrollView;
-@synthesize pageControllerView = _pageControllerView;
-@synthesize pageControl = _pageControl;
-@synthesize isPageControlled = _isPageControlled;
-@synthesize originalFrame = _originalFrame;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

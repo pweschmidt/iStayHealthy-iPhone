@@ -15,7 +15,6 @@
 @end
 
 @implementation ResultsAnalysis
-@synthesize results = _results;
 
 - (id)initWithResults:(NSArray *)allResults
 {

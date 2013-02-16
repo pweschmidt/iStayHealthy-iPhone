@@ -7,6 +7,7 @@
 //
 
 #import "ProcedureTableViewController.h"
+#import "iStayHealthyAppDelegate.h"
 #import "iStayHealthyRecord.h"
 #import "GeneralSettings.h"
 #import "Procedures.h"
@@ -17,23 +18,52 @@
 
 @interface ProcedureTableViewController ()
 @property (nonatomic, strong) NSDateFormatter * formatter;
+@property (nonatomic, strong) NSArray *allProcedures;
+@property (nonatomic, strong) SQLDataTableController *dataController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
 @end
 
 @implementation ProcedureTableViewController
-@synthesize formatter = _formatter;
-- (id)initWithStyle:(UITableViewStyle)style
+
+- (void)setUpData
 {
-    self = [super initWithStyle:style];
-    if (self)
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"Procedures"
+                                                                     sortBy:@"Date"
+                                                                isAscending:NO
+                                                                    context:self.context];
+    
+    self.allProcedures = [self.dataController entriesForEntity];
+}
+
+- (void)reloadData:(NSNotification *)note
+{
+    NSLog(@"reloadData");
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
     {
-        // Custom initialization
+        self.allProcedures = [self.dataController entriesForEntity];
+        [self.tableView reloadData];
     }
-    return self;
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 	self.formatter = [[NSDateFormatter alloc]init];
 	self.formatter.dateFormat = @"dd MMM YYYY";
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadDetailProcedureViewController)];
@@ -46,11 +76,14 @@
     {
         [navBar addButtonWithTitle:@"Illness" target:self selector:@selector(gotoPOZ)];
     }
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)loadDetailProcedureViewController
 {
-    ProcedureDetailViewController *newProcController = [[ProcedureDetailViewController alloc]initWithRecord:self.masterRecord];
+    ProcedureDetailViewController *newProcController = [[ProcedureDetailViewController alloc]initWithContext:self.context];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newProcController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -60,7 +93,7 @@
 - (void)loadEditProcedureViewControllerForId:(NSUInteger)rowId
 {
     Procedures *proc = (Procedures *)[self.allProcedures objectAtIndex:rowId];
-    ProcedureDetailViewController *newProcController = [[ProcedureDetailViewController alloc] initWithProcedure:proc masterRecord:self.masterRecord];
+    ProcedureDetailViewController *newProcController = [[ProcedureDetailViewController alloc] initWithProcedure:proc];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newProcController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];

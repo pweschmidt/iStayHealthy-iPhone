@@ -7,19 +7,68 @@
 //
 
 #import "SideEffectsViewController.h"
-#import "iStayHealthyRecord.h"
+#import "iStayHealthyAppDelegate.h"
 #import "SideEffects.h"
 #import "NSArray-Set.h"
 #import "GeneralSettings.h"
 #import "SideEffectListCell.h"
 #import "SideEffectsDetailTableViewController.h"
+#import "Utilities.h"
 
 @interface SideEffectsViewController()
+@property (nonatomic, strong) NSArray *allSideEffects;
+@property (nonatomic, strong) NSArray *medications;
+@property (nonatomic, strong) SQLDataTableController *dataController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
 - (void)loadSideEffectsController;
 @end
 
 @implementation SideEffectsViewController
 
+- (id)initWithContext:(NSManagedObjectContext *)context medications:(NSArray *)medications
+{
+    self = [super initWithNibName:@"SideEffectsViewController" bundle:nil];
+    if (nil != self)
+    {
+        self.context = context;
+        self.medications = medications;
+    }
+    return self;
+}
+
+- (void)setUpData
+{
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"SideEffects"
+                                                                        sortBy:@"SideEffectDate"
+                                                                   isAscending:YES
+                                                                       context:self.context];
+    
+    self.allSideEffects = [self.dataController entriesForEntity];
+}
+
+- (void)reloadData:(NSNotification *)note
+{
+    NSLog(@"reloadData");
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {
+        self.allSideEffects = [self.dataController entriesForEntity];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+}
 
 
 - (IBAction) done:				(id) sender
@@ -40,6 +89,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 	self.navigationItem.title = NSLocalizedString(@"Side Effects", @"Side Effects");
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
@@ -47,12 +98,16 @@
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadSideEffectsController)];
     self.tableView.rowHeight = 57.0;
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)loadSideEffectsController
 {
     
-	SideEffectsDetailTableViewController *newSideEffectController = [[SideEffectsDetailTableViewController alloc] initWithRecord:self.masterRecord medication:self.allMeds];
+	SideEffectsDetailTableViewController *newSideEffectController = [[SideEffectsDetailTableViewController alloc]
+                                                                     initWithContext:self.context medications:self.medications];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -125,7 +180,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SideEffects *effects = (SideEffects *)[self.allSideEffects objectAtIndex:indexPath.row];
-	SideEffectsDetailTableViewController *newSideEffectController = [[SideEffectsDetailTableViewController alloc] initWithResults:effects masterRecord:self.masterRecord];
+	SideEffectsDetailTableViewController *newSideEffectController = [[SideEffectsDetailTableViewController alloc] initWithSideEffects:effects];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];

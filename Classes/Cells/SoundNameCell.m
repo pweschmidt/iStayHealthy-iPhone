@@ -9,7 +9,6 @@
 #import "SoundNameCell.h"
 
 @implementation SoundNameCell
-@synthesize soundName = _soundName;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -9,19 +9,6 @@
 #import "ResultListCell.h"
 #import "GeneralSettings.h"
 @implementation ResultListCell
-@synthesize dateLabel = _dateLabel; 
-@synthesize cd4Title = _cd4Title;
-@synthesize cd4PercentTitle = _cd4PercentTitle;
-@synthesize vlTitle = _vlTitle;
-@synthesize cd4Value = _cd4Value;
-@synthesize cd4PercentValue = _cd4PercentValue;
-@synthesize vlValue = _vlValue;
-
-
-@synthesize cd4ColourView = _cd4ColourView;
-@synthesize serumsView = _serumsView;
-@synthesize bloodView = _bloodView;
-@synthesize otherView = _otherView;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

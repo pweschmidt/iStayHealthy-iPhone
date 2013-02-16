@@ -9,13 +9,6 @@
 #import <UIKit/UIKit.h>
 @class iStayHealthyTabBarController;
 @interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>
-@property (nonatomic, strong) NSString * passwordString;
-@property (nonatomic, strong) IBOutlet UITextField *passwordField;
-@property (nonatomic, strong) IBOutlet UILabel *label;
-@property (nonatomic, strong) IBOutlet UILabel *versionLabel;
-@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
-@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 - (void)loadTabController;
 - (IBAction)testLoad:(id)sender;
 - (IBAction)textFieldDoneEditing:(id)sender;

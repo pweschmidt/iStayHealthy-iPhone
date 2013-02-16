@@ -10,7 +10,6 @@
 
 
 @implementation FAQDetailCell
-@synthesize explanationView = _explanationView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

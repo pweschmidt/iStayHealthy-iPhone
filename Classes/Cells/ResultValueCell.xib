@@ -78,16 +78,16 @@
 							<object class="IBUITextField" id="636424371">
 								<reference key="NSNextResponder" ref="85936489"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{150, 7}, {140, 32}}</string>
+								<string key="NSFrame">{{150, 0}, {150, 47}}</string>
 								<reference key="NSSuperview" ref="85936489"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:304</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText">Enter Value</string>
-								<int key="IBUIBorderStyle">2</int>
 								<object class="NSColor" key="IBUITextColor" id="138740337">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>

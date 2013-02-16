@@ -19,13 +19,6 @@
 @end
 
 @implementation GradientButton
-@synthesize normalGradientColors = _normalGradientColors;
-@synthesize normalGradientLocations = _normalGradientLocations;
-@synthesize highlightGradientColors = _highlightGradientColors;
-@synthesize highlightGradientLocations = _highlightGradientLocations;
-@synthesize cornerRadius = _cornerRadius;
-@synthesize strokeWeight = _strokeWeight;
-@synthesize strokeColor = _strokeColor;
 @synthesize normalGradient = _normalGradient;
 @synthesize highlightGradient = _highlightGradient;
 

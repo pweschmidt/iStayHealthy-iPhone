@@ -21,8 +21,6 @@
 @end
 
 @implementation NewAlertViewController
-@synthesize notificationsArray = _notificationsArray;
-@synthesize timeLeftUpdater = _timeLeftUpdater;
 
 - (void)didReceiveMemoryWarning
 {

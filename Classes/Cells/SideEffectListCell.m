@@ -9,11 +9,6 @@
 #import "SideEffectListCell.h"
 
 @implementation SideEffectListCell
-@synthesize effect = _effect;
-@synthesize date = _date;
-@synthesize drug = _drug;
-@synthesize effectsImageView = _effectsImageView;
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -9,9 +9,6 @@
 #import "OtherMedCell.h"
 
 @implementation OtherMedCell
-@synthesize dateLabel = _dateLabel;
-@synthesize nameLabel = _nameLabel;
-@synthesize drugLabel = _drugLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -7,7 +7,8 @@
 //
 
 #import "MissedMedViewController.h"
-#import "iStayHealthyRecord.h"
+#import "iStayHealthyAppDelegate.h"
+#import "Utilities.h"
 #import "MissedMedication.h"
 #import "NSArray-Set.h"
 #import "GeneralSettings.h"
@@ -15,10 +16,59 @@
 #import "MissedMedsDetailTableViewController.h"
 
 @interface MissedMedViewController ()
+@property (nonatomic, strong) NSArray *allMissedMeds;
+@property (nonatomic, strong) SQLDataTableController *dataController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+@property (nonatomic, strong) NSArray *medications;
+- (void)setUpData;
 - (void)loadMissedMedsTableViewController;
 @end
 
 @implementation MissedMedViewController
+
+- (id)initWithContext:(NSManagedObjectContext *)context medications:(NSArray *)medications
+{
+    self = [super initWithNibName:@"MissedMedViewController" bundle:nil];
+    if (nil != self)
+    {
+        self.context = context;
+        self.medications = medications;
+    }
+    return self;
+}
+
+- (void)setUpData
+{
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+                                                                       sortBy:@"MissedDate"
+                                                                  isAscending:NO
+                                                                      context:self.context];
+    
+    self.allMissedMeds = [self.dataController entriesForEntity];
+}
+
+- (void)reloadData:(NSNotification *)note
+{
+    NSLog(@"reloadData");
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {
+        self.allMissedMeds = [self.dataController entriesForEntity];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+}
 
 - (IBAction) done:				(id) sender
 {
@@ -38,18 +88,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 	self.navigationItem.title = NSLocalizedString(@"Missed", @"Missed");
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                              target:self action:@selector(done:)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMissedMedsTableViewController)];
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)loadMissedMedsTableViewController
 {
     
-	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithRecord:self.masterRecord medication:self.allMeds];
+	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithContext:self.context medications:self.medications];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -125,7 +180,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MissedMedication *missed = (MissedMedication *)[self.allMissedMeds objectAtIndex:indexPath.row];
-	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithMissedMeds:missed masterRecord:self.masterRecord];
+	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithMissedMedication:missed];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];

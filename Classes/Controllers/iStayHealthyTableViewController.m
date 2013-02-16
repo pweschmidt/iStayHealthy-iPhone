@@ -24,22 +24,6 @@
 
 @implementation iStayHealthyTableViewController
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize masterRecord = _masterRecord;
-@synthesize landscapeController = _landscapeController;
-@synthesize headerView = _headerView;
-@synthesize allMeds = _allMeds;
-@synthesize allMissedMeds = _allMissedMeds;
-@synthesize allResults = _allResults;
-@synthesize allResultsInReverseOrder = _allResultsInReverseOrder;
-@synthesize allPills = _allPills;
-@synthesize allContacts = _allContacts;
-@synthesize allProcedures = _allProcedures;
-@synthesize allSideEffects = _allSideEffects;
-@synthesize allPreviousMedications = _allPreviousMedications;
-@synthesize allWellnes = _allWellnes;
-@synthesize isShowingLandscape = _isShowingLandscape;
-@synthesize activityIndicator = _activityIndicator;
-@synthesize hasReloadedData = _hasReloadedData;
 #pragma mark -
 #pragma mark View lifecycle
 

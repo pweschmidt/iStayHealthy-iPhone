@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class iStayHealthyRecord, SideEffects, SetDateCell;
+@class SideEffects, SetDateCell;
 
 @interface SideEffectsDetailTableViewController : UITableViewController<UIActionSheetDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSDate *effectsDate;
-@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) SideEffects *sideEffects;
 @property (nonatomic, strong) SetDateCell *setDateCell;
 @property (nonatomic, strong) UISegmentedControl *seriousnessControl;
@@ -23,8 +22,6 @@
 - (void)changeDate;
 - (void)removeSQLEntry;
 - (IBAction) showAlertView:			(id) sender;
-- (id)initWithResults:(SideEffects *)effects
-         masterRecord:(iStayHealthyRecord *)masterRecord;
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord medication:(NSArray *)medArray;
-
+- (id)initWithSideEffects:(SideEffects *)effects;
+- (id)initWithContext:(NSManagedObjectContext  *)context medications:(NSArray *)medications;
 @end

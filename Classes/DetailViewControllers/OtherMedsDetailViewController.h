@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ClinicAddressCell.h"
-@class iStayHealthyRecord, SetDateCell, OtherMedication, DosageCell;
+@class SetDateCell, OtherMedication, DosageCell;
 
 @interface OtherMedsDetailViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate, ClinicAddressCellDelegate>
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
-@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) OtherMedication *otherMeds;
 @property (nonatomic, strong) SetDateCell *setDateCell;
 @property (nonatomic, strong) DosageCell *dosageCell;
@@ -25,8 +24,6 @@
 - (void)changeStartDate;
 - (void)removeSQLEntry;
 - (IBAction) showAlertView:			(id) sender;
-- (id)initWithOtherMedication:(OtherMedication *)otherMeds
-             withMasterRecord:(iStayHealthyRecord *)masterRecord;
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
-
+- (id)initWithContext:(NSManagedObjectContext *)context;
+- (id)initWithOtherMedication:(OtherMedication *)otherMedication;
 @end

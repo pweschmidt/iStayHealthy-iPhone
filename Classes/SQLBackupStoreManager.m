@@ -43,11 +43,6 @@
 @end
 
 @implementation SQLBackupStoreManager
-@synthesize model = _model;
-@synthesize mainStoreURL = _mainStoreURL;
-@synthesize backupStoreURL = _backupStoreURL;
-@synthesize localOptions = _localOptions;
-@synthesize mainQueue = _mainQueue;
 
 - (id)init
 {

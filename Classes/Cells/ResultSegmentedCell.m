@@ -9,8 +9,6 @@
 #import "ResultSegmentedCell.h"
 
 @implementation ResultSegmentedCell
-@synthesize query = _query;
-@synthesize switchControl = _switchControl;    
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

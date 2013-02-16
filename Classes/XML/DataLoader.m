@@ -7,7 +7,6 @@
 //
 
 #import "DataLoader.h"
-#import "iStayHealthyRecord.h"
 #import "iStayHealthyAppDelegate.h"
 #import "Results.h"
 #import "Contacts.h"
@@ -25,60 +24,73 @@
 #import "Utilities.h"
 #import "XMLConstants.h"
 
+@interface DataLoader ()
+@property (nonatomic, strong) NSManagedObjectContext * context;
+@property (nonatomic, strong) SQLDataTableController *resultsController;
+@property (nonatomic, strong) SQLDataTableController *wellnessController;
+@property (nonatomic, strong) SQLDataTableController *previousController;
+@property (nonatomic, strong) SQLDataTableController *effectsController;
+@property (nonatomic, strong) SQLDataTableController *missedController;
+@property (nonatomic, strong) SQLDataTableController *medsController;
+@property (nonatomic, strong) SQLDataTableController *otherMedsController;
+@property (nonatomic, strong) SQLDataTableController *contactsController;
+@property (nonatomic, strong) SQLDataTableController *proceduresController;
+@property (nonatomic, strong) SQLDataTableController *masterRecordController;
+- (BOOL)hasRecords;
+@end
+
 @implementation DataLoader
-@synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize masterRecord = _masterRecord;
-@synthesize allResults = _allResults;
-@synthesize allMedications = _allMedications;
-@synthesize allMissedMeds = _allMissedMeds;
-@synthesize allOtherMeds = _allOtherMeds;
-@synthesize allContacts = _allContacts;
-@synthesize allProcedures = _allProcedures;
-@synthesize allSideEffects = _allSideEffects;
-@synthesize allPreviousMedications = _allPreviousMedications;
-@synthesize allWellness = _allWellness;
 
 - (id)init
 {
     self = [super init];
     if (nil != self)
     {
+        iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+        self.context = appDelegate.managedObjectContext;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(reloadData:)
                                                      name:@"RefetchAllDatabaseData"
                                                    object:nil];
+        self.allMedications = [NSMutableArray array];
+        self.allMissedMeds = [NSMutableArray array];
+        self.allPreviousMedications = [NSMutableArray array];
+        self.allSideEffects = [NSMutableArray array];
+        self.allContacts = [NSMutableArray array];
+        self.allOtherMeds = [NSMutableArray array];
+        self.allProcedures = [NSMutableArray array];
+        self.allResults = [NSMutableArray array];
+        self.allWellness = [NSMutableArray array];
     }
     
     return self;
 }
 
+- (BOOL)hasRecords
+{
+    int count = self.allMedications.count;
+    count += self.allMissedMeds.count;
+    count += self.allPreviousMedications.count;
+    count += self.allSideEffects.count;
+    count += self.allContacts.count;
+    count += self.allOtherMeds.count;
+    count += self.allProcedures.count;
+    count += self.allResults.count;
+    count += self.allWellness.count;    
+    return (0 < count) ? YES : NO;
+}
+
 - (void)reloadData:(NSNotification*)note
 {
-#ifdef APPDEBUG
-    NSLog(@"We are getting notified to reload the data");
-#endif
-    NSError *error = nil;
-    if (![[self fetchedResultsController] performFetch:&error])
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
-                              message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
-                              delegate:self
-                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-                              otherButtonTitles:nil];
-        [alert show];
-    }
-    NSArray *records = [self.fetchedResultsController fetchedObjects];
-    if (0 < records.count)
-    {
-        self.masterRecord = (iStayHealthyRecord *)[records lastObject];
-    }
-    else
-    {
-        self.masterRecord = nil;
-    }
-    //    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-    //    }];
+    self.allMedications = [self.medsController entriesForEntity];
+    self.allMissedMeds = [self.missedController entriesForEntity];
+    self.allPreviousMedications = [self.previousController entriesForEntity];
+    self.allSideEffects = [self.effectsController entriesForEntity];
+    self.allContacts = [self.contactsController entriesForEntity];
+    self.allOtherMeds = [self.otherMedsController entriesForEntity];
+    self.allProcedures = [self.proceduresController entriesForEntity];
+    self.allResults = [self.resultsController entriesForEntity];
+    self.allWellness = [self.wellnessController entriesForEntity];
     
 }
 
@@ -89,7 +101,7 @@
 - (NSString *)csvString
 {
     NSMutableString *csv = [NSMutableString stringWithString:@"iStayHealthy\r"];
-    if (nil == self.masterRecord)
+    if (![self hasRecords])
     {
         return csv;
     }
@@ -234,13 +246,13 @@
 {
     XMLDocument *document = [[XMLDocument alloc] init];
     XMLElement *root = [document root];
-    if (nil == self.masterRecord)
+    if (![self hasRecords])
     {
         NSString *xmlString = [document xmlString];
         return [xmlString dataUsingEncoding:NSUTF8StringEncoding];
     }
-    
-    
+    NSString *masterUID = [Utilities GUID];
+/*
     NSString *masterUID = self.masterRecord.UID;
     if (nil == masterUID || [masterUID isEqualToString:@""])
     {
@@ -262,6 +274,7 @@
         }
         
     }
+ */
     [root addAttribute:kXMLAttributeUID andValue:masterUID];
     
     if (0 < [self.allResults count])
@@ -954,9 +967,8 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-    Results *result = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementResults inManagedObjectContext:context];
-    [self.masterRecord addResultsObject:result];
+    Results *result = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementResults
+                                                    inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     result.ResultsDate = [formatter dateFromString:[resultElement attributeValue:kXMLAttributeResultsDate]];
@@ -1139,7 +1151,7 @@
     
     
 	NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1161,9 +1173,7 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-    Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementMedication inManagedObjectContext:context];
-    [self.masterRecord addMedicationsObject:medication];
+    Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     medication.StartDate = [formatter dateFromString:[medicationElement attributeValue:kXMLAttributeStartDate]];
@@ -1202,7 +1212,7 @@
     }
     
     NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1225,9 +1235,7 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-    MissedMedication *missedMed = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementMissedMedication inManagedObjectContext:context];
-    [self.masterRecord addMissedMedicationsObject:missedMed];
+    MissedMedication *missedMed = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementMissedMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     missedMed.MissedDate = [formatter dateFromString:[missedMedicationElement attributeValue:kXMLAttributeMissedDate]];
@@ -1257,7 +1265,7 @@
         missedMed.missedReason = _reason;
     }
     NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1279,9 +1287,7 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-    OtherMedication *otherMed = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementOtherMedication inManagedObjectContext:context];
-    [self.masterRecord addOtherMedicationsObject:otherMed];
+    OtherMedication *otherMed = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementOtherMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     otherMed.StartDate = [formatter dateFromString:[otherMedicationsElement attributeValue:kXMLAttributeStartDate]];
@@ -1321,7 +1327,7 @@
     }
     
     NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1342,9 +1348,8 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-    Contacts *contacts = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementContacts inManagedObjectContext:context];
-    [self.masterRecord addContactsObject:contacts];
+    Contacts *contacts = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementContacts
+                                                       inManagedObjectContext:self.context];
     
     if (nil != [contactsElement elementUID])
     {
@@ -1385,7 +1390,7 @@
     }
                 
     NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1406,10 +1411,9 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
 
-    SideEffects *effect = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementSideEffects inManagedObjectContext:context];
-    [self.masterRecord addSideeffectsObject:effect];
+    SideEffects *effect = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementSideEffects
+                                                        inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     if (nil != [sideEffectsElement elementUID])
@@ -1439,7 +1443,7 @@
     }
     
     NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1460,9 +1464,8 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-    Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementProcedures inManagedObjectContext:context];
-    [self.masterRecord addProceduresObject:procedures];
+    Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementProcedures
+                                                           inManagedObjectContext:self.context];
     
     if (nil != [proceduresElement elementUID])
     {
@@ -1489,7 +1492,7 @@
     }
     
     NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1509,9 +1512,7 @@
     {
         return;
     }
-    NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-    PreviousMedication *prev = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementPreviousMedication inManagedObjectContext:context];
-    [self.masterRecord addPreviousMedicationsObject:prev];
+    PreviousMedication *prev = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementPreviousMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     if (nil != [previousElement elementUID])
@@ -1548,7 +1549,7 @@
     }
     
     NSError *error = nil;
-	if (![context save:&error])
+	if (![self.context save:&error])
     {
 #ifdef APPDEBUG
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -1576,149 +1577,62 @@
  */
 - (BOOL)getSQLData
 {
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error])
-    {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
-							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
-							  delegate:self 
-							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
-							  otherButtonTitles:nil];
-		[alert show];
-	}
-    NSArray *records = [self.fetchedResultsController fetchedObjects];
-    if(nil == records)
-    {
-#ifdef APPDEBUG
-        NSLog(@"DataLoader::getSQLData records array is NIL");
-#endif
-        self.allResults = [NSMutableArray array];
-        self.allMedications = [NSMutableArray array];
-        self.allMissedMeds = [NSMutableArray array];
-        self.allOtherMeds = [NSMutableArray array];
-        self.allContacts = [NSMutableArray array];
-        self.allSideEffects = [NSMutableArray array];
-        self.allProcedures = [NSMutableArray array];
-        self.allPreviousMedications = [NSMutableArray array];
-        self.allWellness = [NSMutableArray array];
-        self.masterRecord = nil;
-        return NO;
-    }
-    if (0 == records.count)
-    {
-#ifdef APPDEBUG
-        NSLog(@"DataLoader::getSQLData records array is empty");
-#endif
-        self.allResults = [NSMutableArray array];
-        self.allMedications = [NSMutableArray array];
-        self.allMissedMeds = [NSMutableArray array];
-        self.allOtherMeds = [NSMutableArray array];
-        self.allContacts = [NSMutableArray array];
-        self.allSideEffects = [NSMutableArray array];
-        self.allProcedures = [NSMutableArray array];
-        self.allPreviousMedications = [NSMutableArray array];
-        self.allWellness = [NSMutableArray array];
-        self.masterRecord = nil;
-        return NO;
-    }
-	self.masterRecord = (iStayHealthyRecord *)[records lastObject];
+    self.medsController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
+                                                                    sortBy:@"StartDate"
+                                                               isAscending:YES
+                                                                   context:self.context];
+    self.allMedications = [self.medsController entriesForEntity];
     
-	if (0 != [self.masterRecord.results count])
-    {
-		self.allResults = [NSArray arrayByOrderingSet:self.masterRecord.results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
-	}
-    else
-        self.allResults = (NSArray *)self.masterRecord.results;
+    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+                                                                       sortBy:@"MissedDate"
+                                                                  isAscending:YES
+                                                                      context:self.context];
+    self.allMissedMeds = [self.missedController entriesForEntity];
     
-	if (0 != [self.masterRecord.medications count])
-    {
-		self.allMedications = [NSArray arrayByOrderingSet:self.masterRecord.medications byKey:@"StartDate" ascending:YES reverseOrder:NO];
-	}
-    else
-        self.allMedications = (NSArray *)self.masterRecord.medications;
+    self.previousController = [[SQLDataTableController alloc] initForEntityName:@"PreviousMedication"
+                                                                         sortBy:@"endDate"
+                                                                    isAscending:YES
+                                                                        context:self.context];    
+    self.allPreviousMedications = [self.previousController entriesForEntity];
     
-    if (0 != [self.masterRecord.missedMedications count])
-    {
-        self.allMissedMeds = [NSArray arrayByOrderingSet:self.masterRecord.missedMedications byKey:@"MissedDate" ascending:YES reverseOrder:NO];
-    }
-    else
-        self.allMissedMeds = (NSArray *)self.masterRecord.missedMedications;
+    self.effectsController = [[SQLDataTableController alloc] initForEntityName:@"SideEffects"
+                                                                        sortBy:@"SideEffectDate"
+                                                                   isAscending:YES
+                                                                       context:self.context];    
+    self.allSideEffects = [self.effectsController entriesForEntity];
+    self.contactsController = [[SQLDataTableController alloc] initForEntityName:@"Contacts"
+                                                                     sortBy:@"ClinicName"
+                                                                isAscending:YES
+                                                                    context:self.context];
     
-    if(0 != [self.masterRecord.otherMedications count])
-    {
-        self.allOtherMeds = [NSArray arrayByOrderingSet:self.masterRecord.otherMedications byKey:@"StartDate" ascending:YES reverseOrder:NO];
-    }
-    else
-        self.allOtherMeds = (NSArray *)self.masterRecord.otherMedications;
+    self.allContacts = [self.contactsController entriesForEntity];
+    self.otherMedsController = [[SQLDataTableController alloc] initForEntityName:@"OtherMedication"
+                                                                     sortBy:@"StartDate"
+                                                                isAscending:YES
+                                                                    context:self.context];
     
-
-    if(0 != [self.masterRecord.procedures count])
-    {
-        self.allProcedures = [NSArray arrayByOrderingSet:self.masterRecord.procedures byKey:@"Date" ascending:YES reverseOrder:NO];
-    }
-    else{
-        self.allProcedures = (NSArray *)self.masterRecord.procedures;
-    }
+    self.allOtherMeds = [self.otherMedsController entriesForEntity];
+    self.proceduresController = [[SQLDataTableController alloc] initForEntityName:@"Procedures"
+                                                                     sortBy:@"Date"
+                                                                isAscending:YES
+                                                                    context:self.context];
+    self.allProcedures = [self.proceduresController entriesForEntity];
+    self.resultsController = [[SQLDataTableController alloc] initForEntityName:@"Results"
+                                                                        sortBy:@"ResultsDate"
+                                                                   isAscending:YES
+                                                                       context:self.context];
+    self.allResults = [self.resultsController entriesForEntity];
     
-    if (0 != [self.masterRecord.sideeffects count])
-    {
-        self.allSideEffects = [NSArray arrayByOrderingSet:self.masterRecord.sideeffects byKey:@"SideEffectDate" ascending:YES reverseOrder:NO];
-    }
-    else
-    {
-        self.allSideEffects = (NSArray *)self.masterRecord.sideeffects;
-    }
-    // no particular order is needed for contacts
-    self.allContacts = (NSArray *)self.masterRecord.contacts;
+    self.wellnessController = [[SQLDataTableController alloc] initForEntityName:@"Wellness"
+                                                                        sortBy:@"sleepBarometer"
+                                                                   isAscending:YES
+                                                                       context:self.context];
+    self.allWellness = [self.wellnessController entriesForEntity];
+    
     return YES;
     
 }
 
-/**
- this handles the fetching of the objects
- @return NSFetchedResultsController
- */
-- (NSFetchedResultsController *)fetchedResultsController
-{
-	if (fetchedResultsController_ != nil)
-    {
-		return fetchedResultsController_;
-	}
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSManagedObjectContext *context = appDelegate.managedObjectContext;
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"iStayHealthyRecord" inManagedObjectContext:context];
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"Name" ascending:YES];
-	NSArray *allDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[request setSortDescriptors:allDescriptors];	
-	[request setEntity:entity];
-	
-	NSFetchedResultsController *tmpFetchController = [[NSFetchedResultsController alloc]
-													  initWithFetchRequest:request 
-													  managedObjectContext:context 
-													  sectionNameKeyPath:nil 
-													  cacheName:nil];
-	tmpFetchController.delegate = self;
-	fetchedResultsController_ = tmpFetchController;
-	
-	return fetchedResultsController_;
-	
-}	
-
-/**
- notified when changes to the database
- @controller
- */
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-    if (0 == objects.count)
-    {
-        return;
-    }
-	self.masterRecord = (iStayHealthyRecord *)[objects lastObject];
-}
 
 
 

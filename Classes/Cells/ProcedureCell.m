@@ -9,9 +9,6 @@
 #import "ProcedureCell.h"
 
 @implementation ProcedureCell
-@synthesize dateLabel = _dateLabel;
-@synthesize procLabel = _procLabel;
-@synthesize illnessLabel = _illnessLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

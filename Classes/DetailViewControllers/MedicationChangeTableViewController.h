@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ClinicAddressCell.h"
-@class iStayHealthyRecord, Medication, SetDateCell, GradientButton;
+@class Medication, SetDateCell, GradientButton;
 
 @interface MedicationChangeTableViewController : UITableViewController <UIActionSheetDelegate, UIAlertViewDelegate>
 @property BOOL startDateChanged;
@@ -18,7 +18,6 @@
 @property (nonatomic, strong) NSDate *endDate;
 @property (nonatomic, weak) SetDateCell *startDateCell;
 @property (nonatomic, weak) SetDateCell *endDateCell;
-@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) Medication *selectedMedication;
 @property (nonatomic, strong) NSString *medName;
 - (IBAction) save:					(id) sender;
@@ -26,5 +25,5 @@
 - (IBAction) showAlertView:			(id) sender;
 - (void)removeSQLEntry;
 - (void)changeDate;
-- (id)initWithMasterRecord:(iStayHealthyRecord *)masterRecord withMedication:(Medication *)medication;
+- (id)initWithMedication:(Medication *)medication context:(NSManagedObjectContext *)context;
 @end

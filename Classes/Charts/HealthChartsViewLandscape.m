@@ -12,8 +12,6 @@
 #import "Trafo.h"
 
 @implementation HealthChartsViewLandscape
-@synthesize cd4TitleLabel = _cd4TitleLabel;
-@synthesize viralLoadTitleLabel = _viralLoadTitleLabel;
 /**
  */
 - (id)initWithFrame:(CGRect)frame

@@ -7,7 +7,6 @@
 //
 
 #import "GeneralMedicalTableViewController.h"
-#import "iStayHealthyRecord.h"
 #import "GeneralSettings.h"
 #import "NSArray-Set.h"
 #import "OtherMedication.h"
@@ -38,6 +37,17 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)reloadData:(NSNotification *)note
+{
+    ///empty implementation
+}
+
+- (void)start
+{
+    ///empty implementation
+}
+
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -47,7 +57,6 @@
     if (navBar) {
         [navBar addButtonWithTitle:@"General" target:self selector:@selector(gotoPOZ)];
     }
-//	self.navigationItem.title = NSLocalizedString(@"General", @"General");
 }
 
 - (void)viewWillAppear:(BOOL)animated

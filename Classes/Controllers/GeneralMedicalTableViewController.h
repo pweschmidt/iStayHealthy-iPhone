@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iStayHealthyTableViewController.h"
+#import "BasicViewController.h"
 
-@interface GeneralMedicalTableViewController : iStayHealthyTableViewController
+@interface GeneralMedicalTableViewController : BasicViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @end

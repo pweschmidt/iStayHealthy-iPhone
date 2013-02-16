@@ -7,31 +7,62 @@
 //
 
 #import "ClinicsTableViewController.h"
+#import "iStayHealthyAppDelegate.h"
 #import "ClinicCell.h"
 #import "Contacts.h"
 #import "GeneralSettings.h"
 #import "UINavigationBar-Button.h"
 #import "ClinicsDetailViewController.h"
+#import "Utilities.h"
 
 @interface ClinicsTableViewController ()
-
+@property (nonatomic, strong) NSArray *allContacts;
+@property (nonatomic, strong) SQLDataTableController *dataController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
 @end
 
 @implementation ClinicsTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (void)setUpData
 {
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"Contacts"
+                                                                     sortBy:@"ClinicName"
+                                                                isAscending:YES
+                                                                    context:self.context];
+    
+    self.allContacts = [self.dataController entriesForEntity];
 }
+
+- (void)reloadData:(NSNotification *)note
+{
+    NSLog(@"reloadData");
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {
+        self.allContacts = [self.dataController entriesForEntity];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadClinicDetailViewController)];
     
     
@@ -42,6 +73,9 @@
     {
         [navBar addButtonWithTitle:@"Clinics" target:self selector:@selector(gotoPOZ)];
     }
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (IBAction)done:(id)sender
@@ -51,7 +85,7 @@
 
 - (void)loadClinicDetailViewController
 {
-    ClinicsDetailViewController *newClinicController = [[ClinicsDetailViewController alloc] initWithRecord:self.masterRecord];
+    ClinicsDetailViewController *newClinicController = [[ClinicsDetailViewController alloc] initWithContext:self.context];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newClinicController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -62,7 +96,7 @@
 - (void)loadClinicEditViewControllerForContactId:(NSUInteger) rowId
 {
     Contacts *contacts = (Contacts *)[self.allContacts objectAtIndex:rowId];
-    ClinicsDetailViewController *newClinicController = [[ClinicsDetailViewController alloc] initWithContacts:contacts masterRecord:self.masterRecord];
+    ClinicsDetailViewController *newClinicController = [[ClinicsDetailViewController alloc] initWithContacts:contacts];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newClinicController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];

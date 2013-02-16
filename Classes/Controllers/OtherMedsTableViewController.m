@@ -7,33 +7,30 @@
 //
 
 #import "OtherMedsTableViewController.h"
+#import "iStayHealthyAppDelegate.h"
 #import "OtherMedCell.h"
 #import "Utilities.h"
 #import "GeneralSettings.h"
-#import "iStayHealthyRecord.h"
 #import "OtherMedication.h"
 #import "UINavigationBar-Button.h"
 #import "OtherMedsDetailViewController.h"
 
 @interface OtherMedsTableViewController ()
+@property (nonatomic, strong) NSArray *allOtherMeds;
+@property (nonatomic, strong) SQLDataTableController *dataController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSDateFormatter *formatter;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
 @end
 
 @implementation OtherMedsTableViewController
-@synthesize formatter = _formatter;
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 	self.formatter = [[NSDateFormatter alloc]init];
 	self.formatter.dateFormat = @"dd MMM YYYY";
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadDetailOtherMedsController)];
@@ -46,6 +43,9 @@
     {
         [navBar addButtonWithTitle:@"Other Meds" target:self selector:@selector(gotoPOZ)];
     }
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 #if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
@@ -56,9 +56,45 @@
 }
 #endif
 
+- (void)setUpData
+{
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"OtherMedication"
+                                                                     sortBy:@"StartDate"
+                                                                isAscending:NO
+                                                                    context:self.context];
+    
+    self.allOtherMeds = [self.dataController entriesForEntity];
+}
+
+
+- (void)reloadData:(NSNotification*)note
+{
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {
+        self.allOtherMeds = [self.dataController entriesForEntity];
+        [self.tableView reloadData];
+    }
+    
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+    
+}
+
+
+
 - (void)loadDetailOtherMedsController
 {
-	OtherMedsDetailViewController *newMedsController = [[OtherMedsDetailViewController alloc] initWithRecord:self.masterRecord];
+	OtherMedsDetailViewController *newMedsController = [[OtherMedsDetailViewController alloc] initWithContext:self.context];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMedsController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -67,8 +103,8 @@
 
 - (void)loadEditMedsControllerForId:(NSUInteger)rowId
 {
-    OtherMedication *otherMed = (OtherMedication *)[self.allPills objectAtIndex:rowId];
-    OtherMedsDetailViewController *editMedsController = [[OtherMedsDetailViewController alloc] initWithOtherMedication:otherMed withMasterRecord:self.masterRecord];
+    OtherMedication *otherMed = (OtherMedication *)[self.allOtherMeds objectAtIndex:rowId];
+    OtherMedsDetailViewController *editMedsController = [[OtherMedsDetailViewController alloc] initWithOtherMedication:otherMed];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:editMedsController];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -91,7 +127,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.allPills.count;
+    return self.allOtherMeds.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,7 +154,7 @@
             }
         }
     }
-    OtherMedication *med = (OtherMedication *)[self.allPills objectAtIndex:indexPath.row];
+    OtherMedication *med = (OtherMedication *)[self.allOtherMeds objectAtIndex:indexPath.row];
     [[cell dateLabel]setText:[self.formatter stringFromDate:med.StartDate]];
     [[cell nameLabel]setText:med.Name];
     [[cell drugLabel]setText:[NSString stringWithFormat:@"%2.2f %@",[med.Dose floatValue], med.Unit]];

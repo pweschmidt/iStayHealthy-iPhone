@@ -8,8 +8,35 @@
 
 #import "Utilities.h"
 #import <math.h>
+#import <QuartzCore/QuartzCore.h>
 
 @implementation Utilities
+
++ (CGRect)frameFromSize:(CGSize)size
+{
+    return CGRectMake(size.width/2 - 70, size.height/2-70, 140, 140);
+}
+
+
++ (UIActivityIndicatorView *)activityIndicatorViewWithFrame:(CGRect)frame
+{
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    activityIndicator.frame = frame;
+    activityIndicator.layer.cornerRadius = 10;
+    CGRect labelFrame = CGRectMake(15, 90, 100, 30);
+    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+    label.text = NSLocalizedString(@"Loading", "Loading");
+    label.textColor = [UIColor whiteColor];
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = UITextAlignmentCenter;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
+    label.font = [UIFont boldSystemFontOfSize:12];
+    [activityIndicator addSubview:label];
+    return activityIndicator;
+}
+
 
 - (id)init
 {
@@ -46,49 +73,13 @@
     NSLocale *locale = [NSLocale currentLocale];
     NSString *currentLocaleID = [locale localeIdentifier]; 
     
-    if ([currentLocaleID hasPrefix:@"en"])
-    {
-        if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"])
-        {
-            return [UIImage imageNamed:@"pozbannerEmpty.png"];
-        }
-        else
-        {
-            return [UIImage imageNamed:@"gaydarbanner.png"];
-        }
-    }
-    else if ([currentLocaleID hasPrefix:@"de"])
+    if ([currentLocaleID hasPrefix:@"de"])
     {
         return [UIImage imageNamed:@"dahbanner.png"];
     }
-    else if ([currentLocaleID hasPrefix:@"fr"])
-    {
-        if ([currentLocaleID isEqualToString:@"fr_CA"])
-        {
-            return [UIImage imageNamed:@"pozbannerEmpty.png"];
-        }
-        else
-        {
-            return [UIImage imageNamed:@"gaydarbanner.png"];
-        }
-    }
     else if ([currentLocaleID hasPrefix:@"es"])
     {
-        if ([currentLocaleID isEqualToString:@"es_ES"])
-        {
-            return [UIImage imageNamed:@"gaydarbanner.png"];
-        }
-        else
-        {
-            return [UIImage imageNamed:@"pozbannerES.png"];
-        }
-    }
-    //main EUROZONE get the gaydar banner
-    else if([currentLocaleID hasPrefix:@"nl"] || [currentLocaleID hasPrefix:@"da"] || [currentLocaleID hasPrefix:@"it"] || [currentLocaleID hasPrefix:@"no"] || [currentLocaleID hasPrefix:@"sv"] ||
-            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"])
-    {
-        return [UIImage imageNamed:@"gaydarbanner.png"];
+        return [UIImage imageNamed:@"pozbannerES.png"];
     }
     else
     {
@@ -102,48 +93,13 @@
     NSLocale *locale = [NSLocale currentLocale];
     NSString *currentLocaleID = [locale localeIdentifier]; 
     
-    if ([currentLocaleID hasPrefix:@"en"]) {
-        if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"])
-        {
-            return @"http://www.poz.com";
-        }
-        else
-        {
-            return @"http://app.gaydar.net";
-        }
-    }
-    else if ([currentLocaleID hasPrefix:@"de"])
+    if ([currentLocaleID hasPrefix:@"de"])
     {
         return @"http://www.aidshilfe.de";
     }
-    else if ([currentLocaleID hasPrefix:@"fr"])
-    {
-        if ([currentLocaleID isEqualToString:@"fr_CA"])
-        {
-            return @"http://www.poz.com";
-        }
-        else
-        {
-            return @"http://app.gaydar.net";
-        }
-    }
     else if ([currentLocaleID hasPrefix:@"es"])
     {
-        if ([currentLocaleID isEqualToString:@"es_ES"])
-        {
-            return @"http://app.gaydar.net";
-        }
-        else
-        {
             return @"http://www.poz.com/latino";
-        }
-    }
-    //main EUROZONE get the gaydar banner
-    else if([currentLocaleID hasPrefix:@"nl"] || [currentLocaleID hasPrefix:@"da"] || [currentLocaleID hasPrefix:@"it"] || [currentLocaleID hasPrefix:@"no"] || [currentLocaleID hasPrefix:@"sv"] ||
-            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"])
-    {
-        return @"http://app.gaydar.net";
     }
     else
     {
@@ -156,49 +112,13 @@
     NSLocale *locale = [NSLocale currentLocale];
     NSString *currentLocaleID = [locale localeIdentifier]; 
     
-    if ([currentLocaleID hasPrefix:@"en"])
-    {
-        if ([currentLocaleID isEqualToString:@"en_US"]
-            ||[currentLocaleID isEqualToString:@"en_CA"])
-        {
-            return @"POZ Magazine";
-        }
-        else
-        {
-            return @"Gaydar.net";
-        }
-    }
-    else if ([currentLocaleID hasPrefix:@"de"])
+    if ([currentLocaleID hasPrefix:@"de"])
     {
         return @"Deutsche AIDS Hilfe";
     }
-    else if ([currentLocaleID hasPrefix:@"fr"])
-    {
-        if ([currentLocaleID isEqualToString:@"fr_CA"])
-        {
-            return @"POZ Magazine";
-        }
-        else
-        {
-            return @"Gaydar.net";
-        }
-    }
     else if ([currentLocaleID hasPrefix:@"es"])
     {
-        if ([currentLocaleID isEqualToString:@"es_ES"])
-        {
-            return @"Gaydar.net";
-        }
-        else
-        {
-            return @"POZ Magazine ES";
-        }
-    }
-    //main EUROZONE get the gaydar banner
-    else if([currentLocaleID hasPrefix:@"nl"] || [currentLocaleID hasPrefix:@"da"] || [currentLocaleID hasPrefix:@"it"] || [currentLocaleID hasPrefix:@"no"] || [currentLocaleID hasPrefix:@"sv"] ||
-            [currentLocaleID isEqualToString:@"pt_PT"] || [currentLocaleID hasPrefix:@"fi"])
-    {
-        return @"Gaydar.net";
+        return @"POZ Magazine ES";
     }
     else
     {

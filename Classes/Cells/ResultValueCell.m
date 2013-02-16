@@ -9,11 +9,6 @@
 #import "ResultValueCell.h"
 
 @implementation ResultValueCell
-@synthesize inputTitle = _inputTitle;
-@synthesize inputValueField = _inputValueField;
-@synthesize resultValueDelegate =_resultValueDelegate;
-@synthesize inputValueKind = _inputValueKind;
-@synthesize colourCodeView = _colourCodeView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -15,18 +15,19 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface iStayHealthyPasswordController ()
+@property (nonatomic, strong) NSString * passwordString;
+@property (nonatomic, strong) IBOutlet UITextField *passwordField;
+@property (nonatomic, strong) IBOutlet UILabel *label;
+@property (nonatomic, strong) IBOutlet UILabel *versionLabel;
+@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 @property BOOL hasReloadedData;
+- (NSString *)passwordFromMasterRecord;
 @end
 
 @implementation iStayHealthyPasswordController
-@synthesize passwordField = _passwordField;
-@synthesize label = _label;
-@synthesize versionLabel = _versionLabel;
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize tabBarController = _tabBarController;
-@synthesize passwordString = _passwordString;
-@synthesize activityIndicator = _activityIndicator;
-@synthesize hasReloadedData = _hasReloadedData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,31 +51,17 @@
 
 - (void)reloadData:(NSNotification*)note
 {
-    NSError *error = nil;
-    if (![[self fetchedResultsController] performFetch:&error])
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *passwordFromSettings = (NSString *)[defaults objectForKey:@"password"];
+    if (!passwordFromSettings)
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
-                              message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
-                              delegate:self
-                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-                              otherButtonTitles:nil];
-        [alert show];
+        self.passwordString = [self passwordFromMasterRecord];
+        if (!self.passwordString)
+        {
+            [self loadTabController];
+        }
     }
-    NSArray *records = [self.fetchedResultsController fetchedObjects];
-    self.hasReloadedData = YES;
     [self.activityIndicator stopAnimating];
-    int count = [records count];
-    if (0 < count)
-    {
-        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records lastObject];
-        self.passwordString = masterRecord.Password;
-    }
-    else
-    {//shouldn't really happen
-        [self loadTabController];
-    }
-    
 }
 
 - (void)start
@@ -97,6 +84,16 @@
 #endif
     if ([self.passwordString isEqualToString:suggestedPassword] )
     {
+        [self loadTabController];
+    }
+    else if (0 == self.passwordString.length || [self.passwordString isEqualToString:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
+                                                        message:NSLocalizedString(@"Empty Password", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [alert show];
         [self loadTabController];
     }
     else
@@ -173,14 +170,47 @@
     }
 }
 
+- (NSString *)passwordFromMasterRecord
+{
+    NSError *error = nil;
+    if (![[self fetchedResultsController] performFetch:&error])
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+                              delegate:self
+                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    NSArray *records = [self.fetchedResultsController fetchedObjects];
+    for (iStayHealthyRecord *record in records)
+    {
+        NSString *testPassword = record.Password;
+        if (testPassword)
+        {
+            if (![testPassword isEqualToString:@""] && 0 < testPassword.length)
+            {
+                return testPassword;
+            }
+        }
+    }
+    return nil;
+}
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.hasReloadedData = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"RefetchAllDatabaseData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(start) name:@"startAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(start)
+                                                 name:@"startAnimation" object:nil];
 
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2-70, 140, 140);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -198,27 +228,36 @@
     label.font = [UIFont boldSystemFontOfSize:12];
     [self.activityIndicator addSubview:label];
     [self.view addSubview:self.activityIndicator];
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error])
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *passwordFromSettings = (NSString *)[defaults objectForKey:@"password"];
+    if (!passwordFromSettings)
     {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
-							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
-							  delegate:self 
-							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
-							  otherButtonTitles:nil];
-		[alert show];
-	}
-	NSArray *records = [self.fetchedResultsController fetchedObjects];
-    if (0 < records.count)
-    {
-        iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[records lastObject];
-        self.passwordString = masterRecord.Password;
+        self.passwordString = [self passwordFromMasterRecord];
     }
     else
-    {//shouldn't really happen
+    {
+        self.passwordString = passwordFromSettings;
+    }
+    
+    if (!self.passwordString)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password Reset" message:@"Your stored password appears to be empty. Please go into the app and recreate it." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         [self loadTabController];
     }
+    else
+    {
+        if ([self.passwordString isEqualToString:@""] || 0 == self.passwordString.length)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password Reset" message:@"Your stored password appears to be empty. Please go into the app and recreate it." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            [self loadTabController];
+        }
+    }
+    
+    
+    
     self.label.text = NSLocalizedString(@"Enter Password", @"Enter Password");
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     self.versionLabel.text = [NSString stringWithFormat:@"version %@",version];

@@ -9,8 +9,6 @@
 #import "DosageCell.h"
 
 @implementation DosageCell
-@synthesize segmentedControl = _segmentedControl;
-@synthesize unitName = _unitName;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

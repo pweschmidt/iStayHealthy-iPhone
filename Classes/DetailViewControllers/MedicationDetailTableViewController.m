@@ -7,32 +7,25 @@
 //
 
 #import "MedicationDetailTableViewController.h"
-#import "iStayHealthyRecord.h"
 #import "Medication.h"
 #import "Utilities.h"
 #import "MedSelectionCell.h"
 #import "SetDateCell.h"
 #import "GeneralSettings.h"
 
-@implementation MedicationDetailTableViewController
-@synthesize startDate = _startDate;
-@synthesize record = _record;
-@synthesize stateDictionary = _stateDictionary;
-@synthesize dateCell = _dateCell;
-@synthesize isInitialLoad = _isInitialLoad;
-@synthesize combiTablets = _combiTablets;
-@synthesize proteaseInhibitors = _proteaseInhibitors;
-@synthesize nRTInihibtors = _nRTInihibtors;
-@synthesize nNRTInhibitors = _nNRTInhibitors;
-@synthesize integraseInhibitors = _integraseInhibitors;
-@synthesize entryInhibitors = _entryInhibitors;
+@interface MedicationDetailTableViewController ()
+@property (nonatomic, retain) NSManagedObjectContext *context;
+- (void)postNotification;
+@end
 
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+@implementation MedicationDetailTableViewController
+
+- (id)initWithContext:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"MedicationDetailTableViewController" bundle:nil];
     if (self)
     {
-        self.record = masterrecord;
+        self.context = context;
         NSString *combipath = [[NSBundle mainBundle] pathForResource:@"CombiMeds" ofType:@"plist"];
         NSArray *tmp1 = [[NSArray alloc]initWithContentsOfFile:combipath];
         self.combiTablets = tmp1;
@@ -60,11 +53,8 @@
         self.startDate = [NSDate date];
     }
     return self;
+    
 }
-
-/**
- dealloc
- */
 
 - (void)viewDidUnload
 {
@@ -166,18 +156,16 @@
                 medDescription = (NSArray *)[self.proteaseInhibitors objectAtIndex:(keyValue - 1000000)];                
             }
             
-            NSManagedObjectContext *context = [self.record managedObjectContext];
-            Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:@"Medication" inManagedObjectContext:context];
-            [self.record addMedicationsObject:medication];
+            Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:@"Medication"
+                                                                   inManagedObjectContext:self.context];
             medication.Name = (NSString *)[medDescription objectAtIndex:1];
             medication.Drug = (NSString *)[medDescription objectAtIndex:0];
             medication.MedicationForm = (NSString *)[medDescription objectAtIndex:2];
             medication.StartDate = self.startDate;
 
             medication.UID = [Utilities GUID];
-            self.record.UID = [Utilities GUID];
             NSError *error = nil;
-            if (![context save:&error])
+            if (![self.context save:&error])
             {
 #ifdef APPDEBUG
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -192,7 +180,7 @@
         }
         
     }
-    
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];    
 }
 
@@ -204,6 +192,22 @@
 {
 	[self dismissModalViewControllerAnimated:YES];
 }
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+}
+
 
 #pragma mark -
 #pragma mark datepicker code

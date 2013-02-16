@@ -13,7 +13,6 @@
 #import "ChartSettings.h"
 
 @implementation ChartEvents
-@synthesize allChartEvents = _allChartEvents;
 
 - (id)init
 {
@@ -123,12 +122,6 @@
 @end
 
 @implementation ChartEvent
-@synthesize date = _date;
-@synthesize CD4Count = _CD4Count;
-@synthesize CD4Percent = _CD4Percent;
-@synthesize ViralLoad = _ViralLoad;
-@synthesize medicationName = _medicationName;
-@synthesize missedName = _missedName;
 
 - (id)init
 {

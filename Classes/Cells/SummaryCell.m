@@ -18,11 +18,6 @@
 @end
 
 @implementation SummaryCell
-@synthesize title = _title;
-@synthesize result = _result;
-@synthesize change = _change;
-@synthesize changeIndicatorView = _changeIndicatorView;
-@synthesize addedLayer = _addedLayer;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

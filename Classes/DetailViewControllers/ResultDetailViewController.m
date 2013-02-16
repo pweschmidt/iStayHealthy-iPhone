@@ -7,7 +7,6 @@
 //
 
 #import "ResultDetailViewController.h"
-#import "iStayHealthyRecord.h"
 #import "Results.h"
 #import "Utilities.h"
 #import "SetDateCell.h"
@@ -23,40 +22,21 @@
 
 @interface ResultDetailViewController ()
 @property BOOL isInEditMode;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+- (void)postNotification;
 @end
 
 @implementation ResultDetailViewController
-@synthesize resultsDate = _resultsDate;
-@synthesize setDateCell = _setDateCell;
-@synthesize record = _record;
-@synthesize vlHIV = _vlHIV;
-@synthesize vlHepC = _vlHepC;
-@synthesize cd4 = _cd4;
-@synthesize cd4Percent = _cd4Percent;
-@synthesize glucose = _glucose;
-@synthesize ldl = _ldl;
-@synthesize hdl = _hdl;
-@synthesize cholesterol = _cholesterol;
-@synthesize weight = _weight;
-@synthesize systole = _systole;
-@synthesize diastole = _diastole;
-@synthesize hemoglobulin = _hemoglobulin;
-@synthesize whiteCells = _whiteCells;
-@synthesize redCells = _redCells;
-@synthesize platelets = _platelets;
-@synthesize resultsSegmentControl = _resultsSegmentControl;
-@synthesize isInEditMode = _isInEditMode;
-@synthesize results = _results;
+
 #pragma mark -
 #pragma mark View lifecycle
 
-
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+- (id)initWithContext:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"ResultDetailViewController" bundle:nil];
     if (self)
     {
-        self.record = masterrecord;
+        self.context = context;
         self.resultsDate = [NSDate date];
         self.vlHIV = [NSNumber numberWithFloat:-1.0];
         self.cd4 = [NSNumber numberWithFloat:-1.0];
@@ -75,19 +55,19 @@
         self.platelets = [NSNumber numberWithFloat:-1.0];
         self.systole = [NSNumber numberWithFloat:-1.0];
         self.diastole = [NSNumber numberWithFloat:-1.0];
-        self.isInEditMode = NO;
+        self.isInEditMode = NO;        
     }
     return self;
 }
 
-- (id)initWithResults:(Results *)storedResults withMasterRecord:(iStayHealthyRecord *)masterRecord
+- (id)initWithResults:(Results *)results context:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"ResultDetailViewController" bundle:nil];
     if (self)
     {
         self.isInEditMode = YES;
-        self.results = storedResults;
-        self.record = masterRecord;
+        self.results = results;
+        self.context = context;
         self.vlHIV = [NSNumber numberWithFloat:-1.0];
         self.vlHepC = [NSNumber numberWithFloat:-1.0];
         self.cd4 = [NSNumber numberWithFloat:-1.0];
@@ -168,9 +148,9 @@
         if (nil != self.results.redBloodCellCount)
         {
             self.redCells = self.results.redBloodCellCount;
-        }
+        }        
     }
-    return self;
+    return self;    
 }
 
 
@@ -194,6 +174,9 @@
                                             target:self action:@selector(save:)];
     NSArray *segmentArray = [NSArray arrayWithObjects:NSLocalizedString(@"HIV Results", nil), NSLocalizedString(@"Blood Results", nil), NSLocalizedString(@"Other Results", nil), nil];
     
+    self.undetectableSwitch = [[UISwitch alloc] init];
+    self.undetectableSwitch.tintColor = TINTCOLOUR;
+    self.undetectableSwitch.on = NO;
     
     self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:segmentArray];
     
@@ -224,10 +207,8 @@
  */
 - (IBAction) save: (id) sender
 {
-    NSManagedObjectContext *context = nil;
     if (self.isInEditMode)
     {
-        context = [self.results managedObjectContext];
         self.results.ResultsDate = self.resultsDate;
         self.results.CD4 = self.cd4;
         self.results.CD4Percent = self.cd4Percent;
@@ -245,14 +226,11 @@
         self.results.PlateletCount = self.platelets;
         self.results.UID = [Utilities GUID];
         self.results.redBloodCellCount = self.redCells;
-        self.record.UID = [Utilities GUID];
     }
     else
     {
-        context = [self.record managedObjectContext];
-        Results *results = [NSEntityDescription insertNewObjectForEntityForName:@"Results" inManagedObjectContext:context];
-        [self.record addResultsObject:results];
-        self.record.UID = [Utilities GUID];
+        Results *results = [NSEntityDescription insertNewObjectForEntityForName:@"Results"
+                                                         inManagedObjectContext:self.context];
         results.UID = [Utilities GUID];
         results.ResultsDate = self.resultsDate;
         results.ViralLoad = self.vlHIV;
@@ -272,10 +250,10 @@
         results.redBloodCellCount = self.redCells;
     }
     
-    if (nil != context)
+    if (nil != self.context)
     {
         NSError *error = nil;
-        if (![context save:&error])
+        if (![self.context save:&error])
         {
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -289,6 +267,7 @@
         }
     }
 	
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -303,11 +282,9 @@
 
 - (void) removeSQLEntry
 {
-    [self.record removeResultsObject:self.results];
-    NSManagedObjectContext *context = self.results.managedObjectContext;
-    [context deleteObject:self.results];
+    [self.context deleteObject:self.results];
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -319,8 +296,25 @@
                           otherButtonTitles: nil]
          show];
     }
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];
 }
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+}
+
 
 /**
  shows the Alert view when user clicks the Trash button
@@ -634,19 +628,27 @@
             {
                 case 0:
                     resultCell.inputTitle.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
-                    if (0 < [self.cd4 intValue])
+                    if (0 < [self.cd4 intValue] && self.isInEditMode)
                     {
                         resultCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.cd4 intValue]];
                         resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = INTEGERINPUT;
                     break;
                 case 1:
                     resultCell.inputTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
-                    if (0 < [self.cd4Percent floatValue])
+                    if (0 < [self.cd4Percent floatValue] && self.isInEditMode)
                     {
                         resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.cd4Percent floatValue]];
                         resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -682,20 +684,28 @@
             {
                 case 0:
                     resultCell.inputTitle.text = NSLocalizedString(@"Glucose", @"Glucose");
-                    if (0 < [self.glucose floatValue])
+                    if (0 < [self.glucose floatValue] && self.isInEditMode)
                     {
                         resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.glucose floatValue]];
                         resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
                 case 1:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Total Cholesterol", @"Total Cholesterol");
-                    if (0 < [self.cholesterol floatValue])
+                    if (0 < [self.cholesterol floatValue] && self.isInEditMode)
                     {
                         resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.cholesterol floatValue]];
                         resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -703,10 +713,14 @@
                 case 2:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"HDL", @"HDL");
-                    if (0 < [self.hdl floatValue])
+                    if (0 < [self.hdl floatValue] && self.isInEditMode)
                     {
                         resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.hdl floatValue]];
                         resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -714,10 +728,14 @@
                 case 3:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"LDL", @"LDL");
-                    if (0 < [self.ldl floatValue])
+                    if (0 < [self.ldl floatValue] && self.isInEditMode)
                     {
                         resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.ldl floatValue]];
                         resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = FLOATINPUT;
                     break;
@@ -749,10 +767,14 @@
             resultCell.colourCodeView.backgroundColor = DARK_GREEN;
             resultCell.colourCodeView.layer.cornerRadius = 5;
             resultCell.inputTitle.text = NSLocalizedString(@"Weight", @"Weight");
-            if (0 < [self.weight floatValue])
+            if (0 < [self.weight floatValue] && self.isInEditMode)
             {
                 resultCell.inputValueField.text = [NSString stringWithFormat:@"%2.1f",[self.weight floatValue]];
                 resultCell.inputValueField.textColor = [UIColor blackColor];
+            }
+            else
+            {
+                resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
             }
             resultCell.inputValueKind = FLOATINPUT;
             resultCell.tag = tag;
@@ -795,13 +817,17 @@
                 case 0:
                     segCell.inputTitle.text = NSLocalizedString(@"Viral Load",@"Viral Load");
                     segCell.inputValueField.enabled = NO;
-                    if (40 <= [self.vlHIV intValue])
+                    if (40 <= [self.vlHIV intValue] && self.isInEditMode)
                     {
                         segCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.vlHIV intValue]];
                         segCell.inputValueField.textColor = [UIColor blackColor];
                         segCell.inputValueField.enabled = YES;
                         segCell.switchControl.on = NO;
                     }
+                    else
+                    {
+                        segCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
+                    }                    
                     if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue])
                     {
                         segCell.inputValueField.textColor = [UIColor blackColor];
@@ -819,12 +845,16 @@
                 case 1:
                     segCell.inputTitle.text = NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC");
                     segCell.inputValueField.enabled = YES;
-                    if (40 <= [self.vlHepC intValue])
+                    if (40 <= [self.vlHepC intValue] && self.isInEditMode)
                     {
                         segCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.vlHepC intValue]];
                         segCell.inputValueField.textColor = [UIColor blackColor];
                         segCell.inputValueField.enabled = YES;
                         segCell.switchControl.on = NO;
+                    }
+                    else
+                    {
+                        segCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue])
                     {
@@ -873,10 +903,14 @@
                 case 0:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Hemoglobulin", @"Hemoglobulin");
-                    if (0 < [self.hemoglobulin floatValue])
+                    if (0 < [self.hemoglobulin floatValue] && self.isInEditMode)
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.hemoglobulin intValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.hemoglobulin intValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = INTEGERINPUT;
                     break;
@@ -884,10 +918,14 @@
                 case 1:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"White Blood Cells", @"White Blood Cells");
-                    if (0 < [self.whiteCells floatValue])
+                    if (0 < [self.whiteCells floatValue] && self.isInEditMode)
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.whiteCells intValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.whiteCells intValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = INTEGERINPUT;
                     break;
@@ -895,10 +933,14 @@
                 case 2:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Red Blood Cells", @"Red Blood Cells");
-                    if (0 < [self.redCells floatValue])
+                    if (0 < [self.redCells floatValue] && self.isInEditMode)
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.redCells intValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.redCells intValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = INTEGERINPUT;
                     break;
@@ -906,10 +948,14 @@
                 case 3:
                 {
                     resultCell.inputTitle.text = NSLocalizedString(@"Platelets", @"Platelets");
-                    if (0 < [self.platelets floatValue])
+                    if (0 < [self.platelets floatValue] && self.isInEditMode)
                     {
-                        [[resultCell inputValueField]setText:[NSString stringWithFormat:@"%d",[self.platelets intValue]]];
-                        [[resultCell inputValueField]setTextColor:[UIColor blackColor]];
+                        resultCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.platelets intValue]];
+                        resultCell.inputValueField.textColor = [UIColor blackColor];
+                    }
+                    else
+                    {
+                        resultCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
                     resultCell.inputValueKind = INTEGERINPUT;
                     break;

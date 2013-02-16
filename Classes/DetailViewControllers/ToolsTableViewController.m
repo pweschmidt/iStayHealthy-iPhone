@@ -15,26 +15,27 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface ToolsTableViewController ()
-- (void)start;
+@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
+@property (nonatomic, strong) NSString *password;
+@property BOOL isPasswordEnabled;
+@property BOOL firstIsSet;
+@property BOOL secondIsSet;
+@property BOOL isConsistent;
+@property (nonatomic, strong) NSString *firstPassword;
+@property (nonatomic, strong) NSString *secondPassword;
+@property (nonatomic, strong) UISwitch *passwordSwitch;
+@property (nonatomic, strong) UITextField *passwordField;
+@property (nonatomic, strong) UITextField *passConfirmField;
+@property (nonatomic, strong) UIImageView *firstRightView;
+@property (nonatomic, strong) UIImageView *firstWrongView;
+@property (nonatomic, strong) UIImageView *secondRightView;
+@property (nonatomic, strong) UIImageView *secondWrongView;
+- (NSString *)passwordFromMasterRecord;
 @end
 
 @implementation ToolsTableViewController
-@synthesize passwordSwitch = _passwordSwitch;
-@synthesize passwordField = _passwordField;
-@synthesize passConfirmField = _passConfirmField;
-@synthesize firstPassword = _firstPassword;
-@synthesize secondPassword = _secondPassword;
-@synthesize masterRecord = _masterRecord;
-@synthesize firstIsSet = _firstIsSet;
-@synthesize secondIsSet = _secondIsSet;
-@synthesize isConsistent = _isConsistent;
-@synthesize isPasswordEnabled = _isPasswordEnabled;
-@synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize firstRightView = _firstRightView;
-@synthesize firstWrongView = _firstWrongView;
-@synthesize secondRightView = _secondRightView;
-@synthesize secondWrongView = _secondWrongView;
-@synthesize activityIndicator = _activityIndicator;
+@synthesize fetchedResultsController = _fetchedResultsController;
 /**
  dealloc
  */
@@ -53,84 +54,64 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.navigationItem.title = NSLocalizedString(@"Password", @"Password");
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                              target:self action:@selector(done:)];
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadData:)
                                                  name:@"RefetchAllDatabaseData"
                                                object:nil];
-        
+
+	self.navigationItem.title = NSLocalizedString(@"Password", @"Password");
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                              target:self action:@selector(done:)];
     
-    
-    CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2-50, 100, 100);
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-    self.activityIndicator.frame = frame;
-    self.activityIndicator.layer.cornerRadius = 10;
-    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
+    if (self.isPasswordEnabled)
+    {
+        self.password = [self passwordFromMasterRecord];
+        if (!self.password)
+        {
+            self.isPasswordEnabled = NO;
+            [defaults setBool:self.isPasswordEnabled forKey:@"isPasswordEnabled"];
+            [defaults synchronize];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password Not Found"
+                                                            message:@"Please reset your password"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+            [alert show];
+        }
+    }    
+}
+
+- (NSString *)passwordFromMasterRecord
+{
+    self.masterRecord = nil;
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
     {
 		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
-							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
-							  delegate:self 
-							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
+							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
+							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
+							  delegate:self
+							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
 							  otherButtonTitles:nil];
 		[alert show];
 	}
 	NSArray *records = [self.fetchedResultsController fetchedObjects];
-    if (0 < records.count)
+    for (iStayHealthyRecord *record in records)
     {
-        self.masterRecord = (iStayHealthyRecord *)[records lastObject];
-    }
-    else
-    {
-        self.masterRecord = nil;
-    }
-
-}
-- (void)reloadData:(NSNotification*)note
-{
-#ifdef APPDEBUG
-    NSLog(@"We are getting notified to reload the data");
-#endif
-    NSError *error = nil;
-    if (![[self fetchedResultsController] performFetch:&error])
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
-                              message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
-                              delegate:self
-                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-                              otherButtonTitles:nil];
-        [alert show];
-    }
-    [self.activityIndicator stopAnimating];
-    NSArray *records = [self.fetchedResultsController fetchedObjects];
-    if (0 < records.count)
-    {
-        self.masterRecord = (iStayHealthyRecord *)[records lastObject];
-    }
-    else
-    {
-        self.masterRecord = nil;
-    }
-    
-}
-- (void)start
-{
-    if (nil != self.activityIndicator)
-    {
-        if (!self.activityIndicator.isAnimating)
+        NSString *password = record.Password;
+        if (nil != password)
         {
-            [self.activityIndicator startAnimating];
+            if (![password isEqualToString:@""] && password.length != 0)
+            {
+                self.masterRecord = record;
+                return record.Password;
+            }
         }
     }
+    return nil;
 }
 
 
@@ -140,20 +121,6 @@
     self.firstIsSet = NO;
     self.secondIsSet = NO;
     self.isConsistent = NO;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
-    if (nil == self.masterRecord)
-    {
-        self.hasPassword = NO;
-        return;
-    }
-    NSString *passwordString = self.masterRecord.Password;
-    self.hasPassword = TRUE;
-    if (nil == passwordString || [passwordString isEqualToString:@""])
-    {
-        self.hasPassword = FALSE;
-    }
-    [self.tableView reloadData];
 }
 
 /**
@@ -162,36 +129,20 @@
  */
 - (IBAction) done: (id) sender
 {
-    if (nil == self.masterRecord)
-    {
-        return;
-    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled)
     {
-        NSManagedObjectContext *context = [self.masterRecord managedObjectContext];
-        self.masterRecord.UID = [Utilities GUID];
-        self.masterRecord.Password = self.passwordField.text;
-        NSError *error = nil;
-        if (![context save:&error])
-        {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
-                                        message:NSLocalizedString(@"Save error message", nil)
-                                       delegate:nil
-                              cancelButtonTitle:@"Ok"
-                              otherButtonTitles: nil]
-             show];
-        }
-        else
-        {
-            UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [isDone show];
-        }
+        [defaults setBool:YES forKey:@"isPasswordEnabled"];
+        [defaults setObject:self.password forKey:@"password"];
+        UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [isDone show];
     }
     else
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setBool:FALSE forKey:@"isPasswordEnabled"];        
+        [defaults setBool:NO forKey:@"isPasswordEnabled"];
     }
+    [defaults synchronize];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -200,14 +151,14 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.passwordSwitch.on)
     {
-        [defaults setBool:TRUE forKey:@"isPasswordEnabled"];
-        self.isPasswordEnabled = TRUE;
+        [defaults setBool:YES forKey:@"isPasswordEnabled"];
+        self.isPasswordEnabled = YES;
         self.masterRecord.Password = self.passwordField.text;
     }
     else
     {
-        [defaults setBool:FALSE forKey:@"isPasswordEnabled"];
-        self.isPasswordEnabled = FALSE;
+        [defaults setBool:NO forKey:@"isPasswordEnabled"];
+        self.isPasswordEnabled = NO;
         self.masterRecord.Password = @"";
     }
     [defaults synchronize];
@@ -278,6 +229,7 @@
         {
             self.isConsistent = YES;
             self.secondRightView.hidden = NO;
+            self.password = self.firstPassword;
         }
         else
         {
@@ -501,9 +453,9 @@
  */
 - (NSFetchedResultsController *)fetchedResultsController
 {
-	if (fetchedResultsController_ != nil)
+	if (_fetchedResultsController != nil)
     {
-		return fetchedResultsController_;
+		return _fetchedResultsController;
 	}
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -520,9 +472,9 @@
 													  sectionNameKeyPath:nil 
 													  cacheName:nil];
 	tmpFetchController.delegate = self;
-	fetchedResultsController_ = tmpFetchController;
+	_fetchedResultsController = tmpFetchController;
 	
-	return fetchedResultsController_;
+	return _fetchedResultsController;
 	
 }	
 

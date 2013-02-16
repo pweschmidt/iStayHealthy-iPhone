@@ -7,7 +7,6 @@
 //
 
 #import "SideEffectsDetailTableViewController.h"
-#import "iStayHealthyRecord.h"
 #import "SideEffects.h"
 #import "SetDateCell.h"
 #import "GeneralSettings.h"
@@ -27,23 +26,11 @@
 @property (nonatomic, strong) NSNumber *seriousnessIndex;
 @property (nonatomic, strong) NSString *selectedSideEffectLabel;
 @property (nonatomic, strong) NSString *seriousness;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+- (void)postNotification;
 @end
 
 @implementation SideEffectsDetailTableViewController
-@synthesize effectsDate = _effectsDate;
-@synthesize record = _record;
-@synthesize sideEffects = _sideEffects;
-@synthesize setDateCell = _setDateCell;
-@synthesize isEditMode = _isEditMode;
-@synthesize sideEffectArray = _sideEffectArray;
-@synthesize seriousnessControl = _seriousnessControl;
-@synthesize currentMedArray = _currentMedArray;
-@synthesize selectedCell = _selectedCell;
-@synthesize formatter = _formatter;
-@synthesize seriousnessIndex = _seriousnessIndex;
-@synthesize seriousness = _seriousness;
-@synthesize selectedSideEffectLabel = _selectedSideEffectLabel;
-@synthesize currentMeds = _currentMeds;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -55,17 +42,16 @@
     return self;
 }
 
-- (id)initWithResults:(SideEffects *)effects
-         masterRecord:(iStayHealthyRecord *)masterRecord
+- (id)initWithSideEffects:(SideEffects *)effects
 {
     self = [super initWithNibName:@"SideEffectsDetailTableViewController" bundle:nil];
     if (nil != self)
     {
         self.isEditMode = YES;
+        self.context = effects.managedObjectContext;
         self.sideEffects = effects;
         self.effectsDate = self.sideEffects.SideEffectDate;
         self.currentMeds = self.sideEffects.Name;
-        self.record = masterRecord;
         self.selectedCell = nil;
         self.formatter = [[NSDateFormatter alloc] init];
         self.formatter.dateFormat = @"dd MMM YY";
@@ -87,24 +73,25 @@
             else
             {
                 self.seriousnessIndex = [NSNumber numberWithInt:2];
-            }            
+            }
         }
 #ifdef APPDEBUG
         NSLog(@"Seriousness is %@",self.seriousness);
 #endif
     }
     return self;
+    
 }
 
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord medication:(NSArray *)medArray
+- (id)initWithContext:(NSManagedObjectContext  *)context medications:(NSArray *)medications
 {
     self = [super initWithNibName:@"SideEffectsDetailTableViewController" bundle:nil];
     if (nil != self)
     {
+        self.context = context;
         self.isEditMode = NO;
         self.effectsDate = [NSDate date];
-        self.record = masterrecord;
-        self.currentMedArray = [NSMutableArray arrayWithArray:medArray];
+        self.currentMedArray = [NSMutableArray arrayWithArray:medications];
         NSMutableString *medsString = [NSMutableString string];
         for (Medication *med in self.currentMedArray)
         {
@@ -117,8 +104,8 @@
         self.seriousnessIndex = [NSNumber numberWithInt:0];
     }
     return self;
+    
 }
-
 
 - (void)viewDidLoad
 {
@@ -166,22 +153,17 @@
             self.seriousness = @"Serious";
             break;
     }
-    NSManagedObjectContext *context = nil;
     if (self.isEditMode)
     {
-        context = [self.sideEffects managedObjectContext];
         self.sideEffects.SideEffect = self.selectedSideEffectLabel;
         self.sideEffects.SideEffectDate = self.effectsDate;
         self.sideEffects.seriousness = self.seriousness;
         self.sideEffects.UID = [Utilities GUID];
-        self.record.UID = [Utilities GUID];
     }
     else
     {
-        context = [self.record managedObjectContext];
-        SideEffects *newEffects = [NSEntityDescription insertNewObjectForEntityForName:@"SideEffects" inManagedObjectContext:context];
-        [self.record addSideeffectsObject:newEffects];
-        self.record.UID = [Utilities GUID];
+        SideEffects *newEffects = [NSEntityDescription insertNewObjectForEntityForName:@"SideEffects"
+                                                                inManagedObjectContext:self.context];
         newEffects.UID = [Utilities GUID];
         newEffects.SideEffect = self.selectedSideEffectLabel;
         newEffects.SideEffectDate = self.effectsDate;
@@ -194,10 +176,10 @@
         newEffects.Name = effectedDrugs;
         newEffects.seriousness = self.seriousness;
     }
-    if (nil != context)
+    if (nil != self.context)
     {
         NSError *error = nil;
-        if (![context save:&error])
+        if (![self.context save:&error])
         {
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -210,12 +192,31 @@
              show];
         }
     }
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];
 }
+
 - (IBAction) cancel:				(id) sender
 {
 	[self dismissModalViewControllerAnimated:YES];
 }
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+}
+
+
 
 - (IBAction)seriousnessChanged:(id)sender
 {
@@ -269,11 +270,9 @@
 
 - (void)removeSQLEntry
 {
-    [self.record removeSideeffectsObject:self.sideEffects];
-    NSManagedObjectContext *context = self.sideEffects.managedObjectContext;
-    [context deleteObject:self.sideEffects];
+    [self.context deleteObject:self.sideEffects];
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -285,7 +284,8 @@
                           otherButtonTitles: nil]
          show];
     }
-	[self dismissModalViewControllerAnimated:YES];    
+    [self postNotification];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 

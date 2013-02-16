@@ -7,51 +7,62 @@
 //
 
 #import "PreviousMedViewController.h"
+#import "SQLDataTableController.h"
 #import "GeneralSettings.h"
-#import "iStayHealthyRecord.h"
 #import "PreviousMedication.h"
 #import "HIVMedListCell.h"
 #import "iStayHealthyAppDelegate.h"
 #import "NSArray-Set.h"
 
 @interface PreviousMedViewController ()
+@property (nonatomic, strong) SQLDataTableController *dataController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
 - (NSString *)getStringFromName:(NSString *)name;
 @end
 
 @implementation PreviousMedViewController
-@synthesize record = _record;
-@synthesize allPreviousMedications = _allPreviousMedications;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+- (id)initWithContext:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"PreviousMedViewController" bundle:nil];
     if (self) {
-        self.record = masterrecord;
-        NSSet *previousSet = masterrecord.previousMedications;
-        if (0 != previousSet.count) {
-            self.allPreviousMedications = [NSArray arrayByOrderingSet:previousSet byKey:@"endDate" ascending:YES reverseOrder:YES];
-        }
-        else {//if empty - simply map to empty set
-            self.allPreviousMedications = (NSMutableArray *)previousSet;
-        }
+        self.context = context;
     }
     return self;
+    
+}
+
+- (void)setUpData
+{
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"PreviousMedication"
+                                                                     sortBy:@"endDate"
+                                                                isAscending:NO
+                                                                    context:self.context];
+    
+    self.allPreviousMedications = [NSMutableArray arrayWithArray:[self.dataController entriesForEntity]];
+}
+
+- (void)reloadData:(NSNotification *)note
+{
+    NSLog(@"reloadData");
+    self.hasReloadedData = YES;
+    if (nil != note)
+    {
+        self.allPreviousMedications = [NSMutableArray arrayWithArray:[self.dataController entriesForEntity]];
+        [self.tableView reloadData];
+    }
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
+    [self setUpData];
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
@@ -166,7 +177,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         PreviousMedication *previousMed = (PreviousMedication *)[self.allPreviousMedications objectAtIndex:indexPath.row];
-        [self.record removePreviousMedicationsObject:previousMed];
         [self.allPreviousMedications removeObject:previousMed];
         NSManagedObjectContext *context = previousMed.managedObjectContext;
         [context deleteObject:previousMed];

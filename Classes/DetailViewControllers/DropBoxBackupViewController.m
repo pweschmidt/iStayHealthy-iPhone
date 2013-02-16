@@ -21,6 +21,7 @@
 - (void)createIStayHealthyFolder;
 - (void)copyOldFileToNew;
 - (void)setRestClient;
+- (void)postNotification;
 @property (nonatomic, strong) DBRestClient* restClient;
 @property BOOL dropBoxFileExists;
 @property BOOL newDropboxFileExists;
@@ -31,13 +32,7 @@
 @end
 
 @implementation DropBoxBackupViewController
-@synthesize iStayHealthyPath  = _iStayHealthyPath;
-@synthesize activityIndicator = _activityIndicator;
-@synthesize dropBoxFileExists = _dropBoxFileExists;
-@synthesize newDropboxFileExists = _newDropboxFileExists;
-@synthesize restClient = _restClient;
-@synthesize isBackup = _isBackup;
-@synthesize dataLoader = _dataLoader;
+
 /**
  initWithStyle
  */
@@ -386,16 +381,32 @@
     [self.activityIndicator stopAnimating];
     if (success)
     {
+        [self postNotification];
         [[[UIAlertView alloc]
           initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.isth.",nil)
           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-         show];
+         show];        
     }
     else
     {
         [self showDBError];        
     }
 
+}
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
 }
 
 

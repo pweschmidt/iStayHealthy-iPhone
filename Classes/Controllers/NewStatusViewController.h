@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "iStayHealthyTableViewController.h"
+#import "BasicViewController.h"
+
 #define TEXTCELLHEIGHT 30.0
 #define CHARTCELLHEIGHT 208.0
 
@@ -16,7 +18,8 @@
 @class ChartEvents;
 @class Results;
 
-@interface NewStatusViewController : iStayHealthyTableViewController
+@interface NewStatusViewController : BasicViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) HealthChartsViewPortrait *chartView;
 @property (nonatomic, strong) ChartEvents *events;
 @property (nonatomic, strong) NSNumber * sizeOfSummaryCell;
@@ -26,4 +29,6 @@
 - (void)configureViralLoadCell:(SummaryCell *)cell;
 - (void) showInfoView:(id)sender;
 - (void) showSettingsView:(id)sender;
+- (void)reloadData:(NSNotification*)note;
+- (void)start;
 @end

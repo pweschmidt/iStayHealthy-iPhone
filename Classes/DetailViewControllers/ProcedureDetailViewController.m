@@ -10,22 +10,16 @@
 #import "Procedures.h"
 #import "Utilities.h"
 #import "SetDateCell.h"
-#import "iStayHealthyRecord.h"
 #import "GeneralSettings.h"
 #import "GradientButton.h"
 
 @interface ProcedureDetailViewController ()
 @property BOOL isEdit;
+@property (nonatomic, strong) NSManagedObjectContext * context;
+- (void)postNotification;
 @end
 
 @implementation ProcedureDetailViewController
-@synthesize dateCell = _dateCell;
-@synthesize startDate = _startDate;
-@synthesize record = _record;
-@synthesize name = _name;
-@synthesize illness = _illness;
-@synthesize procedures = _procedures;
-@synthesize isEdit = _isEdit;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,26 +31,26 @@
     return self;
 }
 
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+- (id)initWithContext:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"ProcedureDetailViewController" bundle:nil];
     if (nil != self)
     {
         self.isEdit = NO;
-        self.record = masterrecord;
+        self.context = context;
         self.startDate = [NSDate date];
     }
-    return self;
+    return self;    
 }
 
-- (id)initWithProcedure:(Procedures *)procedure masterRecord:(iStayHealthyRecord *)masterRecord
+- (id)initWithProcedure:(Procedures *)procedure
 {
     self = [super initWithNibName:@"ProcedureDetailViewController" bundle:nil];
     if (nil != self)
     {
         self.isEdit = YES;
         self.procedures = procedure;
-        self.record = masterRecord;
+        self.context = procedure.managedObjectContext;
         if (nil != procedure.Date)
         {
             self.startDate = procedure.Date;
@@ -82,18 +76,14 @@
             self.illness = NSLocalizedString(@"Enter Name", @"Enter Name");
         }
     }
-    return self;
-    
+    return self;    
 }
 
 - (IBAction) save:					(id) sender
 {
 	NSError *error = nil;
-    NSManagedObjectContext *context = nil;
     if (self.isEdit)
     {
-        context = [self.procedures managedObjectContext];
-        self.record.UID = [Utilities GUID];
         self.procedures.UID = [Utilities GUID];
         self.procedures.Illness = self.illness;
         self.procedures.Name = self.name;
@@ -101,16 +91,14 @@
     }
     else
     {
-        context = [self.record managedObjectContext];
-        Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:@"Procedures" inManagedObjectContext:context];
-        [self.record addProceduresObject:procedures];
+        Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:@"Procedures"
+                                                               inManagedObjectContext:self.context];
         procedures.Date = self.startDate;
         procedures.Name = self.name;
         procedures.Illness = self.illness;
         procedures.UID = [Utilities GUID];
-        self.record.UID = [Utilities GUID];
     }
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -122,12 +110,28 @@
                           otherButtonTitles: nil]
          show];
     }
+    [self postNotification];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction) cancel:				(id) sender
 {
     [self dismissModalViewControllerAnimated:YES];    
+}
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
 }
 
 
@@ -186,11 +190,9 @@
 
 - (void) removeSQLEntry
 {
-    [self.record removeProceduresObject:self.procedures];
-    NSManagedObjectContext *context = self.procedures.managedObjectContext;
-    [context deleteObject:self.procedures];
+    [self.context deleteObject:self.procedures];
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -202,6 +204,7 @@
                           otherButtonTitles: nil]
          show];
     }
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];
 }
 

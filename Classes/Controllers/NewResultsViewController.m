@@ -16,43 +16,71 @@
 #import "ChartSettings.h"
 #import "ResultListCell.h"
 #import "UINavigationBar-Button.h"
-#import "ResultsSettingsTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Utilities.h"
+#import "WebViewController.h"
+
+@interface NewResultsViewController ()
+@property (nonatomic, strong) NSArray *allResultsInReverseOrder;
+@property (nonatomic, strong) SQLDataTableController *dataController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+- (void)setUpData;
+@end
 
 @implementation NewResultsViewController
 
-- (void)didReceiveMemoryWarning
+
+- (void)setUpData
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"Results" sortBy:@"ResultsDate" isAscending:NO context:self.context];
     
-    // Release any cached data, images, etc that aren't in use.
+    self.allResultsInReverseOrder = [self.dataController entriesForEntity];    
 }
 
-/**
- dealloc
- */
+- (void)reloadData:(NSNotification *)note
+{
+    NSLog(@"reloadData");
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+    if (nil != note)
+    {
+        self.allResultsInReverseOrder = [self.dataController entriesForEntity];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }    
+}
+
 
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-#ifdef APPDEBUG
-    NSLog(@"NewResultsViewController viewDidLoad");
-#endif
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadResultDetailViewController)];
-    
-    /*
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(loadSetUpViewController)];
-
-     */
+    self.hasReloadedData = NO;
+    [self setUpData];
+      
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
     {
         [navBar addButtonWithTitle:@"Results" target:self selector:@selector(gotoPOZ)];
     }
+    
+    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
+    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
+    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
+    
+    
 }
 
 /**
@@ -68,7 +96,8 @@
  */
 - (void)loadResultDetailViewController
 {
-	ResultDetailViewController *newRecordView = [[ResultDetailViewController alloc] initWithRecord:self.masterRecord];
+    ResultDetailViewController *newRecordView = [[ResultDetailViewController alloc] initWithContext:self.context];
+//	ResultDetailViewController *newRecordView = [[ResultDetailViewController alloc] initWithRecord:self.masterRecord];
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newRecordView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
@@ -81,7 +110,8 @@
 - (void)loadResultChangeViewController:(int)row
 {
     Results *results = (Results *)[self.allResultsInReverseOrder objectAtIndex:row];
-	ResultDetailViewController *changeRecordView = [[ResultDetailViewController alloc] initWithResults:results withMasterRecord:self.masterRecord];
+    ResultDetailViewController *changeRecordView = [[ResultDetailViewController alloc] initWithResults:results context:self.context];
+//	ResultDetailViewController *changeRecordView = [[ResultDetailViewController alloc] initWithResults:results withMasterRecord:self.masterRecord];
     
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:changeRecordView];
 	UINavigationBar *navigationBar = [navigationController navigationBar];
@@ -89,11 +119,6 @@
 	[self presentModalViewController:navigationController animated:YES];
 }
 
-- (void)loadSetUpViewController
-{
-    ResultsSettingsTableViewController *settingsController = [[ResultsSettingsTableViewController alloc]initWithRecord:self.masterRecord];
-    [self.navigationController pushViewController:settingsController animated:YES];
-}
 
 
 
@@ -207,15 +232,15 @@
         cell.otherView.backgroundColor = [UIColor clearColor];
     }
     
-    [[cell dateLabel]setText:[formatter stringFromDate:current.ResultsDate]];
-    [[cell cd4Title]setText:NSLocalizedString(@"CD4 Count",nil)];
-    [[cell cd4Title]setTextColor:TEXTCOLOUR];
+    cell.dateLabel.text = [formatter stringFromDate:current.ResultsDate];
+    cell.cd4Title.text = NSLocalizedString(@"CD4 Count",nil);
+    cell.cd4Title.textColor = TEXTCOLOUR;
     [cell setCD4:current.CD4];
-    [[cell cd4PercentTitle]setText:NSLocalizedString(@"CD4 %", @"CD4 %")];
-    [[cell cd4PercentTitle]setTextColor:TEXTCOLOUR];
+    cell.cd4PercentTitle.text = NSLocalizedString(@"CD4 %", @"CD4 %");
+    cell.cd4PercentTitle.textColor = TEXTCOLOUR;
     [cell setCD4Percent:current.CD4Percent];
-    [[cell vlTitle]setText:NSLocalizedString(@"Viral Load", @"Viral Load")];
-    [[cell vlTitle]setTextColor:TEXTCOLOUR];
+    cell.vlTitle.text = NSLocalizedString(@"Viral Load", @"Viral Load");
+    cell.vlTitle.textColor = TEXTCOLOUR;
     [cell setViralLoad:current.ViralLoad];
     return (UITableViewCell *)cell;
 }

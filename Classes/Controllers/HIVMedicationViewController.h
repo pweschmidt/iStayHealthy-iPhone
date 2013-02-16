@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iStayHealthyTableViewController.h"
+#import "SQLDataTableController.h"
+#import "StatusViewControllerLandscape.h"
+#import "BasicViewController.h"
 
-@interface HIVMedicationViewController : iStayHealthyTableViewController
+@interface HIVMedicationViewController : BasicViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 - (void)loadMedicationDetailViewController;
 - (void)loadMedicationChangeDetailViewController:(NSIndexPath *)selectedIndexPath;
 - (void)loadSideEffectsController;
 - (void)loadMissedMedicationsController;
 - (NSString *)getStringFromName:(NSString *)name;
+- (void)reloadData:(NSNotification*)note;
+- (void)start;
 @end

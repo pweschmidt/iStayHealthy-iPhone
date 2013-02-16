@@ -11,26 +11,31 @@
 #import "ChartSettings.h"
 #import "HealthChartsView.h"
 #import "HealthChartsViewLandscape.h"
-#import "iStayHealthyRecord.h"
+#import "SQLDataTableController.h"
 #import "NSArray-Set.h"
 #import "ChartEvents.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface StatusViewControllerLandscape ()
+@property (nonatomic, strong) SQLDataTableController *resultsController;
+@property (nonatomic, strong) SQLDataTableController *medsController;
+@property (nonatomic, strong) SQLDataTableController *missedController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, assign) BOOL hasReloadedData;
+@property UIStatusBarStyle oldStatusBarStyle;
+@property BOOL hasNoResults;
+@property BOOL hasNoMedication;
+@property BOOL hasNoMissedDates;
+@property (nonatomic, strong) HealthChartsViewLandscape *chartView;
+@property (nonatomic, strong) NSArray *allResults;
+@property (nonatomic, strong) NSArray *allMeds;
+@property (nonatomic, strong) NSArray *allMissedMeds;
+@property (nonatomic, strong) ChartEvents *events;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
+- (void)setUpData;
 @end
 
 @implementation StatusViewControllerLandscape
-@synthesize chartView =_chartView;
-@synthesize allResults = _allResults;
-@synthesize allMeds = _allMeds;
-@synthesize masterRecord = _masterRecord;
-@synthesize allMissedMeds = _allMissedMeds;
-@synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize events = _events;
-@synthesize hasNoMedication = _hasNoMedication;
-@synthesize hasNoResults = _hasNoResults;
-@synthesize hasNoMissedDates = _hasNoMissedDates;
-@synthesize activityIndicator = _activityIndicator;
 /**
  inits the ViewController
  @nibNameOrNil - the NIB file name for the landscape controller
@@ -91,19 +96,7 @@
     HealthChartsViewLandscape *chart = [[HealthChartsViewLandscape alloc]initWithFrame:frame];
     [self.view addSubview:chart];
     self.chartView = chart;
-    [self.chartView setEvents:self.events];
-    
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error])
-    {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Error Loading Data",nil) 
-							  message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]] 
-							  delegate:self 
-							  cancelButtonTitle:NSLocalizedString(@"Cancel",nil) 
-							  otherButtonTitles:nil];
-		[alert show];
-	}
+    [self.chartView setEvents:self.events];    
 }
 
 /**
@@ -121,77 +114,33 @@
 
 
 
-/**
- called each time we move away from this view
- @animated
- */
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
 
 /**
  */
 - (void)setUpData
 {
-#ifdef APPDEBUG	
-	NSLog(@"StatusViewControllerLandscape:setUpData");
-#endif
-	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-	if ( 0 == objects.count)
-    {
-        self.allResults = [NSMutableArray array];
-        self.allMeds = [NSMutableArray array];
-        self.allMissedMeds = [NSMutableArray array];
-        if (0 < [self.events.allChartEvents count])
-        {
-            [self.events.allChartEvents removeAllObjects];
-        }
-        return;
-    }
-    
-    
-	self.masterRecord = (iStayHealthyRecord *)[objects lastObject];
-    
-	NSSet *results = self.masterRecord.results;
-	NSSet *meds = self.masterRecord.medications;
-    NSSet *missedMeds = self.masterRecord.missedMedications;
 
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.resultsController = [[SQLDataTableController alloc] initForEntityName:@"Results"
+                                                                        sortBy:@"ResultsDate"
+                                                                   isAscending:NO context:self.context];
+    
+    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+                                                                       sortBy:@"MissedDate"
+                                                                  isAscending:NO context:self.context];
+    
+    self.medsController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
+                                                                     sortBy:@"StartDate"
+                                                                isAscending:NO context:self.context];
+    
+    self.allResults = [self.resultsController entriesForEntity];
+    self.allMeds = [self.medsController entriesForEntity];
+    self.allMissedMeds  = [self.missedController entriesForEntity];
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];
     }
-    //set results
-	if (0 != [results count])
-    {
-		self.allResults = [NSArray arrayByOrderingSet:results byKey:@"ResultsDate" ascending:YES reverseOrder:NO];
-#ifdef APPDEBUG	
-        NSLog(@"StatusViewControllerLandscape:setUpData Results array has %d entries",[results count]);
-#endif
-	}
-	else
-    {
-#ifdef APPDEBUG	
-        NSLog(@"StatusViewControllerLandscape:setUpData Results array is empty. Why?");
-#endif
-		self.allResults = (NSMutableArray *)results;
-	}
-    //set meds
-	if (0 != [meds count])
-    {
-		self.allMeds = [NSArray arrayByOrderingSet:meds byKey:@"StartDate" ascending:YES reverseOrder:NO];
-	}
-	else
-    {
-		self.allMeds = (NSMutableArray *)meds;
-	}
-    //set missed meds
-    if (0 != [missedMeds count])
-    {
-        self.allMissedMeds = [NSArray arrayByOrderingSet:missedMeds byKey:@"MissedDate" ascending:YES reverseOrder:NO];
-    }
-    else
-        self.allMissedMeds = (NSMutableArray *)self.masterRecord.missedMedications;
     
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
@@ -256,51 +205,6 @@
  @interfaceOrientation
  */
 
-/**
- fetchedResultsController
- @return NSFetchedResultsController
- */
-- (NSFetchedResultsController *)fetchedResultsController
-{
-	if (_fetchedResultsController != nil)
-    {
-		return _fetchedResultsController;
-	}
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSManagedObjectContext *context = appDelegate.managedObjectContext;
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"iStayHealthyRecord" inManagedObjectContext:context];
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"Name" ascending:YES];
-	NSArray *allDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[request setSortDescriptors:allDescriptors];
-	
-	[request setEntity:entity];
-	
-	NSFetchedResultsController *tmpFetchController = [[NSFetchedResultsController alloc]
-													  initWithFetchRequest:request 
-													  managedObjectContext:context 
-													  sectionNameKeyPath:nil 
-													  cacheName:nil];
-	tmpFetchController.delegate = self;
-	_fetchedResultsController = tmpFetchController;
-	
-	return _fetchedResultsController;
-	
-}	
-
-/**
- */
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{	
-#ifdef APPDEBUG	
-	NSLog(@"---> in landscape mode. data changed");
-#endif
-	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-    if (nil != objects && 0 < objects.count)
-    {
-        self.masterRecord = (iStayHealthyRecord *)[objects lastObject];
-        [self.chartView setNeedsDisplay];
-    }
-}
 
 #pragma mark -
 #pragma mark memory stuff
@@ -314,7 +218,6 @@
     self.allMissedMeds = nil;
     self.chartView = nil;
     self.events = nil;
-    self.masterRecord = nil;
     self.activityIndicator = nil;
     [super didReceiveMemoryWarning];
 }
@@ -330,7 +233,6 @@
     self.allMissedMeds = nil;
     self.chartView = nil;
     self.events = nil;
-    self.masterRecord = nil;
     self.activityIndicator = nil;
     [super viewDidUnload];
 }

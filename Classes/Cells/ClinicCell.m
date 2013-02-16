@@ -9,7 +9,6 @@
 #import "ClinicCell.h"
 
 @implementation ClinicCell
-@synthesize clinicCell = _clinicCell;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

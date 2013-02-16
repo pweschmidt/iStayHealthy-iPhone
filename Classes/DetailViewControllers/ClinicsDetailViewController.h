@@ -10,11 +10,10 @@
 #import <MessageUI/MessageUI.h>
 #import "ClinicAddressCell.h"
 
-@class iStayHealthyRecord, Contacts;
+@class Contacts;
 
 @interface ClinicsDetailViewController : UITableViewController <ClinicAddressCellDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
-@property (nonatomic, strong) iStayHealthyRecord *record;
 @property (nonatomic, strong) Contacts *contacts;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *idString;
@@ -29,7 +28,7 @@
 - (void)removeSQLEntry;
 - (IBAction) save:                  (id) sender;
 - (IBAction) cancel:				(id) sender;
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord;
-- (id)initWithContacts:(Contacts *)contacts masterRecord:(iStayHealthyRecord *)masterrecord;
+- (id)initWithContext:(NSManagedObjectContext *)context;
+- (id)initWithContacts:(Contacts *)contacts;
 
 @end

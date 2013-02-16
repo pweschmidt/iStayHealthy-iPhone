@@ -12,7 +12,6 @@
 #import "ChartEvents.h"
 
 @implementation HealthChartsView
-@synthesize events = _events;
 #pragma mark -
 #pragma mark UIView methods
 

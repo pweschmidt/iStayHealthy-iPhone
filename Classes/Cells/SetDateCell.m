@@ -9,9 +9,6 @@
 #import "SetDateCell.h"
 
 @implementation SetDateCell
-@synthesize title = _title;
-@synthesize value = _value;
-@synthesize labelImageView = _labelImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

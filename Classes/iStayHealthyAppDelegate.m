@@ -21,16 +21,7 @@
 @end
 
 @implementation iStayHealthyAppDelegate
-@synthesize window = _window;
-@synthesize tabBarController = _tabBarController;
-@synthesize passController = _passController;
-@synthesize relinkUserId = _relinkUserId;
-@synthesize cloudURL = _cloudURL;
-@synthesize iCloudIsAvailable = _iCloudIsAvailable;
 @synthesize managedObjectContext = _managedObjectContext;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize sqlHelper = _sqlHelper;
 NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
 #pragma mark -

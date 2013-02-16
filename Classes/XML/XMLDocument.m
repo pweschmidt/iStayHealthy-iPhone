@@ -11,7 +11,6 @@
 #import "XMLConstants.h"
 
 @implementation XMLDocument
-@synthesize root = _root;
 - (id)init
 {
     self = [super init];

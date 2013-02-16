@@ -16,5 +16,4 @@
 - (void)startDropBox;
 - (void)startPasswordController;
 - (void)gotoPOZ;
-//- (void)testTintabee;
 @end

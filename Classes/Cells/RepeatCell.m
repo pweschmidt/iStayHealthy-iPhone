@@ -9,8 +9,6 @@
 #import "RepeatCell.h"
 
 @implementation RepeatCell
-@synthesize segmentedControl = _segmentedControl;
-@synthesize repeatCellDelegate=_repeatCellDelegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

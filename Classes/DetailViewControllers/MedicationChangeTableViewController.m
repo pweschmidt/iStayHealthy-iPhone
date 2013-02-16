@@ -10,7 +10,6 @@
 #import "MissedMedication.h"
 #import "PreviousMedication.h"
 #import "Medication.h"
-#import "iStayHealthyRecord.h"
 #import "Utilities.h"
 #import "GeneralSettings.h"
 #import "SideEffects.h"
@@ -18,25 +17,19 @@
 #import "MoreResultsCell.h"
 #import "GradientButton.h"
 
+@interface MedicationChangeTableViewController ()
+@property (nonatomic, strong) NSManagedObjectContext *context;
+- (void)postNotification;
+@end
 
 @implementation MedicationChangeTableViewController
-@synthesize startDate = _startDate;
-@synthesize record = _record;
-@synthesize selectedMedication = _selectedMedication;
-@synthesize startDateCell = _startDateCell;
-@synthesize endDateCell = _endDateCell;
-@synthesize startDateChanged = _startDateChanged;
-@synthesize endDateChanged = _endDateChanged;
-@synthesize medName = _medName;
-@synthesize state = _state;
-/**
- init - loads NIB file and sets the master SQL record
- */
-- (id)initWithMasterRecord:(iStayHealthyRecord *)masterRecord withMedication:(Medication *)medication{
+
+- (id)initWithMedication:(Medication *)medication context:(NSManagedObjectContext *)context
+{
     self = [super initWithNibName:@"MedicationChangeTableViewController" bundle:nil];
     if (self)
     {
-        self.record = masterRecord;
+        self.context = context;
         self.selectedMedication = medication;
         self.startDateChanged = NO;
         self.endDateChanged = NO;
@@ -49,9 +42,8 @@
         self.medName = medication.Name;
     }
     return self;
+    
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -91,15 +83,12 @@
  */
 - (IBAction) save:					(id) sender
 {
-    NSManagedObjectContext *context = nil;
     NSError *error = nil;
     if (self.startDateChanged)
     {
-        context = [self.selectedMedication managedObjectContext];
-        self.record.UID = [Utilities GUID];
         self.selectedMedication.StartDate = self.startDate;
         self.selectedMedication.UID = [Utilities GUID];
-        if (![context save:&error])
+        if (![self.selectedMedication.managedObjectContext save:&error])
         {
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -111,21 +100,19 @@
                               otherButtonTitles: nil]
              show];
         }
+        [self postNotification];
         [self dismissModalViewControllerAnimated:YES];
     }
     if (self.endDateChanged)
     {
-        context = [self.record managedObjectContext];
-        PreviousMedication *previousMed = [NSEntityDescription insertNewObjectForEntityForName:@"PreviousMedication" inManagedObjectContext:context];
-        [self.record addPreviousMedicationsObject:previousMed];
+        PreviousMedication *previousMed = [NSEntityDescription insertNewObjectForEntityForName:@"PreviousMedication" inManagedObjectContext:self.context];
         previousMed.uID = [Utilities GUID];
-        self.record.UID = [Utilities GUID];
         previousMed.name = self.selectedMedication.Name;
         previousMed.startDate = self.selectedMedication.StartDate;
         previousMed.endDate = self.endDate;
         previousMed.isART = [NSNumber numberWithBool:YES];
         previousMed.drug = self.selectedMedication.Drug;
-        if (![context save:&error])
+        if (![self.context save:&error])
         {
 #ifdef APPDEBUG
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -137,6 +124,7 @@
                               otherButtonTitles: nil]
              show];
         }
+        [self postNotification];
         [self removeSQLEntry];
     }
     
@@ -145,6 +133,21 @@
 - (IBAction) cancel: (id) sender
 {
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
 }
 
 
@@ -176,11 +179,9 @@
  */
 - (void) removeSQLEntry
 {
-    [self.record removeMedicationsObject:self.selectedMedication];
-    NSManagedObjectContext *context = self.selectedMedication.managedObjectContext;
-    [context deleteObject:self.selectedMedication];
+    [self.selectedMedication.managedObjectContext deleteObject:self.selectedMedication];
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.selectedMedication.managedObjectContext save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -192,7 +193,8 @@
                           otherButtonTitles: nil]
          show];
     }
-	[self dismissModalViewControllerAnimated:YES];        
+    [self postNotification];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 

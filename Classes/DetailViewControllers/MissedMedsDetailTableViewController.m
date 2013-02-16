@@ -7,7 +7,6 @@
 //
 
 #import "MissedMedsDetailTableViewController.h"
-#import "iStayHealthyRecord.h"
 #import "MissedMedication.h"
 #import "SetDateCell.h"
 #import "GeneralSettings.h"
@@ -26,21 +25,12 @@
 @property (nonatomic, strong) NSNumber *seriousnessIndex;
 @property (nonatomic, strong) NSString *selectedReasonLabel;
 @property (nonatomic, strong) NSArray *reasonArray;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+- (void)postNotification;
 @end
 
 @implementation MissedMedsDetailTableViewController
-@synthesize missedDate = _missedDate;
-@synthesize record = _record;
-@synthesize missedMeds = _missedMeds;
-@synthesize setDateCell = _setDateCell;
-@synthesize isEditMode = _isEditMode;
-@synthesize currentMedArray = _currentMedArray;
-@synthesize selectedCell = _selectedCell;
-@synthesize formatter = _formatter;
-@synthesize seriousnessIndex = _seriousnessIndex;
-@synthesize selectedReasonLabel = _selectedReasonLabel;
-@synthesize currentMeds = _currentMeds;
-@synthesize reasonArray = _reasonArray;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -51,31 +41,32 @@
     return self;
 }
 
-- (id)initWithMissedMeds:(MissedMedication *)missed
-            masterRecord:(iStayHealthyRecord *)masterRecord{
+- (id)initWithMissedMedication:(MissedMedication*)missed
+{
     self = [super initWithNibName:@"MissedMedsDetailTableViewController" bundle:nil];
     if (nil != self)
     {
         self.isEditMode = YES;
+        self.context = missed.managedObjectContext;
         self.missedMeds = missed;
         self.missedDate = self.missedMeds.MissedDate;
         self.currentMeds = self.missedMeds.Name;
-        self.record = masterRecord;
         self.selectedCell = nil;
         self.formatter = [[NSDateFormatter alloc] init];
         self.formatter.dateFormat = @"dd MMM YY";
         self.selectedReasonLabel = self.missedMeds.missedReason;
     }
     return self;
+    
 }
-
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord medication:(NSArray *)medArray{
+- (id)initWithContext:(NSManagedObjectContext *)context medications:(NSArray *)medArray
+{
     self = [super initWithNibName:@"MissedMedsDetailTableViewController" bundle:nil];
     if (nil != self)
     {
+        self.context = context;
         self.isEditMode = NO;
         self.missedDate = [NSDate date];
-        self.record = masterrecord;
         self.currentMedArray = [NSMutableArray arrayWithArray:medArray];
         NSMutableString *medsString = [NSMutableString string];
         for (Medication *med in self.currentMedArray) {
@@ -88,6 +79,7 @@
         self.selectedReasonLabel = nil;
     }
     return self;
+    
 }
 
 - (void)viewDidLoad
@@ -111,21 +103,15 @@
 
 - (IBAction) save:					(id) sender
 {
-    NSManagedObjectContext *context = nil;
     if (self.isEditMode)
     {
-        context = [self.missedMeds managedObjectContext];
         self.missedMeds.MissedDate = self.missedDate;
         self.missedMeds.missedReason = self.selectedReasonLabel;
         self.missedMeds.UID = [Utilities GUID];
-        self.record.UID = [Utilities GUID];
     }
     else
     {
-        context = [self.record managedObjectContext];
-        MissedMedication *newMissedMeds = [NSEntityDescription insertNewObjectForEntityForName:@"MissedMedication" inManagedObjectContext:context];
-        [self.record addMissedMedicationsObject:newMissedMeds];
-        self.record.UID = [Utilities GUID];
+        MissedMedication *newMissedMeds = [NSEntityDescription insertNewObjectForEntityForName:@"MissedMedication" inManagedObjectContext:self.context];
         newMissedMeds.UID = [Utilities GUID];
         newMissedMeds.missedReason = self.selectedReasonLabel;
         newMissedMeds.MissedDate = self.missedDate;
@@ -136,22 +122,20 @@
         }
         newMissedMeds.Name = effectedDrugs;
     }
-    if (nil != context)
+    NSError *error = nil;
+    if (![self.context save:&error])
     {
-        NSError *error = nil;
-        if (![context save:&error])
-        {
 #ifdef APPDEBUG
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #endif
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
-                                        message:NSLocalizedString(@"Save error message", nil)
-                                       delegate:nil
-                              cancelButtonTitle:@"Ok"
-                              otherButtonTitles: nil]
-             show];
-        }
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", nil)
+                                    message:NSLocalizedString(@"Save error message", nil)
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil]
+         show];
     }
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -159,6 +143,22 @@
 {
 	[self dismissModalViewControllerAnimated:YES];
 }
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+}
+
 
 - (void)changeDate
 {
@@ -206,11 +206,9 @@
 
 - (void)removeSQLEntry
 {
-    [self.record removeMissedMedicationsObject:self.missedMeds];
-    NSManagedObjectContext *context = self.missedMeds.managedObjectContext;
-    [context deleteObject:self.missedMeds];
+    [self.context deleteObject:self.missedMeds];
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -222,6 +220,7 @@
                           otherButtonTitles: nil]
          show];
     }
+    [self postNotification];
 	[self dismissModalViewControllerAnimated:YES];
 }
 

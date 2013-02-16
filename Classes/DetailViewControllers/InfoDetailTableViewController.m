@@ -12,10 +12,6 @@
 #import "UINavigationBar-Button.h"
 
 @implementation InfoDetailTableViewController
-@synthesize faqList = _faqList;
-@synthesize headerLabel = _headerLabel;
-@synthesize adButton = _adButton;
-@synthesize bannerButton = _bannerButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

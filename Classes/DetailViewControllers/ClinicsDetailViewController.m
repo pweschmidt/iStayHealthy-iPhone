@@ -7,7 +7,6 @@
 //
 
 #import "ClinicsDetailViewController.h"
-#import "iStayHealthyRecord.h"
 #import "Utilities.h"
 #import "Contacts.h"
 #import "GradientButton.h"
@@ -18,21 +17,13 @@
 @interface ClinicsDetailViewController ()
 @property BOOL isEdit;
 @property NSUInteger buttonCount;
+@property (nonatomic, strong) NSManagedObjectContext * context;
+- (void)postNotification;
 - (void)callNumber;
 - (void)callEmergencyNumber;
 @end
 
 @implementation ClinicsDetailViewController
-@synthesize isEdit = _isEdit;
-@synthesize record = _record;
-@synthesize contacts = _contacts;
-@synthesize name = _name;
-@synthesize idString = _idString;
-@synthesize www = _www;
-@synthesize email = _email;
-@synthesize number = _number;
-@synthesize emergencynumber = _emergencynumber;
-@synthesize buttonCount = _buttonCount;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -42,12 +33,13 @@
     }
     return self;
 }
-- (id)initWithRecord:(iStayHealthyRecord *)masterrecord
+
+- (id)initWithContext:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"ClinicsDetailViewController" bundle:nil];
     if (nil != self)
     {
-        self.record = masterrecord;
+        self.context = context;
         self.name = @"";
         self.idString = @"";
         self.www = @"";
@@ -57,14 +49,16 @@
         self.isEdit = NO;
     }
     return self;
+    
 }
 
-- (id)initWithContacts:(Contacts *)contacts masterRecord:(iStayHealthyRecord *)masterrecord
+
+- (id)initWithContacts:(Contacts *)contacts
 {
     self = [super initWithNibName:@"ClinicsDetailViewController" bundle:nil];
     if (nil != self)
     {
-        self.record = masterrecord;
+        self.context = contacts.managedObjectContext;
         self.contacts = contacts;
         self.isEdit = YES;
         self.name = self.contacts.ClinicName;
@@ -411,11 +405,9 @@
 
 - (void)removeSQLEntry
 {
-    [self.record removeContactsObject:self.contacts];
-    NSManagedObjectContext *context = [self.contacts managedObjectContext];
-    [context deleteObject:self.contacts];
+    [self.context deleteObject:self.contacts];
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -427,16 +419,14 @@
                           otherButtonTitles: nil]
          show];
     }
-    [self dismissModalViewControllerAnimated:YES];    
+    [self postNotification];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction) save:                  (id) sender
 {
-    NSManagedObjectContext *context = nil;
     if (self.isEdit)
     {
-        context = [self.contacts managedObjectContext];
-        self.record.UID = [Utilities GUID];
         self.contacts.ClinicName = self.name;
         self.contacts.ClinicID = self.idString;
         self.contacts.ClinicWebSite = self.www;
@@ -447,10 +437,8 @@
     }
     else
     {
-        context = [self.record managedObjectContext];
-        Contacts *contact = [NSEntityDescription insertNewObjectForEntityForName:@"Contacts" inManagedObjectContext:context];
-        [self.record addContactsObject:contact];
-        self.record.UID = [Utilities GUID];
+        Contacts *contact = [NSEntityDescription insertNewObjectForEntityForName:@"Contacts"
+                                                          inManagedObjectContext:self.context];
         contact.ClinicName = self.name;
         contact.ClinicID = self.idString;
         contact.ClinicWebSite = self.www;
@@ -460,7 +448,7 @@
         contact.UID = [Utilities GUID];
     }
     NSError *error = nil;
-    if (![context save:&error])
+    if (![self.context save:&error])
     {
 #ifdef APPDEBUG
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -472,7 +460,7 @@
                           otherButtonTitles: nil]
          show];
     }
-    
+    [self postNotification];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -480,6 +468,22 @@
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
+}
+
 
 #pragma mark - ClinicAddressCellDelegate Protocol implementation
 - (void)setValueString:(NSString *)valueString withTag:(int)tag

@@ -9,11 +9,6 @@
 #import "WebViewController.h"
 
 @implementation WebViewController
-@synthesize webView = _webView;
-@synthesize activityIndicatorView = _activityIndicatorView;
-@synthesize toolBar = _toolBar;
-@synthesize url = _url;
-@synthesize webNavtitle = _webNavtitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
