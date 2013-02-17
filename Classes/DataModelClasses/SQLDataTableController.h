@@ -18,8 +18,23 @@
 #import "Contacts.h"
 #import "iStayHealthyRecord.h"
 
+typedef enum
+{
+    kResultsTable = 0,
+    kMedicationTable = 1,
+    kMissedMedicationTable = 2,
+    kPreviousMedicationTable = 3,
+    kOtherMedicationTable = 4,
+    kProceduresTable = 5,
+    kRecordTable = 6,
+    kContactsTable = 7,
+    kSideEffectsTable = 8,
+    kWellnessTable = 9
+}TableType;
+
 @interface SQLDataTableController : NSObject <NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedContext;
 
 - (id)initForEntityName:(NSString *)tableName
                  sortBy:(NSString *)sortBy
@@ -30,4 +45,7 @@
          descriptor:(NSSortDescriptor *)descriptor
             context:(NSManagedObjectContext *)context;
 - (NSArray *)entriesForEntity;
+
+- (NSArray *)cleanEntriesForData:(NSArray *)dataTable table:(TableType)table;
+
 @end

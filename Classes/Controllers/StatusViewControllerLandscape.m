@@ -63,6 +63,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    [self setUpData];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadData:)
                                                  name:@"RefetchAllDatabaseData"
@@ -109,7 +110,6 @@
 	NSLog(@"StatusViewControllerLandscape:viewWillAppear");
 #endif
     [super viewWillAppear:animated];
-    [self setUpData];
 }
 
 
@@ -134,9 +134,13 @@
                                                                      sortBy:@"StartDate"
                                                                 isAscending:NO context:self.context];
     
-    self.allResults = [self.resultsController entriesForEntity];
-    self.allMeds = [self.medsController entriesForEntity];
-    self.allMissedMeds  = [self.missedController entriesForEntity];
+    NSArray *results = [self.resultsController entriesForEntity];
+    self.allResults = [self.resultsController cleanEntriesForData:results table:kResultsTable];
+    NSArray *meds = [self.medsController entriesForEntity];
+    self.allMeds = [self.medsController cleanEntriesForData:meds table:kMedicationTable];
+    NSArray *missed  = [self.missedController entriesForEntity];
+    self.allMissedMeds = [self.missedController cleanEntriesForData:missed table:kMissedMedicationTable];
+
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];

@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, assign) BOOL hasReloadedData;
 @property (nonatomic, strong) NSArray *medications;
+- (void)registerObservers;
 - (void)setUpData;
 - (void)loadMissedMedsTableViewController;
 @end
@@ -38,6 +39,15 @@
     return self;
 }
 
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+}
+
+
 - (void)setUpData
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -47,28 +57,22 @@
                                                                   isAscending:NO
                                                                       context:self.context];
     
-    self.allMissedMeds = [self.dataController entriesForEntity];
+    NSArray *missed = [self.dataController entriesForEntity];
+    self.allMissedMeds = [self.dataController cleanEntriesForData:missed table:kMissedMedicationTable];
 }
 
 - (void)reloadData:(NSNotification *)note
 {
     NSLog(@"reloadData");
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
     if (nil != note)
     {
-        self.allMissedMeds = [self.dataController entriesForEntity];
+        NSArray *missed = [self.dataController entriesForEntity];
+        self.allMissedMeds = [self.dataController cleanEntriesForData:missed table:kMissedMedicationTable];
         [self.tableView reloadData];
     }
 }
 
-- (void)start
-{
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
-    }
-}
 
 - (IBAction) done:				(id) sender
 {
@@ -88,6 +92,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerObservers];
     self.hasReloadedData = NO;
     [self setUpData];
 	self.navigationItem.title = NSLocalizedString(@"Missed", @"Missed");
@@ -96,9 +101,6 @@
                                              target:self action:@selector(done:)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMissedMedsTableViewController)];
-    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
-    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
-    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)loadMissedMedsTableViewController

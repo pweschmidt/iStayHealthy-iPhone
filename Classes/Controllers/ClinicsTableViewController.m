@@ -20,10 +20,19 @@
 @property (nonatomic, strong) SQLDataTableController *dataController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, assign) BOOL hasReloadedData;
+- (void)registerObservers;
 - (void)setUpData;
 @end
 
 @implementation ClinicsTableViewController
+
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+}
 
 - (void)setUpData
 {
@@ -34,26 +43,19 @@
                                                                 isAscending:YES
                                                                     context:self.context];
     
-    self.allContacts = [self.dataController entriesForEntity];
+    NSArray *contacts = [self.dataController entriesForEntity];
+    self.allContacts = [self.dataController cleanEntriesForData:contacts table:kContactsTable];
 }
 
 - (void)reloadData:(NSNotification *)note
 {
     NSLog(@"reloadData");
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
     if (nil != note)
     {
-        self.allContacts = [self.dataController entriesForEntity];
+        NSArray *contacts = [self.dataController entriesForEntity];
+        self.allContacts = [self.dataController cleanEntriesForData:contacts table:kContactsTable];
         [self.tableView reloadData];
-    }
-}
-
-- (void)start
-{
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
     }
 }
 
@@ -61,6 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerObservers];
     self.hasReloadedData = NO;
     [self setUpData];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadClinicDetailViewController)];
@@ -73,9 +76,6 @@
     {
         [navBar addButtonWithTitle:@"Clinics" target:self selector:@selector(gotoPOZ)];
     }
-    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
-    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
-    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (IBAction)done:(id)sender

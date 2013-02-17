@@ -38,18 +38,20 @@
     self.dataController = [[SQLDataTableController alloc] initForEntityName:@"Results" sortBy:@"ResultsDate" isAscending:NO context:self.context];
     
     self.allResultsInReverseOrder = [self.dataController entriesForEntity];    
+    self.allResultsInReverseOrder = [self.dataController cleanEntriesForData:self.allResultsInReverseOrder table:kResultsTable];
 }
 
 - (void)reloadData:(NSNotification *)note
 {
     NSLog(@"reloadData");
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
     if (nil != note)
     {
         self.allResultsInReverseOrder = [self.dataController entriesForEntity];
+        self.allResultsInReverseOrder = [self.dataController cleanEntriesForData:self.allResultsInReverseOrder table:kResultsTable];
         [self.tableView reloadData];
     }
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)start

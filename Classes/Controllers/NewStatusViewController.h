@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iStayHealthyTableViewController.h"
 #import "BasicViewController.h"
 
 #define TEXTCELLHEIGHT 30.0

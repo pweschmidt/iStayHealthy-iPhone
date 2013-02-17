@@ -183,7 +183,6 @@
 		C4C4199715F13AAD00882416 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198315F13AAD00882416 /* DashboardViewController.m */; };
 		C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198515F13AAD00882416 /* GeneralMedicalTableViewController.m */; };
 		C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198715F13AAD00882416 /* HIVMedicationViewController.m */; };
-		C4C4199A15F13AAD00882416 /* iStayHealthyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198915F13AAD00882416 /* iStayHealthyTableViewController.m */; };
 		C4C4199B15F13AAD00882416 /* NewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198B15F13AAD00882416 /* NewAlertViewController.m */; };
 		C4C4199C15F13AAD00882416 /* NewResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198D15F13AAD00882416 /* NewResultsViewController.m */; };
 		C4C4199D15F13AAD00882416 /* NewStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198F15F13AAD00882416 /* NewStatusViewController.m */; };
@@ -240,6 +239,16 @@
 		C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3415F1445400882416 /* ringtone1.caf */; };
 		C4C41A3C15F1445400882416 /* ringtone2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3515F1445400882416 /* ringtone2.caf */; };
 		C4C41A3D15F1445400882416 /* xylophone.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3615F1445400882416 /* xylophone.caf */; };
+		C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837DA16D1041C002D934F /* Results+Comparator.m */; };
+		C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837DD16D10475002D934F /* SideEffects+Comparator.m */; };
+		C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837E016D10493002D934F /* Procedures+Comparator.m */; };
+		C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837E316D104AF002D934F /* PreviousMedication+Comparator.m */; };
+		C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837E616D104D2002D934F /* OtherMedication+Comparator.m */; };
+		C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837E916D104F0002D934F /* Wellness+Comparator.m */; };
+		C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837EC16D10514002D934F /* iStayHealthyRecord+Comparator.m */; };
+		C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837EF16D10536002D934F /* Medication+Comparator.m */; };
+		C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F216D10554002D934F /* MissedMedication+Comparator.m */; };
+		C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F516D1057E002D934F /* Contacts+Comparator.m */; };
 		C4CA33CB14CC1AB4000C7BE3 /* smartandstrong.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */; };
 		C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */; };
 		C4CDED5F138D7CD7005BAC87 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CDED5E138D7CD7005BAC87 /* edurant.png */; };
@@ -616,8 +625,6 @@
 		C4C4198515F13AAD00882416 /* GeneralMedicalTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneralMedicalTableViewController.m; path = Controllers/GeneralMedicalTableViewController.m; sourceTree = "<group>"; };
 		C4C4198615F13AAD00882416 /* HIVMedicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HIVMedicationViewController.h; path = Controllers/HIVMedicationViewController.h; sourceTree = "<group>"; };
 		C4C4198715F13AAD00882416 /* HIVMedicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HIVMedicationViewController.m; path = Controllers/HIVMedicationViewController.m; sourceTree = "<group>"; };
-		C4C4198815F13AAD00882416 /* iStayHealthyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iStayHealthyTableViewController.h; path = Controllers/iStayHealthyTableViewController.h; sourceTree = "<group>"; };
-		C4C4198915F13AAD00882416 /* iStayHealthyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iStayHealthyTableViewController.m; path = Controllers/iStayHealthyTableViewController.m; sourceTree = "<group>"; };
 		C4C4198A15F13AAD00882416 /* NewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewAlertViewController.h; path = Controllers/NewAlertViewController.h; sourceTree = "<group>"; };
 		C4C4198B15F13AAD00882416 /* NewAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewAlertViewController.m; path = Controllers/NewAlertViewController.m; sourceTree = "<group>"; };
 		C4C4198C15F13AAD00882416 /* NewResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewResultsViewController.h; path = Controllers/NewResultsViewController.h; sourceTree = "<group>"; };
@@ -699,6 +706,26 @@
 		C4C41A3415F1445400882416 /* ringtone1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone1.caf; sourceTree = "<group>"; };
 		C4C41A3515F1445400882416 /* ringtone2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone2.caf; sourceTree = "<group>"; };
 		C4C41A3615F1445400882416 /* xylophone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = xylophone.caf; sourceTree = "<group>"; };
+		C4C837D916D1041C002D934F /* Results+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Results+Comparator.h"; path = "Utils/Results+Comparator.h"; sourceTree = "<group>"; };
+		C4C837DA16D1041C002D934F /* Results+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Results+Comparator.m"; path = "Utils/Results+Comparator.m"; sourceTree = "<group>"; };
+		C4C837DC16D10475002D934F /* SideEffects+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SideEffects+Comparator.h"; path = "Utils/SideEffects+Comparator.h"; sourceTree = "<group>"; };
+		C4C837DD16D10475002D934F /* SideEffects+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SideEffects+Comparator.m"; path = "Utils/SideEffects+Comparator.m"; sourceTree = "<group>"; };
+		C4C837DF16D10493002D934F /* Procedures+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Procedures+Comparator.h"; path = "Utils/Procedures+Comparator.h"; sourceTree = "<group>"; };
+		C4C837E016D10493002D934F /* Procedures+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Procedures+Comparator.m"; path = "Utils/Procedures+Comparator.m"; sourceTree = "<group>"; };
+		C4C837E216D104AF002D934F /* PreviousMedication+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PreviousMedication+Comparator.h"; path = "Utils/PreviousMedication+Comparator.h"; sourceTree = "<group>"; };
+		C4C837E316D104AF002D934F /* PreviousMedication+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PreviousMedication+Comparator.m"; path = "Utils/PreviousMedication+Comparator.m"; sourceTree = "<group>"; };
+		C4C837E516D104D2002D934F /* OtherMedication+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OtherMedication+Comparator.h"; path = "Utils/OtherMedication+Comparator.h"; sourceTree = "<group>"; };
+		C4C837E616D104D2002D934F /* OtherMedication+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "OtherMedication+Comparator.m"; path = "Utils/OtherMedication+Comparator.m"; sourceTree = "<group>"; };
+		C4C837E816D104F0002D934F /* Wellness+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Wellness+Comparator.h"; path = "Utils/Wellness+Comparator.h"; sourceTree = "<group>"; };
+		C4C837E916D104F0002D934F /* Wellness+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Wellness+Comparator.m"; path = "Utils/Wellness+Comparator.m"; sourceTree = "<group>"; };
+		C4C837EB16D10513002D934F /* iStayHealthyRecord+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iStayHealthyRecord+Comparator.h"; path = "Utils/iStayHealthyRecord+Comparator.h"; sourceTree = "<group>"; };
+		C4C837EC16D10514002D934F /* iStayHealthyRecord+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "iStayHealthyRecord+Comparator.m"; path = "Utils/iStayHealthyRecord+Comparator.m"; sourceTree = "<group>"; };
+		C4C837EE16D10536002D934F /* Medication+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Medication+Comparator.h"; path = "Utils/Medication+Comparator.h"; sourceTree = "<group>"; };
+		C4C837EF16D10536002D934F /* Medication+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Medication+Comparator.m"; path = "Utils/Medication+Comparator.m"; sourceTree = "<group>"; };
+		C4C837F116D10554002D934F /* MissedMedication+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MissedMedication+Comparator.h"; path = "Utils/MissedMedication+Comparator.h"; sourceTree = "<group>"; };
+		C4C837F216D10554002D934F /* MissedMedication+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MissedMedication+Comparator.m"; path = "Utils/MissedMedication+Comparator.m"; sourceTree = "<group>"; };
+		C4C837F416D1057E002D934F /* Contacts+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contacts+Comparator.h"; path = "Utils/Contacts+Comparator.h"; sourceTree = "<group>"; };
+		C4C837F516D1057E002D934F /* Contacts+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contacts+Comparator.m"; path = "Utils/Contacts+Comparator.m"; sourceTree = "<group>"; };
 		C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartandstrong.png; sourceTree = "<group>"; };
 		C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-label-small.png"; sourceTree = "<group>"; };
 		C4CDED5E138D7CD7005BAC87 /* edurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edurant.png; path = Images/edurant.png; sourceTree = "<group>"; };
@@ -1108,8 +1135,6 @@
 				C4C4198515F13AAD00882416 /* GeneralMedicalTableViewController.m */,
 				C4C4198615F13AAD00882416 /* HIVMedicationViewController.h */,
 				C4C4198715F13AAD00882416 /* HIVMedicationViewController.m */,
-				C4C4198815F13AAD00882416 /* iStayHealthyTableViewController.h */,
-				C4C4198915F13AAD00882416 /* iStayHealthyTableViewController.m */,
 				C4C4198A15F13AAD00882416 /* NewAlertViewController.h */,
 				C4C4198B15F13AAD00882416 /* NewAlertViewController.m */,
 				C4C4198C15F13AAD00882416 /* NewResultsViewController.h */,
@@ -1233,6 +1258,26 @@
 				C4C41A2715F1432E00882416 /* UINavigationBar-Button.m */,
 				C4C41A2815F1432E00882416 /* Utilities.h */,
 				C4C41A2915F1432E00882416 /* Utilities.m */,
+				C4C837D916D1041C002D934F /* Results+Comparator.h */,
+				C4C837DA16D1041C002D934F /* Results+Comparator.m */,
+				C4C837DC16D10475002D934F /* SideEffects+Comparator.h */,
+				C4C837DD16D10475002D934F /* SideEffects+Comparator.m */,
+				C4C837DF16D10493002D934F /* Procedures+Comparator.h */,
+				C4C837E016D10493002D934F /* Procedures+Comparator.m */,
+				C4C837E216D104AF002D934F /* PreviousMedication+Comparator.h */,
+				C4C837E316D104AF002D934F /* PreviousMedication+Comparator.m */,
+				C4C837E516D104D2002D934F /* OtherMedication+Comparator.h */,
+				C4C837E616D104D2002D934F /* OtherMedication+Comparator.m */,
+				C4C837E816D104F0002D934F /* Wellness+Comparator.h */,
+				C4C837E916D104F0002D934F /* Wellness+Comparator.m */,
+				C4C837EB16D10513002D934F /* iStayHealthyRecord+Comparator.h */,
+				C4C837EC16D10514002D934F /* iStayHealthyRecord+Comparator.m */,
+				C4C837EE16D10536002D934F /* Medication+Comparator.h */,
+				C4C837EF16D10536002D934F /* Medication+Comparator.m */,
+				C4C837F116D10554002D934F /* MissedMedication+Comparator.h */,
+				C4C837F216D10554002D934F /* MissedMedication+Comparator.m */,
+				C4C837F416D1057E002D934F /* Contacts+Comparator.h */,
+				C4C837F516D1057E002D934F /* Contacts+Comparator.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1638,7 +1683,6 @@
 				C4C4199715F13AAD00882416 /* DashboardViewController.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
 				C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */,
-				C4C4199A15F13AAD00882416 /* iStayHealthyTableViewController.m in Sources */,
 				C4C4199B15F13AAD00882416 /* NewAlertViewController.m in Sources */,
 				C4C4199C15F13AAD00882416 /* NewResultsViewController.m in Sources */,
 				C4C4199D15F13AAD00882416 /* NewStatusViewController.m in Sources */,
@@ -1683,6 +1727,16 @@
 				C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */,
 				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,
 				C4B9DA7716CE97E600703B67 /* BasicViewController.m in Sources */,
+				C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */,
+				C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */,
+				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
+				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
+				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
+				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
+				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
+				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,
+				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
+				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

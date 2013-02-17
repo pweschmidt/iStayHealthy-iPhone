@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iStayHealthyTableViewController.h"
+#import "BasicViewController.h"
 
-@interface NewAlertViewController : iStayHealthyTableViewController
+@interface NewAlertViewController : BasicViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *notificationsArray;
 - (void)loadMedAlertDetailViewController;
 - (void)loadMedAlertChangeViewController:(int)row;

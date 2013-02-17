@@ -22,10 +22,19 @@
 @property (nonatomic, strong) SQLDataTableController *dataController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, assign) BOOL hasReloadedData;
+- (void)registerObservers;
 - (void)setUpData;
 @end
 
 @implementation ProcedureTableViewController
+
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+}
 
 - (void)setUpData
 {
@@ -36,32 +45,26 @@
                                                                 isAscending:NO
                                                                     context:self.context];
     
-    self.allProcedures = [self.dataController entriesForEntity];
+    NSArray *procs = [self.dataController entriesForEntity];
+    self.allProcedures = [self.dataController cleanEntriesForData:procs table:kProceduresTable];
 }
 
 - (void)reloadData:(NSNotification *)note
 {
     NSLog(@"reloadData");
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
     if (nil != note)
     {
-        self.allProcedures = [self.dataController entriesForEntity];
+        NSArray *procs = [self.dataController entriesForEntity];
+        self.allProcedures = [self.dataController cleanEntriesForData:procs table:kProceduresTable];
         [self.tableView reloadData];
-    }
-}
-
-- (void)start
-{
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerObservers];
     self.hasReloadedData = NO;
     [self setUpData];
 	self.formatter = [[NSDateFormatter alloc]init];
@@ -76,9 +79,6 @@
     {
         [navBar addButtonWithTitle:@"Illness" target:self selector:@selector(gotoPOZ)];
     }
-    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
-    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
-    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)loadDetailProcedureViewController

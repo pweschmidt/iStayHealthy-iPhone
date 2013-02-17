@@ -9,13 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SQLDataTableController.h"
 #import "StatusViewControllerLandscape.h"
-#import "BasicViewController.h"
 
-@interface ProcedureTableViewController : BasicViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ProcedureTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 - (void)loadDetailProcedureViewController;
 - (void)loadEditProcedureViewControllerForId:(NSUInteger)rowId;
 - (IBAction)done:(id)sender;
 - (void)reloadData:(NSNotification*)note;
-- (void)start;
 @end

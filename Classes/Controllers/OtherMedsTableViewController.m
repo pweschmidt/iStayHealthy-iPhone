@@ -21,14 +21,24 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSDateFormatter *formatter;
 @property (nonatomic, assign) BOOL hasReloadedData;
+- (void)registerObservers;
 - (void)setUpData;
 @end
 
 @implementation OtherMedsTableViewController
 
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerObservers];
     self.hasReloadedData = NO;
     [self setUpData];
 	self.formatter = [[NSDateFormatter alloc]init];
@@ -43,9 +53,6 @@
     {
         [navBar addButtonWithTitle:@"Other Meds" target:self selector:@selector(gotoPOZ)];
     }
-    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
-    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
-    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 #if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
@@ -65,32 +72,22 @@
                                                                 isAscending:NO
                                                                     context:self.context];
     
-    self.allOtherMeds = [self.dataController entriesForEntity];
+    NSArray *others = [self.dataController entriesForEntity];
+    self.allOtherMeds = [self.dataController cleanEntriesForData:others table:kOtherMedicationTable];
 }
 
 
 - (void)reloadData:(NSNotification*)note
 {
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
     if (nil != note)
     {
-        self.allOtherMeds = [self.dataController entriesForEntity];
+        NSArray *others = [self.dataController entriesForEntity];
+        self.allOtherMeds = [self.dataController cleanEntriesForData:others table:kOtherMedicationTable];
         [self.tableView reloadData];
     }
     
 }
-
-- (void)start
-{
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
-    }
-    
-}
-
-
 
 - (void)loadDetailOtherMedsController
 {

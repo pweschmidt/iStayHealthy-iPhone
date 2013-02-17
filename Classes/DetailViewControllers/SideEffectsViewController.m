@@ -23,6 +23,7 @@
 @property (nonatomic, assign) BOOL hasReloadedData;
 - (void)setUpData;
 - (void)loadSideEffectsController;
+- (void)registerObservers;
 @end
 
 @implementation SideEffectsViewController
@@ -38,6 +39,15 @@
     return self;
 }
 
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+}
+
+
 - (void)setUpData
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -47,26 +57,19 @@
                                                                    isAscending:YES
                                                                        context:self.context];
     
-    self.allSideEffects = [self.dataController entriesForEntity];
+    NSArray *effects = [self.dataController entriesForEntity];
+    self.allSideEffects = [self.dataController cleanEntriesForData:effects table:kSideEffectsTable];
 }
 
 - (void)reloadData:(NSNotification *)note
 {
     NSLog(@"reloadData");
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
     if (nil != note)
     {
-        self.allSideEffects = [self.dataController entriesForEntity];
+        NSArray *effects = [self.dataController entriesForEntity];
+        self.allSideEffects = [self.dataController cleanEntriesForData:effects table:kSideEffectsTable];
         [self.tableView reloadData];
-    }
-}
-
-- (void)start
-{
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
     }
 }
 
@@ -89,6 +92,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerObservers];
     self.hasReloadedData = NO;
     [self setUpData];
 	self.navigationItem.title = NSLocalizedString(@"Side Effects", @"Side Effects");
@@ -98,9 +102,6 @@
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadSideEffectsController)];
     self.tableView.rowHeight = 57.0;
-    CGRect frame = [Utilities frameFromSize:self.view.bounds.size];
-    self.activityIndicator = [Utilities activityIndicatorViewWithFrame:frame];
-    [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
 - (void)loadSideEffectsController

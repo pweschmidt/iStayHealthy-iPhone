@@ -30,9 +30,16 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-/**
- dealloc
- */
+- (void)reloadData:(NSNotification *)note
+{
+    ///empty implementation
+}
+
+- (void)start
+{
+    ///empty implementation
+}
+
 
 
 #pragma mark - View lifecycle

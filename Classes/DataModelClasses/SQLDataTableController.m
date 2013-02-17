@@ -7,11 +7,21 @@
 //
 
 #import "SQLDataTableController.h"
+#import "iStayHealthyRecord+Comparator.h"
+#import "Results+Comparator.h"
+#import "OtherMedication+Comparator.h"
+#import "Medication+Comparator.h"
+#import "PreviousMedication+Comparator.h"
+#import "Wellness+Comparator.h"
+#import "Procedures+Comparator.h"
+#import "MissedMedication+Comparator.h"
+#import "SideEffects+Comparator.h"
+#import "Contacts+Comparator.h"
 
 @interface SQLDataTableController ()
 @property (nonatomic, strong) NSEntityDescription *entityDescription;
 @property (nonatomic, strong) NSSortDescriptor *sortDescriptor;
-@property (nonatomic, strong) NSManagedObjectContext *managedContext;
+@property (nonatomic, strong, readwrite) NSManagedObjectContext *managedContext;
 @end
 
 @implementation SQLDataTableController
@@ -56,6 +66,77 @@
     }
 	return [self.fetchedResultsController fetchedObjects];    
 }
+
+
+- (NSArray *)cleanEntriesForData:(NSArray *)dataTable table:(TableType)table
+{
+    id previous = nil;
+    BOOL hasChanges = NO;
+
+    for (id dataObject in dataTable)
+    {
+        if (previous)
+        {
+            if ([previous respondsToSelector:@selector(isEqualTo:)] && [dataObject respondsToSelector:@selector(isEqualTo:)])
+            {
+                if ([previous isEqualTo:dataObject])
+                {
+                    switch (table)
+                    {
+                        case kRecordTable:
+                            [self.managedContext deleteObject:(iStayHealthyRecord *)previous];
+                            break;
+                        case kResultsTable:
+                            [self.managedContext deleteObject:(Results *)previous];
+                            break;
+                        case kMedicationTable:
+                            [self.managedContext deleteObject:(Medication *)previous];
+                            break;
+                        case kMissedMedicationTable:
+                            [self.managedContext deleteObject:(MissedMedication *)previous];
+                            break;
+                        case kPreviousMedicationTable:
+                            [self.managedContext deleteObject:(PreviousMedication *)previous];
+                            break;
+                        case kOtherMedicationTable:
+                            [self.managedContext deleteObject:(OtherMedication *)previous];
+                            break;
+                        case kProceduresTable:
+                            [self.managedContext deleteObject:(Procedures *)previous];
+                            break;
+                        case kContactsTable:
+                            [self.managedContext deleteObject:(Contacts *)previous];
+                            break;
+                        case kSideEffectsTable:
+                            [self.managedContext deleteObject:(SideEffects *)previous];
+                            break;
+                        case kWellnessTable:
+                            [self.managedContext deleteObject:(Wellness *)previous];
+                            break;
+                            
+                    }
+                    hasChanges = YES;
+                }
+            }
+            
+        }
+        
+        previous = dataObject;
+    }
+    if (hasChanges)
+    {
+        NSError *error = nil;
+        BOOL success = [self.managedContext save:&error];
+        if (success)
+        {
+            return [self entriesForEntity];
+        }
+    }
+        
+    return dataTable;
+}
+
+
 
 
 

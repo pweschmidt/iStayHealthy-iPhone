@@ -55,28 +55,35 @@
                                                                isAscending:NO
                                                                    context:self.context];
     
-    self.allMeds = [self.medController entriesForEntity];
+    NSArray *meds = [self.medController entriesForEntity];
+    self.allMeds = [self.medController cleanEntriesForData:meds table:kMedicationTable];
 
     self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
                                                                     sortBy:@"MissedDate"
                                                                isAscending:NO
                                                                    context:self.context];
     
-    self.allMissedMeds = [self.missedController entriesForEntity];
+    NSArray *missed = [self.missedController entriesForEntity];
+    self.allMissedMeds = [self.missedController cleanEntriesForData:missed
+                                                              table:kMissedMedicationTable];
 
     self.previousController = [[SQLDataTableController alloc] initForEntityName:@"PreviousMedication"
                                                                     sortBy:@"endDate"
                                                                isAscending:NO
                                                                    context:self.context];
     
-    self.allPreviousMedications = [self.previousController entriesForEntity];
+    NSArray *previous = [self.previousController entriesForEntity];
+    self.allPreviousMedications = [self.previousController cleanEntriesForData:previous
+                                                                         table:kPreviousMedicationTable];
 
     self.effectsController = [[SQLDataTableController alloc] initForEntityName:@"SideEffects"
                                                                     sortBy:@"SideEffectDate"
                                                                isAscending:YES
                                                                    context:self.context];
     
-    self.allSideEffects = [self.effectsController entriesForEntity];
+    NSArray *effects = [self.effectsController entriesForEntity];
+    self.allSideEffects = [self.effectsController cleanEntriesForData:effects
+                                                                table:kSideEffectsTable];
 
 
 }
@@ -85,15 +92,22 @@
 {
     NSLog(@"reloadData");
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
     if (nil != note)
     {
-        self.allMeds = [self.medController entriesForEntity];
-        self.allMissedMeds = [self.missedController entriesForEntity];
-        self.allPreviousMedications = [self.previousController entriesForEntity];
-        self.allSideEffects = [self.effectsController entriesForEntity];
+        NSArray *meds = [self.medController entriesForEntity];
+        self.allMeds = [self.medController cleanEntriesForData:meds table:kMedicationTable];
+        NSArray *missed = [self.missedController entriesForEntity];
+        self.allMissedMeds = [self.missedController cleanEntriesForData:missed
+                                                                  table:kMissedMedicationTable];
+        NSArray *previous = [self.previousController entriesForEntity];
+        self.allPreviousMedications = [self.previousController cleanEntriesForData:previous
+                                                                             table:kPreviousMedicationTable];
+        NSArray *effects = [self.effectsController entriesForEntity];
+        self.allSideEffects = [self.effectsController cleanEntriesForData:effects
+                                                                    table:kSideEffectsTable];
         [self.tableView reloadData];
     }
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)start

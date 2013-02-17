@@ -72,9 +72,12 @@
                                                                        sortBy:@"StartDate"
                                                                   isAscending:NO context:self.context];
     
-    self.allResults = [self.resultsController entriesForEntity];
-    self.allMeds = [self.medsController entriesForEntity];
-    self.allMissedMeds  = [self.missedController entriesForEntity];
+    NSArray *results = [self.resultsController entriesForEntity];
+    self.allResults = [self.resultsController cleanEntriesForData:results table:kResultsTable];
+    NSArray *meds = [self.medsController entriesForEntity];
+    self.allMeds = [self.medsController cleanEntriesForData:meds table:kMedicationTable];
+    NSArray *missed  = [self.missedController entriesForEntity];
+    self.allMissedMeds = [self.missedController cleanEntriesForData:missed table:kMissedMedicationTable];
 }
 
 #pragma mark - View lifecycle
@@ -118,11 +121,15 @@
         [self.events.allChartEvents removeAllObjects];
     }
     self.hasReloadedData = YES;
-    [self.activityIndicator stopAnimating];
-    self.allResults = [self.resultsController entriesForEntity];
-    self.allMeds = [self.medsController entriesForEntity];
-    self.allMissedMeds  = [self.missedController entriesForEntity];
+    NSArray *results = [self.resultsController entriesForEntity];
+    self.allResults = [self.resultsController cleanEntriesForData:results table:kResultsTable];
+    NSArray *meds = [self.medsController entriesForEntity];
+    self.allMeds = [self.medsController cleanEntriesForData:meds table:kMedicationTable];
+    NSArray *missed  = [self.missedController entriesForEntity];
+    self.allMissedMeds = [self.missedController cleanEntriesForData:missed table:kMissedMedicationTable];
     
+    [self.activityIndicator stopAnimating];
+
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
     [self.events loadMissedMedication:self.allMissedMeds];

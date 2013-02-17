@@ -18,6 +18,7 @@
 @property (nonatomic, strong) SQLDataTableController *dataController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, assign) BOOL hasReloadedData;
+- (void)registerObservers;
 - (void)setUpData;
 - (NSString *)getStringFromName:(NSString *)name;
 @end
@@ -43,7 +44,9 @@
                                                                 isAscending:NO
                                                                     context:self.context];
     
-    self.allPreviousMedications = [NSMutableArray arrayWithArray:[self.dataController entriesForEntity]];
+    NSArray *previous = [self.dataController entriesForEntity];
+    NSArray *cleanPrevious = [self.dataController cleanEntriesForData:previous table:kPreviousMedicationTable];
+    self.allPreviousMedications = [NSMutableArray arrayWithArray:cleanPrevious];
 }
 
 - (void)reloadData:(NSNotification *)note
@@ -52,15 +55,25 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        self.allPreviousMedications = [NSMutableArray arrayWithArray:[self.dataController entriesForEntity]];
+        NSArray *previous = [self.dataController entriesForEntity];
+        NSArray *cleanPrevious = [self.dataController cleanEntriesForData:previous table:kPreviousMedicationTable];
+        self.allPreviousMedications = [NSMutableArray arrayWithArray:cleanPrevious];
         [self.tableView reloadData];
     }
 }
 
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData:)
+                                                 name:@"RefetchAllDatabaseData"
+                                               object:nil];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerObservers];
     self.hasReloadedData = NO;
     [self setUpData];
 
