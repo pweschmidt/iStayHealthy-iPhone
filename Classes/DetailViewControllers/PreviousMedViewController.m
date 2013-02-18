@@ -21,6 +21,7 @@
 - (void)registerObservers;
 - (void)setUpData;
 - (NSString *)getStringFromName:(NSString *)name;
+- (void)postNotification;
 @end
 
 @implementation PreviousMedViewController
@@ -33,6 +34,21 @@
     }
     return self;
     
+}
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+    
+    NSNotification* animateNotification = [NSNotification
+                                           notificationWithName:@"startAnimation"
+                                           object:self
+                                           userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
 }
 
 - (void)setUpData
@@ -208,6 +224,7 @@
              show];
         }
         
+        [self postNotification];
     }
 }
 

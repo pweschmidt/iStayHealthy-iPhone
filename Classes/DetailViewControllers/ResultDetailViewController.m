@@ -175,7 +175,7 @@
     NSArray *segmentArray = [NSArray arrayWithObjects:NSLocalizedString(@"HIV Results", nil), NSLocalizedString(@"Blood Results", nil), NSLocalizedString(@"Other Results", nil), nil];
     
     self.undetectableSwitch = [[UISwitch alloc] init];
-    self.undetectableSwitch.tintColor = TINTCOLOUR;
+    self.undetectableSwitch.onTintColor = TINTCOLOUR;
     self.undetectableSwitch.on = NO;
     
     self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:segmentArray];
