@@ -71,7 +71,8 @@
     [super viewDidLoad];
     self.hasReloadedData = NO;
     [self setUpData];
-      
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadResultDetailViewController)];
+    
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
     {

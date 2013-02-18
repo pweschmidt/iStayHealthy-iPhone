@@ -32,7 +32,6 @@
     [super viewDidLoad];
     [self registerObservers];
     [self setUpLandscapeController];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadResultDetailViewController)];
     
     if (self.headerView)
     {
