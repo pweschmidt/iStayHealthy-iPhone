@@ -435,7 +435,7 @@
 {
     if ([string isEqualToString:NSLocalizedString(@"undetectable",@"undetectable")])
     {
-        return [NSNumber numberWithFloat:0.0];
+        return [NSNumber numberWithFloat:1.0];
     }
     if ([string isEqualToString:@""])
     {
@@ -817,7 +817,7 @@
                 case 0:
                     segCell.inputTitle.text = NSLocalizedString(@"Viral Load",@"Viral Load");
                     segCell.inputValueField.enabled = NO;
-                    if (40 <= [self.vlHIV intValue] && self.isInEditMode)
+                    if (1 <= [self.vlHIV intValue] && self.isInEditMode)
                     {
                         segCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.vlHIV intValue]];
                         segCell.inputValueField.textColor = [UIColor blackColor];
@@ -828,7 +828,7 @@
                     {
                         segCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }                    
-                    if(0 <= [self.vlHIV intValue] && 40 > [self.vlHIV intValue])
+                    if(0 <= [self.vlHIV intValue] && 1 >= [self.vlHIV intValue])
                     {
                         segCell.inputValueField.textColor = [UIColor blackColor];
                         segCell.inputValueField.text = NSLocalizedString(@"undetectable",@"undetectable");
@@ -845,7 +845,7 @@
                 case 1:
                     segCell.inputTitle.text = NSLocalizedString(@"Viral Load HepC",@"Viral Load HepC");
                     segCell.inputValueField.enabled = YES;
-                    if (40 <= [self.vlHepC intValue] && self.isInEditMode)
+                    if (1 <= [self.vlHepC intValue] && self.isInEditMode)
                     {
                         segCell.inputValueField.text = [NSString stringWithFormat:@"%d",[self.vlHepC intValue]];
                         segCell.inputValueField.textColor = [UIColor blackColor];
@@ -856,7 +856,7 @@
                     {
                         segCell.inputValueField.text = NSLocalizedString(@"Enter Number", @"Enter Number");
                     }
-                    if(0 <= [self.vlHepC intValue] && 40 > [self.vlHepC intValue])
+                    if(0 <= [self.vlHepC intValue] && 1 >= [self.vlHepC intValue])
                     {
                         segCell.inputValueField.textColor = [UIColor blackColor];
                         segCell.inputValueField.text = NSLocalizedString(@"undetectable",@"undetectable");

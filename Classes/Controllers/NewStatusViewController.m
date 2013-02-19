@@ -544,11 +544,11 @@
 
 	int vlCount = [self.latestVL intValue];
     
-	if (10 < vlCount)
+	if (1 < vlCount)
     {
         cell.result.text = [NSString stringWithFormat:@"%d",vlCount];
 	}
-	else if(0 <= vlCount && 10 >= vlCount)
+	else if(0 <= vlCount && 1 >= vlCount)
     {
         cell.result.text = NSLocalizedString(@"undetectable", @"undetectable");
 	}
@@ -561,7 +561,7 @@
     {
         //		previous = (Results *)[self.allResults objectAtIndex:(count - 2)];
 		int previousVL = [self.previousVL intValue];
-		if (10 < vlCount && 10 < previousVL)
+		if (0 <= vlCount && 0 <= previousVL && ( 1 < vlCount || 1 < previousVL ))
         {
             int diff = vlCount - previousVL;
             cell.change.text = [NSString stringWithFormat:@"%d", diff];
@@ -583,7 +583,7 @@
                 [cell indicator:self hasShape:neutral isGood:NO];
             }
 		}
-        if ((0 <= vlCount && 10 >= vlCount) && (0 <= previousVL && 10 >= previousVL))
+        if ((0 <= vlCount && 1 >= vlCount) && (0 <= previousVL && 1 >= previousVL))
         {
             cell.change.text = @"0";
             cell.change.textColor = [UIColor lightGrayColor];

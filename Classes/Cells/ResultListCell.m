@@ -71,7 +71,7 @@
 - (void)setViralLoad:(NSNumber *)value
 {
     int vl = [value intValue];
-	if (10 > vl && 0 <= vl)
+	if ( 0 <= vl && 1 >= vl)
     {
         self.vlValue.text = NSLocalizedString(@"undetectable",nil);
 		self.vlValue.textColor = DARK_GREEN;
@@ -81,10 +81,15 @@
         self.vlValue.text = NSLocalizedString(@"n/a",nil);
         self.vlValue.textColor = [UIColor lightGrayColor];
     }
+    else if(1000 > vl)
+    {
+		self.vlValue.text = [NSString stringWithFormat:@"%d",vl];
+		self.vlValue.textColor = DARK_GREEN;
+    }
 	else
     {
 		self.vlValue.text = [NSString stringWithFormat:@"%d",vl];
-		if (100000 <= vl && 500000 > vl)
+		if (1000 <= vl && 500000 > vl)
         {
 			self.vlValue.textColor = DARK_YELLOW;
 		}
