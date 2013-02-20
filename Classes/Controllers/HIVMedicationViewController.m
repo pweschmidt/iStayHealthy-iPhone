@@ -50,40 +50,33 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.medController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
+    self.medController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
                                                                     sortBy:@"StartDate"
                                                                isAscending:NO
                                                                    context:self.context];
     
-    NSArray *meds = [self.medController entriesForEntity];
-    self.allMeds = [self.medController cleanEntriesForData:meds table:kMedicationTable];
+    self.allMeds = [self.medController cleanedEntries];
 
-    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+    self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
                                                                     sortBy:@"MissedDate"
                                                                isAscending:NO
                                                                    context:self.context];
     
-    NSArray *missed = [self.missedController entriesForEntity];
-    self.allMissedMeds = [self.missedController cleanEntriesForData:missed
-                                                              table:kMissedMedicationTable];
+    self.allMissedMeds = [self.missedController cleanedEntries];
 
-    self.previousController = [[SQLDataTableController alloc] initForEntityName:@"PreviousMedication"
+    self.previousController = [[SQLDataTableController alloc] initForEntityType:kPreviousMedicationTable
                                                                     sortBy:@"endDate"
                                                                isAscending:NO
                                                                    context:self.context];
     
-    NSArray *previous = [self.previousController entriesForEntity];
-    self.allPreviousMedications = [self.previousController cleanEntriesForData:previous
-                                                                         table:kPreviousMedicationTable];
+    self.allPreviousMedications = [self.previousController cleanedEntries];
 
-    self.effectsController = [[SQLDataTableController alloc] initForEntityName:@"SideEffects"
+    self.effectsController = [[SQLDataTableController alloc] initForEntityType:kSideEffectsTable
                                                                     sortBy:@"SideEffectDate"
                                                                isAscending:YES
                                                                    context:self.context];
     
-    NSArray *effects = [self.effectsController entriesForEntity];
-    self.allSideEffects = [self.effectsController cleanEntriesForData:effects
-                                                                table:kSideEffectsTable];
+    self.allSideEffects = [self.effectsController cleanedEntries];
 
 
 }
@@ -94,17 +87,10 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        NSArray *meds = [self.medController entriesForEntity];
-        self.allMeds = [self.medController cleanEntriesForData:meds table:kMedicationTable];
-        NSArray *missed = [self.missedController entriesForEntity];
-        self.allMissedMeds = [self.missedController cleanEntriesForData:missed
-                                                                  table:kMissedMedicationTable];
-        NSArray *previous = [self.previousController entriesForEntity];
-        self.allPreviousMedications = [self.previousController cleanEntriesForData:previous
-                                                                             table:kPreviousMedicationTable];
-        NSArray *effects = [self.effectsController entriesForEntity];
-        self.allSideEffects = [self.effectsController cleanEntriesForData:effects
-                                                                    table:kSideEffectsTable];
+        self.allMeds = [self.medController cleanedEntries];
+        self.allMissedMeds = [self.missedController cleanedEntries];
+        self.allPreviousMedications = [self.previousController cleanedEntries];
+        self.allSideEffects = [self.effectsController cleanedEntries];
         [self.tableView reloadData];
     }
     [self.activityIndicator stopAnimating];

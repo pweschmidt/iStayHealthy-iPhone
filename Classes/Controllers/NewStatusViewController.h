@@ -28,6 +28,4 @@
 - (void)configureViralLoadCell:(SummaryCell *)cell;
 - (void) showInfoView:(id)sender;
 - (void) showSettingsView:(id)sender;
-- (void)reloadData:(NSNotification*)note;
-- (void)start;
 @end

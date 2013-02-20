@@ -36,16 +36,11 @@ typedef enum
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedContext;
 
-- (id)initForEntityName:(NSString *)tableName
+- (id)initForEntityType:(TableType *)table
                  sortBy:(NSString *)sortBy
             isAscending:(BOOL)isAscending
                 context:(NSManagedObjectContext *)context;
 
-- (id)initForEntity:(NSEntityDescription *)entity
-         descriptor:(NSSortDescriptor *)descriptor
-            context:(NSManagedObjectContext *)context;
-- (NSArray *)entriesForEntity;
-
-- (NSArray *)cleanEntriesForData:(NSArray *)dataTable table:(TableType)table;
+- (NSArray *)cleanedEntries;
 
 @end

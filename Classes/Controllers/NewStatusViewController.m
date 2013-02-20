@@ -60,24 +60,33 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.resultsController = [[SQLDataTableController alloc] initForEntityName:@"Results"
+    self.resultsController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
                                                                         sortBy:@"ResultsDate"
                                                                    isAscending:NO context:self.context];
     
-    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+    self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
                                                                         sortBy:@"MissedDate"
                                                                    isAscending:NO context:self.context];
     
-    self.medsController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
+    self.medsController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
                                                                        sortBy:@"StartDate"
                                                                   isAscending:NO context:self.context];
+
+    /*
+    if (0 < [self.events.allChartEvents count])
+    {
+        [self.events.allChartEvents removeAllObjects];
+    }
+    self.allResults = [self.resultsController cleanedEntries];
+    self.allMeds = [self.medsController cleanedEntries];
+    self.allMissedMeds = [self.missedController cleanedEntries];
+    [self getStats];
     
-    NSArray *results = [self.resultsController entriesForEntity];
-    self.allResults = [self.resultsController cleanEntriesForData:results table:kResultsTable];
-    NSArray *meds = [self.medsController entriesForEntity];
-    self.allMeds = [self.medsController cleanEntriesForData:meds table:kMedicationTable];
-    NSArray *missed  = [self.missedController entriesForEntity];
-    self.allMissedMeds = [self.missedController cleanEntriesForData:missed table:kMissedMedicationTable];
+    [self.events loadResult:self.allResults];
+    [self.events loadMedication:self.allMeds];
+    [self.events loadMissedMedication:self.allMissedMeds];
+    [self.events sortEventsAscending:YES];
+     */
 }
 
 #pragma mark - View lifecycle
@@ -116,27 +125,31 @@
 
 - (void)reloadData:(NSNotification *)note
 {
+    NSLog(@"NewStatusViewController::reloadData:(NSNotification *)note");
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];
     }
     self.hasReloadedData = YES;
-    NSArray *results = [self.resultsController entriesForEntity];
-    self.allResults = [self.resultsController cleanEntriesForData:results table:kResultsTable];
-    NSArray *meds = [self.medsController entriesForEntity];
-    self.allMeds = [self.medsController cleanEntriesForData:meds table:kMedicationTable];
-    NSArray *missed  = [self.missedController entriesForEntity];
-    self.allMissedMeds = [self.missedController cleanEntriesForData:missed table:kMissedMedicationTable];
-    
-    [self.activityIndicator stopAnimating];
+    self.allResults = [self.resultsController cleanedEntries];
+    self.allMeds = [self.medsController cleanedEntries];
+    self.allMissedMeds = [self.missedController cleanedEntries];
+    [self getStats];
+    NSIndexPath *firstRow = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *secondRow = [NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *thirdRow = [NSIndexPath indexPathForRow:2 inSection:0];
+    NSArray *rows = @[firstRow, secondRow, thirdRow];
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
 
+    [self.activityIndicator stopAnimating];
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
     [self.events loadMissedMedication:self.allMissedMeds];
     [self.events sortEventsAscending:YES];
-    [self getStats];
+
     [self.chartView setNeedsDisplay];
-    [self.tableView reloadData];
 }
 
 - (void)start
@@ -177,14 +190,23 @@
     {
         [self.events.allChartEvents removeAllObjects];
     }
-    
+    self.allResults = [self.resultsController cleanedEntries];
+    self.allMeds = [self.medsController cleanedEntries];
+    self.allMissedMeds = [self.missedController cleanedEntries];
+    [self getStats];
+    NSIndexPath *firstRow = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *secondRow = [NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *thirdRow = [NSIndexPath indexPathForRow:2 inSection:0];
+    NSArray *rows = @[firstRow, secondRow, thirdRow];
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
     [self.events loadMissedMedication:self.allMissedMeds];
     [self.events sortEventsAscending:YES];
-    [self getStats];
+
     [self.chartView setNeedsDisplay];
-    [self.tableView reloadData];
 }
 
 
@@ -220,6 +242,14 @@
 
 - (void)getStats
 {
+    NSLog(@"****** getStats");
+    self.latestCD4Count = nil;
+    self.previousCD4Count = nil;
+    self.latestCD4Percent = nil;
+    self.previousCD4Percent = nil;
+    self.latestVL = nil;
+    self.previousVL = nil;
+    
     self.latestCD4Count     = [self latestValueForType:@"CD4Count"];
     self.previousCD4Count   = [self previousValueForType:@"CD4Count"];
     self.latestCD4Percent   = [self latestValueForType:@"CD4Percent"];
@@ -393,6 +423,7 @@
  */
 - (void)configureCD4Cell:(SummaryCell *)cell
 {
+    NSLog(@"****** configureCD4Cell");
     cell.title.text = NSLocalizedString(@"CD4 Count", @"CD4 Count");
     cell.title.textColor = DARK_YELLOW;
     [cell clearIndicatorsFromLayer];
@@ -522,6 +553,7 @@
  */
 - (void)configureViralLoadCell:(SummaryCell *)cell
 {
+    NSLog(@"****** configureViralLoadCell");
     cell.title.text = NSLocalizedString(@"Viral Load", @"Viral Load");
     cell.title.textColor = DARK_BLUE;
     [cell clearIndicatorsFromLayer];
@@ -544,13 +576,13 @@
 
 	int vlCount = [self.latestVL intValue];
     
-	if (1 < vlCount)
-    {
-        cell.result.text = [NSString stringWithFormat:@"%d",vlCount];
-	}
-	else if(0 <= vlCount && 1 >= vlCount)
+	if (0 == vlCount)
     {
         cell.result.text = NSLocalizedString(@"undetectable", @"undetectable");
+	}
+	else if(0 < vlCount)
+    {
+        cell.result.text = [NSString stringWithFormat:@"%d",vlCount];
 	}
     else
     {
@@ -561,7 +593,7 @@
     {
         //		previous = (Results *)[self.allResults objectAtIndex:(count - 2)];
 		int previousVL = [self.previousVL intValue];
-		if (0 <= vlCount && 0 <= previousVL && ( 1 < vlCount || 1 < previousVL ))
+		if (0 < vlCount || 0 < previousVL)
         {
             int diff = vlCount - previousVL;
             cell.change.text = [NSString stringWithFormat:@"%d", diff];
@@ -583,7 +615,7 @@
                 [cell indicator:self hasShape:neutral isGood:NO];
             }
 		}
-        if ((0 <= vlCount && 1 >= vlCount) && (0 <= previousVL && 1 >= previousVL))
+        if (0 == vlCount && 0 == previousVL)
         {
             cell.change.text = @"0";
             cell.change.textColor = [UIColor lightGrayColor];
@@ -606,7 +638,7 @@
     
 	if (0 == indexPath.section)
     {
-        NSString *identifier = @"SummaryCell";
+        NSString *identifier = [NSString stringWithFormat:@"SummaryCell%d",indexPath.row];
         SummaryCell *cell = (SummaryCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil)
         {

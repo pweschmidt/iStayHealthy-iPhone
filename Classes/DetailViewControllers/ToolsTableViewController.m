@@ -12,6 +12,7 @@
 #import "NSArray-Set.h"
 #import "Utilities.h"
 #import "iStayHealthyAppDelegate.h"
+#import "Constants.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ToolsTableViewController ()
@@ -54,10 +55,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadData:)
-                                                 name:@"RefetchAllDatabaseData"
-                                               object:nil];
 
 	self.navigationItem.title = NSLocalizedString(@"Password", @"Password");
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
@@ -65,14 +62,14 @@
                                               target:self action:@selector(done:)];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
+    self.isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
     if (self.isPasswordEnabled)
     {
         self.password = [self passwordFromMasterRecord];
         if (!self.password)
         {
             self.isPasswordEnabled = NO;
-            [defaults setBool:self.isPasswordEnabled forKey:@"isPasswordEnabled"];
+            [defaults setBool:self.isPasswordEnabled forKey:kIsPasswordEnabled];
             [defaults synchronize];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password Not Found"
                                                             message:@"Please reset your password"
@@ -132,15 +129,15 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled)
     {
-        [defaults setBool:YES forKey:@"isPasswordEnabled"];
-        [defaults setObject:self.password forKey:@"password"];
+        [defaults setBool:YES forKey:kIsPasswordEnabled];
+        [defaults setObject:self.password forKey:kPassword];
         UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [isDone show];
     }
     else
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setBool:NO forKey:@"isPasswordEnabled"];
+        [defaults setBool:NO forKey:kIsPasswordEnabled];
     }
     [defaults synchronize];
 	[self dismissModalViewControllerAnimated:YES];
@@ -151,13 +148,13 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.passwordSwitch.on)
     {
-        [defaults setBool:YES forKey:@"isPasswordEnabled"];
+        [defaults setBool:YES forKey:kIsPasswordEnabled];
         self.isPasswordEnabled = YES;
         self.masterRecord.Password = self.passwordField.text;
     }
     else
     {
-        [defaults setBool:NO forKey:@"isPasswordEnabled"];
+        [defaults setBool:NO forKey:kIsPasswordEnabled];
         self.isPasswordEnabled = NO;
         self.masterRecord.Password = @"";
     }
@@ -478,6 +475,9 @@
 	
 }	
 
-
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    NSLog(@"ENTERING controllerDidChangeContent in ToolsTableViewController");
+}
 
 @end

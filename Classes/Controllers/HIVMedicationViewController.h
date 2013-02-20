@@ -18,6 +18,4 @@
 - (void)loadSideEffectsController;
 - (void)loadMissedMedicationsController;
 - (NSString *)getStringFromName:(NSString *)name;
-- (void)reloadData:(NSNotification*)note;
-- (void)start;
 @end

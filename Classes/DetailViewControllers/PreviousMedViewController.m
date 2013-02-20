@@ -55,13 +55,12 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"PreviousMedication"
+    self.dataController = [[SQLDataTableController alloc] initForEntityType:kPreviousMedicationTable
                                                                      sortBy:@"endDate"
                                                                 isAscending:NO
                                                                     context:self.context];
     
-    NSArray *previous = [self.dataController entriesForEntity];
-    NSArray *cleanPrevious = [self.dataController cleanEntriesForData:previous table:kPreviousMedicationTable];
+    NSArray *cleanPrevious = [self.dataController cleanedEntries];
     self.allPreviousMedications = [NSMutableArray arrayWithArray:cleanPrevious];
 }
 
@@ -71,8 +70,7 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        NSArray *previous = [self.dataController entriesForEntity];
-        NSArray *cleanPrevious = [self.dataController cleanEntriesForData:previous table:kPreviousMedicationTable];
+        NSArray *cleanPrevious = [self.dataController cleanedEntries];
         self.allPreviousMedications = [NSMutableArray arrayWithArray:cleanPrevious];
         [self.tableView reloadData];
     }

@@ -50,3 +50,6 @@ extern NSString * const kiCloudDataSource;
 extern NSString * const kFaultyDataSource;
 extern NSString * const kUbiquitousKeyPath;
 extern NSString * const kTeamId;
+extern NSString * const kDataTablesCleaned;
+extern NSString * const kIsPasswordEnabled;
+extern NSString * const kPassword;

@@ -53,6 +53,14 @@
 		self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         ChartEvents *tmpEvents = [[ChartEvents alloc]init];
         self.events = tmpEvents;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadData:)
+                                                     name:@"RefetchAllDatabaseData"
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(start)
+                                                     name:@"startLoading"
+                                                   object:nil];
     }
     return self;
 }
@@ -63,16 +71,23 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    [self setUpData];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadData:)
-                                                 name:@"RefetchAllDatabaseData"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(start)
-                                                 name:@"startLoading"
-                                               object:nil];
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    self.resultsController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
+                                                                        sortBy:@"ResultsDate"
+                                                                   isAscending:NO context:self.context];
     
+    self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
+                                                                       sortBy:@"MissedDate"
+                                                                  isAscending:NO context:self.context];
+    
+    self.medsController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
+                                                                     sortBy:@"StartDate"
+                                                                isAscending:NO context:self.context];
+    
+    
+    [self setUpData];
+
     CGRect activityFrame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2-70, 140, 140);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -120,26 +135,10 @@
 - (void)setUpData
 {
 
-	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.context = appDelegate.managedObjectContext;
-    self.resultsController = [[SQLDataTableController alloc] initForEntityName:@"Results"
-                                                                        sortBy:@"ResultsDate"
-                                                                   isAscending:NO context:self.context];
     
-    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
-                                                                       sortBy:@"MissedDate"
-                                                                  isAscending:NO context:self.context];
-    
-    self.medsController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
-                                                                     sortBy:@"StartDate"
-                                                                isAscending:NO context:self.context];
-    
-    NSArray *results = [self.resultsController entriesForEntity];
-    self.allResults = [self.resultsController cleanEntriesForData:results table:kResultsTable];
-    NSArray *meds = [self.medsController entriesForEntity];
-    self.allMeds = [self.medsController cleanEntriesForData:meds table:kMedicationTable];
-    NSArray *missed  = [self.missedController entriesForEntity];
-    self.allMissedMeds = [self.missedController cleanEntriesForData:missed table:kMissedMedicationTable];
+    self.allResults = [self.resultsController cleanedEntries];
+    self.allMeds = [self.medsController cleanedEntries];
+    self.allMissedMeds = [self.missedController cleanedEntries];
 
     if (0 < [self.events.allChartEvents count])
     {

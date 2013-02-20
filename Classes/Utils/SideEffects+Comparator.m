@@ -30,16 +30,19 @@
     }
     NSUInteger comparator = 0;
     NSUInteger index = 0;
+
+    comparator++;
     if ([self.SideEffectDate compare:sideEffects.SideEffectDate] == NSOrderedSame)
     {
-        comparator++;
         index++;
     }
+
+    comparator++;
     if ([self.SideEffect isEqualToString:sideEffects.SideEffect])
     {
-        comparator++;
         index++;
     }
+    
     if (self.Name && sideEffects.Name)
     {
         comparator++;

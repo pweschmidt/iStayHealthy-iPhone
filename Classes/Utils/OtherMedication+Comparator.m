@@ -30,16 +30,19 @@
     }
     NSUInteger comparator = 0;
     NSUInteger index = 0;
+
+    comparator++;
     if ([self.StartDate compare:other.StartDate] == NSOrderedSame)
     {
-        comparator++;
         index++;
     }
+
+    comparator++;
     if ([self.Name isEqualToString:other.Name])
     {
-        comparator++;
         index++;
     }
+
     if (other.Dose && self.Dose)
     {
         comparator++;
@@ -48,6 +51,7 @@
             index++;
         }
     }
+
     if (other.Unit && self.Unit)
     {
         comparator++;

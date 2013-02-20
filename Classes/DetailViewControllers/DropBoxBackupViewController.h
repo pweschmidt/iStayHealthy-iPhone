@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsDetailViewController.h"
 @class DBRestClient;
 
 @interface DropBoxBackupViewController : UITableViewController
+//@property (nonatomic, weak) id<DropboxPostDelegate> postDelegate;
 - (NSString *)dropBoxFileTmpPath;
 - (NSString *)uploadFileTmpPath;
+//- (id) initWithPostDelegate:(id<DropboxPostDelegate>)postDelegate;
 @end

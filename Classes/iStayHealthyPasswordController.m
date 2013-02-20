@@ -12,6 +12,7 @@
 #import "iStayHealthyAppDelegate.h"
 #import "WebViewController.h"
 #import "GeneralSettings.h"
+#import "Constants.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface iStayHealthyPasswordController ()
@@ -52,7 +53,7 @@
 - (void)reloadData:(NSNotification*)note
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *passwordFromSettings = (NSString *)[defaults objectForKey:@"password"];
+    NSString *passwordFromSettings = (NSString *)[defaults objectForKey:kPassword];
     if (!passwordFromSettings)
     {
         self.passwordString = [self passwordFromMasterRecord];
@@ -230,7 +231,7 @@
     [self.view addSubview:self.activityIndicator];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *passwordFromSettings = (NSString *)[defaults objectForKey:@"password"];
+    NSString *passwordFromSettings = (NSString *)[defaults objectForKey:kPassword];
     if (!passwordFromSettings)
     {
         self.passwordString = [self passwordFromMasterRecord];

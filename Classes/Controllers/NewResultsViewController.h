@@ -15,6 +15,4 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 - (void)loadResultDetailViewController;
 - (void)loadResultChangeViewController:(int)row;
-- (void)reloadData:(NSNotification*)note;
-- (void)start;
 @end

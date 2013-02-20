@@ -35,10 +35,12 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"Results" sortBy:@"ResultsDate" isAscending:NO context:self.context];
+    self.dataController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
+                                                                     sortBy:@"ResultsDate"
+                                                                isAscending:NO
+                                                                    context:self.context];
     
-    self.allResultsInReverseOrder = [self.dataController entriesForEntity];    
-    self.allResultsInReverseOrder = [self.dataController cleanEntriesForData:self.allResultsInReverseOrder table:kResultsTable];
+    self.allResultsInReverseOrder = [self.dataController cleanedEntries];
 }
 
 - (void)reloadData:(NSNotification *)note
@@ -47,8 +49,7 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        self.allResultsInReverseOrder = [self.dataController entriesForEntity];
-        self.allResultsInReverseOrder = [self.dataController cleanEntriesForData:self.allResultsInReverseOrder table:kResultsTable];
+        self.allResultsInReverseOrder = [self.dataController cleanedEntries];
         [self.tableView reloadData];
     }
     [self.activityIndicator stopAnimating];

@@ -13,6 +13,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "Utilities.h"
 #import "XMLLoader.h"
+#import "Constants.h"
 #import "SQLDatabaseManager.h"
 
 @interface iStayHealthyAppDelegate() <DBSessionDelegate>
@@ -62,7 +63,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
+    BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
 
     NSString* consumerKey = @"sekt4gbt7526j0y";
 	NSString* consumerSecret = @"drg5hompcf9vbd2";
@@ -198,7 +199,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     NSLog(@"in iStayHealthyAppDelegate::applicationDidEnterBackground");
 #endif
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
+    BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
     
     if (isPasswordEnabled)
     {
@@ -246,7 +247,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     NSLog(@"in iStayHealthyAppDelegate::applicationWillTerminate");
 #endif
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isPasswordEnabled = [defaults boolForKey:@"isPasswordEnabled"];
+    BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
     
     if (isPasswordEnabled)
     {

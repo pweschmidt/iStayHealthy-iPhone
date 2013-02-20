@@ -40,13 +40,12 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"Procedures"
+    self.dataController = [[SQLDataTableController alloc] initForEntityType:kProceduresTable
                                                                      sortBy:@"Date"
                                                                 isAscending:NO
                                                                     context:self.context];
     
-    NSArray *procs = [self.dataController entriesForEntity];
-    self.allProcedures = [self.dataController cleanEntriesForData:procs table:kProceduresTable];
+    self.allProcedures = [self.dataController cleanedEntries];
 }
 
 - (void)reloadData:(NSNotification *)note
@@ -55,8 +54,7 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        NSArray *procs = [self.dataController entriesForEntity];
-        self.allProcedures = [self.dataController cleanEntriesForData:procs table:kProceduresTable];
+        self.allProcedures = [self.dataController cleanedEntries];
         [self.tableView reloadData];
     }
 }

@@ -37,6 +37,24 @@
 @property (nonatomic, strong) SQLDataTableController *proceduresController;
 @property (nonatomic, strong) SQLDataTableController *masterRecordController;
 - (BOOL)hasRecords;
+- (void) addResults:(XMLElement *)resultsParent;
+- (void) addMedications:(XMLElement *)medicationParent;
+- (void) addMissedMedications:(XMLElement *)missedMedicationParent;
+- (void) addOtherMeds:(XMLElement *)otherMedsParent;
+- (void) addContacts:(XMLElement *)contactsParent;
+- (void) addSideEffects:(XMLElement *)sideEffectsParent;
+- (void) addProcedures:(XMLElement *)proceduresParent;
+- (void) addPreviousMedications:(XMLElement *)previousMedsParent;
+- (void) addWellness:(XMLElement *)wellnessParent;
+- (BOOL) containsResultsUID:(NSString *)UID;
+- (BOOL) containsMedicationsUID:(NSString *)UID;
+- (BOOL) containsMissedMedicationsUID:(NSString *)UID;
+- (BOOL) containsOtherMedicationsUID:(NSString *)UID;
+- (BOOL) containsProceduresUID:(NSString *)UID;
+- (BOOL) containsSideEffectsUID:(NSString *)UID;
+- (BOOL) containsContactsUID:(NSString *)UID;
+- (BOOL) containsPreviousMedsUID:(NSString *)UID;
+- (BOOL) containsWellnessUID:(NSString *)UID;
 @end
 
 @implementation DataLoader
@@ -48,10 +66,12 @@
     {
         iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
         self.context = appDelegate.managedObjectContext;
+        /*
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(reloadData:)
                                                      name:@"RefetchAllDatabaseData"
                                                    object:nil];
+         */
         self.allMedications = [NSMutableArray array];
         self.allMissedMeds = [NSMutableArray array];
         self.allPreviousMedications = [NSMutableArray array];
@@ -65,6 +85,7 @@
     
     return self;
 }
+
 
 - (BOOL)hasRecords
 {
@@ -80,20 +101,22 @@
     return (0 < count) ? YES : NO;
 }
 
+/*
 - (void)reloadData:(NSNotification*)note
 {
-    self.allMedications = [self.medsController entriesForEntity];
-    self.allMissedMeds = [self.missedController entriesForEntity];
-    self.allPreviousMedications = [self.previousController entriesForEntity];
-    self.allSideEffects = [self.effectsController entriesForEntity];
-    self.allContacts = [self.contactsController entriesForEntity];
-    self.allOtherMeds = [self.otherMedsController entriesForEntity];
-    self.allProcedures = [self.proceduresController entriesForEntity];
-    self.allResults = [self.resultsController entriesForEntity];
-    self.allWellness = [self.wellnessController entriesForEntity];
+    NSLog(@"DATALOADER reloadData:(NSNotification*)note");
+    self.allMedications = [self.medsController cleanedEntries];
+    self.allMissedMeds = [self.missedController cleanedEntries];
+    self.allPreviousMedications = [self.previousController cleanedEntries];
+    self.allSideEffects = [self.effectsController cleanedEntries];
+    self.allContacts = [self.contactsController cleanedEntries];
+    self.allOtherMeds = [self.otherMedsController cleanedEntries];
+    self.allProcedures = [self.proceduresController cleanedEntries];
+    self.allResults = [self.resultsController cleanedEntries];
+    self.allWellness = [self.wellnessController cleanedEntries];
     
 }
-
+ */
 /**
  dealloc
  */
@@ -244,6 +267,7 @@
  */
 - (NSData *)xmlData
 {
+    [self getSQLData];
     XMLDocument *document = [[XMLDocument alloc] init];
     XMLElement *root = [document root];
     if (![self hasRecords])
@@ -560,6 +584,12 @@
         if (nil != unit)
         {
             [otherMedElement addAttribute:kXMLAttributeUnit andValue:unit];
+        }
+        
+        NSNumber *dose = otherMed.Dose;
+        if (nil != dose)
+        {
+            [otherMedElement addAttribute:kXMLAttributeDose andValue:[NSString stringWithFormat:@"%f",[dose floatValue]]];
         }
         
         NSString *uid = otherMed.UID;
@@ -1577,57 +1607,58 @@
  */
 - (BOOL)getSQLData
 {
-    self.medsController = [[SQLDataTableController alloc] initForEntityName:@"Medication"
+    self.medsController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
                                                                     sortBy:@"StartDate"
                                                                isAscending:YES
                                                                    context:self.context];
-    self.allMedications = [self.medsController entriesForEntity];
     
-    self.missedController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+    self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
                                                                        sortBy:@"MissedDate"
                                                                   isAscending:YES
                                                                       context:self.context];
-    self.allMissedMeds = [self.missedController entriesForEntity];
     
-    self.previousController = [[SQLDataTableController alloc] initForEntityName:@"PreviousMedication"
+    self.previousController = [[SQLDataTableController alloc] initForEntityType:kPreviousMedicationTable
                                                                          sortBy:@"endDate"
                                                                     isAscending:YES
                                                                         context:self.context];    
-    self.allPreviousMedications = [self.previousController entriesForEntity];
     
-    self.effectsController = [[SQLDataTableController alloc] initForEntityName:@"SideEffects"
+    self.effectsController = [[SQLDataTableController alloc] initForEntityType:kSideEffectsTable
                                                                         sortBy:@"SideEffectDate"
                                                                    isAscending:YES
                                                                        context:self.context];    
-    self.allSideEffects = [self.effectsController entriesForEntity];
-    self.contactsController = [[SQLDataTableController alloc] initForEntityName:@"Contacts"
+    self.contactsController = [[SQLDataTableController alloc] initForEntityType:kContactsTable
                                                                      sortBy:@"ClinicName"
                                                                 isAscending:YES
                                                                     context:self.context];
     
-    self.allContacts = [self.contactsController entriesForEntity];
-    self.otherMedsController = [[SQLDataTableController alloc] initForEntityName:@"OtherMedication"
+    self.otherMedsController = [[SQLDataTableController alloc] initForEntityType:kOtherMedicationTable
                                                                      sortBy:@"StartDate"
                                                                 isAscending:YES
                                                                     context:self.context];
     
-    self.allOtherMeds = [self.otherMedsController entriesForEntity];
-    self.proceduresController = [[SQLDataTableController alloc] initForEntityName:@"Procedures"
+    self.proceduresController = [[SQLDataTableController alloc] initForEntityType:kProceduresTable
                                                                      sortBy:@"Date"
                                                                 isAscending:YES
                                                                     context:self.context];
-    self.allProcedures = [self.proceduresController entriesForEntity];
-    self.resultsController = [[SQLDataTableController alloc] initForEntityName:@"Results"
+    self.resultsController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
                                                                         sortBy:@"ResultsDate"
                                                                    isAscending:YES
                                                                        context:self.context];
-    self.allResults = [self.resultsController entriesForEntity];
     
-    self.wellnessController = [[SQLDataTableController alloc] initForEntityName:@"Wellness"
+    self.wellnessController = [[SQLDataTableController alloc] initForEntityType:kWellnessTable
                                                                         sortBy:@"sleepBarometer"
                                                                    isAscending:YES
                                                                        context:self.context];
-    self.allWellness = [self.wellnessController entriesForEntity];
+    
+    self.allMedications = [self.medsController cleanedEntries];
+    self.allMissedMeds = [self.missedController cleanedEntries];
+    self.allPreviousMedications = [self.previousController cleanedEntries];
+    self.allSideEffects = [self.effectsController cleanedEntries];
+    self.allContacts = [self.contactsController cleanedEntries];
+    self.allOtherMeds = [self.otherMedsController cleanedEntries];
+    self.allProcedures = [self.proceduresController cleanedEntries];
+    self.allResults = [self.resultsController cleanedEntries];
+    self.allWellness = [self.wellnessController cleanedEntries];
     
     return YES;
     

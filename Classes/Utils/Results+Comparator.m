@@ -31,9 +31,9 @@
     NSUInteger comparator = 0;
     NSUInteger index = 0;
     
+    comparator++;
     if ([self.ResultsDate compare:results.ResultsDate] == NSOrderedSame)
     {
-        comparator++;
         index++;
     }
     

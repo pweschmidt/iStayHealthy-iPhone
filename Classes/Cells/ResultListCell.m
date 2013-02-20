@@ -71,7 +71,7 @@
 - (void)setViralLoad:(NSNumber *)value
 {
     int vl = [value intValue];
-	if ( 0 <= vl && 1 >= vl)
+	if ( 0 == vl)
     {
         self.vlValue.text = NSLocalizedString(@"undetectable",nil);
 		self.vlValue.textColor = DARK_GREEN;

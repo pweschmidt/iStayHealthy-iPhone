@@ -50,3 +50,8 @@ NSString * const kFaultyDataSource  = @"iStayHealthyNoiCloud.sqlite";
 NSString * const kUbiquitousKeyPath = @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store";
 NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
 
+NSString * const kDataTablesCleaned = @"dataTablesCleaned";
+NSString * const kIsPasswordEnabled = @"isPasswordEnabled";
+NSString * const kPassword = @"password";
+
+

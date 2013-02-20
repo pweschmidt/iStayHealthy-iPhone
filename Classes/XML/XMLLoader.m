@@ -14,6 +14,10 @@
 #import "XMLConstants.h"
 #import "DataLoader.h"
 
+@interface XMLLoader ()
+- (void)postNotification;
+@end
+
 @implementation XMLLoader
 - (id)init
 {
@@ -23,6 +27,16 @@
     }
     
     return self;
+}
+
+- (void)postNotification
+{
+    NSNotification* refreshNotification =
+    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
+                                  object:self
+                                userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+    
 }
 
 
@@ -169,6 +183,9 @@
             [loader addPreviousMedicationsToSQL:element];
         }
     }
+    NSLog(@"XMLLoader::synchronise BEFORE posting notification");
+    [self postNotification];
+    NSLog(@"XMLLoader::synchronise AFTER posting notification");
     return YES;
 }
 

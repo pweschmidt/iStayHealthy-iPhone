@@ -52,13 +52,12 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.dataController = [[SQLDataTableController alloc] initForEntityName:@"MissedMedication"
+    self.dataController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
                                                                        sortBy:@"MissedDate"
                                                                   isAscending:NO
                                                                       context:self.context];
     
-    NSArray *missed = [self.dataController entriesForEntity];
-    self.allMissedMeds = [self.dataController cleanEntriesForData:missed table:kMissedMedicationTable];
+    self.allMissedMeds = [self.dataController cleanedEntries];
 }
 
 - (void)reloadData:(NSNotification *)note
@@ -67,8 +66,7 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        NSArray *missed = [self.dataController entriesForEntity];
-        self.allMissedMeds = [self.dataController cleanEntriesForData:missed table:kMissedMedicationTable];
+        self.allMissedMeds = [self.dataController cleanedEntries];
         [self.tableView reloadData];
     }
 }

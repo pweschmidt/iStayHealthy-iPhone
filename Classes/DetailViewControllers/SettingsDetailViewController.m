@@ -92,7 +92,10 @@
     }
     else
     {
-        DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc] initWithNibName:@"DropBoxBackupViewController" bundle:nil];
+//        DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc] initWithPostDelegate:self];
+        DropBoxBackupViewController *dropBoxController = [[DropBoxBackupViewController alloc]
+                                                          initWithNibName:@"DropBoxBackupViewController"
+                                                          bundle:nil];
         [self.navigationController pushViewController:dropBoxController animated:YES];
     }
 }

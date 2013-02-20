@@ -12,6 +12,7 @@
 #import "DataLoader.h"
 #import "XMLLoader.h"
 #import "GeneralSettings.h"
+#import "Constants.h"
 
 @interface DropBoxBackupViewController ()<DBRestClientDelegate>
 - (void)unlinkDropBox;
@@ -21,33 +22,27 @@
 - (void)createIStayHealthyFolder;
 - (void)copyOldFileToNew;
 - (void)setRestClient;
-- (void)postNotification;
 @property (nonatomic, strong) DBRestClient* restClient;
 @property BOOL dropBoxFileExists;
 @property BOOL newDropboxFileExists;
 @property BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, strong) DataLoader *dataLoader;
 @end
 
 @implementation DropBoxBackupViewController
 
-/**
- initWithStyle
- */
-- (id)initWithStyle:(UITableViewStyle)style
+/*
+- (id)initWithPostDelegate:(id<DropboxPostDelegate>)postDelegate
 {
-    self = [super initWithStyle:style];
-    if (self)
+    self = [super initWithNibName:@"DropBoxBackupViewController" bundle:nil];
+    if (nil != self)
     {
-#ifdef APPDEBUG
-        NSLog(@"DropBoxBackupViewController initWithStyle - do we reach this point?");
-#endif
+        self.postDelegate = postDelegate;
     }
     return self;
 }
-
+*/
 /**
  didReceiveMemoryWarning
  */
@@ -89,6 +84,10 @@
     [self setRestClient];
 }
 
+- (IBAction) done: (id) sender
+{
+	[self dismissModalViewControllerAnimated:YES];
+}
 
 /**
  viewWillAppear
@@ -97,7 +96,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.dataLoader = [[DataLoader alloc] init];
     if (nil != self.restClient)
     {
         [self.restClient loadMetadata:@"/iStayHealthy"];
@@ -316,8 +314,8 @@
 #ifdef APPDEBUG
     NSLog(@"DropBoxBackupViewController::backup temporary directory is in %@",dataPath);
 #endif    
-    [self.dataLoader getSQLData];
-    NSData *xmlData = [self.dataLoader xmlData];
+    DataLoader *dataLoader = [[DataLoader alloc] init];
+    NSData *xmlData = [dataLoader xmlData];
 	NSError *error = nil;
     [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&error];
 	if (error != nil)
@@ -381,11 +379,13 @@
     [self.activityIndicator stopAnimating];
     if (success)
     {
-        [self postNotification];
-        [[[UIAlertView alloc]
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setBool:NO forKey:kDataTablesCleaned];
+        [defaults synchronize];
+       [[[UIAlertView alloc]
           initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.isth.",nil)
           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-         show];        
+         show];
     }
     else
     {
@@ -394,20 +394,6 @@
 
 }
 
-- (void)postNotification
-{
-    NSNotification* refreshNotification =
-    [NSNotification notificationWithName:@"RefetchAllDatabaseData"
-                                  object:self
-                                userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-
-    NSNotification* animateNotification = [NSNotification
-                                           notificationWithName:@"startAnimation"
-                                           object:self
-                                           userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:animateNotification];
-}
 
 
 
