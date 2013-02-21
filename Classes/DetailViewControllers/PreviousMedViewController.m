@@ -66,7 +66,6 @@
 
 - (void)reloadData:(NSNotification *)note
 {
-    NSLog(@"reloadData");
     self.hasReloadedData = YES;
     if (nil != note)
     {

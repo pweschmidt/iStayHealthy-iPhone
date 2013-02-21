@@ -198,7 +198,6 @@
  */
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    NSLog(@"ENTERING controllerDidChangeContent in SQLDataTableController");
     [self getCurrentData];
 }
 

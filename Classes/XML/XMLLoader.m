@@ -183,9 +183,7 @@
             [loader addPreviousMedicationsToSQL:element];
         }
     }
-    NSLog(@"XMLLoader::synchronise BEFORE posting notification");
     [self postNotification];
-    NSLog(@"XMLLoader::synchronise AFTER posting notification");
     return YES;
 }
 
