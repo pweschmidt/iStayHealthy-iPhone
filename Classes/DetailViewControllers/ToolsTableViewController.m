@@ -148,7 +148,7 @@
     {
         [defaults setBool:NO forKey:kIsPasswordEnabled];
     }
-//    [defaults setBool:YES forKey:kPasswordTransferred];
+    [defaults setBool:YES forKey:kPasswordTransferred];
     [defaults synchronize];
 	[self dismissModalViewControllerAnimated:YES];
 }

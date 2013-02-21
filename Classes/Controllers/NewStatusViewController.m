@@ -93,6 +93,7 @@
     [self.events loadMedication:self.allMeds];
     [self.events loadMissedMedication:self.allMissedMeds];
     [self.events sortEventsAscending:YES];
+    [self.chartView setNeedsDisplay];
 }
 
 #pragma mark - View lifecycle
@@ -163,6 +164,7 @@
     }
 }
 
+/*
 - (void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"NewStatusViewController:viewWillAppear");
@@ -176,7 +178,7 @@
         [self.chartView setNeedsDisplay];
     }
 }
-
+*/
 
 /**
  viewDidUnload
