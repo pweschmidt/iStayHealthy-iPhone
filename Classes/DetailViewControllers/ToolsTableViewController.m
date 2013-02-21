@@ -14,10 +14,9 @@
 #import "iStayHealthyAppDelegate.h"
 #import "Constants.h"
 #import <QuartzCore/QuartzCore.h>
+#import "KeychainHandler.h"
 
 @interface ToolsTableViewController ()
-@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
 @property (nonatomic, strong) NSString *password;
 @property BOOL isPasswordEnabled;
 @property BOOL firstIsSet;
@@ -32,11 +31,10 @@
 @property (nonatomic, strong) UIImageView *firstWrongView;
 @property (nonatomic, strong) UIImageView *secondRightView;
 @property (nonatomic, strong) UIImageView *secondWrongView;
-- (NSString *)passwordFromMasterRecord;
+//- (NSString *)passwordFromMasterRecord;
 @end
 
 @implementation ToolsTableViewController
-@synthesize fetchedResultsController = _fetchedResultsController;
 /**
  dealloc
  */
@@ -63,6 +61,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
+    /*
     if (self.isPasswordEnabled)
     {
         self.password = [self passwordFromMasterRecord];
@@ -79,8 +78,10 @@
             [alert show];
         }
     }    
+     */
 }
 
+/*
 - (NSString *)passwordFromMasterRecord
 {
     self.masterRecord = nil;
@@ -110,7 +111,7 @@
     }
     return nil;
 }
-
+*/
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -129,16 +130,25 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled)
     {
-        [defaults setBool:YES forKey:kIsPasswordEnabled];
-        [defaults setObject:self.password forKey:kPassword];
-        UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [isDone show];
+        NSUInteger hash = [self.password hash];
+        NSString *encodedHash = [KeychainHandler securedSHA256DigestHashForPIN:hash];
+        if ([KeychainHandler createKeychainValue:encodedHash forIdentifier:kIsPasswordEnabled])
+        {
+            [defaults setBool:YES forKey:kIsPasswordEnabled];
+            UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [isDone show];
+            
+        }
+        else
+        {
+            [defaults setBool:NO forKey:kIsPasswordEnabled];
+        }
     }
     else
     {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
     }
+//    [defaults setBool:YES forKey:kPasswordTransferred];
     [defaults synchronize];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -150,13 +160,11 @@
     {
         [defaults setBool:YES forKey:kIsPasswordEnabled];
         self.isPasswordEnabled = YES;
-        self.masterRecord.Password = self.passwordField.text;
     }
     else
     {
         [defaults setBool:NO forKey:kIsPasswordEnabled];
         self.isPasswordEnabled = NO;
-        self.masterRecord.Password = @"";
     }
     [defaults synchronize];
     [self.tableView reloadData];    
@@ -444,40 +452,5 @@
 {
 }
 
-/**
- this handles the fetching of the objects
- @return NSFetchedResultsController
- */
-- (NSFetchedResultsController *)fetchedResultsController
-{
-	if (_fetchedResultsController != nil)
-    {
-		return _fetchedResultsController;
-	}
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSManagedObjectContext *context = appDelegate.managedObjectContext;
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"iStayHealthyRecord" inManagedObjectContext:context];
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"Name" ascending:YES];
-	NSArray *allDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[request setSortDescriptors:allDescriptors];	
-	[request setEntity:entity];
-	
-	NSFetchedResultsController *tmpFetchController = [[NSFetchedResultsController alloc]
-													  initWithFetchRequest:request 
-													  managedObjectContext:context 
-													  sectionNameKeyPath:nil 
-													  cacheName:nil];
-	tmpFetchController.delegate = self;
-	_fetchedResultsController = tmpFetchController;
-	
-	return _fetchedResultsController;
-	
-}	
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    NSLog(@"ENTERING controllerDidChangeContent in ToolsTableViewController");
-}
 
 @end

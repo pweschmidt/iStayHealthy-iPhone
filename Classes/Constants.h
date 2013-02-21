@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define kNumberOfChartViews 14
+#define APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
+#define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 /**
  General
  */
@@ -53,3 +55,4 @@ extern NSString * const kTeamId;
 extern NSString * const kDataTablesCleaned;
 extern NSString * const kIsPasswordEnabled;
 extern NSString * const kPassword;
+extern NSString * const kPasswordTransferred;

@@ -14,13 +14,13 @@
 #import "GeneralSettings.h"
 #import "Constants.h"
 #import <QuartzCore/QuartzCore.h>
+#import "KeychainHandler.h"
 
 @interface iStayHealthyPasswordController ()
 @property (nonatomic, strong) NSString * passwordString;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
-@property (nonatomic, strong, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
 @property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 @property BOOL hasReloadedData;
@@ -28,7 +28,6 @@
 @end
 
 @implementation iStayHealthyPasswordController
-@synthesize fetchedResultsController = fetchedResultsController_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,28 +49,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)reloadData:(NSNotification*)note
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *passwordFromSettings = (NSString *)[defaults objectForKey:kPassword];
-    if (!passwordFromSettings)
-    {
-        self.passwordString = [self passwordFromMasterRecord];
-        if (!self.passwordString)
-        {
-            [self loadTabController];
-        }
-    }
-    [self.activityIndicator stopAnimating];
-}
-
-- (void)start
-{
-    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
-    {
-        [self.activityIndicator startAnimating];
-    }
-}
 
 
 #pragma mark - Text Editing and Processing
@@ -83,7 +60,14 @@
 #ifdef APPDEBUG
     NSLog(@"stored password is %@",self.passwordString);
 #endif
-    if ([self.passwordString isEqualToString:suggestedPassword] )
+    NSUInteger hash = [suggestedPassword hash];
+    BOOL isValidated = NO;
+    if ([KeychainHandler compareKeychainValueForMatchingPIN:hash])
+    {
+        isValidated = YES;
+    }
+    
+    if (isValidated)
     {
         [self loadTabController];
     }
@@ -171,47 +155,12 @@
     }
 }
 
-- (NSString *)passwordFromMasterRecord
-{
-    NSError *error = nil;
-    if (![[self fetchedResultsController] performFetch:&error])
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Error Loading Data",nil)
-                              message:[NSString stringWithFormat:NSLocalizedString(@"Error was %@, quitting.", @"Error was %@, quitting"), [error localizedDescription]]
-                              delegate:self
-                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-                              otherButtonTitles:nil];
-        [alert show];
-    }
-    NSArray *records = [self.fetchedResultsController fetchedObjects];
-    for (iStayHealthyRecord *record in records)
-    {
-        NSString *testPassword = record.Password;
-        if (testPassword)
-        {
-            if (![testPassword isEqualToString:@""] && 0 < testPassword.length)
-            {
-                return testPassword;
-            }
-        }
-    }
-    return nil;
-}
-
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.hasReloadedData = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadData:)
-                                                 name:@"RefetchAllDatabaseData" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(start)
-                                                 name:@"startAnimation" object:nil];
 
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2-70, 140, 140);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -277,51 +226,6 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-/**
- this handles the fetching of the objects
- @return NSFetchedResultsController
- */
-- (NSFetchedResultsController *)fetchedResultsController
-{
-	if (fetchedResultsController_ != nil) {
-		return fetchedResultsController_;
-	}
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSManagedObjectContext *context = appDelegate.managedObjectContext;
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"iStayHealthyRecord" inManagedObjectContext:context];
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"Name" ascending:YES];
-	NSArray *allDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[request setSortDescriptors:allDescriptors];
-	
-	[request setEntity:entity];
-	
-	NSFetchedResultsController *tmpFetchController = [[NSFetchedResultsController alloc]
-													  initWithFetchRequest:request 
-													  managedObjectContext:context 
-													  sectionNameKeyPath:nil 
-													  cacheName:nil];
-	tmpFetchController.delegate = self;
-	fetchedResultsController_ = tmpFetchController;
-	
-	return fetchedResultsController_;
-	
-}	
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-	NSArray *objects = [self.fetchedResultsController fetchedObjects];
-    if (nil == objects)
-    {
-        return;
-    }
-    if (0 == objects.count)
-    {
-        return;
-    }
-    iStayHealthyRecord *masterRecord = (iStayHealthyRecord *)[objects lastObject];
-    self.passwordString = masterRecord.Password;
-}
 
 
 @end

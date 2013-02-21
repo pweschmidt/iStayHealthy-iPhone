@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class iStayHealthyTabBarController;
-@interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>
+@interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate>
 - (void)loadTabController;
 - (IBAction)testLoad:(id)sender;
 - (IBAction)textFieldDoneEditing:(id)sender;
 - (void)dismissTabBarController;
-- (void)reloadData:(NSNotification*)note;
 - (void)start;
 @end

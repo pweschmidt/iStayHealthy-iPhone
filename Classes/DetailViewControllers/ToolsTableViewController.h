@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class iStayHealthyRecord;
 
-@interface ToolsTableViewController : UITableViewController<UITextFieldDelegate, NSFetchedResultsControllerDelegate>
+@interface ToolsTableViewController : UITableViewController<UITextFieldDelegate>
 - (IBAction) done:				(id) sender;
 - (IBAction) switchPasswordEnabling:(id)sender;
 @end

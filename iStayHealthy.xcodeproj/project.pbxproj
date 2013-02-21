@@ -89,6 +89,7 @@
 		C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4B8B79413DEAE1C00FA9893 /* Localizable.strings */; };
 		C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9DA7316CE221500703B67 /* SQLDataTableController.m */; };
 		C4B9DA7716CE97E600703B67 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9DA7616CE97E600703B67 /* BasicViewController.m */; };
+		C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BB8A1916D69166003D5B7A /* KeychainHandler.m */; };
 		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
 		C4C0154613425268005E889D /* aptivus.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C0152413425268005E889D /* aptivus.png */; };
 		C4C0154713425268005E889D /* atripla.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C0152513425268005E889D /* atripla.png */; };
@@ -491,6 +492,8 @@
 		C4B9DA7316CE221500703B67 /* SQLDataTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLDataTableController.m; path = DataModelClasses/SQLDataTableController.m; sourceTree = "<group>"; };
 		C4B9DA7516CE97E600703B67 /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicViewController.h; path = Controllers/BasicViewController.h; sourceTree = "<group>"; };
 		C4B9DA7616CE97E600703B67 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicViewController.m; path = Controllers/BasicViewController.m; sourceTree = "<group>"; };
+		C4BB8A1816D69166003D5B7A /* KeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainHandler.h; path = Utils/KeychainHandler.h; sourceTree = "<group>"; };
+		C4BB8A1916D69166003D5B7A /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainHandler.m; path = Utils/KeychainHandler.m; sourceTree = "<group>"; };
 		C4C0151A134251B4005E889D /* HIVMedications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HIVMedications.plist; sourceTree = "<group>"; };
 		C4C0152413425268005E889D /* aptivus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aptivus.png; sourceTree = "<group>"; };
 		C4C0152513425268005E889D /* atripla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atripla.png; sourceTree = "<group>"; };
@@ -1248,6 +1251,8 @@
 		C4C41A1F15F1421800882416 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C4BB8A1816D69166003D5B7A /* KeychainHandler.h */,
+				C4BB8A1916D69166003D5B7A /* KeychainHandler.m */,
 				C4C41A2015F1432E00882416 /* GradientButton.h */,
 				C4C41A2115F1432E00882416 /* GradientButton.m */,
 				C4C41A2215F1432E00882416 /* NSArray-Set.h */,
@@ -1737,6 +1742,7 @@
 				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
+				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

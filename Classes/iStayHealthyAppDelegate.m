@@ -64,6 +64,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
+    BOOL passwordIsTransferred = [defaults boolForKey:kPasswordTransferred];
 
     NSString* consumerKey = @"sekt4gbt7526j0y";
 	NSString* consumerSecret = @"drg5hompcf9vbd2";
@@ -81,7 +82,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 		 show];
 	}    
     
-    if (isPasswordEnabled)
+    if (isPasswordEnabled && passwordIsTransferred)
     {
         iStayHealthyPasswordController *tmpPassController =
         [[iStayHealthyPasswordController alloc]initWithNibName:@"iStayHealthyPasswordController" bundle:nil];
@@ -92,6 +93,10 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     else
     
     {
+        if (isPasswordEnabled && !passwordIsTransferred)
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Password Reset" message:@"Password has been reset. Please, reenter it." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        }
         iStayHealthyTabBarController *tmpBarController = [[iStayHealthyTabBarController alloc]initWithNibName:nil bundle:nil];
         self.tabBarController = tmpBarController;
         self.window.rootViewController = self.tabBarController;

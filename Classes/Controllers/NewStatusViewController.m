@@ -102,6 +102,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"NewStatusViewController:viewDidLoad");
     self.hasReloadedData = NO;
     [self setUpData];
 
@@ -131,6 +132,7 @@
 
 - (void)reloadData:(NSNotification *)note
 {
+    NSLog(@"NewStatusViewController:reloadData");
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];
@@ -158,6 +160,20 @@
     if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
     {
         [self.activityIndicator startAnimating];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"NewStatusViewController:viewWillAppear");
+    [super viewWillAppear:animated];
+    if (self.hasReloadedData)
+    {
+        [self.events loadResult:self.allResults];
+        [self.events loadMedication:self.allMeds];
+        [self.events loadMissedMedication:self.allMissedMeds];
+        [self.events sortEventsAscending:YES];
+        [self.chartView setNeedsDisplay];
     }
 }
 

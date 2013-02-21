@@ -53,5 +53,6 @@ NSString * const kTeamId            = @"5Y4HL833A4.com.pweschmidt.iStayHealthy";
 NSString * const kDataTablesCleaned = @"dataTablesCleaned";
 NSString * const kIsPasswordEnabled = @"isPasswordEnabled";
 NSString * const kPassword = @"password";
+NSString * const kPasswordTransferred = @"passwordIsTransferred";
 
 
