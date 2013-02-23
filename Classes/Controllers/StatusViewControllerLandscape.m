@@ -71,21 +71,6 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.context = appDelegate.managedObjectContext;
-    self.resultsController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
-                                                                        sortBy:@"ResultsDate"
-                                                                   isAscending:NO context:self.context];
-    
-    self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
-                                                                       sortBy:@"MissedDate"
-                                                                  isAscending:NO context:self.context];
-    
-    self.medsController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
-                                                                     sortBy:@"StartDate"
-                                                                isAscending:NO context:self.context];
-    
-    
     [self setUpData];
 
     CGRect activityFrame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2-70, 140, 140);
@@ -134,6 +119,22 @@
  */
 - (void)setUpData
 {
+	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    if (nil == self.resultsController || nil == self.missedController || nil == self.medsController)
+    {
+        self.resultsController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
+                                                                            sortBy:@"ResultsDate"
+                                                                       isAscending:NO context:self.context];
+        
+        self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
+                                                                           sortBy:@"MissedDate"
+                                                                      isAscending:NO context:self.context];
+        
+        self.medsController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
+                                                                         sortBy:@"StartDate"
+                                                                    isAscending:NO context:self.context];
+    }
 
     
     self.allResults = [self.resultsController cleanedEntries];

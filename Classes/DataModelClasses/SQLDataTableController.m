@@ -29,6 +29,7 @@
 @end
 
 @implementation SQLDataTableController
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 + (NSString *)tableNameFromType:(TableType)type
 {
@@ -157,6 +158,11 @@
 
 - (NSArray *)getCurrentData
 {
+    if (nil == [self fetchedResultsController])
+    {
+        return [NSArray array];
+    }
+
 	NSError *error = nil;
     NSArray *data = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
@@ -179,6 +185,10 @@
  */
 - (NSFetchedResultsController *)fetchedResultsController
 {
+    if (self.managedContext == nil ||  self.entityDescription == nil || self.sortDescriptor == nil)
+    {
+        return nil;
+    }
 	if (_fetchedResultsController != nil)
     {
 		return _fetchedResultsController;

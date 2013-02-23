@@ -52,10 +52,13 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.dataController = [[SQLDataTableController alloc] initForEntityType:kSideEffectsTable
-                                                                        sortBy:@"SideEffectDate"
-                                                                   isAscending:YES
-                                                                       context:self.context];
+    if (nil == self.dataController)
+    {
+        self.dataController = [[SQLDataTableController alloc] initForEntityType:kSideEffectsTable
+                                                                         sortBy:@"SideEffectDate"
+                                                                    isAscending:YES
+                                                                        context:self.context];
+    }
     
     self.allSideEffects = [self.dataController cleanedEntries];
 }
@@ -65,7 +68,7 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        self.allSideEffects = [self.dataController cleanedEntries];
+        [self setUpData];
         [self.tableView reloadData];
     }
 }

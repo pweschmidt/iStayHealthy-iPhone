@@ -40,10 +40,13 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.dataController = [[SQLDataTableController alloc] initForEntityType:kProceduresTable
-                                                                     sortBy:@"Date"
-                                                                isAscending:NO
-                                                                    context:self.context];
+    if (nil == self.dataController)
+    {
+        self.dataController = [[SQLDataTableController alloc] initForEntityType:kProceduresTable
+                                                                         sortBy:@"Date"
+                                                                    isAscending:NO
+                                                                        context:self.context];
+    }
     
     self.allProcedures = [self.dataController cleanedEntries];
 }
@@ -53,7 +56,7 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        self.allProcedures = [self.dataController cleanedEntries];
+        [self setUpData];
         [self.tableView reloadData];
     }
 }

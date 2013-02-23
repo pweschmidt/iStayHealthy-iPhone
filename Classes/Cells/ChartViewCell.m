@@ -32,7 +32,7 @@
 
 - (void)reloadChartViewWithEvents:(NSDictionary *)events
 {
-    if (self.chartView)
+    if (self.chartView && events)
     {
         [self.chartView loadEvents:events];
         [self.chartView setNeedsDisplay];

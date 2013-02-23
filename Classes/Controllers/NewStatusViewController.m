@@ -49,6 +49,7 @@
 - (void)configureCD4Cell;
 - (void)configureCD4PercentCell;
 - (void)configureViralLoadCell;
+- (void)setUpDataControllers;
 - (void)setUpData;
 - (NSNumber *)latestValueForType:(NSString *)type;
 - (NSNumber *)previousValueForType:(NSString *)type;
@@ -65,21 +66,39 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)setUpData
+- (void)setUpDataControllers
 {
+#ifdef APPDEBUG
+    NSLog(@"setUpDataControllers::");
+#endif
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.resultsController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
-                                                                        sortBy:@"ResultsDate"
-                                                                   isAscending:NO context:self.context];
-    
-    self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
-                                                                        sortBy:@"MissedDate"
-                                                                   isAscending:NO context:self.context];
-    
-    self.medsController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
-                                                                       sortBy:@"StartDate"
-                                                                  isAscending:NO context:self.context];
+    if (self.resultsController == nil || self.missedController == nil || self.medsController == nil)
+    {
+#ifdef APPDEBUG
+        NSLog(@"setUpDataControllers::one of the controllers is nil");
+#endif
+        self.resultsController = [[SQLDataTableController alloc] initForEntityType:kResultsTable
+                                                                            sortBy:@"ResultsDate"
+                                                                       isAscending:NO context:self.context];
+        
+        self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
+                                                                           sortBy:@"MissedDate"
+                                                                      isAscending:NO context:self.context];
+        
+        self.medsController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
+                                                                         sortBy:@"StartDate"
+                                                                    isAscending:NO context:self.context];
+    }
+}
+
+
+- (void)setUpData
+{
+#ifdef APPDEBUG
+    NSLog(@"setUpData::");
+#endif
+    [self setUpDataControllers];
 
     /*
     if (0 < [self.events.allChartEvents count])
@@ -91,8 +110,19 @@
     self.allMeds = [self.medsController cleanedEntries];
     self.allMissedMeds = [self.missedController cleanedEntries];
     [self getStats];
-    
-    self.eventsDictionary = [NSDictionary dictionaryWithObjects:@[self.allResults, self.allMeds, self.allMissedMeds] forKeys:@[kResultsData, kMedicationData, kMissedMedicationData]];
+    if (self.allResults && self.allMeds && self.allMissedMeds)
+    {
+#ifdef APPDEBUG
+        NSLog(@"setUpData::arrays are NOT nil");
+#endif
+        self.eventsDictionary = [NSDictionary dictionaryWithObjects:@[self.allResults, self.allMeds, self.allMissedMeds] forKeys:@[kResultsData, kMedicationData, kMissedMedicationData]];
+    }
+    else
+    {
+#ifdef APPDEBUG
+        NSLog(@"setUpData:: One of the arrays is NIL");
+#endif
+    }
     
     /*
     [self.events loadResult:self.allResults];
@@ -109,8 +139,10 @@
  */
 - (void)viewDidLoad
 {
+#ifdef APPDEBUG
+    NSLog(@"NewStatusViewController Entering viewDidLoad");
+#endif
     [super viewDidLoad];
-    NSLog(@"NewStatusViewController:viewDidLoad");
     self.hasReloadedData = NO;
     [self setUpData];
 
@@ -121,11 +153,16 @@
     
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
     self.navigationItem.leftBarButtonItem = actionButton;
+#ifdef APPDEBUG
+    NSLog(@"AFTER adding navigation bar buttons");
+#endif
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar) {
         [navBar addButtonWithTitle:@"Charts" target:self selector:@selector(gotoPOZ)];
     }
-
+#ifdef APPDEBUG
+    NSLog(@"AFTER adding navigation top button with POZ logo");
+#endif
 //    ChartEvents *tmpEvents = [[ChartEvents alloc]init];
 //	self.events = tmpEvents;
     CGSize size = self.view.bounds.size;
@@ -141,21 +178,18 @@
 
 - (void)reloadData:(NSNotification *)note
 {
+#ifdef APPDEBUG
     NSLog(@"NewStatusViewController:reloadData");
+#endif
     /*
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];
     }
      */
+    [self setUpData];
     
-    self.hasReloadedData = YES;
-    self.allResults = [self.resultsController cleanedEntries];
-    self.allMeds = [self.medsController cleanedEntries];
-    self.allMissedMeds = [self.missedController cleanedEntries];
-    [self getStats];
 
-    self.eventsDictionary = [NSDictionary dictionaryWithObjects:@[self.allResults, self.allMeds, self.allMissedMeds] forKeys:@[kResultsData, kMedicationData, kMissedMedicationData]];
     [self.activityIndicator stopAnimating];
     /*
     [self.events loadResult:self.allResults];

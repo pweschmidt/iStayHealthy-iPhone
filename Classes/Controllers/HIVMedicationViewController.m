@@ -50,32 +50,30 @@
 {
 	iStayHealthyAppDelegate *appDelegate = (iStayHealthyAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.medController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
-                                                                    sortBy:@"StartDate"
-                                                               isAscending:NO
-                                                                   context:self.context];
+    if (nil == self.medController || nil == self.missedController ||
+        nil == self.effectsController || nil == self.previousController)
+    {
+        self.medController = [[SQLDataTableController alloc] initForEntityType:kMedicationTable
+                                                                        sortBy:@"StartDate"
+                                                                   isAscending:NO
+                                                                       context:self.context];
+        self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
+                                                                           sortBy:@"MissedDate"
+                                                                      isAscending:NO
+                                                                          context:self.context];
+        self.previousController = [[SQLDataTableController alloc] initForEntityType:kPreviousMedicationTable
+                                                                             sortBy:@"endDate"
+                                                                        isAscending:NO
+                                                                            context:self.context];
+        self.effectsController = [[SQLDataTableController alloc] initForEntityType:kSideEffectsTable
+                                                                            sortBy:@"SideEffectDate"
+                                                                       isAscending:YES
+                                                                           context:self.context];
+    }
     
     self.allMeds = [self.medController cleanedEntries];
-
-    self.missedController = [[SQLDataTableController alloc] initForEntityType:kMissedMedicationTable
-                                                                    sortBy:@"MissedDate"
-                                                               isAscending:NO
-                                                                   context:self.context];
-    
     self.allMissedMeds = [self.missedController cleanedEntries];
-
-    self.previousController = [[SQLDataTableController alloc] initForEntityType:kPreviousMedicationTable
-                                                                    sortBy:@"endDate"
-                                                               isAscending:NO
-                                                                   context:self.context];
-    
     self.allPreviousMedications = [self.previousController cleanedEntries];
-
-    self.effectsController = [[SQLDataTableController alloc] initForEntityType:kSideEffectsTable
-                                                                    sortBy:@"SideEffectDate"
-                                                               isAscending:YES
-                                                                   context:self.context];
-    
     self.allSideEffects = [self.effectsController cleanedEntries];
 
 
@@ -86,10 +84,7 @@
     self.hasReloadedData = YES;
     if (nil != note)
     {
-        self.allMeds = [self.medController cleanedEntries];
-        self.allMissedMeds = [self.missedController cleanedEntries];
-        self.allPreviousMedications = [self.previousController cleanedEntries];
-        self.allSideEffects = [self.effectsController cleanedEntries];
+        [self setUpData];
         [self.tableView reloadData];
     }
     [self.activityIndicator stopAnimating];

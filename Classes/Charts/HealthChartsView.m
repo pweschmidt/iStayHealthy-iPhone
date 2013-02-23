@@ -26,14 +26,21 @@
     {
         [self.events.allChartEvents removeAllObjects];
     }
+    if (nil == eventsDictionary)
+    {
+        return;
+    }
+    
     NSArray *results = [eventsDictionary objectForKey:kResultsData];
     NSArray *meds = [eventsDictionary objectForKey:kMedicationData];
     NSArray *missed = [eventsDictionary objectForKey:kMissedMedicationData];
-    
-    [self.events loadResult:results];
-    [self.events loadMedication:meds];
-    [self.events loadMissedMedication:missed];
-    [self.events sortEventsAscending:YES];
+    if (results && meds && missed)
+    {
+        [self.events loadResult:results];
+        [self.events loadMedication:meds];
+        [self.events loadMissedMedication:missed];
+        [self.events sortEventsAscending:YES];
+    }
 }
 
 - (id)initWithFrame:(CGRect)frame events:(NSDictionary *)eventsDictionary
