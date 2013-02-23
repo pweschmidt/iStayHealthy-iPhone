@@ -19,8 +19,8 @@
 
 @interface NewStatusViewController : BasicViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) HealthChartsViewPortrait *chartView;
-@property (nonatomic, strong) ChartEvents *events;
+//@property (nonatomic, strong) HealthChartsViewPortrait *chartView;
+//@property (nonatomic, strong) ChartEvents *events;
 @property (nonatomic, strong) NSNumber * sizeOfSummaryCell;
 @property (nonatomic, strong) NSNumber * sizeOfChartCell;
 - (void) showInfoView:(id)sender;

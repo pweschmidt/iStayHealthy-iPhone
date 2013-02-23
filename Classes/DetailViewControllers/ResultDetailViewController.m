@@ -435,7 +435,7 @@
 {
     if ([string isEqualToString:NSLocalizedString(@"undetectable",@"undetectable")])
     {
-        return [NSNumber numberWithFloat:1.0];
+        return [NSNumber numberWithFloat:0.0];
     }
     if ([string isEqualToString:@""])
     {

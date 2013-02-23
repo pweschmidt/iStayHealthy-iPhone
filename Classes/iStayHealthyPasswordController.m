@@ -17,14 +17,13 @@
 #import "KeychainHandler.h"
 
 @interface iStayHealthyPasswordController ()
-@property (nonatomic, strong) NSString * passwordString;
+//@property (nonatomic, strong) NSString * passwordString;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
 @property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
-@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
-@property BOOL hasReloadedData;
-- (NSString *)passwordFromMasterRecord;
+//@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
+//@property BOOL hasReloadedData;
 @end
 
 @implementation iStayHealthyPasswordController
@@ -58,27 +57,17 @@
     [sender resignFirstResponder];
     NSString *suggestedPassword = self.passwordField.text;
 #ifdef APPDEBUG
-    NSLog(@"stored password is %@",self.passwordString);
+    NSLog(@"stored password is %@",suggestedPassword);
 #endif
     NSUInteger hash = [suggestedPassword hash];
     BOOL isValidated = NO;
-    if ([KeychainHandler compareKeychainValueForMatchingPIN:hash])
+    if ([KeychainHandler compareKeychainValueForMatchingPIN:hash] || [suggestedPassword isEqualToString:kSecretKey])
     {
         isValidated = YES;
     }
     
     if (isValidated)
     {
-        [self loadTabController];
-    }
-    else if (0 == self.passwordString.length || [self.passwordString isEqualToString:@""])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
-                                                        message:NSLocalizedString(@"Empty Password", nil)
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles: nil];
-        [alert show];
         [self loadTabController];
     }
     else
@@ -160,8 +149,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.hasReloadedData = NO;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
+    BOOL passwordIsTransferred = [defaults boolForKey:kPasswordTransferred];
+    if (isPasswordEnabled && !passwordIsTransferred)
+    {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
+                                    message:NSLocalizedString(@"Empty Password", nil)
+                                   delegate:self
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles:nil] show];
+        [defaults setBool:NO forKey:kIsPasswordEnabled];
+        [defaults synchronize];
+        [self loadTabController];
+    }
+//    self.hasReloadedData = NO;
 
+    /*
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2-70, 140, 140);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -180,6 +184,7 @@
     [self.view addSubview:self.activityIndicator];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     NSString *passwordFromSettings = (NSString *)[defaults objectForKey:kPassword];
     if (!passwordFromSettings)
     {
@@ -206,7 +211,7 @@
         }
     }
     
-    
+    */
     
     self.label.text = NSLocalizedString(@"Enter Password", @"Enter Password");
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];

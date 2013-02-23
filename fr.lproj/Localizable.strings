@@ -182,5 +182,9 @@
 "Error Saving" = "Données de sauvegarde d'Erreur";
 "Save error message" = "Une erreur s'est produite lors de l'enregistrement de vos données. Essayez à nouveau ou redémarrez iStayHealthy.";
 "Password Reset" = "Réinitialisation de Mot";
-"Empty Password" = "Votre mot de passe stocké semble être vide. S'il vous plaît allez dans l'application et le recréer.";
+"Empty Password" = "S'il vous plaît allez dans l'application et entrer un nouveau mot de passe.";
+"Password Disabled" = "Aucun Mot de passe";
+"No Password" = "Mot de passe a été désactivé";
+"Password Error" = "Erreur Mot de passe";
+"Password Problem" = "Un problème est survenu lors de l'enregistrement du mot de passe. Essayez à nouveau.";
 

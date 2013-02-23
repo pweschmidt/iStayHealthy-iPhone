@@ -10,10 +10,42 @@
 #import "ChartSettings.h"
 #import "Trafo.h"
 #import "ChartEvents.h"
+#import "Constants.h"
 
 @implementation HealthChartsView
 #pragma mark -
 #pragma mark UIView methods
+
+- (void)loadEvents:(NSDictionary *)eventsDictionary
+{
+    if (nil == self.events)
+    {
+        self.events = [[ChartEvents alloc] init];
+    }
+    else
+    {
+        [self.events.allChartEvents removeAllObjects];
+    }
+    NSArray *results = [eventsDictionary objectForKey:kResultsData];
+    NSArray *meds = [eventsDictionary objectForKey:kMedicationData];
+    NSArray *missed = [eventsDictionary objectForKey:kMissedMedicationData];
+    
+    [self.events loadResult:results];
+    [self.events loadMedication:meds];
+    [self.events loadMissedMedication:missed];
+    [self.events sortEventsAscending:YES];
+}
+
+- (id)initWithFrame:(CGRect)frame events:(NSDictionary *)eventsDictionary
+{
+    self = [self initWithFrame:frame];
+    if (nil != self)
+    {
+        [self loadEvents:eventsDictionary];
+    }
+    return self;
+}
+
 
 /**
  */

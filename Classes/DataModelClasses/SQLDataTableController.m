@@ -158,11 +158,18 @@
 - (NSArray *)getCurrentData
 {
 	NSError *error = nil;
+    NSArray *data = nil;
 	if (![[self fetchedResultsController] performFetch:&error])
     {
         return [NSArray array];
     }
-    return [self.fetchedResultsController fetchedObjects];
+    
+    data = [self.fetchedResultsController fetchedObjects];
+    if (nil == data)
+    {
+        data = [NSArray array];
+    }
+    return data;
 }
 
 

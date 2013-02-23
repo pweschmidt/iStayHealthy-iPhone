@@ -18,6 +18,9 @@
     float height;
 }
 @property (nonatomic, strong) ChartEvents *events;
+- (void)loadEvents:(NSDictionary *)eventsDictionary;
+- (id)initWithFrame:(CGRect)frame events:(NSDictionary *)eventsDictionary;
+
 - (void)drawXAxis:(CGContextRef)context;
 - (void)drawYAxis:(CGContextRef)context;
 - (void)drawCD4Ticks:(CGContextRef)context;

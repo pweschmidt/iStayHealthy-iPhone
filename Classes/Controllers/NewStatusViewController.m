@@ -24,6 +24,7 @@
 #import "UINavigationBar-Button.h"
 #import "SQLDataTableController.h"
 #import "Utilities.h"
+#import "ChartViewCell.h"
 
 @interface NewStatusViewController ()
 @property (nonatomic, strong) NSNumber *latestCD4Count;
@@ -43,6 +44,8 @@
 @property (nonatomic, strong) SummaryCell *cd4Cell;
 @property (nonatomic, strong) SummaryCell *cd4PercentCell;
 @property (nonatomic, strong) SummaryCell *vlCell;
+@property (nonatomic, strong) ChartViewCell *chartViewCell;
+@property (nonatomic, strong) NSDictionary * eventsDictionary;
 - (void)configureCD4Cell;
 - (void)configureCD4PercentCell;
 - (void)configureViralLoadCell;
@@ -79,21 +82,25 @@
                                                                   isAscending:NO context:self.context];
 
     /*
-     */
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];
     }
+     */
     self.allResults = [self.resultsController cleanedEntries];
     self.allMeds = [self.medsController cleanedEntries];
     self.allMissedMeds = [self.missedController cleanedEntries];
     [self getStats];
     
+    self.eventsDictionary = [NSDictionary dictionaryWithObjects:@[self.allResults, self.allMeds, self.allMissedMeds] forKeys:@[kResultsData, kMedicationData, kMissedMedicationData]];
+    
+    /*
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
     [self.events loadMissedMedication:self.allMissedMeds];
     [self.events sortEventsAscending:YES];
     [self.chartView setNeedsDisplay];
+     */
 }
 
 #pragma mark - View lifecycle
@@ -118,8 +125,9 @@
     if (navBar) {
         [navBar addButtonWithTitle:@"Charts" target:self selector:@selector(gotoPOZ)];
     }
-    ChartEvents *tmpEvents = [[ChartEvents alloc]init];
-	self.events = tmpEvents;
+
+//    ChartEvents *tmpEvents = [[ChartEvents alloc]init];
+//	self.events = tmpEvents;
     CGSize size = self.view.bounds.size;
     float cellHeight = size.height * 0.066;
     self.sizeOfSummaryCell = [NSNumber numberWithFloat:cellHeight];
@@ -134,26 +142,36 @@
 - (void)reloadData:(NSNotification *)note
 {
     NSLog(@"NewStatusViewController:reloadData");
+    /*
     if (0 < [self.events.allChartEvents count])
     {
         [self.events.allChartEvents removeAllObjects];
     }
+     */
+    
     self.hasReloadedData = YES;
     self.allResults = [self.resultsController cleanedEntries];
     self.allMeds = [self.medsController cleanedEntries];
     self.allMissedMeds = [self.missedController cleanedEntries];
     [self getStats];
 
+    self.eventsDictionary = [NSDictionary dictionaryWithObjects:@[self.allResults, self.allMeds, self.allMissedMeds] forKeys:@[kResultsData, kMedicationData, kMissedMedicationData]];
     [self.activityIndicator stopAnimating];
+    /*
     [self.events loadResult:self.allResults];
     [self.events loadMedication:self.allMeds];
     [self.events loadMissedMedication:self.allMissedMeds];
     [self.events sortEventsAscending:YES];
 
     [self.chartView setNeedsDisplay];
+     */
     [self configureCD4Cell];
     [self configureCD4PercentCell];
     [self configureViralLoadCell];
+    if (self.chartViewCell)
+    {
+        [self.chartViewCell reloadChartViewWithEvents:self.eventsDictionary];
+    }
 }
 
 - (void)start
@@ -186,8 +204,8 @@
 #if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
 - (void)viewDidUnload
 {
-    self.chartView = nil;
-    self.events = nil;
+//    self.chartView = nil;
+//    self.events = nil;
     self.latestCD4Count = nil;
     self.latestCD4Percent = nil;
     self.latestVL = nil;
@@ -197,15 +215,6 @@
     [super viewDidUnload];
 }
 #endif
-/**
- viewWillAppear called each time this view controller is shown. At this stage we make sure we reload the arrays
- that are needed to display the cell content and charts
- @animated
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
- */
 
 /**
  loads the info viewer with short explanations on CD4 counts and Viral Loads
@@ -673,6 +682,18 @@
 	if (1 == indexPath.section)
     {
         NSString *identifier = @"ChartViewCell";
+        ChartViewCell *cell = (ChartViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == cell)
+        {
+            cell = [[ChartViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                        reuseIdentifier:identifier
+                                                 margin:MARGINLEFT
+                                                 height:[self.sizeOfChartCell floatValue]
+                                                 events:self.eventsDictionary];
+        }
+        self.chartViewCell = cell;        
+        
+        /*
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 		if (nil == cell)
         {
@@ -683,11 +704,11 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+MARGINLEFT/2, CGRectGetMinY(cell.bounds), CGRectGetWidth(cell.bounds) - MARGINLEFT*1.5, [self.sizeOfChartCell floatValue]-5.0);
         HealthChartsViewPortrait *chart = [[HealthChartsViewPortrait alloc] initWithFrame:frame];
-        [chart setEvents:self.events];
-//        chart.events = self.events;
+        chart.events = self.events;
         
 		[cell.contentView addSubview:chart];
 		self.chartView = chart;
+         */
         return cell;
 	}
     return nil;
@@ -706,19 +727,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section)
+    if (0 == indexPath.section && self.chartViewCell)
     {
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
         switch (indexPath.row)
         {
             case 0:
-                [self.chartView showCD4];
+                [self.chartViewCell selectChart:kCD4Chart];
+//                [self.chartView showCD4];
                 break;
             case 1:
-                [self.chartView showCD4Percent];
+                [self.chartViewCell selectChart:kCD4PercentChart];
+//                [self.chartView showCD4Percent];
                 break;
             case 2:
-                [self.chartView showViralLoad];
+                [self.chartViewCell selectChart:kViralLoadChart];
+//                [self.chartView showViralLoad];
                 break;
         }
     }

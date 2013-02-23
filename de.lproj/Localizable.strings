@@ -182,5 +182,9 @@
 "Error Saving" = "Speicherfehlmeldung";
 "Save error message" = "Fehler beim Datenspeichern. Starten Sie bitte iStayHealthy neu.";
 "Password Reset" = "Kennwort Zurückgestellt";
-"Empty Password" = "Das gespeicherte Kennwort wurde nicht gefunden. Bitte geben Sie ein neues ein.";
+"Empty Password" = "Bitte öffnen Sie die App und geben ein neues Kennwort ein.";
+"Password Disabled" = "Kein Kennwort";
+"No Password" = "Ihr Kennwort wurde deaktiviert.";
+"Password Error" = "Kennwortfehler";
+"Password Problem" = "Fehler beim Speichern des Kennwortes. Bitte versuchen Sie es nochmal.";
 

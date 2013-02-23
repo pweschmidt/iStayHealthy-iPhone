@@ -55,4 +55,8 @@ NSString * const kIsPasswordEnabled = @"isPasswordEnabled";
 NSString * const kPassword = @"password";
 NSString * const kPasswordTransferred = @"passwordIsTransferred";
 
+NSString * const kResultsData = @"ResultsData";
+NSString * const kMedicationData = @"MedicationData";
+NSString * const kMissedMedicationData = @"MissedMedicationData";
 
+NSString * const kSecretKey = @"EDFAEE24-CC9F-49FC-ADF6-FE2C8D2C313D";

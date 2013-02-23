@@ -182,6 +182,10 @@
 "Error Saving" = "Error al guardar Datos";
 "Save error message" = "Se produjo un error al guardar los datos. Inténtelo de nuevo o reiniciar iStayHealthy.";
 "Password Reset" = "Restablecimiento de Contraseña";
-"Empty Password" = "Su contraseña almacenada parece estar vacío. Por favor, vaya a la aplicación y volver a crearla.";
+"Empty Password" = "Por favor, vaya a la aplicación y escriba una nueva contraseña.";
+"Password Disabled" = "Sin Contraseña";
+"No Password" = "Contraseña ha sido desactivada";
+"Password Error" = "Error de Contraseña";
+"Password Problem" = "Se produjo un problema al tratar de guardar la contraseña. Inténtelo de nuevo.";
 
 

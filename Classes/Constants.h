@@ -56,3 +56,9 @@ extern NSString * const kDataTablesCleaned;
 extern NSString * const kIsPasswordEnabled;
 extern NSString * const kPassword;
 extern NSString * const kPasswordTransferred;
+
+extern NSString * const kResultsData;
+extern NSString * const kMedicationData;
+extern NSString * const kMissedMedicationData;
+
+extern NSString * const kSecretKey;

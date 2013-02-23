@@ -182,4 +182,8 @@
 "Error Saving" = "Error Saving Data";
 "Save error message" = "An error occurred while saving your data. Try again or restart iStayHealthy.";
 "Password Reset" = "Password Reset";
-"Empty Password" = "Your stored password appears to be empty. Please go into the app and recreate it.";
+"Empty Password" = "Please go into the app and enter a new password.";
+"Password Disabled" = "No Password";
+"No Password" = "Password has been disabled";
+"Password Error" = "Password Error";
+"Password Problem" = "A problem occurred while trying to save the password. Try again.";

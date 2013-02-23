@@ -25,6 +25,7 @@
 		C43423321466BDFC00F06DC6 /* iStayHealthyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43423311466BDFC00F06DC6 /* iStayHealthyTabBarController.m */; };
 		C43423361466BE3700F06DC6 /* iStayHealthyPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43423341466BE3700F06DC6 /* iStayHealthyPasswordController.m */; };
 		C43423371466BE3700F06DC6 /* iStayHealthyPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C43423351466BE3700F06DC6 /* iStayHealthyPasswordController.xib */; };
+		C437503516D8C4C10097503D /* ChartViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C437503416D8C4C10097503D /* ChartViewCell.m */; };
 		C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE56F15F7C5B600108EF8 /* Contacts.m */; };
 		C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57215F7C5CD00108EF8 /* iStayHealthyRecord.m */; };
 		C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57515F7C5CD00108EF8 /* Medication.m */; };
@@ -356,6 +357,8 @@
 		C43423331466BE3700F06DC6 /* iStayHealthyPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyPasswordController.h; sourceTree = "<group>"; };
 		C43423341466BE3700F06DC6 /* iStayHealthyPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iStayHealthyPasswordController.m; sourceTree = "<group>"; };
 		C43423351466BE3700F06DC6 /* iStayHealthyPasswordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = iStayHealthyPasswordController.xib; path = Classes/iStayHealthyPasswordController.xib; sourceTree = "<group>"; };
+		C437503316D8C4C10097503D /* ChartViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChartViewCell.h; path = Cells/ChartViewCell.h; sourceTree = "<group>"; };
+		C437503416D8C4C10097503D /* ChartViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChartViewCell.m; path = Cells/ChartViewCell.m; sourceTree = "<group>"; };
 		C43BE56D15F7C14400108EF8 /* iStayHealthy 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 13.xcdatamodel"; sourceTree = "<group>"; };
 		C43BE56E15F7C5B600108EF8 /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contacts.h; path = DataModelClasses/Contacts.h; sourceTree = "<group>"; };
 		C43BE56F15F7C5B600108EF8 /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contacts.m; path = DataModelClasses/Contacts.m; sourceTree = "<group>"; };
@@ -1373,6 +1376,8 @@
 				C4574ADE14938F7E00793164 /* DosageCell.xib */,
 				C42AB56A1494F119005E9A0F /* SwitcherCell.xib */,
 				C42AB58114950EE5005E9A0F /* PasswordCell.xib */,
+				C437503316D8C4C10097503D /* ChartViewCell.h */,
+				C437503416D8C4C10097503D /* ChartViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1743,6 +1748,7 @@
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
+				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,7 @@
 
 @interface ToolsTableViewController ()
 @property (nonatomic, strong) NSString *password;
+@property BOOL hasPresetPassword;
 @property BOOL isPasswordEnabled;
 @property BOOL firstIsSet;
 @property BOOL secondIsSet;
@@ -53,6 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasPresetPassword = NO;
 
 	self.navigationItem.title = NSLocalizedString(@"Password", @"Password");
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
@@ -61,6 +63,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
+    self.hasPresetPassword = self.isPasswordEnabled;
     /*
     if (self.isPasswordEnabled)
     {
@@ -127,47 +130,80 @@
  */
 - (IBAction) done: (id) sender
 {
+    BOOL success = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.firstIsSet && self.secondIsSet && self.isConsistent && self.isPasswordEnabled)
     {
         NSUInteger hash = [self.password hash];
         NSString *encodedHash = [KeychainHandler securedSHA256DigestHashForPIN:hash];
-        if ([KeychainHandler createKeychainValue:encodedHash forIdentifier:kIsPasswordEnabled])
+        if (self.hasPresetPassword)
+        {
+            success = [KeychainHandler updateKeychainValue:encodedHash forIdentifier:kIsPasswordEnabled];
+        }
+        else
+        {
+            success = [KeychainHandler createKeychainValue:encodedHash forIdentifier:kIsPasswordEnabled];
+        }
+        if (success)
         {
             [defaults setBool:YES forKey:kIsPasswordEnabled];
-            UIAlertView *isDone = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password", @"Password") message:NSLocalizedString(@"PasswordSet", @"PasswordSet") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            UIAlertView *isDone = [[UIAlertView alloc]
+                                   initWithTitle:NSLocalizedString(@"Password", @"Password")
+                                   message:NSLocalizedString(@"PasswordSet", @"PasswordSet")
+                                   delegate:self
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
             [isDone show];
             
         }
         else
         {
+            /*
+             "Password Error" = "Password Error";
+             "Password Problem" = "A problem occurred while trying to save the password. Try again.";
+             */
+            UIAlertView *isDone = [[UIAlertView alloc]
+                                   initWithTitle:NSLocalizedString(@"Password Error", nil)
+                                   message:NSLocalizedString(@"Password Problem", nil)
+                                   delegate:self
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
+            [isDone show];
             [defaults setBool:NO forKey:kIsPasswordEnabled];
         }
     }
     else
     {
+        success = YES;
+        [KeychainHandler deleteItemFromKeychainWithIdentifier:kIsPasswordEnabled];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
+        UIAlertView *isDone = [[UIAlertView alloc]
+                               initWithTitle:NSLocalizedString(@"Password Disabled", @"Password Disabled")
+                               message:NSLocalizedString(@"No Password", @"No Password")
+                               delegate:self
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:nil];
+        [isDone show];
     }
     [defaults setBool:YES forKey:kPasswordTransferred];
     [defaults synchronize];
-	[self dismissModalViewControllerAnimated:YES];
+    if (success)
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction) switchPasswordEnabling:(id)sender
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.passwordSwitch.on)
     {
-        [defaults setBool:YES forKey:kIsPasswordEnabled];
         self.isPasswordEnabled = YES;
     }
     else
     {
-        [defaults setBool:NO forKey:kIsPasswordEnabled];
         self.isPasswordEnabled = NO;
     }
-    [defaults synchronize];
-    [self.tableView reloadData];    
+    [self.tableView reloadData];
 }
 
 

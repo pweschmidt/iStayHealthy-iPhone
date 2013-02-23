@@ -13,5 +13,4 @@
 - (IBAction)testLoad:(id)sender;
 - (IBAction)textFieldDoneEditing:(id)sender;
 - (void)dismissTabBarController;
-- (void)start;
 @end
