@@ -22,8 +22,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
 @property (nonatomic, strong) iStayHealthyTabBarController *tabBarController;
-//@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
-//@property BOOL hasReloadedData;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
+@property BOOL hasReloadedData;
 @end
 
 @implementation iStayHealthyPasswordController
@@ -33,11 +33,35 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadData:)
+                                                     name:@"RefetchAllDatabaseData"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(start)
+                                                     name:@"startAnimation"
+                                                   object:nil];
     }
     return self;
 }
 
+- (void)reloadData:(NSNotification *)note
+{
+#ifdef APPDEBUG
+    NSLog(@"NewStatusViewController:reloadData");
+#endif
+    self.hasReloadedData = YES;
+    [self.activityIndicator stopAnimating];
+}
+
+- (void)start
+{
+    if (![self.activityIndicator isAnimating] && !self.hasReloadedData)
+    {
+        [self.activityIndicator startAnimating];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -149,6 +173,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasReloadedData = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
     BOOL passwordIsTransferred = [defaults boolForKey:kPasswordTransferred];
@@ -163,9 +188,7 @@
         [defaults synchronize];
         [self loadTabController];
     }
-//    self.hasReloadedData = NO;
 
-    /*
     CGRect frame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2-70, 140, 140);
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -183,6 +206,7 @@
     [self.activityIndicator addSubview:label];
     [self.view addSubview:self.activityIndicator];
     
+    /*
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *passwordFromSettings = (NSString *)[defaults objectForKey:kPassword];

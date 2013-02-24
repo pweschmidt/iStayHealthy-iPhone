@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ClinicAddressCell.h"
 
 @protocol RepeatCellDelegate;
 @interface RepeatCell : UITableViewCell

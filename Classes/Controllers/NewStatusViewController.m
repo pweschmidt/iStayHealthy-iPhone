@@ -54,6 +54,8 @@
 - (NSNumber *)latestValueForType:(NSString *)type;
 - (NSNumber *)previousValueForType:(NSString *)type;
 - (void)getStats;
+- (void)reloadData:(NSNotification *)note;
+- (void)start;
 @end
 
 @implementation NewStatusViewController
@@ -187,9 +189,8 @@
         [self.events.allChartEvents removeAllObjects];
     }
      */
+    self.hasReloadedData = YES;
     [self setUpData];
-    
-
     [self.activityIndicator stopAnimating];
     /*
     [self.events loadResult:self.allResults];
@@ -756,14 +757,14 @@
  */
 - (void) deselect: (id) sender
 {
-	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow]
+                                  animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.section && self.chartViewCell)
     {
-        [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
         switch (indexPath.row)
         {
             case 0:
@@ -779,6 +780,7 @@
 //                [self.chartView showViralLoad];
                 break;
         }
+        [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
 }
 
