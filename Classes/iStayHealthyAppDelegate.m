@@ -115,6 +115,15 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
      object:self.sqlHelper.persistentStoreCoordinator];
     
     [self.sqlHelper loadSQLitePersistentStore];
+    
+    NSURL *appURL = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+    if (nil != appURL)
+    {
+        if ([appURL isFileURL])
+        {
+            [self handleFileImport:appURL];
+        }
+    }
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -184,7 +193,12 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         }
         return YES;
     }
-    return [self handleFileImport:url];
+    BOOL success = YES;
+    if (nil != url && [url isFileURL])
+    {
+        success = [self handleFileImport:url];
+    }
+    return success;
 }
 
 
