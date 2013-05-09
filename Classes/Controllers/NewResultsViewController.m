@@ -46,6 +46,12 @@
     self.allResultsInReverseOrder = [self.dataController cleanedEntries];
 }
 
+- (void)parseAndReload:(NSNotification *)note
+{
+    ///empty implementation
+}
+
+
 - (void)reloadData:(NSNotification *)note
 {
     self.hasReloadedData = YES;

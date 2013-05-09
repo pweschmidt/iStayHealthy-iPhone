@@ -37,6 +37,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)parseAndReload:(NSNotification *)note
+{
+    ///empty implementation    
+}
+
 - (void)reloadData:(NSNotification *)note
 {
     ///empty implementation

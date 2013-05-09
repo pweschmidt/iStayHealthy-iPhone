@@ -28,6 +28,7 @@
 - (void)saveContext;
 - (void)showReminder:(NSString *)text;
 - (BOOL)handleFileImport:(NSURL *)url;
+- (BOOL)handleParametersFromURL:(NSURL *)url;
 extern NSString *MEDICATIONALERTKEY;
 @end
 

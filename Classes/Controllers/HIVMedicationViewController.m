@@ -79,6 +79,12 @@
 
 }
 
+- (void)parseAndReload:(NSNotification *)note
+{
+    
+}
+
+
 - (void)reloadData:(NSNotification *)note
 {
     self.hasReloadedData = YES;

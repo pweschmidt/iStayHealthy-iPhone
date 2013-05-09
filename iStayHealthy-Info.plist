@@ -64,9 +64,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.pweschmidt.iStayHealthy</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-sekt4gbt7526j0y</string>
+				<string>com.pweschmidt.iStayHealthy</string>
 			</array>
 		</dict>
 	</array>

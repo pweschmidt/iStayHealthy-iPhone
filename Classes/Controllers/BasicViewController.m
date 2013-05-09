@@ -69,6 +69,10 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(parseAndReload:) name:@"ParseResultsFromURL"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(start)
                                                  name:@"startAnimation"
                                                object:nil];

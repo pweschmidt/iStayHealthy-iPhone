@@ -157,6 +157,39 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     return YES;
 }
 
+- (BOOL)handleParametersFromURL:(NSURL *)url
+{
+    BOOL success = YES;
+    NSString *parameters = [url parameterString];
+    if (nil == parameters)
+    {
+        return NO;
+    }
+    NSArray *parameterArray = [parameters componentsSeparatedByString:@"&"];
+    __block NSMutableArray *kvc = [NSMutableArray array];
+    [parameterArray enumerateObjectsUsingBlock:^(NSString *parameter, NSUInteger index, BOOL *stop){
+        NSArray *parameterValues = [parameter componentsSeparatedByString:@"="];
+        if (2 == parameterValues.count)
+        {
+            NSString *key = [parameterValues objectAtIndex:0];
+            NSString *value = [parameterValues objectAtIndex:1];
+            NSDictionary *dictionary = [NSDictionary dictionaryWithObject:value forKey:key];
+            [kvc addObject:dictionary];
+        }
+    }];
+    NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:kvc];
+    NSUserDefaults *standardDefault = [NSUserDefaults standardUserDefaults];
+    [standardDefault removeObjectForKey:@"ResultParameters"];
+    [standardDefault setObject:archivedData forKey:@"ResultParameters"];
+    [standardDefault synchronize];
+    NSNotification* refreshNotification = [NSNotification notificationWithName:@"ParseResultsFromURL" object:self];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+    
+    return success;
+}
+
+
 /**
  acc to Apple Doc - this should replace handleOpenURL method below
  */
@@ -165,7 +198,18 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 #ifdef APPDEBUG
     NSLog(@"in openURL");
 #endif
-    if ([[DBSession sharedSession] handleOpenURL:url])
+    if (nil == url)
+    {
+        return NO;
+    }
+    BOOL success = YES;
+    
+    NSString *scheme = [url scheme];
+    if ([scheme isEqualToString:@"com.pweschmidt.iStayHealthy"])
+    {
+        [self handleParametersFromURL:url];
+    }
+    else if ([[DBSession sharedSession] handleOpenURL:url])
     {
         if ([[DBSession sharedSession] isLinked])
         {
@@ -173,7 +217,11 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         }
         return YES;
     }
-    return [self handleFileImport:url];
+    else if ([url isFileURL])
+    {
+        success = [self handleFileImport:url];
+    }
+    return success;
 }
 
 
@@ -182,7 +230,17 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
  */
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    if ([[DBSession sharedSession] handleOpenURL:url])
+    if (nil == url)
+    {
+        return NO;
+    }
+    BOOL success = YES;
+    NSString *scheme = [url scheme];
+    if ([scheme isEqualToString:@"com.pweschmidt.iStayHealthy"])
+    {
+        [self handleParametersFromURL:url];
+    }
+    else if ([[DBSession sharedSession] handleOpenURL:url])
     {
 #ifdef APPDEBUG
         NSLog(@"in deprecated handleOpenURL method");
@@ -193,8 +251,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         }
         return YES;
     }
-    BOOL success = YES;
-    if (nil != url && [url isFileURL])
+    else if ([url isFileURL])
     {
         success = [self handleFileImport:url];
     }

@@ -178,6 +178,11 @@
     [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
+- (void)parseAndReload:(NSNotification *)note
+{
+}
+
+
 - (void)reloadData:(NSNotification *)note
 {
 #ifdef APPDEBUG
