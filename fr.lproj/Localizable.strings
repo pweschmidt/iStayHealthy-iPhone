@@ -187,4 +187,6 @@
 "No Password" = "Mot de passe a été désactivé";
 "Password Error" = "Erreur Mot de passe";
 "Password Problem" = "Un problème est survenu lors de l'enregistrement du mot de passe. Essayez à nouveau.";
+"Import File"="Importer des données?";
+"Import"="Importer";
 

@@ -10,6 +10,7 @@
 #import "Utilities.h"
 #import "Constants.h"
 #import "SQLBackupStoreManager.h"
+#import "XMLLoader.h"
 
 #define MIGRATE_STORE_FOR_SIMULATOR NO
 #define USE_BACKUP_STORE NO
@@ -55,16 +56,16 @@
     self = [super init];
     if (nil != self)
     {
-        self.mainQueue = [[NSOperationQueue alloc] init];
-        self.universalLock = [[NSLock alloc] init];
-        self.backupStoreExists = NO;
-        self.mainStoreExists = NO;
-        self.iCloudIsAvailable = NO;
-        self.ubiquityToken = nil;
-        self.mainStore = nil;
-        self.backupStore = nil;
-        self.iOS6FeaturesAvailable = [self checkiOS6Availability];
-        
+        _mainQueue = [[NSOperationQueue alloc] init];
+        _universalLock = [[NSLock alloc] init];
+        _backupStoreExists = NO;
+        _mainStoreExists = NO;
+        _iCloudIsAvailable = NO;
+        _ubiquityToken = nil;
+        _mainStore = nil;
+        _backupStore = nil;
+        _iOS6FeaturesAvailable = [self checkiOS6Availability];
+        _importData = nil;
         [self storeAndContext];
         
     }
@@ -122,6 +123,29 @@
     {
         return NO;
     }
+    
+}
+
+
+- (void)loadImportedData
+{
+    NSLog(@"in loadImportedData");
+    if (nil == self.importData || nil == self.mainObjectContext)
+    {
+        NSLog(@"importData or objectContext are nil");
+        return;
+    }
+    
+    
+    XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:self.importData];
+    NSLog(@"importing data");
+    NSError* error = nil;
+    [xmlLoader startParsing:&error];
+    [xmlLoader synchronise];
+    NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+    NSLog(@"importing data. posting notification");
     
 }
 

@@ -141,19 +141,16 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         return NO;
     }
     NSData *importedData = [NSData dataWithContentsOfURL:url];
-    if (![XMLLoader isXML:importedData])
+    if (![XMLLoader isXML:importedData] || nil == self.sqlHelper)
     {
+        UIAlertView *cancelImport = [[UIAlertView alloc] initWithTitle:@"Import Error" message:@"The file has not the correct format" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+        [cancelImport show];
         return NO;
     }
-    XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:importedData];
-    NSError* error = nil;
-    [xmlLoader startParsing:&error];        
-    [xmlLoader synchronise];
-    NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self];
+    self.sqlHelper.importData = importedData;
+    UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import", nil) message:NSLocalizedString(@"Import File", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Import", nil), nil];
+    [importAlert show];
     
-    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-    
-        
     return YES;
 }
 
@@ -468,6 +465,20 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
 {
+    NSString *buttonTitle = [alertView buttonTitleAtIndex:index];
+    NSString *importTitle = NSLocalizedString(@"Import", @"Import");
+    NSLog(@"The buttonTitle is %@ and the expected title is %@", buttonTitle, importTitle);
+    if ([importTitle isEqualToString:buttonTitle])
+    {
+        NSLog(@"we get to importing the data");
+        if (nil != self.sqlHelper)
+        {
+            NSLog(@"we get to importing the data. SQLHelper is NOT nil");
+            [self.sqlHelper loadImportedData];
+        }
+        return;
+    }
+    
 	if (index != alertView.cancelButtonIndex)
     {
 		[[DBSession sharedSession] linkUserId:self.relinkUserId fromController:self.tabBarController];

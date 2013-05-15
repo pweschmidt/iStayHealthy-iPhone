@@ -13,5 +13,7 @@
 @property (nonatomic, strong, readonly) NSManagedObjectContext * mainObjectContext;
 @property (nonatomic, strong, readonly) NSURL *mainStoreURL;
 @property (nonatomic, strong, readonly) NSURL *backupStoreURL;
+@property (nonatomic, strong) NSData *importData;
 - (void)loadSQLitePersistentStore;
+- (void)loadImportedData;
 @end
