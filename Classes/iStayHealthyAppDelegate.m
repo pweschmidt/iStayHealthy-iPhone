@@ -18,6 +18,7 @@
 
 @interface iStayHealthyAppDelegate() <DBSessionDelegate>
 @property (nonatomic, strong, readwrite) SQLDatabaseManager *sqlHelper;
+@property (nonatomic, strong, readwrite) NSURL *fileImportURL;
 - (void)postNotificationWithNote:(NSNotification *)note;
 @end
 
@@ -143,12 +144,22 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     NSData *importedData = [NSData dataWithContentsOfURL:url];
     if (![XMLLoader isXML:importedData] || nil == self.sqlHelper)
     {
-        UIAlertView *cancelImport = [[UIAlertView alloc] initWithTitle:@"Import Error" message:@"The file has not the correct format" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+        UIAlertView *cancelImport = [[UIAlertView alloc]
+                                     initWithTitle:NSLocalizedString(@"Import Error", nil)
+                                     message:NSLocalizedString(@"Wrong Format", nil)
+                                     delegate:self
+                                     cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                     otherButtonTitles: nil];
         [cancelImport show];
         return NO;
     }
-    self.sqlHelper.importData = importedData;
-    UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import", nil) message:NSLocalizedString(@"Import File", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Import", nil), nil];
+    self.fileImportURL = url;
+    UIAlertView *importAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Import", nil)
+                                message:NSLocalizedString(@"Import File", nil)
+                                delegate:self
+                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                otherButtonTitles:NSLocalizedString(@"Import", nil), nil];
     [importAlert show];
     
     return YES;
@@ -394,13 +405,15 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 - (void)postNotificationWithNote:(NSNotification *)note
 {
 #ifdef APPDEBUG
-    NSLog(@"iStayHealthyAppDelegate::postNotificationWithNote");
+    NSLog(@"iStayHealthyAppDelegate::postNotificationWithNote - called after store changed");
 #endif
+    /*
     NSNotification* refreshNotification = [NSNotification
                                            notificationWithName:@"RefetchAllDatabaseData"
                                            object:self
                                            userInfo:[note userInfo]];
     [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];    
+     */
 }
 
 /**
@@ -467,14 +480,11 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 {
     NSString *buttonTitle = [alertView buttonTitleAtIndex:index];
     NSString *importTitle = NSLocalizedString(@"Import", @"Import");
-    NSLog(@"The buttonTitle is %@ and the expected title is %@", buttonTitle, importTitle);
     if ([importTitle isEqualToString:buttonTitle])
     {
-        NSLog(@"we get to importing the data");
-        if (nil != self.sqlHelper)
+        if (nil != self.sqlHelper && nil != self.fileImportURL)
         {
-            NSLog(@"we get to importing the data. SQLHelper is NOT nil");
-            [self.sqlHelper loadImportedData];
+            [self.sqlHelper importDataFromURL:self.fileImportURL];
         }
         return;
     }

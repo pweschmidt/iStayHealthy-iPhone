@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
 @class iStayHealthyTabBarController;
-@interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate>
+@interface iStayHealthyPasswordController : UIViewController<UITextFieldDelegate, MFMailComposeViewControllerDelegate>
+@property (nonatomic, strong) IBOutlet UIButton * forgotButton;
 - (void)loadTabController;
 - (IBAction)testLoad:(id)sender;
 - (IBAction)textFieldDoneEditing:(id)sender;
 - (void)dismissTabBarController;
 - (void)reloadData:(NSNotification *)note;
 - (void)start;
+- (IBAction)sendMail:(id)sender;
 @end

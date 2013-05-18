@@ -168,6 +168,22 @@
     }
 }
 
+- (IBAction)sendMail:(id)sender
+{
+    if (![MFMailComposeViewController canSendMail])
+    {
+        return;
+    }
+    
+    MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+    mail.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
+    mail.mailComposeDelegate = self;
+    [mail setToRecipients:toRecipient];
+    [mail setSubject:@"I forgot my iStayHealthy password (iPhone)"];
+    [self presentModalViewController:mail animated:YES];
+    
+}
 
 
 - (void)viewDidLoad
@@ -240,6 +256,16 @@
     self.label.text = NSLocalizedString(@"Enter Password", @"Enter Password");
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     self.versionLabel.text = [NSString stringWithFormat:@"version %@",version];
+    
+    
+    UILabel *forgotLabel = [[UILabel alloc] init];
+    forgotLabel.frame = CGRectMake(self.forgotButton.bounds.origin.x, self.forgotButton.bounds.origin.y, self.forgotButton.bounds.size.width, self.forgotButton.bounds.size.height);
+    forgotLabel.text = NSLocalizedString(@"Forgot Password", nil);
+    forgotLabel.textColor = DARK_RED;
+    forgotLabel.font = [UIFont boldSystemFontOfSize:12];
+    forgotLabel.backgroundColor = [UIColor clearColor];
+    [self.forgotButton addSubview:forgotLabel];
+    
 }
 
 #if  defined(__IPHONE_5_1) || defined (__IPHONE_5_0)
@@ -253,7 +279,56 @@
 #endif
 
 #pragma mark -
-#pragma mark Table view delegate
+#pragma mark Mail delegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    NSString *resultText = @"";
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        {
+            //            resultText = @"Result: canceled";
+#ifdef APPDEBUG
+            NSLog(@"Result: canceled");
+#endif
+            break;
+        }
+        case MFMailComposeResultSent:
+        {
+            //            resultText = @"Result: sent";
+#ifdef APPDEBUG
+            NSLog(@"Result: sent");
+#endif
+            break;
+        }
+        case MFMailComposeResultFailed:
+        {
+            resultText = @"Result: failed";
+#ifdef APPDEBUG
+            NSLog(@"Result: failed");
+#endif
+            UIAlertView *alertView = [[UIAlertView alloc]
+                                      initWithTitle:@"iStayHealthy E-mail"
+                                      message:resultText delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+            [alertView show];
+            break;
+        }
+        case MFMailComposeResultSaved:
+        {
+            //            resultText = @"Result: saved";
+#ifdef APPDEBUG
+            NSLog(@"Result: saved");
+#endif
+            break;
+        }
+    }
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
 
 
 

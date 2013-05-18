@@ -187,6 +187,9 @@
 "No Password" = "Ihr Kennwort wurde deaktiviert.";
 "Password Error" = "Kennwortfehler";
 "Password Problem" = "Fehler beim Speichern des Kennwortes. Bitte versuchen Sie es nochmal.";
+"Import Error"="Import Error";
+"Wrong Format"="The import data have not the correct format";
 "Import File"="Daten importieren?";
 "Import"="Importieren";
+"Forgot Password"="Kennwort vergessen? Hier klicken.";
 

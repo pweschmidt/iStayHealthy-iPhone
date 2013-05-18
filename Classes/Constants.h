@@ -62,3 +62,4 @@ extern NSString * const kMedicationData;
 extern NSString * const kMissedMedicationData;
 
 extern NSString * const kSecretKey;
+extern NSString * const kImportXMLFile;

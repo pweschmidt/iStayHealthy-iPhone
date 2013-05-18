@@ -187,5 +187,8 @@
 "No Password" = "Password has been disabled";
 "Password Error" = "Password Error";
 "Password Problem" = "A problem occurred while trying to save the password. Try again.";
+"Import Error"="Import Error";
+"Wrong Format"="The import data have not the correct format";
 "Import File"="Import Data from file?";
 "Import"="Import";
+"Forgot Password"="Forgot Password? Click here";

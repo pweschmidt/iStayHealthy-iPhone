@@ -65,7 +65,6 @@
         _mainStore = nil;
         _backupStore = nil;
         _iOS6FeaturesAvailable = [self checkiOS6Availability];
-        _importData = nil;
         [self storeAndContext];
         
     }
@@ -126,7 +125,7 @@
     
 }
 
-
+/*
 - (void)loadImportedData
 {
     NSLog(@"in loadImportedData");
@@ -148,8 +147,81 @@
     NSLog(@"importing data. posting notification");
     
 }
+*/
+
+- (void)importDataFromURL:(NSURL *)url
+{
+    if (![url isFileURL])
+    {
+        return;
+    }
+    NSLog(@"importDataFromURL");
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *tmpName = kImportXMLFile;
+    NSString *tmpFile = [NSTemporaryDirectory() stringByAppendingString:tmpName];
+    NSError *error = nil;
+    BOOL success = YES;
+    if([manager fileExistsAtPath:tmpFile])
+    {
+        NSLog(@"importDataFromURL: file already exists - removing");
+        success = [manager removeItemAtPath:tmpFile error:&error];
+        if (!success)
+        {
+            NSLog(@"importDataFromURL: file already exists - removing failed!!!");
+            return;
+        }
+    }
+    NSLog(@"We are trying to copy item at path %@",[url absoluteString]);
+    NSData *xmlData = [NSData dataWithContentsOfURL:url];
+    NSLog(@"importDataFromURL: xml file copied");
+    success = [xmlData writeToFile:tmpFile atomically:NO];
+    /*
+    success = [manager copyItemAtPath:[url absoluteString] toPath:tmpFile error:&error];
+     */
+    if (!success)
+    {
+        NSLog(@"importDataFromURL: writing data to tmp file FAILED!!!");
+        return;
+    }
+    
+    NSPersistentStore *store = [self.persistentStoreCoordinator persistentStoreForURL:self.mainStoreURL];
+    if (nil == store)
+    {
+        store = [self.persistentStoreCoordinator persistentStoreForURL:self.backupStoreURL];
+    }
+    if (nil != store)
+    {
+        NSLog(@"we already have a store available - import");
+        [self importFromTmpFile];
+    }
+    
+}
 
 
+- (BOOL)importFromTmpFile
+{
+    NSLog(@"importFromTmpFile");
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *tmpName = kImportXMLFile;
+    NSString *tmpFile = [NSTemporaryDirectory() stringByAppendingString:tmpName];
+    NSError *error = nil;
+    BOOL success = [manager fileExistsAtPath:tmpFile];
+    if (!success)
+    {
+        NSLog(@"importFromTmpFile: import file %@ no longer exists", tmpFile);
+        return NO;
+    }
+    
+    NSData *xmlData = [NSData dataWithContentsOfFile:tmpFile];
+    XMLLoader *xmlLoader = [[XMLLoader alloc] initWithData:xmlData];
+    [xmlLoader startParsing:&error];
+    [xmlLoader synchronise];
+    NSLog(@"importFromTmpFile: importing file %@", tmpFile);
+    
+    success = [manager removeItemAtPath:tmpFile error:&error];
+    
+    return success;
+}
 
 /**
  called from init. In here we set up the main object context using main queue as we want the
@@ -420,6 +492,7 @@
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [self sendDebugMessage:@"selectStoreAndMigrateForiOS6 success to load iCloud store" onMainThread:YES];
                     [self addMasterRecord];
+                    [self importFromTmpFile];
                     NSNotification* refreshNotification =
                     [NSNotification notificationWithName:@"RefetchAllDatabaseData"
                                                   object:self
@@ -463,6 +536,7 @@
         {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 [self addMasterRecord];
+                [self importFromTmpFile];
                 
                 NSNotification* refreshNotification =
                 [NSNotification notificationWithName:@"RefetchAllDatabaseData"
@@ -534,6 +608,7 @@
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 [self sendDebugMessage:@"posting a reload notification and USING iCloud" onMainThread:YES];
                 [self addMasterRecord];
+                [self importFromTmpFile];
                 NSNotification* refreshNotification =
                 [NSNotification notificationWithName:@"RefetchAllDatabaseData"
                                               object:self
@@ -586,6 +661,7 @@
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 [self sendDebugMessage:@"selectStoreAndMigrate NOT using iCloud store" onMainThread:YES];
                 [self addMasterRecord];
+                [self importFromTmpFile];
                 
                 NSNotification* refreshNotification =
                 [NSNotification notificationWithName:@"RefetchAllDatabaseData"

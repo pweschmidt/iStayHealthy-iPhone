@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "StatusViewControllerLandscape.h"
-
+#import <QuartzCore/QuartzCore.h>
 @interface BasicViewController : UIViewController
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) StatusViewControllerLandscape *landscapeController;

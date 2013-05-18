@@ -187,7 +187,10 @@
 "No Password" = "Contraseña ha sido desactivada";
 "Password Error" = "Error de Contraseña";
 "Password Problem" = "Se produjo un problema al tratar de guardar la contraseña. Inténtelo de nuevo.";
+"Import Error"="Import Error";
+"Wrong Format"="The import data have not the correct format";
 "Import File"="¿Importar datos?";
 "Import"="Importar";
+"Forgot Password"="¿Olvidó su contraseña? Clic aquí";
 
 
