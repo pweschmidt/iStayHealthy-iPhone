@@ -23,11 +23,12 @@
 - (void)copyOldFileToNew;
 - (void)setRestClient;
 @property (nonatomic, strong) DBRestClient* restClient;
-@property BOOL dropBoxFileExists;
-@property BOOL newDropboxFileExists;
-@property BOOL isBackup;
+@property (nonatomic, assign) BOOL dropBoxFileExists;
+@property (nonatomic, assign) BOOL newDropboxFileExists;
+@property (nonatomic, assign) BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) NSString *parentRevision;
 @end
 
 @implementation DropBoxBackupViewController
@@ -81,6 +82,7 @@
     self.dropBoxFileExists = NO;
     self.newDropboxFileExists = NO;
     self.isBackup = NO;
+    self.parentRevision = nil;
     [self setRestClient];
 }
 
@@ -210,7 +212,7 @@
                     NSString *dataPath = [self dropBoxFileTmpPath];
                     //                    [[self restClient] loadRevisionsForFile:@"/iStayHealthy/iStayHealthy.isth" limit:1000];
                     [self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
-                                        atRev:nil
+                                        atRev:self.parentRevision
                                      intoPath:dataPath];
                 }
                 break;
@@ -329,7 +331,7 @@
     {
         [self.restClient uploadFile:@"iStayHealthy.isth"
                              toPath:@"/iStayHealthy"
-                      withParentRev:nil
+                      withParentRev:self.parentRevision
                            fromPath:dataPath];
     }        
 
@@ -436,37 +438,31 @@
         if (nil == self.iStayHealthyPath)
         {
             [self createIStayHealthyFolder];
-        }          
+        }
     }
     if ([path isEqualToString:@"/iStayHealthy"])
     {
+        DBMetadata *backupFile = nil;
         for (DBMetadata *child in metadata.contents)
         {
             NSString *pathName = [child path];
-            if([pathName hasSuffix:@"iStayHealthy.xml"])
-            {
-#ifdef APPDEBUG
-                NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.xml file");
-#endif
-                self.dropBoxFileExists = YES;            
-            }
             if([pathName hasSuffix:@"iStayHealthy.isth"])
             {
 #ifdef APPDEBUG
                 NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.isth file");
 #endif
-                self.newDropboxFileExists = YES;            
+                backupFile = child;
             }
         }
-        if(self.dropBoxFileExists && !self.newDropboxFileExists)
+        if (nil != backupFile)
         {
-#ifdef APPDEBUG
-            NSLog(@"DBRestClient::loadedMetadata - we found the iStayHealthy.xml but not the isth file");
-#endif
-            [self copyOldFileToNew];
+            self.parentRevision = backupFile.rev;
+        }
+        else
+        {
+            self.parentRevision = nil;
         }
     }
-    
 }
 
 /**
