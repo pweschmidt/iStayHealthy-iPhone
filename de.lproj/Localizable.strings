@@ -86,9 +86,9 @@
 "Save to DropBox" = "Daten Sichern";
 "Get from DropBox" = "Daten herunterladen";
 "Backup Finished"="Backup Beendet";
-"Data were sent to DropBox iStayHealthy.xml."="Daten werden nach DropBox iStayHealthy.xml kopiert.";
+"Data were sent to DropBox iStayHealthy.xml."="Daten werden nach DropBox iStayHealthy.isth kopiert.";
 "Restore Data"="Datenwiederherstellung beendet";
-"Data were copied from DropBox iStayHealthy.xml."="Data werden von DropBox iStayHealthy.xml heruntergeladen.";
+"Data were copied from DropBox iStayHealthy.xml."="Data werden von DropBox iStayHealthy.isth heruntergeladen.";
 "Set Time"="Zeiteingabe";
 "per day" = "pro Tag";
 "Alert Settings" = "Wecker Einstellungen";
@@ -192,4 +192,5 @@
 "Import File"="Daten importieren?";
 "Import"="Importieren";
 "Forgot Password"="Kennwort vergessen? Hier klicken.";
+"Please reset password"="Bitte das Kennwort neu eingeben.";
 

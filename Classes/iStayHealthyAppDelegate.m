@@ -117,6 +117,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     
     [self.sqlHelper loadSQLitePersistentStore];
     
+    /*
     NSURL *appURL = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
     if (nil != appURL)
     {
@@ -125,6 +126,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
             [self handleFileImport:appURL];
         }
     }
+     */
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -161,7 +163,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
                                 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                 otherButtonTitles:NSLocalizedString(@"Import", nil), nil];
     [importAlert show];
-    
     return YES;
 }
 
@@ -235,7 +236,6 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
 
 /**
  this is a deprecated method, but we'll retain it here just in case
- */
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     if (nil == url)
@@ -265,6 +265,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
     }
     return success;
 }
+ */
 
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -323,7 +323,7 @@
 	if (error != nil)
     {
 		[[[UIAlertView alloc]
-		   initWithTitle:@"Error writing XML data to tmp directory" message:[error localizedDescription] 
+		   initWithTitle:@"Error writing data to tmp directory" message:[error localizedDescription]
 		   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 		 show];
 	}

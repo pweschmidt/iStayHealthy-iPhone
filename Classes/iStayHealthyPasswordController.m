@@ -85,9 +85,22 @@
 #endif
     NSUInteger hash = [suggestedPassword hash];
     BOOL isValidated = NO;
-    if ([KeychainHandler compareKeychainValueForMatchingPIN:hash] || [suggestedPassword isEqualToString:kSecretKey])
+    if ([KeychainHandler compareKeychainValueForMatchingPIN:hash])
     {
         isValidated = YES;
+    }
+    else if([suggestedPassword caseInsensitiveCompare:kSecretKey] == NSOrderedSame)
+    {
+        isValidated = YES;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setBool:NO forKey:kIsPasswordEnabled];
+        [defaults synchronize];
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
+                                    message:NSLocalizedString(@"Please reset password", nil)
+                                   delegate:self
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles:nil] show];
+        
     }
     
     if (isValidated)
