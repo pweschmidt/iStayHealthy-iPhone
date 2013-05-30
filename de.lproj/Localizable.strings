@@ -128,7 +128,7 @@
 "Side Effects/Missed Medication"="Nebenwirkungen/Versäumnisse";
 "Set"="Eingabe";
 "Viral Load HepC"="Hep. C Viruslast";
-"Glossary"="Glossar";
+"Glossary"="Hilfe/Links";
 "Manage HIV Drugs"="HIV Medikamente";
 "Password too short"="Kennwort ist zu kurz";
 "Try Again"="Nochmal versuchen";
@@ -195,3 +195,6 @@
 "Please reset password"="Bitte das Kennwort neu eingeben.";
 "Select From List"="Von Liste auswählen";
 "SideEffect"="Nebenwirkung";
+"General Info"="AIDS Hilfen in Deutschland";
+"Testing"="HIV Testen";
+"Prevention"="Wie man sich schützt";

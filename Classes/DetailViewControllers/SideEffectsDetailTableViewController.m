@@ -19,7 +19,7 @@
 
 @interface SideEffectsDetailTableViewController ()
 @property BOOL isEditMode;
-@property (nonatomic, strong) NSMutableArray *currentMedArray;
+//@property (nonatomic, strong) NSMutableArray *currentMedArray;
 @property (nonatomic, strong) NSString *currentMeds;
 @property (nonatomic, strong) UITableViewCell *selectedCell;
 @property (nonatomic, strong) NSDateFormatter *formatter;
@@ -47,42 +47,59 @@
     self = [super initWithNibName:@"SideEffectsDetailTableViewController" bundle:nil];
     if (nil != self)
     {
-        self.isEditMode = YES;
-        self.context = effects.managedObjectContext;
-        self.sideEffects = effects;
-        self.effectsDate = self.sideEffects.SideEffectDate;
-        self.currentMeds = self.sideEffects.Name;
-        self.selectedCell = nil;
-        self.formatter = [[NSDateFormatter alloc] init];
-        self.formatter.dateFormat = @"dd MMM YY";
-        self.seriousness = self.sideEffects.seriousness;
-        if (nil == self.seriousness)
+        _isEditMode = YES;
+        _context = effects.managedObjectContext;
+        _sideEffects = effects;
+        _effectsDate = self.sideEffects.SideEffectDate;
+        _currentMeds = self.sideEffects.Name;
+        _selectedCell = nil;
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.dateFormat = @"dd MMM YY";
+        _seriousness = self.sideEffects.seriousness;
+        if (nil == _seriousness)
         {
-            self.seriousnessIndex = [NSNumber numberWithInt:0];
+            _seriousnessIndex = [NSNumber numberWithInt:0];
         }
         else
         {
-            if ([self.seriousness isEqualToString:@"Minor"])
+            if ([_seriousness isEqualToString:@"Minor"])
             {
-                self.seriousnessIndex = [NSNumber numberWithInt:0];
+                _seriousnessIndex = [NSNumber numberWithInt:0];
             }
-            else if ([self.seriousness isEqualToString:@"Major"])
+            else if ([_seriousness isEqualToString:@"Major"])
             {
-                self.seriousnessIndex = [NSNumber numberWithInt:1];
+                _seriousnessIndex = [NSNumber numberWithInt:1];
             }
             else
             {
-                self.seriousnessIndex = [NSNumber numberWithInt:2];
+                _seriousnessIndex = [NSNumber numberWithInt:2];
             }
         }
 #ifdef APPDEBUG
-        NSLog(@"Seriousness is %@",self.seriousness);
+        NSLog(@"Seriousness is %@",_seriousness);
 #endif
     }
     return self;
     
 }
+- (id)initWithContext:(NSManagedObjectContext *)context medicationName:(NSString *)medicationName
+{
+    self = [super initWithNibName:@"SideEffectsDetailTableViewController" bundle:nil];
+    if (nil != self)
+    {
+        _context = context;
+        _isEditMode = NO;
+        _effectsDate = [NSDate date];
+        _currentMeds = medicationName;
+        _selectedCell = nil;
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.dateFormat = @"dd MMM YY";
+        _seriousnessIndex = [NSNumber numberWithInt:0];
+    }
+    return self;
+}
 
+/*
 - (id)initWithContext:(NSManagedObjectContext  *)context medications:(NSArray *)medications
 {
     self = [super initWithNibName:@"SideEffectsDetailTableViewController" bundle:nil];
@@ -106,6 +123,7 @@
     return self;
     
 }
+*/
 
 - (void)viewDidLoad
 {
@@ -161,13 +179,7 @@
         newEffects.UID = [Utilities GUID];
         newEffects.SideEffect = self.selectedSideEffectLabel;
         newEffects.SideEffectDate = self.effectsDate;
-        NSMutableString *effectedDrugs = [NSMutableString string];
-        for (Medication *med in self.currentMedArray)
-        {
-            NSString *name = med.Name;
-            [effectedDrugs appendFormat:@"%@ ",name];
-        }
-        newEffects.Name = effectedDrugs;
+        newEffects.Name = self.currentMeds;
         newEffects.seriousness = self.seriousness;
     }
     if (nil != self.context)
@@ -310,12 +322,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    if (1 == section)
+    {
+        return 40;
+    }
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 40;
+    if (2 == section)
+    {
+        return 40;
+    }
+    return 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -328,7 +348,7 @@
     }
     else
     {
-        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
     }
     return headerView;
 }
@@ -336,7 +356,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footerView = nil;
-    footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 37)];
+    footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
     if (2 == section)
     {
         if (self.isEditMode)

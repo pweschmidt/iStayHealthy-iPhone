@@ -106,13 +106,41 @@
 
 - (void)loadSideEffectsController
 {
+    if (nil == self.medications)
+    {
+        UIAlertView *noMedsAlert = [[UIAlertView alloc] initWithTitle:@"No Medication" message:@"No Meds available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [noMedsAlert show];
+        return;
+    }
+    int availableMeds = self.medications.count;
+    if (0 == availableMeds)
+    {
+        UIAlertView *noMedsAlert = [[UIAlertView alloc] initWithTitle:@"No Medication" message:@"No Meds available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [noMedsAlert show];
+        return;
+    }
     
-	SideEffectsDetailTableViewController *newSideEffectController = [[SideEffectsDetailTableViewController alloc]
-                                                                     initWithContext:self.context medications:self.medications];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
-	UINavigationBar *navigationBar = [navigationController navigationBar];
-	navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:navigationController animated:YES];
+    if (1 == availableMeds)
+    {
+        Medication *med = [self.medications objectAtIndex:0];
+        SideEffectsDetailTableViewController *newSideEffectController =[[SideEffectsDetailTableViewController alloc] initWithContext:self.context medicationName:med.Name];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
+        UINavigationBar *navigationBar = [navigationController navigationBar];
+        navigationBar.tintColor = [UIColor blackColor];
+        [self presentModalViewController:navigationController animated:YES];        
+    }
+    else
+    {
+        __block UIAlertView *medAlert = [[UIAlertView alloc] init];
+        medAlert.title = NSLocalizedString(@"HIV Drugs", nil);
+        medAlert.message = NSLocalizedString(@"Select From List", nil);
+        medAlert.delegate = self;
+        [self.medications enumerateObjectsUsingBlock:^(Medication *med, NSUInteger index, BOOL *stop){
+            [medAlert addButtonWithTitle:med.Name];
+        }];
+        [medAlert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+        [medAlert show];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -188,6 +216,21 @@
 	[self presentModalViewController:navigationController animated:YES];
 }
 
-
+#pragma mark - AlertView delegate method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if (nil != title)
+    {
+        if (![title isEqualToString:NSLocalizedString(@"Cancel", nil)] && ![title isEqualToString:@""])
+        {
+            SideEffectsDetailTableViewController *newSideEffectController =[[SideEffectsDetailTableViewController alloc] initWithContext:self.context medicationName:title];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
+            UINavigationBar *navigationBar = [navigationController navigationBar];
+            navigationBar.tintColor = [UIColor blackColor];
+            [self presentModalViewController:navigationController animated:YES];
+        }
+    }
+}
 
 @end

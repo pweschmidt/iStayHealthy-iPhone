@@ -10,7 +10,7 @@
 #import "SQLDataTableController.h"
 #import "StatusViewControllerLandscape.h"
 
-@interface SideEffectsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SideEffectsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 - (IBAction) done:					(id) sender;
 - (id)initWithContext:(NSManagedObjectContext *)context medications:(NSArray *)medications;

@@ -11,7 +11,7 @@
 #import "StatusViewControllerLandscape.h"
 
 @class iStayHealthyRecord;
-@interface MissedMedViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MissedMedViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 - (IBAction) done:					(id) sender;
 - (NSString *)getStringFromName:(NSString *)name;

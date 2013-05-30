@@ -30,5 +30,6 @@
 - (void)removeSQLEntry;
 - (IBAction) showAlertView:			(id) sender;
 - (id)initWithSideEffects:(SideEffects *)effects;
-- (id)initWithContext:(NSManagedObjectContext  *)context medications:(NSArray *)medications;
+- (id)initWithContext:(NSManagedObjectContext *)context medicationName:(NSString *)medicationName;
+//- (id)initWithContext:(NSManagedObjectContext  *)context medications:(NSArray *)medications;
 @end

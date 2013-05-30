@@ -46,19 +46,37 @@
     self = [super initWithNibName:@"MissedMedsDetailTableViewController" bundle:nil];
     if (nil != self)
     {
-        self.isEditMode = YES;
-        self.context = missed.managedObjectContext;
-        self.missedMeds = missed;
-        self.missedDate = self.missedMeds.MissedDate;
-        self.currentMeds = self.missedMeds.Name;
-        self.selectedCell = nil;
-        self.formatter = [[NSDateFormatter alloc] init];
-        self.formatter.dateFormat = @"dd MMM YY";
-        self.selectedReasonLabel = self.missedMeds.missedReason;
+        _isEditMode = YES;
+        _context = missed.managedObjectContext;
+        _missedMeds = missed;
+        _missedDate = self.missedMeds.MissedDate;
+        _currentMeds = self.missedMeds.Name;
+        _selectedCell = nil;
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.dateFormat = @"dd MMM YY";
+        _selectedReasonLabel = self.missedMeds.missedReason;
     }
     return self;
     
 }
+- (id)initWithContext:(NSManagedObjectContext *)context medicationName:(NSString *)medicationName
+{
+    self = [super initWithNibName:@"SideEffectsDetailTableViewController" bundle:nil];
+    if (nil != self)
+    {
+        _context = context;
+        _isEditMode = NO;
+        _missedDate = [NSDate date];
+        _currentMeds = medicationName;
+        _selectedCell = nil;
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.dateFormat = @"dd MMM YY";
+        _selectedReasonLabel = nil;
+    }
+    return self;
+}
+
+/*
 - (id)initWithContext:(NSManagedObjectContext *)context medications:(NSArray *)medArray
 {
     self = [super initWithNibName:@"MissedMedsDetailTableViewController" bundle:nil];
@@ -81,7 +99,7 @@
     return self;
     
 }
-
+*/
 - (void)viewDidLoad
 {
     [super viewDidLoad];

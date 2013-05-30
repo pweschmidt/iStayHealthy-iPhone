@@ -275,11 +275,26 @@
  */
 - (void) showInfoView:(id)sender
 {
-	InfoDetailTableViewController *infoViewController = [[InfoDetailTableViewController alloc] initWithNibName:@"InfoDetailTableViewController" bundle:nil];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
-	UINavigationBar *navigationBar = [navigationController navigationBar];
-	navigationBar.tintColor = [UIColor blackColor];
-    [self presentModalViewController:navigationController animated:YES];
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *currentLocaleID = [locale localeIdentifier];
+    if ([currentLocaleID hasPrefix:@"es"] || [currentLocaleID hasPrefix:@"fr"])
+    {
+        NSString *urlString = [Utilities generalInfoURLFromLocale];
+        NSString *title = NSLocalizedString(@"General Info", nil);
+        WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlString withTitle:title];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+        UINavigationBar *navigationBar = [navigationController navigationBar];
+        navigationBar.tintColor = [UIColor blackColor];
+        [self presentModalViewController:navigationController animated:YES];
+    }
+    else
+    {
+        InfoDetailTableViewController *infoViewController = [[InfoDetailTableViewController alloc] initWithNibName:@"InfoDetailTableViewController" bundle:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
+        UINavigationBar *navigationBar = [navigationController navigationBar];
+        navigationBar.tintColor = [UIColor blackColor];
+        [self presentModalViewController:navigationController animated:YES];        
+    }
 }
 
 

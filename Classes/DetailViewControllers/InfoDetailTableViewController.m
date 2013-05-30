@@ -7,10 +7,10 @@
 //
 
 #import "InfoDetailTableViewController.h"
-#import "FAQDetailCell.h"
 #import "WebViewController.h"
 #import "UINavigationBar-Button.h"
-
+#import "GeneralSettings.h"
+#import "Utilities.h"
 @implementation InfoDetailTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -37,13 +37,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.navigationItem.title = NSLocalizedString(@"Glossary", @"Glossary");
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                               target:self action:@selector(done:)];
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"FAQ" ofType:@"plist"];
-	NSMutableArray *tmpMedList = [[NSMutableArray alloc]initWithContentsOfFile:path];
-    self.faqList = tmpMedList;
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     self.headerLabel.text = [NSString stringWithFormat:@"iStayHealthy version %@",version];
     UINavigationBar *navBar = self.navigationController.navigationBar;
@@ -74,13 +70,7 @@
  */
 - (IBAction)loadWebView:(id)sender
 {
-    //    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
 	NSString *urlAddress = NSLocalizedString(@"BannerURL", @"BannerURL");
-    /*
-     if ([language isEqualToString:@"de"]) {
-     urlAddress = @"http://www.aidshilfe.de";
-     }
-     */
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlAddress withTitle:NSLocalizedString(@"POZ Magazine", @"POZ Magazine")];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
@@ -92,11 +82,6 @@
 - (IBAction)loadAd:(id)sender
 {
 	NSString *urlAddress = NSLocalizedString(@"AdURL", @"AdURL");
-    /*
-     if ([language isEqualToString:@"de"]) {
-     urlAddress = @"http://www.aidshilfe.de";
-     }
-     */
     WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlAddress withTitle:NSLocalizedString(@"Gaydar.Net", @"Gaydar.net")];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
@@ -122,7 +107,6 @@
     self.headerLabel = nil;
     self.adButton = nil;
     self.bannerButton = nil;
-    self.faqList = nil;
     [super viewDidUnload];
 }
 #endif
@@ -131,37 +115,48 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.faqList count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100.0;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    NSArray *currentFAQList = (NSArray *)[self.faqList objectAtIndex:section];
-    return (NSString *)[currentFAQList objectAtIndex:0];
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    FAQDetailCell *cell = (FAQDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *identifier = @"UITableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
     {
-        cell = [[FAQDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:identifier];
     }
-    NSArray *faqItem = (NSArray *)[self.faqList objectAtIndex:indexPath.section];
-    cell.explanationView.text = (NSString *)[faqItem objectAtIndex:1];
+    cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return (UITableViewCell *)cell;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 180.0, 22.0);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.textColor = TEXTCOLOUR;
+    label.textAlignment = UITextAlignmentLeft;
+    label.font = [UIFont systemFontOfSize:15.0];
+    switch (indexPath.row)
+    {
+        case 0:
+            label.text = NSLocalizedString(@"General Info", nil);
+            break;
+        case 1:
+            label.text = NSLocalizedString(@"Testing", nil);
+            break;
+        case 2:
+            label.text = NSLocalizedString(@"Prevention", nil);
+            break;
+        case 3:
+            label.text = NSLocalizedString(@"HIV Drugs", nil);
+            break;
+    }
+    [cell addSubview:label];
+    return cell;
 }
 
 
@@ -169,6 +164,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *urlString = nil;
+    NSString *title = nil;
+    switch (indexPath.row)
+    {
+        case 0:
+            urlString = [Utilities generalInfoURLFromLocale];
+            title = NSLocalizedString(@"General Info", nil);
+            break;
+        case 1:
+            urlString = [Utilities testingInfoURLFromLocale];
+            title = NSLocalizedString(@"Testing", nil);
+            break;
+        case 2:
+            urlString = [Utilities preventionURLFromLocale];
+            title = NSLocalizedString(@"Prevention", nil);
+            break;
+        case 3:
+            urlString = [Utilities medListURLFromLocale];
+            title = NSLocalizedString(@"HIV Drugs", nil);
+            break;
+    }
+    
+    if (nil != urlString && nil != title)
+    {
+        WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlString withTitle:title];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+        UINavigationBar *navigationBar = [navigationController navigationBar];
+        navigationBar.tintColor = [UIColor blackColor];
+        [self presentModalViewController:navigationController animated:YES];
+    }
 }
 
 @end

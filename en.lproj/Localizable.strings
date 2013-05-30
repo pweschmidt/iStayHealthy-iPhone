@@ -127,7 +127,7 @@
 "Side Effects/Missed Medication"="Side Effects/Missed Medication";
 "Set"="Set";
 "Viral Load HepC"="Viral Load HepC";
-"Glossary"="Glossary";
+"Glossary"="Info/Links";
 "Manage HIV Drugs"="Manage HIV Drugs";
 "Password too short"="Password too short";
 "Try Again"="Try Again";
@@ -195,3 +195,6 @@
 "Please reset password"="Please, reset your password.";
 "Select From List"="Select From List";
 "SideEffect"="Side Effect";
+"General Info"="HIV Info";
+"Testing"="HIV Testing";
+"Prevention"="How to stay safe";

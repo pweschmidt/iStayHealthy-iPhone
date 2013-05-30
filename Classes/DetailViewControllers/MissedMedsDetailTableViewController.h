@@ -19,6 +19,7 @@
 - (void)removeSQLEntry;
 - (IBAction) showAlertView:			(id) sender;
 - (id)initWithMissedMedication:(MissedMedication*)missed;
-- (id)initWithContext:(NSManagedObjectContext *)context medications:(NSArray *)medArray;
+- (id)initWithContext:(NSManagedObjectContext *)context medicationName:(NSString *)medicationName;
+//- (id)initWithContext:(NSManagedObjectContext *)context medications:(NSArray *)medArray;
 
 @end

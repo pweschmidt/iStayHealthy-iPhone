@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface InfoDetailTableViewController : UITableViewController 
-@property (nonatomic, strong) NSMutableArray *faqList;
+//@property (nonatomic, strong) NSMutableArray *faqList;
 @property (nonatomic, strong) IBOutlet UILabel *headerLabel;
 @property (nonatomic, strong) IBOutlet UIButton *bannerButton;
 @property (nonatomic, strong) IBOutlet UIButton *adButton;

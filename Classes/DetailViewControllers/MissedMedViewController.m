@@ -105,12 +105,40 @@
 
 - (void)loadMissedMedsTableViewController
 {
+    if (nil == self.medications)
+    {
+        UIAlertView *noMedsAlert = [[UIAlertView alloc] initWithTitle:@"No Medication" message:@"No Meds available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [noMedsAlert show];
+        return;
+    }
+    if (0 == self.medications.count)
+    {
+        UIAlertView *noMedsAlert = [[UIAlertView alloc] initWithTitle:@"No Medication" message:@"No Meds available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [noMedsAlert show];
+        return;
+    }
+    if (1 == self.medications.count)
+    {
+        Medication *med = [self.medications objectAtIndex:0];
+        MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithContext:self.context medicationName:med.Name];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
+        UINavigationBar *navigationBar = [navigationController navigationBar];
+        navigationBar.tintColor = [UIColor blackColor];
+        [self presentModalViewController:navigationController animated:YES];
+    }
+    else
+    {
+        __block UIAlertView *medAlert = [[UIAlertView alloc] init];
+        medAlert.title = NSLocalizedString(@"HIV Drugs", nil);
+        medAlert.message = NSLocalizedString(@"Select From List", nil);
+        medAlert.delegate = self;
+        [self.medications enumerateObjectsUsingBlock:^(Medication *med, NSUInteger index, BOOL *stop){
+            [medAlert addButtonWithTitle:med.Name];
+        }];
+        [medAlert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+        [medAlert show];        
+    }
     
-	MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithContext:self.context medications:self.medications];
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
-	UINavigationBar *navigationBar = [navigationController navigationBar];
-	navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:navigationController animated:YES];
 }
 
 
@@ -187,6 +215,23 @@
 	UINavigationBar *navigationBar = [navigationController navigationBar];
 	navigationBar.tintColor = [UIColor blackColor];
 	[self presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark - AlertView delegate method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if (nil != title)
+    {
+        if (![title isEqualToString:NSLocalizedString(@"Cancel", nil)] && ![title isEqualToString:@""])
+        {
+            MissedMedsDetailTableViewController *newMissedController = [[MissedMedsDetailTableViewController alloc] initWithContext:self.context medicationName:title];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newMissedController];
+            UINavigationBar *navigationBar = [navigationController navigationBar];
+            navigationBar.tintColor = [UIColor blackColor];
+            [self presentModalViewController:navigationController animated:YES];
+        }
+    }
 }
 
 @end
