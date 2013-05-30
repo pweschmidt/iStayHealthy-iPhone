@@ -26,4 +26,8 @@
 + (NSString *)titleFromLocale;
 + (CGRect)frameFromSize:(CGSize)size;
 + (UIActivityIndicatorView *)activityIndicatorViewWithFrame:(CGRect)frame;
++ (NSString *)medListURLFromLocale;
++ (NSString *)generalInfoURLFromLocale;
++ (NSString *)testingInfoURLFromLocale;
++ (NSString *)preventionURLFromLocale;
 @end

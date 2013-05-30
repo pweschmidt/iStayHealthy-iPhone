@@ -252,6 +252,8 @@
 		C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F216D10554002D934F /* MissedMedication+Comparator.m */; };
 		C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F516D1057E002D934F /* Contacts+Comparator.m */; };
 		C4CA33CB14CC1AB4000C7BE3 /* smartandstrong.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */; };
+		C4CAC93817574F860010C165 /* EffectsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CAC93617574F860010C165 /* EffectsListController.m */; };
+		C4CAC93917574F860010C165 /* EffectsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4CAC93717574F860010C165 /* EffectsListController.xib */; };
 		C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */; };
 		C4CDED5F138D7CD7005BAC87 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CDED5E138D7CD7005BAC87 /* edurant.png */; };
 		C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CE682512DB070500FBCFF4 /* combi-small.png */; };
@@ -733,6 +735,9 @@
 		C4C837F416D1057E002D934F /* Contacts+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contacts+Comparator.h"; path = "Utils/Contacts+Comparator.h"; sourceTree = "<group>"; };
 		C4C837F516D1057E002D934F /* Contacts+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contacts+Comparator.m"; path = "Utils/Contacts+Comparator.m"; sourceTree = "<group>"; };
 		C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartandstrong.png; sourceTree = "<group>"; };
+		C4CAC93517574F860010C165 /* EffectsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsListController.h; path = DetailViewControllers/EffectsListController.h; sourceTree = "<group>"; };
+		C4CAC93617574F860010C165 /* EffectsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectsListController.m; path = DetailViewControllers/EffectsListController.m; sourceTree = "<group>"; };
+		C4CAC93717574F860010C165 /* EffectsListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EffectsListController.xib; path = Classes/DetailViewControllers/EffectsListController.xib; sourceTree = "<group>"; };
 		C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-label-small.png"; sourceTree = "<group>"; };
 		C4CDED5E138D7CD7005BAC87 /* edurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edurant.png; path = Images/edurant.png; sourceTree = "<group>"; };
 		C4CE682512DB070500FBCFF4 /* combi-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-small.png"; sourceTree = "<group>"; };
@@ -903,6 +908,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4CAC93717574F860010C165 /* EffectsListController.xib */,
 				C440848815FB5817007F4A7D /* PreviousMedViewController.xib */,
 				C4D6B4C415F237C3003C7AB5 /* ClinicsDetailViewController.xib */,
 				C491AE6215F167BE00EB1CF8 /* ProcedureDetailViewController.xib */,
@@ -1247,6 +1253,8 @@
 				C4D6B4C315F237C3003C7AB5 /* ClinicsDetailViewController.m */,
 				C440848615FB5817007F4A7D /* PreviousMedViewController.h */,
 				C440848715FB5817007F4A7D /* PreviousMedViewController.m */,
+				C4CAC93517574F860010C165 /* EffectsListController.h */,
+				C4CAC93617574F860010C165 /* EffectsListController.m */,
 			);
 			name = DetailViewControllers;
 			sourceTree = "<group>";
@@ -1639,6 +1647,7 @@
 				C4FCF922161376AA008F81A0 /* Default-568h@2x.png in Resources */,
 				C4FCF92416137993008F81A0 /* NewStatusViewController_iPhone5.xib in Resources */,
 				C4FCF92616137E11008F81A0 /* StatusViewControllerLandscape_iPhone5.xib in Resources */,
+				C4CAC93917574F860010C165 /* EffectsListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1749,6 +1758,7 @@
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
+				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

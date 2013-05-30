@@ -511,8 +511,8 @@
     }
 }
 
-- (void)setUnitString:(NSString *)unitString{
-    //do nothing unit is not needed for these types of cells
+- (void)setUnitString:(NSString *)unitString
+{
 }
 
 #pragma mark - messaging and email

@@ -14,11 +14,11 @@
 #import "GradientButton.h"
 #import "Utilities.h"
 #import "Medication.h"
+#import "EffectsListController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SideEffectsDetailTableViewController ()
 @property BOOL isEditMode;
-@property (nonatomic, strong) NSMutableArray *sideEffectArray;
 @property (nonatomic, strong) NSMutableArray *currentMedArray;
 @property (nonatomic, strong) NSString *currentMeds;
 @property (nonatomic, strong) UITableViewCell *selectedCell;
@@ -117,12 +117,6 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                               target:self action:@selector(save:)];
-    NSString *effectsList = [[NSBundle mainBundle] pathForResource:@"SideEffects" ofType:@"plist"];
-    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:effectsList];
-    NSArray *list = [dict valueForKey:@"SideEffectArray"];
-    NSArray *sortedList = [list sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
-    self.sideEffectArray = [NSMutableArray arrayWithArray:sortedList];
 
     NSArray *segmentArray = [NSArray arrayWithObjects:NSLocalizedString(@"Minor", @"Minor"), NSLocalizedString(@"Major", @"Major"), NSLocalizedString(@"Serious", @"Serious"), nil];
     
@@ -295,19 +289,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section)
-    {
-        return 1;
-    }
-    else
-    {
-        return self.sideEffectArray.count;
-    }
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -323,22 +310,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (1 == section)
-    {
-        return 40;
-    }
-    else
-        return 10;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    CGFloat height = 10;
-    if (1 == section)
-    {
-        height = 40;
-    }
-    return height;
+    return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -351,7 +328,7 @@
     }
     else
     {
-        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
     }
     return headerView;
 }
@@ -359,8 +336,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footerView = nil;
-    footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
-    if (1 == section)
+    footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 37)];
+    if (2 == section)
     {
         if (self.isEditMode)
         {
@@ -408,28 +385,58 @@
         self.setDateCell = dateCell;
         return dateCell;
     }
-    else {
-        NSString *identifier = [NSString stringWithFormat:@"Row%d",indexPath.row];
+    else if (1 == indexPath.section)
+    {
+        NSString *identifier = @"ClinicAddressCell";
+        ClinicAddressCell *cell = (ClinicAddressCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (nil == cell)
+        {
+            NSArray *cellObjects = [[NSBundle mainBundle]loadNibNamed:@"ClinicAddressCell"
+                                                                owner:self
+                                                              options:nil];
+            for (id currentObject in cellObjects)
+            {
+                if ([currentObject isKindOfClass:[ClinicAddressCell class]])
+                {
+                    cell = (ClinicAddressCell *)currentObject;
+                    break;
+                }
+            }
+            [cell setDelegate:self];
+        }
+        cell.title.text = NSLocalizedString(@"SideEffect", nil);
+        if (self.isEditMode && ![self.sideEffects.SideEffect isEqualToString:@""])
+        {
+            cell.valueField.text = self.sideEffects.SideEffect;
+            cell.valueField.textColor = [UIColor blackColor];
+        }
+        else
+        {
+            cell.valueField.text = NSLocalizedString(@"Enter Name", nil);
+            cell.valueField.textColor = [UIColor lightGrayColor];
+        }
+        self.selectedEffectCell = cell;
+        return cell;
+    }
+    else
+    {
+        NSString *identifier = @"UITableViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if(nil == cell)
+        if (cell == nil)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:identifier];
         }
-        cell.textLabel.textColor = TEXTCOLOUR;
-        cell.textLabel.text = [self.sideEffectArray objectAtIndex:indexPath.row];
         cell.backgroundColor = [UIColor whiteColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        if (self.isEditMode && [self.sideEffects.SideEffect isEqualToString:cell.textLabel.text])
-        {
-            self.selectedSideEffectLabel = self.sideEffects.SideEffect;
-            self.selectedCell = cell;
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        if (cell == self.selectedCell)
-        {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 180.0, 22.0);
+        UILabel *label = [[UILabel alloc] initWithFrame:frame];
+        label.textColor = TEXTCOLOUR;
+        label.textAlignment = UITextAlignmentLeft;
+        label.font = [UIFont systemFontOfSize:15.0];
+        label.text = NSLocalizedString(@"Select From List", nil);
+        [cell addSubview:label];
         return cell;
     }
     return nil;
@@ -448,20 +455,31 @@
     {
         [self changeDate];
     }
-    else if (1 == indexPath.section)
+    else if (2 == indexPath.section)
     {
-        if (nil != self.selectedCell)
-        {
-            self.selectedCell.accessoryType = UITableViewCellAccessoryNone;
-            self.selectedCell = nil;
-        }
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        self.selectedCell = cell;
-        self.selectedSideEffectLabel = cell.textLabel.text;
-        [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
-        
+        EffectsListController *listController = [[EffectsListController alloc] initWithNibName:@"EffectsListController" bundle:nil];
+        listController.selectorDelegate = self;
+        [self.navigationController pushViewController:listController animated:YES];        
     }
+}
+
+#pragma mark - Effects Selector method
+- (void)selectedEffectFromList:(NSString *)effect
+{
+    self.selectedSideEffectLabel = effect;
+    self.selectedEffectCell.valueField.text = effect;
+    self.selectedEffectCell.valueField.textColor = [UIColor blackColor];
+}
+
+#pragma mark - ClinicAddress protocol implementations
+
+- (void)setValueString:(NSString *)valueString withTag:(int)tag
+{
+    self.selectedSideEffectLabel = valueString;
+}
+
+- (void)setUnitString:(NSString *)unitString
+{
 }
 
 @end

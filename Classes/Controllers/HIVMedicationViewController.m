@@ -21,7 +21,7 @@
 #import "HIVMedSupportCell.h"
 #import "UINavigationBar-Button.h"
 #import "Utilities.h"
-
+#import "WebViewController.h"
 
 @interface HIVMedicationViewController ()
 @property (nonatomic, strong) NSArray *allMeds;
@@ -114,7 +114,10 @@
     [super viewDidLoad];
     self.hasReloadedData = NO;
     [self setUpData];
+	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	[infoButton addTarget:self action:@selector(showInfoView:) forControlEvents:UIControlEventTouchUpInside];
 
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMedicationDetailViewController)];
     UINavigationBar *navBar = self.navigationController.navigationBar;
     if (navBar)
@@ -139,9 +142,16 @@
     [self.view insertSubview:self.activityIndicator aboveSubview:self.tableView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void) showInfoView:(id)sender
 {
-    [super viewWillAppear:animated];
+    NSString *urlString = [Utilities medListURLFromLocale];
+    NSString *title = NSLocalizedString(@"HIV Drugs", nil);
+    WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlString withTitle:title];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+    UINavigationBar *navigationBar = [navigationController navigationBar];
+    navigationBar.tintColor = [UIColor blackColor];
+    [self presentModalViewController:navigationController animated:YES];
 }
 
 - (void)loadPreviousMedsController

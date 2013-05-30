@@ -126,6 +126,196 @@
     }        
 }
 
++ (NSString *)medListURLFromLocale
+{
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *currentLocaleID = [locale localeIdentifier];
+    if ([currentLocaleID hasPrefix:@"de"])
+    {
+        return @"http://www.aidshilfe.de/de/leben-mit-hiv/medizinische-infos/medikamente";
+    }
+    else if([currentLocaleID hasPrefix:@"es"])
+    {
+        if ([currentLocaleID hasSuffix:@"ES"])
+        {
+            return @"http://www.aidsmap.com/v634746756360000000/file/1051858/ARV_drug_chart_Spanish.pdf";
+        }
+        else
+        {
+            return @"http://www.aidsmeds.com/list.shtml";            
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"en"])
+    {
+        if ([currentLocaleID hasSuffix:@"GB"])
+        {
+            return @"http://i-base.info/guides/category/arvs";
+        }
+        else
+        {
+            return @"http://www.aidsmeds.com/list.shtml";
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"fr"])
+    {
+        if ([currentLocaleID hasSuffix:@"CA"])
+        {
+            return @"http://www.catie.ca/fr/guides-pratiques/traitement-antiretroviral/annexes/b";
+        }
+        else
+        {
+            return @"http://www.aidsmap.com/v634746760450000000/file/1051857/ARV_drugchart_FRE_Dec2011_Web.pdf";
+        }
+    }
+    else
+    {
+        return @"http://www.aidsmeds.com/list.shtml";        
+    }
+}
+
++ (NSString *)generalInfoURLFromLocale
+{
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *currentLocaleID = [locale localeIdentifier];
+    if ([currentLocaleID hasPrefix:@"de"])
+    {
+        return @"http://www.aidshilfe.de/de/adressen";
+    }
+    else if([currentLocaleID hasPrefix:@"es"])
+    {
+        if ([currentLocaleID hasSuffix:@"ES"])
+        {
+            return @"http://www.aidsmap.com/es";
+        }
+        else
+        {
+            return @"http://www.poz.com/latino";
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"en"])
+    {
+        if ([currentLocaleID hasSuffix:@"GB"])
+        {
+            return @"http://www.aidsmap.com/hiv-basics";
+        }
+        else
+        {
+            return @"http://aids.gov/hiv-aids-basics/";
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"fr"])
+    {
+        if ([currentLocaleID hasSuffix:@"CA"])
+        {
+            return @"http://www.catie.ca/fr/essentiel";
+        }
+        else
+        {
+            return @"http://www.aidsmap.com/translations/fr/Le-BAba-du-VIH-The-basics/page/1330873/";
+        }
+    }
+    else
+    {
+        return @"http://www.aidsmeds.com/list.shtml";
+    }
+    
+}
+
++ (NSString *)testingInfoURLFromLocale
+{
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *currentLocaleID = [locale localeIdentifier];
+    if ([currentLocaleID hasPrefix:@"de"])
+    {
+        return @"http://www.aidshilfe.de/de/sich-schuetzen/hiv/aids/hiv-test";
+    }
+    else if([currentLocaleID hasPrefix:@"es"])
+    {
+        if ([currentLocaleID hasSuffix:@"ES"])
+        {
+            return @"http://www.aidsmap.com/es";
+        }
+        else
+        {
+            return @"http://www.poz.com/latino";
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"en"])
+    {
+        if ([currentLocaleID hasSuffix:@"GB"])
+        {
+            return @"http://www.aidsmap.com/hiv-basics/Testing/page/1412439";
+        }
+        else
+        {
+            return @"http://www.poz.com/hiv_testing.shtml";
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"fr"])
+    {
+        if ([currentLocaleID hasSuffix:@"CA"])
+        {
+            return @"http://www.catie.ca/fr/prevention/depistage-diagnostic";
+        }
+        else
+        {
+            return @"http://www.aidsmap.com/translations/fr/Le-BAba-du-VIH-The-basics/page/1330873/";
+        }
+    }
+    else
+    {
+        return @"http://www.aidsmeds.com/list.shtml";
+    }
+    
+}
+
++ (NSString *)preventionURLFromLocale
+{
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *currentLocaleID = [locale localeIdentifier];
+    if ([currentLocaleID hasPrefix:@"de"])
+    {
+        return @"http://www.aidshilfe.de/de/sich-schuetzen/hiv/aids/safer-sex";
+    }
+    else if([currentLocaleID hasPrefix:@"es"])
+    {
+        if ([currentLocaleID hasSuffix:@"ES"])
+        {
+            return @"http://www.aidsmap.com/es";
+        }
+        else
+        {
+            return @"http://www.poz.com/latino";
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"en"])
+    {
+        if ([currentLocaleID hasSuffix:@"GB"])
+        {
+            return @"http://www.aidsmap.com/hiv-basics/Transmission/page/1412438/";
+        }
+        else
+        {
+            return @"http://www.poz.com/archive/2008_Mar_2168.shtml";
+        }
+    }
+    else if ([currentLocaleID hasPrefix:@"fr"])
+    {
+        if ([currentLocaleID hasSuffix:@"CA"])
+        {
+            return @"http://www.catie.ca/fr/prevention";
+        }
+        else
+        {
+            return @"http://www.aidsmap.com/translations/fr/Le-BAba-du-VIH-The-basics/page/1330873/";
+        }
+    }
+    else
+    {
+        return @"http://www.aidsmeds.com/list.shtml";
+    }
+    
+}
 
 
 @end
