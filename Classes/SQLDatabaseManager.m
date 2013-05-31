@@ -25,6 +25,8 @@
 @property (nonatomic, strong, readwrite) id ubiquityToken;
 @property (nonatomic, strong, readwrite) NSPersistentStore *mainStore;
 @property (nonatomic, strong, readwrite) NSPersistentStore *backupStore;
+@property (nonatomic, strong, readwrite) NSURL *importFileURL;
+@property (nonatomic, assign) BOOL isFileImport;
 @property BOOL backupStoreExists;
 @property BOOL mainStoreExists;
 @property BOOL iCloudIsAvailable;
@@ -65,6 +67,8 @@
         _mainStore = nil;
         _backupStore = nil;
         _iOS6FeaturesAvailable = [self checkiOS6Availability];
+        _importFileURL = nil;
+        _isFileImport = NO;
         [self storeAndContext];
         
     }
@@ -125,102 +129,63 @@
     
 }
 
-/*
-- (void)loadImportedData
-{
-    NSLog(@"in loadImportedData");
-    if (nil == self.importData || nil == self.mainObjectContext)
-    {
-        NSLog(@"importData or objectContext are nil");
-        return;
-    }
-    
-    
-    XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:self.importData];
-    NSLog(@"importing data");
-    NSError* error = nil;
-    [xmlLoader startParsing:&error];
-    [xmlLoader synchronise];
-    NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefetchAllDatabaseData" object:self];
-    
-    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
-    NSLog(@"importing data. posting notification");
-    
-}
-*/
-
 - (void)importDataFromURL:(NSURL *)url
 {
     if (![url isFileURL])
     {
         return;
     }
-    NSLog(@"importDataFromURL");
-    NSFileManager *manager = [NSFileManager defaultManager];
-    NSString *tmpName = kImportXMLFile;
-    NSString *tmpFile = [NSTemporaryDirectory() stringByAppendingString:tmpName];
-    NSError *error = nil;
-    BOOL success = YES;
-    if([manager fileExistsAtPath:tmpFile])
+    else
     {
-        NSLog(@"importDataFromURL: file already exists - removing");
-        success = [manager removeItemAtPath:tmpFile error:&error];
-        if (!success)
+        self.importFileURL = url;
+        self.isFileImport = YES;
+        NSPersistentStore *store = [self.persistentStoreCoordinator persistentStoreForURL:self.mainStoreURL];
+        if (nil == store)
         {
-            NSLog(@"importDataFromURL: file already exists - removing failed!!!");
-            return;
+            store = [self.persistentStoreCoordinator persistentStoreForURL:self.backupStoreURL];
+        }
+        if (nil != store)
+        {
+#ifdef APPDEBUG
+            NSLog(@"we already have a store available - import");
+#endif
+            [self importFromTmpFile];
         }
     }
-    NSLog(@"We are trying to copy item at path %@",[url absoluteString]);
-    NSData *xmlData = [NSData dataWithContentsOfURL:url];
-    NSLog(@"importDataFromURL: xml file copied");
-    success = [xmlData writeToFile:tmpFile atomically:NO];
-    /*
-    success = [manager copyItemAtPath:[url absoluteString] toPath:tmpFile error:&error];
-     */
-    if (!success)
-    {
-        NSLog(@"importDataFromURL: writing data to tmp file FAILED!!!");
-        return;
-    }
-    
-    NSPersistentStore *store = [self.persistentStoreCoordinator persistentStoreForURL:self.mainStoreURL];
-    if (nil == store)
-    {
-        store = [self.persistentStoreCoordinator persistentStoreForURL:self.backupStoreURL];
-    }
-    if (nil != store)
-    {
-        NSLog(@"we already have a store available - import");
-        [self importFromTmpFile];
-    }
-    
 }
 
 
 - (BOOL)importFromTmpFile
 {
-    NSLog(@"importFromTmpFile");
-    NSFileManager *manager = [NSFileManager defaultManager];
-    NSString *tmpName = kImportXMLFile;
-    NSString *tmpFile = [NSTemporaryDirectory() stringByAppendingString:tmpName];
-    NSError *error = nil;
-    BOOL success = [manager fileExistsAtPath:tmpFile];
-    if (!success)
+    if (nil == self.importFileURL || !self.isFileImport)
     {
-        NSLog(@"importFromTmpFile: import file %@ no longer exists", tmpFile);
         return NO;
     }
-    
-    NSData *xmlData = [NSData dataWithContentsOfFile:tmpFile];
-    XMLLoader *xmlLoader = [[XMLLoader alloc] initWithData:xmlData];
-    [xmlLoader startParsing:&error];
-    [xmlLoader synchronise];
-    NSLog(@"importFromTmpFile: importing file %@", tmpFile);
-    
-    success = [manager removeItemAtPath:tmpFile error:&error];
-    
-    return success;
+    else
+    {
+        UIAlertView *importAlert = [[UIAlertView alloc]
+                                    initWithTitle:NSLocalizedString(@"Import", nil)
+                                    message:NSLocalizedString(@"Import File", nil)
+                                    delegate:self
+                                    cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    otherButtonTitles:NSLocalizedString(@"Import", nil), nil];
+        [importAlert show];
+        return YES;
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
+{
+    NSString *buttonTitle = [alertView buttonTitleAtIndex:index];
+    NSString *importTitle = NSLocalizedString(@"Import", @"Import");
+    if ([importTitle isEqualToString:buttonTitle])
+    {
+        NSError *error = nil;
+        NSData *xmlData = [NSData dataWithContentsOfURL:self.importFileURL];
+        XMLLoader *xmlLoader = [[XMLLoader alloc] initWithData:xmlData];
+        [xmlLoader startParsing:&error];
+        [xmlLoader synchronise];
+    }
 }
 
 /**

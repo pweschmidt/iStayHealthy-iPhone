@@ -235,22 +235,6 @@
     }
 }
 
-/*
-- (void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"NewStatusViewController:viewWillAppear");
-    [super viewWillAppear:animated];
-    if (self.hasReloadedData)
-    {
-        [self.events loadResult:self.allResults];
-        [self.events loadMedication:self.allMeds];
-        [self.events loadMissedMedication:self.allMissedMeds];
-        [self.events sortEventsAscending:YES];
-        [self.chartView setNeedsDisplay];
-    }
-}
-*/
-
 /**
  viewDidUnload
  */

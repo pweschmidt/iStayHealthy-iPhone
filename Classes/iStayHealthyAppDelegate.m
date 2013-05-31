@@ -18,7 +18,6 @@
 
 @interface iStayHealthyAppDelegate() <DBSessionDelegate>
 @property (nonatomic, strong, readwrite) SQLDatabaseManager *sqlHelper;
-@property (nonatomic, strong, readwrite) NSURL *fileImportURL;
 - (void)postNotificationWithNote:(NSNotification *)note;
 @end
 
@@ -155,14 +154,7 @@ NSString *MEDICATIONALERTKEY = @"MedicationAlertKey";
         [cancelImport show];
         return NO;
     }
-    self.fileImportURL = url;
-    UIAlertView *importAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Import", nil)
-                                message:NSLocalizedString(@"Import File", nil)
-                                delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                otherButtonTitles:NSLocalizedString(@"Import", nil), nil];
-    [importAlert show];
+    [self.sqlHelper importDataFromURL:url];
     return YES;
 }
 
@@ -479,17 +471,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
 {
-    NSString *buttonTitle = [alertView buttonTitleAtIndex:index];
-    NSString *importTitle = NSLocalizedString(@"Import", @"Import");
-    if ([importTitle isEqualToString:buttonTitle])
-    {
-        if (nil != self.sqlHelper && nil != self.fileImportURL)
-        {
-            [self.sqlHelper importDataFromURL:self.fileImportURL];
-        }
-        return;
-    }
-    
 	if (index != alertView.cancelButtonIndex)
     {
 		[[DBSession sharedSession] linkUserId:self.relinkUserId fromController:self.tabBarController];

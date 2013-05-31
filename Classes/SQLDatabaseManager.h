@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SQLDatabaseManager : NSObject
+@interface SQLDatabaseManager : NSObject <UIAlertViewDelegate>
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * persistentStoreCoordinator;
 @property (nonatomic, strong, readonly) NSManagedObjectContext * mainObjectContext;
 @property (nonatomic, strong, readonly) NSURL *mainStoreURL;
