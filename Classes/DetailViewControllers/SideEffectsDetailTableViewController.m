@@ -425,6 +425,7 @@
             [cell setDelegate:self];
         }
         cell.title.text = NSLocalizedString(@"SideEffect", nil);
+        cell.valueField.borderStyle = UITextBorderStyleBezel;
         if (self.isEditMode && ![self.sideEffects.SideEffect isEqualToString:@""])
         {
             cell.valueField.text = self.sideEffects.SideEffect;
@@ -432,7 +433,7 @@
         }
         else
         {
-            cell.valueField.text = NSLocalizedString(@"Enter Name", nil);
+            cell.valueField.text = NSLocalizedString(@"Enter Effect", nil);
             cell.valueField.textColor = [UIColor lightGrayColor];
         }
         self.selectedEffectCell = cell;
@@ -450,11 +451,11 @@
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+20.0, CGRectGetMinY(cell.bounds)+12.0, 180.0, 22.0);
+        CGRect frame = CGRectMake(CGRectGetMinX(cell.bounds)+30.0, CGRectGetMinY(cell.bounds)+12.0, 180.0, 22.0);
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
         label.textColor = TEXTCOLOUR;
         label.textAlignment = UITextAlignmentLeft;
-        label.font = [UIFont systemFontOfSize:15.0];
+        label.font = [UIFont systemFontOfSize:17.0];
         label.text = NSLocalizedString(@"Select From List", nil);
         [cell addSubview:label];
         return cell;
