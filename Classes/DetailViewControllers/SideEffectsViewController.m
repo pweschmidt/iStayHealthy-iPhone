@@ -222,7 +222,9 @@
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if (nil != title)
     {
-        if (![title isEqualToString:NSLocalizedString(@"Cancel", nil)] && ![title isEqualToString:@""])
+        if (![title isEqualToString:NSLocalizedString(@"Cancel", nil)]
+            && ![title isEqualToString:@""]
+            && ![title isEqualToString:@"OK"])
         {
             SideEffectsDetailTableViewController *newSideEffectController =[[SideEffectsDetailTableViewController alloc] initWithContext:self.context medicationName:title];
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newSideEffectController];
