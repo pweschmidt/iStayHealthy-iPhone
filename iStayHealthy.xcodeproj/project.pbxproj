@@ -16,6 +16,8 @@
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C402283015FB99EC00120B1F /* XMLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C402282F15FB99EC00120B1F /* XMLConstants.m */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
+		C40B1BDD1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C40B1BDC1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard */; };
+		C40B1BE11775D1AD002E8EE2 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
 		C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB56A1494F119005E9A0F /* SwitcherCell.xib */; };
@@ -340,6 +342,10 @@
 		C402282E15FB99EC00120B1F /* XMLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLConstants.h; path = XML/XMLConstants.h; sourceTree = "<group>"; };
 		C402282F15FB99EC00120B1F /* XMLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLConstants.m; path = XML/XMLConstants.m; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C40B1BDC1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryBoard_iPhone.storyboard; sourceTree = "<group>"; };
+		C40B1BDE1775CEA3002E8EE2 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		C40B1BDF1775D1AD002E8EE2 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = Controllers/ContainerViewController.h; sourceTree = "<group>"; };
+		C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController.m; path = Controllers/ContainerViewController.m; sourceTree = "<group>"; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
 		C4276D6D12DB7AED001DDCD2 /* cross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small.png"; sourceTree = "<group>"; };
 		C4279EFC146AEDCA00D93B34 /* clinic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clinic.png; sourceTree = "<group>"; };
@@ -950,6 +956,8 @@
 				C43BE58E15F7CBE400108EF8 /* SideEffects.plist */,
 				C4FCF92316137993008F81A0 /* NewStatusViewController_iPhone5.xib */,
 				C4FCF92516137E11008F81A0 /* StatusViewControllerLandscape_iPhone5.xib */,
+				C40B1BDC1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard */,
+				C40B1BDE1775CEA3002E8EE2 /* MainStoryboard_iPad.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1163,6 +1171,8 @@
 				C4C4199515F13AAD00882416 /* StatusViewControllerLandscape.m */,
 				C4B9DA7516CE97E600703B67 /* BasicViewController.h */,
 				C4B9DA7616CE97E600703B67 /* BasicViewController.m */,
+				C40B1BDF1775D1AD002E8EE2 /* ContainerViewController.h */,
+				C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1567,6 +1577,7 @@
 				C4FCBC61152F210900E3F082 /* iconroundedsmall@2x.png in Resources */,
 				C4FCBC62152F210900E3F082 /* istayhealthypozbanner@2x.png in Resources */,
 				C4FCBC63152F210900E3F082 /* lock@2x.png in Resources */,
+				C40B1BDD1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard in Resources */,
 				C4FCBC64152F210900E3F082 /* neutralflat@2x.png in Resources */,
 				C4FCBC65152F210900E3F082 /* procedure@2x.png in Resources */,
 				C4FCBC66152F210900E3F082 /* redcross-small@2x.png in Resources */,
@@ -1666,6 +1677,7 @@
 				C4DF910B15EE79560042211E /* Constants.m in Sources */,
 				C4C418D515F1363C00882416 /* DataLoader.m in Sources */,
 				C4C418D615F1363C00882416 /* XMLAttribute.m in Sources */,
+				C40B1BE11775D1AD002E8EE2 /* ContainerViewController.m in Sources */,
 				C4C418D715F1363C00882416 /* XMLDocument.m in Sources */,
 				C4C418D815F1363C00882416 /* XMLElement.m in Sources */,
 				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
@@ -1975,7 +1987,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -2005,7 +2017,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",
@@ -2101,7 +2113,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",

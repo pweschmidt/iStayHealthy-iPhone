@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>09D59E08-3821-46EE-952B-4C6E192679FD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iStayHealthy</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>042A1254-831E-4EA7-9B3E-35BDA8D4657A</key>
+		<string>https://github.com/pweschmidt/iStayHealthy-iPhone.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iStayHealthy.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>042A1254-831E-4EA7-9B3E-35BDA8D4657A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/pweschmidt/iStayHealthy-iPhone.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>042A1254-831E-4EA7-9B3E-35BDA8D4657A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>042A1254-831E-4EA7-9B3E-35BDA8D4657A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iStayHealthy-iPhone</string>
+		</dict>
+	</array>
+</dict>
+</plist>
