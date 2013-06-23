@@ -18,6 +18,7 @@
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C40B1BDD1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C40B1BDC1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard */; };
 		C40B1BE11775D1AD002E8EE2 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */; };
+		C40B1BE61776F6D3002E8EE2 /* DatabaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
 		C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB56A1494F119005E9A0F /* SwitcherCell.xib */; };
@@ -346,6 +347,8 @@
 		C40B1BDE1775CEA3002E8EE2 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		C40B1BDF1775D1AD002E8EE2 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = Controllers/ContainerViewController.h; sourceTree = "<group>"; };
 		C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController.m; path = Controllers/ContainerViewController.m; sourceTree = "<group>"; };
+		C40B1BE41776F6D3002E8EE2 /* DatabaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseController.h; path = DataModelClasses/DatabaseController.h; sourceTree = "<group>"; };
+		C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseController.m; path = DataModelClasses/DatabaseController.m; sourceTree = "<group>"; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
 		C4276D6D12DB7AED001DDCD2 /* cross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small.png"; sourceTree = "<group>"; };
 		C4279EFC146AEDCA00D93B34 /* clinic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clinic.png; sourceTree = "<group>"; };
@@ -1180,6 +1183,8 @@
 		C4B803C112D36E6700A5A38F /* DataModelClasses */ = {
 			isa = PBXGroup;
 			children = (
+				C40B1BE41776F6D3002E8EE2 /* DatabaseController.h */,
+				C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */,
 				C43BE58915F7C5CE00108EF8 /* Wellness.h */,
 				C43BE58A15F7C5CE00108EF8 /* Wellness.m */,
 				C43BE58615F7C5CE00108EF8 /* PreviousMedication.h */,
@@ -1741,6 +1746,7 @@
 				C491AE5E15F15B8500EB1CF8 /* OtherMedsDetailViewController.m in Sources */,
 				C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */,
 				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
+				C40B1BE61776F6D3002E8EE2 /* DatabaseController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
