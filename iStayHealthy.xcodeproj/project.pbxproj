@@ -16,8 +16,6 @@
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C402283015FB99EC00120B1F /* XMLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C402282F15FB99EC00120B1F /* XMLConstants.m */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
-		C40B1BDD1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C40B1BDC1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard */; };
-		C40B1BE11775D1AD002E8EE2 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */; };
 		C40B1BE61776F6D3002E8EE2 /* DatabaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
@@ -53,8 +51,11 @@
 		C462002C140934C500E70B5B /* retrovir.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620027140934C500E70B5B /* retrovir.png */; };
 		C462002D140934C500E70B5B /* viracept.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620028140934C500E70B5B /* viracept.png */; };
 		C462002E140934C500E70B5B /* viramune.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620029140934C500E70B5B /* viramune.png */; };
+		C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22817AD04F80037A6DF /* ContainerViewController.m */; };
 		C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46231441632E21D005DD746 /* SQLDatabaseManager.m */; };
 		C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */; };
+		C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22B17AD05630037A6DF /* LoginViewController.m */; };
+		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
 		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
@@ -80,6 +81,11 @@
 		C49B5C5F15DFE4BA00D3AF3B /* appointments.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B5C5E15DFE4BA00D3AF3B /* appointments.png */; };
 		C49F82B013DEE02C00D5891F /* viralOff-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82B213DEE02C00D5891F /* viralOff-small.png */; };
 		C49F82C213DEE06500D5891F /* viralOn-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82C413DEE06500D5891F /* viralOn-small.png */; };
+		C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */; };
+		C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */; };
+		C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */; };
+		C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */; };
+		C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */; };
 		C4A899FD1748BC9D0048556A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A899FC1748BC9D0048556A /* DropboxSDK.framework */; };
 		C4ADD9D013890E54004445C0 /* Alarm-Clock-32.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CC13890E54004445C0 /* Alarm-Clock-32.png */; };
 		C4ADD9D113890E54004445C0 /* Alarm-Clock-55.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CD13890E54004445C0 /* Alarm-Clock-55.png */; };
@@ -343,10 +349,6 @@
 		C402282E15FB99EC00120B1F /* XMLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLConstants.h; path = XML/XMLConstants.h; sourceTree = "<group>"; };
 		C402282F15FB99EC00120B1F /* XMLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLConstants.m; path = XML/XMLConstants.m; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C40B1BDC1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryBoard_iPhone.storyboard; sourceTree = "<group>"; };
-		C40B1BDE1775CEA3002E8EE2 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		C40B1BDF1775D1AD002E8EE2 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = Controllers/ContainerViewController.h; sourceTree = "<group>"; };
-		C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController.m; path = Controllers/ContainerViewController.m; sourceTree = "<group>"; };
 		C40B1BE41776F6D3002E8EE2 /* DatabaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseController.h; path = DataModelClasses/DatabaseController.h; sourceTree = "<group>"; };
 		C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseController.m; path = DataModelClasses/DatabaseController.m; sourceTree = "<group>"; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -421,6 +423,12 @@
 		C465974213EE849600006F72 /* libxslt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxslt.dylib; path = usr/lib/libxslt.dylib; sourceTree = SDKROOT; };
 		C47B705D163ACABB0092C439 /* SQLBackupStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLBackupStoreManager.h; sourceTree = "<group>"; };
 		C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLBackupStoreManager.m; sourceTree = "<group>"; };
+		C47DB22717AD04F80037A6DF /* ContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = ViewControllersCommon/ContainerViewController.h; sourceTree = "<group>"; };
+		C47DB22817AD04F80037A6DF /* ContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController.m; path = ViewControllersCommon/ContainerViewController.m; sourceTree = "<group>"; };
+		C47DB22A17AD05630037A6DF /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllersCommon/LoginViewController.h; sourceTree = "<group>"; };
+		C47DB22B17AD05630037A6DF /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllersCommon/LoginViewController.m; sourceTree = "<group>"; };
+		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
+		C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CentralAppDelegate.m; path = ViewControllersCommon/CentralAppDelegate.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
 		C4897FC4140FD0360033C61C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC6140FD03F0033C61C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/CombiMeds.plist; sourceTree = "<group>"; };
@@ -478,6 +486,14 @@
 		C49F82C513DEE06A00D5891F /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = "de.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C613DEE06C00D5891F /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C713DEE06E00D5891F /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = "fr.lproj/viralOn-small.png"; sourceTree = "<group>"; };
+		C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = Classes/Assets/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPad.storyboard; path = Classes/Assets/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		C4A8244517AD4B9B00E8CA8C /* ContentContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentContainerViewController.h; path = ViewControllersCommon/ContentContainerViewController.h; sourceTree = "<group>"; };
+		C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentContainerViewController.m; path = ViewControllersCommon/ContentContainerViewController.m; sourceTree = "<group>"; };
+		C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HamburgerMenuTableViewController.h; path = ViewControllersCommon/HamburgerMenuTableViewController.h; sourceTree = "<group>"; };
+		C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HamburgerMenuTableViewController.m; path = ViewControllersCommon/HamburgerMenuTableViewController.m; sourceTree = "<group>"; };
+		C4A8244B17AD4C5600E8CA8C /* AddMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMenuTableViewController.h; path = ViewControllersCommon/AddMenuTableViewController.h; sourceTree = "<group>"; };
+		C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddMenuTableViewController.m; path = ViewControllersCommon/AddMenuTableViewController.m; sourceTree = "<group>"; };
 		C4A899FC1748BC9D0048556A /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C4ACF8531476DD4D00FA5E80 /* iStayHealthy 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 11.xcdatamodel"; sourceTree = "<group>"; };
 		C4ADD9CC13890E54004445C0 /* Alarm-Clock-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Alarm-Clock-32.png"; path = "Images/Alarm-Clock-32.png"; sourceTree = "<group>"; };
@@ -853,6 +869,11 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C47DB23817AD43B80037A6DF /* Assets */,
+				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
+				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
+				C47DB22917AD050C0037A6DF /* DataModelClassesCategories */,
+				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
 				C4DE020312D5E2E7005C0043 /* Cells */,
 				C4B8040F12D3721800A5A38F /* Charts */,
 				C4B8036612D3660600A5A38F /* Controllers */,
@@ -959,8 +980,6 @@
 				C43BE58E15F7CBE400108EF8 /* SideEffects.plist */,
 				C4FCF92316137993008F81A0 /* NewStatusViewController_iPhone5.xib */,
 				C4FCF92516137E11008F81A0 /* StatusViewControllerLandscape_iPhone5.xib */,
-				C40B1BDC1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard */,
-				C40B1BDE1775CEA3002E8EE2 /* MainStoryboard_iPad.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1016,6 +1035,56 @@
 				C402282F15FB99EC00120B1F /* XMLConstants.m */,
 			);
 			name = XML;
+			sourceTree = "<group>";
+		};
+		C47DB22617AD04D60037A6DF /* ViewControllersCommon */ = {
+			isa = PBXGroup;
+			children = (
+				C47DB22717AD04F80037A6DF /* ContainerViewController.h */,
+				C47DB22817AD04F80037A6DF /* ContainerViewController.m */,
+				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
+				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
+				C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */,
+				C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */,
+				C4A8244517AD4B9B00E8CA8C /* ContentContainerViewController.h */,
+				C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */,
+				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
+				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
+				C4A8244B17AD4C5600E8CA8C /* AddMenuTableViewController.h */,
+				C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */,
+			);
+			name = ViewControllersCommon;
+			sourceTree = "<group>";
+		};
+		C47DB22917AD050C0037A6DF /* DataModelClassesCategories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DataModelClassesCategories;
+			sourceTree = "<group>";
+		};
+		C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllersiPhone;
+			sourceTree = "<group>";
+		};
+		C47DB22E17AD05B40037A6DF /* ViewControllersiPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllersiPad;
+			sourceTree = "<group>";
+		};
+		C47DB23817AD43B80037A6DF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */,
+				C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Assets;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		C4B8033512D3658800A5A38F /* Images */ = {
@@ -1174,8 +1243,6 @@
 				C4C4199515F13AAD00882416 /* StatusViewControllerLandscape.m */,
 				C4B9DA7516CE97E600703B67 /* BasicViewController.h */,
 				C4B9DA7616CE97E600703B67 /* BasicViewController.m */,
-				C40B1BDF1775D1AD002E8EE2 /* ContainerViewController.h */,
-				C40B1BE01775D1AD002E8EE2 /* ContainerViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1431,7 +1498,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iStayHealthy" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1507,7 +1574,6 @@
 				C4C0156513425268005E889D /* zerit.png in Resources */,
 				C4C0156613425268005E889D /* ziagen.png in Resources */,
 				C4C0156713425268005E889D /* zidovudine.png in Resources */,
-				C48A513C140BFD89004AE872 /* MainWindow.xib in Resources */,
 				C4B24C13141CC3EC00FACA6B /* cd4PercentOn-small.png in Resources */,
 				C4ADD9D013890E54004445C0 /* Alarm-Clock-32.png in Resources */,
 				C4ADD9D113890E54004445C0 /* Alarm-Clock-55.png in Resources */,
@@ -1582,7 +1648,6 @@
 				C4FCBC61152F210900E3F082 /* iconroundedsmall@2x.png in Resources */,
 				C4FCBC62152F210900E3F082 /* istayhealthypozbanner@2x.png in Resources */,
 				C4FCBC63152F210900E3F082 /* lock@2x.png in Resources */,
-				C40B1BDD1775CE1A002E8EE2 /* MainStoryBoard_iPhone.storyboard in Resources */,
 				C4FCBC64152F210900E3F082 /* neutralflat@2x.png in Resources */,
 				C4FCBC65152F210900E3F082 /* procedure@2x.png in Resources */,
 				C4FCBC66152F210900E3F082 /* redcross-small@2x.png in Resources */,
@@ -1663,6 +1728,9 @@
 				C4FCF92416137993008F81A0 /* NewStatusViewController_iPhone5.xib in Resources */,
 				C4FCF92616137E11008F81A0 /* StatusViewControllerLandscape_iPhone5.xib in Resources */,
 				C4CAC93917574F860010C165 /* EffectsListController.xib in Resources */,
+				C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */,
+				C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */,
+				C48A513C140BFD89004AE872 /* MainWindow.xib in Resources */,
 				C456C459176C5CBE00053621 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1682,7 +1750,6 @@
 				C4DF910B15EE79560042211E /* Constants.m in Sources */,
 				C4C418D515F1363C00882416 /* DataLoader.m in Sources */,
 				C4C418D615F1363C00882416 /* XMLAttribute.m in Sources */,
-				C40B1BE11775D1AD002E8EE2 /* ContainerViewController.m in Sources */,
 				C4C418D715F1363C00882416 /* XMLDocument.m in Sources */,
 				C4C418D815F1363C00882416 /* XMLElement.m in Sources */,
 				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
@@ -1701,6 +1768,7 @@
 				C4C4193C15F1383000882416 /* ResultListCell.m in Sources */,
 				C4C4193E15F1383000882416 /* ResultSegmentedCell.m in Sources */,
 				C4C4194015F1383000882416 /* ResultValueCell.m in Sources */,
+				C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */,
 				C4C4194215F1383000882416 /* SetDateCell.m in Sources */,
 				C4C4194415F1383000882416 /* SettingsCell.m in Sources */,
 				C4C4194615F1383000882416 /* SideEffectListCell.m in Sources */,
@@ -1767,6 +1835,7 @@
 				C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */,
 				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
+				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
@@ -1776,6 +1845,10 @@
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
+				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
+				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
+				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,
+				C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1993,7 +2066,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -2023,7 +2096,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",
@@ -2039,7 +2112,6 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
@@ -2051,9 +2123,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DAPPDEBUG";
-				PROVISIONING_PROFILE = "B01EF5B1-D0C0-4517-98E0-4A7C93A8248D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B01EF5B1-D0C0-4517-98E0-4A7C93A8248D";
+				PROVISIONING_PROFILE = "B31B8444-4463-429A-9FC1-E2333EA96639";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B31B8444-4463-429A-9FC1-E2333EA96639";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2061,7 +2134,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
@@ -2074,8 +2146,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "B01EF5B1-D0C0-4517-98E0-4A7C93A8248D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B01EF5B1-D0C0-4517-98E0-4A7C93A8248D";
+				PROVISIONING_PROFILE = "B31B8444-4463-429A-9FC1-E2333EA96639";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B31B8444-4463-429A-9FC1-E2333EA96639";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -2083,7 +2155,6 @@
 		C4C3AA421316E071000FC699 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
@@ -2106,7 +2177,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt";
@@ -2119,7 +2189,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",

@@ -1,0 +1,126 @@
+//
+//  HamburgerMenuTableViewController.m
+//  iStayHealthy
+//
+//  Created by Peter Schmidt on 03/08/2013.
+//
+//
+
+#import "HamburgerMenuTableViewController.h"
+
+@interface HamburgerMenuTableViewController ()
+@property (nonatomic, strong) NSArray * menus;
+@end
+
+@implementation HamburgerMenuTableViewController
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.menus = @[NSLocalizedString(@"Dashboard", nil),
+                   NSLocalizedString(@"Results", nil),
+                   NSLocalizedString(@"HIV Medication", nil),
+                   NSLocalizedString(@"Missed Meds", nil),
+                   NSLocalizedString(@"Side Effects", nil),
+                   NSLocalizedString(@"Previous Meds", nil),
+                   NSLocalizedString(@"Medication Manager", nil),
+                   NSLocalizedString(@"Alerts", nil),
+                   NSLocalizedString(@"Appointments", nil),
+                   NSLocalizedString(@"Other Medication", nil),
+                   NSLocalizedString(@"Clinics", nil),
+                   NSLocalizedString(@"Procedures", nil),
+                   NSLocalizedString(@"Wellness", nil),
+                   NSLocalizedString(@"Login Password", nil),
+                   NSLocalizedString(@"Backups", nil),
+                   NSLocalizedString(@"Feedback", nil),
+                   NSLocalizedString(@"Info", nil)];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.menus.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"SettingsCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.textLabel.text = [self.menus objectAtIndex:indexPath.row];
+    return cell;
+}
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
+}
+
+@end

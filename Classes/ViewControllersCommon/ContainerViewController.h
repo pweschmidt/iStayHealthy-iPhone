@@ -10,5 +10,5 @@
 
 @interface ContainerViewController : UIViewController
 - (IBAction)transitionToContentController:(id)sender;
-- (IBAction)transitionToMenuController:(id)sender;
+- (IBAction)transitionToLoginController:(id)sender;
 @end
