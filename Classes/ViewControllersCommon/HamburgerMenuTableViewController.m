@@ -7,6 +7,8 @@
 //
 
 #import "HamburgerMenuTableViewController.h"
+#import "ContentContainerViewController.h"
+#import "Constants.h"
 
 @interface HamburgerMenuTableViewController ()
 @property (nonatomic, strong) NSArray * menus;
@@ -26,13 +28,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                             target:self action:@selector(cancel)];
+    
     self.menus = @[NSLocalizedString(@"Dashboard", nil),
                    NSLocalizedString(@"Results", nil),
                    NSLocalizedString(@"HIV Medication", nil),
                    NSLocalizedString(@"Missed Meds", nil),
                    NSLocalizedString(@"Side Effects", nil),
                    NSLocalizedString(@"Previous Meds", nil),
-                   NSLocalizedString(@"Medication Manager", nil),
+                   NSLocalizedString(@"Medication Diary", nil),
                    NSLocalizedString(@"Alerts", nil),
                    NSLocalizedString(@"Appointments", nil),
                    NSLocalizedString(@"Other Medication", nil),
@@ -66,61 +74,36 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"SettingsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     cell.textLabel.text = [self.menus objectAtIndex:indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    switch (indexPath.row)
+    {
+        case 0:
+//            [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:kDashboardController];
+            break;
+        case 1:
+            [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kResultsController];
+        default:
+            break;
+    }
+}
+
+- (void)cancel
+{
+    [(ContentNavigationController *)self.parentViewController rewindToPreviousController];
 }
 
 @end

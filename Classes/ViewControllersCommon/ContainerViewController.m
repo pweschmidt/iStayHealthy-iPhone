@@ -45,11 +45,13 @@
     {
         NSLog(@"calling the login view controller");
         [self.view addSubview:self.loginController.view];
+        self.currentController = self.loginController;
     }
     else
     {
         NSLog(@"Calling the content container view controller");
-        [self.view addSubview:self.contentController.view];        
+        [self.view addSubview:self.contentController.view];
+        self.currentController = self.contentController;
     }
 
 }
@@ -61,15 +63,17 @@
 
 - (IBAction)transitionToContentController:(id)sender
 {
-    [self transitionFromViewController:sender toViewController:self.contentController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished){
+    [self transitionFromViewController:self.currentController toViewController:self.contentController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished){
         [self.contentController didMoveToParentViewController:self];
+        self.currentController = self.contentController;
     }];
 }
 
 - (IBAction)transitionToLoginController:(id)sender
 {
-    [self transitionFromViewController:sender toViewController:self.loginController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished){
+    [self transitionFromViewController:self.currentController toViewController:self.loginController duration:0 options:UIViewAnimationTransitionNone animations:nil completion:^(BOOL finished){
         [self.loginController didMoveToParentViewController:self];
+        self.currentController = self.loginController;
     }];    
 }
 

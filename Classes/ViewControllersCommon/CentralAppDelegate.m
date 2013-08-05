@@ -8,16 +8,18 @@
 
 #import "CentralAppDelegate.h"
 #import "ContainerViewController.h"
+#import "Constants.h"
+
+@interface CentralAppDelegate ()
+@property (nonatomic, strong) ContainerViewController * containerController;
+@end
+
 
 @implementation CentralAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"We got to the new CentralAppDelegate");
-    ContainerViewController *rootController = (ContainerViewController *)self.window.rootViewController;
-    if (nil == rootController)
-    {
-        NSLog(@"the root view controller is DEAD");
-    }
+    self.containerController = (ContainerViewController *)self.window.rootViewController;
     return YES;
 }
 
@@ -29,13 +31,17 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
+    BOOL passwordIsTransferred = [defaults boolForKey:kPasswordTransferred];
+    if (isPasswordEnabled && passwordIsTransferred)
+    {
+        [self.containerController transitionToLoginController:self];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

@@ -12,7 +12,6 @@
 #import "HIVMedicationViewController.h"
 #import "NewAlertViewController.h"
 #import "GeneralMedicalTableViewController.h"
-#import "DashboardViewController.h"
 
 @implementation iStayHealthyTabBarController
 

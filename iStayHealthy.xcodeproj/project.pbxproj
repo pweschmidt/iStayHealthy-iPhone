@@ -76,6 +76,8 @@
 		C491B3541477DE96000A4229 /* procedure.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34E1477DE96000A4229 /* procedure.png */; };
 		C491B3551477DE96000A4229 /* sideeffects.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34F1477DE96000A4229 /* sideeffects.png */; };
 		C4959F6914B883F0000B3F10 /* pozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4959F6B14B883F0000B3F10 /* pozbanner.png */; };
+		C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */; };
+		C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B717B03C3B006BE980 /* ContentNavigationController.m */; };
 		C49B5C5615DFCC4600D3AF3B /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B5C5515DFCC4600D3AF3B /* stop@2x.png */; };
 		C49B5C5815DFCC6300D3AF3B /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B5C5715DFCC6300D3AF3B /* stop.png */; };
 		C49B5C5F15DFE4BA00D3AF3B /* appointments.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B5C5E15DFE4BA00D3AF3B /* appointments.png */; };
@@ -190,7 +192,6 @@
 		C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4195E15F138B900882416 /* ResultsAnalysis.m */; };
 		C4C4196715F138B900882416 /* Trafo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4196015F138B900882416 /* Trafo.m */; };
 		C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198115F13AAD00882416 /* ClinicsTableViewController.m */; };
-		C4C4199715F13AAD00882416 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198315F13AAD00882416 /* DashboardViewController.m */; };
 		C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198515F13AAD00882416 /* GeneralMedicalTableViewController.m */; };
 		C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198715F13AAD00882416 /* HIVMedicationViewController.m */; };
 		C4C4199B15F13AAD00882416 /* NewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4198B15F13AAD00882416 /* NewAlertViewController.m */; };
@@ -475,6 +476,10 @@
 		C4959F6C14B883FA000B3F10 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = de.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6D14B883FE000B3F10 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = es.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6E14B88401000B3F10 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = fr.lproj/pozbanner.png; sourceTree = "<group>"; };
+		C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsListTableViewController.h; path = ViewControllersCommon/ResultsListTableViewController.h; sourceTree = "<group>"; };
+		C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsListTableViewController.m; path = ViewControllersCommon/ResultsListTableViewController.m; sourceTree = "<group>"; };
+		C49A16B617B03C3B006BE980 /* ContentNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentNavigationController.h; path = ViewControllersCommon/ContentNavigationController.h; sourceTree = "<group>"; };
+		C49A16B717B03C3B006BE980 /* ContentNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentNavigationController.m; path = ViewControllersCommon/ContentNavigationController.m; sourceTree = "<group>"; };
 		C49B5C5515DFCC4600D3AF3B /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop@2x.png"; sourceTree = "<group>"; };
 		C49B5C5715DFCC6300D3AF3B /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		C49B5C5E15DFE4BA00D3AF3B /* appointments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appointments.png; sourceTree = "<group>"; };
@@ -646,8 +651,6 @@
 		C4C4196015F138B900882416 /* Trafo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Trafo.m; path = Charts/Trafo.m; sourceTree = "<group>"; };
 		C4C4198015F13AAD00882416 /* ClinicsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClinicsTableViewController.h; path = Controllers/ClinicsTableViewController.h; sourceTree = "<group>"; };
 		C4C4198115F13AAD00882416 /* ClinicsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicsTableViewController.m; path = Controllers/ClinicsTableViewController.m; sourceTree = "<group>"; };
-		C4C4198215F13AAD00882416 /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashboardViewController.h; path = Controllers/DashboardViewController.h; sourceTree = "<group>"; };
-		C4C4198315F13AAD00882416 /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashboardViewController.m; path = Controllers/DashboardViewController.m; sourceTree = "<group>"; };
 		C4C4198415F13AAD00882416 /* GeneralMedicalTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeneralMedicalTableViewController.h; path = Controllers/GeneralMedicalTableViewController.h; sourceTree = "<group>"; };
 		C4C4198515F13AAD00882416 /* GeneralMedicalTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneralMedicalTableViewController.m; path = Controllers/GeneralMedicalTableViewController.m; sourceTree = "<group>"; };
 		C4C4198615F13AAD00882416 /* HIVMedicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HIVMedicationViewController.h; path = Controllers/HIVMedicationViewController.h; sourceTree = "<group>"; };
@@ -1052,6 +1055,10 @@
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C4A8244B17AD4C5600E8CA8C /* AddMenuTableViewController.h */,
 				C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */,
+				C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */,
+				C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */,
+				C49A16B617B03C3B006BE980 /* ContentNavigationController.h */,
+				C49A16B717B03C3B006BE980 /* ContentNavigationController.m */,
 			);
 			name = ViewControllersCommon;
 			sourceTree = "<group>";
@@ -1223,8 +1230,6 @@
 			children = (
 				C4C4198015F13AAD00882416 /* ClinicsTableViewController.h */,
 				C4C4198115F13AAD00882416 /* ClinicsTableViewController.m */,
-				C4C4198215F13AAD00882416 /* DashboardViewController.h */,
-				C4C4198315F13AAD00882416 /* DashboardViewController.m */,
 				C4C4198415F13AAD00882416 /* GeneralMedicalTableViewController.h */,
 				C4C4198515F13AAD00882416 /* GeneralMedicalTableViewController.m */,
 				C4C4198615F13AAD00882416 /* HIVMedicationViewController.h */,
@@ -1777,13 +1782,13 @@
 				C4C4194F15F1383000882416 /* SwitcherCell.m in Sources */,
 				C4C4195015F1383000882416 /* UnitCell.m in Sources */,
 				C4C4196115F138B900882416 /* ChartEvents.m in Sources */,
+				C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */,
 				C4C4196315F138B900882416 /* HealthChartsView.m in Sources */,
 				C4C4196415F138B900882416 /* HealthChartsViewLandscape.m in Sources */,
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
 				C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */,
 				C4C4196715F138B900882416 /* Trafo.m in Sources */,
 				C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */,
-				C4C4199715F13AAD00882416 /* DashboardViewController.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
 				C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */,
 				C4C4199B15F13AAD00882416 /* NewAlertViewController.m in Sources */,
@@ -1822,6 +1827,7 @@
 				C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */,
 				C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */,
 				C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */,
+				C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */,
 				C43BE58515F7C5CE00108EF8 /* Results.m in Sources */,
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
 				C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */,

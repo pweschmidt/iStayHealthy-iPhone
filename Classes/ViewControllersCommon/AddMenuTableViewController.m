@@ -7,6 +7,8 @@
 //
 
 #import "AddMenuTableViewController.h"
+#import "ContentContainerViewController.h"
+#import "ContentNavigationController.h"
 
 @interface AddMenuTableViewController ()
 @property (nonatomic, strong) NSArray * menus;
@@ -18,6 +20,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = NSLocalizedString(@"New Items", nil);
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                             target:self action:@selector(cancel)];
+    
     self.menus = @[NSLocalizedString(@"New Result", nil),
                    NSLocalizedString(@"New HIV Med", nil),
                    NSLocalizedString(@"New Other Med", nil),
@@ -50,7 +57,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"AddEntryCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
     cell.textLabel.text = [self.menus objectAtIndex:indexPath.row];
     
@@ -100,13 +111,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
+
+- (void)cancel
+{
+    [(ContentNavigationController *)self.parentViewController rewindToPreviousController];
+}
+
 
 @end

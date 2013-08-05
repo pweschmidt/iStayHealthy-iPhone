@@ -11,6 +11,15 @@
 #define kNumberOfChartViews 14
 #define APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
 #define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
+
+/**
+ Controllers
+ */
+extern NSString * const kMenuController;
+extern NSString * const kAddController;
+extern NSString * const kResultsController;
+extern NSString * const kDashboardController;
+
 /**
  General
  */

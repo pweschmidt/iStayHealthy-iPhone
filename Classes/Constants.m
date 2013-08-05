@@ -8,6 +8,13 @@
 
 #import "Constants.h"
 
+NSString * const kMenuController = @"MenuController";
+NSString * const kAddController = @"AddController";
+NSString * const kResultsController = @"ResultsController";
+NSString * const kDashboardController = @"DashboardController";
+
+
+
 /**
  General
  */
