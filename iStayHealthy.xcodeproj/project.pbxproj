@@ -102,6 +102,12 @@
 		C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9DA7316CE221500703B67 /* SQLDataTableController.m */; };
 		C4B9DA7716CE97E600703B67 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9DA7616CE97E600703B67 /* BasicViewController.m */; };
 		C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BB8A1916D69166003D5B7A /* KeychainHandler.m */; };
+		C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */; };
+		C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAAC17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m */; };
+		C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAAF17B2CE340038D2A7 /* CoreDataManageriOS6.m */; };
+		C4BFAAB317B2CE500038D2A7 /* CoreDataManageriOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAB217B2CE500038D2A7 /* CoreDataManageriOS7.m */; };
+		C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */; };
+		C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */; };
 		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
 		C4C0154613425268005E889D /* aptivus.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C0152413425268005E889D /* aptivus.png */; };
 		C4C0154713425268005E889D /* atripla.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C0152513425268005E889D /* atripla.png */; };
@@ -525,6 +531,18 @@
 		C4B9DA7616CE97E600703B67 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicViewController.m; path = Controllers/BasicViewController.m; sourceTree = "<group>"; };
 		C4BB8A1816D69166003D5B7A /* KeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainHandler.h; path = Utils/KeychainHandler.h; sourceTree = "<group>"; };
 		C4BB8A1916D69166003D5B7A /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainHandler.m; path = Utils/KeychainHandler.m; sourceTree = "<group>"; };
+		C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = CoreDataManagement/CoreDataManager.h; sourceTree = "<group>"; };
+		C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = CoreDataManagement/CoreDataManager.m; sourceTree = "<group>"; };
+		C4BFAAAB17B2CE010038D2A7 /* CoreDataManagerPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManagerPlaceholder.h; path = CoreDataManagement/CoreDataManagerPlaceholder.h; sourceTree = "<group>"; };
+		C4BFAAAC17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManagerPlaceholder.m; path = CoreDataManagement/CoreDataManagerPlaceholder.m; sourceTree = "<group>"; };
+		C4BFAAAE17B2CE340038D2A7 /* CoreDataManageriOS6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManageriOS6.h; path = CoreDataManagement/CoreDataManageriOS6.h; sourceTree = "<group>"; };
+		C4BFAAAF17B2CE340038D2A7 /* CoreDataManageriOS6.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManageriOS6.m; path = CoreDataManagement/CoreDataManageriOS6.m; sourceTree = "<group>"; };
+		C4BFAAB117B2CE500038D2A7 /* CoreDataManageriOS7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManageriOS7.h; path = CoreDataManagement/CoreDataManageriOS7.h; sourceTree = "<group>"; };
+		C4BFAAB217B2CE500038D2A7 /* CoreDataManageriOS7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManageriOS7.m; path = CoreDataManagement/CoreDataManageriOS7.m; sourceTree = "<group>"; };
+		C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataConstants.h; path = CoreDataManagement/CoreDataConstants.h; sourceTree = "<group>"; };
+		C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataConstants.m; path = CoreDataManagement/CoreDataConstants.m; sourceTree = "<group>"; };
+		C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = CoreDataManagement/CoreDataUtils.h; sourceTree = "<group>"; };
+		C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataUtils.m; path = CoreDataManagement/CoreDataUtils.m; sourceTree = "<group>"; };
 		C4C0151A134251B4005E889D /* HIVMedications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HIVMedications.plist; sourceTree = "<group>"; };
 		C4C0152413425268005E889D /* aptivus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aptivus.png; sourceTree = "<group>"; };
 		C4C0152513425268005E889D /* atripla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atripla.png; sourceTree = "<group>"; };
@@ -872,6 +890,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */,
 				C47DB23817AD43B80037A6DF /* Assets */,
 				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
 				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
@@ -1348,6 +1367,25 @@
 			name = DetailViewControllers;
 			sourceTree = "<group>";
 		};
+		C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */ = {
+			isa = PBXGroup;
+			children = (
+				C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */,
+				C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */,
+				C4BFAAAB17B2CE010038D2A7 /* CoreDataManagerPlaceholder.h */,
+				C4BFAAAC17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m */,
+				C4BFAAAE17B2CE340038D2A7 /* CoreDataManageriOS6.h */,
+				C4BFAAAF17B2CE340038D2A7 /* CoreDataManageriOS6.m */,
+				C4BFAAB117B2CE500038D2A7 /* CoreDataManageriOS7.h */,
+				C4BFAAB217B2CE500038D2A7 /* CoreDataManageriOS7.m */,
+				C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */,
+				C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */,
+				C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */,
+				C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */,
+			);
+			name = CoreDataManagement;
+			sourceTree = "<group>";
+		};
 		C4C41A1F15F1421800882416 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1751,6 +1789,7 @@
 				1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */,
 				28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */,
 				C43423321466BDFC00F06DC6 /* iStayHealthyTabBarController.m in Sources */,
+				C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */,
 				C43423361466BE3700F06DC6 /* iStayHealthyPasswordController.m in Sources */,
 				C4DF910B15EE79560042211E /* Constants.m in Sources */,
 				C4C418D515F1363C00882416 /* DataLoader.m in Sources */,
@@ -1843,15 +1882,20 @@
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
+				C4BFAAB317B2CE500038D2A7 /* CoreDataManageriOS7.m in Sources */,
 				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
 				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
+				C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
+				C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
+				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
+				C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */,
 				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,
 				C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */,
