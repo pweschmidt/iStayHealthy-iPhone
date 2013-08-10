@@ -66,8 +66,8 @@
 
 - (NSDictionary *)rootControllers
 {
-    HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] init];
-    AddMenuTableViewController *addController = [[AddMenuTableViewController alloc] init];
+    HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    AddMenuTableViewController *addController = [[AddMenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
     ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]init];
     
     menuController.view.frame = self.view.frame;

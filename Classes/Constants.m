@@ -8,6 +8,17 @@
 
 #import "Constants.h"
 
+NSString * const kAppNotificationKey = @"iStayHealthyNotification";
+
+
+NSString * const kDropboxConsumerKey = @"sekt4gbt7526j0y";;
+NSString * const kDropboxSecretKey = @"drg5hompcf9vbd2";;
+
+NSString * const kPKBConsumerKey = @"<replace with a valid key>";
+NSString * const kPKBSecretKey = @"<replace with a valid key>";
+
+
+
 NSString * const kMenuController = @"MenuController";
 NSString * const kAddController = @"AddController";
 NSString * const kResultsController = @"ResultsController";

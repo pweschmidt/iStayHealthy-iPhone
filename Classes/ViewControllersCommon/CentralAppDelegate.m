@@ -9,6 +9,8 @@
 #import "CentralAppDelegate.h"
 #import "ContainerViewController.h"
 #import "Constants.h"
+#import "CoreDataManager.h"
+#import <DropboxSDK/DropboxSDK.h>
 
 @interface CentralAppDelegate ()
 @property (nonatomic, strong) ContainerViewController * containerController;
@@ -20,6 +22,37 @@
 {
     NSLog(@"We got to the new CentralAppDelegate");
     self.containerController = (ContainerViewController *)self.window.rootViewController;
+    [[CoreDataManager sharedInstance] setUpCoreDataManager];
+    [[CoreDataManager sharedInstance] setUpStoreWithError:^(NSError *error) {
+        if (error)
+        {
+            NSLog(@"Error occurred with code %d and message %@", [error code], [error localizedDescription]);
+        }
+    }];
+    
+    
+    UILocalNotification *notification = [launchOptions objectForKey:
+                                         UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    if (notification)
+    {
+        NSString *reminderText = [notification.userInfo
+                                  objectForKey:kAppNotificationKey];
+        [self showReminder:reminderText];
+    }
+    
+    NSInteger badges = application.applicationIconBadgeNumber - 1;
+    if (0 > badges)
+    {
+        badges = 0;
+    }
+    application.applicationIconBadgeNumber = badges;
+    
+    NSString* root = kDBRootDropbox;
+	DBSession* session = [[DBSession alloc]initWithAppKey:kDropboxConsumerKey
+                                                appSecret:kDropboxSecretKey
+                                                     root:root];
+	[DBSession setSharedSession:session];
     return YES;
 }
 
@@ -31,6 +64,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContext:&error];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -51,6 +86,63 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContext:&error];
 }
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    if ([[DBSession sharedSession] handleOpenURL:url])
+    {
+        if ([[DBSession sharedSession] isLinked])
+        {
+            //any app calls?
+        }
+        return YES;
+    }
+    else if ([url isFileURL])
+    {
+        return [self handleFileImport:url];
+    }
+    return YES;
+}
+
+
+#pragma mark - private
+- (BOOL)handleFileImport:(NSURL *)url
+{
+    if (nil == url || ![url isFileURL])
+    {
+        return NO;
+    }
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] addFileToImportList:url error:&error];
+    if (nil != error)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Import Error",nil)
+                                  message:NSLocalizedString(@"Error importing file", nil)
+                                  delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                  otherButtonTitles:nil];
+        [alertView show];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)showReminder:(NSString *)text
+{
+	UIAlertView *alertView = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"iStayHealthy Alert",nil)
+                              message:text
+                              delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                              otherButtonTitles:nil];
+	[alertView show];
+}
+
 @end

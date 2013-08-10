@@ -42,4 +42,31 @@
             amendedCloudURL,
             NSPersistentStoreUbiquitousContentURLKey, nil];}
 
+
++ (void)archiveUbiquityToken:(id)token
+{
+    if (nil == token)
+    {
+        [CoreDataUtils dropUbiquityToken];
+        return;
+    }
+    NSData *currentTokenData = [NSKeyedArchiver archivedDataWithRootObject:token];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:currentTokenData forKey:kUbiquityTokenKey];
+    [defaults synchronize];
+    
+}
+
++ (id)ubiquityTokenFromArchive
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *formerTokenData = [defaults objectForKey:kUbiquityTokenKey];
+    return  [NSKeyedUnarchiver unarchiveObjectWithData:formerTokenData];
+}
+
++ (void)dropUbiquityToken
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUbiquityTokenKey];
+}
+
 @end

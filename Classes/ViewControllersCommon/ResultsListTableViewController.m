@@ -10,24 +10,18 @@
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
 #import "Constants.h"
-@interface ResultsListTableViewController ()
+#import "CoreDataManager.h"
 
+@interface ResultsListTableViewController ()
+@property (nonatomic, strong) NSArray * results;
 @end
 
 @implementation ResultsListTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.results = [NSArray array];//init with empty array
     self.navigationItem.title = NSLocalizedString(@"Results", nil);
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMenu)];
@@ -45,10 +39,10 @@
 {
     return 1;
 }
-#warning replace with actual data
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.results.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,5 +74,53 @@
 {
     [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kAddController];
 }
+
+#pragma mark - override the notification handlers
+- (void)reloadSQLData:(NSNotification *)notification
+{
+    NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
+    [[CoreDataManager sharedInstance] fetchDataForEntityName:@"Results" predicate:nil sortTerm:@"ResultsDate" ascending:NO completion:^(NSArray *array, NSError *error) {
+        if (nil == array)
+        {
+            UIAlertView *errorAlert = [[UIAlertView alloc]
+                                       initWithTitle:@"Error"
+                                       message:@"Error loading data"
+                                       delegate:nil
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:nil];
+            [errorAlert show];
+            
+        }
+        else
+        {
+            self.results = nil;
+            self.results = [NSArray arrayWithArray:array];
+            NSLog(@"we have %d results returned", self.results.count);
+            [self.tableView reloadData];
+        }
+    }];
+}
+- (void)startAnimation:(NSNotification *)notification
+{
+    NSLog(@"ResultsListTableViewController:startAnimation with name %@", notification.name);
+}
+- (void)stopAnimation:(NSNotification *)notification
+{
+    NSLog(@"ResultsListTableViewController:stopAnimation with name %@", notification.name);
+}
+- (void)handleError:(NSNotification *)notification
+{
+    NSLog(@"ResultsListTableViewController:handleError with name %@", notification.name);
+}
+
+- (void)handleStoreChanged:(NSNotification *)notification
+{
+    NSLog(@"ResultsListTableViewController:handleStoreChanged with name %@", notification.name);
+    
+}
+
+
+#pragma mark - private methods
+
 
 @end

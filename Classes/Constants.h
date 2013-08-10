@@ -13,6 +13,29 @@
 #define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 
 /**
+ Block Definitions
+ */
+typedef void (^iStayHealthyErrorBlock)(NSError * error);
+typedef void (^iStayHealthyArrayCompletionBlock)(NSArray *array, NSError *error);
+
+/**
+ General
+ */
+extern NSString * const kAppNotificationKey;
+
+/**
+ Dropbox app definitions
+ */
+extern NSString * const kDropboxConsumerKey;
+extern NSString * const kDropboxSecretKey;
+
+/**
+ Patient Knows Best definitions
+ */
+extern NSString * const kPKBConsumerKey;
+extern NSString * const kPKBSecretKey;
+
+/**
  Controllers
  */
 extern NSString * const kMenuController;

@@ -35,4 +35,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)login:(id)sender
+{
+    
+}
+
+#pragma mark - override the notification handlers
+- (void)reloadSQLData:(NSNotification *)notification
+{
+    
+}
+- (void)startAnimation:(NSNotification *)notification
+{
+    
+}
+- (void)stopAnimation:(NSNotification *)notification
+{
+    
+}
+- (void)handleError:(NSNotification *)notification
+{
+    
+}
+
+- (void)handleStoreChanged:(NSNotification *)notification
+{
+    
+}
 @end
