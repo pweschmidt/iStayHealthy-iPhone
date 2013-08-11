@@ -23,6 +23,7 @@ NSString * const kMenuController = @"MenuController";
 NSString * const kAddController = @"AddController";
 NSString * const kResultsController = @"ResultsController";
 NSString * const kDashboardController = @"DashboardController";
+NSString * const kDropboxController = @"DropboxController";
 
 
 
@@ -37,29 +38,128 @@ NSString * const kValueTypeKey = @"type";
 NSString * const kHasResultsKey = @"hasResults";
 NSString * const kResultsDictionaryKey = @"resultsDictionary";
 
+/**
+ XML
+ */
+NSString * const kXMLDBVersionString = @"14";
+NSString * const kXMLPreamble = @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+NSString * const kXMLElementRoot = @"iStayHealthyRecord";
 
 /**
  Results
  */
+NSString * const kResults = @"Results";
+NSString * const kMedications = @"Medications";
+NSString * const kMissedMedications = @"MissedMedications";
+NSString * const kOtherMedications = @"OtherMedications";
+NSString * const kClinicalContacts = @"ClinicalContacts";
+NSString * const kIllnessAndProcedures = @"IllnessesAndProcedures";
+NSString * const kHIVSideEffects = @"HIVSideEffects";
+NSString * const kPreviousMedications = @"PreviousMedications";
+NSString * const kWellnesses = @"Wellnesses";
+
+NSString * const kResult = @"Result";
+NSString * const kMedication = @"Medication";
+NSString * const kMissedMedication = @"MissedMedication";
+NSString * const kOtherMedication = @"OtherMedication";
+NSString * const kContacts = @"Contacts";
+NSString * const kProcedures = @"Procedures";
+NSString * const kSideEffects = @"SideEffects";
+NSString * const kPreviousMedication = @"PreviousMedication";
+NSString * const kWellness = @"Wellness";
+
+NSString * const kFromDevice = @"fromDevice";
+NSString * const kFromDate = @"fromDate";
+NSString * const kDBVersion = @"dbVersion";
+NSString * const kMedicationForm = @"MedicationForm";
+NSString * const kName = @"Name";
+NSString * const kNameLowerCase = @"name";
+NSString * const kImage = @"Image";
+NSString * const kStartDate = @"StartDate";
+NSString * const kEndDate = @"EndDate";
+NSString * const kStartDateLowerCase = @"startDate";
+NSString * const kEndDateLowerCase = @"endDate";
+
+NSString * const kDose = @"Dose";
+NSString * const kUnit = @"Unit";
+NSString * const kMissedDate = @"MissedDate";
+NSString * const kDrug = @"Drug";
+NSString * const kDrugLowerCase = @"drug";
 NSString * const kCD4 = @"CD4";
-NSString * const kCD4Percent = @"CD4Percent";
-NSString * const kViralLoad = @"ViralLoad";
-NSString * const kSystole = @"Systole";
-NSString * const kHDL = @"HDL";
-NSString * const kLDL = @"LDL";
-NSString * const kWeight = @"Weight";
-NSString * const kOxygenLevel = @"OxygenLevel";
-NSString * const kDiastole = @"Diastole";
-NSString * const kHeartRate = @"HeartRate";
 NSString * const kResultsDate = @"ResultsDate";
-NSString * const kTotalCholesterol = @"TotalCholesterol";
-NSString * const kTriglyceride = @"Triglyceride";
-NSString * const kGlucose = @"Glucose";
+NSString * const kViralLoad = @"ViralLoad";
+NSString * const kCD4Percent = @"CD4Percent";
 NSString * const kHepCViralLoad = @"HepCViralLoad";
-NSString * const kWhiteBloodCellCount = @"WhiteBloodCellCount";
-NSString * const kPlateletCount = @"PlateletCount";
-NSString * const kRedBloodCellCount = @"RedBloodCellCount";
+NSString * const kGlucose = @"Glucose";
+NSString * const kTotalCholesterol = @"TotalCholesterol";
+NSString * const kLDL = @"LDL";
+NSString * const kHDL = @"HDL";
+NSString * const kTriglyceride = @"Triglyceride";
+NSString * const kHeartRate = @"HeartRate";
+NSString * const kSystole = @"Systole";
+NSString * const kDiastole = @"Diastole";
+NSString * const kOxygenLevel = @"OxygenLevel";
+NSString * const kWeight = @"Weight";
 NSString * const kHemoglobulin = @"Hemoglobulin";
+NSString * const kPlatelet = @"PlateletCount";
+NSString * const kWhiteBloodCells = @"WhiteBloodCellCount";
+NSString * const kRedBloodCells = @"redBloodCellCount";
+NSString * const kCholesterolRatio = @"cholesterolRatio";
+NSString * const kCardiacRiskFactor = @"cardiacRiskFactor";
+NSString * const kLiverAlanineTransaminase = @"liverAlanineTransaminase";
+NSString * const kLiverAspartateTransaminase = @"liverAspartateTransaminase";
+NSString * const kLiverAlkalinePhosphatase = @"liverAlkalinePhosphatase";
+NSString * const kLiverAlbumin = @"liverAlbumin";
+
+NSString * const kLiverAlanineTotalBilirubin = @"liverAlanineTotalBilirubin";
+NSString * const kLiverAlanineDirectBilirubin = @"liverAlanineDirectBilirubin";
+NSString * const kLiverGammaGlutamylTranspeptidase = @"liverGammaGlutamylTranspeptidase";
+NSString * const kUIDLowerCase = @"uID";
+NSString * const kClinicName = @"ClinicName";
+NSString * const kClinicID = @"ClinicID";
+NSString * const kClinicStreet = @"ClinicStreet";
+NSString * const kClinicPostcode = @"ClinicPostcode";
+
+NSString * const kClinicCity = @"ClinicCity";
+NSString * const kClinicContactNumber = @"ClinicContactNumber";
+NSString * const kResultsContactNumber = @"ResultsContactNumber";
+NSString * const kClinicEmailAddress = @"ClinicEmailAddress";
+NSString * const kClinicWebSite = @"ClinicWebSite";
+
+NSString * const kEmergencyContactNumber = @"EmergencyContactNumber";
+NSString * const kAppointmentContactNumber = @"AppointmentContactNumber";
+
+NSString * const kInsuranceID = @"InsuranceID";
+NSString * const kInsuranceName = @"InsuranceName";
+NSString * const kInsuranceWebSite = @"InsuranceWebSite";
+NSString * const kClinicCountry = @"ClinicCountry";
+NSString * const kConsultantName = @"ConsultantName";
+NSString * const kInsuranceAuthorisationCode = @"InsuranceAuthorisationCode";
+NSString * const kInsuranceContactNumber = @"InsuranceContactNumber";
+NSString * const kEmergencyContactNumber2 = @"InsuranceContactNumber2";
+NSString * const kClinicNurseName = @"ClinicNurseName";
+NSString * const kContactName = @"ContactName";
+
+
+NSString * const kSideEffect = @"SideEffect";
+NSString * const kSideEffectDate = @"SideEffectDate";
+NSString * const kIllness = @"Illness";
+
+NSString * const kDate = @"Date";
+NSString * const kYearOfBirth = @"yearOfBirth";
+NSString * const kIsDiabetic = @"isDiabetic";
+NSString * const kIsSmoker = @"isSmoker";
+NSString * const kGender = @"gender";
+
+NSString * const kSleepBarometer = @"sleepBarometer";
+NSString * const kMoodBarometer = @"moodBarometer";
+NSString * const kWellnessBarometer = @"wellnessBarometer";
+NSString * const kMissedReason = @"missedReason";
+NSString * const kSeriousness = @"seriousness";
+NSString * const kReasonEnded = @"reasonEnded";
+NSString * const kIsART = @"isART";
+NSString * const kNotes = @"Notes";
+NSString * const kCausedBy = @"CausedBy";
 
 NSString * const kMainDataSource    = @"iStayHealthy.sqlite";
 NSString * const kBackupDataSource  = @"iStayHealthyBackup.sqlite";

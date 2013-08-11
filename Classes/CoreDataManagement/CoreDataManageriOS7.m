@@ -191,21 +191,19 @@
     }
     
     [context performBlock:^{
-        [privateContext performBlockAndWait:^{
-            NSError * error = nil;
-            NSArray * results = nil;
-            results = [context executeFetchRequest:request error:&error];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (nil == results)
-                {
-                    completion(nil, error);
-                }
-                else
-                {
-                    completion(results, nil);
-                }
-            });
-        }];
+        NSError * error = nil;
+        NSArray * fetchedObjects = nil;
+        fetchedObjects = [context executeFetchRequest:request error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (nil == fetchedObjects)
+            {
+                completion(nil, error);
+            }
+            else
+            {
+                completion(fetchedObjects, nil);
+            }
+        });
     }];
 }
 

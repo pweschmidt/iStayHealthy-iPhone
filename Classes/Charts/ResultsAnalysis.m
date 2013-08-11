@@ -99,13 +99,13 @@
         return result.Hemoglobulin;
     else if ([value isEqualToString:kHepCViralLoad])
         return result.HepCViralLoad;
-    else if ([value isEqualToString:kPlateletCount])
+    else if ([value isEqualToString:kPlatelet])
         return result.PlateletCount;
-    else if ([value isEqualToString:kWhiteBloodCellCount])
+    else if ([value isEqualToString:kWhiteBloodCells])
         return result.WhiteBloodCellCount;
 
     //to be changed once the RedBloodCellCount is in the DB
-    else if ([value isEqualToString:kRedBloodCellCount])
+    else if ([value isEqualToString:kRedBloodCells])
         return nil;
     
     else

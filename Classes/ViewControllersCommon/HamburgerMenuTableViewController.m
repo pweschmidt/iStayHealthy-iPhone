@@ -8,6 +8,7 @@
 
 #import "HamburgerMenuTableViewController.h"
 #import "ContentContainerViewController.h"
+#import <DropboxSDK/DropboxSDK.h>
 #import "Constants.h"
 
 @interface HamburgerMenuTableViewController ()
@@ -80,21 +81,108 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row)
+    NSString *controllerName = [self controllerNameForRowIndexPath:indexPath];
+    if (nil == controllerName)
     {
-        case 0:
-//            [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:kDashboardController];
-            break;
-        case 1:
-            [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kResultsController];
-        default:
-            break;
+        return;
+    }
+    if ([controllerName isEqualToString:kDropboxController])
+    {
+        if (![[DBSession sharedSession] isLinked])
+        {
+            [[DBSession sharedSession] linkFromController:self];
+        }
+        else
+        {
+            [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:controllerName];            
+        }
+    }
+    else
+    {
+        [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:controllerName];
     }
 }
 
 - (void)cancel
 {
     [(ContentNavigationController *)self.parentViewController rewindToPreviousController];
+}
+
+- (NSString *)controllerNameForRowIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row >= self.menus.count)
+    {
+        return nil;
+    }
+    NSString *menuName = [self.menus objectAtIndex:indexPath.row];
+    if ([menuName isEqualToString:NSLocalizedString(@"Dashboard", nil)])
+    {
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Results", nil)])
+    {
+        return kResultsController;
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"HIV Medication", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Missed Meds", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Side Effects", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Previous Meds", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Medication Diary", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Alerts", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Appointments", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Other Medication", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Clinics", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Procedures", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Wellness", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Login Password", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Backups", nil)])
+    {
+        return kDropboxController;
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Info", nil)])
+    {
+        
+    }
+    return nil;
 }
 
 @end

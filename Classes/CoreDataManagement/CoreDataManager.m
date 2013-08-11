@@ -81,6 +81,11 @@
 
 
 #pragma mark - implemented methods
+- (id)managedObjectForEntityName:(NSString *)entityName
+{
+    return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:self.defaultContext];
+}
+
 
 - (void)addFileToImportList:(NSURL *)sourceURL error:(NSError **)error
 {

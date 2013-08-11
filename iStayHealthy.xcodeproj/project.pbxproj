@@ -14,9 +14,7 @@
 		28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
-		C402283015FB99EC00120B1F /* XMLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C402282F15FB99EC00120B1F /* XMLConstants.m */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
-		C40B1BE61776F6D3002E8EE2 /* DatabaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
 		C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB56A1494F119005E9A0F /* SwitcherCell.xib */; };
@@ -105,6 +103,20 @@
 		C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9DA7316CE221500703B67 /* SQLDataTableController.m */; };
 		C4B9DA7716CE97E600703B67 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9DA7616CE97E600703B67 /* BasicViewController.m */; };
 		C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BB8A1916D69166003D5B7A /* KeychainHandler.m */; };
+		C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF08F17B7A35A00F1E0F7 /* Results+Handling.m */; };
+		C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF09217B7A81500F1E0F7 /* NSManagedObject+Handling.m */; };
+		C4BCF09617B7A87500F1E0F7 /* NSNumber+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF09517B7A87500F1E0F7 /* NSNumber+Handling.m */; };
+		C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF09817B7A94000F1E0F7 /* Wellness+Handling.m */; };
+		C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF09B17B7A95900F1E0F7 /* Procedures+Handling.m */; };
+		C4BCF09F17B7A9C000F1E0F7 /* PreviousMedication+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF09E17B7A9C000F1E0F7 /* PreviousMedication+Handling.m */; };
+		C4BCF0A217B7A9DA00F1E0F7 /* SideEffects+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0A117B7A9DA00F1E0F7 /* SideEffects+Handling.m */; };
+		C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0A417B7A9F300F1E0F7 /* MissedMedication+Handling.m */; };
+		C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0A717B7AA1400F1E0F7 /* OtherMedication+Handling.m */; };
+		C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0AA17B7AA2D00F1E0F7 /* Medication+Handling.m */; };
+		C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0AD17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m */; };
+		C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */; };
+		C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */; };
+		C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */; };
 		C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */; };
 		C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAAC17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m */; };
 		C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAAF17B2CE340038D2A7 /* CoreDataManageriOS6.m */; };
@@ -356,11 +368,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		C402282E15FB99EC00120B1F /* XMLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLConstants.h; path = XML/XMLConstants.h; sourceTree = "<group>"; };
-		C402282F15FB99EC00120B1F /* XMLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLConstants.m; path = XML/XMLConstants.m; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C40B1BE41776F6D3002E8EE2 /* DatabaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseController.h; path = DataModelClasses/DatabaseController.h; sourceTree = "<group>"; };
-		C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseController.m; path = DataModelClasses/DatabaseController.m; sourceTree = "<group>"; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
 		C4276D6D12DB7AED001DDCD2 /* cross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small.png"; sourceTree = "<group>"; };
 		C4279EFC146AEDCA00D93B34 /* clinic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clinic.png; sourceTree = "<group>"; };
@@ -541,6 +549,34 @@
 		C4B9DA7616CE97E600703B67 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicViewController.m; path = Controllers/BasicViewController.m; sourceTree = "<group>"; };
 		C4BB8A1816D69166003D5B7A /* KeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainHandler.h; path = Utils/KeychainHandler.h; sourceTree = "<group>"; };
 		C4BB8A1916D69166003D5B7A /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainHandler.m; path = Utils/KeychainHandler.m; sourceTree = "<group>"; };
+		C4BCF08E17B7A35A00F1E0F7 /* Results+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Results+Handling.h"; path = "Categories/Results+Handling.h"; sourceTree = "<group>"; };
+		C4BCF08F17B7A35A00F1E0F7 /* Results+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Results+Handling.m"; path = "Categories/Results+Handling.m"; sourceTree = "<group>"; };
+		C4BCF09117B7A81500F1E0F7 /* NSManagedObject+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+Handling.h"; path = "Categories/NSManagedObject+Handling.h"; sourceTree = "<group>"; };
+		C4BCF09217B7A81500F1E0F7 /* NSManagedObject+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+Handling.m"; path = "Categories/NSManagedObject+Handling.m"; sourceTree = "<group>"; };
+		C4BCF09417B7A87500F1E0F7 /* NSNumber+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+Handling.h"; path = "Categories/NSNumber+Handling.h"; sourceTree = "<group>"; };
+		C4BCF09517B7A87500F1E0F7 /* NSNumber+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+Handling.m"; path = "Categories/NSNumber+Handling.m"; sourceTree = "<group>"; };
+		C4BCF09717B7A94000F1E0F7 /* Wellness+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Wellness+Handling.h"; path = "Categories/Wellness+Handling.h"; sourceTree = "<group>"; };
+		C4BCF09817B7A94000F1E0F7 /* Wellness+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Wellness+Handling.m"; path = "Categories/Wellness+Handling.m"; sourceTree = "<group>"; };
+		C4BCF09A17B7A95800F1E0F7 /* Procedures+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Procedures+Handling.h"; path = "Categories/Procedures+Handling.h"; sourceTree = "<group>"; };
+		C4BCF09B17B7A95900F1E0F7 /* Procedures+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Procedures+Handling.m"; path = "Categories/Procedures+Handling.m"; sourceTree = "<group>"; };
+		C4BCF09D17B7A9C000F1E0F7 /* PreviousMedication+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PreviousMedication+Handling.h"; path = "Categories/PreviousMedication+Handling.h"; sourceTree = "<group>"; };
+		C4BCF09E17B7A9C000F1E0F7 /* PreviousMedication+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PreviousMedication+Handling.m"; path = "Categories/PreviousMedication+Handling.m"; sourceTree = "<group>"; };
+		C4BCF0A017B7A9DA00F1E0F7 /* SideEffects+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SideEffects+Handling.h"; path = "Categories/SideEffects+Handling.h"; sourceTree = "<group>"; };
+		C4BCF0A117B7A9DA00F1E0F7 /* SideEffects+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SideEffects+Handling.m"; path = "Categories/SideEffects+Handling.m"; sourceTree = "<group>"; };
+		C4BCF0A317B7A9F300F1E0F7 /* MissedMedication+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MissedMedication+Handling.h"; path = "Categories/MissedMedication+Handling.h"; sourceTree = "<group>"; };
+		C4BCF0A417B7A9F300F1E0F7 /* MissedMedication+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MissedMedication+Handling.m"; path = "Categories/MissedMedication+Handling.m"; sourceTree = "<group>"; };
+		C4BCF0A617B7AA1400F1E0F7 /* OtherMedication+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OtherMedication+Handling.h"; path = "Categories/OtherMedication+Handling.h"; sourceTree = "<group>"; };
+		C4BCF0A717B7AA1400F1E0F7 /* OtherMedication+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "OtherMedication+Handling.m"; path = "Categories/OtherMedication+Handling.m"; sourceTree = "<group>"; };
+		C4BCF0A917B7AA2D00F1E0F7 /* Medication+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Medication+Handling.h"; path = "Categories/Medication+Handling.h"; sourceTree = "<group>"; };
+		C4BCF0AA17B7AA2D00F1E0F7 /* Medication+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Medication+Handling.m"; path = "Categories/Medication+Handling.m"; sourceTree = "<group>"; };
+		C4BCF0AC17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iStayHealthyRecord+Handling.h"; path = "Categories/iStayHealthyRecord+Handling.h"; sourceTree = "<group>"; };
+		C4BCF0AD17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "iStayHealthyRecord+Handling.m"; path = "Categories/iStayHealthyRecord+Handling.m"; sourceTree = "<group>"; };
+		C4BCF0AF17B7AA6500F1E0F7 /* Contacts+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contacts+Handling.h"; path = "Categories/Contacts+Handling.h"; sourceTree = "<group>"; };
+		C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contacts+Handling.m"; path = "Categories/Contacts+Handling.m"; sourceTree = "<group>"; };
+		C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropboxViewController.h; path = ViewControllersCommon/DropboxViewController.h; sourceTree = "<group>"; };
+		C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropboxViewController.m; path = ViewControllersCommon/DropboxViewController.m; sourceTree = "<group>"; };
+		C4BCF0B517B7C4D600F1E0F7 /* CoreXMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreXMLWriter.h; path = CoreXML/CoreXMLWriter.h; sourceTree = "<group>"; };
+		C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLWriter.m; path = CoreXML/CoreXMLWriter.m; sourceTree = "<group>"; };
 		C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = CoreDataManagement/CoreDataManager.h; sourceTree = "<group>"; };
 		C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = CoreDataManagement/CoreDataManager.m; sourceTree = "<group>"; };
 		C4BFAAAB17B2CE010038D2A7 /* CoreDataManagerPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManagerPlaceholder.h; path = CoreDataManagement/CoreDataManagerPlaceholder.h; sourceTree = "<group>"; };
@@ -900,18 +936,18 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C45F838C17B6A5F40042E63A /* CoreXML */,
-				C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */,
 				C47DB23817AD43B80037A6DF /* Assets */,
-				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
-				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
-				C47DB22917AD050C0037A6DF /* DataModelClassesCategories */,
-				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
+				C4BCF08D17B7A32100F1E0F7 /* Categories */,
 				C4DE020312D5E2E7005C0043 /* Cells */,
 				C4B8040F12D3721800A5A38F /* Charts */,
 				C4B8036612D3660600A5A38F /* Controllers */,
+				C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */,
+				C45F838C17B6A5F40042E63A /* CoreXML */,
 				C4B803C112D36E6700A5A38F /* DataModelClasses */,
 				C4B8041212D3723100A5A38F /* DetailViewControllers */,
+				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
+				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
+				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
 				C4C41A1F15F1421800882416 /* Utils */,
 				C465975913EE96D500006F72 /* XML */,
 				1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */,
@@ -1056,6 +1092,8 @@
 			children = (
 				C45F838D17B6A61F0042E63A /* CoreXMLReader.h */,
 				C45F838E17B6A61F0042E63A /* CoreXMLReader.m */,
+				C4BCF0B517B7C4D600F1E0F7 /* CoreXMLWriter.h */,
+				C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */,
 			);
 			name = CoreXML;
 			sourceTree = "<group>";
@@ -1073,8 +1111,6 @@
 				C4C418D215F1363C00882416 /* XMLElement.m */,
 				C4C418D315F1363C00882416 /* XMLLoader.h */,
 				C4C418D415F1363C00882416 /* XMLLoader.m */,
-				C402282E15FB99EC00120B1F /* XMLConstants.h */,
-				C402282F15FB99EC00120B1F /* XMLConstants.m */,
 			);
 			name = XML;
 			sourceTree = "<group>";
@@ -1097,6 +1133,8 @@
 				C49A16B717B03C3B006BE980 /* ContentNavigationController.m */,
 				C47DB22717AD04F80037A6DF /* ContainerViewController.h */,
 				C47DB22817AD04F80037A6DF /* ContainerViewController.m */,
+				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
+				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
@@ -1105,13 +1143,6 @@
 				C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */,
 			);
 			name = ViewControllersCommon;
-			sourceTree = "<group>";
-		};
-		C47DB22917AD050C0037A6DF /* DataModelClassesCategories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = DataModelClassesCategories;
 			sourceTree = "<group>";
 		};
 		C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */ = {
@@ -1299,8 +1330,6 @@
 		C4B803C112D36E6700A5A38F /* DataModelClasses */ = {
 			isa = PBXGroup;
 			children = (
-				C40B1BE41776F6D3002E8EE2 /* DatabaseController.h */,
-				C40B1BE51776F6D3002E8EE2 /* DatabaseController.m */,
 				C43BE58915F7C5CE00108EF8 /* Wellness.h */,
 				C43BE58A15F7C5CE00108EF8 /* Wellness.m */,
 				C43BE58615F7C5CE00108EF8 /* PreviousMedication.h */,
@@ -1390,6 +1419,37 @@
 				C4CAC93617574F860010C165 /* EffectsListController.m */,
 			);
 			name = DetailViewControllers;
+			sourceTree = "<group>";
+		};
+		C4BCF08D17B7A32100F1E0F7 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C4BCF0AF17B7AA6500F1E0F7 /* Contacts+Handling.h */,
+				C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */,
+				C4BCF0AC17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.h */,
+				C4BCF0AD17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m */,
+				C4BCF0A917B7AA2D00F1E0F7 /* Medication+Handling.h */,
+				C4BCF0AA17B7AA2D00F1E0F7 /* Medication+Handling.m */,
+				C4BCF0A317B7A9F300F1E0F7 /* MissedMedication+Handling.h */,
+				C4BCF0A417B7A9F300F1E0F7 /* MissedMedication+Handling.m */,
+				C4BCF09117B7A81500F1E0F7 /* NSManagedObject+Handling.h */,
+				C4BCF09217B7A81500F1E0F7 /* NSManagedObject+Handling.m */,
+				C4BCF09417B7A87500F1E0F7 /* NSNumber+Handling.h */,
+				C4BCF09517B7A87500F1E0F7 /* NSNumber+Handling.m */,
+				C4BCF0A617B7AA1400F1E0F7 /* OtherMedication+Handling.h */,
+				C4BCF0A717B7AA1400F1E0F7 /* OtherMedication+Handling.m */,
+				C4BCF09D17B7A9C000F1E0F7 /* PreviousMedication+Handling.h */,
+				C4BCF09E17B7A9C000F1E0F7 /* PreviousMedication+Handling.m */,
+				C4BCF09A17B7A95800F1E0F7 /* Procedures+Handling.h */,
+				C4BCF09B17B7A95900F1E0F7 /* Procedures+Handling.m */,
+				C4BCF08E17B7A35A00F1E0F7 /* Results+Handling.h */,
+				C4BCF08F17B7A35A00F1E0F7 /* Results+Handling.m */,
+				C4BCF0A017B7A9DA00F1E0F7 /* SideEffects+Handling.h */,
+				C4BCF0A117B7A9DA00F1E0F7 /* SideEffects+Handling.m */,
+				C4BCF09717B7A94000F1E0F7 /* Wellness+Handling.h */,
+				C4BCF09817B7A94000F1E0F7 /* Wellness+Handling.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */ = {
@@ -1815,6 +1875,7 @@
 				28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */,
 				C43423321466BDFC00F06DC6 /* iStayHealthyTabBarController.m in Sources */,
 				C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */,
+				C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */,
 				C43423361466BE3700F06DC6 /* iStayHealthyPasswordController.m in Sources */,
 				C4DF910B15EE79560042211E /* Constants.m in Sources */,
 				C4C418D515F1363C00882416 /* DataLoader.m in Sources */,
@@ -1822,11 +1883,14 @@
 				C4C418D715F1363C00882416 /* XMLDocument.m in Sources */,
 				C4C418D815F1363C00882416 /* XMLElement.m in Sources */,
 				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
+				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,
 				C4C4192315F1383000882416 /* AlertListCell.m in Sources */,
 				C4C4192515F1383000882416 /* ClinicAddressCell.m in Sources */,
+				C4BCF0A217B7A9DA00F1E0F7 /* SideEffects+Handling.m in Sources */,
 				C4C4192715F1383000882416 /* ClinicCell.m in Sources */,
 				C4C4192915F1383000882416 /* DosageCell.m in Sources */,
 				C4C4192C15F1383000882416 /* HIVMedListCell.m in Sources */,
+				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				C4C4192E15F1383000882416 /* HIVMedSupportCell.m in Sources */,
 				C4C4193015F1383000882416 /* MedSelectionCell.m in Sources */,
 				C4C4193215F1383000882416 /* MoreResultsCell.m in Sources */,
@@ -1843,6 +1907,7 @@
 				C4C4194615F1383000882416 /* SideEffectListCell.m in Sources */,
 				C4C4194815F1383000882416 /* SoundNameCell.m in Sources */,
 				C4C4194C15F1383000882416 /* SummaryCell.m in Sources */,
+				C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */,
 				C4C4194F15F1383000882416 /* SwitcherCell.m in Sources */,
 				C4C4195015F1383000882416 /* UnitCell.m in Sources */,
 				C4C4196115F138B900882416 /* ChartEvents.m in Sources */,
@@ -1852,6 +1917,7 @@
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
 				C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */,
 				C4C4196715F138B900882416 /* Trafo.m in Sources */,
+				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
 				C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
 				C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */,
@@ -1866,7 +1932,9 @@
 				C4C419D015F13C6F00882416 /* MedicationChangeTableViewController.m in Sources */,
 				C4C419D115F13C6F00882416 /* MedicationDetailTableViewController.m in Sources */,
 				C4C419D215F13C6F00882416 /* MissedMedsDetailTableViewController.m in Sources */,
+				C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */,
 				C4C419D315F13C6F00882416 /* MissedMedViewController.m in Sources */,
+				C4BCF09617B7A87500F1E0F7 /* NSNumber+Handling.m in Sources */,
 				C4C419D415F13C6F00882416 /* NewAlertDetailViewController.m in Sources */,
 				C4C419D515F13C6F00882416 /* NewAlertEditDetailViewController.m in Sources */,
 				C4C419DB15F13C6F00882416 /* ResultDetailViewController.m in Sources */,
@@ -1875,17 +1943,19 @@
 				C4C419DF15F13C6F00882416 /* SideEffectsViewController.m in Sources */,
 				C4C419E015F13C6F00882416 /* ToolsTableViewController.m in Sources */,
 				C4C419E215F13C6F00882416 /* WebViewController.m in Sources */,
+				C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */,
 				C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */,
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
 				C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */,
 				C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */,
 				C4C41A2E15F1432E00882416 /* Utilities.m in Sources */,
 				C491AE5E15F15B8500EB1CF8 /* OtherMedsDetailViewController.m in Sources */,
+				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
 				C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */,
 				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
-				C40B1BE61776F6D3002E8EE2 /* DatabaseController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
+				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
 				C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */,
@@ -1898,9 +1968,9 @@
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
 				C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */,
 				C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */,
-				C402283015FB99EC00120B1F /* XMLConstants.m in Sources */,
 				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
 				C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */,
+				C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */,
 				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,
 				C4B9DA7716CE97E600703B67 /* BasicViewController.m in Sources */,
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
@@ -1910,7 +1980,9 @@
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
+				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
 				C4BFAAB317B2CE500038D2A7 /* CoreDataManageriOS7.m in Sources */,
+				C4BCF09F17B7A9C000F1E0F7 /* PreviousMedication+Handling.m in Sources */,
 				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
 				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,

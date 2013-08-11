@@ -43,4 +43,6 @@
 - (void)importWhenReady:(NSNotification *)notification;
 - (void)importWithData;
 
+- (id)managedObjectForEntityName:(NSString *)entityName;
+
 @end

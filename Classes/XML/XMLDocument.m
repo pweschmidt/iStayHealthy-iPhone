@@ -8,7 +8,7 @@
 
 #import "XMLDocument.h"
 #import "XMLElement.h"
-#import "XMLConstants.h"
+#import "Constants.h"
 
 @implementation XMLDocument
 - (id)init
@@ -28,12 +28,12 @@
 
 -(NSMutableString *)xmlString
 {
-    [self.root addAttribute:kXMLAttributeDBVersion andValue:kXMLDBVersionString];
-    [self.root addAttribute:kXMLAttributeFromDevice andValue:[[UIDevice currentDevice]model]];
+    [self.root addAttribute:kDBVersion andValue:kXMLDBVersionString];
+    [self.root addAttribute:kFromDevice andValue:[[UIDevice currentDevice]model]];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"dd-MMM-YY HH:mm:ss";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
-    [self.root addAttribute:kXMLAttributeFromDate andValue:dateString];
+    [self.root addAttribute:kFromDate andValue:dateString];
     NSMutableString *xml = [NSMutableString stringWithString:kXMLPreamble];
     NSString *elementText = [self.root toString];
     [xml appendFormat:@"\r%@",elementText];

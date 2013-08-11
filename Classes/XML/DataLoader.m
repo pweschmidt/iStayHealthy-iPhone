@@ -22,7 +22,7 @@
 #import "XMLElement.h"
 #import "XMLAttribute.h"
 #import "Utilities.h"
-#import "XMLConstants.h"
+#import "Constants.h"
 
 @interface DataLoader ()
 @property (nonatomic, strong) NSManagedObjectContext * context;
@@ -299,67 +299,67 @@
         
     }
  */
-    [root addAttribute:kXMLAttributeUID andValue:masterUID];
+    [root addAttribute:kUID andValue:masterUID];
     
     if (0 < [self.allResults count])
     {
-        XMLElement *results = [[XMLElement alloc]initWithName:kXMLElementResults];
+        XMLElement *results = [[XMLElement alloc]initWithName:kResults];
         [self addResults:results];
         [root addChild:results];
     }
     
     if (0 < [self.allMedications count])
     {
-        XMLElement *medications = [[XMLElement alloc]initWithName:kXMLElementMedications];
+        XMLElement *medications = [[XMLElement alloc]initWithName:kMedications];
         [self addMedications:medications];
         [root addChild:medications];
     }
     
     if (0 < [self.allMissedMeds count])
     {
-        XMLElement *missedMedications = [[XMLElement alloc]initWithName:kXMLElementMissedMedications];
+        XMLElement *missedMedications = [[XMLElement alloc]initWithName:kMissedMedications];
         [self addMissedMedications:missedMedications];
         [root addChild:missedMedications];
     }
         
     if (0 < [self.allOtherMeds count])
     {
-        XMLElement *otherMedications = [[XMLElement alloc]initWithName:kXMLElementOtherMedications];
+        XMLElement *otherMedications = [[XMLElement alloc]initWithName:kOtherMedications];
         [self addOtherMeds:otherMedications];        
         [root addChild:otherMedications];
     }
     
     if (0 < [self.allContacts count])
     {
-        XMLElement *contacts = [[XMLElement alloc]initWithName:kXMLElementClinicalContacts];
+        XMLElement *contacts = [[XMLElement alloc]initWithName:kClinicalContacts];
         [self addContacts:contacts];
         [root addChild:contacts];
     }
     
     if (0 < [self.allSideEffects count])
     {
-        XMLElement *sideEffects = [[XMLElement alloc]initWithName:kXMLElementHIVSideEffects];
+        XMLElement *sideEffects = [[XMLElement alloc]initWithName:kHIVSideEffects];
         [self addSideEffects:sideEffects];
         [root addChild:sideEffects];
     }
     
     if (0 < [self.allProcedures count])
     {
-        XMLElement *procedures = [[XMLElement alloc]initWithName:kXMLElementIllnessAndProcedures];
+        XMLElement *procedures = [[XMLElement alloc]initWithName:kIllnessAndProcedures];
         [self addProcedures:procedures];
         [root addChild:procedures];        
     }
     
     if (0 < self.allPreviousMedications.count)
     {
-        XMLElement *previousMeds = [[XMLElement alloc]initWithName:kXMLElementPreviousMedications];
+        XMLElement *previousMeds = [[XMLElement alloc]initWithName:kPreviousMedications];
         [self addPreviousMedications:previousMeds];
         [root addChild:previousMeds];
     }
     
     if (0 < self.allWellness.count)
     {
-        XMLElement *wellness = [[XMLElement alloc]initWithName:kXMLElementWellnesses];
+        XMLElement *wellness = [[XMLElement alloc]initWithName:kWellnesses];
         [self addWellness:wellness];
         [root addChild:wellness];
     }
@@ -378,81 +378,81 @@
 {
     for (Results *results in self.allResults)
     {
-        XMLElement *resultElement = [[XMLElement alloc]initWithName:kXMLElementResult];
+        XMLElement *resultElement = [[XMLElement alloc]initWithName:kResult];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
-        [resultElement addAttribute:kXMLAttributeResultsDate
+        [resultElement addAttribute:kResultsDate
                            andValue:[formatter stringFromDate:results.ResultsDate]];
         if (0.0 < [results.CD4 floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeCD4 andValue:[results.CD4 stringValue]];
+            [resultElement addAttribute:kCD4 andValue:[results.CD4 stringValue]];
         }
         if (0.0 < [results.CD4Percent floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeCD4Percent andValue:[results.CD4Percent stringValue]];
+            [resultElement addAttribute:kCD4Percent andValue:[results.CD4Percent stringValue]];
         }
         if (0.0 <= [results.ViralLoad floatValue])
         {
             if (0.0 == [results.ViralLoad floatValue])
             {
-                [resultElement addAttribute:kXMLAttributeViralLoad andValue:@"undetectable"];
+                [resultElement addAttribute:kViralLoad andValue:@"undetectable"];
             }
             else
-                [resultElement addAttribute:kXMLAttributeViralLoad andValue:[results.ViralLoad stringValue]];
+                [resultElement addAttribute:kViralLoad andValue:[results.ViralLoad stringValue]];
         }
         if (0.0 <= [results.HepCViralLoad floatValue])
         {
             if (0.0 == [results.HepCViralLoad floatValue])
             {
-                [resultElement addAttribute:kXMLAttributeHepCViralLoad andValue:@"undetectable"];                
+                [resultElement addAttribute:kHepCViralLoad andValue:@"undetectable"];                
             }
             else
-                [resultElement addAttribute:kXMLAttributeHepCViralLoad andValue:[results.HepCViralLoad stringValue]];
+                [resultElement addAttribute:kHepCViralLoad andValue:[results.HepCViralLoad stringValue]];
         }
         
         if (0.0 < [results.Glucose floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeGlucose andValue:[results.Glucose stringValue]];
+            [resultElement addAttribute:kGlucose andValue:[results.Glucose stringValue]];
         }
         if (0.0 < [results.TotalCholesterol floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeTotalCholesterol andValue:[results.TotalCholesterol stringValue]];
+            [resultElement addAttribute:kTotalCholesterol andValue:[results.TotalCholesterol stringValue]];
         }
         if (0.0 < [results.LDL floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeLDL andValue:[results.LDL stringValue]];
+            [resultElement addAttribute:kLDL andValue:[results.LDL stringValue]];
         }
         if (0.0 < [results.HDL floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeHDL andValue:[results.HDL stringValue]];
+            [resultElement addAttribute:kHDL andValue:[results.HDL stringValue]];
         }
         if (0.0 < [results.Hemoglobulin floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeHemoglobulin andValue:[results.Hemoglobulin stringValue]];
+            [resultElement addAttribute:kHemoglobulin andValue:[results.Hemoglobulin stringValue]];
         }
         if (0.0 < [results.PlateletCount floatValue])
         {
-            [resultElement addAttribute:kXMLAttributePlatelet andValue:[results.PlateletCount stringValue]];
+            [resultElement addAttribute:kPlatelet andValue:[results.PlateletCount stringValue]];
         }
         if (0.0 < [results.WhiteBloodCellCount floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeWhiteBloodCells andValue:[results.WhiteBloodCellCount stringValue]];
+            [resultElement addAttribute:kWhiteBloodCells andValue:[results.WhiteBloodCellCount stringValue]];
         }
         if (0.0 < [results.redBloodCellCount floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeRedBloodCells andValue:[results.redBloodCellCount stringValue]];
+            [resultElement addAttribute:kRedBloodCells andValue:[results.redBloodCellCount stringValue]];
         }
         if (0.0 < [results.Systole floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeSystole andValue:[results.Systole stringValue]];
+            [resultElement addAttribute:kSystole andValue:[results.Systole stringValue]];
         }
         if (0.0 < [results.Diastole floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeDiastole andValue:[results.Diastole stringValue]];
+            [resultElement addAttribute:kDiastole andValue:[results.Diastole stringValue]];
         }
         if (0.0 < [results.Weight floatValue])
         {
-            [resultElement addAttribute:kXMLAttributeWeight andValue:[results.Weight stringValue]];
+            [resultElement addAttribute:kWeight andValue:[results.Weight stringValue]];
         }
         
         
@@ -476,7 +476,7 @@
                  show];
             }
         }
-        [resultElement addAttribute:kXMLAttributeUID andValue:uid];
+        [resultElement addAttribute:kUID andValue:uid];
 
         [resultsParent addChild:resultElement];
     }
@@ -489,13 +489,13 @@
 {
     for (Medication *medication in self.allMedications)
     {
-        XMLElement *medElement = [[XMLElement alloc]initWithName:kXMLElementMedication];
+        XMLElement *medElement = [[XMLElement alloc]initWithName:kMedication];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
-        [medElement addAttribute:kXMLAttributeStartDate andValue:[formatter stringFromDate:medication.StartDate]];
-        [medElement addAttribute:kXMLAttributeName andValue:medication.Name];
-        [medElement addAttribute:kXMLAttributeDrug andValue:medication.Drug];
-        [medElement addAttribute:kXMLAttributeMedicationForm andValue:medication.MedicationForm];
+        [medElement addAttribute:kStartDate andValue:[formatter stringFromDate:medication.StartDate]];
+        [medElement addAttribute:kName andValue:medication.Name];
+        [medElement addAttribute:kDrug andValue:medication.Drug];
+        [medElement addAttribute:kMedicationForm andValue:medication.MedicationForm];
         NSString *uid = medication.UID;
         if (nil == uid)
         {
@@ -516,7 +516,7 @@
                  show];
             }
         }
-        [medElement addAttribute:kXMLAttributeUID andValue:uid];
+        [medElement addAttribute:kUID andValue:uid];
         [medicationParent addChild:medElement];
     }
     
@@ -529,13 +529,13 @@
 {
     for (MissedMedication *missedMed in self.allMissedMeds)
     {
-        XMLElement *missedMedElement = [[XMLElement alloc]initWithName:kXMLElementMissedMedication];
+        XMLElement *missedMedElement = [[XMLElement alloc]initWithName:kMissedMedication];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
-        [missedMedElement addAttribute:kXMLAttributeMissedDate andValue:[formatter stringFromDate:missedMed.MissedDate]];
-        [missedMedElement addAttribute:kXMLAttributeName andValue:missedMed.Name];
-        [missedMedElement addAttribute:kXMLAttributeDrug andValue:missedMed.Drug];
-        [missedMedElement addAttribute:kXMLAttributeMissedReason andValue:missedMed.missedReason];
+        [missedMedElement addAttribute:kMissedDate andValue:[formatter stringFromDate:missedMed.MissedDate]];
+        [missedMedElement addAttribute:kName andValue:missedMed.Name];
+        [missedMedElement addAttribute:kDrug andValue:missedMed.Drug];
+        [missedMedElement addAttribute:kMissedReason andValue:missedMed.missedReason];
         NSString *uid = missedMed.UID;
         if (nil == uid)
         {
@@ -556,7 +556,7 @@
                  show];
             }
         }
-        [missedMedElement addAttribute:kXMLAttributeUID andValue:uid];
+        [missedMedElement addAttribute:kUID andValue:uid];
         [missedMedicationParent addChild:missedMedElement];
     }
 }
@@ -569,27 +569,27 @@
 {
     for (OtherMedication *otherMed in self.allOtherMeds)
     {
-        XMLElement *otherMedElement = [[XMLElement alloc]initWithName:kXMLElementOtherMedication];
+        XMLElement *otherMedElement = [[XMLElement alloc]initWithName:kOtherMedication];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
-        [otherMedElement addAttribute:kXMLAttributeStartDate andValue:[formatter stringFromDate:otherMed.StartDate]];
-        [otherMedElement addAttribute:kXMLAttributeName andValue:otherMed.Name];
+        [otherMedElement addAttribute:kStartDate andValue:[formatter stringFromDate:otherMed.StartDate]];
+        [otherMedElement addAttribute:kName andValue:otherMed.Name];
 
         if (nil != otherMed.MedicationForm)
         {
-            [otherMedElement addAttribute:kXMLAttributeMedicationForm andValue:otherMed.MedicationForm];
+            [otherMedElement addAttribute:kMedicationForm andValue:otherMed.MedicationForm];
         }
         
         NSString *unit = otherMed.Unit;
         if (nil != unit)
         {
-            [otherMedElement addAttribute:kXMLAttributeUnit andValue:unit];
+            [otherMedElement addAttribute:kUnit andValue:unit];
         }
         
         NSNumber *dose = otherMed.Dose;
         if (nil != dose)
         {
-            [otherMedElement addAttribute:kXMLAttributeDose andValue:[NSString stringWithFormat:@"%f",[dose floatValue]]];
+            [otherMedElement addAttribute:kDose andValue:[NSString stringWithFormat:@"%f",[dose floatValue]]];
         }
         
         NSString *uid = otherMed.UID;
@@ -612,7 +612,7 @@
                  show];
             }
         }
-        [otherMedElement addAttribute:kXMLAttributeUID andValue:uid];
+        [otherMedElement addAttribute:kUID andValue:uid];
         [otherMedsParent addChild:otherMedElement];
         
     }
@@ -623,13 +623,13 @@
 {
     for (Contacts *contacts in self.allContacts)
     {
-        XMLElement *contactElement = [[XMLElement alloc]initWithName:kXMLElementContacts];
-        [contactElement addAttribute:kXMLAttributeClinicName andValue:contacts.ClinicName];
-        [contactElement addAttribute:kXMLAttributeClinicID andValue:contacts.ClinicID];
-        [contactElement addAttribute:kXMLAttributeClinicEmailAddress andValue:contacts.ClinicEmailAddress];
-        [contactElement addAttribute:kXMLAttributeClinicWebSite andValue:contacts.ClinicWebSite];
-        [contactElement addAttribute:kXMLAttributeClinicContactNumber andValue:contacts.ClinicContactNumber];
-        [contactElement addAttribute:kXMLAttributeEmergencyContactNumber
+        XMLElement *contactElement = [[XMLElement alloc]initWithName:kContacts];
+        [contactElement addAttribute:kClinicName andValue:contacts.ClinicName];
+        [contactElement addAttribute:kClinicID andValue:contacts.ClinicID];
+        [contactElement addAttribute:kClinicEmailAddress andValue:contacts.ClinicEmailAddress];
+        [contactElement addAttribute:kClinicWebSite andValue:contacts.ClinicWebSite];
+        [contactElement addAttribute:kClinicContactNumber andValue:contacts.ClinicContactNumber];
+        [contactElement addAttribute:kEmergencyContactNumber
                             andValue:contacts.EmergencyContactNumber];
         NSString *uid = contacts.UID;
         if (nil == uid)
@@ -651,7 +651,7 @@
                  show];
             }
         }
-        [contactElement addAttribute:kXMLAttributeUID andValue:uid];
+        [contactElement addAttribute:kUID andValue:uid];
         [contactsParent addChild:contactElement];        
     }
     
@@ -661,15 +661,15 @@
 {
     for (SideEffects *effects in self.allSideEffects)
     {
-        XMLElement *sideEffect = [[XMLElement alloc]initWithName:kXMLElementSideEffects];
-        [sideEffect addAttribute:kXMLAttributeSideEffect andValue:effects.SideEffect];
+        XMLElement *sideEffect = [[XMLElement alloc]initWithName:kSideEffects];
+        [sideEffect addAttribute:kSideEffect andValue:effects.SideEffect];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
 
-        [sideEffect addAttribute:kXMLAttributeSideEffectDate andValue:[formatter stringFromDate:effects.SideEffectDate]];
-        [sideEffect addAttribute:kXMLAttributeName andValue:effects.Name];
-        [sideEffect addAttribute:kXMLAttributeDrug andValue:effects.Drug];
-        [sideEffect addAttribute:kXMLAttributeSeriousness andValue:effects.seriousness];
+        [sideEffect addAttribute:kSideEffectDate andValue:[formatter stringFromDate:effects.SideEffectDate]];
+        [sideEffect addAttribute:kName andValue:effects.Name];
+        [sideEffect addAttribute:kDrug andValue:effects.Drug];
+        [sideEffect addAttribute:kSeriousness andValue:effects.seriousness];
         NSString *uid = effects.UID;
         if (nil == uid)
         {
@@ -690,7 +690,7 @@
                  show];
             }
         }
-        [sideEffect addAttribute:kXMLAttributeUID andValue:uid];
+        [sideEffect addAttribute:kUID andValue:uid];
         [sideEffectsParent addChild:sideEffect];        
     }
 }
@@ -699,12 +699,12 @@
 {
     for (Procedures *procedure in self.allProcedures)
     {
-        XMLElement *procElement = [[XMLElement alloc]initWithName:kXMLElementProcedures];
-        [procElement addAttribute:kXMLAttributeIllness andValue:procedure.Illness];
+        XMLElement *procElement = [[XMLElement alloc]initWithName:kProcedures];
+        [procElement addAttribute:kIllness andValue:procedure.Illness];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
-        [procElement addAttribute:kXMLAttributeDate andValue:[formatter stringFromDate:procedure.Date]];
-        [procElement addAttribute:kXMLAttributeName andValue:procedure.Name];
+        [procElement addAttribute:kDate andValue:[formatter stringFromDate:procedure.Date]];
+        [procElement addAttribute:kName andValue:procedure.Name];
         NSString *uid = procedure.UID;
         if (nil == uid)
         {
@@ -725,7 +725,7 @@
                  show];
             }
         }
-        [procElement addAttribute:kXMLAttributeUID andValue:uid];
+        [procElement addAttribute:kUID andValue:uid];
         [proceduresParent addChild:procElement];                
     }
 }
@@ -734,21 +734,21 @@
 {
     for (PreviousMedication *prevMed in self.allPreviousMedications)
     {
-        XMLElement *prevElement = [[XMLElement alloc]initWithName:kXMLElementPreviousMedication];
-        [prevElement addAttribute:kXMLAttributeNameLowerCase andValue:prevMed.name];
-        [prevElement addAttribute:kXMLAttributeDrugLowerCase andValue:prevMed.drug];
+        XMLElement *prevElement = [[XMLElement alloc]initWithName:kPreviousMedication];
+        [prevElement addAttribute:kNameLowerCase andValue:prevMed.name];
+        [prevElement addAttribute:kDrugLowerCase andValue:prevMed.drug];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = DATEFORMATSTYLE;
-        [prevElement addAttribute:kXMLAttributeStartDateLowerCase andValue:[formatter stringFromDate:prevMed.startDate]];
-        [prevElement addAttribute:kXMLAttributeEndDateLowerCase andValue:[formatter stringFromDate:prevMed.endDate]];
+        [prevElement addAttribute:kStartDateLowerCase andValue:[formatter stringFromDate:prevMed.startDate]];
+        [prevElement addAttribute:kEndDateLowerCase andValue:[formatter stringFromDate:prevMed.endDate]];
         BOOL isArt = [prevMed.isART boolValue];
         if (isArt)
         {
-            [prevElement addAttribute:kXMLAttributeIsART andValue:@"YES"];
+            [prevElement addAttribute:kIsART andValue:@"YES"];
         }
         else
         {
-            [prevElement addAttribute:kXMLAttributeIsART andValue:@"NO"];
+            [prevElement addAttribute:kIsART andValue:@"NO"];
         }
         NSString *uid = prevMed.uID;
         if (nil == uid)
@@ -770,7 +770,7 @@
                  show];
             }
         }
-        [prevElement addAttribute:kXMLAttributeUIDLowerCase andValue:uid];
+        [prevElement addAttribute:kUIDLowerCase andValue:uid];
         [previousMedsParent addChild:prevElement];
         
     }
@@ -997,11 +997,11 @@
     {
         return;
     }
-    Results *result = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementResults
+    Results *result = [NSEntityDescription insertNewObjectForEntityForName:kResults
                                                     inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
-    result.ResultsDate = [formatter dateFromString:[resultElement attributeValue:kXMLAttributeResultsDate]];
+    result.ResultsDate = [formatter dateFromString:[resultElement attributeValue:kResultsDate]];
     if (nil != [resultElement elementUID])
     {
         result.UID = [resultElement elementUID];
@@ -1011,23 +1011,23 @@
         result.UID = [Utilities GUID]; 
     }
 
-    NSString *_cd4 = [resultElement attributeValue:kXMLAttributeCD4];
-    NSString *_cd4Percent = [resultElement attributeValue:kXMLAttributeCD4Percent];
-    NSString *_vl = [resultElement attributeValue:kXMLAttributeViralLoad];
-    NSString *_vlHepC = [resultElement attributeValue:kXMLAttributeHepCViralLoad];
-    NSString *_glucose = [resultElement attributeValue:kXMLAttributeGlucose];
-    NSString *_cholesterol = [resultElement attributeValue:kXMLAttributeTotalCholesterol];
-    NSString *_hdl = [resultElement attributeValue:kXMLAttributeHDL];
-    NSString *_ldl = [resultElement attributeValue:kXMLAttributeLDL];
+    NSString *_cd4 = [resultElement attributeValue:kCD4];
+    NSString *_cd4Percent = [resultElement attributeValue:kCD4Percent];
+    NSString *_vl = [resultElement attributeValue:kViralLoad];
+    NSString *_vlHepC = [resultElement attributeValue:kHepCViralLoad];
+    NSString *_glucose = [resultElement attributeValue:kGlucose];
+    NSString *_cholesterol = [resultElement attributeValue:kTotalCholesterol];
+    NSString *_hdl = [resultElement attributeValue:kHDL];
+    NSString *_ldl = [resultElement attributeValue:kLDL];
 
-    NSString *_platelets = [resultElement attributeValue:kXMLAttributePlatelet];
-    NSString *_hemo = [resultElement attributeValue:kXMLAttributeHemoglobulin];
-    NSString *_red = [resultElement attributeValue:kXMLAttributeRedBloodCells];
-    NSString *_white = [resultElement attributeValue:kXMLAttributeWhiteBloodCells];
+    NSString *_platelets = [resultElement attributeValue:kPlatelet];
+    NSString *_hemo = [resultElement attributeValue:kHemoglobulin];
+    NSString *_red = [resultElement attributeValue:kRedBloodCells];
+    NSString *_white = [resultElement attributeValue:kWhiteBloodCells];
 
-    NSString *_weight = [resultElement attributeValue:kXMLAttributeWeight];
-    NSString *_systole = [resultElement attributeValue:kXMLAttributeSystole];
-    NSString *_diastole = [resultElement attributeValue:kXMLAttributeDiastole];
+    NSString *_weight = [resultElement attributeValue:kWeight];
+    NSString *_systole = [resultElement attributeValue:kSystole];
+    NSString *_diastole = [resultElement attributeValue:kDiastole];
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -1203,10 +1203,10 @@
     {
         return;
     }
-    Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementMedication inManagedObjectContext:self.context];
+    Medication *medication = [NSEntityDescription insertNewObjectForEntityForName:kMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
-    medication.StartDate = [formatter dateFromString:[medicationElement attributeValue:kXMLAttributeStartDate]];
+    medication.StartDate = [formatter dateFromString:[medicationElement attributeValue:kStartDate]];
     if (nil != [medicationElement elementUID])
     {
         medication.UID = [medicationElement elementUID];
@@ -1217,10 +1217,10 @@
     }
 
 
-    NSString *_name = [medicationElement attributeValue:kXMLAttributeName];
-    NSString *_drug = [medicationElement attributeValue:kXMLAttributeDrug];
-    NSString *_form = [medicationElement attributeValue:kXMLAttributeMedicationForm];
-    NSString *_dose = [medicationElement attributeValue:kXMLAttributeDose];
+    NSString *_name = [medicationElement attributeValue:kName];
+    NSString *_drug = [medicationElement attributeValue:kDrug];
+    NSString *_form = [medicationElement attributeValue:kMedicationForm];
+    NSString *_dose = [medicationElement attributeValue:kDose];
     
     if (nil != _name)
     {
@@ -1265,10 +1265,10 @@
     {
         return;
     }
-    MissedMedication *missedMed = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementMissedMedication inManagedObjectContext:self.context];
+    MissedMedication *missedMed = [NSEntityDescription insertNewObjectForEntityForName:kMissedMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
-    missedMed.MissedDate = [formatter dateFromString:[missedMedicationElement attributeValue:kXMLAttributeMissedDate]];
+    missedMed.MissedDate = [formatter dateFromString:[missedMedicationElement attributeValue:kMissedDate]];
     if (nil!= [missedMedicationElement elementUID])
     {
         missedMed.UID = [missedMedicationElement elementUID];        
@@ -1277,9 +1277,9 @@
     {
         missedMed.UID = [Utilities GUID];
     }
-    NSString *_name = [missedMedicationElement attributeValue:kXMLAttributeName];
-    NSString *_drug = [missedMedicationElement attributeValue:kXMLAttributeDrug];
-    NSString *_reason = [missedMedicationElement attributeValue:kXMLAttributeMissedReason];
+    NSString *_name = [missedMedicationElement attributeValue:kName];
+    NSString *_drug = [missedMedicationElement attributeValue:kDrug];
+    NSString *_reason = [missedMedicationElement attributeValue:kMissedReason];
 
     if (nil != _name)
     {
@@ -1317,10 +1317,10 @@
     {
         return;
     }
-    OtherMedication *otherMed = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementOtherMedication inManagedObjectContext:self.context];
+    OtherMedication *otherMed = [NSEntityDescription insertNewObjectForEntityForName:kOtherMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
-    otherMed.StartDate = [formatter dateFromString:[otherMedicationsElement attributeValue:kXMLAttributeStartDate]];
+    otherMed.StartDate = [formatter dateFromString:[otherMedicationsElement attributeValue:kStartDate]];
     if (nil != [otherMedicationsElement elementUID])
     {
         otherMed.UID = [otherMedicationsElement elementUID];
@@ -1331,10 +1331,10 @@
     }
     
     
-    NSString *_name = [otherMedicationsElement attributeValue:kXMLAttributeName];
-    NSString *_form = [otherMedicationsElement attributeValue:kXMLAttributeMedicationForm];
-    NSString *_dose = [otherMedicationsElement attributeValue:kXMLAttributeDose];
-    NSString *_unit = [otherMedicationsElement attributeValue:kXMLAttributeUnit];
+    NSString *_name = [otherMedicationsElement attributeValue:kName];
+    NSString *_form = [otherMedicationsElement attributeValue:kMedicationForm];
+    NSString *_dose = [otherMedicationsElement attributeValue:kDose];
+    NSString *_unit = [otherMedicationsElement attributeValue:kUnit];
     
     if (nil != _name)
     {
@@ -1378,7 +1378,7 @@
     {
         return;
     }
-    Contacts *contacts = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementContacts
+    Contacts *contacts = [NSEntityDescription insertNewObjectForEntityForName:kContacts
                                                        inManagedObjectContext:self.context];
     
     if (nil != [contactsElement elementUID])
@@ -1388,12 +1388,12 @@
     else
         contacts.UID = [Utilities GUID];
         
-    NSString *_clinicName = [contactsElement attributeValue:kXMLAttributeClinicName];
-    NSString *_clinicID = [contactsElement attributeValue:kXMLAttributeClinicID];
-    NSString *_clinicEmail = [contactsElement attributeValue:kXMLAttributeClinicEmailAddress];
-    NSString *_clinicWWW = [contactsElement attributeValue:kXMLAttributeClinicWebSite];
-    NSString *_clinicNumber = [contactsElement attributeValue:kXMLAttributeClinicContactNumber];
-    NSString *_emergency = [contactsElement attributeValue:kXMLAttributeEmergencyContactNumber];
+    NSString *_clinicName = [contactsElement attributeValue:kClinicName];
+    NSString *_clinicID = [contactsElement attributeValue:kClinicID];
+    NSString *_clinicEmail = [contactsElement attributeValue:kClinicEmailAddress];
+    NSString *_clinicWWW = [contactsElement attributeValue:kClinicWebSite];
+    NSString *_clinicNumber = [contactsElement attributeValue:kClinicContactNumber];
+    NSString *_emergency = [contactsElement attributeValue:kEmergencyContactNumber];
     if (nil != _clinicName)
     {
         contacts.ClinicName = _clinicName;
@@ -1442,7 +1442,7 @@
         return;
     }
 
-    SideEffects *effect = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementSideEffects
+    SideEffects *effect = [NSEntityDescription insertNewObjectForEntityForName:kSideEffects
                                                         inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
@@ -1453,12 +1453,12 @@
     else
         effect.UID = [Utilities GUID];
     
-    effect.SideEffectDate = [formatter dateFromString:[sideEffectsElement attributeValue:kXMLAttributeSideEffectDate]];
+    effect.SideEffectDate = [formatter dateFromString:[sideEffectsElement attributeValue:kSideEffectDate]];
     
-    NSString *_name = [sideEffectsElement attributeValue:kXMLAttributeName];
-    NSString *_drug = [sideEffectsElement attributeValue:kXMLAttributeDrug];
-    NSString *_effect = [sideEffectsElement attributeValue:kXMLAttributeSideEffect];
-    NSString *_serious = [sideEffectsElement attributeValue:kXMLAttributeSeriousness];
+    NSString *_name = [sideEffectsElement attributeValue:kName];
+    NSString *_drug = [sideEffectsElement attributeValue:kDrug];
+    NSString *_effect = [sideEffectsElement attributeValue:kSideEffect];
+    NSString *_serious = [sideEffectsElement attributeValue:kSeriousness];
     if(nil != _name)
         effect.Name = _name;
     if(nil != _drug)
@@ -1494,7 +1494,7 @@
     {
         return;
     }
-    Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementProcedures
+    Procedures *procedures = [NSEntityDescription insertNewObjectForEntityForName:kProcedures
                                                            inManagedObjectContext:self.context];
     
     if (nil != [proceduresElement elementUID])
@@ -1504,12 +1504,12 @@
     else
         procedures.UID = [Utilities GUID];
         
-    NSString *_illness = [proceduresElement attributeValue:kXMLAttributeIllness];
-    NSString *_name = [proceduresElement attributeValue:kXMLAttributeName];
+    NSString *_illness = [proceduresElement attributeValue:kIllness];
+    NSString *_name = [proceduresElement attributeValue:kName];
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
-    procedures.Date = [formatter dateFromString:[proceduresElement attributeValue:kXMLAttributeDate]];
+    procedures.Date = [formatter dateFromString:[proceduresElement attributeValue:kDate]];
     
     if (nil != _illness)
     {
@@ -1542,7 +1542,7 @@
     {
         return;
     }
-    PreviousMedication *prev = [NSEntityDescription insertNewObjectForEntityForName:kXMLElementPreviousMedication inManagedObjectContext:self.context];
+    PreviousMedication *prev = [NSEntityDescription insertNewObjectForEntityForName:kPreviousMedication inManagedObjectContext:self.context];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATEFORMATSTYLE;
     if (nil != [previousElement elementUID])
@@ -1552,13 +1552,13 @@
     else
         prev.uID = [Utilities GUID];
     
-    prev.startDate = [formatter dateFromString:[previousElement attributeValue:kXMLAttributeStartDateLowerCase]];
-    prev.endDate = [formatter dateFromString:[previousElement attributeValue:kXMLAttributeEndDateLowerCase]];
+    prev.startDate = [formatter dateFromString:[previousElement attributeValue:kStartDateLowerCase]];
+    prev.endDate = [formatter dateFromString:[previousElement attributeValue:kEndDateLowerCase]];
     
     
-    NSString *_name = [previousElement attributeValue:kXMLAttributeName];
-    NSString *_drug = [previousElement attributeValue:kXMLAttributeDrug];
-    NSString *_isArt = [previousElement attributeValue:kXMLAttributeIsART];
+    NSString *_name = [previousElement attributeValue:kName];
+    NSString *_drug = [previousElement attributeValue:kDrug];
+    NSString *_isArt = [previousElement attributeValue:kIsART];
     
     if (nil != _name)
     {

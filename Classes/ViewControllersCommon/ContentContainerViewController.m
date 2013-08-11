@@ -12,6 +12,7 @@
 #import "ResultsListTableViewController.h"
 #import "Constants.h"
 #import "ContentNavigationController.h"
+#import "DropboxViewController.h"
 
 @interface ContentContainerViewController ()
 @property (nonatomic, strong) NSDictionary * controllers;
@@ -25,10 +26,6 @@
 {
     [super viewDidLoad];
     self.controllers = [self rootControllers];
-    
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,20 +66,24 @@
     HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
     AddMenuTableViewController *addController = [[AddMenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
     ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]init];
+    DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
+    
     
     menuController.view.frame = self.view.frame;
     addController.view.frame = self.view.frame;
     resultsController.view.frame = self.view.frame;
+    dropBoxController.view.frame = self.view.frame;
     
     ContentNavigationController *menuNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:menuController];
     ContentNavigationController *addNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:addController];
     ContentNavigationController *resultsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:resultsController];
+    ContentNavigationController *dropNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dropBoxController];
     
     
-
     [self addChildViewController:menuNavCtrl];
     [self addChildViewController:addNavCtrl];
     [self addChildViewController:resultsNavCtrl];
+    [self addChildViewController:dropNavCtrl];
 
     [self.view addSubview:resultsNavCtrl.view];
     self.currentController = resultsNavCtrl;
@@ -90,7 +91,8 @@
     
     NSDictionary *controllers = @{kMenuController : menuNavCtrl,
                                   kAddController : addNavCtrl,
-                                  kResultsController : resultsNavCtrl};
+                                  kResultsController : resultsNavCtrl,
+                                  kDropboxController : dropNavCtrl};
     return controllers;
 }
 
