@@ -88,4 +88,126 @@
     return string;
 }
 
+- (void)addValueString:(NSString *)valueString type:(NSString *)type
+{
+    NSNumber *value = nil;
+    if (nil == valueString || [valueString isEqualToString:@""])
+    {
+        value = [NSNumber numberWithFloat:0.0];
+    }
+    else
+    {
+        value = [NSNumber numberWithFloat:[valueString floatValue]];
+    }
+    if ([type isEqualToString:kCD4])
+    {
+        self.CD4 = value;
+    }
+    else if ([type isEqualToString:kCD4Percent])
+    {
+        self.CD4Percent = value;
+    }
+    else if ([type isEqualToString:kLDL])
+    {
+        self.LDL = value;
+    }
+    else if ([type isEqualToString:kHemoglobulin])
+    {
+        self.CD4 = value;
+    }
+    else if ([type isEqualToString:kGlucose])
+    {
+        self.Glucose = value;
+    }
+    else if ([type isEqualToString:kHeartRate])
+    {
+        self.HeartRate = value;
+    }
+    else if ([type isEqualToString:kOxygenLevel])
+    {
+        self.OxygenLevel = value;
+    }
+    else if ([type isEqualToString:kSystole])
+    {
+        self.Systole = value;
+    }
+    else if ([type isEqualToString:kPlatelet])
+    {
+        self.PlateletCount = value;
+    }
+    else if ([type isEqualToString:kHDL])
+    {
+        self.HDL = value;
+    }
+    else if ([type isEqualToString:kHepCViralLoad])
+    {
+        self.HepCViralLoad = value;
+    }
+    else if ([type isEqualToString:kDiastole])
+    {
+        self.Diastole = value;
+    }
+    else if ([type isEqualToString:kWhiteBloodCells])
+    {
+        self.WhiteBloodCellCount = value;
+    }
+    else if ([type isEqualToString:kTotalCholesterol])
+    {
+        self.TotalCholesterol = value;
+    }
+    else if ([type isEqualToString:kTriglyceride])
+    {
+        self.Triglyceride = value;
+    }
+    else if ([type isEqualToString:kViralLoad])
+    {
+        self.ViralLoad = value;
+    }
+    else if ([type isEqualToString:kRedBloodCells])
+    {
+        self.redBloodCellCount = value;
+    }
+    else if ([type isEqualToString:kCholesterolRatio])
+    {
+        self.cholesterolRatio = value;
+    }
+    else if ([type isEqualToString:kCardiacRiskFactor])
+    {
+        self.cardiacRiskFactor = value;
+    }
+    else if ([type isEqualToString:kWeight])
+    {
+        self.Weight = value;
+    }
+    else if ([type isEqualToString:kLiverAlanineTransaminase])
+    {
+        self.liverAlanineTransaminase = value;
+    }
+    else if ([type isEqualToString:kLiverAspartateTransaminase])
+    {
+        self.liverAspartateTransaminase = value;
+    }
+    else if ([type isEqualToString:kLiverAlkalinePhosphatase])
+    {
+        self.liverAlkalinePhosphatase = value;
+    }
+    else if ([type isEqualToString:kLiverAlbumin])
+    {
+        self.liverAlbumin = value;
+    }
+    else if ([type isEqualToString:kLiverAlanineTotalBilirubin])
+    {
+        self.liverAlanineTotalBilirubin = value;
+    }
+    else if ([type isEqualToString:kLiverAlanineDirectBilirubin])
+    {
+        self.liverAlanineDirectBilirubin = value;
+    }
+    else if ([type isEqualToString:kLiverGammaGlutamylTranspeptidase])
+    {
+        self.liverGammaGlutamylTranspeptidase = value;
+    }
+}
+
+
 @end

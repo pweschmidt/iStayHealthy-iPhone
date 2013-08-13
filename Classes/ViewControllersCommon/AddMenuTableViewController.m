@@ -9,6 +9,7 @@
 #import "AddMenuTableViewController.h"
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
+#import "EditResultsTableViewController.h"
 
 @interface AddMenuTableViewController ()
 @property (nonatomic, strong) NSArray * menus;
@@ -111,6 +112,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    switch (indexPath.row)
+    {
+        case 0:
+        {
+            EditResultsTableViewController *resultsCtrl = [[EditResultsTableViewController alloc] init];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+    }
 }
 
 - (void)cancel
