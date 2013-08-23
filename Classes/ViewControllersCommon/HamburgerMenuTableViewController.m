@@ -10,6 +10,7 @@
 #import "ContentContainerViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "Constants.h"
+#import "Menus.h"
 
 @interface HamburgerMenuTableViewController ()
 @property (nonatomic, strong) NSArray * menus;
@@ -26,23 +27,7 @@
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                              target:self action:@selector(cancel)];
     
-    self.menus = @[NSLocalizedString(@"Dashboard", nil),
-                   NSLocalizedString(@"Results", nil),
-                   NSLocalizedString(@"HIV Medication", nil),
-                   NSLocalizedString(@"Missed Meds", nil),
-                   NSLocalizedString(@"Side Effects", nil),
-                   NSLocalizedString(@"Previous Meds", nil),
-                   NSLocalizedString(@"Medication Diary", nil),
-                   NSLocalizedString(@"Alerts", nil),
-                   NSLocalizedString(@"Appointments", nil),
-                   NSLocalizedString(@"Other Medication", nil),
-                   NSLocalizedString(@"Clinics", nil),
-                   NSLocalizedString(@"Procedures", nil),
-                   NSLocalizedString(@"Wellness", nil),
-                   NSLocalizedString(@"Login Password", nil),
-                   NSLocalizedString(@"Backups", nil),
-                   NSLocalizedString(@"Feedback", nil),
-                   NSLocalizedString(@"Info", nil)];
+    self.menus = [Menus hamburgerMenus];
 }
 
 - (void)didReceiveMemoryWarning

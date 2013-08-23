@@ -10,7 +10,7 @@
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
 #import "EditResultsTableViewController.h"
-
+#import "Menus.h"
 @interface AddMenuTableViewController ()
 @property (nonatomic, strong) NSArray * menus;
 @end
@@ -26,15 +26,7 @@
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                              target:self action:@selector(cancel)];
     
-    self.menus = @[NSLocalizedString(@"New Result", nil),
-                   NSLocalizedString(@"New HIV Med", nil),
-                   NSLocalizedString(@"New Other Med", nil),
-                   NSLocalizedString(@"New Missed Med", nil),
-                   NSLocalizedString(@"New Side Effects", nil),
-                   NSLocalizedString(@"New Alert", nil),
-                   NSLocalizedString(@"New Appointment", nil),
-                   NSLocalizedString(@"New Procedure", nil),
-                   NSLocalizedString(@"New Wellness", nil)];
+    self.menus = [Menus addMenus];
 }
 
 - (void)didReceiveMemoryWarning

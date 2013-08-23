@@ -23,8 +23,6 @@
     [super viewDidLoad];
     self.results = [NSArray array];//init with empty array
     self.navigationItem.title = NSLocalizedString(@"Results", nil);
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMenu)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,16 +62,6 @@
     
 }
 
-#pragma mark - private methods
-- (void)settingsMenu
-{
-    [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kMenuController];
-}
-
-- (void)addMenu
-{
-    [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kAddController];
-}
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification

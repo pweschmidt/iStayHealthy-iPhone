@@ -13,6 +13,7 @@
 #import "Constants.h"
 #import "ContentNavigationController.h"
 #import "DropboxViewController.h"
+#import "Utilities.h"
 
 @interface ContentContainerViewController ()
 @property (nonatomic, strong) NSDictionary * controllers;
@@ -25,7 +26,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.controllers = [self rootControllers];
+    if ([Utilities isIPad])
+    {
+        self.controllers = [self rootControllers_iPad];
+    }
+    else
+    {
+        self.controllers = [self rootControllers_iPhone];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,12 +68,13 @@
     }];
 }
 
+#pragma iPhone handling
 
-- (NSDictionary *)rootControllers
+- (NSDictionary *)rootControllers_iPhone
 {
-    HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    AddMenuTableViewController *addController = [[AddMenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]init];
+    HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    AddMenuTableViewController *addController = [[AddMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
     
     
@@ -96,5 +105,24 @@
     return controllers;
 }
 
-
+#pragma iPad handling
+- (NSDictionary *)rootControllers_iPad
+{
+    ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
+    DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
+    
+    resultsController.view.frame = self.view.frame;
+    dropBoxController.view.frame = self.view.frame;
+    ContentNavigationController *resultsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:resultsController];
+    ContentNavigationController *dropNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dropBoxController];
+    [self addChildViewController:resultsNavCtrl];
+    [self addChildViewController:dropNavCtrl];
+    [self.view addSubview:resultsNavCtrl.view];
+    self.currentController = resultsNavCtrl;
+    self.previousController = nil;
+    
+    NSDictionary *controllers = @{kResultsController : resultsNavCtrl,
+                                  kDropboxController : dropNavCtrl};
+    return controllers;
+}
 @end

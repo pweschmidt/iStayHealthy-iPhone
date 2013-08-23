@@ -85,6 +85,8 @@
 		C49B5C5F15DFE4BA00D3AF3B /* appointments.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B5C5E15DFE4BA00D3AF3B /* appointments.png */; };
 		C49F82B013DEE02C00D5891F /* viralOff-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82B213DEE02C00D5891F /* viralOff-small.png */; };
 		C49F82C213DEE06500D5891F /* viralOn-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82C413DEE06500D5891F /* viralOn-small.png */; };
+		C4A6E21817C76DE90020FC2A /* CustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A6E21717C76DE90020FC2A /* CustomTableView.m */; };
+		C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A6E21C17C7770C0020FC2A /* Menus.m */; };
 		C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */; };
 		C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */; };
 		C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */; };
@@ -518,6 +520,11 @@
 		C49F82C513DEE06A00D5891F /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = "de.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C613DEE06C00D5891F /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C713DEE06E00D5891F /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = "fr.lproj/viralOn-small.png"; sourceTree = "<group>"; };
+		C4A6E21617C76DE90020FC2A /* CustomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTableView.h; path = ViewControllersiPad/CustomTableView.h; sourceTree = "<group>"; };
+		C4A6E21717C76DE90020FC2A /* CustomTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTableView.m; path = ViewControllersiPad/CustomTableView.m; sourceTree = "<group>"; };
+		C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewControllerDelegate.h; path = ViewControllersiPad/ContainerViewControllerDelegate.h; sourceTree = "<group>"; };
+		C4A6E21B17C7770C0020FC2A /* Menus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menus.h; path = ViewControllersCommon/Menus.h; sourceTree = "<group>"; };
+		C4A6E21C17C7770C0020FC2A /* Menus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menus.m; path = ViewControllersCommon/Menus.m; sourceTree = "<group>"; };
 		C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = Classes/Assets/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPad.storyboard; path = Classes/Assets/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		C4A8244517AD4B9B00E8CA8C /* ContentContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentContainerViewController.h; path = ViewControllersCommon/ContentContainerViewController.h; sourceTree = "<group>"; };
@@ -1142,6 +1149,8 @@
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
 				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
+				C4A6E21B17C7770C0020FC2A /* Menus.h */,
+				C4A6E21C17C7770C0020FC2A /* Menus.m */,
 				C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */,
 				C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */,
 			);
@@ -1160,6 +1169,9 @@
 		C47DB22E17AD05B40037A6DF /* ViewControllersiPad */ = {
 			isa = PBXGroup;
 			children = (
+				C4A6E21617C76DE90020FC2A /* CustomTableView.h */,
+				C4A6E21717C76DE90020FC2A /* CustomTableView.m */,
+				C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */,
 			);
 			name = ViewControllersiPad;
 			sourceTree = "<group>";
@@ -1905,6 +1917,7 @@
 				C4C4193A15F1383000882416 /* RepeatCell.m in Sources */,
 				C4C4193C15F1383000882416 /* ResultListCell.m in Sources */,
 				C4C4193E15F1383000882416 /* ResultSegmentedCell.m in Sources */,
+				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
 				C4C4194015F1383000882416 /* ResultValueCell.m in Sources */,
 				C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */,
 				C4C4194215F1383000882416 /* SetDateCell.m in Sources */,
@@ -1919,6 +1932,7 @@
 				C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */,
 				C4C4196315F138B900882416 /* HealthChartsView.m in Sources */,
 				C4C4196415F138B900882416 /* HealthChartsViewLandscape.m in Sources */,
+				C4A6E21817C76DE90020FC2A /* CustomTableView.m in Sources */,
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
 				C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */,
 				C4C4196715F138B900882416 /* Trafo.m in Sources */,

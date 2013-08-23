@@ -12,6 +12,13 @@
 #define APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
 #define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 
+
+typedef NS_ENUM(NSUInteger, MenuType)
+{
+    HamburgerMenuType = 0,
+    AddMenuType
+};
+
 /**
  Block Definitions
  */

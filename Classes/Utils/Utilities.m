@@ -29,7 +29,7 @@
     label.text = NSLocalizedString(@"Loading", "Loading");
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.lineBreakMode = UILineBreakModeWordWrap;
     label.numberOfLines = 0;
     label.font = [UIFont boldSystemFontOfSize:12];
@@ -317,5 +317,9 @@
     
 }
 
++ (BOOL)isIPad
+{
+    return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
+}
 
 @end
