@@ -7,16 +7,16 @@
 //
 
 #import "Menus.h"
+#import "Constants.h"
 
 @implementation Menus
 + (NSArray *)hamburgerMenus
 {
     return  @[NSLocalizedString(@"Dashboard", nil),
               NSLocalizedString(@"Results", nil),
-              NSLocalizedString(@"HIV Medication", nil),
+              NSLocalizedString(@"HIV Medications", nil),
               NSLocalizedString(@"Missed Meds", nil),
               NSLocalizedString(@"Side Effects", nil),
-              NSLocalizedString(@"Previous Meds", nil),
               NSLocalizedString(@"Medication Diary", nil),
               NSLocalizedString(@"Alerts", nil),
               NSLocalizedString(@"Appointments", nil),
@@ -42,4 +42,95 @@
               NSLocalizedString(@"New Procedure", nil),
               NSLocalizedString(@"New Wellness", nil)];    
 }
+
++ (NSString *)controllerNameForRowIndexPath:(NSIndexPath *)indexPath
+                                ignoreFirst:(BOOL)ignoreFirst
+{
+    NSArray * menus = [Menus hamburgerMenus];
+    if (indexPath.row > menus.count)
+    {
+        return nil;
+    }
+    NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
+    NSString *menuName = [menus objectAtIndex:index];
+    if ([menuName isEqualToString:NSLocalizedString(@"Dashboard", nil)])
+    {
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Results", nil)])
+    {
+        return kResultsController;
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"HIV Medications", nil)])
+    {
+        return kHIVMedsController;
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Missed Meds", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Side Effects", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Medication Diary", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Alerts", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Appointments", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Other Medication", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Clinics", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Procedures", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Wellness", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Login Password", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Backups", nil)])
+    {
+        return kDropboxController;
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
+    {
+        
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Info", nil)])
+    {
+        
+    }
+    return nil;
+}
+
++ (NSString *)editControllerNameForRowIndexPath:(NSIndexPath *)indexPath
+                                    ignoreFirst:(BOOL)ignoreFirst
+{
+    NSArray * menus = [Menus addMenus];
+    if (indexPath.row > menus.count)
+    {
+        return nil;
+    }
+    NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
+    NSString *menuName = [menus objectAtIndex:index];
+    return nil;
+}
+
+
 @end

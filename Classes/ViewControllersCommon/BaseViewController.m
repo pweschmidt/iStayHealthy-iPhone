@@ -10,6 +10,7 @@
 #import "CoreDataConstants.h"
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
+#import <DropboxSDK/DropboxSDK.h>
 #import "GeneralSettings.h"
 #import "Constants.h"
 #import "CustomTableView.h"
@@ -17,7 +18,8 @@
 #import "Menus.h"
 
 @interface BaseViewController ()
-
+@property (nonatomic, assign) BOOL hamburgerMenuIsShown;
+@property (nonatomic, assign) BOOL addMenuIsShown;
 @end
 
 @implementation BaseViewController
@@ -25,6 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hamburgerMenuIsShown = NO;
+    self.addMenuIsShown = NO;
     self.view.backgroundColor = DEFAULT_BACKGROUND;
     if ([Utilities isIPad])
     {
@@ -172,7 +176,7 @@
 }
 
 #pragma mark - iPad controller delegate methods
-- (void)slideOutHamburger
+- (void)slideOutHamburgerToNavController:(NSString *)navController
 {
     [UIView beginAnimations:@"slideOutHamburger" context:nil];
     [UIView setAnimationDuration:0.5f];
@@ -186,6 +190,25 @@
     self.hamburgerMenuBarButton.enabled = YES;
     self.addMenuBarButton.enabled = YES;
     [UIView commitAnimations];
+    if (nil != navController)
+    {
+        if ([navController isEqualToString:kDropboxController])
+        {
+            if (![[DBSession sharedSession] isLinked])
+            {
+                [[DBSession sharedSession] linkFromController:self];
+            }
+            else
+            {
+                [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:navController];
+            }
+        }
+        else
+        {
+            [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:navController];
+        }
+    }
+    self.hamburgerMenuIsShown = NO;
 }
 
 - (void)slideInHamburger
@@ -203,6 +226,7 @@
     self.hamburgerMenuBarButton.enabled = NO;
     self.addMenuBarButton.enabled = NO;
     [UIView commitAnimations];
+    self.hamburgerMenuIsShown = YES;
 }
 
 - (void)slideInAdder
@@ -220,9 +244,10 @@
     self.hamburgerMenuBarButton.enabled = NO;
     self.addMenuBarButton.enabled = NO;
     [UIView commitAnimations];
+    self.addMenuIsShown = YES;
 }
 
-- (void)slideOutAdder
+- (void)slideOutAdderToNavController:(NSString *)navController
 {
     [UIView beginAnimations:@"slideOutAdder" context:nil];
     [UIView setAnimationDuration:0.5f];
@@ -235,5 +260,49 @@
     self.hamburgerMenuBarButton.enabled = YES;
     self.addMenuBarButton.enabled = YES;
     [UIView commitAnimations];
+    if (nil != navController)
+    {
+        [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:navController];
+    }
+    self.addMenuIsShown = NO;
 }
+
+#pragma mark - handle rotations (iPad only)
+- (BOOL)shouldAutorotate
+{
+    if ([Utilities isIPad])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([Utilities isIPad])
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+    else
+    {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (self.hamburgerMenuIsShown)
+    {
+        [self slideOutHamburgerToNavController:nil];
+    }
+    if (self.addMenuIsShown)
+    {
+        [self slideOutAdderToNavController:nil];
+    }
+}
+
+
 @end

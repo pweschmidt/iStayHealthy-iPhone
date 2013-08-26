@@ -16,6 +16,7 @@
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
+		C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
 		C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB56A1494F119005E9A0F /* SwitcherCell.xib */; };
 		C42AB57F14950EE5005E9A0F /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB58114950EE5005E9A0F /* PasswordCell.xib */; };
@@ -374,6 +375,8 @@
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
 		C4276D6D12DB7AED001DDCD2 /* cross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small.png"; sourceTree = "<group>"; };
+		C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVMedicationViewController.h; path = ViewControllersCommon/MyHIVMedicationViewController.h; sourceTree = "<group>"; };
+		C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHIVMedicationViewController.m; path = ViewControllersCommon/MyHIVMedicationViewController.m; sourceTree = "<group>"; };
 		C4279EFC146AEDCA00D93B34 /* clinic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clinic.png; sourceTree = "<group>"; };
 		C42AB5691494F119005E9A0F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SwitcherCell.xib; sourceTree = "<group>"; };
 		C42AB56B1494F122005E9A0F /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SwitcherCell.xib; sourceTree = "<group>"; };
@@ -1151,6 +1154,8 @@
 				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
 				C4A6E21B17C7770C0020FC2A /* Menus.h */,
 				C4A6E21C17C7770C0020FC2A /* Menus.m */,
+				C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */,
+				C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */,
 				C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */,
 				C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */,
 			);
@@ -1909,6 +1914,7 @@
 				C4C4192C15F1383000882416 /* HIVMedListCell.m in Sources */,
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				C4C4192E15F1383000882416 /* HIVMedSupportCell.m in Sources */,
+				C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */,
 				C4C4193015F1383000882416 /* MedSelectionCell.m in Sources */,
 				C4C4193215F1383000882416 /* MoreResultsCell.m in Sources */,
 				C4C4193415F1383000882416 /* OtherMedCell.m in Sources */,

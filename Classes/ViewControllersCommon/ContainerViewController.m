@@ -10,7 +10,7 @@
 #import "LoginViewController.h"
 #import "ContentContainerViewController.h"
 #import "Constants.h"
-
+#import "Utilities.h"
 @interface ContainerViewController ()
 @property (nonatomic, strong) LoginViewController * loginController;
 @property (nonatomic, strong) ContentContainerViewController * contentController;
@@ -75,6 +75,31 @@
         [self.loginController didMoveToParentViewController:self];
         self.currentController = self.loginController;
     }];    
+}
+
+#pragma mark - handle rotations (iPad only)
+- (BOOL)shouldAutorotate
+{
+    if ([Utilities isIPad])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([Utilities isIPad])
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+    else
+    {
+        return UIInterfaceOrientationMaskPortrait;
+    }
 }
 
 

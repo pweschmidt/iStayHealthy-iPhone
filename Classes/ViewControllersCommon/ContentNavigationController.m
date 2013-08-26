@@ -8,7 +8,7 @@
 
 #import "ContentNavigationController.h"
 #import "ContentContainerViewController.h"
-
+#import "Utilities.h"
 
 @interface ContentNavigationController ()
 

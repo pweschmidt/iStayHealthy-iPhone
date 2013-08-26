@@ -24,6 +24,7 @@ NSString * const kAddController = @"AddController";
 NSString * const kResultsController = @"ResultsController";
 NSString * const kDashboardController = @"DashboardController";
 NSString * const kDropboxController = @"DropboxController";
+NSString * const kHIVMedsController = @"MyHIVMedicationViewController";
 
 
 

@@ -16,8 +16,8 @@
 /**
  show the menu view
  */
-- (void)slideOutHamburger;
+- (void)slideOutHamburgerToNavController:(NSString *)navController;
 
 - (void)slideInAdder;
-- (void)slideOutAdder;
+- (void)slideOutAdderToNavController:(NSString *)navController;
 @end

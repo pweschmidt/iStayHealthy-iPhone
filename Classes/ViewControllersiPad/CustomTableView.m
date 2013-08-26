@@ -7,6 +7,8 @@
 //
 
 #import "CustomTableView.h"
+#import "Constants.h"
+#import "Menus.h"
 
 @interface CustomTableView ()
 @property (nonatomic, strong, readwrite) NSArray * menuItems;
@@ -85,16 +87,46 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (HamburgerMenuType == self.type)
+    {
+        [self handleHamburgerMenuRowAtIndexPath:indexPath];
+    }
+    else if (AddMenuType == self.type)
+    {
+        [self handleAddMenuRowAtIndexPath:indexPath];
+    }
+}
+
+- (void)handleHamburgerMenuRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (0 == indexPath.row)
     {
-        switch (self.type)
+        [self.containerDelegate slideOutHamburgerToNavController:nil];
+    }
+    else
+    {
+        NSString *controllerName = [Menus controllerNameForRowIndexPath:indexPath
+                                                            ignoreFirst:YES];
+        if (nil != controllerName)
         {
-            case HamburgerMenuType:
-                [self.containerDelegate slideOutHamburger];
-                break;
-            case AddMenuType:
-                [self.containerDelegate slideOutAdder];
-                break;
+            [self.containerDelegate slideOutHamburgerToNavController:controllerName];
+        }
+    }
+}
+
+- (void)handleAddMenuRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.row)
+    {
+        [self.containerDelegate slideOutAdderToNavController:nil];
+    }
+    else
+    {
+        NSString *editCtrlName = [Menus editControllerNameForRowIndexPath:indexPath
+                                                              ignoreFirst:YES];
+        if (nil != editCtrlName)
+        {
+            [self.containerDelegate slideOutAdderToNavController:editCtrlName];
         }
     }
 }

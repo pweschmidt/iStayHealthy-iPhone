@@ -10,6 +10,7 @@
 #import "CoreDataConstants.h"
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
+#import <DropboxSDK/DropboxSDK.h>
 #import "GeneralSettings.h"
 #import "Constants.h"
 #import "CustomTableView.h"
@@ -17,7 +18,8 @@
 #import "Menus.h"
 
 @interface BaseTableViewController ()
-
+@property (nonatomic, assign) BOOL hamburgerMenuIsShown;
+@property (nonatomic, assign) BOOL addMenuIsShown;
 @end
 
 @implementation BaseTableViewController
@@ -25,12 +27,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hamburgerMenuIsShown = NO;
+    self.addMenuIsShown = NO;
     self.view.backgroundColor = DEFAULT_BACKGROUND;
     if ([Utilities isIPad])
     {
         mainFrameCenter = self.view.frame;
-        mainFrameToLeft = CGRectMake(self.view.frame.origin.x - 200, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-        mainFrameToRight = CGRectMake(self.view.frame.origin.x +200, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+        mainFrameToLeft = CGRectMake(-200, self.view.frame.origin.y, self.view.frame.size.width - 200, self.view.frame.size.height);
+        mainFrameToRight = CGRectMake(200, self.view.frame.origin.y, self.view.frame.size.width - 200, self.view.frame.size.height);
         offScreenLeft = CGRectMake(-200, 0, 200, self.view.frame.size.height);
         onScreenLeft = CGRectMake(0, 0, 200, self.view.frame.size.height);
         offScreenRight = CGRectMake(self.view.frame.size.width, 0, 200, self.view.frame.size.height);
@@ -189,7 +193,7 @@
 
 
 #pragma mark - iPad controller delegate methods
-- (void)slideOutHamburger
+- (void)slideOutHamburgerToNavController:(NSString *)navController
 {
     [UIView beginAnimations:@"slideOutHamburger" context:nil];
     [UIView setAnimationDuration:0.5f];
@@ -198,11 +202,30 @@
     self.iPadHamburgerMenuView.frame = offScreenLeft;
     [self.iPadHamburgerMenuView setNeedsDisplay];
     self.tableView.alpha = 1.0;
-//    self.tableView.frame = mainFrameCenter;
+    self.tableView.frame = mainFrameCenter;
     self.navigationController.navigationBar.alpha = 1.0;
     self.hamburgerMenuBarButton.enabled = YES;
     self.addMenuBarButton.enabled = YES;
     [UIView commitAnimations];
+    if (nil != navController)
+    {
+        if ([navController isEqualToString:kDropboxController])
+        {
+            if (![[DBSession sharedSession] isLinked])
+            {
+                [[DBSession sharedSession] linkFromController:self];
+            }
+            else
+            {
+                [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:navController];
+            }
+        }
+        else
+        {
+            [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:navController];
+        }
+    }
+    self.hamburgerMenuIsShown = NO;
 }
 
 - (void)slideInHamburger
@@ -215,11 +238,11 @@
     self.iPadHamburgerMenuView.alpha = 1.0;
     [self.iPadHamburgerMenuView setNeedsDisplay];
     self.tableView.alpha = 0.9;
-//    self.tableView.frame = mainFrameToRight;
     self.navigationController.navigationBar.alpha = 0.9;
     self.hamburgerMenuBarButton.enabled = NO;
     self.addMenuBarButton.enabled = NO;
     [UIView commitAnimations];
+    self.hamburgerMenuIsShown = YES;
 }
 
 - (void)slideInAdder
@@ -232,14 +255,14 @@
     self.iPadAddMenuView.alpha = 1.0;
     [self.iPadAddMenuView setNeedsDisplay];
     self.tableView.alpha = 0.9;
-//    self.tableView.frame = mainFrameToLeft;
     self.navigationController.navigationBar.alpha = 0.9;
     self.hamburgerMenuBarButton.enabled = NO;
     self.addMenuBarButton.enabled = NO;
     [UIView commitAnimations];
+    self.addMenuIsShown = YES;
 }
 
-- (void)slideOutAdder
+- (void)slideOutAdderToNavController:(NSString *)navController
 {
     [UIView beginAnimations:@"slideOutAdder" context:nil];
     [UIView setAnimationDuration:0.5f];
@@ -247,12 +270,48 @@
     self.iPadAddMenuView.frame = offScreenRight;
     [self.iPadAddMenuView setNeedsDisplay];
     self.tableView.alpha = 1.0;
-//    self.tableView.frame = mainFrameCenter;
     self.navigationController.navigationBar.alpha = 1.0;
     self.hamburgerMenuBarButton.enabled = YES;
     self.addMenuBarButton.enabled = YES;
     [UIView commitAnimations];
+    self.addMenuIsShown = NO;
 }
 
+#pragma mark - handle rotations (iPad only)
+- (BOOL)shouldAutorotate
+{
+    if ([Utilities isIPad])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([Utilities isIPad])
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+    else
+    {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (self.hamburgerMenuIsShown)
+    {
+        [self slideOutHamburgerToNavController:nil];
+    }
+    if (self.addMenuIsShown)
+    {
+        [self slideOutAdderToNavController:nil];
+    }
+}
 
 @end

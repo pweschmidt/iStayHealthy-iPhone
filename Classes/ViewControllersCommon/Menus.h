@@ -11,4 +11,10 @@
 @interface Menus : NSObject
 + (NSArray *)hamburgerMenus;
 + (NSArray *)addMenus;
++ (NSString *)controllerNameForRowIndexPath:(NSIndexPath *)indexPath
+                                ignoreFirst:(BOOL)ignoreFirst;
+
++ (NSString *)editControllerNameForRowIndexPath:(NSIndexPath *)indexPath
+                                    ignoreFirst:(BOOL)ignoreFirst;
+
 @end

@@ -51,6 +51,7 @@ extern NSString * const kAddController;
 extern NSString * const kResultsController;
 extern NSString * const kDashboardController;
 extern NSString * const kDropboxController;
+extern NSString * const kHIVMedsController;
 /**
  General
  */
