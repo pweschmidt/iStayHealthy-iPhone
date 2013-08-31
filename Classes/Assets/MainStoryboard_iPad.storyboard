@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3734.1"/>
     </dependencies>
     <scenes>
-        <!--Container View Controller-->
+        <!--Container View Controller i Pad-->
         <scene sceneID="7IO-cw-61y">
             <objects>
-                <viewController storyboardIdentifier="containerController" id="aQs-ZU-szb" customClass="ContainerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="containerController" id="aQs-ZU-szb" customClass="ContainerViewController_iPad" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D7f-7X-QIE"/>
                         <viewControllerLayoutGuide type="bottom" id="6a2-fB-Ccg"/>
@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-168" y="-177"/>
         </scene>
-        <!--Content Container View Controller-->
+        <!--Content Container View Controller i Pad-->
         <scene sceneID="t3X-eC-2HW">
             <objects>
-                <viewController storyboardIdentifier="contentController" id="ksK-On-ygA" customClass="ContentContainerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="contentController" id="ksK-On-ygA" customClass="ContentContainerViewController_iPad" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ms2-dP-Reg"/>
                         <viewControllerLayoutGuide type="bottom" id="H9D-b0-sQV"/>
@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="751" y="-177"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login View Controller i Pad-->
         <scene sceneID="ag0-b0-FsW">
             <objects>
-                <viewController storyboardIdentifier="loginController" id="28q-mZ-Gcq" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginController" id="28q-mZ-Gcq" customClass="LoginViewController_iPad" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VbK-Er-T0S"/>
                         <viewControllerLayoutGuide type="bottom" id="Pfe-Td-DqV"/>

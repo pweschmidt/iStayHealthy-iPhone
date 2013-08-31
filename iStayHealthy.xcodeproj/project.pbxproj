@@ -15,6 +15,10 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
+		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
+		C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */; };
+		C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */; };
+		C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
@@ -374,6 +378,14 @@
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
+		C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHIVMedsTableViewController.h; path = ViewControllersiPhone/EditHIVMedsTableViewController.h; sourceTree = "<group>"; };
+		C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHIVMedsTableViewController.m; path = ViewControllersiPhone/EditHIVMedsTableViewController.m; sourceTree = "<group>"; };
+		C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewController_iPad.h; path = ViewControllersiPad/ContainerViewController_iPad.h; sourceTree = "<group>"; };
+		C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController_iPad.m; path = ViewControllersiPad/ContainerViewController_iPad.m; sourceTree = "<group>"; };
+		C41D8B1A17D22EE3008EC822 /* ContentContainerViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentContainerViewController_iPad.h; path = ViewControllersiPad/ContentContainerViewController_iPad.h; sourceTree = "<group>"; };
+		C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentContainerViewController_iPad.m; path = ViewControllersiPad/ContentContainerViewController_iPad.m; sourceTree = "<group>"; };
+		C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController_iPad.h; path = ViewControllersiPad/LoginViewController_iPad.h; sourceTree = "<group>"; };
+		C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController_iPad.m; path = ViewControllersiPad/LoginViewController_iPad.m; sourceTree = "<group>"; };
 		C4276D6D12DB7AED001DDCD2 /* cross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small.png"; sourceTree = "<group>"; };
 		C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVMedicationViewController.h; path = ViewControllersCommon/MyHIVMedicationViewController.h; sourceTree = "<group>"; };
 		C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHIVMedicationViewController.m; path = ViewControllersCommon/MyHIVMedicationViewController.m; sourceTree = "<group>"; };
@@ -1165,6 +1177,8 @@
 		C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */ = {
 			isa = PBXGroup;
 			children = (
+				C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */,
+				C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */,
 				C45D00EE17BAB403001AE0CB /* EditResultsTableViewController.h */,
 				C45D00EF17BAB403001AE0CB /* EditResultsTableViewController.m */,
 			);
@@ -1174,9 +1188,15 @@
 		C47DB22E17AD05B40037A6DF /* ViewControllersiPad */ = {
 			isa = PBXGroup;
 			children = (
+				C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */,
+				C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */,
+				C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */,
+				C41D8B1A17D22EE3008EC822 /* ContentContainerViewController_iPad.h */,
+				C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */,
 				C4A6E21617C76DE90020FC2A /* CustomTableView.h */,
 				C4A6E21717C76DE90020FC2A /* CustomTableView.m */,
-				C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */,
+				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
+				C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */,
 			);
 			name = ViewControllersiPad;
 			sourceTree = "<group>";
@@ -1905,6 +1925,7 @@
 				C4C418D715F1363C00882416 /* XMLDocument.m in Sources */,
 				C4C418D815F1363C00882416 /* XMLElement.m in Sources */,
 				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
+				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
 				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,
 				C4C4192315F1383000882416 /* AlertListCell.m in Sources */,
 				C4C4192515F1383000882416 /* ClinicAddressCell.m in Sources */,
@@ -1980,6 +2001,7 @@
 				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
+				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
@@ -2013,11 +2035,13 @@
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
 				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
+				C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
+				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,

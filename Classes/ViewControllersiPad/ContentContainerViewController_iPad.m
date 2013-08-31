@@ -1,12 +1,12 @@
 //
-//  ContentContainerViewController.m
+//  ContentContainerViewController_iPad.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 03/08/2013.
+//  Created by Peter Schmidt on 31/08/2013.
 //
 //
 
-#import "ContentContainerViewController.h"
+#import "ContentContainerViewController_iPad.h"
 #import "HamburgerMenuTableViewController.h"
 #import "AddMenuTableViewController.h"
 #import "ResultsListTableViewController.h"
@@ -16,24 +16,32 @@
 #import "DropboxViewController.h"
 #import "Utilities.h"
 
-@interface ContentContainerViewController ()
+@interface ContentContainerViewController_iPad ()
 @property (nonatomic, strong) NSDictionary * controllers;
 @property (nonatomic, strong) id currentController;
 @property (nonatomic, strong) id previousController;
 @end
 
-@implementation ContentContainerViewController
+@implementation ContentContainerViewController_iPad
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.controllers = [self rootControllers_iPhone];
+    self.controllers = [self rootControllers_iPad];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)rewindToPreviousController
@@ -62,44 +70,36 @@
     }];
 }
 
-#pragma iPhone handling
 
-- (NSDictionary *)rootControllers_iPhone
+#pragma iPad handling
+- (NSDictionary *)rootControllers_iPad
 {
-    HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    AddMenuTableViewController *addController = [[AddMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
     MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
-    menuController.view.frame = self.view.frame;
-    addController.view.frame = self.view.frame;
-    resultsController.view.frame = self.view.frame;
-    dropBoxController.view.frame = self.view.frame;
-    hivController.view.frame = self.view.frame;
+    //    resultsController.view.frame = self.view.frame;
+    //    dropBoxController.view.frame = self.view.frame;
+    //    hivController.view.frame = self.view.frame;
     
-    ContentNavigationController *menuNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:menuController];
-    ContentNavigationController *addNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:addController];
     ContentNavigationController *resultsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:resultsController];
     ContentNavigationController *dropNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dropBoxController];
     ContentNavigationController *hivNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:hivController];
     
-    [self addChildViewController:menuNavCtrl];
-    [self addChildViewController:addNavCtrl];
     [self addChildViewController:resultsNavCtrl];
     [self addChildViewController:dropNavCtrl];
     [self addChildViewController:hivNavCtrl];
-
+    
     [self.view addSubview:resultsNavCtrl.view];
+    
     self.currentController = resultsNavCtrl;
     self.previousController = nil;
     
-    NSDictionary *controllers = @{kMenuController : menuNavCtrl,
-                                  kAddController : addNavCtrl,
-                                  kResultsController : resultsNavCtrl,
+    NSDictionary *controllers = @{kResultsController : resultsNavCtrl,
                                   kDropboxController : dropNavCtrl,
                                   kHIVMedsController : hivNavCtrl
                                   };
+    
     return controllers;
 }
 

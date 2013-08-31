@@ -1,28 +1,29 @@
 //
-//  ContainerViewController.m
+//  ContainerViewController_iPad.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 22/06/2013.
+//  Created by Peter Schmidt on 31/08/2013.
 //
 //
 
-#import "ContainerViewController.h"
-#import "LoginViewController.h"
-#import "ContentContainerViewController.h"
+#import "ContainerViewController_iPad.h"
+#import "LoginViewController_iPad.h"
+#import "ContentContainerViewController_iPad.h"
 #import "Constants.h"
 #import "Utilities.h"
-@interface ContainerViewController ()
-@property (nonatomic, strong) LoginViewController * loginController;
-@property (nonatomic, strong) ContentContainerViewController * contentController;
+
+@interface ContainerViewController_iPad ()
+@property (nonatomic, strong) LoginViewController_iPad * loginController;
+@property (nonatomic, strong) ContentContainerViewController_iPad * contentController;
 @property (nonatomic, strong) id currentController;
 @end
 
-@implementation ContainerViewController
+@implementation ContainerViewController_iPad
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"We got to the ContainerViewController - hurrah");
+    NSLog(@"We got to the ContainerViewController for iPad - hurrah");
     self.loginController = [self.storyboard
                             instantiateViewControllerWithIdentifier:@"loginController"];
     if (nil != self.loginController)
@@ -31,7 +32,7 @@
         [self addChildViewController:self.loginController];
     }
     self.contentController = [self.storyboard
-                            instantiateViewControllerWithIdentifier:@"contentController"];
+                              instantiateViewControllerWithIdentifier:@"contentController"];
     if (nil != self.contentController)
     {
         self.contentController.view.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
@@ -53,12 +54,12 @@
         [self.view addSubview:self.contentController.view];
         self.currentController = self.contentController;
     }
-
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)transitionToContentController:(id)sender
@@ -74,10 +75,33 @@
     [self transitionFromViewController:self.currentController toViewController:self.loginController duration:0 options:UIViewAnimationTransitionNone animations:nil completion:^(BOOL finished){
         [self.loginController didMoveToParentViewController:self];
         self.currentController = self.loginController;
-    }];    
+    }];
 }
 
+#pragma mark - handle rotations (iPad only)
+/*
+- (BOOL)shouldAutorotate
+{
+    if ([Utilities isIPad])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
 
-
-
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([Utilities isIPad])
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+    else
+    {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+ */
 @end
