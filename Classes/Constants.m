@@ -111,7 +111,7 @@ NSString * const kLiverAlanineTransaminase = @"liverAlanineTransaminase";
 NSString * const kLiverAspartateTransaminase = @"liverAspartateTransaminase";
 NSString * const kLiverAlkalinePhosphatase = @"liverAlkalinePhosphatase";
 NSString * const kLiverAlbumin = @"liverAlbumin";
-
+NSString * const kBloodPressure = @"BloodPressure";
 NSString * const kLiverAlanineTotalBilirubin = @"liverAlanineTotalBilirubin";
 NSString * const kLiverAlanineDirectBilirubin = @"liverAlanineDirectBilirubin";
 NSString * const kLiverGammaGlutamylTranspeptidase = @"liverGammaGlutamylTranspeptidase";

@@ -13,6 +13,18 @@
 #define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 
 
+typedef NS_ENUM(NSUInteger, InputType)
+{
+    DefaultInput = 0,
+    NumericalInput,
+    PercentageInput,
+    BloodPressureInput,
+    TextInput,
+    EmailInput,
+    WebInput
+};
+
+
 typedef NS_ENUM(NSUInteger, MenuType)
 {
     HamburgerMenuType = 0,
@@ -124,6 +136,7 @@ extern NSString * const kTriglyceride;
 extern NSString * const kHeartRate;
 extern NSString * const kSystole;
 extern NSString * const kDiastole;
+extern NSString * const kBloodPressure;
 extern NSString * const kOxygenLevel;
 extern NSString * const kWeight;
 extern NSString * const kHemoglobulin;

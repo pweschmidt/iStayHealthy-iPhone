@@ -144,11 +144,7 @@
 "PasswordSet"="Password is set";
 "Change"="Change";
 "Treatment Start Date"="Treatment Start Date";
-"HDL"="HDL cholesterol";
-"LDL"="LDL cholesterol";
-"Triglyceride"="Triglyceride cholesterol";
 "Total Cholesterol"="Total Cholesterol";
-"Glucose"="Blood sugar";
 "Hemoglobulin"="Hemoglobulin";
 "White Blood Cells"="White Blood Cells";
 "Platelet"="Red Blood Cells";
@@ -159,7 +155,6 @@
 "DOB"="Date of Birth";
 "Smoker"="Smoker?";
 "Diabetic"="Diabetic?";
-"Weight"="Weight";
 "HIVResults"="Viral Measures";
 "GeneralBloods"="Blood and Other Results";
 "GeneralWellBeing"="General";
@@ -199,3 +194,39 @@
 "Testing"="HIV Testing";
 "Prevention"="How to stay safe";
 "Enter Effect"="Enter Effect";
+
+/** 
+ NEW STRINGS
+ */
+
+/**
+ Results
+ */
+"CD4"="CD4 Count";
+"ResultsDate" = "Date";
+"ViralLoad" = "Viral Load";
+"CD4Percent" = "CD4 %";
+"HepCViralLoad" = "Viral Load (HepC)";
+"Glucose" = "Blood Sugar";
+"TotalCholesterol" = "Cholesterol";
+"LDL" = "LDL";
+"HDL" = "HDL";
+"Triglyceride" = "Triglyceride";
+"HeartRate" = "Heart Rate";
+"Systole" = "Blood Pressure (Top)";
+"Diastole" = "Blood Pressure (Btm)";
+"OxygenLevel" = "Oxygen Level";
+"Weight" = "Weight";
+"Hemoglobulin" = "Hemoglobulin";
+"PlateletCount" = "Platelets";
+"WhiteBloodCellCount" = "White Blood Cells";
+"redBloodCellCount" = "Red Blood Cells";
+"cholesterolRatio" = "Cholesterol Ratio";
+"cardiacRiskFactor" = "Risk Factor (Heart)";
+"liverAlanineTransaminase" = "Alanine Transaminase";
+"liverAspartateTransaminase" = "Liver AST";
+"liverAlkalinePhosphatase" = "Liver ALP";
+"liverAlbumin" = "Albumin";
+"liverAlanineTotalBilirubin" = "Bilirubin (total)";
+"liverAlanineDirectBilirubin" = "Bilirubin (direct)";
+"liverGammaGlutamylTranspeptidase" = "Liver GGT (gamma)";

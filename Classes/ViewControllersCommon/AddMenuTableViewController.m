@@ -9,7 +9,15 @@
 #import "AddMenuTableViewController.h"
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
+#import "EditAlertsTableViewController.h"
+#import "EditAppointmentsTableViewController.h"
+#import "EditHIVMedsTableViewController.h"
+#import "EditMissedMedsTableViewController.h"
+#import "EditOtherMedsTableViewController.h"
 #import "EditResultsTableViewController.h"
+#import "EditProceduresTableViewController.h"
+#import "EditSideEffectsTableViewController.h"
+#import "EditWellnessTableViewController.h"
 #import "Menus.h"
 @interface AddMenuTableViewController ()
 @property (nonatomic, strong) NSArray * menus;
@@ -61,44 +69,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -108,7 +78,55 @@
     {
         case 0:
         {
-            EditResultsTableViewController *resultsCtrl = [[EditResultsTableViewController alloc] init];
+            EditResultsTableViewController *resultsCtrl = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 1:
+        {
+            EditHIVMedsTableViewController *resultsCtrl = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 2:
+        {
+            EditOtherMedsTableViewController *resultsCtrl = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 3:
+        {
+            EditMissedMedsTableViewController *resultsCtrl = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 4:
+        {
+            EditSideEffectsTableViewController *resultsCtrl = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 5:
+        {
+            EditAlertsTableViewController *resultsCtrl = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 6:
+        {
+            EditAppointmentsTableViewController *resultsCtrl = [[EditAppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 7:
+        {
+            EditProceduresTableViewController *resultsCtrl = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            [self.navigationController pushViewController:resultsCtrl animated:YES];
+        }
+            break;
+        case 8:
+        {
+            EditWellnessTableViewController *resultsCtrl = [[EditWellnessTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
             [self.navigationController pushViewController:resultsCtrl animated:YES];
         }
             break;

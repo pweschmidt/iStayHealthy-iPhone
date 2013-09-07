@@ -18,44 +18,14 @@
     CGRect separatorFrame;
     CGRect textViewFrame;
 }
+@property (nonatomic, strong) NSArray * defaultValues;
 @property (nonatomic, strong) NSArray * editResultsMenu;
-@property (nonatomic, strong) NSMutableArray *textViews;
-@property (nonatomic, strong) Results * currentResults;
+@property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, assign) BOOL isInEditMode;
 
 @end
 
 @implementation EditResultsTableViewController
-
-- (id)init
-{
-    return [self initWithStyle:UITableViewStyleGrouped results:nil];
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    return [self initWithStyle:style results:nil];
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-            results:(Results *)results
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        _currentResults = results;
-        if (nil != results)
-        {
-            _isInEditMode = YES;
-        }
-        else
-        {
-            _isInEditMode = NO;
-        }
-    }
-    return self;
-}
-
 
 - (void)viewDidLoad
 {
@@ -80,26 +50,47 @@
                              kRedBloodCells,
                              kPlatelet,
                              kWeight,
-                             kSystole,
-                             kDiastole,
+                             kBloodPressure,
                              kCardiacRiskFactor];
-    self.textViews = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
+    self.defaultValues = @[@"400-1500",
+                           @"20.0 - 50.0",
+                           @"10 - 10000000",
+                           @"10 - 10000000"
+                           @"4.0 - 7.0",
+                           @"3.0 - 6.0",
+                           @"1.0 - 2.2"
+                           @"2.0 - 3.4",
+                           @"1.8 - 2.7",
+                           @"3.5 - 11",
+                           @"11.5 - 14.5",
+                           @"150 - 450",
+                           @"Enter your weight",
+                           @"120/80",
+                           @"0.0 - 10.0"];
+    
+    
+    
+    self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
 }
 
 - (IBAction)save:(id)sender
 {
-
-    if (nil == self.currentResults)
+    if (!self.isInEditMode)
     {
-        self.currentResults = [[CoreDataManager sharedInstance] managedObjectForEntityName:kResults];
-        self.currentResults.UID = [Utilities GUID];
-        self.currentResults.ResultsDate = [NSDate date];
-        [self.textViews enumerateObjectsUsingBlock:^(UITextView *view, NSUInteger index, BOOL *stop) {
+        Results * results = [[CoreDataManager sharedInstance]
+                             managedObjectForEntityName:kResults];
+        results.UID = [Utilities GUID];
+        results.ResultsDate = [NSDate date];
+        [self.titleStrings enumerateObjectsUsingBlock:^(UITextView *view, NSUInteger index, BOOL *stop) {
             NSString *valueString = view.text;
             NSString *type = [self.editResultsMenu objectAtIndex:index];
-            [self.currentResults addValueString:valueString type:type];
+            [results addValueString:valueString type:type];
         }];
         
+    }
+    else
+    {
+        Results * results = (Results *)self.managedObject;
     }
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
@@ -132,91 +123,16 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    [self configureResultsCell:cell atIndexPath:indexPath];
-    return cell;
-}
-
-- (void)configureResultsCell:(UITableViewCell *)resultsCell
-                 atIndexPath:(NSIndexPath *)indexPath
-{
-    UILabel *title = [[UILabel alloc] initWithFrame:labelFrame];
-    NSString *text = NSLocalizedString([self.editResultsMenu objectAtIndex:indexPath.row], nil);
-    title.text = text;
-    title.backgroundColor = [UIColor clearColor];
-    
-    UIView *separator = [[UIView alloc] initWithFrame:separatorFrame];
-    separator.backgroundColor = [UIColor lightGrayColor];
-    
-    UITextField *textField = [[UITextField alloc] initWithFrame:textViewFrame];
-    textField.delegate = self;
-    textField.tag = indexPath.row;
-    textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-    textField.keyboardAppearance = UIKeyboardAppearanceLight;
-    [self.textViews insertObject:textField atIndex:indexPath.row];
- 
-    [resultsCell addSubview:title];
-    [resultsCell addSubview:separator];
-    [resultsCell addSubview:textField];
-}
-
-#pragma mark - UITextViewDelegate methods
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    textField.textColor = [UIColor blackColor];
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    
-    NSString *separator = [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];
-    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSString *expression = nil;
-    
-    int tag = textField.tag;
-    BOOL isIntegerField = (0 == tag || 2 == tag || 3 == tag || 9 == tag || 10 == tag || 11 == tag || 13 == tag || 14 == tag);
-    
-    if (isIntegerField)
+    if (0 == indexPath.row)
     {
-        expression = @"^([0-9]+)?$";
+        [self configureDateCell:cell indexPath:indexPath];
     }
     else
     {
-        if ([@"." isEqualToString:separator])
-        {
-            expression = @"^([0-9]{1,3})?(\\.([0-9]{1,2})?)?$";
-        }
-        else
-        {
-            expression = @"^([0-9]{1,3})?(,([0-9]{1,2})?)?$";
-        }
+        NSString *text = NSLocalizedString([self.editResultsMenu objectAtIndex:indexPath.row], nil);
+        [self configureTableCell:cell title:text indexPath:indexPath];
     }
-    
-    
-    NSError *error = nil;
-    
-    NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:expression
-                                  options:NSRegularExpressionCaseInsensitive
-                                  error:&error];
-    if (error)
-    {
-        return YES;
-    }
-    NSUInteger numberOfMatches = [regex numberOfMatchesInString:newString
-                                                        options:0
-                                                          range:NSMakeRange(0, [newString length])];
-    
-    if (0 < numberOfMatches)
-    {
-        return YES;
-    }
-    return NO;
+    return cell;
 }
 
 

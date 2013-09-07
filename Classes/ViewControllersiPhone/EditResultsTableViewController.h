@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseEditTableViewController.h"
 
 @class Results;
 
-@interface EditResultsTableViewController : UITableViewController <UITextFieldDelegate>
-- (id)initWithStyle:(UITableViewStyle)style results:(Results *)results;
+@interface EditResultsTableViewController : BaseEditTableViewController
 @end
