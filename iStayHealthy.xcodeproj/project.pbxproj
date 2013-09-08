@@ -68,6 +68,8 @@
 		C462002E140934C500E70B5B /* viramune.png in Resources */ = {isa = PBXBuildFile; fileRef = C4620029140934C500E70B5B /* viramune.png */; };
 		C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22817AD04F80037A6DF /* ContainerViewController.m */; };
 		C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46231441632E21D005DD746 /* SQLDatabaseManager.m */; };
+		C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A6E3F17DC80D900D99A3F /* UITableViewCell+Extras.m */; };
+		C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A6E4517DC857A00D99A3F /* NSDate+Extras.m */; };
 		C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */; };
 		C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22B17AD05630037A6DF /* LoginViewController.m */; };
 		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
@@ -490,6 +492,10 @@
 		C46231441632E21D005DD746 /* SQLDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseManager.m; sourceTree = "<group>"; };
 		C465974013EE848B00006F72 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		C465974213EE849600006F72 /* libxslt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxslt.dylib; path = usr/lib/libxslt.dylib; sourceTree = SDKROOT; };
+		C46A6E3E17DC80D900D99A3F /* UITableViewCell+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+Extras.h"; path = "Categories/UITableViewCell+Extras.h"; sourceTree = "<group>"; };
+		C46A6E3F17DC80D900D99A3F /* UITableViewCell+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+Extras.m"; path = "Categories/UITableViewCell+Extras.m"; sourceTree = "<group>"; };
+		C46A6E4417DC857A00D99A3F /* NSDate+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extras.h"; path = "Categories/NSDate+Extras.h"; sourceTree = "<group>"; };
+		C46A6E4517DC857A00D99A3F /* NSDate+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extras.m"; path = "Categories/NSDate+Extras.m"; sourceTree = "<group>"; };
 		C47B705D163ACABB0092C439 /* SQLBackupStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLBackupStoreManager.h; sourceTree = "<group>"; };
 		C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLBackupStoreManager.m; sourceTree = "<group>"; };
 		C47DB22717AD04F80037A6DF /* ContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = ViewControllersCommon/ContainerViewController.h; sourceTree = "<group>"; };
@@ -1538,6 +1544,8 @@
 				C4BCF0AA17B7AA2D00F1E0F7 /* Medication+Handling.m */,
 				C4BCF0A317B7A9F300F1E0F7 /* MissedMedication+Handling.h */,
 				C4BCF0A417B7A9F300F1E0F7 /* MissedMedication+Handling.m */,
+				C46A6E4417DC857A00D99A3F /* NSDate+Extras.h */,
+				C46A6E4517DC857A00D99A3F /* NSDate+Extras.m */,
 				C4BCF09117B7A81500F1E0F7 /* NSManagedObject+Handling.h */,
 				C4BCF09217B7A81500F1E0F7 /* NSManagedObject+Handling.m */,
 				C4BCF09417B7A87500F1E0F7 /* NSNumber+Handling.h */,
@@ -1552,6 +1560,8 @@
 				C4BCF08F17B7A35A00F1E0F7 /* Results+Handling.m */,
 				C4BCF0A017B7A9DA00F1E0F7 /* SideEffects+Handling.h */,
 				C4BCF0A117B7A9DA00F1E0F7 /* SideEffects+Handling.m */,
+				C46A6E3E17DC80D900D99A3F /* UITableViewCell+Extras.h */,
+				C46A6E3F17DC80D900D99A3F /* UITableViewCell+Extras.m */,
 				C4BCF09717B7A94000F1E0F7 /* Wellness+Handling.h */,
 				C4BCF09817B7A94000F1E0F7 /* Wellness+Handling.m */,
 			);
@@ -2072,6 +2082,7 @@
 				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
 				C45C27CA17DB5A75001F6831 /* EditAppointmentsTableViewController.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
+				C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
 				C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */,
@@ -2112,6 +2123,7 @@
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
+				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */,

@@ -7,6 +7,10 @@
 //
 
 #import "EditHIVMedsTableViewController.h"
+#import "UITableViewCell+Extras.h"
+#import "NSDate+Extras.h"
+#import "Constants.h"
+#import "GeneralSettings.h"
 
 @interface EditHIVMedsTableViewController ()
 @property (nonatomic, strong) NSArray *combiTablets;
@@ -24,14 +28,15 @@
 
 @implementation EditHIVMedsTableViewController
 
-- (id)init
-{
-    return [self initWithStyle:UITableViewStyleGrouped meds:nil];
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    return [self initWithStyle:style meds:nil];
+    self = [super initWithStyle:style];
+    if (self)
+    {
+        _meds  = nil;
+        _isInEditMode = NO;
+    }
+    return self;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style meds:(NSArray *)meds
@@ -140,10 +145,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
+    NSString *identifier = [self cellIdentifierForIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+
+    if (nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    if (0 == indexPath.section)
+    {
+        [cell configureCellWithDate:self.startDate];
+    }
+    else
+    {
+        [self configureMedicationCell:cell indexPath:indexPath];
+    }
     
     return cell;
 }
@@ -180,56 +196,160 @@
     return 60.0;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) deselect: (id) sender
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow]
+                                  animated:YES];
 }
 
- */
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section)
+    {
+    }
+    else
+    {
+        UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        NSInteger rowKey = indexPath.row;
+        NSInteger section = indexPath.section;
+        switch (section)
+        {
+                rowKey = 100 + rowKey;
+                break;
+            case 3:
+                rowKey = 1000 + rowKey;
+                break;
+            case 4:
+                rowKey = 10000 + rowKey;
+                break;
+            case 5:
+                rowKey = 100000 + rowKey;
+                break;
+            case 6:
+                rowKey = 1000000 + rowKey;
+                break;
+        }
+        NSString *key = [NSString stringWithFormat:@"%d",rowKey];
+        BOOL isChecked = !([[self.stateDictionary objectForKey:key] boolValue]);
+        NSNumber *checked = [NSNumber numberWithBool:isChecked];
+        [self.stateDictionary setObject:checked forKey:key];
+        
+        // Update the cell accessory checkmark
+        cell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+        
+        
+        [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+    }
+    
+}
+
+#pragma mark - configuring the med cells
+- (void)configureMedicationCell:(UITableViewCell *)cell
+                      indexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellKey = [self cellKeyForIndexPath:indexPath];
+    NSArray *description = [self medDescriptionForIndexPath:indexPath];
+    
+    NSNumber * checked = [self.stateDictionary objectForKey:cellKey];
+    if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:cellKey];
+    cell.accessoryType = checked.boolValue ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
+
+    NSString *imageName = [description objectAtIndex:3];
+    NSString *path = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
+    
+    UIImageView *imageView = [[UIImageView alloc]init];
+    imageView.backgroundColor = [UIColor clearColor];
+    imageView.frame = CGRectMake(20, 3, 55, 55);
+    imageView.image = [UIImage imageWithContentsOfFile:path];
+    
+    UILabel *typeLabel = [[UILabel alloc] init];
+    typeLabel.backgroundColor = [UIColor clearColor];
+    typeLabel.frame = CGRectMake(83, 0, 200, 21);
+    typeLabel.font = [UIFont italicSystemFontOfSize:12];
+    typeLabel.textColor = [UIColor darkGrayColor];
+    typeLabel.text = [description objectAtIndex:2];
+    
+    UILabel *nameLabel = [[UILabel alloc] init];
+    nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.frame = CGRectMake(83, 20, 200, 21);
+    nameLabel.font = [UIFont systemFontOfSize:17];
+    nameLabel.textColor = TEXTCOLOUR;
+    nameLabel.text = [description objectAtIndex:1];
+    
+    UILabel *drugLabel = [[UILabel alloc] init];
+    drugLabel.backgroundColor = [UIColor clearColor];
+    drugLabel.frame = CGRectMake(83, 40, 200, 21);
+    drugLabel.font = [UIFont italicSystemFontOfSize:12];
+    drugLabel.textColor = [UIColor redColor];
+    drugLabel.text = [description objectAtIndex:0];
+    
+    [cell.contentView addSubview:imageView];
+    [cell.contentView addSubview:typeLabel];
+    [cell.contentView addSubview:nameLabel];
+    [cell.contentView addSubview:drugLabel];
+}
+
+- (NSString *)cellIdentifierForIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section)
+    {
+        return @"SetDateCell";
+    }
+    else
+    {
+        return @"MedSelectionCell";
+    }
+}
+
+- (NSString *)cellKeyForIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0 || indexPath.section == 1)
+    {
+        return [NSString stringWithFormat:@"%d", indexPath.row];
+    }
+    
+    NSInteger multiplier = 1;
+    for (NSInteger index = 0; index < indexPath.section; index++)
+    {
+        multiplier *= 10;
+    }
+    multiplier += indexPath.row;
+    return [NSString stringWithFormat:@"%d",multiplier];
+}
+
+- (NSArray *)medDescriptionForIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section)
+    {
+        return nil;
+    }
+    NSArray * descriptionArray = nil;
+    switch (indexPath.section)
+    {
+        case 1:
+            descriptionArray = (NSArray *)[self.combiTablets objectAtIndex:indexPath.row];
+            break;
+        case 2:
+            descriptionArray = (NSArray *)[self.entryInhibitors objectAtIndex:indexPath.row];
+            break;
+        case 3:
+            descriptionArray = (NSArray *)[self.integraseInhibitors objectAtIndex:indexPath.row];
+            break;
+        case 4:
+            descriptionArray = (NSArray *)[self.nNRTInhibitors objectAtIndex:indexPath.row];
+            break;
+        case 5:
+            descriptionArray = (NSArray *)[self.nRTInihibtors objectAtIndex:indexPath.row];
+            break;
+        case 6:
+            descriptionArray = (NSArray *)[self.proteaseInhibitors objectAtIndex:indexPath.row];
+            break;
+    }
+    return descriptionArray;
+}
 
 @end

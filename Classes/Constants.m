@@ -9,7 +9,7 @@
 #import "Constants.h"
 
 NSString * const kAppNotificationKey = @"iStayHealthyNotification";
-
+NSString * const kDefaultDateFormatting = @"dd-MMM-yy HH:mm:ss";
 
 NSString * const kDropboxConsumerKey = @"sekt4gbt7526j0y";;
 NSString * const kDropboxSecretKey = @"drg5hompcf9vbd2";;
