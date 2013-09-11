@@ -322,4 +322,13 @@
     return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
 }
 
++ (BOOL)isIOS7
+{
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
+    {
+        return NO;
+    }
+    return YES;
+}
+
 @end

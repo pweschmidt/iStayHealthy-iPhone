@@ -10,12 +10,21 @@
 #import "GeneralSettings.h"
 #import "Constants.h"
 
-@interface BaseEditTableViewController : UITableViewController <UITextFieldDelegate, UIActionSheetDelegate>
+#define kBaseDateCellTag 99
+#define kBaseDateCellRow 0
+#define kBaseDateCellRowHeight 255
+
+@interface BaseEditTableViewController : UITableViewController
+    <UITextFieldDelegate, UIActionSheetDelegate>
 @property (nonatomic, strong) NSMutableDictionary * contentViewsDictionary;
 @property (nonatomic, strong) NSMutableDictionary * textViews;
 @property (nonatomic, assign) BOOL isEditMode;
 @property (nonatomic, strong) NSManagedObject * managedObject;
 @property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) UIDatePicker * datePicker;
+@property (nonatomic, strong) NSIndexPath * datePickerIndexPath;
+@property (nonatomic, assign) NSUInteger cellCount;
+
 - (id)initWithStyle:(UITableViewStyle)style
       managedObject:(NSManagedObject *)managedObject
   hasNumericalInput:(BOOL)hasNumericalInput;
@@ -26,6 +35,9 @@
 
 - (void)configureDateCell:(UITableViewCell *)cell
                 indexPath:(NSIndexPath *)indexPath;
-- (void)changeDate;
+- (void)changeDate:(NSIndexPath *)indexPath;
+
+- (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;
+- (BOOL)indexPathHasDate:(NSIndexPath *)indexPath;
 
 @end

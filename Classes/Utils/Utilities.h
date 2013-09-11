@@ -31,4 +31,5 @@
 + (NSString *)testingInfoURLFromLocale;
 + (NSString *)preventionURLFromLocale;
 + (BOOL)isIPad;
++ (BOOL)isIOS7;
 @end
