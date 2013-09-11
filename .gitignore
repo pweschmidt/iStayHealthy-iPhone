@@ -1,5 +1,10 @@
+# XCode
 .DS_Store
-.DS_Store?
-.xcuserdata
-.xcuserstate
+xcuserdata
+*.xcuserstate
+*/build/*
+*.pbxuser
+profile
+*.hmap
+DerivedData
 
