@@ -67,7 +67,7 @@
                            @"Enter your weight",
                            @"120/80",
                            @"0.0 - 10.0"];
-    
+    self.cellCount = self.editResultsMenu.count + 1;
     
     
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
@@ -112,7 +112,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.editResultsMenu.count;
+    return [super tableView:tableView numberOfRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
