@@ -24,6 +24,7 @@
         _hasNumericalInput = hasNumericalInput;
         _managedObject = managedObject;
         _isEditMode = (nil != managedObject);
+        _date = [NSDate date];
     }
     return self;
 }
@@ -103,7 +104,6 @@
 {
     
 }
-
 
 #pragma mark - Table view data source
 
@@ -225,6 +225,24 @@
         return YES;
     }
     return NO;
+}
+
+#pragma mark - ActionSheet delegate only used for iOS 6.x
+- (void)changeDate
+{
+    NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
+	[actionSheet showInView:self.view];
+	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+	datePicker.tag = 101;
+	datePicker.datePickerMode = UIDatePickerModeDate;
+	[actionSheet addSubview:datePicker];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
+	self.date = datePicker.date;
 }
 
 @end

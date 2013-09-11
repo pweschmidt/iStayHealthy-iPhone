@@ -10,12 +10,12 @@
 #import "GeneralSettings.h"
 #import "Constants.h"
 
-@interface BaseEditTableViewController : UITableViewController <UITextFieldDelegate>
+@interface BaseEditTableViewController : UITableViewController <UITextFieldDelegate, UIActionSheetDelegate>
 @property (nonatomic, strong) NSMutableDictionary * contentViewsDictionary;
 @property (nonatomic, strong) NSMutableDictionary * textViews;
 @property (nonatomic, assign) BOOL isEditMode;
 @property (nonatomic, strong) NSManagedObject * managedObject;
-
+@property (nonatomic, strong) NSDate * date;
 - (id)initWithStyle:(UITableViewStyle)style
       managedObject:(NSManagedObject *)managedObject
   hasNumericalInput:(BOOL)hasNumericalInput;
@@ -26,5 +26,6 @@
 
 - (void)configureDateCell:(UITableViewCell *)cell
                 indexPath:(NSIndexPath *)indexPath;
+- (void)changeDate;
 
 @end
