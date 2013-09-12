@@ -67,9 +67,7 @@
                            @"Enter your weight",
                            @"120/80",
                            @"0.0 - 10.0"];
-    self.cellCount = self.editResultsMenu.count + 1;
-    
-    
+        
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
 }
 
@@ -112,7 +110,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [super tableView:tableView numberOfRowsInSection:section];
+    if ([self hasInlineDatePicker])
+    {
+        // we have a date picker, so allow for it in the number of rows in this section
+        NSInteger numRows = self.editResultsMenu.count + 1;
+        return ++numRows;
+    }
+    return self.editResultsMenu.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

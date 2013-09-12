@@ -36,7 +36,15 @@
     self.contentViewsDictionary = [NSMutableDictionary dictionary];
     self.textViews = [NSMutableDictionary dictionary];
     //date cell is ALWAYS at the top
-    self.datePickerIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    if (EMBEDDED_DATE_PICKER)
+    {
+        self.datePickerIndexPath = [NSIndexPath indexPathForRow:kBaseDatePickerRow
+                                                      inSection:0];
+    }
+    else
+    {
+        self.datePickerIndexPath = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,13 +126,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([self hasInlineDatePicker])
-    {
-        // we have a date picker, so allow for it in the number of rows in this section
-        NSInteger numRows = self.cellCount;
-        return ++numRows;
-    }
-    return self.cellCount;
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]                                 userInfo:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
