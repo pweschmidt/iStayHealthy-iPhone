@@ -12,6 +12,7 @@
 
 #define kBaseDateCellTag 99
 #define kBaseDateCellRow 0
+#define kBaseDatePickerRow 1
 #define kBaseDateCellRowHeight 255
 
 @interface BaseEditTableViewController : UITableViewController
@@ -23,7 +24,6 @@
 @property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (nonatomic, strong) NSIndexPath * datePickerIndexPath;
-@property (nonatomic, assign) NSUInteger cellCount;
 
 - (id)initWithStyle:(UITableViewStyle)style
       managedObject:(NSManagedObject *)managedObject
@@ -37,6 +37,7 @@
                 indexPath:(NSIndexPath *)indexPath;
 - (void)changeDate:(NSIndexPath *)indexPath;
 
+- (BOOL)hasInlineDatePicker;
 - (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath;
 
