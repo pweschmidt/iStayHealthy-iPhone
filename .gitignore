@@ -1,7 +1,7 @@
 # XCode
 .DS_Store
 xcuserdata
-*.xcuserstate
+*xcuserstate
 */build/*
 *.pbxuser
 profile
