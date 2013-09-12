@@ -8,6 +8,7 @@
 
 #import "BaseEditTableViewController.h"
 #import "Utilities.h"
+#import "NSDate+Extras.h"
 
 @interface BaseEditTableViewController ()
 @property (nonatomic, assign) BOOL hasNumericalInput;
@@ -113,16 +114,29 @@
 - (void)configureDateCell:(UITableViewCell *)cell
                 indexPath:(NSIndexPath *)indexPath
 {
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    UIView *mainContentView = [[UIView alloc] initWithFrame:cell.contentView.frame];
+    mainContentView.backgroundColor = [UIColor whiteColor];
     
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.backgroundColor = [UIColor clearColor];
+    imageView.frame = CGRectMake(20, 0, 44, 44);
+    imageView.image = [UIImage imageNamed:@"appointments.png"];
+    
+    [mainContentView addSubview:imageView];
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(50, 0, 200, cell.contentView.frame.size.height);
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = TEXTCOLOUR;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:15];
+    label.text = [self.date stringFromCustomDate];
+    self.dateLabel = label;
+    
+    [cell.contentView addSubview:mainContentView];
 }
 
 #pragma mark - Table view data source
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
-}
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -158,6 +172,10 @@
     UIColor *backgroundColour = [UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:235.0f/255.0f alpha:0.8];
     
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        if (nil != self.dateCellView)
+        {
+            self.dateCellView.backgroundColor = backgroundColour;
+        }
         for (NSNumber *tagFieldNumber in self.textViews.allKeys)
         {
             UIView *view = [self.contentViewsDictionary objectForKey:tagFieldNumber];
@@ -181,6 +199,10 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        if (nil != self.dateCellView)
+        {
+            self.dateCellView.backgroundColor = [UIColor whiteColor];
+        }
         for (NSNumber *tagFieldNumber in self.textViews.allKeys)
         {
             UIView *view = [self.contentViewsDictionary objectForKey:tagFieldNumber];
@@ -266,7 +288,7 @@
         before = self.datePickerIndexPath.row < indexPath.row;
     }
     
-    BOOL sameCellClicked = (self.datePickerIndexPath.row - 1 == indexPath.row);
+    BOOL sameCellClicked = (kBaseDateCellRow == indexPath.row);
     
     // remove any date picker cell if it exists
     if ([self hasInlineDatePicker])
@@ -393,5 +415,31 @@
     
     [self.tableView endUpdates];
 }
+
+- (IBAction)dateAction:(id)sender
+{
+    NSIndexPath *targetedCellIndexPath = nil;
+    
+    if ([self hasInlineDatePicker])
+    {
+        // inline date picker: update the cell's date "above" the date picker cell
+        //
+        targetedCellIndexPath = [NSIndexPath indexPathForRow:self.datePickerIndexPath.row - 1 inSection:0];
+    }
+    else
+    {
+        // external date picker: update the current "selected" cell's date
+        targetedCellIndexPath = [self.tableView indexPathForSelectedRow];
+    }
+    
+    UIDatePicker *targetedDatePicker = sender;
+    
+    // update our data model
+//    NSMutableDictionary *itemData = self.dataArray[targetedCellIndexPath.row];
+//    [itemData setValue:targetedDatePicker.date forKey:kDateKey];
+    self.dateLabel.text = [targetedDatePicker.date stringFromCustomDate];
+    // update the cell's date string
+}
+
 
 @end

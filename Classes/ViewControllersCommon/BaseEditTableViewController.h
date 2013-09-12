@@ -24,6 +24,8 @@
 @property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (nonatomic, strong) NSIndexPath * datePickerIndexPath;
+@property (nonatomic, strong) UILabel * dateLabel;
+@property (nonatomic, strong) UIView * dateCellView;
 
 - (id)initWithStyle:(UITableViewStyle)style
       managedObject:(NSManagedObject *)managedObject
