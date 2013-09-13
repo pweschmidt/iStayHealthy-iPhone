@@ -27,6 +27,8 @@
         _managedObject = managedObject;
         _isEditMode = (nil != managedObject);
         _date = [NSDate date];
+        _datePickerIndexPath = nil;
+        _datePickerCellIsShown = NO;
     }
     return self;
 }
@@ -36,16 +38,6 @@
     [super viewDidLoad];
     self.contentViewsDictionary = [NSMutableDictionary dictionary];
     self.textViews = [NSMutableDictionary dictionary];
-    //date cell is ALWAYS at the top
-    if (EMBEDDED_DATE_PICKER)
-    {
-        self.datePickerIndexPath = [NSIndexPath indexPathForRow:kBaseDatePickerRow
-                                                      inSection:0];
-    }
-    else
-    {
-        self.datePickerIndexPath = nil;
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,7 +51,15 @@
                      title:(NSString *)title
                  indexPath:(NSIndexPath *)indexPath
 {
-    NSNumber *taggedViewNumber = [NSNumber numberWithInteger:indexPath.row];
+    NSNumber *taggedViewNumber = nil;
+    if (nil != self.datePickerIndexPath)
+    {
+        taggedViewNumber = [NSNumber numberWithInteger:(indexPath.row - 2)];
+    }
+    else
+    {
+        taggedViewNumber = [NSNumber numberWithInteger:(indexPath.row - 1)];
+    }
     
     cell.contentView.backgroundColor = [UIColor clearColor];
     UIView *mainContentView = [self.contentViewsDictionary objectForKey:taggedViewNumber];
@@ -87,7 +87,7 @@
     {
         textField = [[UITextField alloc] init];
         textField.backgroundColor = [UIColor whiteColor];
-        textField.tag = indexPath.row;
+        textField.tag = [taggedViewNumber integerValue];
         textField.frame = CGRectMake(100, 0, cell.contentView.frame.size.width - 120, cell.contentView.frame.size.height);
         textField.delegate = self;
         textField.font = [UIFont systemFontOfSize:15];
@@ -131,10 +131,32 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:15];
     label.text = [self.date stringFromCustomDate];
+    [mainContentView addSubview:label];
     self.dateLabel = label;
-    
     [cell.contentView addSubview:mainContentView];
 }
+
+- (void)configureDatePickerCell:(UITableViewCell *)cell
+                      indexPath:(NSIndexPath *)indexPath
+{
+    cell.contentView.backgroundColor = [UIColor clearColor];
+//    UIView *mainContentView = [[UIView alloc] initWithFrame:cell.contentView.frame];
+//    mainContentView.backgroundColor = [UIColor whiteColor];
+    
+	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+	datePicker.tag = kBaseDateCellTag;
+	datePicker.datePickerMode = UIDatePickerModeDate;
+    datePicker.backgroundColor = [UIColor clearColor];
+    [datePicker addTarget:self
+                   action:@selector(dateAction:)
+         forControlEvents:UIControlEventValueChanged];
+//    [mainContentView addSubview:datePicker];
+//    self.datePickerCellView = mainContentView;
+    [cell.contentView addSubview:datePicker];
+}
+
+
+
 
 #pragma mark - Table view data source
 
@@ -158,6 +180,16 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.reuseIdentifier isEqualToString:kBaseDateCellRowIdentifier])
+    {
+        self.datePickerCellIsShown = !self.datePickerCellIsShown;
+        [self changeDate:indexPath];
+    }
+    
+}
 
 #pragma mark - UITextFieldDelegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -172,10 +204,16 @@
     UIColor *backgroundColour = [UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:235.0f/255.0f alpha:0.8];
     
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        /*
         if (nil != self.dateCellView)
         {
             self.dateCellView.backgroundColor = backgroundColour;
         }
+        if (nil != self.datePickerIndexPath)
+        {
+            self.datePickerCellView.backgroundColor = backgroundColour;
+        }
+         */
         for (NSNumber *tagFieldNumber in self.textViews.allKeys)
         {
             UIView *view = [self.contentViewsDictionary objectForKey:tagFieldNumber];
@@ -199,10 +237,16 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        /*
         if (nil != self.dateCellView)
         {
             self.dateCellView.backgroundColor = [UIColor whiteColor];
         }
+        if (nil != self.datePickerIndexPath)
+        {
+            self.datePickerCellView.backgroundColor = [UIColor whiteColor];
+        }
+         */
         for (NSNumber *tagFieldNumber in self.textViews.allKeys)
         {
             UIView *view = [self.contentViewsDictionary objectForKey:tagFieldNumber];
@@ -288,7 +332,7 @@
         before = self.datePickerIndexPath.row < indexPath.row;
     }
     
-    BOOL sameCellClicked = (kBaseDateCellRow == indexPath.row);
+//    BOOL sameCellClicked = (kBaseDateCellRow - 1 == indexPath.row);
     
     // remove any date picker cell if it exists
     if ([self hasInlineDatePicker])
@@ -298,7 +342,7 @@
         self.datePickerIndexPath = nil;
     }
     
-    if (!sameCellClicked)
+    if (self.datePickerCellIsShown)
     {
         // hide the old date picker and display the new one
         NSInteger rowToReveal = (before ? indexPath.row - 1 : indexPath.row);
@@ -320,7 +364,7 @@
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
 	[actionSheet showInView:self.view];
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-	datePicker.tag = 101;
+	datePicker.tag = kBaseDateCellTag;
 	datePicker.datePickerMode = UIDatePickerModeDate;
 	[actionSheet addSubview:datePicker];
 }
@@ -328,7 +372,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:101];
+	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:kBaseDateCellTag];
 	self.date = datePicker.date;
 }
 

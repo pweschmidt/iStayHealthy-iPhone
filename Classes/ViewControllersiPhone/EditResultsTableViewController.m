@@ -127,20 +127,46 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"ResultsCell%d",indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *identifier = nil;
+    if (0 == indexPath.row)
+    {
+        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
+    }
+    else
+    {
+        if ([self hasInlineDatePicker])
+        {
+            identifier = [NSString stringWithFormat:@"DatePickerCell"];
+        }
+        else
+        {
+            identifier = [NSString stringWithFormat:@"ResultsCell%d",indexPath.row];
+        }
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (nil == cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    
+    
     if (0 == indexPath.row)
     {
         [self configureDateCell:cell indexPath:indexPath];
     }
     else
     {
-        NSString *text = NSLocalizedString([self.editResultsMenu objectAtIndex:indexPath.row], nil);
-        [self configureTableCell:cell title:text indexPath:indexPath];
+        if ([self hasInlineDatePicker])
+        {
+            [self configureDatePickerCell:cell indexPath:indexPath];
+        }
+        else
+        {
+            NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
+            NSString *text = NSLocalizedString([self.editResultsMenu objectAtIndex:titleIndex], nil);
+            [self configureTableCell:cell title:text indexPath:indexPath];            
+        }
     }
     return cell;
 }
