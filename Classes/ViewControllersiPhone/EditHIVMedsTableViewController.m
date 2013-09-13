@@ -21,46 +21,16 @@
 @property (nonatomic, strong) NSArray *entryInhibitors;
 @property (nonatomic, strong) NSMutableDictionary *stateDictionary;
 @property (nonatomic, strong) NSDate *startDate;
-@property (nonatomic, strong) NSArray * meds;
-@property (nonatomic, assign) BOOL isInEditMode;
 @property (nonatomic, assign) BOOL isInitialLoad;
 @end
 
 @implementation EditHIVMedsTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        _meds  = nil;
-        _isInEditMode = NO;
-    }
-    return self;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style meds:(NSArray *)meds
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        _meds  = meds;
-        if (nil != meds)
-        {
-            _isInEditMode = YES;
-        }
-        else
-        {
-            _isInEditMode = NO;
-        }
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.isInEditMode)
+    if (self.isEditMode)
     {
         self.navigationItem.title = NSLocalizedString(@"Edit HIV Drugs", nil);
     }
@@ -121,6 +91,13 @@
     int rows = 1;
     switch (section)
     {
+        case 0:
+        {
+            if ([self hasInlineDatePicker])
+            {
+                rows = 2;
+            }
+        }
         case 1:
             rows = [self.combiTablets count];
             break;
@@ -193,6 +170,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (0 == indexPath.section)
+    {
+        return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+    }
     return 60.0;
 }
 
@@ -207,6 +188,7 @@
 {
     if (0 == indexPath.section)
     {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
     else
     {

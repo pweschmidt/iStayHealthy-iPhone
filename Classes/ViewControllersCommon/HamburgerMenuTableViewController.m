@@ -9,6 +9,7 @@
 #import "HamburgerMenuTableViewController.h"
 #import "ContentContainerViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "GeneralSettings.h"
 #import "Constants.h"
 #import "Menus.h"
 
@@ -22,6 +23,7 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = DEFAULT_BACKGROUND;
     self.navigationItem.title = NSLocalizedString(@"Menu", nil);
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel

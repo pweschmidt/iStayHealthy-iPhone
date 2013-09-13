@@ -21,8 +21,6 @@
 @property (nonatomic, strong) NSArray * defaultValues;
 @property (nonatomic, strong) NSArray * editResultsMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
-@property (nonatomic, assign) BOOL isInEditMode;
-
 @end
 
 @implementation EditResultsTableViewController
@@ -73,7 +71,7 @@
 
 - (IBAction)save:(id)sender
 {
-    if (!self.isInEditMode)
+    if (!self.isEditMode)
     {
         Results * results = [[CoreDataManager sharedInstance]
                              managedObjectForEntityName:kResults];

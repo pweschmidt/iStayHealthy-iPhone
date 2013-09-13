@@ -9,5 +9,4 @@
 #import "BaseEditTableViewController.h"
 
 @interface EditOtherMedsTableViewController : BaseEditTableViewController
-
 @end

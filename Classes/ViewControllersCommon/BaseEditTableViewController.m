@@ -36,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     self.contentViewsDictionary = [NSMutableDictionary dictionary];
     self.textViews = [NSMutableDictionary dictionary];
 }

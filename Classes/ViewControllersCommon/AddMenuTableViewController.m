@@ -29,7 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = NSLocalizedString(@"New Items", nil);
+    self.tableView.backgroundColor = DEFAULT_BACKGROUND;
+    self.navigationItem.title = NSLocalizedString(@"Add", nil);
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                              target:self action:@selector(cancel)];
@@ -90,7 +91,7 @@
             break;
         case 2:
         {
-            EditOtherMedsTableViewController *resultsCtrl = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            EditOtherMedsTableViewController *resultsCtrl = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
             [self.navigationController pushViewController:resultsCtrl animated:YES];
         }
             break;

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface EditHIVMedsTableViewController : UITableViewController
-- (id)initWithStyle:(UITableViewStyle)style meds:(NSArray *)meds;
+#import "BaseEditTableViewController.h"
+
+@interface EditHIVMedsTableViewController : BaseEditTableViewController
 @end
