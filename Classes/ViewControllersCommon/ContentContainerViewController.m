@@ -14,6 +14,7 @@
 #import "Constants.h"
 #import "ContentNavigationController.h"
 #import "DropboxViewController.h"
+#import "DashboardViewController.h"
 #import "Utilities.h"
 
 @interface ContentContainerViewController ()
@@ -71,7 +72,10 @@
     ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
     MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    
+
+    DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
+
+    dashboardController.view.frame = self.view.frame;
     menuController.view.frame = self.view.frame;
     addController.view.frame = self.view.frame;
     resultsController.view.frame = self.view.frame;
@@ -84,21 +88,25 @@
     ContentNavigationController *dropNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dropBoxController];
     ContentNavigationController *hivNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:hivController];
     
+    ContentNavigationController *dashNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dashboardController];
+    
     [self addChildViewController:menuNavCtrl];
     [self addChildViewController:addNavCtrl];
     [self addChildViewController:resultsNavCtrl];
     [self addChildViewController:dropNavCtrl];
     [self addChildViewController:hivNavCtrl];
+    [self addChildViewController:dashNavCtrl];
 
-    [self.view addSubview:resultsNavCtrl.view];
-    self.currentController = resultsNavCtrl;
+    [self.view addSubview:dashNavCtrl.view];
+    self.currentController = dashNavCtrl;
     self.previousController = nil;
     
     NSDictionary *controllers = @{kMenuController : menuNavCtrl,
                                   kAddController : addNavCtrl,
                                   kResultsController : resultsNavCtrl,
                                   kDropboxController : dropNavCtrl,
-                                  kHIVMedsController : hivNavCtrl
+                                  kHIVMedsController : hivNavCtrl,
+                                  kDashboardController : dashNavCtrl
                                   };
     return controllers;
 }

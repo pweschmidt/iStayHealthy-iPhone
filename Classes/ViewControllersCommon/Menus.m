@@ -55,6 +55,7 @@
     NSString *menuName = [menus objectAtIndex:index];
     if ([menuName isEqualToString:NSLocalizedString(@"Dashboard", nil)])
     {
+        return kDashboardController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Results", nil)])
     {
