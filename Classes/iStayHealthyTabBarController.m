@@ -55,8 +55,6 @@
     {
         statusView = [[NewStatusViewController alloc]initWithNibName:@"NewStatusViewController_iPhone5" bundle:nil];
     }
-//    DashboardViewController *statusView = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:nil];
-//    statusView.title = NSLocalizedString(@"Charts", @"Charts");
     statusView.tabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"Charts", @"Charts") image:[UIImage imageNamed:@"status-small.png"] tag:0];
     UINavigationController *statusNavController = [[UINavigationController alloc]initWithRootViewController:statusView];
     statusNavController.navigationBar.tintColor = [UIColor blackColor];

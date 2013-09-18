@@ -279,7 +279,6 @@
 		C4C41A0815F13EFA00882416 /* SideEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419F415F13EFA00882416 /* SideEffectsViewController.xib */; };
 		C4C41A0915F13EFA00882416 /* ToolsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419F515F13EFA00882416 /* ToolsTableViewController.xib */; };
 		C4C41A1515F1404000882416 /* ClinicsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A0B15F1404000882416 /* ClinicsTableViewController.xib */; };
-		C4C41A1615F1404000882416 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A0C15F1404000882416 /* DashboardViewController.xib */; };
 		C4C41A1715F1404000882416 /* GeneralMedicalTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A0D15F1404000882416 /* GeneralMedicalTableViewController.xib */; };
 		C4C41A1815F1404000882416 /* HIVMedicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A0E15F1404000882416 /* HIVMedicationViewController.xib */; };
 		C4C41A1915F1404000882416 /* NewAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A0F15F1404000882416 /* NewAlertViewController.xib */; };
@@ -863,7 +862,6 @@
 		C4C419F415F13EFA00882416 /* SideEffectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SideEffectsViewController.xib; path = Classes/DetailViewControllers/SideEffectsViewController.xib; sourceTree = "<group>"; };
 		C4C419F515F13EFA00882416 /* ToolsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ToolsTableViewController.xib; path = Classes/DetailViewControllers/ToolsTableViewController.xib; sourceTree = "<group>"; };
 		C4C41A0B15F1404000882416 /* ClinicsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClinicsTableViewController.xib; path = Classes/Controllers/ClinicsTableViewController.xib; sourceTree = "<group>"; };
-		C4C41A0C15F1404000882416 /* DashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DashboardViewController.xib; path = Classes/Controllers/DashboardViewController.xib; sourceTree = "<group>"; };
 		C4C41A0D15F1404000882416 /* GeneralMedicalTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GeneralMedicalTableViewController.xib; path = Classes/Controllers/GeneralMedicalTableViewController.xib; sourceTree = "<group>"; };
 		C4C41A0E15F1404000882416 /* HIVMedicationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HIVMedicationViewController.xib; path = Classes/Controllers/HIVMedicationViewController.xib; sourceTree = "<group>"; };
 		C4C41A0F15F1404000882416 /* NewAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewAlertViewController.xib; path = Classes/Controllers/NewAlertViewController.xib; sourceTree = "<group>"; };
@@ -1099,7 +1097,6 @@
 				C491AE6215F167BE00EB1CF8 /* ProcedureDetailViewController.xib */,
 				C491AE5D15F15B8500EB1CF8 /* OtherMedsDetailViewController.xib */,
 				C4C41A0B15F1404000882416 /* ClinicsTableViewController.xib */,
-				C4C41A0C15F1404000882416 /* DashboardViewController.xib */,
 				C4C41A0D15F1404000882416 /* GeneralMedicalTableViewController.xib */,
 				C4C41A0E15F1404000882416 /* HIVMedicationViewController.xib */,
 				C4C41A0F15F1404000882416 /* NewAlertViewController.xib */,
@@ -2012,7 +2009,6 @@
 				C4C41A0815F13EFA00882416 /* SideEffectsViewController.xib in Resources */,
 				C4C41A0915F13EFA00882416 /* ToolsTableViewController.xib in Resources */,
 				C4C41A1515F1404000882416 /* ClinicsTableViewController.xib in Resources */,
-				C4C41A1615F1404000882416 /* DashboardViewController.xib in Resources */,
 				C4C41A1715F1404000882416 /* GeneralMedicalTableViewController.xib in Resources */,
 				C4C41A1815F1404000882416 /* HIVMedicationViewController.xib in Resources */,
 				C4C41A1915F1404000882416 /* NewAlertViewController.xib in Resources */,

@@ -75,12 +75,12 @@
 
     DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
 
-    dashboardController.view.frame = self.view.frame;
-    menuController.view.frame = self.view.frame;
-    addController.view.frame = self.view.frame;
-    resultsController.view.frame = self.view.frame;
-    dropBoxController.view.frame = self.view.frame;
-    hivController.view.frame = self.view.frame;
+    menuController.view.frame       = self.view.frame;
+    addController.view.frame        = self.view.frame;
+    resultsController.view.frame    = self.view.frame;
+    dropBoxController.view.frame    = self.view.frame;
+    hivController.view.frame        = self.view.frame;
+    dashboardController.view.frame  = self.view.frame;
     
     ContentNavigationController *menuNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:menuController];
     ContentNavigationController *addNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:addController];
