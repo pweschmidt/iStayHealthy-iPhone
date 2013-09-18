@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	self.stateDictionary = [NSMutableDictionary dictionary];
     if (self.isEditMode)
     {
         self.navigationItem.title = NSLocalizedString(@"Edit HIV Drugs", nil);
@@ -98,6 +99,7 @@
                 rows = 2;
             }
         }
+            break;
         case 1:
             rows = [self.combiTablets count];
             break;
@@ -122,16 +124,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = [self cellIdentifierForIndexPath:indexPath];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 
+    NSString *identifier = [self cellIdentifierForIndexPath:indexPath];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    
     if (nil == cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:identifier];
     }
     if (0 == indexPath.section)
     {
-        [cell configureCellWithDate:self.startDate];
+        if (0 == indexPath.row)
+        {
+            [cell configureCellWithDate:self.startDate];
+        }
+        else if ([self hasInlineDatePicker])
+        {
+            [self configureDatePickerCell:cell indexPath:indexPath];
+        }
     }
     else
     {
@@ -140,6 +153,7 @@
     
     return cell;
 }
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -172,7 +186,14 @@
 {
     if (0 == indexPath.section)
     {
-        return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+        if ([self indexPathHasPicker:indexPath])
+        {
+            return kBaseDateCellRowHeight;
+        }
+        else
+        {
+            return self.tableView.rowHeight;
+        }
     }
     return 60.0;
 }
@@ -193,34 +214,12 @@
     else
     {
         UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        NSInteger rowKey = indexPath.row;
-        NSInteger section = indexPath.section;
-        switch (section)
-        {
-                rowKey = 100 + rowKey;
-                break;
-            case 3:
-                rowKey = 1000 + rowKey;
-                break;
-            case 4:
-                rowKey = 10000 + rowKey;
-                break;
-            case 5:
-                rowKey = 100000 + rowKey;
-                break;
-            case 6:
-                rowKey = 1000000 + rowKey;
-                break;
-        }
-        NSString *key = [NSString stringWithFormat:@"%d",rowKey];
-        BOOL isChecked = !([[self.stateDictionary objectForKey:key] boolValue]);
+        NSString *key = [self cellKeyForIndexPath:indexPath];
+        BOOL keyValue = [[self.stateDictionary objectForKey:key] boolValue];
+        BOOL isChecked = !keyValue;
         NSNumber *checked = [NSNumber numberWithBool:isChecked];
         [self.stateDictionary setObject:checked forKey:key];
-        
-        // Update the cell accessory checkmark
         cell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
-        
-        
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
     
@@ -234,7 +233,10 @@
     NSArray *description = [self medDescriptionForIndexPath:indexPath];
     
     NSNumber * checked = [self.stateDictionary objectForKey:cellKey];
-    if (!checked) [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:cellKey];
+    if (!checked)
+    {
+        [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:cellKey];
+    }
     cell.accessoryType = checked.boolValue ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -279,7 +281,14 @@
 {
     if (0 == indexPath.section)
     {
-        return @"SetDateCell";
+        if (0 == indexPath.row)
+        {
+            return kBaseDateCellRowIdentifier;
+        }
+        else
+        {
+            return @"DatePickerCell";
+        }
     }
     else
     {
@@ -289,18 +298,29 @@
 
 - (NSString *)cellKeyForIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 || indexPath.section == 1)
+    NSUInteger rowKey = 0;
+    switch (indexPath.section)
     {
-        return [NSString stringWithFormat:@"%d", indexPath.row];
+        case 1:
+            rowKey = indexPath.row;
+            break;
+        case 2:
+            rowKey = 100 + indexPath.row;
+            break;
+        case 3:
+            rowKey = 1000 + indexPath.row;
+            break;
+        case 4:
+            rowKey = 10000 + indexPath.row;
+            break;
+        case 5:
+            rowKey = 100000 + indexPath.row;
+            break;
+        case 6:
+            rowKey = 1000000 + indexPath.row;
+            break;
     }
-    
-    NSInteger multiplier = 1;
-    for (NSInteger index = 0; index < indexPath.section; index++)
-    {
-        multiplier *= 10;
-    }
-    multiplier += indexPath.row;
-    return [NSString stringWithFormat:@"%d",multiplier];
+    return [NSString stringWithFormat:@"%d",rowKey];
 }
 
 - (NSArray *)medDescriptionForIndexPath:(NSIndexPath *)indexPath
