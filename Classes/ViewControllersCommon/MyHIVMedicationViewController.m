@@ -101,25 +101,24 @@
         else
         {
             self.currentMeds = array;
-            [self.tableView reloadData];
-        }
-    }];
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:YES completion:^(NSArray *array, NSError *error) {
-        if (nil == array)
-        {
-            UIAlertView *errorAlert = [[UIAlertView alloc]
-                                       initWithTitle:@"Error"
-                                       message:@"Error loading data"
-                                       delegate:nil
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:nil];
-            [errorAlert show];
-            
-        }
-        else
-        {
-            self.previousMeds = array;
-            [self.tableView reloadData];
+            [[CoreDataManager sharedInstance] fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:YES completion:^(NSArray *array, NSError *error) {
+                if (nil == array)
+                {
+                    UIAlertView *errorAlert = [[UIAlertView alloc]
+                                               initWithTitle:@"Error"
+                                               message:@"Error loading data"
+                                               delegate:nil
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:nil];
+                    [errorAlert show];
+                    
+                }
+                else
+                {
+                    self.previousMeds = array;
+                    [self.tableView reloadData];
+                }
+            }];
         }
     }];
 }

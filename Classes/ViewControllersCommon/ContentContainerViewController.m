@@ -9,6 +9,11 @@
 #import "ContentContainerViewController.h"
 #import "HamburgerMenuTableViewController.h"
 #import "AddMenuTableViewController.h"
+#import "AppointmentsTableViewController.h"
+#import "ClinicalAddressTableViewController.h"
+#import "NotificationAlertsTableViewController.h"
+#import "OtherMedicationsListTableViewController.h"
+#import "ProceduresListTableViewController.h"
 #import "ResultsListTableViewController.h"
 #import "MyHIVMedicationViewController.h"
 #import "Constants.h"
@@ -74,13 +79,30 @@
     MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
 
     DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
-
+    AppointmentsTableViewController *appController = [[AppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    ClinicalAddressTableViewController *clinicController = [[ClinicalAddressTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    NotificationAlertsTableViewController *alertsController = [[NotificationAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    OtherMedicationsListTableViewController *otherController = [[OtherMedicationsListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    ProceduresListTableViewController *procController = [[ProceduresListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    
+    procController.view.frame       = self.view.frame;
+    otherController.view.frame      = self.view.frame;
+    alertsController.view.frame     = self.view.frame;
+    clinicController.view.frame     = self.view.frame;
+    appController.view.frame        = self.view.frame;
     menuController.view.frame       = self.view.frame;
     addController.view.frame        = self.view.frame;
     resultsController.view.frame    = self.view.frame;
     dropBoxController.view.frame    = self.view.frame;
     hivController.view.frame        = self.view.frame;
     dashboardController.view.frame  = self.view.frame;
+    
+    ContentNavigationController *appointmentNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:appController];
+    ContentNavigationController *clinicNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:clinicController];
+    ContentNavigationController *alertNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:alertsController];
+    ContentNavigationController *otherNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:otherController];
+    ContentNavigationController *procNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:procController];
+    
     
     ContentNavigationController *menuNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:menuController];
     ContentNavigationController *addNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:addController];
@@ -90,6 +112,11 @@
     
     ContentNavigationController *dashNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dashboardController];
     
+    [self addChildViewController:appointmentNavCtrl];
+    [self addChildViewController:clinicNavCtrl];
+    [self addChildViewController:alertNavCtrl];
+    [self addChildViewController:otherNavCtrl];
+    [self addChildViewController:procNavCtrl];
     [self addChildViewController:menuNavCtrl];
     [self addChildViewController:addNavCtrl];
     [self addChildViewController:resultsNavCtrl];
@@ -106,7 +133,12 @@
                                   kResultsController : resultsNavCtrl,
                                   kDropboxController : dropNavCtrl,
                                   kHIVMedsController : hivNavCtrl,
-                                  kDashboardController : dashNavCtrl
+                                  kDashboardController : dashNavCtrl,
+                                  kAppointmentsController : appointmentNavCtrl,
+                                  kAlertsController : alertNavCtrl,
+                                  kOtherMedsController : otherNavCtrl,
+                                  kProceduresController : procNavCtrl,
+                                  kClinicsController : clinicNavCtrl
                                   };
     return controllers;
 }

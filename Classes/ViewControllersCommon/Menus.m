@@ -79,23 +79,23 @@
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Alerts", nil)])
     {
-        
+        return kAlertsController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Appointments", nil)])
     {
-        
+        return kAppointmentsController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Other Medication", nil)])
     {
-        
+        return kOtherMedsController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Clinics", nil)])
     {
-        
+        return kClinicsController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Procedures", nil)])
     {
-        
+        return kProceduresController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Wellness", nil)])
     {
