@@ -86,6 +86,9 @@
 		C46C5DEB17EDA44500866DBD /* InformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DEA17EDA44500866DBD /* InformationTableViewController.m */; };
 		C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */; };
 		C46C5DF117EDA83500866DBD /* SeinfeldCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DF017EDA83500866DBD /* SeinfeldCalendarViewController.m */; };
+		C46C5DFE17EDAF5300866DBD /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C46C5DFC17EDAF5300866DBD /* libGoogleAdMobAds.a */; };
+		C46C5DFF17EDAF5400866DBD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C46C5DFD17EDAF5300866DBD /* README.txt */; };
+		C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46C5E0017EDAF9C00866DBD /* AdSupport.framework */; };
 		C46EB5DC17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */; };
 		C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */; };
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
@@ -549,6 +552,18 @@
 		C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = ViewControllersCommon/SettingsTableViewController.m; sourceTree = "<group>"; };
 		C46C5DEF17EDA83500866DBD /* SeinfeldCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendarViewController.h; path = ViewControllersCommon/SeinfeldCalendarViewController.h; sourceTree = "<group>"; };
 		C46C5DF017EDA83500866DBD /* SeinfeldCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendarViewController.m; path = ViewControllersCommon/SeinfeldCalendarViewController.m; sourceTree = "<group>"; };
+		C46C5DF317EDAF5300866DBD /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		C46C5DF417EDAF5300866DBD /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		C46C5DF517EDAF5300866DBD /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		C46C5DF617EDAF5300866DBD /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		C46C5DF717EDAF5300866DBD /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		C46C5DF817EDAF5300866DBD /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		C46C5DF917EDAF5300866DBD /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		C46C5DFA17EDAF5300866DBD /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		C46C5DFB17EDAF5300866DBD /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		C46C5DFC17EDAF5300866DBD /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		C46C5DFD17EDAF5300866DBD /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		C46C5E0017EDAF9C00866DBD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		C46EB5DA17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedicationsListTableViewController.h; path = ViewControllersCommon/OtherMedicationsListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedicationsListTableViewController.m; path = ViewControllersCommon/OtherMedicationsListTableViewController.m; sourceTree = "<group>"; };
 		C46EB5DD17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationAlertsTableViewController.h; path = ViewControllersCommon/NotificationAlertsTableViewController.h; sourceTree = "<group>"; };
@@ -1027,6 +1042,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */,
+				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
 				C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */,
 				C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */,
@@ -1038,10 +1055,10 @@
 				C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */,
 				C4FB103513A4BF05009270C5 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				C46C5DFE17EDAF5300866DBD /* libGoogleAdMobAds.a in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
-				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
 				C4A899FD1748BC9D0048556A /* DropboxSDK.framework in Frameworks */,
 			);
@@ -1063,6 +1080,7 @@
 				C463742A17E9F12100D19B94 /* Dashboard */,
 				C4B803C112D36E6700A5A38F /* DataModelClasses */,
 				C4B8041212D3723100A5A38F /* DetailViewControllers */,
+				C46C5DF217EDAEFA00866DBD /* GoogleAdMob */,
 				C45C27B617DB265F001F6831 /* TableCells */,
 				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
 				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
@@ -1174,6 +1192,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C46C5E0017EDAF9C00866DBD /* AdSupport.framework */,
 				C4A899FC1748BC9D0048556A /* DropboxSDK.framework */,
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
@@ -1276,6 +1295,24 @@
 				C4C418D415F1363C00882416 /* XMLLoader.m */,
 			);
 			name = XML;
+			sourceTree = "<group>";
+		};
+		C46C5DF217EDAEFA00866DBD /* GoogleAdMob */ = {
+			isa = PBXGroup;
+			children = (
+				C46C5DF317EDAF5300866DBD /* GADAdMobExtras.h */,
+				C46C5DF417EDAF5300866DBD /* GADAdNetworkExtras.h */,
+				C46C5DF517EDAF5300866DBD /* GADAdSize.h */,
+				C46C5DF617EDAF5300866DBD /* GADBannerView.h */,
+				C46C5DF717EDAF5300866DBD /* GADBannerViewDelegate.h */,
+				C46C5DF817EDAF5300866DBD /* GADInterstitial.h */,
+				C46C5DF917EDAF5300866DBD /* GADInterstitialDelegate.h */,
+				C46C5DFA17EDAF5300866DBD /* GADRequest.h */,
+				C46C5DFB17EDAF5300866DBD /* GADRequestError.h */,
+				C46C5DFC17EDAF5300866DBD /* libGoogleAdMobAds.a */,
+				C46C5DFD17EDAF5300866DBD /* README.txt */,
+			);
+			name = GoogleAdMob;
 			sourceTree = "<group>";
 		};
 		C47DB22617AD04D60037A6DF /* ViewControllersCommon */ = {
@@ -1891,6 +1928,7 @@
 				C4B8035F12D365F800A5A38F /* status-small.png in Resources */,
 				C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */,
 				C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */,
+				C46C5DFF17EDAF5400866DBD /* README.txt in Resources */,
 				C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */,
 				C4EB1FE412FD8FA800A8712D /* combi-label-medium.png in Resources */,
 				C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */,
@@ -2483,6 +2521,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
+				);
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -2513,6 +2555,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
+				);
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",
@@ -2606,6 +2652,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
+				);
 				OTHER_LDFLAGS = (
 					"-lxslt",
 					"-lxml2",
