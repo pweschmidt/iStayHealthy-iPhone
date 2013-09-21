@@ -81,6 +81,11 @@
 		C463744C17E9F35900D19B94 /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = C463744917E9F35900D19B94 /* PWESDataTuple.m */; };
 		C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A6E3F17DC80D900D99A3F /* UITableViewCell+Extras.m */; };
 		C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A6E4517DC857A00D99A3F /* NSDate+Extras.m */; };
+		C46C5DE517ED9CCC00866DBD /* MissedMedicationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DE417ED9CCC00866DBD /* MissedMedicationsTableViewController.m */; };
+		C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DE717EDA2B300866DBD /* SideEffectsTableViewController.m */; };
+		C46C5DEB17EDA44500866DBD /* InformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DEA17EDA44500866DBD /* InformationTableViewController.m */; };
+		C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */; };
+		C46C5DF117EDA83500866DBD /* SeinfeldCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DF017EDA83500866DBD /* SeinfeldCalendarViewController.m */; };
 		C46EB5DC17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */; };
 		C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */; };
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
@@ -534,6 +539,16 @@
 		C46A6E3F17DC80D900D99A3F /* UITableViewCell+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+Extras.m"; path = "Categories/UITableViewCell+Extras.m"; sourceTree = "<group>"; };
 		C46A6E4417DC857A00D99A3F /* NSDate+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extras.h"; path = "Categories/NSDate+Extras.h"; sourceTree = "<group>"; };
 		C46A6E4517DC857A00D99A3F /* NSDate+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extras.m"; path = "Categories/NSDate+Extras.m"; sourceTree = "<group>"; };
+		C46C5DE317ED9CCC00866DBD /* MissedMedicationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissedMedicationsTableViewController.h; path = ViewControllersCommon/MissedMedicationsTableViewController.h; sourceTree = "<group>"; };
+		C46C5DE417ED9CCC00866DBD /* MissedMedicationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissedMedicationsTableViewController.m; path = ViewControllersCommon/MissedMedicationsTableViewController.m; sourceTree = "<group>"; };
+		C46C5DE617EDA2B300866DBD /* SideEffectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideEffectsTableViewController.h; path = ViewControllersCommon/SideEffectsTableViewController.h; sourceTree = "<group>"; };
+		C46C5DE717EDA2B300866DBD /* SideEffectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffectsTableViewController.m; path = ViewControllersCommon/SideEffectsTableViewController.m; sourceTree = "<group>"; };
+		C46C5DE917EDA44500866DBD /* InformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InformationTableViewController.h; path = ViewControllersCommon/InformationTableViewController.h; sourceTree = "<group>"; };
+		C46C5DEA17EDA44500866DBD /* InformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InformationTableViewController.m; path = ViewControllersCommon/InformationTableViewController.m; sourceTree = "<group>"; };
+		C46C5DEC17EDA5B200866DBD /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = ViewControllersCommon/SettingsTableViewController.h; sourceTree = "<group>"; };
+		C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = ViewControllersCommon/SettingsTableViewController.m; sourceTree = "<group>"; };
+		C46C5DEF17EDA83500866DBD /* SeinfeldCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendarViewController.h; path = ViewControllersCommon/SeinfeldCalendarViewController.h; sourceTree = "<group>"; };
+		C46C5DF017EDA83500866DBD /* SeinfeldCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendarViewController.m; path = ViewControllersCommon/SeinfeldCalendarViewController.m; sourceTree = "<group>"; };
 		C46EB5DA17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedicationsListTableViewController.h; path = ViewControllersCommon/OtherMedicationsListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedicationsListTableViewController.m; path = ViewControllersCommon/OtherMedicationsListTableViewController.m; sourceTree = "<group>"; };
 		C46EB5DD17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationAlertsTableViewController.h; path = ViewControllersCommon/NotificationAlertsTableViewController.h; sourceTree = "<group>"; };
@@ -1295,8 +1310,12 @@
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
 				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
+				C46C5DE917EDA44500866DBD /* InformationTableViewController.h */,
+				C46C5DEA17EDA44500866DBD /* InformationTableViewController.m */,
 				C4A6E21B17C7770C0020FC2A /* Menus.h */,
 				C4A6E21C17C7770C0020FC2A /* Menus.m */,
+				C46C5DE317ED9CCC00866DBD /* MissedMedicationsTableViewController.h */,
+				C46C5DE417ED9CCC00866DBD /* MissedMedicationsTableViewController.m */,
 				C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */,
 				C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */,
 				C46EB5DD17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.h */,
@@ -1307,6 +1326,12 @@
 				C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */,
 				C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */,
 				C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */,
+				C46C5DEF17EDA83500866DBD /* SeinfeldCalendarViewController.h */,
+				C46C5DF017EDA83500866DBD /* SeinfeldCalendarViewController.m */,
+				C46C5DEC17EDA5B200866DBD /* SettingsTableViewController.h */,
+				C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */,
+				C46C5DE617EDA2B300866DBD /* SideEffectsTableViewController.h */,
+				C46C5DE717EDA2B300866DBD /* SideEffectsTableViewController.m */,
 			);
 			name = ViewControllersCommon;
 			sourceTree = "<group>";
@@ -2072,6 +2097,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C46C5DEB17EDA44500866DBD /* InformationTableViewController.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */,
 				28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */,
@@ -2187,6 +2213,7 @@
 				C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */,
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
 				C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */,
+				C46C5DF117EDA83500866DBD /* SeinfeldCalendarViewController.m in Sources */,
 				C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */,
 				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
 				C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */,
@@ -2198,9 +2225,11 @@
 				C4B9DA7716CE97E600703B67 /* BasicViewController.m in Sources */,
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
+				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
 				C463744A17E9F35900D19B94 /* PWESDataManager.m in Sources */,
 				C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */,
 				C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */,
+				C46C5DE517ED9CCC00866DBD /* MissedMedicationsTableViewController.m in Sources */,
 				C45C27C417DB5A3F001F6831 /* EditSideEffectsTableViewController.m in Sources */,
 				C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */,
 				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
@@ -2226,6 +2255,7 @@
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
+				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
 				C463744B17E9F35900D19B94 /* PWESDataNTuple.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */,

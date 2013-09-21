@@ -14,7 +14,7 @@
 #import "Menus.h"
 
 @interface HamburgerMenuTableViewController ()
-@property (nonatomic, strong) NSArray * menus;
+@property (nonatomic, strong) NSArray *menus;
 @end
 
 @implementation HamburgerMenuTableViewController
@@ -86,6 +86,14 @@
             [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:controllerName];            
         }
     }
+    else if ([controllerName isEqualToString:kFeedbackController])
+    {
+        [self startFeedbackController];
+    }
+    else if ([controllerName isEqualToString:kEmailController])
+    {
+        [self startMailController];
+    }
     else
     {
         [(ContentContainerViewController *)self.parentViewController transitionToNavigationControllerWithName:controllerName];
@@ -96,5 +104,39 @@
 {
     [(ContentNavigationController *)self.parentViewController rewindToPreviousController];
 }
+
+- (void)startMailController
+{
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    mailController.mailComposeDelegate = self;
+    [mailController setSubject:@"iStayHealthy Data (attached)"];
+//    [mailController setMessageBody:msgBody isHTML:NO];
+//    [mailController addAttachmentData:xmlData mimeType:@"text/xml" fileName:tmpXMLFile];
+    [self.navigationController presentViewController:mailController animated:YES completion:^{
+    }];
+}
+
+- (void)startFeedbackController
+{
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    
+    NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
+    mailController.mailComposeDelegate = self;
+    [mailController setToRecipients:toRecipient];
+    [mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
+    [self.navigationController presentViewController:mailController animated:YES completion:^{
+    }];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 
 @end

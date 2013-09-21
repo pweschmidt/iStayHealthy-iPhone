@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "ContentNavigationController.h"
 
 @interface HamburgerMenuTableViewController : UITableViewController
-
+    <MFMailComposeViewControllerDelegate>
 @end

@@ -85,6 +85,14 @@ extern NSString * const kAlertsController;
 extern NSString * const kClinicsController;
 extern NSString * const kOtherMedsController;
 extern NSString * const kProceduresController;
+extern NSString * const kMissedController;
+extern NSString * const kSideEffectsController;
+extern NSString * const kWellnessController;
+extern NSString * const kInfoController;
+extern NSString * const kSettingsController;
+extern NSString * const kMedicationDiaryController;
+extern NSString * const kFeedbackController;
+extern NSString * const kEmailController;
 /**
  General
  */

@@ -8,39 +8,79 @@
 
 #import "Menus.h"
 #import "Constants.h"
+#import "Utilities.h"
 
 @implementation Menus
 + (NSArray *)hamburgerMenus
 {
-    return  @[NSLocalizedString(@"Dashboard", nil),
-              NSLocalizedString(@"Results", nil),
-              NSLocalizedString(@"HIV Medications", nil),
-              NSLocalizedString(@"Missed Meds", nil),
-              NSLocalizedString(@"Side Effects", nil),
-              NSLocalizedString(@"Medication Diary", nil),
-              NSLocalizedString(@"Alerts", nil),
-              NSLocalizedString(@"Appointments", nil),
-              NSLocalizedString(@"Other Medication", nil),
-              NSLocalizedString(@"Clinics", nil),
-              NSLocalizedString(@"Procedures", nil),
-              NSLocalizedString(@"Wellness", nil),
-              NSLocalizedString(@"Login Password", nil),
-              NSLocalizedString(@"Backups", nil),
-              NSLocalizedString(@"Feedback", nil),
-              NSLocalizedString(@"Info", nil)];
-    
+    NSArray *menus = nil;
+    if ([Utilities isIPad])
+    {
+        menus = @[NSLocalizedString(@"Charts", nil),
+                  NSLocalizedString(@"Results", nil),
+                  NSLocalizedString(@"HIV Medications", nil),
+                  NSLocalizedString(@"Missed Meds", nil),
+                  NSLocalizedString(@"Side Effects", nil),
+                  NSLocalizedString(@"Medication Diary", nil),
+                  NSLocalizedString(@"Alerts", nil),
+                  NSLocalizedString(@"Appointments", nil),
+                  NSLocalizedString(@"Other Medication", nil),
+                  NSLocalizedString(@"Clinics", nil),
+                  NSLocalizedString(@"Procedures", nil),
+                  NSLocalizedString(@"Wellness", nil),
+                  NSLocalizedString(@"Settings", nil),
+                  NSLocalizedString(@"Backups", nil),
+                  NSLocalizedString(@"Feedback", nil),
+                  NSLocalizedString(@"Email Data", nil),
+                  NSLocalizedString(@"Info", nil)];
+    }
+    else
+    {
+        menus = @[NSLocalizedString(@"Charts", nil),
+                  NSLocalizedString(@"Results", nil),
+                  NSLocalizedString(@"HIV Medications", nil),
+                  NSLocalizedString(@"Missed Meds", nil),
+                  NSLocalizedString(@"Side Effects", nil),
+                  NSLocalizedString(@"Medication Diary", nil),
+                  NSLocalizedString(@"Alerts", nil),
+                  NSLocalizedString(@"Appointments", nil),
+                  NSLocalizedString(@"Other Medication", nil),
+                  NSLocalizedString(@"Clinics", nil),
+                  NSLocalizedString(@"Procedures", nil),
+                  NSLocalizedString(@"Settings", nil),
+                  NSLocalizedString(@"Backups", nil),
+                  NSLocalizedString(@"Feedback", nil),
+                  NSLocalizedString(@"Email Data", nil),
+                  NSLocalizedString(@"Info", nil)];
+    }
+    return menus;
 }
+
 + (NSArray *)addMenus
 {
-    return  @[NSLocalizedString(@"New Result", nil),
-              NSLocalizedString(@"New HIV Med", nil),
-              NSLocalizedString(@"New Other Med", nil),
-              NSLocalizedString(@"New Missed Med", nil),
-              NSLocalizedString(@"New Side Effects", nil),
-              NSLocalizedString(@"New Alert", nil),
-              NSLocalizedString(@"New Appointment", nil),
-              NSLocalizedString(@"New Procedure", nil),
-              NSLocalizedString(@"New Wellness", nil)];    
+    if ([Utilities isIPad])
+    {
+        return  @[NSLocalizedString(@"New Result", nil),
+                  NSLocalizedString(@"New HIV Med", nil),
+                  NSLocalizedString(@"New Other Med", nil),
+                  NSLocalizedString(@"New Missed Med", nil),
+                  NSLocalizedString(@"New Side Effects", nil),
+                  NSLocalizedString(@"New Alert", nil),
+                  NSLocalizedString(@"New Appointment", nil),
+                  NSLocalizedString(@"New Procedure", nil),
+                  NSLocalizedString(@"New Wellness", nil)];
+    }
+    else
+    {
+        return  @[NSLocalizedString(@"New Result", nil),
+                  NSLocalizedString(@"New HIV Med", nil),
+                  NSLocalizedString(@"New Other Med", nil),
+                  NSLocalizedString(@"New Missed Med", nil),
+                  NSLocalizedString(@"New Side Effects", nil),
+                  NSLocalizedString(@"New Alert", nil),
+                  NSLocalizedString(@"New Appointment", nil),
+                  NSLocalizedString(@"New Procedure", nil)];
+    }
 }
 
 + (NSString *)controllerNameForRowIndexPath:(NSIndexPath *)indexPath
@@ -53,7 +93,7 @@
     }
     NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
     NSString *menuName = [menus objectAtIndex:index];
-    if ([menuName isEqualToString:NSLocalizedString(@"Dashboard", nil)])
+    if ([menuName isEqualToString:NSLocalizedString(@"Charts", nil)])
     {
         return kDashboardController;
     }
@@ -67,15 +107,15 @@
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Missed Meds", nil)])
     {
-        
+        return kMissedController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Side Effects", nil)])
     {
-        
+        return kSideEffectsController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Medication Diary", nil)])
     {
-        
+        return kMedicationDiaryController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Alerts", nil)])
     {
@@ -99,23 +139,27 @@
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Wellness", nil)])
     {
-        
+        return kWellnessController;
     }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Login Password", nil)])
+    else if ([menuName isEqualToString:NSLocalizedString(@"Settings", nil)])
     {
-        
+        return kSettingsController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Backups", nil)])
     {
         return kDropboxController;
     }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
-    {
-        
-    }
     else if ([menuName isEqualToString:NSLocalizedString(@"Info", nil)])
     {
-        
+        return kInfoController;
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
+    {
+        return kFeedbackController;
+    }
+    else if ([menuName isEqualToString:NSLocalizedString(@"Email Data", nil)])
+    {
+        return kEmailController;
     }
     return nil;
 }

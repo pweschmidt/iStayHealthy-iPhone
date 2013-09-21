@@ -30,6 +30,14 @@ NSString * const kAlertsController = @"AlertsController";
 NSString * const kClinicsController = @"ClinicsController";
 NSString * const kOtherMedsController = @"OtherMedsController";
 NSString * const kProceduresController = @"ProceduresController";
+NSString * const kMissedController = @"MissedController";
+NSString * const kSideEffectsController = @"SideEffectsController";
+NSString * const kWellnessController = @"WellnessController";
+NSString * const kInfoController = @"InfoController";
+NSString * const kSettingsController = @"SettingsController";
+NSString * const kMedicationDiaryController = @"MedicationDiaryController";
+NSString * const kFeedbackController = @"FeedbackController";
+NSString * const kEmailController = @"EmailController";
 
 
 

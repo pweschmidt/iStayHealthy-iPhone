@@ -16,6 +16,10 @@
 #import "ProceduresListTableViewController.h"
 #import "ResultsListTableViewController.h"
 #import "MyHIVMedicationViewController.h"
+#import "MissedMedicationsTableViewController.h"
+#import "SideEffectsTableViewController.h"
+#import "SeinfeldCalendarViewController.h"
+#import "InformationTableViewController.h"
 #import "Constants.h"
 #import "ContentNavigationController.h"
 #import "DropboxViewController.h"
@@ -84,7 +88,15 @@
     NotificationAlertsTableViewController *alertsController = [[NotificationAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     OtherMedicationsListTableViewController *otherController = [[OtherMedicationsListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ProceduresListTableViewController *procController = [[ProceduresListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    MissedMedicationsTableViewController *missedController = [[MissedMedicationsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    SideEffectsTableViewController *effectsController = [[SideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    InformationTableViewController *infoController = [[InformationTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    SeinfeldCalendarViewController *calendarController = [[SeinfeldCalendarViewController alloc] init];
     
+    calendarController.view.frame   = self.view.frame;
+    infoController.view.frame       = self.view.frame;
+    effectsController.view.frame    = self.view.frame;
+    missedController.view.frame     = self.view.frame;
     procController.view.frame       = self.view.frame;
     otherController.view.frame      = self.view.frame;
     alertsController.view.frame     = self.view.frame;
@@ -97,6 +109,11 @@
     hivController.view.frame        = self.view.frame;
     dashboardController.view.frame  = self.view.frame;
     
+
+    ContentNavigationController *calendarNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:calendarController];
+    ContentNavigationController *infoNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:infoController];
+    ContentNavigationController *effectsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:effectsController];
+    ContentNavigationController *missedNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:missedController];
     ContentNavigationController *appointmentNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:appController];
     ContentNavigationController *clinicNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:clinicController];
     ContentNavigationController *alertNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:alertsController];
@@ -112,6 +129,10 @@
     
     ContentNavigationController *dashNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dashboardController];
     
+    [self addChildViewController:calendarNavCtrl];
+    [self addChildViewController:infoNavCtrl];
+    [self addChildViewController:effectsNavCtrl];
+    [self addChildViewController:missedNavCtrl];
     [self addChildViewController:appointmentNavCtrl];
     [self addChildViewController:clinicNavCtrl];
     [self addChildViewController:alertNavCtrl];
@@ -138,7 +159,11 @@
                                   kAlertsController : alertNavCtrl,
                                   kOtherMedsController : otherNavCtrl,
                                   kProceduresController : procNavCtrl,
-                                  kClinicsController : clinicNavCtrl
+                                  kClinicsController : clinicNavCtrl,
+                                  kMissedController : missedNavCtrl,
+                                  kSideEffectsController : effectsNavCtrl,
+                                  kInfoController : infoNavCtrl,
+                                  kMedicationDiaryController : calendarNavCtrl
                                   };
     return controllers;
 }

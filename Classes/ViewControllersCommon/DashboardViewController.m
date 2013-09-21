@@ -32,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = NSLocalizedString(@"Charts", nil);
     CGFloat xOffset = 0;
     CGFloat yScrollOffset = 95;
     CGFloat scrollHeight = self.view.frame.size.height - 188;
