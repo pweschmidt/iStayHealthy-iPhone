@@ -81,6 +81,7 @@
 
 
 #pragma mark - implemented methods
+
 - (id)managedObjectForEntityName:(NSString *)entityName
 {
     return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:self.defaultContext];

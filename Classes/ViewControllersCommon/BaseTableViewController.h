@@ -11,7 +11,7 @@
 #import "ContainerViewControllerDelegate.h"
 @class CustomTableView;
 
-@interface BaseTableViewController : UITableViewController <BaseViewControllerDelegate, ContainerViewControllerDelegate>
+@interface BaseTableViewController : UITableViewController <BaseViewControllerDelegate, ContainerViewControllerDelegate, UIAlertViewDelegate>
 {
     CGRect onScreenLeft;
     CGRect offScreenLeft;
@@ -21,11 +21,15 @@
     CGRect mainFrameToRight;
     CGRect mainFrameToLeft;
 }
-@property (nonatomic, strong) CustomTableView * iPadHamburgerMenuView;
-@property (nonatomic, strong) CustomTableView * iPadAddMenuView;
-@property (nonatomic, strong) UIBarButtonItem * hamburgerMenuBarButton;
-@property (nonatomic, strong) UIBarButtonItem * addMenuBarButton;
+@property (nonatomic, strong) CustomTableView *iPadHamburgerMenuView;
+@property (nonatomic, strong) CustomTableView *iPadAddMenuView;
+@property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;
+@property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
+@property (nonatomic, strong) NSManagedObject *markedObject;
+@property (nonatomic, strong) NSIndexPath     *markedIndexPath;
 - (void)configureIPadMenus;
 - (void)settingsMenu;
 - (void)addMenu;
+- (void)showDeleteAlertView;
+- (void)removeSQLEntry;
 @end

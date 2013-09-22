@@ -49,6 +49,8 @@
 		C456C459176C5CBE00053621 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C456C458176C5CBE00053621 /* MainWindow-iPad.xib */; };
 		C4574ADC14938F7E00793164 /* DosageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4574ADE14938F7E00793164 /* DosageCell.xib */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
+		C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E417EEE3BA004E13C7 /* DateView.m */; };
+		C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */; };
 		C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27BA17DB3DC2001F6831 /* BaseEditTableViewController.m */; };
 		C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27BD17DB59FA001F6831 /* EditOtherMedsTableViewController.m */; };
 		C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27C017DB5A1E001F6831 /* EditMissedMedsTableViewController.m */; };
@@ -480,6 +482,10 @@
 		C4574AE014938F8700793164 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE114938F8A00793164 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
+		C45A98E317EEE3BA004E13C7 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateView.h; path = Views/DateView.h; sourceTree = "<group>"; };
+		C45A98E417EEE3BA004E13C7 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateView.m; path = Views/DateView.m; sourceTree = "<group>"; };
+		C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsView_iPhone.h; path = Views/ResultsView_iPhone.h; sourceTree = "<group>"; };
+		C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsView_iPhone.m; path = Views/ResultsView_iPhone.m; sourceTree = "<group>"; };
 		C45C27B917DB3DC2001F6831 /* BaseEditTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEditTableViewController.h; path = ViewControllersCommon/BaseEditTableViewController.h; sourceTree = "<group>"; };
 		C45C27BA17DB3DC2001F6831 /* BaseEditTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEditTableViewController.m; path = ViewControllersCommon/BaseEditTableViewController.m; sourceTree = "<group>"; };
 		C45C27BC17DB59FA001F6831 /* EditOtherMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditOtherMedsTableViewController.h; path = ViewControllersiPhone/EditOtherMedsTableViewController.h; sourceTree = "<group>"; };
@@ -1082,10 +1088,11 @@
 				C4B8041212D3723100A5A38F /* DetailViewControllers */,
 				C46C5DF217EDAEFA00866DBD /* GoogleAdMob */,
 				C45C27B617DB265F001F6831 /* TableCells */,
+				C4C41A1F15F1421800882416 /* Utils */,
 				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
 				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
 				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
-				C4C41A1F15F1421800882416 /* Utils */,
+				C45A98E217EEE35A004E13C7 /* Views */,
 				C465975913EE96D500006F72 /* XML */,
 				1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */,
 				1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */,
@@ -1222,6 +1229,17 @@
 				C456C458176C5CBE00053621 /* MainWindow-iPad.xib */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		C45A98E217EEE35A004E13C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C45A98E317EEE3BA004E13C7 /* DateView.h */,
+				C45A98E417EEE3BA004E13C7 /* DateView.m */,
+				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
+				C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		C45C27B617DB265F001F6831 /* TableCells */ = {
@@ -2197,6 +2215,7 @@
 				C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
+				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
 				C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */,
 				C4C4199B15F13AAD00882416 /* NewAlertViewController.m in Sources */,
 				C4C4199C15F13AAD00882416 /* NewResultsViewController.m in Sources */,
@@ -2290,6 +2309,7 @@
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */,
+				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,

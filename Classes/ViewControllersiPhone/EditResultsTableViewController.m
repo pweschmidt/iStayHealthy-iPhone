@@ -77,12 +77,20 @@
                              managedObjectForEntityName:kResults];
         results.UID = [Utilities GUID];
         results.ResultsDate = [NSDate date];
-        [self.titleStrings enumerateObjectsUsingBlock:^(UITextView *view, NSUInteger index, BOOL *stop) {
-            NSString *valueString = view.text;
-            NSString *type = [self.editResultsMenu objectAtIndex:index];
-            [results addValueString:valueString type:type];
+        [self.textViews.allKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
+            if ([obj isKindOfClass:[NSNumber class]])
+            {
+                NSNumber *number = (NSNumber *)obj;
+                id viewObj = [self.textViews objectForKey:number];
+                if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]])
+                {
+                    UITextField *textField = (UITextField *)viewObj;
+                    NSString *valueString = textField.text;
+                    NSString *type = [self.editResultsMenu objectAtIndex:index];
+                    [results addValueString:valueString type:type];
+                }
+            }
         }];
-        
     }
     else
     {

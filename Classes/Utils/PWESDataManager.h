@@ -36,4 +36,18 @@
 - (NSArray *)combinedTimelineForOrderedRawResults:(NSArray *)rawResults
                                                   types:(NSArray *)types
                                                   error:(NSError **)error;
+
+/**
+ @param types an array of strings for which a predicate will be created
+ @return a predicate to filter an array with
+ */
+- (NSPredicate *)filterPredicateFromTypes:(NSArray *)types;
+
+/**
+ @param type the results type
+ @return a string to be used in a predicate
+ */
+- (NSString *)filterStringForType:(NSString *)type;
+
+
 @end

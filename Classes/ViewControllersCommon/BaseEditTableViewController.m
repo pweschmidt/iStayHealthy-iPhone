@@ -189,7 +189,6 @@
         self.datePickerCellIsShown = !self.datePickerCellIsShown;
         [self changeDate:indexPath];
     }
-    
 }
 
 #pragma mark - UITextFieldDelegate methods
@@ -283,11 +282,11 @@
     
     if ([@"." isEqualToString:separator])
     {
-        expression = @"^([0-9]{1,3})?(\\.([0-9]{1,2})?)?$";
+        expression = @"^([0-9]{1,9})?(\\.([0-9]{1,2})?)?$";
     }
     else
     {
-        expression = @"^([0-9]{1,3})?(,([0-9]{1,2})?)?$";
+        expression = @"^([0-9]{1,9})?(,([0-9]{1,2})?)?$";
     }
     
     NSError *error = nil;

@@ -9,6 +9,7 @@
 #import "BaseTableViewController.h"
 #import "CoreDataConstants.h"
 #import "ContentContainerViewController.h"
+#import "CoreDataManager.h"
 #import "ContentNavigationController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "GeneralSettings.h"
@@ -27,6 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.markedObject = nil;
+    self.markedIndexPath = nil;
     self.hamburgerMenuIsShown = NO;
     self.addMenuIsShown = NO;
     self.view.backgroundColor = DEFAULT_BACKGROUND;
@@ -75,6 +78,12 @@
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
                                  userInfo:nil];
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
 
 - (void)registerObservers
 {
@@ -313,5 +322,45 @@
         [self slideOutAdderToNavController:nil];
     }
 }
+
+
+- (void)showDeleteAlertView
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+    
+    [alert show];
+}
+
+/**
+ if user really wants to delete the entry call removeSQLEntry
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
+    {
+        [self removeSQLEntry];
+    }
+}
+
+- (void)removeSQLEntry
+{
+    if (nil == self.markedObject)
+    {
+        return;
+    }
+    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
+    [defaultContext deleteObject:self.markedObject];
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    if (nil == error)
+    {
+        [self.tableView deleteRowsAtIndexPaths:@[self.markedIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+        [self.tableView reloadData];
+        self.markedObject = nil;
+        self.markedIndexPath = nil;
+    }
+}
+
 
 @end

@@ -13,6 +13,13 @@
 #define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 
 
+typedef NS_ENUM(NSUInteger, ResultsType)
+{
+    HIVResultsType = 0,
+    BloodResultsType,
+    OtherResultsType
+};
+
 typedef NS_ENUM(NSUInteger, InputType)
 {
     DefaultInput = 0,

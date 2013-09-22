@@ -11,6 +11,9 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "DateView.h"
+#import "ResultsView_iPhone.h"
+#import "Results.h"
 
 @interface ResultsListTableViewController ()
 @property (nonatomic, strong) NSArray * results;
@@ -51,11 +54,42 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    [self configureResultsCell:cell indexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
+
+- (void)configureResultsCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    Results *results = [self.results objectAtIndex:indexPath.row];
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    DateView *dateView = [DateView viewWithDate:results.ResultsDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+    
+    ResultsView_iPhone *hivView = [ResultsView_iPhone viewForResults:results resultsType:HIVResultsType frame:CGRectMake(70, 1, 70, rowHeight)];
+    
+    ResultsView_iPhone *bloodView = [ResultsView_iPhone viewForResults:results resultsType:BloodResultsType frame:CGRectMake(145, 1, 60, rowHeight)];
+    
+    ResultsView_iPhone *otherView = [ResultsView_iPhone viewForResults:results resultsType:OtherResultsType frame:CGRectMake(210, 1, 60, rowHeight)];
+
+    [cell.contentView addSubview:dateView];
+    [cell.contentView addSubview:hivView];
+    [cell.contentView addSubview:bloodView];
+    [cell.contentView addSubview:otherView];
+}
+
+
 #pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle)
+    {
+        self.markedIndexPath = indexPath;
+        self.markedObject = [self.results objectAtIndex:indexPath];
+        [self showDeleteAlertView];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
