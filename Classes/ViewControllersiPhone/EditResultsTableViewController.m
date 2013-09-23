@@ -74,30 +74,30 @@
     if (!self.isEditMode)
     {
         Results * results = [[CoreDataManager sharedInstance]
-                             managedObjectForEntityName:kResults];
+                                     managedObjectForEntityName:kResults];
         results.UID = [Utilities GUID];
         results.ResultsDate = [NSDate date];
-        [self.textViews.allKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
-            if ([obj isKindOfClass:[NSNumber class]])
+        int index = 0;
+        for (NSNumber *number in self.textViews.allKeys)
+        {
+            id viewObj = [self.textViews objectForKey:number];
+            if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
+                index < self.editResultsMenu.count)
             {
-                NSNumber *number = (NSNumber *)obj;
-                id viewObj = [self.textViews objectForKey:number];
-                if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]])
-                {
-                    UITextField *textField = (UITextField *)viewObj;
-                    NSString *valueString = textField.text;
-                    NSString *type = [self.editResultsMenu objectAtIndex:index];
-                    [results addValueString:valueString type:type];
-                }
+                UITextField *textField = (UITextField *)viewObj;
+                NSString *valueString = textField.text;
+                NSString *type = [self.editResultsMenu objectAtIndex:index];
+                [results addValueString:valueString type:type];
             }
-        }];
+            ++index;
+        }
     }
     else
     {
         Results * results = (Results *)self.managedObject;
     }
     NSError *error = nil;
-    [[CoreDataManager sharedInstance] saveContext:&error];
+    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

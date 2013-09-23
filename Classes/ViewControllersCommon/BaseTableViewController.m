@@ -351,15 +351,11 @@
     }
     NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
     [defaultContext deleteObject:self.markedObject];
+    [self.tableView deleteRowsAtIndexPaths:@[self.markedIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-    if (nil == error)
-    {
-        [self.tableView deleteRowsAtIndexPaths:@[self.markedIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
-        [self.tableView reloadData];
-        self.markedObject = nil;
-        self.markedIndexPath = nil;
-    }
+    self.markedObject = nil;
+    self.markedIndexPath = nil;
 }
 
 

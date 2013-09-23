@@ -86,14 +86,14 @@
     if (UITableViewCellEditingStyleDelete == editingStyle)
     {
         self.markedIndexPath = indexPath;
-        self.markedObject = [self.results objectAtIndex:indexPath];
+        self.markedObject = [self.results objectAtIndex:indexPath.row];
         [self showDeleteAlertView];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    Results *results = [self.results objectAtIndex:indexPath.row];
 }
 
 
@@ -116,7 +116,7 @@
         else
         {
             self.results = nil;
-            self.results = [NSArray arrayWithArray:array];
+            self.results = array;
             NSLog(@"we have %d results returned", self.results.count);
             [self.tableView reloadData];
         }

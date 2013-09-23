@@ -113,7 +113,7 @@
     }
     else if ([type isEqualToString:kHemoglobulin])
     {
-        self.CD4 = value;
+        self.Hemoglobulin = value;
     }
     else if ([type isEqualToString:kGlucose])
     {

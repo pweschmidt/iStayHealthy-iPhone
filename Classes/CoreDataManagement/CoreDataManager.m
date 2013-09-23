@@ -84,7 +84,8 @@
 
 - (id)managedObjectForEntityName:(NSString *)entityName
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:self.defaultContext];
+    return [NSEntityDescription insertNewObjectForEntityForName:entityName
+                                         inManagedObjectContext:self.defaultContext];
 }
 
 
