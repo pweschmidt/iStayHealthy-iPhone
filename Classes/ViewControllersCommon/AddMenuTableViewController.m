@@ -80,55 +80,64 @@
         case 0:
         {
             EditResultsTableViewController *resultsCtrl = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            resultsCtrl.menuDelegate = self;
             [self.navigationController pushViewController:resultsCtrl animated:YES];
         }
             break;
         case 1:
         {
-            EditHIVMedsTableViewController *resultsCtrl = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditHIVMedsTableViewController *hivCtrl = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            hivCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:hivCtrl animated:YES];
         }
             break;
         case 2:
         {
-            EditOtherMedsTableViewController *resultsCtrl = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditOtherMedsTableViewController *otherCtrl = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+            otherCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:otherCtrl animated:YES];
         }
             break;
         case 3:
         {
-            EditMissedMedsTableViewController *resultsCtrl = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditMissedMedsTableViewController *missedCtrl = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            missedCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:missedCtrl animated:YES];
         }
             break;
         case 4:
         {
-            EditSideEffectsTableViewController *resultsCtrl = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditSideEffectsTableViewController *effectsCtrl = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            effectsCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:effectsCtrl animated:YES];
         }
             break;
         case 5:
         {
-            EditAlertsTableViewController *resultsCtrl = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditAlertsTableViewController *alertsCtrl = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            alertsCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:alertsCtrl animated:YES];
         }
             break;
         case 6:
         {
-            EditAppointmentsTableViewController *resultsCtrl = [[EditAppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditAppointmentsTableViewController *datesCtrl = [[EditAppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            datesCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:datesCtrl animated:YES];
         }
             break;
         case 7:
         {
-            EditProceduresTableViewController *resultsCtrl = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditProceduresTableViewController *procsCtrl = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            procsCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:procsCtrl animated:YES];
         }
             break;
         case 8:
         {
-            EditWellnessTableViewController *resultsCtrl = [[EditWellnessTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-            [self.navigationController pushViewController:resultsCtrl animated:YES];
+            EditWellnessTableViewController *wellCtrl = [[EditWellnessTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+            wellCtrl.menuDelegate = self;
+            [self.navigationController pushViewController:wellCtrl animated:YES];
         }
             break;
     }
@@ -137,6 +146,11 @@
 - (void)cancel
 {
     [(ContentNavigationController *)self.parentViewController rewindToPreviousController];
+}
+
+- (void)moveToNavigationControllerWithName:(NSString *)name
+{
+    [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:name];
 }
 
 

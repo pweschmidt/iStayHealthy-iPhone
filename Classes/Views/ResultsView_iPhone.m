@@ -77,8 +77,8 @@
     
     
     CGRect vlFrame = CGRectMake(self.frame.size.width/2, 0, self.frame.size.width/2, self.frame.size.height);
-    BOOL hasVL = ([self.results.ViralLoad floatValue] >= 0 ||
-                  [self.results.HepCViralLoad floatValue] >= 0);
+    BOOL hasVL = ([self.results.ViralLoad floatValue] > 0 ||
+                  [self.results.HepCViralLoad floatValue] > 0);
     UILabel *vlLabel = [[UILabel alloc] initWithFrame:vlFrame];
     vlLabel.backgroundColor = [UIColor clearColor];
     vlLabel.text = NSLocalizedString(@"VL", nil);

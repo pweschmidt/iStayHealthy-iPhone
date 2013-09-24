@@ -639,6 +639,7 @@
 		C4952D1D17F21DDB0022EFEF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlightSDK/TestFlight.h; sourceTree = "<group>"; };
 		C4952D1E17F21DDB0022EFEF /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlightSDK/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		C4952D1F17F21DDB0022EFEF /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlightSDK/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		C4952D2317F223370022EFEF /* AddMenuNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMenuNavigationDelegate.h; path = ViewControllersCommon/AddMenuNavigationDelegate.h; sourceTree = "<group>"; };
 		C4959F6A14B883F0000B3F10 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6C14B883FA000B3F10 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = de.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6D14B883FE000B3F10 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = es.lproj/pozbanner.png; sourceTree = "<group>"; };
@@ -1347,6 +1348,7 @@
 		C47DB22617AD04D60037A6DF /* ViewControllersCommon */ = {
 			isa = PBXGroup;
 			children = (
+				C4952D2317F223370022EFEF /* AddMenuNavigationDelegate.h */,
 				C4A8244B17AD4C5600E8CA8C /* AddMenuTableViewController.h */,
 				C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */,
 				C46EB5E617EB819800B9EA5A /* AppointmentsTableViewController.h */,

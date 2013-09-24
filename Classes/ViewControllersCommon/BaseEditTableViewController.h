@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GeneralSettings.h"
 #import "Constants.h"
+#import "AddMenuNavigationDelegate.h"
 
 #define kBaseDateCellTag 99
 #define kBaseDateCellRow 0
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) UILabel * dateLabel;
 @property (nonatomic, strong) UIView * dateCellView;
 @property (nonatomic, strong) UIView * datePickerCellView;
+@property (nonatomic, weak) id<AddMenuNavigationDelegate> menuDelegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
       managedObject:(NSManagedObject *)managedObject

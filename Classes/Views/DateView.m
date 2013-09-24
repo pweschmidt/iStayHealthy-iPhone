@@ -50,9 +50,9 @@
  */
 - (void)configureFrames
 {
-    self.layer.cornerRadius = 5;
-    self.layer.borderColor = [UIColor blueColor].CGColor;
-    self.layer.borderWidth = 1;
+//    self.layer.cornerRadius = 5;
+//    self.layer.borderColor = [UIColor blueColor].CGColor;
+//    self.layer.borderWidth = 1;
     CGFloat height = self.frame.size.height;
     CGFloat width = self.frame.size.width;
     

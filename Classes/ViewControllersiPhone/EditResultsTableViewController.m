@@ -67,6 +67,7 @@
                            @"0.0 - 10.0"];
         
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
+    self.menuDelegate = nil;
 }
 
 - (IBAction)save:(id)sender
@@ -100,6 +101,13 @@
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     
     [self.navigationController popViewControllerAnimated:YES];
+    if (nil != self.menuDelegate)
+    {
+        if ([self.menuDelegate respondsToSelector:@selector(moveToNavigationControllerWithName:)])
+        {
+            [self.menuDelegate moveToNavigationControllerWithName:kResultsController];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -14,6 +14,7 @@
 #import "DateView.h"
 #import "ResultsView_iPhone.h"
 #import "Results.h"
+#import "EditResultsTableViewController.h"
 
 @interface ResultsListTableViewController ()
 @property (nonatomic, strong) NSArray * results;
@@ -45,6 +46,17 @@
 {
     return self.results.count;
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (0 == self.results.count)
+    {
+        return NSLocalizedString(@"No Results Entered",nil);
+    }
+    else
+        return @"";
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -94,6 +106,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Results *results = [self.results objectAtIndex:indexPath.row];
+    EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
+    editController.menuDelegate = nil;
+    [self.navigationController pushViewController:editController animated:YES];
 }
 
 
