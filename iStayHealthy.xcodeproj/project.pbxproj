@@ -19,7 +19,6 @@
 		C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */; };
 		C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */; };
 		C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */; };
-		C4246FAD17F09EAC00AA7D1E /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4246FAB17F09EAC00AA7D1E /* libGoogleAdMobAds.a */; };
 		C4246FAE17F09EAC00AA7D1E /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C4246FAC17F09EAC00AA7D1E /* README.txt */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */; };
@@ -118,6 +117,10 @@
 		C491B3531477DE96000A4229 /* missed.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34D1477DE96000A4229 /* missed.png */; };
 		C491B3541477DE96000A4229 /* procedure.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34E1477DE96000A4229 /* procedure.png */; };
 		C491B3551477DE96000A4229 /* sideeffects.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34F1477DE96000A4229 /* sideeffects.png */; };
+		C4952D1817F21C380022EFEF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4246FAB17F09EAC00AA7D1E /* libGoogleAdMobAds.a */; };
+		C4952D2017F21DDB0022EFEF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4952D1A17F21DDB0022EFEF /* libTestFlight.a */; };
+		C4952D2117F21DDB0022EFEF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C4952D1B17F21DDB0022EFEF /* README.md */; };
+		C4952D2217F21DDB0022EFEF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = C4952D1C17F21DDB0022EFEF /* release_notes.md */; };
 		C4959F6914B883F0000B3F10 /* pozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4959F6B14B883F0000B3F10 /* pozbanner.png */; };
 		C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */; };
 		C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B717B03C3B006BE980 /* ContentNavigationController.m */; };
@@ -630,6 +633,12 @@
 		C491B34E1477DE96000A4229 /* procedure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = procedure.png; sourceTree = "<group>"; };
 		C491B34F1477DE96000A4229 /* sideeffects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideeffects.png; sourceTree = "<group>"; };
 		C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 3.xcdatamodel"; sourceTree = "<group>"; };
+		C4952D1A17F21DDB0022EFEF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightSDK/libTestFlight.a; sourceTree = "<group>"; };
+		C4952D1B17F21DDB0022EFEF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = TestFlightSDK/README.md; sourceTree = "<group>"; };
+		C4952D1C17F21DDB0022EFEF /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = release_notes.md; path = TestFlightSDK/release_notes.md; sourceTree = "<group>"; };
+		C4952D1D17F21DDB0022EFEF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlightSDK/TestFlight.h; sourceTree = "<group>"; };
+		C4952D1E17F21DDB0022EFEF /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlightSDK/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		C4952D1F17F21DDB0022EFEF /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlightSDK/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		C4959F6A14B883F0000B3F10 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6C14B883FA000B3F10 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = de.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6D14B883FE000B3F10 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = es.lproj/pozbanner.png; sourceTree = "<group>"; };
@@ -1048,6 +1057,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4952D1817F21C380022EFEF /* libGoogleAdMobAds.a in Frameworks */,
 				C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
@@ -1059,10 +1069,10 @@
 				C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */,
 				C4574AE314939D2300793164 /* libm.dylib in Frameworks */,
 				C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */,
-				C4246FAD17F09EAC00AA7D1E /* libGoogleAdMobAds.a in Frameworks */,
 				C4FB103513A4BF05009270C5 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				C4952D2017F21DDB0022EFEF /* libTestFlight.a in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
@@ -1088,6 +1098,7 @@
 				C4B8041212D3723100A5A38F /* DetailViewControllers */,
 				C46C5DF217EDAEFA00866DBD /* GoogleAdMob */,
 				C45C27B617DB265F001F6831 /* TableCells */,
+				C4952D1917F21DA40022EFEF /* TestFlightSDK */,
 				C4C41A1F15F1421800882416 /* Utils */,
 				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
 				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
@@ -1440,6 +1451,19 @@
 			);
 			name = Assets;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		C4952D1917F21DA40022EFEF /* TestFlightSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C4952D1A17F21DDB0022EFEF /* libTestFlight.a */,
+				C4952D1B17F21DDB0022EFEF /* README.md */,
+				C4952D1C17F21DDB0022EFEF /* release_notes.md */,
+				C4952D1D17F21DDB0022EFEF /* TestFlight.h */,
+				C4952D1E17F21DDB0022EFEF /* TestFlight+AsyncLogging.h */,
+				C4952D1F17F21DDB0022EFEF /* TestFlight+ManualSessions.h */,
+			);
+			name = TestFlightSDK;
 			sourceTree = "<group>";
 		};
 		C4B8033512D3658800A5A38F /* Images */ = {
@@ -1960,6 +1984,7 @@
 				C4C0154713425268005E889D /* atripla.png in Resources */,
 				C4C0154813425268005E889D /* celsentri.png in Resources */,
 				C4C0154913425268005E889D /* combivir.png in Resources */,
+				C4952D2117F21DDB0022EFEF /* README.md in Resources */,
 				C4C0154A13425268005E889D /* crixivan.png in Resources */,
 				C4C0154B13425268005E889D /* didanosine.png in Resources */,
 				C4C0154C13425268005E889D /* emtriva.png in Resources */,
@@ -2008,6 +2033,7 @@
 				C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */,
 				C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */,
 				C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */,
+				C4952D2217F21DDB0022EFEF /* release_notes.md in Resources */,
 				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
 				C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */,
 				C43423371466BE3700F06DC6 /* iStayHealthyPasswordController.xib in Resources */,
@@ -2532,7 +2558,8 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"/Users/peterschmidt/Sandbox/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2546,6 +2573,8 @@
 					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes/GoogleAdMob",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/GoogleAdMob",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/TestFlightSDK",
 				);
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
@@ -2570,7 +2599,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"/Users/peterschmidt/Sandbox/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2582,6 +2612,8 @@
 					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes/GoogleAdMob",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/GoogleAdMob",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/TestFlightSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -2669,7 +2701,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"/Users/peterschmidt/Sandbox/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2681,6 +2714,8 @@
 					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes/GoogleAdMob",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/GoogleAdMob",
+					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/TestFlightSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",

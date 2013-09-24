@@ -16,6 +16,9 @@
 #import "Constants.h"
 #import "SQLDatabaseManager.h"
 
+#import "TestFlight.h"
+
+
 @interface iStayHealthyAppDelegate() <DBSessionDelegate>
 @property (nonatomic, strong, readwrite) SQLDatabaseManager *sqlHelper;
 - (void)postNotificationWithNote:(NSNotification *)note;

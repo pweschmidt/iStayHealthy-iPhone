@@ -13,6 +13,8 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
 
+#import "TestFlight.h"
+
 @interface CentralAppDelegate ()
 @property (nonatomic, strong) ContainerViewController * containerController;
 @end
@@ -30,6 +32,7 @@
             NSLog(@"Error occurred with code %d and message %@", [error code], [error localizedDescription]);
         }
     }];
+    [TestFlight takeOff:@"f9640006-475c-47e9-ad01-b9ff23f67d1b"];
     
     
     UILocalNotification *notification = [launchOptions objectForKey:
