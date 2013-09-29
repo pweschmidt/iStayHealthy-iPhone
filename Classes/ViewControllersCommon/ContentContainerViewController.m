@@ -56,7 +56,8 @@
     {
         return;
     }
-    [self transitionFromViewController:self.currentController toViewController:self.previousController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
+    [self transitionFromViewController:self.currentController toViewController:self.previousController duration:0.5 options:UIViewAnimationOptionTransitionNone animations:^(void){
+    } completion:^(BOOL finished) {
         self.currentController = self.previousController;
         self.previousController = nil;
     }];
@@ -65,7 +66,8 @@
 - (void)transitionToNavigationControllerWithName:(NSString *)name
 {
     id controller = [self.controllers objectForKey:name];
-    [self transitionFromViewController:self.currentController toViewController:controller duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished){
+    [self transitionFromViewController:self.currentController toViewController:controller duration:0.5 options:UIViewAnimationOptionTransitionNone animations:^(void){
+    } completion:^(BOOL finished){
         [controller didMoveToParentViewController:self];
         self.previousController = self.currentController;
         self.currentController = controller;

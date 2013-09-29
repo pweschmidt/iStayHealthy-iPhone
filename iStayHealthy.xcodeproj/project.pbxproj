@@ -50,6 +50,7 @@
 		C456C459176C5CBE00053621 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C456C458176C5CBE00053621 /* MainWindow-iPad.xib */; };
 		C4574ADC14938F7E00793164 /* DosageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4574ADE14938F7E00793164 /* DosageCell.xib */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
+		C457BCDA17F8585F0020F29E /* CalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C457BCD917F8585F0020F29E /* CalendarView.m */; };
 		C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E417EEE3BA004E13C7 /* DateView.m */; };
 		C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */; };
 		C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27BA17DB3DC2001F6831 /* BaseEditTableViewController.m */; };
@@ -496,6 +497,8 @@
 		C4574AE014938F8700793164 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE114938F8A00793164 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DosageCell.xib; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
+		C457BCD817F8585F0020F29E /* CalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarView.h; path = Views/CalendarView.h; sourceTree = "<group>"; };
+		C457BCD917F8585F0020F29E /* CalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarView.m; path = Views/CalendarView.m; sourceTree = "<group>"; };
 		C45A98E317EEE3BA004E13C7 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateView.h; path = Views/DateView.h; sourceTree = "<group>"; };
 		C45A98E417EEE3BA004E13C7 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateView.m; path = Views/DateView.m; sourceTree = "<group>"; };
 		C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsView_iPhone.h; path = Views/ResultsView_iPhone.h; sourceTree = "<group>"; };
@@ -1246,6 +1249,8 @@
 		C45A98E217EEE35A004E13C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C457BCD817F8585F0020F29E /* CalendarView.h */,
+				C457BCD917F8585F0020F29E /* CalendarView.m */,
 				C45A98E317EEE3BA004E13C7 /* DateView.h */,
 				C45A98E417EEE3BA004E13C7 /* DateView.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
@@ -2319,6 +2324,7 @@
 				C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */,
 				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
 				C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */,
+				C457BCDA17F8585F0020F29E /* CalendarView.m in Sources */,
 				C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */,
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,

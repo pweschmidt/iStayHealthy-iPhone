@@ -32,4 +32,8 @@
 + (NSString *)preventionURLFromLocale;
 + (BOOL)isIPad;
 + (BOOL)isIOS7;
++ (NSDictionary *)calendarDictionary;
++ (NSDateComponents *)dateComponentsForDate:(NSDate *)date;
++ (NSString *)monthForDate:(NSDate *)date;
++ (NSString *)weekDayForDate:(NSDate *)date;
 @end

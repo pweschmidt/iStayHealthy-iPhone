@@ -8,6 +8,9 @@
 
 #import "BaseViewController.h"
 
-@interface SeinfeldCalendarViewController : BaseViewController
+@interface SeinfeldCalendarViewController : BaseViewController <UIScrollViewDelegate>
+@property (nonatomic, strong) UIScrollView *calendarScrollView;
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
 
 @end

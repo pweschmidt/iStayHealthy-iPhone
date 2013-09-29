@@ -317,6 +317,60 @@
     
 }
 
+
++ (NSDictionary *)calendarDictionary
+{
+    NSArray *months = @[NSLocalizedString(@"January", nil),
+                        NSLocalizedString(@"February", nil),
+                        NSLocalizedString(@"March", nil),
+                        NSLocalizedString(@"April", nil),
+                        NSLocalizedString(@"May", nil),
+                        NSLocalizedString(@"June", nil),
+                        NSLocalizedString(@"July", nil),
+                        NSLocalizedString(@"August", nil),
+                        NSLocalizedString(@"September", nil),
+                        NSLocalizedString(@"October", nil),
+                        NSLocalizedString(@"November", nil),
+                        NSLocalizedString(@"December", nil)];
+    
+    NSArray *shortDays = @[NSLocalizedString(@"S", @"Sunday"),
+                           NSLocalizedString(@"M", @"Monday"),
+                           NSLocalizedString(@"T", @"Tuesday"),
+                           NSLocalizedString(@"W", @"Wednesday"),
+                           NSLocalizedString(@"T", @"Thursday"),
+                           NSLocalizedString(@"F", @"Friday"),
+                           NSLocalizedString(@"S", @"Saturday")];
+    
+    NSDictionary *dictionary = @{@"months": months,
+                                 @"shortDays" : shortDays};
+    return dictionary;
+}
+
++ (NSDateComponents *)dateComponentsForDate:(NSDate *)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    return [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit
+                       fromDate:date];
+}
+
++ (NSString *)monthForDate:(NSDate *)date
+{
+    NSDateComponents *components = [[self class] dateComponentsForDate:date];
+    NSArray *months = [[[self class] calendarDictionary] objectForKey:@"months"];
+    int monthIndex = components.month - 1;
+    return (NSString *)[months objectAtIndex:monthIndex];
+}
+
++ (NSString *)weekDayForDate:(NSDate *)date
+{
+    NSDateComponents *components = [[self class] dateComponentsForDate:date];
+    NSArray *weekdays = [[[self class] calendarDictionary] objectForKey:@"shortDays"];
+    int dayIndex = components.weekday - 1;
+    return (NSString *)[weekdays objectAtIndex:dayIndex];
+}
+
+
+
 + (BOOL)isIPad
 {
     return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;

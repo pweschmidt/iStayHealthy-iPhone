@@ -11,4 +11,7 @@
 @interface NSDate (Extras)
 - (NSString *)stringFromCustomDate;
 - (NSDate *)dateFromCustomDateString:(NSString *)dateString;
+- (NSDate *)dateByAddingDays:(NSUInteger)days;
+- (NSUInteger)timeDifferenceInDays:(NSDate *)comparedDate;
+- (NSUInteger)daysInMonth;
 @end
