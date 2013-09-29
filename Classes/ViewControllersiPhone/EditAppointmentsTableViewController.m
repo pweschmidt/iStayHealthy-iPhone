@@ -29,6 +29,12 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void)setDefaultValues
+{
+    
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

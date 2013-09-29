@@ -45,6 +45,12 @@
     [self loadDrugs];
 }
 
+- (void)setDefaultValues
+{
+    
+}
+
+
 - (void)loadDrugs
 {
     NSString *combipath = [[NSBundle mainBundle] pathForResource:@"CombiMeds" ofType:@"plist"];

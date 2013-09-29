@@ -31,7 +31,14 @@
     labelFrame = CGRectMake(20, 0, 115, 44);
     separatorFrame = CGRectMake(117, 4, 2, 40);
     textViewFrame = CGRectMake(120, 0, 150, 44);
-    self.navigationItem.title = NSLocalizedString(@"New Result", nil);
+    if (self.isEditMode)
+    {
+        self.navigationItem.title = NSLocalizedString(@"Edit Result", nil);
+    }
+    else
+    {
+        self.navigationItem.title = NSLocalizedString(@"New Result", nil);
+    }
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                              target:self action:@selector(save:)];
@@ -70,32 +77,64 @@
     self.menuDelegate = nil;
 }
 
-- (IBAction)save:(id)sender
+- (void)setDefaultValues
 {
     if (!self.isEditMode)
     {
-        Results * results = [[CoreDataManager sharedInstance]
-                                     managedObjectForEntityName:kResults];
-        results.UID = [Utilities GUID];
-        results.ResultsDate = [NSDate date];
-        int index = 0;
-        for (NSNumber *number in self.textViews.allKeys)
+        return;
+    }
+    Results *results = (Results *)self.managedObject;
+    int index = 0;
+    self.date = results.ResultsDate;
+    for (NSNumber *key  in self.textViews.allKeys)
+    {
+        id viewObj = [self.textViews objectForKey:key];
+        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
+            index < self.editResultsMenu.count)
         {
-            id viewObj = [self.textViews objectForKey:number];
-            if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-                index < self.editResultsMenu.count)
+            UITextField *textField = (UITextField *)viewObj;
+            NSString *type = [self.editResultsMenu objectAtIndex:index];
+            textField.text = [results valueStringForType:type];
+            if ([textField.text isEqualToString:NSLocalizedString(@"Enter Value", nil)])
             {
-                UITextField *textField = (UITextField *)viewObj;
-                NSString *valueString = textField.text;
-                NSString *type = [self.editResultsMenu objectAtIndex:index];
-                [results addValueString:valueString type:type];
+                textField.textColor = [UIColor lightGrayColor];
             }
-            ++index;
         }
+        ++index;
+    }
+}
+
+- (IBAction)save:(id)sender
+{
+    Results *results = nil;
+    if (!self.isEditMode)
+    {
+        results = [[CoreDataManager sharedInstance]
+                   managedObjectForEntityName:kResults];
     }
     else
     {
-        Results * results = (Results *)self.managedObject;
+        results = (Results *)self.managedObject;
+    }
+    if (nil == results)
+    {
+        return;
+    }
+    results.UID = [Utilities GUID];
+    results.ResultsDate = self.date;
+    int index = 0;
+    for (NSNumber *number in self.textViews.allKeys)
+    {
+        id viewObj = [self.textViews objectForKey:number];
+        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
+            index < self.editResultsMenu.count)
+        {
+            UITextField *textField = (UITextField *)viewObj;
+            NSString *valueString = textField.text;
+            NSString *type = [self.editResultsMenu objectAtIndex:index];
+            [results addValueString:valueString type:type];
+        }
+        ++index;
     }
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];

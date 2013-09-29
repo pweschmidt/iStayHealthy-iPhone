@@ -209,5 +209,136 @@
     }
 }
 
+- (NSString *)valueStringForType:(NSString *)type
+{
+    if (nil == type)
+    {
+        return NSLocalizedString(@"Enter Value", nil);
+    }
+    NSString *valueString = NSLocalizedString(@"Enter Value", nil);
+    if ([type isEqualToString:kCD4] && 0 < [self.CD4 floatValue])
+    {
+        return [NSString stringWithFormat:@"%d",[self.CD4 intValue]];
+    }
+    else if ([type isEqualToString:kCD4Percent] && 0 < [self.CD4Percent floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.CD4Percent floatValue]];
+    }
+    else if ([type isEqualToString:kLDL] && 0 < [self.LDL floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.LDL floatValue]];
+    }
+    else if ([type isEqualToString:kHemoglobulin] && 0 < [self.Hemoglobulin floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.Hemoglobulin floatValue]];
+    }
+    else if ([type isEqualToString:kGlucose] && 0 < [self.Glucose floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.Glucose floatValue]];
+    }
+    else if ([type isEqualToString:kHeartRate] && 0 < [self.HeartRate floatValue])
+    {
+        return [NSString stringWithFormat:@"%d",[self.HeartRate intValue]];
+    }
+    else if ([type isEqualToString:kOxygenLevel] && 0 < [self.OxygenLevel floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.OxygenLevel floatValue]];
+    }
+    else if ([type isEqualToString:kSystole] && 0 < [self.Systole floatValue])
+    {
+        return [NSString stringWithFormat:@"%d",[self.Systole intValue]];
+    }
+    else if ([type isEqualToString:kPlatelet] && 0 < [self.PlateletCount floatValue])
+    {
+        return [NSString stringWithFormat:@"%9.2f",[self.PlateletCount floatValue]];
+    }
+    else if ([type isEqualToString:kHDL] && 0 < [self.HDL floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.HDL floatValue]];
+    }
+    else if ([type isEqualToString:kHepCViralLoad] && 0 < [self.HepCViralLoad floatValue])
+    {
+        if (0 == [self.HepCViralLoad floatValue])
+        {
+            return NSLocalizedString(@"undetectable", nil);
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%d",[self.HepCViralLoad intValue]];
+        }
+    }
+    else if ([type isEqualToString:kDiastole] && 0 < [self.Diastole floatValue])
+    {
+        return [NSString stringWithFormat:@"%d",[self.Diastole intValue]];
+    }
+    else if ([type isEqualToString:kWhiteBloodCells] && 0 < [self.WhiteBloodCellCount floatValue])
+    {
+        return [NSString stringWithFormat:@"%9.2f",[self.WhiteBloodCellCount floatValue]];
+    }
+    else if ([type isEqualToString:kTotalCholesterol] && 0 < [self.TotalCholesterol floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.TotalCholesterol floatValue]];
+    }
+    else if ([type isEqualToString:kTriglyceride] && 0 < [self.Triglyceride floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.Triglyceride floatValue]];
+    }
+    else if ([type isEqualToString:kViralLoad] && 0 < [self.ViralLoad floatValue])
+    {
+        if (0 == [self.ViralLoad floatValue])
+        {
+            return NSLocalizedString(@"undetectable", nil);
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%d",[self.ViralLoad intValue]];
+        }
+    }
+    else if ([type isEqualToString:kRedBloodCells] && 0 < [self.redBloodCellCount floatValue])
+    {
+        return [NSString stringWithFormat:@"%9.2f",[self.redBloodCellCount floatValue]];
+    }
+    else if ([type isEqualToString:kCholesterolRatio] && 0 < [self.cholesterolRatio floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.cholesterolRatio floatValue]];
+    }
+    else if ([type isEqualToString:kCardiacRiskFactor] && 0 < [self.cardiacRiskFactor floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.cardiacRiskFactor floatValue]];
+    }
+    else if ([type isEqualToString:kWeight] && 0 < [self.Weight floatValue])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.Weight floatValue]];
+    }
+    else if ([type isEqualToString:kLiverAlanineTransaminase] && 0 < [self.liverAlanineTransaminase floatValue])
+    {
+        return [NSString stringWithFormat:@"%6.2f",[self.liverAlanineTransaminase floatValue]];
+    }
+    else if ([type isEqualToString:kLiverAspartateTransaminase] && 0 < [self.liverAspartateTransaminase floatValue])
+    {
+        return [NSString stringWithFormat:@"%6.2f",[self.liverAspartateTransaminase floatValue]];
+    }
+    else if ([type isEqualToString:kLiverAlkalinePhosphatase] && 0 < [self.liverAlkalinePhosphatase floatValue])
+    {
+        return [NSString stringWithFormat:@"%6.2f",[self.liverAlkalinePhosphatase floatValue]];
+    }
+    else if ([type isEqualToString:kLiverAlbumin] && 0 < [self.liverAlbumin floatValue])
+    {
+        return [NSString stringWithFormat:@"%6.2f",[self.liverAlbumin floatValue]];
+    }
+    else if ([type isEqualToString:kLiverAlanineTotalBilirubin] && 0 < [self.liverAlanineTotalBilirubin floatValue])
+    {
+        return [NSString stringWithFormat:@"%6.2f",[self.liverAlanineTotalBilirubin floatValue]];
+    }
+    else if ([type isEqualToString:kLiverAlanineDirectBilirubin] && 0 < [self.liverAlanineDirectBilirubin floatValue])
+    {
+        return [NSString stringWithFormat:@"%6.2f",[self.liverAlanineDirectBilirubin floatValue]];
+    }
+    else if ([type isEqualToString:kLiverGammaGlutamylTranspeptidase] && 0 < [self.liverGammaGlutamylTranspeptidase floatValue])
+    {
+        return [NSString stringWithFormat:@"%6.2f",[self.liverGammaGlutamylTranspeptidase floatValue]];
+    }
+    return valueString;
+}
 
 @end

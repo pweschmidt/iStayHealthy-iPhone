@@ -35,6 +35,12 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)setDefaultValues
+{
+    
+}
+
+
 - (IBAction)save:(id)sender
 {
     OtherMedication *med = nil;

@@ -47,7 +47,7 @@
                       indexPath:(NSIndexPath *)indexPath;
 
 - (void)changeDate:(NSIndexPath *)indexPath;
-
+- (void)setDefaultValues;
 - (BOOL)hasInlineDatePicker;
 - (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath;

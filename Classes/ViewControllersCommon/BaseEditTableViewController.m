@@ -41,12 +41,29 @@
     self.textViews = [NSMutableDictionary dictionary];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self setDefaultValues];
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     self.contentViewsDictionary = nil;
     self.textViews = nil;
     [super didReceiveMemoryWarning];
 }
+
+- (void)setDefaultValues
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
+                                 userInfo:nil];
+}
+
+
+
 
 - (void)configureTableCell:(UITableViewCell *)cell
                      title:(NSString *)title
@@ -481,6 +498,7 @@
     // update our data model
 //    NSMutableDictionary *itemData = self.dataArray[targetedCellIndexPath.row];
 //    [itemData setValue:targetedDatePicker.date forKey:kDateKey];
+    self.date = targetedDatePicker.date;
     self.dateLabel.text = [targetedDatePicker.date stringFromCustomDate];
     // update the cell's date string
 }

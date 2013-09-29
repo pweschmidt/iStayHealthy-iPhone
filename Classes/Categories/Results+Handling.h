@@ -12,4 +12,5 @@
 - (void)importFromDictionary:(NSDictionary *)attributes;
 - (NSString *)xmlString;
 - (void)addValueString:(NSString *)valueString type:(NSString *)type;
+- (NSString *)valueStringForType:(NSString *)type;
 @end
