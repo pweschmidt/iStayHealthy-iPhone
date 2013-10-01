@@ -14,7 +14,9 @@
 
 @interface EditOtherMedsTableViewController ()
 @property (nonatomic, strong) NSArray * editMenu;
+@property (nonatomic, strong) NSArray * unitArray;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
+@property (nonatomic, strong) UISegmentedControl *unitControl;
 @end
 
 @implementation EditOtherMedsTableViewController
@@ -23,11 +25,18 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"New Other Medication", nil);
+    /*
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                               target:self action:@selector(save:)];
+     */
     self.editMenu = @[kName, kDose];
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
+    self.unitArray = @[@"g", @"mg", @"ml", @"other"];
+    self.unitControl = [[UISegmentedControl alloc] initWithItems:self.unitArray];
+    self.unitControl.selectedSegmentIndex = 1;
+    [self.unitControl addTarget:self action:@selector(changeUnit:) forControlEvents:UIControlEventValueChanged];
+    self.unitControl.segmentedControlStyle = UISegmentedControlStylePlain;
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,11 +46,14 @@
 
 - (void)setDefaultValues
 {
-    
+    if(!self.isEditMode)
+    {
+        return;
+    }
 }
 
 
-- (IBAction)save:(id)sender
+- (void)save:(id)sender
 {
     OtherMedication *med = nil;
     if (!self.isEditMode)
@@ -57,6 +69,11 @@
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)deleteObject:(id)sender
+{
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -125,6 +142,34 @@
         }
     }
     return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 55;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footerView = [[UIView alloc] init];
+    footerView.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
+    UILabel *label = [[UILabel alloc]
+                      initWithFrame:CGRectMake(20, 10, tableView.bounds.size.width-40, 20)];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = NSLocalizedString(@"Select Unit", nil);
+    label.textColor = TEXTCOLOUR;
+    label.textAlignment = NSTextAlignmentJustified;
+    label.font = [UIFont systemFontOfSize:15];
+    [footerView addSubview:label];
+    self.unitControl.frame = CGRectMake(20, 35, tableView.bounds.size.width-40, 25);
+    [footerView addSubview:self.unitControl];
+    return footerView;
+}
+
+- (void)changeUnit:(id)sender
+{
+    
 }
 
 @end

@@ -18,7 +18,7 @@
 #define kBaseDateCellRowIdentifier @"DateSelectionCell"
 
 @interface BaseEditTableViewController : UITableViewController
-    <UITextFieldDelegate, UIActionSheetDelegate>
+    <UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableDictionary * contentViewsDictionary;
 @property (nonatomic, strong) NSMutableDictionary * textViews;
 @property (nonatomic, assign) BOOL isEditMode;
@@ -45,6 +45,9 @@
 
 - (void)configureDatePickerCell:(UITableViewCell *)cell
                       indexPath:(NSIndexPath *)indexPath;
+
+- (void)save:(id)sender;
+- (void)deleteObject:(id)sender;
 
 - (void)changeDate:(NSIndexPath *)indexPath;
 - (void)setDefaultValues;

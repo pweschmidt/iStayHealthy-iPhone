@@ -37,6 +37,18 @@
 {
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
+    NSArray *barButtons = nil;
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(save:)];
+    if (self.isEditMode)
+    {
+        UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteObject:)];
+        barButtons = @[saveButton, trashButton];
+    }
+    else
+    {
+        barButtons = @[saveButton];
+    }
+    self.navigationItem.rightBarButtonItems = barButtons;
     self.contentViewsDictionary = [NSMutableDictionary dictionary];
     self.textViews = [NSMutableDictionary dictionary];
 }
@@ -62,6 +74,19 @@
                                  userInfo:nil];
 }
 
+- (void)save:(id)sender
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
+                                 userInfo:nil];
+}
+
+- (void)deleteObject:(id)sender
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
+                                 userInfo:nil];    
+}
 
 
 

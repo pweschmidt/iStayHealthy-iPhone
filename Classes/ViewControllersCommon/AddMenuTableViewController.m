@@ -100,35 +100,35 @@
             break;
         case 3:
         {
-            EditMissedMedsTableViewController *missedCtrl = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            EditMissedMedsTableViewController *missedCtrl = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
             missedCtrl.menuDelegate = self;
             [self.navigationController pushViewController:missedCtrl animated:YES];
         }
             break;
         case 4:
         {
-            EditSideEffectsTableViewController *effectsCtrl = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            EditSideEffectsTableViewController *effectsCtrl = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
             effectsCtrl.menuDelegate = self;
             [self.navigationController pushViewController:effectsCtrl animated:YES];
         }
             break;
         case 5:
         {
-            EditAlertsTableViewController *alertsCtrl = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            EditAlertsTableViewController *alertsCtrl = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
             alertsCtrl.menuDelegate = self;
             [self.navigationController pushViewController:alertsCtrl animated:YES];
         }
             break;
         case 6:
         {
-            EditAppointmentsTableViewController *datesCtrl = [[EditAppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            EditAppointmentsTableViewController *datesCtrl = [[EditAppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
             datesCtrl.menuDelegate = self;
             [self.navigationController pushViewController:datesCtrl animated:YES];
         }
             break;
         case 7:
         {
-            EditProceduresTableViewController *procsCtrl = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+            EditProceduresTableViewController *procsCtrl = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
             procsCtrl.menuDelegate = self;
             [self.navigationController pushViewController:procsCtrl animated:YES];
         }

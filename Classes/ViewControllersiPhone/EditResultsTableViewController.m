@@ -18,9 +18,11 @@
     CGRect separatorFrame;
     CGRect textViewFrame;
 }
-@property (nonatomic, strong) NSArray * defaultValues;
-@property (nonatomic, strong) NSArray * editResultsMenu;
+@property (nonatomic, strong) NSArray *defaultValues;
+@property (nonatomic, strong) NSArray *editResultsMenu;
+@property (nonatomic, strong) NSArray *editResultsUndetectableMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
+@property (nonatomic, strong) UISwitch *undetectableSwitch;
 @end
 
 @implementation EditResultsTableViewController
@@ -39,13 +41,12 @@
     {
         self.navigationItem.title = NSLocalizedString(@"New Result", nil);
     }
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                             target:self action:@selector(save:)];
+//	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+//                                             initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+//                                             target:self action:@selector(save:)];
     self.editResultsMenu = @[kCD4,
                              kCD4Percent,
                              kViralLoad,
-                             kHepCViralLoad,
                              kGlucose,
                              kTotalCholesterol,
                              kHDL,
@@ -57,10 +58,24 @@
                              kWeight,
                              kBloodPressure,
                              kCardiacRiskFactor];
+    
+    self.editResultsUndetectableMenu = @[kCD4,
+                                         kCD4Percent,
+                                         kGlucose,
+                                         kTotalCholesterol,
+                                         kHDL,
+                                         kLDL,
+                                         kHemoglobulin,
+                                         kWhiteBloodCells,
+                                         kRedBloodCells,
+                                         kPlatelet,
+                                         kWeight,
+                                         kBloodPressure,
+                                         kCardiacRiskFactor];
+    
     self.defaultValues = @[@"400-1500",
                            @"20.0 - 50.0",
                            @"10 - 10000000",
-                           @"10 - 10000000"
                            @"4.0 - 7.0",
                            @"3.0 - 6.0",
                            @"1.0 - 2.2"
@@ -74,6 +89,9 @@
                            @"0.0 - 10.0"];
         
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
+    self.undetectableSwitch = [[UISwitch alloc] init];
+    [self.undetectableSwitch addTarget:self action:@selector(switchUndetectable:) forControlEvents:UIControlEventValueChanged];
+    [self.undetectableSwitch setOn:NO];
     self.menuDelegate = nil;
 }
 
@@ -104,7 +122,7 @@
     }
 }
 
-- (IBAction)save:(id)sender
+- (void)save:(id)sender
 {
     Results *results = nil;
     if (!self.isEditMode)
@@ -149,6 +167,11 @@
     }
 }
 
+- (void)deleteObject:(id)sender
+{
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -169,13 +192,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSUInteger resultsCount = (self.undetectableSwitch.isOn) ? self.editResultsUndetectableMenu.count : self.editResultsMenu.count;
+    resultsCount++;
     if ([self hasInlineDatePicker])
     {
         // we have a date picker, so allow for it in the number of rows in this section
-        NSInteger numRows = self.editResultsMenu.count + 1;
+        NSInteger numRows = resultsCount;
         return ++numRows;
     }
-    return self.editResultsMenu.count + 1;
+    return resultsCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -217,12 +242,38 @@
         else
         {
             NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
-            NSString *text = NSLocalizedString([self.editResultsMenu objectAtIndex:titleIndex], nil);
+            NSString *resultsString = (self.undetectableSwitch.isOn) ? [self.editResultsUndetectableMenu objectAtIndex:titleIndex] : [self.editResultsMenu objectAtIndex:titleIndex];
+            NSString *text = NSLocalizedString(resultsString, nil);
             [self configureTableCell:cell title:text indexPath:indexPath];            
         }
     }
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] init];
+    headerView.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
+    UILabel *label = [[UILabel alloc]
+                      initWithFrame:CGRectMake(20, 10, 150, 20)];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = NSLocalizedString(@"Undetectable?", nil);
+    label.textColor = TEXTCOLOUR;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:15];
+    [headerView addSubview:label];
+    self.undetectableSwitch.frame = CGRectMake(180, 2, 80, 36);
+    [headerView addSubview:self.undetectableSwitch];
+    return headerView;
+}
+
+- (void)switchUndetectable:(id)sender
+{
+}
 
 @end

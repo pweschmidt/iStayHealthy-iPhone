@@ -31,4 +31,15 @@
     
 }
 
+- (void)save:(id)sender
+{
+    
+}
+
+- (void)deleteObject:(id)sender
+{
+    
+}
+
+
 @end

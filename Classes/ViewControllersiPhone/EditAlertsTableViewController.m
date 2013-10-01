@@ -31,6 +31,15 @@
     
 }
 
+- (void)save:(id)sender
+{
+    
+}
+
+- (void)deleteObject:(id)sender
+{
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
