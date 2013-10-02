@@ -10,6 +10,7 @@
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
 #import "Constants.h"
+#import "EditAlertsTableViewController.h"
 
 @interface NotificationAlertsTableViewController ()
 @property (nonatomic, strong) NSArray *notifications;
@@ -27,6 +28,12 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)addButtonPressed:(id)sender
+{
+    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -56,6 +63,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    UILocalNotification *notification = (UILocalNotification *)[self.notifications objectAtIndex:indexPath.row];
+    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
     
 }
 

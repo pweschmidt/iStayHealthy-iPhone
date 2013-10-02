@@ -16,6 +16,7 @@
 #import "PWESDataNTuple.h"
 #import "CoreDataManager.h"
 #import "GeneralSettings.h"
+#import "EditResultsTableViewController.h"
 
 @interface DashboardViewController ()
 {
@@ -78,6 +79,13 @@
     self.pageController.currentPage = 0;
     [self.view addSubview:pager];
 }
+
+- (void)addButtonPressed:(id)sender
+{
+    EditResultsTableViewController *controller = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 
 - (void)reloadSQLData:(NSNotification *)notification
 {

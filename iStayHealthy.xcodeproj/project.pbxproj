@@ -334,6 +334,8 @@
 		C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */; };
 		C4CDED5F138D7CD7005BAC87 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CDED5E138D7CD7005BAC87 /* edurant.png */; };
 		C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CE682512DB070500FBCFF4 /* combi-small.png */; };
+		C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */; };
+		C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */; };
 		C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D6B4C315F237C3003C7AB5 /* ClinicsDetailViewController.m */; };
 		C4D6B4C615F237C3003C7AB5 /* ClinicsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4D6B4C415F237C3003C7AB5 /* ClinicsDetailViewController.xib */; };
 		C4DF7E4D14857D17009C46E6 /* missedsmall.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF7E4C14857D17009C46E6 /* missedsmall.png */; };
@@ -978,6 +980,10 @@
 		C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-label-small.png"; sourceTree = "<group>"; };
 		C4CDED5E138D7CD7005BAC87 /* edurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edurant.png; path = Images/edurant.png; sourceTree = "<group>"; };
 		C4CE682512DB070500FBCFF4 /* combi-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-small.png"; sourceTree = "<group>"; };
+		C4CF467017FC696E00A4A5AA /* EditPreviousMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditPreviousMedsTableViewController.h; path = ViewControllersiPhone/EditPreviousMedsTableViewController.h; sourceTree = "<group>"; };
+		C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditPreviousMedsTableViewController.m; path = ViewControllersiPhone/EditPreviousMedsTableViewController.m; sourceTree = "<group>"; };
+		C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditContactsTableViewController.h; path = ViewControllersiPhone/EditContactsTableViewController.h; sourceTree = "<group>"; };
+		C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditContactsTableViewController.m; path = ViewControllersiPhone/EditContactsTableViewController.m; sourceTree = "<group>"; };
 		C4D6B4C215F237C3003C7AB5 /* ClinicsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClinicsDetailViewController.h; path = DetailViewControllers/ClinicsDetailViewController.h; sourceTree = "<group>"; };
 		C4D6B4C315F237C3003C7AB5 /* ClinicsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicsDetailViewController.m; path = DetailViewControllers/ClinicsDetailViewController.m; sourceTree = "<group>"; };
 		C4D6B4C415F237C3003C7AB5 /* ClinicsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClinicsDetailViewController.xib; path = Classes/DetailViewControllers/ClinicsDetailViewController.xib; sourceTree = "<group>"; };
@@ -1416,12 +1422,16 @@
 				C45C27C617DB5A5B001F6831 /* EditAlertsTableViewController.m */,
 				C45C27C817DB5A75001F6831 /* EditAppointmentsTableViewController.h */,
 				C45C27C917DB5A75001F6831 /* EditAppointmentsTableViewController.m */,
+				C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */,
+				C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */,
 				C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */,
 				C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */,
 				C45C27BF17DB5A1E001F6831 /* EditMissedMedsTableViewController.h */,
 				C45C27C017DB5A1E001F6831 /* EditMissedMedsTableViewController.m */,
 				C45C27BC17DB59FA001F6831 /* EditOtherMedsTableViewController.h */,
 				C45C27BD17DB59FA001F6831 /* EditOtherMedsTableViewController.m */,
+				C4CF467017FC696E00A4A5AA /* EditPreviousMedsTableViewController.h */,
+				C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */,
 				C45C27CB17DB5A9D001F6831 /* EditProceduresTableViewController.h */,
 				C45C27CC17DB5A9D001F6831 /* EditProceduresTableViewController.m */,
 				C45D00EE17BAB403001AE0CB /* EditResultsTableViewController.h */,
@@ -2298,6 +2308,7 @@
 				C463744C17E9F35900D19B94 /* PWESDataTuple.m in Sources */,
 				C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */,
 				C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */,
+				C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */,
 				C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */,
 				C43BE58515F7C5CE00108EF8 /* Results.m in Sources */,
 				C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */,
@@ -2341,6 +2352,7 @@
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
 				C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
+				C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,

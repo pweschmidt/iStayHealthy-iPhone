@@ -7,6 +7,8 @@
 //
 
 #import "AppointmentsTableViewController.h"
+#import "EditAppointmentsTableViewController.h"
+
 
 @interface AppointmentsTableViewController ()
 @property (nonatomic, strong) NSArray *appointments;
@@ -30,6 +32,13 @@
     return 1;
 }
 
+- (void)addButtonPressed:(id)sender
+{
+    EditAppointmentsTableViewController *controller = [[EditAppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.appointments.count;
@@ -52,7 +61,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    EditAppointmentsTableViewController *controller = [[EditAppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];    
 }
 
 

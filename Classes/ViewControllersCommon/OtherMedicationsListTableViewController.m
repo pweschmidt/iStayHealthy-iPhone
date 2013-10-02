@@ -11,6 +11,8 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "EditOtherMedsTableViewController.h"
+#import "OtherMedication+Handling.h"
 
 @interface OtherMedicationsListTableViewController ()
 @property (nonatomic, strong) NSArray * otherMediction;
@@ -30,6 +32,13 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+- (void)addButtonPressed:(id)sender
+{
+    EditOtherMedsTableViewController *otherController = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:otherController animated:YES];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -58,7 +67,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    OtherMedication *med = (OtherMedication *)[self.otherMediction objectAtIndex:indexPath.row];
+    EditOtherMedsTableViewController *otherController = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
+    [self.navigationController pushViewController:otherController animated:YES];
 }
 
 

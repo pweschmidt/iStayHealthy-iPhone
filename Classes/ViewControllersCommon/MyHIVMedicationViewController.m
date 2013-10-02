@@ -11,6 +11,10 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "PreviousMedication+Handling.h"
+#import "Medication+Handling.h"
+#import "EditHIVMedsTableViewController.h"
+#import "EditPreviousMedsTableViewController.h"
 
 @interface MyHIVMedicationViewController ()
 @property (nonatomic, strong) NSArray * currentMeds;
@@ -30,6 +34,12 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)addButtonPressed:(id)sender
+{
+    EditHIVMedsTableViewController *controller = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 
@@ -79,7 +89,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (0 == indexPath.section)
+    {
+        Medication *med = (Medication *)[self.currentMeds objectAtIndex:indexPath.row];
+        EditHIVMedsTableViewController *controller = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else
+    {
+        PreviousMedication *med = (PreviousMedication *)[self.previousMeds objectAtIndex:indexPath.row];
+        EditPreviousMedsTableViewController *controller = [[EditPreviousMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 #pragma mark - override the notification handlers

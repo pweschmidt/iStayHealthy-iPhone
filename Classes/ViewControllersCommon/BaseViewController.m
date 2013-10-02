@@ -156,6 +156,14 @@
     [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kAddController];
 }
 
+- (void)addButtonPressed:(id)sender
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
+                                 userInfo:nil];
+}
+
+
 #pragma mark - iPad handling
 - (void)configureIPadMenus
 {

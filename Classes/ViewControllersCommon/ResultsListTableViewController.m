@@ -57,6 +57,11 @@
         return @"";
 }
 
+- (void)addButtonPressed:(id)sender
+{
+    EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+    [self.navigationController pushViewController:editController animated:YES];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

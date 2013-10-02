@@ -11,6 +11,8 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "EditProceduresTableViewController.h"
+#import "Procedures+Handling.h"
 
 @interface ProceduresListTableViewController ()
 @property (nonatomic, strong) NSArray *procedures;
@@ -29,6 +31,14 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+- (void)addButtonPressed:(id)sender
+{
+    EditProceduresTableViewController *controller = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -56,7 +66,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    Procedures *proc = (Procedures *)[self.procedures objectAtIndex:indexPath.row];
+    EditProceduresTableViewController *controller = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:proc hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

@@ -28,4 +28,5 @@
 - (void)configureIPadMenus;
 - (void)settingsMenu;
 - (void)addMenu;
+- (void)addButtonPressed:(id)sender;
 @end

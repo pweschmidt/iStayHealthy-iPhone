@@ -11,6 +11,8 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "EditMissedMedsTableViewController.h"
+#import "MissedMedication+Handling.h"
 
 @interface MissedMedicationsTableViewController ()
 @property (nonatomic, strong) NSArray * missed;
@@ -34,6 +36,13 @@
     return 1;
 }
 
+- (void)addButtonPressed:(id)sender
+{
+    EditMissedMedsTableViewController *controller = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.missed.count;
@@ -56,6 +65,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MissedMedication *missed = (MissedMedication *)[self.missed objectAtIndex:indexPath.row];
+    EditMissedMedsTableViewController *controller = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:missed hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
     
 }
 

@@ -19,10 +19,12 @@
     CGRect textViewFrame;
 }
 @property (nonatomic, strong) NSArray *defaultValues;
+@property (nonatomic, strong) NSArray *resultsMenu;
 @property (nonatomic, strong) NSArray *editResultsMenu;
 @property (nonatomic, strong) NSArray *editResultsUndetectableMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISwitch *undetectableSwitch;
+@property (nonatomic, strong) NSIndexPath *viralLoadIndexPath;
 @end
 
 @implementation EditResultsTableViewController
@@ -44,6 +46,7 @@
 //	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
 //                                             initWithBarButtonSystemItem:UIBarButtonSystemItemSave
 //                                             target:self action:@selector(save:)];
+    self.viralLoadIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     self.editResultsMenu = @[kCD4,
                              kCD4Percent,
                              kViralLoad,
@@ -87,8 +90,9 @@
                            @"Enter your weight",
                            @"120/80",
                            @"0.0 - 10.0"];
-        
-    self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
+    
+    self.resultsMenu = self.editResultsMenu;
+    self.titleStrings = [NSMutableArray arrayWithCapacity:self.resultsMenu.count];
     self.undetectableSwitch = [[UISwitch alloc] init];
     [self.undetectableSwitch addTarget:self action:@selector(switchUndetectable:) forControlEvents:UIControlEventValueChanged];
     [self.undetectableSwitch setOn:NO];
@@ -108,14 +112,17 @@
     {
         id viewObj = [self.textViews objectForKey:key];
         if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editResultsMenu.count)
+            index < self.resultsMenu.count)
         {
             UITextField *textField = (UITextField *)viewObj;
-            NSString *type = [self.editResultsMenu objectAtIndex:index];
+            NSString *type = [self.resultsMenu objectAtIndex:index];
             textField.text = [results valueStringForType:type];
             if ([textField.text isEqualToString:NSLocalizedString(@"Enter Value", nil)])
             {
                 textField.textColor = [UIColor lightGrayColor];
+            }
+            if ([type isEqualToString:kViralLoad] && [textField.text isEqualToString:NSLocalizedString(@"undetectable", nil)]) {
+                [self.undetectableSwitch setOn:YES];
             }
         }
         ++index;
@@ -145,14 +152,18 @@
     {
         id viewObj = [self.textViews objectForKey:number];
         if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editResultsMenu.count)
+            index < self.resultsMenu.count)
         {
             UITextField *textField = (UITextField *)viewObj;
             NSString *valueString = textField.text;
-            NSString *type = [self.editResultsMenu objectAtIndex:index];
+            NSString *type = [self.resultsMenu objectAtIndex:index];
             [results addValueString:valueString type:type];
         }
         ++index;
+    }
+    if (self.undetectableSwitch.isOn)
+    {
+        [results addValueString:@"0" type:kViralLoad];
     }
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
@@ -192,7 +203,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger resultsCount = (self.undetectableSwitch.isOn) ? self.editResultsUndetectableMenu.count : self.editResultsMenu.count;
+    NSUInteger resultsCount = self.resultsMenu.count;
     resultsCount++;
     if ([self hasInlineDatePicker])
     {
@@ -218,7 +229,7 @@
         }
         else
         {
-            identifier = [NSString stringWithFormat:@"ResultsCell%d",indexPath.row];
+            identifier = [NSString stringWithFormat:@"ResultsCell"];
         }
     }
     
@@ -242,7 +253,7 @@
         else
         {
             NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
-            NSString *resultsString = (self.undetectableSwitch.isOn) ? [self.editResultsUndetectableMenu objectAtIndex:titleIndex] : [self.editResultsMenu objectAtIndex:titleIndex];
+            NSString *resultsString = [self.resultsMenu objectAtIndex:titleIndex];
             NSString *text = NSLocalizedString(resultsString, nil);
             [self configureTableCell:cell title:text indexPath:indexPath];            
         }
@@ -274,6 +285,21 @@
 
 - (void)switchUndetectable:(id)sender
 {
+    [self.tableView beginUpdates];
+    {
+        NSArray *indexPaths = @[self.viralLoadIndexPath];
+        if (self.undetectableSwitch.isOn)
+        {
+            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+            self.resultsMenu = self.editResultsUndetectableMenu;
+        }
+        else
+        {
+            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+            self.resultsMenu = self.editResultsMenu;
+        }
+    }
+    [self.tableView endUpdates];
 }
 
 @end

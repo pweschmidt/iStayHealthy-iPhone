@@ -90,6 +90,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)addButtonPressed:(id)sender
+{
+}
+
+
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {

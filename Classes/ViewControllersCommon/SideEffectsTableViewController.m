@@ -11,6 +11,8 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "EditSideEffectsTableViewController.h"
+#import "SideEffects+Handling.h"
 
 @interface SideEffectsTableViewController ()
 @property (nonatomic, strong) NSArray *effects;
@@ -29,6 +31,14 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+- (void)addButtonPressed:(id)sender
+{
+    EditSideEffectsTableViewController *controller = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -56,7 +66,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    SideEffects *effects = (SideEffects *)[self.effects objectAtIndex:indexPath.row];
+    EditSideEffectsTableViewController *controller = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:effects hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

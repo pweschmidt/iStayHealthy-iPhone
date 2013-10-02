@@ -11,6 +11,8 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "Contacts+Handling.h"
+#import "EditContactsTableViewController.h"
 
 @interface ClinicalAddressTableViewController ()
 @property (nonatomic, strong) NSArray *clinics;
@@ -29,6 +31,13 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+- (void)addButtonPressed:(id)sender
+{
+    EditContactsTableViewController *controller = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -57,6 +66,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Contacts *contact = (Contacts *)[self.clinics objectAtIndex:indexPath.row];
+    EditContactsTableViewController *controller = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];
     
 }
 
