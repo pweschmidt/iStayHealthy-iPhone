@@ -2567,7 +2567,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/peterschmidt/Sandbox/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2578,11 +2577,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
-					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes",
-					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes/GoogleAdMob",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/GoogleAdMob",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/TestFlightSDK",
+					"$(SRCROOT)/Classes",
+					"$(SRCROOT)/Classes",
+					"$(SRCROOT)/Classes/GoogleAdMob",
+					"$(SRCROOT)/Classes/TestFlightSDK",
 				);
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
@@ -2608,7 +2606,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/peterschmidt/Sandbox/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2617,11 +2614,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
-					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes",
-					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes/GoogleAdMob",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/GoogleAdMob",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/TestFlightSDK",
+					"$(SRCROOT)/Classes",
+					"$(SRCROOT)/Classes",
+					"$(SRCROOT)/Classes/GoogleAdMob",
+					"$(SRCROOT)/Classes/TestFlightSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -2710,7 +2706,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/peterschmidt/Sandbox/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2719,11 +2714,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes",
-					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes",
-					"/Users/peterschmidt/Private/iStayHealthy-iPhone/Classes/GoogleAdMob",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/GoogleAdMob",
-					"/Users/peterschmidt/iStayHealthy-iOSV4/iStayHealthy-iPhone/Classes/TestFlightSDK",
+					"$(SRCROOT)/Classes",
+					"$(SRCROOT)/Classes",
+					"$(SRCROOT)/Classes/GoogleAdMob",
+					"$(SRCROOT)/Classes/TestFlightSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",
