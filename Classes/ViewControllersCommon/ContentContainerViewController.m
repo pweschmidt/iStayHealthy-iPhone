@@ -56,20 +56,30 @@
     {
         return;
     }
-    [self transitionFromViewController:self.currentController toViewController:self.previousController duration:0.5 options:UIViewAnimationOptionTransitionNone animations:^(void){
+    CGRect currentFrame = ((UIViewController *)self.currentController).view.frame;
+    ((UIViewController *)self.previousController).view.frame = CGRectMake(-currentFrame.size.width, 0, currentFrame.size.width, currentFrame.size.height);
+    CGRect previousFrame = ((UIViewController *)self.previousController).view.frame;
+    [self transitionFromViewController:self.currentController toViewController:self.previousController duration:0.5 options:UIViewAnimationOptionBeginFromCurrentState animations:^(void){
+        ((UIViewController *)self.previousController).view.frame = currentFrame;
     } completion:^(BOOL finished) {
         self.currentController = self.previousController;
+        ((UIViewController *)self.currentController).view.frame = previousFrame;
         self.previousController = nil;
     }];
 }
 
 - (void)transitionToNavigationControllerWithName:(NSString *)name
 {
-    id controller = [self.controllers objectForKey:name];
-    [self transitionFromViewController:self.currentController toViewController:controller duration:0.5 options:UIViewAnimationOptionTransitionNone animations:^(void){
+    __block id controller = [self.controllers objectForKey:name];
+    CGRect currentFrame = ((UIViewController *)self.currentController).view.frame;
+    ((UIViewController *)controller).view.frame = CGRectMake(-currentFrame.size.width, 0, currentFrame.size.width, currentFrame.size.height);
+    CGRect previousFrame = ((UIViewController *)controller).view.frame;
+    [self transitionFromViewController:self.currentController toViewController:controller duration:0.5 options:UIViewAnimationOptionBeginFromCurrentState animations:^(void){
+        ((UIViewController *)controller).view.frame = currentFrame;
     } completion:^(BOOL finished){
         [controller didMoveToParentViewController:self];
         self.previousController = self.currentController;
+        ((UIViewController *)self.previousController).view.frame = previousFrame;
         self.currentController = controller;
     }];
 }
