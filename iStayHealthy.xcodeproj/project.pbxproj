@@ -99,6 +99,13 @@
 		C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */; };
 		C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22B17AD05630037A6DF /* LoginViewController.m */; };
 		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
+		C481FD2117FDEBDE0058EE9D /* icon_57_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1A17FDEBDE0058EE9D /* icon_57_flat.png */; };
+		C481FD2217FDEBDE0058EE9D /* icon_72_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1B17FDEBDE0058EE9D /* icon_72_flat.png */; };
+		C481FD2317FDEBDE0058EE9D /* icon_76_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1C17FDEBDE0058EE9D /* icon_76_flat.png */; };
+		C481FD2417FDEBDE0058EE9D /* icon_114_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1D17FDEBDE0058EE9D /* icon_114_flat.png */; };
+		C481FD2517FDEBDE0058EE9D /* icon_120_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1E17FDEBDE0058EE9D /* icon_120_flat.png */; };
+		C481FD2617FDEBDE0058EE9D /* icon_144_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1F17FDEBDE0058EE9D /* icon_144_flat.png */; };
+		C481FD2717FDEBDE0058EE9D /* icon_152_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD2017FDEBDE0058EE9D /* icon_152_flat.png */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
 		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
@@ -597,6 +604,13 @@
 		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
 		C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CentralAppDelegate.m; path = ViewControllersCommon/CentralAppDelegate.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
+		C481FD1A17FDEBDE0058EE9D /* icon_57_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_57_flat.png; path = Classes/Assets/icon_57_flat.png; sourceTree = "<group>"; };
+		C481FD1B17FDEBDE0058EE9D /* icon_72_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_72_flat.png; path = Classes/Assets/icon_72_flat.png; sourceTree = "<group>"; };
+		C481FD1C17FDEBDE0058EE9D /* icon_76_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_76_flat.png; path = Classes/Assets/icon_76_flat.png; sourceTree = "<group>"; };
+		C481FD1D17FDEBDE0058EE9D /* icon_114_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_114_flat.png; path = Classes/Assets/icon_114_flat.png; sourceTree = "<group>"; };
+		C481FD1E17FDEBDE0058EE9D /* icon_120_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_120_flat.png; path = Classes/Assets/icon_120_flat.png; sourceTree = "<group>"; };
+		C481FD1F17FDEBDE0058EE9D /* icon_144_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_144_flat.png; path = Classes/Assets/icon_144_flat.png; sourceTree = "<group>"; };
+		C481FD2017FDEBDE0058EE9D /* icon_152_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_152_flat.png; path = Classes/Assets/icon_152_flat.png; sourceTree = "<group>"; };
 		C4897FC4140FD0360033C61C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC6140FD03F0033C61C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC7140FD0410033C61C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/CombiMeds.plist; sourceTree = "<group>"; };
@@ -1463,6 +1477,13 @@
 		C47DB23817AD43B80037A6DF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C481FD1A17FDEBDE0058EE9D /* icon_57_flat.png */,
+				C481FD1B17FDEBDE0058EE9D /* icon_72_flat.png */,
+				C481FD1C17FDEBDE0058EE9D /* icon_76_flat.png */,
+				C481FD1D17FDEBDE0058EE9D /* icon_114_flat.png */,
+				C481FD1E17FDEBDE0058EE9D /* icon_120_flat.png */,
+				C481FD1F17FDEBDE0058EE9D /* icon_144_flat.png */,
+				C481FD2017FDEBDE0058EE9D /* icon_152_flat.png */,
 				C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */,
 				C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */,
 			);
@@ -1983,6 +2004,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C481FD2317FDEBDE0058EE9D /* icon_76_flat.png in Resources */,
 				C4B8035D12D365F800A5A38F /* list-small.png in Resources */,
 				C4B8035F12D365F800A5A38F /* status-small.png in Resources */,
 				C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */,
@@ -2004,6 +2026,7 @@
 				C4952D2117F21DDB0022EFEF /* README.md in Resources */,
 				C4C0154A13425268005E889D /* crixivan.png in Resources */,
 				C4C0154B13425268005E889D /* didanosine.png in Resources */,
+				C481FD2117FDEBDE0058EE9D /* icon_57_flat.png in Resources */,
 				C4C0154C13425268005E889D /* emtriva.png in Resources */,
 				C4C0154D13425268005E889D /* epivir.png in Resources */,
 				C4C0154E13425268005E889D /* fuzeon.png in Resources */,
@@ -2034,6 +2057,7 @@
 				C4ADD9D313890E54004445C0 /* redcross-small.png in Resources */,
 				C4B24C17141CC43E00FACA6B /* cd4Off-small.png in Resources */,
 				C49F82B013DEE02C00D5891F /* viralOff-small.png in Resources */,
+				C481FD2517FDEBDE0058EE9D /* icon_120_flat.png in Resources */,
 				C4B24C15141CC41A00FACA6B /* cd4PercentOff-small.png in Resources */,
 				C4CDED5F138D7CD7005BAC87 /* edurant.png in Resources */,
 				C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */,
@@ -2072,7 +2096,9 @@
 				C4C26D8014FEC06D00CDA2B4 /* icon-rounded-small-flat.png in Resources */,
 				C4FCBC43152F210900E3F082 /* cd4PercentOn-small@2x.png in Resources */,
 				C4FCBC44152F210900E3F082 /* cd4Off-small@2x.png in Resources */,
+				C481FD2717FDEBDE0058EE9D /* icon_152_flat.png in Resources */,
 				C4FCBC45152F210900E3F082 /* cd4PercentOff-small@2x.png in Resources */,
+				C481FD2417FDEBDE0058EE9D /* icon_114_flat.png in Resources */,
 				C4FCBC46152F210900E3F082 /* pozicon@2x.png in Resources */,
 				C4FCBC47152F210900E3F082 /* combi-small@2x.png in Resources */,
 				C4FCBC48152F210900E3F082 /* cross-small@2x.png in Resources */,
@@ -2130,6 +2156,7 @@
 				C4C4192F15F1383000882416 /* HIVMedSupportCell.xib in Resources */,
 				C4C4193115F1383000882416 /* MedSelectionCell.xib in Resources */,
 				C4C4193315F1383000882416 /* MoreResultsCell.xib in Resources */,
+				C481FD2217FDEBDE0058EE9D /* icon_72_flat.png in Resources */,
 				C4C4193515F1383000882416 /* OtherMedCell.xib in Resources */,
 				C4C4193715F1383000882416 /* PressureCell.xib in Resources */,
 				C4C4193915F1383000882416 /* ProcedureCell.xib in Resources */,
@@ -2138,6 +2165,7 @@
 				C4C4193F15F1383000882416 /* ResultSegmentedCell.xib in Resources */,
 				C4C4194115F1383000882416 /* ResultValueCell.xib in Resources */,
 				C4C4194315F1383000882416 /* SetDateCell.xib in Resources */,
+				C481FD2617FDEBDE0058EE9D /* icon_144_flat.png in Resources */,
 				C4C4194515F1383000882416 /* SettingsCell.xib in Resources */,
 				C4C4194715F1383000882416 /* SideEffectListCell.xib in Resources */,
 				C4C4194915F1383000882416 /* SoundNameCell.xib in Resources */,
