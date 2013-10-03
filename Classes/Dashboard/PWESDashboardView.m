@@ -39,7 +39,7 @@
     self.layer.cornerRadius = 20;
     self.layer.borderColor = [UIColor darkGrayColor].CGColor;
     self.layer.borderWidth = 1;
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
     
     
 //    NSLog(@"*** DASHBOARD FOR %@ ****",types);

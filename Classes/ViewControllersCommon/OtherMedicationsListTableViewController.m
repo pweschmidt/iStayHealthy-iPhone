@@ -13,9 +13,10 @@
 #import "CoreDataManager.h"
 #import "EditOtherMedsTableViewController.h"
 #import "OtherMedication+Handling.h"
+#import "DateView.h"
 
 @interface OtherMedicationsListTableViewController ()
-@property (nonatomic, strong) NSArray * otherMediction;
+@property (nonatomic, strong) NSArray *otherMediction;
 @end
 
 @implementation OtherMedicationsListTableViewController
@@ -58,12 +59,48 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    [self configureCell:cell indexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    OtherMedication *med = [self.otherMediction objectAtIndex:indexPath.row];
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    DateView *dateView = [DateView viewWithDate:med.StartDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+    
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 1, 120, rowHeight)];
+    nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.text = med.Name;
+    nameLabel.textAlignment = NSTextAlignmentRight;
+    nameLabel.textColor = TEXTCOLOUR;
+    nameLabel.font = [UIFont systemFontOfSize:15];
+
+    UILabel *doseLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 1, 80, rowHeight)];
+    NSString *dose = [NSString stringWithFormat:@"%3.2f [%@]",[med.Dose floatValue],med.Unit];
+    doseLabel.backgroundColor = [UIColor clearColor];
+    doseLabel.text = dose;
+    doseLabel.textColor = DARK_RED;
+    doseLabel.textAlignment = NSTextAlignmentJustified;
+    doseLabel.font = [UIFont systemFontOfSize:10];
+    
+    [cell.contentView addSubview:dateView];
+    [cell.contentView addSubview:nameLabel];
+    [cell.contentView addSubview:doseLabel];
+}
 
 #pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle)
+    {
+        self.markedIndexPath = indexPath;
+        self.markedObject = [self.otherMediction objectAtIndex:indexPath.row];
+        [self showDeleteAlertView];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

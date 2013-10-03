@@ -45,4 +45,47 @@
     return string;
 }
 
+- (void)addValueString:(NSString *)valueString type:(NSString *)type
+{
+    if ([type isEqualToString:kName])
+    {
+        self.Name = valueString;
+    }
+    else if([type isEqualToString:kDose])
+    {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        self.Dose = [formatter numberFromString:valueString];    
+    }
+    else if([type isEqualToString:kUnit])
+    {
+        self.Unit = valueString;
+    }
+    else if([type isEqualToString:kMedicationForm])
+    {
+        self.MedicationForm = valueString;
+    }
+}
+
+- (NSString *)valueStringForType:(NSString *)type
+{
+    if ([type isEqualToString:kName])
+    {
+        return self.Name;
+    }
+    else if([type isEqualToString:kDose])
+    {
+        return [NSString stringWithFormat:@"%3.2f",[self.Dose floatValue]];
+    }
+    else if([type isEqualToString:kUnit])
+    {
+        return self.Unit;
+    }
+    else if([type isEqualToString:kMedicationForm])
+    {
+        return self.MedicationForm;
+    }
+    return nil;
+}
+
 @end

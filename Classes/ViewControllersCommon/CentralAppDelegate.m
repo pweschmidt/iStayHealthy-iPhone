@@ -26,10 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"We got to the new CentralAppDelegate");
-    if ([Utilities isIOS7])
-    {
-        self.window.tintColor = TEXTCOLOUR;
-    }
+    self.window.tintColor = TEXTCOLOUR;
     self.containerController = (ContainerViewController *)self.window.rootViewController;
     [[CoreDataManager sharedInstance] setUpCoreDataManager];
     [[CoreDataManager sharedInstance] setUpStoreWithError:^(NSError *error) {

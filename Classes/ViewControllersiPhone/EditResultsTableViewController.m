@@ -255,7 +255,7 @@
             NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
             NSString *resultsString = [self.resultsMenu objectAtIndex:titleIndex];
             NSString *text = NSLocalizedString(resultsString, nil);
-            [self configureTableCell:cell title:text indexPath:indexPath];            
+            [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
         }
     }
     return cell;

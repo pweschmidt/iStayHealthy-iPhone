@@ -51,6 +51,7 @@
     self.navigationItem.rightBarButtonItems = barButtons;
     self.contentViewsDictionary = [NSMutableDictionary dictionary];
     self.textViews = [NSMutableDictionary dictionary];
+    self.inputTypeForTextView = [NSMutableDictionary dictionary];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -93,6 +94,7 @@
 - (void)configureTableCell:(UITableViewCell *)cell
                      title:(NSString *)title
                  indexPath:(NSIndexPath *)indexPath
+         hasNumericalInput:(BOOL)hasNumericalInput
 {
     NSNumber *taggedViewNumber = nil;
     if (nil != self.datePickerIndexPath)
@@ -134,13 +136,17 @@
         textField.frame = CGRectMake(100, 0, cell.contentView.frame.size.width - 120, cell.contentView.frame.size.height);
         textField.delegate = self;
         textField.font = [UIFont systemFontOfSize:15];
-        if (self.hasNumericalInput)
+        if (hasNumericalInput)
         {
             textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            [self.inputTypeForTextView setObject:[NSNumber numberWithBool:YES]
+                                          forKey:taggedViewNumber];
         }
         else
         {
             textField.keyboardType = UIKeyboardTypeDefault;
+            [self.inputTypeForTextView setObject:[NSNumber numberWithBool:NO]
+                                          forKey:taggedViewNumber];
         }
         
         textField.returnKeyType = UIReturnKeyDone;
@@ -313,7 +319,9 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (!self.hasNumericalInput)
+    NSNumber *tagNumber = [NSNumber numberWithInteger:textField.tag];
+    BOOL hasNumericalInput = [[self.inputTypeForTextView objectForKey:tagNumber] boolValue];
+    if (!hasNumericalInput)
     {
         return YES;
     }

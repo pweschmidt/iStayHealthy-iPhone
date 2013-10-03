@@ -19,17 +19,18 @@
 
 @interface BaseEditTableViewController : UITableViewController
     <UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
-@property (nonatomic, strong) NSMutableDictionary * contentViewsDictionary;
-@property (nonatomic, strong) NSMutableDictionary * textViews;
+@property (nonatomic, strong) NSMutableDictionary *contentViewsDictionary;
+@property (nonatomic, strong) NSMutableDictionary *textViews;
+@property (nonatomic, strong) NSMutableDictionary *inputTypeForTextView;
 @property (nonatomic, assign) BOOL isEditMode;
 @property (nonatomic, assign) BOOL datePickerCellIsShown;
-@property (nonatomic, strong) NSManagedObject * managedObject;
+@property (nonatomic, strong) NSManagedObject *managedObject;
 @property (nonatomic, strong) NSDate * date;
-@property (nonatomic, strong) UIDatePicker * datePicker;
-@property (nonatomic, strong) NSIndexPath * datePickerIndexPath;
-@property (nonatomic, strong) UILabel * dateLabel;
-@property (nonatomic, strong) UIView * dateCellView;
-@property (nonatomic, strong) UIView * datePickerCellView;
+@property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UIView *dateCellView;
+@property (nonatomic, strong) UIView *datePickerCellView;
 @property (nonatomic, weak) id<AddMenuNavigationDelegate> menuDelegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -38,7 +39,8 @@
 
 - (void)configureTableCell:(UITableViewCell *)cell
                      title:(NSString *)title
-                 indexPath:(NSIndexPath *)indexPath;
+                 indexPath:(NSIndexPath *)indexPath
+         hasNumericalInput:(BOOL)hasNumericalInput;
 
 - (void)configureDateCell:(UITableViewCell *)cell
                 indexPath:(NSIndexPath *)indexPath;

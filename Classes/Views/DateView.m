@@ -7,7 +7,7 @@
 //
 
 #import "DateView.h"
-
+#import "GeneralSettings.h"
 @interface DateView ()
 {
     CGRect yearFrame;
@@ -96,7 +96,7 @@
     view.frame = yearFrame;
     UILabel *label = [[UILabel alloc] init];
     label.frame = yearLabelFrame;
-    label.backgroundColor = [UIColor darkGrayColor];
+    label.backgroundColor = [UIColor lightGrayColor];
     label.text = [NSString stringWithFormat:@"%d",year];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont boldSystemFontOfSize:yearFontSize];
@@ -118,7 +118,14 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dayFrame.size.width, dayFrame.size.height)];
     label.backgroundColor = [UIColor clearColor];
     label.text = [NSString stringWithFormat:@"%d",day];
-    label.textAlignment = NSTextAlignmentRight;
+    if (9 < day)
+    {
+        label.textAlignment = NSTextAlignmentRight;
+    }
+    else
+    {
+        label.textAlignment = NSTextAlignmentCenter;
+    }
     label.textColor = [UIColor darkGrayColor];
     label.font = [UIFont boldSystemFontOfSize:dayFontSize];
     [view addSubview:label];

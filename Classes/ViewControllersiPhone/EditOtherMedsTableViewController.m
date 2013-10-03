@@ -36,7 +36,6 @@
     self.unitControl = [[UISegmentedControl alloc] initWithItems:self.unitArray];
     self.unitControl.selectedSegmentIndex = 1;
     [self.unitControl addTarget:self action:@selector(changeUnit:) forControlEvents:UIControlEventValueChanged];
-    self.unitControl.segmentedControlStyle = UISegmentedControlStylePlain;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,7 +64,19 @@
         med = (OtherMedication *)self.managedObject;
     }
     med.UID = [Utilities GUID];
-    
+    med.StartDate = self.date;
+    int index = 0;
+    for (NSNumber *number in self.textViews)
+    {
+        id viewObj = [self.textViews objectForKey:number];
+        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]])
+        {
+            UITextField *textField = (UITextField *)viewObj;
+            NSString *valueString = textField.text;
+            [med addValueString:valueString type:[self.editMenu objectAtIndex:index]];
+        }
+        index++;
+    }
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
     [self.navigationController popViewControllerAnimated:YES];
@@ -137,8 +148,13 @@
         else
         {
             NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
-            NSString *text = NSLocalizedString([self.editMenu objectAtIndex:titleIndex], nil);
-            [self configureTableCell:cell title:text indexPath:indexPath];
+            NSString *text = [self.editMenu objectAtIndex:titleIndex];
+            NSString *localisedText = NSLocalizedString([self.editMenu objectAtIndex:titleIndex], nil);
+            BOOL hasNumericalInput = [text isEqualToString:kDose];
+            [self configureTableCell:cell
+                               title:localisedText
+                           indexPath:indexPath
+                   hasNumericalInput:hasNumericalInput];
         }
     }
     return cell;

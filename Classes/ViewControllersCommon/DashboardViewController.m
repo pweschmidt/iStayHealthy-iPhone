@@ -24,7 +24,7 @@
     CGRect pageFrame;
 }
 @property (nonatomic, assign) BOOL pageControlUsed;
-@property (nonatomic, strong) NSMutableArray * dashboardTypes;
+@property (nonatomic, strong) NSMutableArray *dashboardTypes;
 @end
 
 @implementation DashboardViewController
@@ -72,6 +72,7 @@
     self.pageController = pager;
     self.pageController.backgroundColor = [UIColor clearColor];
     self.pageController.tintColor = [UIColor lightGrayColor];
+    self.pageController.pageIndicatorTintColor = [UIColor lightGrayColor];
     self.pageController.currentPageIndicatorTintColor = DARK_RED;
     [self.pageController addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
     self.chartScroller.contentSize = CGSizeMake(self.view.frame.size.width * self.dashboardTypes.count, self.chartScroller.frame.size.height);
