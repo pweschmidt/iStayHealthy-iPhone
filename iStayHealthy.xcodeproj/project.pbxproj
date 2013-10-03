@@ -106,6 +106,12 @@
 		C481FD2517FDEBDE0058EE9D /* icon_120_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1E17FDEBDE0058EE9D /* icon_120_flat.png */; };
 		C481FD2617FDEBDE0058EE9D /* icon_144_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1F17FDEBDE0058EE9D /* icon_144_flat.png */; };
 		C481FD2717FDEBDE0058EE9D /* icon_152_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD2017FDEBDE0058EE9D /* icon_152_flat.png */; };
+		C481FD2C17FDEE540058EE9D /* icon_40_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD2817FDEE540058EE9D /* icon_40_flat.png */; };
+		C481FD2D17FDEE540058EE9D /* icon_50_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD2917FDEE540058EE9D /* icon_50_flat.png */; };
+		C481FD2E17FDEE540058EE9D /* icon_80_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD2A17FDEE540058EE9D /* icon_80_flat.png */; };
+		C481FD2F17FDEE540058EE9D /* icon_100_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD2B17FDEE540058EE9D /* icon_100_flat.png */; };
+		C481FD3617FDEF7B0058EE9D /* icon_29.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD3417FDEF7B0058EE9D /* icon_29.png */; };
+		C481FD3717FDEF7B0058EE9D /* icon_29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD3517FDEF7B0058EE9D /* icon_29@2x.png */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
 		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
@@ -611,6 +617,12 @@
 		C481FD1E17FDEBDE0058EE9D /* icon_120_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_120_flat.png; path = Classes/Assets/icon_120_flat.png; sourceTree = "<group>"; };
 		C481FD1F17FDEBDE0058EE9D /* icon_144_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_144_flat.png; path = Classes/Assets/icon_144_flat.png; sourceTree = "<group>"; };
 		C481FD2017FDEBDE0058EE9D /* icon_152_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_152_flat.png; path = Classes/Assets/icon_152_flat.png; sourceTree = "<group>"; };
+		C481FD2817FDEE540058EE9D /* icon_40_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_40_flat.png; path = Classes/Assets/icon_40_flat.png; sourceTree = "<group>"; };
+		C481FD2917FDEE540058EE9D /* icon_50_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_50_flat.png; path = Classes/Assets/icon_50_flat.png; sourceTree = "<group>"; };
+		C481FD2A17FDEE540058EE9D /* icon_80_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_80_flat.png; path = Classes/Assets/icon_80_flat.png; sourceTree = "<group>"; };
+		C481FD2B17FDEE540058EE9D /* icon_100_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_100_flat.png; path = Classes/Assets/icon_100_flat.png; sourceTree = "<group>"; };
+		C481FD3417FDEF7B0058EE9D /* icon_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_29.png; path = Classes/Assets/icon_29.png; sourceTree = "<group>"; };
+		C481FD3517FDEF7B0058EE9D /* icon_29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_29@2x.png"; path = "Classes/Assets/icon_29@2x.png"; sourceTree = "<group>"; };
 		C4897FC4140FD0360033C61C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC6140FD03F0033C61C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC7140FD0410033C61C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/CombiMeds.plist; sourceTree = "<group>"; };
@@ -1477,6 +1489,12 @@
 		C47DB23817AD43B80037A6DF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C481FD3417FDEF7B0058EE9D /* icon_29.png */,
+				C481FD3517FDEF7B0058EE9D /* icon_29@2x.png */,
+				C481FD2817FDEE540058EE9D /* icon_40_flat.png */,
+				C481FD2917FDEE540058EE9D /* icon_50_flat.png */,
+				C481FD2A17FDEE540058EE9D /* icon_80_flat.png */,
+				C481FD2B17FDEE540058EE9D /* icon_100_flat.png */,
 				C481FD1A17FDEBDE0058EE9D /* icon_57_flat.png */,
 				C481FD1B17FDEBDE0058EE9D /* icon_72_flat.png */,
 				C481FD1C17FDEBDE0058EE9D /* icon_76_flat.png */,
@@ -2070,6 +2088,7 @@
 				C44B4884140CDEBE00BDC418 /* dropbox-small.png in Resources */,
 				C44B4886140CF1C200BDC418 /* feedback-small.png in Resources */,
 				C44B4888140CF94B00BDC418 /* e-mail-small.png in Resources */,
+				C481FD2D17FDEE540058EE9D /* icon_50_flat.png in Resources */,
 				C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */,
 				C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */,
 				C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */,
@@ -2115,6 +2134,7 @@
 				C4FCBC53152F210900E3F082 /* downredweb@2x.png in Resources */,
 				C4FCBC54152F210900E3F082 /* downgreenweb@2x.png in Resources */,
 				C4FCBC55152F210900E3F082 /* icon-small@2x.png in Resources */,
+				C481FD3617FDEF7B0058EE9D /* icon_29.png in Resources */,
 				C4FCBC56152F210900E3F082 /* icon@2x.png in Resources */,
 				C4FCBC57152F210900E3F082 /* icon-72@2x.png in Resources */,
 				C4FCBC58152F210900E3F082 /* empty@2x.png in Resources */,
@@ -2122,6 +2142,7 @@
 				C4FCBC5A152F210900E3F082 /* wrong@2x.png in Resources */,
 				C4FCBC5B152F210900E3F082 /* cd4On-small@2x.png in Resources */,
 				C4FCBC5C152F210900E3F082 /* clinic@2x.png in Resources */,
+				C481FD2F17FDEE540058EE9D /* icon_100_flat.png in Resources */,
 				C4FCBC5D152F210900E3F082 /* dropbox-small@2x.png in Resources */,
 				C4FCBC5E152F210900E3F082 /* e-mail-small@2x.png in Resources */,
 				C4FCBC5F152F210900E3F082 /* feedback-small@2x.png in Resources */,
@@ -2156,6 +2177,7 @@
 				C4C4192F15F1383000882416 /* HIVMedSupportCell.xib in Resources */,
 				C4C4193115F1383000882416 /* MedSelectionCell.xib in Resources */,
 				C4C4193315F1383000882416 /* MoreResultsCell.xib in Resources */,
+				C481FD2C17FDEE540058EE9D /* icon_40_flat.png in Resources */,
 				C481FD2217FDEBDE0058EE9D /* icon_72_flat.png in Resources */,
 				C4C4193515F1383000882416 /* OtherMedCell.xib in Resources */,
 				C4C4193715F1383000882416 /* PressureCell.xib in Resources */,
@@ -2190,6 +2212,8 @@
 				C4C41A1815F1404000882416 /* HIVMedicationViewController.xib in Resources */,
 				C4C41A1915F1404000882416 /* NewAlertViewController.xib in Resources */,
 				C4C41A1A15F1404000882416 /* NewResultsViewController.xib in Resources */,
+				C481FD3717FDEF7B0058EE9D /* icon_29@2x.png in Resources */,
+				C481FD2E17FDEE540058EE9D /* icon_80_flat.png in Resources */,
 				C4C41A1B15F1404000882416 /* NewStatusViewController.xib in Resources */,
 				C4C41A1C15F1404000882416 /* OtherMedsTableViewController.xib in Resources */,
 				C4C41A1D15F1404000882416 /* ProcedureTableViewController.xib in Resources */,
