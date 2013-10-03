@@ -9,6 +9,8 @@
 #import "CentralAppDelegate.h"
 #import "ContainerViewController.h"
 #import "Constants.h"
+#import "GeneralSettings.h"
+#import "Utilities.h"
 #import "CoreDataManager.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
@@ -24,6 +26,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"We got to the new CentralAppDelegate");
+    if ([Utilities isIOS7])
+    {
+        self.window.tintColor = TEXTCOLOUR;
+    }
     self.containerController = (ContainerViewController *)self.window.rootViewController;
     [[CoreDataManager sharedInstance] setUpCoreDataManager];
     [[CoreDataManager sharedInstance] setUpStoreWithError:^(NSError *error) {
