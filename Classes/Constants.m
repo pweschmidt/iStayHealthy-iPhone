@@ -10,6 +10,7 @@
 
 NSString * const kAppNotificationKey = @"iStayHealthyNotification";
 NSString * const kDefaultDateFormatting = @"dd-MMM-yy HH:mm:ss";
+NSString * const kDefaultFontName = @"Helvetica";
 
 NSString * const kDropboxConsumerKey = @"sekt4gbt7526j0y";;
 NSString * const kDropboxSecretKey = @"drg5hompcf9vbd2";;
@@ -114,6 +115,7 @@ NSString * const kSystole = @"Systole";
 NSString * const kDiastole = @"Diastole";
 NSString * const kOxygenLevel = @"OxygenLevel";
 NSString * const kWeight = @"Weight";
+NSString * const kBMI = @"BMI";
 NSString * const kHemoglobulin = @"Hemoglobulin";
 NSString * const kPlatelet = @"PlateletCount";
 NSString * const kWhiteBloodCells = @"WhiteBloodCellCount";
@@ -165,6 +167,8 @@ NSString * const kIsDiabetic = @"isDiabetic";
 NSString * const kIsSmoker = @"isSmoker";
 NSString * const kGender = @"gender";
 
+
+
 NSString * const kSleepBarometer = @"sleepBarometer";
 NSString * const kMoodBarometer = @"moodBarometer";
 NSString * const kWellnessBarometer = @"wellnessBarometer";
@@ -174,6 +178,9 @@ NSString * const kReasonEnded = @"reasonEnded";
 NSString * const kIsART = @"isART";
 NSString * const kNotes = @"Notes";
 NSString * const kCausedBy = @"CausedBy";
+NSString * const kAlertLabel = @"AlertLabel";
+NSString * const kAlertFrequency = @"AlertFrequency";
+NSString * const kAlertSoundName = @"AlertSoundName";
 
 NSString * const kMainDataSource    = @"iStayHealthy.sqlite";
 NSString * const kBackupDataSource  = @"iStayHealthyBackup.sqlite";
@@ -193,4 +200,18 @@ NSString * const kMissedMedicationData = @"MissedMedicationData";
 
 NSString * const kSecretKey = @"EDFAEE24-CC9F-49FC-ADF6-FE2C8D2C313D";
 NSString * const kImportXMLFile = @"importXML.isth";
+
+NSString * const kMissedReasonForgotten = @"Forgotten";
+NSString * const kMissedReasonNoMeds = @"Ran out of meds";
+NSString * const kMissedReasonUnable = @"Could not take the pills";
+NSString * const kMissedReasonUnwilling = @"Didn't want to take the meds";
+NSString * const kMissedReasonOther = @"No particular reason";
+NSString * const kEffectsOther = @"Select from list";
+NSString * const kEffectsMinor = @"Minor";
+NSString * const kEffectsMajor = @"Major";
+NSString * const kEffectsSerious = @"Serious";
+NSString * const kEffectsAlways = @"Always";
+NSString * const kEffectsOften = @"Often";
+NSString * const kEffectsSometimes = @"Sometimes";
+NSString * const kEffectsRarely = @"Rarely";
 

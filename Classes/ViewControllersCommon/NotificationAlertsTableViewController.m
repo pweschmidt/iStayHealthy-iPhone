@@ -11,9 +11,11 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "EditAlertsTableViewController.h"
+#import "TimeView.h"
 
 @interface NotificationAlertsTableViewController ()
 @property (nonatomic, strong) NSArray *notifications;
+@property (nonatomic, strong) UILocalNotification *markedNotification;
 @end
 
 @implementation NotificationAlertsTableViewController
@@ -23,6 +25,7 @@
     [super viewDidLoad];
     self.notifications = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];;
     self.navigationItem.title = NSLocalizedString(@"Alerts", nil);
+    self.markedNotification = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,7 +35,9 @@
 
 - (void)addButtonPressed:(id)sender
 {
-    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
+                                                 initWithStyle:UITableViewStyleGrouped
+                                                 localNotification:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -58,13 +63,56 @@
     return cell;
 }
 
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    UILocalNotification *notification = [self.notifications objectAtIndex:indexPath.row];
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    TimeView *timeView = [TimeView viewWithTime:notification.fireDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = notification.alertBody;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = TEXTCOLOUR;
+    label.font = [UIFont fontWithType:Standard size:Standard];
+    [cell.contentView addSubview:timeView];
+}
+
 
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle)
+    {
+        self.markedIndexPath = indexPath;
+        self.markedNotification = (UILocalNotification *)[self.notifications
+                                                          objectAtIndex:indexPath.row];
+        [self showDeleteAlertView];
+    }
+}
+
+- (void)removeSQLEntry
+{
+    if (nil == self.markedNotification)
+    {
+        return;
+    }
+    [self.tableView beginUpdates];
+    [[UIApplication sharedApplication] cancelLocalNotification:self.markedNotification];
+    self.notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    self.markedNotification = nil;
+    [self.tableView endUpdates];
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UILocalNotification *notification = (UILocalNotification *)[self.notifications objectAtIndex:indexPath.row];
-    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    UILocalNotification *notification = (UILocalNotification *)[self.notifications
+                                                                objectAtIndex:indexPath.row];
+    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
+                                                 initWithStyle:UITableViewStyleGrouped
+                                                 localNotification:notification];
     [self.navigationController pushViewController:controller animated:YES];
     
 }

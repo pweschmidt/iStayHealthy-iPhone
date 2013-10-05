@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "BaseViewControllerDelegate.h"
 #import "ContainerViewControllerDelegate.h"
+#import "UIFont+Standard.h"
 @class CustomTableView;
 
 @interface BaseTableViewController : UITableViewController <BaseViewControllerDelegate, ContainerViewControllerDelegate, UIAlertViewDelegate>

@@ -13,9 +13,11 @@
 #import "CoreDataManager.h"
 #import "EditSideEffectsTableViewController.h"
 #import "SideEffects+Handling.h"
+#import "DateView.h"
 
 @interface SideEffectsTableViewController ()
 @property (nonatomic, strong) NSArray *effects;
+@property (nonatomic, strong) NSArray *currentMeds;
 @end
 
 @implementation SideEffectsTableViewController
@@ -24,6 +26,7 @@
 {
     [super viewDidLoad];
     self.effects = [NSArray array];
+    self.currentMeds = [NSArray array];
     self.navigationItem.title = NSLocalizedString(@"Side Effects", nil);
 }
 
@@ -34,7 +37,7 @@
 
 - (void)addButtonPressed:(id)sender
 {
-    EditSideEffectsTableViewController *controller = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+    EditSideEffectsTableViewController *controller = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped currentMeds:self.currentMeds managedObject:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -64,10 +67,21 @@
 
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle)
+    {
+        self.markedIndexPath = indexPath;
+        self.markedObject = [self.effects objectAtIndex:indexPath.row];
+        [self showDeleteAlertView];
+    }
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SideEffects *effects = (SideEffects *)[self.effects objectAtIndex:indexPath.row];
-    EditSideEffectsTableViewController *controller = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:effects hasNumericalInput:NO];
+    EditSideEffectsTableViewController *controller = [[EditSideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped currentMeds:self.currentMeds managedObject:effects];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -75,28 +89,43 @@
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kSideEffects
-                                                   predicate:nil
-                                                    sortTerm:kSideEffectDate
-                                                   ascending:NO completion:^(NSArray *array, NSError *error) {
-                                                       if (nil == array)
-                                                       {
-                                                           UIAlertView *errorAlert = [[UIAlertView alloc]
-                                                                                      initWithTitle:@"Error"
-                                                                                      message:@"Error loading data"
-                                                                                      delegate:nil
-                                                                                      cancelButtonTitle:@"Cancel"
-                                                                                      otherButtonTitles:nil];
-                                                           [errorAlert show];
-                                                           
-                                                       }
-                                                       else
-                                                       {
-                                                           self.effects = nil;
-                                                           self.effects = [NSArray arrayWithArray:array];
-                                                           [self.tableView reloadData];
-                                                       }
-                                                   }];
+    [[CoreDataManager sharedInstance] fetchDataForEntityName:kSideEffects predicate:nil sortTerm:kSideEffectDate ascending:NO completion:^(NSArray *array, NSError *error) {
+        if (nil == array)
+        {
+            UIAlertView *errorAlert = [[UIAlertView alloc]
+                                       initWithTitle:@"Error"
+                                       message:@"Error loading data"
+                                       delegate:nil
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:nil];
+            [errorAlert show];
+            
+        }
+        else
+        {
+            self.effects = nil;
+            self.effects = [NSArray arrayWithArray:array];
+            [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion:^(NSArray *medsarray, NSError *innererror) {
+                if (nil == array)
+                {
+                    UIAlertView *errorAlert = [[UIAlertView alloc]
+                                               initWithTitle:@"Error"
+                                               message:@"Error loading data"
+                                               delegate:nil
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:nil];
+                    [errorAlert show];
+                    
+                }
+                else
+                {
+                    self.currentMeds = nil;
+                    self.currentMeds = [NSArray arrayWithArray:medsarray];
+                    [self.tableView reloadData];
+                }
+            }];
+        }
+    }];
 }
 - (void)startAnimation:(NSNotification *)notification
 {

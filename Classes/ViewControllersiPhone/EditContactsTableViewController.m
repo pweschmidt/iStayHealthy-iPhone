@@ -7,9 +7,15 @@
 //
 
 #import "EditContactsTableViewController.h"
+#import "Constants.h"
+#import "CoreDataManager.h"
+#import "Contacts+Handling.h"
+#import "Utilities.h"
+#import "UILabel+Standard.h"
 
 @interface EditContactsTableViewController ()
-
+@property (nonatomic, strong) NSArray *editMenu;
+@property (nonatomic, strong) NSMutableArray *titleStrings;
 @end
 
 @implementation EditContactsTableViewController
@@ -17,17 +23,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    if (self.isEditMode)
+    {
+        self.navigationItem.title = NSLocalizedString(@"Edit Clinic", nil);
+    }
+    else
+    {
+        self.navigationItem.title = NSLocalizedString(@"New Clinic", nil);
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setDefaultValues
 {
+    if(!self.isEditMode)
+    {
+        return;
+    }
     
 }
 
@@ -36,9 +52,5 @@
     
 }
 
-- (void)deleteObject:(id)sender
-{
-    
-}
 
 @end

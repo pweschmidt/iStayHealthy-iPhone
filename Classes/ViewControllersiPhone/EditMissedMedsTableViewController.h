@@ -9,5 +9,8 @@
 #import "BaseEditTableViewController.h"
 
 @interface EditMissedMedsTableViewController : BaseEditTableViewController
+- (id)initWithStyle:(UITableViewStyle)style
+        currentMeds:(NSArray *)currentMeds
+      managedObject:(NSManagedObject *)managedObject;
 
 @end

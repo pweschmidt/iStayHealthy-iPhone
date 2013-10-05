@@ -160,7 +160,7 @@
         }
         else if ([self hasInlineDatePicker])
         {
-            [self configureDatePickerCell:cell indexPath:indexPath];
+            [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
         }
     }
     else

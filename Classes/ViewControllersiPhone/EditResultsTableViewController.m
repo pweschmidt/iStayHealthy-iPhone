@@ -59,6 +59,7 @@
                              kRedBloodCells,
                              kPlatelet,
                              kWeight,
+                             kBMI,
                              kBloodPressure,
                              kCardiacRiskFactor];
     
@@ -73,6 +74,7 @@
                                          kRedBloodCells,
                                          kPlatelet,
                                          kWeight,
+                                         kBMI,
                                          kBloodPressure,
                                          kCardiacRiskFactor];
     
@@ -88,6 +90,7 @@
                            @"11.5 - 14.5",
                            @"150 - 450",
                            @"Enter your weight",
+                           @"25",
                            @"120/80",
                            @"0.0 - 10.0"];
     
@@ -178,11 +181,6 @@
     }
 }
 
-- (void)deleteObject:(id)sender
-{
-    
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -242,7 +240,7 @@
     
     if (0 == indexPath.row)
     {
-        [self configureDateCell:cell indexPath:indexPath];
+        [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
     }
     else
     {

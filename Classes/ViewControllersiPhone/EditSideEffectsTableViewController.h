@@ -7,7 +7,12 @@
 //
 
 #import "BaseEditTableViewController.h"
+#import "EffectsSelectionDataSource.h"
 
 @interface EditSideEffectsTableViewController : BaseEditTableViewController
+    <EffectsSelectionDataSource>
+- (id)initWithStyle:(UITableViewStyle)style
+        currentMeds:(NSArray *)currentMeds
+      managedObject:(NSManagedObject *)managedObject;
 
 @end

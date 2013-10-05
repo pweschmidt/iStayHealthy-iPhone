@@ -12,15 +12,21 @@
 #define APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
 #define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 
+typedef NS_ENUM(int, DateType)
+{
+    DateOnly = 0,
+    DateAndTime,
+    TimeOnly
+};
 
-typedef NS_ENUM(NSUInteger, ResultsType)
+typedef NS_ENUM(int, ResultsType)
 {
     HIVResultsType = 0,
     BloodResultsType,
     OtherResultsType
 };
 
-typedef NS_ENUM(NSUInteger, InputType)
+typedef NS_ENUM(int, InputType)
 {
     DefaultInput = 0,
     NumericalInput,
@@ -31,8 +37,25 @@ typedef NS_ENUM(NSUInteger, InputType)
     WebInput
 };
 
+typedef NS_ENUM(int, FontType)
+{
+    Standard = 0,
+    Light,
+    LightItalic,
+    Bold,
+    BoldItalic
+};
 
-typedef NS_ENUM(NSUInteger, MenuType)
+typedef NS_ENUM(int, FontSize)
+{
+    small = 10,
+    medium = 12,
+    standard = 15,
+    large = 17
+};
+
+
+typedef NS_ENUM(int, MenuType)
 {
     HamburgerMenuType = 0,
     AddMenuType
@@ -66,6 +89,7 @@ typedef void (^iStayHealthyArrayCompletionBlock)(NSArray *array, NSError *error)
  */
 extern NSString * const kAppNotificationKey;
 extern NSString * const kDefaultDateFormatting;
+extern NSString * const kDefaultFontName;
 /**
  Dropbox app definitions
  */
@@ -175,6 +199,7 @@ extern NSString * const kDiastole;
 extern NSString * const kBloodPressure;
 extern NSString * const kOxygenLevel;
 extern NSString * const kWeight;
+extern NSString * const kBMI;
 extern NSString * const kHemoglobulin;
 extern NSString * const kPlatelet;
 extern NSString * const kWhiteBloodCells;
@@ -236,7 +261,9 @@ extern NSString * const kReasonEnded;
 extern NSString * const kIsART;
 extern NSString * const kNotes;
 extern NSString * const kCausedBy;
-
+extern NSString * const kAlertLabel;
+extern NSString * const kAlertFrequency;
+extern NSString * const kAlertSoundName;
 extern NSString * const kMainDataSource;
 extern NSString * const kBackupDataSource;
 extern NSString * const kiCloudDataSource;
@@ -254,3 +281,17 @@ extern NSString * const kMissedMedicationData;
 
 extern NSString * const kSecretKey;
 extern NSString * const kImportXMLFile;
+
+extern NSString * const kMissedReasonForgotten;
+extern NSString * const kMissedReasonNoMeds;
+extern NSString * const kMissedReasonUnable;
+extern NSString * const kMissedReasonUnwilling;
+extern NSString * const kMissedReasonOther;
+extern NSString * const kEffectsOther;
+extern NSString * const kEffectsMinor;
+extern NSString * const kEffectsMajor;
+extern NSString * const kEffectsSerious;
+extern NSString * const kEffectsAlways;
+extern NSString * const kEffectsOften;
+extern NSString * const kEffectsSometimes;
+extern NSString * const kEffectsRarely;

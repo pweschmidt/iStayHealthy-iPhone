@@ -9,9 +9,11 @@
 #import "BaseEditTableViewController.h"
 #import "Utilities.h"
 #import "NSDate+Extras.h"
+#import "CoreDataManager.h"
 
 @interface BaseEditTableViewController ()
 @property (nonatomic, assign) BOOL hasNumericalInput;
+@property (nonatomic, assign) DateType dateType;
 @end
 
 @implementation BaseEditTableViewController
@@ -82,11 +84,14 @@
                                  userInfo:nil];
 }
 
-- (void)deleteObject:(id)sender
+
+- (void)removeManagedObject
 {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-                                 userInfo:nil];    
+    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
+    [defaultContext deleteObject:self.managedObject];
+    //    [self.tableView deleteRowsAtIndexPaths:@[self.markedIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
 
 
@@ -162,7 +167,9 @@
 
 - (void)configureDateCell:(UITableViewCell *)cell
                 indexPath:(NSIndexPath *)indexPath
+                 dateType:(DateType)dateType
 {
+    self.dateType = dateType;
     cell.contentView.backgroundColor = [UIColor clearColor];
     UIView *mainContentView = [[UIView alloc] initWithFrame:cell.contentView.frame];
     mainContentView.backgroundColor = [UIColor whiteColor];
@@ -194,8 +201,8 @@
     
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = kBaseDateCellTag;
-	datePicker.datePickerMode = UIDatePickerModeDate;
     datePicker.backgroundColor = [UIColor clearColor];
+    [self selectDatePickerMode:datePicker];
     [datePicker addTarget:self
                    action:@selector(dateAction:)
          forControlEvents:UIControlEventValueChanged];
@@ -360,20 +367,31 @@
     return NO;
 }
 
-#pragma mark - ActionSheet delegate only used for iOS 6.x
-- (void)changeDate:(NSIndexPath *)indexPath
+
+#pragma UIAlertViewDelegate methods
+
+- (void)showDeleteAlertView
 {
-    if ([Utilities isIOS7])
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+    
+    [alert show];
+}
+
+/**
+ if user really wants to delete the entry call removeSQLEntry
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
     {
-        [self changeDate_iOS7:indexPath];
-    }
-    else
-    {
-        [self changeDate_iOS6];
+        [self removeManagedObject];
     }
 }
 
-- (void)changeDate_iOS7:(NSIndexPath *)indexPath
+
+#pragma mark - ActionSheet delegate only used for iOS 6.x
+- (void)changeDate:(NSIndexPath *)indexPath
 {
     [self.tableView beginUpdates];
     BOOL before = NO;   // indicates if the date picker is below "indexPath", help us determine which row to reveal
@@ -382,7 +400,7 @@
         before = self.datePickerIndexPath.row < indexPath.row;
     }
     
-//    BOOL sameCellClicked = (kBaseDateCellRow - 1 == indexPath.row);
+    //    BOOL sameCellClicked = (kBaseDateCellRow - 1 == indexPath.row);
     
     // remove any date picker cell if it exists
     if ([self hasInlineDatePicker])
@@ -405,25 +423,6 @@
     // always deselect the row containing the start or end date
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.tableView endUpdates];
-}
-
-
-- (void)changeDate_iOS6
-{
-    NSString *title = @"\n\n\n\n\n\n\n\n\n\n\n\n" ;
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Set",nil), nil];
-	[actionSheet showInView:self.view];
-	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-	datePicker.tag = kBaseDateCellTag;
-	datePicker.datePickerMode = UIDatePickerModeDate;
-	[actionSheet addSubview:datePicker];
-}
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	UIDatePicker *datePicker = (UIDatePicker *)[actionSheet viewWithTag:kBaseDateCellTag];
-	self.date = datePicker.date;
 }
 
 #pragma mark - iOS7 date cell handling
@@ -536,5 +535,21 @@
     // update the cell's date string
 }
 
+
+- (void)selectDatePickerMode:(UIDatePicker *)datePicker
+{
+    switch (self.dateType)
+    {
+        case DateOnly:
+            datePicker.datePickerMode = UIDatePickerModeDate;
+            break;
+        case DateAndTime:
+            datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+            break;
+        case TimeOnly:
+            datePicker.datePickerMode = UIDatePickerModeTime;
+            break;
+    }
+}
 
 @end

@@ -9,16 +9,26 @@
 #import "EditAppointmentsTableViewController.h"
 
 @interface EditAppointmentsTableViewController ()
-
+@property (nonatomic, strong) NSArray *clinics;
 @end
 
 @implementation EditAppointmentsTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
+     currentClinics:(NSArray *)currentClinics
+      managedObject:(NSManagedObject *)managedObject
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:NO];
+    if (nil != self)
+    {
+        if (nil == currentClinics)
+        {
+            _clinics = [NSArray array];
+        }
+        else
+        {
+            _clinics = currentClinics;
+        }
     }
     return self;
 }
@@ -26,7 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)setDefaultValues

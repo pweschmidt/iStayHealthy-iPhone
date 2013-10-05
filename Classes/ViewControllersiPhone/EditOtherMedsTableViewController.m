@@ -13,10 +13,14 @@
 #import "Utilities.h"
 
 @interface EditOtherMedsTableViewController ()
+{
+    NSUInteger unitIndex;
+}
 @property (nonatomic, strong) NSArray * editMenu;
 @property (nonatomic, strong) NSArray * unitArray;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISegmentedControl *unitControl;
+- (void)changeUnit:(id)sender;
 @end
 
 @implementation EditOtherMedsTableViewController
@@ -35,6 +39,7 @@
     self.unitArray = @[@"g", @"mg", @"ml", @"other"];
     self.unitControl = [[UISegmentedControl alloc] initWithItems:self.unitArray];
     self.unitControl.selectedSegmentIndex = 1;
+    unitIndex = 1;
     [self.unitControl addTarget:self action:@selector(changeUnit:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -65,6 +70,7 @@
     }
     med.UID = [Utilities GUID];
     med.StartDate = self.date;
+    med.Unit = [self.unitArray objectAtIndex:unitIndex];
     int index = 0;
     for (NSNumber *number in self.textViews)
     {
@@ -80,11 +86,6 @@
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)deleteObject:(id)sender
-{
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,7 +138,7 @@
     
     if (0 == indexPath.row)
     {
-        [self configureDateCell:cell indexPath:indexPath];
+        [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
     }
     else
     {
@@ -185,7 +186,11 @@
 
 - (void)changeUnit:(id)sender
 {
-    
+    if ([sender isKindOfClass:[UISegmentedControl class]])
+    {
+        UISegmentedControl *segmenter = (UISegmentedControl *)sender;
+        unitIndex = segmenter.selectedSegmentIndex;
+    }
 }
 
 @end

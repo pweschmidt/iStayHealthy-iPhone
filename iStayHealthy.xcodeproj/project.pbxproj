@@ -143,6 +143,10 @@
 		C49B5C5F15DFE4BA00D3AF3B /* appointments.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B5C5E15DFE4BA00D3AF3B /* appointments.png */; };
 		C49F82B013DEE02C00D5891F /* viralOff-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82B213DEE02C00D5891F /* viralOff-small.png */; };
 		C49F82C213DEE06500D5891F /* viralOn-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C49F82C413DEE06500D5891F /* viralOn-small.png */; };
+		C4A49AD918002CD400FC1637 /* TimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49AD818002CD400FC1637 /* TimeView.m */; };
+		C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1C180031C400FC1637 /* UIFont+Standard.m */; };
+		C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1F1800549500FC1637 /* UILabel+Standard.m */; };
+		C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */; };
 		C4A6E21817C76DE90020FC2A /* CustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A6E21717C76DE90020FC2A /* CustomTableView.m */; };
 		C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A6E21C17C7770C0020FC2A /* Menus.m */; };
 		C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */; };
@@ -179,9 +183,6 @@
 		C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */; };
 		C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */; };
 		C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */; };
-		C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAAC17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m */; };
-		C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAAF17B2CE340038D2A7 /* CoreDataManageriOS6.m */; };
-		C4BFAAB317B2CE500038D2A7 /* CoreDataManageriOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAB217B2CE500038D2A7 /* CoreDataManageriOS7.m */; };
 		C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */; };
 		C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */; };
 		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
@@ -690,6 +691,15 @@
 		C49F82C513DEE06A00D5891F /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = "de.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C613DEE06C00D5891F /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/viralOn-small.png"; sourceTree = "<group>"; };
 		C49F82C713DEE06E00D5891F /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = "fr.lproj/viralOn-small.png"; sourceTree = "<group>"; };
+		C4A49AD718002CD300FC1637 /* TimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeView.h; path = Views/TimeView.h; sourceTree = "<group>"; };
+		C4A49AD818002CD400FC1637 /* TimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeView.m; path = Views/TimeView.m; sourceTree = "<group>"; };
+		C4A49B1B180031C400FC1637 /* UIFont+Standard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Standard.h"; path = "Categories/UIFont+Standard.h"; sourceTree = "<group>"; };
+		C4A49B1C180031C400FC1637 /* UIFont+Standard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+Standard.m"; path = "Categories/UIFont+Standard.m"; sourceTree = "<group>"; };
+		C4A49B1E1800549500FC1637 /* UILabel+Standard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+Standard.h"; path = "Categories/UILabel+Standard.h"; sourceTree = "<group>"; };
+		C4A49B1F1800549500FC1637 /* UILabel+Standard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+Standard.m"; path = "Categories/UILabel+Standard.m"; sourceTree = "<group>"; };
+		C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsSelectionDataSource.h; path = ViewControllersCommon/EffectsSelectionDataSource.h; sourceTree = "<group>"; };
+		C4A49B2318005CD200FC1637 /* EffectsSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsSelectionTableViewController.h; path = ViewControllersiPhone/EffectsSelectionTableViewController.h; sourceTree = "<group>"; };
+		C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectsSelectionTableViewController.m; path = ViewControllersiPhone/EffectsSelectionTableViewController.m; sourceTree = "<group>"; };
 		C4A6E21617C76DE90020FC2A /* CustomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTableView.h; path = ViewControllersiPad/CustomTableView.h; sourceTree = "<group>"; };
 		C4A6E21717C76DE90020FC2A /* CustomTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTableView.m; path = ViewControllersiPad/CustomTableView.m; sourceTree = "<group>"; };
 		C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewControllerDelegate.h; path = ViewControllersiPad/ContainerViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -759,12 +769,6 @@
 		C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLWriter.m; path = CoreXML/CoreXMLWriter.m; sourceTree = "<group>"; };
 		C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = CoreDataManagement/CoreDataManager.h; sourceTree = "<group>"; };
 		C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = CoreDataManagement/CoreDataManager.m; sourceTree = "<group>"; };
-		C4BFAAAB17B2CE010038D2A7 /* CoreDataManagerPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManagerPlaceholder.h; path = CoreDataManagement/CoreDataManagerPlaceholder.h; sourceTree = "<group>"; };
-		C4BFAAAC17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManagerPlaceholder.m; path = CoreDataManagement/CoreDataManagerPlaceholder.m; sourceTree = "<group>"; };
-		C4BFAAAE17B2CE340038D2A7 /* CoreDataManageriOS6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManageriOS6.h; path = CoreDataManagement/CoreDataManageriOS6.h; sourceTree = "<group>"; };
-		C4BFAAAF17B2CE340038D2A7 /* CoreDataManageriOS6.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManageriOS6.m; path = CoreDataManagement/CoreDataManageriOS6.m; sourceTree = "<group>"; };
-		C4BFAAB117B2CE500038D2A7 /* CoreDataManageriOS7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManageriOS7.h; path = CoreDataManagement/CoreDataManageriOS7.h; sourceTree = "<group>"; };
-		C4BFAAB217B2CE500038D2A7 /* CoreDataManageriOS7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManageriOS7.m; path = CoreDataManagement/CoreDataManageriOS7.m; sourceTree = "<group>"; };
 		C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataConstants.h; path = CoreDataManagement/CoreDataConstants.h; sourceTree = "<group>"; };
 		C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataConstants.m; path = CoreDataManagement/CoreDataConstants.m; sourceTree = "<group>"; };
 		C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = CoreDataManagement/CoreDataUtils.h; sourceTree = "<group>"; };
@@ -1287,6 +1291,8 @@
 				C45A98E417EEE3BA004E13C7 /* DateView.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
 				C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */,
+				C4A49AD718002CD300FC1637 /* TimeView.h */,
+				C4A49AD818002CD400FC1637 /* TimeView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1411,6 +1417,7 @@
 				C463742C17E9F17500D19B94 /* DashboardViewController.m */,
 				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
 				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
+				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
@@ -1466,6 +1473,8 @@
 				C45C27C317DB5A3F001F6831 /* EditSideEffectsTableViewController.m */,
 				C45C27CE17DB5AC7001F6831 /* EditWellnessTableViewController.h */,
 				C45C27CF17DB5AC7001F6831 /* EditWellnessTableViewController.m */,
+				C4A49B2318005CD200FC1637 /* EffectsSelectionTableViewController.h */,
+				C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */,
 			);
 			name = ViewControllersiPhone;
 			sourceTree = "<group>";
@@ -1801,6 +1810,10 @@
 				C4BCF08F17B7A35A00F1E0F7 /* Results+Handling.m */,
 				C4BCF0A017B7A9DA00F1E0F7 /* SideEffects+Handling.h */,
 				C4BCF0A117B7A9DA00F1E0F7 /* SideEffects+Handling.m */,
+				C4A49B1B180031C400FC1637 /* UIFont+Standard.h */,
+				C4A49B1C180031C400FC1637 /* UIFont+Standard.m */,
+				C4A49B1E1800549500FC1637 /* UILabel+Standard.h */,
+				C4A49B1F1800549500FC1637 /* UILabel+Standard.m */,
 				C46A6E3E17DC80D900D99A3F /* UITableViewCell+Extras.h */,
 				C46A6E3F17DC80D900D99A3F /* UITableViewCell+Extras.m */,
 				C4BCF09717B7A94000F1E0F7 /* Wellness+Handling.h */,
@@ -1816,12 +1829,6 @@
 				C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */,
 				C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */,
 				C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */,
-				C4BFAAAE17B2CE340038D2A7 /* CoreDataManageriOS6.h */,
-				C4BFAAAF17B2CE340038D2A7 /* CoreDataManageriOS6.m */,
-				C4BFAAB117B2CE500038D2A7 /* CoreDataManageriOS7.h */,
-				C4BFAAB217B2CE500038D2A7 /* CoreDataManageriOS7.m */,
-				C4BFAAAB17B2CE010038D2A7 /* CoreDataManagerPlaceholder.h */,
-				C4BFAAAC17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m */,
 				C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */,
 				C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */,
 			);
@@ -2313,6 +2320,7 @@
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
 				C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */,
 				C4C4199B15F13AAD00882416 /* NewAlertViewController.m in Sources */,
+				C4A49AD918002CD400FC1637 /* TimeView.m in Sources */,
 				C4C4199C15F13AAD00882416 /* NewResultsViewController.m in Sources */,
 				C4C4199D15F13AAD00882416 /* NewStatusViewController.m in Sources */,
 				C4C4199E15F13AAD00882416 /* OtherMedsTableViewController.m in Sources */,
@@ -2356,6 +2364,7 @@
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
 				C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */,
 				C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */,
+				C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */,
 				C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */,
 				C463744C17E9F35900D19B94 /* PWESDataTuple.m in Sources */,
 				C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */,
@@ -2393,7 +2402,6 @@
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
-				C4BFAAB317B2CE500038D2A7 /* CoreDataManageriOS7.m in Sources */,
 				C4BCF09F17B7A9C000F1E0F7 /* PreviousMedication+Handling.m in Sources */,
 				C463744317E9F2AF00D19B94 /* PWESUtils.m in Sources */,
 				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
@@ -2406,15 +2414,15 @@
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 				C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
-				C4BFAAAD17B2CE010038D2A7 /* CoreDataManagerPlaceholder.m in Sources */,
+				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
+				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
 				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
 				C463744B17E9F35900D19B94 /* PWESDataNTuple.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
-				C4BFAAB017B2CE340038D2A7 /* CoreDataManageriOS6.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
 				C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */,

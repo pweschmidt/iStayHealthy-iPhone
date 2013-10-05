@@ -9,5 +9,8 @@
 #import "BaseEditTableViewController.h"
 
 @interface EditAppointmentsTableViewController : BaseEditTableViewController
+- (id)initWithStyle:(UITableViewStyle)style
+     currentClinics:(NSArray *)currentClinics
+      managedObject:(NSManagedObject *)managedObject;
 
 @end

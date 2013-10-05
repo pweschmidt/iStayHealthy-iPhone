@@ -376,13 +376,14 @@
     return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
 }
 
-+ (BOOL)isIOS7
+
++ (NSString *)imageNameFromMedName:(NSString *)medName
 {
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
-    {
-        return NO;
-    }
-    return YES;
+    NSArray *stringArray = [medName componentsSeparatedByString:@"/"];
+    NSString *imageName = [(NSString *)[stringArray objectAtIndex:0]lowercaseString];
+    NSArray *finalArray = [imageName componentsSeparatedByString:@" "];
+    
+    return [(NSString *)[finalArray objectAtIndex:0]lowercaseString];
 }
 
 @end

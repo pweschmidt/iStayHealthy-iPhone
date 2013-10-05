@@ -87,6 +87,24 @@
 
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle)
+    {
+        self.markedIndexPath = indexPath;
+        if (0 == indexPath.section)
+        {
+            self.markedObject = [self.currentMeds objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            self.markedObject = [self.previousMeds objectAtIndex:indexPath.row];
+        }
+        [self showDeleteAlertView];
+    }
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.section)

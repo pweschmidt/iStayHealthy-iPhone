@@ -179,6 +179,10 @@
     {
         self.Weight = value;
     }
+    else if ([type isEqualToString:kBMI])
+    {
+        //self.BMI = value;
+    }
     else if ([type isEqualToString:kLiverAlanineTransaminase])
     {
         self.liverAlanineTransaminase = value;
@@ -309,6 +313,10 @@
     else if ([type isEqualToString:kWeight] && 0 < [self.Weight floatValue])
     {
         return [NSString stringWithFormat:@"%3.2f",[self.Weight floatValue]];
+    }
+    else if ([type isEqualToString:kBMI] /* && 0 < [self.BMI floatValue] */)
+    {
+        //return [NSString stringWithFormat:@"%3.2f",[self.BMI floatValue]);
     }
     else if ([type isEqualToString:kLiverAlanineTransaminase] && 0 < [self.liverAlanineTransaminase floatValue])
     {

@@ -63,41 +63,46 @@
 
 
 #pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle)
+    {
+        self.markedIndexPath = indexPath;
+        self.markedObject = [self.clinics objectAtIndex:indexPath.row];
+        [self showDeleteAlertView];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Contacts *contact = (Contacts *)[self.clinics objectAtIndex:indexPath.row];
-    EditContactsTableViewController *controller = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-    [self.navigationController pushViewController:controller animated:YES];
-    
+    EditContactsTableViewController *controller = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:contact hasNumericalInput:NO];
+    [self.navigationController pushViewController:controller animated:YES];    
 }
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kContacts
-                                                   predicate:nil
-                                                    sortTerm:kClinicName
-                                                   ascending:NO completion:^(NSArray *array, NSError *error) {
-                                                       if (nil == array)
-                                                       {
-                                                           UIAlertView *errorAlert = [[UIAlertView alloc]
-                                                                                      initWithTitle:@"Error"
-                                                                                      message:@"Error loading data"
-                                                                                      delegate:nil
-                                                                                      cancelButtonTitle:@"Cancel"
-                                                                                      otherButtonTitles:nil];
-                                                           [errorAlert show];
-                                                           
-                                                       }
-                                                       else
-                                                       {
-                                                           self.clinics = nil;
-                                                           self.clinics = [NSArray arrayWithArray:array];
-                                                           NSLog(@"we have %d other meds returned", self.clinics.count);
-                                                           [self.tableView reloadData];
-                                                       }
-                                                   }];
+    [[CoreDataManager sharedInstance] fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:NO completion:^(NSArray *array, NSError *error) {
+        if (nil == array)
+        {
+            UIAlertView *errorAlert = [[UIAlertView alloc]
+                                       initWithTitle:@"Error"
+                                       message:@"Error loading data"
+                                       delegate:nil
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:nil];
+            [errorAlert show];
+            
+        }
+        else
+        {
+            self.clinics = nil;
+            self.clinics = [NSArray arrayWithArray:array];
+            NSLog(@"we have %d clinics returned", self.clinics.count);
+            [self.tableView reloadData];
+        }
+    }];
 }
 - (void)startAnimation:(NSNotification *)notification
 {
