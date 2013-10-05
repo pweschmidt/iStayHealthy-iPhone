@@ -40,15 +40,13 @@
 
 - (void)setDefaultValues
 {
-    
+    if (!self.isEditMode)
+    {
+        return;
+    }
 }
 
 - (void)save:(id)sender
-{
-    
-}
-
-- (void)deleteObject:(id)sender
 {
     
 }
@@ -57,7 +55,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -44,4 +44,45 @@
     return string;
 }
 
+- (void)addValueString:(NSString *)valueString type:(NSString *)type
+{
+    if ([type isEqualToString:kName])
+    {
+        self.Name = valueString;
+    }
+    else if([type isEqualToString:kIllness])
+    {
+        self.Illness = valueString;
+    }
+    else if([type isEqualToString:kCausedBy])
+    {
+        self.CausedBy = valueString;
+    }
+    else if([type isEqualToString:kNotes])
+    {
+        self.Notes = valueString;
+    }
+}
+
+- (NSString *)valueStringForType:(NSString *)type
+{
+    if ([type isEqualToString:kName])
+    {
+        return self.Name;
+    }
+    else if([type isEqualToString:kIllness])
+    {
+        return self.Illness;
+    }
+    else if([type isEqualToString:kCausedBy])
+    {
+        return self.CausedBy;
+    }
+    else if([type isEqualToString:kNotes])
+    {
+        return self.Notes;
+    }
+    return nil;
+}
+
 @end
