@@ -215,3 +215,7 @@ NSString * const kEffectsOften = @"Often";
 NSString * const kEffectsSometimes = @"Sometimes";
 NSString * const kEffectsRarely = @"Rarely";
 
+NSString * const kAppointmentDate = @"AppointmentDate";
+NSString * const kAppointmentClinic = @"AppointmentClinic";
+NSString * const kAppointmentNotes = @"AppointmentNotes";
+

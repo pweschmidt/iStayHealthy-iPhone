@@ -40,7 +40,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = NSLocalizedString(@"New Alert", nil);
+    if (self.isEditMode)
+    {
+        self.navigationItem.title = NSLocalizedString(@"Edit Alert", nil);
+    }
+    else
+    {
+        self.navigationItem.title = NSLocalizedString(@"New Alert", nil);
+    }
     self.editMenu = @[kAlertLabel];
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
     self.frequencyArray = @[@"1", @"2", @"3", @"4"];

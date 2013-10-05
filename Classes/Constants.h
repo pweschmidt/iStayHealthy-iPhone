@@ -295,3 +295,7 @@ extern NSString * const kEffectsAlways;
 extern NSString * const kEffectsOften;
 extern NSString * const kEffectsSometimes;
 extern NSString * const kEffectsRarely;
+
+extern NSString * const kAppointmentDate;
+extern NSString * const kAppointmentClinic;
+extern NSString * const kAppointmentNotes;

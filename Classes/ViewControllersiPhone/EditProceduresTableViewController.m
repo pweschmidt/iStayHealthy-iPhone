@@ -137,7 +137,7 @@
         }
         else
         {
-            identifier = [NSString stringWithFormat:@"ResultsCell"];
+            identifier = [NSString stringWithFormat:@"ProceduresCell"];
         }
     }
     
