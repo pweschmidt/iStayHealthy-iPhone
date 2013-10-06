@@ -16,13 +16,8 @@
 #import "Utilities.h"
 
 @interface EditHIVMedsTableViewController ()
-@property (nonatomic, strong) NSArray *combiTablets;
-@property (nonatomic, strong) NSArray *proteaseInhibitors;
-@property (nonatomic, strong) NSArray *nRTInihibtors;
-@property (nonatomic, strong) NSArray *nNRTInhibitors;
-@property (nonatomic, strong) NSArray *integraseInhibitors;
-@property (nonatomic, strong) NSArray *entryInhibitors;
 @property (nonatomic, strong) NSMutableDictionary *stateDictionary;
+@property (nonatomic, strong) NSMutableDictionary *medicationListings;
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, assign) BOOL isInitialLoad;
 @end
@@ -34,6 +29,7 @@
 {
     [super viewDidLoad];
 	self.stateDictionary = [NSMutableDictionary dictionary];
+    self.medicationListings = [NSMutableDictionary dictionary];
     if (self.isEditMode)
     {
         self.navigationItem.title = NSLocalizedString(@"Edit HIV Drugs", nil);
@@ -61,31 +57,32 @@
 {
     __block NSMutableArray *selectedMeds = [NSMutableArray array];
     NSArray *keys = self.stateDictionary.allKeys;
-    [keys enumerateObjectsUsingBlock:^(NSNumber *key, NSUInteger index, BOOL *stop) {
-        BOOL isSelected = [[self.stateDictionary objectForKey:key] boolValue];
+    [keys enumerateObjectsUsingBlock:^(NSIndexPath *indexPath, NSUInteger index, BOOL *stop) {
+        BOOL isSelected = [[self.stateDictionary objectForKey:indexPath] boolValue];
         if (isSelected)
         {
-            NSUInteger cellKey = [key unsignedIntegerValue];
+            NSArray *meds = [self medicationArrayForIndexPath:indexPath];
+            if (meds.count > indexPath.row)
+            {
+                [selectedMeds addObject:[meds objectAtIndex:indexPath.row]];
+            }
         }
-        
     }];
     
     if (0 == selectedMeds.count)
     {
         return;
     }
+    [selectedMeds enumerateObjectsUsingBlock:^(NSArray *medDescription, NSUInteger index, BOOL *stop) {
+        Medication *medication = [[CoreDataManager sharedInstance]
+                                  managedObjectForEntityName:kMedication];
+        medication.UID = [Utilities GUID];
+        medication.StartDate = self.date;
+        medication.Drug = [medDescription objectAtIndex:0];
+        medication.Name = [medDescription objectAtIndex:1];
+        medication.MedicationForm = [medDescription objectAtIndex:2];
+    }];
     
-    Medication *med = nil;
-    if (self.isEditMode)
-    {
-        med = (Medication *)self.managedObject;
-    }
-    else
-    {
-        med = [[CoreDataManager sharedInstance] managedObjectForEntityName:kMedication];
-    }
-    med.UID = [Utilities GUID];
-    med.StartDate = self.date;
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self.navigationController popViewControllerAnimated:YES];
@@ -99,28 +96,28 @@
 - (void)loadDrugs
 {
     NSString *combipath = [[NSBundle mainBundle] pathForResource:@"CombiMeds" ofType:@"plist"];
-    NSArray *tmp1 = [[NSArray alloc]initWithContentsOfFile:combipath];
-    self.combiTablets = tmp1;
-    
-    NSString *nrtiPath = [[NSBundle mainBundle] pathForResource:@"NRTI" ofType:@"plist"];
-    NSArray *tmp2 = [[NSArray alloc]initWithContentsOfFile:nrtiPath];
-    self.nRTInihibtors = tmp2;
-    
-    NSString *proteasePath = [[NSBundle mainBundle] pathForResource:@"ProteaseInhibitors" ofType:@"plist"];
-    NSArray *tmp3 = [[NSArray alloc]initWithContentsOfFile:proteasePath];
-    self.proteaseInhibitors = tmp3;
-    
-    NSString *nnrtiPath = [[NSBundle mainBundle] pathForResource:@"NNRTI" ofType:@"plist"];
-    NSArray *tmp4 = [[NSArray alloc]initWithContentsOfFile:nnrtiPath];
-    self.nNRTInhibitors = tmp4;
-    
+    NSArray *combi = [[NSArray alloc]initWithContentsOfFile:combipath];
+    [self.medicationListings setObject:combi forKey:[NSNumber numberWithInteger:1]];
+
     NSString *entryPath = [[NSBundle mainBundle] pathForResource:@"EntryInhibitors" ofType:@"plist"];
-    NSArray *tmp5 = [[NSArray alloc]initWithContentsOfFile:entryPath];
-    self.entryInhibitors = tmp5;
+    NSArray *entry = [[NSArray alloc]initWithContentsOfFile:entryPath];
+    [self.medicationListings setObject:entry forKey:[NSNumber numberWithInteger:2]];
     
     NSString *integrasePath = [[NSBundle mainBundle] pathForResource:@"IntegraseInhibitors" ofType:@"plist"];
-    NSArray *tmp6 = [[NSArray alloc]initWithContentsOfFile:integrasePath];
-    self.integraseInhibitors = tmp6;
+    NSArray *integrase = [[NSArray alloc]initWithContentsOfFile:integrasePath];
+    [self.medicationListings setObject:integrase forKey:[NSNumber numberWithInteger:3]];
+    
+    NSString *nnrtiPath = [[NSBundle mainBundle] pathForResource:@"NNRTI" ofType:@"plist"];
+    NSArray *nnrti = [[NSArray alloc]initWithContentsOfFile:nnrtiPath];
+    [self.medicationListings setObject:nnrti forKey:[NSNumber numberWithInteger:4]];
+    
+    NSString *nrtiPath = [[NSBundle mainBundle] pathForResource:@"NRTI" ofType:@"plist"];
+    NSArray *nrti = [[NSArray alloc]initWithContentsOfFile:nrtiPath];
+    [self.medicationListings setObject:nrti forKey:[NSNumber numberWithInteger:5]];
+    
+    NSString *proteasePath = [[NSBundle mainBundle] pathForResource:@"ProteaseInhibitors" ofType:@"plist"];
+    NSArray *protease = [[NSArray alloc]initWithContentsOfFile:proteasePath];
+    [self.medicationListings setObject:protease forKey:[NSNumber numberWithInteger:6]];
     
     self.startDate = [NSDate date];
 }
@@ -141,34 +138,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int rows = 1;
-    switch (section)
+    if (0 == section)
     {
-        case 0:
+        if ([self hasInlineDatePicker])
         {
-            if ([self hasInlineDatePicker])
-            {
-                rows = 2;
-            }
+            rows = 2;
         }
-            break;
-        case 1:
-            rows = [self.combiTablets count];
-            break;
-        case 2:
-            rows = [self.entryInhibitors count];
-            break;
-        case 3:
-            rows = [self.integraseInhibitors count];
-            break;
-        case 4:
-            rows = [self.nNRTInhibitors count];
-            break;
-        case 5:
-            rows = [self.nRTInihibtors count];
-            break;
-        case 6:
-            rows = [self.proteaseInhibitors count];
-            break;
+    }
+    else
+    {
+        NSArray *meds = [self.medicationListings objectForKey:[NSNumber numberWithInteger:section]];
+        if (nil != meds)
+        {
+            rows = meds.count;
+        }
     }
     return rows;
 }
@@ -265,11 +248,10 @@
     else
     {
         UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        NSNumber *key = [self cellKeyForIndexPath:indexPath];
-        BOOL keyValue = [[self.stateDictionary objectForKey:key] boolValue];
+        BOOL keyValue = [[self.stateDictionary objectForKey:indexPath] boolValue];
         BOOL isChecked = !keyValue;
         NSNumber *checked = [NSNumber numberWithBool:isChecked];
-        [self.stateDictionary setObject:checked forKey:key];
+        [self.stateDictionary setObject:checked forKey:indexPath];
         cell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
@@ -280,13 +262,12 @@
 - (void)configureMedicationCell:(UITableViewCell *)cell
                       indexPath:(NSIndexPath *)indexPath
 {
-    NSNumber *cellKey = [self cellKeyForIndexPath:indexPath];
     NSArray *description = [self medDescriptionForIndexPath:indexPath];
     
-    NSNumber * checked = [self.stateDictionary objectForKey:cellKey];
+    NSNumber * checked = [self.stateDictionary objectForKey:indexPath];
     if (!checked)
     {
-        [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:cellKey];
+        [self.stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:indexPath];
     }
     cell.accessoryType = checked.boolValue ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
     
@@ -343,38 +324,23 @@
     }
     else
     {
-        NSNumber *cellKey = [self cellKeyForIndexPath:indexPath];
-        NSUInteger key = [cellKey unsignedIntegerValue];
+        NSUInteger key = [self multiplierForIndexPath:indexPath];
         return [NSString stringWithFormat:@"MedicationCell %d",key];
     }
 }
 
-- (NSNumber *)cellKeyForIndexPath:(NSIndexPath *)indexPath
+- (NSUInteger)multiplierForIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger rowKey = 0;
-    switch (indexPath.section)
+    NSUInteger multiplier = 1;
+    NSInteger factor = 10;
+    for (NSInteger i = 0; i < indexPath.section; i++)
     {
-        case 1:
-            rowKey = indexPath.row;
-            break;
-        case 2:
-            rowKey = 100 + indexPath.row;
-            break;
-        case 3:
-            rowKey = 1000 + indexPath.row;
-            break;
-        case 4:
-            rowKey = 10000 + indexPath.row;
-            break;
-        case 5:
-            rowKey = 100000 + indexPath.row;
-            break;
-        case 6:
-            rowKey = 1000000 + indexPath.row;
-            break;
+        multiplier *= factor;
     }
-    return [NSNumber numberWithUnsignedInteger:rowKey];
+    multiplier += indexPath.row;
+    return multiplier;
 }
+
 
 - (NSArray *)medDescriptionForIndexPath:(NSIndexPath *)indexPath
 {
@@ -382,29 +348,21 @@
     {
         return nil;
     }
-    NSArray * descriptionArray = nil;
-    switch (indexPath.section)
-    {
-        case 1:
-            descriptionArray = (NSArray *)[self.combiTablets objectAtIndex:indexPath.row];
-            break;
-        case 2:
-            descriptionArray = (NSArray *)[self.entryInhibitors objectAtIndex:indexPath.row];
-            break;
-        case 3:
-            descriptionArray = (NSArray *)[self.integraseInhibitors objectAtIndex:indexPath.row];
-            break;
-        case 4:
-            descriptionArray = (NSArray *)[self.nNRTInhibitors objectAtIndex:indexPath.row];
-            break;
-        case 5:
-            descriptionArray = (NSArray *)[self.nRTInihibtors objectAtIndex:indexPath.row];
-            break;
-        case 6:
-            descriptionArray = (NSArray *)[self.proteaseInhibitors objectAtIndex:indexPath.row];
-            break;
-    }
+    NSArray *meds = [self medicationArrayForIndexPath:indexPath];
+    NSArray * descriptionArray = (NSArray *)[meds objectAtIndex:indexPath.row];
     return descriptionArray;
 }
+
+- (NSArray *)medicationArrayForIndexPath:(NSIndexPath *)indexPath
+{
+    NSNumber *sectionKey = [NSNumber numberWithInteger:indexPath.section];
+    id object = [self.medicationListings objectForKey:sectionKey];
+    if (nil != object && [object isKindOfClass:[NSArray class]])
+    {
+        return (NSArray *)object;
+    }
+    return nil;
+}
+
 
 @end
