@@ -552,4 +552,13 @@
     }
 }
 
+
+- (UIImage *)blankImage
+{
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(55, 55), NO, 0.0);
+    UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return blank;
+}
+
 @end

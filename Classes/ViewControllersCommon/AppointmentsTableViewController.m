@@ -8,6 +8,7 @@
 
 #import "AppointmentsTableViewController.h"
 #import "EditAppointmentsTableViewController.h"
+#import "UILabel+Standard.h"
 
 
 @interface AppointmentsTableViewController ()
@@ -53,8 +54,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    [self configureCell:cell indexPath:indexPath];
     return cell;
 }
+
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 
 
 #pragma mark - Table view delegate

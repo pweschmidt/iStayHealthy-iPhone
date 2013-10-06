@@ -14,6 +14,7 @@
 #import "EditMissedMedsTableViewController.h"
 #import "MissedMedication+Handling.h"
 #import "DateView.h"
+#import "UILabel+Standard.h"
 
 @interface MissedMedicationsTableViewController ()
 @property (nonatomic, strong) NSArray * missed;
@@ -59,10 +60,33 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    [self configureCell:cell indexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    MissedMedication *missed = (MissedMedication *)[self.missed objectAtIndex:indexPath.row];
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    DateView *dateView = [DateView viewWithDate:missed.MissedDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+    
+    UILabel *nameLabel = [UILabel standardLabel];
+    nameLabel.frame = CGRectMake(70, 1, 100, rowHeight);
+    nameLabel.text = missed.Name;
+    
+    UILabel *reasonLabel = [UILabel standardLabel];
+    reasonLabel.frame = CGRectMake(175, 1, 100, rowHeight);
+    if (nil != missed.missedReason && ![missed.missedReason isEqualToString:@""])
+    {
+        reasonLabel.text = missed.missedReason;
+        reasonLabel.textColor = DARK_RED;
+    }
+    
+    [cell.contentView addSubview:dateView];
+    [cell.contentView addSubview:nameLabel];
+    [cell.contentView addSubview:reasonLabel];
+}
 
 #pragma mark - Table view delegate
 

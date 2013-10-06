@@ -15,6 +15,9 @@
 #import "Medication+Handling.h"
 #import "EditHIVMedsTableViewController.h"
 #import "EditPreviousMedsTableViewController.h"
+#import "UILabel+Standard.h"
+#import "DateView.h"
+#import "Utilities.h"
 
 @interface MyHIVMedicationViewController ()
 @property (nonatomic, strong) NSArray * currentMeds;
@@ -81,7 +84,49 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    [self configureCell:cell indexPath:indexPath];
     return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    UIImageView *medImageView = [[UIImageView alloc] init];
+    medImageView.frame = CGRectMake(20+rowHeight+200, 1, rowHeight, rowHeight);
+    medImageView.backgroundColor = [UIColor clearColor];
+    UILabel *label = [UILabel standardLabel];
+    label.frame = CGRectMake(20+rowHeight+5, 1, 190, rowHeight);
+    DateView *dateView = nil;
+    if (0 == indexPath.section)
+    {
+        Medication *med = (Medication *)[self.currentMeds objectAtIndex:indexPath.row];
+        dateView = [DateView viewWithDate:med.StartDate
+                                    frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+        label.text = med.Name;
+        UIImage *image= [Utilities imageFromMedName:med.Name];
+        if (nil == image)
+        {
+            image = [self blankImage];
+        }
+        medImageView.image = image;
+    }
+    else
+    {
+        PreviousMedication *med = (PreviousMedication *)[self.previousMeds
+                                                         objectAtIndex:indexPath.row];
+        dateView = [DateView viewWithDate:med.startDate
+                                    frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+        label.text = med.name;
+        UIImage *image= [Utilities imageFromMedName:med.name];
+        if (nil == image)
+        {
+            image = [self blankImage];
+        }
+        medImageView.image = image;
+    }
+    [cell.contentView addSubview:dateView];
+    [cell.contentView addSubview:label];
+    [cell.contentView addSubview:medImageView];
 }
 
 

@@ -9,8 +9,11 @@
 #import "EditHIVMedsTableViewController.h"
 #import "UITableViewCell+Extras.h"
 #import "NSDate+Extras.h"
+#import "CoreDataManager.h"
 #import "Constants.h"
 #import "GeneralSettings.h"
+#import "Medication+Handling.h"
+#import "Utilities.h"
 
 @interface EditHIVMedsTableViewController ()
 @property (nonatomic, strong) NSArray *combiTablets;
@@ -39,28 +42,59 @@
     {
         self.navigationItem.title = NSLocalizedString(@"Add HIV Drugs", nil);
     }
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                              target:self action:@selector(save:)];
+    UIBarButtonItem *save = [[UIBarButtonItem alloc]
+                            initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                            target:self action:@selector(save:)];
+    UIBarButtonItem *reload = [[UIBarButtonItem alloc]
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadMedications:)];
+    
+	self.navigationItem.rightBarButtonItems = @[save, reload];
     [self loadDrugs];
 }
 
 - (void)setDefaultValues
 {
-    
+    ///not used here
 }
 
 - (void)save:(id)sender
 {
+    __block NSMutableArray *selectedMeds = [NSMutableArray array];
+    NSArray *keys = self.stateDictionary.allKeys;
+    [keys enumerateObjectsUsingBlock:^(NSNumber *key, NSUInteger index, BOOL *stop) {
+        BOOL isSelected = [[self.stateDictionary objectForKey:key] boolValue];
+        if (isSelected)
+        {
+            NSUInteger cellKey = [key unsignedIntegerValue];
+        }
+        
+    }];
     
+    if (0 == selectedMeds.count)
+    {
+        return;
+    }
+    
+    Medication *med = nil;
+    if (self.isEditMode)
+    {
+        med = (Medication *)self.managedObject;
+    }
+    else
+    {
+        med = [[CoreDataManager sharedInstance] managedObjectForEntityName:kMedication];
+    }
+    med.UID = [Utilities GUID];
+    med.StartDate = self.date;
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)deleteObject:(id)sender
+- (void)reloadMedications:(id)sender
 {
     
 }
-
-
 
 - (void)loadDrugs
 {
@@ -231,7 +265,7 @@
     else
     {
         UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        NSString *key = [self cellKeyForIndexPath:indexPath];
+        NSNumber *key = [self cellKeyForIndexPath:indexPath];
         BOOL keyValue = [[self.stateDictionary objectForKey:key] boolValue];
         BOOL isChecked = !keyValue;
         NSNumber *checked = [NSNumber numberWithBool:isChecked];
@@ -246,7 +280,7 @@
 - (void)configureMedicationCell:(UITableViewCell *)cell
                       indexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellKey = [self cellKeyForIndexPath:indexPath];
+    NSNumber *cellKey = [self cellKeyForIndexPath:indexPath];
     NSArray *description = [self medDescriptionForIndexPath:indexPath];
     
     NSNumber * checked = [self.stateDictionary objectForKey:cellKey];
@@ -309,11 +343,13 @@
     }
     else
     {
-        return @"MedSelectionCell";
+        NSNumber *cellKey = [self cellKeyForIndexPath:indexPath];
+        NSUInteger key = [cellKey unsignedIntegerValue];
+        return [NSString stringWithFormat:@"MedicationCell %d",key];
     }
 }
 
-- (NSString *)cellKeyForIndexPath:(NSIndexPath *)indexPath
+- (NSNumber *)cellKeyForIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger rowKey = 0;
     switch (indexPath.section)
@@ -337,7 +373,7 @@
             rowKey = 1000000 + indexPath.row;
             break;
     }
-    return [NSString stringWithFormat:@"%d",rowKey];
+    return [NSNumber numberWithUnsignedInteger:rowKey];
 }
 
 - (NSArray *)medDescriptionForIndexPath:(NSIndexPath *)indexPath

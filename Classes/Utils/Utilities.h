@@ -36,4 +36,5 @@
 + (NSString *)monthForDate:(NSDate *)date;
 + (NSString *)weekDayForDate:(NSDate *)date;
 + (NSString *)imageNameFromMedName:(NSString *)medName;
++ (UIImage *)imageFromMedName:(NSString *)medName;
 @end

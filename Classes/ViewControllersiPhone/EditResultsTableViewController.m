@@ -170,15 +170,7 @@
     }
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-    
     [self.navigationController popViewControllerAnimated:YES];
-    if (nil != self.menuDelegate)
-    {
-        if ([self.menuDelegate respondsToSelector:@selector(moveToNavigationControllerWithName:)])
-        {
-            [self.menuDelegate moveToNavigationControllerWithName:kResultsController];
-        }
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -227,7 +219,7 @@
         }
         else
         {
-            identifier = [NSString stringWithFormat:@"ResultsCell"];
+            identifier = [NSString stringWithFormat:@"ResultsCell%d", indexPath.row];
         }
     }
     

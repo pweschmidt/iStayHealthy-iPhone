@@ -29,4 +29,5 @@
 - (void)settingsMenu;
 - (void)addMenu;
 - (void)addButtonPressed:(id)sender;
+- (UIImage *)blankImage;
 @end

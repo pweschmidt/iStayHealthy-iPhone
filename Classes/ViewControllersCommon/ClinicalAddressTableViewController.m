@@ -13,6 +13,7 @@
 #import "CoreDataManager.h"
 #import "Contacts+Handling.h"
 #import "EditContactsTableViewController.h"
+#import "UILabel+Standard.h"
 
 @interface ClinicalAddressTableViewController ()
 @property (nonatomic, strong) NSArray *clinics;
@@ -58,9 +59,19 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    [self configureCell:cell indexPath:indexPath];
     return cell;
 }
 
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    Contacts *contact = (Contacts *)[self.clinics objectAtIndex:indexPath.row];
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    UILabel *name = [UILabel standardLabel];
+    name.text = contact.ClinicName;
+    name.frame = CGRectMake(20, 1, 170, rowHeight);
+    [cell.contentView addSubview:name];    
+}
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

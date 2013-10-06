@@ -386,4 +386,17 @@
     return [(NSString *)[finalArray objectAtIndex:0]lowercaseString];
 }
 
++ (UIImage *)imageFromMedName:(NSString *)medName
+{
+    if (nil == medName)
+    {
+        return nil;
+    }
+    NSString *imageName = [[self class] imageNameFromMedName:medName];
+    NSString *pillPath = [[NSBundle mainBundle]
+                          pathForResource:[imageName lowercaseString] ofType:@"png"];
+    return [UIImage imageWithContentsOfFile:pillPath];
+}
+
+
 @end

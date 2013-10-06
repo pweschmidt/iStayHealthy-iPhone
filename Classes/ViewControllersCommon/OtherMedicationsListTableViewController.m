@@ -14,6 +14,8 @@
 #import "EditOtherMedsTableViewController.h"
 #import "OtherMedication+Handling.h"
 #import "DateView.h"
+#import "UILabel+Standard.h"
+
 
 @interface OtherMedicationsListTableViewController ()
 @property (nonatomic, strong) NSArray *otherMediction;

@@ -59,5 +59,5 @@
 - (BOOL)hasInlineDatePicker;
 - (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath;
-
+- (UIImage *)blankImage;
 @end

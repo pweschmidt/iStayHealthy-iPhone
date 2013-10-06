@@ -14,6 +14,7 @@
 #import "EditSideEffectsTableViewController.h"
 #import "SideEffects+Handling.h"
 #import "DateView.h"
+#import "UILabel+Standard.h"
 
 @interface SideEffectsTableViewController ()
 @property (nonatomic, strong) NSArray *effects;
@@ -61,7 +62,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    [self configureCell:cell indexPath:indexPath];
     return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 

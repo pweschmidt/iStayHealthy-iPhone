@@ -34,4 +34,5 @@
 - (void)addButtonPressed:(id)sender;
 - (void)showDeleteAlertView;
 - (void)removeSQLEntry;
+- (UIImage *)blankImage;
 @end
