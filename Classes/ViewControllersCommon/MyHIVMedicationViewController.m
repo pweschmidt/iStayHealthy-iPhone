@@ -92,10 +92,10 @@
 {
     CGFloat rowHeight = self.tableView.rowHeight - 2;
     UIImageView *medImageView = [[UIImageView alloc] init];
-    medImageView.frame = CGRectMake(20+rowHeight+200, 1, rowHeight, rowHeight);
+    medImageView.frame = CGRectMake(20+rowHeight+170, 1, rowHeight, rowHeight);
     medImageView.backgroundColor = [UIColor clearColor];
     UILabel *label = [UILabel standardLabel];
-    label.frame = CGRectMake(20+rowHeight+5, 1, 190, rowHeight);
+    label.frame = CGRectMake(20+rowHeight+5, 1, 160, rowHeight);
     DateView *dateView = nil;
     if (0 == indexPath.section)
     {
