@@ -208,6 +208,7 @@
          forControlEvents:UIControlEventValueChanged];
 //    [mainContentView addSubview:datePicker];
 //    self.datePickerCellView = mainContentView;
+    self.datePicker = datePicker;
     [cell.contentView addSubview:datePicker];
 }
 
@@ -423,6 +424,7 @@
     // always deselect the row containing the start or end date
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.tableView endUpdates];
+    [self updateDatePicker];
 }
 
 #pragma mark - iOS7 date cell handling
@@ -441,7 +443,7 @@
 
 - (BOOL)hasPickerForIndexPath:(NSIndexPath *)indexPath
 {
-    BOOL hasDatePicker = NO;
+    __block BOOL hasDatePicker = NO;
     
     NSInteger targetedRow = indexPath.row;
     targetedRow++;
@@ -450,10 +452,19 @@
     [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow
                                                              inSection:0]];
     
+    NSArray *subViews = checkDatePickerCell.contentView.subviews;
+    [subViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[UIDatePicker class]]) {
+            hasDatePicker = YES;
+        }
+    }];
+
+    /*
     UIDatePicker *checkDatePicker = (UIDatePicker *)[checkDatePickerCell
                                                      viewWithTag:kBaseDateCellTag];
     
     hasDatePicker = (checkDatePicker != nil);
+     */
     return hasDatePicker;
 }
 
@@ -471,18 +482,18 @@
 
 - (void)updateDatePicker
 {
-    if (self.datePickerIndexPath != nil)
+    if (/*self.datePickerIndexPath != nil && */nil != self.datePicker)
     {
+        [self.datePicker setDate:self.date];
+        /*
         UITableViewCell *associatedDatePickerCell = [self.tableView cellForRowAtIndexPath:self.datePickerIndexPath];
         
         UIDatePicker *targetedDatePicker = (UIDatePicker *)[associatedDatePickerCell viewWithTag:kBaseDateCellTag];
         if (targetedDatePicker != nil)
         {
-            // we found a UIDatePicker in this cell, so update it's date value
-            //
-//            NSDictionary *itemData = self.dataArray[self.datePickerIndexPath.row - 1];
-//          [targetedDatePicker setDate:[itemData valueForKey:kDateKey] animated:NO];
+            [targetedDatePicker setDate:self.date];
         }
+         */
     }
 }
 
