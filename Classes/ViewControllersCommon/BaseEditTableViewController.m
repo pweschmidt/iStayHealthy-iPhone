@@ -401,7 +401,7 @@
         before = self.datePickerIndexPath.row < indexPath.row;
     }
     
-    //    BOOL sameCellClicked = (kBaseDateCellRow - 1 == indexPath.row);
+//    BOOL sameCellClicked = (kBaseDateCellRow - 1 == indexPath.row);
     
     // remove any date picker cell if it exists
     if ([self hasInlineDatePicker])
@@ -468,26 +468,26 @@
     return hasDatePicker;
 }
 
-- (BOOL)indexPathHasDate:(NSIndexPath *)indexPath
-{
-    BOOL hasDate = NO;
-    
-    if (indexPath.row == kBaseDateCellRow)
-    {
-        hasDate = YES;
-    }
-    return hasDate;
-}
-
-
 - (void)updateDatePicker
 {
-    if (/*self.datePickerIndexPath != nil && */nil != self.datePicker)
+    if (self.datePickerIndexPath != nil)
     {
         [self.datePicker setDate:self.date];
         /*
         UITableViewCell *associatedDatePickerCell = [self.tableView cellForRowAtIndexPath:self.datePickerIndexPath];
-        
+        NSArray *subViews = associatedDatePickerCell.contentView.subviews;
+        __block UIDatePicker *targetedDatePicker = nil;
+        [subViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj isKindOfClass:[UIDatePicker class]]) {
+                targetedDatePicker = (UIDatePicker *)obj;
+            }
+        }];
+        if (targetedDatePicker != nil)
+        {
+            [targetedDatePicker setDate:self.date];
+        }
+         */
+        /*
         UIDatePicker *targetedDatePicker = (UIDatePicker *)[associatedDatePickerCell viewWithTag:kBaseDateCellTag];
         if (targetedDatePicker != nil)
         {
@@ -528,7 +528,9 @@
     {
         // inline date picker: update the cell's date "above" the date picker cell
         //
-        targetedCellIndexPath = [NSIndexPath indexPathForRow:self.datePickerIndexPath.row - 1 inSection:0];
+        targetedCellIndexPath = [NSIndexPath
+                                 indexPathForRow:self.datePickerIndexPath.row - 1
+                                 inSection:0];
     }
     else
     {
