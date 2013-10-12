@@ -10,23 +10,13 @@
 
 @implementation WebViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (id)initWithURLString:(NSString *)urlString withTitle:(NSString *)navTitle
 {
     self = [super initWithNibName:@"WebViewController" bundle:nil];
     if (self)
     {
-        self.url = [NSURL URLWithString:urlString];
-        self.webNavtitle = navTitle;
+        _url = [NSURL URLWithString:urlString];
+        _webNavtitle = navTitle;
     }
     
     return self;
@@ -35,20 +25,9 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
-/**
- dismisses the view without saving
- @id 
- */
-- (IBAction) done:(id)sender
-{
-	[self dismissModalViewControllerAnimated:YES];
-}
 
 #pragma mark - View lifecycle
 
@@ -56,9 +35,6 @@
 {
     [super viewDidLoad];
 	self.navigationItem.title = self.webNavtitle;
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                              target:self action:@selector(done:)];
 
     CGRect titleFrame = CGRectMake(CGRectGetMinX(self.toolBar.bounds)+290.0, CGRectGetMinY(self.toolBar.bounds)+12.0, 20.0, 20.0);
     UIActivityIndicatorView *actView = [[UIActivityIndicatorView alloc]initWithFrame:titleFrame];

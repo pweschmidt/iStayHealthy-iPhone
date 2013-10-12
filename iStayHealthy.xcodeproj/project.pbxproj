@@ -15,6 +15,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
+		C40DACED180981E400EDD6E9 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40DACEC180981E400EDD6E9 /* WebViewController.m */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */; };
 		C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */; };
@@ -302,7 +303,6 @@
 		C4C419DE15F13C6F00882416 /* SideEffectsDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419C415F13C6F00882416 /* SideEffectsDetailTableViewController.m */; };
 		C4C419DF15F13C6F00882416 /* SideEffectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419C615F13C6F00882416 /* SideEffectsViewController.m */; };
 		C4C419E015F13C6F00882416 /* ToolsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419C815F13C6F00882416 /* ToolsTableViewController.m */; };
-		C4C419E215F13C6F00882416 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C419CC15F13C6F00882416 /* WebViewController.m */; };
 		C4C419F815F13EFA00882416 /* DropBoxBackupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E415F13EFA00882416 /* DropBoxBackupViewController.xib */; };
 		C4C419F915F13EFA00882416 /* InfoDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E515F13EFA00882416 /* InfoDetailTableViewController.xib */; };
 		C4C419FA15F13EFA00882416 /* MedicationChangeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C419E615F13EFA00882416 /* MedicationChangeTableViewController.xib */; };
@@ -435,6 +435,8 @@
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
+		C40DACEB180981E400EDD6E9 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ViewControllersCommon/WebViewController.h; sourceTree = "<group>"; };
+		C40DACEC180981E400EDD6E9 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ViewControllersCommon/WebViewController.m; sourceTree = "<group>"; };
 		C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHIVMedsTableViewController.h; path = ViewControllersiPhone/EditHIVMedsTableViewController.h; sourceTree = "<group>"; };
 		C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHIVMedsTableViewController.m; path = ViewControllersiPhone/EditHIVMedsTableViewController.m; sourceTree = "<group>"; };
 		C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewController_iPad.h; path = ViewControllersiPad/ContainerViewController_iPad.h; sourceTree = "<group>"; };
@@ -949,8 +951,6 @@
 		C4C419C615F13C6F00882416 /* SideEffectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffectsViewController.m; path = DetailViewControllers/SideEffectsViewController.m; sourceTree = "<group>"; };
 		C4C419C715F13C6F00882416 /* ToolsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToolsTableViewController.h; path = DetailViewControllers/ToolsTableViewController.h; sourceTree = "<group>"; };
 		C4C419C815F13C6F00882416 /* ToolsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToolsTableViewController.m; path = DetailViewControllers/ToolsTableViewController.m; sourceTree = "<group>"; };
-		C4C419CB15F13C6F00882416 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = DetailViewControllers/WebViewController.h; sourceTree = "<group>"; };
-		C4C419CC15F13C6F00882416 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = DetailViewControllers/WebViewController.m; sourceTree = "<group>"; };
 		C4C419E415F13EFA00882416 /* DropBoxBackupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropBoxBackupViewController.xib; path = Classes/DetailViewControllers/DropBoxBackupViewController.xib; sourceTree = "<group>"; };
 		C4C419E515F13EFA00882416 /* InfoDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfoDetailTableViewController.xib; path = Classes/DetailViewControllers/InfoDetailTableViewController.xib; sourceTree = "<group>"; };
 		C4C419E615F13EFA00882416 /* MedicationChangeTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MedicationChangeTableViewController.xib; path = Classes/DetailViewControllers/MedicationChangeTableViewController.xib; sourceTree = "<group>"; };
@@ -1234,7 +1234,6 @@
 				C4C0151A134251B4005E889D /* HIVMedications.plist */,
 				C43423351466BE3700F06DC6 /* iStayHealthyPasswordController.xib */,
 				2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */,
-				C452630A13F5422B0004C80F /* WebViewController.xib */,
 				8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */,
 				C4EB207F12FD9DF900A8712D /* SoundList.plist */,
 				C4B8B79413DEAE1C00FA9893 /* Localizable.strings */,
@@ -1448,6 +1447,9 @@
 				C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */,
 				C46C5DE617EDA2B300866DBD /* SideEffectsTableViewController.h */,
 				C46C5DE717EDA2B300866DBD /* SideEffectsTableViewController.m */,
+				C40DACEB180981E400EDD6E9 /* WebViewController.h */,
+				C40DACEC180981E400EDD6E9 /* WebViewController.m */,
+				C452630A13F5422B0004C80F /* WebViewController.xib */,
 			);
 			name = ViewControllersCommon;
 			sourceTree = "<group>";
@@ -1781,8 +1783,6 @@
 				C4C419C615F13C6F00882416 /* SideEffectsViewController.m */,
 				C4C419C715F13C6F00882416 /* ToolsTableViewController.h */,
 				C4C419C815F13C6F00882416 /* ToolsTableViewController.m */,
-				C4C419CB15F13C6F00882416 /* WebViewController.h */,
-				C4C419CC15F13C6F00882416 /* WebViewController.m */,
 				C491AE5B15F15B8500EB1CF8 /* OtherMedsDetailViewController.h */,
 				C491AE5C15F15B8500EB1CF8 /* OtherMedsDetailViewController.m */,
 				C491AE6015F167BD00EB1CF8 /* ProcedureDetailViewController.h */,
@@ -2332,6 +2332,7 @@
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
 				C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
+				C40DACED180981E400EDD6E9 /* WebViewController.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
 				C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */,
@@ -2358,7 +2359,6 @@
 				C4C419DE15F13C6F00882416 /* SideEffectsDetailTableViewController.m in Sources */,
 				C4C419DF15F13C6F00882416 /* SideEffectsViewController.m in Sources */,
 				C4C419E015F13C6F00882416 /* ToolsTableViewController.m in Sources */,
-				C4C419E215F13C6F00882416 /* WebViewController.m in Sources */,
 				C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */,
 				C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */,
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
@@ -2493,7 +2493,6 @@
 				C452630D13F542380004C80F /* fr */,
 			);
 			name = WebViewController.xib;
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		C4574ADE14938F7E00793164 /* DosageCell.xib */ = {

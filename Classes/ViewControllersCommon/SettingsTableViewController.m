@@ -81,6 +81,7 @@
     {
         [KeychainHandler deleteItemFromKeychainWithIdentifier:kIsPasswordEnabled];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
+        [defaults synchronize];
         UIAlertView *isDone = [[UIAlertView alloc]
                                initWithTitle:NSLocalizedString(@"Password Disabled", @"Password Disabled")
                                message:NSLocalizedString(@"No Password", @"No Password")
@@ -92,11 +93,17 @@
     }
     if (2 != self.textViews.allKeys.count)
     {
+        [KeychainHandler deleteItemFromKeychainWithIdentifier:kIsPasswordEnabled];
+        [defaults setBool:NO forKey:kIsPasswordEnabled];
+        [defaults synchronize];
         return;
     }
     UITextField *field = [self.textViews objectForKey:@(0)];
     if (![self checkPassword:field])
     {
+        [KeychainHandler deleteItemFromKeychainWithIdentifier:kIsPasswordEnabled];
+        [defaults setBool:NO forKey:kIsPasswordEnabled];
+        [defaults synchronize];
         return;
     }
     NSString *password = field.text;

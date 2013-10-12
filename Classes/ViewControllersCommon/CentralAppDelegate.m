@@ -77,8 +77,7 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
-    BOOL passwordIsTransferred = [defaults boolForKey:kPasswordTransferred];
-    if (isPasswordEnabled && passwordIsTransferred)
+    if (isPasswordEnabled)
     {
         [self.containerController transitionToLoginController:self];
     }
