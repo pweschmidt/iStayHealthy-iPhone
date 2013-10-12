@@ -8,7 +8,6 @@
 
 #import "ContentContainerViewController.h"
 #import "HamburgerMenuTableViewController.h"
-#import "AddMenuTableViewController.h"
 #import "AppointmentsTableViewController.h"
 #import "ClinicalAddressTableViewController.h"
 #import "NotificationAlertsTableViewController.h"
@@ -19,6 +18,7 @@
 #import "MissedMedicationsTableViewController.h"
 #import "SideEffectsTableViewController.h"
 #import "SeinfeldCalendarViewController.h"
+#import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "Constants.h"
 #import "ContentNavigationController.h"
@@ -79,7 +79,6 @@
 - (NSDictionary *)rootControllers_iPhone
 {
     HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    AddMenuTableViewController *addController = [[AddMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
     MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -94,6 +93,7 @@
     SideEffectsTableViewController *effectsController = [[SideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     InformationTableViewController *infoController = [[InformationTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     SeinfeldCalendarViewController *calendarController = [[SeinfeldCalendarViewController alloc] init];
+    SettingsTableViewController *settingsController = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     calendarController.view.frame   = self.view.frame;
     infoController.view.frame       = self.view.frame;
@@ -105,12 +105,11 @@
     clinicController.view.frame     = self.view.frame;
     appController.view.frame        = self.view.frame;
     menuController.view.frame       = self.view.frame;
-    addController.view.frame        = self.view.frame;
     resultsController.view.frame    = self.view.frame;
     dropBoxController.view.frame    = self.view.frame;
     hivController.view.frame        = self.view.frame;
     dashboardController.view.frame  = self.view.frame;
-    
+    settingsController.view.frame   = self.view.frame;
 
     ContentNavigationController *calendarNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:calendarController];
     ContentNavigationController *infoNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:infoController];
@@ -124,12 +123,12 @@
     
     
     ContentNavigationController *menuNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:menuController];
-    ContentNavigationController *addNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:addController];
     ContentNavigationController *resultsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:resultsController];
     ContentNavigationController *dropNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dropBoxController];
     ContentNavigationController *hivNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:hivController];
     
     ContentNavigationController *dashNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dashboardController];
+    ContentNavigationController *settingsCtrl = [[ContentNavigationController alloc] initWithRootViewController:settingsController];
     
     [self addChildViewController:calendarNavCtrl];
     [self addChildViewController:infoNavCtrl];
@@ -141,18 +140,17 @@
     [self addChildViewController:otherNavCtrl];
     [self addChildViewController:procNavCtrl];
     [self addChildViewController:menuNavCtrl];
-    [self addChildViewController:addNavCtrl];
     [self addChildViewController:resultsNavCtrl];
     [self addChildViewController:dropNavCtrl];
     [self addChildViewController:hivNavCtrl];
     [self addChildViewController:dashNavCtrl];
+    [self addChildViewController:settingsCtrl];
 
     [self.view addSubview:dashNavCtrl.view];
     self.currentController = dashNavCtrl;
     self.previousController = nil;
     
     NSDictionary *controllers = @{kMenuController : menuNavCtrl,
-                                  kAddController : addNavCtrl,
                                   kResultsController : resultsNavCtrl,
                                   kDropboxController : dropNavCtrl,
                                   kHIVMedsController : hivNavCtrl,
@@ -165,7 +163,8 @@
                                   kMissedController : missedNavCtrl,
                                   kSideEffectsController : effectsNavCtrl,
                                   kInfoController : infoNavCtrl,
-                                  kMedicationDiaryController : calendarNavCtrl
+                                  kMedicationDiaryController : calendarNavCtrl,
+                                  kSettingsController : settingsCtrl
                                   };
     return controllers;
 }
