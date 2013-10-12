@@ -7,6 +7,7 @@
 //
 
 #import "Utilities.h"
+#import "Constants.h"
 #import <math.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -396,6 +397,46 @@
     NSString *pillPath = [[NSBundle mainBundle]
                           pathForResource:[imageName lowercaseString] ofType:@"png"];
     return [UIImage imageWithContentsOfFile:pillPath];
+}
+
++ (NSDictionary *)resultsTypeDictionary
+{
+    static dispatch_once_t onceToken;
+    static NSDictionary *dictionary = nil;
+    dispatch_once (&onceToken, ^{
+        dictionary = @{
+                       kCD4 : NSLocalizedString(kCD4, nil),
+                       kViralLoad : NSLocalizedString(kViralLoad, nil),
+                       kCD4Percent : NSLocalizedString(kCD4Percent, nil),
+                       kHepCViralLoad : NSLocalizedString(kHepCViralLoad, nil),
+                       kGlucose : NSLocalizedString(kGlucose, nil),
+                       kTotalCholesterol : NSLocalizedString(kTotalCholesterol, nil),
+                       kLDL : NSLocalizedString(kLDL, nil),
+                       kHDL : NSLocalizedString(kHDL, nil),
+                       kTriglyceride : NSLocalizedString(kTriglyceride, nil),
+                       kHeartRate : NSLocalizedString(kHeartRate, nil),
+                       kSystole : NSLocalizedString(kSystole, nil),
+                       kDiastole : NSLocalizedString(kDiastole, nil),
+                       kBloodPressure : NSLocalizedString(kBloodPressure, nil),
+                       kOxygenLevel : NSLocalizedString(kOxygenLevel, nil),
+                       kWeight : NSLocalizedString(kWeight, nil),
+                       kHemoglobulin : NSLocalizedString(kHemoglobulin, nil),
+                       kPlatelet : NSLocalizedString(kPlatelet, nil),
+                       kWhiteBloodCells : NSLocalizedString(kWhiteBloodCells, nil),
+                       kRedBloodCells : NSLocalizedString(kRedBloodCells, nil),
+                       kCholesterolRatio : NSLocalizedString(kCholesterolRatio, nil),
+                       kCardiacRiskFactor : NSLocalizedString(kCardiacRiskFactor, nil),
+                       kCholesterolRatio : NSLocalizedString(kCholesterolRatio, nil),
+                       kLiverAlanineTransaminase : NSLocalizedString(kLiverAlanineTransaminase, nil),
+                       kLiverAspartateTransaminase : NSLocalizedString(kLiverAspartateTransaminase, nil),
+                       kLiverAlkalinePhosphatase : NSLocalizedString(kLiverAlkalinePhosphatase, nil),
+                       kLiverAlbumin : NSLocalizedString(kLiverAlbumin, nil),
+                       kLiverAlanineTotalBilirubin : NSLocalizedString(kLiverAlanineTotalBilirubin, nil),
+                       kLiverAlanineDirectBilirubin : NSLocalizedString(kLiverAlanineDirectBilirubin, nil),
+                       kLiverGammaGlutamylTranspeptidase : NSLocalizedString(kLiverGammaGlutamylTranspeptidase, nil)
+                       };
+    });
+    return dictionary;
 }
 
 

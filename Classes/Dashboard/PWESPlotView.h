@@ -11,6 +11,10 @@
 #import "PWESDataNTuple.h"
 
 @interface PWESPlotView : UIView
+@property (nonatomic, assign) CGFloat marginLeft;
+@property (nonatomic, assign) CGFloat marginRight;
+@property (nonatomic, assign) CGFloat marginTop;
+@property (nonatomic, assign) CGFloat marginBottom;
 
 + (PWESPlotView *)plotViewWithFrame:(CGRect)frame
                              nTuple:(PWESDataNTuple *)nTuple

@@ -12,7 +12,7 @@
 #import "PWESUtils.h"
 #import "PWESIndicatorView.h"
 #import "Results.h"
-
+#import "Utilities.h"
 @implementation PWESResultsSummaryView
 
 - (id)initWithFrame:(CGRect)frame
@@ -59,7 +59,8 @@
     UILabel *titleLabel         = [[UILabel alloc] initWithFrame:CGRectMake(titleView.bounds.origin.x, titleView.bounds.origin.y, titleView.bounds.size.width, titleView.bounds.size.height)];
     titleLabel.backgroundColor  = [UIColor clearColor];
     titleLabel.font             = font;
-    titleLabel.text             = tuple.type;
+    NSDictionary *typeDictionary = [Utilities resultsTypeDictionary];
+    titleLabel.text             = [typeDictionary objectForKey:tuple.type];
     [titleView addSubview:titleLabel];
     [self addSubview:titleView];
     

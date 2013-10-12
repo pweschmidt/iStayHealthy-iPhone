@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface PWESDataTuple : NSObject
-@property (nonatomic, strong, readonly) NSArray * valueTuple;
-@property (nonatomic, strong, readonly) NSArray * dateTuple;
-@property (nonatomic, strong, readonly) NSString * type;
+@property (nonatomic, strong, readonly) NSArray *valueTuple;
+@property (nonatomic, strong, readonly) NSArray *dateTuple;
+@property (nonatomic, strong, readonly) NSString *type;
 
 +(PWESDataTuple *)initWithValues:(NSArray *)values dates:(NSArray *)dates type:(NSString *)type;
 
