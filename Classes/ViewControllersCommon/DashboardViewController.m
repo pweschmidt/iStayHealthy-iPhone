@@ -91,7 +91,7 @@
 - (void)reloadSQLData:(NSNotification *)notification
 {
     __weak DashboardViewController *weakSelf = self;
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion:^(NSArray *results, NSError *resultsError) {
+    [[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:YES completion:^(NSArray *results, NSError *resultsError) {
         if (nil == results)
         {
             UIAlertView *errorAlert = [[UIAlertView alloc]
@@ -105,7 +105,7 @@
         }
         else
         {
-            [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion:^(NSArray *meds, NSError *medError) {
+            [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion:^(NSArray *meds, NSError *medError) {
                 if (nil == meds)
                 {
                     UIAlertView *errorAlert = [[UIAlertView alloc]

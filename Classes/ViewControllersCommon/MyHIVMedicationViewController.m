@@ -185,8 +185,8 @@
         else
         {
             self.currentMeds = array;
-            [[CoreDataManager sharedInstance] fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:YES completion:^(NSArray *array, NSError *error) {
-                if (nil == array)
+            [[CoreDataManager sharedInstance] fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:YES completion:^(NSArray *prevarray, NSError *error) {
+                if (nil == prevarray)
                 {
                     UIAlertView *errorAlert = [[UIAlertView alloc]
                                                initWithTitle:@"Error"
@@ -199,7 +199,7 @@
                 }
                 else
                 {
-                    self.previousMeds = array;
+                    self.previousMeds = prevarray;
                     [self.tableView reloadData];
                 }
             }];

@@ -178,6 +178,10 @@
         [defaults setObject:start forKey:@"diaryStart"];
         [defaults synchronize];
     }
+    else
+    {
+        self.startDate = [NSKeyedUnarchiver unarchiveObjectWithData:start];
+    }
     if (nil == end)
     {
         self.endDate = [self.startDate dateByAddingDays:90];
@@ -185,8 +189,10 @@
         [defaults setObject:end forKey:@"diaryEnd"];
         [defaults synchronize];
     }
-    self.startDate = [NSKeyedUnarchiver unarchiveObjectWithData:start];
-    self.endDate = [NSKeyedUnarchiver unarchiveObjectWithData:end];
+    else
+    {
+        self.endDate = [NSKeyedUnarchiver unarchiveObjectWithData:end];        
+    }
 }
 
 - (NSUInteger)monthsToMonitor
@@ -195,7 +201,16 @@
     NSDateComponents *endComponents = [Utilities dateComponentsForDate:self.endDate];
     NSUInteger startMonth = startComponents.month;
     NSUInteger endMonth = endComponents.month;
-    return (endMonth - startMonth + 1);
+    NSUInteger result = 0;
+    if (endMonth < startMonth)
+    {
+        result = 12 - startMonth + endMonth;
+    }
+    else
+    {
+        result = endMonth - startMonth + 1;
+    }
+    return result;
 }
 
 
