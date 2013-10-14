@@ -7,12 +7,17 @@
 //
 
 #import "PWESPlotView.h"
+#import "PWESAxis.h"
+#import "PWESChartsConstants.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PWESPlotView ()
 {
     CGRect plotBoundaries;
+    int ticks;
 }
+@property (nonatomic, strong) PWESAxis *xAxis;
+@property (nonatomic, strong) PWESAxis *yAxis;
 @property (nonatomic, strong) NSArray *types;
 @property (nonatomic, strong) PWESDataNTuple *ntuple;
 @property (nonatomic, strong) NSArray *medications;
@@ -36,6 +41,7 @@
                               types:(NSArray *)types
 {
     PWESPlotView *plotView = [[PWESPlotView alloc] initWithFrame:frame];
+    plotView.pxTickDistance = 25;
     plotView.ntuple = nTuple;
     plotView.medications = medications;
     plotView.types = types;
@@ -45,16 +51,35 @@
 
 - (void)configurePlotView
 {
+    CGRect yAxisFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
+
+    CGRect xAxisFrame = CGRectMake(self.bounds.origin.x+self.marginLeft/2, self.bounds.origin.y+22, self.bounds.size.width - self.marginRight, self.marginBottom * 2);
+    self.layer.backgroundColor = [UIColor clearColor].CGColor;
+    self.yAxis = [[PWESAxis alloc] initWithFrame:yAxisFrame orientation:Vertical];
+    if (self.yAxis.axisLayer)
+    {
+        [self.layer addSublayer:self.yAxis.axisLayer];
+        [self.yAxis show];
+    }
+    self.xAxis = [[PWESAxis alloc] initWithFrame:xAxisFrame orientation:Horizontal];
+    if (self.xAxis)
+    {
+        [self.layer addSublayer:self.xAxis.axisLayer];
+        [self.xAxis show];
+    }
+    
+    /*
     self.layer.delegate = self;
     plotBoundaries = CGRectMake(self.marginLeft, self.bounds.size.height - self.marginBottom, self.bounds.size.width - self.marginLeft - self.marginRight, self.bounds.size.height - self.marginBottom - self.marginTop);
     self.backgroundColor = [UIColor whiteColor];
+    ticks = floorf(plotBoundaries.size.height / self.pxTickDistance);
     [self addVerticalAxis];
     [self addHorizontalAxis];
     if (2 == self.types.count)
     {
         [self addVerticalRightAxis];
     }
-//    [self.layer setNeedsDisplay];
+     */
 }
 
 
@@ -86,11 +111,6 @@
 
 
 
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
-{
-//    layer.backgroundColor = [UIColor clearColor].CGColor;
-}
-
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -99,5 +119,6 @@
     // Drawing code
 }
 */
+
 
 @end

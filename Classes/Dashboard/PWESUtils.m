@@ -87,4 +87,22 @@
                           [NSNumber numberWithUnsignedInteger:Glucose] : kGlucose };
     return map;
 }
+
+- (void)drawLineWithContext:(CGContextRef)context
+                      start:(CGPoint)start
+                        end:(CGPoint)end
+                  lineWidth:(CGFloat)lineWidth
+                   cgColour:(CGColorRef)cgColour
+{
+    CGContextSaveGState(context);
+    CGContextSetLineCap(context, kCGLineCapSquare);
+    CGContextSetStrokeColorWithColor(context, cgColour);
+    CGContextSetLineWidth(context, lineWidth);
+    CGFloat lineOffset = lineWidth / 2;
+    CGContextMoveToPoint(context, start.x + lineOffset, start.y + lineOffset);
+    CGContextAddLineToPoint(context, end.x + lineOffset, end.y + lineOffset);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+}
+
 @end

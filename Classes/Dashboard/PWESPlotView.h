@@ -15,6 +15,7 @@
 @property (nonatomic, assign) CGFloat marginRight;
 @property (nonatomic, assign) CGFloat marginTop;
 @property (nonatomic, assign) CGFloat marginBottom;
+@property (nonatomic, assign) CGFloat pxTickDistance;
 
 + (PWESPlotView *)plotViewWithFrame:(CGRect)frame
                              nTuple:(PWESDataNTuple *)nTuple

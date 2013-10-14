@@ -26,6 +26,7 @@
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
 		C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB56A1494F119005E9A0F /* SwitcherCell.xib */; };
 		C42AB57F14950EE5005E9A0F /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42AB58114950EE5005E9A0F /* PasswordCell.xib */; };
+		C431408D180C801D00EB5F5E /* PWESAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = C431408C180C801D00EB5F5E /* PWESAxis.m */; };
 		C43423321466BDFC00F06DC6 /* iStayHealthyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43423311466BDFC00F06DC6 /* iStayHealthyTabBarController.m */; };
 		C43423361466BE3700F06DC6 /* iStayHealthyPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43423341466BE3700F06DC6 /* iStayHealthyPasswordController.m */; };
 		C43423371466BE3700F06DC6 /* iStayHealthyPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C43423351466BE3700F06DC6 /* iStayHealthyPasswordController.xib */; };
@@ -468,6 +469,8 @@
 		C42AB58214950EF1005E9A0F /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/PasswordCell.xib; sourceTree = "<group>"; };
 		C42AB58314950EF4005E9A0F /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/PasswordCell.xib; sourceTree = "<group>"; };
 		C42AB58414950EF7005E9A0F /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/PasswordCell.xib; sourceTree = "<group>"; };
+		C431408B180C801D00EB5F5E /* PWESAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESAxis.h; path = Dashboard/PWESAxis.h; sourceTree = "<group>"; };
+		C431408C180C801D00EB5F5E /* PWESAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESAxis.m; path = Dashboard/PWESAxis.m; sourceTree = "<group>"; };
 		C43423301466BDFC00F06DC6 /* iStayHealthyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyTabBarController.h; sourceTree = "<group>"; };
 		C43423311466BDFC00F06DC6 /* iStayHealthyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iStayHealthyTabBarController.m; sourceTree = "<group>"; };
 		C43423331466BE3700F06DC6 /* iStayHealthyPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyPasswordController.h; sourceTree = "<group>"; };
@@ -1337,6 +1340,8 @@
 		C463742A17E9F12100D19B94 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				C431408B180C801D00EB5F5E /* PWESAxis.h */,
+				C431408C180C801D00EB5F5E /* PWESAxis.m */,
 				C463742E17E9F2AF00D19B94 /* PWESChartsConstants.h */,
 				C463742F17E9F2AF00D19B94 /* PWESDashboardSummaryView.h */,
 				C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */,
@@ -2371,6 +2376,7 @@
 				C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */,
 				C4C41A2E15F1432E00882416 /* Utilities.m in Sources */,
 				C463744217E9F2AF00D19B94 /* PWESResultsSummaryView.m in Sources */,
+				C431408D180C801D00EB5F5E /* PWESAxis.m in Sources */,
 				C491AE5E15F15B8500EB1CF8 /* OtherMedsDetailViewController.m in Sources */,
 				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
 				C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */,

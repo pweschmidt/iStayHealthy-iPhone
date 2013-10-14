@@ -7,10 +7,15 @@
 //
 #import "Constants.h"
 
-#ifndef HealthCharts_PWESChartsConstants_h
-#define HealthCharts_PWESChartsConstants_h
-
 #define kSummaryViewHeight 80
+
+typedef NS_ENUM(int, AxisType)
+{
+    Vertical = 0,
+    Horizontal
+};
+
+
 typedef NS_ENUM  (NSUInteger, ResultsTypes)
 {
     CD4AndViralLoad = 0,
@@ -48,4 +53,3 @@ typedef NS_ENUM(NSUInteger, EvaluationType)
     GOOD
 };
 
-#endif

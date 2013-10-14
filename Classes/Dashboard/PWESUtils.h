@@ -15,4 +15,11 @@
 - (NSString *)objectForType:(SingleResultType)type;
 - (EvaluationType)evaluationTypeForDifference:(float)difference
                                    resultType:(SingleResultType)resultType;
+
+- (void)drawLineWithContext:(CGContextRef)context
+                      start:(CGPoint)start
+                        end:(CGPoint)end
+                  lineWidth:(CGFloat)lineWidth
+                   cgColour:(CGColorRef)cgColour;
+
 @end
