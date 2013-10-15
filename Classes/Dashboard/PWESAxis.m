@@ -41,7 +41,10 @@
     {
         return;
     }
-    self.axisLayer.delegate = self;
+    if (nil == self.axisLayer.delegate)
+    {
+        self.axisLayer.delegate = self;
+    }
     [self.axisLayer setNeedsDisplay];
 }
 
