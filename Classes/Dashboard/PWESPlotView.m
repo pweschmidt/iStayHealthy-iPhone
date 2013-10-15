@@ -51,19 +51,21 @@
 
 - (void)configurePlotView
 {
+//    self.layer.backgroundColor = [UIColor blueColor].CGColor;
     CGRect yAxisFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
 
-    CGRect xAxisFrame = CGRectMake(self.bounds.origin.x+self.marginLeft/2, self.bounds.origin.y+22, self.bounds.size.width - self.marginRight, self.marginBottom * 2);
-    self.layer.backgroundColor = [UIColor clearColor].CGColor;
+    CGRect xAxisFrame = CGRectMake(self.bounds.origin.x+self.marginLeft, self.bounds.size.height - self.marginBottom - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
     self.yAxis = [[PWESAxis alloc] initWithFrame:yAxisFrame orientation:Vertical];
     if (self.yAxis.axisLayer)
     {
+//        self.yAxis.axisLayer.backgroundColor = [UIColor redColor].CGColor;
         [self.layer addSublayer:self.yAxis.axisLayer];
         [self.yAxis show];
     }
     self.xAxis = [[PWESAxis alloc] initWithFrame:xAxisFrame orientation:Horizontal];
     if (self.xAxis)
     {
+//        self.xAxis.axisLayer.backgroundColor = [UIColor greenColor].CGColor;
         [self.layer addSublayer:self.xAxis.axisLayer];
         [self.xAxis show];
     }

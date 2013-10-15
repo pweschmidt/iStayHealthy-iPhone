@@ -50,7 +50,7 @@
     CGPoint axisStart;
     CGPoint axisEnd;
     
-    CGRect frame = self.axisLayer.frame;
+    CGRect frame = self.axisLayer.bounds;
     if (Vertical == self.orientation)
     {
         axisStart = CGPointMake(frame.origin.x + frame.size.width/2 + self.lineWidth/2, frame.origin.y);
@@ -59,7 +59,7 @@
     }
     else
     {
-        axisStart = CGPointMake(frame.origin.x, frame.origin.y + frame.size.height/2 - self.lineWidth/2);
+        axisStart = CGPointMake(frame.origin.x + self.lineWidth/2, frame.origin.y + frame.size.height/2 - self.lineWidth/2);
         axisEnd = CGPointMake(frame.size.width, frame.origin.y + frame.size.height/2 - self.lineWidth/2);
     }
 //    CGContextSaveGState(context);

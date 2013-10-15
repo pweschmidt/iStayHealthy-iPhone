@@ -22,6 +22,5 @@
 
 - (id)initWithFrame:(CGRect)frame
         orientation:(AxisType)orientation;
-- (void)configureAxis;
 - (void)show;
 @end
