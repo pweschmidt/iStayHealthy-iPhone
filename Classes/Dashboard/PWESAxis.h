@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "PWESChartsConstants.h"
+#import "PWESDraw.h"
 
-@interface PWESAxis : NSObject
+@interface PWESAxis : PWESDraw
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, strong) UIColor *axisColor;
+@property (nonatomic, assign) CGFloat tickWidth;
 @property (nonatomic, strong) NSString *axisTitle;
 @property (nonatomic, assign) AxisType axisTitleOrientation;
 @property (nonatomic, assign) CGFloat tickLength;

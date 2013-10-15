@@ -25,10 +25,11 @@
     {
         _orientation = orientation;
         _lineWidth = 2.0;
+        _tickWidth = 1.0;
         _pxTickDistance = 25.0;
         _axisLayer = [CALayer layer];
         _axisLayer.frame = frame;
-//        _axisLayer.backgroundColor = [UIColor whiteColor].CGColor;
+        _tickLength = 10;
     }
     return self;;
 }
@@ -55,31 +56,30 @@
     {
         axisStart = CGPointMake(frame.origin.x + frame.size.width/2 + self.lineWidth/2, frame.origin.y);
         axisEnd = CGPointMake(frame.origin.x + frame.size.width/2 + self.lineWidth/2, frame.size.height);
-//        [self addTickMarks];
+        [self addTickMarks:context frame:frame];
     }
     else
     {
         axisStart = CGPointMake(frame.origin.x + self.lineWidth/2, frame.origin.y + frame.size.height/2 - self.lineWidth/2);
         axisEnd = CGPointMake(frame.size.width, frame.origin.y + frame.size.height/2 - self.lineWidth/2);
     }
-//    CGContextSaveGState(context);
-    CGContextSetLineCap(context, kCGLineCapSquare);
-    CGContextSetStrokeColorWithColor(context, self.axisColor.CGColor);
-    CGContextSetLineWidth(context, self.lineWidth);
-    CGFloat lineOffset = self.lineWidth / 2;
-    CGContextMoveToPoint(context, axisStart.x + lineOffset, axisStart.y + lineOffset);
-    CGContextAddLineToPoint(context, axisEnd.x + lineOffset, axisEnd.y + lineOffset);
-    CGContextStrokePath(context);
-//    CGContextRestoreGState(context);
-
-    /*
-    [[PWESUtils sharedInstance] drawLineWithContext:ctx start:axisStart end:axisEnd lineWidth:self.lineWidth cgColour:self.axisColor.CGColor];
-     */
+    [self drawLineWithContext:context start:axisStart end:axisEnd lineWidth:self.lineWidth cgColour:self.axisColor.CGColor];
 }
 
-- (void)addTickMarks
+- (void)addTickMarks:(CGContextRef)context frame:(CGRect)frame
 {
+    CGFloat yOffset = frame.origin.y + self.pxTickDistance;
+    CGFloat xStart = frame.origin.x + frame.size.width/2 + self.lineWidth/2 - self.tickLength/2;
+    CGFloat xEnd = xStart + self.tickLength;
     
+    int ticks = roundf(frame.size.height / self.pxTickDistance);
+    for (int tick = 0; tick < ticks; tick++)
+    {
+        CGPoint start = CGPointMake(xStart, yOffset);
+        CGPoint end = CGPointMake(xEnd, yOffset);
+        [self drawLineWithContext:context start:start end:end lineWidth:self.tickWidth cgColour:self.axisColor.CGColor];
+        yOffset += self.pxTickDistance;
+    }
 }
 
 @end

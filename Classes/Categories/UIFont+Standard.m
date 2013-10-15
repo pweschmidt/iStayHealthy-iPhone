@@ -16,19 +16,19 @@
     switch (fontType)
     {
         case Standard:
-            name = @"Helvetica-Light";
+            name = @"HelveticaNeue-Light";
             break;
         case Light:
-            name = @"Helvetica-Light";
+            name = @"HelveticaNeue-UltraLight";
             break;
         case LightItalic:
-            name = @"Helvetica-LightOblique";
+            name = @"HelveticaNeue-LightOblique";
             break;
         case Bold:
-            name = @"Helvetica-Bold";
+            name = @"HelveticaNeue-Bold";
             break;
         case BoldItalic:
-            name = @"Helvetica-BoldOblique";
+            name = @"HelveticaNeue-BoldOblique";
             break;
     }
     return [UIFont fontWithName:name size:size];

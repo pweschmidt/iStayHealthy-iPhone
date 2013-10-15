@@ -166,6 +166,7 @@
 		C4ADD9D013890E54004445C0 /* Alarm-Clock-32.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CC13890E54004445C0 /* Alarm-Clock-32.png */; };
 		C4ADD9D113890E54004445C0 /* Alarm-Clock-55.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CD13890E54004445C0 /* Alarm-Clock-55.png */; };
 		C4ADD9D313890E54004445C0 /* redcross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CF13890E54004445C0 /* redcross-small.png */; };
+		C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF829180DC05C00107966 /* PWESDraw.m */; };
 		C4B24C13141CC3EC00FACA6B /* cd4PercentOn-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B24C14141CC3EC00FACA6B /* cd4PercentOn-small.png */; };
 		C4B24C15141CC41A00FACA6B /* cd4PercentOff-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B24C16141CC41A00FACA6B /* cd4PercentOff-small.png */; };
 		C4B24C17141CC43E00FACA6B /* cd4Off-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B24C18141CC43E00FACA6B /* cd4Off-small.png */; };
@@ -731,6 +732,8 @@
 		C4ADD9CC13890E54004445C0 /* Alarm-Clock-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Alarm-Clock-32.png"; path = "Images/Alarm-Clock-32.png"; sourceTree = "<group>"; };
 		C4ADD9CD13890E54004445C0 /* Alarm-Clock-55.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Alarm-Clock-55.png"; path = "Images/Alarm-Clock-55.png"; sourceTree = "<group>"; };
 		C4ADD9CF13890E54004445C0 /* redcross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "redcross-small.png"; path = "Images/redcross-small.png"; sourceTree = "<group>"; };
+		C4AEF828180DC05C00107966 /* PWESDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDraw.h; path = Dashboard/PWESDraw.h; sourceTree = "<group>"; };
+		C4AEF829180DC05C00107966 /* PWESDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDraw.m; path = Dashboard/PWESDraw.m; sourceTree = "<group>"; };
 		C4B228A214794AB200AEAED8 /* iStayHealthy 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 12.xcdatamodel"; sourceTree = "<group>"; };
 		C4B24C14141CC3EC00FACA6B /* cd4PercentOn-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cd4PercentOn-small.png"; sourceTree = "<group>"; };
 		C4B24C16141CC41A00FACA6B /* cd4PercentOff-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cd4PercentOff-small.png"; path = "Images/cd4PercentOff-small.png"; sourceTree = "<group>"; };
@@ -1347,6 +1350,8 @@
 				C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */,
 				C463743117E9F2AF00D19B94 /* PWESDashboardView.h */,
 				C463743217E9F2AF00D19B94 /* PWESDashboardView.m */,
+				C4AEF828180DC05C00107966 /* PWESDraw.h */,
+				C4AEF829180DC05C00107966 /* PWESDraw.m */,
 				C463743317E9F2AF00D19B94 /* PWESGraph.h */,
 				C463743417E9F2AF00D19B94 /* PWESGraph.m */,
 				C463743517E9F2AF00D19B94 /* PWESIndicatorView.h */,
@@ -2299,6 +2304,7 @@
 				C4C418D815F1363C00882416 /* XMLElement.m in Sources */,
 				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
 				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
+				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
 				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,
 				C4C4192315F1383000882416 /* AlertListCell.m in Sources */,
 				C4C4192515F1383000882416 /* ClinicAddressCell.m in Sources */,

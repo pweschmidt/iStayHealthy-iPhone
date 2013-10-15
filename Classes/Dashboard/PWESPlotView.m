@@ -18,6 +18,7 @@
 }
 @property (nonatomic, strong) PWESAxis *xAxis;
 @property (nonatomic, strong) PWESAxis *yAxis;
+@property (nonatomic, strong) PWESAxis *yAxisRight;
 @property (nonatomic, strong) NSArray *types;
 @property (nonatomic, strong) PWESDataNTuple *ntuple;
 @property (nonatomic, strong) NSArray *medications;
@@ -69,48 +70,21 @@
         [self.layer addSublayer:self.xAxis.axisLayer];
         [self.xAxis show];
     }
-    
-    /*
-    self.layer.delegate = self;
-    plotBoundaries = CGRectMake(self.marginLeft, self.bounds.size.height - self.marginBottom, self.bounds.size.width - self.marginLeft - self.marginRight, self.bounds.size.height - self.marginBottom - self.marginTop);
-    self.backgroundColor = [UIColor whiteColor];
-    ticks = floorf(plotBoundaries.size.height / self.pxTickDistance);
-    [self addVerticalAxis];
-    [self addHorizontalAxis];
     if (2 == self.types.count)
     {
-        [self addVerticalRightAxis];
+        CGRect yAxisFrameRight = CGRectMake(self.bounds.origin.x + self.bounds.size.width - self.marginRight - self.marginLeft, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
+        self.yAxisRight = [[PWESAxis alloc] initWithFrame:yAxisFrameRight orientation:Vertical];
+        if (self.yAxisRight.axisLayer)
+        {
+            [self.layer addSublayer:self.yAxisRight.axisLayer];
+            [self.yAxisRight show];
+        }
     }
-     */
+    
+    
+    
+    
 }
-
-
-- (void)addHorizontalAxis
-{
-    CALayer *axis = [CALayer layer];
-    axis.frame = CGRectMake(plotBoundaries.origin.x, plotBoundaries.origin.y, plotBoundaries.size.width, 2);
-    axis.backgroundColor = [UIColor blackColor].CGColor;
-    [self.layer addSublayer:axis];
-}
-
-- (void)addVerticalRightAxis
-{
-    CALayer *axis = [CALayer layer];
-    axis.frame = CGRectMake(plotBoundaries.origin.x + plotBoundaries.size.width - 2, self.marginTop, 2, plotBoundaries.size.height);
-    axis.backgroundColor = [UIColor blackColor].CGColor;
-    [self.layer addSublayer:axis];
-}
-
-
-- (void)addVerticalAxis
-{
-    CALayer *axis = [CALayer layer];
-    axis.frame = CGRectMake(plotBoundaries.origin.x, self.marginTop, 2, plotBoundaries.size.height);
-    axis.backgroundColor = [UIColor blackColor].CGColor;
-    [self.layer addSublayer:axis];
-}
-
-
 
 
 /*
