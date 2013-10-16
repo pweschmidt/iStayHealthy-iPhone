@@ -49,6 +49,40 @@
 		C44B4884140CDEBE00BDC418 /* dropbox-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C44B4883140CDEBE00BDC418 /* dropbox-small.png */; };
 		C44B4886140CF1C200BDC418 /* feedback-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C44B4885140CF1C200BDC418 /* feedback-small.png */; };
 		C44B4888140CF94B00BDC418 /* e-mail-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C44B4887140CF94B00BDC418 /* e-mail-small.png */; };
+		C44D36B5180F3E3600EE9F5E /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D369F180F3E3600EE9F5E /* alarm.png */; };
+		C44D36B6180F3E3600EE9F5E /* alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A0180F3E3600EE9F5E /* alarm@2x.png */; };
+		C44D36B7180F3E3600EE9F5E /* appointments.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A1180F3E3600EE9F5E /* appointments.png */; };
+		C44D36B8180F3E3600EE9F5E /* appointments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A2180F3E3600EE9F5E /* appointments@2x.png */; };
+		C44D36B9180F3E3600EE9F5E /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A3180F3E3600EE9F5E /* cancel.png */; };
+		C44D36BA180F3E3600EE9F5E /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A4180F3E3600EE9F5E /* cancel@2x.png */; };
+		C44D36BB180F3E3600EE9F5E /* charts.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A5180F3E3600EE9F5E /* charts.png */; };
+		C44D36BC180F3E3600EE9F5E /* charts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A6180F3E3600EE9F5E /* charts@2x.png */; };
+		C44D36BD180F3E3600EE9F5E /* combi.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A7180F3E3600EE9F5E /* combi.png */; };
+		C44D36BE180F3E3600EE9F5E /* combi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A8180F3E3600EE9F5E /* combi@2x.png */; };
+		C44D36BF180F3E3600EE9F5E /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36A9180F3E3600EE9F5E /* cross.png */; };
+		C44D36C0180F3E3600EE9F5E /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36AA180F3E3600EE9F5E /* cross@2x.png */; };
+		C44D36C1180F3E3600EE9F5E /* diary.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36AB180F3E3600EE9F5E /* diary.png */; };
+		C44D36C2180F3E3600EE9F5E /* diary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36AC180F3E3600EE9F5E /* diary@2x.png */; };
+		C44D36C3180F3E3600EE9F5E /* doctor.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36AD180F3E3600EE9F5E /* doctor.png */; };
+		C44D36C4180F3E3600EE9F5E /* doctor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36AE180F3E3600EE9F5E /* doctor@2x.png */; };
+		C44D36C5180F3E3600EE9F5E /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36AF180F3E3600EE9F5E /* feedback.png */; };
+		C44D36C6180F3E3600EE9F5E /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36B0180F3E3600EE9F5E /* feedback@2x.png */; };
+		C44D36C7180F3E3600EE9F5E /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36B1180F3E3600EE9F5E /* mail.png */; };
+		C44D36C8180F3E3600EE9F5E /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36B2180F3E3600EE9F5E /* mail@2x.png */; };
+		C44D36C9180F3E3600EE9F5E /* medalarm.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36B3180F3E3600EE9F5E /* medalarm.png */; };
+		C44D36CA180F3E3600EE9F5E /* medalarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36B4180F3E3600EE9F5E /* medalarm@2x.png */; };
+		C44D36D7180F3E5000EE9F5E /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36CB180F3E5000EE9F5E /* menu.png */; };
+		C44D36D8180F3E5000EE9F5E /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36CC180F3E5000EE9F5E /* menu@2x.png */; };
+		C44D36D9180F3E5000EE9F5E /* missed.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36CD180F3E5000EE9F5E /* missed.png */; };
+		C44D36DA180F3E5000EE9F5E /* missed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36CE180F3E5000EE9F5E /* missed@2x.png */; };
+		C44D36DB180F3E5000EE9F5E /* procedure.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36CF180F3E5000EE9F5E /* procedure.png */; };
+		C44D36DC180F3E5000EE9F5E /* procedure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D0180F3E5000EE9F5E /* procedure@2x.png */; };
+		C44D36DD180F3E5000EE9F5E /* results.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D1180F3E5000EE9F5E /* results.png */; };
+		C44D36DE180F3E5000EE9F5E /* results@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D2180F3E5000EE9F5E /* results@2x.png */; };
+		C44D36DF180F3E5000EE9F5E /* sideeffects.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D3180F3E5000EE9F5E /* sideeffects.png */; };
+		C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D4180F3E5000EE9F5E /* sideeffects@2x.png */; };
+		C44D36E1180F3E5000EE9F5E /* stopped.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D5180F3E5000EE9F5E /* stopped.png */; };
+		C44D36E2180F3E5000EE9F5E /* stopped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D6180F3E5000EE9F5E /* stopped@2x.png */; };
 		C452630813F5422B0004C80F /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C452630A13F5422B0004C80F /* WebViewController.xib */; };
 		C456C459176C5CBE00053621 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C456C458176C5CBE00053621 /* MainWindow-iPad.xib */; };
 		C4574ADC14938F7E00793164 /* DosageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4574ADE14938F7E00793164 /* DosageCell.xib */; };
@@ -514,6 +548,40 @@
 		C44B4883140CDEBE00BDC418 /* dropbox-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropbox-small.png"; sourceTree = "<group>"; };
 		C44B4885140CF1C200BDC418 /* feedback-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback-small.png"; sourceTree = "<group>"; };
 		C44B4887140CF94B00BDC418 /* e-mail-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e-mail-small.png"; sourceTree = "<group>"; };
+		C44D369F180F3E3600EE9F5E /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarm.png; path = Classes/Assets/alarm.png; sourceTree = "<group>"; };
+		C44D36A0180F3E3600EE9F5E /* alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm@2x.png"; path = "Classes/Assets/alarm@2x.png"; sourceTree = "<group>"; };
+		C44D36A1180F3E3600EE9F5E /* appointments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appointments.png; path = Classes/Assets/appointments.png; sourceTree = "<group>"; };
+		C44D36A2180F3E3600EE9F5E /* appointments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appointments@2x.png"; path = "Classes/Assets/appointments@2x.png"; sourceTree = "<group>"; };
+		C44D36A3180F3E3600EE9F5E /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel.png; path = Classes/Assets/cancel.png; sourceTree = "<group>"; };
+		C44D36A4180F3E3600EE9F5E /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancel@2x.png"; path = "Classes/Assets/cancel@2x.png"; sourceTree = "<group>"; };
+		C44D36A5180F3E3600EE9F5E /* charts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = charts.png; path = Classes/Assets/charts.png; sourceTree = "<group>"; };
+		C44D36A6180F3E3600EE9F5E /* charts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts@2x.png"; path = "Classes/Assets/charts@2x.png"; sourceTree = "<group>"; };
+		C44D36A7180F3E3600EE9F5E /* combi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = combi.png; path = Classes/Assets/combi.png; sourceTree = "<group>"; };
+		C44D36A8180F3E3600EE9F5E /* combi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "combi@2x.png"; path = "Classes/Assets/combi@2x.png"; sourceTree = "<group>"; };
+		C44D36A9180F3E3600EE9F5E /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cross.png; path = Classes/Assets/cross.png; sourceTree = "<group>"; };
+		C44D36AA180F3E3600EE9F5E /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cross@2x.png"; path = "Classes/Assets/cross@2x.png"; sourceTree = "<group>"; };
+		C44D36AB180F3E3600EE9F5E /* diary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diary.png; path = Classes/Assets/diary.png; sourceTree = "<group>"; };
+		C44D36AC180F3E3600EE9F5E /* diary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "diary@2x.png"; path = "Classes/Assets/diary@2x.png"; sourceTree = "<group>"; };
+		C44D36AD180F3E3600EE9F5E /* doctor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doctor.png; path = Classes/Assets/doctor.png; sourceTree = "<group>"; };
+		C44D36AE180F3E3600EE9F5E /* doctor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "doctor@2x.png"; path = "Classes/Assets/doctor@2x.png"; sourceTree = "<group>"; };
+		C44D36AF180F3E3600EE9F5E /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feedback.png; path = Classes/Assets/feedback.png; sourceTree = "<group>"; };
+		C44D36B0180F3E3600EE9F5E /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedback@2x.png"; path = "Classes/Assets/feedback@2x.png"; sourceTree = "<group>"; };
+		C44D36B1180F3E3600EE9F5E /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mail.png; path = Classes/Assets/mail.png; sourceTree = "<group>"; };
+		C44D36B2180F3E3600EE9F5E /* mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail@2x.png"; path = "Classes/Assets/mail@2x.png"; sourceTree = "<group>"; };
+		C44D36B3180F3E3600EE9F5E /* medalarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = medalarm.png; path = Classes/Assets/medalarm.png; sourceTree = "<group>"; };
+		C44D36B4180F3E3600EE9F5E /* medalarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medalarm@2x.png"; path = "Classes/Assets/medalarm@2x.png"; sourceTree = "<group>"; };
+		C44D36CB180F3E5000EE9F5E /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = Classes/Assets/menu.png; sourceTree = "<group>"; };
+		C44D36CC180F3E5000EE9F5E /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu@2x.png"; path = "Classes/Assets/menu@2x.png"; sourceTree = "<group>"; };
+		C44D36CD180F3E5000EE9F5E /* missed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = missed.png; path = Classes/Assets/missed.png; sourceTree = "<group>"; };
+		C44D36CE180F3E5000EE9F5E /* missed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "missed@2x.png"; path = "Classes/Assets/missed@2x.png"; sourceTree = "<group>"; };
+		C44D36CF180F3E5000EE9F5E /* procedure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = procedure.png; path = Classes/Assets/procedure.png; sourceTree = "<group>"; };
+		C44D36D0180F3E5000EE9F5E /* procedure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "procedure@2x.png"; path = "Classes/Assets/procedure@2x.png"; sourceTree = "<group>"; };
+		C44D36D1180F3E5000EE9F5E /* results.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = results.png; path = Classes/Assets/results.png; sourceTree = "<group>"; };
+		C44D36D2180F3E5000EE9F5E /* results@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "results@2x.png"; path = "Classes/Assets/results@2x.png"; sourceTree = "<group>"; };
+		C44D36D3180F3E5000EE9F5E /* sideeffects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sideeffects.png; path = Classes/Assets/sideeffects.png; sourceTree = "<group>"; };
+		C44D36D4180F3E5000EE9F5E /* sideeffects@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sideeffects@2x.png"; path = "Classes/Assets/sideeffects@2x.png"; sourceTree = "<group>"; };
+		C44D36D5180F3E5000EE9F5E /* stopped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stopped.png; path = Classes/Assets/stopped.png; sourceTree = "<group>"; };
+		C44D36D6180F3E5000EE9F5E /* stopped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stopped@2x.png"; path = "Classes/Assets/stopped@2x.png"; sourceTree = "<group>"; };
 		C452630913F5422B0004C80F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		C452630B13F542320004C80F /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		C452630C13F542350004C80F /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/WebViewController.xib; sourceTree = "<group>"; };
@@ -1526,12 +1594,30 @@
 				C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */,
 				C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */,
 				C48B9BFC180949E7007CF6DE /* MedicationImages */,
+				C44D369F180F3E3600EE9F5E /* alarm.png */,
+				C44D36A0180F3E3600EE9F5E /* alarm@2x.png */,
+				C44D36A1180F3E3600EE9F5E /* appointments.png */,
+				C44D36A2180F3E3600EE9F5E /* appointments@2x.png */,
+				C44D36A3180F3E3600EE9F5E /* cancel.png */,
+				C44D36A4180F3E3600EE9F5E /* cancel@2x.png */,
+				C44D36A5180F3E3600EE9F5E /* charts.png */,
+				C44D36A6180F3E3600EE9F5E /* charts@2x.png */,
+				C44D36A7180F3E3600EE9F5E /* combi.png */,
+				C44D36A8180F3E3600EE9F5E /* combi@2x.png */,
+				C44D36A9180F3E3600EE9F5E /* cross.png */,
+				C44D36AA180F3E3600EE9F5E /* cross@2x.png */,
 				C48B9BF018094972007CF6DE /* Default-480h@2x.png */,
 				C48B9BF118094972007CF6DE /* Default-568h@2x.png */,
 				C48B9BF218094972007CF6DE /* Default-768h.png */,
 				C48B9BF318094972007CF6DE /* Default-768h@2x.png */,
 				C48B9BF418094972007CF6DE /* Default-1024h.png */,
 				C48B9BF518094972007CF6DE /* Default-1024h@2x.png */,
+				C44D36AB180F3E3600EE9F5E /* diary.png */,
+				C44D36AC180F3E3600EE9F5E /* diary@2x.png */,
+				C44D36AD180F3E3600EE9F5E /* doctor.png */,
+				C44D36AE180F3E3600EE9F5E /* doctor@2x.png */,
+				C44D36AF180F3E3600EE9F5E /* feedback.png */,
+				C44D36B0180F3E3600EE9F5E /* feedback@2x.png */,
 				C481FD3417FDEF7B0058EE9D /* icon_29.png */,
 				C481FD3517FDEF7B0058EE9D /* icon_29@2x.png */,
 				C481FD2817FDEE540058EE9D /* icon_40_flat.png */,
@@ -1545,8 +1631,24 @@
 				C481FD1C17FDEBDE0058EE9D /* icon_76_flat.png */,
 				C48B9BEA18094675007CF6DE /* icon_76_flat@2x.png */,
 				C481FD1E17FDEBDE0058EE9D /* icon_120_flat.png */,
+				C44D36B1180F3E3600EE9F5E /* mail.png */,
+				C44D36B2180F3E3600EE9F5E /* mail@2x.png */,
+				C44D36B3180F3E3600EE9F5E /* medalarm.png */,
+				C44D36B4180F3E3600EE9F5E /* medalarm@2x.png */,
+				C44D36CB180F3E5000EE9F5E /* menu.png */,
+				C44D36CC180F3E5000EE9F5E /* menu@2x.png */,
+				C44D36CD180F3E5000EE9F5E /* missed.png */,
+				C44D36CE180F3E5000EE9F5E /* missed@2x.png */,
 				C4595940180EF8D50082559E /* pozicon.png */,
 				C4595941180EF8D50082559E /* pozicon@2x.png */,
+				C44D36CF180F3E5000EE9F5E /* procedure.png */,
+				C44D36D0180F3E5000EE9F5E /* procedure@2x.png */,
+				C44D36D1180F3E5000EE9F5E /* results.png */,
+				C44D36D2180F3E5000EE9F5E /* results@2x.png */,
+				C44D36D3180F3E5000EE9F5E /* sideeffects.png */,
+				C44D36D4180F3E5000EE9F5E /* sideeffects@2x.png */,
+				C44D36D5180F3E5000EE9F5E /* stopped.png */,
+				C44D36D6180F3E5000EE9F5E /* stopped@2x.png */,
 			);
 			name = Assets;
 			path = ..;
@@ -2078,6 +2180,7 @@
 				C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */,
 				C4B24C19141CC45800FACA6B /* cd4On-small.png in Resources */,
 				C49F82C213DEE06500D5891F /* viralOn-small.png in Resources */,
+				C44D36D9180F3E5000EE9F5E /* missed.png in Resources */,
 				C4C3AA2A1316DF70000FC699 /* Icon-72.png in Resources */,
 				C4C3AA2B1316DF70000FC699 /* Icon-small.png in Resources */,
 				C4C3AA2C1316DF70000FC699 /* Icon.png in Resources */,
@@ -2087,6 +2190,10 @@
 				C4C0154813425268005E889D /* celsentri.png in Resources */,
 				C4C0154913425268005E889D /* combivir.png in Resources */,
 				C4952D2117F21DDB0022EFEF /* README.md in Resources */,
+				C44D36C7180F3E3600EE9F5E /* mail.png in Resources */,
+				C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */,
+				C44D36B7180F3E3600EE9F5E /* appointments.png in Resources */,
+				C44D36B5180F3E3600EE9F5E /* alarm.png in Resources */,
 				C4C0154A13425268005E889D /* crixivan.png in Resources */,
 				C4C0154B13425268005E889D /* didanosine.png in Resources */,
 				C4595942180EF8D50082559E /* pozicon.png in Resources */,
@@ -2107,10 +2214,13 @@
 				C4C0155A13425268005E889D /* reyataz.png in Resources */,
 				C4C0155B13425268005E889D /* stavudine.png in Resources */,
 				C4C0155C13425268005E889D /* sustiva.png in Resources */,
+				C44D36C2180F3E3600EE9F5E /* diary@2x.png in Resources */,
 				C4C0155D13425268005E889D /* telzir.png in Resources */,
 				C4C0155E13425268005E889D /* triomune.png in Resources */,
 				C4C0155F13425268005E889D /* trizivir.png in Resources */,
+				C44D36CA180F3E3600EE9F5E /* medalarm@2x.png in Resources */,
 				C4C0156013425268005E889D /* truvada.png in Resources */,
+				C44D36C4180F3E3600EE9F5E /* doctor@2x.png in Resources */,
 				C48B9BF718094972007CF6DE /* Default-568h@2x.png in Resources */,
 				C4C0156113425268005E889D /* videx.png in Resources */,
 				C4C0156413425268005E889D /* viread.png in Resources */,
@@ -2136,12 +2246,15 @@
 				C44B4884140CDEBE00BDC418 /* dropbox-small.png in Resources */,
 				C44B4886140CF1C200BDC418 /* feedback-small.png in Resources */,
 				C44B4888140CF94B00BDC418 /* e-mail-small.png in Resources */,
+				C44D36C5180F3E3600EE9F5E /* feedback.png in Resources */,
 				C481FD2D17FDEE540058EE9D /* icon_50_flat.png in Resources */,
 				C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */,
+				C44D36DA180F3E5000EE9F5E /* missed@2x.png in Resources */,
 				C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */,
 				C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */,
 				C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */,
 				C4952D2217F21DDB0022EFEF /* release_notes.md in Resources */,
+				C44D36BC180F3E3600EE9F5E /* charts@2x.png in Resources */,
 				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
 				C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */,
 				C43423371466BE3700F06DC6 /* iStayHealthyPasswordController.xib in Resources */,
@@ -2149,6 +2262,7 @@
 				C491B3501477DE96000A4229 /* alarm.png in Resources */,
 				C491B3521477DE96000A4229 /* lock.png in Resources */,
 				C491B3531477DE96000A4229 /* missed.png in Resources */,
+				C44D36BD180F3E3600EE9F5E /* combi.png in Resources */,
 				C491B3541477DE96000A4229 /* procedure.png in Resources */,
 				C491B3551477DE96000A4229 /* sideeffects.png in Resources */,
 				C4DF7E4D14857D17009C46E6 /* missedsmall.png in Resources */,
@@ -2157,6 +2271,7 @@
 				C42AB5681494F119005E9A0F /* SwitcherCell.xib in Resources */,
 				C48B9BFA18094972007CF6DE /* Default-1024h.png in Resources */,
 				C42AB57F14950EE5005E9A0F /* PasswordCell.xib in Resources */,
+				C44D36DF180F3E5000EE9F5E /* sideeffects.png in Resources */,
 				C48B9BEB18094675007CF6DE /* icon_40_flat@2x.png in Resources */,
 				C4959F6914B883F0000B3F10 /* pozbanner.png in Resources */,
 				C4CA33CB14CC1AB4000C7BE3 /* smartandstrong.png in Resources */,
@@ -2166,15 +2281,19 @@
 				C4FCBC43152F210900E3F082 /* cd4PercentOn-small@2x.png in Resources */,
 				C4FCBC44152F210900E3F082 /* cd4Off-small@2x.png in Resources */,
 				C4FCBC45152F210900E3F082 /* cd4PercentOff-small@2x.png in Resources */,
+				C44D36C3180F3E3600EE9F5E /* doctor.png in Resources */,
+				C44D36C1180F3E3600EE9F5E /* diary.png in Resources */,
 				C4FCBC47152F210900E3F082 /* combi-small@2x.png in Resources */,
 				C4FCBC48152F210900E3F082 /* cross-small@2x.png in Resources */,
 				C4FCBC49152F210900E3F082 /* list-small@2x.png in Resources */,
 				C4FCBC4A152F210900E3F082 /* Alarm-Clock-55@2x.png in Resources */,
+				C44D36DC180F3E5000EE9F5E /* procedure@2x.png in Resources */,
 				C4FCBC4B152F210900E3F082 /* Alarm-Clock-32@2x.png in Resources */,
 				C4FCBC4C152F210900E3F082 /* appointments@2x.png in Resources */,
 				C4FCBC4D152F210900E3F082 /* missed@2x.png in Resources */,
 				C4FCBC4E152F210900E3F082 /* missedsmall@2x.png in Resources */,
 				C4FCBC4F152F210900E3F082 /* sideeffects@2x.png in Resources */,
+				C44D36B9180F3E3600EE9F5E /* cancel.png in Resources */,
 				C4FCBC50152F210900E3F082 /* alarm@2x.png in Resources */,
 				C4FCBC51152F210900E3F082 /* upredweb@2x.png in Resources */,
 				C4FCBC52152F210900E3F082 /* upgreenweb@2x.png in Resources */,
@@ -2183,6 +2302,7 @@
 				C4FCBC54152F210900E3F082 /* downgreenweb@2x.png in Resources */,
 				C4FCBC55152F210900E3F082 /* icon-small@2x.png in Resources */,
 				C48B9BF918094972007CF6DE /* Default-768h@2x.png in Resources */,
+				C44D36BF180F3E3600EE9F5E /* cross.png in Resources */,
 				C481FD3617FDEF7B0058EE9D /* icon_29.png in Resources */,
 				C4FCBC56152F210900E3F082 /* icon@2x.png in Resources */,
 				C48B9BEF18094675007CF6DE /* icon_76_flat@2x.png in Resources */,
@@ -2195,17 +2315,21 @@
 				C4FCBC5F152F210900E3F082 /* feedback-small@2x.png in Resources */,
 				C4FCBC60152F210900E3F082 /* icon-rounded-small-flat@2x.png in Resources */,
 				C48B9BF818094972007CF6DE /* Default-768h.png in Resources */,
+				C44D36C9180F3E3600EE9F5E /* medalarm.png in Resources */,
 				C4FCBC61152F210900E3F082 /* iconroundedsmall@2x.png in Resources */,
+				C44D36D8180F3E5000EE9F5E /* menu@2x.png in Resources */,
 				C4FCBC62152F210900E3F082 /* istayhealthypozbanner@2x.png in Resources */,
 				C4FCBC63152F210900E3F082 /* lock@2x.png in Resources */,
 				C4FCBC64152F210900E3F082 /* neutralflat@2x.png in Resources */,
 				C4FCBC65152F210900E3F082 /* procedure@2x.png in Resources */,
 				C4FCBC66152F210900E3F082 /* redcross-small@2x.png in Resources */,
+				C44D36E2180F3E5000EE9F5E /* stopped@2x.png in Resources */,
 				C4FCBC69152F210900E3F082 /* status-small@2x.png in Resources */,
 				C4FCBC6E152F229600E3F082 /* viralOff-small@2x.png in Resources */,
 				C4FCBC74152F22AE00E3F082 /* viralOn-small@2x.png in Resources */,
 				C4FCBC80152F332A00E3F082 /* dahbanner.png in Resources */,
 				C4FCBC81152F332A00E3F082 /* dahbanner@2x.png in Resources */,
+				C44D36E1180F3E5000EE9F5E /* stopped.png in Resources */,
 				C4FCBC84152F332A00E3F082 /* pozbanner.png in Resources */,
 				C4FCBC85152F332A00E3F082 /* pozbanner@2x.png in Resources */,
 				C4FCBC88152F33F200E3F082 /* pozbannerES.png in Resources */,
@@ -2226,9 +2350,12 @@
 				C48B9BED18094675007CF6DE /* icon_57_flat@2x.png in Resources */,
 				C4C4193115F1383000882416 /* MedSelectionCell.xib in Resources */,
 				C4C4193315F1383000882416 /* MoreResultsCell.xib in Resources */,
+				C44D36C0180F3E3600EE9F5E /* cross@2x.png in Resources */,
 				C481FD2C17FDEE540058EE9D /* icon_40_flat.png in Resources */,
 				C481FD2217FDEBDE0058EE9D /* icon_72_flat.png in Resources */,
 				C4C4193515F1383000882416 /* OtherMedCell.xib in Resources */,
+				C44D36BB180F3E3600EE9F5E /* charts.png in Resources */,
+				C44D36B8180F3E3600EE9F5E /* appointments@2x.png in Resources */,
 				C4C4193715F1383000882416 /* PressureCell.xib in Resources */,
 				C4C4193915F1383000882416 /* ProcedureCell.xib in Resources */,
 				C4C4193B15F1383000882416 /* RepeatCell.xib in Resources */,
@@ -2243,6 +2370,7 @@
 				C4C4195115F1383000882416 /* UnitCell.xib in Resources */,
 				C4C419F815F13EFA00882416 /* DropBoxBackupViewController.xib in Resources */,
 				C4C419F915F13EFA00882416 /* InfoDetailTableViewController.xib in Resources */,
+				C44D36C8180F3E3600EE9F5E /* mail@2x.png in Resources */,
 				C4C419FA15F13EFA00882416 /* MedicationChangeTableViewController.xib in Resources */,
 				C4C419FB15F13EFA00882416 /* MedicationDetailTableViewController.xib in Resources */,
 				C4C419FC15F13EFA00882416 /* MissedMedsDetailTableViewController.xib in Resources */,
@@ -2251,6 +2379,7 @@
 				C4C419FF15F13EFA00882416 /* NewAlertEditDetailViewController.xib in Resources */,
 				C4C41A0415F13EFA00882416 /* ResultDetailViewController.xib in Resources */,
 				C4C41A0515F13EFA00882416 /* ResultsSettingsTableViewController.xib in Resources */,
+				C44D36DD180F3E5000EE9F5E /* results.png in Resources */,
 				C4C41A0615F13EFA00882416 /* SettingsDetailViewController.xib in Resources */,
 				C4C41A0715F13EFA00882416 /* SideEffectsDetailTableViewController.xib in Resources */,
 				C4C41A0815F13EFA00882416 /* SideEffectsViewController.xib in Resources */,
@@ -2259,23 +2388,29 @@
 				C4C41A1715F1404000882416 /* GeneralMedicalTableViewController.xib in Resources */,
 				C4C41A1815F1404000882416 /* HIVMedicationViewController.xib in Resources */,
 				C4C41A1915F1404000882416 /* NewAlertViewController.xib in Resources */,
+				C44D36BE180F3E3600EE9F5E /* combi@2x.png in Resources */,
 				C4C41A1A15F1404000882416 /* NewResultsViewController.xib in Resources */,
 				C481FD3717FDEF7B0058EE9D /* icon_29@2x.png in Resources */,
 				C4C41A1B15F1404000882416 /* NewStatusViewController.xib in Resources */,
 				C4C41A1C15F1404000882416 /* OtherMedsTableViewController.xib in Resources */,
 				C4C41A1D15F1404000882416 /* ProcedureTableViewController.xib in Resources */,
+				C44D36B6180F3E3600EE9F5E /* alarm@2x.png in Resources */,
 				C4C41A1E15F1404000882416 /* StatusViewControllerLandscape.xib in Resources */,
 				C4C41A3715F1445400882416 /* chimes.caf in Resources */,
 				C4C41A3815F1445400882416 /* doorbell.caf in Resources */,
 				C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */,
+				C44D36C6180F3E3600EE9F5E /* feedback@2x.png in Resources */,
 				C4C41A3A15F1445400882416 /* polyphonic2.caf in Resources */,
 				C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */,
+				C44D36BA180F3E3600EE9F5E /* cancel@2x.png in Resources */,
 				C4C41A3C15F1445400882416 /* ringtone2.caf in Resources */,
+				C44D36DB180F3E5000EE9F5E /* procedure.png in Resources */,
 				C4C41A3D15F1445400882416 /* xylophone.caf in Resources */,
 				C491AE5F15F15B8500EB1CF8 /* OtherMedsDetailViewController.xib in Resources */,
 				C491AE6415F167BE00EB1CF8 /* ProcedureDetailViewController.xib in Resources */,
 				C4D6B4C615F237C3003C7AB5 /* ClinicsDetailViewController.xib in Resources */,
 				C48A90CD15F67AD300640664 /* stribild.png in Resources */,
+				C44D36DE180F3E5000EE9F5E /* results@2x.png in Resources */,
 				C440848A15FB5817007F4A7D /* PreviousMedViewController.xib in Resources */,
 				C4FCF922161376AA008F81A0 /* Default-568h@2x.png in Resources */,
 				C4FCF92416137993008F81A0 /* NewStatusViewController_iPhone5.xib in Resources */,
@@ -2284,6 +2419,7 @@
 				C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */,
 				C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */,
 				C48A513C140BFD89004AE872 /* MainWindow.xib in Resources */,
+				C44D36D7180F3E5000EE9F5E /* menu.png in Resources */,
 				C456C459176C5CBE00053621 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

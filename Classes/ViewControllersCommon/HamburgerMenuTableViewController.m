@@ -12,6 +12,8 @@
 #import "GeneralSettings.h"
 #import "Constants.h"
 #import "Menus.h"
+#import "UILabel+Standard.h"
+#import "UIFont+Standard.h"
 
 @interface HamburgerMenuTableViewController ()
 @property (nonatomic, strong) NSArray *menus;
@@ -24,12 +26,19 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = DEFAULT_BACKGROUND;
-    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
+    [self setTitleViewWithTitle:NSLocalizedString(@"Menu", nil)];
+    [self disableRightBarButtons];
+//    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                              target:self action:@selector(cancel)];
     
     self.menus = [Menus hamburgerMenus];
+}
+
+- (void)goToPOZSite
+{
+    NSLog(@"navigation button clicked");
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,5 +151,22 @@
     }];
 }
 
+#pragma mark - override the notification handlers
+- (void)reloadSQLData:(NSNotification *)notification
+{
+}
+- (void)startAnimation:(NSNotification *)notification
+{
+}
+- (void)stopAnimation:(NSNotification *)notification
+{
+}
+- (void)handleError:(NSNotification *)notification
+{
+}
+
+- (void)handleStoreChanged:(NSNotification *)notification
+{
+}
 
 @end

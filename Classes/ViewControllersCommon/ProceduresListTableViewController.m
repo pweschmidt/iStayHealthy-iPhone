@@ -26,7 +26,6 @@
     [super viewDidLoad];
     self.procedures = [NSArray array];//init with empty array
     [self setTitleViewWithTitle:NSLocalizedString(@"Illness", nil)];
-//    self.navigationItem.title = NSLocalizedString(@"Illness/Procedures", nil);
 }
 
 - (void)didReceiveMemoryWarning

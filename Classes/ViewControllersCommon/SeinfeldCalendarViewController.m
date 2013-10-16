@@ -40,7 +40,6 @@
     [super viewDidLoad];
     [self datesFromArchive];
     [self setTitleViewWithTitle:NSLocalizedString(@"Medication Diary", nil)];
-//    self.navigationItem.title = NSLocalizedString(@"Medication Diary", nil);
     CGFloat xOffset = 0;
     CGFloat yScrollOffset = 95;
     CGFloat scrollHeight = self.view.frame.size.height - 188;

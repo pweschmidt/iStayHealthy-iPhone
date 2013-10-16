@@ -29,7 +29,6 @@
     [self setTitleViewWithTitle:NSLocalizedString(@"Side Effects", nil)];
     self.effects = [NSArray array];
     self.currentMeds = [NSArray array];
-//    self.navigationItem.title = NSLocalizedString(@"Side Effects", nil);
 }
 
 - (void)didReceiveMemoryWarning

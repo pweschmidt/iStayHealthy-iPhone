@@ -32,7 +32,6 @@
     self.currentMeds = [NSArray array];
     self.previousMeds = [NSArray array];
     [self setTitleViewWithTitle:NSLocalizedString(@"HIV Medications", nil)];
-//    self.navigationItem.title = NSLocalizedString(@"HIV Medications", nil);
 }
 
 - (void)didReceiveMemoryWarning

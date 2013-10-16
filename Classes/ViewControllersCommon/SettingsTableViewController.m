@@ -37,8 +37,7 @@
 {
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
-    self.navigationItem.title = NSLocalizedString(@"Password", @"Password");
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
+    [self setTitleViewWithTitle:NSLocalizedString(@"Password", nil)];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                              target:self action:@selector(done:)];
@@ -66,11 +65,6 @@
     self.contentViewsDictionary = [NSMutableDictionary dictionary];
     self.textViews = [NSMutableDictionary dictionary];
     self.passwordDictionary = [NSMutableDictionary dictionary];
-}
-
-- (void)settingsMenu
-{
-    [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kMenuController];
 }
 
 
@@ -344,6 +338,25 @@
         return NO;
     }
     return YES;
+}
+
+
+#pragma mark - override the notification handlers
+- (void)reloadSQLData:(NSNotification *)notification
+{
+}
+- (void)startAnimation:(NSNotification *)notification
+{
+}
+- (void)stopAnimation:(NSNotification *)notification
+{
+}
+- (void)handleError:(NSNotification *)notification
+{
+}
+
+- (void)handleStoreChanged:(NSNotification *)notification
+{
 }
 
 @end

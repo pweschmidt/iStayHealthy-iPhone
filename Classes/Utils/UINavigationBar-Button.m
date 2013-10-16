@@ -7,7 +7,9 @@
 //
 
 #import "UINavigationBar-Button.h"
-
+#import "UIFont+Standard.h"
+#import "Constants.h"
+#import "GeneralSettings.h"
 @implementation UINavigationBar(Button)
 - (UIButton *)buttonWithImageName:(NSString *)name
 {
@@ -33,13 +35,14 @@
 
 - (void)addButtonWithTitle:(NSString *)title target:(id)target selector:(SEL)selector
 {
+    self.translucent = NO;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     CGSize size = self.bounds.size;
     float xOffset = size.width/2 - 100;
     CGRect buttonFrame = CGRectMake(xOffset, CGRectGetMinY(self.bounds) + 2, 190, 40);
     button.frame = buttonFrame;
     
-    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon-rounded-small-flat.png"]];
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_29.png"]];
     
     iconView.frame = CGRectMake(1, 7, 29, 29);
     
@@ -50,12 +53,12 @@
     UILabel *label = [[UILabel alloc]init];
     label.frame = CGRectMake(30, 0, 114, 44);
     label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
+    label.textColor = TEXTCOLOUR;
     label.text = NSLocalizedString(title, title);
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.numberOfLines = 0;
-    label.lineBreakMode = UILineBreakModeWordWrap;
-    label.font = [UIFont boldSystemFontOfSize:20];
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.font = [UIFont fontWithType:Bold size:20];
     
     [button addSubview:label];
     [button addSubview:iconView];

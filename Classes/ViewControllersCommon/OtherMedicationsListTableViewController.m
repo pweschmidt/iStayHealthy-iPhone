@@ -29,7 +29,6 @@
     [super viewDidLoad];
     self.otherMediction = [NSArray array];//init with empty array
     [self setTitleViewWithTitle:NSLocalizedString(@"Other Medication", nil)];
-//    self.navigationItem.title = NSLocalizedString(@"Other Medication", nil);
 }
 
 - (void)didReceiveMemoryWarning

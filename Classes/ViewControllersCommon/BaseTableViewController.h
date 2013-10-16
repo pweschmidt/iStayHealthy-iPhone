@@ -10,6 +10,7 @@
 #import "BaseViewControllerDelegate.h"
 #import "ContainerViewControllerDelegate.h"
 #import "UIFont+Standard.h"
+#import "UINavigationBar-Button.h"
 @class CustomTableView;
 
 @interface BaseTableViewController : UITableViewController <BaseViewControllerDelegate, ContainerViewControllerDelegate, UIAlertViewDelegate>
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
 @property (nonatomic, strong) NSManagedObject *markedObject;
 @property (nonatomic, strong) NSIndexPath     *markedIndexPath;
+- (void)disableRightBarButtons;
 - (void)configureIPadMenus;
 - (void)settingsMenu;
 - (void)addMenu;
@@ -36,4 +38,6 @@
 - (void)removeSQLEntry;
 - (void)setTitleViewWithTitle:(NSString *)titleString;
 - (UIImage *)blankImage;
+- (void)goToPOZSite;
+
 @end

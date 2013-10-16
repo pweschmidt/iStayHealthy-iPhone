@@ -7,6 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SettingsTableViewController : UITableViewController <UITextFieldDelegate>
+#import "BaseTableViewController.h"
+@interface SettingsTableViewController : BaseTableViewController <UITextFieldDelegate>
 @end

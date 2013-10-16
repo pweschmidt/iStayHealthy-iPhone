@@ -27,7 +27,6 @@
     [super viewDidLoad];
     self.results = [NSArray array];//init with empty array
     [self setTitleViewWithTitle:NSLocalizedString(@"Results", nil)];
-//    self.navigationItem.title = NSLocalizedString(@"Results", nil);
 }
 
 - (void)didReceiveMemoryWarning

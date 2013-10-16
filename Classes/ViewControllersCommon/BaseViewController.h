@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewControllerDelegate.h"
 #import "ContainerViewControllerDelegate.h"
+#import "UINavigationBar-Button.h"
 @class CustomTableView;
 
 @interface BaseViewController : UIViewController <BaseViewControllerDelegate, ContainerViewControllerDelegate>
@@ -25,10 +26,13 @@
 @property (nonatomic, strong) CustomTableView * iPadAddMenuView;
 @property (nonatomic, strong) UIBarButtonItem * hamburgerMenuBarButton;
 @property (nonatomic, strong) UIBarButtonItem * addMenuBarButton;
+- (void)disableRightBarButtons;
 - (void)configureIPadMenus;
 - (void)settingsMenu;
 - (void)addMenu;
 - (void)addButtonPressed:(id)sender;
 - (UIImage *)blankImage;
 - (void)setTitleViewWithTitle:(NSString *)titleString;
+- (void)goToPOZSite;
+
 @end

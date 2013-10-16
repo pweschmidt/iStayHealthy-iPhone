@@ -12,6 +12,7 @@
 #import "GeneralSettings.h"
 #import "Utilities.h"
 #import "CoreDataManager.h"
+#import "UIFont+Standard.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
 
@@ -27,6 +28,9 @@
 {
     NSLog(@"We got to the new CentralAppDelegate");
     self.window.tintColor = TEXTCOLOUR;
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: TEXTCOLOUR, NSFontAttributeName : [UIFont fontWithType:Standard size:17]}];
+    
     self.containerController = (ContainerViewController *)self.window.rootViewController;
     [[CoreDataManager sharedInstance] setUpCoreDataManager];
     [[CoreDataManager sharedInstance] setUpStoreWithError:^(NSError *error) {
