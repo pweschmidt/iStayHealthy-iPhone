@@ -38,4 +38,5 @@
 + (NSString *)imageNameFromMedName:(NSString *)medName;
 + (UIImage *)imageFromMedName:(NSString *)medName;
 + (NSDictionary *)resultsTypeDictionary;
++ (NSDictionary *)colourTypeDictionary;
 @end

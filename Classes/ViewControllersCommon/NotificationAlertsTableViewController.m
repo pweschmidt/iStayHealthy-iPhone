@@ -24,7 +24,8 @@
 {
     [super viewDidLoad];
     self.notifications = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];;
-    self.navigationItem.title = NSLocalizedString(@"Alerts", nil);
+    [self setTitleViewWithTitle:NSLocalizedString(@"Alerts", nil)];
+//    self.navigationItem.title = NSLocalizedString(@"Alerts", nil);
     self.markedNotification = nil;
 }
 

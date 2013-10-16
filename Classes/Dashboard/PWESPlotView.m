@@ -9,6 +9,9 @@
 #import "PWESPlotView.h"
 #import "PWESAxis.h"
 #import "PWESChartsConstants.h"
+#import "GeneralSettings.h"
+#import "Constants.h"
+#import "UIFont+Standard.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PWESPlotView ()
@@ -52,6 +55,18 @@
 
 - (void)configurePlotView
 {
+    if (self.ntuple.isEmpty)
+    {
+        UILabel *emptyLabel = [[UILabel alloc] init];
+        emptyLabel.frame = CGRectMake(self.bounds.origin.x + self.bounds.size.width/2 - 100, self.bounds.origin.y + self.bounds.size.height/2 - 50 , 200, 100);
+        emptyLabel.backgroundColor = [UIColor clearColor];
+        emptyLabel.textAlignment = NSTextAlignmentCenter;
+        emptyLabel.textColor = TEXTCOLOUR;
+        emptyLabel.font = [UIFont fontWithType:Light size:20];
+        emptyLabel.text = NSLocalizedString(@"No results available", nil);
+        [self addSubview:emptyLabel];
+        return;
+    }
 //    self.layer.backgroundColor = [UIColor blueColor].CGColor;
     CGRect yAxisFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
 

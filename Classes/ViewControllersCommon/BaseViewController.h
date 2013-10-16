@@ -30,4 +30,5 @@
 - (void)addMenu;
 - (void)addButtonPressed:(id)sender;
 - (UIImage *)blankImage;
+- (void)setTitleViewWithTitle:(NSString *)titleString;
 @end

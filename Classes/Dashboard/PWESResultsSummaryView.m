@@ -13,6 +13,7 @@
 #import "PWESIndicatorView.h"
 #import "Results.h"
 #import "Utilities.h"
+#import "UIFont+Standard.h"
 @implementation PWESResultsSummaryView
 
 - (id)initWithFrame:(CGRect)frame
@@ -51,7 +52,7 @@
     CGRect indicatorFrame       = CGRectMake(indicatorOffsetX, yOffset + 10, componentWidth-10, totalHeight - 20);
     
     
-    UIFont *font = [UIFont boldSystemFontOfSize:13];
+    UIFont *font = [UIFont fontWithType:Bold size:13];
     
     UIView *titleView           = [[UIView alloc] initWithFrame:titleRect];
     titleView.backgroundColor   = [UIColor clearColor];
@@ -62,6 +63,8 @@
     NSDictionary *typeDictionary = [Utilities resultsTypeDictionary];
     titleLabel.text             = [typeDictionary objectForKey:tuple.type];
     [titleView addSubview:titleLabel];
+    NSDictionary *colourDictionary = [Utilities colourTypeDictionary];
+    titleLabel.textColor        = [colourDictionary objectForKey:tuple.type];
     [self addSubview:titleView];
     
     UIView *valueView           = [[UIView alloc] initWithFrame:valueRect];
@@ -72,7 +75,7 @@
 
     if (0 == tuple.valueTuple.count)
     {
-        valueLabel.text = @"no results";
+        valueLabel.text = @"";
     }
     else
     {

@@ -54,6 +54,8 @@
 		C4574ADC14938F7E00793164 /* DosageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4574ADE14938F7E00793164 /* DosageCell.xib */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
 		C457BCDA17F8585F0020F29E /* CalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C457BCD917F8585F0020F29E /* CalendarView.m */; };
+		C4595942180EF8D50082559E /* pozicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4595940180EF8D50082559E /* pozicon.png */; };
+		C4595943180EF8D50082559E /* pozicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4595941180EF8D50082559E /* pozicon@2x.png */; };
 		C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E417EEE3BA004E13C7 /* DateView.m */; };
 		C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */; };
 		C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27BA17DB3DC2001F6831 /* BaseEditTableViewController.m */; };
@@ -370,7 +372,6 @@
 		C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE811D1306D9890097B903 /* AudioToolbox.framework */; };
 		C4EFD405154D71A90059A2BA /* pozbannerEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EFD403154D71A90059A2BA /* pozbannerEmpty.png */; };
 		C4EFD406154D71A90059A2BA /* pozbannerEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EFD404154D71A90059A2BA /* pozbannerEmpty@2x.png */; };
-		C4F337C414D42C7C00C4F573 /* pozicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F337C314D42C7C00C4F573 /* pozicon.png */; };
 		C4F337C614D42C8D00C4F573 /* istayhealthypozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */; };
 		C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */; };
 		C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */; };
@@ -380,7 +381,6 @@
 		C4FCBC43152F210900E3F082 /* cd4PercentOn-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC1C152F210800E3F082 /* cd4PercentOn-small@2x.png */; };
 		C4FCBC44152F210900E3F082 /* cd4Off-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC1D152F210800E3F082 /* cd4Off-small@2x.png */; };
 		C4FCBC45152F210900E3F082 /* cd4PercentOff-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC1E152F210800E3F082 /* cd4PercentOff-small@2x.png */; };
-		C4FCBC46152F210900E3F082 /* pozicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC1F152F210800E3F082 /* pozicon@2x.png */; };
 		C4FCBC47152F210900E3F082 /* combi-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC20152F210800E3F082 /* combi-small@2x.png */; };
 		C4FCBC48152F210900E3F082 /* cross-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC21152F210800E3F082 /* cross-small@2x.png */; };
 		C4FCBC49152F210900E3F082 /* list-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCBC22152F210800E3F082 /* list-small@2x.png */; };
@@ -526,6 +526,8 @@
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
 		C457BCD817F8585F0020F29E /* CalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarView.h; path = Views/CalendarView.h; sourceTree = "<group>"; };
 		C457BCD917F8585F0020F29E /* CalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarView.m; path = Views/CalendarView.m; sourceTree = "<group>"; };
+		C4595940180EF8D50082559E /* pozicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pozicon.png; path = Classes/Assets/pozicon.png; sourceTree = "<group>"; };
+		C4595941180EF8D50082559E /* pozicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pozicon@2x.png"; path = "Classes/Assets/pozicon@2x.png"; sourceTree = "<group>"; };
 		C45A98E317EEE3BA004E13C7 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateView.h; path = Views/DateView.h; sourceTree = "<group>"; };
 		C45A98E417EEE3BA004E13C7 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateView.m; path = Views/DateView.m; sourceTree = "<group>"; };
 		C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsView_iPhone.h; path = Views/ResultsView_iPhone.h; sourceTree = "<group>"; };
@@ -1046,7 +1048,6 @@
 		C4EE811D1306D9890097B903 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C4EFD403154D71A90059A2BA /* pozbannerEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pozbannerEmpty.png; sourceTree = "<group>"; };
 		C4EFD404154D71A90059A2BA /* pozbannerEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pozbannerEmpty@2x.png"; sourceTree = "<group>"; };
-		C4F337C314D42C7C00C4F573 /* pozicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pozicon.png; sourceTree = "<group>"; };
 		C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = istayhealthypozbanner.png; sourceTree = "<group>"; };
 		C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1056,7 +1057,6 @@
 		C4FCBC1C152F210800E3F082 /* cd4PercentOn-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cd4PercentOn-small@2x.png"; sourceTree = "<group>"; };
 		C4FCBC1D152F210800E3F082 /* cd4Off-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cd4Off-small@2x.png"; sourceTree = "<group>"; };
 		C4FCBC1E152F210800E3F082 /* cd4PercentOff-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cd4PercentOff-small@2x.png"; sourceTree = "<group>"; };
-		C4FCBC1F152F210800E3F082 /* pozicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pozicon@2x.png"; sourceTree = "<group>"; };
 		C4FCBC20152F210800E3F082 /* combi-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-small@2x.png"; sourceTree = "<group>"; };
 		C4FCBC21152F210800E3F082 /* cross-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small@2x.png"; sourceTree = "<group>"; };
 		C4FCBC22152F210800E3F082 /* list-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-small@2x.png"; sourceTree = "<group>"; };
@@ -1545,6 +1545,8 @@
 				C481FD1C17FDEBDE0058EE9D /* icon_76_flat.png */,
 				C48B9BEA18094675007CF6DE /* icon_76_flat@2x.png */,
 				C481FD1E17FDEBDE0058EE9D /* icon_120_flat.png */,
+				C4595940180EF8D50082559E /* pozicon.png */,
+				C4595941180EF8D50082559E /* pozicon@2x.png */,
 			);
 			name = Assets;
 			path = ..;
@@ -1591,7 +1593,6 @@
 				C4FCBC1C152F210800E3F082 /* cd4PercentOn-small@2x.png */,
 				C4FCBC1D152F210800E3F082 /* cd4Off-small@2x.png */,
 				C4FCBC1E152F210800E3F082 /* cd4PercentOff-small@2x.png */,
-				C4FCBC1F152F210800E3F082 /* pozicon@2x.png */,
 				C4FCBC20152F210800E3F082 /* combi-small@2x.png */,
 				C4FCBC21152F210800E3F082 /* cross-small@2x.png */,
 				C4FCBC22152F210800E3F082 /* list-small@2x.png */,
@@ -1625,7 +1626,6 @@
 				C4FCBC42152F210800E3F082 /* status-small@2x.png */,
 				C4C26D7F14FEC06D00CDA2B4 /* icon-rounded-small-flat.png */,
 				C4F337C514D42C8D00C4F573 /* istayhealthypozbanner.png */,
-				C4F337C314D42C7C00C4F573 /* pozicon.png */,
 				C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */,
 				C4959F6B14B883F0000B3F10 /* pozbanner.png */,
 				C44587BC148A691B00F453FB /* iconroundedsmall.png */,
@@ -2089,6 +2089,7 @@
 				C4952D2117F21DDB0022EFEF /* README.md in Resources */,
 				C4C0154A13425268005E889D /* crixivan.png in Resources */,
 				C4C0154B13425268005E889D /* didanosine.png in Resources */,
+				C4595942180EF8D50082559E /* pozicon.png in Resources */,
 				C481FD2117FDEBDE0058EE9D /* icon_57_flat.png in Resources */,
 				C4C0154C13425268005E889D /* emtriva.png in Resources */,
 				C4C0154D13425268005E889D /* epivir.png in Resources */,
@@ -2159,14 +2160,12 @@
 				C48B9BEB18094675007CF6DE /* icon_40_flat@2x.png in Resources */,
 				C4959F6914B883F0000B3F10 /* pozbanner.png in Resources */,
 				C4CA33CB14CC1AB4000C7BE3 /* smartandstrong.png in Resources */,
-				C4F337C414D42C7C00C4F573 /* pozicon.png in Resources */,
 				C48B9BEC18094675007CF6DE /* icon_50_flat@2x.png in Resources */,
 				C4F337C614D42C8D00C4F573 /* istayhealthypozbanner.png in Resources */,
 				C4C26D8014FEC06D00CDA2B4 /* icon-rounded-small-flat.png in Resources */,
 				C4FCBC43152F210900E3F082 /* cd4PercentOn-small@2x.png in Resources */,
 				C4FCBC44152F210900E3F082 /* cd4Off-small@2x.png in Resources */,
 				C4FCBC45152F210900E3F082 /* cd4PercentOff-small@2x.png in Resources */,
-				C4FCBC46152F210900E3F082 /* pozicon@2x.png in Resources */,
 				C4FCBC47152F210900E3F082 /* combi-small@2x.png in Resources */,
 				C4FCBC48152F210900E3F082 /* cross-small@2x.png in Resources */,
 				C4FCBC49152F210900E3F082 /* list-small@2x.png in Resources */,
@@ -2221,6 +2220,7 @@
 				C4C4192615F1383000882416 /* ClinicAddressCell.xib in Resources */,
 				C4C4192815F1383000882416 /* ClinicCell.xib in Resources */,
 				C4C4192D15F1383000882416 /* HIVMedListCell.xib in Resources */,
+				C4595943180EF8D50082559E /* pozicon@2x.png in Resources */,
 				C48B9BFB18094972007CF6DE /* Default-1024h@2x.png in Resources */,
 				C4C4192F15F1383000882416 /* HIVMedSupportCell.xib in Resources */,
 				C48B9BED18094675007CF6DE /* icon_57_flat@2x.png in Resources */,

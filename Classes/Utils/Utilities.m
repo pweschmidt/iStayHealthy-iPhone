@@ -8,6 +8,8 @@
 
 #import "Utilities.h"
 #import "Constants.h"
+#import "GeneralSettings.h"
+#import "ChartSettings.h"
 #import <math.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -420,6 +422,7 @@
                        kBloodPressure : NSLocalizedString(kBloodPressure, nil),
                        kOxygenLevel : NSLocalizedString(kOxygenLevel, nil),
                        kWeight : NSLocalizedString(kWeight, nil),
+                       kBMI : NSLocalizedString(kBMI, nil),
                        kHemoglobulin : NSLocalizedString(kHemoglobulin, nil),
                        kPlatelet : NSLocalizedString(kPlatelet, nil),
                        kWhiteBloodCells : NSLocalizedString(kWhiteBloodCells, nil),
@@ -437,6 +440,47 @@
                        };
     });
     return dictionary;
+}
+
++ (NSDictionary *)colourTypeDictionary
+{
+    static dispatch_once_t onceToken;
+    static NSDictionary *colourDictionary = nil;
+    dispatch_once (&onceToken, ^{
+        colourDictionary = @{
+                       kCD4 : DARK_YELLOW,
+                       kViralLoad : DARK_BLUE,
+                       kCD4Percent : DARK_YELLOW,
+                       kHepCViralLoad : DARK_RED,
+                       kGlucose : DARK_RED,
+                       kTotalCholesterol : DARK_RED,
+                       kLDL : DARK_RED,
+                       kHDL : DARK_RED,
+                       kTriglyceride : DARK_RED,
+                       kHeartRate : DARK_GREEN,
+                       kSystole : DARK_GREEN,
+                       kDiastole : DARK_GREEN,
+                       kBloodPressure : DARK_GREEN,
+                       kOxygenLevel : DARK_GREEN,
+                       kWeight : DARK_GREEN,
+                       kBMI : DARK_GREEN,
+                       kHemoglobulin : DARK_RED,
+                       kPlatelet : DARK_RED,
+                       kWhiteBloodCells : DARK_RED,
+                       kRedBloodCells : DARK_RED,
+                       kCholesterolRatio : DARK_RED,
+                       kCardiacRiskFactor : DARK_GREEN,
+                       kCholesterolRatio : DARK_RED,
+                       kLiverAlanineTransaminase : DARK_RED,
+                       kLiverAspartateTransaminase : DARK_RED,
+                       kLiverAlkalinePhosphatase : DARK_RED,
+                       kLiverAlbumin : DARK_RED,
+                       kLiverAlanineTotalBilirubin : DARK_RED,
+                       kLiverAlanineDirectBilirubin : DARK_RED,
+                       kLiverGammaGlutamylTranspeptidase : DARK_RED
+                       };
+    });
+    return colourDictionary;
 }
 
 

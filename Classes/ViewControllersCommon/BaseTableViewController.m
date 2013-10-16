@@ -17,6 +17,7 @@
 #import "CustomTableView.h"
 #import "Utilities.h"
 #import "Menus.h"
+#import "UILabel+Standard.h"
 
 @interface BaseTableViewController ()
 @property (nonatomic, assign) BOOL hamburgerMenuIsShown;
@@ -52,6 +53,49 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
     }
     [self registerObservers];
+}
+
+- (void)setTitleViewWithTitle:(NSString *)titleString
+{
+    if (nil == titleString)
+    {
+        return;
+    }
+    self.navigationItem.titleView = nil;
+    CGRect navigationFrame = self.navigationController.navigationBar.bounds;
+    CGRect titleFrame = CGRectMake(navigationFrame.origin.x + navigationFrame.size.width/4, navigationFrame.origin.y, navigationFrame.size.width/2, navigationFrame.size.height);
+    UIImage *pozIcon = [UIImage imageNamed:@"pozicon.png"];
+    UIImage *icon = [UIImage imageNamed:@"icon_29.png"];
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:titleFrame];
+    titleView.backgroundColor = [UIColor clearColor];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = titleFrame;
+    button.backgroundColor = [UIColor clearColor];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:icon];
+    logoView.frame = CGRectMake(0, titleFrame.origin.y + 29/2, 29, 29);
+    logoView.backgroundColor = [UIColor clearColor];
+    UIImageView *pozView = [[UIImageView alloc] initWithImage:pozIcon];
+    pozView.frame = CGRectMake(titleFrame.size.width - 45, titleFrame.origin.y + 29/2, 45, 29);
+    pozView.backgroundColor = [UIColor clearColor];
+    UILabel *label = [UILabel standardLabel];
+    label.text = titleString;
+    label.frame = CGRectMake(titleFrame.origin.x + 29, 0, titleFrame.size.width - 29 - 45, titleFrame.size.height);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.numberOfLines = 0;
+    
+    [button addSubview:logoView];
+    [button addSubview:label];
+    [button addSubview:pozView];
+    [button addTarget:self action:@selector(goToPOZSite) forControlEvents:UIControlEventTouchUpInside];
+    [titleView addSubview:button];
+    self.navigationItem.titleView = titleView;
+}
+
+- (void)goToPOZSite
+{
+    
 }
 
 - (void)didReceiveMemoryWarning

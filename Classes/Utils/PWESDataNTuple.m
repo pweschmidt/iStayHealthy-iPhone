@@ -85,7 +85,7 @@
 
 - (BOOL)isEmpty
 {
-    return (0 == self.tuples.count);
+    return (0 == self.dateLine.count);
 }
 
 #pragma mark private methods

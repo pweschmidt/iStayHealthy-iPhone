@@ -21,7 +21,8 @@
 {
     [super viewDidLoad];
     self.appointments = [NSArray array];//init with empty array
-    self.navigationItem.title = NSLocalizedString(@"Appointments", nil);
+    [self setTitleViewWithTitle:NSLocalizedString(@"Appointments", nil)];
+//    self.navigationItem.title = NSLocalizedString(@"Appointments", nil);
 }
 
 - (void)didReceiveMemoryWarning

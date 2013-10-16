@@ -34,5 +34,6 @@
 - (void)addButtonPressed:(id)sender;
 - (void)showDeleteAlertView;
 - (void)removeSQLEntry;
+- (void)setTitleViewWithTitle:(NSString *)titleString;
 - (UIImage *)blankImage;
 @end

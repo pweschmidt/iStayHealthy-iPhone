@@ -28,7 +28,8 @@
     [super viewDidLoad];
     self.missed = [NSArray array];
     self.currentMeds = [NSArray array];
-    self.navigationItem.title = NSLocalizedString(@"Missed Medication", nil);
+    [self setTitleViewWithTitle:NSLocalizedString(@"Missed Medication", nil)];
+//    self.navigationItem.title = NSLocalizedString(@"Missed Medication", nil);
 }
 
 - (void)didReceiveMemoryWarning
