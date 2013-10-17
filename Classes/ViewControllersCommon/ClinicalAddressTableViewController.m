@@ -69,8 +69,16 @@
     CGFloat rowHeight = self.tableView.rowHeight - 2;
     UILabel *name = [UILabel standardLabel];
     name.text = contact.ClinicName;
-    name.frame = CGRectMake(20, 1, 170, rowHeight);
-    [cell.contentView addSubview:name];    
+    name.frame = CGRectMake(20+rowHeight+10, 1, 170, rowHeight);
+    
+    UIImageView *medImageView = [[UIImageView alloc] init];
+    medImageView.frame = CGRectMake(20, 1, rowHeight, rowHeight);
+    medImageView.backgroundColor = [UIColor clearColor];
+    medImageView.image = [UIImage imageNamed:@"doctor.png"];
+
+    
+    [cell.contentView addSubview:name];
+    [cell.contentView addSubview:medImageView];
 }
 
 #pragma mark - Table view delegate

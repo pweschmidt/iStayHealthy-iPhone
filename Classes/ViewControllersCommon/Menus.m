@@ -182,5 +182,32 @@
     return nil;
 }
 
++ (NSDictionary *)menuImages
+{
+    static dispatch_once_t onceToken;
+    static NSDictionary *colourDictionary = nil;
+    dispatch_once (&onceToken, ^{
+        colourDictionary = @{
+                             kDashboardController : [UIImage imageNamed:@"charts.png"],
+                             kResultsController : [UIImage imageNamed:@"results.png"],
+                             kHIVMedsController : [UIImage imageNamed:@"combi.png"],
+                             kMissedController : [UIImage imageNamed:@"missed.png"],
+                             kAlertsController : [UIImage imageNamed:@"alarm.png"],
+                             kAppointmentsController : [UIImage imageNamed:@"appointments.png"],
+                             kClinicsController : [UIImage imageNamed:@"doctor.png"],
+                             kSideEffectsController : [UIImage imageNamed:@"sideeffects.png"],
+                             kDropboxController : [UIImage imageNamed:@"save.png"],
+                             kOtherMedsController : [UIImage imageNamed:@"cross.png"],
+                             kInfoController : [UIImage imageNamed:@"info.png"],
+                             kFeedbackController : [UIImage imageNamed:@"feedback.png"],
+                             kEmailController : [UIImage imageNamed:@"mail.png"],
+                             kProceduresController : [UIImage imageNamed:@"procedure.png"],
+                             kSettingsController : [UIImage imageNamed:@"lock.png"],
+                             kMedicationDiaryController : [UIImage imageNamed:@"diary.png"]
+                             };
+    });
+    return colourDictionary;
+    
+}
 
 @end

@@ -17,4 +17,5 @@
 + (NSString *)editControllerNameForRowIndexPath:(NSIndexPath *)indexPath
                                     ignoreFirst:(BOOL)ignoreFirst;
 
++ (NSDictionary *)menuImages;
 @end

@@ -47,7 +47,18 @@
     }
     else
     {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
+        UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
+        UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
+        menuView.backgroundColor = [UIColor clearColor];
+        menuView.frame = CGRectMake(0, 0, 20, 20);
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0, 20, 20);
+        button.backgroundColor = [UIColor clearColor];
+        [button addSubview:menuView];
+        [button addTarget:self action:@selector(settingsMenu) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.navigationItem.leftBarButtonItem = menuButton;
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
     }
     [self registerObservers];

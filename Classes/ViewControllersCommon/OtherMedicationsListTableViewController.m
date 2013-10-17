@@ -79,7 +79,7 @@
     nameLabel.textColor = TEXTCOLOUR;
     nameLabel.font = [UIFont systemFontOfSize:15];
 
-    UILabel *doseLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 1, 80, rowHeight)];
+    UILabel *doseLabel = [[UILabel alloc] initWithFrame:CGRectMake(190, 1, 40, rowHeight)];
     NSString *dose = [NSString stringWithFormat:@"%3.2f [%@]",[med.Dose floatValue],med.Unit];
     doseLabel.backgroundColor = [UIColor clearColor];
     doseLabel.text = dose;
@@ -87,9 +87,16 @@
     doseLabel.textAlignment = NSTextAlignmentJustified;
     doseLabel.font = [UIFont systemFontOfSize:10];
     
+    UIImageView *medImageView = [[UIImageView alloc] init];
+    medImageView.frame = CGRectMake(235, 1, rowHeight, rowHeight);
+    medImageView.backgroundColor = [UIColor clearColor];
+    medImageView.image = [UIImage imageNamed:@"cross.png"];
+    
+    
     [cell.contentView addSubview:dateView];
     [cell.contentView addSubview:nameLabel];
     [cell.contentView addSubview:doseLabel];
+    [cell.contentView addSubview:medImageView];
 }
 
 #pragma mark - Table view delegate

@@ -16,6 +16,7 @@
 @interface EditContactsTableViewController ()
 @property (nonatomic, strong) NSArray *editMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
+@property (nonatomic, strong) UIToolbar *toolbar;
 @end
 
 @implementation EditContactsTableViewController
@@ -26,6 +27,10 @@
     if (self.isEditMode)
     {
         self.navigationItem.title = NSLocalizedString(@"Edit Clinic", nil);
+        self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-44);
+        self.toolbar = [[UIToolbar alloc] init];
+        self.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+        [self.view addSubview:self.toolbar];
     }
     else
     {

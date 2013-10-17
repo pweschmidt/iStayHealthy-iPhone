@@ -40,7 +40,14 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     NSArray *barButtons = nil;
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(save:)];
+    UIImage *saveImage = [UIImage imageNamed:@"save.png"];
+    UIImageView *saveView = [[UIImageView alloc] initWithImage:saveImage];
+    saveView.backgroundColor = [UIColor clearColor];
+    saveView.frame = CGRectMake(0, 0, 20, 20);
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithCustomView:saveView];
+    [saveButton setTarget:self];
+    [saveButton setAction:@selector(save:)];
+//    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(save:)];
     if (self.isEditMode)
     {
         UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteObject:)];

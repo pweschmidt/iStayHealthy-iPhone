@@ -29,9 +29,19 @@
     [self setTitleViewWithTitle:NSLocalizedString(@"Menu", nil)];
     [self disableRightBarButtons];
 //    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                             target:self action:@selector(cancel)];
+    UIImage *menuImage = [UIImage imageNamed:@"cancel.png"];
+    UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
+    menuView.backgroundColor = [UIColor clearColor];
+    menuView.frame = CGRectMake(0, 0, 20, 20);
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 20, 20);
+    button.backgroundColor = [UIColor clearColor];
+    [button addSubview:menuView];
+    [button addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+//                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+//                                             target:self action:@selector(cancel)];
     
     self.menus = [Menus hamburgerMenus];
 }
@@ -61,18 +71,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"SettingsCell";
+    NSString *CellIdentifier = [NSString stringWithFormat:@"SettingsCell%d",indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [self.menus objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = TEXTCOLOUR;
-    cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.contentView.backgroundColor = [UIColor clearColor];
     cell.backgroundColor = [UIColor clearColor];
+    CGFloat offset = (self.tableView.rowHeight - 25 ) / 2;
+    
+    UILabel *label = [UILabel standardLabel];
+    label.frame = CGRectMake(60, 0, 200, self.tableView.rowHeight);
+    label.textAlignment = NSTextAlignmentLeft;
+    label.text = [self.menus objectAtIndex:indexPath.row];
+    [cell.contentView addSubview:label];
+    NSString *controllerName = [Menus
+                                controllerNameForRowIndexPath:indexPath
+                                ignoreFirst:NO];
+    if (nil != controllerName)
+    {
+        NSDictionary *images = [Menus menuImages];
+        UIImage *image = [images objectForKey:controllerName];
+        if (nil != image)
+        {
+            UIImageView *medImageView = [[UIImageView alloc] init];
+            medImageView.frame = CGRectMake(20, offset, 25, 25);
+            medImageView.backgroundColor = [UIColor clearColor];
+            medImageView.image = image;
+            [cell.contentView addSubview:medImageView];
+        }
+    }
+    
+    
+    
     return cell;
 }
 
