@@ -393,6 +393,7 @@
 		C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837EF16D10536002D934F /* Medication+Comparator.m */; };
 		C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F216D10554002D934F /* MissedMedication+Comparator.m */; };
 		C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F516D1057E002D934F /* Contacts+Comparator.m */; };
+		C4C8F9AF18118DD10011885D /* EditDashboardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C8F9AE18118DD10011885D /* EditDashboardTableViewController.m */; };
 		C4CA33CB14CC1AB4000C7BE3 /* smartandstrong.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */; };
 		C4CAC93817574F860010C165 /* EffectsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CAC93617574F860010C165 /* EffectsListController.m */; };
 		C4CAC93917574F860010C165 /* EffectsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4CAC93717574F860010C165 /* EffectsListController.xib */; };
@@ -1092,6 +1093,8 @@
 		C4C837F216D10554002D934F /* MissedMedication+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MissedMedication+Comparator.m"; path = "Utils/MissedMedication+Comparator.m"; sourceTree = "<group>"; };
 		C4C837F416D1057E002D934F /* Contacts+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contacts+Comparator.h"; path = "Utils/Contacts+Comparator.h"; sourceTree = "<group>"; };
 		C4C837F516D1057E002D934F /* Contacts+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contacts+Comparator.m"; path = "Utils/Contacts+Comparator.m"; sourceTree = "<group>"; };
+		C4C8F9AD18118DD10011885D /* EditDashboardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditDashboardTableViewController.h; path = ViewControllersiPhone/EditDashboardTableViewController.h; sourceTree = "<group>"; };
+		C4C8F9AE18118DD10011885D /* EditDashboardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditDashboardTableViewController.m; path = ViewControllersiPhone/EditDashboardTableViewController.m; sourceTree = "<group>"; };
 		C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartandstrong.png; sourceTree = "<group>"; };
 		C4CAC93517574F860010C165 /* EffectsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsListController.h; path = DetailViewControllers/EffectsListController.h; sourceTree = "<group>"; };
 		C4CAC93617574F860010C165 /* EffectsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectsListController.m; path = DetailViewControllers/EffectsListController.m; sourceTree = "<group>"; };
@@ -1540,6 +1543,8 @@
 				C45C27C917DB5A75001F6831 /* EditAppointmentsTableViewController.m */,
 				C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */,
 				C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */,
+				C4C8F9AD18118DD10011885D /* EditDashboardTableViewController.h */,
+				C4C8F9AE18118DD10011885D /* EditDashboardTableViewController.m */,
 				C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */,
 				C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */,
 				C45C27BF17DB5A1E001F6831 /* EditMissedMedsTableViewController.h */,
@@ -2585,6 +2590,7 @@
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
 				C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */,
+				C4C8F9AF18118DD10011885D /* EditDashboardTableViewController.m in Sources */,
 				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,
 				C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */,
