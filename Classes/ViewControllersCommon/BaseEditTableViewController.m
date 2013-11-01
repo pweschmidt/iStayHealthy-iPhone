@@ -30,7 +30,7 @@
         _isEditMode = (nil != managedObject);
         _date = [NSDate date];
         _datePickerIndexPath = nil;
-        _datePickerCellIsShown = NO;
+        _formatter = [[NSDateFormatter alloc] init];
     }
     return self;
 }
@@ -215,7 +215,6 @@
          forControlEvents:UIControlEventValueChanged];
 //    [mainContentView addSubview:datePicker];
 //    self.datePickerCellView = mainContentView;
-    self.datePicker = datePicker;
     [cell.contentView addSubview:datePicker];
 }
 
@@ -249,8 +248,11 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell.reuseIdentifier isEqualToString:kBaseDateCellRowIdentifier])
     {
-        self.datePickerCellIsShown = !self.datePickerCellIsShown;
         [self changeDate:indexPath];
+    }
+    else
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
@@ -267,16 +269,6 @@
     UIColor *backgroundColour = [UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:235.0f/255.0f alpha:0.8];
     
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        /*
-        if (nil != self.dateCellView)
-        {
-            self.dateCellView.backgroundColor = backgroundColour;
-        }
-        if (nil != self.datePickerIndexPath)
-        {
-            self.datePickerCellView.backgroundColor = backgroundColour;
-        }
-         */
         for (NSNumber *tagFieldNumber in self.textViews.allKeys)
         {
             UIView *view = [self.contentViewsDictionary objectForKey:tagFieldNumber];
@@ -300,16 +292,6 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        /*
-        if (nil != self.dateCellView)
-        {
-            self.dateCellView.backgroundColor = [UIColor whiteColor];
-        }
-        if (nil != self.datePickerIndexPath)
-        {
-            self.datePickerCellView.backgroundColor = [UIColor whiteColor];
-        }
-         */
         for (NSNumber *tagFieldNumber in self.textViews.allKeys)
         {
             UIView *view = [self.contentViewsDictionary objectForKey:tagFieldNumber];
@@ -402,26 +384,30 @@
 - (void)changeDate:(NSIndexPath *)indexPath
 {
     [self.tableView beginUpdates];
-    BOOL before = NO;   // indicates if the date picker is below "indexPath", help us determine which row to reveal
-    if ([self hasInlineDatePicker])
+    BOOL sameCellClicked = NO;
+    if (nil != self.datePickerIndexPath)
     {
-        before = self.datePickerIndexPath.row < indexPath.row;
+        sameCellClicked = (self.datePickerIndexPath.row - 1 == indexPath.row);
     }
-    
-//    BOOL sameCellClicked = (kBaseDateCellRow - 1 == indexPath.row);
-    
-    // remove any date picker cell if it exists
+
     if ([self hasInlineDatePicker])
     {
+        UITableViewCell *checkDatePickerCell = [self.tableView
+                                                cellForRowAtIndexPath:self.datePickerIndexPath];
+        id view = [checkDatePickerCell viewWithTag:kBaseDateCellTag];
+        if (nil != view)
+        {
+            UIDatePicker *pickerView = (UIDatePicker *)view;
+            [pickerView removeFromSuperview];
+        }
         [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.datePickerIndexPath.row inSection:0]]
                               withRowAnimation:UITableViewRowAnimationFade];
         self.datePickerIndexPath = nil;
     }
     
-    if (self.datePickerCellIsShown)
+    if (!sameCellClicked)
     {
-        // hide the old date picker and display the new one
-        NSInteger rowToReveal = (before ? indexPath.row - 1 : indexPath.row);
+        NSInteger rowToReveal = indexPath.row;
         NSIndexPath *indexPathToReveal = [NSIndexPath indexPathForRow:rowToReveal inSection:0];
         
         [self revealDatePickerForSelectedIndexPath:indexPathToReveal];
@@ -450,57 +436,43 @@
 
 - (BOOL)hasPickerForIndexPath:(NSIndexPath *)indexPath
 {
-    __block BOOL hasDatePicker = NO;
-    
     NSInteger targetedRow = indexPath.row;
     targetedRow++;
+    UITableViewCell *checkDatePickerCell = [self.tableView
+                                            cellForRowAtIndexPath:[NSIndexPath
+                                                                   indexPathForRow:targetedRow
+                                                                   inSection:0]];
     
-    UITableViewCell *checkDatePickerCell =
-    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow
-                                                             inSection:0]];
-    
-    NSArray *subViews = checkDatePickerCell.contentView.subviews;
-    [subViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:[UIDatePicker class]]) {
-            hasDatePicker = YES;
-        }
-    }];
-
-    /*
-    UIDatePicker *checkDatePicker = (UIDatePicker *)[checkDatePickerCell
-                                                     viewWithTag:kBaseDateCellTag];
-    
-    hasDatePicker = (checkDatePicker != nil);
-     */
-    return hasDatePicker;
+    UIDatePicker *datePicker = (UIDatePicker *)[checkDatePickerCell
+                                                viewWithTag:kBaseDateCellTag];
+    return (nil != datePicker);
 }
 
 - (void)updateDatePicker
 {
     if (self.datePickerIndexPath != nil)
     {
-        [self.datePicker setDate:self.date];
-        /*
-        UITableViewCell *associatedDatePickerCell = [self.tableView cellForRowAtIndexPath:self.datePickerIndexPath];
-        NSArray *subViews = associatedDatePickerCell.contentView.subviews;
-        __block UIDatePicker *targetedDatePicker = nil;
-        [subViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            if ([obj isKindOfClass:[UIDatePicker class]]) {
-                targetedDatePicker = (UIDatePicker *)obj;
+        UITableViewCell *checkDatePickerCell = [self.tableView
+                                                cellForRowAtIndexPath:self.datePickerIndexPath];
+        
+        UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+        datePicker.tag = kBaseDateCellTag;
+        datePicker.datePickerMode = UIDatePickerModeDate;
+        [datePicker addTarget:self
+                       action:@selector(dateAction:)
+             forControlEvents:UIControlEventValueChanged];
+        [checkDatePickerCell.contentView addSubview:datePicker];
+        
+        if (nil != datePicker)
+        {
+            UITableViewCell *dateLabelCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            UILabel *label = (UILabel *)[dateLabelCell viewWithTag:kBaseDateLabelTag];
+            if (nil != label)
+            {
+                [datePicker setDate:self.date animated:NO];
+                datePicker.datePickerMode = UIDatePickerModeDate;
             }
-        }];
-        if (targetedDatePicker != nil)
-        {
-            [targetedDatePicker setDate:self.date];
         }
-         */
-        /*
-        UIDatePicker *targetedDatePicker = (UIDatePicker *)[associatedDatePickerCell viewWithTag:kBaseDateCellTag];
-        if (targetedDatePicker != nil)
-        {
-            [targetedDatePicker setDate:self.date];
-        }
-         */
     }
 }
 
@@ -529,30 +501,14 @@
 
 - (IBAction)dateAction:(id)sender
 {
-    NSIndexPath *targetedCellIndexPath = nil;
-    
-    if ([self hasInlineDatePicker])
+    UITableViewCell *dateLabelCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    UILabel *label = (UILabel *)[dateLabelCell viewWithTag:kBaseDateLabelTag];
+    UIDatePicker *datePicker = (UIDatePicker *)sender;
+    self.date = datePicker.date;
+    if (nil != label)
     {
-        // inline date picker: update the cell's date "above" the date picker cell
-        //
-        targetedCellIndexPath = [NSIndexPath
-                                 indexPathForRow:self.datePickerIndexPath.row - 1
-                                 inSection:0];
+        label.text = [self.formatter stringFromDate:datePicker.date];
     }
-    else
-    {
-        // external date picker: update the current "selected" cell's date
-        targetedCellIndexPath = [self.tableView indexPathForSelectedRow];
-    }
-    
-    UIDatePicker *targetedDatePicker = sender;
-    
-    // update our data model
-//    NSMutableDictionary *itemData = self.dataArray[targetedCellIndexPath.row];
-//    [itemData setValue:targetedDatePicker.date forKey:kDateKey];
-    self.date = targetedDatePicker.date;
-    self.dateLabel.text = [targetedDatePicker.date stringFromCustomDate];
-    // update the cell's date string
 }
 
 

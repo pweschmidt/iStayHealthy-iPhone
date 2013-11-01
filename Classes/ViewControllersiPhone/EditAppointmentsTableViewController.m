@@ -178,7 +178,7 @@
     {
         if ([self hasInlineDatePicker])
         {
-            [self configureDatePickerCell:cell indexPath:indexPath];
+//            [self configureDatePickerCell:cell indexPath:indexPath];
         }
         else
         {

@@ -13,6 +13,7 @@
 #import "UIFont+Standard.h"
 
 #define kBaseDateCellTag 99
+#define kBaseDateLabelTag 101
 #define kBaseDateCellRow 0
 #define kBaseDatePickerRow 1
 #define kBaseDateCellRowHeight 255
@@ -20,14 +21,13 @@
 
 @interface BaseEditTableViewController : UITableViewController
     <UITextFieldDelegate, UIAlertViewDelegate>
+@property (nonatomic, strong) NSDateFormatter *formatter;
 @property (nonatomic, strong) NSMutableDictionary *contentViewsDictionary;
 @property (nonatomic, strong) NSMutableDictionary *textViews;
 @property (nonatomic, strong) NSMutableDictionary *inputTypeForTextView;
 @property (nonatomic, assign) BOOL isEditMode;
-@property (nonatomic, assign) BOOL datePickerCellIsShown;
 @property (nonatomic, strong) NSManagedObject *managedObject;
 @property (nonatomic, strong) NSDate * date;
-@property (nonatomic, strong) UIDatePicker *datePicker;
 @property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UIView *dateCellView;
