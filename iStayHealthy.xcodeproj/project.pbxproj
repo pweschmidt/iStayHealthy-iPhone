@@ -204,7 +204,6 @@
 		C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */; };
 		C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */; };
 		C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */; };
-		C4A899FD1748BC9D0048556A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A899FC1748BC9D0048556A /* DropboxSDK.framework */; };
 		C4ADD9D013890E54004445C0 /* Alarm-Clock-32.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CC13890E54004445C0 /* Alarm-Clock-32.png */; };
 		C4ADD9D113890E54004445C0 /* Alarm-Clock-55.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CD13890E54004445C0 /* Alarm-Clock-55.png */; };
 		C4ADD9D313890E54004445C0 /* redcross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4ADD9CF13890E54004445C0 /* redcross-small.png */; };
@@ -397,6 +396,7 @@
 		C4CA33CB14CC1AB4000C7BE3 /* smartandstrong.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */; };
 		C4CAC93817574F860010C165 /* EffectsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CAC93617574F860010C165 /* EffectsListController.m */; };
 		C4CAC93917574F860010C165 /* EffectsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4CAC93717574F860010C165 /* EffectsListController.xib */; };
+		C4CAD003182403D500DFB38A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4CAD002182403D500DFB38A /* DropboxSDK.framework */; };
 		C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */; };
 		C4CDED5F138D7CD7005BAC87 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CDED5E138D7CD7005BAC87 /* edurant.png */; };
 		C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CE682512DB070500FBCFF4 /* combi-small.png */; };
@@ -801,7 +801,6 @@
 		C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HamburgerMenuTableViewController.m; path = ViewControllersCommon/HamburgerMenuTableViewController.m; sourceTree = "<group>"; };
 		C4A8244B17AD4C5600E8CA8C /* AddMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMenuTableViewController.h; path = ViewControllersCommon/AddMenuTableViewController.h; sourceTree = "<group>"; };
 		C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddMenuTableViewController.m; path = ViewControllersCommon/AddMenuTableViewController.m; sourceTree = "<group>"; };
-		C4A899FC1748BC9D0048556A /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C4ACF8531476DD4D00FA5E80 /* iStayHealthy 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 11.xcdatamodel"; sourceTree = "<group>"; };
 		C4ADD9CC13890E54004445C0 /* Alarm-Clock-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Alarm-Clock-32.png"; path = "Images/Alarm-Clock-32.png"; sourceTree = "<group>"; };
 		C4ADD9CD13890E54004445C0 /* Alarm-Clock-55.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Alarm-Clock-55.png"; path = "Images/Alarm-Clock-55.png"; sourceTree = "<group>"; };
@@ -1099,6 +1098,7 @@
 		C4CAC93517574F860010C165 /* EffectsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsListController.h; path = DetailViewControllers/EffectsListController.h; sourceTree = "<group>"; };
 		C4CAC93617574F860010C165 /* EffectsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectsListController.m; path = DetailViewControllers/EffectsListController.m; sourceTree = "<group>"; };
 		C4CAC93717574F860010C165 /* EffectsListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EffectsListController.xib; path = Classes/DetailViewControllers/EffectsListController.xib; sourceTree = "<group>"; };
+		C4CAD002182403D500DFB38A /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-label-small.png"; sourceTree = "<group>"; };
 		C4CDED5E138D7CD7005BAC87 /* edurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edurant.png; path = Images/edurant.png; sourceTree = "<group>"; };
 		C4CE682512DB070500FBCFF4 /* combi-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-small.png"; sourceTree = "<group>"; };
@@ -1182,6 +1182,7 @@
 				C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */,
 				C4F337F114D43B6B00C4F573 /* libz.dylib in Frameworks */,
 				C4F337EF14D43B4700C4F573 /* SystemConfiguration.framework in Frameworks */,
+				C4CAD003182403D500DFB38A /* DropboxSDK.framework in Frameworks */,
 				C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */,
 				C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */,
 				C4574AE314939D2300793164 /* libm.dylib in Frameworks */,
@@ -1193,7 +1194,6 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
-				C4A899FD1748BC9D0048556A /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,9 +1326,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C4CAD002182403D500DFB38A /* DropboxSDK.framework */,
 				C41EC32C180ED0EE00A49AE4 /* CoreText.framework */,
 				C46C5E0017EDAF9C00866DBD /* AdSupport.framework */,
-				C4A899FC1748BC9D0048556A /* DropboxSDK.framework */,
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
 				C490250A14DD630700BDD906 /* CoreLocation.framework */,
@@ -2804,6 +2804,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"/Users/peterschmidt/Private/iStayHealthy-iPhone",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2845,6 +2846,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"/Users/peterschmidt/Private/iStayHealthy-iPhone",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2946,6 +2948,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"/Users/peterschmidt/Private/iStayHealthy-iPhone",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
