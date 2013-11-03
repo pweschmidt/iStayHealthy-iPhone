@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "BaseEditTableViewController.h"
 
-@class Results;
-
 @interface EditResultsTableViewController : BaseEditTableViewController
 @end

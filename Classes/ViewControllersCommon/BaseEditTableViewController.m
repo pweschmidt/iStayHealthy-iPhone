@@ -40,17 +40,15 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     NSArray *barButtons = nil;
-    UIImage *saveImage = [UIImage imageNamed:@"save.png"];
-    UIImageView *saveView = [[UIImageView alloc] initWithImage:saveImage];
-    saveView.backgroundColor = [UIColor clearColor];
-    saveView.frame = CGRectMake(0, 0, 20, 20);
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithCustomView:saveView];
-    [saveButton setTarget:self];
-    [saveButton setAction:@selector(save:)];
-//    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(save:)];
+    UIButton *save = [UIButton buttonWithType:UIButtonTypeCustom];
+    save.frame = CGRectMake(0, 0, 20, 20);
+    save.backgroundColor = [UIColor clearColor];
+    [save setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
+    [save addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
     if (self.isEditMode)
     {
-        UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteObject:)];
+        UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(showDeleteAlertView)];
         barButtons = @[saveButton, trashButton];
     }
     else
@@ -96,7 +94,6 @@
 {
     NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
     [defaultContext deleteObject:self.managedObject];
-    //    [self.tableView deleteRowsAtIndexPaths:@[self.markedIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
@@ -119,12 +116,22 @@
     }
     
     cell.contentView.backgroundColor = [UIColor clearColor];
+    
     UIView *mainContentView = [self.contentViewsDictionary objectForKey:taggedViewNumber];
     if (nil == mainContentView)
     {
         mainContentView = [[UIView alloc] initWithFrame:cell.contentView.frame];
         mainContentView.backgroundColor = [UIColor whiteColor];
         [self.contentViewsDictionary setObject:mainContentView forKey:taggedViewNumber];
+    }
+    else
+    {
+        NSArray *subviews = mainContentView.subviews;
+        [subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIView *view = (UIView *)obj;
+            [view removeFromSuperview];
+        }];
+        
     }
     
     UILabel *label = [[UILabel alloc] init];
