@@ -246,7 +246,10 @@
     
     if (0 == indexPath.section)
     {
-        [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
+        if (0 == indexPath.row)
+        {
+            [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
+        }
     }
     else
     {

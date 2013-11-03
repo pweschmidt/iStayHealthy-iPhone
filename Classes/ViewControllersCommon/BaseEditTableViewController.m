@@ -198,11 +198,11 @@
     label.frame = CGRectMake(50, 0, 200, cell.contentView.frame.size.height);
     label.backgroundColor = [UIColor clearColor];
     label.textColor = TEXTCOLOUR;
+    label.tag = kBaseDateLabelTag;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:15];
     label.text = [self.date stringFromCustomDate];
     [mainContentView addSubview:label];
-    self.dateLabel = label;
     [cell.contentView addSubview:mainContentView];
 }
 
@@ -515,6 +515,7 @@
     if (nil != label)
     {
         label.text = [self.formatter stringFromDate:datePicker.date];
+        [label setNeedsDisplay];
     }
 }
 
