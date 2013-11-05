@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1CB49C01-9291-4AD0-8687-733081DF9927</string>
+	<string>451367E8-707B-403A-B925-4CF97D3A96F4</string>
 	<key>IDESourceControlProjectName</key>
 	<string>iStayHealthy</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>DC77C86A-40CC-4F81-9629-050D9E4611F7</key>
-		<string>https://github.com/pweschmidt/iStayHealthy-iPhone.git</string>
+		<key>2F335483-ABF2-439C-A9AF-801EEA94D937</key>
+		<string>https://github.com/pweschmidt/iStayHealthy-iPhone</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iStayHealthy.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DC77C86A-40CC-4F81-9629-050D9E4611F7</key>
+		<key>2F335483-ABF2-439C-A9AF-801EEA94D937</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/pweschmidt/iStayHealthy-iPhone.git</string>
+	<string>https://github.com/pweschmidt/iStayHealthy-iPhone</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DC77C86A-40CC-4F81-9629-050D9E4611F7</string>
+	<string>2F335483-ABF2-439C-A9AF-801EEA94D937</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DC77C86A-40CC-4F81-9629-050D9E4611F7</string>
+			<string>2F335483-ABF2-439C-A9AF-801EEA94D937</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iStayHealthy-iPhone</string>
 		</dict>

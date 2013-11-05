@@ -9,6 +9,7 @@
 #import "BaseEditTableViewController.h"
 #import "Utilities.h"
 #import "NSDate+Extras.h"
+#import "UIFont+Standard.h"
 #import "CoreDataManager.h"
 
 @interface BaseEditTableViewController ()
@@ -139,7 +140,7 @@
     label.frame = CGRectMake(20, 0, 80, cell.contentView.frame.size.height);
     label.text = title;
     label.textColor = TEXTCOLOUR;
-    label.font = [UIFont systemFontOfSize:12];
+    label.font = [UIFont fontWithType:Standard size:standard];
     label.textAlignment = NSTextAlignmentLeft;
     label.numberOfLines = 0;
     label.lineBreakMode = NSLineBreakByWordWrapping;
@@ -184,34 +185,39 @@
                  dateType:(DateType)dateType
 {
     self.dateType = dateType;
+    [self setDateFormatter];
     cell.contentView.backgroundColor = [UIColor clearColor];
-    UIView *mainContentView = [[UIView alloc] initWithFrame:cell.contentView.frame];
-    mainContentView.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.backgroundColor = [UIColor clearColor];
-    imageView.frame = CGRectMake(20, 0, 44, 44);
-    imageView.image = [UIImage imageNamed:@"appointments.png"];
+    UILabel *dateLabel = [[UILabel alloc] init];
+    dateLabel.backgroundColor = [UIColor clearColor];
+    dateLabel.frame = CGRectMake(20, 0, 80, cell.contentView.frame.size.height);
+    dateLabel.textColor = TEXTCOLOUR;
+    dateLabel.font = [UIFont fontWithType:Standard size:standard];
+    dateLabel.textAlignment = NSTextAlignmentLeft;
+    [self setDateLabelTitle:dateLabel];
+    [cell.contentView addSubview:dateLabel];
     
-    [mainContentView addSubview:imageView];
-    UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(50, 0, 200, cell.contentView.frame.size.height);
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = TEXTCOLOUR;
-    label.tag = kBaseDateLabelTag;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:15];
-    label.text = [self.date stringFromCustomDate];
-    [mainContentView addSubview:label];
-    [cell.contentView addSubview:mainContentView];
+    
+    UILabel *label = (UILabel *)[cell viewWithTag:kBaseDateLabelTag];
+    if (nil == label)
+    {
+        label = [[UILabel alloc] init];
+        label.frame = CGRectMake(50, 0, 200, cell.contentView.frame.size.height);
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = TEXTCOLOUR;
+        label.tag = kBaseDateLabelTag;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:15];
+        label.text = [self.formatter stringFromDate:self.date];
+        [cell.contentView addSubview:label];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)configureDatePickerCell:(UITableViewCell *)cell
                       indexPath:(NSIndexPath *)indexPath
 {
     cell.contentView.backgroundColor = [UIColor clearColor];
-//    UIView *mainContentView = [[UIView alloc] initWithFrame:cell.contentView.frame];
-//    mainContentView.backgroundColor = [UIColor whiteColor];
     
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.tag = kBaseDateCellTag;
@@ -220,8 +226,6 @@
     [datePicker addTarget:self
                    action:@selector(dateAction:)
          forControlEvents:UIControlEventValueChanged];
-//    [mainContentView addSubview:datePicker];
-//    self.datePickerCellView = mainContentView;
     [cell.contentView addSubview:datePicker];
 }
 
@@ -464,7 +468,7 @@
         
         UIDatePicker *datePicker = [[UIDatePicker alloc] init];
         datePicker.tag = kBaseDateCellTag;
-        datePicker.datePickerMode = UIDatePickerModeDate;
+//        datePicker.datePickerMode = UIDatePickerModeDate;
         [datePicker addTarget:self
                        action:@selector(dateAction:)
              forControlEvents:UIControlEventValueChanged];
@@ -472,13 +476,8 @@
         
         if (nil != datePicker)
         {
-            UITableViewCell *dateLabelCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            UILabel *label = (UILabel *)[dateLabelCell viewWithTag:kBaseDateLabelTag];
-            if (nil != label)
-            {
-                [datePicker setDate:self.date animated:NO];
-                datePicker.datePickerMode = UIDatePickerModeDate;
-            }
+            [datePicker setDate:self.date animated:NO];
+            [self selectDatePickerMode:datePicker];
         }
     }
 }
@@ -515,7 +514,6 @@
     if (nil != label)
     {
         label.text = [self.formatter stringFromDate:datePicker.date];
-        [label setNeedsDisplay];
     }
 }
 
@@ -534,6 +532,39 @@
             datePicker.datePickerMode = UIDatePickerModeTime;
             break;
     }
+}
+
+- (void)setDateLabelTitle:(UILabel *)label
+{
+    switch (self.dateType)
+    {
+        case DateOnly:
+            label.text = NSLocalizedString(@"Date", nil);
+            break;
+        case DateAndTime:
+            label.text = NSLocalizedString(@"Date/Time", nil);
+            break;
+        case TimeOnly:
+            label.text = NSLocalizedString(@"Time", nil);
+            break;
+    }
+}
+
+- (void)setDateFormatter
+{
+    switch (self.dateType)
+    {
+        case DateOnly:
+            self.formatter.dateFormat = kDateFormatting;
+            break;
+        case DateAndTime:
+            self.formatter.dateFormat = kDefaultDateFormatting;
+            break;
+        case TimeOnly:
+            self.formatter.dateFormat = kTimeFormatting;
+            break;
+    }
+    
 }
 
 

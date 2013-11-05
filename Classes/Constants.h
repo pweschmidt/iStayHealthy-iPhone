@@ -89,6 +89,8 @@ typedef void (^iStayHealthyArrayCompletionBlock)(NSArray *array, NSError *error)
  */
 extern NSString * const kAppNotificationKey;
 extern NSString * const kDefaultDateFormatting;
+extern NSString * const kDateFormatting;
+extern NSString * const kTimeFormatting;
 extern NSString * const kDefaultFontName;
 /**
  Dropbox app definitions

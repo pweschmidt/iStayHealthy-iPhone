@@ -29,9 +29,6 @@
 @property (nonatomic, strong) NSManagedObject *managedObject;
 @property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
-@property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) UIView *dateCellView;
-@property (nonatomic, strong) UIView *datePickerCellView;
 @property (nonatomic, weak) id<AddMenuNavigationDelegate> menuDelegate;
 
 - (id)initWithStyle:(UITableViewStyle)style

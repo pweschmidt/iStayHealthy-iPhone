@@ -10,6 +10,8 @@
 
 NSString * const kAppNotificationKey = @"iStayHealthyNotification";
 NSString * const kDefaultDateFormatting = @"dd-MMM-yy HH:mm:ss";
+NSString * const kDateFormatting = @"dd-MMM-yyyy";
+NSString * const kTimeFormatting = @"HH:mm";
 NSString * const kDefaultFontName = @"Helvetica";
 
 NSString * const kDropboxConsumerKey = @"sekt4gbt7526j0y";;
