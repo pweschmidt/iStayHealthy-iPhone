@@ -36,9 +36,4 @@
     
 }
 
-- (void)deleteObject:(id)sender
-{
-    
-}
-
 @end

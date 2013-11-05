@@ -118,63 +118,65 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([self hasInlineDatePicker])
+    if (0 == section)
     {
-        // we have a date picker, so allow for it in the number of rows in this section
-        NSInteger numRows = self.editMenu.count + 1;
-        return ++numRows;
-    }
-    return self.editMenu.count + 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *identifier = nil;
-    if (0 == indexPath.row)
-    {
-        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
+        return ([self hasInlineDatePicker] ? 2 : 1);
     }
     else
     {
+        return self.editMenu.count;
+    }
+}
+
+
+- (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = nil;
+    if (0 == indexPath.section)
+    {
+        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
         if ([self hasInlineDatePicker])
         {
             identifier = [NSString stringWithFormat:@"DatePickerCell"];
         }
-        else
-        {
-            identifier = [NSString stringWithFormat:@"AlertCell%d",indexPath.row];
-        }
     }
+    else
+    {
+        identifier = [NSString stringWithFormat:@"AlertCell%d", indexPath.row];
+    }
+    return identifier;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = [self identifierForIndexPath:indexPath];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:identifier];
     }
-    if (0 == indexPath.row)
+    if (0 == indexPath.section)
     {
-        [self configureDateCell:cell indexPath:indexPath dateType:TimeOnly];
+        if (0 == indexPath.row)
+        {
+            [self configureDateCell:cell indexPath:indexPath dateType:TimeOnly];
+        }
     }
     else
     {
-        if ([self hasInlineDatePicker])
-        {
-//            [self configureDatePickerCell:cell indexPath:indexPath];
-        }
-        else
-        {
-            NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
-            NSString *localisedText = NSLocalizedString([self.editMenu objectAtIndex:titleIndex], nil);
-            [self configureTableCell:cell
-                               title:localisedText
-                           indexPath:indexPath
-                   hasNumericalInput:NO];
-        }
+        NSString *localisedText = NSLocalizedString([self.editMenu objectAtIndex:indexPath.row], nil);
+        [self configureTableCell:cell
+                           title:localisedText
+                       indexPath:indexPath
+               hasNumericalInput:NO];
         
     }
     return cell;
@@ -183,12 +185,25 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 55;
+    if (0 == section)
+    {
+        return 10;
+    }
+    else
+    {
+        return 55;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footerView = [[UIView alloc] init];
+    if (0 == section)
+    {
+        footerView.frame = CGRectMake(0, 0, tableView.frame.size.width, 10);
+        footerView.backgroundColor = [UIColor clearColor];
+        return footerView;
+    }
     footerView.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
     UILabel *label = [[UILabel alloc]
                       initWithFrame:CGRectMake(20, 10, tableView.bounds.size.width-40, 20)];

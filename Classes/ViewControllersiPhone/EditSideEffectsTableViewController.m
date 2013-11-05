@@ -129,6 +129,10 @@
     {
         return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
     }
+    else if (1 == indexPath.section)
+    {
+        return self.tableView.rowHeight;
+    }
     else
     {
         return 60;
@@ -138,20 +142,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (0 == section)
     {
-        if ([self hasInlineDatePicker])
-        {
-            // we have a date picker, so allow for it in the number of rows in this section
-            NSInteger numRows = self.editMenu.count + 1;
-            return ++numRows;
-        }
-        return self.editMenu.count + 1;
+        return ([self hasInlineDatePicker] ? 2 : 1);
+    }
+    else if (1 == section)
+    {
+        return self.editMenu.count;
     }
     else
     {
@@ -159,31 +161,33 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = nil;
     if (0 == indexPath.section)
     {
-        if (0 == indexPath.row)
+        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
+        if ([self hasInlineDatePicker])
         {
-            identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
+            identifier = [NSString stringWithFormat:@"DatePickerCell"];
         }
-        else
-        {
-            if ([self hasInlineDatePicker])
-            {
-                identifier = [NSString stringWithFormat:@"DatePickerCell"];
-            }
-            else
-            {
-                identifier = [NSString stringWithFormat:@"SideEffectCell%d",indexPath.row];
-            }
-        }
+    }
+    else if(1 == indexPath.section)
+    {
+        identifier = [NSString stringWithFormat:@"SideEffectCell%d", indexPath.row];
     }
     else
     {
         identifier = [NSString stringWithFormat:@"CurrentMedCell%d", indexPath.row];
     }
+    return identifier;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = [self identifierForIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (nil == cell)
@@ -197,32 +201,25 @@
         {
             [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
         }
+    }
+    else if (1 == indexPath.section)
+    {
+        NSString *text = [self.editMenu objectAtIndex:indexPath.row];
+        NSString *localisedText = NSLocalizedString(text, nil);
+        if ([text isEqualToString:kSideEffect])
+        {
+            [self configureTableCell:cell
+                               title:localisedText
+                           indexPath:indexPath
+                   hasNumericalInput:NO];
+        }
         else
         {
-            if ([self hasInlineDatePicker])
-            {
-//                [self configureDatePickerCell:cell indexPath:indexPath];
-            }
-            else
-            {
-                NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
-                NSString *text = [self.editMenu objectAtIndex:titleIndex];
-                NSString *localisedText = NSLocalizedString(text, nil);
-                if ([text isEqualToString:kSideEffect])
-                {
-                    [self configureTableCell:cell
-                                       title:localisedText
-                                   indexPath:indexPath
-                           hasNumericalInput:NO];
-                }
-                else
-                {
-                    [self configureLinkCell:cell
-                                  indexPath:indexPath
-                                      title:localisedText];
-                }
-            }
+            [self configureLinkCell:cell
+                          indexPath:indexPath
+                              title:localisedText];
         }
+        
     }
     else
     {
@@ -258,7 +255,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (0 == section)
+    if (1 == section)
     {
         return 120;
     }
@@ -271,7 +268,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footerView = [[UIView alloc] init];
-    if (0 < section)
+    if (1 != section)
     {
         footerView.backgroundColor = [UIColor clearColor];
         return footerView;

@@ -128,40 +128,44 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger resultsCount = self.editMenu.count;
-    resultsCount++;
-    if ([self hasInlineDatePicker])
+    if (0 == section)
     {
-        // we have a date picker, so allow for it in the number of rows in this section
-        NSInteger numRows = resultsCount;
-        return ++numRows;
-    }
-    return resultsCount;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *identifier = nil;
-    if (0 == indexPath.row)
-    {
-        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
+        return ([self hasInlineDatePicker] ? 2 : 1);
     }
     else
     {
+        return self.editMenu.count;
+    }
+}
+
+- (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = nil;
+    if (0 == indexPath.section)
+    {
+        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
         if ([self hasInlineDatePicker])
         {
             identifier = [NSString stringWithFormat:@"DatePickerCell"];
         }
-        else
-        {
-            identifier = [NSString stringWithFormat:@"AppointmentCell"];
-        }
     }
+    else
+    {
+        identifier = [NSString stringWithFormat:@"AppointmentCell%d", indexPath.row];
+    }
+    return identifier;
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = [self identifierForIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (nil == cell)
@@ -170,23 +174,18 @@
     }
     
     
-    if (0 == indexPath.row)
+    if (0 == indexPath.section)
     {
-        [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
+        if (0 == indexPath.row)
+        {
+            [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
+        }
     }
     else
     {
-        if ([self hasInlineDatePicker])
-        {
-//            [self configureDatePickerCell:cell indexPath:indexPath];
-        }
-        else
-        {
-            NSUInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
-            NSString *resultsString = [self.editMenu objectAtIndex:titleIndex];
-            NSString *text = NSLocalizedString(resultsString, nil);
-            [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
-        }
+        NSString *resultsString = [self.editMenu objectAtIndex:indexPath.row];
+        NSString *text = NSLocalizedString(resultsString, nil);
+        [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
     }
     return cell;
 }
