@@ -352,7 +352,7 @@
 + (NSDateComponents *)dateComponentsForDate:(NSDate *)date
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    return [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit
+    return [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit|NSWeekOfMonthCalendarUnit
                        fromDate:date];
 }
 

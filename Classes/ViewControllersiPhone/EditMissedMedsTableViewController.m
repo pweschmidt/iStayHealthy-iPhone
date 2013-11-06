@@ -104,6 +104,10 @@
     {
         return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
     }
+    else if (1 == indexPath.section)
+    {
+        return self.tableView.rowHeight;
+    }
     else
     {
         return 60;
@@ -236,18 +240,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    if (0 == indexPath.section)
+    if (1 == indexPath.section)
     {
-        NSInteger titleIndex = (nil == self.datePickerIndexPath) ? indexPath.row - 1 : indexPath.row - 2;
-        if (![self hasInlineDatePicker] && 0 <= titleIndex)
-        {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            self.selectedReasonCell = cell;
-            [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
-        }
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        self.selectedReasonCell = cell;
+        [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
-    else
+    else if(2 == indexPath.section)
     {
         BOOL keyValue = [[self.selectedMedCells objectForKey:indexPath] boolValue];
         BOOL isChecked = !keyValue;

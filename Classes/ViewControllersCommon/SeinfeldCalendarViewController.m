@@ -57,7 +57,7 @@
     self.calendarScrollView.backgroundColor = [UIColor clearColor];
     self.calendarScrollView.delegate = self;
     self.calendarScrollView.scrollsToTop = YES;
-    self.calendarScrollView.pagingEnabled = YES;
+//    self.calendarScrollView.pagingEnabled = YES;
     self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
     
     
@@ -211,6 +211,30 @@
         result = endMonth - startMonth + 1;
     }
     return result;
+}
+
+- (NSUInteger)weeksInMonthForDate:(NSDate *)date isStart:(BOOL)isStart
+{
+    NSDateComponents *components = [Utilities dateComponentsForDate:date];
+    NSUInteger weeks = components.weekOfMonth - 1;//needs to be 0 based
+    if (isStart)
+    {
+        NSUInteger days = [date daysInMonth] - components.day + 1;//including the start day
+        NSInteger weekday = components.weekday - 1; //start Monday not Sunday
+        if (7 >= days)
+        {
+            weeks = (7 < weekday + days) ? 2 : 1;
+        }
+        else
+        {
+            weeks = days / 7;
+            if (1 < weekday)
+            {
+                weeks++;
+            }
+        }
+    }
+    return weeks;
 }
 
 

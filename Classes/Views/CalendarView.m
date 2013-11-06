@@ -11,6 +11,8 @@
 #import "GeneralSettings.h"
 #import "ChartSettings.h"
 #import "Utilities.h"
+#import "UIFont+Standard.h"
+#import "Constants.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface CalendarView ()
@@ -65,10 +67,10 @@
 
 - (UILabel *)monthLabel
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, 18)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.origin.x+20, self.bounds.origin.y, self.bounds.size.width-40, 18)];
     label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont boldSystemFontOfSize:15];
+    label.textAlignment = NSTextAlignmentRight;
+    label.font = [UIFont fontWithType:Bold size:standard];
     label.text = [Utilities monthForDate:self.date];
     label.textColor = TEXTCOLOUR;
     return label;
@@ -83,14 +85,14 @@
     CGFloat width = view.frame.size.width/7;
     CGFloat height = 18;
     CGFloat xOffset = view.frame.origin.x;
-    CGFloat yOffset = view.frame.origin.y;
+    CGFloat yOffset = view.frame.origin.y+3;
     [days enumerateObjectsUsingBlock:^(NSString *day, NSUInteger index, BOOL *stop) {
         CGRect labelFrame = CGRectMake(index * width + xOffset, yOffset, width, height);
         UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
         label.backgroundColor = [UIColor clearColor];
         label.text = day;
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:15];
+        label.textAlignment = NSTextAlignmentLeft;
+        label.font = [UIFont fontWithType:Standard size:standard];
         label.textColor = TEXTCOLOUR;
         [view addSubview:label];
     }];
@@ -111,7 +113,6 @@
     NSUInteger weeks = 0;
     CGFloat width = view.frame.size.width/7;
     CGFloat height = 20;
-    
     for (NSUInteger day = startDay; day <= daysInMonth; day++)
     {
         if (6 < startWeekDay)
@@ -126,7 +127,7 @@
         button.backgroundColor = [UIColor clearColor];
         button.tag = day;
         [button addTarget:self action:@selector(checkIfMissed:) forControlEvents:UIControlEventTouchUpInside];
-        CGFloat labelXOffset = (width - 20)/2;
+        CGFloat labelXOffset = (width - 20)/2 + 3.5;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(labelXOffset, 0, 20, 20)];
         label.backgroundColor = [UIColor clearColor];
         label.text = [NSString stringWithFormat:@"%d",day];

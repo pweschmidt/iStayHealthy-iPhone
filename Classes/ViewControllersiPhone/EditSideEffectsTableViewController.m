@@ -231,7 +231,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section)
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    if (1 == indexPath.section)
     {
         if (indexPath.row == self.linkIndexPath.row)
         {
