@@ -101,6 +101,9 @@
 		C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27CC17DB5A9D001F6831 /* EditProceduresTableViewController.m */; };
 		C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27CF17DB5AC7001F6831 /* EditWellnessTableViewController.m */; };
 		C45D00F017BAB403001AE0CB /* EditResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45D00EF17BAB403001AE0CB /* EditResultsTableViewController.m */; };
+		C45E52F4182BFD1400C30061 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45E52F3182BFD1400C30061 /* EventKit.framework */; };
+		C45E52F7182BFE6400C30061 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45E52F6182BFE6400C30061 /* BaseCollectionViewController.m */; };
+		C45E52FA182BFF0400C30061 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45E52F9182BFF0400C30061 /* BaseCollectionViewCell.m */; };
 		C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F837D17B66CEF0042E63A /* BaseViewController.m */; };
 		C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838917B675350042E63A /* BaseTableViewController.m */; };
 		C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838E17B6A61F0042E63A /* CoreXMLReader.m */; };
@@ -614,6 +617,11 @@
 		C45C27CF17DB5AC7001F6831 /* EditWellnessTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditWellnessTableViewController.m; path = ViewControllersiPhone/EditWellnessTableViewController.m; sourceTree = "<group>"; };
 		C45D00EE17BAB403001AE0CB /* EditResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditResultsTableViewController.h; path = ViewControllersiPhone/EditResultsTableViewController.h; sourceTree = "<group>"; };
 		C45D00EF17BAB403001AE0CB /* EditResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditResultsTableViewController.m; path = ViewControllersiPhone/EditResultsTableViewController.m; sourceTree = "<group>"; };
+		C45E52F3182BFD1400C30061 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		C45E52F5182BFE6400C30061 /* BaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseCollectionViewController.h; path = ViewControllersiPad/BaseCollectionViewController.h; sourceTree = "<group>"; };
+		C45E52F6182BFE6400C30061 /* BaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseCollectionViewController.m; path = ViewControllersiPad/BaseCollectionViewController.m; sourceTree = "<group>"; };
+		C45E52F8182BFF0400C30061 /* BaseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseCollectionViewCell.h; path = ViewControllersiPad/BaseCollectionViewCell.h; sourceTree = "<group>"; };
+		C45E52F9182BFF0400C30061 /* BaseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseCollectionViewCell.m; path = ViewControllersiPad/BaseCollectionViewCell.m; sourceTree = "<group>"; };
 		C45F837C17B66CEF0042E63A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = ViewControllersCommon/BaseViewController.h; sourceTree = "<group>"; };
 		C45F837D17B66CEF0042E63A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = ViewControllersCommon/BaseViewController.m; sourceTree = "<group>"; };
 		C45F838817B675350042E63A /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewController.h; path = ViewControllersCommon/BaseTableViewController.h; sourceTree = "<group>"; };
@@ -1173,6 +1181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45E52F4182BFD1400C30061 /* EventKit.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
 				C4952D1817F21C380022EFEF /* libGoogleAdMobAds.a in Frameworks */,
 				C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */,
@@ -1326,6 +1335,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C45E52F3182BFD1400C30061 /* EventKit.framework */,
 				C4CAD002182403D500DFB38A /* DropboxSDK.framework */,
 				C41EC32C180ED0EE00A49AE4 /* CoreText.framework */,
 				C46C5E0017EDAF9C00866DBD /* AdSupport.framework */,
@@ -1570,6 +1580,10 @@
 		C47DB22E17AD05B40037A6DF /* ViewControllersiPad */ = {
 			isa = PBXGroup;
 			children = (
+				C45E52F8182BFF0400C30061 /* BaseCollectionViewCell.h */,
+				C45E52F9182BFF0400C30061 /* BaseCollectionViewCell.m */,
+				C45E52F5182BFE6400C30061 /* BaseCollectionViewController.h */,
+				C45E52F6182BFE6400C30061 /* BaseCollectionViewController.m */,
 				C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */,
 				C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */,
 				C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */,
@@ -2481,6 +2495,7 @@
 				C40DACED180981E400EDD6E9 /* WebViewController.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
+				C45E52F7182BFE6400C30061 /* BaseCollectionViewController.m in Sources */,
 				C4C4199915F13AAD00882416 /* HIVMedicationViewController.m in Sources */,
 				C4C4199B15F13AAD00882416 /* NewAlertViewController.m in Sources */,
 				C4A49AD918002CD400FC1637 /* TimeView.m in Sources */,
@@ -2488,6 +2503,7 @@
 				C4C4199D15F13AAD00882416 /* NewStatusViewController.m in Sources */,
 				C4C4199E15F13AAD00882416 /* OtherMedsTableViewController.m in Sources */,
 				C4C4199F15F13AAD00882416 /* ProcedureTableViewController.m in Sources */,
+				C45E52FA182BFF0400C30061 /* BaseCollectionViewCell.m in Sources */,
 				C4C419A015F13AAD00882416 /* StatusViewControllerLandscape.m in Sources */,
 				C4C419CE15F13C6F00882416 /* DropBoxBackupViewController.m in Sources */,
 				C463743E17E9F2AF00D19B94 /* PWESDashboardView.m in Sources */,
