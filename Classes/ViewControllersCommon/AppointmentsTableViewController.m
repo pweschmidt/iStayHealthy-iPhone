@@ -9,10 +9,12 @@
 #import "AppointmentsTableViewController.h"
 #import "EditAppointmentsTableViewController.h"
 #import "UILabel+Standard.h"
+#import <EventKit/EventKit.h>
 
 
 @interface AppointmentsTableViewController ()
 @property (nonatomic, strong) NSArray *appointments;
+@property (nonatomic, strong) EKEventStore *eventStore;
 @end
 
 @implementation AppointmentsTableViewController
@@ -20,6 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.eventStore = [[EKEventStore alloc] init];
     self.appointments = [NSArray array];//init with empty array
     [self setTitleViewWithTitle:NSLocalizedString(@"Appointments", nil)];
 }
