@@ -38,7 +38,8 @@
     {
         return [NSNumber numberWithInt:-1];
     }
-    if ([valueString hasPrefix:NSLocalizedString(@"undetectable", nil)])
+    NSString *lowercaseValueString = [valueString lowercaseString];
+    if ([lowercaseValueString hasPrefix:NSLocalizedString(@"undetectable", nil)])
     {
         return [NSNumber numberWithInt:1];
     }

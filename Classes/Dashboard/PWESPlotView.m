@@ -50,6 +50,7 @@
     plotView.medications = medications;
     plotView.types = types;
     [plotView configurePlotView];
+    [plotView plot];
     return plotView;
 }
 
@@ -96,11 +97,30 @@
         }
     }
     
+}
+
+- (void)plot
+{
+    NSArray *timeline = self.ntuple.dateLine;
+    if (nil == timeline || 0 == timeline.count)
+    {
+        return;
+    }
+    CGFloat width = self.bounds.size.width - self.marginRight - self.marginLeft;
+    CGFloat xStartLeft = self.marginLeft;
     
+    CGFloat xStart = width / timeline.count;
+    if (10 > timeline.count)
+    {
+        xStart = width/(timeline.count + 1);
+    }
+    if (xStart < xStartLeft)
+    {
+        xStart = xStartLeft;
+    }
     
     
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.
