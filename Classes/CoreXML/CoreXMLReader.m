@@ -64,8 +64,10 @@
     [[CoreDataManager sharedInstance] saveContext:&saveError];
     if (nil  != saveError)
     {
+        NSLog(@"END PARSING WITH ERROR");
         ///TODO handle error after we imported data
     }
+    NSLog(@"END PARSING");
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName

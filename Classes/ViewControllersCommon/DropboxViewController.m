@@ -11,6 +11,11 @@
 #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreXMLReader.h"
+#import "Utilities.h"
+#import "CustomTableView.h"
+#import "Menus.h"
+#import "UILabel+Standard.h"
+#import "UIFont+Standard.h"
 #import <DropboxSDK/DropboxSDK.h>
 
 @interface DropboxViewController ()<DBRestClientDelegate>
@@ -30,8 +35,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMenu)];
+    [self disableRightBarButtons];
     self.iStayHealthyPath = nil;
     self.dropBoxFileExists = NO;
     self.newDropboxFileExists = NO;
@@ -45,15 +49,87 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - private methods
-- (void)settingsMenu
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kMenuController];
+    return 3;
 }
 
-- (void)addMenu
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName:kAddController];
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellIdentifier = [NSString stringWithFormat:@"DropboxCell%d",indexPath.section];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    UILabel *label = [UILabel standardLabel];
+    label.frame = CGRectMake(20, 0, 200, self.tableView.rowHeight);
+    switch (indexPath.section)
+    {
+        case 0:
+            label.text = NSLocalizedString(@"Save to Dropbox",@"Save to Dropbox");
+            break;
+        case 1:
+            label.text = NSLocalizedString(@"Get from Dropbox",@"Get from Dropbox");
+            break;
+        case 2:
+            label.text = NSLocalizedString(@"Unlink DropBox",@"Unlink DropBox");
+            break;
+    }
+    [cell.contentView addSubview:label];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section)
+    {
+        case 0:
+            [self backup];
+            break;
+        case 1:
+        {
+            if ([[DBSession sharedSession] isLinked])
+            {
+                [self.activityIndicator startAnimating];
+                NSString *dataPath = [self dropBoxFileTmpPath];
+                [self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
+                                    atRev:self.parentRevision
+                                 intoPath:dataPath];
+            }
+        }
+            break;
+        case 2:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
+                                                            message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                                  otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+            
+            [alert show];
+        }
+            break;
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
+    {
+        [self unlinkDropBox];
+    }
 }
 
 #pragma mark - DropBox actions
@@ -66,6 +142,7 @@
     }
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
+    
 }
 
 
@@ -85,12 +162,7 @@
 - (void)unlinkDropBox
 {
     [[DBSession sharedSession] unlinkAll];
-#ifdef APPDEBUG
-    [[[UIAlertView alloc]
-      initWithTitle:@"Account Unlinked!" message:@"Your dropbox account has been unlinked"
-      delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
-#endif
+    [self settingsMenu];
 }
 
 /**
@@ -266,8 +338,10 @@
     [self showDBError];
 }
 
-- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
-              from:(NSString*)srcPath metadata:(DBMetadata*)metadata
+- (void)restClient:(DBRestClient*)client
+      uploadedFile:(NSString*)destPath
+              from:(NSString*)srcPath
+          metadata:(DBMetadata*)metadata
 {
     [self.activityIndicator stopAnimating];
     [[[UIAlertView alloc]
@@ -299,4 +373,31 @@
       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
      show];
 }
+
+#pragma mark BaseTableViewController methods
+- (void)reloadSQLData:(NSNotification *)notification
+{
+    
+}
+
+- (void)startAnimation:(NSNotification *)notification
+{
+    
+}
+
+- (void)stopAnimation:(NSNotification *)notification
+{
+    
+}
+
+- (void)handleError:(NSNotification *)notification
+{
+    
+}
+
+- (void)handleStoreChanged:(NSNotification *)notification
+{
+    
+}
+
 @end

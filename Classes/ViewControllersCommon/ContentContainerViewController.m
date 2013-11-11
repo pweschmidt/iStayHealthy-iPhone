@@ -80,7 +80,7 @@
 {
     HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
-    DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
+    DropboxViewController *dropBoxController = [[DropboxViewController alloc] initWithStyle:UITableViewStyleGrouped];
     MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
 
     DashboardViewController *dashboardController = [[DashboardViewController alloc] init];

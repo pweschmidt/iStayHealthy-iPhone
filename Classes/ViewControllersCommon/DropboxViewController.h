@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface DropboxViewController : UIViewController
-
+@interface DropboxViewController : BaseTableViewController <UIAlertViewDelegate>
 @end
