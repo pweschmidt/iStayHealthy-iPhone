@@ -61,7 +61,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     NSError *saveError = nil;
-    [[CoreDataManager sharedInstance] saveContext:&saveError];
+    [[CoreDataManager sharedInstance] saveContextAndWait:&saveError];
     if (nil  != saveError)
     {
         NSLog(@"END PARSING WITH ERROR");

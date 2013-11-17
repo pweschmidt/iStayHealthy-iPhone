@@ -154,7 +154,7 @@
     }
     else
     {
-        identifier = [NSString stringWithFormat:@"AlertCell%d", indexPath.row];
+        identifier = [NSString stringWithFormat:@"AlertCell%ld", (long)indexPath.row];
     }
     return identifier;
 }
