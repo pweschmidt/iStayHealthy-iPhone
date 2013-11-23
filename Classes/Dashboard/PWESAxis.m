@@ -13,27 +13,41 @@
 {
     CGRect axisFrame;
 }
+@property (nonatomic, strong) PWESValueRange *valueRange;
 @end
 
 @implementation PWESAxis
 
-- (id)initWithFrame:(CGRect)frame
-        orientation:(AxisType)orientation
+- (id)initVerticalAxisWithFrame:(CGRect)frame
+                     valueRange:(PWESValueRange *)valueRange
+                    orientation:(AxisType)orientation
+                          ticks:(CGFloat)ticks
 {
     self = [super init];
     if (nil != self)
     {
         _orientation = orientation;
-        _lineWidth = 2.0;
-        _tickWidth = 1.0;
-        _pxTickDistance = 25.0;
         _axisLayer = [CALayer layer];
         _axisLayer.frame = frame;
-        _tickLength = 10;
+        _valueRange = valueRange;
+        _ticks = ticks;
     }
-    return self;;
+    return self;
 }
 
+- (id)initHorizontalAxisWithFrame:(CGRect)frame
+{
+    self = [super init];
+    if (nil != self)
+    {
+        _orientation = Horizontal;
+        _axisLayer = [CALayer layer];
+        _axisLayer.frame = frame;
+        _valueRange = nil;
+        _ticks = 0;
+    }
+    return self;
+}
 
 - (void)show
 {
@@ -57,32 +71,37 @@
     CGRect frame = self.axisLayer.bounds;
     if (Vertical == self.orientation)
     {
-        axisStart = CGPointMake(frame.origin.x + frame.size.width/2 + self.lineWidth/2, frame.origin.y);
-        axisEnd = CGPointMake(frame.origin.x + frame.size.width/2 + self.lineWidth/2, frame.size.height);
+        axisStart = CGPointMake(frame.origin.x + frame.size.width/2 + kAxisLineWidth/2, frame.origin.y);
+        axisEnd = CGPointMake(frame.origin.x + frame.size.width/2 + kAxisLineWidth/2, frame.size.height);
         [self addTickMarks:context frame:frame];
+        [self addLabels:context frame:frame];
     }
     else
     {
-        axisStart = CGPointMake(frame.origin.x + self.lineWidth/2, frame.origin.y + frame.size.height/2 - self.lineWidth/2);
-        axisEnd = CGPointMake(frame.size.width, frame.origin.y + frame.size.height/2 - self.lineWidth/2);
+        axisStart = CGPointMake(frame.origin.x + kAxisLineWidth/2, frame.origin.y + frame.size.height/2 - kAxisLineWidth/2);
+        axisEnd = CGPointMake(frame.size.width, frame.origin.y + frame.size.height/2 - kAxisLineWidth/2);
     }
-    [self drawLineWithContext:context start:axisStart end:axisEnd lineWidth:self.lineWidth cgColour:self.axisColor.CGColor];
+    [self drawLineWithContext:context start:axisStart end:axisEnd lineWidth:kAxisLineWidth cgColour:self.axisColor.CGColor];
 }
 
 - (void)addTickMarks:(CGContextRef)context frame:(CGRect)frame
 {
-    CGFloat yOffset = frame.origin.y + self.pxTickDistance;
-    CGFloat xStart = frame.origin.x + frame.size.width/2 + self.lineWidth/2 - self.tickLength/2;
-    CGFloat xEnd = xStart + self.tickLength;
+    CGFloat yOffset = frame.origin.y + kPXTickDistance;
+    CGFloat xStart = frame.origin.x + frame.size.width/2 + kAxisLineWidth/2 - kTickLength/2;
+    CGFloat xEnd = xStart + kTickLength;
     
-    int ticks = roundf(frame.size.height / self.pxTickDistance);
-    for (int tick = 0; tick < ticks; tick++)
+    for (int tick = 0; tick < self.ticks; tick++)
     {
         CGPoint start = CGPointMake(xStart, yOffset);
         CGPoint end = CGPointMake(xEnd, yOffset);
-        [self drawLineWithContext:context start:start end:end lineWidth:self.tickWidth cgColour:self.axisColor.CGColor];
-        yOffset += self.pxTickDistance;
+        [self drawLineWithContext:context start:start end:end lineWidth:kAxisTickWidth cgColour:self.axisColor.CGColor];
+        yOffset += kPXTickDistance;
     }
+}
+
+- (void)addLabels:(CGContextRef)context frame:(CGRect)frame
+{
+    
 }
 
 @end

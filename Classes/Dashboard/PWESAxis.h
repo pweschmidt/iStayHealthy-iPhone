@@ -9,20 +9,37 @@
 #import <Foundation/Foundation.h>
 #import "PWESChartsConstants.h"
 #import "PWESDraw.h"
+#import "PWESValueRange.h"
 
 @interface PWESAxis : PWESDraw
-@property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, strong) UIColor *axisColor;
-@property (nonatomic, assign) CGFloat tickWidth;
 @property (nonatomic, strong) NSString *axisTitle;
 @property (nonatomic, assign) AxisType axisTitleOrientation;
-@property (nonatomic, assign) CGFloat tickLength;
-@property (nonatomic, assign) CGFloat pxTickDistance;
 @property (nonatomic, assign) AxisType orientation;
+@property (nonatomic, assign) CGFloat ticks;
 
 @property (nonatomic, strong) CALayer *axisLayer;
 
-- (id)initWithFrame:(CGRect)frame
-        orientation:(AxisType)orientation;
+/**
+ vertical axis
+ @param frame
+ @param valueRange
+ @param orientation
+ @param ticks
+ */
+- (id)initVerticalAxisWithFrame:(CGRect)frame
+                     valueRange:(PWESValueRange *)valueRange
+                    orientation:(AxisType)orientation
+                          ticks:(CGFloat)ticks;
+
+/**
+ horizontal axis
+ @param frame
+ */
+- (id)initHorizontalAxisWithFrame:(CGRect)frame;
+
+/**
+ show the axis
+ */
 - (void)show;
 @end

@@ -65,6 +65,7 @@ NSString * const kXMLElementRoot = @"iStayHealthyRecord";
 /**
  Results
  */
+NSString * const kNoResult = @"NoResult";
 NSString * const kResults = @"Results";
 NSString * const kMedications = @"Medications";
 NSString * const kMissedMedications = @"MissedMedications";

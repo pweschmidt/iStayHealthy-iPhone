@@ -10,6 +10,8 @@
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
 		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
+		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
+		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
 		1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -465,6 +467,10 @@
 		0B6048541840D12B0092B5FB /* PWESDataNTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataNTuple.m; path = Dashboard/PWESDataNTuple.m; sourceTree = "<group>"; };
 		0B6048551840D12B0092B5FB /* PWESDataTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataTuple.h; path = Dashboard/PWESDataTuple.h; sourceTree = "<group>"; };
 		0B6048561840D12B0092B5FB /* PWESDataTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataTuple.m; path = Dashboard/PWESDataTuple.m; sourceTree = "<group>"; };
+		0B60485A1840D1BA0092B5FB /* PWESValueRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESValueRange.h; path = Dashboard/PWESValueRange.h; sourceTree = "<group>"; };
+		0B60485B1840D1BA0092B5FB /* PWESValueRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESValueRange.m; path = Dashboard/PWESValueRange.m; sourceTree = "<group>"; };
+		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
+		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iStayHealthyAppDelegate.m; sourceTree = "<group>"; };
@@ -1448,6 +1454,8 @@
 				C463743A17E9F2AF00D19B94 /* PWESResultsSummaryView.m */,
 				C463743B17E9F2AF00D19B94 /* PWESUtils.h */,
 				C463743C17E9F2AF00D19B94 /* PWESUtils.m */,
+				0B60485A1840D1BA0092B5FB /* PWESValueRange.h */,
+				0B60485B1840D1BA0092B5FB /* PWESValueRange.m */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -1939,6 +1947,8 @@
 				C4BCF0AA17B7AA2D00F1E0F7 /* Medication+Handling.m */,
 				C4BCF0A317B7A9F300F1E0F7 /* MissedMedication+Handling.h */,
 				C4BCF0A417B7A9F300F1E0F7 /* MissedMedication+Handling.m */,
+				0B60485D1840D5B30092B5FB /* NSArray+Extras.h */,
+				0B60485E1840D5B30092B5FB /* NSArray+Extras.m */,
 				C46A6E4417DC857A00D99A3F /* NSDate+Extras.h */,
 				C46A6E4517DC857A00D99A3F /* NSDate+Extras.m */,
 				C4BCF09117B7A81500F1E0F7 /* NSManagedObject+Handling.h */,
@@ -2467,6 +2477,7 @@
 				C4C4193815F1383000882416 /* ProcedureCell.m in Sources */,
 				C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */,
 				C4C4193A15F1383000882416 /* RepeatCell.m in Sources */,
+				0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */,
 				C4C4193C15F1383000882416 /* ResultListCell.m in Sources */,
 				C4C4193E15F1383000882416 /* ResultSegmentedCell.m in Sources */,
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
@@ -2550,6 +2561,7 @@
 				C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */,
 				C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */,
 				C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */,
+				0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */,
 				C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */,
 				C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */,
 				C43BE58515F7C5CE00108EF8 /* Results.m in Sources */,

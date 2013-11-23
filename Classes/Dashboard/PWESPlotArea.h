@@ -8,6 +8,8 @@
 
 #import "PWESDraw.h"
 #import "PWESChartsConstants.h"
+#import "PWESDataTuple.h"
+#import "PWESValueRange.h"
 
 @interface PWESPlotArea : PWESDraw
 @property (nonatomic, assign) CGFloat lineWidth;

@@ -148,6 +148,7 @@ extern NSString * const kXMLElementRoot;
 /**
  Data
  */
+extern NSString * const kNoResult;
 extern NSString * const kResults;
 extern NSString * const kMedications;
 extern NSString * const kMissedMedications;

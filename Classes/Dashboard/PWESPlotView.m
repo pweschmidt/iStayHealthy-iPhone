@@ -9,6 +9,7 @@
 #import "PWESPlotView.h"
 #import "PWESAxis.h"
 #import "PWESChartsConstants.h"
+#import "PWESValueRange.h"
 #import "GeneralSettings.h"
 #import "Constants.h"
 #import "UIFont+Standard.h"
@@ -17,7 +18,7 @@
 @interface PWESPlotView ()
 {
     CGRect plotBoundaries;
-    int ticks;
+    CGFloat ticks;
 }
 @property (nonatomic, strong) PWESAxis *xAxis;
 @property (nonatomic, strong) PWESAxis *yAxis;
@@ -45,12 +46,11 @@
                               types:(NSArray *)types
 {
     PWESPlotView *plotView = [[PWESPlotView alloc] initWithFrame:frame];
-    plotView.pxTickDistance = 25;
+    plotView.pxTickDistance = kPXTickDistance;
     plotView.ntuple = nTuple;
     plotView.medications = medications;
     plotView.types = types;
     [plotView configurePlotView];
-    [plotView plot];
     return plotView;
 }
 
@@ -68,28 +68,43 @@
         [self addSubview:emptyLabel];
         return;
     }
-//    self.layer.backgroundColor = [UIColor blueColor].CGColor;
+    
+    
     CGRect yAxisFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
 
+    ticks = roundf(yAxisFrame.size.height / self.pxTickDistance);
+    
     CGRect xAxisFrame = CGRectMake(self.bounds.origin.x+self.marginLeft, self.bounds.size.height - self.marginBottom - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
-    self.yAxis = [[PWESAxis alloc] initWithFrame:yAxisFrame orientation:Vertical];
+
+
+    PWESDataTuple *dataTuple = [self.ntuple tupleForType:[self.types objectAtIndex:0]];
+    PWESValueRange *rangeLeft = [PWESValueRange valueRangeForDataTuple:dataTuple ticks:ticks];
+    
+    
+    self.yAxis = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrame
+                                                  valueRange:rangeLeft
+                                                 orientation:Vertical
+                                                       ticks:ticks];
     if (self.yAxis.axisLayer)
     {
-//        self.yAxis.axisLayer.backgroundColor = [UIColor redColor].CGColor;
         [self.layer addSublayer:self.yAxis.axisLayer];
         [self.yAxis show];
     }
-    self.xAxis = [[PWESAxis alloc] initWithFrame:xAxisFrame orientation:Horizontal];
+    self.xAxis = [[PWESAxis alloc] initHorizontalAxisWithFrame:xAxisFrame];
     if (self.xAxis)
     {
-//        self.xAxis.axisLayer.backgroundColor = [UIColor greenColor].CGColor;
         [self.layer addSublayer:self.xAxis.axisLayer];
         [self.xAxis show];
     }
     if (2 == self.types.count)
     {
-        CGRect yAxisFrameRight = CGRectMake(self.bounds.origin.x + self.bounds.size.width - self.marginRight - self.marginLeft, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
-        self.yAxisRight = [[PWESAxis alloc] initWithFrame:yAxisFrameRight orientation:Vertical];
+        PWESDataTuple *dataTupleRight = [self.ntuple tupleForType:[self.types objectAtIndex:1]];
+        PWESValueRange *rangeRight = [PWESValueRange valueRangeForDataTuple:dataTupleRight ticks:ticks];
+        CGRect yAxisFrameRight = CGRectMake(self.bounds.origin.x + self.bounds.size.width - self.marginRight - self.marginLeft - 3, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
+        self.yAxisRight = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
+                                                           valueRange:rangeRight
+                                                          orientation:Vertical
+                                                                ticks:ticks];
         if (self.yAxisRight.axisLayer)
         {
             [self.layer addSublayer:self.yAxisRight.axisLayer];
@@ -99,28 +114,6 @@
     
 }
 
-- (void)plot
-{
-    NSArray *timeline = self.ntuple.dateLine;
-    if (nil == timeline || 0 == timeline.count)
-    {
-        return;
-    }
-    CGFloat width = self.bounds.size.width - self.marginRight - self.marginLeft;
-    CGFloat xStartLeft = self.marginLeft;
-    
-    CGFloat xStart = width / timeline.count;
-    if (10 > timeline.count)
-    {
-        xStart = width/(timeline.count + 1);
-    }
-    if (xStart < xStartLeft)
-    {
-        xStart = xStartLeft;
-    }
-    
-    
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

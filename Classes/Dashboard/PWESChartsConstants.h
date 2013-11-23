@@ -15,7 +15,6 @@ typedef NS_ENUM(int, AxisType)
     Horizontal
 };
 
-
 typedef NS_ENUM  (NSUInteger, ResultsTypes)
 {
     CD4AndViralLoad = 0,
@@ -53,3 +52,7 @@ typedef NS_ENUM(NSUInteger, EvaluationType)
     GOOD
 };
 
+#define kAxisLineWidth  2.0
+#define kAxisTickWidth  1.0
+#define kPXTickDistance 25.0
+#define kTickLength     10.0
