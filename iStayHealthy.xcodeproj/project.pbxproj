@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
+		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
+		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
 		1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -122,9 +125,6 @@
 		C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743817E9F2AF00D19B94 /* PWESPlotView.m */; };
 		C463744217E9F2AF00D19B94 /* PWESResultsSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743A17E9F2AF00D19B94 /* PWESResultsSummaryView.m */; };
 		C463744317E9F2AF00D19B94 /* PWESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743C17E9F2AF00D19B94 /* PWESUtils.m */; };
-		C463744A17E9F35900D19B94 /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C463744517E9F35900D19B94 /* PWESDataManager.m */; };
-		C463744B17E9F35900D19B94 /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = C463744717E9F35900D19B94 /* PWESDataNTuple.m */; };
-		C463744C17E9F35900D19B94 /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = C463744917E9F35900D19B94 /* PWESDataTuple.m */; };
 		C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A6E3F17DC80D900D99A3F /* UITableViewCell+Extras.m */; };
 		C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A6E4517DC857A00D99A3F /* NSDate+Extras.m */; };
 		C46C5DE517ED9CCC00866DBD /* MissedMedicationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DE417ED9CCC00866DBD /* MissedMedicationsTableViewController.m */; };
@@ -459,6 +459,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
+		0B6048521840D12B0092B5FB /* PWESDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataManager.m; path = Dashboard/PWESDataManager.m; sourceTree = "<group>"; };
+		0B6048531840D12B0092B5FB /* PWESDataNTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataNTuple.h; path = Dashboard/PWESDataNTuple.h; sourceTree = "<group>"; };
+		0B6048541840D12B0092B5FB /* PWESDataNTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataNTuple.m; path = Dashboard/PWESDataNTuple.m; sourceTree = "<group>"; };
+		0B6048551840D12B0092B5FB /* PWESDataTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataTuple.h; path = Dashboard/PWESDataTuple.h; sourceTree = "<group>"; };
+		0B6048561840D12B0092B5FB /* PWESDataTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataTuple.m; path = Dashboard/PWESDataTuple.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iStayHealthyAppDelegate.m; sourceTree = "<group>"; };
@@ -654,12 +660,6 @@
 		C463743A17E9F2AF00D19B94 /* PWESResultsSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESResultsSummaryView.m; path = Dashboard/PWESResultsSummaryView.m; sourceTree = "<group>"; };
 		C463743B17E9F2AF00D19B94 /* PWESUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESUtils.h; path = Dashboard/PWESUtils.h; sourceTree = "<group>"; };
 		C463743C17E9F2AF00D19B94 /* PWESUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESUtils.m; path = Dashboard/PWESUtils.m; sourceTree = "<group>"; };
-		C463744417E9F35900D19B94 /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Utils/PWESDataManager.h; sourceTree = "<group>"; };
-		C463744517E9F35900D19B94 /* PWESDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataManager.m; path = Utils/PWESDataManager.m; sourceTree = "<group>"; };
-		C463744617E9F35900D19B94 /* PWESDataNTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataNTuple.h; path = Utils/PWESDataNTuple.h; sourceTree = "<group>"; };
-		C463744717E9F35900D19B94 /* PWESDataNTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataNTuple.m; path = Utils/PWESDataNTuple.m; sourceTree = "<group>"; };
-		C463744817E9F35900D19B94 /* PWESDataTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataTuple.h; path = Utils/PWESDataTuple.h; sourceTree = "<group>"; };
-		C463744917E9F35900D19B94 /* PWESDataTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataTuple.m; path = Utils/PWESDataTuple.m; sourceTree = "<group>"; };
 		C465974013EE848B00006F72 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		C465974213EE849600006F72 /* libxslt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxslt.dylib; path = usr/lib/libxslt.dylib; sourceTree = SDKROOT; };
 		C46A6E3E17DC80D900D99A3F /* UITableViewCell+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+Extras.h"; path = "Categories/UITableViewCell+Extras.h"; sourceTree = "<group>"; };
@@ -1428,6 +1428,12 @@
 				C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */,
 				C463743117E9F2AF00D19B94 /* PWESDashboardView.h */,
 				C463743217E9F2AF00D19B94 /* PWESDashboardView.m */,
+				0B6048511840D12B0092B5FB /* PWESDataManager.h */,
+				0B6048521840D12B0092B5FB /* PWESDataManager.m */,
+				0B6048531840D12B0092B5FB /* PWESDataNTuple.h */,
+				0B6048541840D12B0092B5FB /* PWESDataNTuple.m */,
+				0B6048551840D12B0092B5FB /* PWESDataTuple.h */,
+				0B6048561840D12B0092B5FB /* PWESDataTuple.m */,
 				C4AEF828180DC05C00107966 /* PWESDraw.h */,
 				C4AEF829180DC05C00107966 /* PWESDraw.m */,
 				C463743317E9F2AF00D19B94 /* PWESGraph.h */,
@@ -1997,12 +2003,6 @@
 				C4C837E316D104AF002D934F /* PreviousMedication+Comparator.m */,
 				C4C837DF16D10493002D934F /* Procedures+Comparator.h */,
 				C4C837E016D10493002D934F /* Procedures+Comparator.m */,
-				C463744417E9F35900D19B94 /* PWESDataManager.h */,
-				C463744517E9F35900D19B94 /* PWESDataManager.m */,
-				C463744617E9F35900D19B94 /* PWESDataNTuple.h */,
-				C463744717E9F35900D19B94 /* PWESDataNTuple.m */,
-				C463744817E9F35900D19B94 /* PWESDataTuple.h */,
-				C463744917E9F35900D19B94 /* PWESDataTuple.m */,
 				C4C837D916D1041C002D934F /* Results+Comparator.h */,
 				C4C837DA16D1041C002D934F /* Results+Comparator.m */,
 				C4C837DC16D10475002D934F /* SideEffects+Comparator.h */,
@@ -2471,9 +2471,11 @@
 				C4C4193E15F1383000882416 /* ResultSegmentedCell.m in Sources */,
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
 				C4C4194015F1383000882416 /* ResultValueCell.m in Sources */,
+				0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */,
 				C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */,
 				C4C4194215F1383000882416 /* SetDateCell.m in Sources */,
 				C4C4194415F1383000882416 /* SettingsCell.m in Sources */,
+				0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */,
 				C4C4194615F1383000882416 /* SideEffectListCell.m in Sources */,
 				C4C4194815F1383000882416 /* SoundNameCell.m in Sources */,
 				C4C4194C15F1383000882416 /* SummaryCell.m in Sources */,
@@ -2546,7 +2548,6 @@
 				C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */,
 				C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */,
 				C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */,
-				C463744C17E9F35900D19B94 /* PWESDataTuple.m in Sources */,
 				C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */,
 				C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */,
 				C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */,
@@ -2568,7 +2569,6 @@
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
 				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
-				C463744A17E9F35900D19B94 /* PWESDataManager.m in Sources */,
 				C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */,
 				C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */,
 				C46C5DE517ED9CCC00866DBD /* MissedMedicationsTableViewController.m in Sources */,
@@ -2580,6 +2580,7 @@
 				C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */,
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
+				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
 				C4BCF09F17B7A9C000F1E0F7 /* PreviousMedication+Handling.m in Sources */,
@@ -2601,7 +2602,6 @@
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
 				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
-				C463744B17E9F35900D19B94 /* PWESDataNTuple.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
