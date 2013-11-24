@@ -77,7 +77,14 @@
         axisStart = CGPointMake(frame.origin.x + frame.size.width/2 + kAxisLineWidth/2, frame.origin.y);
         axisEnd = CGPointMake(frame.origin.x + frame.size.width/2 + kAxisLineWidth/2, frame.size.height);
         [self addTickMarks:context frame:frame];
-        [self addLabels:context frame:frame];
+        if ([self.valueRange.type isEqualToString:kViralLoad] || [self.valueRange.type isEqualToString:kHepCViralLoad])
+        {
+            [self addExponentialLabels:context frame:frame];
+        }
+        else
+        {
+            [self addLabels:context frame:frame];
+        }
     }
     else
     {
@@ -109,6 +116,7 @@
     {
         return;
     }
+	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     CGFloat fontSize = 8;
     NSDictionary *attributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Bold" size:fontSize]};
     CGFloat xPosition = frame.origin.x+2;
@@ -119,7 +127,6 @@
     CGFloat yPosition = frame.size.height-2;
 //    CGFloat yPosition = frame.origin.y + kPXTickDistance;
     CGFloat min = [self.valueRange.minValue floatValue];
-	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     for (int tick = 0; tick < self.ticks; ++tick)
     {
         NSString *label = [[NSString alloc] valueStringForType:self.valueRange.type valueAsFloat:min];
@@ -133,5 +140,69 @@
     }
     
 }
+
+
+- (void)addExponentialLabels:(CGContextRef)context frame:(CGRect)frame
+{
+	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
+    CGFloat fontSize = 8;
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Bold" size:fontSize]};
+    CGFloat xPosition = frame.origin.x+2;
+    if (VerticalRight == self.orientation)
+    {
+        xPosition += frame.size.width/2 + 2;
+    }
+    CGFloat yPosition = frame.size.height-2;
+    fontSize = 7;
+    NSDictionary *expAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Bold" size:fontSize]};
+    CGFloat expXPosition = xPosition + 10;
+    CGFloat expYPosition = yPosition - fontSize;
+
+    CGFloat min = 0.1;
+    int exponentValue = -1;
+    for (int tick = 0; tick < self.ticks; ++tick)
+    {
+        NSString *label = nil;
+        NSString *exponent = nil;
+        if (1 > min)
+        {
+            label = @"";
+        }
+        else if (10 > min)
+        {
+            label = NSLocalizedString(@"und.", nil);
+        }
+        else if (1000 > min) {
+            label = [NSString stringWithFormat:@"%d", (int)min];
+        }
+        else
+        {
+            label = @"10";
+            exponent = [NSString stringWithFormat:@"%d",exponentValue];
+        }
+        NSAttributedString *string = [[NSAttributedString alloc] initWithString:label attributes:attributes];
+        CTLineRef displayLine = CTLineCreateWithAttributedString( (__bridge CFAttributedStringRef)string );
+        CGContextSetTextPosition( context, xPosition, yPosition );
+        CTLineDraw( displayLine, context );
+        CFRelease( displayLine );
+        
+        if (nil != exponent)
+        {
+            NSAttributedString *expstring = [[NSAttributedString alloc] initWithString:exponent
+                                                                            attributes:expAttributes];
+            CTLineRef extdisplayLine = CTLineCreateWithAttributedString( (__bridge CFAttributedStringRef)expstring );
+            CGContextSetTextPosition( context, expXPosition, expYPosition );
+            CTLineDraw( extdisplayLine, context );
+            CFRelease( extdisplayLine );
+        }
+        
+        min *= 10;
+        exponentValue++;
+        yPosition -= kPXTickDistance;
+        expYPosition -= kPXTickDistance;
+    }
+    
+}
+
 
 @end
