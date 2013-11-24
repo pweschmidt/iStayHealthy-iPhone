@@ -103,7 +103,7 @@
         CGRect yAxisFrameRight = CGRectMake(self.bounds.origin.x + self.bounds.size.width - self.marginRight - self.marginLeft - 3, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
         self.yAxisRight = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
                                                            valueRange:rangeRight
-                                                          orientation:Vertical
+                                                          orientation:VerticalRight
                                                                 ticks:ticks];
         if (self.yAxisRight.axisLayer)
         {

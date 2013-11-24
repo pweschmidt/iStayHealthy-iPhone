@@ -12,6 +12,7 @@
 typedef NS_ENUM(int, AxisType)
 {
     Vertical = 0,
+    VerticalRight,
     Horizontal
 };
 

@@ -8,6 +8,9 @@
 
 #import "PWESAxis.h"
 #import "PWESUtils.h"
+#import "UIFont+Standard.h"
+#import "NSString+Extras.h"
+#import <CoreText/CoreText.h>
 
 @interface PWESAxis ()
 {
@@ -69,7 +72,7 @@
     CGPoint axisEnd;
     
     CGRect frame = self.axisLayer.bounds;
-    if (Vertical == self.orientation)
+    if (Vertical == self.orientation || VerticalRight == self.orientation)
     {
         axisStart = CGPointMake(frame.origin.x + frame.size.width/2 + kAxisLineWidth/2, frame.origin.y);
         axisEnd = CGPointMake(frame.origin.x + frame.size.width/2 + kAxisLineWidth/2, frame.size.height);
@@ -86,7 +89,8 @@
 
 - (void)addTickMarks:(CGContextRef)context frame:(CGRect)frame
 {
-    CGFloat yOffset = frame.origin.y + kPXTickDistance;
+//    CGFloat yOffset = frame.origin.y + kPXTickDistance;
+    CGFloat yOffset = frame.size.height;
     CGFloat xStart = frame.origin.x + frame.size.width/2 + kAxisLineWidth/2 - kTickLength/2;
     CGFloat xEnd = xStart + kTickLength;
     
@@ -95,12 +99,38 @@
         CGPoint start = CGPointMake(xStart, yOffset);
         CGPoint end = CGPointMake(xEnd, yOffset);
         [self drawLineWithContext:context start:start end:end lineWidth:kAxisTickWidth cgColour:self.axisColor.CGColor];
-        yOffset += kPXTickDistance;
+        yOffset -= kPXTickDistance;
     }
 }
 
 - (void)addLabels:(CGContextRef)context frame:(CGRect)frame
 {
+    if (Horizontal == self.orientation || nil == self.valueRange)
+    {
+        return;
+    }
+    CGFloat fontSize = 8;
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Bold" size:fontSize]};
+    CGFloat xPosition = frame.origin.x+2;
+    if (VerticalRight == self.orientation)
+    {
+        xPosition += kAxisLineWidth/2 + 2;
+    }
+    CGFloat yPosition = frame.size.height-2;
+//    CGFloat yPosition = frame.origin.y + kPXTickDistance;
+    CGFloat min = [self.valueRange.minValue floatValue];
+	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
+    for (int tick = 0; tick < self.ticks; ++tick)
+    {
+        NSString *label = [[NSString alloc] valueStringForType:self.valueRange.type valueAsFloat:min];
+        NSAttributedString *string = [[NSAttributedString alloc] initWithString:label attributes:attributes];
+        CTLineRef displayLine = CTLineCreateWithAttributedString( (__bridge CFAttributedStringRef)string );
+        CGContextSetTextPosition( context, xPosition, yPosition );
+        CTLineDraw( displayLine, context );
+        CFRelease( displayLine );
+        min += self.valueRange.tickDeltaValue;
+        yPosition -= kPXTickDistance;
+    }
     
 }
 

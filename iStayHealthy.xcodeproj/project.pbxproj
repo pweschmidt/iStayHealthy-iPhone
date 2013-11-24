@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
 		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
@@ -461,6 +462,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B47527218422D2F0079A239 /* NSString+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Extras.h"; path = "Categories/NSString+Extras.h"; sourceTree = "<group>"; };
+		0B47527318422D2F0079A239 /* NSString+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extras.m"; path = "Categories/NSString+Extras.m"; sourceTree = "<group>"; };
 		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
 		0B6048521840D12B0092B5FB /* PWESDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataManager.m; path = Dashboard/PWESDataManager.m; sourceTree = "<group>"; };
 		0B6048531840D12B0092B5FB /* PWESDataNTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataNTuple.h; path = Dashboard/PWESDataNTuple.h; sourceTree = "<group>"; };
@@ -1955,6 +1958,8 @@
 				C4BCF09217B7A81500F1E0F7 /* NSManagedObject+Handling.m */,
 				C4BCF09417B7A87500F1E0F7 /* NSNumber+Handling.h */,
 				C4BCF09517B7A87500F1E0F7 /* NSNumber+Handling.m */,
+				0B47527218422D2F0079A239 /* NSString+Extras.h */,
+				0B47527318422D2F0079A239 /* NSString+Extras.m */,
 				C4BCF0A617B7AA1400F1E0F7 /* OtherMedication+Handling.h */,
 				C4BCF0A717B7AA1400F1E0F7 /* OtherMedication+Handling.m */,
 				C4BCF09D17B7A9C000F1E0F7 /* PreviousMedication+Handling.h */,
@@ -2454,6 +2459,7 @@
 				C4C418D515F1363C00882416 /* DataLoader.m in Sources */,
 				C4C418D615F1363C00882416 /* XMLAttribute.m in Sources */,
 				C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */,
+				0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */,
 				C4C418D715F1363C00882416 /* XMLDocument.m in Sources */,
 				C4C418D815F1363C00882416 /* XMLElement.m in Sources */,
 				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
