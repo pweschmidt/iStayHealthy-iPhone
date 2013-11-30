@@ -34,7 +34,12 @@
     range.type = tuple.type;
     range.maxValue = [tuple.valueTuple maxNumber];
     range.minValue = [tuple.valueTuple minNumber];
-    if (![range.type isEqualToString:kViralLoad] && ![range.type isEqualToString:kHepCViralLoad])
+    if ([range.type isEqualToString:kViralLoad] || [range.type isEqualToString:kHepCViralLoad])
+    {
+        range.minValue = [NSNumber numberWithFloat:0.1];
+        range.maxValue = [NSNumber numberWithFloat:1000000000];
+    }
+    else
     {
         [range correctForTicks:ticks];
     }

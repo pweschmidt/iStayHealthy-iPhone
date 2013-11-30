@@ -16,9 +16,11 @@
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, strong) CALayer *plotLayer;
 
-- (id)initWithFrame:(CGRect)frame;
+- (id)initWithFrame:(CGRect)frame
+         lineColour:(UIColor *)lineColour
+         valueRange:(PWESValueRange *)valueRange
+           dateLine:(NSArray *)dateLine
+              ticks:(CGFloat)ticks;
 
-- (void)showNoData;
-
-- (void)show;
+- (void)plotDataTuple:(PWESDataTuple *)tuple;
 @end
