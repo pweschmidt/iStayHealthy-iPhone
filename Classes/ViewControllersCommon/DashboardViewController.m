@@ -16,7 +16,8 @@
 #import "PWESDataNTuple.h"
 #import "CoreDataManager.h"
 #import "GeneralSettings.h"
-#import "EditResultsTableViewController.h"
+//#import "EditResultsTableViewController.h"
+#import "EditChartsTableViewController.h"
 
 @interface DashboardViewController ()
 {
@@ -84,7 +85,10 @@
 
 - (void)addButtonPressed:(id)sender
 {
+    /*
     EditResultsTableViewController *controller = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+     */
+    EditChartsTableViewController *controller = [[EditChartsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

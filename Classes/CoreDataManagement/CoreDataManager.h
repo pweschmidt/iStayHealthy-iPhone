@@ -45,4 +45,6 @@
 
 - (id)managedObjectForEntityName:(NSString *)entityName;
 
+- (NSDictionary *)attributesForEntityName:(NSString *)entityName;
+
 @end

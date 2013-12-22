@@ -320,6 +320,13 @@
                                          inManagedObjectContext:self.defaultContext];
 }
 
+- (NSDictionary *)attributesForEntityName:(NSString *)entityName
+{
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName
+                                                         inManagedObjectContext:self.defaultContext];
+    NSDictionary *attributes = [entityDescription attributesByName];
+    return attributes;    
+}
 
 - (void)addFileToImportList:(NSURL *)sourceURL error:(NSError **)error
 {
