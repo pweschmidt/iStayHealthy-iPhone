@@ -81,6 +81,7 @@
     self.pageController.numberOfPages = self.dashboardTypes.count;
     self.pageController.currentPage = 0;
     [self.view addSubview:pager];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(addButtonPressed:)];
 }
 
 - (void)addButtonPressed:(id)sender
@@ -220,5 +221,11 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     self.pageControlUsed = NO;
+}
+
+#pragma mark ChartSelector method
+- (void)selectedCharts:(NSArray *)selectedCharts
+{
+    
 }
 @end

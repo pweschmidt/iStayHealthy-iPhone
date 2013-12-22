@@ -465,6 +465,7 @@
 /* Begin PBXFileReference section */
 		0B3F19451866F9F00091704C /* EditChartsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditChartsTableViewController.h; path = ViewControllersiPhone/EditChartsTableViewController.h; sourceTree = "<group>"; };
 		0B3F19461866F9F00091704C /* EditChartsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditChartsTableViewController.m; path = ViewControllersiPhone/EditChartsTableViewController.m; sourceTree = "<group>"; };
+		0B3F19481867044D0091704C /* ChartSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChartSelector.h; path = ViewControllersiPhone/ChartSelector.h; sourceTree = "<group>"; };
 		0B47527218422D2F0079A239 /* NSString+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Extras.h"; path = "Categories/NSString+Extras.h"; sourceTree = "<group>"; };
 		0B47527318422D2F0079A239 /* NSString+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extras.m"; path = "Categories/NSString+Extras.m"; sourceTree = "<group>"; };
 		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
@@ -1567,6 +1568,7 @@
 		C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */ = {
 			isa = PBXGroup;
 			children = (
+				0B3F19481867044D0091704C /* ChartSelector.h */,
 				C45C27C517DB5A5B001F6831 /* EditAlertsTableViewController.h */,
 				C45C27C617DB5A5B001F6831 /* EditAlertsTableViewController.m */,
 				C45C27C817DB5A75001F6831 /* EditAppointmentsTableViewController.h */,

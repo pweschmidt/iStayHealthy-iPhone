@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSArray *results;
 @property (nonatomic, strong) NSMutableArray *immutableIndexPaths;
 @property (nonatomic, strong) NSMutableDictionary *mutableIndexPaths;
+@property (nonatomic, strong) NSMutableArray *selectedItems;
+@property (nonatomic, assign) BOOL settingsChanged;
 @end
 
 @implementation EditChartsTableViewController
@@ -28,12 +30,47 @@
     self.results = attributes.allKeys;
     self.immutableIndexPaths = [NSMutableArray array];
     self.mutableIndexPaths = [NSMutableDictionary dictionary];
+    self.selectedItems = [NSMutableArray arrayWithArray:@[kCD4,kViralLoad]];
+    NSArray *barButtons = nil;
+    UIButton *save = [UIButton buttonWithType:UIButtonTypeCustom];
+    save.frame = CGRectMake(0, 0, 20, 20);
+    save.backgroundColor = [UIColor clearColor];
+    [save setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
+    [save addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
+    barButtons = @[saveButton];
+    self.navigationItem.rightBarButtonItems = barButtons;
+    self.settingsChanged = NO;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)save:(id)sender
+{
+    if (!self.settingsChanged)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No changes", nil)
+                                                        message:NSLocalizedString(@"There are no changes to your settings", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    if (nil != self.chartSelector && [self.chartSelector respondsToSelector:@selector(selectedCharts:)])
+    {
+        [self.chartSelector selectedCharts:self.selectedItems];
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Dashboard", nil)
+                                                    message:NSLocalizedString(@"Your dashboard settings changed", nil)
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark - Table view data source
@@ -86,16 +123,36 @@
     }
     NSNumber *number = [self.mutableIndexPaths objectForKey:indexPath];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *attributeName = [self.results objectAtIndex:indexPath.row];
     if (nil != number)
     {
         BOOL checked = ![number boolValue];
         [self.mutableIndexPaths setObject:[NSNumber numberWithBool:checked] forKey:indexPath];
         cell.accessoryType = (checked) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        if (checked)
+        {
+            if (![self.selectedItems containsObject:attributeName])
+            {
+                [self.selectedItems addObject:attributeName];
+            }
+        }
+        else
+        {
+            if ([self.selectedItems containsObject:attributeName])
+            {
+                [self.selectedItems removeObject:attributeName];
+            }
+        }
     }
     else
     {
         [self.mutableIndexPaths setObject:@(1) forKey:indexPath];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.selectedItems addObject:attributeName];
+    }
+    if (!self.settingsChanged)
+    {
+        self.settingsChanged = YES;
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }

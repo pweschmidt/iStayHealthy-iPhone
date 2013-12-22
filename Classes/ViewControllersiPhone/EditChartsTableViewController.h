@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ChartSelector.h"
 @interface EditChartsTableViewController : UITableViewController
-
+@property (nonatomic, weak) id<ChartSelector>chartSelector;
 @end
