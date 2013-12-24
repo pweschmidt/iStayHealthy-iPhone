@@ -14,6 +14,7 @@
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
+		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
 		1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -478,6 +479,7 @@
 		0B60485B1840D1BA0092B5FB /* PWESValueRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESValueRange.m; path = Dashboard/PWESValueRange.m; sourceTree = "<group>"; };
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
+		0BCBA8E018699B870098D2DA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iStayHealthyAppDelegate.m; sourceTree = "<group>"; };
@@ -1341,6 +1343,7 @@
 				C43BE58E15F7CBE400108EF8 /* SideEffects.plist */,
 				C4FCF92316137993008F81A0 /* NewStatusViewController_iPhone5.xib */,
 				C4FCF92516137E11008F81A0 /* StatusViewControllerLandscape_iPhone5.xib */,
+				0BCBA8E018699B870098D2DA /* Settings.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2251,6 +2254,7 @@
 				C4C0156013425268005E889D /* truvada.png in Resources */,
 				C44D36C4180F3E3600EE9F5E /* doctor@2x.png in Resources */,
 				C48B9BF718094972007CF6DE /* Default-568h@2x.png in Resources */,
+				0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */,
 				C4C0156113425268005E889D /* videx.png in Resources */,
 				C4C0156413425268005E889D /* viread.png in Resources */,
 				C4C0156513425268005E889D /* zerit.png in Resources */,
