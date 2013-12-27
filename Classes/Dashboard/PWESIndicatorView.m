@@ -8,6 +8,8 @@
 
 #import "PWESIndicatorView.h"
 #import "Constants.h"
+#import "ChartSettings.h"
+#import "GeneralSettings.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PWESIndicatorView ()
@@ -51,7 +53,7 @@
         }
         else
         {
-            UIColor * background = [self colourForDifference:difference type:tuple.type];
+            UIColor * background = [self colourForDifference:difference type:tuple.type label:label];
             self.layer.backgroundColor = background.CGColor;
         }
     }
@@ -77,15 +79,16 @@
     }
 }
 
-- (UIColor *)colourForDifference:(float)difference type:(NSString *)type
+- (UIColor *)colourForDifference:(float)difference type:(NSString *)type label:(UILabel *)label
 {
     
-    UIColor *evaluator = (0 > difference) ? [UIColor redColor] : [UIColor greenColor];
-    UIColor *inverseEvaluator = (0 > difference) ? [UIColor greenColor] : [UIColor redColor];
+    UIColor *evaluator = (0 > difference) ? DARK_RED : DARK_GREEN;
+    UIColor *inverseEvaluator = (0 > difference) ? DARK_GREEN : DARK_RED;
     
     if ([type isEqualToString:kCD4]
         || [type isEqualToString:kCD4Percent])
     {
+        label.textColor = [UIColor whiteColor];
         return evaluator;
     }
     else if([type isEqualToString:kHepCViralLoad]
@@ -94,6 +97,7 @@
             || [type isEqualToString:kTotalCholesterol]
             || [type isEqualToString:kHDL])
     {
+        label.textColor = [UIColor whiteColor];
         return inverseEvaluator;
     }
     
