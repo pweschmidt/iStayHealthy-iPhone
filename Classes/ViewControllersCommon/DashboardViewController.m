@@ -26,6 +26,7 @@
 }
 @property (nonatomic, assign) BOOL pageControlUsed;
 @property (nonatomic, strong) NSMutableArray *dashboardTypes;
+@property (nonatomic, strong) NSArray *selectedItems;
 @end
 
 @implementation DashboardViewController
@@ -54,42 +55,35 @@
     self.chartScroller.scrollsToTop = YES;
     self.chartScroller.pagingEnabled = YES;
     self.dashboardTypes = [NSMutableArray array];
-    NSArray *cd4VL = @[kCD4, kViralLoad];
-    NSArray *cd4PVL = @[kCD4Percent, kViralLoad];
-    NSArray *bloodpressure = @[kSystole];
-    NSArray *cholesterol = @[kTotalCholesterol, kHDL];
-    NSArray *weight = @[kWeight];
-    NSArray *glucose = @[kGlucose];
-    NSArray *risk = @[kCardiacRiskFactor];
-    [self.dashboardTypes addObject:cd4VL];
-    [self.dashboardTypes addObject:cd4PVL];
-    [self.dashboardTypes addObject:bloodpressure];
-    [self.dashboardTypes addObject:cholesterol];
-    [self.dashboardTypes addObject:weight];
-    [self.dashboardTypes addObject:glucose];
-    [self.dashboardTypes addObject:risk];
     
-    
-    UIPageControl *pager = [[UIPageControl alloc] initWithFrame:pageFrame];
-    self.pageController = pager;
-    self.pageController.backgroundColor = [UIColor clearColor];
-    self.pageController.tintColor = [UIColor lightGrayColor];
-    self.pageController.pageIndicatorTintColor = [UIColor lightGrayColor];
-    self.pageController.currentPageIndicatorTintColor = DARK_RED;
-    [self.pageController addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
-    self.chartScroller.contentSize = CGSizeMake(self.view.frame.size.width * self.dashboardTypes.count, self.chartScroller.frame.size.height);
-    self.pageController.numberOfPages = self.dashboardTypes.count;
-    self.pageController.currentPage = 0;
-    [self.view addSubview:pager];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *archivedData = [defaults objectForKey:kDashboardTypes];
+    NSMutableArray *selected = nil;
+    if (nil != archivedData)
+    {
+        selected = [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    }
+    else
+    {
+        selected = (NSMutableArray *)@[kCD4AndVL,
+                                       kCD4PercentAndVL,
+                                       kGlucose,
+                                       kTotalCholesterol,
+                                       kHDL,
+                                       kSystole,
+                                       kWeight,
+                                       kCardiacRiskFactor];
+    }
+    [self selectedCharts:selected];
+    [self resetPageController];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(addButtonPressed:)];
 }
 
 - (void)addButtonPressed:(id)sender
 {
-    /*
-    EditResultsTableViewController *controller = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-     */
-    EditChartsTableViewController *controller = [[EditChartsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    EditChartsTableViewController *controller = [[EditChartsTableViewController alloc]
+                                                 initWithSelectedItems:self.selectedItems];
+    controller.chartSelector = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -226,6 +220,47 @@
 #pragma mark ChartSelector method
 - (void)selectedCharts:(NSArray *)selectedCharts
 {
-    
+    self.selectedItems = selectedCharts;
+    [self.dashboardTypes removeAllObjects];
+    NSArray *cd4VL = @[kCD4, kViralLoad];
+    NSArray *cd4PVL = @[kCD4Percent, kViralLoad];
+    for (NSString *type in selectedCharts)
+    {
+        if ([type isEqualToString:kCD4AndVL])
+        {
+            [self.dashboardTypes addObject:cd4VL];
+        }
+        else if ([type isEqualToString:kCD4PercentAndVL])
+        {
+            [self.dashboardTypes addObject:cd4PVL];
+        }
+        else
+        {
+            [self.dashboardTypes addObject:@[type]];
+        }
+    }
+    [self resetPageController];
+}
+
+
+#pragma mark private
+- (void)resetPageController
+{
+    if (nil != self.pageController)
+    {
+        [self.pageController removeFromSuperview];
+    }
+    UIPageControl *pager = [[UIPageControl alloc] initWithFrame:pageFrame];
+    self.pageController = pager;
+    self.pageController.backgroundColor = [UIColor clearColor];
+    self.pageController.tintColor = [UIColor lightGrayColor];
+    self.pageController.pageIndicatorTintColor = [UIColor lightGrayColor];
+    self.pageController.currentPageIndicatorTintColor = DARK_RED;
+    [self.pageController addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
+    self.chartScroller.contentSize = CGSizeMake(self.view.frame.size.width * self.dashboardTypes.count, self.chartScroller.frame.size.height);
+    self.pageController.numberOfPages = self.dashboardTypes.count;
+    self.pageController.currentPage = 0;
+    [self.view addSubview:pager];
+    [self reloadSQLData:nil];
 }
 @end

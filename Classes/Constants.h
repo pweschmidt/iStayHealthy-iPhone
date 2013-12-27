@@ -277,6 +277,10 @@ extern NSString * const kDataTablesCleaned;
 extern NSString * const kIsPasswordEnabled;
 extern NSString * const kPassword;
 extern NSString * const kPasswordTransferred;
+extern NSString * const kPasswordReset;
+extern NSString * const kDashboardTypes;
+extern NSString * const kCD4AndVL;
+extern NSString * const kCD4PercentAndVL;
 
 extern NSString * const kResultsData;
 extern NSString * const kMedicationData;

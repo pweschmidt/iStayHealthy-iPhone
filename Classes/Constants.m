@@ -196,6 +196,10 @@ NSString * const kDataTablesCleaned = @"dataTablesCleaned";
 NSString * const kIsPasswordEnabled = @"isPasswordEnabled";
 NSString * const kPassword = @"password";
 NSString * const kPasswordTransferred = @"passwordIsTransferred";
+NSString * const kPasswordReset = @"resetPassword";
+NSString * const kDashboardTypes = @"dashboardTypes";
+NSString * const kCD4AndVL = @"CD4AndVL";
+NSString * const kCD4PercentAndVL = @"CD4PercentAndVL";
 
 NSString * const kResultsData = @"ResultsData";
 NSString * const kMedicationData = @"MedicationData";

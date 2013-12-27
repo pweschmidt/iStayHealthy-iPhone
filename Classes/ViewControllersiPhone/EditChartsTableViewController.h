@@ -10,4 +10,5 @@
 #import "ChartSelector.h"
 @interface EditChartsTableViewController : UITableViewController
 @property (nonatomic, weak) id<ChartSelector>chartSelector;
+- (id)initWithSelectedItems:(NSArray *)items;
 @end

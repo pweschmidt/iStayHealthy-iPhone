@@ -7,7 +7,6 @@
 //
 
 #import "EditChartsTableViewController.h"
-#import "CoreDataManager.h"
 #import "Constants.h"
 #import "GeneralSettings.h"
 #import "UIFont+Standard.h"
@@ -21,16 +20,23 @@
 @end
 
 @implementation EditChartsTableViewController
+- (id)initWithSelectedItems:(NSArray *)items
+{
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (nil != self)
+    {
+        _selectedItems = [NSMutableArray arrayWithArray:items];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
-    NSDictionary *attributes = [[CoreDataManager sharedInstance] attributesForEntityName:kResults];
-    self.results = attributes.allKeys;
+    self.results = [self dashboardTypes];
     self.immutableIndexPaths = [NSMutableArray array];
     self.mutableIndexPaths = [NSMutableDictionary dictionary];
-    self.selectedItems = [NSMutableArray arrayWithArray:@[kCD4,kViralLoad]];
     NSArray *barButtons = nil;
     UIButton *save = [UIButton buttonWithType:UIButtonTypeCustom];
     save.frame = CGRectMake(0, 0, 20, 20);
@@ -64,13 +70,17 @@
     if (nil != self.chartSelector && [self.chartSelector respondsToSelector:@selector(selectedCharts:)])
     {
         [self.chartSelector selectedCharts:self.selectedItems];
+        NSData *archivedSelector = [NSKeyedArchiver archivedDataWithRootObject:self.selectedItems];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:archivedSelector forKey:kDashboardTypes];
+        [defaults synchronize];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Dashboard", nil)
+                                                        message:NSLocalizedString(@"Your dashboard settings changed", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Dashboard", nil)
-                                                    message:NSLocalizedString(@"Your dashboard settings changed", nil)
-                                                   delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                          otherButtonTitles:nil];
-    [alert show];
 }
 
 #pragma mark - Table view data source
@@ -98,14 +108,17 @@
     cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
     cell.textLabel.textColor = TEXTCOLOUR;
     
-    if ([attributeName isEqualToString:kCD4] || [attributeName isEqualToString:kViralLoad])
+    if ([attributeName isEqualToString:kCD4AndVL])
     {
         cell.textLabel.textColor = [UIColor lightGrayColor];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.immutableIndexPaths addObject:indexPath];
     }
-    
+    else if ([self.selectedItems containsObject:attributeName])
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;        
+    }
     return cell;
 }
 
@@ -155,6 +168,16 @@
         self.settingsChanged = YES;
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+}
+
+- (NSArray *)dashboardTypes
+{
+    NSArray *types = @[kCD4AndVL, kCD4PercentAndVL,
+                       kGlucose, kTotalCholesterol, kTriglyceride,
+                       kHDL, kLDL, kCholesterolRatio, kHemoglobulin,
+                       kWhiteBloodCells, kRedBloodCells, kPlatelet,
+                       kWeight, kBMI, kSystole, kCardiacRiskFactor];
+    return types;
 }
 
 @end

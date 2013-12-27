@@ -40,7 +40,8 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
-    if (isPasswordEnabled)
+    BOOL isPasswordReset = [defaults boolForKey:kPasswordReset];
+    if (isPasswordEnabled && !isPasswordReset)
     {
         NSLog(@"calling the login view controller");
         [self.view addSubview:self.loginController.view];
@@ -48,6 +49,15 @@
     }
     else
     {
+        if (isPasswordReset)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
+                                                            message:NSLocalizedString(@"You reset your password", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
         NSLog(@"Calling the content container view controller");
         [self.view addSubview:self.contentController.view];
         self.currentController = self.contentController;
