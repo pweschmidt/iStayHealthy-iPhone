@@ -23,10 +23,52 @@
 @property (nonatomic, strong) NSArray *editResultsMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISwitch *undetectableSwitch;
+@property (nonatomic, strong) NSMutableDictionary *segmentMap;
+@property (nonatomic, strong) NSMutableDictionary *textFieldMap;
+@property (nonatomic, strong) NSMutableDictionary *valueMap;
 @property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
 @end
 
 @implementation EditResultsTableViewController
+
+- (id)initWithStyle:(UITableViewStyle)style
+      managedObject:(NSManagedObject *)managedObject
+  hasNumericalInput:(BOOL)hasNumericalInput
+{
+    self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
+    if (nil != self)
+    {
+        [self populateValueMap];
+    }
+    return self;
+}
+
+- (void)populateValueMap
+{
+    self.valueMap = [NSMutableDictionary dictionary];
+    if (!self.isEditMode)
+    {
+        return;
+    }
+    Results *results = (Results *)self.managedObject;
+    NSDictionary *attributes = [[results entity] attributesByName];
+    for (NSString *attribute in attributes.allKeys)
+    {
+        id value = [results valueForKey:attribute];
+        if ([value isKindOfClass:[NSDate class]])
+        {
+            self.date = (NSDate *)value;
+        }
+        else if ([value isKindOfClass:[NSNumber class]])
+        {
+            NSNumber *valueAsNumber = (NSNumber *)value;
+            if (0 < [valueAsNumber floatValue])
+            {
+                [self.valueMap setObject:value forKey:attribute];
+            }
+        }
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -34,6 +76,9 @@
     labelFrame = CGRectMake(20, 0, 115, 44);
     separatorFrame = CGRectMake(117, 4, 2, 40);
     textViewFrame = CGRectMake(120, 0, 150, 44);
+    self.segmentMap = [NSMutableDictionary dictionary];
+    self.textFieldMap = [NSMutableDictionary dictionary];
+    
     if (self.isEditMode)
     {
         self.navigationItem.title = NSLocalizedString(@"Edit Result", nil);
@@ -43,30 +88,13 @@
         self.navigationItem.title = NSLocalizedString(@"New Result", nil);
     }
     
-    NSArray *hivMenu = @[kCD4,
-                         kCD4Percent,
-                         kViralLoad];
     
-    NSArray *bloodMenu = @[kGlucose,
-                           kTotalCholesterol,
-                           kTriglyceride,
-                           kHDL,
-                           kLDL,
-                           kCholesterolRatio];
-    NSArray *cellsMenu = @[kHemoglobulin,
-                           kWhiteBloodCells,
-                           kRedBloodCells,
-                           kPlatelet];
-    NSArray *otherMenu = @[kWeight,
-                           kBMI,
-                           kBloodPressure,
-                           kCardiacRiskFactor];
-
-    
-    NSArray *menuTitles = @[NSLocalizedString(@"HIV Result", nil),
-                            NSLocalizedString(@"Blood Result", nil),
+    NSArray *menuTitles = @[NSLocalizedString(@"HIV", nil),
+                            NSLocalizedString(@"Bloods", nil),
                             NSLocalizedString(@"Cells", nil),
-                            NSLocalizedString(@"Other Result", nil)];
+                            NSLocalizedString(@"Other", nil)/*,
+                            NSLocalizedString(@"Liver",nil)*/];
+    
     self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
     
     CGFloat width = self.tableView.bounds.size.width;
@@ -76,13 +104,7 @@
     self.resultsSegmentControl.selectedSegmentIndex = 0;
     [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
     
-    self.menus = @{@"HIV" : hivMenu,
-                   @"Bloods" : bloodMenu,
-                   @"Cells" : cellsMenu,
-                   @"Other" : otherMenu};
-    
-    self.editResultsMenu = hivMenu;
-    
+    [self prepareMenus];
     
     self.defaultValues = @[@"400-1500",
                            @"20.0 - 50.0",
@@ -103,39 +125,25 @@
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
     self.undetectableSwitch = [[UISwitch alloc] init];
     [self.undetectableSwitch addTarget:self action:@selector(switchUndetectable:) forControlEvents:UIControlEventValueChanged];
-    [self.undetectableSwitch setOn:NO];
+    if (self.isEditMode)
+    {
+        NSNumber *vlValue = [self.valueMap objectForKey:kViralLoad];
+        if (nil != vlValue && 1 >= [vlValue floatValue])
+        {
+            [self.undetectableSwitch setOn:YES];
+        }
+        else
+        {
+            [self.undetectableSwitch setOn:NO];
+        }
+    }
     self.menuDelegate = nil;
 }
 
 - (void)setDefaultValues
 {
-    if (!self.isEditMode)
-    {
-        return;
-    }
-    Results *results = (Results *)self.managedObject;
-    int index = 0;
-    self.date = results.ResultsDate;
-    for (NSNumber *key  in self.textViews.allKeys)
-    {
-        id viewObj = [self.textViews objectForKey:key];
-        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editResultsMenu.count)
-        {
-            UITextField *textField = (UITextField *)viewObj;
-            NSString *type = [self.editResultsMenu objectAtIndex:index];
-            textField.text = [results valueStringForType:type];
-            if ([textField.text isEqualToString:NSLocalizedString(@"Enter Value", nil)])
-            {
-                textField.textColor = [UIColor lightGrayColor];
-            }
-            if ([type isEqualToString:kViralLoad] && [textField.text isEqualToString:NSLocalizedString(@"undetectable", nil)]) {
-                [self.undetectableSwitch setOn:YES];
-            }
-        }
-        ++index;
-    }
 }
+
 
 - (void)save:(id)sender
 {
@@ -153,26 +161,32 @@
     {
         return;
     }
-    results.UID = [Utilities GUID];
-    results.ResultsDate = self.date;
-    int index = 0;
-    for (NSNumber *number in self.textViews.allKeys)
+    
+    NSDictionary *attributes = [[results entity] attributesByName];
+    for (NSString *attribute in attributes.allKeys)
     {
-        id viewObj = [self.textViews objectForKey:number];
-        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editResultsMenu.count)
+        if ([attribute isEqualToString:kUID])
         {
-            UITextField *textField = (UITextField *)viewObj;
-            NSString *valueString = textField.text;
-            NSString *type = [self.editResultsMenu objectAtIndex:index];
-            [results addValueString:valueString type:type];
+            results.UID = [Utilities GUID];
         }
-        ++index;
+        else if ([attribute isEqualToString:kResultsDate])
+        {
+            results.ResultsDate = self.date;
+        }
+        else
+        {
+            NSNumber *value = [self.valueMap objectForKey:attribute];
+            if (nil != value && 0 < [value floatValue])
+            {
+                [results setValue:value forKey:attribute];
+            }
+            else
+            {
+                [results setValue:@(-1) forKey:attribute];
+            }
+        }
     }
-    if (self.undetectableSwitch.isOn)
-    {
-        [results addValueString:@"0" type:kViralLoad];
-    }
+    
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self.navigationController popViewControllerAnimated:YES];
@@ -215,25 +229,6 @@
     }
 }
 
-
-- (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *identifier = nil;
-    if (0 == indexPath.section)
-    {
-        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
-        if ([self hasInlineDatePicker])
-        {
-            identifier = [NSString stringWithFormat:@"DatePickerCell"];
-        }
-    }
-    else
-    {
-        identifier = [NSString stringWithFormat:@"ResultsCell%d", indexPath.row];
-    }
-    return identifier;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = [self identifierForIndexPath:indexPath];
@@ -255,10 +250,12 @@
     {
         NSString *resultsString = [self.editResultsMenu objectAtIndex:indexPath.row];
         NSString *text = NSLocalizedString(resultsString, nil);
+        cell.tag = [self tagForIndex:indexPath];
         [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
     }
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -318,9 +315,134 @@
     return footerView;
 }
 
+#pragma mark - textfield delegate overrides
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [super textFieldDidEndEditing:textField];
+    if (nil == textField.text || [textField.text isEqualToString:@""])
+    {
+        return;
+    }
+    NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
+    NSNumber *foundTag = nil;
+    for (NSNumber *tag in self.textFieldMap.allKeys)
+    {
+        UITextField *field = [self.textFieldMap objectForKey:tag];
+        if ([field isEqual:textField])
+        {
+            foundTag = tag;
+        }
+    }
+    if (nil == foundTag)
+    {
+        return;
+    }
+    NSString *attribute = [self.segmentMap objectForKey:foundTag];
+    if (nil != attribute)
+    {
+        [self.valueMap setObject:value forKey:attribute];
+    }
+}
+
+#pragma mark - private methods
+- (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
+{
+    [super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+    NSNumber *tagNumber = [self tagNumberForIndex:indexPath.row
+                                          segment:self.resultsSegmentControl.selectedSegmentIndex];
+    UITextField *textField = [self.textFieldMap objectForKey:tagNumber];
+    if (nil == textField)
+    {
+        for (id view in cell.contentView.subviews)
+        {
+            if ([view isKindOfClass:[UITextField class]])
+            {
+                textField = (UITextField *)view;
+                [self.textFieldMap setObject:view forKey:tagNumber];
+            }
+        }
+    }
+    NSString *attribute = [self.segmentMap objectForKey:tagNumber];
+    if (nil != attribute && nil != textField)
+    {
+        NSNumber *value = [self.valueMap objectForKey:attribute];
+        if (0 < [value floatValue])
+        {
+            if ([attribute isEqualToString:kViralLoad] && 1 >= [value floatValue])
+            {
+                textField.text = NSLocalizedString(@"undetectable", nil);
+                textField.textColor = [UIColor blackColor];
+                textField.enabled = NO;
+            }
+            else
+            {
+                textField.text = [NSString stringWithFormat:@"%9.2f",[value floatValue]];
+                textField.textColor = [UIColor blackColor];
+                textField.enabled = YES;
+            }
+        }
+        else
+        {
+            textField.text = NSLocalizedString(@"Enter Value", nil);
+            textField.textColor = [UIColor lightGrayColor];
+            textField.enabled = YES;
+        }
+    }
+}
+
+
+- (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = nil;
+    if (0 == indexPath.section)
+    {
+        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
+        if ([self hasInlineDatePicker])
+        {
+            identifier = [NSString stringWithFormat:@"DatePickerCell"];
+        }
+    }
+    else
+    {
+        identifier = [NSString stringWithFormat:@"ResultsCell%d", indexPath.row];
+    }
+    return identifier;
+}
 
 - (void)switchUndetectable:(id)sender
 {
+    NSNumber *foundTag = nil;
+    for (NSNumber *tag in self.segmentMap.allKeys)
+    {
+        NSString *vl = [self.segmentMap objectForKey:tag];
+        if ([vl isEqualToString:kViralLoad])
+        {
+            foundTag = tag;
+        }
+    }
+    if (nil == foundTag)
+    {
+        return;
+    }
+    UITextField *textField = [self.textFieldMap objectForKey:foundTag];
+    if (nil == textField)
+    {
+        return;
+    }
+    if (self.undetectableSwitch.isOn)
+    {
+        textField.text = NSLocalizedString(@"undetectable", nil);
+        textField.textColor = [UIColor blackColor];
+        textField.enabled = NO;
+        [self.valueMap setObject:@(1) forKey:kViralLoad];
+    }
+    else
+    {
+        textField.text = @"";
+        textField.textColor = [UIColor blackColor];
+        textField.enabled = YES;
+        [self.valueMap removeObjectForKey:kViralLoad];
+    }
 }
 
 - (void)indexDidChangeForSegment
@@ -349,4 +471,72 @@
 }
 
 
+- (void)prepareMenus
+{
+    NSArray *hivMenu = @[kCD4,
+                         kCD4Percent,
+                         kViralLoad];
+    [self prepareSegmentMapForMenu:hivMenu segment:0];
+    
+    NSArray *bloodMenu = @[kGlucose,
+                           kTotalCholesterol,
+                           kTriglyceride,
+                           kHDL,
+                           kLDL,
+                           kCholesterolRatio];
+    [self prepareSegmentMapForMenu:bloodMenu segment:1];
+    
+    NSArray *cellsMenu = @[kHemoglobulin,
+                           kWhiteBloodCells,
+                           kRedBloodCells,
+                           kPlatelet];
+    [self prepareSegmentMapForMenu:cellsMenu segment:2];
+    
+    NSArray *otherMenu = @[kWeight,
+                           kBMI,
+                           kBloodPressure,
+                           kCardiacRiskFactor];
+    
+    [self prepareSegmentMapForMenu:otherMenu segment:3];
+    
+    
+    /*
+     NSArray *liverMenu = @[kLiverAlanineTransaminase,
+     kLiverAspartateTransaminase,
+     kLiverAlkalinePhosphatase,
+     kLiverAlbumin,
+     kLiverAlanineTotalBilirubin,
+     kLiverAlanineDirectBilirubin,
+     kLiverGammaGlutamylTranspeptidase];
+     */
+    
+    self.menus = @{@"HIV" : hivMenu,
+                   @"Bloods" : bloodMenu,
+                   @"Cells" : cellsMenu,
+                   @"Other" : otherMenu/*,
+                                        @"Liver" : liverMenu*/};
+    
+    self.editResultsMenu = hivMenu;
+}
+
+- (void)prepareSegmentMapForMenu:(NSArray *)menu segment:(NSUInteger)segment
+{
+    for (NSUInteger index = 0; index < menu.count; ++index)
+    {
+        NSNumber *tag = [self tagNumberForIndex:index segment:segment];
+        NSString *value = [menu objectAtIndex:index];
+        [self.segmentMap setObject:value forKey:tag];
+    }
+}
+
+- (NSNumber *)tagNumberForIndex:(NSUInteger)index segment:(NSUInteger)segment
+{
+    NSUInteger tag = pow(10, segment) + index;
+    return @(tag);
+}
+
+- (NSInteger)tagForIndex:(NSIndexPath *)indexPath
+{
+    return pow(10, self.resultsSegmentControl.selectedSegmentIndex) + indexPath.row;
+}
 @end
