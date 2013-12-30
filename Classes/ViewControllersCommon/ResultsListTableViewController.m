@@ -79,6 +79,10 @@
 
 - (void)configureResultsCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
+    NSArray *subviews = cell.contentView.subviews;
+    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
+        [view removeFromSuperview];
+    }];
     Results *results = [self.results objectAtIndex:indexPath.row];
     CGFloat rowHeight = self.tableView.rowHeight - 2;
     DateView *dateView = [DateView viewWithDate:results.ResultsDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
@@ -93,6 +97,7 @@
     [cell.contentView addSubview:hivView];
     [cell.contentView addSubview:bloodView];
     [cell.contentView addSubview:otherView];
+    [cell.contentView setNeedsDisplay];
 }
 
 

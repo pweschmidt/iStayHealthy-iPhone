@@ -97,16 +97,22 @@
     [defaultContext deleteObject:self.managedObject];
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 - (void)configureTableCell:(UITableViewCell *)cell
                      title:(NSString *)title
                  indexPath:(NSIndexPath *)indexPath
          hasNumericalInput:(BOOL)hasNumericalInput
 {
-    NSNumber *taggedViewNumber = nil;
+    [self configureTableCell:cell title:title indexPath:indexPath segmentIndex:0 hasNumericalInput:hasNumericalInput];
+}
+
+
+- (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath segmentIndex:(NSInteger)segmentIndex hasNumericalInput:(BOOL)hasNumericalInput
+{
+    NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:segmentIndex];
+    /*
     if (nil != self.datePickerIndexPath)
     {
         taggedViewNumber = [NSNumber numberWithInteger:(indexPath.row - 2)];
@@ -115,7 +121,7 @@
     {
         taggedViewNumber = [NSNumber numberWithInteger:(indexPath.row - 1)];
     }
-    
+    */
     cell.contentView.backgroundColor = [UIColor clearColor];
     
     UIView *mainContentView = [self.contentViewsDictionary objectForKey:taggedViewNumber];
@@ -155,6 +161,7 @@
         textField.tag = [taggedViewNumber integerValue];
         textField.frame = CGRectMake(100, 0, cell.contentView.frame.size.width - 120, cell.contentView.frame.size.height);
         textField.delegate = self;
+        textField.clearsOnBeginEditing = YES;
         textField.font = [UIFont systemFontOfSize:15];
         if (hasNumericalInput)
         {
@@ -179,6 +186,7 @@
     [cell.contentView bringSubviewToFront:textField];
     
 }
+
 
 - (void)configureDateCell:(UITableViewCell *)cell
                 indexPath:(NSIndexPath *)indexPath
@@ -229,7 +237,11 @@
     [cell.contentView addSubview:datePicker];
 }
 
-
+- (NSNumber *)tagNumberForIndex:(NSUInteger)index segment:(NSUInteger)segment
+{
+    NSUInteger tag = pow(10, segment) + index;
+    return @(tag);
+}
 
 
 #pragma mark - Table view data source
@@ -276,6 +288,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    textField.text = @"";
     textField.textColor = [UIColor blackColor];
     UIColor *backgroundColour = [UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:235.0f/255.0f alpha:0.8];
     

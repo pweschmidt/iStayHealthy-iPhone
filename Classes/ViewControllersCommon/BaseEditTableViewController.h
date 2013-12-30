@@ -40,6 +40,12 @@
                  indexPath:(NSIndexPath *)indexPath
          hasNumericalInput:(BOOL)hasNumericalInput;
 
+- (void)configureTableCell:(UITableViewCell *)cell
+                     title:(NSString *)title
+                 indexPath:(NSIndexPath *)indexPath
+              segmentIndex:(NSInteger)segmentIndex
+         hasNumericalInput:(BOOL)hasNumericalInput;
+
 - (void)configureDateCell:(UITableViewCell *)cell
                 indexPath:(NSIndexPath *)indexPath
                  dateType:(DateType)dateType;
@@ -56,4 +62,5 @@
 - (BOOL)hasInlineDatePicker;
 - (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;
 - (UIImage *)blankImage;
+- (NSNumber *)tagNumberForIndex:(NSUInteger)index segment:(NSUInteger)segment;
 @end

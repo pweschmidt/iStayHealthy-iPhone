@@ -24,7 +24,6 @@
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISwitch *undetectableSwitch;
 @property (nonatomic, strong) NSMutableDictionary *segmentMap;
-@property (nonatomic, strong) NSMutableDictionary *textFieldMap;
 @property (nonatomic, strong) NSMutableDictionary *valueMap;
 @property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
 @end
@@ -77,7 +76,6 @@
     separatorFrame = CGRectMake(117, 4, 2, 40);
     textViewFrame = CGRectMake(120, 0, 150, 44);
     self.segmentMap = [NSMutableDictionary dictionary];
-    self.textFieldMap = [NSMutableDictionary dictionary];
     
     if (self.isEditMode)
     {
@@ -325,9 +323,9 @@
     }
     NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
     NSNumber *foundTag = nil;
-    for (NSNumber *tag in self.textFieldMap.allKeys)
+    for (NSNumber *tag in self.textViews.allKeys)
     {
-        UITextField *field = [self.textFieldMap objectForKey:tag];
+        UITextField *field = [self.textViews objectForKey:tag];
         if ([field isEqual:textField])
         {
             foundTag = tag;
@@ -347,20 +345,13 @@
 #pragma mark - private methods
 - (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
 {
-    [super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+    [super configureTableCell:cell title:title indexPath:indexPath segmentIndex:self.resultsSegmentControl.selectedSegmentIndex hasNumericalInput:hasNumericalInput];
     NSNumber *tagNumber = [self tagNumberForIndex:indexPath.row
                                           segment:self.resultsSegmentControl.selectedSegmentIndex];
-    UITextField *textField = [self.textFieldMap objectForKey:tagNumber];
+    UITextField *textField = [self.textViews objectForKey:tagNumber];
     if (nil == textField)
     {
-        for (id view in cell.contentView.subviews)
-        {
-            if ([view isKindOfClass:[UITextField class]])
-            {
-                textField = (UITextField *)view;
-                [self.textFieldMap setObject:view forKey:tagNumber];
-            }
-        }
+        return;
     }
     NSString *attribute = [self.segmentMap objectForKey:tagNumber];
     if (nil != attribute && nil != textField)
@@ -424,7 +415,7 @@
     {
         return;
     }
-    UITextField *textField = [self.textFieldMap objectForKey:foundTag];
+    UITextField *textField = [self.textViews objectForKey:foundTag];
     if (nil == textField)
     {
         return;
@@ -529,11 +520,6 @@
     }
 }
 
-- (NSNumber *)tagNumberForIndex:(NSUInteger)index segment:(NSUInteger)segment
-{
-    NSUInteger tag = pow(10, segment) + index;
-    return @(tag);
-}
 
 - (NSInteger)tagForIndex:(NSIndexPath *)indexPath
 {
