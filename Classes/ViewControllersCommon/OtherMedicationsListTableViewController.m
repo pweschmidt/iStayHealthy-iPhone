@@ -68,6 +68,10 @@
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
+    NSArray *subviews = cell.contentView.subviews;
+    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
+        [view removeFromSuperview];
+    }];
     OtherMedication *med = [self.otherMediction objectAtIndex:indexPath.row];
     CGFloat rowHeight = self.tableView.rowHeight - 2;
     DateView *dateView = [DateView viewWithDate:med.StartDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];

@@ -66,6 +66,10 @@
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
+    NSArray *subviews = cell.contentView.subviews;
+    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
+        [view removeFromSuperview];
+    }];
     UILocalNotification *notification = [self.notifications objectAtIndex:indexPath.row];
     CGFloat rowHeight = self.tableView.rowHeight - 2;
     TimeView *timeView = [TimeView viewWithTime:notification.fireDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];

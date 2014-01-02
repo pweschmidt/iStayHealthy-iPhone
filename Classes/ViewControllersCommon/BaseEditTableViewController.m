@@ -79,9 +79,6 @@
 
 - (void)setDefaultValues
 {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-                                 userInfo:nil];
 }
 
 - (void)save:(id)sender
@@ -178,7 +175,7 @@
         }
         
         textField.returnKeyType = UIReturnKeyDone;
-        textField.placeholder = @"Enter Value";
+        textField.placeholder = NSLocalizedString(@"Enter Value", nil);
         [self.textViews setObject:textField forKey:taggedViewNumber];
     }
     

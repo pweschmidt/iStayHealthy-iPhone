@@ -67,6 +67,10 @@
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
+    NSArray *subviews = cell.contentView.subviews;
+    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
+        [view removeFromSuperview];
+    }];
     MissedMedication *missed = (MissedMedication *)[self.missed objectAtIndex:indexPath.row];
     CGFloat rowHeight = self.tableView.rowHeight - 2;
     DateView *dateView = [DateView viewWithDate:missed.MissedDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
