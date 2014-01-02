@@ -173,10 +173,6 @@
     {
         if (0 == indexPath.row)
         {
-            [cell configureCellWithDate:self.startDate];
-        }
-        else if ([self hasInlineDatePicker])
-        {
             [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
         }
     }

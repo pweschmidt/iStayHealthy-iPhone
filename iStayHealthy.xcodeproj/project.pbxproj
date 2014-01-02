@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
+		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F19461866F9F00091704C /* EditChartsTableViewController.m */; };
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
@@ -464,6 +466,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEndDateTableViewController.h; path = ViewControllersCommon/BaseEndDateTableViewController.h; sourceTree = "<group>"; };
+		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
+		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
+		0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditCurrentHIVMedsTableViewController.m; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.m; sourceTree = "<group>"; };
 		0B3F19451866F9F00091704C /* EditChartsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditChartsTableViewController.h; path = ViewControllersiPhone/EditChartsTableViewController.h; sourceTree = "<group>"; };
 		0B3F19461866F9F00091704C /* EditChartsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditChartsTableViewController.m; path = ViewControllersiPhone/EditChartsTableViewController.m; sourceTree = "<group>"; };
 		0B3F19481867044D0091704C /* ChartSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChartSelector.h; path = ViewControllersiPhone/ChartSelector.h; sourceTree = "<group>"; };
@@ -1515,6 +1521,8 @@
 				C46EB5E717EB819800B9EA5A /* AppointmentsTableViewController.m */,
 				C45C27B917DB3DC2001F6831 /* BaseEditTableViewController.h */,
 				C45C27BA17DB3DC2001F6831 /* BaseEditTableViewController.m */,
+				0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */,
+				0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */,
 				C45F838817B675350042E63A /* BaseTableViewController.h */,
 				C45F838917B675350042E63A /* BaseTableViewController.m */,
 				C45F837C17B66CEF0042E63A /* BaseViewController.h */,
@@ -1580,6 +1588,8 @@
 				0B3F19461866F9F00091704C /* EditChartsTableViewController.m */,
 				C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */,
 				C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */,
+				0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */,
+				0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */,
 				C4C8F9AD18118DD10011885D /* EditDashboardTableViewController.h */,
 				C4C8F9AE18118DD10011885D /* EditDashboardTableViewController.m */,
 				C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */,
@@ -2508,6 +2518,7 @@
 				C4C4194815F1383000882416 /* SoundNameCell.m in Sources */,
 				C4C4194C15F1383000882416 /* SummaryCell.m in Sources */,
 				C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */,
+				0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */,
 				C4C4194F15F1383000882416 /* SwitcherCell.m in Sources */,
 				C4C4195015F1383000882416 /* UnitCell.m in Sources */,
 				C4C4196115F138B900882416 /* ChartEvents.m in Sources */,
@@ -2569,6 +2580,7 @@
 				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
 				C45C27CA17DB5A75001F6831 /* EditAppointmentsTableViewController.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
+				0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */,
 				C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,

@@ -14,6 +14,7 @@
 #import "PreviousMedication+Handling.h"
 #import "Medication+Handling.h"
 #import "EditHIVMedsTableViewController.h"
+#import "EditCurrentHIVMedsTableViewController.h"
 #import "EditPreviousMedsTableViewController.h"
 #import "UILabel+Standard.h"
 #import "DateView.h"
@@ -155,7 +156,7 @@
     if (0 == indexPath.section)
     {
         Medication *med = (Medication *)[self.currentMeds objectAtIndex:indexPath.row];
-        EditHIVMedsTableViewController *controller = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
+        EditCurrentHIVMedsTableViewController *controller = [[EditCurrentHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
         [self.navigationController pushViewController:controller animated:YES];
     }
     else

@@ -1,12 +1,12 @@
 //
-//  EditPreviousMedsTableViewController.m
+//  EditCurrentHIVMedsTableViewController.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 02/10/2013.
+//  Created by Peter Schmidt on 02/01/2014.
 //
 //
 
-#import "EditPreviousMedsTableViewController.h"
+#import "EditCurrentHIVMedsTableViewController.h"
 #import "UITableViewCell+Extras.h"
 #import "NSDate+Extras.h"
 #import "CoreDataManager.h"
@@ -17,11 +17,11 @@
 #import "UILabel+Standard.h"
 #import "Utilities.h"
 
-@interface EditPreviousMedsTableViewController ()
-@property (nonatomic, strong) NSDate *origEndDate;
+@interface EditCurrentHIVMedsTableViewController ()
+
 @end
 
-@implementation EditPreviousMedsTableViewController
+@implementation EditCurrentHIVMedsTableViewController
 - (id)initWithStyle:(UITableViewStyle)style
       managedObject:(NSManagedObject *)managedObject
   hasNumericalInput:(BOOL)hasNumericalInput
@@ -29,22 +29,19 @@
     self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
     if (nil != self)
     {
-        [self populateDates];
+        [self populateStartDate];
     }
     return self;
 }
 
-- (void)populateDates
+- (void)populateStartDate
 {
     if (nil == self.managedObject)
     {
         return;
     }
-    PreviousMedication *med = (PreviousMedication *)self.managedObject;
-    self.date = med.startDate;
-    self.endDate = med.endDate;
-    self.origEndDate = med.endDate;
-    self.endDateIsSet = YES;
+    Medication *med = (Medication *)self.managedObject;
+    self.date = med.StartDate;
 }
 
 - (void)viewDidLoad
@@ -62,36 +59,39 @@
     
 }
 
+
 - (void)save:(id)sender
 {
-    BOOL nothingToDo = NO;
     if (nil == self.managedObject)
     {
-        nothingToDo = YES;
+        return;
     }
-    if (!self.dateIsChanged && ([self.endDate compare:self.origEndDate] == NSOrderedSame))
+    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
+    Medication *med = (Medication *)self.managedObject;
+    BOOL isSave = NO;
+    if (self.endDateIsSet)
     {
-        nothingToDo = YES;
+        PreviousMedication *previous = [[CoreDataManager sharedInstance] managedObjectForEntityName:kPreviousMedication];
+        previous.uID = [Utilities GUID];
+        previous.startDate = med.StartDate;
+        previous.endDate = self.endDate;
+        previous.name = med.Name;
+        previous.drug = med.Drug;
+        [defaultContext deleteObject:med];
+        isSave = YES;
     }
-    if (nothingToDo)
+    else if (self.dateIsChanged)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Nothing to save", nil)
-                                                        message:NSLocalizedString(@"There is nothing to save", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                              otherButtonTitles: nil];
-        [alert show];
+        med.UID = [Utilities GUID];
+        med.StartDate = self.date;
+        isSave = YES;
     }
-    else
+    if (isSave)
     {
-        PreviousMedication *med = (PreviousMedication *)self.managedObject;
-        med.uID = [Utilities GUID];
-        med.startDate = self.date;
-        med.endDate = self.endDate;
         NSError *error = nil;
         [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-        [self.navigationController popViewControllerAnimated:YES];
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

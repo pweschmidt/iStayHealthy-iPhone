@@ -6,8 +6,8 @@
 //
 //
 
-#import "BaseEditTableViewController.h"
+#import "BaseEndDateTableViewController.h"
 
-@interface EditPreviousMedsTableViewController : BaseEditTableViewController
+@interface EditPreviousMedsTableViewController : BaseEndDateTableViewController
 
 @end

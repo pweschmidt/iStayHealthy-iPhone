@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableDictionary *textViews;
 @property (nonatomic, strong) NSMutableDictionary *inputTypeForTextView;
 @property (nonatomic, assign) BOOL isEditMode;
+@property (nonatomic, assign) BOOL dateIsChanged;
 @property (nonatomic, strong) NSManagedObject *managedObject;
 @property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
@@ -52,6 +53,10 @@
 
 - (void)configureDatePickerCell:(UITableViewCell *)cell
                       indexPath:(NSIndexPath *)indexPath;
+
+- (void)setDateFormatter;
+- (void)setDateLabelTitle:(UILabel *)label;
+- (void)selectDatePickerMode:(UIDatePicker *)datePicker;
 
 - (void)save:(id)sender;
 - (void)removeManagedObject;

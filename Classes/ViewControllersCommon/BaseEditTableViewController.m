@@ -31,6 +31,7 @@
         _isEditMode = (nil != managedObject);
         _date = [NSDate date];
         _datePickerIndexPath = nil;
+        _dateIsChanged = NO;
         _formatter = [[NSDateFormatter alloc] init];
     }
     return self;
@@ -527,6 +528,7 @@
     if (nil != label)
     {
         label.text = [self.formatter stringFromDate:datePicker.date];
+        self.dateIsChanged = YES;
     }
 }
 
