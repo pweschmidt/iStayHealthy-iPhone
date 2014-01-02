@@ -22,6 +22,7 @@ NSString * const kPKBSecretKey = @"<replace with a valid key>";
 
 
 
+NSString * const kDefaultControllerKey = @"DefaultController";
 NSString * const kMenuController = @"MenuController";
 NSString * const kAddController = @"AddController";
 NSString * const kResultsController = @"ResultsController";

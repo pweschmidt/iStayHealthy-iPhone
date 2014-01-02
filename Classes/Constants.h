@@ -107,6 +107,7 @@ extern NSString * const kPKBSecretKey;
 /**
  Controllers
  */
+extern NSString * const kDefaultControllerKey;
 extern NSString * const kMenuController;
 extern NSString * const kAddController;
 extern NSString * const kResultsController;
