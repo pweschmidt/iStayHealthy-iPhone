@@ -10,6 +10,7 @@
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
 #import "Constants.h"
+#import "DateView.h"
 #import "CoreDataManager.h"
 #import "EditProceduresTableViewController.h"
 #import "Procedures+Handling.h"
@@ -65,6 +66,26 @@
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
+    NSArray *subviews = cell.contentView.subviews;
+    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
+        [view removeFromSuperview];
+    }];
+    Procedures *procedures = (Procedures *)[self.procedures objectAtIndex:indexPath.row];
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    UILabel *name = [UILabel standardLabel];
+    name.text = procedures.Illness;
+    name.frame = CGRectMake(20+rowHeight+10, 1, 170, rowHeight/2);
+    
+    UILabel *proc = [UILabel standardLabel];
+    proc.text = procedures.Name;
+    proc.frame = CGRectMake(20+rowHeight+10, 1+rowHeight/2, 170, rowHeight/2);
+
+    
+    DateView *dateView = [DateView viewWithDate:procedures.Date frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+    
+    [cell.contentView addSubview:name];
+    [cell.contentView addSubview:proc];
+    [cell.contentView addSubview:dateView];
     
 }
 

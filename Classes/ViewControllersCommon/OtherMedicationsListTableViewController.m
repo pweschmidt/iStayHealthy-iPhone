@@ -76,31 +76,26 @@
     CGFloat rowHeight = self.tableView.rowHeight - 2;
     DateView *dateView = [DateView viewWithDate:med.StartDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 1, 120, rowHeight)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 1, 120, rowHeight/2)];
     nameLabel.backgroundColor = [UIColor clearColor];
     nameLabel.text = med.Name;
-    nameLabel.textAlignment = NSTextAlignmentRight;
+    nameLabel.textAlignment = NSTextAlignmentJustified;
     nameLabel.textColor = TEXTCOLOUR;
     nameLabel.font = [UIFont systemFontOfSize:15];
 
-    UILabel *doseLabel = [[UILabel alloc] initWithFrame:CGRectMake(190, 1, 40, rowHeight)];
-    NSString *dose = [NSString stringWithFormat:@"%3.2f [%@]",[med.Dose floatValue],med.Unit];
+    UILabel *doseLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 1+rowHeight/2, 120, rowHeight/2)];
+    NSString *dose = [NSString stringWithFormat:@"%3.2f %@",[med.Dose floatValue],med.Unit];
     doseLabel.backgroundColor = [UIColor clearColor];
     doseLabel.text = dose;
     doseLabel.textColor = DARK_RED;
     doseLabel.textAlignment = NSTextAlignmentJustified;
     doseLabel.font = [UIFont systemFontOfSize:10];
     
-    UIImageView *medImageView = [[UIImageView alloc] init];
-    medImageView.frame = CGRectMake(235, 1, rowHeight, rowHeight);
-    medImageView.backgroundColor = [UIColor clearColor];
-    medImageView.image = [UIImage imageNamed:@"cross.png"];
     
     
     [cell.contentView addSubview:dateView];
     [cell.contentView addSubview:nameLabel];
     [cell.contentView addSubview:doseLabel];
-    [cell.contentView addSubview:medImageView];
 }
 
 #pragma mark - Table view delegate

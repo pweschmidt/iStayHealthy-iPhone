@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
     self.clinics = [NSArray array];//init with empty array
-    self.navigationItem.title = NSLocalizedString(@"Clinics", nil);
+    [self setTitleViewWithTitle:NSLocalizedString(@"Clinics", nil)];
 }
 
 - (void)didReceiveMemoryWarning
