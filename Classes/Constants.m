@@ -76,6 +76,8 @@ NSString * const kIllnessAndProcedures = @"IllnessesAndProcedures";
 NSString * const kHIVSideEffects = @"HIVSideEffects";
 NSString * const kPreviousMedications = @"PreviousMedications";
 NSString * const kWellnesses = @"Wellnesses";
+NSString * const kSeinfeldCalendars = @"SeinfeldCalendars";
+NSString * const kSeinfeldCalendarEntries = @"SeinfeldCalendarEntries";
 
 NSString * const kResult = @"Result";
 NSString * const kMedication = @"Medication";
@@ -86,6 +88,8 @@ NSString * const kProcedures = @"Procedures";
 NSString * const kSideEffects = @"SideEffects";
 NSString * const kPreviousMedication = @"PreviousMedication";
 NSString * const kWellness = @"Wellness";
+NSString * const kSeinfeldCalendar = @"SeinfeldCalendar";
+NSString * const kSeinfeldCalendarEntry = @"SeinfeldCalendarEntry";
 NSString * const kiStayHealthyRecord = @"iStayHealthyRecord";
 
 NSString * const kFromDevice = @"fromDevice";
@@ -171,6 +175,10 @@ NSString * const kYearOfBirth = @"yearOfBirth";
 NSString * const kIsDiabetic = @"isDiabetic";
 NSString * const kIsSmoker = @"isSmoker";
 NSString * const kGender = @"gender";
+
+NSString * const kIsCompleted = @"isCompleted";
+NSString * const kDateLowerCase = @"date";
+NSString * const kHasTakenMeds = @"hasTakenMeds";
 
 
 

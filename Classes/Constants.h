@@ -159,6 +159,9 @@ extern NSString * const kIllnessAndProcedures;
 extern NSString * const kHIVSideEffects;
 extern NSString * const kPreviousMedications;
 extern NSString * const kWellnesses;
+extern NSString * const kSeinfeldCalendars;
+extern NSString * const kSeinfeldCalendarEntries;
+
 extern NSString * const kiStayHealthyRecord;
 extern NSString * const kResult;
 extern NSString * const kMedication;
@@ -169,6 +172,8 @@ extern NSString * const kProcedures;
 extern NSString * const kSideEffects;
 extern NSString * const kPreviousMedication;
 extern NSString * const kWellness;
+extern NSString * const kSeinfeldCalendar;
+extern NSString * const kSeinfeldCalendarEntry;
 
 extern NSString * const kFromDevice;
 extern NSString * const kFromDate;
@@ -256,6 +261,10 @@ extern NSString * const kIsDiabetic;
 extern NSString * const kIsSmoker;
 extern NSString * const kGender;
 
+extern NSString * const kIsCompleted;
+extern NSString * const kDateLowerCase;
+extern NSString * const kHasTakenMeds;
+
 extern NSString * const kSleepBarometer;
 extern NSString * const kMoodBarometer;
 extern NSString * const kWellnessBarometer;
@@ -303,6 +312,8 @@ extern NSString * const kEffectsAlways;
 extern NSString * const kEffectsOften;
 extern NSString * const kEffectsSometimes;
 extern NSString * const kEffectsRarely;
+
+
 
 extern NSString * const kAppointmentDate;
 extern NSString * const kAppointmentClinic;

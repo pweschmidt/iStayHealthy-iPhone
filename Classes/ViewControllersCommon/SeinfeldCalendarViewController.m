@@ -15,11 +15,15 @@
 #import "CoreDataManager.h"
 #import "NSDate+Extras.h"
 #import "CalendarView.h"
+#import "SeinfeldCalendar.h"
+#import "SeinfeldCalendarEntry.h"
+#import "EditSeinfeldCalendarTableViewController.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @interface SeinfeldCalendarViewController ()
-@property (nonatomic, strong) NSArray *medications;
-@property (nonatomic, strong) NSArray *missedMedications;
+@property (nonatomic, strong) NSArray *calendars;
+@property (nonatomic, strong) SeinfeldCalendar *currentCalendar;
 @end
 
 @implementation SeinfeldCalendarViewController
@@ -29,8 +33,8 @@
     self = [super init];
     if (nil != self)
     {
-        _medications = [NSArray array];
-        _missedMedications = [NSArray array];
+        _calendars = [NSArray array];
+        _currentCalendar = nil;
     }
     return self;
 }
@@ -38,18 +42,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self datesFromArchive];
     [self setTitleViewWithTitle:NSLocalizedString(@"Medication Diary", nil)];
     CGFloat xOffset = 0;
     CGFloat yScrollOffset = 95;
     CGFloat scrollHeight = self.view.frame.size.height - 188;
     CGFloat scrollWidth = self.view.frame.size.width;
-    NSUInteger months = [self monthsToMonitor];
-    NSDateComponents *components = [Utilities dateComponentsForDate:self.startDate];
-    NSUInteger startMonth = components.month;
-    NSUInteger startYear = components.year;
-    CGFloat contentHeight = 150 * months;
     CGRect scrollFrame = CGRectMake(xOffset, yScrollOffset, scrollWidth, scrollHeight);
+
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:scrollFrame];
     [self.view addSubview:scrollView];
     
@@ -58,9 +57,22 @@
     self.calendarScrollView.delegate = self;
     self.calendarScrollView.scrollsToTop = YES;
 //    self.calendarScrollView.pagingEnabled = YES;
-    self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
     
-    
+    /*
+     [self datesFromArchive];
+     
+     
+     
+     CGFloat xOffset = 0;
+     CGFloat yScrollOffset = 95;
+     CGFloat scrollHeight = self.view.frame.size.height - 188;
+     CGFloat scrollWidth = self.view.frame.size.width;
+     NSUInteger months = [self monthsToMonitor];
+     NSDateComponents *components = [Utilities dateComponentsForDate:self.startDate];
+     NSUInteger startMonth = components.month;
+     NSUInteger startYear = components.year;
+     CGFloat contentHeight = 150 * months;
+     self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
     for (int month = 0; month < months; month++)
     {
         NSDate *date = self.startDate;
@@ -82,7 +94,8 @@
             startYear++;
         }
     }
-    
+    */
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(addButtonPressed:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,13 +105,16 @@
 
 - (void)addButtonPressed:(id)sender
 {
+    EditSeinfeldCalendarTableViewController *calendarCtrl = [[EditSeinfeldCalendarTableViewController alloc]
+                                                             initWithStyle:UITableViewStyleGrouped calendars:self.calendars];
+    [self.navigationController pushViewController:calendarCtrl animated:YES];
 }
 
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion:^(NSArray *array, NSError *error) {
+    [[CoreDataManager sharedInstance] fetchDataForEntityName:kSeinfeldCalendar predicate:nil sortTerm:kStartDateLowerCase ascending:NO completion:^(NSArray *array, NSError *error) {
         if (nil == array)
         {
             UIAlertView *errorAlert = [[UIAlertView alloc]
@@ -112,26 +128,16 @@
         }
         else
         {
-            self.medications = nil;
-            self.medications = [NSArray arrayWithArray:array];
-            [[CoreDataManager sharedInstance] fetchDataForEntityName:kMissedMedication predicate:nil sortTerm:kMissedDate ascending:NO completion:^(NSArray *missedArray, NSError *missedError) {
-                if (nil == missedArray)
+            self.calendars = nil;
+            self.calendars = [NSArray arrayWithArray:array];
+            for (SeinfeldCalendar *calendar in array)
+            {
+                if (!calendar.isCompleted)
                 {
-                    UIAlertView *errorAlert = [[UIAlertView alloc]
-                                               initWithTitle:@"Error"
-                                               message:@"Error loading data"
-                                               delegate:nil
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles:nil];
-                    [errorAlert show];
-                    
+                    self.currentCalendar = calendar;
+                    break;
                 }
-                else
-                {
-                    self.missedMedications = nil;
-                    self.missedMedications = [NSArray arrayWithArray:missedArray];
-                }
-            }];
+            }
         }
     }];
 }

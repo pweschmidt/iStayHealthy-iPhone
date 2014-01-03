@@ -20,6 +20,7 @@
 		0BAC2F121876E7B500D452A7 /* SeinfeldCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F111876E7B500D452A7 /* SeinfeldCalendar.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
+		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
 		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
 		1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -496,6 +497,8 @@
 		0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendarEntry.m; path = DataModelClasses/SeinfeldCalendarEntry.m; sourceTree = "<group>"; };
 		0BAC2F161876E7B500D452A7 /* Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Results.h; path = DataModelClasses/Results.h; sourceTree = "<group>"; };
 		0BAC2F171876E7B500D452A7 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
+		0BAC2F191876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditSeinfeldCalendarTableViewController.h; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.h; sourceTree = "<group>"; };
+		0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSeinfeldCalendarTableViewController.m; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.m; sourceTree = "<group>"; };
 		0BCBA8E018699B870098D2DA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyAppDelegate.h; sourceTree = "<group>"; };
@@ -1611,6 +1614,8 @@
 				C45C27CC17DB5A9D001F6831 /* EditProceduresTableViewController.m */,
 				C45D00EE17BAB403001AE0CB /* EditResultsTableViewController.h */,
 				C45D00EF17BAB403001AE0CB /* EditResultsTableViewController.m */,
+				0BAC2F191876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.h */,
+				0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */,
 				C45C27C217DB5A3F001F6831 /* EditSideEffectsTableViewController.h */,
 				C45C27C317DB5A3F001F6831 /* EditSideEffectsTableViewController.m */,
 				C45C27CE17DB5AC7001F6831 /* EditWellnessTableViewController.h */,
@@ -2579,6 +2584,7 @@
 				C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */,
 				C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */,
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
+				0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */,
 				C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */,
 				C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */,
 				C4C41A2E15F1432E00882416 /* Utilities.m in Sources */,
