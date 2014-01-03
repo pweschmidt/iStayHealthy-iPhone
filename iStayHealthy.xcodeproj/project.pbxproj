@@ -16,6 +16,10 @@
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
+		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
+		0BAC2F121876E7B500D452A7 /* SeinfeldCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F111876E7B500D452A7 /* SeinfeldCalendar.m */; };
+		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
+		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
 		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
 		1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -49,9 +53,7 @@
 		C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57B15F7C5CE00108EF8 /* MissedMedication.m */; };
 		C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57E15F7C5CE00108EF8 /* SideEffects.m */; };
 		C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58115F7C5CE00108EF8 /* Procedures.m */; };
-		C43BE58515F7C5CE00108EF8 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58415F7C5CE00108EF8 /* Results.m */; };
 		C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */; };
-		C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58A15F7C5CE00108EF8 /* Wellness.m */; };
 		C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43BE58E15F7CBE400108EF8 /* SideEffects.plist */; };
 		C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C440848715FB5817007F4A7D /* PreviousMedViewController.m */; };
 		C440848A15FB5817007F4A7D /* PreviousMedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C440848815FB5817007F4A7D /* PreviousMedViewController.xib */; };
@@ -485,6 +487,15 @@
 		0B60485B1840D1BA0092B5FB /* PWESValueRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESValueRange.m; path = Dashboard/PWESValueRange.m; sourceTree = "<group>"; };
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
+		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
+		0BAC2F0D1876E7B400D452A7 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
+		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
+		0BAC2F101876E7B500D452A7 /* SeinfeldCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendar.h; path = DataModelClasses/SeinfeldCalendar.h; sourceTree = "<group>"; };
+		0BAC2F111876E7B500D452A7 /* SeinfeldCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendar.m; path = DataModelClasses/SeinfeldCalendar.m; sourceTree = "<group>"; };
+		0BAC2F131876E7B500D452A7 /* SeinfeldCalendarEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendarEntry.h; path = DataModelClasses/SeinfeldCalendarEntry.h; sourceTree = "<group>"; };
+		0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendarEntry.m; path = DataModelClasses/SeinfeldCalendarEntry.m; sourceTree = "<group>"; };
+		0BAC2F161876E7B500D452A7 /* Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Results.h; path = DataModelClasses/Results.h; sourceTree = "<group>"; };
+		0BAC2F171876E7B500D452A7 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
 		0BCBA8E018699B870098D2DA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyAppDelegate.h; sourceTree = "<group>"; };
@@ -557,12 +568,8 @@
 		C43BE57E15F7C5CE00108EF8 /* SideEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffects.m; path = DataModelClasses/SideEffects.m; sourceTree = "<group>"; };
 		C43BE58015F7C5CE00108EF8 /* Procedures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Procedures.h; path = DataModelClasses/Procedures.h; sourceTree = "<group>"; };
 		C43BE58115F7C5CE00108EF8 /* Procedures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Procedures.m; path = DataModelClasses/Procedures.m; sourceTree = "<group>"; };
-		C43BE58315F7C5CE00108EF8 /* Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Results.h; path = DataModelClasses/Results.h; sourceTree = "<group>"; };
-		C43BE58415F7C5CE00108EF8 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
 		C43BE58615F7C5CE00108EF8 /* PreviousMedication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviousMedication.h; path = DataModelClasses/PreviousMedication.h; sourceTree = "<group>"; };
 		C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviousMedication.m; path = DataModelClasses/PreviousMedication.m; sourceTree = "<group>"; };
-		C43BE58915F7C5CE00108EF8 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
-		C43BE58A15F7C5CE00108EF8 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
 		C43BE58D15F7CBE400108EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/SideEffects.plist; sourceTree = "<group>"; };
 		C43BE58F15F7CBEE00108EF8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/SideEffects.plist; sourceTree = "<group>"; };
 		C43BE59015F7CBF400108EF8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/SideEffects.plist; sourceTree = "<group>"; };
@@ -1870,28 +1877,32 @@
 		C4B803C112D36E6700A5A38F /* DataModelClasses */ = {
 			isa = PBXGroup;
 			children = (
-				C43BE58915F7C5CE00108EF8 /* Wellness.h */,
-				C43BE58A15F7C5CE00108EF8 /* Wellness.m */,
-				C43BE58615F7C5CE00108EF8 /* PreviousMedication.h */,
-				C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */,
-				C43BE58315F7C5CE00108EF8 /* Results.h */,
-				C43BE58415F7C5CE00108EF8 /* Results.m */,
-				C43BE58015F7C5CE00108EF8 /* Procedures.h */,
-				C43BE58115F7C5CE00108EF8 /* Procedures.m */,
-				C43BE57D15F7C5CE00108EF8 /* SideEffects.h */,
-				C43BE57E15F7C5CE00108EF8 /* SideEffects.m */,
+				C43BE56E15F7C5B600108EF8 /* Contacts.h */,
+				C43BE56F15F7C5B600108EF8 /* Contacts.m */,
+				C43BE57115F7C5CD00108EF8 /* iStayHealthyRecord.h */,
+				C43BE57215F7C5CD00108EF8 /* iStayHealthyRecord.m */,
+				C43BE57415F7C5CD00108EF8 /* Medication.h */,
+				C43BE57515F7C5CD00108EF8 /* Medication.m */,
 				C43BE57A15F7C5CE00108EF8 /* MissedMedication.h */,
 				C43BE57B15F7C5CE00108EF8 /* MissedMedication.m */,
 				C43BE57715F7C5CE00108EF8 /* OtherMedication.h */,
 				C43BE57815F7C5CE00108EF8 /* OtherMedication.m */,
-				C43BE57415F7C5CD00108EF8 /* Medication.h */,
-				C43BE57515F7C5CD00108EF8 /* Medication.m */,
-				C43BE57115F7C5CD00108EF8 /* iStayHealthyRecord.h */,
-				C43BE57215F7C5CD00108EF8 /* iStayHealthyRecord.m */,
-				C43BE56E15F7C5B600108EF8 /* Contacts.h */,
-				C43BE56F15F7C5B600108EF8 /* Contacts.m */,
+				C43BE58615F7C5CE00108EF8 /* PreviousMedication.h */,
+				C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */,
+				C43BE58015F7C5CE00108EF8 /* Procedures.h */,
+				C43BE58115F7C5CE00108EF8 /* Procedures.m */,
+				0BAC2F161876E7B500D452A7 /* Results.h */,
+				0BAC2F171876E7B500D452A7 /* Results.m */,
+				0BAC2F101876E7B500D452A7 /* SeinfeldCalendar.h */,
+				0BAC2F111876E7B500D452A7 /* SeinfeldCalendar.m */,
+				0BAC2F131876E7B500D452A7 /* SeinfeldCalendarEntry.h */,
+				0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */,
+				C43BE57D15F7C5CE00108EF8 /* SideEffects.h */,
+				C43BE57E15F7C5CE00108EF8 /* SideEffects.m */,
 				C4B9DA7216CE221500703B67 /* SQLDataTableController.h */,
 				C4B9DA7316CE221500703B67 /* SQLDataTableController.m */,
+				0BAC2F0D1876E7B400D452A7 /* Wellness.h */,
+				0BAC2F0E1876E7B400D452A7 /* Wellness.m */,
 			);
 			name = DataModelClasses;
 			sourceTree = "<group>";
@@ -2534,6 +2545,7 @@
 				C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
 				C40DACED180981E400EDD6E9 /* WebViewController.m in Sources */,
+				0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */,
 				C4C4199815F13AAD00882416 /* GeneralMedicalTableViewController.m in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
 				C45E52F7182BFE6400C30061 /* BaseCollectionViewController.m in Sources */,
@@ -2555,6 +2567,7 @@
 				C4C419D215F13C6F00882416 /* MissedMedsDetailTableViewController.m in Sources */,
 				C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */,
 				C4C419D315F13C6F00882416 /* MissedMedViewController.m in Sources */,
+				0BAC2F181876E7B500D452A7 /* Results.m in Sources */,
 				C4BCF09617B7A87500F1E0F7 /* NSNumber+Handling.m in Sources */,
 				C4C419D415F13C6F00882416 /* NewAlertDetailViewController.m in Sources */,
 				C4C419D515F13C6F00882416 /* NewAlertEditDetailViewController.m in Sources */,
@@ -2577,6 +2590,7 @@
 				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
+				0BAC2F121876E7B500D452A7 /* SeinfeldCalendar.m in Sources */,
 				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
 				C45C27CA17DB5A75001F6831 /* EditAppointmentsTableViewController.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
@@ -2590,13 +2604,12 @@
 				C43BE57F15F7C5CE00108EF8 /* SideEffects.m in Sources */,
 				C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */,
 				C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */,
+				0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */,
 				0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */,
 				C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */,
 				C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */,
-				C43BE58515F7C5CE00108EF8 /* Results.m in Sources */,
 				C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */,
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
-				C43BE58B15F7C5CE00108EF8 /* Wellness.m in Sources */,
 				C46C5DF117EDA83500866DBD /* SeinfeldCalendarViewController.m in Sources */,
 				C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */,
 				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
@@ -3062,6 +3075,7 @@
 		2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */,
 				C4ACF8531476DD4D00FA5E80 /* iStayHealthy 11.xcdatamodel */,
 				C4B3A6B21466E36D00D03C3B /* iStayHealthy 9.xcdatamodel */,
 				C4B3A6AE1466D8BC00D03C3B /* iStayHealthy 8.xcdatamodel */,
@@ -3076,7 +3090,7 @@
 				C4B803DE12D3700700A5A38F /* iStayHealthy 2.xcdatamodel */,
 				C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */,
 			);
-			currentVersion = 28C3AD890F43EF2300507BA6 /* iStayHealthy.xcdatamodel */;
+			currentVersion = 0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */;
 			path = iStayHealthy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

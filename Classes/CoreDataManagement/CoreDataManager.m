@@ -10,7 +10,7 @@
 #import "CoreDataUtils.h"
 #import "CoreDataConstants.h"
 #import "CoreXMLReader.h"
-
+#import "iStayHealthyRecord+Handling.h"
 @interface CoreDataManager ()
 {
     NSManagedObjectContext * privateContext;
@@ -170,6 +170,28 @@
 {
     [self saveContext:NO error:error];
 }
+
+- (void)fetchiStayHealthyRecordWithCompletion:(iStayHealthyRecordCompletionBlock)completion
+{
+    [self fetchDataForEntityName:kiStayHealthyRecord predicate:nil sortTerm:nil ascending:NO completion:^(NSArray *array, NSError *error) {
+        if (nil == array)
+        {
+            completion(nil, error);
+        }
+        else if (0 == array.count)
+        {
+            NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:100 userInfo:nil];
+            completion(nil, error);
+        }
+        else
+        {
+            iStayHealthyRecord *lastRecord = (iStayHealthyRecord *)[array lastObject];
+            completion(lastRecord, nil);
+        }
+    }];
+}
+
+
 
 - (void)fetchDataForEntityName:(NSString *)entityName
                      predicate:(NSPredicate *)predicate

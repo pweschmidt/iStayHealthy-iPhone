@@ -31,6 +31,7 @@
 
 - (void)addFileToImportList:(NSURL *)sourceURL error:(NSError **)error;
 
+- (void)fetchiStayHealthyRecordWithCompletion:(iStayHealthyRecordCompletionBlock)completion;
 
 - (void)fetchDataForEntityName:(NSString *)entityName
                      predicate:(NSPredicate *)predicate

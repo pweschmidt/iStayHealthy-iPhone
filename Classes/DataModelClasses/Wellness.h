@@ -2,7 +2,7 @@
 //  Wellness.h
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 05/09/2012.
+//  Created by Peter Schmidt on 03/01/2014.
 //
 //
 
@@ -13,10 +13,11 @@
 
 @interface Wellness : NSManagedObject
 
-@property (nonatomic, strong) NSNumber * sleepBarometer;
-@property (nonatomic, strong) NSNumber * moodBarometer;
-@property (nonatomic, strong) NSNumber * wellnessBarometer;
-@property (nonatomic, strong) NSString * uID;
-@property (nonatomic, strong) iStayHealthyRecord *record;
+@property (nonatomic, retain) NSNumber * moodBarometer;
+@property (nonatomic, retain) NSNumber * wellnessBarometer;
+@property (nonatomic, retain) NSString * uID;
+@property (nonatomic, retain) NSNumber * sleepBarometer;
+@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) iStayHealthyRecord *record;
 
 @end

@@ -76,14 +76,14 @@ static NSUInteger DeviceSystemMajorVersion()
 #define EMBEDDED_DATE_PICKER (DeviceSystemMajorVersion() >= 7)
 
 
-
+@class iStayHealthyRecord;
 /**
  Block Definitions
  */
 typedef void (^iStayHealthyErrorBlock)(NSError * error);
 typedef void (^iStayHealthySuccessBlock)(BOOL success, NSError *error);
 typedef void (^iStayHealthyArrayCompletionBlock)(NSArray *array, NSError *error);
-
+typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NSError *error);
 /**
  General
  */
@@ -159,7 +159,7 @@ extern NSString * const kIllnessAndProcedures;
 extern NSString * const kHIVSideEffects;
 extern NSString * const kPreviousMedications;
 extern NSString * const kWellnesses;
-
+extern NSString * const kiStayHealthyRecord;
 extern NSString * const kResult;
 extern NSString * const kMedication;
 extern NSString * const kMissedMedication;

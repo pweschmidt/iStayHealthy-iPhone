@@ -2,7 +2,7 @@
 //  Results.h
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 05/09/2012.
+//  Created by Peter Schmidt on 03/01/2014.
 //
 //
 
@@ -13,37 +13,38 @@
 
 @interface Results : NSManagedObject
 
-@property (nonatomic, strong) NSNumber * LDL;
-@property (nonatomic, strong) NSNumber * Hemoglobulin;
-@property (nonatomic, strong) NSNumber * Glucose;
-@property (nonatomic, strong) NSNumber * HeartRate;
-@property (nonatomic, strong) NSNumber * CD4Percent;
-@property (nonatomic, strong) NSDate * ResultsDate;
-@property (nonatomic, strong) NSNumber * OxygenLevel;
-@property (nonatomic, strong) NSString * UID;
-@property (nonatomic, strong) NSNumber * Systole;
-@property (nonatomic, strong) NSNumber * CD4;
-@property (nonatomic, strong) NSNumber * PlateletCount;
-@property (nonatomic, strong) NSNumber * HDL;
-@property (nonatomic, strong) NSNumber * HepCViralLoad;
-@property (nonatomic, strong) NSNumber * Weight;
-@property (nonatomic, strong) NSNumber * Diastole;
-@property (nonatomic, strong) NSNumber * WhiteBloodCellCount;
-@property (nonatomic, strong) NSNumber * TotalCholesterol;
-@property (nonatomic, strong) NSNumber * Triglyceride;
-@property (nonatomic, strong) NSNumber * ViralLoad;
-@property (nonatomic, strong) NSNumber * redBloodCellCount;
-@property (nonatomic, strong) NSNumber * cholesterolRatio;
-@property (nonatomic, strong) NSNumber * cardiacRiskFactor;
-@property (nonatomic, strong) NSNumber * hepBTiter;
-@property (nonatomic, strong) NSNumber * hepCTiter;
-@property (nonatomic, strong) NSNumber * liverAlanineTransaminase;
-@property (nonatomic, strong) NSNumber * liverAspartateTransaminase;
-@property (nonatomic, strong) NSNumber * liverAlkalinePhosphatase;
-@property (nonatomic, strong) NSNumber * liverAlbumin;
-@property (nonatomic, strong) NSNumber * liverAlanineTotalBilirubin;
-@property (nonatomic, strong) NSNumber * liverAlanineDirectBilirubin;
-@property (nonatomic, strong) NSNumber * liverGammaGlutamylTranspeptidase;
-@property (nonatomic, strong) iStayHealthyRecord *record;
+@property (nonatomic, retain) NSNumber * WhiteBloodCellCount;
+@property (nonatomic, retain) NSNumber * liverAlanineTransaminase;
+@property (nonatomic, retain) NSNumber * LDL;
+@property (nonatomic, retain) NSNumber * liverAspartateTransaminase;
+@property (nonatomic, retain) NSNumber * ViralLoad;
+@property (nonatomic, retain) NSNumber * Hemoglobulin;
+@property (nonatomic, retain) NSNumber * Glucose;
+@property (nonatomic, retain) NSNumber * HeartRate;
+@property (nonatomic, retain) NSNumber * CD4Percent;
+@property (nonatomic, retain) NSNumber * liverAlkalinePhosphatase;
+@property (nonatomic, retain) NSDate * ResultsDate;
+@property (nonatomic, retain) NSNumber * liverAlbumin;
+@property (nonatomic, retain) NSNumber * OxygenLevel;
+@property (nonatomic, retain) NSString * UID;
+@property (nonatomic, retain) NSNumber * liverAlanineTotalBilirubin;
+@property (nonatomic, retain) NSNumber * cholesterolRatio;
+@property (nonatomic, retain) NSNumber * hepBTiter;
+@property (nonatomic, retain) NSNumber * redBloodCellCount;
+@property (nonatomic, retain) NSNumber * Systole;
+@property (nonatomic, retain) NSNumber * hepCTiter;
+@property (nonatomic, retain) NSNumber * CD4;
+@property (nonatomic, retain) NSNumber * PlateletCount;
+@property (nonatomic, retain) NSNumber * HDL;
+@property (nonatomic, retain) NSNumber * cardiacRiskFactor;
+@property (nonatomic, retain) NSNumber * HepCViralLoad;
+@property (nonatomic, retain) NSNumber * Triglyceride;
+@property (nonatomic, retain) NSNumber * TotalCholesterol;
+@property (nonatomic, retain) NSNumber * Weight;
+@property (nonatomic, retain) NSNumber * liverGammaGlutamylTranspeptidase;
+@property (nonatomic, retain) NSNumber * Diastole;
+@property (nonatomic, retain) NSNumber * liverAlanineDirectBilirubin;
+@property (nonatomic, retain) NSNumber * bmi;
+@property (nonatomic, retain) iStayHealthyRecord *record;
 
 @end

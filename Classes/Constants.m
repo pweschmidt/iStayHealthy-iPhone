@@ -86,6 +86,7 @@ NSString * const kProcedures = @"Procedures";
 NSString * const kSideEffects = @"SideEffects";
 NSString * const kPreviousMedication = @"PreviousMedication";
 NSString * const kWellness = @"Wellness";
+NSString * const kiStayHealthyRecord = @"iStayHealthyRecord";
 
 NSString * const kFromDevice = @"fromDevice";
 NSString * const kFromDate = @"fromDate";
@@ -119,7 +120,7 @@ NSString * const kSystole = @"Systole";
 NSString * const kDiastole = @"Diastole";
 NSString * const kOxygenLevel = @"OxygenLevel";
 NSString * const kWeight = @"Weight";
-NSString * const kBMI = @"BMI";
+NSString * const kBMI = @"bmi";
 NSString * const kHemoglobulin = @"Hemoglobulin";
 NSString * const kPlatelet = @"PlateletCount";
 NSString * const kWhiteBloodCells = @"WhiteBloodCellCount";

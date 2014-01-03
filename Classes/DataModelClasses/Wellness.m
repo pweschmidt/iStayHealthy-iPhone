@@ -2,7 +2,7 @@
 //  Wellness.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 05/09/2012.
+//  Created by Peter Schmidt on 03/01/2014.
 //
 //
 
@@ -12,10 +12,11 @@
 
 @implementation Wellness
 
-@dynamic sleepBarometer;
 @dynamic moodBarometer;
 @dynamic wellnessBarometer;
 @dynamic uID;
+@dynamic sleepBarometer;
+@dynamic date;
 @dynamic record;
 
 @end
