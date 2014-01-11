@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "CoreDataManager.h"
 #import "SeinfeldCalendar.h"
+#import "UILabel+Standard.h"
 
 @interface EditSeinfeldCalendarTableViewController ()
 @property (nonatomic, strong) UISegmentedControl *calendarSegmentControl;
@@ -58,14 +59,14 @@
 {
     [super viewDidLoad];
     [self populateCalendars];
-    self.navigationItem.title = NSLocalizedString(@"Edit Med. Diary", nil);
+    self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
     NSArray *menuTitles = @[@"1", @"2", @"3", @"4"];
     self.calendarSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
     CGFloat width = self.tableView.bounds.size.width;
     CGFloat segmentWidth = width - 2 * 20;
     self.calendarSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
     self.calendarSegmentControl.tintColor = TINTCOLOUR;
-    self.calendarSegmentControl.selectedSegmentIndex = 0;
+    self.calendarSegmentControl.selectedSegmentIndex = 2;
     [self.calendarSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -108,6 +109,124 @@
     {
         return self.completedCalendars.count;
     }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = [self identifierForIndexPath:indexPath];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    
+    
+    if (0 == indexPath.section)
+    {
+        if (0 == indexPath.row)
+        {
+            [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
+        }
+    }
+
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (0 == section)
+    {
+        return 55;
+    }
+    else
+    {
+        return 10;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (0 == section)
+    {
+        return 40;
+    }
+    else
+    {
+        return 60;
+    }
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footer = [[UIView alloc] init];
+    if (0 < section || nil != self.currentCalendar)
+    {
+        footer.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
+        footer.backgroundColor = [UIColor clearColor];
+        return footer;
+    }
+    footer.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
+    UILabel *label = [UILabel standardLabel];
+    label.frame = CGRectMake(20, 10, tableView.bounds.size.width-40, 20);
+    label.text = NSLocalizedString(@"For how many months?", nil);
+    [footer addSubview:label];
+    self.calendarSegmentControl.frame = CGRectMake(20, 35, tableView.bounds.size.width-40, 25);
+    [footer addSubview:self.calendarSegmentControl];
+    return footer;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *header = [[UIView alloc] init];
+    CGFloat height = (0 == section) ? 40 : 60;
+    header.frame = CGRectMake(0, 0, tableView.frame.size.width, height);
+    UILabel *label = [UILabel standardLabel];
+    label.frame = CGRectMake(20, 0, tableView.bounds.size.width - 40, height);
+    if (0 == section)
+    {
+        if (nil == self.currentCalendar)
+        {
+            label.text = NSLocalizedString(@"New Course", nil);
+        }
+        else
+        {
+            label.text = NSLocalizedString(@"Current Course", nil);
+        }
+    }
+    else
+    {
+        if (0 < self.completedCalendars.count)
+        {
+            label.text = NSLocalizedString(@"Completed Courses", nil);
+        }
+        else
+        {
+            label.text = @"";
+        }
+    }
+    [header addSubview:label];
+    return header;
+}
+
+- (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = nil;
+    if (0 == indexPath.section)
+    {
+        identifier = [NSString stringWithFormat:kBaseDateCellRowIdentifier];
+        if ([self hasInlineDatePicker])
+        {
+            identifier = [NSString stringWithFormat:@"DatePickerCell"];
+        }
+    }
+    else
+    {
+        identifier = [NSString stringWithFormat:@"OtherCell%d", indexPath.row];
+    }
+    return identifier;
 }
 
 - (void)indexDidChangeForSegment
