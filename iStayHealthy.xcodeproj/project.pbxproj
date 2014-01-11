@@ -16,6 +16,8 @@
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
+		0B7CA7E918818E7600B8BF20 /* tivicay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7CA7E718818E7600B8BF20 /* tivicay.png */; };
+		0B7CA7EA18818E7600B8BF20 /* tivicay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7CA7E818818E7600B8BF20 /* tivicay@2x.png */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
 		0BAC2F121876E7B500D452A7 /* SeinfeldCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F111876E7B500D452A7 /* SeinfeldCalendar.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
@@ -488,7 +490,9 @@
 		0B60485B1840D1BA0092B5FB /* PWESValueRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESValueRange.m; path = Dashboard/PWESValueRange.m; sourceTree = "<group>"; };
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
-		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
+		0B7CA7E718818E7600B8BF20 /* tivicay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tivicay.png; path = Classes/Assets/tivicay.png; sourceTree = "<group>"; };
+		0B7CA7E818818E7600B8BF20 /* tivicay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tivicay@2x.png"; path = "Classes/Assets/tivicay@2x.png"; sourceTree = "<group>"; };
+		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
 		0BAC2F0D1876E7B400D452A7 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
 		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
 		0BAC2F101876E7B500D452A7 /* SeinfeldCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendar.h; path = DataModelClasses/SeinfeldCalendar.h; sourceTree = "<group>"; };
@@ -1725,6 +1729,8 @@
 		C48B9BFC180949E7007CF6DE /* MedicationImages */ = {
 			isa = PBXGroup;
 			children = (
+				0B7CA7E718818E7600B8BF20 /* tivicay.png */,
+				0B7CA7E818818E7600B8BF20 /* tivicay@2x.png */,
 			);
 			name = MedicationImages;
 			sourceTree = "<group>";
@@ -2230,6 +2236,7 @@
 				C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */,
 				C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */,
 				C4246FAE17F09EAC00AA7D1E /* README.txt in Resources */,
+				0B7CA7E918818E7600B8BF20 /* tivicay.png in Resources */,
 				C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */,
 				C4EB1FE412FD8FA800A8712D /* combi-label-medium.png in Resources */,
 				C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */,
@@ -2441,6 +2448,7 @@
 				C481FD3717FDEF7B0058EE9D /* icon_29@2x.png in Resources */,
 				C4C41A1B15F1404000882416 /* NewStatusViewController.xib in Resources */,
 				C4C41A1C15F1404000882416 /* OtherMedsTableViewController.xib in Resources */,
+				0B7CA7EA18818E7600B8BF20 /* tivicay@2x.png in Resources */,
 				C4C41A1D15F1404000882416 /* ProcedureTableViewController.xib in Resources */,
 				C44D36B6180F3E3600EE9F5E /* alarm@2x.png in Resources */,
 				C4C41A1E15F1404000882416 /* StatusViewControllerLandscape.xib in Resources */,
