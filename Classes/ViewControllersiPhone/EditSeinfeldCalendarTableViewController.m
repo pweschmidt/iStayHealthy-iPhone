@@ -11,6 +11,7 @@
 #import "CoreDataManager.h"
 #import "SeinfeldCalendar.h"
 #import "UILabel+Standard.h"
+#import "Utilities.h"
 
 @interface EditSeinfeldCalendarTableViewController ()
 @property (nonatomic, strong) UISegmentedControl *calendarSegmentControl;
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *completedCalendars;
 @property (nonatomic, strong) SeinfeldCalendar *currentCalendar;
 @property (nonatomic, assign) BOOL hasCalendarRunning;
+@property (nonatomic, strong) NSDate *endDate;
 @end
 
 @implementation EditSeinfeldCalendarTableViewController
@@ -29,6 +31,7 @@
     {
         _calendars = calendars;
         _currentCalendar = nil;
+        _endDate = nil;
         _hasCalendarRunning = NO;
     }
     return self;
@@ -43,7 +46,7 @@
     }
     for (SeinfeldCalendar *calendar in self.calendars)
     {
-        if (calendar.isCompleted)
+        if (YES == [calendar.isCompleted boolValue])
         {
             [self.completedCalendars addObject:calendar];
         }
@@ -68,10 +71,20 @@
     self.calendarSegmentControl.tintColor = TINTCOLOUR;
     self.calendarSegmentControl.selectedSegmentIndex = 2;
     [self.calendarSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
+    [self indexDidChangeForSegment];
 }
 
 - (void)save:(id)sender
 {
+    SeinfeldCalendar *newCalendar = [[CoreDataManager sharedInstance] managedObjectForEntityName:kSeinfeldCalendar];
+    newCalendar.uID = [Utilities GUID];
+    newCalendar.startDate = self.date;
+    newCalendar.endDate = self.endDate;
+    newCalendar.isCompleted = [NSNumber numberWithBool:NO];
+    
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -231,6 +244,23 @@
 
 - (void)indexDidChangeForSegment
 {
-    
+    NSDateComponents *components = [Utilities dateComponentsForDate:self.date];
+    NSUInteger startDay = components.day;
+    NSUInteger startMonth = components.month;
+    NSUInteger startYear = components.year;
+    NSUInteger length = self.calendarSegmentControl.selectedSegmentIndex + 1;
+    NSUInteger endMonth = startMonth + length;
+    NSUInteger endYear = startYear;
+    if (12 < endMonth)
+    {
+        endMonth -= 12;
+        endYear++;
+    }
+    NSDateComponents *endComponents = [[NSDateComponents alloc] init];
+    [endComponents setDay:startDay];
+    [endComponents setMonth:endMonth];
+    [endComponents setMonth:endYear];
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    self.endDate = [gregorianCalendar dateFromComponents:endComponents];
 }
 @end

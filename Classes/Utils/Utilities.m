@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "GeneralSettings.h"
 #import "ChartSettings.h"
+#import "NSDate+Extras.h"
 #import <math.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -19,7 +20,6 @@
 {
     return CGRectMake(size.width/2 - 70, size.height/2-70, 140, 140);
 }
-
 
 + (UIActivityIndicatorView *)activityIndicatorViewWithFrame:(CGRect)frame
 {
@@ -33,7 +33,7 @@
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;
-    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
     label.numberOfLines = 0;
     label.font = [UIFont boldSystemFontOfSize:12];
     [activityIndicator addSubview:label];
@@ -372,6 +372,47 @@
     return (NSString *)[weekdays objectAtIndex:dayIndex];
 }
 
++ (NSUInteger)monthsToMonitorFromStartDate:(NSDate *)startDate endDate:(NSDate *)endDate
+{
+    NSDateComponents *startComponents = [[self class] dateComponentsForDate:startDate];
+    NSDateComponents *endComponents = [[self class] dateComponentsForDate:endDate];
+    NSUInteger startMonth = startComponents.month;
+    NSUInteger endMonth = endComponents.month;
+    NSUInteger result = 0;
+    if (endMonth < startMonth)
+    {
+        result = 12 - startMonth + endMonth;
+    }
+    else
+    {
+        result = endMonth - startMonth + 1;
+    }
+    return result;
+}
+
++ (NSUInteger)weeksInMonthForDate:(NSDate *)date isStartDate:(BOOL)isStartDate
+{
+    NSDateComponents *components = [[self class] dateComponentsForDate:date];
+    NSUInteger weeks = components.weekOfMonth - 1;//needs to be 0 based
+    if (isStartDate)
+    {
+        NSUInteger days = [date daysInMonth] - components.day + 1;//including the start day
+        NSInteger weekday = components.weekday - 1; //start Monday not Sunday
+        if (7 >= days)
+        {
+            weeks = (7 < weekday + days) ? 2 : 1;
+        }
+        else
+        {
+            weeks = days / 7;
+            if (1 < weekday)
+            {
+                weeks++;
+            }
+        }
+    }
+    return weeks;
+}
 
 
 + (BOOL)isIPad

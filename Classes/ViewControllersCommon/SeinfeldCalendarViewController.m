@@ -56,7 +56,7 @@
     self.calendarScrollView.backgroundColor = [UIColor clearColor];
     self.calendarScrollView.delegate = self;
     self.calendarScrollView.scrollsToTop = YES;
-//    self.calendarScrollView.pagingEnabled = YES;
+    self.calendarScrollView.pagingEnabled = YES;
     
     /*
      [self datesFromArchive];
@@ -132,11 +132,15 @@
             self.calendars = [NSArray arrayWithArray:array];
             for (SeinfeldCalendar *calendar in array)
             {
-                if (!calendar.isCompleted)
+                if (NO == [calendar.isCompleted boolValue])
                 {
                     self.currentCalendar = calendar;
                     break;
                 }
+            }
+            if (nil != self.currentCalendar)
+            {
+                [self buildSeinfeldCalendar];
             }
         }
     }];
@@ -169,79 +173,13 @@
 {
 }
 
-
 #pragma mark private
-- (void)datesFromArchive
+- (void)buildSeinfeldCalendar
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *start = [defaults objectForKey:@"diaryStart"];
-    NSData *end = [defaults objectForKey:@"diaryEnd"];
+    if (nil == self.currentCalendar)
+    {
+        return;
+    }
     
-    if (nil == start)
-    {
-        self.startDate = [NSDate date];
-        start = [NSKeyedArchiver archivedDataWithRootObject:self.startDate];
-        [defaults setObject:start forKey:@"diaryStart"];
-        [defaults synchronize];
-    }
-    else
-    {
-        self.startDate = [NSKeyedUnarchiver unarchiveObjectWithData:start];
-    }
-    if (nil == end)
-    {
-        self.endDate = [self.startDate dateByAddingDays:90];
-        end = [NSKeyedArchiver archivedDataWithRootObject:self.endDate];
-        [defaults setObject:end forKey:@"diaryEnd"];
-        [defaults synchronize];
-    }
-    else
-    {
-        self.endDate = [NSKeyedUnarchiver unarchiveObjectWithData:end];        
-    }
 }
-
-- (NSUInteger)monthsToMonitor
-{
-    NSDateComponents *startComponents = [Utilities dateComponentsForDate:self.startDate];
-    NSDateComponents *endComponents = [Utilities dateComponentsForDate:self.endDate];
-    NSUInteger startMonth = startComponents.month;
-    NSUInteger endMonth = endComponents.month;
-    NSUInteger result = 0;
-    if (endMonth < startMonth)
-    {
-        result = 12 - startMonth + endMonth;
-    }
-    else
-    {
-        result = endMonth - startMonth + 1;
-    }
-    return result;
-}
-
-- (NSUInteger)weeksInMonthForDate:(NSDate *)date isStart:(BOOL)isStart
-{
-    NSDateComponents *components = [Utilities dateComponentsForDate:date];
-    NSUInteger weeks = components.weekOfMonth - 1;//needs to be 0 based
-    if (isStart)
-    {
-        NSUInteger days = [date daysInMonth] - components.day + 1;//including the start day
-        NSInteger weekday = components.weekday - 1; //start Monday not Sunday
-        if (7 >= days)
-        {
-            weeks = (7 < weekday + days) ? 2 : 1;
-        }
-        else
-        {
-            weeks = days / 7;
-            if (1 < weekday)
-            {
-                weeks++;
-            }
-        }
-    }
-    return weeks;
-}
-
-
 @end

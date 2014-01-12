@@ -39,4 +39,6 @@
 + (UIImage *)imageFromMedName:(NSString *)medName;
 + (NSDictionary *)resultsTypeDictionary;
 + (NSDictionary *)colourTypeDictionary;
++ (NSUInteger)monthsToMonitorFromStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
++ (NSUInteger)weeksInMonthForDate:(NSDate *)date isStartDate:(BOOL)isStartDate;
 @end
