@@ -56,45 +56,7 @@
     self.calendarScrollView.backgroundColor = [UIColor clearColor];
     self.calendarScrollView.delegate = self;
     self.calendarScrollView.scrollsToTop = YES;
-    self.calendarScrollView.pagingEnabled = YES;
-    
-    /*
-     [self datesFromArchive];
-     
-     
-     
-     CGFloat xOffset = 0;
-     CGFloat yScrollOffset = 95;
-     CGFloat scrollHeight = self.view.frame.size.height - 188;
-     CGFloat scrollWidth = self.view.frame.size.width;
-     NSUInteger months = [self monthsToMonitor];
-     NSDateComponents *components = [Utilities dateComponentsForDate:self.startDate];
-     NSUInteger startMonth = components.month;
-     NSUInteger startYear = components.year;
-     CGFloat contentHeight = 150 * months;
-     self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
-    for (int month = 0; month < months; month++)
-    {
-        NSDate *date = self.startDate;
-        if (0 < month)
-        {
-            NSDateComponents *newMonth = [[NSDateComponents alloc] init];
-            newMonth.month = startMonth;
-            newMonth.day = 1;
-            newMonth.year = startYear;
-            date = [[NSCalendar currentCalendar] dateFromComponents:newMonth];
-        }
-        CGRect frame = CGRectMake(self.calendarScrollView.frame.origin.x, self.calendarScrollView.frame.origin.y + month * 150, scrollWidth, 150);
-        CalendarView *calendarView = [CalendarView calenderViewForDate:date frame:frame];
-        [self.calendarScrollView addSubview:calendarView];
-        startMonth++;
-        if (12 < startMonth)
-        {
-            startMonth = 1;
-            startYear++;
-        }
-    }
-    */
+    self.calendarScrollView.pagingEnabled = YES;    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(addButtonPressed:)];
 }
 
@@ -239,7 +201,7 @@
         }
     }
     self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
-    
+    [self.calendarScrollView setNeedsDisplay];
 }
 
 
