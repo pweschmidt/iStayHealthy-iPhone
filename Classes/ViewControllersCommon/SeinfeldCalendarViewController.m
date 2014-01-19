@@ -14,7 +14,7 @@
 #import "MissedMedication.h"
 #import "CoreDataManager.h"
 #import "NSDate+Extras.h"
-#import "CalendarView.h"
+#import "CalendarMonthView.h"
 #import "SeinfeldCalendar.h"
 #import "SeinfeldCalendarEntry.h"
 #import "EditSeinfeldCalendarTableViewController.h"
@@ -180,6 +180,67 @@
     {
         return;
     }
+    NSDate *startDate = self.currentCalendar.startDate;
+    NSDate *endDate = self.currentCalendar.endDate;
+    
+    NSDateComponents *startComponents = [Utilities dateComponentsForDate:startDate];
+    NSDateComponents *endComponents = [Utilities dateComponentsForDate:endDate];
+
+    NSInteger months = endComponents.month - startComponents.month;
+    if (endComponents.year > startComponents.year)
+    {
+        months += 12;
+    }
+    if (0 == months)
+    {
+        months = 1;
+    }
+    NSInteger month = startComponents.month;
+    NSInteger year = startComponents.year;
+    
+    CGFloat xOffset = self.calendarScrollView.frame.origin.x;
+    CGFloat yScrollOffset = self.calendarScrollView.frame.origin.y;
+    CGFloat scrollWidth = self.view.frame.size.width;
+    CGFloat contentHeight = 0;
+    CGFloat contentGap = 20;
+    NSDateComponents *monthStart = startComponents;
+
+    NSDateComponents *monthEnd = [[NSDateComponents alloc] init];
+    [monthEnd setDay:[Utilities daysInMonth:startComponents.month inYear:startComponents.year]];
+    [monthEnd setMonth:startComponents.month];
+    [monthEnd setYear:startComponents.year];
+    for (NSInteger monthIndex = 0; monthIndex < months; ++monthIndex)
+    {
+        CGRect frame = CGRectMake(xOffset, yScrollOffset + contentGap + contentHeight, scrollWidth, 150);
+        CalendarMonthView *monthView = [CalendarMonthView calendarMonthViewForCalendar:self.currentCalendar
+                                                                       startComponents:monthStart
+                                                                         endComponents:monthEnd
+                                                                        suggestedFrame:frame];
+        contentHeight += monthView.frame.size.height;
+        [self.calendarScrollView addSubview:monthView];
+        month++;
+        if (12 < month)
+        {
+            month = 1;
+            year++;
+        }
+        [monthStart setDay:1];
+        [monthStart setMonth:month];
+        [monthStart setYear:year];
+        if (endComponents.month == month && endComponents.year == year)
+        {
+            monthEnd = endComponents;
+        }
+        else
+        {
+            [monthEnd setDay:[Utilities daysInMonth:monthStart.month inYear:monthStart.year]];
+            [monthEnd setMonth:monthStart.month];
+            [monthEnd setYear:monthStart.year];
+        }
+    }
+    self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
     
 }
+
+
 @end

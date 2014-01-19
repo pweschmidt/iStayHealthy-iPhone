@@ -351,7 +351,7 @@
 
 + (NSDateComponents *)dateComponentsForDate:(NSDate *)date
 {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     return [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit|NSWeekOfMonthCalendarUnit
                        fromDate:date];
 }
@@ -370,6 +370,27 @@
     NSArray *weekdays = [[[self class] calendarDictionary] objectForKey:@"shortDays"];
     int dayIndex = components.weekday - 1;
     return (NSString *)[weekdays objectAtIndex:dayIndex];
+}
+
++ (NSInteger)daysInMonth:(NSInteger)month inYear:(NSInteger)inYear
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    if (1 > month)
+    {
+        month = 1;
+    }
+    else if (12 < month)
+    {
+        month = 12;
+    }
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:1];
+    [components setMonth:month];
+    [components setYear:inYear];
+    
+    NSDate *date = [calendar dateFromComponents:components];
+    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+    return days.length;
 }
 
 + (NSUInteger)monthsToMonitorFromStartDate:(NSDate *)startDate endDate:(NSDate *)endDate

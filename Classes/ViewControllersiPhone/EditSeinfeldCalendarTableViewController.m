@@ -54,14 +54,15 @@
         {
             self.currentCalendar = calendar;
             self.hasCalendarRunning = YES;
+            self.isEditMode = YES;
         }
     }
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     [self populateCalendars];
+    [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
     NSArray *menuTitles = @[@"1", @"2", @"3", @"4"];
     self.calendarSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
@@ -86,6 +87,48 @@
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)removeManagedObject
+{
+    if (nil == self.currentCalendar)
+    {
+        return;
+    }
+    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
+    [defaultContext deleteObject:self.currentCalendar];
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+- (void)showDeleteAlertView
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"End or Delete?", nil) message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"End", nil), NSLocalizedString(@"Delete", nil), nil];
+    
+    [alert show];
+}
+
+/**
+ if user really wants to delete the entry call removeSQLEntry
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:NSLocalizedString(@"Delete", @"Delete")])
+    {
+        [self removeManagedObject];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"End", nil)] && nil != self.currentCalendar)
+    {
+        self.currentCalendar.isCompleted = [NSNumber numberWithBool:YES];
+        NSError *error = nil;
+        [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -259,7 +302,7 @@
     NSDateComponents *endComponents = [[NSDateComponents alloc] init];
     [endComponents setDay:startDay];
     [endComponents setMonth:endMonth];
-    [endComponents setMonth:endYear];
+    [endComponents setYear:endYear];
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     self.endDate = [gregorianCalendar dateFromComponents:endComponents];
 }
