@@ -148,14 +148,10 @@
     NSDateComponents *startComponents = [Utilities dateComponentsForDate:startDate];
     NSDateComponents *endComponents = [Utilities dateComponentsForDate:endDate];
 
-    NSInteger months = endComponents.month - startComponents.month;
+    NSInteger months = endComponents.month - startComponents.month + 1;
     if (endComponents.year > startComponents.year)
     {
         months += 12;
-    }
-    if (0 == months)
-    {
-        months = 1;
     }
     NSInteger month = startComponents.month;
     NSInteger year = startComponents.year;
@@ -178,7 +174,7 @@
                                                                        startComponents:monthStart
                                                                          endComponents:monthEnd
                                                                         suggestedFrame:frame];
-        contentHeight += monthView.frame.size.height;
+        contentHeight += monthView.bounds.size.height;
         [self.calendarScrollView addSubview:monthView];
         month++;
         if (12 < month)
@@ -201,6 +197,7 @@
         }
     }
     self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
+    self.calendarScrollView.scrollsToTop = YES;
     [self.calendarScrollView setNeedsDisplay];
 }
 

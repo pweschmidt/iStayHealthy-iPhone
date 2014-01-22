@@ -26,7 +26,7 @@
     CGFloat xOffset;
     CGFloat yOffset;
     CGFloat width;
-    NSUInteger weeks;
+    NSInteger weeks;
 }
 @property (nonatomic, strong) NSDateComponents *startComponents;
 @property (nonatomic, strong) NSDateComponents *endComponents;
@@ -45,19 +45,15 @@
     monthView.startComponents = startComponents;
     monthView.endComponents = endComponents;
     [monthView correctHeightFromDates];
-    UILabel *header = [monthView headerView];
-    [monthView addSubview:header];
-    UIView *weekHeader = [monthView weekHeaderView];
-    [monthView addSubview:weekHeader];
-    UIView *weeksView = [monthView weekRowView];
-    [monthView addSubview:weeksView];
+    [monthView addHeaderView];
+    [monthView addWeekHeaderView];
+    [monthView addWeekRows];
     return monthView;
 }
 
-- (UILabel *)headerView
+- (void)addHeaderView
 {
-    UILabel *header = [[UILabel alloc] init];
-    header.frame = CGRectMake(xOffset, self.bounds.origin.y, width, titleHeight);
+    UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, self.bounds.origin.y, width, titleHeight)];
     header.backgroundColor = [UIColor clearColor];
     header.textAlignment = NSTextAlignmentRight;
     header.font = [UIFont fontWithType:Bold size:standard];
@@ -65,18 +61,16 @@
     NSArray *months = [[Utilities calendarDictionary] objectForKey:@"months"];
     int monthIndex = self.startComponents.month - 1;
     header.text = [NSString stringWithFormat:@"%@, %d", [months objectAtIndex:monthIndex], self.startComponents.year];
-    return header;
+    [self addSubview:header];
 }
 
-- (UIView *)weekHeaderView
+- (void)addWeekHeaderView
 {
-    __block UIView *weekHeader = [[UIView alloc] init];
-    CGFloat y = self.bounds.origin.y + yOffset;
-    weekHeader.frame = CGRectMake(xOffset, y, width, weekDayTitleHeight);
+    __block UIView *weekHeader = [[UIView alloc] initWithFrame:CGRectMake(xOffset, self.bounds.origin.y + yOffset, width, weekDayTitleHeight)];
     NSArray *days = [[Utilities calendarDictionary] objectForKey:@"shortDays"];
     CGFloat weekDaywidth = weekHeader.frame.size.width/7;
-    CGFloat weekDayX = weekHeader.frame.origin.x;
-    CGFloat weekDayY = weekHeader.frame.origin.y+3;
+    CGFloat weekDayX = weekHeader.bounds.origin.x + 20;
+    CGFloat weekDayY = weekHeader.bounds.origin.y+3;
     [days enumerateObjectsUsingBlock:^(NSString *day, NSUInteger index, BOOL *stop) {
         CGRect labelFrame = CGRectMake(index * weekDaywidth + weekDayX, weekDayY, weekDaywidth, weekDayTitleHeight);
         UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
@@ -88,15 +82,14 @@
         [weekHeader addSubview:label];
     }];
     weekHeader.backgroundColor = [UIColor clearColor];
-    return weekHeader;
+    [self addSubview:weekHeader];
 }
 
 
-- (UIView *)weekRowView
+- (void)addWeekRows
 {
-    UIView *weekRowView = [[UIView alloc] init];
-    CGFloat y = self.bounds.origin.y + 2 * yOffset;
-    weekRowView.frame = CGRectMake(xOffset, y, width, weeks * yOffset);
+    CGFloat heightOffset = self.bounds.origin.y + 3 + 2 * yOffset;
+    UIView *weekRowView = [[UIView alloc] initWithFrame:CGRectMake(xOffset, heightOffset, width, weeks * yOffset)];
     weekRowView.backgroundColor = [UIColor clearColor];
     NSUInteger startDay = self.startComponents.day;
     NSUInteger endDay = self.endComponents.day;
@@ -110,7 +103,8 @@
         days = 1;
     }
     CGFloat dayWidth = width/7;
-    for (NSUInteger day = startDay; day < days; ++day)
+    NSUInteger dayCounter = startDay;
+    for (NSUInteger day = 0; day < days; ++day)
     {
         if (6 < startWeekDayIndex)
         {
@@ -118,7 +112,7 @@
             weekIndex++;
         }
         CGFloat xDay = startWeekDayIndex * dayWidth;
-        CGFloat yDay = yOffset * weekIndex;
+        CGFloat yDay = heightOffset + yOffset * weekIndex;
         CGRect buttonFrame = CGRectMake(xDay, yDay, dayWidth, yOffset);
         UIButton *dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         dayButton.backgroundColor = [UIColor clearColor];
@@ -130,7 +124,7 @@
         CGRect labelFrame = CGRectMake(labelXOffset, 0, xOffset, yOffset);
         UILabel *dayLabel = [[UILabel alloc] initWithFrame:labelFrame];
         dayLabel.backgroundColor = [UIColor clearColor];
-        dayLabel.text = [NSString stringWithFormat:@"%d", day];
+        dayLabel.text = [NSString stringWithFormat:@"%d", dayCounter];
         dayLabel.textColor = [UIColor darkGrayColor];
         dayLabel.textAlignment = NSTextAlignmentCenter;
         dayLabel.font = [UIFont systemFontOfSize:15];
@@ -140,8 +134,9 @@
         [self.dayButtonsMap setObject:dayButton forKey:[NSNumber numberWithUnsignedInteger:day]];
         [weekRowView addSubview:dayButton];
         startWeekDayIndex++;
+        dayCounter++;
     }
-    return weekRowView;
+    [self addSubview:weekRowView];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -178,6 +173,7 @@
 
 - (IBAction)checkIfMissed:(id)sender
 {
+    NSLog(@"clicked day button");
     
 }
 
