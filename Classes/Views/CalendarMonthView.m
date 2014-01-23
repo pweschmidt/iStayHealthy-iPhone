@@ -30,6 +30,7 @@
 }
 @property (nonatomic, strong) NSDateComponents *startComponents;
 @property (nonatomic, strong) NSDateComponents *endComponents;
+@property (nonatomic, strong) NSDateComponents *todayComponents;
 @property (nonatomic, strong) NSMutableDictionary *dayButtonsMap;
 @end
 
@@ -42,6 +43,7 @@
                                      suggestedFrame:(CGRect)suggestedFrame
 {
     CalendarMonthView *monthView = [[CalendarMonthView alloc] initWithFrame:suggestedFrame];
+    monthView.todayComponents = [Utilities dateComponentsForDate:[NSDate date]];
     monthView.startComponents = startComponents;
     monthView.endComponents = endComponents;
     [monthView correctHeightFromDates];
@@ -129,12 +131,7 @@
         CGFloat labelXOffset = (dayWidth - 20)/2 + 3.5;
         CGRect labelFrame = CGRectMake(labelXOffset, 0, xOffset, yOffset);
         UILabel *dayLabel = [[UILabel alloc] initWithFrame:labelFrame];
-        dayLabel.backgroundColor = [UIColor clearColor];
-        dayLabel.text = [NSString stringWithFormat:@"%d", dayCounter];
-        dayLabel.textColor = [UIColor darkGrayColor];
-        dayLabel.textAlignment = NSTextAlignmentCenter;
-        dayLabel.font = [UIFont systemFontOfSize:15];
-        dayLabel.layer.cornerRadius = yOffset/2;
+        [self decorateLabel:dayLabel day:dayCounter];
         
         [dayButton addSubview:dayLabel];
         [self.dayButtonsMap setObject:dayButton forKey:[NSNumber numberWithUnsignedInteger:day]];
@@ -180,6 +177,24 @@
 - (IBAction)checkIfMissed:(id)sender
 {
     NSLog(@"clicked day button");
+    
+}
+
+- (void)decorateLabel:(UILabel *)label day:(NSUInteger)day
+{
+    
+    label.backgroundColor = [UIColor clearColor];
+    label.text = [NSString stringWithFormat:@"%d", day];
+    label.textColor = [UIColor darkGrayColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont fontWithType:Standard size:standard];
+    label.layer.cornerRadius = yOffset/2;
+    if (self.todayComponents.day == day)
+    {
+        label.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont fontWithType:Bold size:standard];
+    }
     
 }
 
