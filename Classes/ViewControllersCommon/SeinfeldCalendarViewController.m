@@ -44,7 +44,7 @@
     [super viewDidLoad];
     [self setTitleViewWithTitle:NSLocalizedString(@"Medication Diary", nil)];
     CGFloat xOffset = 0;
-    CGFloat yScrollOffset = 95;
+    CGFloat yScrollOffset = 0;
     CGFloat scrollHeight = self.view.frame.size.height - 188;
     CGFloat scrollWidth = self.view.frame.size.width;
     CGRect scrollFrame = CGRectMake(xOffset, yScrollOffset, scrollWidth, scrollHeight);
@@ -163,18 +163,18 @@
     CGFloat contentGap = 20;
     NSDateComponents *monthStart = startComponents;
 
-    NSDateComponents *monthEnd = [[NSDateComponents alloc] init];
-    [monthEnd setDay:[Utilities daysInMonth:startComponents.month inYear:startComponents.year]];
-    [monthEnd setMonth:startComponents.month];
-    [monthEnd setYear:startComponents.year];
+    NSDateComponents *monthEnd = [Utilities
+                                  fullComponentsFromDay:[Utilities daysInMonth:startComponents.month inYear:startComponents.year]
+                                  month:startComponents.month
+                                  year:startComponents.year];
     for (NSInteger monthIndex = 0; monthIndex < months; ++monthIndex)
     {
-        CGRect frame = CGRectMake(xOffset, yScrollOffset + contentGap + contentHeight, scrollWidth, 150);
+        CGRect frame = CGRectMake(xOffset, contentGap + contentHeight, scrollWidth, 150);
         CalendarMonthView *monthView = [CalendarMonthView calendarMonthViewForCalendar:self.currentCalendar
                                                                        startComponents:monthStart
                                                                          endComponents:monthEnd
                                                                         suggestedFrame:frame];
-        contentHeight += monthView.bounds.size.height;
+        contentHeight += monthView.bounds.size.height + 20;
         [self.calendarScrollView addSubview:monthView];
         month++;
         if (12 < month)
@@ -182,18 +182,17 @@
             month = 1;
             year++;
         }
-        [monthStart setDay:1];
-        [monthStart setMonth:month];
-        [monthStart setYear:year];
+        monthStart = [Utilities fullComponentsFromDay:1 month:month year:year];
         if (endComponents.month == month && endComponents.year == year)
         {
             monthEnd = endComponents;
         }
         else
         {
-            [monthEnd setDay:[Utilities daysInMonth:monthStart.month inYear:monthStart.year]];
-            [monthEnd setMonth:monthStart.month];
-            [monthEnd setYear:monthStart.year];
+            monthEnd = [Utilities
+                        fullComponentsFromDay:[Utilities daysInMonth:startComponents.month inYear:startComponents.year]
+                        month:startComponents.month
+                        year:startComponents.year];
         }
     }
     self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);

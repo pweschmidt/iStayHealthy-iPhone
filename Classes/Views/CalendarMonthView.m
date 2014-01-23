@@ -54,6 +54,8 @@
 - (void)addHeaderView
 {
     UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, self.bounds.origin.y, width, titleHeight)];
+    NSLog(@"HEADER bounds x=%f y=%f w=%f h=%f ",header.bounds.origin.x,header.bounds.origin.y,header.bounds.size.width,header.bounds.size.height);
+    NSLog(@"HEADER frame x=%f y=%f w=%f h=%f ",header.frame.origin.x,header.frame.origin.y,header.frame.size.width,header.frame.size.height);
     header.backgroundColor = [UIColor clearColor];
     header.textAlignment = NSTextAlignmentRight;
     header.font = [UIFont fontWithType:Bold size:standard];
@@ -67,6 +69,8 @@
 - (void)addWeekHeaderView
 {
     __block UIView *weekHeader = [[UIView alloc] initWithFrame:CGRectMake(xOffset, self.bounds.origin.y + yOffset, width, weekDayTitleHeight)];
+    NSLog(@"WEEKHEADER bounds x=%f y=%f w=%f h=%f ",weekHeader.bounds.origin.x,weekHeader.bounds.origin.y,weekHeader.bounds.size.width,weekHeader.bounds.size.height);
+    NSLog(@"WEEKHEADER frame x=%f y=%f w=%f h=%f ",weekHeader.frame.origin.x,weekHeader.frame.origin.y,weekHeader.frame.size.width,weekHeader.frame.size.height);
     NSArray *days = [[Utilities calendarDictionary] objectForKey:@"shortDays"];
     CGFloat weekDaywidth = weekHeader.frame.size.width/7;
     CGFloat weekDayX = weekHeader.bounds.origin.x + 20;
@@ -90,6 +94,8 @@
 {
     CGFloat heightOffset = self.bounds.origin.y + 3 + 2 * yOffset;
     UIView *weekRowView = [[UIView alloc] initWithFrame:CGRectMake(xOffset, heightOffset, width, weeks * yOffset)];
+    NSLog(@"WEEK bounds x=%f y=%f w=%f h=%f ",weekRowView.bounds.origin.x,weekRowView.bounds.origin.y,weekRowView.bounds.size.width,weekRowView.bounds.size.height);
+    NSLog(@"WEEK frame x=%f y=%f w=%f h=%f ",weekRowView.frame.origin.x,weekRowView.frame.origin.y,weekRowView.frame.size.width,weekRowView.frame.size.height);
     weekRowView.backgroundColor = [UIColor clearColor];
     NSUInteger startDay = self.startComponents.day;
     NSUInteger endDay = self.endComponents.day;
@@ -112,7 +118,7 @@
             weekIndex++;
         }
         CGFloat xDay = startWeekDayIndex * dayWidth;
-        CGFloat yDay = heightOffset + yOffset * weekIndex;
+        CGFloat yDay =  yOffset * weekIndex;
         CGRect buttonFrame = CGRectMake(xDay, yDay, dayWidth, yOffset);
         UIButton *dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         dayButton.backgroundColor = [UIColor clearColor];
