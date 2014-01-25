@@ -18,11 +18,12 @@
 #import "SeinfeldCalendar.h"
 #import "SeinfeldCalendarEntry.h"
 #import "EditSeinfeldCalendarTableViewController.h"
-
+#import "EditMissedMedsTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SeinfeldCalendarViewController ()
 @property (nonatomic, strong) NSArray *calendars;
+@property (nonatomic, strong) NSArray *currentMeds;
 @property (nonatomic, strong) SeinfeldCalendar *currentCalendar;
 @end
 
@@ -34,6 +35,7 @@
     if (nil != self)
     {
         _calendars = [NSArray array];
+        _currentMeds = [NSArray array];
         _currentCalendar = nil;
     }
     return self;
@@ -104,6 +106,24 @@
             {
                 [self buildSeinfeldCalendar];
             }
+            [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion:^(NSArray *medsarray, NSError *innererror) {
+                if (nil == medsarray)
+                {
+                    UIAlertView *errorAlert = [[UIAlertView alloc]
+                                               initWithTitle:@"Error"
+                                               message:@"Error loading data"
+                                               delegate:nil
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:nil];
+                    [errorAlert show];
+                    
+                }
+                else
+                {
+                    self.currentMeds = nil;
+                    self.currentMeds = medsarray;
+                }
+            }];
         }
     }];
 }
@@ -174,6 +194,7 @@
                                                                        startComponents:monthStart
                                                                          endComponents:monthEnd
                                                                         suggestedFrame:frame];
+        monthView.calendarDelegate = self;
         contentHeight += monthView.bounds.size.height + 20;
         [self.calendarScrollView addSubview:monthView];
         month++;
@@ -200,5 +221,13 @@
     [self.calendarScrollView setNeedsDisplay];
 }
 
-
+#pragma mark Seinfeld Calendar delegate
+- (void)popToMissedMedicationController
+{
+    EditMissedMedsTableViewController *missedController = [[EditMissedMedsTableViewController alloc]
+                                                           initWithStyle:UITableViewStyleGrouped
+                                                           currentMeds:self.currentMeds
+                                                           managedObject:nil];
+    [self.navigationController pushViewController:missedController animated:YES];
+}
 @end

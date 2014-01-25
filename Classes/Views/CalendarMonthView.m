@@ -13,7 +13,7 @@
 #import "Utilities.h"
 #import "UIFont+Standard.h"
 #import "Constants.h"
-#import "SeinfeldCalendar.h"
+#import "SeinfeldCalendar+Handling.h"
 #import "SeinfeldCalendarEntry.h"
 #import "CoreDataManager.h"
 #import <QuartzCore/QuartzCore.h>
@@ -32,6 +32,9 @@
 @property (nonatomic, strong) NSDateComponents *endComponents;
 @property (nonatomic, strong) NSDateComponents *todayComponents;
 @property (nonatomic, strong) NSMutableDictionary *dayButtonsMap;
+@property (nonatomic, strong) SeinfeldCalendar *calendar;
+@property (nonatomic, strong) SeinfeldCalendarEntry *selectedEntry;
+@property (nonatomic, strong) UIButton *selectedDayButton;
 @end
 
 @implementation CalendarMonthView
@@ -46,6 +49,7 @@
     monthView.todayComponents = [Utilities dateComponentsForDate:[NSDate date]];
     monthView.startComponents = startComponents;
     monthView.endComponents = endComponents;
+    monthView.calendar = calendar;
     [monthView correctHeightFromDates];
     [monthView addHeaderView];
     [monthView addWeekHeaderView];
@@ -127,14 +131,20 @@
         dayButton.frame = buttonFrame;
         dayButton.tag = day;
         [dayButton addTarget:self action:@selector(checkIfMissed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        SeinfeldCalendarEntry *entry = [self.calendar entryForDay:dayCounter month:self.startComponents.month year:self.startComponents.year];
+        if (nil != entry)
+        {
+            [self.dayButtonsMap setObject:entry forKey:[NSNumber numberWithUnsignedInteger:day]];
+        }
 
         CGFloat labelXOffset = (dayWidth - 20)/2 + 3.5;
         CGRect labelFrame = CGRectMake(labelXOffset, 0, xOffset, yOffset);
         UILabel *dayLabel = [[UILabel alloc] initWithFrame:labelFrame];
-        [self decorateLabel:dayLabel day:dayCounter];
+        dayLabel.tag = day;
+        [self decorateLabel:dayLabel day:dayCounter entry:entry];
         
         [dayButton addSubview:dayLabel];
-        [self.dayButtonsMap setObject:dayButton forKey:[NSNumber numberWithUnsignedInteger:day]];
         [weekRowView addSubview:dayButton];
         startWeekDayIndex++;
         dayCounter++;
@@ -155,6 +165,8 @@
         xOffset = self.bounds.origin.x + 20;
         width = self.bounds.size.width - 40;
         _dayButtonsMap = [NSMutableDictionary dictionary];
+        _selectedEntry = nil;
+        _selectedDayButton = nil;
     }
     return self;
 }
@@ -174,18 +186,36 @@
     self.bounds = bounds;
 }
 
-- (IBAction)checkIfMissed:(id)sender
+- (void)checkIfMissed:(id)sender
 {
-    NSLog(@"clicked day button");
+    self.selectedDayButton = nil;
+    self.selectedEntry = nil;
+    if (![sender isKindOfClass:[UIButton class]])
+    {
+        return;
+    }
+    UIButton *button = (UIButton *)sender;
+    self.selectedDayButton = button;
+    NSNumber *key = [NSNumber numberWithUnsignedInteger:button.tag];
+    SeinfeldCalendarEntry *entry = [self.dayButtonsMap objectForKey:key];
     
+    NSString *title = NSLocalizedString(@"Set", nil);
+    NSString *message = NSLocalizedString(@"Have you taken All of your meds?", nil);
+    if (nil != entry)
+    {
+        title = NSLocalizedString(@"Change", nil);
+        self.selectedEntry = entry;
+    }
+    UIAlertView *medAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil];
+    [medAlert show];
 }
 
-- (void)decorateLabel:(UILabel *)label day:(NSUInteger)day
+- (void)decorateLabel:(UILabel *)label day:(NSUInteger)day entry:(SeinfeldCalendarEntry *)entry
 {
     
     label.backgroundColor = [UIColor clearColor];
     label.text = [NSString stringWithFormat:@"%d", day];
-    label.textColor = [UIColor darkGrayColor];
+    label.textColor = [UIColor lightGrayColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithType:Standard size:standard];
     label.layer.cornerRadius = yOffset/2;
@@ -195,8 +225,96 @@
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont fontWithType:Bold size:standard];
     }
+    else if (self.todayComponents.day > day)
+    {
+        label.textColor = [UIColor darkGrayColor];
+    }
+    if (nil != entry)
+    {
+        BOOL hasTaken = [entry.hasTakenMeds boolValue];
+        if (hasTaken)
+        {
+            label.layer.backgroundColor = DARK_GREEN.CGColor;
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont fontWithType:Bold size:standard];
+        }
+        else
+        {
+            label.layer.backgroundColor = DARK_RED.CGColor;
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont fontWithType:Bold size:standard];
+        }
+    }
     
 }
 
+#pragma mark Alert View delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == [alertView cancelButtonIndex])
+    {
+        return;
+    }
+    if (nil == self.selectedDayButton)
+    {
+        return;
+    }
+    
+    __block UILabel *foundLabel = nil;
+    [self.selectedDayButton.subviews enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+        if ([object isKindOfClass:[UILabel class]])
+        {
+            foundLabel = (UILabel *)object;
+        }
+    }];
+    
+    if (nil == foundLabel)
+    {
+        return;
+    }
+    
+    SeinfeldCalendarEntry *entry = self.selectedEntry;
+    BOOL isEntryUpdate = YES;
+    BOOL needToEnterMissed = NO;
+    if (nil == entry)
+    {
+        isEntryUpdate = NO;
+        entry = [[CoreDataManager sharedInstance] managedObjectForEntityName:kSeinfeldCalendarEntry];
+        entry.uID = [Utilities GUID];
+    }
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:NSLocalizedString(@"Yes", nil)])
+    {
+        foundLabel.layer.backgroundColor = DARK_GREEN.CGColor;
+        foundLabel.textColor = [UIColor whiteColor];
+        foundLabel.font = [UIFont fontWithType:Bold size:standard];
+        entry.hasTakenMeds = [NSNumber numberWithBool:YES];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"No", nil)])
+    {
+        needToEnterMissed = YES;
+        foundLabel.layer.backgroundColor = DARK_RED.CGColor;
+        foundLabel.textColor = [UIColor whiteColor];
+        foundLabel.font = [UIFont fontWithType:Bold size:standard];
+        entry.hasTakenMeds = [NSNumber numberWithBool:NO];
+    }
+    
+    if (!isEntryUpdate)
+    {
+        NSUInteger day = self.selectedDayButton.tag + self.startComponents.day;
+        entry.date = [NSDate dateFromDay:day month:self.startComponents.month year:self.startComponents.year];
+        [self.calendar addEntriesObject:entry];
+    }
+    
+    NSError *error = nil;
+    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    if (needToEnterMissed &&
+        nil != self.calendarDelegate &&
+        [self.calendarDelegate respondsToSelector:@selector(popToMissedMedicationController)])
+    {
+        [self.calendarDelegate popToMissedMedicationController];
+    }
+    
+}
 
 @end

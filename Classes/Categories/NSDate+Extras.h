@@ -14,4 +14,5 @@
 - (NSDate *)dateByAddingDays:(NSUInteger)days;
 - (NSUInteger)timeDifferenceInDays:(NSDate *)comparedDate;
 - (NSUInteger)daysInMonth;
++ (NSDate *)dateFromDay:(NSUInteger)day month:(NSUInteger)month year:(NSUInteger)year;
 @end

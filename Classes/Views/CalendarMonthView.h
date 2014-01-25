@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SeinfeldCalendarDelegate.h"
 @class SeinfeldCalendar;
 
-@interface CalendarMonthView : UIView
-
+@interface CalendarMonthView : UIView <UIAlertViewDelegate>
+@property (nonatomic, weak) id<SeinfeldCalendarDelegate>calendarDelegate;
 + (CalendarMonthView *)calendarMonthViewForCalendar:(SeinfeldCalendar *)calendar
                                     startComponents:(NSDateComponents *)startComponents
                                       endComponents:(NSDateComponents *)endComponents

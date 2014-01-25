@@ -53,4 +53,19 @@
     return days.length;
 }
 
++ (NSDate *)dateFromDay:(NSUInteger)day month:(NSUInteger)month year:(NSUInteger)year
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.day = day;
+    components.month = month;
+    components.year = year;
+    components.hour = 12;
+    components.minute = 0;
+    components.second = 0;
+    
+    return [calendar dateFromComponents:components];
+}
+
+
 @end

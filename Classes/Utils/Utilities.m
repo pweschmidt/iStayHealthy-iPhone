@@ -437,16 +437,7 @@
 
 + (NSDateComponents *)fullComponentsFromDay:(NSInteger)day month:(NSInteger)month year:(NSInteger)year
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.day = day;
-    components.month = month;
-    components.year = year;
-    components.hour = 12;
-    components.minute = 0;
-    components.second = 0;
-    
-    NSDate *date = [calendar dateFromComponents:components];
+    NSDate *date = [NSDate dateFromDay:day month:month year:year];
     return [[self class] dateComponentsForDate:date];
 }
 

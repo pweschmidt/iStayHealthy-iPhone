@@ -134,7 +134,7 @@
             self.missed = nil;
             self.missed = [NSArray arrayWithArray:array];
             [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion:^(NSArray *medsarray, NSError *innererror) {
-                if (nil == array)
+                if (nil == medsarray)
                 {
                     UIAlertView *errorAlert = [[UIAlertView alloc]
                                                initWithTitle:@"Error"
