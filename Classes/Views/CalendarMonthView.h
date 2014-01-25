@@ -15,5 +15,6 @@
 + (CalendarMonthView *)calendarMonthViewForCalendar:(SeinfeldCalendar *)calendar
                                     startComponents:(NSDateComponents *)startComponents
                                       endComponents:(NSDateComponents *)endComponents
+                                courseEndComponents:(NSDateComponents *)courseEndComponents
                                      suggestedFrame:(CGRect)suggestedFrame;
 @end

@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSDateComponents *startComponents;
 @property (nonatomic, strong) NSDateComponents *endComponents;
 @property (nonatomic, strong) NSDateComponents *todayComponents;
+@property (nonatomic, strong) NSDateComponents *courseEndComponents;
 @property (nonatomic, strong) NSMutableDictionary *dayButtonsMap;
 @property (nonatomic, strong) SeinfeldCalendar *calendar;
 @property (nonatomic, strong) SeinfeldCalendarEntry *selectedEntry;
@@ -43,12 +44,14 @@
 + (CalendarMonthView *)calendarMonthViewForCalendar:(SeinfeldCalendar *)calendar
                                     startComponents:(NSDateComponents *)startComponents
                                       endComponents:(NSDateComponents *)endComponents
+                                courseEndComponents:(NSDateComponents *)courseEndComponents
                                      suggestedFrame:(CGRect)suggestedFrame
 {
     CalendarMonthView *monthView = [[CalendarMonthView alloc] initWithFrame:suggestedFrame];
     monthView.todayComponents = [Utilities dateComponentsForDate:[NSDate date]];
     monthView.startComponents = startComponents;
     monthView.endComponents = endComponents;
+    monthView.courseEndComponents = courseEndComponents;
     monthView.calendar = calendar;
     [monthView correctHeightFromDates];
     [monthView addHeaderView];
@@ -131,6 +134,16 @@
         dayButton.frame = buttonFrame;
         dayButton.tag = day;
         [dayButton addTarget:self action:@selector(checkIfMissed:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.todayComponents.day < dayCounter ||
+            self.todayComponents.month != self.startComponents.month ||
+            self.todayComponents.year != self.startComponents.year)
+        {
+            dayButton.enabled = NO;
+        }
+        else
+        {
+            dayButton.enabled = YES;
+        }
         
         SeinfeldCalendarEntry *entry = [self.calendar entryForDay:dayCounter month:self.startComponents.month year:self.startComponents.year];
         if (nil != entry)
@@ -225,7 +238,9 @@
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont fontWithType:Bold size:standard];
     }
-    else if (self.todayComponents.day > day)
+    else if (self.todayComponents.day > day &&
+             self.todayComponents.month == self.startComponents.month &&
+             self.todayComponents.year == self.startComponents.year)
     {
         label.textColor = [UIColor darkGrayColor];
     }
@@ -276,6 +291,12 @@
     SeinfeldCalendarEntry *entry = self.selectedEntry;
     BOOL isEntryUpdate = YES;
     BOOL needToEnterMissed = NO;
+    NSUInteger day = self.selectedDayButton.tag + self.startComponents.day;
+    
+    BOOL courseIsEnded = (day == self.courseEndComponents.day &&
+                          self.startComponents.month == self.courseEndComponents.month &&
+                          self.startComponents.year == self.courseEndComponents.year);
+    
     if (nil == entry)
     {
         isEntryUpdate = NO;
@@ -301,20 +322,27 @@
     
     if (!isEntryUpdate)
     {
-        NSUInteger day = self.selectedDayButton.tag + self.startComponents.day;
         entry.date = [NSDate dateFromDay:day month:self.startComponents.month year:self.startComponents.year];
         [self.calendar addEntriesObject:entry];
     }
     
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-    if (needToEnterMissed &&
-        nil != self.calendarDelegate &&
-        [self.calendarDelegate respondsToSelector:@selector(popToMissedMedicationController)])
-    {
-        [self.calendarDelegate popToMissedMedicationController];
-    }
     
+    if (courseIsEnded)
+    {
+        if (nil != self.calendarDelegate && [self.calendarDelegate respondsToSelector:@selector(courseHasEndedHasMissedMedsOnLastDay::)])
+        {
+            [self.calendarDelegate courseHasEndedHasMissedMedsOnLastDay:needToEnterMissed];
+        }
+    }
+    else
+    {
+        if (nil != self.calendarDelegate && [self.calendarDelegate respondsToSelector:@selector(popToMissedMedicationControllerHasMissed:)])
+        {
+            [self.calendarDelegate popToMissedMedicationControllerHasMissed:needToEnterMissed];
+        }
+    }
 }
 
 @end

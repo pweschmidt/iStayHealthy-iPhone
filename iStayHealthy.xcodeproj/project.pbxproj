@@ -11,6 +11,7 @@
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F19461866F9F00091704C /* EditChartsTableViewController.m */; };
 		0B4064B61893C36100F858BB /* SeinfeldCalendar+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4064B51893C36100F858BB /* SeinfeldCalendar+Handling.m */; };
+		0B4065001894370900F858BB /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4064FF1894370900F858BB /* StarView.m */; };
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
 		0B508C5C188BE19E00752568 /* CalendarMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B508C5B188BE19E00752568 /* CalendarMonthView.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
@@ -482,6 +483,8 @@
 		0B4064B41893C36100F858BB /* SeinfeldCalendar+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SeinfeldCalendar+Handling.h"; path = "Categories/SeinfeldCalendar+Handling.h"; sourceTree = "<group>"; };
 		0B4064B51893C36100F858BB /* SeinfeldCalendar+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SeinfeldCalendar+Handling.m"; path = "Categories/SeinfeldCalendar+Handling.m"; sourceTree = "<group>"; };
 		0B4064B71893D83B00F858BB /* SeinfeldCalendarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendarDelegate.h; path = ViewControllersCommon/SeinfeldCalendarDelegate.h; sourceTree = "<group>"; };
+		0B4064FE1894370900F858BB /* StarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarView.h; path = Views/StarView.h; sourceTree = "<group>"; };
+		0B4064FF1894370900F858BB /* StarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarView.m; path = Views/StarView.m; sourceTree = "<group>"; };
 		0B47527218422D2F0079A239 /* NSString+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Extras.h"; path = "Categories/NSString+Extras.h"; sourceTree = "<group>"; };
 		0B47527318422D2F0079A239 /* NSString+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extras.m"; path = "Categories/NSString+Extras.m"; sourceTree = "<group>"; };
 		0B508C5A188BE19E00752568 /* CalendarMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarMonthView.h; path = Views/CalendarMonthView.h; sourceTree = "<group>"; };
@@ -1418,6 +1421,8 @@
 				C45A98E417EEE3BA004E13C7 /* DateView.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
 				C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */,
+				0B4064FE1894370900F858BB /* StarView.h */,
+				0B4064FF1894370900F858BB /* StarView.m */,
 				C4A49AD718002CD300FC1637 /* TimeView.h */,
 				C4A49AD818002CD400FC1637 /* TimeView.m */,
 			);
@@ -2656,6 +2661,7 @@
 				C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */,
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
+				0B4065001894370900F858BB /* StarView.m in Sources */,
 				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,

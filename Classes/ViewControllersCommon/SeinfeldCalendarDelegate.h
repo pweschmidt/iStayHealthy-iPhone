@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol SeinfeldCalendarDelegate <NSObject>
-- (void)popToMissedMedicationController;
+- (void)popToMissedMedicationControllerHasMissed:(BOOL)hasMissed;
+- (void)courseHasEndedHasMissedMedsOnLastDay:(BOOL)hasMissedMedsOnLastDay;
 @end

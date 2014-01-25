@@ -106,6 +106,7 @@
             {
                 [self buildSeinfeldCalendar];
             }
+            [self.calendarScrollView setNeedsDisplay];
             [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion:^(NSArray *medsarray, NSError *innererror) {
                 if (nil == medsarray)
                 {
@@ -193,6 +194,7 @@
         CalendarMonthView *monthView = [CalendarMonthView calendarMonthViewForCalendar:self.currentCalendar
                                                                        startComponents:monthStart
                                                                          endComponents:monthEnd
+                                                                   courseEndComponents:endComponents
                                                                         suggestedFrame:frame];
         monthView.calendarDelegate = self;
         contentHeight += monthView.bounds.size.height + 20;
@@ -218,16 +220,36 @@
     }
     self.calendarScrollView.contentSize = CGSizeMake(scrollWidth, contentHeight);
     self.calendarScrollView.scrollsToTop = YES;
-    [self.calendarScrollView setNeedsDisplay];
 }
 
 #pragma mark Seinfeld Calendar delegate
-- (void)popToMissedMedicationController
+- (void)popToMissedMedicationControllerHasMissed:(BOOL)hasMissed
 {
+    if (!hasMissed)
+    {
+        return;
+    }
     EditMissedMedsTableViewController *missedController = [[EditMissedMedsTableViewController alloc]
                                                            initWithStyle:UITableViewStyleGrouped
                                                            currentMeds:self.currentMeds
                                                            managedObject:nil];
     [self.navigationController pushViewController:missedController animated:YES];
+}
+
+- (void)courseHasEndedHasMissedMedsOnLastDay:(BOOL)hasMissedMedsOnLastDay
+{
+    if (self.currentCalendar)
+    {
+        self.currentCalendar.isCompleted = [NSNumber numberWithBool:YES];
+    }
+    
+    if (hasMissedMedsOnLastDay)
+    {
+        EditMissedMedsTableViewController *missedController = [[EditMissedMedsTableViewController alloc]
+                                                               initWithStyle:UITableViewStyleGrouped
+                                                               currentMeds:self.currentMeds
+                                                               managedObject:nil];
+        [self.navigationController pushViewController:missedController animated:YES];
+    }
 }
 @end
