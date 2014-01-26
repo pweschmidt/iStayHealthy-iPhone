@@ -19,8 +19,8 @@
 @property (nonatomic, strong) NSArray *unitArray;
 @property (nonatomic, strong) NSArray *currentMeds;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
-@property (nonatomic, strong) UITableViewCell *selectedReasonCell;
-@property (nonatomic, strong) NSMutableDictionary *selectedMedCells;
+@property (nonatomic, strong) NSIndexPath *selectedReasonPath;
+@property (nonatomic, strong) NSMutableDictionary *selectedMedPaths;
 @end
 
 @implementation EditMissedMedsTableViewController
@@ -42,22 +42,60 @@
         {
             _currentMeds = currentMeds;
         }
+        [self populateValues];
     }
     return self;
 }
 
-
-- (void)viewDidLoad
+- (void)populateValues
 {
-    [super viewDidLoad];
-    self.navigationItem.title = NSLocalizedString(@"New Missed Medication", nil);
     self.editMenu = @[kMissedReasonForgotten,
                       kMissedReasonNoMeds,
                       kMissedReasonUnable,
                       kMissedReasonUnwilling,
                       kMissedReasonOther];
-    self.selectedReasonCell = nil;
-    self.selectedMedCells = [NSMutableDictionary dictionary];
+    self.selectedReasonPath = nil;
+    self.selectedMedPaths = [NSMutableDictionary dictionary];
+    NSUInteger medSection = 2;
+    [self.currentMeds enumerateObjectsUsingBlock:^(Medication *medication, NSUInteger index, BOOL *stop) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:medSection];
+        NSNumber *value = [NSNumber numberWithBool:NO];
+        [self.selectedMedPaths setObject:value forKey:indexPath];
+    }];
+    
+    if (self.isEditMode)
+    {
+        MissedMedication *missedMed = (MissedMedication *)self.managedObject;
+        NSString *reason = missedMed.missedReason;
+        if (nil != reason)
+        {
+            NSUInteger foundIndex = [self.editMenu indexOfObject:reason];
+            if (NSNotFound != foundIndex)
+            {
+                self.selectedReasonPath = [NSIndexPath indexPathForRow:foundIndex inSection:1];
+            }
+        }
+        NSArray *components = [missedMed.Name componentsSeparatedByString:@","];
+        [self.currentMeds enumerateObjectsUsingBlock:^(Medication *medication, NSUInteger index, BOOL *stop) {
+            NSString *name = medication.Name;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:medSection];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@",name];
+            NSArray *filtered = [components filteredArrayUsingPredicate:predicate];
+            if (nil != filtered && 0 < filtered.count)
+            {
+                [self.selectedMedPaths setObject:[NSNumber numberWithBool:YES] forKey:indexPath];
+            }
+        }];
+        
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationItem.title = NSLocalizedString(@"New Missed Medication", nil);
+//    self.selectedReasonCell = nil;
+//    self.selectedMedCells = [NSMutableDictionary dictionary];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,13 +113,27 @@
 
 - (void)save:(id)sender
 {
-    if (nil == self.selectedReasonCell)
+    if (nil == self.selectedReasonPath)
     {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reason is missing", nil) message:NSLocalizedString(@"Please select a reason", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles: nil];
+        [alert show];
         return;
     }
-    if (0 == self.currentMeds.count)
+    __block BOOL found = NO;
+    [self.selectedMedPaths enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *key, NSNumber *obj, BOOL *stop) {
+        if ([obj boolValue])
+        {
+            found = YES;
+        }
+    }];
+    if (!found)
     {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Med is missing", nil) message:NSLocalizedString(@"Please select a medication", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles: nil];
+        [alert show];
+        return;
     }
+    
+    
     MissedMedication *med = nil;
     if (self.isEditMode)
     {
@@ -93,6 +145,29 @@
     }
     med.UID = [Utilities GUID];
     med.MissedDate = self.date;
+    if (nil != self.selectedReasonPath)
+    {
+        med.missedReason = [self.editMenu objectAtIndex:self.selectedReasonPath.row];
+    }
+    if (nil != self.selectedMedPaths)
+    {
+        __block NSMutableString *names = [NSMutableString string];
+        [self.selectedMedPaths enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *key, NSNumber *checked, BOOL *stop) {
+            if ([checked boolValue])
+            {
+                if (0 < names.length)
+                {
+                    [names appendString:@","];
+                }
+                Medication *med = [self.currentMeds objectAtIndex:key.row];
+                [names appendString:med.Name];
+            }
+        }];
+        if (0 < names.length)
+        {
+            med.Name = names;
+        }
+    }
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
     [self.navigationController popViewControllerAnimated:YES];
@@ -200,6 +275,13 @@
     UILabel *label = [UILabel standardLabel];
     label.frame = CGRectMake(20, 0, 200, self.tableView.rowHeight);
     label.text = text;
+    if (nil != self.selectedReasonPath)
+    {
+        if (indexPath.row == self.selectedReasonPath.row && indexPath.section == self.selectedReasonPath.section)
+        {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    }
     [cell.contentView addSubview:label];
 }
 
@@ -208,12 +290,27 @@
                indexPath:(NSIndexPath *)indexPath
 {
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    NSNumber *checked = [self.selectedMedPaths objectForKey:indexPath];
+    if (nil == checked)
+    {
+        
+    }
+    else
+    {
+        if ([checked boolValue])
+        {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    }
+    
+    /*
     NSNumber *checked = [self.selectedMedCells objectForKey:indexPath];
     if (!checked)
     {
         [self.selectedMedCells setObject:(checked = [NSNumber numberWithBool:NO])
                                   forKey:indexPath];
     }
+     */
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.backgroundColor = [UIColor clearColor];
     imageView.frame = CGRectMake(20, 2, 55, 55);
@@ -244,17 +341,30 @@
     UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if (1 == indexPath.section)
     {
+        if (nil != self.selectedReasonPath)
+        {
+            UITableViewCell *checkedCell = [self.tableView cellForRowAtIndexPath:self.selectedReasonPath];
+            checkedCell.accessoryType = UITableViewCellAccessoryNone;
+        }
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        self.selectedReasonCell = cell;
+        self.selectedReasonPath = indexPath;
+//        self.selectedReasonCell = cell;
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
     else if(2 == indexPath.section)
     {
+        BOOL checkedValue = [[self.selectedMedPaths objectForKey:indexPath] boolValue];
+        BOOL checkedUnchecked = !checkedValue;
+        [self.selectedMedPaths setObject:[NSNumber numberWithBool:checkedUnchecked] forKey:indexPath];
+        cell.accessoryType = checkedUnchecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+        
+        /*
         BOOL keyValue = [[self.selectedMedCells objectForKey:indexPath] boolValue];
         BOOL isChecked = !keyValue;
         NSNumber *checked = [NSNumber numberWithBool:isChecked];
         [self.selectedMedCells setObject:checked forKey:indexPath];
         cell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+         */
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
 }
