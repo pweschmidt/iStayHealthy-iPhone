@@ -94,8 +94,6 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"New Missed Medication", nil);
-//    self.selectedReasonCell = nil;
-//    self.selectedMedCells = [NSMutableDictionary dictionary];
 }
 
 - (void)didReceiveMemoryWarning
@@ -303,14 +301,6 @@
         }
     }
     
-    /*
-    NSNumber *checked = [self.selectedMedCells objectForKey:indexPath];
-    if (!checked)
-    {
-        [self.selectedMedCells setObject:(checked = [NSNumber numberWithBool:NO])
-                                  forKey:indexPath];
-    }
-     */
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.backgroundColor = [UIColor clearColor];
     imageView.frame = CGRectMake(20, 2, 55, 55);
@@ -348,7 +338,6 @@
         }
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.selectedReasonPath = indexPath;
-//        self.selectedReasonCell = cell;
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
     else if(2 == indexPath.section)
@@ -357,14 +346,6 @@
         BOOL checkedUnchecked = !checkedValue;
         [self.selectedMedPaths setObject:[NSNumber numberWithBool:checkedUnchecked] forKey:indexPath];
         cell.accessoryType = checkedUnchecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
-        
-        /*
-        BOOL keyValue = [[self.selectedMedCells objectForKey:indexPath] boolValue];
-        BOOL isChecked = !keyValue;
-        NSNumber *checked = [NSNumber numberWithBool:isChecked];
-        [self.selectedMedCells setObject:checked forKey:indexPath];
-        cell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
-         */
         [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
     }
 }

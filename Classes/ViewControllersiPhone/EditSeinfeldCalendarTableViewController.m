@@ -12,6 +12,7 @@
 #import "SeinfeldCalendar.h"
 #import "UILabel+Standard.h"
 #import "Utilities.h"
+#import "StarView.h"
 
 @interface EditSeinfeldCalendarTableViewController ()
 @property (nonatomic, strong) UISegmentedControl *calendarSegmentControl;
@@ -186,9 +187,20 @@
             [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
         }
     }
+    else
+    {
+        [self configureCell:cell indexPath:indexPath];
+    }
 
     return cell;
 }
+
+- (void)configureCell:(UITableViewCell *)cell
+            indexPath:(NSIndexPath *)indexPath
+{
+    SeinfeldCalendar *calendar = (SeinfeldCalendar *)[self.completedCalendars objectAtIndex:indexPath.row];
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
