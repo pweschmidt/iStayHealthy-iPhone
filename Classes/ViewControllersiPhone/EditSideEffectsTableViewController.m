@@ -29,6 +29,7 @@
 @property (nonatomic, strong) UISegmentedControl *frequencyControl;
 @property (nonatomic, strong) NSIndexPath *linkIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *selectedMedCells;
+@property (nonatomic, strong) NSMutableDictionary *valueMap;
 - (void)changeFrequency:(id)sender;
 - (void)changeSeriousness:(id)sender;
 
@@ -57,10 +58,15 @@
     return self;
 }
 
-
-- (void)viewDidLoad
+- (void)populateValues
 {
-    [super viewDidLoad];
+    self.valueMap = [NSMutableDictionary dictionary];
+    self.selectedMedCells = [NSMutableDictionary dictionary];
+    [self.currentMeds enumerateObjectsUsingBlock:^(Medication *med, NSUInteger index, BOOL *stop) {
+        NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:2];
+        [self.selectedMedCells setObject:[NSNumber numberWithBool:NO] forKey:path];
+    }];
+
     self.editMenu = @[kSideEffect, kEffectsOther];
     self.seriousnessArray = @[kEffectsMinor, kEffectsMajor, kEffectsSerious];
     self.frequencyArray = @[kEffectsRarely, kEffectsSometimes, kEffectsOften, kEffectsAlways];
@@ -70,27 +76,47 @@
                                 action:@selector(changeSeriousness:)
                       forControlEvents:UIControlEventValueChanged];
     [self.frequencyControl addTarget:self
-                                action:@selector(changeFrequency:)
-                      forControlEvents:UIControlEventValueChanged];
+                              action:@selector(changeFrequency:)
+                    forControlEvents:UIControlEventValueChanged];
     seriousnessIndex = 0;
     frequencyIndex = 0;
     self.linkIndexPath = nil;
     self.seriousnessControl.selectedSegmentIndex = seriousnessIndex;
     self.frequencyControl.selectedSegmentIndex = frequencyIndex;
+    if (self.isEditMode && nil != self.managedObject)
+    {
+        SideEffects *effects = (SideEffects *)self.managedObject;
+        [self.valueMap setObject:effects.SideEffect forKey:kSideEffect];
+        NSInteger index = [self.seriousnessArray indexOfObject:effects.seriousness];
+        if (NSNotFound != index)
+        {
+            self.seriousnessControl.selectedSegmentIndex = index;
+        }
+        self.date = effects.SideEffectDate;
+        if (0 < self.currentMeds && 0 < effects.Name.length)
+        {
+            NSArray *names = [effects.Name componentsSeparatedByString:@","];
+            [self.currentMeds enumerateObjectsUsingBlock:^(Medication *med, NSUInteger index, BOOL *stop) {
+                if ([names containsObject:med.Name])
+                {
+                    [self.selectedMedCells setObject:[NSNumber numberWithBool:YES]
+                                              forKey:[NSIndexPath indexPathForRow:index inSection:2]];
+                }
+            }];
+        }
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self populateValues];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)setDefaultValues
-{
-    if(!self.isEditMode)
-    {
-        return;
-    }
 }
 
 - (void)save:(id)sender
@@ -106,10 +132,31 @@
     }
     effects.UID = [Utilities GUID];
     effects.SideEffectDate = self.date;
-    if (0 < self.selectedMedCells.allKeys.count)
+    __block NSMutableString *medNames = [NSMutableString string];
+    [self.selectedMedCells enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *key, NSNumber *checked, BOOL *stop) {
+        if ([checked boolValue])
+        {
+            if (0 < medNames.length)
+            {
+                [medNames appendString:@","];
+            }
+            Medication *med = [self.currentMeds objectAtIndex:key.row];
+            [medNames appendString:med.Name];
+        }
+    }];
+    if (0 == medNames.length)
     {
-        
+        if (0 < self.currentMeds.count)
+        {
+            Medication *med = [self.currentMeds objectAtIndex:0];
+            effects.Name = med.Name;
+        }
     }
+    else
+    {
+        effects.Name = medNames;
+    }
+    
     if (nil != self.textViews && 0 < self.textViews.count)
     {
         NSNumber *firstNumber = (NSNumber *)[self.textViews.allKeys objectAtIndex:0];
@@ -229,9 +276,39 @@
     return cell;
 }
 
+- (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
+{
+    [super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+    NSString *value = [self.valueMap objectForKey:kSideEffect];
+    NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
+    UITextField *textField = [self.textViews objectForKey:taggedViewNumber];
+    if (nil != textField && nil != value)
+    {
+        textField.text = value;
+        textField.textColor = [UIColor blackColor];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [super textFieldDidEndEditing:textField];
+    if (nil == textField.text || [textField.text isEqualToString:@""])
+    {
+        return;
+    }
+    [self.valueMap setObject:textField.text forKey:kSideEffect];
+}
+
+- (void) deselect: (id) sender
+{
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if (1 == indexPath.section)
     {
         if (indexPath.row == self.linkIndexPath.row)
@@ -240,6 +317,15 @@
             controller.effectsDataSource = self;
             [self.navigationController pushViewController:controller animated:YES];
         }
+    }
+    else if (2 == indexPath.section)
+    {
+        BOOL checkedValue = [[self.selectedMedCells objectForKey:indexPath] boolValue];
+        BOOL checkedUnchecked = !checkedValue;
+        [self.selectedMedCells setObject:[NSNumber numberWithBool:checkedUnchecked] forKey:indexPath];
+        cell.accessoryType = checkedUnchecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+        [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+        
     }
 }
 
@@ -330,6 +416,13 @@
     {
         [self.selectedMedCells setObject:(checked = [NSNumber numberWithBool:NO])
                                   forKey:indexPath];
+    }
+    else
+    {
+        if ([checked boolValue])
+        {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
     }
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.backgroundColor = [UIColor clearColor];

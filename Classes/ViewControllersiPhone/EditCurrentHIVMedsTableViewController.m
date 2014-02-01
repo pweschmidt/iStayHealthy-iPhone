@@ -54,12 +54,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setDefaultValues
-{
-    
-}
-
-
 - (void)save:(id)sender
 {
     if (nil == self.managedObject)

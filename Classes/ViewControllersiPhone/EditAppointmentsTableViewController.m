@@ -56,34 +56,6 @@
     }
 }
 
-- (void)setDefaultValues
-{
-    if (!self.isEditMode)
-    {
-        return;
-    }
-    /**
-    Appointments *appointment = (Appointments *)self.managedObject;
-    int index = 0;
-    for (NSNumber *key  in self.textViews.allKeys)
-    {
-        id viewObj = [self.textViews objectForKey:key];
-        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editMenu.count)
-        {
-            UITextField *textField = (UITextField *)viewObj;
-            NSString *type = [self.editMenu objectAtIndex:index];
-            textField.text = [appointment valueStringForType:type];
-            if ([textField.text isEqualToString:NSLocalizedString(@"Enter Value", nil)])
-            {
-                textField.textColor = [UIColor lightGrayColor];
-            }
-        }
-        ++index;
-    }
-    */
-}
-
 - (void)save:(id)sender
 {
     /**

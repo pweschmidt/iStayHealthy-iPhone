@@ -101,14 +101,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setDefaultValues
-{
-    if(!self.isEditMode)
-    {
-        return;
-    }
-}
-
 - (void)save:(id)sender
 {
     if (nil == self.selectedReasonPath)

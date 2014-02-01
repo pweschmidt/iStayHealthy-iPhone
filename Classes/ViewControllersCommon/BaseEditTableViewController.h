@@ -63,7 +63,6 @@
 - (void)showDeleteAlertView;
 
 - (void)changeDate:(NSIndexPath *)indexPath;
-- (void)setDefaultValues;
 - (BOOL)hasInlineDatePicker;
 - (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;
 - (UIImage *)blankImage;

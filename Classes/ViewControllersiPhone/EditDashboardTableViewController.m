@@ -38,9 +38,4 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setDefaultValues
-{
-    
-}
-
 @end

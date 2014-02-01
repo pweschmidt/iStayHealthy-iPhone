@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B06DCDF189D209E00008590 /* DropboxSDK.framework */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F19461866F9F00091704C /* EditChartsTableViewController.m */; };
@@ -413,7 +414,6 @@
 		C4CA33CB14CC1AB4000C7BE3 /* smartandstrong.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CA33CA14CC1AB4000C7BE3 /* smartandstrong.png */; };
 		C4CAC93817574F860010C165 /* EffectsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CAC93617574F860010C165 /* EffectsListController.m */; };
 		C4CAC93917574F860010C165 /* EffectsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4CAC93717574F860010C165 /* EffectsListController.xib */; };
-		C4CAD003182403D500DFB38A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4CAD002182403D500DFB38A /* DropboxSDK.framework */; };
 		C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */; };
 		C4CDED5F138D7CD7005BAC87 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CDED5E138D7CD7005BAC87 /* edurant.png */; };
 		C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CE682512DB070500FBCFF4 /* combi-small.png */; };
@@ -473,6 +473,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B06DCDF189D209E00008590 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEndDateTableViewController.h; path = ViewControllersCommon/BaseEndDateTableViewController.h; sourceTree = "<group>"; };
 		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
 		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
@@ -1148,7 +1149,6 @@
 		C4CAC93517574F860010C165 /* EffectsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsListController.h; path = DetailViewControllers/EffectsListController.h; sourceTree = "<group>"; };
 		C4CAC93617574F860010C165 /* EffectsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectsListController.m; path = DetailViewControllers/EffectsListController.m; sourceTree = "<group>"; };
 		C4CAC93717574F860010C165 /* EffectsListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EffectsListController.xib; path = Classes/DetailViewControllers/EffectsListController.xib; sourceTree = "<group>"; };
-		C4CAD002182403D500DFB38A /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		C4CC607E12F5603B00C5EAE2 /* combi-label-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-label-small.png"; sourceTree = "<group>"; };
 		C4CDED5E138D7CD7005BAC87 /* edurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edurant.png; path = Images/edurant.png; sourceTree = "<group>"; };
 		C4CE682512DB070500FBCFF4 /* combi-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "combi-small.png"; sourceTree = "<group>"; };
@@ -1225,6 +1225,7 @@
 			files = (
 				C45E52F4182BFD1400C30061 /* EventKit.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
+				0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */,
 				C4952D1817F21C380022EFEF /* libGoogleAdMobAds.a in Frameworks */,
 				C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
@@ -1233,7 +1234,6 @@
 				C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */,
 				C4F337F114D43B6B00C4F573 /* libz.dylib in Frameworks */,
 				C4F337EF14D43B4700C4F573 /* SystemConfiguration.framework in Frameworks */,
-				C4CAD003182403D500DFB38A /* DropboxSDK.framework in Frameworks */,
 				C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */,
 				C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */,
 				C4574AE314939D2300793164 /* libm.dylib in Frameworks */,
@@ -1378,8 +1378,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B06DCDF189D209E00008590 /* DropboxSDK.framework */,
 				C45E52F3182BFD1400C30061 /* EventKit.framework */,
-				C4CAD002182403D500DFB38A /* DropboxSDK.framework */,
 				C41EC32C180ED0EE00A49AE4 /* CoreText.framework */,
 				C46C5E0017EDAF9C00866DBD /* AdSupport.framework */,
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
@@ -2897,13 +2897,14 @@
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone",
+					"/Users/piddie/Development/iStayHealthy-iPhone",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2939,13 +2940,14 @@
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone",
+					"/Users/piddie/Development/iStayHealthy-iPhone",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2964,7 +2966,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "EC41331C-EEB9-4563-990D-54ED6F3D9817";
+				PROVISIONING_PROFILE = "E4164E6A-BAE3-4069-972E-72A82CD9656C";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -3041,13 +3043,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/peterschmidt/Private/iStayHealthy-iPhone",
+					"/Users/piddie/Development/iStayHealthy-iPhone",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -3066,8 +3069,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "69DEE5F4-FB0E-469F-B7AE-9CE1FB99FA24";
-				"PROVISIONING_PROFILE[sdk=*]" = "69DEE5F4-FB0E-469F-B7AE-9CE1FB99FA24";
+				PROVISIONING_PROFILE = "EAC7A1E3-65D9-4B6C-8076-FF629118A527";
+				"PROVISIONING_PROFILE[sdk=*]" = "EAC7A1E3-65D9-4B6C-8076-FF629118A527";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;

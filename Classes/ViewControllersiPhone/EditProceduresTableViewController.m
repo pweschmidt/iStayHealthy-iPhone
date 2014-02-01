@@ -16,6 +16,7 @@
 @interface EditProceduresTableViewController ()
 @property (nonatomic, strong) NSArray *editMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
+@property (nonatomic, strong) NSMutableDictionary *valueMap;
 @end
 
 @implementation EditProceduresTableViewController
@@ -23,6 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self populateValues];
     if (self.isEditMode)
     {
         self.navigationItem.title = NSLocalizedString(@"Edit Illness", nil);
@@ -31,43 +33,46 @@
     {
         self.navigationItem.title = NSLocalizedString(@"New Illness", nil);
     }
+}
+
+
+- (void)populateValues
+{
+    self.valueMap = [NSMutableDictionary dictionary];
     self.editMenu = @[kName,
                       kIllness,
                       kCausedBy,
                       kNotes];
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
+    if (self.isEditMode && nil != self.managedObject)
+    {
+        Procedures *procedures = (Procedures *)self.managedObject;
+        [[[procedures entity] attributesByName] enumerateKeysAndObjectsUsingBlock:^(NSString *attribute, id obj, BOOL *stop) {
+            id value = [procedures valueForKey:attribute];
+            if (nil != value)
+            {
+                if ([value isKindOfClass:[NSDate class]])
+                {
+                    if ([attribute isEqualToString:kDate])
+                    {
+                        self.date = (NSDate *)value;
+                    }
+                }
+                else if ([value isKindOfClass:[NSString class]])
+                {
+                    if (![(NSString *)value isEqualToString:@""])
+                    {
+                        [self.valueMap setObject:value forKey:attribute];
+                    }
+                }                
+            }
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
-- (void)setDefaultValues
-{
-    if (!self.isEditMode)
-    {
-        return;
-    }
-    Procedures *procedures = (Procedures *)self.managedObject;
-    int index = 0;
-    for (NSNumber *key  in self.textViews.allKeys)
-    {
-        id viewObj = [self.textViews objectForKey:key];
-        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editMenu.count)
-        {
-            UITextField *textField = (UITextField *)viewObj;
-            NSString *type = [self.editMenu objectAtIndex:index];
-            textField.text = [procedures valueStringForType:type];
-            if ([textField.text isEqualToString:NSLocalizedString(@"Enter Value", nil)])
-            {
-                textField.textColor = [UIColor lightGrayColor];
-            }
-        }
-        ++index;
-    }
-    
 }
 
 - (void)save:(id)sender
@@ -83,20 +88,9 @@
     }
     procedures.UID = [Utilities GUID];
     procedures.Date = self.date;
-    int index = 0;
-    for (NSNumber *number in self.textViews.allKeys)
-    {
-        id viewObj = [self.textViews objectForKey:number];
-        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editMenu.count)
-        {
-            UITextField *textField = (UITextField *)viewObj;
-            NSString *valueString = textField.text;
-            NSString *type = [self.editMenu objectAtIndex:index];
-            [procedures addValueString:valueString type:type];
-        }
-        ++index;
-    }
+    [self.valueMap enumerateKeysAndObjectsUsingBlock:^(NSString *attribute, NSString *value, BOOL *stop) {
+        [procedures addValueString:value type:attribute];
+    }];
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
     [self.navigationController popViewControllerAnimated:YES];
@@ -174,10 +168,36 @@
     {
         NSString *resultsString = [self.editMenu objectAtIndex:indexPath.row];
         NSString *text = NSLocalizedString(resultsString, nil);
-        [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
+        [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:NO];
     }
     return cell;
 }
 
+- (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
+{
+    [super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+    NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
+    NSString *key = [self.editMenu objectAtIndex:indexPath.row];
+    NSString *value = [self.valueMap objectForKey:key];
+    if (nil != value)
+    {
+        UITextField *textField = [self.textViews objectForKey:taggedViewNumber];
+        textField.text = value;
+        textField.textColor = [UIColor blackColor];
+    }
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [super textFieldDidEndEditing:textField];
+    NSInteger tag = textField.tag - 1;
+    if (0 <= tag && tag < self.editMenu.count)
+    {
+        NSString *key = [self.editMenu objectAtIndex:tag];
+        [self.valueMap setObject:textField.text forKey:key];
+    }
+    
+}
 
 @end

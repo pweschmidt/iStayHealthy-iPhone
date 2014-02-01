@@ -48,11 +48,6 @@
     [self loadDrugs];
 }
 
-- (void)setDefaultValues
-{
-    ///not used here
-}
-
 - (void)save:(id)sender
 {
     __block NSMutableArray *selectedMeds = [NSMutableArray array];

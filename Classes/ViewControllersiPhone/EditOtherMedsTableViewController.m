@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSArray * unitArray;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISegmentedControl *unitControl;
+@property (nonatomic, strong) NSMutableDictionary *valueMap;
 - (void)changeUnit:(id)sender;
 @end
 
@@ -28,12 +29,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = NSLocalizedString(@"New Other Medication", nil);
-    /*
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                              target:self action:@selector(save:)];
-     */
+    [self populateValues];
+    if (self.isEditMode)
+    {
+        self.navigationItem.title = NSLocalizedString(@"Edit Other Medication", nil);
+    }
+    else
+    {
+        self.navigationItem.title = NSLocalizedString(@"New Other Medication", nil);
+    }
+}
+
+- (void)populateValues
+{
+    self.valueMap = [NSMutableDictionary dictionary];
     self.editMenu = @[kName, kDose];
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
     self.unitArray = @[@"g", @"mg", @"ml", @"other"];
@@ -41,21 +50,58 @@
     self.unitControl.selectedSegmentIndex = 1;
     unitIndex = 1;
     [self.unitControl addTarget:self action:@selector(changeUnit:) forControlEvents:UIControlEventValueChanged];
+    if (self.isEditMode && nil != self.managedObject)
+    {
+        OtherMedication *otherMed = (OtherMedication *)self.managedObject;
+        [[[otherMed entity] attributesByName] enumerateKeysAndObjectsUsingBlock:^(NSString *attribute, id obj, BOOL *stop) {
+            id value = [otherMed valueForKey:attribute];
+            if (nil != value && ![attribute isEqualToString:kUID])
+            {
+                if ([value isKindOfClass:[NSDate class]])
+                {
+                    if ([attribute isEqualToString:kStartDate])
+                    {
+                        self.date = (NSDate *)value;
+                    }
+                }
+                else if ([value  isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *nValue = (NSNumber *)value;
+                    NSString *valueString = [NSString stringWithFormat:@"%9.2f", [nValue floatValue]];
+                    [self.valueMap setObject:valueString forKey:kDose];
+                }
+                else if ([value isKindOfClass:[NSString class]])
+                {
+                    if (kUnit == attribute)
+                    {
+                        NSString *unit = (NSString *)value;
+                        NSInteger index = [self.unitArray indexOfObject:unit];
+                        if (NSNotFound == index)
+                        {
+                            unit = [NSString stringWithFormat:@"[%@]",unit];
+                            index = [self.unitArray indexOfObject:unit];
+                        }
+                        if (NSNotFound != index && 0 <= index && index < self.unitArray.count)
+                        {
+                            self.unitControl.selectedSegmentIndex = index;
+                        }
+                    }
+                    else
+                    {
+                        [self.valueMap setObject:value forKey:attribute];
+                    }
+                }
+            }
+        }];
+        
+    }
 }
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
-
-- (void)setDefaultValues
-{
-    if(!self.isEditMode)
-    {
-        return;
-    }
-}
-
 
 - (void)save:(id)sender
 {
@@ -71,18 +117,9 @@
     med.UID = [Utilities GUID];
     med.StartDate = self.date;
     med.Unit = [self.unitArray objectAtIndex:unitIndex];
-    int index = 0;
-    for (NSNumber *number in self.textViews)
-    {
-        id viewObj = [self.textViews objectForKey:number];
-        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]])
-        {
-            UITextField *textField = (UITextField *)viewObj;
-            NSString *valueString = textField.text;
-            [med addValueString:valueString type:[self.editMenu objectAtIndex:index]];
-        }
-        index++;
-    }
+    [self.valueMap enumerateKeysAndObjectsUsingBlock:^(NSString *attribute, NSString *value, BOOL *stop) {
+        [med addValueString:value type:attribute];
+    }];
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
     [self.navigationController popViewControllerAnimated:YES];
@@ -167,6 +204,29 @@
     return cell;
 }
 
+- (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
+{
+    [super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+    NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
+    NSString *key = [self.editMenu objectAtIndex:indexPath.row];
+    NSString *value = [self.valueMap objectForKey:key];
+    if (nil != value)
+    {
+        UITextField *textField = [self.textViews objectForKey:taggedViewNumber];
+        textField.text = value;
+        textField.textColor = [UIColor blackColor];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSInteger tag = textField.tag - 1;
+    if (0 <= tag && tag < self.editMenu.count)
+    {
+        NSString *key = [self.editMenu objectAtIndex:tag];
+        [self.valueMap setObject:textField.text forKey:key];
+    }    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {

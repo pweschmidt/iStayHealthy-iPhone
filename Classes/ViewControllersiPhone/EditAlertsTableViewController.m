@@ -64,11 +64,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setDefaultValues
-{
-    
-}
-
 - (void)save:(id)sender
 {
     NSTimeInterval timeInterval = 24.0/(double)frequencyIndex * 60.0 * 60.0;

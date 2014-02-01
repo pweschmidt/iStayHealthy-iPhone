@@ -68,6 +68,29 @@
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
+    NSArray *subviews = cell.contentView.subviews;
+    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
+        [view removeFromSuperview];
+    }];
+    SideEffects *effects = [self.effects objectAtIndex:indexPath.row];
+    CGFloat rowHeight = self.tableView.rowHeight - 2;
+    DateView *dateView = [DateView viewWithDate:effects.SideEffectDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+    
+    UILabel *nameLabel = [UILabel standardLabel];
+    nameLabel.frame = CGRectMake(70, 1, 100, rowHeight);
+    nameLabel.text = effects.Name;
+    
+    UILabel *reasonLabel = [UILabel standardLabel];
+    reasonLabel.frame = CGRectMake(175, 1, 100, rowHeight);
+    if (nil != effects.SideEffect && ![effects.SideEffect isEqualToString:@""])
+    {
+        reasonLabel.text = effects.SideEffect;
+        reasonLabel.textColor = DARK_RED;
+    }
+    
+    [cell.contentView addSubview:dateView];
+    [cell.contentView addSubview:nameLabel];
+    [cell.contentView addSubview:reasonLabel];
     
 }
 

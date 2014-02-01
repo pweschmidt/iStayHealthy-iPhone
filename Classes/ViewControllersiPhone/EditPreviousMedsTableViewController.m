@@ -57,11 +57,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setDefaultValues
-{
-    
-}
-
 - (void)save:(id)sender
 {
     BOOL nothingToDo = NO;

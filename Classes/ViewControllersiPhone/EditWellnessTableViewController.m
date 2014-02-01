@@ -26,11 +26,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setDefaultValues
-{
-    
-}
-
 - (void)save:(id)sender
 {
     

@@ -84,10 +84,6 @@
     }
 }
 
-- (void)setDefaultValues
-{
-}
-
 - (void)save:(id)sender
 {
     Contacts *contact = nil;

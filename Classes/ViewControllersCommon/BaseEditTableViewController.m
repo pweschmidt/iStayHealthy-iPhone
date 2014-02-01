@@ -63,13 +63,6 @@
     self.inputTypeForTextView = [NSMutableDictionary dictionary];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self setDefaultValues];
-    [self.tableView reloadData];
-}
-
 - (void)didReceiveMemoryWarning
 {
     self.contentViewsDictionary = nil;
@@ -77,9 +70,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setDefaultValues
-{
-}
 
 - (void)save:(id)sender
 {
@@ -110,16 +100,6 @@
 - (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath segmentIndex:(NSInteger)segmentIndex hasNumericalInput:(BOOL)hasNumericalInput
 {
     NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:segmentIndex];
-    /*
-    if (nil != self.datePickerIndexPath)
-    {
-        taggedViewNumber = [NSNumber numberWithInteger:(indexPath.row - 2)];
-    }
-    else
-    {
-        taggedViewNumber = [NSNumber numberWithInteger:(indexPath.row - 1)];
-    }
-    */
     cell.contentView.backgroundColor = [UIColor clearColor];
     
     UIView *mainContentView = [self.contentViewsDictionary objectForKey:taggedViewNumber];

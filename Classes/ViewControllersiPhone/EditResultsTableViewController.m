@@ -138,11 +138,6 @@
     self.menuDelegate = nil;
 }
 
-- (void)setDefaultValues
-{
-}
-
-
 - (void)save:(id)sender
 {
     Results *results = nil;
