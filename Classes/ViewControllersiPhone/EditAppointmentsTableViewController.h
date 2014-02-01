@@ -6,9 +6,9 @@
 //
 //
 
-#import "BaseEditTableViewController.h"
+#import "BaseEndDateTableViewController.h"
 
-@interface EditAppointmentsTableViewController : BaseEditTableViewController
+@interface EditAppointmentsTableViewController : BaseEndDateTableViewController
 - (id)initWithStyle:(UITableViewStyle)style
      currentClinics:(NSArray *)currentClinics
       managedObject:(NSManagedObject *)managedObject;

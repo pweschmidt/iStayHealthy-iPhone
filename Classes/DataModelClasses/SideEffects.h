@@ -2,7 +2,7 @@
 //  SideEffects.h
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 05/09/2012.
+//  Created by Peter Schmidt on 01/02/2014.
 //
 //
 
@@ -13,12 +13,13 @@
 
 @interface SideEffects : NSManagedObject
 
-@property (nonatomic, strong) NSString * SideEffect;
-@property (nonatomic, strong) NSDate * SideEffectDate;
-@property (nonatomic, strong) NSString * Name;
-@property (nonatomic, strong) NSString * UID;
-@property (nonatomic, strong) NSString * Drug;
-@property (nonatomic, strong) NSString * seriousness;
-@property (nonatomic, strong) iStayHealthyRecord *record;
+@property (nonatomic, retain) NSString * UID;
+@property (nonatomic, retain) NSDate * SideEffectDate;
+@property (nonatomic, retain) NSString * Drug;
+@property (nonatomic, retain) NSString * Name;
+@property (nonatomic, retain) NSString * SideEffect;
+@property (nonatomic, retain) NSString * seriousness;
+@property (nonatomic, retain) NSString * frequency;
+@property (nonatomic, retain) iStayHealthyRecord *record;
 
 @end

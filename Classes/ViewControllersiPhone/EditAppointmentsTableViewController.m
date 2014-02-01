@@ -14,6 +14,7 @@
 #import "Utilities.h"
 #import "UILabel+Standard.h"
 
+
 @interface EditAppointmentsTableViewController ()
 @property (nonatomic, strong) NSArray *editMenu;
 @property (nonatomic, strong) NSArray *clinics;
@@ -38,14 +39,20 @@
             _clinics = currentClinics;
         }
     }
-    self.editMenu = @[kAppointmentClinic, kAppointmentNotes];
-    self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
     return self;
 }
+
+- (void)populateValues
+{
+    self.editMenu = @[kAppointmentClinic, kAppointmentNotes];
+    self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self populateValues];
     if (self.isEditMode)
     {
         self.navigationItem.title = NSLocalizedString(@"Edit Appointment", nil);
@@ -58,37 +65,7 @@
 
 - (void)save:(id)sender
 {
-    /**
-    Appointments *appointment = nil;
-    if (self.isEditMode)
-    {
-        appointment = (Appointments *)self.managedObject;
-    }
-    else
-    {
-        appointment = [[CoreDataManager sharedInstance] managedObjectForEntityName:kAppointments];
-    }
-    appointment.UID = [Utilities GUID];
-    appointment.date = self.date;
-    int index = 0;
-    for (NSNumber *number in self.textViews.allKeys)
-    {
-        id viewObj = [self.textViews objectForKey:number];
-        if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-            index < self.editMenu.count)
-        {
-            UITextField *textField = (UITextField *)viewObj;
-            NSString *valueString = textField.text;
-            NSString *type = [self.editMenu objectAtIndex:index];
-            [appointment addValueString:valueString type:type];
-        }
-        ++index;
-    }
-    NSError *error = nil;
-    [[CoreDataManager sharedInstance] saveContext:&error];
-    */
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 
@@ -105,13 +82,18 @@
     }
     else
     {
-        return self.tableView.rowHeight;
+        return ([self indexPathHasEndDatePicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -120,9 +102,13 @@
     {
         return ([self hasInlineDatePicker] ? 2 : 1);
     }
+    else if(1 == section)
+    {
+        return ([self hasInlineEndDatePicker] ? 2 : 1);
+    }
     else
     {
-        return self.editMenu.count;
+        return self.clinics.count;
     }
 }
 
@@ -137,6 +123,14 @@
             identifier = [NSString stringWithFormat:@"DatePickerCell"];
         }
     }
+    else if (1 == indexPath.section)
+    {
+        identifier = [NSString stringWithFormat:kEndDateCellRowIdentifier];
+        if ([self hasInlineEndDatePicker])
+        {
+            identifier = [NSString stringWithFormat:@"DatePickerEndCell"];
+        }
+    }
     else
     {
         identifier = [NSString stringWithFormat:@"AppointmentCell%d", indexPath.row];
@@ -149,28 +143,44 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = [self identifierForIndexPath:indexPath];
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    
     if (0 == indexPath.section)
     {
-        if (0 == indexPath.row)
-        {
-            [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
-        }
+        [self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
+    }
+    else if (1 == indexPath.section)
+    {
+        [self configureEndDateCell:cell indexPath:indexPath dateType:DateOnly];
     }
     else
     {
-        NSString *resultsString = [self.editMenu objectAtIndex:indexPath.row];
-        NSString *text = NSLocalizedString(resultsString, nil);
-        [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
+        
     }
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc]
+                          initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
+    headerView.backgroundColor = [UIColor clearColor];
+    UILabel *headerLabel = [UILabel standardLabel];
+    headerLabel.frame = CGRectMake(20, 0, headerView.frame.size.width - 40, headerView.frame.size.height);
+    if (0 == section)
+    {
+        headerLabel.text = NSLocalizedString(@"Appointment Start", nil);
+    }
+    else
+    {
+        headerLabel.text = NSLocalizedString(@"Appointment End", nil);
+    }
+    [headerView addSubview:headerLabel];
+    return headerView;
 }
 
 @end

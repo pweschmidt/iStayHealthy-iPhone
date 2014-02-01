@@ -92,6 +92,11 @@
         {
             self.seriousnessControl.selectedSegmentIndex = index;
         }
+        index = [self.frequencyArray indexOfObject:effects.frequency];
+        if (NSNotFound != index)
+        {
+            self.frequencyControl.selectedSegmentIndex = index;
+        }
         self.date = effects.SideEffectDate;
         if (0 < self.currentMeds && 0 < effects.Name.length)
         {
@@ -164,7 +169,7 @@
         effects.SideEffect = field.text;
     }
     effects.seriousness = [self.seriousnessArray objectAtIndex:seriousnessIndex];
-    //effects.frequency = [self.frequencyArray objectAtIndex:frequencyIndex];
+    effects.frequency = [self.frequencyArray objectAtIndex:frequencyIndex];
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContext:&error];
     [self.navigationController popViewControllerAnimated:YES];

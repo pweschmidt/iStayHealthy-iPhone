@@ -21,9 +21,10 @@
     self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
     if (nil != self)
     {
-        _endDate = nil;
+        _endDate = [NSDate date];
         _endDateIsSet = NO;
         _endDatePath = nil;
+        _endDateSection = 1;
     }
     return self;
 }
@@ -85,8 +86,7 @@
 
 - (IBAction)endDateAction:(id)sender
 {
-    NSInteger lastSection = [self.tableView numberOfSections] - 1;
-    UITableViewCell *dateLabelCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:lastSection]];
+    UITableViewCell *dateLabelCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.endDateSection]];
     UILabel *label = (UILabel *)[dateLabelCell viewWithTag:kEndDateLabelTag];
     UIDatePicker *datePicker = (UIDatePicker *)sender;
     self.endDate = datePicker.date;
@@ -101,7 +101,6 @@
 {
     [self.tableView beginUpdates];
     BOOL sameCellClicked = NO;
-    NSInteger lastSection = [self.tableView numberOfSections] - 1;
     if (nil != self.endDatePath)
     {
         sameCellClicked = (self.endDatePath.row - 1 == indexPath.row);
@@ -118,7 +117,7 @@
             [pickerView removeFromSuperview];
         }
         [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.endDatePath.row
-                                                                    inSection:lastSection]]
+                                                                    inSection:self.endDateSection]]
                               withRowAnimation:UITableViewRowAnimationFade];
         self.endDatePath = nil;
     }
@@ -126,10 +125,10 @@
     if (!sameCellClicked)
     {
         NSInteger rowToReveal = indexPath.row;
-        NSIndexPath *indexPathToReveal = [NSIndexPath indexPathForRow:rowToReveal inSection:lastSection];
+        NSIndexPath *indexPathToReveal = [NSIndexPath indexPathForRow:rowToReveal inSection:self.endDateSection];
         
         [self revealEndDatePickerForSelectedIndexPath:indexPathToReveal];
-        self.endDatePath = [NSIndexPath indexPathForRow:indexPathToReveal.row + 1 inSection:lastSection];
+        self.endDatePath = [NSIndexPath indexPathForRow:indexPathToReveal.row + 1 inSection:self.endDateSection];
     }
     
     // always deselect the row containing the start or end date
@@ -176,11 +175,10 @@
 {
     NSInteger targetedRow = indexPath.row;
     targetedRow++;
-    NSInteger lastSection = [self.tableView numberOfSections] - 1;
     UITableViewCell *checkDatePickerCell = [self.tableView
                                             cellForRowAtIndexPath:[NSIndexPath
                                                                    indexPathForRow:targetedRow
-                                                                   inSection:lastSection]];
+                                                                   inSection:self.endDateSection]];
     
     UIDatePicker *datePicker = (UIDatePicker *)[checkDatePickerCell
                                                 viewWithTag:kEndDateCellTag];
@@ -192,8 +190,7 @@
 {
     [self.tableView beginUpdates];
     
-    NSInteger lastSection = [self.tableView numberOfSections] - 1;
-    NSArray *indexPaths = @[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:lastSection]];
+    NSArray *indexPaths = @[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:self.endDateSection]];
     
     // check if 'indexPath' has an attached date picker below it
     if ([self hasEndDatePickerForIndexPath:indexPath])

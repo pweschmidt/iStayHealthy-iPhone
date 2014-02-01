@@ -2,21 +2,22 @@
 //  SeinfeldCalendar.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 03/01/2014.
+//  Created by Peter Schmidt on 01/02/2014.
 //
 //
 
 #import "SeinfeldCalendar.h"
+#import "SeinfeldCalendarEntry.h"
 
 
 @implementation SeinfeldCalendar
 
-@dynamic startDate;
 @dynamic endDate;
+@dynamic startDate;
 @dynamic isCompleted;
 @dynamic uID;
+@dynamic score;
 @dynamic entries;
-
 - (void)addEntriesObject:(NSManagedObject *)value
 {
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
@@ -48,5 +49,4 @@
     [[self primitiveValueForKey:@"entries"] minusSet:values];
     [self didChangeValueForKey:@"entries" withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
 }
-
 @end

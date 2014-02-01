@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSIndexPath *endDatePath;
 @property (nonatomic, strong) NSDate *endDate;
 @property (nonatomic, assign) BOOL endDateIsSet;
+@property (nonatomic, assign) NSInteger endDateSection;
 
 - (void)configureEndDateCell:(UITableViewCell *)cell
                    indexPath:(NSIndexPath *)indexPath

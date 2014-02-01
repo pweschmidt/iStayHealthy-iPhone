@@ -2,7 +2,7 @@
 //  SideEffects.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 05/09/2012.
+//  Created by Peter Schmidt on 01/02/2014.
 //
 //
 
@@ -12,12 +12,13 @@
 
 @implementation SideEffects
 
-@dynamic SideEffect;
-@dynamic SideEffectDate;
-@dynamic Name;
 @dynamic UID;
+@dynamic SideEffectDate;
 @dynamic Drug;
+@dynamic Name;
+@dynamic SideEffect;
 @dynamic seriousness;
+@dynamic frequency;
 @dynamic record;
 
 @end
