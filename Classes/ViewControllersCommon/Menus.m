@@ -25,7 +25,6 @@
                       NSLocalizedString(@"Side Effects", nil),
                       NSLocalizedString(@"Medication Diary", nil),
                       NSLocalizedString(@"Alerts", nil),
-                      NSLocalizedString(@"Appointments", nil),
                       NSLocalizedString(@"Other Medication", nil),
                       NSLocalizedString(@"Clinics", nil),
                       NSLocalizedString(@"Procedures", nil),
@@ -47,7 +46,6 @@
                       NSLocalizedString(@"Side Effects", nil),
                       NSLocalizedString(@"Medication Diary", nil),
                       NSLocalizedString(@"Alerts", nil),
-                      NSLocalizedString(@"Appointments", nil),
                       NSLocalizedString(@"Other Medication", nil),
                       NSLocalizedString(@"Clinics", nil),
                       NSLocalizedString(@"Procedures", nil),
@@ -71,7 +69,6 @@
                   NSLocalizedString(@"New Missed Med", nil),
                   NSLocalizedString(@"New Side Effects", nil),
                   NSLocalizedString(@"New Alert", nil),
-                  NSLocalizedString(@"New Appointment", nil),
                   NSLocalizedString(@"New Procedure", nil),
                   NSLocalizedString(@"New Wellness", nil)];
     }
@@ -83,7 +80,6 @@
                   NSLocalizedString(@"New Missed Med", nil),
                   NSLocalizedString(@"New Side Effects", nil),
                   NSLocalizedString(@"New Alert", nil),
-                  NSLocalizedString(@"New Appointment", nil),
                   NSLocalizedString(@"New Procedure", nil)];
     }
 }
@@ -125,10 +121,6 @@
     else if ([menuName isEqualToString:NSLocalizedString(@"Alerts", nil)])
     {
         return kAlertsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Appointments", nil)])
-    {
-        return kAppointmentsController;
     }
     else if ([menuName isEqualToString:NSLocalizedString(@"Other Medication", nil)])
     {
@@ -193,7 +185,6 @@
                              kHIVMedsController : [UIImage imageNamed:@"combi.png"],
                              kMissedController : [UIImage imageNamed:@"missed.png"],
                              kAlertsController : [UIImage imageNamed:@"alarm.png"],
-                             kAppointmentsController : [UIImage imageNamed:@"appointments.png"],
                              kClinicsController : [UIImage imageNamed:@"doctor.png"],
                              kSideEffectsController : [UIImage imageNamed:@"sideeffects.png"],
                              kDropboxController : [UIImage imageNamed:@"save.png"],

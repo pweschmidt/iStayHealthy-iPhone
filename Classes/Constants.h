@@ -114,7 +114,6 @@ extern NSString * const kResultsController;
 extern NSString * const kDashboardController;
 extern NSString * const kDropboxController;
 extern NSString * const kHIVMedsController;
-extern NSString * const kAppointmentsController;
 extern NSString * const kAlertsController;
 extern NSString * const kClinicsController;
 extern NSString * const kOtherMedsController;

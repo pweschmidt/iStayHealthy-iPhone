@@ -8,7 +8,6 @@
 
 #import "ContentContainerViewController.h"
 #import "HamburgerMenuTableViewController.h"
-#import "AppointmentsTableViewController.h"
 #import "ClinicalAddressTableViewController.h"
 #import "NotificationAlertsTableViewController.h"
 #import "OtherMedicationsListTableViewController.h"
@@ -84,7 +83,6 @@
     MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
 
     DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
-    AppointmentsTableViewController *appController = [[AppointmentsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     ClinicalAddressTableViewController *clinicController = [[ClinicalAddressTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     NotificationAlertsTableViewController *alertsController = [[NotificationAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     OtherMedicationsListTableViewController *otherController = [[OtherMedicationsListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -103,7 +101,6 @@
     otherController.view.frame      = self.view.frame;
     alertsController.view.frame     = self.view.frame;
     clinicController.view.frame     = self.view.frame;
-    appController.view.frame        = self.view.frame;
     menuController.view.frame       = self.view.frame;
     resultsController.view.frame    = self.view.frame;
     dropBoxController.view.frame    = self.view.frame;
@@ -115,7 +112,6 @@
     ContentNavigationController *infoNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:infoController];
     ContentNavigationController *effectsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:effectsController];
     ContentNavigationController *missedNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:missedController];
-    ContentNavigationController *appointmentNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:appController];
     ContentNavigationController *clinicNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:clinicController];
     ContentNavigationController *alertNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:alertsController];
     ContentNavigationController *otherNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:otherController];
@@ -134,7 +130,6 @@
     [self addChildViewController:infoNavCtrl];
     [self addChildViewController:effectsNavCtrl];
     [self addChildViewController:missedNavCtrl];
-    [self addChildViewController:appointmentNavCtrl];
     [self addChildViewController:clinicNavCtrl];
     [self addChildViewController:alertNavCtrl];
     [self addChildViewController:otherNavCtrl];
@@ -155,7 +150,6 @@
                                   kDropboxController : dropNavCtrl,
                                   kHIVMedsController : hivNavCtrl,
                                   kDashboardController : dashNavCtrl,
-                                  kAppointmentsController : appointmentNavCtrl,
                                   kAlertsController : alertNavCtrl,
                                   kOtherMedsController : otherNavCtrl,
                                   kProceduresController : procNavCtrl,
