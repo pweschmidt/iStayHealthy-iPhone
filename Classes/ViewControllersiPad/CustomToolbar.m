@@ -8,7 +8,13 @@
 
 #import "CustomToolbar.h"
 #import "UIBarButtonItem+iStayHealthy.h"
+#import "SettingsTableViewController.h"
+#import "InformationTableViewController.h"
+#import "DropboxViewController.h"
 #import "Menus.h"
+#import <DropboxSDK/DropboxSDK.h>
+#import "GeneralSettings.h"
+#import "Constants.h"
 
 @interface CustomToolbar ()
 {
@@ -63,25 +69,55 @@
     }];
     [self setItems:buttons];
 }
+
 - (void)openFeedback
 {
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
+    NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
+    mailController.mailComposeDelegate = self;
+    [mailController setToRecipients:toRecipient];
+    [mailController setSubject:@"Feedback for iStayHealthy iPhone app"];    
 }
+
 - (void)openMailWithAttachment
 {
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    mailController.mailComposeDelegate = self;
+    [mailController setSubject:@"iStayHealthy Data (attached)"];
     
 }
 - (void)openSettings
 {
+    SettingsTableViewController *settingsController = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
 }
 - (void)openInfo
 {
+    InformationTableViewController *infoController = [[InformationTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
 }
 - (void)openBackup
 {
+    DropboxViewController *backupController = [[DropboxViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    if (![[DBSession sharedSession] isLinked])
+    {
+        [[DBSession sharedSession] linkFromController:backupController];
+    }
+    else
+    {
+        
+    }
     
 }
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+}
+
 
 @end

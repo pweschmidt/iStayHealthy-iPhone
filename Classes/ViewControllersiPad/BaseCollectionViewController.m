@@ -10,6 +10,8 @@
 #import "CoreDataConstants.h"
 #import "CoreDataManager.h"
 #import "Constants.h"
+#import "CustomToolbar.h"
+
 @interface BaseCollectionViewController ()
 
 @end
@@ -26,7 +28,7 @@
     self.collectionViewLayout.minimumLineSpacing = 20;
     self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
-    CGRect frame = CGRectMake(20, 44, self.view.frame.size.width - 40, self.view.frame.size.height - 44);
+    CGRect frame = CGRectMake(20, 44, self.view.frame.size.width - 40, self.view.frame.size.height - 88);
     self.collectionView = [[UICollectionView alloc] initWithFrame:frame
                                              collectionViewLayout:self.collectionViewLayout];
     self.collectionView.delegate = self;
@@ -37,6 +39,10 @@
     self.collectionView.showsVerticalScrollIndicator = YES;
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
+    CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
+    [self.view addSubview:toolbar];
+    self.toolbar = toolbar;
 }
 
 - (void)didReceiveMemoryWarning
