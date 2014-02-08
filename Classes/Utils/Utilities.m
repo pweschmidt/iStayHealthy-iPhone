@@ -551,5 +551,17 @@
     return colourDictionary;
 }
 
++ (CGRect)popUpFrameInMainFrame:(CGRect)mainFrame
+{
+    if ([[self class] isIPad])
+    {
+        CGFloat height = 568;
+        CGFloat width = 320;
+        CGFloat xOffset = mainFrame.size.width/2 - width/2;
+        CGFloat yOffset = mainFrame.size.height/2 - height/2;
+        return CGRectMake(xOffset, yOffset, width, height);
+    }
+    return CGRectZero;
+}
 
 @end

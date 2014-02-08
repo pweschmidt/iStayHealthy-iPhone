@@ -43,4 +43,5 @@
 + (NSUInteger)monthsToMonitorFromStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 + (NSUInteger)weeksInMonthForDate:(NSDate *)date isStartDate:(BOOL)isStartDate;
 + (NSDateComponents *)fullComponentsFromDay:(NSInteger)day month:(NSInteger)month year:(NSInteger)year;
++ (CGRect)popUpFrameInMainFrame:(CGRect)mainFrame;
 @end

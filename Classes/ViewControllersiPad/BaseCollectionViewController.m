@@ -16,25 +16,32 @@
 
 @implementation BaseCollectionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    self.collectionViewLayout.itemSize = CGSizeMake(150, 150);
+    self.collectionViewLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width-40, 100);
+    self.collectionViewLayout.minimumInteritemSpacing = 20;
+    self.collectionViewLayout.minimumLineSpacing = 20;
+    self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
+    CGRect frame = CGRectMake(20, 44, self.view.frame.size.width - 40, self.view.frame.size.height - 44);
+    self.collectionView = [[UICollectionView alloc] initWithFrame:frame
+                                             collectionViewLayout:self.collectionViewLayout];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.bounces = YES;
+    self.collectionView.scrollEnabled = YES;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.showsVerticalScrollIndicator = YES;
+    self.collectionView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.collectionView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -89,6 +96,26 @@
     
 }
 
+#pragma mark Collection View delegate methods. Override in sub classes
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]                                 userInfo:nil];
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]                                 userInfo:nil];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]                                 userInfo:nil];
+}
+
+#pragma mark Core Data and other methods to override in subclasses
 - (void)reloadSQLData:(NSNotification *)notification
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -120,10 +147,6 @@
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
                                  userInfo:nil];
-}
-
-- (void)removeSQLEntry
-{
 }
 
 @end

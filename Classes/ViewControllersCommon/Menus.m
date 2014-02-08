@@ -11,6 +11,23 @@
 #import "Utilities.h"
 
 @implementation Menus
+
++ (NSArray *)toolbarButtonItems
+{
+    static dispatch_once_t onceToken;
+    static NSArray *items = nil;
+    dispatch_once(&onceToken, ^{
+        items = @[
+                  NSLocalizedString(@"Settings", nil),
+                  NSLocalizedString(@"Backups", nil),
+                  NSLocalizedString(@"Feedback", nil),
+                  NSLocalizedString(@"Email Data", nil),
+                  NSLocalizedString(@"Info", nil)
+                  ];
+    });
+    return items;
+}
+
 + (NSArray *)hamburgerMenus
 {
     static dispatch_once_t onceToken;
@@ -28,12 +45,7 @@
                       NSLocalizedString(@"Other Medication", nil),
                       NSLocalizedString(@"Clinics", nil),
                       NSLocalizedString(@"Procedures", nil),
-                      NSLocalizedString(@"Wellness", nil),
-                      NSLocalizedString(@"Settings", nil),
-                      NSLocalizedString(@"Backups", nil),
-                      NSLocalizedString(@"Feedback", nil),
-                      NSLocalizedString(@"Email Data", nil),
-                      NSLocalizedString(@"Info", nil)];
+                      NSLocalizedString(@"Wellness", nil),];
         });
     }
     else
@@ -199,6 +211,40 @@
     });
     return colourDictionary;
     
+}
+
++ (UIImageView *)buttonImageviewForTitle:(NSString *)title
+{
+    UIImage *image = nil;
+    if ([title isEqualToString:NSLocalizedString(@"Settings", nil)])
+    {
+        image = [UIImage imageNamed:@"lock.png"];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"Backups", nil)])
+    {
+        image = [UIImage imageNamed:@"save.png"];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
+    {
+        image = [UIImage imageNamed:@"feedback.png"];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"Email Data", nil)])
+    {
+        image = [UIImage imageNamed:@"mail.png"];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"Info", nil)])
+    {
+        image = [UIImage imageNamed:@"info.png"];
+    }
+    else
+    {
+        return nil;
+    }    
+    UIImageView *menuView = [[UIImageView alloc] initWithImage:image];
+    menuView.backgroundColor = [UIColor clearColor];
+    menuView.frame = CGRectMake(0, 0, 20, 20);
+    
+    return menuView;
 }
 
 @end

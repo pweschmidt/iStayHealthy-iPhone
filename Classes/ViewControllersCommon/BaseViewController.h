@@ -26,6 +26,7 @@
 @property (nonatomic, strong) CustomTableView * iPadAddMenuView;
 @property (nonatomic, strong) UIBarButtonItem * hamburgerMenuBarButton;
 @property (nonatomic, strong) UIBarButtonItem * addMenuBarButton;
+@property (nonatomic, strong) UIToolbar *iPadToolbar;
 - (void)disableRightBarButtons;
 - (void)configureIPadMenus;
 - (void)settingsMenu;

@@ -10,6 +10,8 @@
 		0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B06DCDF189D209E00008590 /* DropboxSDK.framework */; };
 		0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCEF189D53AE00008590 /* SeinfeldCalendar.m */; };
 		0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCF2189D53AE00008590 /* SideEffects.m */; };
+		0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */; };
+		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F19461866F9F00091704C /* EditChartsTableViewController.m */; };
@@ -474,11 +476,15 @@
 
 /* Begin PBXFileReference section */
 		0B06DCDF189D209E00008590 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
-		0B06DCE1189D50E300008590 /* iStayHealthy 15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iStayHealthy 15.xcdatamodel"; sourceTree = "<group>"; };
+		0B06DCE1189D50E300008590 /* iStayHealthy 15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 15.xcdatamodel"; sourceTree = "<group>"; };
 		0B06DCEE189D53AE00008590 /* SeinfeldCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendar.h; path = DataModelClasses/SeinfeldCalendar.h; sourceTree = "<group>"; };
 		0B06DCEF189D53AE00008590 /* SeinfeldCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendar.m; path = DataModelClasses/SeinfeldCalendar.m; sourceTree = "<group>"; };
 		0B06DCF1189D53AE00008590 /* SideEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideEffects.h; path = DataModelClasses/SideEffects.h; sourceTree = "<group>"; };
 		0B06DCF2189D53AE00008590 /* SideEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffects.m; path = DataModelClasses/SideEffects.m; sourceTree = "<group>"; };
+		0B0C4F6618A657B900D22990 /* UIBarButtonItem+iStayHealthy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+iStayHealthy.h"; path = "Categories/UIBarButtonItem+iStayHealthy.h"; sourceTree = "<group>"; };
+		0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+iStayHealthy.m"; path = "Categories/UIBarButtonItem+iStayHealthy.m"; sourceTree = "<group>"; };
+		0B0C4F6918A664B300D22990 /* CustomToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomToolbar.h; path = ViewControllersiPad/CustomToolbar.h; sourceTree = "<group>"; };
+		0B0C4F6A18A664B300D22990 /* CustomToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomToolbar.m; path = ViewControllersiPad/CustomToolbar.m; sourceTree = "<group>"; };
 		0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEndDateTableViewController.h; path = ViewControllersCommon/BaseEndDateTableViewController.h; sourceTree = "<group>"; };
 		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
 		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
@@ -1655,6 +1661,8 @@
 				C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */,
 				C4A6E21617C76DE90020FC2A /* CustomTableView.h */,
 				C4A6E21717C76DE90020FC2A /* CustomTableView.m */,
+				0B0C4F6918A664B300D22990 /* CustomToolbar.h */,
+				0B0C4F6A18A664B300D22990 /* CustomToolbar.m */,
 				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
 				C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */,
 			);
@@ -2025,6 +2033,8 @@
 				0B4064B51893C36100F858BB /* SeinfeldCalendar+Handling.m */,
 				C4BCF0A017B7A9DA00F1E0F7 /* SideEffects+Handling.h */,
 				C4BCF0A117B7A9DA00F1E0F7 /* SideEffects+Handling.m */,
+				0B0C4F6618A657B900D22990 /* UIBarButtonItem+iStayHealthy.h */,
+				0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */,
 				C4A49B1B180031C400FC1637 /* UIFont+Standard.h */,
 				C4A49B1C180031C400FC1637 /* UIFont+Standard.m */,
 				C4A49B1E1800549500FC1637 /* UILabel+Standard.h */,
@@ -2562,6 +2572,7 @@
 				C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */,
 				C4C4196315F138B900882416 /* HealthChartsView.m in Sources */,
 				C4C4196415F138B900882416 /* HealthChartsViewLandscape.m in Sources */,
+				0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */,
 				C4A6E21817C76DE90020FC2A /* CustomTableView.m in Sources */,
 				C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */,
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
@@ -2596,6 +2607,7 @@
 				0BAC2F181876E7B500D452A7 /* Results.m in Sources */,
 				C4BCF09617B7A87500F1E0F7 /* NSNumber+Handling.m in Sources */,
 				C4C419D415F13C6F00882416 /* NewAlertDetailViewController.m in Sources */,
+				0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */,
 				C4C419D515F13C6F00882416 /* NewAlertEditDetailViewController.m in Sources */,
 				C4C419DB15F13C6F00882416 /* ResultDetailViewController.m in Sources */,
 				C4C419DD15F13C6F00882416 /* SettingsDetailViewController.m in Sources */,

@@ -44,6 +44,11 @@
         [self configureIPadMenus];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(slideInHamburger)];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(slideInAdder)];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] init];
+        toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+        [self.view addSubview:toolbar];
+        self.iPadToolbar = toolbar;
     }
     else
     {

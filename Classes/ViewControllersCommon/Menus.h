@@ -10,6 +10,7 @@
 
 @interface Menus : NSObject
 + (NSArray *)hamburgerMenus;
++ (NSArray *)toolbarButtonItems;
 + (NSArray *)addMenus;
 + (NSString *)controllerNameForRowIndexPath:(NSIndexPath *)indexPath
                                 ignoreFirst:(BOOL)ignoreFirst;
@@ -18,4 +19,5 @@
                                     ignoreFirst:(BOOL)ignoreFirst;
 
 + (NSDictionary *)menuImages;
++ (UIImageView *)buttonImageviewForTitle:(NSString *)title;
 @end
