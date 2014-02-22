@@ -18,6 +18,8 @@
 		0B4064B61893C36100F858BB /* SeinfeldCalendar+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4064B51893C36100F858BB /* SeinfeldCalendar+Handling.m */; };
 		0B4065001894370900F858BB /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4064FF1894370900F858BB /* StarView.m */; };
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
+		0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */; };
+		0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */; };
 		0B508C5C188BE19E00752568 /* CalendarMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B508C5B188BE19E00752568 /* CalendarMonthView.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
 		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
@@ -499,6 +501,10 @@
 		0B4064FF1894370900F858BB /* StarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarView.m; path = Views/StarView.m; sourceTree = "<group>"; };
 		0B47527218422D2F0079A239 /* NSString+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Extras.h"; path = "Categories/NSString+Extras.h"; sourceTree = "<group>"; };
 		0B47527318422D2F0079A239 /* NSString+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extras.m"; path = "Categories/NSString+Extras.m"; sourceTree = "<group>"; };
+		0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsCollectionViewController.h; path = ViewControllersiPad/ResultsCollectionViewController.h; sourceTree = "<group>"; };
+		0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsCollectionViewController.m; path = ViewControllersiPad/ResultsCollectionViewController.m; sourceTree = "<group>"; };
+		0B4C3B1C18B8E77300BF3BB5 /* ContentNavigationController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentNavigationController_iPad.h; path = ViewControllersiPad/ContentNavigationController_iPad.h; sourceTree = "<group>"; };
+		0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentNavigationController_iPad.m; path = ViewControllersiPad/ContentNavigationController_iPad.m; sourceTree = "<group>"; };
 		0B508C5A188BE19E00752568 /* CalendarMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarMonthView.h; path = Views/CalendarMonthView.h; sourceTree = "<group>"; };
 		0B508C5B188BE19E00752568 /* CalendarMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarMonthView.m; path = Views/CalendarMonthView.m; sourceTree = "<group>"; };
 		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
@@ -1659,12 +1665,16 @@
 				C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */,
 				C41D8B1A17D22EE3008EC822 /* ContentContainerViewController_iPad.h */,
 				C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */,
+				0B4C3B1C18B8E77300BF3BB5 /* ContentNavigationController_iPad.h */,
+				0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */,
 				C4A6E21617C76DE90020FC2A /* CustomTableView.h */,
 				C4A6E21717C76DE90020FC2A /* CustomTableView.m */,
 				0B0C4F6918A664B300D22990 /* CustomToolbar.h */,
 				0B0C4F6A18A664B300D22990 /* CustomToolbar.m */,
 				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
 				C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */,
+				0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */,
+				0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */,
 			);
 			name = ViewControllersiPad;
 			sourceTree = "<group>";
@@ -2578,6 +2588,7 @@
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
 				C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */,
 				C4C4196715F138B900882416 /* Trafo.m in Sources */,
+				0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */,
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
 				C4C4199615F13AAD00882416 /* ClinicsTableViewController.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
@@ -2626,6 +2637,7 @@
 				C491AE5E15F15B8500EB1CF8 /* OtherMedsDetailViewController.m in Sources */,
 				0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */,
 				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
+				0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */,
 				C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */,
 				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,

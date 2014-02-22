@@ -13,4 +13,5 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *collectionViewLayout;
 @property (nonatomic, strong) CustomToolbar *toolbar;
+- (void)setTitleViewWithTitle:(NSString *)titleString;
 @end

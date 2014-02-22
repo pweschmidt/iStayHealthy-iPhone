@@ -12,8 +12,8 @@
 #import "Constants.h"
 #import "Utilities.h"
 @interface ContainerViewController ()
-@property (nonatomic, strong) LoginViewController * loginController;
-@property (nonatomic, strong) ContentContainerViewController * contentController;
+@property (nonatomic, strong) LoginViewController *loginController;
+@property (nonatomic, strong) ContentContainerViewController *contentController;
 @property (nonatomic, strong) id currentController;
 @end
 
@@ -21,72 +21,68 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    NSLog(@"We got to the ContainerViewController - hurrah");
-    self.loginController = [self.storyboard
-                            instantiateViewControllerWithIdentifier:@"loginController"];
-    if (nil != self.loginController)
-    {
-        self.loginController.view.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
-        [self addChildViewController:self.loginController];
-    }
-    self.contentController = [self.storyboard
-                            instantiateViewControllerWithIdentifier:@"contentController"];
-    if (nil != self.contentController)
-    {
-        self.contentController.view.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
-        [self addChildViewController:self.contentController];
-    }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
-    BOOL isPasswordReset = [defaults boolForKey:kPasswordReset];
-    if (isPasswordEnabled && !isPasswordReset)
-    {
-        NSLog(@"calling the login view controller");
-        [self.view addSubview:self.loginController.view];
-        self.currentController = self.loginController;
-    }
-    else
-    {
-        if (isPasswordReset)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
-                                                            message:NSLocalizedString(@"You reset your password", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-        NSLog(@"Calling the content container view controller");
-        [self.view addSubview:self.contentController.view];
-        self.currentController = self.contentController;
-    }
+	[super viewDidLoad];
+	NSLog(@"We got to the ContainerViewController - hurrah");
+	self.loginController = [self.storyboard
+	                        instantiateViewControllerWithIdentifier:@"loginController"];
+	if (nil != self.loginController)
+	{
+		self.loginController.view.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
+		[self addChildViewController:self.loginController];
+	}
+	self.contentController = [self.storyboard
+	                          instantiateViewControllerWithIdentifier:@"contentController"];
+	if (nil != self.contentController)
+	{
+		self.contentController.view.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
+		[self addChildViewController:self.contentController];
+	}
 
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
+	BOOL isPasswordReset = [defaults boolForKey:kPasswordReset];
+	if (isPasswordEnabled && !isPasswordReset)
+	{
+		NSLog(@"calling the login view controller");
+		[self.view addSubview:self.loginController.view];
+		self.currentController = self.loginController;
+	}
+	else
+	{
+		if (isPasswordReset)
+		{
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
+			                                                message:NSLocalizedString(@"You reset your password", nil)
+			                                               delegate:nil
+			                                      cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+			                                      otherButtonTitles:nil];
+			[alert show];
+		}
+		NSLog(@"Calling the content container view controller");
+		[self.view addSubview:self.contentController.view];
+		self.currentController = self.contentController;
+	}
 }
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
+	[super didReceiveMemoryWarning];
 }
 
 - (IBAction)transitionToContentController:(id)sender
 {
-    [self transitionFromViewController:self.currentController toViewController:self.contentController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished){
-        [self.contentController didMoveToParentViewController:self];
-        self.currentController = self.contentController;
-    }];
+	[self transitionFromViewController:self.currentController toViewController:self.contentController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion: ^(BOOL finished) {
+	    [self.contentController didMoveToParentViewController:self];
+	    self.currentController = self.contentController;
+	}];
 }
 
 - (IBAction)transitionToLoginController:(id)sender
 {
-    [self transitionFromViewController:self.currentController toViewController:self.loginController duration:0 options:UIViewAnimationTransitionNone animations:nil completion:^(BOOL finished){
-        [self.loginController didMoveToParentViewController:self];
-        self.currentController = self.loginController;
-    }];    
+	[self transitionFromViewController:self.currentController toViewController:self.loginController duration:0 options:UIViewAnimationTransitionNone animations:nil completion: ^(BOOL finished) {
+	    [self.loginController didMoveToParentViewController:self];
+	    self.currentController = self.loginController;
+	}];
 }
-
-
-
 
 @end
