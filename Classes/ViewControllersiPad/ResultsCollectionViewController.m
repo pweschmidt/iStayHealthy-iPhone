@@ -11,7 +11,8 @@
 #import "BaseCollectionViewCell.h"
 #import "Results+Handling.h"
 #import "EditResultsTableViewController.h"
-
+#import "ResultsView-iPad.h"
+//#import "Constants.h"
 
 #define kResultsCollectionCellIdentifier @"ResultsCollectionCellIdentifier"
 
@@ -46,6 +47,7 @@
 		editController.preferredContentSize = CGSizeMake(320, 568);
 		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 		self.resultsPopoverController = [[UIPopoverController alloc] initWithContentViewController:editNavCtrl];
+		self.resultsPopoverController.delegate = self;
 		[self.resultsPopoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 	}
 	else
@@ -77,12 +79,38 @@
 	}
 
 	[cell addDateToTitle:results.ResultsDate];
+	ResultsView_iPad *hivResults = [ResultsView_iPad viewForResults:results resultsType:HIVResultsType frame:CGRectMake(0, 40, 150, 50)];
 
+	ResultsView_iPad *bloods = [ResultsView_iPad viewForResults:results resultsType:BloodResultsType frame:CGRectMake(0, 90, 150, 20)];
+
+	ResultsView_iPad *other = [ResultsView_iPad viewForResults:results resultsType:OtherResultsType frame:CGRectMake(0, 115, 150, 20)];
+
+	[cell addSubview:hivResults];
+	[cell addSubview:bloods];
+	[cell addSubview:other];
 	return cell;
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+	self.resultsPopoverController = nil;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+	if (nil != self.resultsPopoverController)
+	{
+		[self.resultsPopoverController dismissPopoverAnimated:YES];
+		self.resultsPopoverController = nil;
+	}
+	Results *results = [self.results objectAtIndex:indexPath.row];
+	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
+	editController.preferredContentSize = CGSizeMake(320, 568);
+//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+	self.resultsPopoverController = [[UIPopoverController alloc] initWithContentViewController:editNavCtrl];
+	self.resultsPopoverController.delegate = self;
+	[self.resultsPopoverController presentPopoverFromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification

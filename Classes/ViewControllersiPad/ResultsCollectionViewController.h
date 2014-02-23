@@ -8,6 +8,6 @@
 
 #import "BaseCollectionViewController.h"
 
-@interface ResultsCollectionViewController : BaseCollectionViewController
+@interface ResultsCollectionViewController : BaseCollectionViewController <UIPopoverControllerDelegate>
 
 @end

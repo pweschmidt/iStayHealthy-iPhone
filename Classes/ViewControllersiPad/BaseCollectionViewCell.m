@@ -57,8 +57,17 @@
 - (void)addDateToTitle:(NSDate *)date
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"dd MMM yy"];
-	[self addTitle:[dateFormatter stringFromDate:date] font:[UIFont boldSystemFontOfSize:18]];
+	[dateFormatter setDateFormat:@"dd MMM yyyy"];
+	UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, self.titleView.frame.size.width, self.titleView.frame.size.height)];
+	dateLabel.layer.cornerRadius = 6;
+	dateLabel.layer.borderWidth = 1;
+	dateLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+	dateLabel.backgroundColor = [UIColor lightGrayColor];
+	dateLabel.textColor = [UIColor whiteColor];
+	dateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
+	dateLabel.text = [dateFormatter stringFromDate:date];
+	dateLabel.textAlignment = NSTextAlignmentCenter;
+	[self.titleView addSubview:dateLabel];
 }
 
 - (void)addTitle:(NSString *)title font:(UIFont *)font
@@ -75,10 +84,10 @@
 
 - (void)addLabelToContentView:(UILabel *)label
 {
-    if (nil != label)
-    {
-        [self.labelContentView addSubview:label];
-    }
+	if (nil != label)
+	{
+		[self.labelContentView addSubview:label];
+	}
 }
 
 /*

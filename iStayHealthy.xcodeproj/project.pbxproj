@@ -26,6 +26,7 @@
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
+		0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */; };
 		0B7CA7E918818E7600B8BF20 /* tivicay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7CA7E718818E7600B8BF20 /* tivicay.png */; };
 		0B7CA7EA18818E7600B8BF20 /* tivicay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7CA7E818818E7600B8BF20 /* tivicay@2x.png */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
@@ -517,6 +518,8 @@
 		0B60485B1840D1BA0092B5FB /* PWESValueRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESValueRange.m; path = Dashboard/PWESValueRange.m; sourceTree = "<group>"; };
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
+		0B778D5818BA229B00C1F010 /* ResultsView-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ResultsView-iPad.h"; path = "Views/ResultsView-iPad.h"; sourceTree = "<group>"; };
+		0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ResultsView-iPad.m"; path = "Views/ResultsView-iPad.m"; sourceTree = "<group>"; };
 		0B7CA7E718818E7600B8BF20 /* tivicay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tivicay.png; path = Classes/Assets/tivicay.png; sourceTree = "<group>"; };
 		0B7CA7E818818E7600B8BF20 /* tivicay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tivicay@2x.png"; path = "Classes/Assets/tivicay@2x.png"; sourceTree = "<group>"; };
 		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
@@ -1432,6 +1435,8 @@
 				0B508C5B188BE19E00752568 /* CalendarMonthView.m */,
 				C45A98E317EEE3BA004E13C7 /* DateView.h */,
 				C45A98E417EEE3BA004E13C7 /* DateView.m */,
+				0B778D5818BA229B00C1F010 /* ResultsView-iPad.h */,
+				0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
 				C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */,
 				0B4064FE1894370900F858BB /* StarView.h */,
@@ -2664,6 +2669,7 @@
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
 				C46C5DF117EDA83500866DBD /* SeinfeldCalendarViewController.m in Sources */,
 				C440848915FB5817007F4A7D /* PreviousMedViewController.m in Sources */,
+				0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */,
 				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
 				C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */,
 				C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */,
