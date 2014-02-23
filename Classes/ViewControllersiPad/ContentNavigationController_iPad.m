@@ -17,7 +17,6 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,21 +33,6 @@
 - (void)rewindToPreviousController
 {
 	[(ContentContainerViewController_iPad *)self.parentViewController rewindToPreviousController];
-}
-
-- (BOOL)shouldAutorotate
-{
-	return [self.topViewController shouldAutorotate];
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return [self.topViewController supportedInterfaceOrientations];
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return [self.topViewController preferredInterfaceOrientationForPresentation];
 }
 
 @end

@@ -78,40 +78,4 @@
 	}];
 }
 
-#pragma mark - handle rotations (iPad only)
-- (BOOL)shouldAutorotate
-{
-	return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskAll;
-}
-
-/*
-   - (BOOL)shouldAutorotate
-   {
-    if ([Utilities isIPad])
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-   }
-
-   - (NSUInteger)supportedInterfaceOrientations
-   {
-    if ([Utilities isIPad])
-    {
-        return UIInterfaceOrientationMaskAll;
-    }
-    else
-    {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-   }
- */
 @end

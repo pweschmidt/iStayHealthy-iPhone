@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	self.controllers = [self rootControllers_iPad];
 }
 
@@ -92,16 +93,6 @@
 		                           kHIVMedsController : hivNavCtrl };
 
 	return controllers;
-}
-
-- (BOOL)shouldAutorotate
-{
-	return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskAll;
 }
 
 @end
