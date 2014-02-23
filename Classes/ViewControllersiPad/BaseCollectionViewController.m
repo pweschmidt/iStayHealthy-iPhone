@@ -46,6 +46,19 @@
 	CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
 	[self.view addSubview:toolbar];
 	self.toolbar = toolbar;
+
+	UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
+	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
+	menuView.backgroundColor = [UIColor clearColor];
+	menuView.frame = CGRectMake(0, 0, 20, 20);
+	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+	button.frame = CGRectMake(0, 0, 20, 20);
+	button.backgroundColor = [UIColor clearColor];
+	[button addSubview:menuView];
+	[button addTarget:self action:@selector(settingsMenu) forControlEvents:UIControlEventTouchUpInside];
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,6 +119,17 @@
 	 removeObserver:self
 	           name:NSManagedObjectContextDidSaveNotification
 	         object:nil];
+}
+
+- (void)settingsMenu
+{
+}
+
+- (void)addButtonPressed:(id)sender
+{
+	@throw [NSException exceptionWithName:NSInternalInconsistencyException
+	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
+	                             userInfo:nil];
 }
 
 - (void)setTitleViewWithTitle:(NSString *)titleString

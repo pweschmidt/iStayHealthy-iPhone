@@ -24,7 +24,8 @@
 	if (self)
 	{
 		self.layer.cornerRadius = 6;
-		self.layer.borderColor = [UIColor darkGrayColor].CGColor;
+		self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+		self.layer.backgroundColor = [UIColor whiteColor].CGColor;
 		self.layer.borderWidth = 2;
 	}
 	return self;
@@ -74,6 +75,10 @@
 
 - (void)addLabelToContentView:(UILabel *)label
 {
+    if (nil != label)
+    {
+        [self.labelContentView addSubview:label];
+    }
 }
 
 /*

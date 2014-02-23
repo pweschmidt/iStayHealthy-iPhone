@@ -10,11 +10,14 @@
 #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
 #import "Results+Handling.h"
+#import "EditResultsTableViewController.h"
+
 
 #define kResultsCollectionCellIdentifier @"ResultsCollectionCellIdentifier"
 
 @interface ResultsCollectionViewController ()
 @property (nonatomic, strong) NSArray *results;
+@property (nonatomic, strong) UIPopoverController *resultsPopoverController;
 @end
 
 @implementation ResultsCollectionViewController
@@ -27,11 +30,29 @@
 	[self setTitleViewWithTitle:NSLocalizedString(@"Results", nil)];
 	[self.collectionView registerClass:[BaseCollectionViewCell class]
 	        forCellWithReuseIdentifier:kResultsCollectionCellIdentifier];
+	self.resultsPopoverController = nil;
 }
 
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
+}
+
+- (void)addButtonPressed:(id)sender
+{
+	if (nil == self.resultsPopoverController)
+	{
+		EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+		editController.preferredContentSize = CGSizeMake(320, 568);
+		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+		self.resultsPopoverController = [[UIPopoverController alloc] initWithContentViewController:editNavCtrl];
+		[self.resultsPopoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	}
+	else
+	{
+		[self.resultsPopoverController dismissPopoverAnimated:YES];
+		self.resultsPopoverController = nil;
+	}
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -58,6 +79,10 @@
 	[cell addDateToTitle:results.ResultsDate];
 
 	return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
 }
 
 - (void)reloadSQLData:(NSNotification *)notification
