@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PWESNavigationDelegate.h"
 
-@interface ContentContainerViewController_iPad : UIViewController
-- (void)transitionToNavigationControllerWithName:(NSString *)name;
-- (void)rewindToPreviousController;
+@interface ContentContainerViewController_iPad : UIViewController <UIViewControllerTransitioningDelegate, PWESNavigationDelegate>
+@property (nonatomic, assign) TransitionType transitionType;
+- (void)showMenu;
 @end

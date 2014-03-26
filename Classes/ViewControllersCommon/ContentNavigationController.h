@@ -10,5 +10,5 @@
 
 @interface ContentNavigationController : UINavigationController
 - (void)transitionToNavigationControllerWithName:(NSString *)name;
-- (void)rewindToPreviousController;
+- (void)showMenu;
 @end

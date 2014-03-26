@@ -14,237 +14,279 @@
 
 + (NSArray *)toolbarButtonItems
 {
-    static dispatch_once_t onceToken;
-    static NSArray *items = nil;
-    dispatch_once(&onceToken, ^{
-        items = @[
-                  NSLocalizedString(@"Settings", nil),
-                  NSLocalizedString(@"Backups", nil),
-                  NSLocalizedString(@"Feedback", nil),
-                  NSLocalizedString(@"Email Data", nil),
-                  NSLocalizedString(@"Info", nil)
-                  ];
-    });
-    return items;
+	static dispatch_once_t onceToken;
+	static NSArray *items = nil;
+	dispatch_once(&onceToken, ^{
+	    items = @[
+	            NSLocalizedString(@"Settings", nil),
+	            NSLocalizedString(@"Backups", nil),
+	            NSLocalizedString(@"Feedback", nil),
+	            NSLocalizedString(@"Email Data", nil),
+	            NSLocalizedString(@"Info", nil)
+	        ];
+	});
+	return items;
+}
+
++ (NSArray *)controllerMenu
+{
+	static dispatch_once_t onceToken;
+	static NSArray *menus = nil;
+	if ([Utilities isIPad])
+	{
+		dispatch_once(&onceToken, ^{
+		    menus = @[kDashboardController,
+		              kResultsController,
+		              kHIVMedsController,
+		              kMissedController,
+		              kSideEffectsController,
+		              kMedicationDiaryController,
+		              kAlertsController,
+		              kOtherMedsController,
+		              kClinicsController,
+		              kProceduresController,
+		              kWellnessController];
+		});
+	}
+	else
+	{
+		dispatch_once(&onceToken, ^{
+		    menus = @[kDashboardController,
+		              kResultsController,
+		              kHIVMedsController,
+		              kMissedController,
+		              kSideEffectsController,
+		              kMedicationDiaryController,
+		              kAlertsController,
+		              kOtherMedsController,
+		              kClinicsController,
+		              kProceduresController,
+		              kSettingsController,
+		              kDropboxController,
+		              kFeedbackController,
+		              kEmailController,
+		              kInfoController];
+		});
+	}
+	return menus;
 }
 
 + (NSArray *)hamburgerMenus
 {
-    static dispatch_once_t onceToken;
-    static NSArray *menus = nil;
-    if ([Utilities isIPad])
-    {
-        dispatch_once (&onceToken, ^{
-            menus = @[NSLocalizedString(@"Charts", nil),
-                      NSLocalizedString(@"Results", nil),
-                      NSLocalizedString(@"HIV Medications", nil),
-                      NSLocalizedString(@"Missed Meds", nil),
-                      NSLocalizedString(@"Side Effects", nil),
-                      NSLocalizedString(@"Medication Diary", nil),
-                      NSLocalizedString(@"Alerts", nil),
-                      NSLocalizedString(@"Other Medication", nil),
-                      NSLocalizedString(@"Clinics", nil),
-                      NSLocalizedString(@"Procedures", nil),
-                      NSLocalizedString(@"Wellness", nil),];
-        });
-    }
-    else
-    {
-        dispatch_once (&onceToken, ^{
-            menus = @[NSLocalizedString(@"Charts", nil),
-                      NSLocalizedString(@"Results", nil),
-                      NSLocalizedString(@"HIV Medications", nil),
-                      NSLocalizedString(@"Missed Meds", nil),
-                      NSLocalizedString(@"Side Effects", nil),
-                      NSLocalizedString(@"Medication Diary", nil),
-                      NSLocalizedString(@"Alerts", nil),
-                      NSLocalizedString(@"Other Medication", nil),
-                      NSLocalizedString(@"Clinics", nil),
-                      NSLocalizedString(@"Procedures", nil),
-                      NSLocalizedString(@"Settings", nil),
-                      NSLocalizedString(@"Backups", nil),
-                      NSLocalizedString(@"Feedback", nil),
-                      NSLocalizedString(@"Email Data", nil),
-                      NSLocalizedString(@"Info", nil)];
-        });
-    }
-    return menus;
+	static dispatch_once_t onceToken;
+	static NSArray *menus = nil;
+	if ([Utilities isIPad])
+	{
+		dispatch_once(&onceToken, ^{
+		    menus = @[NSLocalizedString(@"Charts", nil),
+		              NSLocalizedString(@"Results", nil),
+		              NSLocalizedString(@"HIV Medications", nil),
+		              NSLocalizedString(@"Missed Meds", nil),
+		              NSLocalizedString(@"Side Effects", nil),
+		              NSLocalizedString(@"Medication Diary", nil),
+		              NSLocalizedString(@"Alerts", nil),
+		              NSLocalizedString(@"Other Medication", nil),
+		              NSLocalizedString(@"Clinics", nil),
+		              NSLocalizedString(@"Procedures", nil),
+		              NSLocalizedString(@"Wellness", nil), ];
+		});
+	}
+	else
+	{
+		dispatch_once(&onceToken, ^{
+		    menus = @[NSLocalizedString(@"Charts", nil),
+		              NSLocalizedString(@"Results", nil),
+		              NSLocalizedString(@"HIV Medications", nil),
+		              NSLocalizedString(@"Missed Meds", nil),
+		              NSLocalizedString(@"Side Effects", nil),
+		              NSLocalizedString(@"Medication Diary", nil),
+		              NSLocalizedString(@"Alerts", nil),
+		              NSLocalizedString(@"Other Medication", nil),
+		              NSLocalizedString(@"Clinics", nil),
+		              NSLocalizedString(@"Procedures", nil),
+		              NSLocalizedString(@"Settings", nil),
+		              NSLocalizedString(@"Backups", nil),
+		              NSLocalizedString(@"Feedback", nil),
+		              NSLocalizedString(@"Email Data", nil),
+		              NSLocalizedString(@"Info", nil)];
+		});
+	}
+	return menus;
 }
 
 + (NSArray *)addMenus
 {
-    if ([Utilities isIPad])
-    {
-        return  @[NSLocalizedString(@"New Result", nil),
-                  NSLocalizedString(@"New HIV Med", nil),
-                  NSLocalizedString(@"New Other Med", nil),
-                  NSLocalizedString(@"New Missed Med", nil),
-                  NSLocalizedString(@"New Side Effects", nil),
-                  NSLocalizedString(@"New Alert", nil),
-                  NSLocalizedString(@"New Procedure", nil),
-                  NSLocalizedString(@"New Wellness", nil)];
-    }
-    else
-    {
-        return  @[NSLocalizedString(@"New Result", nil),
-                  NSLocalizedString(@"New HIV Med", nil),
-                  NSLocalizedString(@"New Other Med", nil),
-                  NSLocalizedString(@"New Missed Med", nil),
-                  NSLocalizedString(@"New Side Effects", nil),
-                  NSLocalizedString(@"New Alert", nil),
-                  NSLocalizedString(@"New Procedure", nil)];
-    }
+	if ([Utilities isIPad])
+	{
+		return @[NSLocalizedString(@"New Result", nil),
+		         NSLocalizedString(@"New HIV Med", nil),
+		         NSLocalizedString(@"New Other Med", nil),
+		         NSLocalizedString(@"New Missed Med", nil),
+		         NSLocalizedString(@"New Side Effects", nil),
+		         NSLocalizedString(@"New Alert", nil),
+		         NSLocalizedString(@"New Procedure", nil),
+		         NSLocalizedString(@"New Wellness", nil)];
+	}
+	else
+	{
+		return @[NSLocalizedString(@"New Result", nil),
+		         NSLocalizedString(@"New HIV Med", nil),
+		         NSLocalizedString(@"New Other Med", nil),
+		         NSLocalizedString(@"New Missed Med", nil),
+		         NSLocalizedString(@"New Side Effects", nil),
+		         NSLocalizedString(@"New Alert", nil),
+		         NSLocalizedString(@"New Procedure", nil)];
+	}
 }
 
 + (NSString *)controllerNameForRowIndexPath:(NSIndexPath *)indexPath
                                 ignoreFirst:(BOOL)ignoreFirst
 {
-    NSArray * menus = [Menus hamburgerMenus];
-    if (indexPath.row > menus.count)
-    {
-        return nil;
-    }
-    NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
-    NSString *menuName = [menus objectAtIndex:index];
-    if ([menuName isEqualToString:NSLocalizedString(@"Charts", nil)])
-    {
-        return kDashboardController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Results", nil)])
-    {
-        return kResultsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"HIV Medications", nil)])
-    {
-        return kHIVMedsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Missed Meds", nil)])
-    {
-        return kMissedController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Side Effects", nil)])
-    {
-        return kSideEffectsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Medication Diary", nil)])
-    {
-        return kMedicationDiaryController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Alerts", nil)])
-    {
-        return kAlertsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Other Medication", nil)])
-    {
-        return kOtherMedsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Clinics", nil)])
-    {
-        return kClinicsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Procedures", nil)])
-    {
-        return kProceduresController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Wellness", nil)])
-    {
-        return kWellnessController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Settings", nil)])
-    {
-        return kSettingsController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Backups", nil)])
-    {
-        return kDropboxController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Info", nil)])
-    {
-        return kInfoController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
-    {
-        return kFeedbackController;
-    }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Email Data", nil)])
-    {
-        return kEmailController;
-    }
-    return nil;
+	NSArray *menus = [Menus hamburgerMenus];
+	if (indexPath.row > menus.count)
+	{
+		return nil;
+	}
+	NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
+	NSString *menuName = [menus objectAtIndex:index];
+	if ([menuName isEqualToString:NSLocalizedString(@"Charts", nil)])
+	{
+		return kDashboardController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Results", nil)])
+	{
+		return kResultsController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"HIV Medications", nil)])
+	{
+		return kHIVMedsController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Missed Meds", nil)])
+	{
+		return kMissedController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Side Effects", nil)])
+	{
+		return kSideEffectsController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Medication Diary", nil)])
+	{
+		return kMedicationDiaryController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Alerts", nil)])
+	{
+		return kAlertsController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Other Medication", nil)])
+	{
+		return kOtherMedsController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Clinics", nil)])
+	{
+		return kClinicsController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Procedures", nil)])
+	{
+		return kProceduresController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Wellness", nil)])
+	{
+		return kWellnessController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Settings", nil)])
+	{
+		return kSettingsController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Backups", nil)])
+	{
+		return kDropboxController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Info", nil)])
+	{
+		return kInfoController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
+	{
+		return kFeedbackController;
+	}
+	else if ([menuName isEqualToString:NSLocalizedString(@"Email Data", nil)])
+	{
+		return kEmailController;
+	}
+	return nil;
 }
 
 + (NSString *)editControllerNameForRowIndexPath:(NSIndexPath *)indexPath
                                     ignoreFirst:(BOOL)ignoreFirst
 {
-    NSArray * menus = [Menus addMenus];
-    if (indexPath.row > menus.count)
-    {
-        return nil;
-    }
-    NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
-    NSString *menuName = [menus objectAtIndex:index];
-    return nil;
+	NSArray *menus = [Menus addMenus];
+	if (indexPath.row > menus.count)
+	{
+		return nil;
+	}
+	NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
+	NSString *menuName = [menus objectAtIndex:index];
+	return nil;
 }
 
 + (NSDictionary *)menuImages
 {
-    static dispatch_once_t onceToken;
-    static NSDictionary *colourDictionary = nil;
-    dispatch_once (&onceToken, ^{
-        colourDictionary = @{
-                             kDashboardController : [UIImage imageNamed:@"charts.png"],
-                             kResultsController : [UIImage imageNamed:@"results.png"],
-                             kHIVMedsController : [UIImage imageNamed:@"combi.png"],
-                             kMissedController : [UIImage imageNamed:@"missed.png"],
-                             kAlertsController : [UIImage imageNamed:@"alarm.png"],
-                             kClinicsController : [UIImage imageNamed:@"doctor.png"],
-                             kSideEffectsController : [UIImage imageNamed:@"sideeffects.png"],
-                             kDropboxController : [UIImage imageNamed:@"save.png"],
-                             kOtherMedsController : [UIImage imageNamed:@"cross.png"],
-                             kInfoController : [UIImage imageNamed:@"info.png"],
-                             kFeedbackController : [UIImage imageNamed:@"feedback.png"],
-                             kEmailController : [UIImage imageNamed:@"mail.png"],
-                             kProceduresController : [UIImage imageNamed:@"procedure.png"],
-                             kSettingsController : [UIImage imageNamed:@"lock.png"],
-                             kMedicationDiaryController : [UIImage imageNamed:@"diary.png"]
-                             };
-    });
-    return colourDictionary;
-    
+	static dispatch_once_t onceToken;
+	static NSDictionary *colourDictionary = nil;
+	dispatch_once(&onceToken, ^{
+	    colourDictionary = @{
+	        kDashboardController : [UIImage imageNamed:@"charts.png"],
+	        kResultsController : [UIImage imageNamed:@"results.png"],
+	        kHIVMedsController : [UIImage imageNamed:@"combi.png"],
+	        kMissedController : [UIImage imageNamed:@"missed.png"],
+	        kAlertsController : [UIImage imageNamed:@"alarm.png"],
+	        kClinicsController : [UIImage imageNamed:@"doctor.png"],
+	        kSideEffectsController : [UIImage imageNamed:@"sideeffects.png"],
+	        kDropboxController : [UIImage imageNamed:@"save.png"],
+	        kOtherMedsController : [UIImage imageNamed:@"cross.png"],
+	        kInfoController : [UIImage imageNamed:@"info.png"],
+	        kFeedbackController : [UIImage imageNamed:@"feedback.png"],
+	        kEmailController : [UIImage imageNamed:@"mail.png"],
+	        kProceduresController : [UIImage imageNamed:@"procedure.png"],
+	        kSettingsController : [UIImage imageNamed:@"lock.png"],
+	        kMedicationDiaryController : [UIImage imageNamed:@"diary.png"]
+		};
+	});
+	return colourDictionary;
 }
 
 + (UIImageView *)buttonImageviewForTitle:(NSString *)title
 {
-    UIImage *image = nil;
-    if ([title isEqualToString:NSLocalizedString(@"Settings", nil)])
-    {
-        image = [UIImage imageNamed:@"lock.png"];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Backups", nil)])
-    {
-        image = [UIImage imageNamed:@"save.png"];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
-    {
-        image = [UIImage imageNamed:@"feedback.png"];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Email Data", nil)])
-    {
-        image = [UIImage imageNamed:@"mail.png"];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Info", nil)])
-    {
-        image = [UIImage imageNamed:@"info.png"];
-    }
-    else
-    {
-        return nil;
-    }    
-    UIImageView *menuView = [[UIImageView alloc] initWithImage:image];
-    menuView.backgroundColor = [UIColor clearColor];
-    menuView.frame = CGRectMake(0, 0, 20, 20);
-    
-    return menuView;
+	UIImage *image = nil;
+	if ([title isEqualToString:NSLocalizedString(@"Settings", nil)])
+	{
+		image = [UIImage imageNamed:@"lock.png"];
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"Backups", nil)])
+	{
+		image = [UIImage imageNamed:@"save.png"];
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
+	{
+		image = [UIImage imageNamed:@"feedback.png"];
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"Email Data", nil)])
+	{
+		image = [UIImage imageNamed:@"mail.png"];
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"Info", nil)])
+	{
+		image = [UIImage imageNamed:@"info.png"];
+	}
+	else
+	{
+		return nil;
+	}
+	UIImageView *menuView = [[UIImageView alloc] initWithImage:image];
+	menuView.backgroundColor = [UIColor clearColor];
+	menuView.frame = CGRectMake(0, 0, 20, 20);
+
+	return menuView;
 }
 
 @end

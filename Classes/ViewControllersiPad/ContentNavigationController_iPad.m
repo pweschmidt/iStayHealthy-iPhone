@@ -19,6 +19,18 @@
 	[super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
+	{
+		if (self.view.frame.size.width < self.view.frame.size.height)
+		{
+			self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
+		}
+	}
+}
+
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
@@ -27,12 +39,16 @@
 
 - (void)transitionToNavigationControllerWithName:(NSString *)name
 {
-	[(ContentContainerViewController_iPad *)self.parentViewController transitionToNavigationControllerWithName : name];
+	[(ContentContainerViewController_iPad *)self.parentViewController transitionToNavigationControllerWithName : name completion : nil];
 }
 
-- (void)rewindToPreviousController
+- (void)showMenu
 {
-	[(ContentContainerViewController_iPad *)self.parentViewController rewindToPreviousController];
+	if ([self.parentViewController isKindOfClass:[ContentContainerViewController_iPad class]])
+	{
+		ContentContainerViewController_iPad *container = (ContentContainerViewController_iPad *)self.parentViewController;
+		[container showMenu];
+	}
 }
 
 @end

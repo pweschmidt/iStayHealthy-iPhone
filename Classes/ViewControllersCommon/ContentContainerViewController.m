@@ -24,6 +24,7 @@
 #import "DropboxViewController.h"
 #import "DashboardViewController.h"
 #import "Utilities.h"
+#import "PWESZoomTransition.h"
 
 @interface ContentContainerViewController ()
 @property (nonatomic, strong) NSDictionary *controllers;
@@ -36,7 +37,9 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.controllers = [self rootControllers_iPhone];
+	ContentNavigationController *navigationController = [self navigationControllerForName_iPhone:kDashboardController];
+	[self addChildViewController:navigationController];
+	[self moveToChildNavigationController:navigationController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,121 +48,174 @@
 	// Dispose of any resources that can be recreated.
 }
 
-- (void)rewindToPreviousController
+- (void)showMenu
 {
-	if (nil == self.previousController)
-	{
-		return;
-	}
-	if (self.currentController == self.previousController)
-	{
-		return;
-	}
-	[self transitionFromViewController:self.currentController toViewController:self.previousController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations: ^(void) {
-	} completion: ^(BOOL finished) {
-	    self.currentController = self.previousController;
-	    self.previousController = nil;
-	}];
+	self.transitionType = kMenuTransition;
+	HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	menuController.modalPresentationStyle = UIModalPresentationCustom;
+	menuController.transitioningDelegate = self;
+	menuController.transitionDelegate = self;
+	[self presentViewController:menuController animated:YES completion:nil];
+}
+
+#pragma mark PWESNavigationDelegate methods
+- (void)changeTransitionType:(TransitionType)transitionType
+{
+	self.transitionType = transitionType;
 }
 
 - (void)transitionToNavigationControllerWithName:(NSString *)name
+                                      completion:(finishBlock)completion
 {
-	__block id controller = [self.controllers objectForKey:name];
-	[self transitionFromViewController:self.currentController toViewController:controller duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations: ^(void) {
-	} completion: ^(BOOL finished) {
-	    [controller didMoveToParentViewController:self];
-	    self.previousController = self.currentController;
-	    self.currentController = controller;
+	ContentNavigationController *navigationController = [self navigationControllerForName_iPhone:name];
+	if (nil == navigationController)
+	{
+		return;
+	}
+	[self addChildViewController:navigationController];
+	ContentNavigationController *currentNavigationController = self.currentController;
+	[self transitionFromViewController:currentNavigationController toViewController:navigationController duration:0.0 options:UIViewAnimationOptionTransitionNone animations:nil completion: ^(BOOL finished) {
+	    [self moveToChildNavigationController:navigationController];
+	    [self removeChildNavigationController:currentNavigationController];
+	    self.currentController = navigationController;
+	    if (nil != completion)
+	    {
+	        completion();
+		}
+	    if (!finished)
+	    {
+	        NSLog(@"transition isn't finished yet");
+		}
 	}];
 }
 
-#pragma iPhone handling
-
-- (NSDictionary *)rootControllers_iPhone
+#pragma mark private methods
+- (void)moveToChildNavigationController:(ContentNavigationController *)childNavigationController
 {
-	HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
-	DropboxViewController *dropBoxController = [[DropboxViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	[childNavigationController didMoveToParentViewController:self];
+	[self.view addSubview:childNavigationController.view];
+	self.currentController = nil;
+	self.currentController = childNavigationController;
+}
 
-	DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
-	ClinicalAddressTableViewController *clinicController = [[ClinicalAddressTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	NotificationAlertsTableViewController *alertsController = [[NotificationAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	OtherMedicationsListTableViewController *otherController = [[OtherMedicationsListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	ProceduresListTableViewController *procController = [[ProceduresListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	MissedMedicationsTableViewController *missedController = [[MissedMedicationsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	SideEffectsTableViewController *effectsController = [[SideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	InformationTableViewController *infoController = [[InformationTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	SeinfeldCalendarViewController *calendarController = [[SeinfeldCalendarViewController alloc] init];
-	SettingsTableViewController *settingsController = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+- (void)removeChildNavigationController:(ContentNavigationController *)childNavigationController
+{
+	[childNavigationController removeFromParentViewController];
+	[childNavigationController willMoveToParentViewController:nil];
+}
 
-	calendarController.view.frame   = self.view.frame;
-	infoController.view.frame       = self.view.frame;
-	effectsController.view.frame    = self.view.frame;
-	missedController.view.frame     = self.view.frame;
-	procController.view.frame       = self.view.frame;
-	otherController.view.frame      = self.view.frame;
-	alertsController.view.frame     = self.view.frame;
-	clinicController.view.frame     = self.view.frame;
-	menuController.view.frame       = self.view.frame;
-	resultsController.view.frame    = self.view.frame;
-	dropBoxController.view.frame    = self.view.frame;
-	hivController.view.frame        = self.view.frame;
-	dashboardController.view.frame  = self.view.frame;
-	settingsController.view.frame   = self.view.frame;
+- (void)addChildNavigationController:(ContentNavigationController *)childNavigationController
+{
+	if (nil != childNavigationController)
+	{
+		[self addChildViewController:childNavigationController];
+		[self.view addSubview:childNavigationController.view];
+	}
+}
 
-	ContentNavigationController *calendarNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:calendarController];
-	ContentNavigationController *infoNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:infoController];
-	ContentNavigationController *effectsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:effectsController];
-	ContentNavigationController *missedNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:missedController];
-	ContentNavigationController *clinicNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:clinicController];
-	ContentNavigationController *alertNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:alertsController];
-	ContentNavigationController *otherNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:otherController];
-	ContentNavigationController *procNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:procController];
+- (ContentNavigationController *)navigationControllerForName_iPhone:(NSString *)controllerName
+{
+	if (nil == controllerName)
+	{
+		return nil;
+	}
 
+	ContentNavigationController *navigationController = nil;
+	if ([kDashboardController isEqualToString:controllerName])
+	{
+		DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
+		navigationController  = [[ContentNavigationController alloc] initWithRootViewController:dashboardController];
+	}
+	else if ([kResultsController isEqualToString:controllerName])
+	{
+		ResultsListTableViewController *resultsController = [[ResultsListTableViewController alloc] init];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:resultsController];
+	}
+	else if ([kDropboxController isEqualToString:controllerName])
+	{
+		DropboxViewController *dropBoxController = [[DropboxViewController alloc] init];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:dropBoxController];
+	}
+	else if ([kHIVMedsController isEqualToString:controllerName])
+	{
+		MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc]
+		                                                initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:hivController];
+	}
+	else if ([kAlertsController isEqualToString:controllerName])
+	{
+		NotificationAlertsTableViewController *alertsController = [[NotificationAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:alertsController];
+	}
+	else if ([kOtherMedsController isEqualToString:controllerName])
+	{
+		OtherMedicationsListTableViewController *otherController = [[OtherMedicationsListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:otherController];
+	}
+	else if ([kProceduresController isEqualToString:controllerName])
+	{
+		ProceduresListTableViewController *procController = [[ProceduresListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:procController];
+	}
+	else if ([kClinicsController isEqualToString:controllerName])
+	{
+		ClinicalAddressTableViewController *clinicController = [[ClinicalAddressTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:clinicController];
+	}
+	else if ([kMissedController isEqualToString:controllerName])
+	{
+		MissedMedicationsTableViewController *missedController = [[MissedMedicationsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:missedController];
+	}
+	else if ([kSideEffectsController isEqualToString:controllerName])
+	{
+		SideEffectsTableViewController *effectsController = [[SideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:effectsController];
+	}
+	else if ([kInfoController isEqualToString:controllerName])
+	{
+		InformationTableViewController *infoController = [[InformationTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:infoController];
+	}
+	else if ([kMedicationDiaryController isEqualToString:controllerName])
+	{
+		SeinfeldCalendarViewController *calendarController = [[SeinfeldCalendarViewController alloc] init];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:calendarController];
+	}
+	else if ([kSettingsController isEqualToString:controllerName])
+	{
+		SettingsTableViewController *settingsController = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc]
+		                        initWithRootViewController:settingsController];
+	}
+	return navigationController;
+}
 
-	ContentNavigationController *menuNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:menuController];
-	ContentNavigationController *resultsNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:resultsController];
-	ContentNavigationController *dropNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dropBoxController];
-	ContentNavigationController *hivNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:hivController];
+#pragma mark UIViewControllerTransitioningDelegate methods
 
-	ContentNavigationController *dashNavCtrl = [[ContentNavigationController alloc] initWithRootViewController:dashboardController];
-	ContentNavigationController *settingsCtrl = [[ContentNavigationController alloc] initWithRootViewController:settingsController];
+- (id <UIViewControllerAnimatedTransitioning> )animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+	PWESZoomTransition *zoomTransition = [[PWESZoomTransition alloc] init];
+	zoomTransition.transitionType = kMenuTransition;
+	return zoomTransition;
+}
 
-	[self addChildViewController:calendarNavCtrl];
-	[self addChildViewController:infoNavCtrl];
-	[self addChildViewController:effectsNavCtrl];
-	[self addChildViewController:missedNavCtrl];
-	[self addChildViewController:clinicNavCtrl];
-	[self addChildViewController:alertNavCtrl];
-	[self addChildViewController:otherNavCtrl];
-	[self addChildViewController:procNavCtrl];
-	[self addChildViewController:menuNavCtrl];
-	[self addChildViewController:resultsNavCtrl];
-	[self addChildViewController:dropNavCtrl];
-	[self addChildViewController:hivNavCtrl];
-	[self addChildViewController:dashNavCtrl];
-	[self addChildViewController:settingsCtrl];
-
-	[self.view addSubview:dashNavCtrl.view];
-	self.currentController = dashNavCtrl;
-	self.previousController = nil;
-
-	NSDictionary *controllers = @{ kMenuController : menuNavCtrl,
-		                           kResultsController : resultsNavCtrl,
-		                           kDropboxController : dropNavCtrl,
-		                           kHIVMedsController : hivNavCtrl,
-		                           kDashboardController : dashNavCtrl,
-		                           kAlertsController : alertNavCtrl,
-		                           kOtherMedsController : otherNavCtrl,
-		                           kProceduresController : procNavCtrl,
-		                           kClinicsController : clinicNavCtrl,
-		                           kMissedController : missedNavCtrl,
-		                           kSideEffectsController : effectsNavCtrl,
-		                           kInfoController : infoNavCtrl,
-		                           kMedicationDiaryController : calendarNavCtrl,
-		                           kSettingsController : settingsCtrl };
-	return controllers;
+- (id <UIViewControllerAnimatedTransitioning> )animationControllerForDismissedController:(UIViewController *)dismissed
+{
+	PWESZoomTransition *zoomTransition = [[PWESZoomTransition alloc] init];
+	zoomTransition.transitionType = kControllerTransition;
+	return zoomTransition;
 }
 
 @end

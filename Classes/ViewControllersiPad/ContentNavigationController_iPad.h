@@ -10,5 +10,5 @@
 
 @interface ContentNavigationController_iPad : UINavigationController
 - (void)transitionToNavigationControllerWithName:(NSString *)name;
-- (void)rewindToPreviousController;
+- (void)showMenu;
 @end

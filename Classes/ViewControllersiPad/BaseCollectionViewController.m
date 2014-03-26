@@ -13,6 +13,7 @@
 #import "CustomToolbar.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
+#import "ContentNavigationController_iPad.h"
 
 @interface BaseCollectionViewController ()
 
@@ -123,6 +124,11 @@
 
 - (void)settingsMenu
 {
+	if ([self.parentViewController isKindOfClass:[ContentNavigationController_iPad class]])
+	{
+		ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *)self.parentViewController;
+		[navController showMenu];
+	}
 }
 
 - (void)addButtonPressed:(id)sender

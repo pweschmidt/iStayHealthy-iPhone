@@ -33,6 +33,8 @@
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
 		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
+		0BB8F4F718E36CBC00C3CCBA /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */; };
+		0BB8F4F818E36CBC00C3CCBA /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */; };
 		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
 		1D3623260D0F684500981E51 /* iStayHealthyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iStayHealthyAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -531,6 +533,11 @@
 		0BAC2F171876E7B500D452A7 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
 		0BAC2F191876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditSeinfeldCalendarTableViewController.h; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.h; sourceTree = "<group>"; };
 		0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSeinfeldCalendarTableViewController.m; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.m; sourceTree = "<group>"; };
+		0BB8F4F318E36CBC00C3CCBA /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESZoomTransition.h; sourceTree = "<group>"; };
+		0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESZoomTransition.m; sourceTree = "<group>"; };
+		0BB8F4F518E36CBC00C3CCBA /* PWESSlideTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESSlideTransition.h; sourceTree = "<group>"; };
+		0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESSlideTransition.m; sourceTree = "<group>"; };
+		0BB8F4F918E36F4D00C3CCBA /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWESNavigationDelegate.h; sourceTree = "<group>"; };
 		0BCBA8E018699B870098D2DA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyAppDelegate.h; sourceTree = "<group>"; };
@@ -1270,6 +1277,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0BB8F4F218E36C9600C3CCBA /* Animations */,
 				C47DB23817AD43B80037A6DF /* Assets */,
 				C4BCF08D17B7A32100F1E0F7 /* Categories */,
 				C4DE020312D5E2E7005C0043 /* Cells */,
@@ -1304,6 +1312,17 @@
 				C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		0BB8F4F218E36C9600C3CCBA /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				0BB8F4F318E36CBC00C3CCBA /* PWESZoomTransition.h */,
+				0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */,
+				0BB8F4F518E36CBC00C3CCBA /* PWESSlideTransition.h */,
+				0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -1600,6 +1619,7 @@
 				C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */,
 				C46EB5DA17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.h */,
 				C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */,
+				0BB8F4F918E36F4D00C3CCBA /* PWESNavigationDelegate.h */,
 				C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */,
 				C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */,
 				C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */,
@@ -2585,6 +2605,7 @@
 				C4C4195015F1383000882416 /* UnitCell.m in Sources */,
 				C4C4196115F138B900882416 /* ChartEvents.m in Sources */,
 				C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */,
+				0BB8F4F718E36CBC00C3CCBA /* PWESZoomTransition.m in Sources */,
 				C4C4196315F138B900882416 /* HealthChartsView.m in Sources */,
 				C4C4196415F138B900882416 /* HealthChartsViewLandscape.m in Sources */,
 				0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */,
@@ -2592,6 +2613,7 @@
 				C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */,
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
 				C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */,
+				0BB8F4F818E36CBC00C3CCBA /* PWESSlideTransition.m in Sources */,
 				C4C4196715F138B900882416 /* Trafo.m in Sources */,
 				0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */,
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,

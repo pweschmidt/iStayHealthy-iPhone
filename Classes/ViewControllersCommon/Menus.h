@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Menus : NSObject
++ (NSArray *)controllerMenu;
 + (NSArray *)hamburgerMenus;
 + (NSArray *)toolbarButtonItems;
 + (NSArray *)addMenus;
