@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	[self registerObservers];
 	self.view.backgroundColor = DEFAULT_BACKGROUND;
 	UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
 	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
@@ -49,7 +50,6 @@
 		[self.view addSubview:toolbar];
 		self.iPadToolbar = toolbar;
 	}
-	[self registerObservers];
 }
 
 - (void)disableRightBarButtons

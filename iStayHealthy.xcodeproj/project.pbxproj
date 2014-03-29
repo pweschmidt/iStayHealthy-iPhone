@@ -34,6 +34,7 @@
 		0B7DF43118E6D78900870BB1 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B7DF42B18E6D78900870BB1 /* release_notes.md */; };
 		0B7DF43D18E6D7BB00870BB1 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7DF43B18E6D7BB00870BB1 /* libGoogleAdMobAds.a */; };
 		0B7DF43E18E6D7BB00870BB1 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B7DF43C18E6D7BB00870BB1 /* README.txt */; };
+		0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
@@ -541,6 +542,8 @@
 		0B7DF43A18E6D7BB00870BB1 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		0B7DF43B18E6D7BB00870BB1 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		0B7DF43C18E6D7BB00870BB1 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		0B7DF43F18E6FF5A00870BB1 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailViewController.h; path = ViewControllersCommon/EmailViewController.h; sourceTree = "<group>"; };
+		0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailViewController.m; path = ViewControllersCommon/EmailViewController.m; sourceTree = "<group>"; };
 		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
 		0BAC2F0D1876E7B400D452A7 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
 		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
@@ -1601,6 +1604,8 @@
 				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
 				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
 				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
+				0B7DF43F18E6FF5A00870BB1 /* EmailViewController.h */,
+				0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
@@ -2734,6 +2739,7 @@
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,
+				0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */,
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
 				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,

@@ -43,4 +43,22 @@
 	}
 }
 
+- (void)showMailController:(MFMailComposeViewController *)mailController
+{
+	if ([self.parentViewController isKindOfClass:[ContentContainerViewController class]])
+	{
+		ContentContainerViewController *container = (ContentContainerViewController *)self.parentViewController;
+		[container showMailController:mailController];
+	}
+}
+
+- (void)hideMailController:(MFMailComposeViewController *)mailController
+{
+	if ([self.parentViewController isKindOfClass:[ContentContainerViewController class]])
+	{
+		ContentContainerViewController *container = (ContentContainerViewController *)self.parentViewController;
+		[container hideMailController:mailController];
+	}
+}
+
 @end

@@ -122,25 +122,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *toControllerName = [self.controllers objectAtIndex:indexPath.row];
-
-	if ([kDropboxController isEqualToString:toControllerName])
+	__strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
+	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(changeTransitionType:)]
+	    && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
 	{
-		if (![[DBSession sharedSession] isLinked])
-		{
-			[[DBSession sharedSession] linkFromController:self];
-		}
+		[strongDelegate changeTransitionType:kControllerTransition];
+		[strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
 	}
-	else
-	{
-		__strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
-		if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(changeTransitionType:)]
-		    && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
-		{
-			[strongDelegate changeTransitionType:kControllerTransition];
-			[strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
-		}
-		[self dismissViewControllerAnimated:YES completion:nil];
-	}
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)startMailController

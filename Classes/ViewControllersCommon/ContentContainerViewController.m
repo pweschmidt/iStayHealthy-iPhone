@@ -20,10 +20,12 @@
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "Constants.h"
+#import "CoreDataConstants.h"
 #import "ContentNavigationController.h"
 #import "DropboxViewController.h"
 #import "DashboardViewController.h"
 #import "Utilities.h"
+#import "EmailViewController.h"
 #import "PWESZoomTransition.h"
 
 @interface ContentContainerViewController ()
@@ -58,6 +60,25 @@
 	[self presentViewController:menuController animated:YES completion:nil];
 }
 
+- (void)showMailController:(MFMailComposeViewController *)mailController
+{
+	if (nil == mailController)
+	{
+		return;
+	}
+	mailController.modalPresentationStyle = UIModalTransitionStyleCoverVertical;
+	[self presentViewController:mailController animated:YES completion:nil];
+}
+
+- (void)hideMailController:(MFMailComposeViewController *)mailController
+{
+	if (nil == mailController)
+	{
+		return;
+	}
+	[mailController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark PWESNavigationDelegate methods
 - (void)changeTransitionType:(TransitionType)transitionType
 {
@@ -75,6 +96,10 @@
 	[self addChildViewController:navigationController];
 	ContentNavigationController *currentNavigationController = self.currentController;
 	[self transitionFromViewController:currentNavigationController toViewController:navigationController duration:0.0 options:UIViewAnimationOptionTransitionNone animations:nil completion: ^(BOOL finished) {
+	    NSNotification *notification = [NSNotification
+	                                    notificationWithName:kLoadedStoreNotificationKey
+	                                                  object:self];
+	    [[NSNotificationCenter defaultCenter] postNotification:notification];
 	    [self moveToChildNavigationController:navigationController];
 	    [self removeChildNavigationController:currentNavigationController];
 	    self.currentController = navigationController;
@@ -198,6 +223,11 @@
 		SettingsTableViewController *settingsController = [[SettingsTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:settingsController];
+	}
+	else if ([kEmailController isEqualToString:controllerName])
+	{
+		EmailViewController *emailController = [[EmailViewController alloc]initWithStyle:UITableViewStyleGrouped];
+		navigationController = [[ContentNavigationController alloc] initWithRootViewController:emailController];
 	}
 	return navigationController;
 }

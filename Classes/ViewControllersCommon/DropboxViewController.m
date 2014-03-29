@@ -22,6 +22,7 @@
 @property (nonatomic, strong) DBRestClient *restClient;
 @property (nonatomic, assign) BOOL dropBoxFileExists;
 @property (nonatomic, assign) BOOL newDropboxFileExists;
+@property (nonatomic, assign) BOOL isConnectAlert;
 @property (nonatomic, assign) BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -41,12 +42,23 @@
 	self.newDropboxFileExists = NO;
 	self.isBackup = NO;
 	self.parentRevision = nil;
+	[self createRestClient];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-	[super viewWillAppear:animated];
-	[self createRestClient];
+	[super viewDidAppear:animated];
+	if (![[DBSession sharedSession] isLinked])
+	{
+		self.isConnectAlert = YES;
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Link?", @"Link?")
+		                                                message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
+		                                               delegate:self
+		                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+		                                      otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+
+		[alert show];
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,7 +80,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString *cellIdentifier = [NSString stringWithFormat:@"DropboxCell%d", indexPath.section];
+	NSString *cellIdentifier = [NSString stringWithFormat:@"DropboxCell"];
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (nil == cell)
 	{
@@ -119,6 +131,7 @@
 
 		case 2:
 		{
+			self.isConnectAlert = NO;
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
 			                                                message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
 			                                               delegate:self
@@ -136,7 +149,16 @@
 	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
 	if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
 	{
-		[self unlinkDropBox];
+		if (!self.isConnectAlert)
+		{
+			[self unlinkDropBox];
+		}
+		else
+		{
+			ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
+			ContentContainerViewController *contentController = (ContentContainerViewController *)navController.parentViewController;
+			[[DBSession sharedSession] linkFromController:contentController];
+		}
 	}
 }
 
@@ -171,7 +193,6 @@
 - (void)unlinkDropBox
 {
 	[[DBSession sharedSession] unlinkAll];
-	[self hamburgerMenu];
 }
 
 /**

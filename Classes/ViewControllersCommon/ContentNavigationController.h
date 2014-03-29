@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @interface ContentNavigationController : UINavigationController
 - (void)transitionToNavigationControllerWithName:(NSString *)name;
 - (void)showMenu;
+- (void)showMailController:(MFMailComposeViewController *)mailController;
+- (void)hideMailController:(MFMailComposeViewController *)mailController;
 @end

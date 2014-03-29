@@ -63,7 +63,6 @@
 		              kProceduresController,
 		              kSettingsController,
 		              kDropboxController,
-		              kFeedbackController,
 		              kEmailController,
 		              kInfoController];
 		});
@@ -106,8 +105,7 @@
 		              NSLocalizedString(@"Procedures", nil),
 		              NSLocalizedString(@"Settings", nil),
 		              NSLocalizedString(@"Backups", nil),
-		              NSLocalizedString(@"Feedback", nil),
-		              NSLocalizedString(@"Email Data", nil),
+		              NSLocalizedString(@"Email", nil),
 		              NSLocalizedString(@"Info", nil)];
 		});
 	}
@@ -205,10 +203,10 @@
 	{
 		return kInfoController;
 	}
-	else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
-	{
-		return kFeedbackController;
-	}
+//	else if ([menuName isEqualToString:NSLocalizedString(@"Feedback", nil)])
+//	{
+//		return kFeedbackController;
+//	}
 	else if ([menuName isEqualToString:NSLocalizedString(@"Email Data", nil)])
 	{
 		return kEmailController;
@@ -245,7 +243,7 @@
 	        kDropboxController : [UIImage imageNamed:@"save.png"],
 	        kOtherMedsController : [UIImage imageNamed:@"cross.png"],
 	        kInfoController : [UIImage imageNamed:@"info.png"],
-	        kFeedbackController : [UIImage imageNamed:@"feedback.png"],
+//	        kFeedbackController : [UIImage imageNamed:@"feedback.png"],
 	        kEmailController : [UIImage imageNamed:@"mail.png"],
 	        kProceduresController : [UIImage imageNamed:@"procedure.png"],
 	        kSettingsController : [UIImage imageNamed:@"lock.png"],
