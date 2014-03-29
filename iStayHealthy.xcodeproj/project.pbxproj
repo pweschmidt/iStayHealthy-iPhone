@@ -29,6 +29,11 @@
 		0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */; };
 		0B7CA7E918818E7600B8BF20 /* tivicay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7CA7E718818E7600B8BF20 /* tivicay.png */; };
 		0B7CA7EA18818E7600B8BF20 /* tivicay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7CA7E818818E7600B8BF20 /* tivicay@2x.png */; };
+		0B7DF42F18E6D78900870BB1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7DF42918E6D78900870BB1 /* libTestFlight.a */; };
+		0B7DF43018E6D78900870BB1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B7DF42A18E6D78900870BB1 /* README.md */; };
+		0B7DF43118E6D78900870BB1 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B7DF42B18E6D78900870BB1 /* release_notes.md */; };
+		0B7DF43D18E6D7BB00870BB1 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7DF43B18E6D7BB00870BB1 /* libGoogleAdMobAds.a */; };
+		0B7DF43E18E6D7BB00870BB1 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B7DF43C18E6D7BB00870BB1 /* README.txt */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
@@ -50,7 +55,6 @@
 		C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */; };
 		C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
-		C4246FAE17F09EAC00AA7D1E /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C4246FAC17F09EAC00AA7D1E /* README.txt */; };
 		C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4276D6D12DB7AED001DDCD2 /* cross-small.png */; };
 		C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */; };
 		C4279EFF146AEDCA00D93B34 /* clinic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4279EFC146AEDCA00D93B34 /* clinic.png */; };
@@ -207,10 +211,6 @@
 		C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C491AE6115F167BD00EB1CF8 /* ProcedureDetailViewController.m */; };
 		C491AE6415F167BE00EB1CF8 /* ProcedureDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C491AE6215F167BE00EB1CF8 /* ProcedureDetailViewController.xib */; };
 		C491B3501477DE96000A4229 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = C491B34A1477DE96000A4229 /* alarm.png */; };
-		C4952D1817F21C380022EFEF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4246FAB17F09EAC00AA7D1E /* libGoogleAdMobAds.a */; };
-		C4952D2017F21DDB0022EFEF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4952D1A17F21DDB0022EFEF /* libTestFlight.a */; };
-		C4952D2117F21DDB0022EFEF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C4952D1B17F21DDB0022EFEF /* README.md */; };
-		C4952D2217F21DDB0022EFEF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = C4952D1C17F21DDB0022EFEF /* release_notes.md */; };
 		C4959F6914B883F0000B3F10 /* pozbanner.png in Resources */ = {isa = PBXBuildFile; fileRef = C4959F6B14B883F0000B3F10 /* pozbanner.png */; };
 		C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */; };
 		C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B717B03C3B006BE980 /* ContentNavigationController.m */; };
@@ -524,6 +524,23 @@
 		0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ResultsView-iPad.m"; path = "Views/ResultsView-iPad.m"; sourceTree = "<group>"; };
 		0B7CA7E718818E7600B8BF20 /* tivicay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tivicay.png; path = Classes/Assets/tivicay.png; sourceTree = "<group>"; };
 		0B7CA7E818818E7600B8BF20 /* tivicay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tivicay@2x.png"; path = "Classes/Assets/tivicay@2x.png"; sourceTree = "<group>"; };
+		0B7DF42918E6D78900870BB1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		0B7DF42A18E6D78900870BB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		0B7DF42B18E6D78900870BB1 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		0B7DF42C18E6D78900870BB1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		0B7DF42D18E6D78900870BB1 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		0B7DF42E18E6D78900870BB1 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		0B7DF43218E6D7BB00870BB1 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		0B7DF43318E6D7BB00870BB1 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		0B7DF43418E6D7BB00870BB1 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		0B7DF43518E6D7BB00870BB1 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		0B7DF43618E6D7BB00870BB1 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		0B7DF43718E6D7BB00870BB1 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		0B7DF43818E6D7BB00870BB1 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		0B7DF43918E6D7BB00870BB1 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		0B7DF43A18E6D7BB00870BB1 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		0B7DF43B18E6D7BB00870BB1 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		0B7DF43C18E6D7BB00870BB1 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
 		0BAC2F0D1876E7B400D452A7 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
 		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
@@ -563,17 +580,6 @@
 		C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController_iPad.h; path = ViewControllersiPad/LoginViewController_iPad.h; sourceTree = "<group>"; };
 		C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController_iPad.m; path = ViewControllersiPad/LoginViewController_iPad.m; sourceTree = "<group>"; };
 		C41EC32C180ED0EE00A49AE4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		C4246FA117F09DE200AA7D1E /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = GoogleAdMob/GADAdMobExtras.h; sourceTree = "<group>"; };
-		C4246FA217F09DE200AA7D1E /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = GoogleAdMob/GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		C4246FA317F09DE200AA7D1E /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = GoogleAdMob/GADAdSize.h; sourceTree = "<group>"; };
-		C4246FA417F09DE200AA7D1E /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerView.h; path = GoogleAdMob/GADBannerView.h; sourceTree = "<group>"; };
-		C4246FA517F09DE200AA7D1E /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerViewDelegate.h; path = GoogleAdMob/GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		C4246FA617F09DE200AA7D1E /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitial.h; path = GoogleAdMob/GADInterstitial.h; sourceTree = "<group>"; };
-		C4246FA717F09DE200AA7D1E /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitialDelegate.h; path = GoogleAdMob/GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		C4246FA817F09DE200AA7D1E /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequest.h; path = GoogleAdMob/GADRequest.h; sourceTree = "<group>"; };
-		C4246FA917F09DE200AA7D1E /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequestError.h; path = GoogleAdMob/GADRequestError.h; sourceTree = "<group>"; };
-		C4246FAB17F09EAC00AA7D1E /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = GoogleAdMob/libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		C4246FAC17F09EAC00AA7D1E /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = GoogleAdMob/README.txt; sourceTree = "<group>"; };
 		C4276D6D12DB7AED001DDCD2 /* cross-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-small.png"; sourceTree = "<group>"; };
 		C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVMedicationViewController.h; path = ViewControllersCommon/MyHIVMedicationViewController.h; sourceTree = "<group>"; };
 		C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHIVMedicationViewController.m; path = ViewControllersCommon/MyHIVMedicationViewController.m; sourceTree = "<group>"; };
@@ -827,12 +833,6 @@
 		C491AE6215F167BE00EB1CF8 /* ProcedureDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProcedureDetailViewController.xib; path = Classes/DetailViewControllers/ProcedureDetailViewController.xib; sourceTree = "<group>"; };
 		C491B34A1477DE96000A4229 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = "<group>"; };
 		C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 3.xcdatamodel"; sourceTree = "<group>"; };
-		C4952D1A17F21DDB0022EFEF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightSDK/libTestFlight.a; sourceTree = "<group>"; };
-		C4952D1B17F21DDB0022EFEF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = TestFlightSDK/README.md; sourceTree = "<group>"; };
-		C4952D1C17F21DDB0022EFEF /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = release_notes.md; path = TestFlightSDK/release_notes.md; sourceTree = "<group>"; };
-		C4952D1D17F21DDB0022EFEF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlightSDK/TestFlight.h; sourceTree = "<group>"; };
-		C4952D1E17F21DDB0022EFEF /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlightSDK/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		C4952D1F17F21DDB0022EFEF /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlightSDK/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		C4952D2317F223370022EFEF /* AddMenuNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMenuNavigationDelegate.h; path = ViewControllersCommon/AddMenuNavigationDelegate.h; sourceTree = "<group>"; };
 		C4959F6A14B883F0000B3F10 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/pozbanner.png; sourceTree = "<group>"; };
 		C4959F6C14B883FA000B3F10 /* de */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = de; path = de.lproj/pozbanner.png; sourceTree = "<group>"; };
@@ -1248,7 +1248,6 @@
 				C45E52F4182BFD1400C30061 /* EventKit.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
 				0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */,
-				C4952D1817F21C380022EFEF /* libGoogleAdMobAds.a in Frameworks */,
 				C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
@@ -1258,12 +1257,13 @@
 				C4F337EF14D43B4700C4F573 /* SystemConfiguration.framework in Frameworks */,
 				C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */,
 				C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */,
+				0B7DF42F18E6D78900870BB1 /* libTestFlight.a in Frameworks */,
 				C4574AE314939D2300793164 /* libm.dylib in Frameworks */,
 				C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */,
+				0B7DF43D18E6D7BB00870BB1 /* libGoogleAdMobAds.a in Frameworks */,
 				C4FB103513A4BF05009270C5 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				C4952D2017F21DDB0022EFEF /* libTestFlight.a in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
@@ -1555,17 +1555,17 @@
 		C46C5DF217EDAEFA00866DBD /* GoogleAdMob */ = {
 			isa = PBXGroup;
 			children = (
-				C4246FAB17F09EAC00AA7D1E /* libGoogleAdMobAds.a */,
-				C4246FAC17F09EAC00AA7D1E /* README.txt */,
-				C4246FA117F09DE200AA7D1E /* GADAdMobExtras.h */,
-				C4246FA217F09DE200AA7D1E /* GADAdNetworkExtras.h */,
-				C4246FA317F09DE200AA7D1E /* GADAdSize.h */,
-				C4246FA417F09DE200AA7D1E /* GADBannerView.h */,
-				C4246FA517F09DE200AA7D1E /* GADBannerViewDelegate.h */,
-				C4246FA617F09DE200AA7D1E /* GADInterstitial.h */,
-				C4246FA717F09DE200AA7D1E /* GADInterstitialDelegate.h */,
-				C4246FA817F09DE200AA7D1E /* GADRequest.h */,
-				C4246FA917F09DE200AA7D1E /* GADRequestError.h */,
+				0B7DF43218E6D7BB00870BB1 /* GADAdMobExtras.h */,
+				0B7DF43318E6D7BB00870BB1 /* GADAdNetworkExtras.h */,
+				0B7DF43418E6D7BB00870BB1 /* GADAdSize.h */,
+				0B7DF43518E6D7BB00870BB1 /* GADBannerView.h */,
+				0B7DF43618E6D7BB00870BB1 /* GADBannerViewDelegate.h */,
+				0B7DF43718E6D7BB00870BB1 /* GADInterstitial.h */,
+				0B7DF43818E6D7BB00870BB1 /* GADInterstitialDelegate.h */,
+				0B7DF43918E6D7BB00870BB1 /* GADRequest.h */,
+				0B7DF43A18E6D7BB00870BB1 /* GADRequestError.h */,
+				0B7DF43B18E6D7BB00870BB1 /* libGoogleAdMobAds.a */,
+				0B7DF43C18E6D7BB00870BB1 /* README.txt */,
 			);
 			name = GoogleAdMob;
 			sourceTree = "<group>";
@@ -1790,12 +1790,12 @@
 		C4952D1917F21DA40022EFEF /* TestFlightSDK */ = {
 			isa = PBXGroup;
 			children = (
-				C4952D1A17F21DDB0022EFEF /* libTestFlight.a */,
-				C4952D1B17F21DDB0022EFEF /* README.md */,
-				C4952D1C17F21DDB0022EFEF /* release_notes.md */,
-				C4952D1D17F21DDB0022EFEF /* TestFlight.h */,
-				C4952D1E17F21DDB0022EFEF /* TestFlight+AsyncLogging.h */,
-				C4952D1F17F21DDB0022EFEF /* TestFlight+ManualSessions.h */,
+				0B7DF42918E6D78900870BB1 /* libTestFlight.a */,
+				0B7DF42A18E6D78900870BB1 /* README.md */,
+				0B7DF42B18E6D78900870BB1 /* release_notes.md */,
+				0B7DF42C18E6D78900870BB1 /* TestFlight.h */,
+				0B7DF42D18E6D78900870BB1 /* TestFlight+AsyncLogging.h */,
+				0B7DF42E18E6D78900870BB1 /* TestFlight+ManualSessions.h */,
 			);
 			name = TestFlightSDK;
 			sourceTree = "<group>";
@@ -2291,7 +2291,6 @@
 				C4B8035F12D365F800A5A38F /* status-small.png in Resources */,
 				C4CE682612DB070500FBCFF4 /* combi-small.png in Resources */,
 				C4276D6E12DB7AED001DDCD2 /* cross-small.png in Resources */,
-				C4246FAE17F09EAC00AA7D1E /* README.txt in Resources */,
 				0B7CA7E918818E7600B8BF20 /* tivicay.png in Resources */,
 				C4CC607F12F5603B00C5EAE2 /* combi-label-small.png in Resources */,
 				C4EB1FE412FD8FA800A8712D /* combi-label-medium.png in Resources */,
@@ -2300,6 +2299,7 @@
 				C49F82C213DEE06500D5891F /* viralOn-small.png in Resources */,
 				C44D36D9180F3E5000EE9F5E /* missed.png in Resources */,
 				C4C3AA2A1316DF70000FC699 /* Icon-72.png in Resources */,
+				0B7DF43118E6D78900870BB1 /* release_notes.md in Resources */,
 				C4C3AA2B1316DF70000FC699 /* Icon-small.png in Resources */,
 				C4C3AA2C1316DF70000FC699 /* Icon.png in Resources */,
 				C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */,
@@ -2307,7 +2307,6 @@
 				C4C0154713425268005E889D /* atripla.png in Resources */,
 				C4C0154813425268005E889D /* celsentri.png in Resources */,
 				C4C0154913425268005E889D /* combivir.png in Resources */,
-				C4952D2117F21DDB0022EFEF /* README.md in Resources */,
 				C44D36C7180F3E3600EE9F5E /* mail.png in Resources */,
 				C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */,
 				C489868618105D78006F47F1 /* save@2x.png in Resources */,
@@ -2375,7 +2374,6 @@
 				C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */,
 				C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */,
 				C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */,
-				C4952D2217F21DDB0022EFEF /* release_notes.md in Resources */,
 				C44D36BC180F3E3600EE9F5E /* charts@2x.png in Resources */,
 				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
 				C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */,
@@ -2452,6 +2450,7 @@
 				C4C4192615F1383000882416 /* ClinicAddressCell.xib in Resources */,
 				C4C4192815F1383000882416 /* ClinicCell.xib in Resources */,
 				C4C4192D15F1383000882416 /* HIVMedListCell.xib in Resources */,
+				0B7DF43E18E6D7BB00870BB1 /* README.txt in Resources */,
 				C4595943180EF8D50082559E /* pozicon@2x.png in Resources */,
 				C48B9BFB18094972007CF6DE /* Default-1024h@2x.png in Resources */,
 				C4C4192F15F1383000882416 /* HIVMedSupportCell.xib in Resources */,
@@ -2507,6 +2506,7 @@
 				0B7CA7EA18818E7600B8BF20 /* tivicay@2x.png in Resources */,
 				C4C41A1D15F1404000882416 /* ProcedureTableViewController.xib in Resources */,
 				C44D36B6180F3E3600EE9F5E /* alarm@2x.png in Resources */,
+				0B7DF43018E6D78900870BB1 /* README.md in Resources */,
 				C4C41A1E15F1404000882416 /* StatusViewControllerLandscape.xib in Resources */,
 				C4C41A3715F1445400882416 /* chimes.caf in Resources */,
 				C4C41A3815F1445400882416 /* doorbell.caf in Resources */,
@@ -2945,7 +2945,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
@@ -2970,6 +2970,7 @@
 					"$(SRCROOT)/Classes",
 					"$(SRCROOT)/Classes/GoogleAdMob",
 					"$(SRCROOT)/Classes/TestFlightSDK",
+					"$(PROJECT_DIR)/Classes",
 				);
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
@@ -2988,7 +2989,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
@@ -3011,6 +3012,7 @@
 					"$(SRCROOT)/Classes",
 					"$(SRCROOT)/Classes/GoogleAdMob",
 					"$(SRCROOT)/Classes/TestFlightSDK",
+					"$(PROJECT_DIR)/Classes",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -3092,7 +3094,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
@@ -3114,6 +3116,7 @@
 					"$(SRCROOT)/Classes",
 					"$(SRCROOT)/Classes/GoogleAdMob",
 					"$(SRCROOT)/Classes/TestFlightSDK",
+					"$(PROJECT_DIR)/Classes",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",

@@ -161,8 +161,7 @@
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError *)error
 {
-	[self dismissViewControllerAnimated:YES completion: ^{
-	}];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - override the notification handlers
