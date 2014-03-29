@@ -106,7 +106,7 @@
 	{
 		if ([[DBSession sharedSession] isLinked])
 		{
-			//any app calls?
+			NSLog(@"App is linked");
 		}
 		return YES;
 	}

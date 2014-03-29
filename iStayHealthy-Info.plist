@@ -101,6 +101,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<string>com.pweschmidt.iStayHealthy</string>
 			<key>CFBundleURLSchemes</key>

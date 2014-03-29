@@ -41,7 +41,12 @@
 	self.newDropboxFileExists = NO;
 	self.isBackup = NO;
 	self.parentRevision = nil;
-	[self setRestClient];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self createRestClient];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,14 +142,17 @@
 
 #pragma mark - DropBox actions
 
-- (void)setRestClient
+- (void)createRestClient
 {
 	if (![[DBSession sharedSession] isLinked])
 	{
 		return;
 	}
-	self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-	self.restClient.delegate = self;
+	else
+	{
+		self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+		self.restClient.delegate = self;
+	}
 }
 
 - (NSString *)dropBoxFileTmpPath

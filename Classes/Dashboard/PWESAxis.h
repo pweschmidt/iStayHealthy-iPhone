@@ -21,11 +21,11 @@
 @property (nonatomic, strong) CALayer *axisLayer;
 
 /**
- vertical axis
- @param frame
- @param valueRange
- @param orientation
- @param ticks
+   vertical axis
+   @param frame
+   @param valueRange
+   @param orientation
+   @param ticks
  */
 - (id)initVerticalAxisWithFrame:(CGRect)frame
                      valueRange:(PWESValueRange *)valueRange
@@ -33,13 +33,21 @@
                           ticks:(CGFloat)ticks;
 
 /**
- horizontal axis
- @param frame
+   vertical axis without labels and no ticks
+   @param frame
+   @param orientation
+ */
+- (id)initVerticalAxisWithFrame:(CGRect)frame
+                    orientation:(AxisType)orientation;
+
+/**
+   horizontal axis
+   @param frame
  */
 - (id)initHorizontalAxisWithFrame:(CGRect)frame;
 
 /**
- show the axis
+   show the axis
  */
 - (void)show;
 @end
