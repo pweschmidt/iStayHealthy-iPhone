@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UINavigationBar-Button.h"
-@class CustomTableView, CustomToolbar;
+@class CustomToolbar;
 
 @interface BaseViewController : UIViewController
 @property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;

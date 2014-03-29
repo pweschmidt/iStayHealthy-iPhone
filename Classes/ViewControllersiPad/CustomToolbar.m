@@ -38,7 +38,9 @@
 - (void)addCustomBarbuttons
 {
 	NSArray *buttonTypes = [Menus toolbarButtonItems];
+	UIBarButtonItem *initialSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
 	__block NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:buttonTypes.count];
+	[buttons addObject:initialSpace];
 	[buttonTypes enumerateObjectsUsingBlock: ^(NSString *title, NSUInteger index, BOOL *stop) {
 	    UIBarButtonItem *barbutton = nil;
 	    if ([title isEqualToString:NSLocalizedString(@"Settings", nil)])
@@ -61,9 +63,11 @@
 	    {
 	        barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openInfo)];
 		}
+	    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
 	    if (nil != barbutton)
 	    {
 	        [buttons addObject:barbutton];
+	        [buttons addObject:flexibleSpace];
 		}
 	}];
 	[self setItems:buttons];

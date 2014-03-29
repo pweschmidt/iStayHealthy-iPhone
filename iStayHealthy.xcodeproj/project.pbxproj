@@ -223,7 +223,6 @@
 		C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1C180031C400FC1637 /* UIFont+Standard.m */; };
 		C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1F1800549500FC1637 /* UILabel+Standard.m */; };
 		C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */; };
-		C4A6E21817C76DE90020FC2A /* CustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A6E21717C76DE90020FC2A /* CustomTableView.m */; };
 		C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A6E21C17C7770C0020FC2A /* Menus.m */; };
 		C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */; };
 		C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */; };
@@ -864,8 +863,6 @@
 		C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsSelectionDataSource.h; path = ViewControllersCommon/EffectsSelectionDataSource.h; sourceTree = "<group>"; };
 		C4A49B2318005CD200FC1637 /* EffectsSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsSelectionTableViewController.h; path = ViewControllersiPhone/EffectsSelectionTableViewController.h; sourceTree = "<group>"; };
 		C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectsSelectionTableViewController.m; path = ViewControllersiPhone/EffectsSelectionTableViewController.m; sourceTree = "<group>"; };
-		C4A6E21617C76DE90020FC2A /* CustomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTableView.h; path = ViewControllersiPad/CustomTableView.h; sourceTree = "<group>"; };
-		C4A6E21717C76DE90020FC2A /* CustomTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTableView.m; path = ViewControllersiPad/CustomTableView.m; sourceTree = "<group>"; };
 		C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewControllerDelegate.h; path = ViewControllersiPad/ContainerViewControllerDelegate.h; sourceTree = "<group>"; };
 		C4A6E21B17C7770C0020FC2A /* Menus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menus.h; path = ViewControllersCommon/Menus.h; sourceTree = "<group>"; };
 		C4A6E21C17C7770C0020FC2A /* Menus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menus.m; path = ViewControllersCommon/Menus.m; sourceTree = "<group>"; };
@@ -1695,8 +1692,6 @@
 				C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */,
 				0B4C3B1C18B8E77300BF3BB5 /* ContentNavigationController_iPad.h */,
 				0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */,
-				C4A6E21617C76DE90020FC2A /* CustomTableView.h */,
-				C4A6E21717C76DE90020FC2A /* CustomTableView.m */,
 				0B0C4F6918A664B300D22990 /* CustomToolbar.h */,
 				0B0C4F6A18A664B300D22990 /* CustomToolbar.m */,
 				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
@@ -2612,7 +2607,6 @@
 				C4C4196315F138B900882416 /* HealthChartsView.m in Sources */,
 				C4C4196415F138B900882416 /* HealthChartsViewLandscape.m in Sources */,
 				0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */,
-				C4A6E21817C76DE90020FC2A /* CustomTableView.m in Sources */,
 				C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */,
 				C4C4196515F138B900882416 /* HealthChartsViewPortrait.m in Sources */,
 				C4C4196615F138B900882416 /* ResultsAnalysis.m in Sources */,

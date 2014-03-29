@@ -12,7 +12,8 @@
 #define APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
 #define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 
-#define kZoomFactor 0.7
+#define kEnlargeFactor 1.25
+#define kZoomFactor 0.45
 typedef void (^finishBlock)(void);
 
 typedef NS_ENUM (NSUInteger, TransitionType)

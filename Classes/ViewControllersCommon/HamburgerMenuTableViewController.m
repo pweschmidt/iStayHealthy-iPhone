@@ -27,6 +27,8 @@
 	[super viewDidLoad];
 
 	self.view.backgroundColor = DEFAULT_BACKGROUND;
+	self.tableView.backgroundColor = DEFAULT_BACKGROUND;
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self setTitleViewWithTitle:NSLocalizedString(@"Menu", nil)];
 	[self disableRightBarButtons];
 //    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
