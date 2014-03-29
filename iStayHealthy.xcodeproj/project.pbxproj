@@ -698,7 +698,6 @@
 		C45F837D17B66CEF0042E63A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = ViewControllersCommon/BaseViewController.m; sourceTree = "<group>"; };
 		C45F838817B675350042E63A /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewController.h; path = ViewControllersCommon/BaseTableViewController.h; sourceTree = "<group>"; };
 		C45F838917B675350042E63A /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTableViewController.m; path = ViewControllersCommon/BaseTableViewController.m; sourceTree = "<group>"; };
-		C45F838B17B681F00042E63A /* BaseViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewControllerDelegate.h; path = ViewControllersCommon/BaseViewControllerDelegate.h; sourceTree = "<group>"; };
 		C45F838D17B6A61F0042E63A /* CoreXMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreXMLReader.h; path = CoreXML/CoreXMLReader.h; sourceTree = "<group>"; };
 		C45F838E17B6A61F0042E63A /* CoreXMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLReader.m; path = CoreXML/CoreXMLReader.m; sourceTree = "<group>"; };
 		C46067E01472D5ED00FCA76D /* iStayHealthy 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 10.xcdatamodel"; sourceTree = "<group>"; };
@@ -1587,7 +1586,6 @@
 				C45F838917B675350042E63A /* BaseTableViewController.m */,
 				C45F837C17B66CEF0042E63A /* BaseViewController.h */,
 				C45F837D17B66CEF0042E63A /* BaseViewController.m */,
-				C45F838B17B681F00042E63A /* BaseViewControllerDelegate.h */,
 				C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */,
 				C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */,
 				C46EB5E017EB7E6100B9EA5A /* ClinicalAddressTableViewController.h */,

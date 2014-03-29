@@ -51,7 +51,7 @@
 - (void)showMenu
 {
 	self.transitionType = kMenuTransition;
-	HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] init];
 	menuController.modalPresentationStyle = UIModalPresentationCustom;
 	menuController.transitioningDelegate = self;
 	menuController.transitionDelegate = self;
@@ -141,49 +141,49 @@
 	else if ([kHIVMedsController isEqualToString:controllerName])
 	{
 		MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc]
-		                                                initWithStyle:UITableViewStyleGrouped];
+		                                                init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:hivController];
 	}
 	else if ([kAlertsController isEqualToString:controllerName])
 	{
-		NotificationAlertsTableViewController *alertsController = [[NotificationAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		NotificationAlertsTableViewController *alertsController = [[NotificationAlertsTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:alertsController];
 	}
 	else if ([kOtherMedsController isEqualToString:controllerName])
 	{
-		OtherMedicationsListTableViewController *otherController = [[OtherMedicationsListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		OtherMedicationsListTableViewController *otherController = [[OtherMedicationsListTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:otherController];
 	}
 	else if ([kProceduresController isEqualToString:controllerName])
 	{
-		ProceduresListTableViewController *procController = [[ProceduresListTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		ProceduresListTableViewController *procController = [[ProceduresListTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:procController];
 	}
 	else if ([kClinicsController isEqualToString:controllerName])
 	{
-		ClinicalAddressTableViewController *clinicController = [[ClinicalAddressTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		ClinicalAddressTableViewController *clinicController = [[ClinicalAddressTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:clinicController];
 	}
 	else if ([kMissedController isEqualToString:controllerName])
 	{
-		MissedMedicationsTableViewController *missedController = [[MissedMedicationsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		MissedMedicationsTableViewController *missedController = [[MissedMedicationsTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:missedController];
 	}
 	else if ([kSideEffectsController isEqualToString:controllerName])
 	{
-		SideEffectsTableViewController *effectsController = [[SideEffectsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		SideEffectsTableViewController *effectsController = [[SideEffectsTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:effectsController];
 	}
 	else if ([kInfoController isEqualToString:controllerName])
 	{
-		InformationTableViewController *infoController = [[InformationTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		InformationTableViewController *infoController = [[InformationTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:infoController];
 	}
@@ -195,7 +195,7 @@
 	}
 	else if ([kSettingsController isEqualToString:controllerName])
 	{
-		SettingsTableViewController *settingsController = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		SettingsTableViewController *settingsController = [[SettingsTableViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:settingsController];
 	}

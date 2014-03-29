@@ -7,33 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewControllerDelegate.h"
-#import "ContainerViewControllerDelegate.h"
 #import "UINavigationBar-Button.h"
 @class CustomTableView, CustomToolbar;
 
-@interface BaseViewController : UIViewController <BaseViewControllerDelegate, ContainerViewControllerDelegate>
-{
-    CGRect onScreenLeft;
-    CGRect offScreenLeft;
-    CGRect onScreenRight;
-    CGRect offScreenRight;
-    CGRect mainFrameCenter;
-    CGRect mainFrameToRight;
-    CGRect mainFrameToLeft;
-}
-@property (nonatomic, strong) CustomTableView * iPadHamburgerMenuView;
-@property (nonatomic, strong) CustomTableView * iPadAddMenuView;
-@property (nonatomic, strong) UIBarButtonItem * hamburgerMenuBarButton;
-@property (nonatomic, strong) UIBarButtonItem * addMenuBarButton;
+@interface BaseViewController : UIViewController
+@property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;
+@property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
 @property (nonatomic, strong) CustomToolbar *iPadToolbar;
 - (void)disableRightBarButtons;
-- (void)configureIPadMenus;
-- (void)settingsMenu;
-- (void)addMenu;
+- (void)hamburgerMenu;
 - (void)addButtonPressed:(id)sender;
 - (UIImage *)blankImage;
 - (void)setTitleViewWithTitle:(NSString *)titleString;
 - (void)goToPOZSite;
-
+- (void)registerObservers;
+- (void)unregisterObservers;
+- (void)reloadSQLData:(NSNotification *)notification;
+- (void)startAnimation:(NSNotification *)notification;
+- (void)stopAnimation:(NSNotification *)notification;
+- (void)handleError:(NSNotification *)notification;
+- (void)handleStoreChanged:(NSNotification *)notification;
 @end

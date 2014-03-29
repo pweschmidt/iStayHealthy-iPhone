@@ -55,7 +55,7 @@
 - (void)showMenu
 {
 	self.transitionType = kMenuTransition;
-	HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] init];
 	menuController.modalPresentationStyle = UIModalPresentationCustom;
 	menuController.transitioningDelegate = self;
 	menuController.transitionDelegate = self;
@@ -152,7 +152,7 @@
 	}
 	else if ([kHIVMedsController isEqualToString:controllerName])
 	{
-		MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] init];
 		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:hivController];
 	}
 	return navigationController;

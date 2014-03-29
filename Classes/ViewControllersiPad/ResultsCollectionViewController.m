@@ -115,7 +115,7 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
+	NSLog(@"ResultsCollectionViewController with name %@", notification.name);
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:@"Results" predicate:nil sortTerm:@"ResultsDate" ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {

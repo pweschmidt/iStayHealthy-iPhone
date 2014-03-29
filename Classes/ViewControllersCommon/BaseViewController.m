@@ -21,8 +21,6 @@
 #import "CustomToolbar.h"
 
 @interface BaseViewController ()
-@property (nonatomic, assign) BOOL hamburgerMenuIsShown;
-@property (nonatomic, assign) BOOL addMenuIsShown;
 @end
 
 @implementation BaseViewController
@@ -30,42 +28,26 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.hamburgerMenuIsShown = NO;
-	self.addMenuIsShown = NO;
 	self.view.backgroundColor = DEFAULT_BACKGROUND;
+	UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
+	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
+	menuView.backgroundColor = [UIColor clearColor];
+	menuView.frame = CGRectMake(0, 0, 20, 20);
+	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+	button.frame = CGRectMake(0, 0, 20, 20);
+	button.backgroundColor = [UIColor clearColor];
+	[button addSubview:menuView];
+	[button addTarget:self action:@selector(hamburgerMenu) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+	self.navigationItem.leftBarButtonItem = menuButton;
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
+
 	if ([Utilities isIPad])
 	{
-		offScreenLeft = CGRectMake(-200, 0, 200, self.view.frame.size.height);
-		onScreenLeft = CGRectMake(0, 0, 200, self.view.frame.size.height);
-		offScreenRight = CGRectMake(self.view.frame.size.width, 0, 200, self.view.frame.size.height);
-		onScreenRight = CGRectMake(self.view.frame.size.width - 200, 0, 200, self.view.frame.size.height);
-		mainFrameCenter = self.view.frame;
-		mainFrameToLeft = CGRectMake(self.view.frame.origin.x - 200, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-		mainFrameToRight = CGRectMake(self.view.frame.origin.x + 200, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-		[self configureIPadMenus];
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(slideInHamburger)];
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(slideInAdder)];
-
 		CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
 		CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
 		[self.view addSubview:toolbar];
 		self.iPadToolbar = toolbar;
-	}
-	else
-	{
-		UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
-		UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
-		menuView.backgroundColor = [UIColor clearColor];
-		menuView.frame = CGRectMake(0, 0, 20, 20);
-		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-		button.frame = CGRectMake(0, 0, 20, 20);
-		button.backgroundColor = [UIColor clearColor];
-		[button addSubview:menuView];
-		[button addTarget:self action:@selector(settingsMenu) forControlEvents:UIControlEventTouchUpInside];
-		UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-		self.navigationItem.leftBarButtonItem = menuButton;
-//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 	}
 	[self registerObservers];
 }
@@ -221,7 +203,7 @@
 }
 
 #pragma mark - iPhone Menus
-- (void)settingsMenu
+- (void)hamburgerMenu
 {
 	if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
 	{
@@ -230,35 +212,11 @@
 	}
 }
 
-- (void)addMenu
-{
-	[(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName : kAddController];
-}
-
 - (void)addButtonPressed:(id)sender
 {
 	@throw [NSException exceptionWithName:NSInternalInconsistencyException
 	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
 	                             userInfo:nil];
-}
-
-#pragma mark - iPad handling
-- (void)configureIPadMenus
-{
-	CustomTableView *hamburgerMenus = [CustomTableView
-	                                   customTableViewWithMenus:[Menus hamburgerMenus]
-	                                                      frame:offScreenLeft
-	                                                       type:HamburgerMenuType];
-	hamburgerMenus.containerDelegate = self;
-	[self.view addSubview:hamburgerMenus];
-	self.iPadHamburgerMenuView = hamburgerMenus;
-	CustomTableView *addMenus = [CustomTableView
-	                             customTableViewWithMenus:[Menus addMenus]
-	                                                frame:offScreenRight
-	                                                 type:AddMenuType];
-	addMenus.containerDelegate = self;
-	[self.view addSubview:addMenus];
-	self.iPadAddMenuView = addMenus;
 }
 
 #pragma mark - handle rotations (iPad only)

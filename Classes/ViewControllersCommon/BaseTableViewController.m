@@ -30,100 +30,39 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.markedObject = nil;
-	self.markedIndexPath = nil;
-	self.hamburgerMenuIsShown = NO;
-	self.addMenuIsShown = NO;
-	self.view.backgroundColor = DEFAULT_BACKGROUND;
-	if ([Utilities isIPad])
+	CGRect frame = self.view.bounds;
+	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
 	{
-		mainFrameCenter = self.view.frame;
-		mainFrameToLeft = CGRectMake(-200, self.view.frame.origin.y, self.view.frame.size.width - 200, self.view.frame.size.height);
-		mainFrameToRight = CGRectMake(200, self.view.frame.origin.y, self.view.frame.size.width - 200, self.view.frame.size.height);
-		offScreenLeft = CGRectMake(-200, 0, 200, self.view.frame.size.height);
-		onScreenLeft = CGRectMake(0, 0, 200, self.view.frame.size.height);
-		offScreenRight = CGRectMake(self.view.frame.size.width, 0, 200, self.view.frame.size.height);
-		onScreenRight = CGRectMake(self.view.frame.size.width - 200, 0, 200, self.view.frame.size.height);
-		[self configureIPadMenus];
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(slideInHamburger)];
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(slideInAdder)];
+		frame = CGRectMake(0, 0, frame.size.height, frame.size.width);
 	}
 	else
 	{
-		UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
-		UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
-		menuView.backgroundColor = [UIColor clearColor];
-		menuView.frame = CGRectMake(0, 0, 20, 20);
-		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-		button.frame = CGRectMake(0, 0, 20, 20);
-		button.backgroundColor = [UIColor clearColor];
-		[button addSubview:menuView];
-		[button addTarget:self action:@selector(settingsMenu) forControlEvents:UIControlEventTouchUpInside];
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(settingsMenu)];
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
+		frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 	}
-	[self registerObservers];
-}
+	UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
+	tableView.backgroundColor = DEFAULT_BACKGROUND;
+	[self.view addSubview:tableView];
+	self.tableView = tableView;
+	self.tableView.delegate = self;
+	self.tableView.dataSource = self;
 
-- (void)disableRightBarButtons
-{
-	self.navigationItem.rightBarButtonItem = nil;
-}
-
-- (void)setTitleViewWithTitle:(NSString *)titleString
-{
-	if (nil == titleString)
-	{
-		return;
-	}
-	CGFloat width = 180;
-	CGFloat height = 44;
-	CGFloat logoWidth = 29;
-	CGFloat pozWidth = 45;
-	CGFloat labelWidth = 180 - 29 - 45;
-	CGFloat topOffset = (44 - 29) / 2;
-	UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-
-	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-	button.frame = CGRectMake(0, 0, width, height);
-
-	UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_29.png"]];
-	logo.frame = CGRectMake(0, topOffset, logoWidth, logoWidth);
-	logo.layer.cornerRadius = 6;
-	logo.layer.masksToBounds = YES;
-	UIImageView *poz = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pozicon.png"]];
-	poz.frame = CGRectMake(width - pozWidth, topOffset, pozWidth, logoWidth);
-	poz.layer.cornerRadius = 6;
-	poz.layer.masksToBounds = YES;
-
-	[button addSubview:logo];
-	[button addSubview:poz];
-
-	UILabel *titleLabel = [UILabel standardLabel];
-	titleLabel.text = titleString;
-	titleLabel.frame = CGRectMake(logoWidth, 0, labelWidth, height);
-	titleLabel.textAlignment = NSTextAlignmentCenter;
-	titleLabel.font = [UIFont fontWithType:Standard size:17];
-	titleLabel.numberOfLines = 0;
-	titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-
-	[button addSubview:titleLabel];
-	[button    addTarget:self
-	              action:@selector(goToPOZSite)
-	    forControlEvents:UIControlEventTouchUpInside];
-	[titleView addSubview:button];
-	self.navigationItem.titleView = titleView;
-}
-
-- (void)goToPOZSite
-{
-	NSLog(@"navigation button clicked");
+	self.markedObject = nil;
+	self.markedIndexPath = nil;
 }
 
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	if ([Utilities isIPad])
+	{
+		CGRect frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+		self.tableView.frame = frame;
+	}
 }
 
 - (void)dealloc
@@ -242,36 +181,6 @@
 	                             userInfo:nil];
 }
 
-#pragma mark - iPhone Menus
-- (void)settingsMenu
-{
-	[(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName : kMenuController];
-}
-
-- (void)addMenu
-{
-	[(ContentNavigationController *)self.parentViewController transitionToNavigationControllerWithName : kAddController];
-}
-
-#pragma mark - iPad handling
-- (void)configureIPadMenus
-{
-	CustomTableView *hamburgerMenus = [CustomTableView
-	                                   customTableViewWithMenus:[Menus hamburgerMenus]
-	                                                      frame:offScreenLeft
-	                                                       type:HamburgerMenuType];
-	hamburgerMenus.containerDelegate = self;
-	[self.view addSubview:hamburgerMenus];
-	self.iPadHamburgerMenuView = hamburgerMenus;
-	CustomTableView *addMenus = [CustomTableView
-	                             customTableViewWithMenus:[Menus addMenus]
-	                                                frame:offScreenRight
-	                                                 type:AddMenuType];
-	addMenus.containerDelegate = self;
-	[self.view addSubview:addMenus];
-	self.iPadAddMenuView = addMenus;
-}
-
 #pragma mark - handle rotations (iPad only)
 - (BOOL)shouldAutorotate
 {
@@ -329,14 +238,6 @@
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	self.markedObject = nil;
 	self.markedIndexPath = nil;
-}
-
-- (UIImage *)blankImage
-{
-	UIGraphicsBeginImageContextWithOptions(CGSizeMake(55, 55), NO, 0.0);
-	UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	return blank;
 }
 
 @end

@@ -14,6 +14,7 @@
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
 #import "ContentNavigationController_iPad.h"
+#import "Utilities.h"
 
 @interface BaseCollectionViewController ()
 
@@ -32,7 +33,16 @@
 	self.collectionViewLayout.minimumLineSpacing = 20;
 	self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
-	CGRect frame = CGRectMake(20, 44, self.view.frame.size.width - 40, self.view.frame.size.height - 88);
+	CGRect frame = self.view.bounds;
+	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
+	{
+		frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
+	}
+	else
+	{
+		frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
+	}
+
 	self.collectionView = [[UICollectionView alloc] initWithFrame:frame
 	                                         collectionViewLayout:self.collectionViewLayout];
 	self.collectionView.delegate = self;
@@ -43,7 +53,7 @@
 	self.collectionView.showsVerticalScrollIndicator = YES;
 	self.collectionView.backgroundColor = [UIColor clearColor];
 	[self.view addSubview:self.collectionView];
-	CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+	CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
 	CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
 	[self.view addSubview:toolbar];
 	self.toolbar = toolbar;
@@ -60,6 +70,26 @@
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	if ([Utilities isIPad])
+	{
+		CGRect frame = self.view.bounds;
+		CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
+		self.toolbar.frame = toolbarFrame;
+		if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
+		{
+			frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
+		}
+		else
+		{
+			frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
+		}
+		self.collectionView.frame = frame;
+	}
 }
 
 - (void)didReceiveMemoryWarning
