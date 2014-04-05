@@ -19,7 +19,7 @@
 	CGRect textViewFrame;
 }
 @property (nonatomic, strong) NSDictionary *menus;
-@property (nonatomic, strong) NSArray *defaultValues;
+//@property (nonatomic, strong) NSArray *defaultValues;
 @property (nonatomic, strong) NSArray *editResultsMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISwitch *undetectableSwitch;
@@ -107,21 +107,21 @@
 
 	[self prepareMenus];
 
-	self.defaultValues = @[@"400-1500",
-	                       @"20.0 - 50.0",
-	                       @"10 - 10000000",
-	                       @"4.0 - 7.0",
-	                       @"3.0 - 6.0",
-	                       @"1.0 - 2.2"
-	                       @"2.0 - 3.4",
-	                       @"1.8 - 2.7",
-	                       @"3.5 - 11",
-	                       @"11.5 - 14.5",
-	                       @"150 - 450",
-	                       @"Enter your weight",
-	                       @"25",
-	                       @"120/80",
-	                       @"0.0 - 10.0"];
+//	self.defaultValues = @[@"400-1500",
+//	                       @"20.0 - 50.0",
+//	                       @"10 - 10000000",
+//	                       @"4.0 - 7.0",
+//	                       @"3.0 - 6.0",
+//	                       @"1.0 - 2.2"
+//	                       @"2.0 - 3.4",
+//	                       @"1.8 - 2.7",
+//	                       @"3.5 - 11",
+//	                       @"11.5 - 14.5",
+//	                       @"150 - 450",
+//	                       @"Enter your weight",
+//	                       @"25",
+//	                       @"120/80",
+//	                       @"0.0 - 10.0"];
 
 	self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
 	self.undetectableSwitch = [[UISwitch alloc] init];

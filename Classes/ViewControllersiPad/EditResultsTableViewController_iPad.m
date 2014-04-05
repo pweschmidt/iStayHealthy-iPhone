@@ -12,10 +12,10 @@
 #import "Results+Handling.h"
 #import "Utilities.h"
 #import "PWESCustomTextfieldCell.h"
+#import "UIFont+Standard.h"
 
 @interface EditResultsTableViewController_iPad ()
 @property (nonatomic, strong) NSArray *resultSections;
-//@property (nonatomic, strong) NSDictionary *menus;
 @property (nonatomic, strong) NSArray *defaultValues;
 @property (nonatomic, strong) NSArray *editResultsMenu;
 @property (nonatomic, strong) NSArray *headers;
@@ -41,12 +41,14 @@
 - (void)populateValueMap
 {
 	self.valueMap = [NSMutableDictionary dictionary];
+	self.segmentMap = [NSMutableDictionary dictionary];
 	if (!self.isEditMode)
 	{
 		return;
 	}
 	Results *results = (Results *)self.managedObject;
 	NSDictionary *attributes = [[results entity] attributesByName];
+
 	for (NSString *attribute in attributes.allKeys)
 	{
 		id value = [results valueForKey:attribute];
@@ -86,6 +88,22 @@
 	                        NSLocalizedString(@"Other", nil),
 	                        NSLocalizedString(@"Liver", nil)];
 	self.headers = menuTitles;
+	self.undetectableSwitch = [[UISwitch alloc] init];
+	[self.undetectableSwitch addTarget:self
+	                            action:@selector(switchUndetectable:)
+	                  forControlEvents:UIControlEventValueChanged];
+	if (self.isEditMode)
+	{
+		NSNumber *vlValue = [self.valueMap objectForKey:kViralLoad];
+		if (nil != vlValue && 1 >= [vlValue floatValue])
+		{
+			[self.undetectableSwitch setOn:YES];
+		}
+		else
+		{
+			[self.undetectableSwitch setOn:NO];
+		}
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,6 +113,49 @@
 
 - (void)save:(id)sender
 {
+	Results *results = nil;
+	if (!self.isEditMode)
+	{
+		results = [[CoreDataManager sharedInstance]
+		           managedObjectForEntityName:kResults];
+	}
+	else
+	{
+		results = (Results *)self.managedObject;
+	}
+	if (nil == results)
+	{
+		return;
+	}
+
+	NSDictionary *attributes = [[results entity] attributesByName];
+	for (NSString *attribute in attributes.allKeys)
+	{
+		if ([attribute isEqualToString:kUID])
+		{
+			results.UID = [Utilities GUID];
+		}
+		else if ([attribute isEqualToString:kResultsDate])
+		{
+			results.ResultsDate = self.date;
+		}
+		else
+		{
+			NSNumber *value = [self.valueMap objectForKey:attribute];
+			if (nil != value && 0 < [value floatValue])
+			{
+				[results setValue:value forKey:attribute];
+			}
+			else
+			{
+				[results setValue:@(-1) forKey:attribute];
+			}
+		}
+	}
+
+	NSError *error = nil;
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -129,6 +190,56 @@
 	}
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	return 40;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+	if (1 == section)
+	{
+		return 40;
+	}
+	return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40)];
+	headerView.backgroundColor = [UIColor clearColor];
+	UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerView.frame];
+	headerLabel.backgroundColor = [UIColor clearColor];
+	headerLabel.textColor = TEXTCOLOUR;
+	headerLabel.textAlignment = NSTextAlignmentCenter;
+	headerLabel.text = [self.headers objectAtIndex:section];
+	headerLabel.font = [UIFont fontWithType:Light size:large];
+	[headerView addSubview:headerLabel];
+	return headerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+	UIView *footerView = [[UIView alloc]
+	                      initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
+	if (1 == section)
+	{
+		footerView = [[UIView alloc]
+		              initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
+		UILabel *label = [[UILabel alloc]
+		                  initWithFrame:CGRectMake(20, 10, 150, 20)];
+		label.backgroundColor = [UIColor clearColor];
+		label.text = NSLocalizedString(@"Undetectable?", nil);
+		label.textColor = TEXTCOLOUR;
+		label.textAlignment = NSTextAlignmentCenter;
+		label.font = [UIFont systemFontOfSize:15];
+		[footerView addSubview:label];
+		self.undetectableSwitch.frame = CGRectMake(180, 2, 80, 36);
+		[footerView addSubview:self.undetectableSwitch];
+	}
+	return footerView;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *identifier = [self identifierForIndexPath:indexPath];
@@ -156,7 +267,6 @@
 		NSArray *currentMenu = [self.resultSections objectAtIndex:indexPath.section];
 		NSString *resultsString = [currentMenu objectAtIndex:indexPath.row];
 		NSString *text = NSLocalizedString(resultsString, nil);
-//		cell.tag = [self tagForIndex:indexPath];
 		[self configureTableCell:customCell title:text indexPath:indexPath hasNumericalInput:YES];
 		return customCell;
 	}
@@ -179,14 +289,6 @@
 	        foundTag = [NSNumber numberWithInteger:textField.tag];
 		}
 	}];
-//	for (NSNumber *tag in self.textViews.allKeys)
-//	{
-//		UITextField *field = [self.textViews objectForKey:tag];
-//		if ([field isEqual:textField])
-//		{
-//			foundTag = tag;
-//		}
-//	}
 	if (nil == foundTag)
 	{
 		return;
@@ -199,9 +301,16 @@
 }
 
 #pragma mark - private methods
-- (void)configureTableCell:(PWESCustomTextfieldCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
+- (void)configureTableCell:(PWESCustomTextfieldCell *)cell
+                     title:(NSString *)title
+                 indexPath:(NSIndexPath *)indexPath
+         hasNumericalInput:(BOOL)hasNumericalInput
 {
-	[super configureTableCell:cell title:title indexPath:indexPath segmentIndex:indexPath.section hasNumericalInput:hasNumericalInput];
+	[super configureTableCell:cell
+	                    title:title
+	                indexPath:indexPath
+	             segmentIndex:indexPath.section
+	        hasNumericalInput:hasNumericalInput];
 	NSNumber *tagNumber = [self tagNumberForIndex:indexPath.row
 	                                      segment:indexPath.section];
 	PWESCustomTextfieldCell *customCell = [self.cellDictionary objectForKey:tagNumber];
@@ -313,6 +422,43 @@
 - (NSInteger)tagForIndex:(NSIndexPath *)indexPath
 {
 	return pow(10, indexPath.section) + indexPath.row;
+}
+
+- (void)switchUndetectable:(id)sender
+{
+	NSNumber *foundTag = nil;
+	for (NSNumber *tag in self.segmentMap.allKeys)
+	{
+		NSString *vl = [self.segmentMap objectForKey:tag];
+		if ([vl isEqualToString:kViralLoad])
+		{
+			foundTag = tag;
+			break;
+		}
+	}
+	if (nil == foundTag)
+	{
+		return;
+	}
+	UITextField *textField = [self customTextFieldForTagNumber:foundTag];
+	if (nil == textField)
+	{
+		return;
+	}
+	if (self.undetectableSwitch.isOn)
+	{
+		textField.text = NSLocalizedString(@"undetectable", nil);
+		textField.textColor = [UIColor blackColor];
+		textField.enabled = NO;
+		[self.valueMap setObject:@(1) forKey:kViralLoad];
+	}
+	else
+	{
+		textField.text = @"";
+		textField.textColor = [UIColor blackColor];
+		textField.enabled = YES;
+		[self.valueMap removeObjectForKey:kViralLoad];
+	}
 }
 
 @end
