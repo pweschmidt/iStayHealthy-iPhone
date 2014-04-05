@@ -227,28 +227,31 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *identifier = [self identifierForIndexPath:indexPath];
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-	if (nil == cell)
-	{
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-	}
-
-
+	id cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (0 == indexPath.section)
 	{
+		if (nil == cell)
+		{
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+		}
 		if (0 == indexPath.row)
 		{
 			[self configureDateCell:cell indexPath:indexPath dateType:DateOnly];
 		}
+		return cell;
 	}
 	else
 	{
+		if (nil == cell)
+		{
+			cell = [[PWESCustomTextfieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+		}
 		NSString *resultsString = [self.editResultsMenu objectAtIndex:indexPath.row];
 		NSString *text = NSLocalizedString(resultsString, nil);
-		cell.tag = [self tagForIndex:indexPath];
+//		cell.tag = [self tagForIndex:indexPath];
 		[self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
+		return cell;
 	}
-	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -316,16 +319,21 @@
 	{
 		return;
 	}
-	NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
-	NSNumber *foundTag = nil;
-	for (NSNumber *tag in self.textViews.allKeys)
+	BOOL isFound = [self textFieldIsInDictionary:textField];
+	if (!isFound)
 	{
-		UITextField *field = [self.textViews objectForKey:tag];
-		if ([field isEqual:textField])
-		{
-			foundTag = tag;
-		}
+		return;
 	}
+	NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
+	NSNumber *foundTag = [NSNumber numberWithInteger:textField.tag];
+//	for (NSNumber *tag in self.textViews.allKeys)
+//	{
+//		UITextField *field = [self.textViews objectForKey:tag];
+//		if ([field isEqual:textField])
+//		{
+//			foundTag = tag;
+//		}
+//	}
 	if (nil == foundTag)
 	{
 		return;
@@ -338,12 +346,12 @@
 }
 
 #pragma mark - private methods
-- (void)configureTableCell:(UITableViewCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
+- (void)configureTableCell:(PWESCustomTextfieldCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
 {
 	[super configureTableCell:cell title:title indexPath:indexPath segmentIndex:self.resultsSegmentControl.selectedSegmentIndex hasNumericalInput:hasNumericalInput];
 	NSNumber *tagNumber = [self tagNumberForIndex:indexPath.row
 	                                      segment:self.resultsSegmentControl.selectedSegmentIndex];
-	UITextField *textField = [self.textViews objectForKey:tagNumber];
+	UITextField *textField = [self customTextFieldForTagNumber:tagNumber];
 	if (nil == textField)
 	{
 		return;
@@ -389,7 +397,7 @@
 	}
 	else
 	{
-		identifier = [NSString stringWithFormat:@"ResultsCell%d", indexPath.row];
+		identifier = [NSString stringWithFormat:@"ResultsCell%ld", (long)indexPath.row];
 	}
 	return identifier;
 }
@@ -409,7 +417,7 @@
 	{
 		return;
 	}
-	UITextField *textField = [self.textViews objectForKey:foundTag];
+	UITextField *textField = [self customTextFieldForTagNumber:foundTag];
 	if (nil == textField)
 	{
 		return;

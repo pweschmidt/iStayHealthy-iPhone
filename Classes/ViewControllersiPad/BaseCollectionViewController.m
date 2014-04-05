@@ -34,14 +34,15 @@
 	self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
 	CGRect frame = self.view.bounds;
-	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
-	{
-		frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
-	}
-	else
-	{
-		frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
-	}
+//	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
+//	{
+//		frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
+//	}
+//	else
+//	{
+//		frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
+//	}
+	frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
 
 	self.collectionView = [[UICollectionView alloc] initWithFrame:frame
 	                                         collectionViewLayout:self.collectionViewLayout];

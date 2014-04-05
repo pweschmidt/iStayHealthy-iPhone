@@ -39,6 +39,8 @@
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
 		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
+		0BACE94B18EFF3D9008F4D13 /* EditResultsTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BACE94A18EFF3D9008F4D13 /* EditResultsTableViewController_iPad.m */; };
+		0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */; };
 		0BB8F4F718E36CBC00C3CCBA /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */; };
 		0BB8F4F818E36CBC00C3CCBA /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */; };
 		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
@@ -552,6 +554,10 @@
 		0BAC2F171876E7B500D452A7 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
 		0BAC2F191876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditSeinfeldCalendarTableViewController.h; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.h; sourceTree = "<group>"; };
 		0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSeinfeldCalendarTableViewController.m; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.m; sourceTree = "<group>"; };
+		0BACE94918EFF3D9008F4D13 /* EditResultsTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditResultsTableViewController_iPad.h; path = ViewControllersiPad/EditResultsTableViewController_iPad.h; sourceTree = "<group>"; };
+		0BACE94A18EFF3D9008F4D13 /* EditResultsTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditResultsTableViewController_iPad.m; path = ViewControllersiPad/EditResultsTableViewController_iPad.m; sourceTree = "<group>"; };
+		0BACE94C18F02DDA008F4D13 /* PWESCustomTextfieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESCustomTextfieldCell.h; path = TableCells/PWESCustomTextfieldCell.h; sourceTree = "<group>"; };
+		0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESCustomTextfieldCell.m; path = TableCells/PWESCustomTextfieldCell.m; sourceTree = "<group>"; };
 		0BB8F4F318E36CBC00C3CCBA /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESZoomTransition.h; sourceTree = "<group>"; };
 		0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESZoomTransition.m; sourceTree = "<group>"; };
 		0BB8F4F518E36CBC00C3CCBA /* PWESSlideTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESSlideTransition.h; sourceTree = "<group>"; };
@@ -1468,6 +1474,8 @@
 		C45C27B617DB265F001F6831 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				0BACE94C18F02DDA008F4D13 /* PWESCustomTextfieldCell.h */,
+				0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */,
 				C45C27B817DB2678001F6831 /* iPad */,
 				C45C27B717DB2669001F6831 /* iPhone */,
 			);
@@ -1694,6 +1702,8 @@
 				0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */,
 				0B0C4F6918A664B300D22990 /* CustomToolbar.h */,
 				0B0C4F6A18A664B300D22990 /* CustomToolbar.m */,
+				0BACE94918EFF3D9008F4D13 /* EditResultsTableViewController_iPad.h */,
+				0BACE94A18EFF3D9008F4D13 /* EditResultsTableViewController_iPad.m */,
 				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
 				C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */,
 				0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */,
@@ -2717,6 +2727,7 @@
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
 				C4BCF09F17B7A9C000F1E0F7 /* PreviousMedication+Handling.m in Sources */,
 				C463744317E9F2AF00D19B94 /* PWESUtils.m in Sources */,
+				0BACE94B18EFF3D9008F4D13 /* EditResultsTableViewController_iPad.m in Sources */,
 				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
 				C463743F17E9F2AF00D19B94 /* PWESGraph.m in Sources */,
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
@@ -2736,6 +2747,7 @@
 				0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */,
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
 				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
+				0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,

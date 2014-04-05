@@ -10,7 +10,7 @@
 #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
 #import "Results+Handling.h"
-#import "EditResultsTableViewController.h"
+#import "EditResultsTableViewController_iPad.h"
 #import "ResultsView-iPad.h"
 //#import "Constants.h"
 
@@ -18,7 +18,6 @@
 
 @interface ResultsCollectionViewController ()
 @property (nonatomic, strong) NSArray *results;
-@property (nonatomic, strong) UIPopoverController *resultsPopoverController;
 @end
 
 @implementation ResultsCollectionViewController
@@ -31,7 +30,6 @@
 	[self setTitleViewWithTitle:NSLocalizedString(@"Results", nil)];
 	[self.collectionView registerClass:[BaseCollectionViewCell class]
 	        forCellWithReuseIdentifier:kResultsCollectionCellIdentifier];
-	self.resultsPopoverController = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,20 +39,9 @@
 
 - (void)addButtonPressed:(id)sender
 {
-	if (nil == self.resultsPopoverController)
-	{
-		EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-		editController.preferredContentSize = CGSizeMake(320, 568);
-		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-		self.resultsPopoverController = [[UIPopoverController alloc] initWithContentViewController:editNavCtrl];
-		self.resultsPopoverController.delegate = self;
-		[self.resultsPopoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-	}
-	else
-	{
-		[self.resultsPopoverController dismissPopoverAnimated:YES];
-		self.resultsPopoverController = nil;
-	}
+	EditResultsTableViewController_iPad *editController = [[EditResultsTableViewController_iPad alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+	editController.menuDelegate = nil;
+	[self.navigationController pushViewController:editController animated:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -91,26 +78,12 @@
 	return cell;
 }
 
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-	self.resultsPopoverController = nil;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (nil != self.resultsPopoverController)
-	{
-		[self.resultsPopoverController dismissPopoverAnimated:YES];
-		self.resultsPopoverController = nil;
-	}
 	Results *results = [self.results objectAtIndex:indexPath.row];
-	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
-	editController.preferredContentSize = CGSizeMake(320, 568);
-//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
-	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-	self.resultsPopoverController = [[UIPopoverController alloc] initWithContentViewController:editNavCtrl];
-	self.resultsPopoverController.delegate = self;
-	[self.resultsPopoverController presentPopoverFromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	EditResultsTableViewController_iPad *editController = [[EditResultsTableViewController_iPad alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
+	editController.menuDelegate = nil;
+	[self.navigationController pushViewController:editController animated:YES];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification

@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "AddMenuNavigationDelegate.h"
 #import "UIFont+Standard.h"
+#import "PWESCustomTextfieldCell.h"
 
 #define kBaseDateCellTag 99
 #define kBaseDateLabelTag 101
@@ -20,28 +21,27 @@
 #define kBaseDateCellRowIdentifier @"DateSelectionCell"
 
 @interface BaseEditTableViewController : UITableViewController
-    <UITextFieldDelegate, UIAlertViewDelegate>
+	<UITextFieldDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSDateFormatter *formatter;
-@property (nonatomic, strong) NSMutableDictionary *contentViewsDictionary;
-@property (nonatomic, strong) NSMutableDictionary *textViews;
+@property (nonatomic, strong) NSMutableDictionary *cellDictionary;
 @property (nonatomic, strong) NSMutableDictionary *inputTypeForTextView;
 @property (nonatomic, assign) BOOL isEditMode;
 @property (nonatomic, assign) BOOL dateIsChanged;
 @property (nonatomic, strong) NSManagedObject *managedObject;
-@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
-@property (nonatomic, weak) id<AddMenuNavigationDelegate> menuDelegate;
+@property (nonatomic, weak) id <AddMenuNavigationDelegate> menuDelegate;
 
-- (id)initWithStyle:(UITableViewStyle)style
-      managedObject:(NSManagedObject *)managedObject
-  hasNumericalInput:(BOOL)hasNumericalInput;
+- (id)  initWithStyle:(UITableViewStyle)style
+        managedObject:(NSManagedObject *)managedObject
+    hasNumericalInput:(BOOL)hasNumericalInput;
 
-- (void)configureTableCell:(UITableViewCell *)cell
+- (void)configureTableCell:(PWESCustomTextfieldCell *)cell
                      title:(NSString *)title
                  indexPath:(NSIndexPath *)indexPath
          hasNumericalInput:(BOOL)hasNumericalInput;
 
-- (void)configureTableCell:(UITableViewCell *)cell
+- (void)configureTableCell:(PWESCustomTextfieldCell *)cell
                      title:(NSString *)title
                  indexPath:(NSIndexPath *)indexPath
               segmentIndex:(NSInteger)segmentIndex
@@ -57,7 +57,8 @@
 - (void)setDateFormatter;
 - (void)setDateLabelTitle:(UILabel *)label;
 - (void)selectDatePickerMode:(UIDatePicker *)datePicker;
-
+- (UITextField *)customTextFieldForTagNumber:(NSNumber *)tagNumber;
+- (BOOL)textFieldIsInDictionary:(UITextField *)textField;
 - (void)save:(id)sender;
 - (void)removeManagedObject;
 - (void)showDeleteAlertView;
