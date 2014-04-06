@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
 @property (nonatomic, strong) CustomToolbar *iPadToolbar;
 @property (nonatomic, strong) UIPopoverController *customPopoverController;
+- (id)initAsPopoverController;
 - (void)disableRightBarButtons;
 - (void)hamburgerMenu;
 - (void)addButtonPressed:(id)sender;

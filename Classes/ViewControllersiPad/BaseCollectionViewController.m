@@ -18,6 +18,7 @@
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "DropboxViewController.h"
+#import "EmailViewController.h"
 
 @interface BaseCollectionViewController ()
 
@@ -316,24 +317,43 @@
 #pragma mark PWESToolbar delegate methods
 - (void)showPasswordControllerFromButton:(UIBarButtonItem *)button
 {
-	SettingsTableViewController *controller = [[SettingsTableViewController alloc] init];
+	SettingsTableViewController *controller = [[SettingsTableViewController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }
 
 - (void)showMailControllerHasAttachment:(BOOL)hasAttachment
 {
+	MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+	mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+
+	NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
+	mailController.mailComposeDelegate = self;
+	[mailController setToRecipients:toRecipient];
+	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
+	[self.navigationController presentViewController:mailController animated:YES completion:nil];
 }
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
 {
+	DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }
 
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button
 {
-	InformationTableViewController *controller = [[InformationTableViewController alloc] init];
+	InformationTableViewController *controller = [[InformationTableViewController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+}
+
+#pragma mark Mail composer callback
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
