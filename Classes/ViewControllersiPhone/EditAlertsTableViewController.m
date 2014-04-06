@@ -94,7 +94,7 @@
 		NSLog(@"NewAlertDetailViewController::save the alert setting is %@", medAlert);
 #endif
 	}
-	[super save:sender];
+	[self popController];
 }
 
 - (void)removeManagedObject

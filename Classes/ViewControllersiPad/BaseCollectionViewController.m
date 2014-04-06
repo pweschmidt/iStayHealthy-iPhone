@@ -15,6 +15,9 @@
 #import "UIFont+Standard.h"
 #import "ContentNavigationController_iPad.h"
 #import "Utilities.h"
+#import "SettingsTableViewController.h"
+#import "InformationTableViewController.h"
+#import "DropboxViewController.h"
 
 @interface BaseCollectionViewController ()
 
@@ -59,6 +62,7 @@
 	CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
 	[self.view addSubview:toolbar];
 	self.toolbar = toolbar;
+	self.toolbar.customToolbarDelegate = self;
 
 	UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
 	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
@@ -114,9 +118,18 @@
 - (void)presentPopoverWithController:(UINavigationController *)controller
                        fromBarButton:(UIBarButtonItem *)barButton
 {
+	[self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionUp];
+}
+
+- (void)presentPopoverWithController:(UINavigationController *)controller
+                       fromBarButton:(UIBarButtonItem *)barButton
+                           direction:(UIPopoverArrowDirection)direction
+{
 	self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
 	self.customPopoverController.delegate = self;
-	[self.customPopoverController presentPopoverFromBarButtonItem:barButton permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	[self.customPopoverController presentPopoverFromBarButtonItem:barButton
+	                                     permittedArrowDirections:direction
+	                                                     animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -298,6 +311,29 @@
 	@throw [NSException exceptionWithName:NSInternalInconsistencyException
 	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
 	                             userInfo:nil];
+}
+
+#pragma mark PWESToolbar delegate methods
+- (void)showPasswordControllerFromButton:(UIBarButtonItem *)button
+{
+	SettingsTableViewController *controller = [[SettingsTableViewController alloc] init];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+}
+
+- (void)showMailControllerHasAttachment:(BOOL)hasAttachment
+{
+}
+
+- (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
+{
+}
+
+- (void)showInfoControllerFromButton:(UIBarButtonItem *)button
+{
+	InformationTableViewController *controller = [[InformationTableViewController alloc] init];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }
 
 @end

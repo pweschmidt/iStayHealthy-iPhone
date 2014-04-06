@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ChartSelector.h"
-@interface EditChartsTableViewController : UITableViewController
-@property (nonatomic, weak) id<ChartSelector>chartSelector;
+#import "PWESPopoverDelegate.h"
+@interface EditChartsTableViewController : UITableViewController <UIAlertViewDelegate>
+@property (nonatomic, weak) id <ChartSelector> chartSelector;
+@property (nonatomic, weak) id <PWESPopoverDelegate> customPopOverDelegate;
 - (id)initWithSelectedItems:(NSArray *)items;
 @end

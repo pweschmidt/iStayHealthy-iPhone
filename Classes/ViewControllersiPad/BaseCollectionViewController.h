@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PWESPopoverDelegate.h"
+#import "PWESToolbarDelegate.h"
 @class CustomToolbar;
 
-@interface BaseCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PWESPopoverDelegate, UIPopoverControllerDelegate /*, UICollectionViewDelegateFlowLayout */>
+@interface BaseCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PWESPopoverDelegate, PWESToolbarDelegate, UIPopoverControllerDelegate /*, UICollectionViewDelegateFlowLayout */>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *collectionViewLayout;
 @property (nonatomic, strong) CustomToolbar *toolbar;

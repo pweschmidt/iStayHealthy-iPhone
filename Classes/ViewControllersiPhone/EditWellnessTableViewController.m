@@ -28,7 +28,7 @@
 
 - (void)save:(id)sender
 {
-	[super save:sender];
+	[self popController];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

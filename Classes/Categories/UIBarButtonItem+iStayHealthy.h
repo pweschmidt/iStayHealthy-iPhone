@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UIBarButtonItem (iStayHealthy)
-+ (UIBarButtonItem *)barButtonItemForTitle:(NSString *)title target:(id)target action:(SEL)action;
++ (UIBarButtonItem *)barButtonItemForTitle:(NSString *)title
+                                    target:(id)target
+                                    action:(SEL)action
+                                 buttonTag:(NSInteger)buttonTag;
 @end

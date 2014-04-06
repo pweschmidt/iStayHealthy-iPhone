@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-
+#import "PWESToolbarDelegate.h"
 @interface CustomToolbar : UIToolbar <MFMailComposeViewControllerDelegate>
-
+@property (nonatomic, weak) id <PWESToolbarDelegate> customToolbarDelegate;
 @end

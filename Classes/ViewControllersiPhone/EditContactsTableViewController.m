@@ -131,7 +131,7 @@
 	 */
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContext:&error];
-	[super save:sender];
+	[self popController];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

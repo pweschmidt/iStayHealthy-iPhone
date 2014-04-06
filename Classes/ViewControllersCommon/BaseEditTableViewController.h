@@ -61,6 +61,7 @@
 - (void)selectDatePickerMode:(UIDatePicker *)datePicker;
 - (UITextField *)customTextFieldForTagNumber:(NSNumber *)tagNumber;
 - (BOOL)textFieldIsInDictionary:(UITextField *)textField;
+- (void)popController;
 - (void)save:(id)sender;
 - (void)removeManagedObject;
 - (void)showDeleteAlertView;

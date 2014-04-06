@@ -10,6 +10,7 @@
 #import "CoreDataConstants.h"
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
+#import "ContentNavigationController_iPad.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "GeneralSettings.h"
 #import "Constants.h"
@@ -111,6 +112,31 @@
 	[self unregisterObservers];
 }
 
+- (void)hidePopover
+{
+	if (nil != self.customPopoverController)
+	{
+		[self.customPopoverController dismissPopoverAnimated:YES];
+		self.customPopoverController = nil;
+	}
+}
+
+- (void)presentPopoverWithController:(UINavigationController *)controller
+                            fromRect:(CGRect)frame
+{
+	self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+	self.customPopoverController.delegate = self;
+	[self.customPopoverController presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
+
+- (void)presentPopoverWithController:(UINavigationController *)controller
+                       fromBarButton:(UIBarButtonItem *)barButton
+{
+	self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+	self.customPopoverController.delegate = self;
+	[self.customPopoverController presentPopoverFromBarButtonItem:barButton permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
@@ -204,10 +230,13 @@
 #pragma mark - iPhone Menus
 - (void)hamburgerMenu
 {
-	if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
+	if ([self.parentViewController isKindOfClass:[ContentNavigationController_iPad class]])
 	{
-		ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-		[navController showMenu];
+		[((ContentNavigationController_iPad *)self.parentViewController)showMenu];
+	}
+	else if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
+	{
+		[((ContentNavigationController *)self.parentViewController)showMenu];
 	}
 }
 

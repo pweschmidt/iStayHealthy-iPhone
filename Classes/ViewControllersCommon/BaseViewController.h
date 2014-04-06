@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "UINavigationBar-Button.h"
+#import "PWESPopoverDelegate.h"
 @class CustomToolbar;
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController <PWESPopoverDelegate, UIPopoverControllerDelegate>
 @property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
 @property (nonatomic, strong) CustomToolbar *iPadToolbar;
+@property (nonatomic, strong) UIPopoverController *customPopoverController;
 - (void)disableRightBarButtons;
 - (void)hamburgerMenu;
 - (void)addButtonPressed:(id)sender;

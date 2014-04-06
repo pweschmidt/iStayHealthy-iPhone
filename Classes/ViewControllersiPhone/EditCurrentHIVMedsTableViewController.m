@@ -85,7 +85,7 @@
 		NSError *error = nil;
 		[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	}
-	[super save:sender];
+	[self popController];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

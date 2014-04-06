@@ -85,7 +85,7 @@
 		med.endDate = self.endDate;
 		NSError *error = nil;
 		[[CoreDataManager sharedInstance] saveContextAndWait:&error];
-		[super save:sender];
+		[self popController];
 	}
 }
 

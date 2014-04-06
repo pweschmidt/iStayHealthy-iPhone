@@ -64,7 +64,7 @@
 
 - (void)save:(id)sender
 {
-	[super save:sender];
+	[self popController];
 }
 
 - (void)didReceiveMemoryWarning

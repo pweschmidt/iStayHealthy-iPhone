@@ -91,7 +91,7 @@
 	[super didReceiveMemoryWarning];
 }
 
-- (void)save:(id)sender
+- (void)popController
 {
 	if ([Utilities isIPad])
 	{
@@ -110,13 +110,19 @@
 	}
 }
 
+- (void)save:(id)sender
+{
+	@throw [NSException exceptionWithName:NSInternalInconsistencyException
+	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]                                 userInfo:nil];
+}
+
 - (void)removeManagedObject
 {
 	NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
 	[defaultContext deleteObject:self.managedObject];
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
-	[self.navigationController popViewControllerAnimated:YES];
+	[self popController];
 }
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell

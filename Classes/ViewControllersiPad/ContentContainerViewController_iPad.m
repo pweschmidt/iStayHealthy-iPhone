@@ -9,7 +9,6 @@
 #import "ContentContainerViewController_iPad.h"
 #import "HamburgerMenuTableViewController.h"
 #import "AddMenuTableViewController.h"
-#import "ResultsListTableViewController.h"
 #import "ResultsCollectionViewController.h"
 #import "MyHIVMedicationViewController.h"
 #import "Constants.h"
@@ -18,6 +17,7 @@
 #import "Utilities.h"
 #import "DashboardViewController.h"
 #import "PWESSlideTransition.h"
+#import "CoreDataConstants.h"
 
 @interface ContentContainerViewController_iPad ()
 @property (nonatomic, strong) NSDictionary *controllers;
@@ -80,6 +80,10 @@
 	[self addChildViewController:navigationController];
 	ContentNavigationController_iPad *currentNavigationController = self.currentController;
 	[self transitionFromViewController:currentNavigationController toViewController:navigationController duration:0.0 options:UIViewAnimationOptionTransitionNone animations:nil completion: ^(BOOL finished) {
+	    NSNotification *notification = [NSNotification
+	                                    notificationWithName:kLoadedStoreNotificationKey
+	                                                  object:self];
+	    [[NSNotificationCenter defaultCenter] postNotification:notification];
 	    [self moveToChildNavigationController:navigationController];
 	    [self removeChildNavigationController:currentNavigationController];
 	    self.currentController = navigationController;

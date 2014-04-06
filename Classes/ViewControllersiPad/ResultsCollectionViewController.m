@@ -43,6 +43,7 @@
 	{
 		EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
 		editController.preferredContentSize = CGSizeMake(320, 568);
+		editController.customPopOverDelegate = self;
 		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
 	}
@@ -98,6 +99,7 @@
 	Results *results = [self.results objectAtIndex:indexPath.row];
 	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
 	editController.preferredContentSize = CGSizeMake(320, 568);
+	editController.customPopOverDelegate = self;
 	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	[self presentPopoverWithController:editNavCtrl
