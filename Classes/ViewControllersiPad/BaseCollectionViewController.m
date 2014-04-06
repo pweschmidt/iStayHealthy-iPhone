@@ -18,6 +18,7 @@
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "DropboxViewController.h"
+#import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
 
 @interface BaseCollectionViewController ()
@@ -331,14 +332,24 @@
 	mailController.mailComposeDelegate = self;
 	[mailController setToRecipients:toRecipient];
 	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
+	if (hasAttachment)
+	{
+	}
 	[self.navigationController presentViewController:mailController animated:YES completion:nil];
 }
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
 {
-	DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+	if ([[DBSession sharedSession] isLinked])
+	{
+		DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
+		UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+	}
+	else
+	{
+		[[DBSession sharedSession] linkFromController:self];
+	}
 }
 
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button

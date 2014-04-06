@@ -8,11 +8,7 @@
 
 #import "CustomToolbar.h"
 #import "UIBarButtonItem+iStayHealthy.h"
-#import "SettingsTableViewController.h"
-#import "InformationTableViewController.h"
-#import "DropboxViewController.h"
 #import "Menus.h"
-#import <DropboxSDK/DropboxSDK.h>
 #import "GeneralSettings.h"
 #import "Constants.h"
 
@@ -88,16 +84,6 @@
 			[strongDelegate showMailControllerHasAttachment:NO];
 		}
 	}
-	else
-	{
-		MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-		mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-
-		NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
-		mailController.mailComposeDelegate = self;
-		[mailController setToRecipients:toRecipient];
-		[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
-	}
 }
 
 - (void)openMailWithAttachment
@@ -109,13 +95,6 @@
 		{
 			[strongDelegate showMailControllerHasAttachment:YES];
 		}
-	}
-	else
-	{
-		MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-		mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-		mailController.mailComposeDelegate = self;
-		[mailController setSubject:@"iStayHealthy Data (attached)"];
 	}
 }
 
@@ -189,12 +168,6 @@
 			}
 		}
 	}
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error
-{
 }
 
 @end
