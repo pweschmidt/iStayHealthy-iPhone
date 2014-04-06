@@ -13,6 +13,7 @@
 @property (nonatomic, strong, readonly) UIView *titleView;
 @property (nonatomic, strong, readonly) UIView *labelContentView;
 
+- (void)clear;
 - (void)addDateToTitle:(NSDate *)date;
 - (void)addTitle:(NSString *)title font:(UIFont *)font;
 - (void)addLabelToContentView:(UILabel *)label;

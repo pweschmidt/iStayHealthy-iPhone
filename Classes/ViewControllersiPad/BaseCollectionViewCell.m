@@ -41,16 +41,24 @@
 	[self configureCell];
 }
 
+- (void)clear
+{
+	[self.contentView.subviews enumerateObjectsUsingBlock: ^(UIView *view, NSUInteger idx, BOOL *stop) {
+	    [view removeFromSuperview];
+	}];
+}
+
 - (void)configureCell
 {
+	[self clear];
 	UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
 	titleView.backgroundColor = [UIColor clearColor];
 	self.titleView = titleView;
-	[self addSubview:titleView];
+	[self.contentView addSubview:titleView];
 
 	UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, self.frame.size.width, self.frame.size.height - 20)];
 	contentView.backgroundColor = [UIColor clearColor];
-	[self addSubview:contentView];
+	[self.contentView addSubview:contentView];
 	self.labelContentView = contentView;
 }
 
@@ -89,14 +97,5 @@
 		[self.labelContentView addSubview:label];
 	}
 }
-
-/*
-   // Only override drawRect: if you perform custom drawing.
-   // An empty implementation adversely affects performance during animation.
-   - (void)drawRect:(CGRect)rect
-   {
-    // Drawing code
-   }
- */
 
 @end

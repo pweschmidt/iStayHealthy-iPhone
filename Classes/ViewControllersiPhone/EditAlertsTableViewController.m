@@ -94,7 +94,7 @@
 		NSLog(@"NewAlertDetailViewController::save the alert setting is %@", medAlert);
 #endif
 	}
-	[self.navigationController popViewControllerAnimated:YES];
+	[super save:sender];
 }
 
 - (void)removeManagedObject

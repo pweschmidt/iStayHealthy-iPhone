@@ -26,22 +26,23 @@
 {
 	[super viewDidLoad];
 	[self registerObservers];
+	self.customPopoverController = nil;
 	self.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
 	self.collectionViewLayout.itemSize = CGSizeMake(150, 150);
-	self.collectionViewLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width - 40, 100);
+	self.collectionViewLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width - 40, 40);
 	self.collectionViewLayout.minimumInteritemSpacing = 20;
 	self.collectionViewLayout.minimumLineSpacing = 20;
 	self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
 	CGRect frame = self.view.bounds;
-//	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
-//	{
-//		frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
-//	}
-//	else
-//	{
-//		frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
-//	}
+	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
+	{
+		frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
+	}
+	else
+	{
+		frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
+	}
 	frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
 
 	self.collectionView = [[UICollectionView alloc] initWithFrame:frame
@@ -91,6 +92,31 @@
 		}
 		self.collectionView.frame = frame;
 	}
+}
+
+- (void)hidePopover
+{
+	if (nil != self.customPopoverController)
+	{
+		[self.customPopoverController dismissPopoverAnimated:YES];
+		self.customPopoverController = nil;
+	}
+}
+
+- (void)presentPopoverWithController:(UINavigationController *)controller
+                            fromRect:(CGRect)frame
+{
+	self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+	self.customPopoverController.delegate = self;
+	[self.customPopoverController presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
+
+- (void)presentPopoverWithController:(UINavigationController *)controller
+                       fromBarButton:(UIBarButtonItem *)barButton
+{
+	self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+	self.customPopoverController.delegate = self;
+	[self.customPopoverController presentPopoverFromBarButtonItem:barButton permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

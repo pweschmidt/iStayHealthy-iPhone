@@ -185,7 +185,7 @@
 
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
-	[self.navigationController popViewControllerAnimated:YES];
+	[super save:sender];
 }
 
 - (void)didReceiveMemoryWarning

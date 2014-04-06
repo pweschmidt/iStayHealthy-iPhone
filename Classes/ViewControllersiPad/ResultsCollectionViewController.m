@@ -10,7 +10,7 @@
 #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
 #import "Results+Handling.h"
-#import "EditResultsTableViewController_iPad.h"
+#import "EditResultsTableViewController.h"
 #import "ResultsView-iPad.h"
 //#import "Constants.h"
 
@@ -39,9 +39,17 @@
 
 - (void)addButtonPressed:(id)sender
 {
-	EditResultsTableViewController_iPad *editController = [[EditResultsTableViewController_iPad alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-	editController.menuDelegate = nil;
-	[self.navigationController pushViewController:editController animated:YES];
+	if (nil == self.customPopoverController)
+	{
+		EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+		editController.preferredContentSize = CGSizeMake(320, 568);
+		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
+	}
+	else
+	{
+		[self hidePopover];
+	}
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -66,24 +74,34 @@
 	}
 
 	[cell addDateToTitle:results.ResultsDate];
-	ResultsView_iPad *hivResults = [ResultsView_iPad viewForResults:results resultsType:HIVResultsType frame:CGRectMake(0, 40, 150, 50)];
+	ResultsView_iPad *hivResults = [ResultsView_iPad viewForResults:results
+	                                                    resultsType:HIVResultsType
+	                                                          frame:CGRectMake(0, 40, 150, 50)];
 
-	ResultsView_iPad *bloods = [ResultsView_iPad viewForResults:results resultsType:BloodResultsType frame:CGRectMake(0, 90, 150, 20)];
+	ResultsView_iPad *bloods = [ResultsView_iPad viewForResults:results
+	                                                resultsType:BloodResultsType
+	                                                      frame:CGRectMake(0, 90, 150, 20)];
 
-	ResultsView_iPad *other = [ResultsView_iPad viewForResults:results resultsType:OtherResultsType frame:CGRectMake(0, 115, 150, 20)];
+	ResultsView_iPad *other = [ResultsView_iPad viewForResults:results
+	                                               resultsType:OtherResultsType
+	                                                     frame:CGRectMake(0, 115, 150, 20)];
 
-	[cell addSubview:hivResults];
-	[cell addSubview:bloods];
-	[cell addSubview:other];
+	[cell.contentView addSubview:hivResults];
+	[cell.contentView addSubview:bloods];
+	[cell.contentView addSubview:other];
 	return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+	[self hidePopover];
 	Results *results = [self.results objectAtIndex:indexPath.row];
-	EditResultsTableViewController_iPad *editController = [[EditResultsTableViewController_iPad alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
-	editController.menuDelegate = nil;
-	[self.navigationController pushViewController:editController animated:YES];
+	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
+	editController.preferredContentSize = CGSizeMake(320, 568);
+	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+	[self presentPopoverWithController:editNavCtrl
+	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification
@@ -104,8 +122,10 @@
 	    {
 	        self.results = nil;
 	        self.results = array;
-	        NSLog(@"we have %d results returned", self.results.count);
-	        [self.collectionView reloadData];
+	        NSLog(@"we have %lu results returned", (unsigned long)self.results.count);
+	        dispatch_async(dispatch_get_main_queue(), ^{
+	            [self.collectionView reloadData];
+			});
 		}
 	}];
 }

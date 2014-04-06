@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PWESPopoverDelegate.h"
 @class CustomToolbar;
 
-@interface BaseCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface BaseCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PWESPopoverDelegate, UIPopoverControllerDelegate /*, UICollectionViewDelegateFlowLayout */>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *collectionViewLayout;
 @property (nonatomic, strong) CustomToolbar *toolbar;
 @property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
+@property (nonatomic, strong) UIPopoverController *customPopoverController;
 - (void)setTitleViewWithTitle:(NSString *)titleString;
 - (void)addButtonPressed:(id)sender;
 @end

@@ -563,6 +563,7 @@
 		0BB8F4F518E36CBC00C3CCBA /* PWESSlideTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESSlideTransition.h; sourceTree = "<group>"; };
 		0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESSlideTransition.m; sourceTree = "<group>"; };
 		0BB8F4F918E36F4D00C3CCBA /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWESNavigationDelegate.h; sourceTree = "<group>"; };
+		0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPopoverDelegate.h; path = ViewControllersiPad/PWESPopoverDelegate.h; sourceTree = "<group>"; };
 		0BCBA8E018699B870098D2DA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iStayHealthyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthyAppDelegate.h; sourceTree = "<group>"; };
@@ -1706,6 +1707,7 @@
 				0BACE94A18EFF3D9008F4D13 /* EditResultsTableViewController_iPad.m */,
 				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
 				C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */,
+				0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */,
 				0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */,
 				0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */,
 			);

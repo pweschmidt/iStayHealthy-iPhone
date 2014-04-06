@@ -120,7 +120,7 @@
 	}];
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContext:&error];
-	[self.navigationController popViewControllerAnimated:YES];
+	[super save:sender];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

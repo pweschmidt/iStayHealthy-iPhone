@@ -91,20 +91,23 @@
 	[super didReceiveMemoryWarning];
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	if ([Utilities isIPad])
-	{
-		[self adjustCellWidth];
-	}
-}
-
 - (void)save:(id)sender
 {
-	@throw [NSException exceptionWithName:NSInternalInconsistencyException
-	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-	                             userInfo:nil];
+	if ([Utilities isIPad])
+	{
+		if (nil != self.customPopOverDelegate)
+		{
+			__strong id <PWESPopoverDelegate> strongPopoverDelegate = self.customPopOverDelegate;
+			if ([strongPopoverDelegate respondsToSelector:@selector(hidePopover)])
+			{
+				[strongPopoverDelegate hidePopover];
+			}
+		}
+	}
+	else
+	{
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 - (void)removeManagedObject
@@ -553,18 +556,6 @@
 	UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return blank;
-}
-
-- (void)adjustCellWidth
-{
-	if (nil == self.cellDictionary || 0 == self.cellDictionary.allKeys.count)
-	{
-		return;
-	}
-	cellWidth = self.view.bounds.size.width;
-	[self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, PWESCustomTextfieldCell *cell, BOOL *stop) {
-	    [cell adjustCellWidth:cellWidth];
-	}];
 }
 
 @end

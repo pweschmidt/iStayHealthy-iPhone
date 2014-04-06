@@ -12,6 +12,7 @@
 #import "AddMenuNavigationDelegate.h"
 #import "UIFont+Standard.h"
 #import "PWESCustomTextfieldCell.h"
+#import "PWESPopoverDelegate.h"
 
 #define kBaseDateCellTag 99
 #define kBaseDateLabelTag 101
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
 @property (nonatomic, weak) id <AddMenuNavigationDelegate> menuDelegate;
+@property (nonatomic, weak) id <PWESPopoverDelegate> customPopOverDelegate;
 
 - (id)  initWithStyle:(UITableViewStyle)style
         managedObject:(NSManagedObject *)managedObject
