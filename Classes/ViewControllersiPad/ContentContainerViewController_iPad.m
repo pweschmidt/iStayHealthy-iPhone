@@ -10,7 +10,13 @@
 #import "HamburgerMenuTableViewController.h"
 #import "AddMenuTableViewController.h"
 #import "ResultsCollectionViewController.h"
-#import "MyHIVMedicationViewController.h"
+#import "OtherMedsCollectionViewController.h"
+#import "MyHIVCollectionViewController.h"
+#import "ProceduresCollectionViewController.h"
+#import "SideEffectsCollectionViewController.h"
+#import "NotificationsAlertsCollectionViewController.h"
+#import "ClinicAddressCollectionViewController.h"
+#import "MissedMedicationCollectionViewController.h"
 #import "Constants.h"
 #import "ContentNavigationController_iPad.h"
 #import "DropboxViewController.h"
@@ -31,7 +37,7 @@
 {
 	[super viewDidLoad];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-	ContentNavigationController_iPad *navigationController = [self navigationControllerForName_iPad:kResultsController];
+	ContentNavigationController_iPad *navigationController = [self navigationControllerForName_iPad:kDashboardController];
 	[self addChildViewController:navigationController];
 	[self moveToChildNavigationController:navigationController];
 }
@@ -162,8 +168,38 @@
 	}
 	else if ([kHIVMedsController isEqualToString:controllerName])
 	{
-		MyHIVMedicationViewController *hivController = [[MyHIVMedicationViewController alloc] init];
+		MyHIVCollectionViewController *hivController = [[MyHIVCollectionViewController alloc] init];
 		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:hivController];
+	}
+	else if ([kOtherMedsController isEqualToString:controllerName])
+	{
+		OtherMedsCollectionViewController *controller = [[OtherMedsCollectionViewController alloc] init];
+		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:controller];
+	}
+	else if ([kSideEffectsController isEqualToString:controllerName])
+	{
+		SideEffectsCollectionViewController *controller = [[SideEffectsCollectionViewController alloc] init];
+		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:controller];
+	}
+	else if ([kMissedController isEqualToString:controllerName])
+	{
+		MissedMedicationCollectionViewController *controller = [[MissedMedicationCollectionViewController alloc] init];
+		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:controller];
+	}
+	else if ([kProceduresController isEqualToString:controllerName])
+	{
+		ProceduresCollectionViewController *controller = [[ProceduresCollectionViewController alloc] init];
+		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:controller];
+	}
+	else if ([kClinicsController isEqualToString:controllerName])
+	{
+		ClinicAddressCollectionViewController *controller = [[ClinicAddressCollectionViewController alloc] init];
+		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:controller];
+	}
+	else if ([kAlertsController isEqualToString:controllerName])
+	{
+		NotificationsAlertsCollectionViewController *controller = [[NotificationsAlertsCollectionViewController alloc] init];
+		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:controller];
 	}
 	return navigationController;
 }

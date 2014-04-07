@@ -48,7 +48,7 @@
 	{
 		frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
 	}
-	frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
+//	frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
 
 	self.collectionView = [[UICollectionView alloc] initWithFrame:frame
 	                                         collectionViewLayout:self.collectionViewLayout];
@@ -82,7 +82,6 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	if ([Utilities isIPad])
 	{
 		CGRect frame = self.view.bounds;
@@ -97,7 +96,9 @@
 			frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
 		}
 		self.collectionView.frame = frame;
+		[self.collectionViewLayout invalidateLayout];
 	}
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 - (void)hidePopover

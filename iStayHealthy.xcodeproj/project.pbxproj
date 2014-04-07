@@ -40,6 +40,13 @@
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
 		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
 		0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */; };
+		0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */; };
+		0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E518F324FA00523DF6 /* MyHIVCollectionViewController.m */; };
+		0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */; };
+		0BB771EC18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771EB18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m */; };
+		0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771EE18F32D8C00523DF6 /* SideEffectsCollectionViewController.m */; };
+		0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */; };
+		0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */; };
 		0BB8F4F718E36CBC00C3CCBA /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */; };
 		0BB8F4F818E36CBC00C3CCBA /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */; };
 		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
@@ -555,6 +562,20 @@
 		0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSeinfeldCalendarTableViewController.m; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.m; sourceTree = "<group>"; };
 		0BACE94C18F02DDA008F4D13 /* PWESCustomTextfieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESCustomTextfieldCell.h; path = TableCells/PWESCustomTextfieldCell.h; sourceTree = "<group>"; };
 		0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESCustomTextfieldCell.m; path = TableCells/PWESCustomTextfieldCell.m; sourceTree = "<group>"; };
+		0BB771E118F321C600523DF6 /* OtherMedsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedsCollectionViewController.h; path = ViewControllersiPad/OtherMedsCollectionViewController.h; sourceTree = "<group>"; };
+		0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedsCollectionViewController.m; path = ViewControllersiPad/OtherMedsCollectionViewController.m; sourceTree = "<group>"; };
+		0BB771E418F324FA00523DF6 /* MyHIVCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVCollectionViewController.h; path = ViewControllersiPad/MyHIVCollectionViewController.h; sourceTree = "<group>"; };
+		0BB771E518F324FA00523DF6 /* MyHIVCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHIVCollectionViewController.m; path = ViewControllersiPad/MyHIVCollectionViewController.m; sourceTree = "<group>"; };
+		0BB771E718F3292E00523DF6 /* ProceduresCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProceduresCollectionViewController.h; path = ViewControllersiPad/ProceduresCollectionViewController.h; sourceTree = "<group>"; };
+		0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresCollectionViewController.m; path = ViewControllersiPad/ProceduresCollectionViewController.m; sourceTree = "<group>"; };
+		0BB771EA18F32B5A00523DF6 /* ClinicAddressCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClinicAddressCollectionViewController.h; path = ViewControllersiPad/ClinicAddressCollectionViewController.h; sourceTree = "<group>"; };
+		0BB771EB18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicAddressCollectionViewController.m; path = ViewControllersiPad/ClinicAddressCollectionViewController.m; sourceTree = "<group>"; };
+		0BB771ED18F32D8C00523DF6 /* SideEffectsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideEffectsCollectionViewController.h; path = ViewControllersiPad/SideEffectsCollectionViewController.h; sourceTree = "<group>"; };
+		0BB771EE18F32D8C00523DF6 /* SideEffectsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffectsCollectionViewController.m; path = ViewControllersiPad/SideEffectsCollectionViewController.m; sourceTree = "<group>"; };
+		0BB771F018F32DA600523DF6 /* MissedMedicationCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissedMedicationCollectionViewController.h; path = ViewControllersiPad/MissedMedicationCollectionViewController.h; sourceTree = "<group>"; };
+		0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissedMedicationCollectionViewController.m; path = ViewControllersiPad/MissedMedicationCollectionViewController.m; sourceTree = "<group>"; };
+		0BB771F318F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsAlertsCollectionViewController.h; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.h; sourceTree = "<group>"; };
+		0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAlertsCollectionViewController.m; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.m; sourceTree = "<group>"; };
 		0BB8F4F318E36CBC00C3CCBA /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESZoomTransition.h; sourceTree = "<group>"; };
 		0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESZoomTransition.m; sourceTree = "<group>"; };
 		0BB8F4F518E36CBC00C3CCBA /* PWESSlideTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESSlideTransition.h; sourceTree = "<group>"; };
@@ -1692,6 +1713,8 @@
 				C45E52F9182BFF0400C30061 /* BaseCollectionViewCell.m */,
 				C45E52F5182BFE6400C30061 /* BaseCollectionViewController.h */,
 				C45E52F6182BFE6400C30061 /* BaseCollectionViewController.m */,
+				0BB771EA18F32B5A00523DF6 /* ClinicAddressCollectionViewController.h */,
+				0BB771EB18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m */,
 				C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */,
 				C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */,
 				C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */,
@@ -1703,10 +1726,22 @@
 				0B0C4F6A18A664B300D22990 /* CustomToolbar.m */,
 				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
 				C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */,
+				0BB771F018F32DA600523DF6 /* MissedMedicationCollectionViewController.h */,
+				0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */,
+				0BB771E418F324FA00523DF6 /* MyHIVCollectionViewController.h */,
+				0BB771E518F324FA00523DF6 /* MyHIVCollectionViewController.m */,
+				0BB771F318F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.h */,
+				0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */,
+				0BB771E118F321C600523DF6 /* OtherMedsCollectionViewController.h */,
+				0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */,
+				0BB771E718F3292E00523DF6 /* ProceduresCollectionViewController.h */,
+				0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */,
 				0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */,
 				0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */,
 				0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */,
 				0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */,
+				0BB771ED18F32D8C00523DF6 /* SideEffectsCollectionViewController.h */,
+				0BB771EE18F32D8C00523DF6 /* SideEffectsCollectionViewController.m */,
 			);
 			name = ViewControllersiPad;
 			sourceTree = "<group>";
@@ -2591,6 +2626,7 @@
 				C4C4193415F1383000882416 /* OtherMedCell.m in Sources */,
 				C4C4193615F1383000882416 /* PressureCell.m in Sources */,
 				C4C4193815F1383000882416 /* ProcedureCell.m in Sources */,
+				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
 				C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */,
 				C4C4193A15F1383000882416 /* RepeatCell.m in Sources */,
 				0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */,
@@ -2599,6 +2635,7 @@
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
 				C4C4194015F1383000882416 /* ResultValueCell.m in Sources */,
 				0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */,
+				0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */,
 				C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */,
 				C4C4194215F1383000882416 /* SetDateCell.m in Sources */,
 				C4C4194415F1383000882416 /* SettingsCell.m in Sources */,
@@ -2640,6 +2677,7 @@
 				C45E52FA182BFF0400C30061 /* BaseCollectionViewCell.m in Sources */,
 				C4C419A015F13AAD00882416 /* StatusViewControllerLandscape.m in Sources */,
 				C4C419CE15F13C6F00882416 /* DropBoxBackupViewController.m in Sources */,
+				0BB771EC18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m in Sources */,
 				C463743E17E9F2AF00D19B94 /* PWESDashboardView.m in Sources */,
 				C4C419CF15F13C6F00882416 /* InfoDetailTableViewController.m in Sources */,
 				C4C419D015F13C6F00882416 /* MedicationChangeTableViewController.m in Sources */,
@@ -2672,7 +2710,9 @@
 				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
 				0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */,
 				C491AE6315F167BE00EB1CF8 /* ProcedureDetailViewController.m in Sources */,
+				0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */,
 				C4D6B4C515F237C3003C7AB5 /* ClinicsDetailViewController.m in Sources */,
+				0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
 				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
@@ -2719,6 +2759,7 @@
 				C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */,
 				C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */,
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
+				0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
 				0B4065001894370900F858BB /* StarView.m in Sources */,
 				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,
@@ -2739,6 +2780,7 @@
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
+				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
 				C437503516D8C4C10097503D /* ChartViewCell.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4CAC93817574F860010C165 /* EffectsListController.m in Sources */,

@@ -1,35 +1,33 @@
 //
-//  ResultsCollectionViewController.m
+//  ClinicAddressCollectionViewController.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 22/02/2014.
+//  Created by Peter Schmidt on 07/04/2014.
 //
 //
 
-#import "ResultsCollectionViewController.h"
+#import "ClinicAddressCollectionViewController.h"
 #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
-#import "Results+Handling.h"
-#import "EditResultsTableViewController.h"
-#import "ResultsView-iPad.h"
-//#import "Constants.h"
+#import "Contacts+Handling.h"
+#import "EditContactsTableViewController.h"
 
-#define kResultsCollectionCellIdentifier @"ResultsCollectionCellIdentifier"
+#define kClinicsCollectionCellIdentifier @"ClinicsCollectionCellIdentifier"
 
-@interface ResultsCollectionViewController ()
-@property (nonatomic, strong) NSArray *results;
+@interface ClinicAddressCollectionViewController ()
+@property (nonatomic, strong) NSArray *clinics;
 @end
 
-@implementation ResultsCollectionViewController
 
+@implementation ClinicAddressCollectionViewController
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.results = [NSArray array]; //init with empty array
-	[self setTitleViewWithTitle:NSLocalizedString(@"Results", nil)];
+	self.clinics = [NSArray array];
+	[self setTitleViewWithTitle:NSLocalizedString(@"Clinics", nil)];
 	[self.collectionView registerClass:[BaseCollectionViewCell class]
-	        forCellWithReuseIdentifier:kResultsCollectionCellIdentifier];
+	        forCellWithReuseIdentifier:kClinicsCollectionCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +39,7 @@
 {
 	if (nil == self.customPopoverController)
 	{
-		EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+		EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
 		editController.preferredContentSize = CGSizeMake(320, 568);
 		editController.customPopOverDelegate = self;
 		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
@@ -55,7 +53,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return self.results.count;
+	return self.clinics.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -66,38 +64,22 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	Results *results = [self.results objectAtIndex:indexPath.row];
-	BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kResultsCollectionCellIdentifier
+	Contacts *contact = [self.clinics objectAtIndex:indexPath.row];
+	BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kClinicsCollectionCellIdentifier
 	                                                                         forIndexPath:indexPath];
-	if (nil != results)
+	if (nil != contact)
 	{
-		[cell setManagedObject:results];
+		[cell setManagedObject:contact];
 	}
 
-	[cell addDateToTitle:results.ResultsDate];
-	ResultsView_iPad *hivResults = [ResultsView_iPad viewForResults:results
-	                                                    resultsType:HIVResultsType
-	                                                          frame:CGRectMake(0, 40, 150, 50)];
-
-	ResultsView_iPad *bloods = [ResultsView_iPad viewForResults:results
-	                                                resultsType:BloodResultsType
-	                                                      frame:CGRectMake(0, 90, 150, 20)];
-
-	ResultsView_iPad *other = [ResultsView_iPad viewForResults:results
-	                                               resultsType:OtherResultsType
-	                                                     frame:CGRectMake(0, 115, 150, 20)];
-
-	[cell.contentView addSubview:hivResults];
-	[cell.contentView addSubview:bloods];
-	[cell.contentView addSubview:other];
 	return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self hidePopover];
-	Results *results = [self.results objectAtIndex:indexPath.row];
-	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
+	Contacts *clinic = [self.clinics objectAtIndex:indexPath.row];
+	EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:clinic hasNumericalInput:NO];
 	editController.preferredContentSize = CGSizeMake(320, 568);
 	editController.customPopOverDelegate = self;
 	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
@@ -106,10 +88,10 @@
 	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
+#pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	NSLog(@"ResultsCollectionViewController with name %@", notification.name);
-	[[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	[[CoreDataManager sharedInstance] fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
 	        UIAlertView *errorAlert = [[UIAlertView alloc]
@@ -122,9 +104,9 @@
 		}
 	    else
 	    {
-	        self.results = nil;
-	        self.results = array;
-	        NSLog(@"we have %lu results returned", (unsigned long)self.results.count);
+	        self.clinics = nil;
+	        self.clinics = [NSArray arrayWithArray:array];
+	        NSLog(@"we have %lu clinics returned", (unsigned long)self.clinics.count);
 	        dispatch_async(dispatch_get_main_queue(), ^{
 	            [self.collectionView reloadData];
 			});

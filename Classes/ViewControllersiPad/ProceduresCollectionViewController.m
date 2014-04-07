@@ -1,35 +1,33 @@
 //
-//  ResultsCollectionViewController.m
+//  ProceduresCollectionViewController.m
 //  iStayHealthy
 //
-//  Created by Peter Schmidt on 22/02/2014.
+//  Created by Peter Schmidt on 07/04/2014.
 //
 //
 
-#import "ResultsCollectionViewController.h"
+#import "ProceduresCollectionViewController.h"
 #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
-#import "Results+Handling.h"
-#import "EditResultsTableViewController.h"
-#import "ResultsView-iPad.h"
-//#import "Constants.h"
+#import "Procedures+Handling.h"
+#import "EditProceduresTableViewController.h"
 
-#define kResultsCollectionCellIdentifier @"ResultsCollectionCellIdentifier"
+#define kProceduresCollectionCellIdentifier @"ProceduresCollectionCellIdentifier"
 
-@interface ResultsCollectionViewController ()
-@property (nonatomic, strong) NSArray *results;
+@interface ProceduresCollectionViewController ()
+@property (nonatomic, strong) NSArray *procedures;
 @end
 
-@implementation ResultsCollectionViewController
+@implementation ProceduresCollectionViewController
 
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.results = [NSArray array]; //init with empty array
-	[self setTitleViewWithTitle:NSLocalizedString(@"Results", nil)];
+	self.procedures = [NSArray array];
+	[self setTitleViewWithTitle:NSLocalizedString(@"Illness", nil)];
 	[self.collectionView registerClass:[BaseCollectionViewCell class]
-	        forCellWithReuseIdentifier:kResultsCollectionCellIdentifier];
+	        forCellWithReuseIdentifier:kProceduresCollectionCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +39,7 @@
 {
 	if (nil == self.customPopoverController)
 	{
-		EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+		EditProceduresTableViewController *editController = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
 		editController.preferredContentSize = CGSizeMake(320, 568);
 		editController.customPopOverDelegate = self;
 		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
@@ -55,7 +53,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return self.results.count;
+	return self.procedures.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -66,38 +64,23 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	Results *results = [self.results objectAtIndex:indexPath.row];
-	BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kResultsCollectionCellIdentifier
+	Procedures *procs = [self.procedures objectAtIndex:indexPath.row];
+	BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kProceduresCollectionCellIdentifier
 	                                                                         forIndexPath:indexPath];
-	if (nil != results)
+	if (nil != procs)
 	{
-		[cell setManagedObject:results];
+		[cell setManagedObject:procs];
 	}
 
-	[cell addDateToTitle:results.ResultsDate];
-	ResultsView_iPad *hivResults = [ResultsView_iPad viewForResults:results
-	                                                    resultsType:HIVResultsType
-	                                                          frame:CGRectMake(0, 40, 150, 50)];
-
-	ResultsView_iPad *bloods = [ResultsView_iPad viewForResults:results
-	                                                resultsType:BloodResultsType
-	                                                      frame:CGRectMake(0, 90, 150, 20)];
-
-	ResultsView_iPad *other = [ResultsView_iPad viewForResults:results
-	                                               resultsType:OtherResultsType
-	                                                     frame:CGRectMake(0, 115, 150, 20)];
-
-	[cell.contentView addSubview:hivResults];
-	[cell.contentView addSubview:bloods];
-	[cell.contentView addSubview:other];
+	[cell addDateToTitle:procs.Date];
 	return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self hidePopover];
-	Results *results = [self.results objectAtIndex:indexPath.row];
-	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
+	Procedures *procs = [self.procedures objectAtIndex:indexPath.row];
+	EditProceduresTableViewController *editController = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:procs hasNumericalInput:NO];
 	editController.preferredContentSize = CGSizeMake(320, 568);
 	editController.customPopOverDelegate = self;
 	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
@@ -108,8 +91,8 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	NSLog(@"ResultsCollectionViewController with name %@", notification.name);
-	[[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	NSLog(@"ProceduresCollectionViewController with name %@", notification.name);
+	[[CoreDataManager sharedInstance] fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
 	        UIAlertView *errorAlert = [[UIAlertView alloc]
@@ -122,9 +105,9 @@
 		}
 	    else
 	    {
-	        self.results = nil;
-	        self.results = array;
-	        NSLog(@"we have %lu results returned", (unsigned long)self.results.count);
+	        self.procedures = nil;
+	        self.procedures = array;
+	        NSLog(@"we have %lu procedures returned", (unsigned long)self.procedures.count);
 	        dispatch_async(dispatch_get_main_queue(), ^{
 	            [self.collectionView reloadData];
 			});
