@@ -70,7 +70,6 @@
 	CGFloat width = self.tableView.bounds.size.width;
 	CGFloat segmentWidth = width - 2 * 20;
 	self.calendarSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
-	self.calendarSegmentControl.tintColor = TINTCOLOUR;
 	self.calendarSegmentControl.selectedSegmentIndex = 2;
 	[self.calendarSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 	[self indexDidChangeForSegment];

@@ -31,12 +31,15 @@
 
 	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: TEXTCOLOUR, NSFontAttributeName : [UIFont fontWithType:Standard size:17] }];
 
+	[[UISegmentedControl appearance] setTintColor:TINTCOLOUR];
+	[[UISwitch appearance] setOnTintColor:TINTCOLOUR];
+
 	self.containerController = (ContainerViewController *)self.window.rootViewController;
 	[[CoreDataManager sharedInstance] setUpCoreDataManager];
 	[[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
 	    if (error)
 	    {
-	        NSLog(@"Error occurred with code %d and message %@", [error code], [error localizedDescription]);
+	        NSLog(@"Error occurred with code %ld and message %@", (long)[error code], [error localizedDescription]);
 		}
 	}];
 	[TestFlight takeOff:@"f9640006-475c-47e9-ad01-b9ff23f67d1b"];

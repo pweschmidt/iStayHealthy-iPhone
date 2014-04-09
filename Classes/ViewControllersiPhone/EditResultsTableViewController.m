@@ -101,7 +101,6 @@
 	}
 	CGFloat segmentWidth = width - 2 * 20;
 	self.resultsSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
-	self.resultsSegmentControl.tintColor = TINTCOLOUR;
 	self.resultsSegmentControl.selectedSegmentIndex = 0;
 	[self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 
