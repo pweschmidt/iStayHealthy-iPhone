@@ -2292,7 +2292,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 5Y4HL833A4;
@@ -2997,7 +2997,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
@@ -3041,7 +3040,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
@@ -3146,7 +3144,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
