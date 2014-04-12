@@ -9,7 +9,6 @@
 #import "Utilities.h"
 #import "Constants.h"
 #import "GeneralSettings.h"
-#import "ChartSettings.h"
 #import "NSDate+Extras.h"
 #import <math.h>
 #import <QuartzCore/QuartzCore.h>
@@ -355,7 +354,7 @@
 {
 	NSDateComponents *components = [[self class] dateComponentsForDate:date];
 	NSArray *months = [[[self class] calendarDictionary] objectForKey:@"months"];
-	int monthIndex = components.month - 1;
+	int monthIndex = (int)(components.month - 1);
 	return (NSString *)[months objectAtIndex:monthIndex];
 }
 
@@ -363,7 +362,7 @@
 {
 	NSDateComponents *components = [[self class] dateComponentsForDate:date];
 	NSArray *weekdays = [[[self class] calendarDictionary] objectForKey:@"shortDays"];
-	int dayIndex = components.weekday - 1;
+	int dayIndex = (int)(components.weekday - 1);
 	return (NSString *)[weekdays objectAtIndex:dayIndex];
 }
 

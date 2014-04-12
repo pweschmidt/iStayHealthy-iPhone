@@ -34,7 +34,7 @@
 	self.customPopoverController = nil;
 	self.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
 	self.collectionViewLayout.itemSize = CGSizeMake(150, 150);
-	self.collectionViewLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width - 40, 40);
+	self.collectionViewLayout.headerReferenceSize = CGSizeMake(self.view.bounds.size.width - 40, 40);
 	self.collectionViewLayout.minimumInteritemSpacing = 20;
 	self.collectionViewLayout.minimumLineSpacing = 20;
 	self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -60,6 +60,7 @@
 	self.collectionView.showsVerticalScrollIndicator = YES;
 	self.collectionView.backgroundColor = [UIColor clearColor];
 	[self.view addSubview:self.collectionView];
+
 	CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
 	CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
 	[self.view addSubview:toolbar];
@@ -80,6 +81,12 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	[self.collectionView setAlpha:0.0f];
+	[self.collectionView.collectionViewLayout invalidateLayout];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	if ([Utilities isIPad])
@@ -96,7 +103,10 @@
 			frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
 		}
 		self.collectionView.frame = frame;
-		[self.collectionViewLayout invalidateLayout];
+		[UIView animateWithDuration:0.125f animations: ^{
+		    [self.collectionView setAlpha:1.0f];
+		}];
+//		[self.collectionViewLayout invalidateLayout];
 	}
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }

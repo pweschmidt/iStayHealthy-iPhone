@@ -8,7 +8,6 @@
 
 #import "PWESIndicatorView.h"
 #import "Constants.h"
-#import "ChartSettings.h"
 #import "GeneralSettings.h"
 #import <QuartzCore/QuartzCore.h>
 

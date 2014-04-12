@@ -90,7 +90,7 @@
     NSDateComponents *components = [[NSCalendar currentCalendar]
                                     components:NSYearCalendarUnit
                                     fromDate:self.date];
-    int year = [components year];
+    int year = (int)[components year];
     
     UIView *view = [[UIView alloc] init];
     view.frame = yearFrame;
@@ -112,7 +112,7 @@
     NSDateComponents *components = [[NSCalendar currentCalendar]
                                     components: NSDayCalendarUnit
                                     fromDate:self.date];
-    int day = [components day];
+    int day = (int)[components day];
     UIView *view = [[UIView alloc] init];
     view.frame = dayFrame;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dayFrame.size.width, dayFrame.size.height)];

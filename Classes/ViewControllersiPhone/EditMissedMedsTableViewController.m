@@ -212,11 +212,11 @@
 	}
 	else if (1 == indexPath.section)
 	{
-		identifier = [NSString stringWithFormat:@"MissedReasonCell%d", indexPath.row];
+		identifier = [NSString stringWithFormat:@"MissedReasonCell%ld", (long)indexPath.row];
 	}
 	else
 	{
-		identifier = [NSString stringWithFormat:@"CurrentMedCell%d", indexPath.row];
+		identifier = [NSString stringWithFormat:@"CurrentMedCell%ld", (long)indexPath.row];
 	}
 	return identifier;
 }

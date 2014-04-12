@@ -12,7 +12,6 @@
 #import "PWESValueRange.h"
 #import "PWESPlotArea.h"
 #import "GeneralSettings.h"
-#import "ChartSettings.h"
 #import "Constants.h"
 #import "UIFont+Standard.h"
 #import <QuartzCore/QuartzCore.h>

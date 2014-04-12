@@ -131,7 +131,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	int rows = 1;
+	NSUInteger rows = 1;
 	if (0 == section)
 	{
 		if ([self hasInlineDatePicker])
@@ -316,7 +316,7 @@
 	else
 	{
 		NSUInteger key = [self multiplierForIndexPath:indexPath];
-		return [NSString stringWithFormat:@"MedicationCell %d", key];
+		return [NSString stringWithFormat:@"MedicationCell %lu", (unsigned long)key];
 	}
 }
 

@@ -145,7 +145,7 @@
     NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:APP_NAME];
     name = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // 2
-    NSString *computedHashString = [NSString stringWithFormat:@"%@%i%@", name, pinHash, SALT_HASH];
+    NSString *computedHashString = [NSString stringWithFormat:@"%@%lu%@", name, (unsigned long)pinHash, SALT_HASH];
     // 3
     NSString *finalHash = [self computeSHA256DigestForString:computedHashString];
     NSLog(@"** Computed hash: %@ for SHA256 Digest: %@", computedHashString, finalHash);

@@ -131,7 +131,7 @@
 	}
 	else
 	{
-		identifier = [NSString stringWithFormat:@"AppointmentCell%d", indexPath.row];
+		identifier = [NSString stringWithFormat:@"AppointmentCell%ld", (long)indexPath.row];
 	}
 	return identifier;
 }

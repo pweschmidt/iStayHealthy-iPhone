@@ -225,7 +225,7 @@
 	{
 		return;
 	}
-	NSString *dataPath = [self uploadFileTmpPath];
+//	NSString *dataPath = [self uploadFileTmpPath];
 	[self.activityIndicator startAnimating];
 	/*
 	   DataLoader *dataLoader = [[DataLoader alloc] init];

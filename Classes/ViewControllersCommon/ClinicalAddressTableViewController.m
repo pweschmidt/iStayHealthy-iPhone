@@ -122,7 +122,7 @@
         {
             self.clinics = nil;
             self.clinics = [NSArray arrayWithArray:array];
-            NSLog(@"we have %d clinics returned", self.clinics.count);
+            NSLog(@"we have %lu clinics returned", (unsigned long)self.clinics.count);
             [self.tableView reloadData];
         }
     }];

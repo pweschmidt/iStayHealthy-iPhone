@@ -140,7 +140,7 @@
         {
             self.otherMediction = nil;
             self.otherMediction = [NSArray arrayWithArray:array];
-            NSLog(@"we have %d other meds returned", self.otherMediction.count);
+            NSLog(@"we have %lu other meds returned", (unsigned long)self.otherMediction.count);
             [self.tableView reloadData];
         }
     }];
