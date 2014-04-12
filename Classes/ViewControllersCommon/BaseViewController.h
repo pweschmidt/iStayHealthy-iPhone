@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "UINavigationBar-Button.h"
 #import "PWESPopoverDelegate.h"
+#import "PWESToolbarDelegate.h"
+#import <MessageUI/MessageUI.h>
 @class CustomToolbar;
 
-@interface BaseViewController : UIViewController <PWESPopoverDelegate, UIPopoverControllerDelegate>
+@interface BaseViewController : UIViewController <PWESPopoverDelegate, PWESToolbarDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate>
 @property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
-@property (nonatomic, strong) CustomToolbar *iPadToolbar;
+@property (nonatomic, strong) CustomToolbar *customToolbar;
 @property (nonatomic, strong) UIPopoverController *customPopoverController;
 - (id)initAsPopoverController;
 - (void)disableRightBarButtons;

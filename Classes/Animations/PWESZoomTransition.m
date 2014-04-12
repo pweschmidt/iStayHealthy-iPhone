@@ -49,7 +49,7 @@
 		    fromController.view.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
 		    CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromController.view.layer.bounds.size.width * kZoomFactor / 2;
 		    fromController.view.layer.position = CGPointMake(zoomedXOffset, fromController.view.layer.position.y);
-		    fromController.view.alpha = 0.6;
+//		    fromController.view.alpha = 0.6;
 		    [transitionContext finalFrameForViewController:fromController];
 		} completion: ^(BOOL finished) {
 		    [transitionContext completeTransition:finished];
@@ -60,7 +60,7 @@
 		toController.view.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
 		CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromController.view.layer.bounds.size.width * kZoomFactor / 2;
 		toController.view.layer.position = CGPointMake(zoomedXOffset, fromController.view.layer.position.y);
-		toController.view.alpha = 0.6;
+//		toController.view.alpha = 0.6;
 
 		fromController.view.alpha = 1.0;
 		fromController.view.layer.transform = CATransform3DIdentity;
@@ -70,7 +70,7 @@
 		    fromController.view.frame = containerView.bounds;
 		    toController.view.layer.transform = CATransform3DIdentity;
 		    toController.view.layer.position = CGPointMake(containerView.bounds.size.width / 2, containerView.bounds.size.height / 2);
-		    toController.view.alpha = 1.0;
+//		    toController.view.alpha = 1.0;
 		} completion: ^(BOOL finished) {
 		    fromController.view.alpha = 1.0;
 		    fromController.view.layer.transform = CATransform3DIdentity;

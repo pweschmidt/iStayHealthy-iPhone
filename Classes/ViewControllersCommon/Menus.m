@@ -74,41 +74,19 @@
 {
 	static dispatch_once_t onceToken;
 	static NSArray *menus = nil;
-	if ([Utilities isIPad])
-	{
-		dispatch_once(&onceToken, ^{
-		    menus = @[NSLocalizedString(@"Charts", nil),
-		              NSLocalizedString(@"Results", nil),
-		              NSLocalizedString(@"HIV Medications", nil),
-		              NSLocalizedString(@"Missed Meds", nil),
-		              NSLocalizedString(@"Side Effects", nil),
-		              NSLocalizedString(@"Medication Diary", nil),
-		              NSLocalizedString(@"Alerts", nil),
-		              NSLocalizedString(@"Other Medication", nil),
-		              NSLocalizedString(@"Clinics", nil),
-		              NSLocalizedString(@"Procedures", nil),
-		              NSLocalizedString(@"Wellness", nil), ];
-		});
-	}
-	else
-	{
-		dispatch_once(&onceToken, ^{
-		    menus = @[NSLocalizedString(@"Charts", nil),
-		              NSLocalizedString(@"Results", nil),
-		              NSLocalizedString(@"HIV Medications", nil),
-		              NSLocalizedString(@"Missed Meds", nil),
-		              NSLocalizedString(@"Side Effects", nil),
-		              NSLocalizedString(@"Medication Diary", nil),
-		              NSLocalizedString(@"Alerts", nil),
-		              NSLocalizedString(@"Other Medication", nil),
-		              NSLocalizedString(@"Clinics", nil),
-		              NSLocalizedString(@"Procedures", nil),
-		              NSLocalizedString(@"Settings", nil),
-		              NSLocalizedString(@"Backups", nil),
-		              NSLocalizedString(@"Email", nil),
-		              NSLocalizedString(@"Info", nil)];
-		});
-	}
+	dispatch_once(&onceToken, ^{
+	    menus = @[NSLocalizedString(@"Charts", nil),
+	              NSLocalizedString(@"Results", nil),
+	              NSLocalizedString(@"HIV Medications", nil),
+	              NSLocalizedString(@"Missed Meds", nil),
+	              NSLocalizedString(@"Side Effects", nil),
+	              NSLocalizedString(@"Medication Diary", nil),
+	              NSLocalizedString(@"Alerts", nil),
+	              NSLocalizedString(@"Other Medication", nil),
+	              NSLocalizedString(@"Clinics", nil),
+	              NSLocalizedString(@"Procedures", nil),
+	              NSLocalizedString(@"Wellness", nil), ];
+	});
 	return menus;
 }
 

@@ -11,7 +11,11 @@
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
 #import "ContentNavigationController_iPad.h"
+#import "SettingsTableViewController.h"
+#import "InformationTableViewController.h"
+#import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "EmailViewController.h"
 #import "GeneralSettings.h"
 #import "Constants.h"
 #import "Utilities.h"
@@ -67,13 +71,18 @@
 	}
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
-	if ([Utilities isIPad])
-	{
-		CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
-		CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
-		[self.view addSubview:toolbar];
-		self.iPadToolbar = toolbar;
-	}
+	CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+	CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
+	[self.view addSubview:toolbar];
+	self.customToolbar = toolbar;
+	self.customToolbar.customToolbarDelegate = self;
+//	if ([Utilities isIPad])
+//	{
+//		CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+//		CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
+//		[self.view addSubview:toolbar];
+//		self.customToolbar = toolbar;
+//	}
 }
 
 - (void)disableRightBarButtons
@@ -170,9 +179,18 @@
 - (void)presentPopoverWithController:(UINavigationController *)controller
                        fromBarButton:(UIBarButtonItem *)barButton
 {
+	[self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionUp];
+}
+
+- (void)presentPopoverWithController:(UINavigationController *)controller
+                       fromBarButton:(UIBarButtonItem *)barButton
+                           direction:(UIPopoverArrowDirection)direction
+{
 	self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
 	self.customPopoverController.delegate = self;
-	[self.customPopoverController presentPopoverFromBarButtonItem:barButton permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	[self.customPopoverController presentPopoverFromBarButtonItem:barButton
+	                                     permittedArrowDirections:direction
+	                                                     animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -316,6 +334,79 @@
 	UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return blank;
+}
+
+#pragma mark PWESToolbar delegate methods
+- (void)showPasswordControllerFromButton:(UIBarButtonItem *)button
+{
+	SettingsTableViewController *controller = [[SettingsTableViewController alloc] initAsPopoverController];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+	if ([Utilities isIPad])
+	{
+		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+	}
+	else
+	{
+		[self.navigationController pushViewController:controller animated:YES];
+	}
+}
+
+- (void)showMailControllerHasAttachment:(BOOL)hasAttachment
+{
+	MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+	mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+
+	NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
+	mailController.mailComposeDelegate = self;
+	[mailController setToRecipients:toRecipient];
+	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
+	if (hasAttachment)
+	{
+	}
+	[self.navigationController presentViewController:mailController animated:YES completion:nil];
+}
+
+- (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
+{
+	if ([[DBSession sharedSession] isLinked])
+	{
+		DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
+		UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+		if ([Utilities isIPad])
+		{
+			[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+		}
+		else
+		{
+			[self.navigationController pushViewController:controller animated:YES];
+		}
+	}
+	else
+	{
+		[[DBSession sharedSession] linkFromController:self];
+	}
+}
+
+- (void)showInfoControllerFromButton:(UIBarButtonItem *)button
+{
+	InformationTableViewController *controller = [[InformationTableViewController alloc] initAsPopoverController];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+	if ([Utilities isIPad])
+	{
+		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+	}
+	else
+	{
+		[self.navigationController pushViewController:controller animated:YES];
+	}
+}
+
+#pragma mark Mail composer callback
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

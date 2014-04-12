@@ -26,8 +26,8 @@
 {
 	[super viewDidLoad];
 
-	self.view.backgroundColor = DEFAULT_BACKGROUND;
-	self.tableView.backgroundColor = DEFAULT_BACKGROUND;
+	self.view.backgroundColor = kDarkBackgroundColor;
+	self.tableView.backgroundColor = kDarkBackgroundColor;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self setTitleViewWithTitle:NSLocalizedString(@"Menu", nil)];
 	[self disableRightBarButtons];
@@ -87,7 +87,7 @@
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.contentView.backgroundColor = [UIColor clearColor];
 	cell.backgroundColor = [UIColor clearColor];
 	CGFloat offset = (self.tableView.rowHeight - 25) / 2;
@@ -96,6 +96,8 @@
 	label.frame = CGRectMake(60, 0, 200, self.tableView.rowHeight);
 	label.textAlignment = NSTextAlignmentLeft;
 	label.text = [self.menus objectAtIndex:indexPath.row];
+	label.textColor = [UIColor whiteColor];
+	label.font = [UIFont fontWithType:Bold size:standard];
 	[cell.contentView addSubview:label];
 	NSString *controllerName = [Menus
 	                            controllerNameForRowIndexPath:indexPath

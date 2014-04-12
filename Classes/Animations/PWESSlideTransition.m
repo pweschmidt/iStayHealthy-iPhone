@@ -9,7 +9,7 @@
 #import "PWESSlideTransition.h"
 #import "Constants.h"
 
-#define kSlideLength 100
+#define kSlideLength 200
 
 @interface PWESSlideTransition ()
 @end

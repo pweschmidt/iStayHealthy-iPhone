@@ -22,6 +22,7 @@
 #define VIRALLOADCOLOUR [UIColor colorWithRed:255.0 / 255.0 green:0.0 / 255.0 blue:102.0 / 255.0 alpha:1.0]
 #define AXISCOLOUR      [UIColor whiteColor]
 #define BRIGHT_BACKGROUND [UIColor colorWithRed:255.0 / 255.0 green:255.0 / 255.0 blue:255. / 255.0 alpha:1.0]
+#define kDarkBackgroundColor [UIColor colorWithRed:0.435294 green:0.443137 blue:0.47451 alpha:1]
 
 
 #define TICKS               7

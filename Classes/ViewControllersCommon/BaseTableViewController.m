@@ -32,11 +32,11 @@
 	CGRect frame = self.view.bounds;
 	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
 	{
-		frame = CGRectMake(0, 0, frame.size.height, frame.size.width);
+		frame = CGRectMake(0, 64, frame.size.height, frame.size.width - 120);
 	}
 	else
 	{
-		frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+		frame = CGRectMake(0, 64, frame.size.width, frame.size.height - 120);
 	}
 	UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
 	tableView.backgroundColor = DEFAULT_BACKGROUND;
