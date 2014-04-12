@@ -15,6 +15,6 @@
 
 - (void)clear;
 - (void)addDateToTitle:(NSDate *)date;
-- (void)addTitle:(NSString *)title font:(UIFont *)font;
+- (void)addTitle:(NSString *)title;
 - (void)addLabelToContentView:(UILabel *)label;
 @end

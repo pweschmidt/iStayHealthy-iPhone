@@ -167,7 +167,6 @@
 		C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838917B675350042E63A /* BaseTableViewController.m */; };
 		C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838E17B6A61F0042E63A /* CoreXMLReader.m */; };
 		C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22817AD04F80037A6DF /* ContainerViewController.m */; };
-		C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46231441632E21D005DD746 /* SQLDatabaseManager.m */; };
 		C463742D17E9F17500D19B94 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C463742C17E9F17500D19B94 /* DashboardViewController.m */; };
 		C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */; };
 		C463743E17E9F2AF00D19B94 /* PWESDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743217E9F2AF00D19B94 /* PWESDashboardView.m */; };
@@ -189,7 +188,6 @@
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
 		C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */; };
 		C46EB5E817EB819800B9EA5A /* AppointmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E717EB819800B9EA5A /* AppointmentsTableViewController.m */; };
-		C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */; };
 		C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22B17AD05630037A6DF /* LoginViewController.m */; };
 		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
 		C481FD2117FDEBDE0058EE9D /* icon_57_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1A17FDEBDE0058EE9D /* icon_57_flat.png */; };
@@ -560,8 +558,6 @@
 		C45F838D17B6A61F0042E63A /* CoreXMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreXMLReader.h; path = CoreXML/CoreXMLReader.h; sourceTree = "<group>"; };
 		C45F838E17B6A61F0042E63A /* CoreXMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLReader.m; path = CoreXML/CoreXMLReader.m; sourceTree = "<group>"; };
 		C46067E01472D5ED00FCA76D /* iStayHealthy 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 10.xcdatamodel"; sourceTree = "<group>"; };
-		C46231431632E21D005DD746 /* SQLDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseManager.h; sourceTree = "<group>"; };
-		C46231441632E21D005DD746 /* SQLDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseManager.m; sourceTree = "<group>"; };
 		C463742B17E9F17500D19B94 /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashboardViewController.h; path = ViewControllersCommon/DashboardViewController.h; sourceTree = "<group>"; };
 		C463742C17E9F17500D19B94 /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashboardViewController.m; path = ViewControllersCommon/DashboardViewController.m; sourceTree = "<group>"; };
 		C463742E17E9F2AF00D19B94 /* PWESChartsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESChartsConstants.h; path = Dashboard/PWESChartsConstants.h; sourceTree = "<group>"; };
@@ -606,8 +602,6 @@
 		C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresListTableViewController.m; path = ViewControllersCommon/ProceduresListTableViewController.m; sourceTree = "<group>"; };
 		C46EB5E617EB819800B9EA5A /* AppointmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppointmentsTableViewController.h; path = ViewControllersCommon/AppointmentsTableViewController.h; sourceTree = "<group>"; };
 		C46EB5E717EB819800B9EA5A /* AppointmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppointmentsTableViewController.m; path = ViewControllersCommon/AppointmentsTableViewController.m; sourceTree = "<group>"; };
-		C47B705D163ACABB0092C439 /* SQLBackupStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLBackupStoreManager.h; sourceTree = "<group>"; };
-		C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLBackupStoreManager.m; sourceTree = "<group>"; };
 		C47DB22717AD04F80037A6DF /* ContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = ViewControllersCommon/ContainerViewController.h; sourceTree = "<group>"; };
 		C47DB22817AD04F80037A6DF /* ContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController.m; path = ViewControllersCommon/ContainerViewController.m; sourceTree = "<group>"; };
 		C47DB22A17AD05630037A6DF /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllersCommon/LoginViewController.h; sourceTree = "<group>"; };
@@ -872,10 +866,6 @@
 				C4DE024612D5F99C005C0043 /* GeneralSettings.h */,
 				C4DF910915EE79560042211E /* Constants.h */,
 				C4DF910A15EE79560042211E /* Constants.m */,
-				C46231431632E21D005DD746 /* SQLDatabaseManager.h */,
-				C46231441632E21D005DD746 /* SQLDatabaseManager.m */,
-				C47B705D163ACABB0092C439 /* SQLBackupStoreManager.h */,
-				C47B705E163ACABB0092C439 /* SQLBackupStoreManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1818,9 +1808,7 @@
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
 				C46C5DF117EDA83500866DBD /* SeinfeldCalendarViewController.m in Sources */,
 				0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */,
-				C46231451632E21D005DD746 /* SQLDatabaseManager.m in Sources */,
 				C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */,
-				C47B705F163ACABB0092C439 /* SQLBackupStoreManager.m in Sources */,
 				C45D00F017BAB403001AE0CB /* EditResultsTableViewController.m in Sources */,
 				C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */,
 				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,

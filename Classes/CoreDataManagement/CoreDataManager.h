@@ -10,26 +10,26 @@
 #import "Constants.h"
 
 @interface CoreDataManager : NSObject
-@property (nonatomic, strong) NSManagedObjectContext * defaultContext;
+@property (nonatomic, strong) NSManagedObjectContext *defaultContext;
 @property (nonatomic, assign) BOOL iCloudIsAvailable;
 @property (nonatomic, assign) BOOL storeIsReady;
 @property (nonatomic, assign) BOOL hasDataForImport;
-@property (nonatomic, strong) NSData * xmlImportData;
-@property (nonatomic, strong) NSString * xmlTmpPath;
+@property (nonatomic, strong) NSData *xmlImportData;
+@property (nonatomic, strong) NSString *xmlTmpPath;
 
-+(CoreDataManager *)sharedInstance;
++ (CoreDataManager *)sharedInstance;
 
 - (void)setUpCoreDataManager;
 
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error;
 
-- (void)saveContextAndWait:(NSError **)error;
+- (BOOL)saveContextAndWait:(NSError **)error;
 
-- (void)saveContext:(NSError **)error;
+- (BOOL)saveContext:(NSError **)error;
 
 - (NSURL *)applicationDocumentsDirectory;
 
-- (void)addFileToImportList:(NSURL *)sourceURL error:(NSError **)error;
+- (BOOL)addFileToImportList:(NSURL *)sourceURL error:(NSError **)error;
 
 - (void)fetchiStayHealthyRecordWithCompletion:(iStayHealthyRecordCompletionBlock)completion;
 

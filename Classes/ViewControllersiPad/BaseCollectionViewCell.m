@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GeneralSettings.h"
 #import "Contacts.h"
+#import "UIFont+Standard.h"
 
 @interface BaseCollectionViewCell ()
 @property (nonatomic, strong, readwrite) UIView *titleView;
@@ -72,21 +73,23 @@
 	dateLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
 	dateLabel.backgroundColor = [UIColor lightGrayColor];
 	dateLabel.textColor = [UIColor whiteColor];
-	dateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
+	dateLabel.font = [UIFont fontWithType:Bold size:standard];
 	dateLabel.text = [dateFormatter stringFromDate:date];
 	dateLabel.textAlignment = NSTextAlignmentCenter;
 	[self.titleView addSubview:dateLabel];
 }
 
-- (void)addTitle:(NSString *)title font:(UIFont *)font
+- (void)addTitle:(NSString *)title
 {
-	UILabel *titleLabel = [[UILabel alloc] init];
-	titleLabel.frame = CGRectMake(0, 2, self.titleView.frame.size.width, self.titleView.frame.size.height);
+	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, self.titleView.frame.size.width, self.titleView.frame.size.height)];
+	titleLabel.layer.cornerRadius = 6;
+	titleLabel.layer.borderWidth = 1;
+	titleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+	titleLabel.backgroundColor = [UIColor lightGrayColor];
+	titleLabel.textColor = [UIColor whiteColor];
+	titleLabel.font = [UIFont fontWithType:Bold size:standard];
 	titleLabel.text = title;
-	titleLabel.backgroundColor = [UIColor clearColor];
-	titleLabel.textColor = TEXTCOLOUR;
 	titleLabel.textAlignment = NSTextAlignmentCenter;
-	titleLabel.font = font;
 	[self.titleView addSubview:titleLabel];
 }
 

@@ -11,6 +11,7 @@
 #import "BaseCollectionViewCell.h"
 #import "Contacts+Handling.h"
 #import "EditContactsTableViewController.h"
+#import "UIFont+Standard.h"
 
 #define kClinicsCollectionCellIdentifier @"ClinicsCollectionCellIdentifier"
 
@@ -71,6 +72,7 @@
 	{
 		[cell setManagedObject:contact];
 	}
+	[cell addTitle:contact.ClinicName];
 
 	return cell;
 }
