@@ -73,6 +73,8 @@
 		0B89111518F93CA500A49B95 /* ziagen.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910EF18F93CA500A49B95 /* ziagen.png */; };
 		0B89111618F93CA500A49B95 /* zidovudine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910F018F93CA500A49B95 /* zidovudine.png */; };
 		0B89111818F93D3200A49B95 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B89111718F93D3200A49B95 /* edurant.png */; };
+		0B89111D18F9407D00A49B95 /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111A18F9407D00A49B95 /* PWESSlideTransition.m */; };
+		0B89111E18F9407D00A49B95 /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
@@ -85,8 +87,6 @@
 		0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771EE18F32D8C00523DF6 /* SideEffectsCollectionViewController.m */; };
 		0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */; };
 		0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */; };
-		0BB8F4F718E36CBC00C3CCBA /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */; };
-		0BB8F4F818E36CBC00C3CCBA /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */; };
 		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -407,6 +407,11 @@
 		0B8910EF18F93CA500A49B95 /* ziagen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ziagen.png; path = Classes/Assets/MedicationImages/ziagen.png; sourceTree = "<group>"; };
 		0B8910F018F93CA500A49B95 /* zidovudine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zidovudine.png; path = Classes/Assets/MedicationImages/zidovudine.png; sourceTree = "<group>"; };
 		0B89111718F93D3200A49B95 /* edurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edurant.png; path = Classes/Assets/MedicationImages/edurant.png; sourceTree = "<group>"; };
+		0B89111918F9407D00A49B95 /* PWESSlideTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSlideTransition.h; path = Animations/PWESSlideTransition.h; sourceTree = "<group>"; };
+		0B89111A18F9407D00A49B95 /* PWESSlideTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSlideTransition.m; path = Animations/PWESSlideTransition.m; sourceTree = "<group>"; };
+		0B89111B18F9407D00A49B95 /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESZoomTransition.h; path = Animations/PWESZoomTransition.h; sourceTree = "<group>"; };
+		0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESZoomTransition.m; path = Animations/PWESZoomTransition.m; sourceTree = "<group>"; };
+		0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESNavigationDelegate.h; path = ViewControllersCommon/PWESNavigationDelegate.h; sourceTree = "<group>"; };
 		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
 		0BAC2F0D1876E7B400D452A7 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
 		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
@@ -432,11 +437,6 @@
 		0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissedMedicationCollectionViewController.m; path = ViewControllersiPad/MissedMedicationCollectionViewController.m; sourceTree = "<group>"; };
 		0BB771F318F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsAlertsCollectionViewController.h; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.h; sourceTree = "<group>"; };
 		0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAlertsCollectionViewController.m; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.m; sourceTree = "<group>"; };
-		0BB8F4F318E36CBC00C3CCBA /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESZoomTransition.h; sourceTree = "<group>"; };
-		0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESZoomTransition.m; sourceTree = "<group>"; };
-		0BB8F4F518E36CBC00C3CCBA /* PWESSlideTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESSlideTransition.h; sourceTree = "<group>"; };
-		0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESSlideTransition.m; sourceTree = "<group>"; };
-		0BB8F4F918E36F4D00C3CCBA /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWESNavigationDelegate.h; sourceTree = "<group>"; };
 		0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPopoverDelegate.h; path = ViewControllersiPad/PWESPopoverDelegate.h; sourceTree = "<group>"; };
 		0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESToolbarDelegate.h; path = ViewControllersiPad/PWESToolbarDelegate.h; sourceTree = "<group>"; };
 		0BCBA8E018699B870098D2DA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -883,10 +883,10 @@
 		0BB8F4F218E36C9600C3CCBA /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				0BB8F4F318E36CBC00C3CCBA /* PWESZoomTransition.h */,
-				0BB8F4F418E36CBC00C3CCBA /* PWESZoomTransition.m */,
-				0BB8F4F518E36CBC00C3CCBA /* PWESSlideTransition.h */,
-				0BB8F4F618E36CBC00C3CCBA /* PWESSlideTransition.m */,
+				0B89111918F9407D00A49B95 /* PWESSlideTransition.h */,
+				0B89111A18F9407D00A49B95 /* PWESSlideTransition.m */,
+				0B89111B18F9407D00A49B95 /* PWESZoomTransition.h */,
+				0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -1146,7 +1146,7 @@
 				C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */,
 				C46EB5DA17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.h */,
 				C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */,
-				0BB8F4F918E36F4D00C3CCBA /* PWESNavigationDelegate.h */,
+				0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */,
 				C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */,
 				C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */,
 				C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */,
@@ -1746,6 +1746,7 @@
 				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
 				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,
+				0B89111E18F9407D00A49B95 /* PWESZoomTransition.m in Sources */,
 				C4BCF0A217B7A9DA00F1E0F7 /* SideEffects+Handling.m in Sources */,
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */,
@@ -1761,10 +1762,8 @@
 				C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */,
 				0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */,
 				C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */,
-				0BB8F4F718E36CBC00C3CCBA /* PWESZoomTransition.m in Sources */,
 				0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */,
 				C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */,
-				0BB8F4F818E36CBC00C3CCBA /* PWESSlideTransition.m in Sources */,
 				0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */,
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
@@ -1861,6 +1860,7 @@
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
+				0B89111D18F9407D00A49B95 /* PWESSlideTransition.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */,
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
