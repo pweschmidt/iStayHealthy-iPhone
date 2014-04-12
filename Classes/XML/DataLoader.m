@@ -87,7 +87,7 @@
 
 - (BOOL)hasRecords
 {
-	int count = self.allMedications.count;
+	NSUInteger count = self.allMedications.count;
 	count += self.allMissedMeds.count;
 	count += self.allPreviousMedications.count;
 	count += self.allSideEffects.count;

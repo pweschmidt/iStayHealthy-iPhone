@@ -285,7 +285,7 @@
 	}
 	else
 	{
-		identifier = [NSString stringWithFormat:@"OtherCell%d", indexPath.row];
+		identifier = [NSString stringWithFormat:@"OtherCell%ld", (long)indexPath.row];
 	}
 	return identifier;
 }
