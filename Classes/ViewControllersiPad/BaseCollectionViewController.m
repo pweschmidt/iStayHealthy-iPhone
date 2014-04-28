@@ -37,7 +37,7 @@
 	self.collectionViewLayout.headerReferenceSize = CGSizeMake(self.view.bounds.size.width - 40, 40);
 	self.collectionViewLayout.minimumInteritemSpacing = 20;
 	self.collectionViewLayout.minimumLineSpacing = 20;
-	self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//	self.collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
 	CGRect frame = self.view.bounds;
 	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))

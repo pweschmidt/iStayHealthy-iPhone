@@ -9,7 +9,9 @@
 
 
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-    #import <CoreData/CoreData.h>
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+	#import <CoreData/CoreData.h>
+	#import "Constants.h"
+	#import "GeneralSettings.h"
 #endif

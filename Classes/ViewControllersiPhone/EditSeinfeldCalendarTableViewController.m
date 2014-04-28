@@ -12,7 +12,7 @@
 #import "SeinfeldCalendar.h"
 #import "UILabel+Standard.h"
 #import "Utilities.h"
-#import "StarView.h"
+#import "PWESStar.h"
 
 @interface EditSeinfeldCalendarTableViewController ()
 @property (nonatomic, strong) UISegmentedControl *calendarSegmentControl;
