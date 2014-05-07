@@ -25,11 +25,21 @@
 @end
 
 @implementation EditOtherMedsTableViewController
+- (id)  initWithStyle:(UITableViewStyle)style
+        managedObject:(NSManagedObject *)managedObject
+    hasNumericalInput:(BOOL)hasNumericalInput
+{
+	self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
+	if (nil != self)
+	{
+		[self populateValueMap];
+	}
+	return self;
+}
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	[self populateValues];
 	if (self.isEditMode)
 	{
 		self.navigationItem.title = NSLocalizedString(@"Edit Other Medication", nil);
@@ -40,7 +50,7 @@
 	}
 }
 
-- (void)populateValues
+- (void)populateValueMap
 {
 	self.valueMap = [NSMutableDictionary dictionary];
 	self.editMenu = @[kName, kDose];
@@ -72,7 +82,7 @@
 				}
 		        else if ([value isKindOfClass:[NSString class]])
 		        {
-		            if (kUnit == attribute)
+		            if ([kUnit isEqualToString:attribute])
 		            {
 		                NSString *unit = (NSString *)value;
 		                NSInteger index = [self.unitArray indexOfObject:unit];
@@ -206,7 +216,7 @@
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
 {
-	[super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+	[super configureTableCell:cell title:title indexPath:indexPath segmentIndex:0 hasNumericalInput:hasNumericalInput];
 	NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
 	NSString *key = [self.editMenu objectAtIndex:indexPath.row];
 	NSString *value = [self.valueMap objectForKey:key];
@@ -223,6 +233,13 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+	[super textFieldDidEndEditing:textField];
+	if (nil == textField.text
+	    || [textField.text isEqualToString:@""]
+	    || [textField.text isEqualToString:textField.placeholder])
+	{
+		return;
+	}
 	NSInteger tag = textField.tag - 1;
 	if (0 <= tag && tag < self.editMenu.count)
 	{

@@ -20,11 +20,21 @@
 @end
 
 @implementation EditProceduresTableViewController
+- (id)  initWithStyle:(UITableViewStyle)style
+        managedObject:(NSManagedObject *)managedObject
+    hasNumericalInput:(BOOL)hasNumericalInput
+{
+	self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
+	if (nil != self)
+	{
+		[self populateValueMap];
+	}
+	return self;
+}
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	[self populateValues];
 	if (self.isEditMode)
 	{
 		self.navigationItem.title = NSLocalizedString(@"Edit Illness", nil);
@@ -35,7 +45,7 @@
 	}
 }
 
-- (void)populateValues
+- (void)populateValueMap
 {
 	self.valueMap = [NSMutableDictionary dictionary];
 	self.editMenu = @[kName,
@@ -174,7 +184,7 @@
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
 {
-	[super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+	[super configureTableCell:cell title:title indexPath:indexPath segmentIndex:0 hasNumericalInput:hasNumericalInput];
 	NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
 	NSString *key = [self.editMenu objectAtIndex:indexPath.row];
 	NSString *value = [self.valueMap objectForKey:key];

@@ -113,22 +113,6 @@
 		}
 	}
 
-	/*
-	   int index = 0;
-	   for (NSNumber *number in self.textViews.allKeys)
-	   {
-	    id viewObj = [self.textViews objectForKey:number];
-	    if (nil != viewObj && [viewObj isKindOfClass:[UITextField class]] &&
-	        index < self.editMenu.count)
-	    {
-	        UITextField *textField = (UITextField *)viewObj;
-	        NSString *valueString = textField.text;
-	        NSString *type = [self.editMenu objectAtIndex:index];
-	        [contact addValueString:valueString type:type];
-	    }
-	   ++index;
-	   }
-	 */
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContext:&error];
 	[self popController];
