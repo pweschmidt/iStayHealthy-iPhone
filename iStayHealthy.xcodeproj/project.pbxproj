@@ -12,7 +12,6 @@
 		0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCF2189D53AE00008590 /* SideEffects.m */; };
 		0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */; };
 		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
-		0B19DCC9190EE5B7003FE3C6 /* PWESStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B19DCC8190EE5B7003FE3C6 /* PWESStar.m */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F19461866F9F00091704C /* EditChartsTableViewController.m */; };
@@ -76,6 +75,11 @@
 		0B89111818F93D3200A49B95 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B89111718F93D3200A49B95 /* edurant.png */; };
 		0B89111D18F9407D00A49B95 /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111A18F9407D00A49B95 /* PWESSlideTransition.m */; };
 		0B89111E18F9407D00A49B95 /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */; };
+		0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D0738191ABDB900D293E0 /* PWESStar.m */; };
+		0B9D073C191ABE4100D293E0 /* PWESSeinfeldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D073B191ABE4100D293E0 /* PWESSeinfeldViewController.m */; };
+		0B9D073F191ABFFC00D293E0 /* PWESCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D073E191ABFFC00D293E0 /* PWESCalendar.m */; };
+		0B9D0742191AC1B400D293E0 /* PWESSeinfeldMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D0741191AC1B400D293E0 /* PWESSeinfeldMonth.m */; };
+		0B9D0745191AC29600D293E0 /* PWESMonthlyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D0744191AC29600D293E0 /* PWESMonthlyView.m */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
@@ -315,8 +319,6 @@
 		0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+iStayHealthy.m"; path = "Categories/UIBarButtonItem+iStayHealthy.m"; sourceTree = "<group>"; };
 		0B0C4F6918A664B300D22990 /* CustomToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomToolbar.h; path = ViewControllersiPad/CustomToolbar.h; sourceTree = "<group>"; };
 		0B0C4F6A18A664B300D22990 /* CustomToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomToolbar.m; path = ViewControllersiPad/CustomToolbar.m; sourceTree = "<group>"; };
-		0B19DCC7190EE5B7003FE3C6 /* PWESStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESStar.h; sourceTree = "<group>"; };
-		0B19DCC8190EE5B7003FE3C6 /* PWESStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESStar.m; sourceTree = "<group>"; };
 		0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEndDateTableViewController.h; path = ViewControllersCommon/BaseEndDateTableViewController.h; sourceTree = "<group>"; };
 		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
 		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
@@ -412,6 +414,17 @@
 		0B89111B18F9407D00A49B95 /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESZoomTransition.h; path = Animations/PWESZoomTransition.h; sourceTree = "<group>"; };
 		0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESZoomTransition.m; path = Animations/PWESZoomTransition.m; sourceTree = "<group>"; };
 		0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESNavigationDelegate.h; path = ViewControllersCommon/PWESNavigationDelegate.h; sourceTree = "<group>"; };
+		0B9D0737191ABDB900D293E0 /* PWESStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESStar.h; path = SeinfeldCalendar/PWESStar.h; sourceTree = "<group>"; };
+		0B9D0738191ABDB900D293E0 /* PWESStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESStar.m; path = SeinfeldCalendar/PWESStar.m; sourceTree = "<group>"; };
+		0B9D073A191ABE4100D293E0 /* PWESSeinfeldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSeinfeldViewController.h; path = SeinfeldCalendar/PWESSeinfeldViewController.h; sourceTree = "<group>"; };
+		0B9D073B191ABE4100D293E0 /* PWESSeinfeldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldViewController.m; path = SeinfeldCalendar/PWESSeinfeldViewController.m; sourceTree = "<group>"; };
+		0B9D073D191ABFFC00D293E0 /* PWESCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESCalendar.h; sourceTree = "<group>"; };
+		0B9D073E191ABFFC00D293E0 /* PWESCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESCalendar.m; sourceTree = "<group>"; };
+		0B9D0740191AC1B400D293E0 /* PWESSeinfeldMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESSeinfeldMonth.h; sourceTree = "<group>"; };
+		0B9D0741191AC1B400D293E0 /* PWESSeinfeldMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESSeinfeldMonth.m; sourceTree = "<group>"; };
+		0B9D0743191AC29600D293E0 /* PWESMonthlyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWESMonthlyView.h; sourceTree = "<group>"; };
+		0B9D0744191AC29600D293E0 /* PWESMonthlyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWESMonthlyView.m; sourceTree = "<group>"; };
+		0B9D0746191AC2A400D293E0 /* PWESResultsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWESResultsDelegate.h; sourceTree = "<group>"; };
 		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
 		0BAC2F0D1876E7B400D452A7 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
 		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
@@ -857,6 +870,7 @@
 				C463742A17E9F12100D19B94 /* Dashboard */,
 				C4B803C112D36E6700A5A38F /* DataModelClasses */,
 				C46C5DF217EDAEFA00866DBD /* GoogleAdMob */,
+				0B9D0736191ABD9F00D293E0 /* SeinfeldCalendar */,
 				C45C27B617DB265F001F6831 /* TableCells */,
 				C4952D1917F21DA40022EFEF /* TestFlightSDK */,
 				C4C41A1F15F1421800882416 /* Utils */,
@@ -870,6 +884,24 @@
 				C4DF910A15EE79560042211E /* Constants.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		0B9D0736191ABD9F00D293E0 /* SeinfeldCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				0B9D073D191ABFFC00D293E0 /* PWESCalendar.h */,
+				0B9D073E191ABFFC00D293E0 /* PWESCalendar.m */,
+				0B9D0743191AC29600D293E0 /* PWESMonthlyView.h */,
+				0B9D0744191AC29600D293E0 /* PWESMonthlyView.m */,
+				0B9D0746191AC2A400D293E0 /* PWESResultsDelegate.h */,
+				0B9D0740191AC1B400D293E0 /* PWESSeinfeldMonth.h */,
+				0B9D0741191AC1B400D293E0 /* PWESSeinfeldMonth.m */,
+				0B9D0737191ABDB900D293E0 /* PWESStar.h */,
+				0B9D0738191ABDB900D293E0 /* PWESStar.m */,
+				0B9D073A191ABE4100D293E0 /* PWESSeinfeldViewController.h */,
+				0B9D073B191ABE4100D293E0 /* PWESSeinfeldViewController.m */,
+			);
+			name = SeinfeldCalendar;
 			sourceTree = "<group>";
 		};
 		0BB8F4F218E36C9600C3CCBA /* Animations */ = {
@@ -975,8 +1007,6 @@
 				0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
 				C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */,
-				0B19DCC7190EE5B7003FE3C6 /* PWESStar.h */,
-				0B19DCC8190EE5B7003FE3C6 /* PWESStar.m */,
 				C4A49AD718002CD300FC1637 /* TimeView.h */,
 				C4A49AD818002CD400FC1637 /* TimeView.m */,
 			);
@@ -1739,11 +1769,13 @@
 				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
 				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
+				0B9D0745191AC29600D293E0 /* PWESMonthlyView.m in Sources */,
 				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,
 				0B89111E18F9407D00A49B95 /* PWESZoomTransition.m in Sources */,
 				C4BCF0A217B7A9DA00F1E0F7 /* SideEffects+Handling.m in Sources */,
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */,
+				0B9D073F191ABFFC00D293E0 /* PWESCalendar.m in Sources */,
 				C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */,
 				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
 				C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */,
@@ -1816,6 +1848,7 @@
 				C45D00F017BAB403001AE0CB /* EditResultsTableViewController.m in Sources */,
 				C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */,
 				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,
+				0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */,
 				C46EB5E817EB819800B9EA5A /* AppointmentsTableViewController.m in Sources */,
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
@@ -1832,7 +1865,6 @@
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
-				0B19DCC9190EE5B7003FE3C6 /* PWESStar.m in Sources */,
 				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
@@ -1847,6 +1879,7 @@
 				0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */,
 				C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
+				0B9D073C191ABE4100D293E0 /* PWESSeinfeldViewController.m in Sources */,
 				C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
@@ -1860,6 +1893,7 @@
 				0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
+				0B9D0742191AC1B400D293E0 /* PWESSeinfeldMonth.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
 				C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */,
 				C4C8F9AF18118DD10011885D /* EditDashboardTableViewController.m in Sources */,

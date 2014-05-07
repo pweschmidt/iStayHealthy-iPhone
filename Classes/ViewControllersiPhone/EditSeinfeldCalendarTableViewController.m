@@ -65,7 +65,7 @@
 	[self populateCalendars];
 	[super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
-	NSArray *menuTitles = @[@"1", @"2", @"3", @"4"];
+	NSArray *menuTitles = @[@"1", @"2", @"3"];
 	self.calendarSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
 	CGFloat width = self.tableView.bounds.size.width;
 	CGFloat segmentWidth = width - 2 * 20;

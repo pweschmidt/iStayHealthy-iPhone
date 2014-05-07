@@ -16,7 +16,8 @@
 #import "MyHIVMedicationViewController.h"
 #import "MissedMedicationsTableViewController.h"
 #import "SideEffectsTableViewController.h"
-#import "SeinfeldCalendarViewController.h"
+#import "PWESSeinfeldViewController.h"
+//#import "SeinfeldCalendarViewController.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "Constants.h"
@@ -214,7 +215,7 @@
 	}
 	else if ([kMedicationDiaryController isEqualToString:controllerName])
 	{
-		SeinfeldCalendarViewController *calendarController = [[SeinfeldCalendarViewController alloc] init];
+		PWESSeinfeldViewController *calendarController = [[PWESSeinfeldViewController alloc] init];
 		navigationController = [[ContentNavigationController alloc]
 		                        initWithRootViewController:calendarController];
 	}

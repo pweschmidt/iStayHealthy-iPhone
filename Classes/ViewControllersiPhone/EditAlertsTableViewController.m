@@ -186,29 +186,6 @@
 		       hasNumericalInput:NO];
 		return cell;
 	}
-
-//	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//	if (nil == cell)
-//	{
-//		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-//		                              reuseIdentifier:identifier];
-//	}
-//	if (0 == indexPath.section)
-//	{
-//		if (0 == indexPath.row)
-//		{
-//			[self configureDateCell:cell indexPath:indexPath dateType:TimeOnly];
-//		}
-//	}
-//	else
-//	{
-//		NSString *localisedText = NSLocalizedString([self.editMenu objectAtIndex:indexPath.row], nil);
-//		[self configureTableCell:cell
-//		                   title:localisedText
-//		               indexPath:indexPath
-//		       hasNumericalInput:NO];
-//	}
-//	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
