@@ -168,6 +168,11 @@
 	{
 		months = 1;
 	}
+	NSInteger lastDay = end.day - 1;
+	if (0 < lastDay)
+	{
+		months++;
+	}
 	return months;
 }
 
