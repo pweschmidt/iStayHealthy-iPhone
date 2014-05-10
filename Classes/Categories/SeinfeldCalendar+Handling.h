@@ -7,6 +7,7 @@
 //
 
 #import "SeinfeldCalendar.h"
+#import "NSManagedObject+Handling.h"
 #import "SeinfeldCalendarEntry.h"
 
 @interface SeinfeldCalendar (Handling)

@@ -7,8 +7,8 @@
 //
 
 #import "Wellness.h"
+#import "NSManagedObject+Handling.h"
 
 @interface Wellness (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
-- (NSString *)xmlString;
 @end

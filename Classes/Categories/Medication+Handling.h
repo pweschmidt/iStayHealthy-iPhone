@@ -7,8 +7,8 @@
 //
 
 #import "Medication.h"
+#import "NSManagedObject+Handling.h"
 
 @interface Medication (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
-- (NSString *)xmlString;
 @end

@@ -211,7 +211,7 @@
 	}
 	NSEntityDescription *entity = [NSEntityDescription
 	                               entityForName:entityName
-	                                                                   inManagedObjectContext:self.defaultContext];
+	                                                                   inManagedObjectContext:context];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:entity];
 	if (nil != predicate)

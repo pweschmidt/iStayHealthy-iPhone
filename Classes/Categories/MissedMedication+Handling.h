@@ -7,6 +7,7 @@
 //
 
 #import "MissedMedication.h"
+#import "NSManagedObject+Handling.h"
 
 @interface MissedMedication (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;

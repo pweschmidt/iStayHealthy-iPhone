@@ -30,8 +30,6 @@
 		0B8910B918F9330A00A49B95 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8910B318F9330A00A49B95 /* libTestFlight.a */; };
 		0B8910BA18F9330A00A49B95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910B418F9330A00A49B95 /* README.md */; };
 		0B8910BB18F9330A00A49B95 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910B518F9330A00A49B95 /* release_notes.md */; };
-		0B8910C718F9331F00A49B95 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8910C518F9331F00A49B95 /* libGoogleAdMobAds.a */; };
-		0B8910C818F9331F00A49B95 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910C618F9331F00A49B95 /* README.txt */; };
 		0B8910CA18F9363900A49B95 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910C918F9363900A49B95 /* Default-568h@2x.png */; };
 		0B8910F118F93CA500A49B95 /* aptivus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910CB18F93CA500A49B95 /* aptivus.png */; };
 		0B8910F218F93CA500A49B95 /* atripla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910CC18F93CA500A49B95 /* atripla.png */; };
@@ -90,6 +88,7 @@
 		0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A5191E38F900731739 /* PWESMonthlyView.m */; };
 		0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */; };
 		0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566AD191E392000731739 /* PWESSeinfeldCollectionViewController.m */; };
+		0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566B0191E674A00731739 /* CoreCSVWriter.m */; };
 		0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */; };
 		0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E518F324FA00523DF6 /* MyHIVCollectionViewController.m */; };
 		0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */; };
@@ -271,11 +270,6 @@
 		C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */; };
 		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
 		C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C3494F130EF201004BE854 /* AVFoundation.framework */; };
-		C4C418D515F1363C00882416 /* DataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418CB15F1363C00882416 /* DataLoader.m */; };
-		C4C418D615F1363C00882416 /* XMLAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418CD15F1363C00882416 /* XMLAttribute.m */; };
-		C4C418D715F1363C00882416 /* XMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418D015F1363C00882416 /* XMLDocument.m */; };
-		C4C418D815F1363C00882416 /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418D215F1363C00882416 /* XMLElement.m */; };
-		C4C418D915F1363C00882416 /* XMLLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C418D415F1363C00882416 /* XMLLoader.m */; };
 		C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2115F1432E00882416 /* GradientButton.m */; };
 		C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2315F1432E00882416 /* NSArray-Set.m */; };
 		C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2515F1432E00882416 /* UIImageResizer.m */; };
@@ -370,17 +364,6 @@
 		0B8910B618F9330A00A49B95 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlight/TestFlight.h; sourceTree = "<group>"; };
 		0B8910B718F9330A00A49B95 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlight/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		0B8910B818F9330A00A49B95 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlight/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		0B8910BC18F9331F00A49B95 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = GoogleAdMob/GADAdMobExtras.h; sourceTree = "<group>"; };
-		0B8910BD18F9331F00A49B95 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = GoogleAdMob/GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		0B8910BE18F9331F00A49B95 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = GoogleAdMob/GADAdSize.h; sourceTree = "<group>"; };
-		0B8910BF18F9331F00A49B95 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerView.h; path = GoogleAdMob/GADBannerView.h; sourceTree = "<group>"; };
-		0B8910C018F9331F00A49B95 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerViewDelegate.h; path = GoogleAdMob/GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		0B8910C118F9331F00A49B95 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitial.h; path = GoogleAdMob/GADInterstitial.h; sourceTree = "<group>"; };
-		0B8910C218F9331F00A49B95 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitialDelegate.h; path = GoogleAdMob/GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		0B8910C318F9331F00A49B95 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequest.h; path = GoogleAdMob/GADRequest.h; sourceTree = "<group>"; };
-		0B8910C418F9331F00A49B95 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequestError.h; path = GoogleAdMob/GADRequestError.h; sourceTree = "<group>"; };
-		0B8910C518F9331F00A49B95 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = GoogleAdMob/libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		0B8910C618F9331F00A49B95 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = GoogleAdMob/README.txt; sourceTree = "<group>"; };
 		0B8910C918F9363900A49B95 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Classes/Assets/Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B8910CB18F93CA500A49B95 /* aptivus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aptivus.png; path = Classes/Assets/MedicationImages/aptivus.png; sourceTree = "<group>"; };
 		0B8910CC18F93CA500A49B95 /* atripla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = atripla.png; path = Classes/Assets/MedicationImages/atripla.png; sourceTree = "<group>"; };
@@ -456,6 +439,8 @@
 		0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldMonth.m; path = SeinfeldCalendar/PWESSeinfeldMonth.m; sourceTree = "<group>"; };
 		0BB566AC191E392000731739 /* PWESSeinfeldCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSeinfeldCollectionViewController.h; path = SeinfeldCalendar/PWESSeinfeldCollectionViewController.h; sourceTree = "<group>"; };
 		0BB566AD191E392000731739 /* PWESSeinfeldCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldCollectionViewController.m; path = SeinfeldCalendar/PWESSeinfeldCollectionViewController.m; sourceTree = "<group>"; };
+		0BB566AF191E674A00731739 /* CoreCSVWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreCSVWriter.h; path = CoreDataManagement/CoreCSVWriter.h; sourceTree = "<group>"; };
+		0BB566B0191E674A00731739 /* CoreCSVWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreCSVWriter.m; path = CoreDataManagement/CoreCSVWriter.m; sourceTree = "<group>"; };
 		0BB771E118F321C600523DF6 /* OtherMedsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedsCollectionViewController.h; path = ViewControllersiPad/OtherMedsCollectionViewController.h; sourceTree = "<group>"; };
 		0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedsCollectionViewController.m; path = ViewControllersiPad/OtherMedsCollectionViewController.m; sourceTree = "<group>"; };
 		0BB771E418F324FA00523DF6 /* MyHIVCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVCollectionViewController.h; path = ViewControllersiPad/MyHIVCollectionViewController.h; sourceTree = "<group>"; };
@@ -778,16 +763,6 @@
 		C4C0151A134251B4005E889D /* HIVMedications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HIVMedications.plist; sourceTree = "<group>"; };
 		C4C0300E136842210080A9FE /* iStayHealthy 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 4.xcdatamodel"; sourceTree = "<group>"; };
 		C4C3494F130EF201004BE854 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		C4C418CA15F1363C00882416 /* DataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataLoader.h; path = XML/DataLoader.h; sourceTree = "<group>"; };
-		C4C418CB15F1363C00882416 /* DataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataLoader.m; path = XML/DataLoader.m; sourceTree = "<group>"; };
-		C4C418CC15F1363C00882416 /* XMLAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLAttribute.h; path = XML/XMLAttribute.h; sourceTree = "<group>"; };
-		C4C418CD15F1363C00882416 /* XMLAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLAttribute.m; path = XML/XMLAttribute.m; sourceTree = "<group>"; };
-		C4C418CF15F1363C00882416 /* XMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDocument.h; path = XML/XMLDocument.h; sourceTree = "<group>"; };
-		C4C418D015F1363C00882416 /* XMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDocument.m; path = XML/XMLDocument.m; sourceTree = "<group>"; };
-		C4C418D115F1363C00882416 /* XMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLElement.h; path = XML/XMLElement.h; sourceTree = "<group>"; };
-		C4C418D215F1363C00882416 /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLElement.m; path = XML/XMLElement.m; sourceTree = "<group>"; };
-		C4C418D315F1363C00882416 /* XMLLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLLoader.h; path = XML/XMLLoader.h; sourceTree = "<group>"; };
-		C4C418D415F1363C00882416 /* XMLLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLLoader.m; path = XML/XMLLoader.m; sourceTree = "<group>"; };
 		C4C41A2015F1432E00882416 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientButton.h; path = Utils/GradientButton.h; sourceTree = "<group>"; };
 		C4C41A2115F1432E00882416 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradientButton.m; path = Utils/GradientButton.m; sourceTree = "<group>"; };
 		C4C41A2215F1432E00882416 /* NSArray-Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray-Set.h"; path = "Utils/NSArray-Set.h"; sourceTree = "<group>"; };
@@ -874,7 +849,6 @@
 				C4574AE314939D2300793164 /* libm.dylib in Frameworks */,
 				0B8910B918F9330A00A49B95 /* libTestFlight.a in Frameworks */,
 				C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */,
-				0B8910C718F9331F00A49B95 /* libGoogleAdMobAds.a in Frameworks */,
 				C4FB103513A4BF05009270C5 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -897,7 +871,6 @@
 				C45F838C17B6A5F40042E63A /* CoreXML */,
 				C463742A17E9F12100D19B94 /* Dashboard */,
 				C4B803C112D36E6700A5A38F /* DataModelClasses */,
-				C46C5DF217EDAEFA00866DBD /* GoogleAdMob */,
 				0B9D0736191ABD9F00D293E0 /* SeinfeldCalendar */,
 				C45C27B617DB265F001F6831 /* TableCells */,
 				C4952D1917F21DA40022EFEF /* TestFlightSDK */,
@@ -906,7 +879,6 @@
 				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
 				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
 				C45A98E217EEE35A004E13C7 /* Views */,
-				C465975913EE96D500006F72 /* XML */,
 				C4DE024612D5F99C005C0043 /* GeneralSettings.h */,
 				C4DF910915EE79560042211E /* Constants.h */,
 				C4DF910A15EE79560042211E /* Constants.m */,
@@ -1133,41 +1105,6 @@
 				0B60485B1840D1BA0092B5FB /* PWESValueRange.m */,
 			);
 			name = Dashboard;
-			sourceTree = "<group>";
-		};
-		C465975913EE96D500006F72 /* XML */ = {
-			isa = PBXGroup;
-			children = (
-				C4C418CA15F1363C00882416 /* DataLoader.h */,
-				C4C418CB15F1363C00882416 /* DataLoader.m */,
-				C4C418CC15F1363C00882416 /* XMLAttribute.h */,
-				C4C418CD15F1363C00882416 /* XMLAttribute.m */,
-				C4C418CF15F1363C00882416 /* XMLDocument.h */,
-				C4C418D015F1363C00882416 /* XMLDocument.m */,
-				C4C418D115F1363C00882416 /* XMLElement.h */,
-				C4C418D215F1363C00882416 /* XMLElement.m */,
-				C4C418D315F1363C00882416 /* XMLLoader.h */,
-				C4C418D415F1363C00882416 /* XMLLoader.m */,
-			);
-			name = XML;
-			sourceTree = "<group>";
-		};
-		C46C5DF217EDAEFA00866DBD /* GoogleAdMob */ = {
-			isa = PBXGroup;
-			children = (
-				0B8910BC18F9331F00A49B95 /* GADAdMobExtras.h */,
-				0B8910BD18F9331F00A49B95 /* GADAdNetworkExtras.h */,
-				0B8910BE18F9331F00A49B95 /* GADAdSize.h */,
-				0B8910BF18F9331F00A49B95 /* GADBannerView.h */,
-				0B8910C018F9331F00A49B95 /* GADBannerViewDelegate.h */,
-				0B8910C118F9331F00A49B95 /* GADInterstitial.h */,
-				0B8910C218F9331F00A49B95 /* GADInterstitialDelegate.h */,
-				0B8910C318F9331F00A49B95 /* GADRequest.h */,
-				0B8910C418F9331F00A49B95 /* GADRequestError.h */,
-				0B8910C518F9331F00A49B95 /* libGoogleAdMobAds.a */,
-				0B8910C618F9331F00A49B95 /* README.txt */,
-			);
-			name = GoogleAdMob;
 			sourceTree = "<group>";
 		};
 		C47DB22617AD04D60037A6DF /* ViewControllersCommon */ = {
@@ -1534,6 +1471,8 @@
 		C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */ = {
 			isa = PBXGroup;
 			children = (
+				0BB566AF191E674A00731739 /* CoreCSVWriter.h */,
+				0BB566B0191E674A00731739 /* CoreCSVWriter.m */,
 				C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */,
 				C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */,
 				C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */,
@@ -1698,7 +1637,6 @@
 				C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */,
 				0B89111318F93CA500A49B95 /* viread.png in Resources */,
 				C44D36D9180F3E5000EE9F5E /* missed.png in Resources */,
-				0B8910C818F9331F00A49B95 /* README.txt in Resources */,
 				C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */,
 				C44D36C7180F3E3600EE9F5E /* mail.png in Resources */,
 				0B89110818F93CA500A49B95 /* stribild.png in Resources */,
@@ -1846,13 +1784,8 @@
 				C46EB5DC17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m in Sources */,
 				C4DF910B15EE79560042211E /* Constants.m in Sources */,
 				C45C27C717DB5A5B001F6831 /* EditAlertsTableViewController.m in Sources */,
-				C4C418D515F1363C00882416 /* DataLoader.m in Sources */,
-				C4C418D615F1363C00882416 /* XMLAttribute.m in Sources */,
 				C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */,
 				0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */,
-				C4C418D715F1363C00882416 /* XMLDocument.m in Sources */,
-				C4C418D815F1363C00882416 /* XMLElement.m in Sources */,
-				C4C418D915F1363C00882416 /* XMLLoader.m in Sources */,
 				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
 				0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
@@ -1898,6 +1831,7 @@
 				C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */,
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
 				0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */,
+				0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */,
 				C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */,
 				C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */,
 				C4C41A2E15F1432E00882416 /* Utilities.m in Sources */,

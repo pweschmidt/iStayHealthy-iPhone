@@ -23,6 +23,7 @@
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
 #import "CustomToolbar.h"
+#import "CoreCSVWriter.h"
 
 @interface BaseViewController ()
 @property (nonatomic, assign) BOOL isPopover;
@@ -362,8 +363,27 @@
 	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
 	if (hasAttachment)
 	{
+		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
+		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
+		    if (nil != csvString)
+		    {
+		        NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
+		        [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
+			}
+		    else
+		    {
+		        [[[UIAlertView alloc]
+		          initWithTitle:@"Error adding attachment" message:[error localizedDescription]
+		               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+		         show];
+			}
+		    [self.navigationController presentViewController:mailController animated:YES completion:nil];
+		}];
 	}
-	[self.navigationController presentViewController:mailController animated:YES completion:nil];
+	else
+	{
+		[self.navigationController presentViewController:mailController animated:YES completion:nil];
+	}
 }
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button

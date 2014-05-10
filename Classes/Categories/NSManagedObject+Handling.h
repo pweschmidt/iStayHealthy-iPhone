@@ -16,4 +16,7 @@
 - (NSString *)xmlClose:(NSString *)name;
 - (NSString *)xmlAttributeString:(NSString *)attributeName
                   attributeValue:(id)attributeValue;
+- (NSString *)xmlString;
+- (NSString *)csvString;
+- (NSString *)csvRowHeader;
 @end

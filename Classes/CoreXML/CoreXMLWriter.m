@@ -23,7 +23,7 @@
 
 static NSArray *dataModels()
 {
-	return @[kResult,
+	return @[kResults,
 	         kMedication,
 	         kMissedMedication,
 	         kSideEffects,
@@ -32,13 +32,12 @@ static NSArray *dataModels()
 	         kOtherMedication,
 	         kPreviousMedication,
 	         kSeinfeldCalendar,
-	         kSeinfeldCalendarEntry,
 	         kWellness];
 }
 
 static NSDictionary *elementParentMap()
 {
-	return @{ kResult : kResults,
+	return @{ kResults : kResults,
 			  kMedication : kMedications,
 			  kMissedMedication : kMissedMedications,
 			  kSideEffects : kHIVSideEffects,
@@ -47,28 +46,40 @@ static NSDictionary *elementParentMap()
 			  kOtherMedication : kOtherMedications,
 			  kPreviousMedication : kPreviousMedications,
 			  kSeinfeldCalendar : kSeinfeldCalendars,
-			  kSeinfeldCalendarEntry : kSeinfeldCalendarEntries,
+			  kWellness : kWellnesses };
+}
+
+static NSDictionary *elementChildMap()
+{
+	return @{ kResults : kResult,
+			  kMedication : kMedication,
+			  kMissedMedication : kMissedMedication,
+			  kSideEffects : kSideEffects,
+			  kContacts : kContacts,
+			  kProcedures : kProcedures,
+			  kOtherMedication : kOtherMedication,
+			  kPreviousMedication : kPreviousMedication,
+			  kSeinfeldCalendar : kSeinfeldCalendar,
 			  kWellness : kWellnesses };
 }
 
 static NSDictionary *sortTerms()
 {
-	return @{ kResult : kResultsDate,
+	return @{ kResults : kResultsDate,
 			  kMedication : kStartDate,
 			  kMissedMedication : kMissedDate,
-			  kPreviousMedication : kEndDate,
+			  kPreviousMedication : kEndDateLowerCase,
 			  kSideEffects : kSideEffectDate,
 			  kOtherMedication : kStartDate,
 			  kProcedures : kDate,
 			  kContacts : kClinicName,
 			  kSeinfeldCalendar : kStartDateLowerCase,
-			  kSeinfeldCalendarEntry : kDateLowerCase,
 			  kWellness : kDateLowerCase };
 }
 
 static NSDictionary *ascendingDictionary()
 {
-	return @{ kResult: @(1),
+	return @{ kResults: @(1),
 			  kMedication : @(1),
 			  kMissedMedication : @(1),
 			  kPreviousMedication : @(1),
@@ -128,6 +139,7 @@ static NSDictionary *ascendingDictionary()
 	    if (nil != array)
 	    {
 	        __block NSUInteger updatedPosition = position;
+
 	        NSString *openElement = [self xmlOpenEnclosingElementForClass:dataModel];
 	        [self.xmlString insertString:openElement atIndex:updatedPosition];
 	        updatedPosition += openElement.length;

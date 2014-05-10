@@ -7,8 +7,8 @@
 //
 
 #import "iStayHealthyRecord.h"
+#import "NSManagedObject+Handling.h"
 
 @interface iStayHealthyRecord (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
-- (NSString *)xmlString;
 @end
