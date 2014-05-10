@@ -42,6 +42,12 @@
 	[self configureCell];
 }
 
+- (void)transparentBackground
+{
+	self.layer.backgroundColor = [UIColor clearColor].CGColor;
+	self.layer.borderColor = [UIColor clearColor].CGColor;
+}
+
 - (void)clear
 {
 	[self.contentView.subviews enumerateObjectsUsingBlock: ^(UIView *view, NSUInteger idx, BOOL *stop) {

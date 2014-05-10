@@ -202,7 +202,7 @@
 	}
 	NSUInteger index = (ignoreFirst) ? indexPath.row - 1 : indexPath.row;
 	NSString *menuName = [menus objectAtIndex:index];
-	return nil;
+	return menuName;
 }
 
 + (NSDictionary *)menuImages

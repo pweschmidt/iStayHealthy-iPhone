@@ -124,7 +124,7 @@
 	}
 
 	UIScrollView *scrollView = [[UIScrollView alloc] init];
-	scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 64, self.view.bounds.size.width, self.view.bounds.size.height - 80);
+	scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 70, self.view.bounds.size.width, self.view.bounds.size.height - 80);
 	scrollView.pagingEnabled = YES;
 	scrollView.scrollEnabled = YES;
 	CGFloat contentHeight = 0.f;
@@ -137,7 +137,9 @@
 		PWESSeinfeldMonth *seinfeldMonth = [PWESSeinfeldMonth monthFromStartDate:self.currentCalendar.startDate
 		                                                              monthIndex:month
 		                                                          numberOfMonths:months];
-		PWESMonthlyView *view = [PWESMonthlyView monthlyViewWithFrame:monthFrame seinfeldMonth:seinfeldMonth];
+		PWESMonthlyView *view = [PWESMonthlyView monthlyViewForCalendar:self.currentCalendar
+		                                                  seinfeldMonth:seinfeldMonth
+		                                                          frame:monthFrame];
 		contentHeight += view.frame.size.height;
 		if (0 == month)
 		{

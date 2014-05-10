@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-@class PWESSeinfeldMonth;
+@class PWESSeinfeldMonth, SeinfeldCalendar;
 @protocol PWESResultsDelegate;
 
 @interface PWESMonthlyView : UIView <UIAlertViewDelegate>
 @property (nonatomic, weak) id <PWESResultsDelegate> resultsDelegate;
-+ (PWESMonthlyView *)monthlyViewWithFrame:(CGRect)monthlyFrame
-                            seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth;
+
++ (PWESMonthlyView *)monthlyViewForCalendar:(SeinfeldCalendar *)calendar
+                              seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+                                      frame:(CGRect)frame;
 @end

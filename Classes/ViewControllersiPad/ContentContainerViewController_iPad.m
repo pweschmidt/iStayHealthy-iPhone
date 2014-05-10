@@ -17,6 +17,7 @@
 #import "NotificationsAlertsCollectionViewController.h"
 #import "ClinicAddressCollectionViewController.h"
 #import "MissedMedicationCollectionViewController.h"
+#import "PWESSeinfeldCollectionViewController.h"
 #import "Constants.h"
 #import "ContentNavigationController_iPad.h"
 #import "DropboxViewController.h"
@@ -185,6 +186,12 @@
 	{
 		MissedMedicationCollectionViewController *controller = [[MissedMedicationCollectionViewController alloc] init];
 		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:controller];
+	}
+	else if ([kMedicationDiaryController isEqualToString:controllerName])
+	{
+		PWESSeinfeldCollectionViewController *calendarController = [[PWESSeinfeldCollectionViewController alloc] init];
+		navigationController = [[ContentNavigationController_iPad alloc]
+		                        initWithRootViewController:calendarController];
 	}
 	else if ([kProceduresController isEqualToString:controllerName])
 	{

@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0BB5668A191E132F00731739"
+               BuildableName = "iStayHealthy Tests.xctest"
+               BlueprintName = "iStayHealthy Tests"
+               ReferencedContainer = "container:iStayHealthy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

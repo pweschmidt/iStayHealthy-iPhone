@@ -9,12 +9,14 @@
 #import "PWESMonthlyView.h"
 #import "PWESCalendar.h"
 #import "PWESSeinfeldMonth.h"
+#import "SeinfeldCalendar+Handling.h"
 #import "SeinfeldCalendarEntry.h"
 #import "PWESResultsDelegate.h"
 #import "CoreDataManager.h"
 #import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreText/CoreText.h>
+
 
 @interface PWESMonthlyView ()
 {
@@ -25,7 +27,10 @@
 @property (nonatomic, strong) NSMutableArray *dates;
 @property (nonatomic, strong) NSMutableArray *layers;
 @property (nonatomic, strong) CATextLayer *tappedLayer;
+@property (nonatomic, strong) CALayer *tappedBackgroundLayer;
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecogniser;
+@property (nonatomic, strong) SeinfeldCalendar *calender;
+@property (nonatomic, strong) NSArray *entriesForMonth;
 @end
 
 @implementation PWESMonthlyView
@@ -36,35 +41,41 @@
 	if (self)
 	{
 		_tappedLayer = nil;
+		_tappedBackgroundLayer = nil;
 		heightOfEndFrame = frame.size.height;
 		_today = [NSDate date];
 	}
 	return self;
 }
 
-+ (PWESMonthlyView *)monthlyViewWithFrame:(CGRect)monthlyFrame
-                            seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
++ (PWESMonthlyView *)monthlyViewForCalendar:(SeinfeldCalendar *)calendar
+                              seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+                                      frame:(CGRect)frame
 {
-	PWESMonthlyView *view = [[PWESMonthlyView alloc] initWithFrame:monthlyFrame];
+	PWESMonthlyView *view = [[PWESMonthlyView alloc] initWithFrame:frame];
 	view->heightOfEndFrame = 0.f;
 	view.exclusiveTouch = YES;
-	[view configureViewWithSeinfeldMonth:seinfeldMonth];
+	[view configureViewWithSeinfeldMonth:seinfeldMonth calendar:calendar];
 	[view resetFrame];
 	return view;
 }
 
 - (void)configureViewWithSeinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+                              calendar:(SeinfeldCalendar *)calendar
 {
+	self.calender = calendar;
+	self.entriesForMonth = [self entriesForSeinfeldMonth:seinfeldMonth];
+	self.seinfeldMonth = seinfeldMonth;
+
 	UITapGestureRecognizer *tapRecogniser = [[UITapGestureRecognizer alloc] initWithTarget:self
 	                                                                                action:@selector(handleTap)];
 	[self addGestureRecognizer:tapRecogniser];
 	self.tapRecogniser = tapRecogniser;
-	self.seinfeldMonth = seinfeldMonth;
 	self.layers = [NSMutableArray array];
 	self.dates = [NSMutableArray array];
 
 	NSString *month = [[PWESCalendar months] objectAtIndex:seinfeldMonth.month - 1];
-	CALayer *title = [self monthWithName:month];
+	CALayer *title = [self monthWithName:[NSString stringWithFormat:@"%@, %d", month, seinfeldMonth.year]];
 	[self.layer addSublayer:title];
 
 	CALayer *header = [self header];
@@ -73,8 +84,8 @@
 
 	CGFloat xMargin = 20.0f;
 	CGFloat xWidth = (self.bounds.size.width - 40.0f) / 7.0f;
-	CGFloat yOffset = 22.f;
-	CGFloat weekOffset = header.frame.origin.y + 22.f;
+	CGFloat yOffset = 25.f;
+	CGFloat weekOffset = header.frame.origin.y + 25.f;
 	heightOfEndFrame += yOffset;
 	NSInteger currentWeekday = seinfeldMonth.startWeekDay;
 	NSInteger daysLeft = seinfeldMonth.totalDays;
@@ -83,23 +94,11 @@
 	{
 		NSInteger dayInMonth = startDay + currentDay;
 		CGFloat xOffset = (currentWeekday - 1) * xWidth + xMargin;
-		CGRect dayFrame = CGRectMake(xOffset, weekOffset, xWidth, 17);
 		NSString *dayString = [NSString stringWithFormat:@"%ld", (long)dayInMonth];
-		CATextLayer *dayLayer = [CATextLayer layer];
-		dayLayer.string = dayString;
-		dayLayer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Light", 0.0, NULL);
-		dayLayer.alignmentMode = kCAAlignmentCenter;
-		dayLayer.fontSize = 15.f;
-		dayLayer.frame = dayFrame;
-		if ([self isTodayForDay:dayInMonth month:seinfeldMonth])
-		{
-			dayLayer.foregroundColor = [UIColor redColor].CGColor;
-		}
-		else
-		{
-			dayLayer.foregroundColor = [UIColor darkGrayColor].CGColor;
-		}
+		CATextLayer *dayLayer = [self textLayerWithString:dayString frame:CGRectMake(xOffset, weekOffset, xWidth, 22)];
+		[self configureColoursForLayer:dayLayer day:dayInMonth seinfeldMonth:seinfeldMonth];
 		[self.layers addObject:dayLayer];
+
 		NSDateComponents *components = [[PWESCalendar sharedInstance] dateFromDay:dayInMonth month:seinfeldMonth.month year:seinfeldMonth.year];
 		[self.dates addObject:components];
 		[self.layer addSublayer:dayLayer];
@@ -111,6 +110,73 @@
 			heightOfEndFrame += yOffset;
 		}
 	}
+}
+
+- (CATextLayer *)textLayerWithString:(NSString *)string frame:(CGRect)frame
+{
+	CATextLayer *dayLayer = [CATextLayer layer];
+	dayLayer.string = string;
+	dayLayer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Light", 0.0, NULL);
+	dayLayer.alignmentMode = kCAAlignmentCenter;
+	dayLayer.fontSize = 20.f;
+	dayLayer.frame = frame;
+	return dayLayer;
+}
+
+- (void)configureColoursForLayer:(CATextLayer *)layer
+                             day:(NSInteger)day
+                   seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+{
+	SeinfeldCalendarEntry *entry = [self calendarEntryForDay:day seinfeldMonth:seinfeldMonth];
+	if (nil != entry)
+	{
+		layer.foregroundColor = [UIColor whiteColor].CGColor;
+		layer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Bold", 0.0, NULL);
+		CALayer *backgroundLayer = [CALayer layer];
+		backgroundLayer.frame = CGRectMake(layer.frame.origin.x + 4, layer.frame.origin.y + 2, layer.frame.size.width - 8, layer.frame.size.height - 2);
+		backgroundLayer.cornerRadius = 5.f;
+		backgroundLayer.anchorPoint = layer.anchorPoint;
+		if ([entry.hasTakenMeds boolValue])
+		{
+			backgroundLayer.backgroundColor = DARK_GREEN.CGColor;
+		}
+		else
+		{
+			backgroundLayer.backgroundColor = DARK_RED.CGColor;
+		}
+		[self.layer insertSublayer:backgroundLayer below:layer];
+		if ([self isTodayForDay:day month:seinfeldMonth])
+		{
+			self.tappedBackgroundLayer = backgroundLayer;
+		}
+	}
+	else if ([self isTodayForDay:day month:seinfeldMonth])
+	{
+		layer.foregroundColor = DARK_RED.CGColor;
+	}
+	else
+	{
+		layer.foregroundColor = [UIColor darkGrayColor].CGColor;
+	}
+}
+
+- (SeinfeldCalendarEntry *)calendarEntryForDay:(NSInteger)day seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+{
+	if (nil == self.entriesForMonth)
+	{
+		return nil;
+	}
+	__block SeinfeldCalendarEntry *entry = nil;
+	[self.entriesForMonth enumerateObjectsUsingBlock: ^(SeinfeldCalendarEntry *obj, NSUInteger idx, BOOL *stop) {
+	    NSDateComponents *components = [[PWESCalendar sharedInstance] dateComponentsForDate:obj.date];
+	    if (components.day == day && seinfeldMonth.month == components.month && seinfeldMonth.year == components.year)
+	    {
+	        entry = obj;
+	        *stop = YES;
+		}
+	}];
+
+	return entry;
 }
 
 - (BOOL)isTodayForDay:(NSInteger)day month:(PWESSeinfeldMonth *)month
@@ -171,7 +237,7 @@
 	    layer.frame = CGRectMake(margin, 0, xWidth, 17);
 	    layer.fontSize = 15.f;
 	    layer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Light", 0.0, NULL);
-	    layer.foregroundColor = [UIColor blackColor].CGColor;
+	    layer.foregroundColor = TEXTCOLOUR.CGColor;
 	    layer.alignmentMode = kCAAlignmentCenter;
 	    [headerLayer addSublayer:layer];
 	}];
@@ -188,8 +254,8 @@
 - (void)handleTap
 {
 	CGPoint point = [self.tapRecogniser locationInView:self];
-	CGPoint superPoint = [self.tapRecogniser locationInView:self.superview];
-	NSLog(@"point hit in view %@ and in superview %@", NSStringFromCGPoint(point), NSStringFromCGPoint(superPoint));
+//	CGPoint superPoint = [self.tapRecogniser locationInView:self.superview];
+//	NSLog(@"point hit in view %@ and in superview %@", NSStringFromCGPoint(point), NSStringFromCGPoint(superPoint));
 	CATextLayer *foundLayer = nil;
 
 	NSUInteger index = 0;
@@ -201,7 +267,7 @@
 		bool containsInOtherFrame = CGRectContainsPoint(textLayer.frame, point);
 		if (containsPoint || containsInOtherFrame)
 		{
-			NSLog(@"***** rectInView = %@ textlayerframe = %@ *****", NSStringFromCGRect(rectInView), NSStringFromCGRect(textLayer.bounds));
+//			NSLog(@"***** rectInView = %@ textlayerframe = %@ *****", NSStringFromCGRect(rectInView), NSStringFromCGRect(textLayer.bounds));
 			foundLayer = textLayer;
 			NSDateComponents *components = [self.dates objectAtIndex:index];
 			if ([self todayForComponent:components])
@@ -229,35 +295,20 @@
 		return;
 	}
 	CATextLayer *tappedLayer = self.tappedLayer;
-	CALayer *backgroundLayer = [CALayer layer];
-	backgroundLayer.frame = CGRectMake(tappedLayer.frame.origin.x + tappedLayer.frame.size.width / 3.5, tappedLayer.frame.origin.y, 17, 17);
-	backgroundLayer.cornerRadius = 2.f;
-	backgroundLayer.anchorPoint = tappedLayer.anchorPoint;
 
 
-	SeinfeldCalendarEntry *record = [[CoreDataManager sharedInstance] managedObjectForEntityName:kSeinfeldCalendarEntry];
 	NSInteger day = [self.layers indexOfObject:self.tappedLayer] + self.seinfeldMonth.startDay;
-	NSInteger month = self.seinfeldMonth.month;
-	NSInteger year = self.seinfeldMonth.year;
-	record.uID = [Utilities GUID];
-	NSDateComponents *components = [[PWESCalendar sharedInstance] dateFromDay:day month:month year:year];
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	record.date = [calendar dateFromComponents:components];
 
 	if ([title isEqualToString:@"Yes"])
 	{
-		backgroundLayer.backgroundColor = [UIColor greenColor].CGColor;
-		tappedLayer.foregroundColor = [UIColor blackColor].CGColor;
-		record.hasTakenMeds = [NSNumber numberWithBool:YES];
+		[self addBackgroundLayerForDay:day colour:DARK_GREEN tappedLayer:tappedLayer];
+		[self createOrUpdateRecordForDay:day hasTakenMeds:YES];
 	}
 	else if ([title isEqualToString:@"No"])
 	{
-		backgroundLayer.backgroundColor = [UIColor redColor].CGColor;
-		tappedLayer.foregroundColor = [UIColor whiteColor].CGColor;
-		record.hasTakenMeds = [NSNumber numberWithBool:NO];
+		[self addBackgroundLayerForDay:day colour:DARK_RED tappedLayer:tappedLayer];
+		[self createOrUpdateRecordForDay:day hasTakenMeds:NO];
 	}
-	[self.layer insertSublayer:backgroundLayer below:tappedLayer];
-	[self saveRecord:record];
 	NSInteger endDay = self.seinfeldMonth.endDay;
 	if (day == endDay && self.seinfeldMonth.isLastMonth)
 	{
@@ -267,14 +318,55 @@
 	self.tappedLayer = nil;
 }
 
-- (void)saveRecord:(SeinfeldCalendarEntry *)record
+- (void)addBackgroundLayerForDay:(NSInteger)day colour:(UIColor *)colour tappedLayer:(CATextLayer *)tappedLayer
 {
+	if (self.tappedBackgroundLayer)
+	{
+		[self.tappedBackgroundLayer removeFromSuperlayer];
+		[self.layer setNeedsLayout];
+	}
+	CALayer *backgroundLayer = [CALayer layer];
+	backgroundLayer.frame = CGRectMake(tappedLayer.frame.origin.x + 4, tappedLayer.frame.origin.y + 2, tappedLayer.frame.size.width - 8, tappedLayer.frame.size.height - 2);
+	backgroundLayer.cornerRadius = 5.f;
+	backgroundLayer.anchorPoint = tappedLayer.anchorPoint;
+	backgroundLayer.backgroundColor = colour.CGColor;
+	tappedLayer.foregroundColor = [UIColor whiteColor].CGColor;
+	tappedLayer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Bold", 0.0, NULL);
+	[self.layer insertSublayer:backgroundLayer below:tappedLayer];
+	self.tappedBackgroundLayer = backgroundLayer;
+}
+
+- (void)createOrUpdateRecordForDay:(NSInteger)day hasTakenMeds:(BOOL)hasTakenMeds
+{
+	SeinfeldCalendarEntry *record = [self calendarEntryForDay:day seinfeldMonth:self.seinfeldMonth];
+	BOOL recordExists = YES;
 	if (nil == record)
+	{
+		record = [[CoreDataManager sharedInstance] managedObjectForEntityName:kSeinfeldCalendarEntry];
+		record.uID = [Utilities GUID];
+		recordExists = NO;
+	}
+	NSDateComponents *components = [[PWESCalendar sharedInstance] dateFromDay:day
+	                                                                    month:self.seinfeldMonth.month
+	                                                                     year:self.seinfeldMonth.year];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	record.date = [calendar dateFromComponents:components];
+	record.hasTakenMeds = [NSNumber numberWithBool:hasTakenMeds];
+	[self saveRecord:record recordExists:recordExists];
+}
+
+- (void)saveRecord:(SeinfeldCalendarEntry *)record recordExists:(BOOL)recordExists
+{
+	if (nil == record || nil == self.calender)
 	{
 		return;
 	}
+	if (!recordExists)
+	{
+		[self.calender addEntriesObject:record];
+	}
 	NSError *error = nil;
-	[[CoreDataManager sharedInstance] saveContext:&error];
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	__strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
 	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendar)])
 	{
@@ -289,6 +381,27 @@
 	{
 		[strongDelegate finishCalendar];
 	}
+}
+
+- (NSArray *)entriesForSeinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+{
+	__block NSMutableArray *array = [NSMutableArray array];
+	NSSet *currentEntries = self.calender.entries;
+	if (nil == currentEntries || 0 == currentEntries.count)
+	{
+		return array;
+	}
+	NSSortDescriptor *sortDescriptor =
+	    [[NSSortDescriptor alloc] initWithKey:kDateLowerCase ascending:YES];
+	NSArray *sortedEntries = [currentEntries sortedArrayUsingDescriptors:@[sortDescriptor]];
+	[sortedEntries enumerateObjectsUsingBlock: ^(SeinfeldCalendarEntry *entry, NSUInteger idx, BOOL *stop) {
+	    NSDateComponents *components = [[PWESCalendar sharedInstance] dateComponentsForDate:entry.date];
+	    if (components.month == seinfeldMonth.month && components.year == seinfeldMonth.year)
+	    {
+	        [array addObject:entry];
+		}
+	}];
+	return array;
 }
 
 @end

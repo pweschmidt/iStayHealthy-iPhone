@@ -17,7 +17,6 @@
 #import "MissedMedicationsTableViewController.h"
 #import "SideEffectsTableViewController.h"
 #import "PWESSeinfeldViewController.h"
-//#import "SeinfeldCalendarViewController.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "Constants.h"
