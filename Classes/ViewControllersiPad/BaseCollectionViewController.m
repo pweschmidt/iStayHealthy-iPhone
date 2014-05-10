@@ -131,7 +131,7 @@
 - (void)presentPopoverWithController:(UINavigationController *)controller
                        fromBarButton:(UIBarButtonItem *)barButton
 {
-	[self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionUp];
+	[self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionAny];
 }
 
 - (void)presentPopoverWithController:(UINavigationController *)controller

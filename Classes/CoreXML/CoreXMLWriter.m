@@ -19,292 +19,276 @@
 #import "Contacts+Handling.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "NSDate+Extras.h"
+
+static NSArray *dataModels()
+{
+	return @[kResult,
+	         kMedication,
+	         kMissedMedication,
+	         kSideEffects,
+	         kContacts,
+	         kProcedures,
+	         kOtherMedication,
+	         kPreviousMedication,
+	         kSeinfeldCalendar,
+	         kSeinfeldCalendarEntry,
+	         kWellness];
+}
+
+static NSDictionary *elementParentMap()
+{
+	return @{ kResult : kResults,
+			  kMedication : kMedications,
+			  kMissedMedication : kMissedMedications,
+			  kSideEffects : kHIVSideEffects,
+			  kContacts : kClinicalContacts,
+			  kProcedures : kIllnessAndProcedures,
+			  kOtherMedication : kOtherMedications,
+			  kPreviousMedication : kPreviousMedications,
+			  kSeinfeldCalendar : kSeinfeldCalendars,
+			  kSeinfeldCalendarEntry : kSeinfeldCalendarEntries,
+			  kWellness : kWellnesses };
+}
+
+static NSDictionary *sortTerms()
+{
+	return @{ kResult : kResultsDate,
+			  kMedication : kStartDate,
+			  kMissedMedication : kMissedDate,
+			  kPreviousMedication : kEndDate,
+			  kSideEffects : kSideEffectDate,
+			  kOtherMedication : kStartDate,
+			  kProcedures : kDate,
+			  kContacts : kClinicName,
+			  kSeinfeldCalendar : kStartDateLowerCase,
+			  kSeinfeldCalendarEntry : kDateLowerCase,
+			  kWellness : kDateLowerCase };
+}
+
+static NSDictionary *ascendingDictionary()
+{
+	return @{ kResult: @(1),
+			  kMedication : @(1),
+			  kMissedMedication : @(1),
+			  kPreviousMedication : @(1),
+			  kSideEffects : @(1),
+			  kOtherMedication : @(1),
+			  kProcedures : @(1),
+			  kContacts : @(0),
+			  kSeinfeldCalendar : @(1),
+			  kSeinfeldCalendarEntry : @(1),
+			  kWellness : @(1) };
+}
 
 @interface CoreXMLWriter ()
-@property (nonatomic, strong) NSMutableString * xmlString;
-
+@property (nonatomic, strong) NSMutableArray *xmlModels;
+@property (nonatomic, strong) NSMutableString *xmlString;
+@property (nonatomic, assign) NSUInteger insertPosition;
+@property (nonatomic, strong) iStayHealthyXMLBlock successBlock;
 @end
 
 @implementation CoreXMLWriter
-+ (id) sharedInstance
++ (id)sharedInstance
 {
-    static CoreXMLWriter *reader = nil;
-    static dispatch_once_t token;
-    dispatch_once(&token, ^{
-        reader = [[CoreXMLWriter alloc] init];
-    });
-    return reader;
+	static CoreXMLWriter *reader = nil;
+	static dispatch_once_t token;
+	dispatch_once(&token, ^{
+	    reader = [[CoreXMLWriter alloc] init];
+	});
+	return reader;
 }
 
-- (void)writeXMLWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock
+- (void)writeWithCompletionBlock:(iStayHealthyXMLBlock)completionBlock
 {
-    self.xmlString = [NSMutableString string];
-    CoreDataManager *manager = [CoreDataManager sharedInstance];
-    iStayHealthyArrayCompletionBlock wellnessBlock = ^void(NSArray *array, NSError *error){
-        if (completionBlock)
-        {
-            if (nil == error)
-            {
-                completionBlock(YES, nil);
-            }
-            else
-            {
-                if (0 < array.count)
-                {
-                    [self xmlOpenEnclosingElementForClass:kWellness];
-                    [array enumerateObjectsUsingBlock:^(Wellness *well, NSUInteger idx, BOOL *stop) {
-                        [self.xmlString appendString:[well xmlString]];
-                    }];
-                    [self xmlCloseEnclosingElementForClass:kWellness];
-                }
-                completionBlock(NO, error);
-            }
-        }
-    };
-
-    iStayHealthyArrayCompletionBlock contactsBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kContacts];
-                [array enumerateObjectsUsingBlock:^(Contacts *contacts, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[contacts xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kContacts];
-            }
-            [manager fetchDataForEntityName:kWellness predicate:nil sortTerm:nil ascending:NO completion:wellnessBlock];
-        }
-    };
-    
-    iStayHealthyArrayCompletionBlock procsBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kProcedures];
-                [array enumerateObjectsUsingBlock:^(Procedures *proc, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[proc xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kProcedures];
-            }
-            [manager fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:YES completion:contactsBlock];
-        }
-    };
-    iStayHealthyArrayCompletionBlock otherBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kOtherMedication];
-                [array enumerateObjectsUsingBlock:^(OtherMedication *med, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[med xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kOtherMedication];
-            }
-            [manager fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:YES completion:procsBlock];
-        }
-    };
-    iStayHealthyArrayCompletionBlock effectsBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kSideEffects];
-                [array enumerateObjectsUsingBlock:^(SideEffects *effect, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[effect xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kSideEffects];
-            }
-            [manager fetchDataForEntityName:kOtherMedication predicate:nil sortTerm:kStartDate ascending:YES completion:otherBlock];
-        }
-    };
-    iStayHealthyArrayCompletionBlock prevBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kPreviousMedication];
-                [array enumerateObjectsUsingBlock:^(PreviousMedication *med, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[med xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kPreviousMedication];
-            }
-            [manager fetchDataForEntityName:kSideEffects predicate:nil sortTerm:kSideEffectDate ascending:YES completion:effectsBlock];
-        }
-    };
-    iStayHealthyArrayCompletionBlock missedBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kMissedMedication];
-                [array enumerateObjectsUsingBlock:^(MissedMedication *med, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[med xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kMissedMedication];
-            }
-            [manager fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDate ascending:YES completion:prevBlock];
-        }
-    };
-    iStayHealthyArrayCompletionBlock medBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kMedication];
-                [array enumerateObjectsUsingBlock:^(Medication *med, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[med xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kMedication];
-            }
-            [manager fetchDataForEntityName:kMissedMedication predicate:nil sortTerm:kMissedDate ascending:YES completion:missedBlock];
-        }
-    };
-    iStayHealthyArrayCompletionBlock resultsBlock = ^void(NSArray *array, NSError *error){
-        if (nil == error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            if (0 < array.count)
-            {
-                [self xmlOpenEnclosingElementForClass:kResult];
-                [array enumerateObjectsUsingBlock:^(Results *result, NSUInteger idx, BOOL *stop) {
-                    [self.xmlString appendString:[result xmlString]];
-                }];
-                [self xmlCloseEnclosingElementForClass:kResult];
-            }
-            [manager fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion:medBlock];
-            
-        }
-    };
-    
-    [manager fetchDataForEntityName:kXMLElementRoot predicate:nil sortTerm:nil ascending:NO completion:^(NSArray *array, NSError *error) {
-        if (error)
-        {
-            completionBlock(NO, error);
-        }
-        else
-        {
-            [manager fetchDataForEntityName:kResult predicate:nil sortTerm:kResultsDate ascending:YES completion:resultsBlock];
-        }
-    }];
-    
-    
+	self.successBlock = [completionBlock copy];
+	NSString *rootElement = [self rootElementOpen];
+	NSUInteger position = [self insertString:rootElement position:0];
+	self.insertPosition = position;
+	self.xmlModels = [NSMutableArray arrayWithArray:dataModels()];
+	NSString *firstModel = [self.xmlModels objectAtIndex:0];
+	NSString *nextModel = [self.xmlModels objectAtIndex:1];
+	NSString *sortTerm = [sortTerms() objectForKey:firstModel];
+	NSNumber *number = [ascendingDictionary() objectForKey:firstModel];
+	BOOL ascending = (nil != number && [number boolValue]) ? YES : NO;
+	[self writeXMLElementForDataModel:firstModel
+	                         position:position
+	                         sortTerm:sortTerm
+	                        ascending:ascending
+	                    nextDataModel:nextModel];
 }
 
+- (void)writeXMLElementForDataModel:(NSString *)dataModel
+                           position:(NSUInteger)position
+                           sortTerm:(NSString *)sortTerm
+                          ascending:(BOOL)ascending
+                      nextDataModel:(NSString *)nextDataModel
+{
+	[[CoreDataManager sharedInstance] fetchDataForEntityName:dataModel predicate:nil sortTerm:sortTerm ascending:ascending completion: ^(NSArray *array, NSError *error) {
+	    if (nil != array)
+	    {
+	        __block NSUInteger updatedPosition = position;
+	        NSString *openElement = [self xmlOpenEnclosingElementForClass:dataModel];
+	        [self.xmlString insertString:openElement atIndex:updatedPosition];
+	        updatedPosition += openElement.length;
+	        [array enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+	            if ([obj respondsToSelector:@selector(xmlString)])
+	            {
+	                NSString *elementString = [obj xmlString];
+	                [self.xmlString insertString:elementString atIndex:updatedPosition];
+	                updatedPosition += elementString.length;
+				}
+			}];
+	        NSString *closeElement = [self xmlCloseEnclosingElementForClass:dataModel];
+	        [self.xmlString insertString:closeElement atIndex:updatedPosition];
+	        updatedPosition += closeElement.length;
+
+
+	        if (nil == nextDataModel) // reached the end
+	        {
+	            [self.xmlString insertString:[self rootElementClose] atIndex:updatedPosition];
+	            if (nil != self.successBlock)
+	            {
+	                self.successBlock(self.xmlString, nil);
+				}
+			}
+	        else
+	        {
+	            NSUInteger index = [self.xmlModels indexOfObject:nextDataModel] + 1;
+	            NSString *nextModel = nil;
+	            if (self.xmlModels.count > index)
+	            {
+	                nextModel = [self.xmlModels objectAtIndex:index];
+				}
+	            NSString *sortTerm = [sortTerms() objectForKey:nextDataModel];
+	            NSNumber *number = [ascendingDictionary() objectForKey:nextDataModel];
+	            BOOL ascending = (nil != number && [number boolValue]) ? YES : NO;
+	            [self writeXMLElementForDataModel:nextDataModel
+	                                     position:updatedPosition
+	                                     sortTerm:sortTerm
+	                                    ascending:ascending
+	                                nextDataModel:nextModel];
+			}
+		}
+	    else
+	    {
+	        if (nil != self.successBlock)
+	        {
+	            self.successBlock(nil, error);
+			}
+		}
+	}];
+}
+
+- (NSUInteger)insertString:(NSString *)string position:(NSUInteger)position
+{
+	if (nil == self.xmlString)
+	{
+		self.xmlString = [NSMutableString string];
+	}
+	[self.xmlString insertString:string atIndex:position];
+	return self.xmlString.length;
+}
+
+- (NSString *)rootElementOpen
+{
+	NSMutableString *string = [NSMutableString string];
+	[string appendString:[NSString stringWithString:kXMLElementRoot]];
+	NSString *dbVersion = [NSString stringWithFormat:@" dbVersion=\"%@\"", kXMLDBVersionString];
+	[string appendString:dbVersion];
+	[string appendString:@" fromDevice=\"iOS\""];
+	NSDate *date = [NSDate date];
+	NSString *fromDate = [NSString stringWithFormat:@" fromDate=\"%@\"", [date stringFromCustomDate]];
+	[string appendString:fromDate];
+	[string appendString:@">"];
+	return string;
+}
+
+- (NSString *)rootElementClose
+{
+	return @"</iStayHealthyRecord>";
+}
 
 - (NSString *)xmlOpenEnclosingElementForClass:(NSString *)className
 {
-    if ([className isEqualToString:kResult])
-    {
-        return [NSString stringWithFormat:@"<%@>",kResults];
-    }
-    else if ([className isEqualToString:kSideEffects])
-    {
-        return [NSString stringWithFormat:@"<%@>",kHIVSideEffects];
-    }
-    else if ([className isEqualToString:kMedication])
-    {
-        return [NSString stringWithFormat:@"<%@>",kMedications];
-    }
-    else if ([className isEqualToString:kOtherMedication])
-    {
-        return [NSString stringWithFormat:@"<%@>",kOtherMedications];
-    }
-    else if ([className isEqualToString:kPreviousMedication])
-    {
-        return [NSString stringWithFormat:@"<%@>",kPreviousMedications];
-    }
-    else if ([className isEqualToString:kMissedMedication])
-    {
-        return [NSString stringWithFormat:@"<%@>",kMissedMedications];
-    }
-    else if ([className isEqualToString:kContacts])
-    {
-        return [NSString stringWithFormat:@"<%@>",kClinicalContacts];
-    }
-    else if ([className isEqualToString:kProcedures])
-    {
-        return [NSString stringWithFormat:@"<%@>",kIllnessAndProcedures];
-    }
-    else if ([className isEqualToString:kWellness])
-    {
-        return [NSString stringWithFormat:@"<%@>",kWellnesses];
-    }
-    return nil;
+	if ([className isEqualToString:kResult])
+	{
+		return [NSString stringWithFormat:@"<%@>", kResults];
+	}
+	else if ([className isEqualToString:kSideEffects])
+	{
+		return [NSString stringWithFormat:@"<%@>", kHIVSideEffects];
+	}
+	else if ([className isEqualToString:kMedication])
+	{
+		return [NSString stringWithFormat:@"<%@>", kMedications];
+	}
+	else if ([className isEqualToString:kOtherMedication])
+	{
+		return [NSString stringWithFormat:@"<%@>", kOtherMedications];
+	}
+	else if ([className isEqualToString:kPreviousMedication])
+	{
+		return [NSString stringWithFormat:@"<%@>", kPreviousMedications];
+	}
+	else if ([className isEqualToString:kMissedMedication])
+	{
+		return [NSString stringWithFormat:@"<%@>", kMissedMedications];
+	}
+	else if ([className isEqualToString:kContacts])
+	{
+		return [NSString stringWithFormat:@"<%@>", kClinicalContacts];
+	}
+	else if ([className isEqualToString:kProcedures])
+	{
+		return [NSString stringWithFormat:@"<%@>", kIllnessAndProcedures];
+	}
+	else if ([className isEqualToString:kWellness])
+	{
+		return [NSString stringWithFormat:@"<%@>", kWellnesses];
+	}
+	return nil;
 }
+
 - (NSString *)xmlCloseEnclosingElementForClass:(NSString *)className
 {
-    if ([className isEqualToString:kResult])
-    {
-        return [NSString stringWithFormat:@"</%@>",kResults];
-    }
-    else if ([className isEqualToString:kSideEffects])
-    {
-        return [NSString stringWithFormat:@"</%@>",kHIVSideEffects];
-    }
-    else if ([className isEqualToString:kMedication])
-    {
-        return [NSString stringWithFormat:@"</%@>",kMedications];
-    }
-    else if ([className isEqualToString:kOtherMedication])
-    {
-        return [NSString stringWithFormat:@"</%@>",kOtherMedications];
-    }
-    else if ([className isEqualToString:kPreviousMedication])
-    {
-        return [NSString stringWithFormat:@"</%@>",kPreviousMedications];
-    }
-    else if ([className isEqualToString:kMissedMedication])
-    {
-        return [NSString stringWithFormat:@"</%@>",kMissedMedications];
-    }
-    else if ([className isEqualToString:kContacts])
-    {
-        return [NSString stringWithFormat:@"</%@>",kClinicalContacts];
-    }
-    else if ([className isEqualToString:kProcedures])
-    {
-        return [NSString stringWithFormat:@"</%@>",kIllnessAndProcedures];
-    }
-    else if ([className isEqualToString:kWellness])
-    {
-        return [NSString stringWithFormat:@"</%@>",kWellnesses];
-    }
-    return nil;
+	if ([className isEqualToString:kResult])
+	{
+		return [NSString stringWithFormat:@"</%@>", kResults];
+	}
+	else if ([className isEqualToString:kSideEffects])
+	{
+		return [NSString stringWithFormat:@"</%@>", kHIVSideEffects];
+	}
+	else if ([className isEqualToString:kMedication])
+	{
+		return [NSString stringWithFormat:@"</%@>", kMedications];
+	}
+	else if ([className isEqualToString:kOtherMedication])
+	{
+		return [NSString stringWithFormat:@"</%@>", kOtherMedications];
+	}
+	else if ([className isEqualToString:kPreviousMedication])
+	{
+		return [NSString stringWithFormat:@"</%@>", kPreviousMedications];
+	}
+	else if ([className isEqualToString:kMissedMedication])
+	{
+		return [NSString stringWithFormat:@"</%@>", kMissedMedications];
+	}
+	else if ([className isEqualToString:kContacts])
+	{
+		return [NSString stringWithFormat:@"</%@>", kClinicalContacts];
+	}
+	else if ([className isEqualToString:kProcedures])
+	{
+		return [NSString stringWithFormat:@"</%@>", kIllnessAndProcedures];
+	}
+	else if ([className isEqualToString:kWellness])
+	{
+		return [NSString stringWithFormat:@"</%@>", kWellnesses];
+	}
+	return nil;
 }
-
-
 
 @end

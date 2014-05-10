@@ -58,7 +58,7 @@ NSString *const kResultsDictionaryKey = @"resultsDictionary";
 /**
    XML
  */
-NSString *const kXMLDBVersionString = @"14";
+NSString *const kXMLDBVersionString = @"15";
 NSString *const kXMLPreamble = @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 NSString *const kXMLElementRoot = @"iStayHealthyRecord";
 

@@ -100,7 +100,6 @@
 	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
 	editController.preferredContentSize = CGSizeMake(320, 568);
 	editController.customPopOverDelegate = self;
-	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	[self presentPopoverWithController:editNavCtrl
 	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];

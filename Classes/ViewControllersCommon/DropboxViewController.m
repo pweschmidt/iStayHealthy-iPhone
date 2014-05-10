@@ -15,6 +15,8 @@
 #import "Menus.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
+#import "CoreXMLReader.h"
+#import "CoreXMLWriter.h"
 #import <DropboxSDK/DropboxSDK.h>
 
 @interface DropboxViewController () <DBRestClientDelegate>
@@ -225,28 +227,38 @@
 	{
 		return;
 	}
-//	NSString *dataPath = [self uploadFileTmpPath];
+	NSString *dataPath = [self uploadFileTmpPath];
 	[self.activityIndicator startAnimating];
-	/*
-	   DataLoader *dataLoader = [[DataLoader alloc] init];
-	   NSData *xmlData = [dataLoader xmlData];
-	   NSError *error = nil;
-	   [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&error];
-	   if (error != nil)
-	   {
-	    [[[UIAlertView alloc]
-	      initWithTitle:@"Error writing data to tmp directory" message:[error localizedDescription]
-	      delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	     show];
-	   }
-	   else
-	   {
-	    [self.restClient uploadFile:@"iStayHealthy.isth"
-	                         toPath:@"/iStayHealthy"
-	                  withParentRev:self.parentRevision
-	                       fromPath:dataPath];
-	   }
-	 */
+	CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+	[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+	    if (nil != xmlString)
+	    {
+	        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+	        NSError *writeError = nil;
+	        [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
+	        if (writeError)
+	        {
+	            [[[UIAlertView alloc]
+	              initWithTitle:@"Error writing data to tmp directory" message:[error localizedDescription]
+	                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+	             show];
+			}
+	        else
+	        {
+	            [self.restClient uploadFile:@"iStayHealthy.isth"
+	                                 toPath:@"/iStayHealthy"
+	                          withParentRev:self.parentRevision
+	                               fromPath:dataPath];
+			}
+		}
+	    else
+	    {
+	        [[[UIAlertView alloc]
+	          initWithTitle:@"Error retrieving data" message:[error localizedDescription]
+	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+	         show];
+		}
+	}];
 }
 
 - (void)restore
@@ -254,27 +266,6 @@
 	NSString *dataPath = [self dropBoxFileTmpPath];
 	NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
 	[[CoreXMLReader sharedInstance] parseXMLData:xmlData];
-	/*
-	   XMLLoader *xmlLoader = [[XMLLoader alloc]initWithData:xmlData];
-	   NSError *error = nil;
-	   [xmlLoader startParsing:&error];
-	   BOOL success = [xmlLoader synchronise];
-	   [self.activityIndicator stopAnimating];
-	   if (success)
-	   {
-	    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	    [defaults setBool:NO forKey:kDataTablesCleaned];
-	    [defaults synchronize];
-	    [[[UIAlertView alloc]
-	      initWithTitle:NSLocalizedString(@"Restore Data",nil) message:NSLocalizedString(@"Data were copied from DropBox iStayHealthy.isth.",nil)
-	      delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	     show];
-	   }
-	   else
-	   {
-	    [self showDBError];
-	   }
-	 */
 }
 
 #pragma mark - DropBox DBRestClient methods

@@ -58,6 +58,18 @@
 
 - (void)addButtonPressed:(id)sender
 {
+	if (nil == self.customPopoverController)
+	{
+		EditSeinfeldCalendarTableViewController *editController = [[EditSeinfeldCalendarTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+		editController.preferredContentSize = CGSizeMake(320, 568);
+		editController.customPopOverDelegate = self;
+		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
+	}
+	else
+	{
+		[self hidePopover];
+	}
 }
 
 - (void)configureCollectionView
