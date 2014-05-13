@@ -11,8 +11,7 @@
 #import "BaseCollectionViewCell.h"
 #import "MissedMedication+Handling.h"
 #import "EditMissedMedsTableViewController.h"
-#import "ResultsView-iPad.h"
-//#import "Constants.h"
+#import "MedView_iPad.h"
 
 #define kMissedCollectionCellIdentifier @"MissedCollectionCellIdentifier"
 
@@ -75,6 +74,8 @@
 	}
 
 	[cell addDateToTitle:med.MissedDate];
+	MedView_iPad *view = [MedView_iPad viewForMissedMedication:med frame:CGRectMake(0, 2, 150, 130)];
+	[cell addView:view];
 	return cell;
 }
 

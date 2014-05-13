@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Constants.h"
 #import "Results.h"
 
 @interface ResultsView_iPad : UIView
 + (ResultsView_iPad *)viewForResults:(Results *)results
-                           resultsType:(ResultsType)resultsType
-                                 frame:(CGRect)frame;
+                         resultsType:(ResultsType)resultsType
+                               frame:(CGRect)frame;
 @end

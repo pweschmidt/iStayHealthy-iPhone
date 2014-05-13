@@ -11,6 +11,7 @@
 #import "BaseCollectionViewCell.h"
 #import "SideEffects+Handling.h"
 #import "EditSideEffectsTableViewController.h"
+#import "MedView_iPad.h"
 
 #define kSideEffectsCollectionCellIdentifier @"SideEffectsCollectionCellIdentifier"
 
@@ -74,6 +75,8 @@
 	}
 
 	[cell addDateToTitle:effect.SideEffectDate];
+	MedView_iPad *view = [MedView_iPad viewForSideEffects:effect frame:CGRectMake(0, 2, 150, 130)];
+	[cell addView:view];
 	return cell;
 }
 

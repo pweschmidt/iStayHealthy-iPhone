@@ -18,4 +18,5 @@
 - (void)addDateToTitle:(NSDate *)date;
 - (void)addTitle:(NSString *)title;
 - (void)addLabelToContentView:(UILabel *)label;
+- (void)addView:(UIView *)view;
 @end

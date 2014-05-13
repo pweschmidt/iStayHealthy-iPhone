@@ -13,6 +13,8 @@
 #import "PreviousMedication+Handling.h"
 #import "EditHIVMedsTableViewController.h"
 #import "EditPreviousMedsTableViewController.h"
+#import "Utilities.h"
+#import "MedView_iPad.h"
 
 #define kHIVCollectionCellIdentifier @"HIVCollectionCellIdentifier"
 
@@ -77,6 +79,7 @@
 {
 	BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHIVCollectionCellIdentifier
 	                                                                         forIndexPath:indexPath];
+	CGRect frame = CGRectMake(0, 2, 150, 130);
 	if (0 == indexPath.section)
 	{
 		Medication *med = [self.currentMeds objectAtIndex:indexPath.row];
@@ -85,6 +88,8 @@
 			[cell setManagedObject:med];
 		}
 		[cell addDateToTitle:med.StartDate];
+		MedView_iPad *medView = [MedView_iPad viewForMedication:med frame:frame];
+		[cell addView:medView];
 	}
 	else
 	{
@@ -93,7 +98,9 @@
 		{
 			[cell setManagedObject:previousMed];
 		}
-		[cell addDateToTitle:previousMed.startDate];
+		[cell addDateToTitle:previousMed.endDate];
+		MedView_iPad *medView = [MedView_iPad viewForPreviousMedication:previousMed frame:frame];
+		[cell addView:medView];
 	}
 	return cell;
 }

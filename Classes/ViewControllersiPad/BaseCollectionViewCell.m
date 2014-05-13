@@ -107,4 +107,12 @@
 	}
 }
 
+- (void)addView:(UIView *)view
+{
+	if (nil != view)
+	{
+		[self.labelContentView addSubview:view];
+	}
+}
+
 @end

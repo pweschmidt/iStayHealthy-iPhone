@@ -27,6 +27,7 @@
 		0B65F95E1913917600523441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B65F95D1913917600523441 /* Images.xcassets */; };
 		0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */; };
 		0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */; };
+		0B81FB3919229D5500A458B0 /* MedView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B81FB3819229D5500A458B0 /* MedView_iPad.m */; };
 		0B8910B918F9330A00A49B95 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8910B318F9330A00A49B95 /* libTestFlight.a */; };
 		0B8910BA18F9330A00A49B95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910B418F9330A00A49B95 /* README.md */; };
 		0B8910BB18F9330A00A49B95 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910B518F9330A00A49B95 /* release_notes.md */; };
@@ -358,6 +359,8 @@
 		0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ResultsView-iPad.m"; path = "Views/ResultsView-iPad.m"; sourceTree = "<group>"; };
 		0B7DF43F18E6FF5A00870BB1 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailViewController.h; path = ViewControllersCommon/EmailViewController.h; sourceTree = "<group>"; };
 		0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailViewController.m; path = ViewControllersCommon/EmailViewController.m; sourceTree = "<group>"; };
+		0B81FB3719229D5500A458B0 /* MedView_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MedView_iPad.h; path = Views/MedView_iPad.h; sourceTree = "<group>"; };
+		0B81FB3819229D5500A458B0 /* MedView_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MedView_iPad.m; path = Views/MedView_iPad.m; sourceTree = "<group>"; };
 		0B8910B318F9330A00A49B95 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlight/libTestFlight.a; sourceTree = "<group>"; };
 		0B8910B418F9330A00A49B95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = TestFlight/README.md; sourceTree = "<group>"; };
 		0B8910B518F9330A00A49B95 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = release_notes.md; path = TestFlight/release_notes.md; sourceTree = "<group>"; };
@@ -1025,6 +1028,8 @@
 			children = (
 				C45A98E317EEE3BA004E13C7 /* DateView.h */,
 				C45A98E417EEE3BA004E13C7 /* DateView.m */,
+				0B81FB3719229D5500A458B0 /* MedView_iPad.h */,
+				0B81FB3819229D5500A458B0 /* MedView_iPad.m */,
 				0B778D5818BA229B00C1F010 /* ResultsView-iPad.h */,
 				0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
@@ -1895,6 +1900,7 @@
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
 				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,
 				C463742D17E9F17500D19B94 /* DashboardViewController.m in Sources */,
+				0B81FB3919229D5500A458B0 /* MedView_iPad.m in Sources */,
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
 				0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */,
 				C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */,
@@ -2363,6 +2369,7 @@
 				0BB5669D191E132F00731739 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iStayHealthy" */ = {
 			isa = XCConfigurationList;

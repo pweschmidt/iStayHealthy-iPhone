@@ -11,6 +11,8 @@
 #import "BaseCollectionViewCell.h"
 #import "OtherMedication+Handling.h"
 #import "EditOtherMedsTableViewController.h"
+#import "MedView_iPad.h"
+
 #define kOtherMedsCollectionCellIdentifier @"OtherMedsCollectionCellIdentifier"
 
 @interface OtherMedsCollectionViewController ()
@@ -72,21 +74,8 @@
 	}
 
 	[cell addDateToTitle:med.StartDate];
-//	ResultsView_iPad *hivResults = [ResultsView_iPad viewForResults:results
-//	                                                    resultsType:HIVResultsType
-//	                                                          frame:CGRectMake(0, 40, 150, 50)];
-//
-//	ResultsView_iPad *bloods = [ResultsView_iPad viewForResults:results
-//	                                                resultsType:BloodResultsType
-//	                                                      frame:CGRectMake(0, 90, 150, 20)];
-//
-//	ResultsView_iPad *other = [ResultsView_iPad viewForResults:results
-//	                                               resultsType:OtherResultsType
-//	                                                     frame:CGRectMake(0, 115, 150, 20)];
-//
-//	[cell.contentView addSubview:hivResults];
-//	[cell.contentView addSubview:bloods];
-//	[cell.contentView addSubview:other];
+	MedView_iPad *view = [MedView_iPad viewForOtherMedication:med frame:CGRectMake(0, 2, 150, 130)];
+	[cell addView:view];
 	return cell;
 }
 
