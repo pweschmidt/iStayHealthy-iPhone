@@ -90,8 +90,8 @@
 	NSArray *menuTitles = @[NSLocalizedString(@"HIV", nil),
 	                        NSLocalizedString(@"Bloods", nil),
 	                        NSLocalizedString(@"Cells", nil),
-	                        NSLocalizedString(@"Other", nil)/*,
-	                                                           NSLocalizedString(@"Liver",nil)*/];
+	                        NSLocalizedString(@"Other", nil),
+	                        NSLocalizedString(@"Liver", nil)];
 
 	self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
 	CGFloat width = self.tableView.bounds.size.width;
@@ -247,7 +247,6 @@
 		}
 		NSString *resultsString = [self.editResultsMenu objectAtIndex:indexPath.row];
 		NSString *text = NSLocalizedString(resultsString, nil);
-//		cell.tag = [self tagForIndex:indexPath];
 		[self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
 		return cell;
 	}
@@ -457,6 +456,10 @@
 		case 3:
 			self.editResultsMenu = [self.menus objectForKey:@"Other"];
 			break;
+
+		case 4:
+			self.editResultsMenu = [self.menus objectForKey:@"Liver"];
+			break;
 	}
 	NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:1];
 	[self.tableView beginUpdates];
@@ -494,21 +497,22 @@
 	[self prepareSegmentMapForMenu:otherMenu segment:3];
 
 
-	/*
-	   NSArray *liverMenu = @[kLiverAlanineTransaminase,
-	   kLiverAspartateTransaminase,
-	   kLiverAlkalinePhosphatase,
-	   kLiverAlbumin,
-	   kLiverAlanineTotalBilirubin,
-	   kLiverAlanineDirectBilirubin,
-	   kLiverGammaGlutamylTranspeptidase];
-	 */
+
+	NSArray *liverMenu = @[kLiverAlanineTransaminase,
+	                       kLiverAspartateTransaminase,
+	                       kLiverAlkalinePhosphatase,
+	                       kLiverAlbumin,
+	                       kLiverAlanineTotalBilirubin,
+	                       kLiverAlanineDirectBilirubin,
+	                       kLiverGammaGlutamylTranspeptidase];
+	[self prepareSegmentMapForMenu:otherMenu segment:4];
+
 
 	self.menus = @{ @"HIV" : hivMenu,
 		            @"Bloods" : bloodMenu,
 		            @"Cells" : cellsMenu,
-		            @"Other" : otherMenu/*,
-		                                   @"Liver" : liverMenu*/};
+		            @"Other" : otherMenu,
+		            @"Liver" : liverMenu };
 
 	self.editResultsMenu = hivMenu;
 }

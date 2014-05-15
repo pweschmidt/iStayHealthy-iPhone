@@ -12,7 +12,7 @@
 {
 	CGFloat dashPattern[2];
 	CGFloat medDashPattern[2];
-	CGFloat dateDashPattern[3];    
+	CGFloat dateDashPattern[3];
 }
 - (void)drawLineWithContext:(CGContextRef)context
                       start:(CGPoint)start
@@ -35,5 +35,17 @@
                  fillColour:(CGColorRef)fillColour
                     pattern:(CGFloat *)pattern
                patternCount:(int)patternCount;
+
+- (void)drawRectWithContext:(CGContextRef)context
+                      point:(CGPoint)point
+                   cgColour:(CGColorRef)cgColor
+                 fillColour:(CGColorRef)fillColour;
+
+- (void)drawRectWithContext:(CGContextRef)context
+                      point:(CGPoint)point
+                      width:(CGFloat)width
+                     height:(CGFloat)height
+                   cgColour:(CGColorRef)cgColor
+                 fillColour:(CGColorRef)fillColour;
 
 @end
