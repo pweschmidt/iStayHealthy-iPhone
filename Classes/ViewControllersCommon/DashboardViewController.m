@@ -10,7 +10,6 @@
 #import "Constants.h"
 #import "Results.h"
 #import "Medication.h"
-#import "PWESGraph.h"
 #import "PWESDashboardView.h"
 #import "PWESDataManager.h"
 #import "PWESDataNTuple.h"
@@ -162,6 +161,8 @@
 	{
 		NSError *error = nil;
 		PWESDataNTuple *ntuple = [PWESDataNTuple initWithRawResults:results
+		                                             rawMedications:medications
+		                                       rawMissedMedications:nil
 		                                                      types:types
 		                                                      error:&error];
 		if (ntuple)

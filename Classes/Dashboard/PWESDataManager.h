@@ -13,39 +13,39 @@
 @interface PWESDataManager : NSObject
 
 /**
- returns a singleton for PWESDataManager
+   returns a singleton for PWESDataManager
  */
-+ (id) sharedInstance;
++ (id)sharedInstance;
 
 /**
- @param rawResults the results array. It is assumed it is ordered by results date
- @param type the data type we want to filter for
- @param error is nil if results can be obtained
- @return a PWESDataTuple or nil if error
+   @param rawResults the results array. It is assumed it is ordered by results date
+   @param type the data type we want to filter for
+   @param error is nil if results can be obtained
+   @return a PWESDataTuple or nil if error
  */
 - (PWESDataTuple *)filterOrderedRawResults:(NSArray *)rawResults
-                                     type:(NSString *)type
-                                    error:(NSError **)error;
+                                      type:(NSString *)type
+                                     error:(NSError **)error;
 
 /**
- @param rawResults. It is assumed the array is ordered by results date
- @param types an array of String types
- @param error will return nil if a valid timeline can be created
- @return the timeline for combined results or nil if error
+   @param rawResults. It is assumed the array is ordered by results date
+   @param types an array of String types
+   @param error will return nil if a valid timeline can be created
+   @return the timeline for combined results or nil if error
  */
 - (NSArray *)combinedTimelineForOrderedRawResults:(NSArray *)rawResults
-                                                  types:(NSArray *)types
-                                                  error:(NSError **)error;
+                                            types:(NSArray *)types
+                                            error:(NSError **)error;
 
 /**
- @param types an array of strings for which a predicate will be created
- @return a predicate to filter an array with
+   @param types an array of strings for which a predicate will be created
+   @return a predicate to filter an array with
  */
 - (NSPredicate *)filterPredicateFromTypes:(NSArray *)types;
 
 /**
- @param type the results type
- @return a string to be used in a predicate
+   @param type the results type
+   @return a string to be used in a predicate
  */
 - (NSString *)filterStringForType:(NSString *)type;
 

@@ -53,6 +53,7 @@ typedef NS_ENUM (int, FontType)
 
 typedef NS_ENUM (int, FontSize)
 {
+	veryTiny = 7,
 	tiny = 8,
 	small = 10,
 	medium = 12,
@@ -100,6 +101,16 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kDateFormatting                 @"dd-MMM-yyyy"
 #define kTimeFormatting                 @"HH:mm"
 #define kDefaultFontName                @"Helvetica"
+
+/**
+   Database and iCloud
+ */
+#define kMainDataSource @"iStayHealthy.sqlite"
+#define kBackupDataSource @"iStayHealthyBackup.sqlite"
+#define kiCloudDataSource @"iStayHealthyiCloud.sqlite"
+#define kFaultyDataSource @"iStayHealthyNoiCloud.sqlite"
+#define kUbiquitousKeyPath @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
+#define kTeamId @"5Y4HL833A4.com.pweschmidt.iStayHealthy"
 
 /**
    App and Dropbox app definitions
@@ -282,15 +293,6 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kAlertFrequency @"AlertFrequency"
 #define kAlertSoundName @"AlertSoundName"
 
-/**
-   Database and iCloud
- */
-#define kMainDataSource @"iStayHealthy.sqlite"
-#define kBackupDataSource @"iStayHealthyBackup.sqlite"
-#define kiCloudDataSource @"iStayHealthyiCloud.sqlite"
-#define kFaultyDataSource @"iStayHealthyNoiCloud.sqlite"
-#define kUbiquitousKeyPath @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
-#define kTeamId @"5Y4HL833A4.com.pweschmidt.iStayHealthy"
 
 
 #define kDataTablesCleaned @"dataTablesCleaned"
@@ -349,11 +351,23 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define BRIGHT_BACKGROUND [UIColor colorWithRed:255.0 / 255.0 green:255.0 / 255.0 blue:255. / 255.0 alpha:1.0]
 #define kDarkBackgroundColor [UIColor colorWithRed:0.435294 green:0.443137 blue:0.47451 alpha:1]
 
+
+#define kDefaultFont @"HelveticaNeue"
+#define kDefaultLightFont @"HelveticaNeue-Light"
+#define kDefaultUltraLightFont @"HelveticaNeue-UltraLight"
+#define kDefaultBoldFont @"HelveticaNeue-Bold"
+#define kDefaultItalicFont @"HelveticaNeue-LightOblique"
+#define kDefaultBoldItalicFont @"HelveticaNeue-BoldOblique"
+
+
 /**
    Dashboard definitions
  */
-#define kPlotAxisLabelFontSize @"AxisLabelFontSize"
-#define kPlotAxisTickLabelFontSize @"AxisTickLabelFontSize"
+#define kPlotAxisTickLabelExpFontSize @"AxisTickExpSize"
+#define kPlotAxisTitleFontSize @"AxisTitleFontSize"
+#define kPlotAxisTickLabelFontSize @"AxisTickFontSize"
+#define kPlotAxisTitleFontName @"AxisFontname"
+#define kPlotAxisTickFontName @"AxisTickFontName"
 
 
 #define kNumberOfChartViews 14

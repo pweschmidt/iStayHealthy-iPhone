@@ -39,7 +39,8 @@
 	self = [super initWithFrame:frame];
 	if (self)
 	{
-		_marginBottom = _marginLeft = _marginRight = _marginTop = 20;
+		_marginBottom = _marginTop = 20;
+		_marginLeft = _marginRight = 35;
 	}
 	return self;
 }
@@ -88,7 +89,9 @@
 
 
 
-	self.firstTuple = [self.ntuple tupleForType:[self.types objectAtIndex:0]];
+	NSString *axisType = [self.types objectAtIndex:0];
+	UIColor *lineColour = [self colourForType:axisType];
+	self.firstTuple = [self.ntuple tupleForType:axisType];
 	PWESValueRange *rangeLeft = [PWESValueRange valueRangeForDataTuple:self.firstTuple ticks:ticks];
 
 
@@ -96,6 +99,9 @@
 	                                              valueRange:rangeLeft
 	                                             orientation:Vertical
 	                                                   ticks:ticks];
+	self.yAxis.axisTitle = axisType;
+	self.yAxis.titleColor = lineColour;
+	self.yAxis.tickLabelOffsetX = 17;
 	if (self.yAxis.axisLayer)
 	{
 		[self.layer addSublayer:self.yAxis.axisLayer];
@@ -115,7 +121,6 @@
 		[self.xAxisTop show];
 	}
 
-	UIColor *lineColour = [self colourForType:[self.types objectAtIndex:0]];
 	self.plotArea = [[PWESPlotArea alloc] initWithFrame:plotFrame
 	                                         lineColour:lineColour
 	                                         valueRange:rangeLeft
@@ -131,18 +136,22 @@
 
 	if (2 == self.types.count)
 	{
-		self.secondTuple = [self.ntuple tupleForType:[self.types objectAtIndex:1]];
+		axisType = [self.types objectAtIndex:1];
+		UIColor *secondColour = [self colourForType:axisType];
+		self.secondTuple = [self.ntuple tupleForType:axisType];
 		PWESValueRange *rangeRight = [PWESValueRange valueRangeForDataTuple:self.secondTuple ticks:ticks];
 		self.yAxisRight = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
 		                                                   valueRange:rangeRight
 		                                                  orientation:VerticalRight
 		                                                        ticks:ticks];
+		self.yAxisRight.axisTitle = axisType;
+		self.yAxisRight.titleColor = lineColour;
+//		self.yAxisRight.tickLabelOffset = 12;
 		if (self.yAxisRight.axisLayer)
 		{
 			[self.layer addSublayer:self.yAxisRight.axisLayer];
 			[self.yAxisRight show];
 		}
-		UIColor *secondColour = [self colourForType:[self.types objectAtIndex:1]];
 		self.secondPlotArea = [[PWESPlotArea alloc] initWithFrame:plotFrame lineColour:secondColour valueRange:rangeRight dateLine:self.ntuple.dateLine ticks:ticks];
 		if (self.secondPlotArea)
 		{

@@ -12,25 +12,30 @@
 + (UIFont *)fontWithType:(FontType)fontType
                     size:(FontSize)size
 {
-    NSString *name = @"Helvetica";
-    switch (fontType)
-    {
-        case Standard:
-            name = @"HelveticaNeue-Light";
-            break;
-        case Light:
-            name = @"HelveticaNeue-UltraLight";
-            break;
-        case LightItalic:
-            name = @"HelveticaNeue-LightOblique";
-            break;
-        case Bold:
-            name = @"HelveticaNeue-Bold";
-            break;
-        case BoldItalic:
-            name = @"HelveticaNeue-BoldOblique";
-            break;
-    }
-    return [UIFont fontWithName:name size:size];
+	NSString *name = kDefaultFont;
+	switch (fontType)
+	{
+		case Standard:
+			name = kDefaultLightFont;
+			break;
+
+		case Light:
+			name = kDefaultUltraLightFont;
+			break;
+
+		case LightItalic:
+			name = kDefaultItalicFont;
+			break;
+
+		case Bold:
+			name = kDefaultBoldFont;
+			break;
+
+		case BoldItalic:
+			name = kDefaultBoldItalicFont;
+			break;
+	}
+	return [UIFont fontWithName:name size:size];
 }
+
 @end

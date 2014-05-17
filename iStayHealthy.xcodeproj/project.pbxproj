@@ -180,7 +180,6 @@
 		C463742D17E9F17500D19B94 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C463742C17E9F17500D19B94 /* DashboardViewController.m */; };
 		C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */; };
 		C463743E17E9F2AF00D19B94 /* PWESDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743217E9F2AF00D19B94 /* PWESDashboardView.m */; };
-		C463743F17E9F2AF00D19B94 /* PWESGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743417E9F2AF00D19B94 /* PWESGraph.m */; };
 		C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743617E9F2AF00D19B94 /* PWESIndicatorView.m */; };
 		C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743817E9F2AF00D19B94 /* PWESPlotView.m */; };
 		C463744217E9F2AF00D19B94 /* PWESResultsSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743A17E9F2AF00D19B94 /* PWESResultsSummaryView.m */; };
@@ -587,8 +586,6 @@
 		C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDashboardSummaryView.m; path = Dashboard/PWESDashboardSummaryView.m; sourceTree = "<group>"; };
 		C463743117E9F2AF00D19B94 /* PWESDashboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDashboardView.h; path = Dashboard/PWESDashboardView.h; sourceTree = "<group>"; };
 		C463743217E9F2AF00D19B94 /* PWESDashboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDashboardView.m; path = Dashboard/PWESDashboardView.m; sourceTree = "<group>"; };
-		C463743317E9F2AF00D19B94 /* PWESGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESGraph.h; path = Dashboard/PWESGraph.h; sourceTree = "<group>"; };
-		C463743417E9F2AF00D19B94 /* PWESGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESGraph.m; path = Dashboard/PWESGraph.m; sourceTree = "<group>"; };
 		C463743517E9F2AF00D19B94 /* PWESIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESIndicatorView.h; path = Dashboard/PWESIndicatorView.h; sourceTree = "<group>"; };
 		C463743617E9F2AF00D19B94 /* PWESIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESIndicatorView.m; path = Dashboard/PWESIndicatorView.m; sourceTree = "<group>"; };
 		C463743717E9F2AF00D19B94 /* PWESPlotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPlotView.h; path = Dashboard/PWESPlotView.h; sourceTree = "<group>"; };
@@ -1089,8 +1086,6 @@
 				0B6048561840D12B0092B5FB /* PWESDataTuple.m */,
 				C4AEF828180DC05C00107966 /* PWESDraw.h */,
 				C4AEF829180DC05C00107966 /* PWESDraw.m */,
-				C463743317E9F2AF00D19B94 /* PWESGraph.h */,
-				C463743417E9F2AF00D19B94 /* PWESGraph.m */,
 				C463743517E9F2AF00D19B94 /* PWESIndicatorView.h */,
 				C463743617E9F2AF00D19B94 /* PWESIndicatorView.m */,
 				C4AEF82B180DCAB800107966 /* PWESPlotArea.h */,
@@ -1890,7 +1885,6 @@
 				C4BCF09F17B7A9C000F1E0F7 /* PreviousMedication+Handling.m in Sources */,
 				C463744317E9F2AF00D19B94 /* PWESUtils.m in Sources */,
 				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
-				C463743F17E9F2AF00D19B94 /* PWESGraph.m in Sources */,
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
 				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,
 				C463742D17E9F17500D19B94 /* DashboardViewController.m in Sources */,
