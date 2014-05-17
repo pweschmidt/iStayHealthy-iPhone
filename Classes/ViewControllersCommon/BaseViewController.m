@@ -16,8 +16,6 @@
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
-#import "GeneralSettings.h"
-#import "Constants.h"
 #import "Utilities.h"
 #import "Menus.h"
 #import "UILabel+Standard.h"

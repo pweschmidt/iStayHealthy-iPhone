@@ -7,8 +7,6 @@
 //
 
 #import "PWESIndicatorView.h"
-#import "Constants.h"
-#import "GeneralSettings.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PWESIndicatorView ()

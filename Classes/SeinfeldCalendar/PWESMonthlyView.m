@@ -75,7 +75,7 @@
 	self.dates = [NSMutableArray array];
 
 	NSString *month = [[PWESCalendar months] objectAtIndex:seinfeldMonth.month - 1];
-	CALayer *title = [self monthWithName:[NSString stringWithFormat:@"%@, %d", month, seinfeldMonth.year]];
+	CALayer *title = [self monthWithName:[NSString stringWithFormat:@"%@, %ld", month, (long)seinfeldMonth.year]];
 	[self.layer addSublayer:title];
 
 	CALayer *header = [self header];

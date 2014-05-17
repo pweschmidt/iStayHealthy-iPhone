@@ -15,7 +15,6 @@
 #import "PWESDataManager.h"
 #import "PWESDataNTuple.h"
 #import "CoreDataManager.h"
-#import "GeneralSettings.h"
 #import "Utilities.h"
 //#import "EditResultsTableViewController.h"
 #import "EditChartsTableViewController.h"
@@ -91,7 +90,7 @@
 		controller.customPopOverDelegate = self;
 		UINavigationController *navController = [[UINavigationController alloc]
 		                                         initWithRootViewController:controller];
-        [self presentPopoverWithController:navController fromBarButton:(UIBarButtonItem *)sender];
+		[self presentPopoverWithController:navController fromBarButton:(UIBarButtonItem *)sender];
 	}
 	else
 	{

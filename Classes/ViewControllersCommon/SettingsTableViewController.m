@@ -7,8 +7,6 @@
 //
 
 #import "SettingsTableViewController.h"
-#import "GeneralSettings.h"
-#import "Constants.h"
 #import "UILabel+Standard.h"
 #import "KeychainHandler.h"
 #import "ContentContainerViewController.h"

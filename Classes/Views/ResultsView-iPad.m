@@ -8,7 +8,6 @@
 
 #import "ResultsView-iPad.h"
 #import "PWESDataManager.h"
-#import "GeneralSettings.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ResultsView_iPad ()

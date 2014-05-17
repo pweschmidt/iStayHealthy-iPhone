@@ -205,7 +205,7 @@ static NSDictionary *ascendingDictionary()
 - (NSString *)rootElementOpen
 {
 	NSMutableString *string = [NSMutableString string];
-	[string appendString:[NSString stringWithString:kXMLElementRoot]];
+	[string appendString:kXMLElementRoot];
 	NSString *dbVersion = [NSString stringWithFormat:@" dbVersion=\"%@\"", kXMLDBVersionString];
 	[string appendString:dbVersion];
 	[string appendString:@" fromDevice=\"iOS\""];

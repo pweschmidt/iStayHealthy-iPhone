@@ -9,8 +9,6 @@
 #import "CustomToolbar.h"
 #import "UIBarButtonItem+iStayHealthy.h"
 #import "Menus.h"
-#import "GeneralSettings.h"
-#import "Constants.h"
 
 @interface CustomToolbar ()
 {

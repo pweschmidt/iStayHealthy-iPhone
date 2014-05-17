@@ -7,10 +7,8 @@
 //
 
 #import "InformationTableViewController.h"
-#import "GeneralSettings.h"
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
-#import "Constants.h"
 #import "UILabel+Standard.h"
 #import "Utilities.h"
 #import "WebViewController.h"

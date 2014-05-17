@@ -7,8 +7,6 @@
 //
 
 #import "EditChartsTableViewController.h"
-#import "Constants.h"
-#import "GeneralSettings.h"
 #import "UIFont+Standard.h"
 #import "Utilities.h"
 

@@ -8,12 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kNumberOfChartViews 14
-#define APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
-#define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 
-#define kEnlargeFactor 1.25
-#define kZoomFactor 0.45
 typedef void (^finishBlock)(void);
 
 typedef NS_ENUM (NSUInteger, TransitionType)
@@ -58,10 +53,12 @@ typedef NS_ENUM (int, FontType)
 
 typedef NS_ENUM (int, FontSize)
 {
+	tiny = 8,
 	small = 10,
 	medium = 12,
 	standard = 15,
-	large = 17
+	large = 17,
+	xLarge = 20
 };
 
 
@@ -94,236 +91,273 @@ typedef void (^iStayHealthyXMLBlock)(NSString *xmlString, NSError *error);
 typedef void (^iStayHealthySuccessBlock)(BOOL success, NSError *error);
 typedef void (^iStayHealthyArrayCompletionBlock)(NSArray *array, NSError *error);
 typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NSError *error);
+
 /**
    General
  */
-extern NSString *const kAppNotificationKey;
-extern NSString *const kDefaultDateFormatting;
-extern NSString *const kDateFormatting;
-extern NSString *const kTimeFormatting;
-extern NSString *const kDefaultFontName;
-/**
-   Dropbox app definitions
- */
-extern NSString *const kDropboxConsumerKey;
-extern NSString *const kDropboxSecretKey;
+#define kAppNotificationKey             @"iStayHealthyNotification"
+#define kDefaultDateFormatting          @"dd-MMM-yy HH:mm:ss"
+#define kDateFormatting                 @"dd-MMM-yyyy"
+#define kTimeFormatting                 @"HH:mm"
+#define kDefaultFontName                @"Helvetica"
 
 /**
-   Patient Knows Best definitions
+   App and Dropbox app definitions
  */
-extern NSString *const kPKBConsumerKey;
-extern NSString *const kPKBSecretKey;
+#define APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
+#define SALT_HASH @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
+#define kDropboxConsumerKey @"sekt4gbt7526j0y"
+#define kDropboxSecretKey @"drg5hompcf9vbd2"
+
 
 /**
    Controllers
  */
-extern NSString *const kDefaultControllerKey;
-extern NSString *const kMenuController;
-extern NSString *const kAddController;
-extern NSString *const kResultsController;
-extern NSString *const kDashboardController;
-extern NSString *const kDropboxController;
-extern NSString *const kHIVMedsController;
-extern NSString *const kAlertsController;
-extern NSString *const kClinicsController;
-extern NSString *const kOtherMedsController;
-extern NSString *const kProceduresController;
-extern NSString *const kMissedController;
-extern NSString *const kSideEffectsController;
-extern NSString *const kWellnessController;
-extern NSString *const kInfoController;
-extern NSString *const kSettingsController;
-extern NSString *const kMedicationDiaryController;
-extern NSString *const kFeedbackController;
-extern NSString *const kEmailController;
+#define kDefaultControllerKey @"DefaultController"
+#define kMenuController @"MenuController"
+#define kAddController @"AddController"
+#define kResultsController @"ResultsController"
+#define kDashboardController @"DashboardController"
+#define kDropboxController @"DropboxController"
+#define kHIVMedsController @"MyHIVMedicationViewController"
+#define kAlertsController @"AlertsController"
+#define kClinicsController @"ClinicsController"
+#define kOtherMedsController @"OtherMedsController"
+#define kProceduresController @"ProceduresController"
+#define kMissedController @"MissedController"
+#define kSideEffectsController @"SideEffectsController"
+#define kWellnessController @"WellnessController"
+#define kInfoController @"InfoController"
+#define kSettingsController @"SettingsController"
+#define kMedicationDiaryController @"MedicationDiaryController"
+#define kFeedbackController @"FeedbackController"
+#define kEmailController @"EmailController"
 /**
    General
  */
 
-extern NSString *const kUID;
-extern NSString *const kLastValueKey;
-extern NSString *const kPreviousValueKey;
-extern NSString *const kDifferentialKey;
-extern NSString *const kValueTypeKey;
-extern NSString *const kHasResultsKey;
-extern NSString *const kResultsDictionaryKey;
+#define kUID @"UID"
+#define kLastValueKey @"lastValue"
+#define kPreviousValueKey @"previousValue"
+#define kDifferentialKey @"differential"
+#define kValueTypeKey @"type"
+#define kHasResultsKey @"hasResults"
+#define kResultsDictionaryKey @"resultsDictionary"
 
 /**
    XML Specific
  */
-extern NSString *const kXMLDBVersionString;
-extern NSString *const kXMLPreamble;
-extern NSString *const kXMLElementRoot;
+#define kXMLDBVersionString @"15"
+#define kXMLPreamble @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+#define kXMLElementRoot @"iStayHealthyRecord"
 
 /**
    Data
  */
-extern NSString *const kNoResult;
-extern NSString *const kResults;
-extern NSString *const kMedications;
-extern NSString *const kMissedMedications;
-extern NSString *const kOtherMedications;
-extern NSString *const kClinicalContacts;
-extern NSString *const kIllnessAndProcedures;
-extern NSString *const kHIVSideEffects;
-extern NSString *const kPreviousMedications;
-extern NSString *const kWellnesses;
-extern NSString *const kSeinfeldCalendars;
-extern NSString *const kSeinfeldCalendarEntries;
+#define kNoResult @"NoResult"
+#define kResults @"Results"
+#define kMedications @"Medications"
+#define kMissedMedications @"MissedMedications"
+#define kOtherMedications @"OtherMedications"
+#define kClinicalContacts @"ClinicalContacts"
+#define kIllnessAndProcedures @"IllnessesAndProcedures"
+#define kHIVSideEffects @"HIVSideEffects"
+#define kPreviousMedications @"PreviousMedications"
+#define kWellnesses @"Wellnesses"
+#define kSeinfeldCalendars @"SeinfeldCalendars"
+#define kSeinfeldCalendarEntries @"SeinfeldCalendarEntries"
 
-extern NSString *const kiStayHealthyRecord;
-extern NSString *const kResult;
-extern NSString *const kMedication;
-extern NSString *const kMissedMedication;
-extern NSString *const kOtherMedication;
-extern NSString *const kContacts;
-extern NSString *const kProcedures;
-extern NSString *const kSideEffects;
-extern NSString *const kPreviousMedication;
-extern NSString *const kWellness;
-extern NSString *const kSeinfeldCalendar;
-extern NSString *const kSeinfeldCalendarEntry;
+#define kiStayHealthyRecord @"iStayHealthyRecord"
+#define kResult @"Result"
+#define kMedication @"Medication"
+#define kMissedMedication @"MissedMedication"
+#define kOtherMedication @"OtherMedication"
+#define kContacts @"Contacts"
+#define kProcedures @"Procedures"
+#define kSideEffects @"SideEffects"
+#define kPreviousMedication @"PreviousMedication"
+#define kWellness @"Wellness"
+#define kSeinfeldCalendar @"SeinfeldCalendar"
+#define kSeinfeldCalendarEntry @"SeinfeldCalendarEntry"
 
-extern NSString *const kFromDevice;
-extern NSString *const kFromDate;
-extern NSString *const kDBVersion;
-extern NSString *const kMedicationForm;
-extern NSString *const kName;
-extern NSString *const kNameLowerCase;
-extern NSString *const kImage;
-extern NSString *const kStartDate;
-extern NSString *const kEndDate;
-extern NSString *const kStartDateLowerCase;
-extern NSString *const kEndDateLowerCase;
+#define kFromDevice @"fromDevice"
+#define kFromDate @"fromDate"
+#define kDBVersion @"dbVersion"
+#define kMedicationForm @"MedicationForm"
+#define kName @"Name"
+#define kNameLowerCase @"name"
+#define kImage @"Image"
+#define kStartDate @"StartDate"
+#define kEndDate @"EndDate"
+#define kStartDateLowerCase @"startDate"
+#define kEndDateLowerCase @"endDate"
 
-extern NSString *const kDose;
-extern NSString *const kUnit;
-extern NSString *const kMissedDate;
-extern NSString *const kDrug;
-extern NSString *const kDrugLowerCase;
-extern NSString *const kCD4;
-extern NSString *const kResultsDate;
-extern NSString *const kViralLoad;
-extern NSString *const kCD4Percent;
-extern NSString *const kHepCViralLoad;
-extern NSString *const kGlucose;
-extern NSString *const kTotalCholesterol;
-extern NSString *const kLDL;
-extern NSString *const kHDL;
-extern NSString *const kTriglyceride;
-extern NSString *const kHeartRate;
-extern NSString *const kSystole;
-extern NSString *const kDiastole;
-extern NSString *const kBloodPressure;
-extern NSString *const kOxygenLevel;
-extern NSString *const kWeight;
-extern NSString *const kBMI;
-extern NSString *const kHemoglobulin;
-extern NSString *const kPlatelet;
-extern NSString *const kWhiteBloodCells;
-extern NSString *const kRedBloodCells;
-extern NSString *const kCholesterolRatio;
-extern NSString *const kCardiacRiskFactor;
-extern NSString *const kLiverAlanineTransaminase;
-extern NSString *const kLiverAspartateTransaminase;
-extern NSString *const kLiverAlkalinePhosphatase;
-extern NSString *const kLiverAlbumin;
+#define kDose @"Dose"
+#define kUnit @"Unit"
+#define kMissedDate @"MissedDate"
+#define kDrug @"Drug"
+#define kDrugLowerCase @"drug"
+#define kCD4 @"CD4"
+#define kResultsDate @"ResultsDate"
+#define kViralLoad @"ViralLoad"
+#define kCD4Percent @"CD4Percent"
+#define kHepCViralLoad @"HepCViralLoad"
+#define kGlucose @"Glucose"
+#define kTotalCholesterol @"TotalCholesterol"
+#define kLDL @"LDL"
+#define kHDL @"HDL"
+#define kTriglyceride @"Triglyceride"
+#define kHeartRate @"HeartRate"
+#define kSystole @"Systole"
+#define kDiastole @"Diastole"
+#define kBloodPressure @"BloodPressure"
+#define kOxygenLevel @"OxygenLevel"
+#define kWeight @"Weight"
+#define kBMI @"bmi"
+#define kHemoglobulin @"Hemoglobulin"
+#define kPlatelet @"PlateletCount"
+#define kWhiteBloodCells @"WhiteBloodCellCount"
+#define kRedBloodCells @"redBloodCellCount"
+#define kCholesterolRatio @"cholesterolRatio"
+#define kCardiacRiskFactor @"cardiacRiskFactor"
+#define kLiverAlanineTransaminase @"liverAlanineTransaminase"
+#define kLiverAspartateTransaminase @"liverAspartateTransaminase"
+#define kLiverAlkalinePhosphatase @"liverAlkalinePhosphatase"
+#define kLiverAlbumin @"liverAlbumin"
 
-extern NSString *const kLiverAlanineTotalBilirubin;
-extern NSString *const kLiverAlanineDirectBilirubin;
-extern NSString *const kLiverGammaGlutamylTranspeptidase;
-extern NSString *const kUID;
-extern NSString *const kUIDLowerCase;
-extern NSString *const kClinicName;
-extern NSString *const kClinicID;
-extern NSString *const kClinicStreet;
-extern NSString *const kClinicPostcode;
+#define kLiverAlanineTotalBilirubin @"liverAlanineTotalBilirubin"
+#define kLiverAlanineDirectBilirubin @"liverAlanineDirectBilirubin"
+#define kLiverGammaGlutamylTranspeptidase @"liverGammaGlutamylTranspeptidase"
+#define kUIDLowerCase @"uID"
+#define kClinicName @"ClinicName"
+#define kClinicID @"ClinicID"
+#define kClinicStreet @"ClinicStreet"
+#define kClinicPostcode @"ClinicPostcode"
 
-extern NSString *const kClinicCity;
-extern NSString *const kClinicContactNumber;
-extern NSString *const kResultsContactNumber;
-extern NSString *const kClinicEmailAddress;
-extern NSString *const kClinicWebSite;
+#define kClinicCity @"ClinicCity"
+#define kClinicContactNumber @"ClinicContactNumber"
+#define kResultsContactNumber @"ResultsContactNumber"
+#define kClinicEmailAddress @"ClinicEmailAddress"
+#define kClinicWebSite @"ClinicWebSite"
 
-extern NSString *const kEmergencyContactNumber;
-extern NSString *const kAppointmentContactNumber;
+#define kEmergencyContactNumber @"EmergencyContactNumber"
+#define kAppointmentContactNumber @"AppointmentContactNumber"
 
-extern NSString *const kInsuranceID;
-extern NSString *const kInsuranceName;
-extern NSString *const kInsuranceWebSite;
-extern NSString *const kClinicCountry;
-extern NSString *const kConsultantName;
-extern NSString *const kInsuranceAuthorisationCode;
-extern NSString *const kInsuranceContactNumber;
-extern NSString *const kEmergencyContactNumber2;
-extern NSString *const kClinicNurseName;
-extern NSString *const kContactName;
-
-
-extern NSString *const kSideEffect;
-extern NSString *const kSideEffectDate;
-extern NSString *const kIllness;
-
-extern NSString *const kDate;
-extern NSString *const kYearOfBirth;
-extern NSString *const kIsDiabetic;
-extern NSString *const kIsSmoker;
-extern NSString *const kGender;
-
-extern NSString *const kIsCompleted;
-extern NSString *const kDateLowerCase;
-extern NSString *const kHasTakenMeds;
-
-extern NSString *const kSleepBarometer;
-extern NSString *const kMoodBarometer;
-extern NSString *const kWellnessBarometer;
-extern NSString *const kMissedReason;
-extern NSString *const kSeriousness;
-extern NSString *const kReasonEnded;
-extern NSString *const kIsART;
-extern NSString *const kNotes;
-extern NSString *const kCausedBy;
-extern NSString *const kAlertLabel;
-extern NSString *const kAlertFrequency;
-extern NSString *const kAlertSoundName;
-extern NSString *const kMainDataSource;
-extern NSString *const kBackupDataSource;
-extern NSString *const kiCloudDataSource;
-extern NSString *const kFaultyDataSource;
-extern NSString *const kUbiquitousKeyPath;
-extern NSString *const kTeamId;
-extern NSString *const kDataTablesCleaned;
-extern NSString *const kIsPasswordEnabled;
-extern NSString *const kPassword;
-extern NSString *const kPasswordTransferred;
-extern NSString *const kPasswordReset;
-extern NSString *const kDashboardTypes;
-extern NSString *const kCD4AndVL;
-extern NSString *const kCD4PercentAndVL;
-
-extern NSString *const kResultsData;
-extern NSString *const kMedicationData;
-extern NSString *const kMissedMedicationData;
-
-extern NSString *const kSecretKey;
-extern NSString *const kImportXMLFile;
-
-extern NSString *const kMissedReasonForgotten;
-extern NSString *const kMissedReasonNoMeds;
-extern NSString *const kMissedReasonUnable;
-extern NSString *const kMissedReasonUnwilling;
-extern NSString *const kMissedReasonOther;
-extern NSString *const kEffectsOther;
-extern NSString *const kEffectsMinor;
-extern NSString *const kEffectsMajor;
-extern NSString *const kEffectsSerious;
-extern NSString *const kEffectsAlways;
-extern NSString *const kEffectsOften;
-extern NSString *const kEffectsSometimes;
-extern NSString *const kEffectsRarely;
+#define kInsuranceID @"InsuranceID"
+#define kInsuranceName @"InsuranceName"
+#define kInsuranceWebSite @"InsuranceWebSite"
+#define kClinicCountry @"ClinicCountry"
+#define kConsultantName @"ConsultantName"
+#define kInsuranceAuthorisationCode @"InsuranceAuthorisationCode"
+#define kInsuranceContactNumber @"InsuranceContactNumber"
+#define kEmergencyContactNumber2 @"InsuranceContactNumber2"
+#define kClinicNurseName @"ClinicNurseName"
+#define kContactName @"ContactName"
 
 
+#define kSideEffect @"SideEffect"
+#define kSideEffectDate @"SideEffectDate"
+#define kIllness @"Illness"
 
-extern NSString *const kAppointmentDate;
-extern NSString *const kAppointmentClinic;
-extern NSString *const kAppointmentNotes;
+#define kDate @"Date"
+#define kYearOfBirth @"yearOfBirth"
+#define kIsDiabetic @"isDiabetic"
+#define kIsSmoker @"isSmoker"
+#define kGender @"gender"
+
+#define kIsCompleted @"isCompleted"
+#define kDateLowerCase @"date"
+#define kHasTakenMeds @"hasTakenMeds"
+
+#define kSleepBarometer @"sleepBarometer"
+#define kMoodBarometer @"moodBarometer"
+#define kWellnessBarometer @"wellnessBarometer"
+#define kMissedReason @"missedReason"
+#define kSeriousness @"seriousness"
+#define kReasonEnded @"reasonEnded"
+#define kIsART @"isART"
+#define kNotes @"Notes"
+#define kCausedBy @"CausedBy"
+#define kAlertLabel @"AlertLabel"
+#define kAlertFrequency @"AlertFrequency"
+#define kAlertSoundName @"AlertSoundName"
+
+/**
+   Database and iCloud
+ */
+#define kMainDataSource @"iStayHealthy.sqlite"
+#define kBackupDataSource @"iStayHealthyBackup.sqlite"
+#define kiCloudDataSource @"iStayHealthyiCloud.sqlite"
+#define kFaultyDataSource @"iStayHealthyNoiCloud.sqlite"
+#define kUbiquitousKeyPath @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
+#define kTeamId @"5Y4HL833A4.com.pweschmidt.iStayHealthy"
+
+
+#define kDataTablesCleaned @"dataTablesCleaned"
+#define kIsPasswordEnabled @"isPasswordEnabled"
+#define kPassword @"password"
+#define kPasswordTransferred @"passwordIsTransferred"
+#define kPasswordReset @"resetPassword"
+#define kDashboardTypes @"dashboardTypes"
+#define kCD4AndVL @"CD4AndVL"
+#define kCD4PercentAndVL @"CD4PercentAndVL"
+
+#define kResultsData @"ResultsData"
+#define kMedicationData @"MedicationData"
+#define kMissedMedicationData @"MissedMedicationData"
+
+#define kSecretKey @"EDFAEE24-CC9F-49FC-ADF6-FE2C8D2C313D"
+#define kImportXMLFile @"importXML.isth"
+
+#define kMissedReasonForgotten @"Forgotten"
+#define kMissedReasonNoMeds @"Ran out of meds"
+#define kMissedReasonUnable @"Could not take the pills"
+#define kMissedReasonUnwilling @"Didn't want to take the meds"
+#define kMissedReasonOther @"No particular reason"
+#define kEffectsOther @"Select from list"
+#define kEffectsMinor @"Minor"
+#define kEffectsMajor @"Major"
+#define kEffectsSerious @"Serious"
+#define kEffectsAlways @"Always"
+#define kEffectsOften @"Often"
+#define kEffectsSometimes @"Sometimes"
+#define kEffectsRarely @"Rarely"
+
+
+
+#define kAppointmentDate @"AppointmentDate"
+#define kAppointmentClinic @"AppointmentClinic"
+#define kAppointmentNotes @"AppointmentNotes"
+
+/**
+   Colour definitions
+ */
+#define TEXTCOLOUR      [UIColor colorWithRed:51.0 / 255.0 green:102.0 / 255.0 blue:204.0 / 255.0 alpha:1.0]
+#define DARK_YELLOW     [UIColor colorWithRed:255.0 / 255.0 green:152.0 / 255.0 blue:0.0 / 255.0 alpha:1.0]
+#define DARK_GREEN      [UIColor colorWithRed:0.0 / 255.0 green:102.0 / 255.0 blue:0.0 / 255.0 alpha:1.0]
+#define DARK_RED        [UIColor colorWithRed:204.0 / 255.0 green:0.0 / 255.0 blue:0.0 / 255.0 alpha:1.0]
+#define BACKGROUND_EVEN [UIColor colorWithRed:224.0 / 255.0 green:255.0 / 255.0 blue:255.0 / 255.0 alpha:1.0]
+#define BACKGROUND_ODD  [UIColor colorWithRed:173.0 / 255.0 green:224.0 / 255.0 blue:255.0 / 255.0 alpha:1.0]
+#define DEFAULT_BACKGROUND      [UIColor colorWithRed:253.0 / 255.0 green:255.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]
+#define MENU_BACKGROUND [UIColor colorWithRed:243.0 / 255.0 green:255.0 / 255.0 blue:230.0 / 255.0 alpha:1.0]
+#define TINTCOLOUR      [UIColor colorWithRed:236.0 / 255.0 green:153.0 / 255.0 blue:51.0 / 255.0 alpha:1.0]
+
+#define DARK_BLUE       [UIColor colorWithRed:0.0 / 255.0 green:0.0 / 255.0 blue:102.0 / 255.0 alpha:1.0]
+#define CD4COLOUR       [UIColor colorWithRed:255.0 / 255.0 green:255.0 / 255.0 blue:102.0 / 255.0 alpha:1.0]
+#define VIRALLOADCOLOUR [UIColor colorWithRed:255.0 / 255.0 green:0.0 / 255.0 blue:102.0 / 255.0 alpha:1.0]
+#define AXISCOLOUR      [UIColor whiteColor]
+#define BRIGHT_BACKGROUND [UIColor colorWithRed:255.0 / 255.0 green:255.0 / 255.0 blue:255. / 255.0 alpha:1.0]
+#define kDarkBackgroundColor [UIColor colorWithRed:0.435294 green:0.443137 blue:0.47451 alpha:1]
+
+/**
+   Dashboard definitions
+ */
+#define kPlotAxisLabelFontSize @"AxisLabelFontSize"
+#define kPlotAxisTickLabelFontSize @"AxisTickLabelFontSize"
+
+
+#define kNumberOfChartViews 14
+
+
+#define kEnlargeFactor 1.25
+#define kZoomFactor 0.45

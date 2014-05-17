@@ -7,9 +7,8 @@
 //
 
 #import "EmailViewController.h"
-#import "Constants.h"
-#import "GeneralSettings.h"
 #import "ContentNavigationController.h"
+
 @interface EmailViewController ()
 @property (nonatomic, strong) MFMailComposeViewController *mailController;
 @end

@@ -8,8 +8,6 @@
 
 #import "CentralAppDelegate.h"
 #import "ContainerViewController.h"
-#import "Constants.h"
-#import "GeneralSettings.h"
 #import "Utilities.h"
 #import "CoreDataManager.h"
 #import "UIFont+Standard.h"

@@ -8,7 +8,6 @@
 
 #import "BaseCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import "GeneralSettings.h"
 #import "Contacts.h"
 #import "UIFont+Standard.h"
 

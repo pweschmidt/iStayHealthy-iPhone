@@ -10,8 +10,6 @@
 #import "UITableViewCell+Extras.h"
 #import "NSDate+Extras.h"
 #import "CoreDataManager.h"
-#import "Constants.h"
-#import "GeneralSettings.h"
 #import "Medication+Handling.h"
 #import "Utilities.h"
 

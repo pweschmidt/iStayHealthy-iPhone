@@ -9,7 +9,6 @@
 #import "PWESCustomTextfieldCell.h"
 #import "Utilities.h"
 #import "UIFont+Standard.h"
-#import "GeneralSettings.h"
 
 @interface PWESCustomTextfieldCell ()
 {

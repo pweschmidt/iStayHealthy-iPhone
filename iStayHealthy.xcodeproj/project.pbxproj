@@ -296,7 +296,6 @@
 		C4C8F9AF18118DD10011885D /* EditDashboardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C8F9AE18118DD10011885D /* EditDashboardTableViewController.m */; };
 		C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */; };
 		C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */; };
-		C4DF910B15EE79560042211E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DF910A15EE79560042211E /* Constants.m */; };
 		C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */; };
 		C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4EB207F12FD9DF900A8712D /* SoundList.plist */; };
 		C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE811D1306D9890097B903 /* AudioToolbox.framework */; };
@@ -809,9 +808,7 @@
 		C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditPreviousMedsTableViewController.m; path = ViewControllersiPhone/EditPreviousMedsTableViewController.m; sourceTree = "<group>"; };
 		C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditContactsTableViewController.h; path = ViewControllersiPhone/EditContactsTableViewController.h; sourceTree = "<group>"; };
 		C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditContactsTableViewController.m; path = ViewControllersiPhone/EditContactsTableViewController.m; sourceTree = "<group>"; };
-		C4DE024612D5F99C005C0043 /* GeneralSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralSettings.h; sourceTree = "<group>"; };
 		C4DF910915EE79560042211E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		C4DF910A15EE79560042211E /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4EB207F12FD9DF900A8712D /* SoundList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SoundList.plist; sourceTree = "<group>"; };
 		C4EE811D1306D9890097B903 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -882,9 +879,7 @@
 				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
 				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
 				C45A98E217EEE35A004E13C7 /* Views */,
-				C4DE024612D5F99C005C0043 /* GeneralSettings.h */,
 				C4DF910915EE79560042211E /* Constants.h */,
-				C4DF910A15EE79560042211E /* Constants.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1787,7 +1782,6 @@
 				C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */,
 				C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */,
 				C46EB5DC17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m in Sources */,
-				C4DF910B15EE79560042211E /* Constants.m in Sources */,
 				C45C27C717DB5A5B001F6831 /* EditAlertsTableViewController.m in Sources */,
 				C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */,
 				0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */,

@@ -13,8 +13,6 @@
 #import "ContentNavigationController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import <QuartzCore/QuartzCore.h>
-#import "GeneralSettings.h"
-#import "Constants.h"
 #import "Utilities.h"
 #import "Menus.h"
 #import "UILabel+Standard.h"
