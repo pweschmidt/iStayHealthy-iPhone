@@ -80,6 +80,8 @@
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
 		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
 		0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */; };
+		0BB084E51928E181007C83E5 /* PWESResultsTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB084E41928E181007C83E5 /* PWESResultsTypes.m */; };
+		0BB084E81929130B007C83E5 /* PWESMedPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB084E71929130B007C83E5 /* PWESMedPlotArea.m */; };
 		0BB5668D191E132F00731739 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB5668C191E132F00731739 /* XCTest.framework */; };
 		0BB5668E191E132F00731739 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		0BB5668F191E132F00731739 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -425,6 +427,10 @@
 		0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSeinfeldCalendarTableViewController.m; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.m; sourceTree = "<group>"; };
 		0BACE94C18F02DDA008F4D13 /* PWESCustomTextfieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESCustomTextfieldCell.h; path = TableCells/PWESCustomTextfieldCell.h; sourceTree = "<group>"; };
 		0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESCustomTextfieldCell.m; path = TableCells/PWESCustomTextfieldCell.m; sourceTree = "<group>"; };
+		0BB084E31928E181007C83E5 /* PWESResultsTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESResultsTypes.h; path = Dashboard/PWESResultsTypes.h; sourceTree = "<group>"; };
+		0BB084E41928E181007C83E5 /* PWESResultsTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESResultsTypes.m; path = Dashboard/PWESResultsTypes.m; sourceTree = "<group>"; };
+		0BB084E61929130B007C83E5 /* PWESMedPlotArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESMedPlotArea.h; path = Dashboard/PWESMedPlotArea.h; sourceTree = "<group>"; };
+		0BB084E71929130B007C83E5 /* PWESMedPlotArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESMedPlotArea.m; path = Dashboard/PWESMedPlotArea.m; sourceTree = "<group>"; };
 		0BB5668B191E132F00731739 /* iStayHealthy Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iStayHealthy Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BB5668C191E132F00731739 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0BB56692191E132F00731739 /* iStayHealthy Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iStayHealthy Tests-Info.plist"; sourceTree = "<group>"; };
@@ -1088,12 +1094,16 @@
 				C4AEF829180DC05C00107966 /* PWESDraw.m */,
 				C463743517E9F2AF00D19B94 /* PWESIndicatorView.h */,
 				C463743617E9F2AF00D19B94 /* PWESIndicatorView.m */,
+				0BB084E61929130B007C83E5 /* PWESMedPlotArea.h */,
+				0BB084E71929130B007C83E5 /* PWESMedPlotArea.m */,
 				C4AEF82B180DCAB800107966 /* PWESPlotArea.h */,
 				C4AEF82C180DCAB800107966 /* PWESPlotArea.m */,
 				C463743717E9F2AF00D19B94 /* PWESPlotView.h */,
 				C463743817E9F2AF00D19B94 /* PWESPlotView.m */,
 				C463743917E9F2AF00D19B94 /* PWESResultsSummaryView.h */,
 				C463743A17E9F2AF00D19B94 /* PWESResultsSummaryView.m */,
+				0BB084E31928E181007C83E5 /* PWESResultsTypes.h */,
+				0BB084E41928E181007C83E5 /* PWESResultsTypes.m */,
 				C463743B17E9F2AF00D19B94 /* PWESUtils.h */,
 				C463743C17E9F2AF00D19B94 /* PWESUtils.m */,
 				0B60485A1840D1BA0092B5FB /* PWESValueRange.h */,
@@ -1774,6 +1784,7 @@
 				C46C5DEB17EDA44500866DBD /* InformationTableViewController.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */,
+				0BB084E51928E181007C83E5 /* PWESResultsTypes.m in Sources */,
 				C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */,
 				C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */,
 				C46EB5DC17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m in Sources */,
@@ -1811,6 +1822,7 @@
 				0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
 				C45E52F7182BFE6400C30061 /* BaseCollectionViewController.m in Sources */,
+				0BB084E81929130B007C83E5 /* PWESMedPlotArea.m in Sources */,
 				C4A49AD918002CD400FC1637 /* TimeView.m in Sources */,
 				C45E52FA182BFF0400C30061 /* BaseCollectionViewCell.m in Sources */,
 				0BB771EC18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m in Sources */,

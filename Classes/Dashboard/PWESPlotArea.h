@@ -16,11 +16,22 @@
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, strong) CALayer *plotLayer;
 
+/**
+   @param frame
+   @param lineColour
+   @param valueRange
+   @param dateLine
+   @param ticks
+ */
 - (id)initWithFrame:(CGRect)frame
          lineColour:(UIColor *)lineColour
          valueRange:(PWESValueRange *)valueRange
-           dateLine:(NSArray *)dateLine
-              ticks:(CGFloat)ticks;
+           dateLine:(NSArray *)dateLine;
 
+/**
+   plots a results line for a given tuple
+   @param tuple
+ */
 - (void)plotDataTuple:(PWESDataTuple *)tuple;
+
 @end

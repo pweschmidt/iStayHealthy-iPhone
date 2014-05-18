@@ -26,7 +26,7 @@
 
 + (PWESDashboardView *)dashboardViewWithFrame:(CGRect)frame
                                        nTuple:(PWESDataNTuple *)nTuple
-                                        types:(NSArray *)types
+                                        types:(PWESResultsTypes *)types
 {
 	PWESDashboardView *dashboard = [[PWESDashboardView alloc] initWithFrame:frame];
 	[dashboard buildDashboardViewWithNTuple:nTuple types:types];
@@ -34,7 +34,7 @@
 }
 
 - (void)buildDashboardViewWithNTuple:(PWESDataNTuple *)nTuple
-                               types:(NSArray *)types
+                               types:(PWESResultsTypes *)types
 {
 	self.layer.cornerRadius = 20;
 	self.layer.borderColor = [UIColor darkGrayColor].CGColor;
@@ -61,9 +61,11 @@
 	PWESPlotView *plot = [PWESPlotView plotViewWithFrame:plotFrame
 	                                              nTuple:nTuple
 	                                               types:types];
-
-
-	[self addSubview:plot];
+	if (nil != plot)
+	{
+//		[plot show];
+		[self addSubview:plot];
+	}
 }
 
 @end

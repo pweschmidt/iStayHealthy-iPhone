@@ -10,7 +10,6 @@
 
 @interface PWESPlotArea ()
 {
-	CGFloat numberOfTicks;
 	CGFloat xStart;
 	CGFloat xDistance;
 	CGFloat red;
@@ -31,7 +30,6 @@
          lineColour:(UIColor *)lineColour
          valueRange:(PWESValueRange *)valueRange
            dateLine:(NSArray *)dateLine
-              ticks:(CGFloat)ticks
 {
 	self = [super init];
 	if (nil != self)
@@ -42,7 +40,6 @@
 		_plotLayer.frame = frame;
 		_lineColour = lineColour;
 		_valueRange = valueRange;
-		numberOfTicks = ticks;
 		_dateLine = dateLine;
 		xStart = 0;
 	}

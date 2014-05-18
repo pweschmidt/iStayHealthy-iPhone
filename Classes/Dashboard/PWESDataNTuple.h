@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PWESDataTuple.h"
+#import "PWESResultsTypes.h"
 
 @interface PWESDataNTuple : NSObject
 @property (nonatomic, strong, readonly) NSArray *dateLine;
@@ -21,14 +22,14 @@
    @param rawResults
    @param rawMedications
    @param rawMissedMedications
-   @param array of NSString types. Must not be nil and have at least 1 entry
+   @param types
    @param error returns nil if an object can be created
    @return an ntuple or nil if error
  */
 + (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
                           rawMedications:(NSArray *)rawMedications
                     rawMissedMedications:(NSArray *)rawMissedMedications
-                                   types:(NSArray *)types
+                                   types:(PWESResultsTypes *)types
                                    error:(NSError **)error;
 
 /**
@@ -40,7 +41,7 @@
    @return an ntuple or nil if error
  */
 + (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
-                                   types:(NSArray *)types
+                                   types:(PWESResultsTypes *)types
                                    error:(NSError **)error;
 
 /**
@@ -52,7 +53,7 @@
    @return an ntuple
  */
 + (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
-                                   types:(NSArray *)types;
+                                   types:(PWESResultsTypes *)types;
 /**
    adds a data  tuple to the N-Tuple
    @param tuple

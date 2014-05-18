@@ -135,7 +135,7 @@ static NSDictionary *defaultAxisAttributes()
 	CGRect frame = self.axisLayer.bounds;
 	if (Vertical == self.orientation || VerticalRight == self.orientation)
 	{
-		[self addAxisLabel:context frame:frame];
+//		[self addAxisLabel:context frame:frame];
 		axisStart = CGPointMake(frame.origin.x + frame.size.width / 2 + kAxisLineWidth / 2, frame.origin.y);
 		axisEnd = CGPointMake(frame.origin.x + frame.size.width / 2 + kAxisLineWidth / 2, frame.size.height);
 		[self addTickMarks:context frame:frame];

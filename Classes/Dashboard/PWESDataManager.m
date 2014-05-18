@@ -46,7 +46,7 @@
 }
 
 - (NSArray *)combinedTimelineForOrderedRawResults:(NSArray *)rawResults
-                                            types:(NSArray *)types
+                                            types:(PWESResultsTypes *)types
                                             error:(NSError **)error
 {
 	if (nil == rawResults || nil == types)
@@ -54,7 +54,7 @@
 		*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
 		return nil;
 	}
-	if (2 > types.count)
+	if (!types.isDualType)
 	{
 		//a combination must have at least 2 types
 		*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
@@ -70,19 +70,19 @@
 	return nil;
 }
 
-- (NSPredicate *)filterPredicateFromTypes:(NSArray *)types
+- (NSPredicate *)filterPredicateFromTypes:(PWESResultsTypes *)types
 {
-	NSMutableString *filter = [NSMutableString string];
-	for (NSString *type in types)
+	NSString *singleFilter = [self filterStringForType:types.mainType];
+	if (types.isDualType)
 	{
-		NSString *singleFilter = [self filterStringForType:type];
-		[filter appendString:singleFilter];
-		if (type != [types lastObject])
-		{
-			[filter appendString:@" OR "];
-		}
+		NSString *secondFilter = [self filterStringForType:types.secondaryType];
+		NSString *combinedFilter = [NSString stringWithFormat:@"%@ OR %@", singleFilter, secondFilter];
+		return [NSPredicate predicateWithFormat:combinedFilter];
 	}
-	return [NSPredicate predicateWithFormat:filter];
+	else
+	{
+		return [NSPredicate predicateWithFormat:singleFilter];
+	}
 }
 
 - (NSString *)filterStringForType:(NSString *)type

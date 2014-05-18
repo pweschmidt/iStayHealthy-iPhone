@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "PWESDataNTuple.h"
+#import "PWESResultsTypes.h"
 
 @interface PWESDashboardSummaryView : UIView
+/**
+   creates a summary view
+   @param frame
+   @param nTuple
+   @param types
+ */
 + (PWESDashboardSummaryView *)summaryViewWithFrame:(CGRect)frame
                                             nTuple:(PWESDataNTuple *)nTuple
-                                             types:(NSArray *)types;
+                                             types:(PWESResultsTypes *)types;
 @end

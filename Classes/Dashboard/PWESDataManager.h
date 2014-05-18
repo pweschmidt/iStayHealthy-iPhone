@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PWESChartsConstants.h"
 #import "PWESDataTuple.h"
+#import "PWESResultsTypes.h"
 
 @interface PWESDataManager : NSObject
 
@@ -29,19 +30,19 @@
 
 /**
    @param rawResults. It is assumed the array is ordered by results date
-   @param types an array of String types
+   @param types
    @param error will return nil if a valid timeline can be created
    @return the timeline for combined results or nil if error
  */
 - (NSArray *)combinedTimelineForOrderedRawResults:(NSArray *)rawResults
-                                            types:(NSArray *)types
+                                            types:(PWESResultsTypes *)types
                                             error:(NSError **)error;
 
 /**
    @param types an array of strings for which a predicate will be created
    @return a predicate to filter an array with
  */
-- (NSPredicate *)filterPredicateFromTypes:(NSArray *)types;
+- (NSPredicate *)filterPredicateFromTypes:(PWESResultsTypes *)types;
 
 /**
    @param type the results type

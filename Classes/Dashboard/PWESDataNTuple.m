@@ -21,10 +21,10 @@
 + (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
                           rawMedications:(NSArray *)rawMedications
                     rawMissedMedications:(NSArray *)rawMissedMedications
-                                   types:(NSArray *)types
+                                   types:(PWESResultsTypes *)types
                                    error:(NSError **)error
 {
-	if (nil == rawResults || nil == types || 0 == types.count)
+	if (nil == rawResults || nil == types)
 	{
 		*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
 		return nil;
@@ -32,7 +32,7 @@
 
 	PWESDataNTuple *ntuple = [[PWESDataNTuple alloc] init];
 	[ntuple createTuplesForResults:rawResults types:types];
-	if (1 < types.count)
+	if (types.isDualType)
 	{
 		ntuple.dateLine = [[PWESDataManager sharedInstance]
 		                   combinedTimelineForOrderedRawResults:rawResults
@@ -41,7 +41,7 @@
 	}
 	else
 	{
-		PWESDataTuple *onlyTuple = [ntuple.tuples objectForKey:[types objectAtIndex:0]];
+		PWESDataTuple *onlyTuple = [ntuple.tuples objectForKey:types.mainType];
 		ntuple.dateLine = onlyTuple.dateTuple;
 	}
 
@@ -61,7 +61,7 @@
 }
 
 + (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
-                                   types:(NSArray *)types
+                                   types:(PWESResultsTypes *)types
                                    error:(NSError **)error
 {
 	return [PWESDataNTuple nTupleWithRawResults:rawResults
@@ -70,7 +70,7 @@
 	                                      types:types error:error];
 }
 
-+ (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults types:(NSArray *)types
++ (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults types:(PWESResultsTypes *)types
 {
 	PWESDataNTuple *ntuple = [[PWESDataNTuple alloc] init];
 	NSError *error = nil;
@@ -126,18 +126,30 @@
 }
 
 #pragma mark private methods
-- (void)createTuplesForResults:(NSArray *)rawResults types:(NSArray *)types
+- (void)createTuplesForResults:(NSArray *)rawResults types:(PWESResultsTypes *)types
 {
-	for (NSString *type in types)
+	NSError *error = nil;
+	PWESDataTuple *tuple = [[PWESDataManager sharedInstance]
+	                        filterOrderedRawResults:rawResults
+	                                           type:types.mainType
+	                                          error:&error];
+	if (!error)
 	{
-		NSError *error = nil;
-		PWESDataTuple *tuple = [[PWESDataManager sharedInstance]
-		                        filterOrderedRawResults:rawResults
-		                                           type:type
-		                                          error:&error];
+		[self addResultsTuple:tuple];
+	}
+	else
+	{
+		return;
+	}
+	if (types.isDualType)
+	{
+		PWESDataTuple *secondTuple = [[PWESDataManager sharedInstance]
+		                              filterOrderedRawResults:rawResults
+		                                                 type:types.secondaryType
+		                                                error:&error];
 		if (!error)
 		{
-			[self addResultsTuple:tuple];
+			[self addResultsTuple:secondTuple];
 		}
 	}
 }

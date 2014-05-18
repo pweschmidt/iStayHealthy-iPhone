@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PWESChartsConstants.h"
 #import "PWESDataNTuple.h"
+#import "PWESResultsTypes.h"
 
 @interface PWESDashboardView : UIView
 /**
@@ -17,9 +18,9 @@
    b.) the plot area below
    @param frame
    @param dataTuple the data tuple to be shown
-   @param types an array of NSString data types to be shown
+   @param types
  */
 + (PWESDashboardView *)dashboardViewWithFrame:(CGRect)frame
                                        nTuple:(PWESDataNTuple *)nTuple
-                                        types:(NSArray *)types;
+                                        types:(PWESResultsTypes *)types;
 @end

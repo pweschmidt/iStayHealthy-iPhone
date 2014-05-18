@@ -24,7 +24,7 @@
 
 + (PWESDashboardSummaryView *)summaryViewWithFrame:(CGRect)frame
                                             nTuple:(PWESDataNTuple *)nTuple
-                                             types:(NSArray *)types
+                                             types:(PWESResultsTypes *)types
 {
 	PWESDashboardSummaryView *summaryView = [[PWESDashboardSummaryView alloc] initWithFrame:frame];
 	[summaryView buildSummaryViewForNTuple:nTuple types:types];
@@ -32,31 +32,34 @@
 }
 
 - (void)buildSummaryViewForNTuple:(PWESDataNTuple *)nTuple
-                            types:(NSArray *)types
+                            types:(PWESResultsTypes *)types
 {
-	if (nil == nTuple  || nil == types || 0 == types.count)
+	if (nil == nTuple  || nil == types)
 	{
 		return;
 	}
 	CGFloat componentWidth = self.bounds.size.width;
 	CGFloat componentHeight = self.bounds.size.height;
+	if (types.isDualType)
+	{
+		componentHeight = componentHeight / 2;
+	}
 	CGFloat xOrigin = self.bounds.origin.x;
 	CGFloat yOrigin = self.bounds.origin.y;
-	if (1 < types.count)
+	PWESDataTuple *tuple = [nTuple resultsTupleForType:types.mainType];
+	CGRect frame = CGRectMake(xOrigin, yOrigin, componentWidth, componentHeight);
+	PWESResultsSummaryView *resultsView = [PWESResultsSummaryView
+	                                       resultsSummaryViewWithFrame:frame
+	                                                         dataTuple:tuple];
+	[self addSubview:resultsView];
+	if (types.isDualType)
 	{
-		componentHeight = componentHeight / types.count;
-	}
-	NSUInteger index = 0;
-	for (NSString *type in types)
-	{
-		PWESDataTuple *tuple = [nTuple resultsTupleForType:type];
-		CGFloat y = yOrigin + index * (componentHeight / types.count);
-		CGRect frame = CGRectMake(xOrigin, y, componentWidth, componentHeight);
-		PWESResultsSummaryView *resultsView = [PWESResultsSummaryView
-		                                       resultsSummaryViewWithFrame:frame
-		                                                         dataTuple:tuple];
-		[self addSubview:resultsView];
-		index++;
+		PWESDataTuple *secondtuple = [nTuple resultsTupleForType:types.secondaryType];
+		CGRect frame = CGRectMake(xOrigin, yOrigin + componentHeight, componentWidth, componentHeight);
+		PWESResultsSummaryView *secondResultsView = [PWESResultsSummaryView
+		                                             resultsSummaryViewWithFrame:frame
+		                                                               dataTuple:secondtuple];
+		[self addSubview:secondResultsView];
 	}
 }
 

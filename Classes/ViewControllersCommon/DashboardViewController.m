@@ -13,6 +13,7 @@
 #import "PWESDashboardView.h"
 #import "PWESDataManager.h"
 #import "PWESDataNTuple.h"
+#import "PWESResultsTypes.h"
 #import "CoreDataManager.h"
 #import "Utilities.h"
 //#import "EditResultsTableViewController.h"
@@ -53,7 +54,6 @@
 	self.chartScroller.delegate = self;
 	self.chartScroller.scrollsToTop = YES;
 	self.chartScroller.pagingEnabled = YES;
-	self.dashboardTypes = [NSMutableArray array];
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSData *archivedData = [defaults objectForKey:kDashboardTypes];
@@ -99,7 +99,6 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	__weak DashboardViewController *weakSelf = self;
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:YES completion: ^(NSArray *results, NSError *resultsError) {
 	    if (nil == results)
 	    {
@@ -126,7 +125,7 @@
 				}
 	            else
 	            {
-	                [weakSelf buildDashBoardForResults:results medications:meds];
+	                [self buildDashBoardForResults:results medications:meds];
 				}
 			}];
 		}
@@ -157,7 +156,7 @@
 	}
 	CGFloat offset = 20;
 	NSUInteger viewIndex = 0;
-	for (NSArray *types in self.dashboardTypes)
+	for (PWESResultsTypes *types in self.dashboardTypes)
 	{
 		NSError *error = nil;
 		PWESDataNTuple *ntuple = [PWESDataNTuple nTupleWithRawResults:results
@@ -230,22 +229,30 @@
 - (void)selectedCharts:(NSArray *)selectedCharts
 {
 	self.selectedItems = selectedCharts;
-	[self.dashboardTypes removeAllObjects];
-	NSArray *cd4VL = @[kCD4, kViralLoad];
-	NSArray *cd4PVL = @[kCD4Percent, kViralLoad];
+	if (nil == self.dashboardTypes)
+	{
+		self.dashboardTypes = [NSMutableArray array];
+	}
+	else
+	{
+		[self.dashboardTypes removeAllObjects];
+	}
 	for (NSString *type in selectedCharts)
 	{
 		if ([type isEqualToString:kCD4AndVL])
 		{
-			[self.dashboardTypes addObject:cd4VL];
+			PWESResultsTypes *cd4VLType = [PWESResultsTypes resultsTypeWithMainType:kCD4 secondaryType:kViralLoad wantsMedLine:YES wantsMissedMedLine:NO];
+			[self.dashboardTypes addObject:cd4VLType];
 		}
 		else if ([type isEqualToString:kCD4PercentAndVL])
 		{
-			[self.dashboardTypes addObject:cd4PVL];
+			PWESResultsTypes *cd4VLType = [PWESResultsTypes resultsTypeWithMainType:kCD4Percent secondaryType:kViralLoad wantsMedLine:YES wantsMissedMedLine:NO];
+			[self.dashboardTypes addObject:cd4VLType];
 		}
 		else
 		{
-			[self.dashboardTypes addObject:@[type]];
+			PWESResultsTypes *singleType = [PWESResultsTypes resultsTypeWithType:type wantsMedLine:NO wantsMissedMedLine:NO];
+			[self.dashboardTypes addObject:singleType];
 		}
 	}
 	[self resetPageController];

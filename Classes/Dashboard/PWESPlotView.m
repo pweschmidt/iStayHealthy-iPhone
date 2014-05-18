@@ -17,7 +17,13 @@
 @interface PWESPlotView ()
 {
 	CGRect plotBoundaries;
+	CGRect yAxisFrame;
+	CGRect yAxisFrameRight;
+	CGRect xAxisFrame;
+	CGRect xAxisFrameTop;
+	CGRect plotAreaFrame;
 	CGFloat ticks;
+	CGFloat logTicks;
 }
 @property (nonatomic, strong) PWESAxis *xAxis;
 @property (nonatomic, strong) PWESAxis *yAxis;
@@ -25,7 +31,7 @@
 @property (nonatomic, strong) PWESAxis *xAxisTop;
 @property (nonatomic, strong) PWESPlotArea *plotArea;
 @property (nonatomic, strong) PWESPlotArea *secondPlotArea;
-@property (nonatomic, strong) NSArray *types;
+@property (nonatomic, strong) PWESResultsTypes *types;
 @property (nonatomic, strong) PWESDataNTuple *ntuple;
 @property (nonatomic, strong) PWESDataTuple *firstTuple;
 @property (nonatomic, strong) PWESDataTuple *secondTuple;
@@ -39,90 +45,52 @@
 	if (self)
 	{
 		_marginBottom = _marginTop = 20;
-		_marginLeft = _marginRight = 35;
+		_marginLeft = _marginRight = 20;
+		logTicks = 10;
 	}
 	return self;
 }
 
 + (PWESPlotView *)plotViewWithFrame:(CGRect)frame
                              nTuple:(PWESDataNTuple *)nTuple
-                              types:(NSArray *)types
+                              types:(PWESResultsTypes *)types
 {
 	PWESPlotView *plotView = [[PWESPlotView alloc] initWithFrame:frame];
 	plotView.pxTickDistance = kPXTickDistance;
 	plotView.ntuple = nTuple;
 	plotView.types = types;
-	[plotView configurePlotView];
+	[plotView show];
 	return plotView;
 }
 
-- (void)configurePlotView
+#pragma mark private methods
+- (void)show
 {
 	if (self.ntuple.isEmpty)
 	{
-		UILabel *emptyLabel = [[UILabel alloc] init];
-		emptyLabel.frame = CGRectMake(self.bounds.origin.x + self.bounds.size.width / 2 - 100, self.bounds.origin.y + self.bounds.size.height / 2 - 50, 200, 100);
-		emptyLabel.backgroundColor = [UIColor clearColor];
-		emptyLabel.textAlignment = NSTextAlignmentCenter;
-		emptyLabel.textColor = TEXTCOLOUR;
-		emptyLabel.font = [UIFont fontWithType:Light size:20];
-		emptyLabel.text = NSLocalizedString(@"No results available", nil);
+		UILabel *emptyLabel = [self emptyLabelView];
 		[self addSubview:emptyLabel];
 		return;
 	}
-
-
-	CGRect yAxisFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
-
-	CGRect yAxisFrameRight = CGRectMake(self.bounds.origin.x + self.bounds.size.width - self.marginRight - self.marginLeft - 3, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
+	[self createFrames];
 
 	ticks = roundf(yAxisFrame.size.height / self.pxTickDistance);
+	PWESDataTuple *firstTuple = [self.ntuple resultsTupleForType:self.types.mainType];
+	self.firstTuple = firstTuple;
 
-	CGRect xAxisFrame = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.size.height - self.marginBottom - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
+	PWESAxis *yAxis = [self leftYAxisResultsTuple:firstTuple];
+	[self showAxis:yAxis];
+	self.yAxis = yAxis;
 
-	CGRect xAxisFrameTop = CGRectMake(self.bounds.origin.x + self.marginLeft, 0 - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
+	PWESAxis *xAxis = [self xAxis];
+	[self showAxis:xAxis];
+	self.xAxis = xAxis;
 
-	CGRect plotFrame = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.origin.y, self.bounds.size.width - self.marginRight - self.marginLeft, self.bounds.size.height - self.marginBottom);
+	PWESAxis *xAxisTop = [self xAxisTop];
+	[self showAxis:xAxisTop];
+	self.xAxisTop = xAxisTop;
 
-
-
-	NSString *axisType = [self.types objectAtIndex:0];
-	UIColor *lineColour = [self colourForType:axisType];
-	self.firstTuple = [self.ntuple resultsTupleForType:axisType];
-	PWESValueRange *rangeLeft = [PWESValueRange valueRangeForDataTuple:self.firstTuple ticks:ticks];
-
-
-	self.yAxis = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrame
-	                                              valueRange:rangeLeft
-	                                             orientation:Vertical
-	                                                   ticks:ticks];
-	self.yAxis.axisTitle = axisType;
-	self.yAxis.titleColor = lineColour;
-	self.yAxis.tickLabelOffsetX = 17;
-	if (self.yAxis.axisLayer)
-	{
-		[self.layer addSublayer:self.yAxis.axisLayer];
-		[self.yAxis show];
-	}
-	self.xAxis = [[PWESAxis alloc] initHorizontalAxisWithFrame:xAxisFrame];
-	if (self.xAxis)
-	{
-		[self.layer addSublayer:self.xAxis.axisLayer];
-		[self.xAxis show];
-	}
-
-	self.xAxisTop = [[PWESAxis alloc] initHorizontalAxisWithFrame:xAxisFrameTop];
-	if (self.xAxisTop)
-	{
-		[self.layer addSublayer:self.xAxisTop.axisLayer];
-		[self.xAxisTop show];
-	}
-
-	self.plotArea = [[PWESPlotArea alloc] initWithFrame:plotFrame
-	                                         lineColour:lineColour
-	                                         valueRange:rangeLeft
-	                                           dateLine:self.ntuple.dateLine
-	                                              ticks:ticks];
+	self.plotArea = [self plotAreaForType:self.types.mainType];
 
 	if (self.plotArea)
 	{
@@ -130,26 +98,21 @@
 		[self.plotArea plotDataTuple:self.firstTuple];
 	}
 
-
-	if (2 == self.types.count)
+	if (self.types.isDualType)
 	{
-		axisType = [self.types objectAtIndex:1];
-		UIColor *secondColour = [self colourForType:axisType];
-		self.secondTuple = [self.ntuple resultsTupleForType:axisType];
-		PWESValueRange *rangeRight = [PWESValueRange valueRangeForDataTuple:self.secondTuple ticks:ticks];
-		self.yAxisRight = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
-		                                                   valueRange:rangeRight
-		                                                  orientation:VerticalRight
-		                                                        ticks:ticks];
-		self.yAxisRight.axisTitle = axisType;
-		self.yAxisRight.titleColor = lineColour;
-//		self.yAxisRight.tickLabelOffset = 12;
-		if (self.yAxisRight.axisLayer)
+		PWESDataTuple *secondTuple = [self.ntuple resultsTupleForType:self.types.secondaryType];
+		self.secondTuple = secondTuple;
+
+		PWESAxis *yAxisRight = [self rightYAxisResultsTuple:secondTuple type:self.types.secondaryType];
+		[self showAxis:yAxisRight];
+		self.yAxisRight = yAxisRight;
+
+		if ([self.types.secondaryType isEqualToString:kViralLoad])
 		{
-			[self.layer addSublayer:self.yAxisRight.axisLayer];
-			[self.yAxisRight show];
+			ticks = logTicks;
 		}
-		self.secondPlotArea = [[PWESPlotArea alloc] initWithFrame:plotFrame lineColour:secondColour valueRange:rangeRight dateLine:self.ntuple.dateLine ticks:ticks];
+
+		self.secondPlotArea = [self plotAreaForType:self.types.secondaryType];
 		if (self.secondPlotArea)
 		{
 			[self.layer addSublayer:self.secondPlotArea.plotLayer];
@@ -158,24 +121,118 @@
 	}
 	else
 	{
-		self.yAxisRight = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
-		                                                  orientation:VerticalRight];
-		if (self.yAxisRight.axisLayer)
-		{
-			[self.layer addSublayer:self.yAxisRight.axisLayer];
-			[self.yAxisRight show];
-		}
+		PWESAxis *yAxisRight = [self rightYAxisResultsTuple:nil type:nil];
+		[self showAxis:yAxisRight];
+		self.yAxisRight = yAxisRight;
 	}
 }
 
-/*
-   // Only override drawRect: if you perform custom drawing.
-   // An empty implementation adversely affects performance during animation.
-   - (void)drawRect:(CGRect)rect
-   {
-    // Drawing code
-   }
- */
+- (UILabel *)emptyLabelView
+{
+	UILabel *emptyLabel = [[UILabel alloc] init];
+	emptyLabel.frame = CGRectMake(self.bounds.origin.x + self.bounds.size.width / 2 - 100, self.bounds.origin.y + self.bounds.size.height / 2 - 50, 200, 100);
+	emptyLabel.backgroundColor = [UIColor clearColor];
+	emptyLabel.textAlignment = NSTextAlignmentCenter;
+	emptyLabel.textColor = TEXTCOLOUR;
+	emptyLabel.font = [UIFont fontWithType:Light size:20];
+	emptyLabel.text = NSLocalizedString(@"No results available", nil);
+	return emptyLabel;
+}
+
+- (void)createFrames
+{
+	yAxisFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
+	yAxisFrameRight = CGRectMake(self.bounds.origin.x + self.bounds.size.width - self.marginRight - self.marginLeft - 3, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
+	xAxisFrame = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.size.height - self.marginBottom - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
+	xAxisFrameTop = CGRectMake(self.bounds.origin.x + self.marginLeft, 0 - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
+	plotAreaFrame = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.origin.y, self.bounds.size.width - self.marginRight - self.marginLeft, self.bounds.size.height - self.marginBottom);
+}
+
+- (PWESAxis *)leftYAxisResultsTuple:(PWESDataTuple *)resultsTuple
+{
+	NSString *axisType = self.types.mainType;
+	UIColor *lineColour = [self colourForType:axisType];
+	PWESValueRange *range = [PWESValueRange valueRangeForDataTuple:resultsTuple ticks:ticks];
+
+
+	PWESAxis *yAxis = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrame
+	                                                   valueRange:range
+	                                                  orientation:Vertical
+	                                                        ticks:ticks];
+	yAxis.axisTitle = axisType;
+	yAxis.titleColor = lineColour;
+	yAxis.tickLabelOffsetX = 2;
+	return yAxis;
+}
+
+- (PWESAxis *)rightYAxisResultsTuple:(PWESDataTuple *)resultsTuple type:(NSString *)type
+{
+	if (self.types.isDualType)
+	{
+		NSString *axisType = self.types.secondaryType;
+		UIColor *lineColour = [self colourForType:axisType];
+		CGFloat ticksToUse = ([type isEqualToString:kViralLoad]) ? logTicks : ticks;
+		PWESValueRange *range = [PWESValueRange valueRangeForDataTuple:resultsTuple ticks:ticks];
+
+
+		PWESAxis *yAxis = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
+		                                                   valueRange:range
+		                                                  orientation:VerticalRight
+		                                                        ticks:ticksToUse];
+		yAxis.axisTitle = axisType;
+		yAxis.titleColor = lineColour;
+		yAxis.tickLabelOffsetX = 2;
+		return yAxis;
+	}
+	else
+	{
+		return [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
+		                                       orientation:VerticalRight];
+	}
+}
+
+- (PWESAxis *)xAxis
+{
+	return [[PWESAxis alloc] initHorizontalAxisWithFrame:xAxisFrame];
+}
+
+- (PWESAxis *)topAxis
+{
+	return [[PWESAxis alloc] initHorizontalAxisWithFrame:xAxisFrameTop];
+}
+
+- (PWESValueRange *)valueRangeForType:(NSString *)type tickCounts:(CGFloat)tickCounts
+{
+	PWESValueRange *valueRange = nil;
+	PWESDataTuple *tuple = [self.ntuple resultsTupleForType:type];
+	if (nil != tuple)
+	{
+		valueRange = [PWESValueRange valueRangeForDataTuple:tuple ticks:tickCounts];
+	}
+	return valueRange;
+}
+
+- (void)showAxis:(PWESAxis *)axis
+{
+	if (nil != axis && nil != axis.axisLayer)
+	{
+		[self.layer addSublayer:axis.axisLayer];
+		[axis show];
+	}
+}
+
+- (PWESPlotArea *)plotAreaForType:(NSString *)type
+{
+	CGFloat ticksToUse = ([type isEqualToString:kViralLoad]) ? logTicks : ticks;
+	PWESValueRange *range = [self valueRangeForType:type tickCounts:ticksToUse];
+	UIColor *colour = [self colourForType:type];
+	PWESPlotArea *area = [[PWESPlotArea alloc] initWithFrame:plotAreaFrame
+	                                              lineColour:colour
+	                                              valueRange:range
+	                                                dateLine:self.ntuple.dateLine];
+	return area;
+}
+
 - (UIColor *)colourForType:(NSString *)type
 {
 	if ([type isEqualToString:kCD4] || [type isEqualToString:kCD4Percent])
