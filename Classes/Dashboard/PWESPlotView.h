@@ -19,6 +19,5 @@
 
 + (PWESPlotView *)plotViewWithFrame:(CGRect)frame
                              nTuple:(PWESDataNTuple *)nTuple
-                        medications:(NSArray *)medications
                               types:(NSArray *)types;
 @end

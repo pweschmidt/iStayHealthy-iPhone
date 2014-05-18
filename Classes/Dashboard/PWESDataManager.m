@@ -41,7 +41,7 @@
 		*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
 		return nil;
 	}
-	PWESDataTuple *tuple = [PWESDataTuple initWithValues:values dates:dates type:type];
+	PWESDataTuple *tuple = [PWESDataTuple resultsTupleWithResultsArray:values dates:dates type:type];
 	return tuple;
 }
 

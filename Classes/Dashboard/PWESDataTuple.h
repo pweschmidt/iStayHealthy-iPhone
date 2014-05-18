@@ -13,7 +13,11 @@
 @property (nonatomic, strong, readonly) NSArray *dateTuple;
 @property (nonatomic, strong, readonly) NSString *type;
 
-+(PWESDataTuple *)initWithValues:(NSArray *)values dates:(NSArray *)dates type:(NSString *)type;
++ (PWESDataTuple *)resultsTupleWithResultsArray:(NSArray *)values dates:(NSArray *)dates type:(NSString *)type;
+
++ (PWESDataTuple *)medTupleWithMedicationArray:(NSArray *)medication;
+
++ (PWESDataTuple *)missedMedTupleWithMissedMedicationArray:(NSArray *)medication;
 
 - (NSUInteger)length;
 

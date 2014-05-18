@@ -12,16 +12,14 @@
 
 @interface PWESDashboardView : UIView
 /**
- builds the view based on the result types to be displayed. The view is split into 2 subviews
- a.) the summary containing text showing the latest results
- b.) the plot area below
- @param frame
- @param dataTuple the data tuple to be shown
- @param medications
- @param types an array of NSString data types to be shown
+   builds the view based on the result types to be displayed. The view is split into 2 subviews
+   a.) the summary containing text showing the latest results
+   b.) the plot area below
+   @param frame
+   @param dataTuple the data tuple to be shown
+   @param types an array of NSString data types to be shown
  */
-+ (PWESDashboardView* )dashboardViewWithFrame:(CGRect) frame
++ (PWESDashboardView *)dashboardViewWithFrame:(CGRect)frame
                                        nTuple:(PWESDataNTuple *)nTuple
-                                  medications:(NSArray *)medications
                                         types:(NSArray *)types;
 @end

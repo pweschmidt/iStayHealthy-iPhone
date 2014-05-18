@@ -12,8 +12,7 @@
 @interface PWESResultsSummaryView : UIView
 
 + (PWESResultsSummaryView *)resultsSummaryViewWithFrame:(CGRect)frame
-                                              dataTuple:(PWESDataTuple *)dataTuple
-                                            medications:(NSArray *)medications;
+                                              dataTuple:(PWESDataTuple *)dataTuple;
 
 
 @end

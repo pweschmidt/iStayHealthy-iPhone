@@ -26,16 +26,14 @@
 
 + (PWESDashboardView *)dashboardViewWithFrame:(CGRect)frame
                                        nTuple:(PWESDataNTuple *)nTuple
-                                  medications:(NSArray *)medications
                                         types:(NSArray *)types
 {
 	PWESDashboardView *dashboard = [[PWESDashboardView alloc] initWithFrame:frame];
-	[dashboard buildDashboardViewWithNTuple:nTuple medications:medications types:types];
+	[dashboard buildDashboardViewWithNTuple:nTuple types:types];
 	return dashboard;
 }
 
 - (void)buildDashboardViewWithNTuple:(PWESDataNTuple *)nTuple
-                         medications:(NSArray *)medications
                                types:(NSArray *)types
 {
 	self.layer.cornerRadius = 20;
@@ -53,7 +51,6 @@
 	PWESDashboardSummaryView *summaryView = [PWESDashboardSummaryView
 	                                         summaryViewWithFrame:summary
 	                                                       nTuple:nTuple
-	                                                  medications:medications
 	                                                        types:types];
 
 
@@ -63,7 +60,6 @@
 
 	PWESPlotView *plot = [PWESPlotView plotViewWithFrame:plotFrame
 	                                              nTuple:nTuple
-	                                         medications:medications
 	                                               types:types];
 
 

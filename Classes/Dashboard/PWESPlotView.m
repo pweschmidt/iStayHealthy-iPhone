@@ -27,7 +27,6 @@
 @property (nonatomic, strong) PWESPlotArea *secondPlotArea;
 @property (nonatomic, strong) NSArray *types;
 @property (nonatomic, strong) PWESDataNTuple *ntuple;
-@property (nonatomic, strong) NSArray *medications;
 @property (nonatomic, strong) PWESDataTuple *firstTuple;
 @property (nonatomic, strong) PWESDataTuple *secondTuple;
 @end
@@ -47,13 +46,11 @@
 
 + (PWESPlotView *)plotViewWithFrame:(CGRect)frame
                              nTuple:(PWESDataNTuple *)nTuple
-                        medications:(NSArray *)medications
                               types:(NSArray *)types
 {
 	PWESPlotView *plotView = [[PWESPlotView alloc] initWithFrame:frame];
 	plotView.pxTickDistance = kPXTickDistance;
 	plotView.ntuple = nTuple;
-	plotView.medications = medications;
 	plotView.types = types;
 	[plotView configurePlotView];
 	return plotView;
@@ -91,7 +88,7 @@
 
 	NSString *axisType = [self.types objectAtIndex:0];
 	UIColor *lineColour = [self colourForType:axisType];
-	self.firstTuple = [self.ntuple tupleForType:axisType];
+	self.firstTuple = [self.ntuple resultsTupleForType:axisType];
 	PWESValueRange *rangeLeft = [PWESValueRange valueRangeForDataTuple:self.firstTuple ticks:ticks];
 
 
@@ -138,7 +135,7 @@
 	{
 		axisType = [self.types objectAtIndex:1];
 		UIColor *secondColour = [self colourForType:axisType];
-		self.secondTuple = [self.ntuple tupleForType:axisType];
+		self.secondTuple = [self.ntuple resultsTupleForType:axisType];
 		PWESValueRange *rangeRight = [PWESValueRange valueRangeForDataTuple:self.secondTuple ticks:ticks];
 		self.yAxisRight = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
 		                                                   valueRange:rangeRight

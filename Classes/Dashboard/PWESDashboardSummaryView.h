@@ -12,6 +12,5 @@
 @interface PWESDashboardSummaryView : UIView
 + (PWESDashboardSummaryView *)summaryViewWithFrame:(CGRect)frame
                                             nTuple:(PWESDataNTuple *)nTuple
-                                       medications:(NSArray *)medications
                                              types:(NSArray *)types;
 @end

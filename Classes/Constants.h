@@ -31,6 +31,7 @@ typedef NS_ENUM (int, ResultsType)
 	OtherResultsType
 };
 
+
 typedef NS_ENUM (int, InputType)
 {
 	DefaultInput = 0,

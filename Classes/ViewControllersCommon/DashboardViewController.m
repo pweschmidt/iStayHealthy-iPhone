@@ -160,11 +160,11 @@
 	for (NSArray *types in self.dashboardTypes)
 	{
 		NSError *error = nil;
-		PWESDataNTuple *ntuple = [PWESDataNTuple initWithRawResults:results
-		                                             rawMedications:medications
-		                                       rawMissedMedications:nil
-		                                                      types:types
-		                                                      error:&error];
+		PWESDataNTuple *ntuple = [PWESDataNTuple nTupleWithRawResults:results
+		                                               rawMedications:medications
+		                                         rawMissedMedications:nil
+		                                                        types:types
+		                                                        error:&error];
 		if (ntuple)
 		{
 			CGFloat x = self.chartScroller.frame.origin.x + self.chartScroller.frame.size.width * viewIndex + offset;
@@ -175,7 +175,6 @@
 			PWESDashboardView *dashboard = [PWESDashboardView
 			                                dashboardViewWithFrame:frame
 			                                                nTuple:ntuple
-			                                           medications:medications
 			                                                 types:types];
 			[self.chartScroller addSubview:dashboard];
 			viewIndex++;

@@ -11,16 +11,18 @@
 
 @interface PWESDataNTuple ()
 @property (nonatomic, strong, readwrite) NSArray *dateLine;
-@property (nonatomic, strong, readwrite) NSMutableArray *types;
+@property (nonatomic, strong, readwrite) NSMutableArray *resultTypes;
+@property (nonatomic, strong, readwrite) PWESDataTuple *medicationTuple;
+@property (nonatomic, strong, readwrite) PWESDataTuple *missedMedicationTuple;
 @property (nonatomic, strong) NSMutableDictionary *tuples;
 @end
 
 @implementation PWESDataNTuple
-+ (PWESDataNTuple *)initWithRawResults:(NSArray *)rawResults
-                        rawMedications:(NSArray *)rawMedications
-                  rawMissedMedications:(NSArray *)rawMissedMedications
-                                 types:(NSArray *)types
-                                 error:(NSError **)error
++ (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
+                          rawMedications:(NSArray *)rawMedications
+                    rawMissedMedications:(NSArray *)rawMissedMedications
+                                   types:(NSArray *)types
+                                   error:(NSError **)error
 {
 	if (nil == rawResults || nil == types || 0 == types.count)
 	{
@@ -42,20 +44,33 @@
 		PWESDataTuple *onlyTuple = [ntuple.tuples objectForKey:[types objectAtIndex:0]];
 		ntuple.dateLine = onlyTuple.dateTuple;
 	}
+
+	if (nil != rawMedications && 0 < rawMedications.count)
+	{
+		PWESDataTuple *medTuple = [PWESDataTuple medTupleWithMedicationArray:rawMedications];
+		[ntuple addMedicationTuple:medTuple];
+	}
+
+	if (nil != rawMissedMedications && 0 < rawMissedMedications.count)
+	{
+		PWESDataTuple *medTuple = [PWESDataTuple missedMedTupleWithMissedMedicationArray:rawMissedMedications];
+		[ntuple addMissedMedicationTuple:medTuple];
+	}
+
 	return ntuple;
 }
 
-+ (PWESDataNTuple *)initWithRawResults:(NSArray *)rawResults
-                                 types:(NSArray *)types
-                                 error:(NSError **)error
++ (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
+                                   types:(NSArray *)types
+                                   error:(NSError **)error
 {
-	return [PWESDataNTuple initWithRawResults:rawResults
-	                           rawMedications:nil
-	                     rawMissedMedications:nil
-	                                    types:types error:error];
+	return [PWESDataNTuple nTupleWithRawResults:rawResults
+	                             rawMedications:nil
+	                       rawMissedMedications:nil
+	                                      types:types error:error];
 }
 
-+ (PWESDataNTuple *)initWithRawResults:(NSArray *)rawResults types:(NSArray *)types
++ (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults types:(NSArray *)types
 {
 	PWESDataNTuple *ntuple = [[PWESDataNTuple alloc] init];
 	NSError *error = nil;
@@ -72,18 +87,30 @@
 	if (nil != self)
 	{
 		_tuples = [NSMutableDictionary dictionary];
-		_types = [NSMutableArray array];
+		_resultTypes = [NSMutableArray array];
 	}
 	return self;
 }
 
-- (void)addDataTuple:(PWESDataTuple *)tuple
+- (void)addResultsTuple:(PWESDataTuple *)tuple
 {
-	[self.types addObject:tuple.type];
+	[self.resultTypes addObject:tuple.type];
 	[self.tuples setObject:tuple forKey:tuple.type];
 }
 
-- (PWESDataTuple *)tupleForType:(NSString *)type
+- (void)addMissedMedicationTuple:(PWESDataTuple *)missedTuple
+{
+	_missedMedicationTuple = missedTuple;
+	[self addTupleToDateLine:missedTuple];
+}
+
+- (void)addMedicationTuple:(PWESDataTuple *)medTuple
+{
+	_medicationTuple = medTuple;
+	[self addTupleToDateLine:medTuple];
+}
+
+- (PWESDataTuple *)resultsTupleForType:(NSString *)type
 {
 	return [self.tuples objectForKey:type];
 }
@@ -110,9 +137,22 @@
 		                                          error:&error];
 		if (!error)
 		{
-			[self addDataTuple:tuple];
+			[self addResultsTuple:tuple];
 		}
 	}
+}
+
+- (void)addTupleToDateLine:(PWESDataTuple *)tuple
+{
+	if (0 == tuple.length)
+	{
+		return;
+	}
+	NSArray *dates = tuple.dateTuple;
+	NSMutableArray *array = [NSMutableArray arrayWithArray:self.dateLine];
+	[array addObjectsFromArray:dates];
+	[array sortUsingSelector:@selector(compare:)];
+	self.dateLine = [NSArray arrayWithArray:array];
 }
 
 @end
