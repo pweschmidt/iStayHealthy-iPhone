@@ -14,12 +14,10 @@
 @interface PWESMedPlotArea : PWESPlotArea
 /**
    @param frame
-   @param lineColour
    @param dateLine
    @param ticks
  */
 - (id)initWithFrame:(CGRect)frame
-         lineColour:(UIColor *)lineColour
            dateLine:(NSArray *)dateLine;
 
 /**

@@ -11,6 +11,7 @@
 #import "PWESChartsConstants.h"
 #import "PWESValueRange.h"
 #import "PWESPlotArea.h"
+#import "PWESMedPlotArea.h"
 #import "UIFont+Standard.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) PWESAxis *xAxisTop;
 @property (nonatomic, strong) PWESPlotArea *plotArea;
 @property (nonatomic, strong) PWESPlotArea *secondPlotArea;
+@property (nonatomic, strong) PWESMedPlotArea *medPlotArea;
 @property (nonatomic, strong) PWESResultsTypes *types;
 @property (nonatomic, strong) PWESDataNTuple *ntuple;
 @property (nonatomic, strong) PWESDataTuple *firstTuple;
@@ -46,7 +48,7 @@
 	{
 		_marginBottom = _marginTop = 20;
 		_marginLeft = _marginRight = 20;
-		logTicks = 10;
+		logTicks = 11;
 	}
 	return self;
 }
@@ -124,6 +126,18 @@
 		PWESAxis *yAxisRight = [self rightYAxisResultsTuple:nil type:nil];
 		[self showAxis:yAxisRight];
 		self.yAxisRight = yAxisRight;
+	}
+
+	if (self.types.showMedLine)
+	{
+		PWESMedPlotArea *medArea = [[PWESMedPlotArea alloc] initWithFrame:plotAreaFrame dateLine:self.ntuple.dateLine];
+		if (nil != medArea)
+		{
+			self.medPlotArea = medArea;
+			PWESDataTuple *medTuple = [self.ntuple medicationTuple];
+			[self.layer addSublayer:self.medPlotArea.plotLayer];
+			[self.medPlotArea plotMedicationTuple:medTuple];
+		}
 	}
 }
 

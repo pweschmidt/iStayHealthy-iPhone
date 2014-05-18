@@ -82,7 +82,7 @@
 
 	if (nil != pattern && NULL != pattern && 0 < patternCount)
 	{
-		CGContextSetLineDash(context, 0, pattern, patternCount);
+		CGContextSetLineDash(context, 0.0f, pattern, patternCount);
 	}
 
 	CGFloat lineOffset = lineWidth / 2;
@@ -92,6 +92,7 @@
 
 	CGContextSetLineDash(context, 0, nil, 0);
 }
+
 
 - (void)drawRectWithContext:(CGContextRef)context
                       point:(CGPoint)point

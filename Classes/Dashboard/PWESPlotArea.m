@@ -18,9 +18,6 @@
 	CGFloat alpha;
 }
 @property (nonatomic, strong) UIColor *lineColour;
-@property (nonatomic, strong) NSArray *dateLine;
-@property (nonatomic, strong) PWESDataTuple *tuple;
-@property (nonatomic, strong) PWESValueRange *valueRange;
 @property (nonatomic, assign) BOOL isToDrawPoints;
 @end
 

@@ -15,6 +15,9 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, strong) CALayer *plotLayer;
+@property (nonatomic, strong) NSArray *dateLine;
+@property (nonatomic, strong) PWESDataTuple *tuple;
+@property (nonatomic, strong) PWESValueRange *valueRange;
 
 /**
    @param frame

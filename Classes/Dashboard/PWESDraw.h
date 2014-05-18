@@ -36,6 +36,7 @@
                     pattern:(CGFloat *)pattern
                patternCount:(int)patternCount;
 
+
 - (void)drawRectWithContext:(CGContextRef)context
                       point:(CGPoint)point
                    cgColour:(CGColorRef)cgColor
