@@ -17,7 +17,7 @@ typedef NS_ENUM (int, AxisStyle)
 {
 	tick,
 	exponentialTick,
-	title
+	title,
 };
 
 static NSDictionary *defaultAxisAttributes()
@@ -26,7 +26,8 @@ static NSDictionary *defaultAxisAttributes()
 		                          kPlotAxisTickLabelFontSize : [NSNumber numberWithFloat:tiny],
 		                          kPlotAxisTitleFontName : kDefaultLightFont,
 		                          kPlotAxisTickFontName : kDefaultBoldFont,
-		                          kPlotAxisTickLabelExpFontSize : [NSNumber numberWithFloat:veryTiny] };
+		                          kPlotAxisTickLabelExpFontSize : [NSNumber numberWithFloat:veryTiny],
+		                          kPlotAxisTickDistance : [NSNumber numberWithFloat:kPXTickDistance] };
 	return attributes;
 }
 
@@ -35,6 +36,7 @@ static NSDictionary *defaultAxisAttributes()
 	CGRect axisFrame;
 	CGFloat defaultTickLabelSize;
 	CGFloat defaultAxisLabelSize;
+	CGFloat tickDistance;
 }
 @property (nonatomic, assign) BOOL hasLabels;
 @property (nonatomic, strong) PWESValueRange *valueRange;
@@ -53,6 +55,10 @@ static NSDictionary *defaultAxisAttributes()
 	self = [super init];
 	if (nil != self)
 	{
+		if (nil == attributes)
+		{
+			attributes = defaultAxisAttributes();
+		}
 		_orientation = orientation;
 		_axisLayer = [CALayer layer];
 		_axisLayer.frame = frame;
@@ -62,6 +68,15 @@ static NSDictionary *defaultAxisAttributes()
 		_tickLabelOffsetX = _tickLabelOffsetY = _tickLabelOffsetXRight = _tickLabelOffsetYRight = 2;
 		_exponentialTickLabelOffset = 10;
 		_axisAttributes = [NSDictionary dictionaryWithDictionary:attributes];
+		NSNumber *distance = [attributes objectForKey:kPlotAxisTickDistance];
+		if (nil == distance)
+		{
+			tickDistance = kPXTickDistance;
+		}
+		else
+		{
+			tickDistance = [distance floatValue];
+		}
 	}
 	return self;
 }
@@ -74,11 +89,19 @@ static NSDictionary *defaultAxisAttributes()
 	return [self initVerticalAxisWithFrame:frame valueRange:valueRange orientation:orientation attributes:defaultAxisAttributes() ticks:ticks];
 }
 
-- (id)initVerticalAxisWithFrame:(CGRect)frame valueRange:(PWESValueRange *)valueRange orientation:(AxisType)orientation attributes:(NSDictionary *)attributes ticks:(CGFloat)ticks
+- (id)initVerticalAxisWithFrame:(CGRect)frame
+                     valueRange:(PWESValueRange *)valueRange
+                    orientation:(AxisType)orientation
+                     attributes:(NSDictionary *)attributes
+                          ticks:(CGFloat)ticks
 {
 	self = [super init];
 	if (nil != self)
 	{
+		if (nil == attributes)
+		{
+			attributes = defaultAxisAttributes();
+		}
 		_orientation = orientation;
 		_axisLayer = [CALayer layer];
 		_axisLayer.frame = frame;
@@ -88,6 +111,15 @@ static NSDictionary *defaultAxisAttributes()
 		_tickLabelOffsetX = _tickLabelOffsetY = _tickLabelOffsetXRight = _tickLabelOffsetYRight = 2;
 		_exponentialTickLabelOffset = 10;
 		_axisAttributes = [NSDictionary dictionaryWithDictionary:attributes];
+		NSNumber *distance = [attributes objectForKey:kPlotAxisTickDistance];
+		if (nil == distance)
+		{
+			tickDistance = kPXTickDistance;
+		}
+		else
+		{
+			tickDistance = [distance floatValue];
+		}
 	}
 	return self;
 }
@@ -135,7 +167,6 @@ static NSDictionary *defaultAxisAttributes()
 	CGRect frame = self.axisLayer.bounds;
 	if (Vertical == self.orientation || VerticalRight == self.orientation)
 	{
-//		[self addAxisLabel:context frame:frame];
 		axisStart = CGPointMake(frame.origin.x + frame.size.width / 2 + kAxisLineWidth / 2, frame.origin.y);
 		axisEnd = CGPointMake(frame.origin.x + frame.size.width / 2 + kAxisLineWidth / 2, frame.size.height);
 		[self addTickMarks:context frame:frame];
@@ -161,7 +192,6 @@ static NSDictionary *defaultAxisAttributes()
 
 - (void)addTickMarks:(CGContextRef)context frame:(CGRect)frame
 {
-//    CGFloat yOffset = frame.origin.y + kPXTickDistance;
 	CGFloat yOffset = frame.size.height;
 	CGFloat xStart = frame.origin.x + frame.size.width / 2 + kAxisLineWidth / 2 - kTickLength / 2;
 	CGFloat xEnd = xStart + kTickLength;

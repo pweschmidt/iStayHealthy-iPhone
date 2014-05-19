@@ -54,8 +54,8 @@ typedef NS_ENUM (int, FontType)
 
 typedef NS_ENUM (int, FontSize)
 {
-	veryTiny = 7,
-	tiny = 8,
+	veryTiny = 9,
+	tiny = 10,
 	small = 10,
 	medium = 12,
 	standard = 15,
@@ -369,6 +369,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kPlotAxisTickLabelFontSize @"AxisTickFontSize"
 #define kPlotAxisTitleFontName @"AxisFontname"
 #define kPlotAxisTickFontName @"AxisTickFontName"
+#define kPlotAxisTickDistance @"TickDistance"
 
 
 #define kNumberOfChartViews 14

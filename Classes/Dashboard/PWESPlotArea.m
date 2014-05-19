@@ -28,6 +28,15 @@
          valueRange:(PWESValueRange *)valueRange
            dateLine:(NSArray *)dateLine
 {
+	return [self initWithFrame:frame lineColour:lineColour valueRange:valueRange dateLine:dateLine tickDistance:kPXTickDistance];
+}
+
+- (id)initWithFrame:(CGRect)frame
+         lineColour:(UIColor *)lineColour
+         valueRange:(PWESValueRange *)valueRange
+           dateLine:(NSArray *)dateLine
+       tickDistance:(CGFloat)tickDistance
+{
 	self = [super init];
 	if (nil != self)
 	{
@@ -39,6 +48,7 @@
 		_valueRange = valueRange;
 		_dateLine = dateLine;
 		xStart = 0;
+		_pxTickDistance = tickDistance;
 	}
 	return self;
 }
@@ -55,19 +65,31 @@
 	}
 	if (!tuple.isEmpty)
 	{
-		self.tuple = tuple;
-		NSUInteger length = self.tuple.length;
-		CGFloat width = self.plotLayer.frame.size.width;
-
-		self.isToDrawPoints = (length < 50) ? YES : NO;
-		xStart = (width / length);
-		xDistance = xStart;
-
-		if (10 > length)
+		NSUInteger length = self.dateLine.count;
+		if (50 > length)
 		{
-			xStart = self.plotLayer.frame.size.width  / (length + 1);
+			self.isToDrawPoints = YES;
 		}
+		[self configureBeforePlottingTuple:tuple tupleLength:length];
 		[self.plotLayer setNeedsDisplay];
+	}
+}
+
+- (void)configureBeforePlottingTuple:(PWESDataTuple *)tuple tupleLength:(NSUInteger)tupleLength
+{
+	self.tuple = tuple;
+	if (0 == tupleLength)
+	{
+		tupleLength = 1;
+	}
+	CGFloat width = self.plotLayer.frame.size.width;
+
+	xStart = (width / tupleLength);
+	xDistance = xStart;
+
+	if (10 > tupleLength)
+	{
+		xStart = self.plotLayer.frame.size.width  / (tupleLength + 1);
 	}
 }
 
@@ -88,7 +110,7 @@
 			{
 				if (self.isToDrawPoints)
 				{
-					CGPoint point = CGPointMake(xValue, yValue);
+					CGPoint point = CGPointMake(xValue - kAxisLineWidth / 2, yValue - kAxisLineWidth / 2);
 					[self drawRectWithContext:context
 					                    point:point
 					                 cgColour:self.lineColour.CGColor
@@ -107,9 +129,9 @@
 					               fillColour:self.lineColour.CGColor];
 				}
 				previousY = yValue;
+				previousX = xValue;
 			}
 		}
-		previousX = xValue;
 		index++;
 	}
 }
@@ -134,14 +156,14 @@
 
 - (CGFloat)linearYOffsetForValue:(NSNumber *)value
 {
-	CGFloat scalingFactor = kPXTickDistance / self.valueRange.tickDeltaValue;
+	CGFloat scalingFactor = self.pxTickDistance / self.valueRange.tickDeltaValue;
 	CGFloat actualValue = [value floatValue];
 	CGFloat y = (actualValue * scalingFactor);
 	CGFloat min = [self.valueRange.minValue floatValue];
 	if (0 < min)
 	{
 		CGFloat ticks = min / self.valueRange.tickDeltaValue;
-		ticks *= kPXTickDistance;
+		ticks *= self.pxTickDistance;
 		y -= ticks;
 	}
 	return (self.plotLayer.frame.size.height - y);
@@ -149,11 +171,11 @@
 
 - (CGFloat)logYOffsetForValue:(NSNumber *)value
 {
-	CGFloat y =  log10f([value floatValue]) * kPXTickDistance;
+	CGFloat y =  log10f([value floatValue]) * self.pxTickDistance;
 	CGFloat min = [self.valueRange.minValue floatValue];
 	if (1 > min)
 	{
-		y += kPXTickDistance;
+		y += self.pxTickDistance;
 	}
 	return (self.plotLayer.frame.size.height - y);
 }

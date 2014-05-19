@@ -58,6 +58,7 @@ typedef NS_ENUM (NSUInteger, EvaluationType)
 #define kAxisTickWidth  1.0f
 #define kPXTickDistance 25.0f
 #define kTickLength     10.0f
+#define kMaxLog10Ticks  11
 
 #define TICKS               7
 #define TICKWIDTH           1.5

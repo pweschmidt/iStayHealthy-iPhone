@@ -13,7 +13,18 @@
 #import "PWESPlotArea.h"
 #import "PWESMedPlotArea.h"
 #import "UIFont+Standard.h"
+#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
+
+static NSDictionary *defaultiPadAxisAttributes()
+{
+	NSDictionary *attributes = @{ kPlotAxisTitleFontSize : [NSNumber numberWithFloat:standard],
+		                          kPlotAxisTickLabelFontSize : [NSNumber numberWithFloat:tiny],
+		                          kPlotAxisTitleFontName : kDefaultLightFont,
+		                          kPlotAxisTickFontName : kDefaultBoldFont,
+		                          kPlotAxisTickLabelExpFontSize : [NSNumber numberWithFloat:veryTiny] };
+	return attributes;
+}
 
 @interface PWESPlotView ()
 {
@@ -25,6 +36,7 @@
 	CGRect plotAreaFrame;
 	CGFloat ticks;
 	CGFloat logTicks;
+	CGFloat tickDistance;
 }
 @property (nonatomic, strong) PWESAxis *xAxis;
 @property (nonatomic, strong) PWESAxis *yAxis;
@@ -47,8 +59,8 @@
 	if (self)
 	{
 		_marginBottom = _marginTop = 20;
-		_marginLeft = _marginRight = 20;
-		logTicks = 11;
+		_marginLeft = _marginRight = 35;
+		logTicks = kMaxLog10Ticks;
 	}
 	return self;
 }
@@ -57,10 +69,28 @@
                              nTuple:(PWESDataNTuple *)nTuple
                               types:(PWESResultsTypes *)types
 {
+	return [PWESPlotView plotViewWithFrame:frame nTuple:nTuple types:types pxTickDistance:kPXTickDistance];
+}
+
++ (PWESPlotView *)plotViewWithFrame:(CGRect)frame
+                             nTuple:(PWESDataNTuple *)nTuple
+                              types:(PWESResultsTypes *)types
+                     pxTickDistance:(CGFloat)pxTickDistance
+{
 	PWESPlotView *plotView = [[PWESPlotView alloc] initWithFrame:frame];
-	plotView.pxTickDistance = kPXTickDistance;
+	plotView.pxTickDistance = pxTickDistance;
 	plotView.ntuple = nTuple;
 	plotView.types = types;
+	plotView.axisAttributes = [NSMutableDictionary dictionaryWithDictionary:defaultiPadAxisAttributes()];
+	if ([Utilities isIPad])
+	{
+		[plotView.axisAttributes setObject:[NSNumber numberWithFloat:pxTickDistance] forKey:kPlotAxisTickDistance];
+	}
+	else
+	{
+		[plotView.axisAttributes setObject:[NSNumber numberWithFloat:kPXTickDistance] forKey:kPlotAxisTickDistance];
+	}
+
 	[plotView show];
 	return plotView;
 }
@@ -88,7 +118,7 @@
 	[self showAxis:xAxis];
 	self.xAxis = xAxis;
 
-	PWESAxis *xAxisTop = [self xAxisTop];
+	PWESAxis *xAxisTop = [self topAxis];
 	[self showAxis:xAxisTop];
 	self.xAxisTop = xAxisTop;
 
@@ -115,6 +145,7 @@
 		}
 
 		self.secondPlotArea = [self plotAreaForType:self.types.secondaryType];
+		self.secondPlotArea.pxTickDistance = self.pxTickDistance;
 		if (self.secondPlotArea)
 		{
 			[self.layer addSublayer:self.secondPlotArea.plotLayer];
@@ -175,7 +206,7 @@
 	                                                        ticks:ticks];
 	yAxis.axisTitle = axisType;
 	yAxis.titleColor = lineColour;
-	yAxis.tickLabelOffsetX = 2;
+	yAxis.tickLabelOffsetX = 5;
 	return yAxis;
 }
 
@@ -189,9 +220,11 @@
 		PWESValueRange *range = [PWESValueRange valueRangeForDataTuple:resultsTuple ticks:ticks];
 
 
+
 		PWESAxis *yAxis = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
 		                                                   valueRange:range
 		                                                  orientation:VerticalRight
+		                                                   attributes:self.axisAttributes
 		                                                        ticks:ticksToUse];
 		yAxis.axisTitle = axisType;
 		yAxis.titleColor = lineColour;

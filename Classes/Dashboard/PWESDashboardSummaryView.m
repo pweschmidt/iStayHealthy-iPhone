@@ -47,7 +47,7 @@
 	CGFloat xOrigin = self.bounds.origin.x;
 	CGFloat yOrigin = self.bounds.origin.y;
 	PWESDataTuple *tuple = [nTuple resultsTupleForType:types.mainType];
-	CGRect frame = CGRectMake(xOrigin, yOrigin, componentWidth, componentHeight);
+	CGRect frame = CGRectMake(xOrigin, yOrigin, componentWidth, 40);
 	PWESResultsSummaryView *resultsView = [PWESResultsSummaryView
 	                                       resultsSummaryViewWithFrame:frame
 	                                                         dataTuple:tuple];
@@ -55,7 +55,7 @@
 	if (types.isDualType)
 	{
 		PWESDataTuple *secondtuple = [nTuple resultsTupleForType:types.secondaryType];
-		CGRect frame = CGRectMake(xOrigin, yOrigin + componentHeight, componentWidth, componentHeight);
+		CGRect frame = CGRectMake(xOrigin, yOrigin + 30, componentWidth, 20);
 		PWESResultsSummaryView *secondResultsView = [PWESResultsSummaryView
 		                                             resultsSummaryViewWithFrame:frame
 		                                                               dataTuple:secondtuple];

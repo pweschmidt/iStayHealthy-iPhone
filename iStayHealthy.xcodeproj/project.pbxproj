@@ -412,6 +412,7 @@
 		0B89111B18F9407D00A49B95 /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESZoomTransition.h; path = Animations/PWESZoomTransition.h; sourceTree = "<group>"; };
 		0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESZoomTransition.m; path = Animations/PWESZoomTransition.m; sourceTree = "<group>"; };
 		0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESNavigationDelegate.h; path = ViewControllersCommon/PWESNavigationDelegate.h; sourceTree = "<group>"; };
+		0B90038B192A87FF004A33DC /* PWESPlotAreaDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPlotAreaDelegate.h; path = Dashboard/PWESPlotAreaDelegate.h; sourceTree = "<group>"; };
 		0B9D0737191ABDB900D293E0 /* PWESStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESStar.h; path = SeinfeldCalendar/PWESStar.h; sourceTree = "<group>"; };
 		0B9D0738191ABDB900D293E0 /* PWESStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESStar.m; path = SeinfeldCalendar/PWESStar.m; sourceTree = "<group>"; };
 		0B9D073A191ABE4100D293E0 /* PWESSeinfeldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSeinfeldViewController.h; path = SeinfeldCalendar/PWESSeinfeldViewController.h; sourceTree = "<group>"; };
@@ -1098,6 +1099,7 @@
 				0BB084E71929130B007C83E5 /* PWESMedPlotArea.m */,
 				C4AEF82B180DCAB800107966 /* PWESPlotArea.h */,
 				C4AEF82C180DCAB800107966 /* PWESPlotArea.m */,
+				0B90038B192A87FF004A33DC /* PWESPlotAreaDelegate.h */,
 				C463743717E9F2AF00D19B94 /* PWESPlotView.h */,
 				C463743817E9F2AF00D19B94 /* PWESPlotView.m */,
 				C463743917E9F2AF00D19B94 /* PWESResultsSummaryView.h */,

@@ -11,12 +11,14 @@
 #import "PWESDataNTuple.h"
 #import "PWESResultsTypes.h"
 
+
 @interface PWESPlotView : UIView
 @property (nonatomic, assign) CGFloat marginLeft;
 @property (nonatomic, assign) CGFloat marginRight;
 @property (nonatomic, assign) CGFloat marginTop;
 @property (nonatomic, assign) CGFloat marginBottom;
 @property (nonatomic, assign) CGFloat pxTickDistance;
+@property (nonatomic, strong) NSMutableDictionary *axisAttributes;
 
 /**
    Creates a plot view with axis and plot area for a given set of types
@@ -28,5 +30,18 @@
 + (PWESPlotView *)plotViewWithFrame:(CGRect)frame
                              nTuple:(PWESDataNTuple *)nTuple
                               types:(PWESResultsTypes *)types;
+
+/**
+   Creates a plot view with axis and plot area for a given set of types
+   @param frame
+   @param nTuple
+   @param types
+   @param pxTickDistance
+   @return an instance of PWESPlotView
+ */
++ (PWESPlotView *)plotViewWithFrame:(CGRect)frame
+                             nTuple:(PWESDataNTuple *)nTuple
+                              types:(PWESResultsTypes *)types
+                     pxTickDistance:(CGFloat)pxTickDistance;
 
 @end
