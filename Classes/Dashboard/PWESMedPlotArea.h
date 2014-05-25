@@ -18,6 +18,7 @@
    @param ticks
  */
 - (id)initWithFrame:(CGRect)frame
+          marginTop:(CGFloat)marginTop
            dateLine:(NSArray *)dateLine;
 
 /**

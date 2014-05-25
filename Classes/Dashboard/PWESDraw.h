@@ -49,4 +49,15 @@
                    cgColour:(CGColorRef)cgColor
                  fillColour:(CGColorRef)fillColour;
 
+- (void)drawDate:(CGContextRef)context
+            date:(NSDate *)date
+          xValue:(CGFloat)xValue
+          yValue:(CGFloat)yValue;
+
+- (void)drawText:(NSString *)text
+         context:(CGContextRef)context
+          xValue:(CGFloat)xValue
+          yValue:(CGFloat)yValue
+          colour:(UIColor *)colour;
+
 @end

@@ -7,11 +7,22 @@
 //
 
 #import "PWESMedPlotArea.h"
+#import <CoreText/CoreText.h>
+
+
+static NSDateFormatter *shortDate()
+{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = kShortDateFormatting;
+	formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+	return formatter;
+}
 
 @interface PWESMedPlotArea ()
 {
 	CGFloat xStart;
 	CGFloat xDistance;
+	CGFloat marginLabelTop;
 }
 @property (nonatomic, assign) NSUInteger allDates;
 
@@ -19,12 +30,14 @@
 
 @implementation PWESMedPlotArea
 - (id)initWithFrame:(CGRect)frame
+          marginTop:(CGFloat)marginTop
            dateLine:(NSArray *)dateLine
 {
 	self = [super initWithFrame:frame lineColour:nil valueRange:nil dateLine:dateLine];
 	if (nil != self)
 	{
 		_allDates = dateLine.count;
+		marginLabelTop = marginTop;
 	}
 	return self;
 }
@@ -84,9 +97,15 @@
 		id value = [self.tuple valueForDate:dateObject];
 		if (nil != value)
 		{
-			CGPoint start = CGPointMake(xValue, self.plotLayer.frame.origin.y);
-			CGPoint end = CGPointMake(xValue, self.plotLayer.frame.size.height);
+			CGPoint start = CGPointMake(xValue, self.plotLayer.frame.origin.y + marginLabelTop);
+			CGPoint end = CGPointMake(xValue, self.plotLayer.frame.size.height  - 2);
 			[self drawLineWithContext:context start:start end:end lineWidth:kAxisLineWidth cgColour:self.lineColor.CGColor fillColour:self.lineColor.CGColor pattern:medDashPattern patternCount:2];
+			CGFloat xOffset = xValue - 20;
+			if (0 < xOffset)
+			{
+				xOffset = 0;
+			}
+			[self drawDate:context date:dateObject xValue:xValue yValue:self.plotLayer.frame.origin.y + 10];
 		}
 		index++;
 	}

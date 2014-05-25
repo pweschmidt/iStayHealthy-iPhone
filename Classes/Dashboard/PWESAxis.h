@@ -10,6 +10,7 @@
 #import "PWESChartsConstants.h"
 #import "PWESDraw.h"
 #import "PWESValueRange.h"
+#import <CoreText/CoreText.h>
 
 @interface PWESAxis : PWESDraw
 @property (nonatomic, strong) UIColor *axisColor;
@@ -24,64 +25,33 @@
 @property (nonatomic, assign) CGFloat tickLabelOffsetYRight;
 @property (nonatomic, assign) CGFloat exponentialTickLabelOffset;
 @property (nonatomic, strong) NSDictionary *axisAttributes;
+@property (nonatomic, assign) BOOL showAxisLabel;
 
 @property (nonatomic, strong) CALayer *axisLayer;
-/**
-   vertical axis with default axis attributes
-   @param frame
-   @param valueRange
-   @param orientation
-   @param attributes set the tick label and axis label font size and font type
-   @param ticks
- */
-- (id)initVerticalAxisWithFrame:(CGRect)frame
-                     valueRange:(PWESValueRange *)valueRange
-                    orientation:(AxisType)orientation
-                     attributes:(NSDictionary *)attributes
-                          ticks:(CGFloat)ticks;
 
 /**
-   vertical axis with default axis attributes
-   @param frame
-   @param valueRange
-   @param orientation
-   @param ticks
- */
-- (id)initVerticalAxisWithFrame:(CGRect)frame
-                     valueRange:(PWESValueRange *)valueRange
-                    orientation:(AxisType)orientation
-                          ticks:(CGFloat)ticks;
-
-/**
-   vertical axis without labels and no ticks
    @param frame
    @param orientation
+   @param attributes
  */
-- (id)initVerticalAxisWithFrame:(CGRect)frame
-                    orientation:(AxisType)orientation;
-/**
-   vertical axis without labels and no ticks
-   @param frame
-   @param orientation
-   @param attributes set the tick label and axis label font size and font type
- */
-- (id)initVerticalAxisWithFrame:(CGRect)frame
-                    orientation:(AxisType)orientation
-                     attributes:(NSDictionary *)attributes;
+- (id)initWithFrame:(CGRect)frame
+        orientation:(AxisType)orientation
+         attributes:(NSDictionary *)attributes;
 
 /**
-   horizontal axis
-   @param frame
-   @param attributes set the tick label and axis label font size and font type
+   @param style
  */
-- (id)initHorizontalAxisWithFrame:(CGRect)frame
-                       attributes:(NSDictionary *)attributes;
+- (CGFloat)fontSizeForAxisStyle:(AxisStyle)style;
 
 /**
-   horizontal axis with default attributes
-   @param frame
+   @param style
  */
-- (id)initHorizontalAxisWithFrame:(CGRect)frame;
+- (NSString *)fontNameForAxisStyle:(AxisStyle)style;
+
+/**
+   @param line
+ */
+- (CGSize)sizeOfLine:(CTLineRef)line;
 
 /**
    show the axis

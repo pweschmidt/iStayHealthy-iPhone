@@ -99,6 +99,7 @@
 	CGFloat previousX = -1;
 	CGFloat previousY = -1;
 	int index = 0;
+
 	for (id dateObject in self.dateLine)
 	{
 		id value = [self.tuple valueForDate:dateObject];
@@ -134,6 +135,15 @@
 		}
 		index++;
 	}
+
+//	if (nil != firstDate)
+//	{
+//		if (0 > firstX - 20)
+//		{
+//			firstX += 20;
+//		}
+//		[self drawDate:context date:firstDate xValue:firstX yValue:self.plotLayer.frame.size.height - 5];
+//	}
 }
 
 - (CGFloat)yOffetForValue:(id)value

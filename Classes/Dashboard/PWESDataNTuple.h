@@ -15,6 +15,9 @@
 @property (nonatomic, strong, readonly) NSMutableArray *resultTypes;
 @property (nonatomic, strong, readonly) PWESDataTuple *medicationTuple;
 @property (nonatomic, strong, readonly) PWESDataTuple *missedMedicationTuple;
+@property (nonatomic, strong, readonly) NSDate *firstResultsDate;
+@property (nonatomic, strong, readonly) NSDate *lastResultsDate;
+@property (nonatomic, assign, readonly) NSUInteger maxNumberOfResults;
 
 /**
    initialises the tuple with rawresults and types
@@ -87,4 +90,9 @@
    @return YES if empty
  */
 - (BOOL)isEmpty;
+
+/**
+   @return YES if at least one results tuple has entries
+ */
+- (BOOL)hasResults;
 @end

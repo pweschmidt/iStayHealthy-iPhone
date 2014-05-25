@@ -25,6 +25,10 @@
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
 		0B65F95E1913917600523441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B65F95D1913917600523441 /* Images.xcassets */; };
+		0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */; };
+		0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326D019321E68001E6601 /* PWESHorizontalAxis.m */; };
+		0B7326D419323032001E6601 /* PWESResultDatesPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326D319323032001E6601 /* PWESResultDatesPlotArea.m */; };
+		0B7326D719324E75001E6601 /* PWESLabelPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326D619324E75001E6601 /* PWESLabelPlotArea.m */; };
 		0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */; };
 		0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */; };
 		0B81FB3919229D5500A458B0 /* MedView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B81FB3819229D5500A458B0 /* MedView_iPad.m */; };
@@ -355,6 +359,14 @@
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
 		0B65F95D1913917600523441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iStayHealthy/Images.xcassets; sourceTree = "<group>"; };
+		0B7326CC19321E52001E6601 /* PWESVerticalAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESVerticalAxis.h; path = Dashboard/PWESVerticalAxis.h; sourceTree = "<group>"; };
+		0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESVerticalAxis.m; path = Dashboard/PWESVerticalAxis.m; sourceTree = "<group>"; };
+		0B7326CF19321E68001E6601 /* PWESHorizontalAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESHorizontalAxis.h; path = Dashboard/PWESHorizontalAxis.h; sourceTree = "<group>"; };
+		0B7326D019321E68001E6601 /* PWESHorizontalAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESHorizontalAxis.m; path = Dashboard/PWESHorizontalAxis.m; sourceTree = "<group>"; };
+		0B7326D219323032001E6601 /* PWESResultDatesPlotArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESResultDatesPlotArea.h; path = Dashboard/PWESResultDatesPlotArea.h; sourceTree = "<group>"; };
+		0B7326D319323032001E6601 /* PWESResultDatesPlotArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESResultDatesPlotArea.m; path = Dashboard/PWESResultDatesPlotArea.m; sourceTree = "<group>"; };
+		0B7326D519324E75001E6601 /* PWESLabelPlotArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESLabelPlotArea.h; path = Dashboard/PWESLabelPlotArea.h; sourceTree = "<group>"; };
+		0B7326D619324E75001E6601 /* PWESLabelPlotArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESLabelPlotArea.m; path = Dashboard/PWESLabelPlotArea.m; sourceTree = "<group>"; };
 		0B778D5818BA229B00C1F010 /* ResultsView-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ResultsView-iPad.h"; path = "Views/ResultsView-iPad.h"; sourceTree = "<group>"; };
 		0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ResultsView-iPad.m"; path = "Views/ResultsView-iPad.m"; sourceTree = "<group>"; };
 		0B7DF43F18E6FF5A00870BB1 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailViewController.h; path = ViewControllersCommon/EmailViewController.h; sourceTree = "<group>"; };
@@ -1093,8 +1105,12 @@
 				0B6048561840D12B0092B5FB /* PWESDataTuple.m */,
 				C4AEF828180DC05C00107966 /* PWESDraw.h */,
 				C4AEF829180DC05C00107966 /* PWESDraw.m */,
+				0B7326CF19321E68001E6601 /* PWESHorizontalAxis.h */,
+				0B7326D019321E68001E6601 /* PWESHorizontalAxis.m */,
 				C463743517E9F2AF00D19B94 /* PWESIndicatorView.h */,
 				C463743617E9F2AF00D19B94 /* PWESIndicatorView.m */,
+				0B7326D519324E75001E6601 /* PWESLabelPlotArea.h */,
+				0B7326D619324E75001E6601 /* PWESLabelPlotArea.m */,
 				0BB084E61929130B007C83E5 /* PWESMedPlotArea.h */,
 				0BB084E71929130B007C83E5 /* PWESMedPlotArea.m */,
 				C4AEF82B180DCAB800107966 /* PWESPlotArea.h */,
@@ -1102,6 +1118,8 @@
 				0B90038B192A87FF004A33DC /* PWESPlotAreaDelegate.h */,
 				C463743717E9F2AF00D19B94 /* PWESPlotView.h */,
 				C463743817E9F2AF00D19B94 /* PWESPlotView.m */,
+				0B7326D219323032001E6601 /* PWESResultDatesPlotArea.h */,
+				0B7326D319323032001E6601 /* PWESResultDatesPlotArea.m */,
 				C463743917E9F2AF00D19B94 /* PWESResultsSummaryView.h */,
 				C463743A17E9F2AF00D19B94 /* PWESResultsSummaryView.m */,
 				0BB084E31928E181007C83E5 /* PWESResultsTypes.h */,
@@ -1110,6 +1128,8 @@
 				C463743C17E9F2AF00D19B94 /* PWESUtils.m */,
 				0B60485A1840D1BA0092B5FB /* PWESValueRange.h */,
 				0B60485B1840D1BA0092B5FB /* PWESValueRange.m */,
+				0B7326CC19321E52001E6601 /* PWESVerticalAxis.h */,
+				0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -1893,6 +1913,7 @@
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
+				0B7326D419323032001E6601 /* PWESResultDatesPlotArea.m in Sources */,
 				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
@@ -1919,12 +1940,15 @@
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
 				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
 				0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */,
+				0B7326D719324E75001E6601 /* PWESLabelPlotArea.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
+				0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
 				C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */,
 				C4C8F9AF18118DD10011885D /* EditDashboardTableViewController.m in Sources */,
 				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
+				0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,
 				C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */,
 			);
@@ -2179,7 +2203,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -2203,7 +2227,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
 					"$(PROJECT_DIR)/Classes/TestFlight",
-					"$(PROJECT_DIR)/Classes/GoogleAdMob",
 				);
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				OTHER_LDFLAGS = (
@@ -2221,7 +2244,7 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -2243,7 +2266,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
 					"$(PROJECT_DIR)/Classes/TestFlight",
-					"$(PROJECT_DIR)/Classes/GoogleAdMob",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",
@@ -2324,7 +2346,7 @@
 		C4C3AA431316E071000FC699 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
@@ -2345,7 +2367,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
 					"$(PROJECT_DIR)/Classes/TestFlight",
-					"$(PROJECT_DIR)/Classes/GoogleAdMob",
 				);
 				OTHER_LDFLAGS = (
 					"-lxslt",

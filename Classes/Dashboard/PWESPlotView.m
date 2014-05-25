@@ -7,13 +7,16 @@
 //
 
 #import "PWESPlotView.h"
-#import "PWESAxis.h"
+#import "PWESVerticalAxis.h"
+#import "PWESHorizontalAxis.h"
 #import "PWESChartsConstants.h"
 #import "PWESValueRange.h"
 #import "PWESPlotArea.h"
 #import "PWESMedPlotArea.h"
+#import "PWESResultDatesPlotArea.h"
 #import "UIFont+Standard.h"
 #import "Utilities.h"
+#import "PWESLabelPlotArea.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSDictionary *defaultiPadAxisAttributes()
@@ -32,11 +35,12 @@ static NSDictionary *defaultiPadAxisAttributes()
 	CGRect yAxisFrame;
 	CGRect yAxisFrameRight;
 	CGRect xAxisFrame;
-	CGRect xAxisFrameTop;
+//	CGRect xAxisFrameTop;
 	CGRect plotAreaFrame;
+	CGRect dateLabelFrame;
 	CGFloat ticks;
 	CGFloat logTicks;
-	CGFloat tickDistance;
+	CGFloat logTickDistance;
 }
 @property (nonatomic, strong) PWESAxis *xAxis;
 @property (nonatomic, strong) PWESAxis *yAxis;
@@ -45,6 +49,7 @@ static NSDictionary *defaultiPadAxisAttributes()
 @property (nonatomic, strong) PWESPlotArea *plotArea;
 @property (nonatomic, strong) PWESPlotArea *secondPlotArea;
 @property (nonatomic, strong) PWESMedPlotArea *medPlotArea;
+@property (nonatomic, strong) PWESResultDatesPlotArea *datesArea;
 @property (nonatomic, strong) PWESResultsTypes *types;
 @property (nonatomic, strong) PWESDataNTuple *ntuple;
 @property (nonatomic, strong) PWESDataTuple *firstTuple;
@@ -82,14 +87,6 @@ static NSDictionary *defaultiPadAxisAttributes()
 	plotView.ntuple = nTuple;
 	plotView.types = types;
 	plotView.axisAttributes = [NSMutableDictionary dictionaryWithDictionary:defaultiPadAxisAttributes()];
-	if ([Utilities isIPad])
-	{
-		[plotView.axisAttributes setObject:[NSNumber numberWithFloat:pxTickDistance] forKey:kPlotAxisTickDistance];
-	}
-	else
-	{
-		[plotView.axisAttributes setObject:[NSNumber numberWithFloat:kPXTickDistance] forKey:kPlotAxisTickDistance];
-	}
 
 	[plotView show];
 	return plotView;
@@ -98,29 +95,24 @@ static NSDictionary *defaultiPadAxisAttributes()
 #pragma mark private methods
 - (void)show
 {
-	if (self.ntuple.isEmpty)
+	if (self.ntuple.isEmpty || ![self.ntuple hasResults])
 	{
 		UILabel *emptyLabel = [self emptyLabelView];
 		[self addSubview:emptyLabel];
 		return;
 	}
-	[self createFrames];
+	[self createFramesAndOffsets];
 
-	ticks = roundf(yAxisFrame.size.height / self.pxTickDistance);
 	PWESDataTuple *firstTuple = [self.ntuple resultsTupleForType:self.types.mainType];
 	self.firstTuple = firstTuple;
 
-	PWESAxis *yAxis = [self leftYAxisResultsTuple:firstTuple];
+	PWESVerticalAxis *yAxis = [self leftYAxisResultsTuple:firstTuple];
 	[self showAxis:yAxis];
 	self.yAxis = yAxis;
 
-	PWESAxis *xAxis = [self xAxis];
+	PWESHorizontalAxis *xAxis = [self bottomAxis];
 	[self showAxis:xAxis];
 	self.xAxis = xAxis;
-
-	PWESAxis *xAxisTop = [self topAxis];
-	[self showAxis:xAxisTop];
-	self.xAxisTop = xAxisTop;
 
 	self.plotArea = [self plotAreaForType:self.types.mainType];
 
@@ -135,7 +127,7 @@ static NSDictionary *defaultiPadAxisAttributes()
 		PWESDataTuple *secondTuple = [self.ntuple resultsTupleForType:self.types.secondaryType];
 		self.secondTuple = secondTuple;
 
-		PWESAxis *yAxisRight = [self rightYAxisResultsTuple:secondTuple type:self.types.secondaryType];
+		PWESVerticalAxis *yAxisRight = [self rightYAxisResultsTuple:secondTuple type:self.types.secondaryType];
 		[self showAxis:yAxisRight];
 		self.yAxisRight = yAxisRight;
 
@@ -152,16 +144,18 @@ static NSDictionary *defaultiPadAxisAttributes()
 			[self.secondPlotArea plotDataTuple:self.secondTuple];
 		}
 	}
-	else
-	{
-		PWESAxis *yAxisRight = [self rightYAxisResultsTuple:nil type:nil];
-		[self showAxis:yAxisRight];
-		self.yAxisRight = yAxisRight;
-	}
 
+	[self showMedLine];
+	[self showResultsDates];
+}
+
+- (void)showMedLine
+{
 	if (self.types.showMedLine)
 	{
-		PWESMedPlotArea *medArea = [[PWESMedPlotArea alloc] initWithFrame:plotAreaFrame dateLine:self.ntuple.dateLine];
+		PWESMedPlotArea *medArea = [[PWESMedPlotArea alloc] initWithFrame:plotAreaFrame
+		                                                        marginTop:self.marginTop
+		                                                         dateLine:self.ntuple.dateLine];
 		if (nil != medArea)
 		{
 			self.medPlotArea = medArea;
@@ -170,6 +164,16 @@ static NSDictionary *defaultiPadAxisAttributes()
 			[self.medPlotArea plotMedicationTuple:medTuple];
 		}
 	}
+}
+
+- (void)showResultsDates
+{
+	PWESResultDatesPlotArea *datesArea = [[PWESResultDatesPlotArea alloc] initWithFrame:dateLabelFrame
+	                                                                       marginBottom:self.marginBottom
+	                                                                             ntuple:self.ntuple];
+	self.datesArea = datesArea;
+	[self.layer addSublayer:self.datesArea.plotLayer];
+	[self.datesArea plotDates];
 }
 
 - (UILabel *)emptyLabelView
@@ -184,48 +188,70 @@ static NSDictionary *defaultiPadAxisAttributes()
 	return emptyLabel;
 }
 
-- (void)createFrames
+- (void)createFramesAndOffsets
 {
 	yAxisFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
 	yAxisFrameRight = CGRectMake(self.bounds.origin.x + self.bounds.size.width - self.marginRight - self.marginLeft - 3, self.bounds.origin.y, self.marginLeft * 2, self.bounds.size.height - self.marginBottom);
 	xAxisFrame = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.size.height - self.marginBottom - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
-	xAxisFrameTop = CGRectMake(self.bounds.origin.x + self.marginLeft, 0 - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
+//	xAxisFrameTop = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.origin.y - self.marginTop, self.bounds.size.width - self.marginRight - self.marginLeft, self.marginBottom * 2);
+
 	plotAreaFrame = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.origin.y, self.bounds.size.width - self.marginRight - self.marginLeft, self.bounds.size.height - self.marginBottom);
+
+	dateLabelFrame = CGRectMake(self.bounds.origin.x + self.marginLeft, self.bounds.origin.y, self.bounds.size.width - self.marginRight - self.marginLeft, self.bounds.size.height);
+
+
+	ticks = roundf(yAxisFrame.size.height / self.pxTickDistance);
+	CGFloat logHeight = ticks * self.pxTickDistance;
+	logTickDistance = roundf(logHeight / kMaxLog10Ticks);
 }
 
-- (PWESAxis *)leftYAxisResultsTuple:(PWESDataTuple *)resultsTuple
+- (PWESVerticalAxis *)leftYAxisResultsTuple:(PWESDataTuple *)resultsTuple
 {
 	NSString *axisType = self.types.mainType;
 	UIColor *lineColour = [self colourForType:axisType];
 	PWESValueRange *range = [PWESValueRange valueRangeForDataTuple:resultsTuple ticks:ticks];
 
 
-	PWESAxis *yAxis = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrame
-	                                                   valueRange:range
-	                                                  orientation:Vertical
-	                                                        ticks:ticks];
+	PWESVerticalAxis *yAxis = [[PWESVerticalAxis alloc] initVerticalAxisWithFrame:yAxisFrame
+	                                                                   valueRange:range
+	                                                                  orientation:Vertical
+	                                                                        ticks:ticks];
 	yAxis.axisTitle = axisType;
 	yAxis.titleColor = lineColour;
 	yAxis.tickLabelOffsetX = 5;
+	if ([axisType isEqualToString:kCD4] || [axisType isEqualToString:kCD4Percent])
+	{
+		yAxis.showAxisLabel = YES;
+	}
 	return yAxis;
 }
 
-- (PWESAxis *)rightYAxisResultsTuple:(PWESDataTuple *)resultsTuple type:(NSString *)type
+- (PWESVerticalAxis *)rightYAxisResultsTuple:(PWESDataTuple *)resultsTuple type:(NSString *)type
 {
 	if (self.types.isDualType)
 	{
 		NSString *axisType = self.types.secondaryType;
 		UIColor *lineColour = [self colourForType:axisType];
-		CGFloat ticksToUse = ([type isEqualToString:kViralLoad]) ? logTicks : ticks;
-		PWESValueRange *range = [PWESValueRange valueRangeForDataTuple:resultsTuple ticks:ticks];
-
-
-
-		PWESAxis *yAxis = [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
-		                                                   valueRange:range
-		                                                  orientation:VerticalRight
-		                                                   attributes:self.axisAttributes
-		                                                        ticks:ticksToUse];
+		BOOL isLogAxis = ([type isEqualToString:kViralLoad] || [type isEqualToString:kHepCViralLoad]);
+		CGFloat ticksToUse = (isLogAxis) ? kMaxLog10Ticks : ticks;
+		PWESValueRange *range = [PWESValueRange valueRangeForDataTuple:resultsTuple ticks:ticksToUse];
+		PWESVerticalAxis *yAxis = nil;
+		if (isLogAxis)
+		{
+			yAxis = [[PWESVerticalAxis alloc] initVerticalLogAxisWithFrame:yAxisFrameRight
+			                                                    valueRange:range orientation:VerticalRight
+			                                               logTickDistance:logTickDistance];
+			yAxis.axisTitle = axisType;
+			yAxis.titleColor = lineColour;
+			yAxis.showAxisLabel = YES;
+		}
+		else
+		{
+			yAxis = [[PWESVerticalAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
+			                                                 valueRange:range
+			                                                orientation:VerticalRight
+			                                                      ticks:ticksToUse];
+		}
 		yAxis.axisTitle = axisType;
 		yAxis.titleColor = lineColour;
 		yAxis.tickLabelOffsetX = 2;
@@ -233,20 +259,27 @@ static NSDictionary *defaultiPadAxisAttributes()
 	}
 	else
 	{
-		return [[PWESAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
-		                                       orientation:VerticalRight];
+		return [[PWESVerticalAxis alloc] initVerticalAxisWithFrame:yAxisFrameRight
+		                                               orientation:VerticalRight];
 	}
 }
 
-- (PWESAxis *)xAxis
+- (PWESHorizontalAxis *)bottomAxis
 {
-	return [[PWESAxis alloc] initHorizontalAxisWithFrame:xAxisFrame];
+	PWESHorizontalAxis *bottomAxis = [[PWESHorizontalAxis alloc]
+	                                  initHorizontalAxisWithFrame:xAxisFrame
+	                                                  orientation:Horizontal
+	                                                   attributes:nil
+	                                                       ntuple:self.ntuple
+	                                                 showAtBottom:YES];
+	return bottomAxis;
 }
 
-- (PWESAxis *)topAxis
-{
-	return [[PWESAxis alloc] initHorizontalAxisWithFrame:xAxisFrameTop];
-}
+//- (PWESHorizontalAxis *)topAxis
+//{
+//	PWESHorizontalAxis *xTopAxis = [[PWESHorizontalAxis alloc] initHorizontalAxisWithFrame:xAxisFrameTop];
+//	return xTopAxis;
+//}
 
 - (PWESValueRange *)valueRangeForType:(NSString *)type tickCounts:(CGFloat)tickCounts
 {
@@ -270,13 +303,17 @@ static NSDictionary *defaultiPadAxisAttributes()
 
 - (PWESPlotArea *)plotAreaForType:(NSString *)type
 {
-	CGFloat ticksToUse = ([type isEqualToString:kViralLoad]) ? logTicks : ticks;
+	BOOL isLog = ([type isEqualToString:kViralLoad] || [type isEqualToString:kHepCViralLoad]);
+	CGFloat ticksToUse = (isLog) ? kMaxLog10Ticks : ticks;
+	CGFloat tickDistanceToUse = (isLog) ? logTickDistance : self.pxTickDistance;
+
 	PWESValueRange *range = [self valueRangeForType:type tickCounts:ticksToUse];
 	UIColor *colour = [self colourForType:type];
 	PWESPlotArea *area = [[PWESPlotArea alloc] initWithFrame:plotAreaFrame
 	                                              lineColour:colour
 	                                              valueRange:range
-	                                                dateLine:self.ntuple.dateLine];
+	                                                dateLine:self.ntuple.dateLine
+	                                            tickDistance:tickDistanceToUse];
 	return area;
 }
 

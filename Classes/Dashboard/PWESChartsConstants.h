@@ -9,11 +9,19 @@
 
 #define kSummaryViewHeight 80.0f
 
+typedef NS_ENUM (int, AxisStyle)
+{
+	tick,
+	exponentialTick,
+	title,
+};
+
 typedef NS_ENUM (int, AxisType)
 {
 	Vertical = 0,
 	VerticalRight,
-	Horizontal
+	Horizontal,
+	HorizontalTop
 };
 
 typedef NS_ENUM  (NSUInteger, ResultsTypes)

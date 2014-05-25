@@ -15,6 +15,9 @@
 @property (nonatomic, strong, readwrite) PWESDataTuple *medicationTuple;
 @property (nonatomic, strong, readwrite) PWESDataTuple *missedMedicationTuple;
 @property (nonatomic, strong) NSMutableDictionary *tuples;
+@property (nonatomic, strong, readwrite) NSDate *firstResultsDate;
+@property (nonatomic, strong, readwrite) NSDate *lastResultsDate;
+@property (nonatomic, assign, readwrite) NSUInteger maxNumberOfResults;
 @end
 
 @implementation PWESDataNTuple
@@ -31,6 +34,7 @@
 	}
 
 	PWESDataNTuple *ntuple = [[PWESDataNTuple alloc] init];
+	ntuple.maxNumberOfResults = 0;
 	[ntuple createTuplesForResults:rawResults types:types];
 	if (types.isDualType)
 	{
@@ -74,6 +78,7 @@
 {
 	PWESDataNTuple *ntuple = [[PWESDataNTuple alloc] init];
 	NSError *error = nil;
+	ntuple.maxNumberOfResults = rawResults.count;
 	ntuple.dateLine = [[PWESDataManager sharedInstance]
 	                   combinedTimelineForOrderedRawResults:rawResults
 	                                                  types:types
@@ -96,6 +101,32 @@
 {
 	[self.resultTypes addObject:tuple.type];
 	[self.tuples setObject:tuple forKey:tuple.type];
+	if (![tuple isEmpty])
+	{
+		NSDate *first = [tuple.dateTuple objectAtIndex:0];
+		NSDate *last = [tuple.dateTuple lastObject];
+		if (nil == self.firstResultsDate)
+		{
+			self.firstResultsDate = first;
+		}
+		else if (NSOrderedDescending == [self.firstResultsDate compare:first])
+		{
+			self.firstResultsDate = first;
+		}
+		if (nil == self.lastResultsDate)
+		{
+			self.lastResultsDate = last;
+		}
+		else if (NSOrderedAscending == [self.lastResultsDate compare:last])
+		{
+			self.lastResultsDate = last;
+		}
+		NSUInteger count = tuple.dateTuple.count;
+		if (self.maxNumberOfResults < count)
+		{
+			self.maxNumberOfResults = count;
+		}
+	}
 }
 
 - (void)addMissedMedicationTuple:(PWESDataTuple *)missedTuple
@@ -123,6 +154,23 @@
 - (BOOL)isEmpty
 {
 	return (0 == self.dateLine.count);
+}
+
+- (BOOL)hasResults
+{
+	__block BOOL hasResultsForTuples = NO;
+	if (nil == self.tuples || 0 == self.tuples.allKeys.count)
+	{
+		return NO;
+	}
+	[self.tuples enumerateKeysAndObjectsUsingBlock: ^(id key, PWESDataTuple *tuple, BOOL *stop) {
+	    if (![tuple isEmpty])
+	    {
+	        hasResultsForTuples = YES;
+	        *stop = YES;
+		}
+	}];
+	return hasResultsForTuples;
 }
 
 #pragma mark private methods

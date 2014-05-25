@@ -7,6 +7,16 @@
 //
 
 #import "PWESDraw.h"
+#import <CoreText/CoreText.h>
+
+
+static NSDateFormatter *shortDate()
+{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = kShortDateFormatting;
+	formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+	return formatter;
+}
 
 @implementation PWESDraw
 
@@ -124,6 +134,39 @@
 	CGRect rect = CGRectMake(point.x + width / 2.0, point.y + height / 2.0, width, height);
 	CGContextAddRect(context, rect);
 	CGContextStrokePath(context);
+}
+
+- (void)drawDate:(CGContextRef)context date:(NSDate *)date xValue:(CGFloat)xValue yValue:(CGFloat)yValue
+{
+	if (nil == date || ![date isKindOfClass:[NSDate class]])
+	{
+		return;
+	}
+	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
+	CGFloat fontSize = tiny;
+	NSDictionary *attributes = @{ NSFontAttributeName:[UIFont fontWithName:kDefaultFont size:fontSize] };
+	NSString *formattedDateString = [shortDate() stringFromDate:date];
+	NSAttributedString *string = [[NSAttributedString alloc] initWithString:formattedDateString attributes:attributes];
+	CTLineRef displayLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)string);
+	CGContextSetTextPosition(context, xValue, yValue);
+	CTLineDraw(displayLine, context);
+	CFRelease(displayLine);
+}
+
+- (void)drawText:(NSString *)text
+         context:(CGContextRef)context
+          xValue:(CGFloat)xValue
+          yValue:(CGFloat)yValue
+          colour:(UIColor *)colour
+{
+	CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
+	CGFloat fontSize = tiny;
+	NSDictionary *attributes = @{ NSFontAttributeName:[UIFont fontWithName:kDefaultFont size:fontSize] };
+	NSAttributedString *string = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+	CTLineRef displayLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)string);
+	CGContextSetTextPosition(context, xValue, yValue);
+	CTLineDraw(displayLine, context);
+	CFRelease(displayLine);
 }
 
 @end
