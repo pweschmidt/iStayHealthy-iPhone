@@ -137,7 +137,6 @@ static NSDictionary *defaultiPadAxisAttributes()
 		}
 
 		self.secondPlotArea = [self plotAreaForType:self.types.secondaryType];
-		self.secondPlotArea.pxTickDistance = self.pxTickDistance;
 		if (self.secondPlotArea)
 		{
 			[self.layer addSublayer:self.secondPlotArea.plotLayer];
