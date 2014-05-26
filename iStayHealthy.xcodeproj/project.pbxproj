@@ -172,7 +172,6 @@
 		C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27C017DB5A1E001F6831 /* EditMissedMedsTableViewController.m */; };
 		C45C27C417DB5A3F001F6831 /* EditSideEffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27C317DB5A3F001F6831 /* EditSideEffectsTableViewController.m */; };
 		C45C27C717DB5A5B001F6831 /* EditAlertsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27C617DB5A5B001F6831 /* EditAlertsTableViewController.m */; };
-		C45C27CA17DB5A75001F6831 /* EditAppointmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27C917DB5A75001F6831 /* EditAppointmentsTableViewController.m */; };
 		C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27CC17DB5A9D001F6831 /* EditProceduresTableViewController.m */; };
 		C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27CF17DB5AC7001F6831 /* EditWellnessTableViewController.m */; };
 		C45D00F017BAB403001AE0CB /* EditResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45D00EF17BAB403001AE0CB /* EditResultsTableViewController.m */; };
@@ -201,7 +200,6 @@
 		C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */; };
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
 		C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */; };
-		C46EB5E817EB819800B9EA5A /* AppointmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E717EB819800B9EA5A /* AppointmentsTableViewController.m */; };
 		C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22B17AD05630037A6DF /* LoginViewController.m */; };
 		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
 		C481FD2117FDEBDE0058EE9D /* icon_57_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = C481FD1A17FDEBDE0058EE9D /* icon_57_flat.png */; };
@@ -251,7 +249,6 @@
 		C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */; };
 		C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */; };
 		C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */; };
-		C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */; };
 		C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF829180DC05C00107966 /* PWESDraw.m */; };
 		C4AEF82D180DCAB800107966 /* PWESPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF82C180DCAB800107966 /* PWESPlotArea.m */; };
 		C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4B8B79413DEAE1C00FA9893 /* Localizable.strings */; };
@@ -578,8 +575,6 @@
 		C45C27C317DB5A3F001F6831 /* EditSideEffectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSideEffectsTableViewController.m; path = ViewControllersiPhone/EditSideEffectsTableViewController.m; sourceTree = "<group>"; };
 		C45C27C517DB5A5B001F6831 /* EditAlertsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditAlertsTableViewController.h; path = ViewControllersiPhone/EditAlertsTableViewController.h; sourceTree = "<group>"; };
 		C45C27C617DB5A5B001F6831 /* EditAlertsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditAlertsTableViewController.m; path = ViewControllersiPhone/EditAlertsTableViewController.m; sourceTree = "<group>"; };
-		C45C27C817DB5A75001F6831 /* EditAppointmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditAppointmentsTableViewController.h; path = ViewControllersiPhone/EditAppointmentsTableViewController.h; sourceTree = "<group>"; };
-		C45C27C917DB5A75001F6831 /* EditAppointmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditAppointmentsTableViewController.m; path = ViewControllersiPhone/EditAppointmentsTableViewController.m; sourceTree = "<group>"; };
 		C45C27CB17DB5A9D001F6831 /* EditProceduresTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditProceduresTableViewController.h; path = ViewControllersiPhone/EditProceduresTableViewController.h; sourceTree = "<group>"; };
 		C45C27CC17DB5A9D001F6831 /* EditProceduresTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProceduresTableViewController.m; path = ViewControllersiPhone/EditProceduresTableViewController.m; sourceTree = "<group>"; };
 		C45C27CE17DB5AC7001F6831 /* EditWellnessTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditWellnessTableViewController.h; path = ViewControllersiPhone/EditWellnessTableViewController.h; sourceTree = "<group>"; };
@@ -636,8 +631,6 @@
 		C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicalAddressTableViewController.m; path = ViewControllersCommon/ClinicalAddressTableViewController.m; sourceTree = "<group>"; };
 		C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProceduresListTableViewController.h; path = ViewControllersCommon/ProceduresListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresListTableViewController.m; path = ViewControllersCommon/ProceduresListTableViewController.m; sourceTree = "<group>"; };
-		C46EB5E617EB819800B9EA5A /* AppointmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppointmentsTableViewController.h; path = ViewControllersCommon/AppointmentsTableViewController.h; sourceTree = "<group>"; };
-		C46EB5E717EB819800B9EA5A /* AppointmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppointmentsTableViewController.m; path = ViewControllersCommon/AppointmentsTableViewController.m; sourceTree = "<group>"; };
 		C47DB22717AD04F80037A6DF /* ContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = ViewControllersCommon/ContainerViewController.h; sourceTree = "<group>"; };
 		C47DB22817AD04F80037A6DF /* ContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController.m; path = ViewControllersCommon/ContainerViewController.m; sourceTree = "<group>"; };
 		C47DB22A17AD05630037A6DF /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllersCommon/LoginViewController.h; sourceTree = "<group>"; };
@@ -701,7 +694,6 @@
 		C490250814DD62BF00BDD906 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C490250A14DD630700BDD906 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 3.xcdatamodel"; sourceTree = "<group>"; };
-		C4952D2317F223370022EFEF /* AddMenuNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMenuNavigationDelegate.h; path = ViewControllersCommon/AddMenuNavigationDelegate.h; sourceTree = "<group>"; };
 		C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsListTableViewController.h; path = ViewControllersCommon/ResultsListTableViewController.h; sourceTree = "<group>"; };
 		C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsListTableViewController.m; path = ViewControllersCommon/ResultsListTableViewController.m; sourceTree = "<group>"; };
 		C49A16B617B03C3B006BE980 /* ContentNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentNavigationController.h; path = ViewControllersCommon/ContentNavigationController.h; sourceTree = "<group>"; };
@@ -724,8 +716,6 @@
 		C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentContainerViewController.m; path = ViewControllersCommon/ContentContainerViewController.m; sourceTree = "<group>"; };
 		C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HamburgerMenuTableViewController.h; path = ViewControllersCommon/HamburgerMenuTableViewController.h; sourceTree = "<group>"; };
 		C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HamburgerMenuTableViewController.m; path = ViewControllersCommon/HamburgerMenuTableViewController.m; sourceTree = "<group>"; };
-		C4A8244B17AD4C5600E8CA8C /* AddMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMenuTableViewController.h; path = ViewControllersCommon/AddMenuTableViewController.h; sourceTree = "<group>"; };
-		C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddMenuTableViewController.m; path = ViewControllersCommon/AddMenuTableViewController.m; sourceTree = "<group>"; };
 		C4ACF8531476DD4D00FA5E80 /* iStayHealthy 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 11.xcdatamodel"; sourceTree = "<group>"; };
 		C4AEF828180DC05C00107966 /* PWESDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDraw.h; path = Dashboard/PWESDraw.h; sourceTree = "<group>"; };
 		C4AEF829180DC05C00107966 /* PWESDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDraw.m; path = Dashboard/PWESDraw.m; sourceTree = "<group>"; };
@@ -1137,11 +1127,6 @@
 		C47DB22617AD04D60037A6DF /* ViewControllersCommon */ = {
 			isa = PBXGroup;
 			children = (
-				C4952D2317F223370022EFEF /* AddMenuNavigationDelegate.h */,
-				C4A8244B17AD4C5600E8CA8C /* AddMenuTableViewController.h */,
-				C4A8244C17AD4C5600E8CA8C /* AddMenuTableViewController.m */,
-				C46EB5E617EB819800B9EA5A /* AppointmentsTableViewController.h */,
-				C46EB5E717EB819800B9EA5A /* AppointmentsTableViewController.m */,
 				C45C27B917DB3DC2001F6831 /* BaseEditTableViewController.h */,
 				C45C27BA17DB3DC2001F6831 /* BaseEditTableViewController.m */,
 				0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */,
@@ -1206,8 +1191,6 @@
 				0B3F19481867044D0091704C /* ChartSelector.h */,
 				C45C27C517DB5A5B001F6831 /* EditAlertsTableViewController.h */,
 				C45C27C617DB5A5B001F6831 /* EditAlertsTableViewController.m */,
-				C45C27C817DB5A75001F6831 /* EditAppointmentsTableViewController.h */,
-				C45C27C917DB5A75001F6831 /* EditAppointmentsTableViewController.m */,
 				0B3F19451866F9F00091704C /* EditChartsTableViewController.h */,
 				0B3F19461866F9F00091704C /* EditChartsTableViewController.m */,
 				C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */,
@@ -1873,7 +1856,6 @@
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
 				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
-				C45C27CA17DB5A75001F6831 /* EditAppointmentsTableViewController.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
 				0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */,
 				0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */,
@@ -1897,7 +1879,6 @@
 				C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */,
 				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,
 				0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */,
-				C46EB5E817EB819800B9EA5A /* AppointmentsTableViewController.m in Sources */,
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
 				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
@@ -1950,7 +1931,6 @@
 				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
 				0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,
-				C4A8244D17AD4C5600E8CA8C /* AddMenuTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

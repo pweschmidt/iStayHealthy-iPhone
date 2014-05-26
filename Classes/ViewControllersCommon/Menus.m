@@ -84,8 +84,7 @@
 	              NSLocalizedString(@"Alerts", nil),
 	              NSLocalizedString(@"Other Medication", nil),
 	              NSLocalizedString(@"Clinics", nil),
-	              NSLocalizedString(@"Procedures", nil),
-	              NSLocalizedString(@"Wellness", nil), ];
+	              NSLocalizedString(@"Procedures", nil)];
 	});
 	return menus;
 }

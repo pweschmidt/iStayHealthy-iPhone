@@ -27,19 +27,19 @@
 	self.view.backgroundColor = kDarkBackgroundColor;
 	self.tableView.backgroundColor = kDarkBackgroundColor;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-	[self setTitleViewWithTitle:NSLocalizedString(@"Menu", nil)];
-	[self disableRightBarButtons];
-//    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
-	UIImage *menuImage = [UIImage imageNamed:@"cancel.png"];
-	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
-	menuView.backgroundColor = [UIColor clearColor];
-	menuView.frame = CGRectMake(0, 0, 20, 20);
-	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-	button.frame = CGRectMake(0, 0, 20, 20);
-	button.backgroundColor = [UIColor clearColor];
-	[button addSubview:menuView];
-	[button addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//	[self setTitleViewWithTitle:NSLocalizedString(@"Menu", nil)];
+//	[self disableRightBarButtons];
+////    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
+//	UIImage *menuImage = [UIImage imageNamed:@"cancel.png"];
+//	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
+//	menuView.backgroundColor = [UIColor clearColor];
+//	menuView.frame = CGRectMake(0, 0, 20, 20);
+//	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//	button.frame = CGRectMake(0, 0, 20, 20);
+//	button.backgroundColor = [UIColor clearColor];
+//	[button addSubview:menuView];
+//	[button addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 //	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
 //                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 //                                             target:self action:@selector(cancel)];
@@ -57,6 +57,18 @@
 {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	return 64;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
+	view.backgroundColor = kDarkBackgroundColor;
+	return view;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
