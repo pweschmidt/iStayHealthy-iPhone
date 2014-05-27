@@ -16,6 +16,9 @@
 #import "PWESSeinfeldMonth.h"
 #import "PWESMonthlyView.h"
 
+#define kScrollViewTag 12358
+#define kLabelViewTag 6247
+
 @interface PWESSeinfeldViewController ()
 @property (nonatomic, strong) NSArray *calendars;
 @property (nonatomic, strong) NSArray *currentMeds;
@@ -112,6 +115,16 @@
 #pragma mark private
 - (void)configureCalenderScroller
 {
+	UIView *existingScrollView = [self.view viewWithTag:kScrollViewTag];
+	if (nil != existingScrollView)
+	{
+		[existingScrollView removeFromSuperview];
+	}
+	UIView *existingLabelView = [self.view viewWithTag:kLabelViewTag];
+	if (nil != existingLabelView)
+	{
+		[existingLabelView removeFromSuperview];
+	}
 	if (nil == self.currentCalendar)
 	{
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
@@ -119,14 +132,16 @@
 		label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20];
 		label.textAlignment = NSTextAlignmentCenter;
 		label.textColor = [UIColor redColor];
+		label.tag = kLabelViewTag;
 		[self.view addSubview:label];
 		return;
 	}
 
 	UIScrollView *scrollView = [[UIScrollView alloc] init];
-	scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 70, self.view.bounds.size.width, self.view.bounds.size.height - 80);
+	scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 70, self.view.bounds.size.width, self.view.bounds.size.height - 120);
 	scrollView.pagingEnabled = YES;
 	scrollView.scrollEnabled = YES;
+	scrollView.tag = kScrollViewTag;
 	CGFloat contentHeight = 0.f;
 
 	NSInteger months = [[PWESCalendar sharedInstance] monthsBetweenStartDate:self.currentCalendar.startDate
