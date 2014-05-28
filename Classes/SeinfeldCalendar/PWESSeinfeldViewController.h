@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "PWESResultsDelegate.h"
 
-@interface PWESSeinfeldViewController : BaseViewController
+@interface PWESSeinfeldViewController : BaseViewController <PWESResultsDelegate>
 
 @end

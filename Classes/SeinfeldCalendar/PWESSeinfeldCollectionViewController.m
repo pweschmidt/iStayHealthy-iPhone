@@ -118,6 +118,7 @@
 	PWESMonthlyView *month = [PWESMonthlyView monthlyViewForCalendar:self.currentCalendar
 	                                                   seinfeldMonth:seinfeld
 	                                                           frame:cell.contentView.bounds];
+	month.resultsDelegate = self;
 	[cell.contentView addSubview:month];
 	return cell;
 }
@@ -183,6 +184,36 @@
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
+{
+}
+
+#pragma mark PWESResultsDelegate methods
+- (void)updateCalendarWithSuccess:(BOOL)success
+{
+	if (nil == self.currentMeds || 0 == self.currentMeds.count)
+	{
+		return;
+	}
+	if (success)
+	{
+		return;
+	}
+	if (nil == self.customPopoverController)
+	{
+		EditMissedMedsTableViewController *controller = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped currentMeds:self.currentMeds managedObject:nil];
+		controller.preferredContentSize = CGSizeMake(320, 568);
+		controller.customPopOverDelegate = self;
+		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:controller];
+		[self presentPopoverWithController:editNavCtrl
+		                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
+	}
+	else
+	{
+		[self hidePopover];
+	}
+}
+
+- (void)finishCalendarWithSuccess:(BOOL)success
 {
 }
 

@@ -7,7 +7,8 @@
 //
 
 #import "BaseCollectionViewController.h"
+#import "PWESResultsDelegate.h"
 
-@interface PWESSeinfeldCollectionViewController : BaseCollectionViewController
+@interface PWESSeinfeldCollectionViewController : BaseCollectionViewController <PWESResultsDelegate>
 
 @end

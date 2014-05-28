@@ -11,6 +11,6 @@
 @class SeinfeldCalendarEntry;
 
 @protocol PWESResultsDelegate <NSObject>
-- (void)updateCalendar;
-- (void)finishCalendar;
+- (void)updateCalendarWithSuccess:(BOOL)success;
+- (void)finishCalendarWithSuccess:(BOOL)success;
 @end

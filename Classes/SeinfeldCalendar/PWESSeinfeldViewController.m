@@ -15,6 +15,7 @@
 #import "PWESCalendar.h"
 #import "PWESSeinfeldMonth.h"
 #import "PWESMonthlyView.h"
+#import "EditMissedMedsTableViewController.h"
 
 #define kScrollViewTag 12358
 #define kLabelViewTag 6247
@@ -155,6 +156,7 @@
 		PWESMonthlyView *view = [PWESMonthlyView monthlyViewForCalendar:self.currentCalendar
 		                                                  seinfeldMonth:seinfeldMonth
 		                                                          frame:monthFrame];
+		view.resultsDelegate = self;
 		contentHeight += view.frame.size.height;
 		if (0 == month)
 		{
@@ -165,6 +167,25 @@
 	scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, contentHeight);
 
 	[self.view addSubview:scrollView];
+}
+
+#pragma mark PWESResultsDelegate methods
+- (void)updateCalendarWithSuccess:(BOOL)success
+{
+	if (nil == self.currentMeds || 0 == self.currentMeds.count)
+	{
+		return;
+	}
+	if (success)
+	{
+		return;
+	}
+	EditMissedMedsTableViewController *controller = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped currentMeds:self.currentMeds managedObject:nil];
+	[self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)finishCalendarWithSuccess:(BOOL)success
+{
 }
 
 @end

@@ -299,20 +299,23 @@
 
 	NSInteger day = [self.layers indexOfObject:self.tappedLayer] + self.seinfeldMonth.startDay;
 
+	BOOL hasTakenMeds = NO;
 	if ([title isEqualToString:@"Yes"])
 	{
 		[self addBackgroundLayerForDay:day colour:DARK_GREEN tappedLayer:tappedLayer];
-		[self createOrUpdateRecordForDay:day hasTakenMeds:YES];
+		hasTakenMeds = YES;
+		[self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
 	}
 	else if ([title isEqualToString:@"No"])
 	{
 		[self addBackgroundLayerForDay:day colour:DARK_RED tappedLayer:tappedLayer];
-		[self createOrUpdateRecordForDay:day hasTakenMeds:NO];
+		hasTakenMeds = NO;
+		[self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
 	}
 	NSInteger endDay = self.seinfeldMonth.endDay;
 	if (day == endDay && self.seinfeldMonth.isLastMonth)
 	{
-		[self completeCourse];
+		[self completeCourseWithHasTakenMeds:hasTakenMeds];
 	}
 
 	self.tappedLayer = nil;
@@ -352,10 +355,10 @@
 	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	record.date = [calendar dateFromComponents:components];
 	record.hasTakenMeds = [NSNumber numberWithBool:hasTakenMeds];
-	[self saveRecord:record recordExists:recordExists];
+	[self saveRecord:record recordExists:recordExists hasTakenMeds:hasTakenMeds];
 }
 
-- (void)saveRecord:(SeinfeldCalendarEntry *)record recordExists:(BOOL)recordExists
+- (void)saveRecord:(SeinfeldCalendarEntry *)record recordExists:(BOOL)recordExists hasTakenMeds:(BOOL)hasTakenMeds
 {
 	if (nil == record || nil == self.calender)
 	{
@@ -368,18 +371,18 @@
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	__strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
-	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendar)])
+	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendarWithSuccess:)])
 	{
-		[strongDelegate updateCalendar];
+		[strongDelegate updateCalendarWithSuccess:hasTakenMeds];
 	}
 }
 
-- (void)completeCourse
+- (void)completeCourseWithHasTakenMeds:(BOOL)hasTakenMeds
 {
 	__strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
-	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(finishCalendar)])
+	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(finishCalendarWithSuccess:)])
 	{
-		[strongDelegate finishCalendar];
+		[strongDelegate finishCalendarWithSuccess:hasTakenMeds];
 	}
 }
 

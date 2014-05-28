@@ -12,6 +12,7 @@
 #import "Medication+Handling.h"
 #import "PreviousMedication+Handling.h"
 #import "EditHIVMedsTableViewController.h"
+#import "EditCurrentHIVMedsTableViewController.h"
 #import "EditPreviousMedsTableViewController.h"
 #import "Utilities.h"
 #import "MedView_iPad.h"
@@ -112,7 +113,7 @@
 	if (0 == indexPath.section)
 	{
 		Medication *med = [self.currentMeds objectAtIndex:indexPath.row];
-		EditHIVMedsTableViewController *editController = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
+		EditCurrentHIVMedsTableViewController *editController = [[EditCurrentHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
 		editController.preferredContentSize = CGSizeMake(320, 568);
 		editController.customPopOverDelegate = self;
 		editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
