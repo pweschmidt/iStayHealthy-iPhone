@@ -291,6 +291,12 @@
 	}
 }
 
+- (void)deselect:(id)sender
+{
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow]
+	                              animated:YES];
+}
+
 #pragma mark - UITextFieldDelegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -520,6 +526,7 @@
 
 - (void)selectDatePickerMode:(UIDatePicker *)datePicker
 {
+	datePicker.locale = [NSLocale currentLocale];
 	switch (self.dateType)
 	{
 		case DateOnly:
@@ -556,6 +563,7 @@
 
 - (void)setDateFormatter
 {
+	self.formatter.locale = [NSLocale currentLocale];
 	switch (self.dateType)
 	{
 		case DateOnly:
@@ -567,7 +575,7 @@
 			break;
 
 		case TimeOnly:
-			self.formatter.dateFormat = kTimeFormatting;
+			self.formatter.timeStyle = NSDateFormatterShortStyle;
 			break;
 	}
 }

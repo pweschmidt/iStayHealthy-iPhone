@@ -98,6 +98,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
    General
  */
 #define kAppNotificationKey             @"iStayHealthyNotification"
+#define kAppNotificationIntervalKey     @"iStayHealthyNotificationInterval"
 #define kDefaultDateFormatting          @"dd-MMM-yy HH:mm:ss"
 #define kDateFormatting                 @"dd-MMM-yyyy"
 #define kTimeFormatting                 @"HH:mm"
@@ -360,7 +361,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define AXISCOLOUR      [UIColor whiteColor]
 #define BRIGHT_BACKGROUND [UIColor colorWithRed:255.0 / 255.0 green:255.0 / 255.0 blue:255. / 255.0 alpha:1.0]
 #define kDarkBackgroundColor [UIColor colorWithRed:0.435294 green:0.443137 blue:0.47451 alpha:1]
-
+#define kShadingColour [UIColor colorWithRed:235.0f / 255.0f green:235.0f / 255.0f blue:235.0f / 255.0f alpha:0.8]
 
 #define kDefaultFont                    @"HelveticaNeue"
 #define kDefaultLightFont               @"HelveticaNeue-Light"

@@ -76,6 +76,12 @@
 	                             userInfo:nil];
 }
 
+- (void)deselect:(id)sender
+{
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow]
+	                              animated:YES];
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return YES;

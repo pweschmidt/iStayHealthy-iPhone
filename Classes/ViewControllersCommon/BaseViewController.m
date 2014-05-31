@@ -150,7 +150,12 @@
 
 - (void)goToPOZSite
 {
-	NSLog(@"navigation button clicked");
+	NSString *urlString = NSLocalizedString(@"BannerURL", nil);
+	if ([urlString hasPrefix:@"http"])
+	{
+		NSURL *url = [NSURL URLWithString:urlString];
+		[[UIApplication sharedApplication] openURL:url];
+	}
 }
 
 - (void)dealloc

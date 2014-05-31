@@ -116,6 +116,7 @@
 	Results *results = [self.results objectAtIndex:indexPath.row];
 	EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
 	editController.menuDelegate = nil;
+	[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 	[self.navigationController pushViewController:editController animated:YES];
 }
 

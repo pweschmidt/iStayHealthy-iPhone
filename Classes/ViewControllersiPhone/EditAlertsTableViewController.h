@@ -7,8 +7,10 @@
 //
 
 #import "BaseEditTableViewController.h"
+#import "NotificationsDelegate.h"
 
 @interface EditAlertsTableViewController : BaseEditTableViewController
-- (id)initWithStyle:(UITableViewStyle)style
-  localNotification:(UILocalNotification *)localNotification;
+@property (nonatomic, weak) id <NotificationsDelegate> notificationsDelegate;
+- (id)  initWithStyle:(UITableViewStyle)style
+    localNotification:(UILocalNotification *)localNotification;
 @end

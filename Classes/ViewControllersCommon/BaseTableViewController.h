@@ -17,4 +17,5 @@
 @property (nonatomic, strong) UITableView *tableView;
 - (void)showDeleteAlertView;
 - (void)removeSQLEntry;
+- (void)deselect:(id)sender;
 @end

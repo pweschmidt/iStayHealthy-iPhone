@@ -25,6 +25,7 @@
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
 		0B65F95E1913917600523441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B65F95D1913917600523441 /* Images.xcassets */; };
+		0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B706400193A1FB900CD2073 /* TimeCounter.m */; };
 		0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */; };
 		0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326D019321E68001E6601 /* PWESHorizontalAxis.m */; };
 		0B7326D419323032001E6601 /* PWESResultDatesPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326D319323032001E6601 /* PWESResultDatesPlotArea.m */; };
@@ -354,6 +355,9 @@
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
 		0B65F95D1913917600523441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iStayHealthy/Images.xcassets; sourceTree = "<group>"; };
+		0B7063BD193A040B00CD2073 /* NotificationsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsDelegate.h; path = ViewControllersCommon/NotificationsDelegate.h; sourceTree = "<group>"; };
+		0B7063FF193A1FB900CD2073 /* TimeCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeCounter.h; path = Views/TimeCounter.h; sourceTree = "<group>"; };
+		0B706400193A1FB900CD2073 /* TimeCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeCounter.m; path = Views/TimeCounter.m; sourceTree = "<group>"; };
 		0B7326CC19321E52001E6601 /* PWESVerticalAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESVerticalAxis.h; path = Dashboard/PWESVerticalAxis.h; sourceTree = "<group>"; };
 		0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESVerticalAxis.m; path = Dashboard/PWESVerticalAxis.m; sourceTree = "<group>"; };
 		0B7326CF19321E68001E6601 /* PWESHorizontalAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESHorizontalAxis.h; path = Dashboard/PWESHorizontalAxis.h; sourceTree = "<group>"; };
@@ -1027,6 +1031,8 @@
 				0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
 				C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */,
+				0B7063FF193A1FB900CD2073 /* TimeCounter.h */,
+				0B706400193A1FB900CD2073 /* TimeCounter.m */,
 				C4A49AD718002CD300FC1637 /* TimeView.h */,
 				C4A49AD818002CD400FC1637 /* TimeView.m */,
 			);
@@ -1156,6 +1162,7 @@
 				C46C5DE417ED9CCC00866DBD /* MissedMedicationsTableViewController.m */,
 				C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */,
 				C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */,
+				0B7063BD193A040B00CD2073 /* NotificationsDelegate.h */,
 				C46EB5DD17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.h */,
 				C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */,
 				C46EB5DA17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.h */,
@@ -1801,6 +1808,7 @@
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
 				0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */,
 				0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */,
+				0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */,
 				C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */,
 				0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */,
 				C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */,

@@ -40,6 +40,10 @@
 	if (self.isEditMode)
 	{
 		self.navigationItem.title = NSLocalizedString(@"Edit Alert", nil);
+		if (nil != self.currentNotification)
+		{
+			self.date = self.currentNotification.fireDate;
+		}
 	}
 	else
 	{
@@ -70,14 +74,11 @@
 	{
 		alertText = inputField.text;
 	}
-//    if (0 < self.textViews.count)
-//    {
-//        alertText = [self.textViews objectForKey:[NSNumber numberWithInt:0]];
-//    }
 	for (int alarmIndex = 0; alarmIndex < frequencyIndex; alarmIndex++)
 	{
 		NSTimeInterval addedSeconds = alarmIndex * timeInterval;
-		NSDictionary *userDictionary = [NSDictionary dictionaryWithObject:alertText forKey:kAppNotificationKey];
+		NSDictionary *userDictionary = @{ kAppNotificationIntervalKey: @"daily",
+			                              kAppNotificationKey : alertText };
 
 		UILocalNotification *medAlert = [[UILocalNotification alloc]init];
 		medAlert.fireDate = (0 == addedSeconds) ? self.date : [self.date dateByAddingTimeInterval:addedSeconds];
@@ -90,9 +91,11 @@
 
 		medAlert.applicationIconBadgeNumber = 1;
 		[[UIApplication sharedApplication]scheduleLocalNotification:medAlert];
-#ifdef APPDEBUG
-		NSLog(@"NewAlertDetailViewController::save the alert setting is %@", medAlert);
-#endif
+	}
+	__strong id <NotificationsDelegate> strongDelegate = self.notificationsDelegate;
+	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateLocalNotifications)])
+	{
+		[strongDelegate updateLocalNotifications];
 	}
 	[self popController];
 }
@@ -185,6 +188,26 @@
 		               indexPath:indexPath
 		       hasNumericalInput:NO];
 		return cell;
+	}
+}
+
+- (void)configureTableCell:(PWESCustomTextfieldCell *)cell
+                     title:(NSString *)title
+                 indexPath:(NSIndexPath *)indexPath
+         hasNumericalInput:(BOOL)hasNumericalInput
+{
+	[super configureTableCell:cell title:title indexPath:indexPath segmentIndex:0 hasNumericalInput:hasNumericalInput];
+	NSString *value = nil;
+	if (nil != self.currentNotification)
+	{
+		value = self.currentNotification.alertBody;
+	}
+	NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
+	UITextField *textField = [self customTextFieldForTagNumber:taggedViewNumber];
+	if (nil != textField && nil != value)
+	{
+		textField.text = value;
+		textField.textColor = [UIColor blackColor];
 	}
 }
 

@@ -164,7 +164,14 @@
 	[self saveContext:YES error:error];
 	if (NULL != error)
 	{
-		return NO;
+		if (nil != *error)
+		{
+			return NO;
+		}
+		else
+		{
+			return YES;
+		}
 	}
 	else
 	{

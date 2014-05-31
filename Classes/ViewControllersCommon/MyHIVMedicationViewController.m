@@ -21,213 +21,212 @@
 #import "Utilities.h"
 
 @interface MyHIVMedicationViewController ()
-@property (nonatomic, strong) NSArray * currentMeds;
-@property (nonatomic, strong) NSArray * previousMeds;
+@property (nonatomic, strong) NSArray *currentMeds;
+@property (nonatomic, strong) NSArray *previousMeds;
 @end
 
 @implementation MyHIVMedicationViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    self.currentMeds = [NSArray array];
-    self.previousMeds = [NSArray array];
-    [self setTitleViewWithTitle:NSLocalizedString(@"HIV Medications", nil)];
+	[super viewDidLoad];
+	self.currentMeds = [NSArray array];
+	self.previousMeds = [NSArray array];
+	[self setTitleViewWithTitle:NSLocalizedString(@"HIV Medications", nil)];
 }
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
+	[super didReceiveMemoryWarning];
 }
 
 - (void)addButtonPressed:(id)sender
 {
-    EditHIVMedsTableViewController *controller = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-    [self.navigationController pushViewController:controller animated:YES];
+	EditHIVMedsTableViewController *controller = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+	[self.navigationController pushViewController:controller animated:YES];
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+	return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section)
-    {
-        return self.currentMeds.count;
-    }
-    else
-    {
-        return self.previousMeds.count;
-    }
+	if (0 == section)
+	{
+		return self.currentMeds.count;
+	}
+	else
+	{
+		return self.previousMeds.count;
+	}
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (0 == section)
-    {
-        return NSLocalizedString(@"Current HIV Medications", nil);
-    }
-    else
-    {
-        return NSLocalizedString(@"Previous HIV Medications", nil);
-    }
+	if (0 == section)
+	{
+		return NSLocalizedString(@"Current HIV Medications", nil);
+	}
+	else
+	{
+		return NSLocalizedString(@"Previous HIV Medications", nil);
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MedicationCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (nil == cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [self configureCell:cell indexPath:indexPath];
-    return cell;
+	static NSString *CellIdentifier = @"MedicationCell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (nil == cell)
+	{
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+	}
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	[self configureCell:cell indexPath:indexPath];
+	return cell;
 }
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    NSArray *subviews = cell.contentView.subviews;
-    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
-        [view removeFromSuperview];
-    }];
-    CGFloat rowHeight = self.tableView.rowHeight - 2;
-    UIImageView *medImageView = [[UIImageView alloc] init];
-    medImageView.frame = CGRectMake(20+rowHeight+170, 1, rowHeight, rowHeight);
-    medImageView.backgroundColor = [UIColor clearColor];
-    UILabel *label = [UILabel standardLabel];
-    label.frame = CGRectMake(20+rowHeight+5, 1, 160, rowHeight);
-    DateView *dateView = nil;
-    if (0 == indexPath.section)
-    {
-        Medication *med = (Medication *)[self.currentMeds objectAtIndex:indexPath.row];
-        dateView = [DateView viewWithDate:med.StartDate
-                                    frame:CGRectMake(20, 1, rowHeight, rowHeight)];
-        label.text = med.Name;
-        UIImage *image= [Utilities imageFromMedName:med.Name];
-        if (nil == image)
-        {
-            image = [self blankImage];
-        }
-        medImageView.image = image;
-    }
-    else
-    {
-        PreviousMedication *med = (PreviousMedication *)[self.previousMeds
-                                                         objectAtIndex:indexPath.row];
-        dateView = [DateView viewWithDate:med.startDate
-                                    frame:CGRectMake(20, 1, rowHeight, rowHeight)];
-        label.text = med.name;
-        UIImage *image= [Utilities imageFromMedName:med.name];
-        if (nil == image)
-        {
-            image = [self blankImage];
-        }
-        medImageView.image = image;
-    }
-    [cell.contentView addSubview:dateView];
-    [cell.contentView addSubview:label];
-    [cell.contentView addSubview:medImageView];
+	NSArray *subviews = cell.contentView.subviews;
+	[subviews enumerateObjectsUsingBlock: ^(UIView *view, NSUInteger index, BOOL *stop) {
+	    [view removeFromSuperview];
+	}];
+	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	UIImageView *medImageView = [[UIImageView alloc] init];
+	medImageView.frame = CGRectMake(20 + rowHeight + 170, 1, rowHeight, rowHeight);
+	medImageView.backgroundColor = [UIColor clearColor];
+	UILabel *label = [UILabel standardLabel];
+	label.frame = CGRectMake(20 + rowHeight + 5, 1, 160, rowHeight);
+	DateView *dateView = nil;
+	if (0 == indexPath.section)
+	{
+		Medication *med = (Medication *)[self.currentMeds objectAtIndex:indexPath.row];
+		dateView = [DateView viewWithDate:med.StartDate
+		                            frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+		label.text = med.Name;
+		UIImage *image = [Utilities imageFromMedName:med.Name];
+		if (nil == image)
+		{
+			image = [self blankImage];
+		}
+		medImageView.image = image;
+	}
+	else
+	{
+		PreviousMedication *med = (PreviousMedication *)[self.previousMeds
+		                                                 objectAtIndex:indexPath.row];
+		dateView = [DateView viewWithDate:med.startDate
+		                            frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+		label.text = med.name;
+		UIImage *image = [Utilities imageFromMedName:med.name];
+		if (nil == image)
+		{
+			image = [self blankImage];
+		}
+		medImageView.image = image;
+	}
+	[cell.contentView addSubview:dateView];
+	[cell.contentView addSubview:label];
+	[cell.contentView addSubview:medImageView];
 }
-
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (UITableViewCellEditingStyleDelete == editingStyle)
-    {
-        self.markedIndexPath = indexPath;
-        if (0 == indexPath.section)
-        {
-            self.markedObject = [self.currentMeds objectAtIndex:indexPath.row];
-        }
-        else
-        {
-            self.markedObject = [self.previousMeds objectAtIndex:indexPath.row];
-        }
-        [self showDeleteAlertView];
-    }
+	if (UITableViewCellEditingStyleDelete == editingStyle)
+	{
+		self.markedIndexPath = indexPath;
+		if (0 == indexPath.section)
+		{
+			self.markedObject = [self.currentMeds objectAtIndex:indexPath.row];
+		}
+		else
+		{
+			self.markedObject = [self.previousMeds objectAtIndex:indexPath.row];
+		}
+		[self showDeleteAlertView];
+	}
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section)
-    {
-        Medication *med = (Medication *)[self.currentMeds objectAtIndex:indexPath.row];
-        EditCurrentHIVMedsTableViewController *controller = [[EditCurrentHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-    else
-    {
-        PreviousMedication *med = (PreviousMedication *)[self.previousMeds objectAtIndex:indexPath.row];
-        EditPreviousMedsTableViewController *controller = [[EditPreviousMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+	if (0 == indexPath.section)
+	{
+		Medication *med = (Medication *)[self.currentMeds objectAtIndex:indexPath.row];
+		EditCurrentHIVMedsTableViewController *controller = [[EditCurrentHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
+		[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+		[self.navigationController pushViewController:controller animated:YES];
+	}
+	else
+	{
+		PreviousMedication *med = (PreviousMedication *)[self.previousMeds objectAtIndex:indexPath.row];
+		EditPreviousMedsTableViewController *controller = [[EditPreviousMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
+		[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+		[self.navigationController pushViewController:controller animated:YES];
+	}
 }
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
-    NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion:^(NSArray *array, NSError *error) {
-        if (nil == array)
-        {
-            UIAlertView *errorAlert = [[UIAlertView alloc]
-                                       initWithTitle:@"Error"
-                                       message:@"Error loading data"
-                                       delegate:nil
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:nil];
-            [errorAlert show];
-            
-        }
-        else
-        {
-            self.currentMeds = array;
-            [[CoreDataManager sharedInstance] fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:YES completion:^(NSArray *prevarray, NSError *error) {
-                if (nil == prevarray)
-                {
-                    UIAlertView *errorAlert = [[UIAlertView alloc]
-                                               initWithTitle:@"Error"
-                                               message:@"Error loading data"
-                                               delegate:nil
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles:nil];
-                    [errorAlert show];
-                    
-                }
-                else
-                {
-                    self.previousMeds = prevarray;
-                    [self.tableView reloadData];
-                }
-            }];
-        }
-    }];
+	NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
+	[[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion: ^(NSArray *array, NSError *error) {
+	    if (nil == array)
+	    {
+	        UIAlertView *errorAlert = [[UIAlertView alloc]
+	                                   initWithTitle:@"Error"
+	                                                message:@"Error loading data"
+	                                               delegate:nil
+	                                      cancelButtonTitle:@"Cancel"
+	                                      otherButtonTitles:nil];
+	        [errorAlert show];
+		}
+	    else
+	    {
+	        self.currentMeds = array;
+	        [[CoreDataManager sharedInstance] fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:YES completion: ^(NSArray *prevarray, NSError *error) {
+	            if (nil == prevarray)
+	            {
+	                UIAlertView *errorAlert = [[UIAlertView alloc]
+	                                           initWithTitle:@"Error"
+	                                                        message:@"Error loading data"
+	                                                       delegate:nil
+	                                              cancelButtonTitle:@"Cancel"
+	                                              otherButtonTitles:nil];
+	                [errorAlert show];
+				}
+	            else
+	            {
+	                self.previousMeds = prevarray;
+	                [self.tableView reloadData];
+				}
+			}];
+		}
+	}];
 }
+
 - (void)startAnimation:(NSNotification *)notification
 {
-    NSLog(@"MyHIVMedicationViewController:startAnimation with name %@", notification.name);
+	NSLog(@"MyHIVMedicationViewController:startAnimation with name %@", notification.name);
 }
+
 - (void)stopAnimation:(NSNotification *)notification
 {
-    NSLog(@"MyHIVMedicationViewController:stopAnimation with name %@", notification.name);
+	NSLog(@"MyHIVMedicationViewController:stopAnimation with name %@", notification.name);
 }
+
 - (void)handleError:(NSNotification *)notification
 {
-    NSLog(@"MyHIVMedicationViewController:handleError with name %@", notification.name);
+	NSLog(@"MyHIVMedicationViewController:handleError with name %@", notification.name);
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
-    NSLog(@"MyHIVMedicationViewController:handleStoreChanged with name %@", notification.name);
-    
+	NSLog(@"MyHIVMedicationViewController:handleStoreChanged with name %@", notification.name);
 }
 
 @end

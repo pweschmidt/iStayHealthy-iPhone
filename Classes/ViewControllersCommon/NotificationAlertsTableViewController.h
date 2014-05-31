@@ -7,7 +7,7 @@
 //
 
 #import "BaseTableViewController.h"
-
-@interface NotificationAlertsTableViewController : BaseTableViewController
+#import "NotificationsDelegate.h"
+@interface NotificationAlertsTableViewController : BaseTableViewController <NotificationsDelegate>
 
 @end

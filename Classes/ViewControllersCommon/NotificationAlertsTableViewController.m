@@ -12,126 +12,157 @@
 #import "Constants.h"
 #import "EditAlertsTableViewController.h"
 #import "TimeView.h"
+#import "TimeCounter.h"
 
 @interface NotificationAlertsTableViewController ()
 @property (nonatomic, strong) NSArray *notifications;
 @property (nonatomic, strong) UILocalNotification *markedNotification;
+@property (nonatomic, strong) NSMutableArray *counterArray;
 @end
 
 @implementation NotificationAlertsTableViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    self.notifications = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];;
-    [self setTitleViewWithTitle:NSLocalizedString(@"Alerts", nil)];
-    self.markedNotification = nil;
+	[super viewDidLoad];
+	self.counterArray = [NSMutableArray array];
+	[self retrieveLocalNotifications];
+	[self setTitleViewWithTitle:NSLocalizedString(@"Alerts", nil)];
+	self.markedNotification = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[self stopCounters];
+	[super viewWillDisappear:animated];
+}
+
+- (void)stopCounters
+{
+	[self.counterArray enumerateObjectsUsingBlock: ^(TimeCounter *counter, NSUInteger idx, BOOL *stop) {
+	    [counter stopTimer];
+	}];
+}
+
+- (void)retrieveLocalNotifications
+{
+	self.notifications = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];
 }
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
+	[self stopCounters];
+	[super didReceiveMemoryWarning];
 }
 
 - (void)addButtonPressed:(id)sender
 {
-    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
-                                                 initWithStyle:UITableViewStyleGrouped
-                                                 localNotification:nil];
-    [self.navigationController pushViewController:controller animated:YES];
+	EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
+	                                             initWithStyle:UITableViewStyleGrouped
+	                                                                                               localNotification:nil];
+	controller.notificationsDelegate = self;
+	[self.navigationController pushViewController:controller animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.notifications.count;
+	return self.notifications.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (nil == cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [self configureCell:cell indexPath:indexPath];
-    return cell;
+	static NSString *CellIdentifier = @"Cell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (nil == cell)
+	{
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+	}
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	[self configureCell:cell indexPath:indexPath];
+	return cell;
 }
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    NSArray *subviews = cell.contentView.subviews;
-    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
-        [view removeFromSuperview];
-    }];
-    UILocalNotification *notification = [self.notifications objectAtIndex:indexPath.row];
-    CGFloat rowHeight = self.tableView.rowHeight - 2;
-    TimeView *timeView = [TimeView viewWithTime:notification.fireDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
-    
-    UILabel *label = [[UILabel alloc] init];
-    label.backgroundColor = [UIColor clearColor];
-    label.text = notification.alertBody;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = TEXTCOLOUR;
-    label.font = [UIFont fontWithType:Standard size:Standard];
-    [cell.contentView addSubview:timeView];
-}
+	NSArray *subviews = cell.contentView.subviews;
+	[subviews enumerateObjectsUsingBlock: ^(UIView *view, NSUInteger index, BOOL *stop) {
+	    [view removeFromSuperview];
+	}];
+	UILocalNotification *notification = [self.notifications objectAtIndex:indexPath.row];
+	CGFloat rowHeight = self.tableView.rowHeight;
+	CGFloat scale = 1.6;
+	TimeView *timeView = [TimeView viewWithTime:notification.fireDate frame:CGRectMake(20, 0, rowHeight * scale, rowHeight)];
 
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(25 + rowHeight * scale, 0, 180, rowHeight / 2)];
+
+	label.text = notification.alertBody;
+	label.textAlignment = NSTextAlignmentLeft;
+	label.textColor = TEXTCOLOUR;
+	label.font = [UIFont fontWithType:Standard size:standard];
+
+	TimeCounter *counter = [TimeCounter viewWithTime:notification.fireDate notification:notification frame:CGRectMake(25 + rowHeight * scale, rowHeight / 2, 180, rowHeight / 2)];
+	[self.counterArray addObject:counter];
+
+	[cell.contentView addSubview:timeView];
+	[cell.contentView addSubview:label];
+	[cell.contentView addSubview:counter];
+}
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (UITableViewCellEditingStyleDelete == editingStyle)
-    {
-        self.markedIndexPath = indexPath;
-        self.markedNotification = (UILocalNotification *)[self.notifications
-                                                          objectAtIndex:indexPath.row];
-        [self showDeleteAlertView];
-    }
+	if (UITableViewCellEditingStyleDelete == editingStyle)
+	{
+		self.markedIndexPath = indexPath;
+		self.markedNotification = (UILocalNotification *)[self.notifications
+		                                                  objectAtIndex:indexPath.row];
+		[self showDeleteAlertView];
+	}
 }
 
 - (void)removeSQLEntry
 {
-    if (nil == self.markedNotification)
-    {
-        return;
-    }
-    [self.tableView beginUpdates];
-    [[UIApplication sharedApplication] cancelLocalNotification:self.markedNotification];
-    self.notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    self.markedNotification = nil;
-    [self.tableView endUpdates];
+	if (nil == self.markedNotification)
+	{
+		return;
+	}
+	[self.tableView beginUpdates];
+	[[UIApplication sharedApplication] cancelLocalNotification:self.markedNotification];
+	self.notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+	self.markedNotification = nil;
+	[self.tableView endUpdates];
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UILocalNotification *notification = (UILocalNotification *)[self.notifications
-                                                                objectAtIndex:indexPath.row];
-    EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
-                                                 initWithStyle:UITableViewStyleGrouped
-                                                 localNotification:notification];
-    [self.navigationController pushViewController:controller animated:YES];
-    
+	UILocalNotification *notification = (UILocalNotification *)[self.notifications
+	                                                            objectAtIndex:indexPath.row];
+	EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
+	                                             initWithStyle:UITableViewStyleGrouped
+	                                                                                               localNotification:notification];
+	controller.notificationsDelegate = self;
+	[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+	[self.navigationController pushViewController:controller animated:YES];
 }
-
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
 }
+
 - (void)startAnimation:(NSNotification *)notification
 {
 }
+
 - (void)stopAnimation:(NSNotification *)notification
 {
 }
+
 - (void)handleError:(NSNotification *)notification
 {
 }
@@ -140,5 +171,11 @@
 {
 }
 
+#pragma mark NotificationsDelegate methods
+- (void)updateLocalNotifications
+{
+	[self retrieveLocalNotifications];
+	[self.tableView reloadData];
+}
 
 @end
