@@ -29,7 +29,10 @@
 {
 	if (nil == rawResults || nil == types)
 	{
-		*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
+		if (NULL != error)
+		{
+			*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
+		}
 		return nil;
 	}
 

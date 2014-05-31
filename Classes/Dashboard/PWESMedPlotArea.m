@@ -100,11 +100,11 @@ static NSDateFormatter *shortDate()
 			CGPoint start = CGPointMake(xValue, self.plotLayer.frame.origin.y + marginLabelTop);
 			CGPoint end = CGPointMake(xValue, self.plotLayer.frame.size.height  - 2);
 			[self drawLineWithContext:context start:start end:end lineWidth:kAxisLineWidth cgColour:self.lineColor.CGColor fillColour:self.lineColor.CGColor pattern:medDashPattern patternCount:2];
-			CGFloat xOffset = xValue - 20;
-			if (0 < xOffset)
-			{
-				xOffset = 0;
-			}
+//			CGFloat xOffset = xValue - 20;
+//			if (0 < xOffset)
+//			{
+//				xOffset = 0;
+//			}
 			[self drawDate:context date:dateObject xValue:xValue yValue:self.plotLayer.frame.origin.y + 10];
 		}
 		index++;

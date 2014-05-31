@@ -161,12 +161,15 @@
 
 - (BOOL)saveContextAndWait:(NSError **)error
 {
-	BOOL success = [self saveContext:YES error:error];
-	if (nil == error && nil == *error)
+	[self saveContext:YES error:error];
+	if (NULL != error)
+	{
+		return NO;
+	}
+	else
 	{
 		return YES;
 	}
-	return success;
 }
 
 - (BOOL)saveContext:(NSError **)error

@@ -33,12 +33,18 @@
 	NSArray *dates = [filteredArray valueForKey:kResultsDate];
 	if (nil == values || dates == nil)
 	{
-		*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
+		if (NULL != error)
+		{
+			*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
+		}
 		return nil;
 	}
 	if (values.count != dates.count)
 	{
-		*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
+		if (NULL != error)
+		{
+			*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
+		}
 		return nil;
 	}
 	PWESDataTuple *tuple = [PWESDataTuple resultsTupleWithResultsArray:values dates:dates type:type];
@@ -51,13 +57,19 @@
 {
 	if (nil == rawResults || nil == types)
 	{
-		*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
+		if (NULL != error)
+		{
+			*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
+		}
 		return nil;
 	}
 	if (!types.isDualType)
 	{
 		//a combination must have at least 2 types
-		*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
+		if (NULL != error)
+		{
+			*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
+		}
 		return nil;
 	}
 	NSPredicate *predicate = [self filterPredicateFromTypes:types];
@@ -66,7 +78,10 @@
 		NSArray *filteredArray = [rawResults filteredArrayUsingPredicate:predicate];
 		return [filteredArray valueForKey:kResultsDate];
 	}
-	*error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
+	if (NULL != error)
+	{
+		*error = [NSError errorWithDomain:@"com.pweschmidt.healthchars" code:100 userInfo:nil];
+	}
 	return nil;
 }
 

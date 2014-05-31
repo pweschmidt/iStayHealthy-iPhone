@@ -39,11 +39,11 @@
 		return;
 	}
 	CGFloat componentWidth = self.bounds.size.width;
-	CGFloat componentHeight = self.bounds.size.height;
-	if (types.isDualType)
-	{
-		componentHeight = componentHeight / 2;
-	}
+//	CGFloat componentHeight = self.bounds.size.height;
+//	if (types.isDualType)
+//	{
+//		componentHeight = componentHeight / 2;
+//	}
 	CGFloat xOrigin = self.bounds.origin.x;
 	CGFloat yOrigin = self.bounds.origin.y;
 	PWESDataTuple *tuple = [nTuple resultsTupleForType:types.mainType];

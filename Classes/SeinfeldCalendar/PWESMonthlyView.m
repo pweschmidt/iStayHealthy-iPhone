@@ -116,10 +116,12 @@
 {
 	CATextLayer *dayLayer = [CATextLayer layer];
 	dayLayer.string = string;
-	dayLayer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Light", 0.0, NULL);
+	CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Light", 0.0, NULL);
+	dayLayer.font = fontRef;
 	dayLayer.alignmentMode = kCAAlignmentCenter;
 	dayLayer.fontSize = 20.f;
 	dayLayer.frame = frame;
+	CFRelease(fontRef);
 	return dayLayer;
 }
 
@@ -131,7 +133,8 @@
 	if (nil != entry)
 	{
 		layer.foregroundColor = [UIColor whiteColor].CGColor;
-		layer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Bold", 0.0, NULL);
+		CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Bold", 0.0, NULL);
+		layer.font = fontRef;
 		CALayer *backgroundLayer = [CALayer layer];
 		backgroundLayer.frame = CGRectMake(layer.frame.origin.x + 4, layer.frame.origin.y + 2, layer.frame.size.width - 8, layer.frame.size.height - 2);
 		backgroundLayer.cornerRadius = 5.f;
@@ -149,6 +152,7 @@
 		{
 			self.tappedBackgroundLayer = backgroundLayer;
 		}
+		CFRelease(fontRef);
 	}
 	else if ([self isTodayForDay:day month:seinfeldMonth])
 	{
@@ -210,13 +214,15 @@
 - (CALayer *)monthWithName:(NSString *)monthName
 {
 	CATextLayer *layer = [CATextLayer layer];
-	layer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-UltraLight", 0.0, NULL);
+	CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-UltraLight", 0.0, NULL);
+	layer.font = fontRef;
 	layer.fontSize = 22.f;
 	layer.string = monthName;
 	layer.alignmentMode = kCAAlignmentLeft;
 	layer.frame = CGRectMake(20, 0, self.bounds.size.width - 40, 24);
 	layer.foregroundColor = [UIColor darkGrayColor].CGColor;
 	heightOfEndFrame += layer.frame.size.height;
+	CFRelease(fontRef);
 	return layer;
 }
 
@@ -229,6 +235,7 @@
 	CGFloat xMargin = 20.0f;
 	CGFloat xWidth = (frame.size.width - 40.0f) / 7.0f;
 
+	CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Light", 0.0, NULL);
 	NSArray *weekdays = [PWESCalendar weekdays];
 	[weekdays enumerateObjectsUsingBlock: ^(NSString *day, NSUInteger index, BOOL *stop) {
 	    CATextLayer *layer = [CATextLayer layer];
@@ -236,7 +243,7 @@
 	    CGFloat margin = index * xWidth + xMargin;
 	    layer.frame = CGRectMake(margin, 0, xWidth, 17);
 	    layer.fontSize = 15.f;
-	    layer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Light", 0.0, NULL);
+	    layer.font = fontRef;
 	    layer.foregroundColor = TEXTCOLOUR.CGColor;
 	    layer.alignmentMode = kCAAlignmentCenter;
 	    [headerLayer addSublayer:layer];
@@ -248,6 +255,7 @@
 
 	[headerLayer addSublayer:separator];
 	heightOfEndFrame += frame.size.height + 10.f;
+	CFRelease(fontRef);
 	return headerLayer;
 }
 
@@ -329,14 +337,16 @@
 		[self.layer setNeedsLayout];
 	}
 	CALayer *backgroundLayer = [CALayer layer];
+	CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Bold", 0.0, NULL);
 	backgroundLayer.frame = CGRectMake(tappedLayer.frame.origin.x + 4, tappedLayer.frame.origin.y + 2, tappedLayer.frame.size.width - 8, tappedLayer.frame.size.height - 2);
 	backgroundLayer.cornerRadius = 5.f;
 	backgroundLayer.anchorPoint = tappedLayer.anchorPoint;
 	backgroundLayer.backgroundColor = colour.CGColor;
 	tappedLayer.foregroundColor = [UIColor whiteColor].CGColor;
-	tappedLayer.font = CTFontCreateWithName((CFStringRef)@"HelveticaNeue-Bold", 0.0, NULL);
+	tappedLayer.font = fontRef;
 	[self.layer insertSublayer:backgroundLayer below:tappedLayer];
 	self.tappedBackgroundLayer = backgroundLayer;
+	CFRelease(fontRef);
 }
 
 - (void)createOrUpdateRecordForDay:(NSInteger)day hasTakenMeds:(BOOL)hasTakenMeds

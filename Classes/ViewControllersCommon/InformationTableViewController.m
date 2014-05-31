@@ -11,7 +11,7 @@
 #import "ContentNavigationController.h"
 #import "UILabel+Standard.h"
 #import "Utilities.h"
-#import "WebViewController.h"
+//#import "WebViewController.h"
 
 @interface InformationTableViewController ()
 
@@ -123,9 +123,10 @@
 
 	if (nil != urlString && nil != title)
 	{
-		WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlString withTitle:title];
-
-		[self.navigationController pushViewController:webViewController animated:YES];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+//		WebViewController *webViewController = [[WebViewController alloc]initWithURLString:urlString withTitle:title];
+//
+//		[self.navigationController pushViewController:webViewController animated:YES];
 	}
 }
 

@@ -111,7 +111,6 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
-		C40DACED180981E400EDD6E9 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40DACEC180981E400EDD6E9 /* WebViewController.m */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */; };
 		C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */; };
@@ -161,7 +160,6 @@
 		C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D4180F3E5000EE9F5E /* sideeffects@2x.png */; };
 		C44D36E1180F3E5000EE9F5E /* stopped.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D5180F3E5000EE9F5E /* stopped.png */; };
 		C44D36E2180F3E5000EE9F5E /* stopped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D6180F3E5000EE9F5E /* stopped@2x.png */; };
-		C452630813F5422B0004C80F /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C452630A13F5422B0004C80F /* WebViewController.xib */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
 		C4595942180EF8D50082559E /* pozicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4595940180EF8D50082559E /* pozicon.png */; };
 		C4595943180EF8D50082559E /* pozicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4595941180EF8D50082559E /* pozicon@2x.png */; };
@@ -486,8 +484,6 @@
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
-		C40DACEB180981E400EDD6E9 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ViewControllersCommon/WebViewController.h; sourceTree = "<group>"; };
-		C40DACEC180981E400EDD6E9 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ViewControllersCommon/WebViewController.m; sourceTree = "<group>"; };
 		C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHIVMedsTableViewController.h; path = ViewControllersiPhone/EditHIVMedsTableViewController.h; sourceTree = "<group>"; };
 		C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHIVMedsTableViewController.m; path = ViewControllersiPhone/EditHIVMedsTableViewController.m; sourceTree = "<group>"; };
 		C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewController_iPad.h; path = ViewControllersiPad/ContainerViewController_iPad.h; sourceTree = "<group>"; };
@@ -554,10 +550,6 @@
 		C44D36D4180F3E5000EE9F5E /* sideeffects@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sideeffects@2x.png"; path = "Classes/Assets/sideeffects@2x.png"; sourceTree = "<group>"; };
 		C44D36D5180F3E5000EE9F5E /* stopped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stopped.png; path = Classes/Assets/stopped.png; sourceTree = "<group>"; };
 		C44D36D6180F3E5000EE9F5E /* stopped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stopped@2x.png"; path = "Classes/Assets/stopped@2x.png"; sourceTree = "<group>"; };
-		C452630913F5422B0004C80F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewController.xib; sourceTree = "<group>"; };
-		C452630B13F542320004C80F /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/WebViewController.xib; sourceTree = "<group>"; };
-		C452630C13F542350004C80F /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/WebViewController.xib; sourceTree = "<group>"; };
-		C452630D13F542380004C80F /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
 		C4595940180EF8D50082559E /* pozicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pozicon.png; path = Classes/Assets/pozicon.png; sourceTree = "<group>"; };
 		C4595941180EF8D50082559E /* pozicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pozicon@2x.png"; path = "Classes/Assets/pozicon@2x.png"; sourceTree = "<group>"; };
@@ -1178,9 +1170,6 @@
 				C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */,
 				C46C5DE617EDA2B300866DBD /* SideEffectsTableViewController.h */,
 				C46C5DE717EDA2B300866DBD /* SideEffectsTableViewController.m */,
-				C40DACEB180981E400EDD6E9 /* WebViewController.h */,
-				C40DACEC180981E400EDD6E9 /* WebViewController.m */,
-				C452630A13F5422B0004C80F /* WebViewController.xib */,
 			);
 			name = ViewControllersCommon;
 			sourceTree = "<group>";
@@ -1673,7 +1662,6 @@
 				C481FD2517FDEBDE0058EE9D /* icon_120_flat.png in Resources */,
 				0B89110418F93CA500A49B95 /* rescriptor.png in Resources */,
 				C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */,
-				C452630813F5422B0004C80F /* WebViewController.xib in Resources */,
 				C44D36C5180F3E3600EE9F5E /* feedback.png in Resources */,
 				C481FD2D17FDEE540058EE9D /* icon_50_flat.png in Resources */,
 				C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */,
@@ -1823,7 +1811,6 @@
 				0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */,
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
-				C40DACED180981E400EDD6E9 /* WebViewController.m in Sources */,
 				0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
 				C45E52F7182BFE6400C30061 /* BaseCollectionViewController.m in Sources */,
@@ -1962,17 +1949,6 @@
 				C43BE59115F7CBFD00108EF8 /* fr */,
 			);
 			name = SideEffects.plist;
-			sourceTree = "<group>";
-		};
-		C452630A13F5422B0004C80F /* WebViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C452630913F5422B0004C80F /* en */,
-				C452630B13F542320004C80F /* de */,
-				C452630C13F542350004C80F /* es */,
-				C452630D13F542380004C80F /* fr */,
-			);
-			name = WebViewController.xib;
 			sourceTree = "<group>";
 		};
 		C4897FC5140FD0360033C61C /* CombiMeds.plist */ = {
