@@ -43,7 +43,7 @@
 	UILabel *intervalLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, self.frame.size.height)];
 	intervalLabel.backgroundColor = [UIColor clearColor];
 	intervalLabel.font = [UIFont fontWithType:Standard size:standard];
-	intervalLabel.textColor = DARK_RED;
+	intervalLabel.textColor = TEXTCOLOUR;
 	intervalLabel.textAlignment = NSTextAlignmentLeft;
 	NSString *intervalText = NSLocalizedString(@"daily", nil);
 	if (nil != notification.userInfo)
@@ -66,32 +66,53 @@
 	UILabel *label = [[UILabel alloc] init];
 	label.frame = CGRectMake(offset + 5, 0, self.frame.size.width - offset - 5, self.frame.size.height);
 	label.font = [UIFont fontWithType:Bold size:standard];
-	label.textColor = DARK_RED;
+	label.textColor = TEXTCOLOUR;
 	label.textAlignment = NSTextAlignmentLeft;
 
 	NSDate *now = [NSDate date];
 	NSDateComponents *components = [[PWESCalendar sharedInstance] dateComponentsForDate:now];
 	NSDateComponents *fireComponents = [[PWESCalendar sharedInstance] dateComponentsForDate:fireDate];
 
-	hour = components.hour - fireComponents.hour;
-	minute = components.minute - fireComponents.minute;
-	second = components.second - fireComponents.second;
-
-	self.timeString = [NSString stringWithFormat:@"%ld:%ld:%ld", (long)hour, (long)minute, (long)second];
+	[self computeDeltaFromCurrentComponent:components fireComponent:fireComponents];
+	if (0 == hour)
+	{
+		label.textColor = DARK_RED;
+	}
+	self.timerLabel.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hour, (long)minute, (long)second];
 
 	label.text = self.timeString;
 
-	self.counter = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateLabelWithTimer:) userInfo:nil repeats:YES];
-	[self.counter fire];
-
+	NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateLabelWithTimer:) userInfo:nil repeats:YES];
+	[timer fire];
+	self.counter = timer;
 	self.timerLabel = label;
 	return label;
 }
 
+- (void)computeDeltaFromCurrentComponent:(NSDateComponents *)current fireComponent:(NSDateComponents *)fire
+{
+	NSTimeInterval currentTime  = 3600 * current.hour + 60 * current.minute + 60 * current.second;
+	NSTimeInterval fireTime     = 3600 * fire.hour + 60 * fire.minute + 60 * fire.second;
+	NSTimeInterval day          = 3600 * 24;
+	NSTimeInterval delta = 0;
+	if (fireTime < currentTime)
+	{
+		delta = day - currentTime + fireTime;
+	}
+	else
+	{
+		delta = currentTime - fireTime;
+	}
+
+	hour = delta / 3600;
+	minute = (delta - (hour * 3600)) / 60;
+	second = (delta - (hour * 3600) - (minute * 60)) / 60;
+}
+
 - (void)updateLabelWithTimer:(NSTimer *)timer;
 {
-	NSInteger nextSecond = second - 1;
-	if (0 > nextSecond)
+	second--;
+	if (0 > second)
 	{
 		second = 59;
 		minute--;
@@ -105,15 +126,13 @@
 	{
 		hour = 0;
 	}
-	self.timeString = [NSString stringWithFormat:@"%ld:%ld:%ld", (long)hour, (long)minute, (long)second];
-	[self performSelectorOnMainThread:@selector(updateLabelText) withObject:nil waitUntilDone:YES];
+	if (0 == hour)
+	{
+		self.timerLabel.textColor = DARK_RED;
+	}
+	self.timerLabel.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hour, (long)minute, (long)second];
 }
 
-- (void)updateLabelText
-{
-	self.timerLabel.text = self.timeString;
-	[self.timerLabel setNeedsDisplay];
-}
 
 - (void)stopTimer
 {
