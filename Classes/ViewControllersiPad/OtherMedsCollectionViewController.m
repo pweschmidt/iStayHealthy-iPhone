@@ -38,18 +38,12 @@
 
 - (void)addButtonPressed:(id)sender
 {
-	if (nil == self.customPopoverController)
-	{
-		EditOtherMedsTableViewController *editController = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-		editController.preferredContentSize = CGSizeMake(320, 568);
-		editController.customPopOverDelegate = self;
-		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
-	}
-	else
-	{
-		[self hidePopover];
-	}
+	EditOtherMedsTableViewController *editController = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+	editController.preferredContentSize = CGSizeMake(320, 568);
+	editController.customPopOverDelegate = self;
+	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+	[self presentViewController:editNavCtrl animated:YES completion:nil];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -81,15 +75,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self hidePopover];
+//	[self hidePopover];
 	OtherMedication *med = [self.meds objectAtIndex:indexPath.row];
 	EditOtherMedsTableViewController *editController = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
 	editController.preferredContentSize = CGSizeMake(320, 568);
-	editController.customPopOverDelegate = self;
+//	editController.customPopOverDelegate = self;
 	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-	[self presentPopoverWithController:editNavCtrl
-	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
+	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+	[self presentViewController:editNavCtrl animated:YES completion:nil];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification

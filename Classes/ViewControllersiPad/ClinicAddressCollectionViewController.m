@@ -38,18 +38,25 @@
 
 - (void)addButtonPressed:(id)sender
 {
-	if (nil == self.customPopoverController)
-	{
-		EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-		editController.preferredContentSize = CGSizeMake(320, 568);
-		editController.customPopOverDelegate = self;
-		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
-	}
-	else
-	{
-		[self hidePopover];
-	}
+	EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+	editController.preferredContentSize = CGSizeMake(320, 568);
+	////		editController.customPopOverDelegate = self;
+	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+	[self presentViewController:editNavCtrl animated:YES completion:nil];
+//	if (nil == self.customPopoverController)
+//	{
+//		EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+//		editController.preferredContentSize = CGSizeMake(320, 568);
+////		editController.customPopOverDelegate = self;
+//		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+//		editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+//		[self presentViewController:editNavCtrl animated:YES completion:nil];
+//	}
+//	else
+//	{
+//		[self hidePopover];
+//	}
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -79,15 +86,17 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self hidePopover];
+//	[self hidePopover];
 	Contacts *clinic = [self.clinics objectAtIndex:indexPath.row];
 	EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:clinic hasNumericalInput:NO];
 	editController.preferredContentSize = CGSizeMake(320, 568);
-	editController.customPopOverDelegate = self;
+//	editController.customPopOverDelegate = self;
 	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-	[self presentPopoverWithController:editNavCtrl
-	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
+	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+	[self presentViewController:editNavCtrl animated:YES completion:nil];
+//	[self presentPopoverWithController:editNavCtrl
+//	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
 #pragma mark - override the notification handlers

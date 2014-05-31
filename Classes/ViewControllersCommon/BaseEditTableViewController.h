@@ -63,7 +63,7 @@
 - (void)save:(id)sender;
 - (void)removeManagedObject;
 - (void)showDeleteAlertView;
-
+- (void)cancel;
 - (void)changeDate:(NSIndexPath *)indexPath;
 - (BOOL)hasInlineDatePicker;
 - (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;

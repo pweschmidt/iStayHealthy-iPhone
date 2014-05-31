@@ -45,7 +45,9 @@
 		editController.preferredContentSize = CGSizeMake(320, 568);
 		editController.customPopOverDelegate = self;
 		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
+		editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+		[self presentViewController:editNavCtrl animated:YES completion:nil];
+//		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
 	}
 	else
 	{
@@ -101,8 +103,10 @@
 	editController.preferredContentSize = CGSizeMake(320, 568);
 	editController.customPopOverDelegate = self;
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-	[self presentPopoverWithController:editNavCtrl
-	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
+	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+	[self presentViewController:editNavCtrl animated:YES completion:nil];
+//	[self presentPopoverWithController:editNavCtrl
+//	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification

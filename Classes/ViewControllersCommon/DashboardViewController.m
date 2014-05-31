@@ -39,8 +39,8 @@
 //    self.navigationItem.title = NSLocalizedString(@"Charts", nil);
 	CGFloat xOffset = 0;
 	CGFloat yScrollOffset = 95;
-	CGFloat scrollHeight = self.view.frame.size.height - 188;
-	CGFloat scrollWidth = self.view.frame.size.width;
+	CGFloat scrollHeight = self.view.bounds.size.height - 188;
+	CGFloat scrollWidth = self.view.bounds.size.width;
 	CGFloat yPageOffset = yScrollOffset + scrollHeight + 5;
 
 	scrollFrame = CGRectMake(xOffset, yScrollOffset, scrollWidth, scrollHeight);

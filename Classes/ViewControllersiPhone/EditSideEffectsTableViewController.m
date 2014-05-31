@@ -30,6 +30,7 @@
 @property (nonatomic, strong) NSIndexPath *linkIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *selectedMedCells;
 @property (nonatomic, strong) NSMutableDictionary *valueMap;
+@property (nonatomic, assign) BOOL hasOnlyOneMed;
 - (void)changeFrequency:(id)sender;
 - (void)changeSeriousness:(id)sender;
 
@@ -62,10 +63,20 @@
 {
 	self.valueMap = [NSMutableDictionary dictionary];
 	self.selectedMedCells = [NSMutableDictionary dictionary];
-	[self.currentMeds enumerateObjectsUsingBlock: ^(Medication *med, NSUInteger index, BOOL *stop) {
-	    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:2];
-	    [self.selectedMedCells setObject:[NSNumber numberWithBool:NO] forKey:path];
-	}];
+	if (1 == self.currentMeds.count)
+	{
+		self.hasOnlyOneMed = YES;
+		NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:2];
+		[self.selectedMedCells setObject:[NSNumber numberWithBool:YES] forKey:path];
+	}
+	else
+	{
+		self.hasOnlyOneMed = NO;
+		[self.currentMeds enumerateObjectsUsingBlock: ^(Medication *med, NSUInteger index, BOOL *stop) {
+		    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:2];
+		    [self.selectedMedCells setObject:[NSNumber numberWithBool:NO] forKey:path];
+		}];
+	}
 
 	self.editMenu = @[kSideEffect, kEffectsOther];
 	self.seriousnessArray = @[kEffectsMinor, kEffectsMajor, kEffectsSerious];
@@ -86,7 +97,10 @@
 	if (self.isEditMode && nil != self.managedObject)
 	{
 		SideEffects *effects = (SideEffects *)self.managedObject;
-		[self.valueMap setObject:effects.SideEffect forKey:kSideEffect];
+		if (nil != effects.SideEffect)
+		{
+			[self.valueMap setObject:effects.SideEffect forKey:kSideEffect];
+		}
 		NSInteger index = [self.seriousnessArray indexOfObject:effects.seriousness];
 		if (NSNotFound != index)
 		{
@@ -162,11 +176,14 @@
 		effects.Name = medNames;
 	}
 	UITextField *effectsField = [self sideEffectTextField];
-	effects.SideEffect = effectsField.text;
+	if (nil != effectsField)
+	{
+		effects.SideEffect = effectsField.text;
+	}
 	effects.seriousness = [self.seriousnessArray objectAtIndex:seriousnessIndex];
 	effects.frequency = [self.frequencyArray objectAtIndex:frequencyIndex];
 	NSError *error = nil;
-	[[CoreDataManager sharedInstance] saveContext:&error];
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	[self popController];
 }
 
@@ -328,7 +345,7 @@
 			[self.navigationController pushViewController:controller animated:YES];
 		}
 	}
-	else if (2 == indexPath.section)
+	else if (2 == indexPath.section && !self.hasOnlyOneMed)
 	{
 		BOOL checkedValue = [[self.selectedMedCells objectForKey:indexPath] boolValue];
 		BOOL checkedUnchecked = !checkedValue;
@@ -462,7 +479,7 @@
 
 - (UITextField *)sideEffectTextField
 {
-	if (nil == self.cellDictionary || 0 < self.cellDictionary.allKeys.count)
+	if (nil == self.cellDictionary || 0 == self.cellDictionary.allKeys.count)
 	{
 		return nil;
 	}

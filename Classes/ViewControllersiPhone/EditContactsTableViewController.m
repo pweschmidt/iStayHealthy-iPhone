@@ -114,7 +114,7 @@
 	}
 
 	NSError *error = nil;
-	[[CoreDataManager sharedInstance] saveContext:&error];
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	[self popController];
 }
 

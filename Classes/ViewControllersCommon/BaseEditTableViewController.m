@@ -74,6 +74,13 @@
 	{
 		labelWidth = kLabelWidthiPad;
 		textFieldWidthReduction = kLabelWidthReductioniPad;
+		UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
+		cancel.frame = CGRectMake(0, 0, 20, 20);
+		cancel.backgroundColor = [UIColor clearColor];
+		[cancel setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal];
+		[cancel addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+		UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancel];
+		self.navigationItem.leftBarButtonItem = cancelButton;
 	}
 	else
 	{
@@ -103,11 +110,20 @@
 				[strongPopoverDelegate hidePopover];
 			}
 		}
+		else
+		{
+			[self cancel];
+		}
 	}
 	else
 	{
 		[self.navigationController popViewControllerAnimated:YES];
 	}
+}
+
+- (void)cancel
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)save:(id)sender
