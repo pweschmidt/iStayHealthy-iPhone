@@ -80,7 +80,8 @@ static NSDateFormatter *shortDate()
                     pattern:(CGFloat *)pattern
                patternCount:(int)patternCount;
 {
-	CGContextSetLineCap(context, kCGLineCapSquare);
+	CGContextSetLineCap(context, kCGLineCapRound);
+	CGContextSetLineJoin(context, kCGLineJoinRound);
 	CGContextSetStrokeColorWithColor(context, cgColour);
 
 	if (nil != fillColour && NULL != fillColour)
