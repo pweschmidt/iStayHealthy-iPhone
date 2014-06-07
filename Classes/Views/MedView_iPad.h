@@ -12,6 +12,8 @@
 #import "PreviousMedication.h"
 #import "OtherMedication.h"
 #import "SideEffects.h"
+#import "Procedures.h"
+#import "Contacts.h"
 
 @interface MedView_iPad : UIView
 + (MedView_iPad *)viewForMedication:(Medication *)medication
@@ -28,5 +30,11 @@
 
 + (MedView_iPad *)viewForSideEffects:(SideEffects *)medication
                                frame:(CGRect)frame;
+
++ (MedView_iPad *)viewForProcedures:(Procedures *)procedures
+                              frame:(CGRect)frame;
+
++ (MedView_iPad *)viewForContacts:(Contacts *)contacts
+                            frame:(CGRect)frame;
 
 @end

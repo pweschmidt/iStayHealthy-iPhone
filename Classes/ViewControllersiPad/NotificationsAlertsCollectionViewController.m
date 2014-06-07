@@ -10,7 +10,8 @@
 #import "BaseCollectionViewCell.h"
 #import "Constants.h"
 #import "EditAlertsTableViewController.h"
-#import "TimeView.h"
+#import "TimeView_iPad.h"
+#import "TimeCounter.h"
 
 #define kAlertsCollectionCellIdentifier @"AlertsCollectionCellIdentifier"
 
@@ -74,6 +75,18 @@
 	UILocalNotification *notification = [self.notifications objectAtIndex:indexPath.row];
 	BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAlertsCollectionCellIdentifier
 	                                                                         forIndexPath:indexPath];
+
+	[cell setManagedObject:nil];
+	if (nil != notification)
+	{
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		formatter.timeStyle = NSDateFormatterShortStyle;
+		[cell addTitle:[formatter stringFromDate:notification.fireDate]];
+
+		TimeView_iPad *view = [TimeView_iPad viewWithNotification:notification frame:CGRectMake(0, 2, 150, 130)];
+		[view startTimer];
+		[cell addView:view];
+	}
 	return cell;
 }
 

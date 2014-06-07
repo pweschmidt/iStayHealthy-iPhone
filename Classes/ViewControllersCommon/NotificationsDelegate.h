@@ -10,4 +10,5 @@
 
 @protocol NotificationsDelegate <NSObject>
 - (void)updateLocalNotifications;
+- (void)restartTimer;
 @end

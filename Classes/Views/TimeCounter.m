@@ -16,6 +16,8 @@
 	NSInteger minute;
 	NSInteger second;
 }
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) UILocalNotification *notification;
 @property (nonatomic, strong) NSTimer *counter;
 @property (nonatomic, strong) UILabel *timerLabel;
 @property (nonatomic, strong) NSString *timeString;
@@ -28,7 +30,8 @@
                         frame:(CGRect)frame
 {
 	TimeCounter *counter = [[TimeCounter alloc] initWithFrame:frame];
-	[counter configureWithDate:date notification:notification];
+	counter.date = date;
+	counter.notification = notification;
 	return counter;
 }
 
@@ -141,6 +144,11 @@
 		[self.counter invalidate];
 		self.counter = nil;
 	}
+}
+
+- (void)startTimer
+{
+	[self configureWithDate:self.date notification:self.notification];
 }
 
 @end

@@ -13,5 +13,5 @@
                  notification:(UILocalNotification *)notification
                         frame:(CGRect)frame;
 - (void)stopTimer;
-
+- (void)startTimer;
 @end

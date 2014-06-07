@@ -9,6 +9,7 @@
 #import "MedView_iPad.h"
 #import "Utilities.h"
 #import "UILabel+Standard.h"
+#import "UIFont+Standard.h"
 
 @interface MedView_iPad ()
 @property (nonatomic, strong) NSString *name;
@@ -24,10 +25,11 @@
 	MedView_iPad *view = [[MedView_iPad alloc] initWithFrame:frame];
 	if (nil != medication)
 	{
-		view.name = medication.Name;
-		view.drug = medication.Drug;
+		[view configureViewWithImageName:medication.Name
+		                      isMedImage:YES
+		                      mainString:medication.Name
+		                 secondaryString:medication.Drug];
 	}
-	[view configureView];
 	return view;
 }
 
@@ -37,10 +39,11 @@
 	MedView_iPad *view = [[MedView_iPad alloc] initWithFrame:frame];
 	if (nil != medication)
 	{
-		view.name = medication.Name;
-		view.drug = medication.Drug;
+		[view configureViewWithImageName:medication.Name
+		                      isMedImage:YES
+		                      mainString:medication.Name
+		                 secondaryString:medication.Drug];
 	}
-	[view configureView];
 	return view;
 }
 
@@ -50,10 +53,11 @@
 	MedView_iPad *view = [[MedView_iPad alloc] initWithFrame:frame];
 	if (nil != medication)
 	{
-		view.name = medication.name;
-		view.drug = medication.drug;
+		[view configureViewWithImageName:medication.name
+		                      isMedImage:YES
+		                      mainString:medication.name
+		                 secondaryString:medication.drug];
 	}
-	[view configureView];
 	return view;
 }
 
@@ -61,109 +65,139 @@
                                    frame:(CGRect)frame
 {
 	MedView_iPad *view = [[MedView_iPad alloc] initWithFrame:frame];
-	[view configureViewForOtherMedication:medication];
+	if (nil != medication)
+	{
+		NSString *doseString = [NSString stringWithFormat:@"%3.2f %@", [medication.Dose floatValue], medication.Unit];
+		[view configureViewWithImageName:@"cross.png"
+		                      isMedImage:NO
+		                      mainString:medication.Name
+		                 secondaryString:doseString];
+	}
 	return view;
 }
 
-+ (MedView_iPad *)viewForSideEffects:(SideEffects *)medication
++ (MedView_iPad *)viewForSideEffects:(SideEffects *)effects
                                frame:(CGRect)frame
 {
 	MedView_iPad *view = [[MedView_iPad alloc] initWithFrame:frame];
-	[view configureViewForSideEffects:medication];
+	if (nil != effects)
+	{
+		NSString *imageName = (nil != effects.Name) ? effects.Name : @"sideeffects.png";
+		[view configureViewWithImageName:imageName
+		                      isMedImage:NO
+		                      mainString:effects.SideEffect
+		                 secondaryString:nil];
+	}
 	return view;
 }
 
-- (void)configureView
++ (MedView_iPad *)viewForProcedures:(Procedures *)procedures
+                              frame:(CGRect)frame
 {
-	UIImage *image = [Utilities imageFromMedName:self.name];
-	if (nil == image)
+	MedView_iPad *view = [[MedView_iPad alloc] initWithFrame:frame];
+	if (nil != procedures)
 	{
-		image = [self blankImage];
+		[view configureViewWithImageName:@"procedure.png"
+		                      isMedImage:NO
+		                      mainString:procedures.Illness
+		                 secondaryString:procedures.Name];
 	}
-
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-	imageView.frame = CGRectMake(10, 0, 55, 55);
-	imageView.backgroundColor = [UIColor clearColor];
-
-	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(70, 0, self.frame.size.width - 70, 55);
-	label.text = self.name;
-	label.textColor = TEXTCOLOUR;
-	label.textAlignment = NSTextAlignmentCenter;
-
-	UILabel *drug = [UILabel standardLabel];
-	drug.frame = CGRectMake(10, 65, self.frame.size.width - 20, 55);
-	drug.text = self.drug;
-	drug.numberOfLines = 0;
-	drug.textColor = DARK_RED;
-	drug.textAlignment = NSTextAlignmentLeft;
-
-	[self addSubview:imageView];
-	[self addSubview:label];
-	[self addSubview:drug];
+	return view;
 }
 
-- (void)configureViewForOtherMedication:(OtherMedication *)otherMed
++ (MedView_iPad *)viewForContacts:(Contacts *)contacts
+                            frame:(CGRect)frame
 {
-	UIImage *image = [Utilities imageFromMedName:self.name];
-	if (nil == image)
+	MedView_iPad *view = [[MedView_iPad alloc] initWithFrame:frame];
+	if (nil != contacts)
 	{
-		image = [self blankImage];
+		NSString *clinicID = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"ID", nil), contacts.ClinicID];
+		if (nil == clinicID)
+		{
+			clinicID = contacts.ClinicName;
+		}
+		NSString *contactNumber = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Tel.", nil), contacts.ClinicContactNumber];
+		if (nil == contactNumber)
+		{
+			contactNumber = contacts.ConsultantName;
+		}
+		[view configureViewWithImageName:@"doctor.png"
+		                      isMedImage:NO
+		                      mainString:clinicID
+		                 secondaryString:contactNumber];
 	}
-
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-	imageView.frame = CGRectMake(20, 10, 55, 55);
-	imageView.backgroundColor = [UIColor clearColor];
-
-	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(80, 10, self.frame.size.width - 80, 55);
-	label.text = otherMed.Name;
-	label.textColor = TEXTCOLOUR;
-	label.textAlignment = NSTextAlignmentCenter;
-
-
-	NSNumber *dose = otherMed.Dose;
-	NSString *unit = otherMed.Unit;
-	NSString *doseText = [NSString stringWithFormat:@"%3.2f [%@]", [dose floatValue], unit];
-	UILabel *drug = [UILabel standardLabel];
-	drug.frame = CGRectMake(20, 75, self.frame.size.width - 40, 40);
-	drug.text = doseText;
-	drug.textColor = DARK_RED;
-	drug.textAlignment = NSTextAlignmentLeft;
-
-	[self addSubview:imageView];
-	[self addSubview:label];
-	[self addSubview:drug];
+	return view;
 }
 
-- (void)configureViewForSideEffects:(SideEffects *)effects
+- (void)configureViewWithImageName:(NSString *)imageName
+                        isMedImage:(BOOL)isMedImage
+                        mainString:(NSString *)mainString
+                   secondaryString:(NSString *)secondayString
 {
-	UIImage *image = [Utilities imageFromMedName:self.name];
+	UIImageView *imageView = [self imageViewForImageName:imageName isMedImage:isMedImage];
+	[self addSubview:imageView];
+
+	if (nil != mainString)
+	{
+		UILabel *mainLabel = [self mainTextLabelWithString:mainString];
+		[self addSubview:mainLabel];
+	}
+
+	if (nil != secondayString)
+	{
+		UILabel *secondaryLabel = [self secondaryTextLabelWithString:secondayString];
+		[self addSubview:secondaryLabel];
+	}
+}
+
+- (UIImageView *)imageViewForImageName:(NSString *)imageName isMedImage:(BOOL)isMedImage
+{
+	UIImage *image = [self imageFromName:imageName isMedImage:isMedImage];
+
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+	imageView.frame = CGRectMake(20, 5, 55, 55);
+	imageView.backgroundColor = [UIColor clearColor];
+	return imageView;
+}
+
+- (UIImage *)imageFromName:(NSString *)imageName isMedImage:(BOOL)isMedImage
+{
+	UIImage *image = nil;
+	if (isMedImage)
+	{
+		image = [Utilities imageFromMedName:imageName];
+	}
+	else
+	{
+		image = [UIImage imageNamed:imageName];
+	}
 	if (nil == image)
 	{
 		image = [self blankImage];
 	}
+	return image;
+}
 
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-	imageView.frame = CGRectMake(20, 10, 55, 55);
-	imageView.backgroundColor = [UIColor clearColor];
-
-	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(80, 10, self.frame.size.width - 80, 55);
-	label.text = effects.Name;
+- (UILabel *)mainTextLabelWithString:(NSString *)string
+{
+	UILabel *label = [[UILabel alloc] init];
+	label.font = [UIFont fontWithType:Bold size:large];
+	label.frame = CGRectMake(20, 63, self.frame.size.width - 40, 18);
+	label.text = string;
 	label.textColor = TEXTCOLOUR;
-	label.textAlignment = NSTextAlignmentCenter;
+	label.textAlignment = NSTextAlignmentLeft;
+	return label;
+}
 
-
-	UILabel *drug = [UILabel standardLabel];
-	drug.frame = CGRectMake(20, 75, self.frame.size.width - 40, 40);
-	drug.text = effects.SideEffect;
-	drug.textColor = DARK_RED;
-	drug.textAlignment = NSTextAlignmentLeft;
-
-	[self addSubview:imageView];
-	[self addSubview:label];
-	[self addSubview:drug];
+- (UILabel *)secondaryTextLabelWithString:(NSString *)string
+{
+	UILabel *label = [UILabel standardLabel];
+	label.frame = CGRectMake(20, 85, self.frame.size.width - 40, 40);
+	label.text = string;
+	label.textColor = DARK_RED;
+	label.numberOfLines = 0;
+	label.textAlignment = NSTextAlignmentLeft;
+	return label;
 }
 
 - (UIImage *)blankImage

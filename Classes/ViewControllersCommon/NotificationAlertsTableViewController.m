@@ -106,6 +106,7 @@
 	label.font = [UIFont fontWithType:Standard size:standard];
 
 	TimeCounter *counter = [TimeCounter viewWithTime:notification.fireDate notification:notification frame:CGRectMake(25 + rowHeight * scale, rowHeight / 2, 180, rowHeight / 2)];
+    [counter startTimer];
 	[self.counterArray addObject:counter];
 
 	[cell.contentView addSubview:timeView];
@@ -176,6 +177,10 @@
 {
 	[self retrieveLocalNotifications];
 	[self.tableView reloadData];
+}
+
+- (void)restartTimer
+{
 }
 
 @end

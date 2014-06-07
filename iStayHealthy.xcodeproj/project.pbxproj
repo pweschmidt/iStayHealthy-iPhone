@@ -78,6 +78,7 @@
 		0B89111818F93D3200A49B95 /* edurant.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B89111718F93D3200A49B95 /* edurant.png */; };
 		0B89111D18F9407D00A49B95 /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111A18F9407D00A49B95 /* PWESSlideTransition.m */; };
 		0B89111E18F9407D00A49B95 /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */; };
+		0B8DDBF4194322E300055E4C /* TimeView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DDBF3194322E300055E4C /* TimeView_iPad.m */; };
 		0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D0738191ABDB900D293E0 /* PWESStar.m */; };
 		0B9D073C191ABE4100D293E0 /* PWESSeinfeldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D073B191ABE4100D293E0 /* PWESSeinfeldViewController.m */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
@@ -423,6 +424,8 @@
 		0B89111B18F9407D00A49B95 /* PWESZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESZoomTransition.h; path = Animations/PWESZoomTransition.h; sourceTree = "<group>"; };
 		0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESZoomTransition.m; path = Animations/PWESZoomTransition.m; sourceTree = "<group>"; };
 		0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESNavigationDelegate.h; path = ViewControllersCommon/PWESNavigationDelegate.h; sourceTree = "<group>"; };
+		0B8DDBF2194322E300055E4C /* TimeView_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeView_iPad.h; path = Views/TimeView_iPad.h; sourceTree = "<group>"; };
+		0B8DDBF3194322E300055E4C /* TimeView_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeView_iPad.m; path = Views/TimeView_iPad.m; sourceTree = "<group>"; };
 		0B90038B192A87FF004A33DC /* PWESPlotAreaDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPlotAreaDelegate.h; path = Dashboard/PWESPlotAreaDelegate.h; sourceTree = "<group>"; };
 		0B9D0737191ABDB900D293E0 /* PWESStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESStar.h; path = SeinfeldCalendar/PWESStar.h; sourceTree = "<group>"; };
 		0B9D0738191ABDB900D293E0 /* PWESStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESStar.m; path = SeinfeldCalendar/PWESStar.m; sourceTree = "<group>"; };
@@ -1035,6 +1038,8 @@
 				0B706400193A1FB900CD2073 /* TimeCounter.m */,
 				C4A49AD718002CD300FC1637 /* TimeView.h */,
 				C4A49AD818002CD400FC1637 /* TimeView.m */,
+				0B8DDBF2194322E300055E4C /* TimeView_iPad.h */,
+				0B8DDBF3194322E300055E4C /* TimeView_iPad.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1818,6 +1823,7 @@
 				C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */,
 				0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */,
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
+				0B8DDBF4194322E300055E4C /* TimeView_iPad.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
 				0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,

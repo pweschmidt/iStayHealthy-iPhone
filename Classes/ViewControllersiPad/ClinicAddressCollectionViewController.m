@@ -12,6 +12,7 @@
 #import "Contacts+Handling.h"
 #import "EditContactsTableViewController.h"
 #import "UIFont+Standard.h"
+#import "MedView_iPad.h"
 
 #define kClinicsCollectionCellIdentifier @"ClinicsCollectionCellIdentifier"
 
@@ -80,6 +81,8 @@
 		[cell setManagedObject:contact];
 	}
 	[cell addTitle:contact.ClinicName];
+	MedView_iPad *view = [MedView_iPad viewForContacts:contact frame:CGRectMake(0, 2, 150, 130)];
+	[cell addView:view];
 
 	return cell;
 }

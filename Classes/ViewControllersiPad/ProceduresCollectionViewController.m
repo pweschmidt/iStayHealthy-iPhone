@@ -12,6 +12,7 @@
 #import "Procedures+Handling.h"
 #import "EditProceduresTableViewController.h"
 #import "UILabel+Standard.h"
+#import "MedView_iPad.h"
 
 #define kProceduresCollectionCellIdentifier @"ProceduresCollectionCellIdentifier"
 
@@ -69,13 +70,8 @@
 
 	[cell addDateToTitle:procs.Date];
 
-	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(20, 2, 130, 130);
-	label.numberOfLines = 0;
-	NSString *text = [NSString stringWithFormat:@"%@ \r\n %@", procs.Name, procs.Illness];
-	label.textAlignment = NSTextAlignmentLeft;
-	label.text = text;
-	[cell addView:label];
+	MedView_iPad *view = [MedView_iPad viewForProcedures:procs frame:CGRectMake(0, 2, 150, 130)];
+	[cell addView:view];
 	return cell;
 }
 
