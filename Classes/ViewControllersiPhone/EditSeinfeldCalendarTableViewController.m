@@ -41,9 +41,9 @@
 
 - (void)populateCalendars
 {
+	self.completedCalendars = [NSMutableArray array];
 	if (nil == self.calendars || 0 == self.calendars.count)
 	{
-		self.completedCalendars = [NSMutableArray array];
 		return;
 	}
 	for (SeinfeldCalendar *calendar in self.calendars)
@@ -195,21 +195,44 @@
             indexPath:(NSIndexPath *)indexPath
 {
 	SeinfeldCalendar *calendar = (SeinfeldCalendar *)[self.completedCalendars objectAtIndex:indexPath.row];
+	float score = [calendar.score floatValue];
 	CGFloat rowHeight = self.tableView.rowHeight - 2;
 	DateView *dateView = [DateView viewWithDate:calendar.endDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
 	[cell.contentView addSubview:dateView];
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-	if (0 == section)
+	UILabel *results = [[UILabel alloc] initWithFrame:CGRectMake(25 + rowHeight, 0, self.view.frame.size.width - 40 - rowHeight, rowHeight / 2)];
+	results.textColor = TEXTCOLOUR;
+	results.textAlignment = NSTextAlignmentLeft;
+	results.font = [UIFont fontWithType:Standard size:standard];
+	NSString *scoreText = NSLocalizedString(@"Your score:", nil);
+	NSString *resultsText = [NSString stringWithFormat:@"%@ %3.2f (%%)", scoreText, score];
+	results.text = resultsText;
+	[cell.contentView addSubview:results];
+
+	UIView *starView = [[UIView alloc] initWithFrame:CGRectMake(15 + rowHeight, rowHeight / 2, self.view.frame.size.width - 40, rowHeight / 2)];
+
+	CGFloat xOffset = 0;
+	CGFloat yOffset = ((rowHeight / 2) - 17) / 2;
+	CGFloat width = 17;
+	CGFloat height = 17;
+	CGFloat marginX = 10;
+	float goldenRule = floorf(score / 20);
+	for (int i = 0; i < 5; ++i)
 	{
-		return 55;
+		CGFloat x = xOffset + i * width + marginX;
+		CGRect frame = CGRectMake(x, yOffset, width, height);
+		PWESStar *star = nil;
+		if (i < goldenRule)
+		{
+			star = [PWESStar starWithColourAndFrame:frame];
+		}
+		else
+		{
+			star = [PWESStar starWithoutColourAndFrame:frame];
+		}
+		[starView addSubview:star];
 	}
-	else
-	{
-		return 10;
-	}
+	[cell.contentView addSubview:starView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

@@ -16,13 +16,15 @@
 #import "PWESCalendar.h"
 #import "PWESSeinfeldMonth.h"
 #import "PWESMonthlyView.h"
+#import "PWESSeinfeldCalendarReusableView.h"
 
 #define kCalendarCollectionCellIdentifier @"CalendarCollectionCellIdentifier"
-
+#define kCalendarCollectionHeaderIdentifier @"HeaderIdentifier"
 @interface PWESSeinfeldCollectionViewController ()
 @property (nonatomic, strong) NSArray *calendars;
 @property (nonatomic, strong) NSArray *currentMeds;
 @property (nonatomic, strong) SeinfeldCalendar *currentCalendar;
+@property (nonatomic, strong) SeinfeldCalendar *lastCalendar;
 @property (nonatomic, strong) NSArray *months;
 
 @end
@@ -49,6 +51,8 @@
 
 	[self.collectionView registerClass:[BaseCollectionViewCell class]
 	        forCellWithReuseIdentifier:kCalendarCollectionCellIdentifier];
+
+	[self.collectionView registerClass:[PWESSeinfeldCalendarReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kCalendarCollectionHeaderIdentifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,18 +62,12 @@
 
 - (void)addButtonPressed:(id)sender
 {
-	if (nil == self.customPopoverController)
-	{
-		EditSeinfeldCalendarTableViewController *editController = [[EditSeinfeldCalendarTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-		editController.preferredContentSize = CGSizeMake(320, 568);
-		editController.customPopOverDelegate = self;
-		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
-	}
-	else
-	{
-		[self hidePopover];
-	}
+	EditSeinfeldCalendarTableViewController *editController = [[EditSeinfeldCalendarTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+	editController.preferredContentSize = CGSizeMake(320, 568);
+	editController.customPopOverDelegate = self;
+	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+	[self presentViewController:editNavCtrl animated:YES completion:nil];
 }
 
 - (void)configureCollectionView
@@ -123,10 +121,32 @@
 	return cell;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath
+{
+	UICollectionReusableView *view = nil;
+	if (UICollectionElementKindSectionHeader == kind)
+	{
+		PWESSeinfeldCalendarReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kCalendarCollectionHeaderIdentifier forIndexPath:indexPath];
+		if (nil == self.currentCalendar)
+		{
+			[headerView showEmptyLabel];
+		}
+		else
+		{
+			[headerView showCalendarInHeader:self.lastCalendar];
+		}
+		view = headerView;
+	}
+
+	return view;
+}
+
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	[[CoreDataManager sharedInstance] fetchDataForEntityName:kSeinfeldCalendar predicate:nil sortTerm:kStartDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
+	[[CoreDataManager sharedInstance] fetchDataForEntityName:kSeinfeldCalendar predicate:nil sortTerm:kEndDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
 	        UIAlertView *errorAlert = [[UIAlertView alloc]
@@ -140,13 +160,21 @@
 	    else
 	    {
 	        self.calendars = nil;
+	        self.lastCalendar = nil;
 	        self.calendars = [NSArray arrayWithArray:array];
 	        for (SeinfeldCalendar * calendar in array)
 	        {
-	            if (NO == [calendar.isCompleted boolValue])
+	            if (![calendar.isCompleted boolValue])
 	            {
 	                self.currentCalendar = calendar;
 	                break;
+				}
+	            else
+	            {
+	                if (nil == self.lastCalendar)
+	                {
+	                    self.lastCalendar = calendar;
+					}
 				}
 			}
 	        [self configureCollectionView];
@@ -215,6 +243,35 @@
 
 - (void)finishCalendarWithSuccess:(BOOL)success
 {
+	SeinfeldCalendar *calendar = self.currentCalendar;
+	NSSet *calendarEntries = calendar.entries;
+	double totalCount = (double)calendarEntries.count;
+	double days = (double)[[PWESCalendar sharedInstance] daysBetweenStartDate:calendar.startDate
+	                                                                  endDate:calendar.endDate];
+
+	double totalDays = abs(days);
+	double fractionMonitored = totalCount / totalDays;
+
+	__block NSUInteger counter = 0;
+	[calendarEntries enumerateObjectsUsingBlock: ^(SeinfeldCalendarEntry *entry, BOOL *stop) {
+	    if (nil != entry.hasTakenMeds)
+	    {
+	        if ([entry.hasTakenMeds boolValue])
+	        {
+	            counter++;
+			}
+		}
+	}];
+
+	double fractionTaken = counter / totalCount;
+	double result = (fractionTaken * fractionMonitored) * 100.0;
+	calendar.score = [NSNumber numberWithDouble:result];
+	calendar.isCompleted = [NSNumber numberWithBool:YES];
+	NSError *error = nil;
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
+
+	self.currentCalendar = nil;
+	[self reloadSQLData:nil];
 }
 
 @end

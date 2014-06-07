@@ -157,6 +157,9 @@
 	else if ([self isTodayForDay:day month:seinfeldMonth])
 	{
 		layer.foregroundColor = DARK_RED.CGColor;
+		layer.cornerRadius = 5.f;
+		layer.borderWidth = 1.f;
+		layer.borderColor = DARK_RED.CGColor;
 	}
 	else
 	{
@@ -262,8 +265,6 @@
 - (void)handleTap
 {
 	CGPoint point = [self.tapRecogniser locationInView:self];
-//	CGPoint superPoint = [self.tapRecogniser locationInView:self.superview];
-//	NSLog(@"point hit in view %@ and in superview %@", NSStringFromCGPoint(point), NSStringFromCGPoint(superPoint));
 	CATextLayer *foundLayer = nil;
 
 	NSUInteger index = 0;
@@ -275,7 +276,6 @@
 		bool containsInOtherFrame = CGRectContainsPoint(textLayer.frame, point);
 		if (containsPoint || containsInOtherFrame)
 		{
-//			NSLog(@"***** rectInView = %@ textlayerframe = %@ *****", NSStringFromCGRect(rectInView), NSStringFromCGRect(textLayer.bounds));
 			foundLayer = textLayer;
 			NSDateComponents *components = [self.dates objectAtIndex:index];
 			if ([self todayForComponent:components])
@@ -289,7 +289,20 @@
 	if (nil != foundLayer && canChangeValue)
 	{
 		self.tappedLayer = foundLayer;
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Meds Taken?" message:@"I have taken my meds today" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", @"No", nil];
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Meds Taken?", nil)
+		                                                    message:NSLocalizedString(@"Have I taken my meds today?", nil)
+		                                                   delegate:self
+		                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+		                                          otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil];
+		[alertView show];
+	}
+	else
+	{
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Don't Cheat!", nil)
+		                                                    message:NSLocalizedString(@"Only today's entry can be changed.", nil)
+		                                                   delegate:nil
+		                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+		                                          otherButtonTitles:nil];
 		[alertView show];
 	}
 }

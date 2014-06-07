@@ -243,7 +243,7 @@
 		label.text = NSLocalizedString(@"No Calender Available", nil);
 		label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20];
 		label.textAlignment = NSTextAlignmentCenter;
-		label.textColor = [UIColor redColor];
+		label.textColor = DARK_RED;
 		label.tag = kLabelViewTag;
 		return label;
 	}
@@ -294,7 +294,7 @@
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 
 	self.currentCalendar = nil;
-	[self configureCalenderScroller];
+	[self reloadSQLData:nil];
 }
 
 @end

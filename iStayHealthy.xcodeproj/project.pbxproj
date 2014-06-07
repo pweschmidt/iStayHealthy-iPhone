@@ -79,6 +79,7 @@
 		0B89111D18F9407D00A49B95 /* PWESSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111A18F9407D00A49B95 /* PWESSlideTransition.m */; };
 		0B89111E18F9407D00A49B95 /* PWESZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89111C18F9407D00A49B95 /* PWESZoomTransition.m */; };
 		0B8DDBF4194322E300055E4C /* TimeView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DDBF3194322E300055E4C /* TimeView_iPad.m */; };
+		0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DDC3A19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m */; };
 		0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D0738191ABDB900D293E0 /* PWESStar.m */; };
 		0B9D073C191ABE4100D293E0 /* PWESSeinfeldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D073B191ABE4100D293E0 /* PWESSeinfeldViewController.m */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
@@ -426,6 +427,8 @@
 		0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESNavigationDelegate.h; path = ViewControllersCommon/PWESNavigationDelegate.h; sourceTree = "<group>"; };
 		0B8DDBF2194322E300055E4C /* TimeView_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeView_iPad.h; path = Views/TimeView_iPad.h; sourceTree = "<group>"; };
 		0B8DDBF3194322E300055E4C /* TimeView_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeView_iPad.m; path = Views/TimeView_iPad.m; sourceTree = "<group>"; };
+		0B8DDC3919435AE000055E4C /* PWESSeinfeldCalendarReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSeinfeldCalendarReusableView.h; path = SeinfeldCalendar/PWESSeinfeldCalendarReusableView.h; sourceTree = "<group>"; };
+		0B8DDC3A19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldCalendarReusableView.m; path = SeinfeldCalendar/PWESSeinfeldCalendarReusableView.m; sourceTree = "<group>"; };
 		0B90038B192A87FF004A33DC /* PWESPlotAreaDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPlotAreaDelegate.h; path = Dashboard/PWESPlotAreaDelegate.h; sourceTree = "<group>"; };
 		0B9D0737191ABDB900D293E0 /* PWESStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESStar.h; path = SeinfeldCalendar/PWESStar.h; sourceTree = "<group>"; };
 		0B9D0738191ABDB900D293E0 /* PWESStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESStar.m; path = SeinfeldCalendar/PWESStar.m; sourceTree = "<group>"; };
@@ -901,6 +904,8 @@
 				0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */,
 				0B9D0737191ABDB900D293E0 /* PWESStar.h */,
 				0B9D0738191ABDB900D293E0 /* PWESStar.m */,
+				0B8DDC3919435AE000055E4C /* PWESSeinfeldCalendarReusableView.h */,
+				0B8DDC3A19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m */,
 				0BB566AC191E392000731739 /* PWESSeinfeldCollectionViewController.h */,
 				0BB566AD191E392000731739 /* PWESSeinfeldCollectionViewController.m */,
 				0B9D073A191ABE4100D293E0 /* PWESSeinfeldViewController.h */,
@@ -1799,6 +1804,7 @@
 				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
 				0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
+				0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */,
 				0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */,
 				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,
 				0B89111E18F9407D00A49B95 /* PWESZoomTransition.m in Sources */,
