@@ -13,6 +13,7 @@
 #import "UILabel+Standard.h"
 #import "Utilities.h"
 #import "PWESStar.h"
+#import "DateView.h"
 
 @interface EditSeinfeldCalendarTableViewController ()
 @property (nonatomic, strong) UISegmentedControl *calendarSegmentControl;
@@ -194,6 +195,9 @@
             indexPath:(NSIndexPath *)indexPath
 {
 	SeinfeldCalendar *calendar = (SeinfeldCalendar *)[self.completedCalendars objectAtIndex:indexPath.row];
+	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	DateView *dateView = [DateView viewWithDate:calendar.endDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+	[cell.contentView addSubview:dateView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -250,18 +254,18 @@
 	{
 		if (nil == self.currentCalendar)
 		{
-			label.text = NSLocalizedString(@"New Course", nil);
+			label.text = NSLocalizedString(@"New Diary", nil);
 		}
 		else
 		{
-			label.text = NSLocalizedString(@"Current Course", nil);
+			label.text = NSLocalizedString(@"Current Diary", nil);
 		}
 	}
 	else
 	{
 		if (0 < self.completedCalendars.count)
 		{
-			label.text = NSLocalizedString(@"Completed Courses", nil);
+			label.text = NSLocalizedString(@"Completed Diaries", nil);
 		}
 		else
 		{

@@ -27,4 +27,5 @@
 - (NSDate *)monthsFromDate:(NSDate *)date months:(NSUInteger)months;
 - (NSDateComponents *)dateFromDay:(NSInteger)day month:(NSInteger)month year:(NSInteger)year;
 - (NSInteger)monthsBetweenStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+- (NSInteger)daysBetweenStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 @end

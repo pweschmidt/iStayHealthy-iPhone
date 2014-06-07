@@ -176,4 +176,16 @@
 	return months;
 }
 
+- (NSInteger)daysBetweenStartDate:(NSDate *)startDate endDate:(NSDate *)endDate
+{
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDate *fromDate = nil;
+	NSDate *toDate = nil;
+	[calendar rangeOfUnit:NSDayCalendarUnit startDate:&fromDate interval:NULL forDate:startDate];
+	[calendar rangeOfUnit:NSDayCalendarUnit startDate:&toDate interval:NULL forDate:endDate];
+	NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+	                                           fromDate:fromDate toDate:toDate options:0];
+	return [difference day];
+}
+
 @end

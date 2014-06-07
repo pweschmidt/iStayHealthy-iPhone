@@ -16,6 +16,8 @@
 #import "PWESSeinfeldMonth.h"
 #import "PWESMonthlyView.h"
 #import "EditMissedMedsTableViewController.h"
+#import "PWESStar.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kScrollViewTag 12358
 #define kLabelViewTag 6247
@@ -52,7 +54,7 @@
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	[[CoreDataManager sharedInstance] fetchDataForEntityName:kSeinfeldCalendar predicate:nil sortTerm:kStartDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
+	[[CoreDataManager sharedInstance] fetchDataForEntityName:kSeinfeldCalendar predicate:nil sortTerm:kEndDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
 	        UIAlertView *errorAlert = [[UIAlertView alloc]
@@ -128,12 +130,7 @@
 	}
 	if (nil == self.currentCalendar)
 	{
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
-		label.text = NSLocalizedString(@"No Calender Available", nil);
-		label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20];
-		label.textAlignment = NSTextAlignmentCenter;
-		label.textColor = [UIColor redColor];
-		label.tag = kLabelViewTag;
+		UIView *label = [self calendarLabel];
 		[self.view addSubview:label];
 		return;
 	}
@@ -169,6 +166,89 @@
 	[self.view addSubview:scrollView];
 }
 
+- (UIView *)calendarLabel
+{
+	BOOL showLastEntry = YES;
+	if (nil == self.calendars)
+	{
+		showLastEntry = NO;
+	}
+	else if (0 == self.calendars.count)
+	{
+		showLastEntry = NO;
+	}
+
+	if (showLastEntry)
+	{
+		SeinfeldCalendar *lastEntry = [self.calendars objectAtIndex:0];
+		float score = [lastEntry.score floatValue];
+		UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
+		view.tag = kLabelViewTag;
+		view.layer.cornerRadius = 10;
+		view.layer.borderColor = [UIColor darkGrayColor].CGColor;
+		view.layer.borderWidth = 1;
+		view.layer.backgroundColor = [UIColor whiteColor].CGColor;
+
+		UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, 40)];
+		title.textColor = TEXTCOLOUR;
+		title.textAlignment = NSTextAlignmentLeft;
+		title.font = [UIFont fontWithType:Bold size:large];
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		formatter.dateStyle = kDateFormatting;
+		NSString *endString = [formatter stringFromDate:lastEntry.endDate];
+
+		NSString *text = NSLocalizedString(@"Last diary ending", nil);
+		title.text = [NSString stringWithFormat:@"%@: %@", text, endString];
+
+		[view addSubview:title];
+
+		UILabel *results = [[UILabel alloc] initWithFrame:CGRectMake(10, 43, self.view.frame.size.width - 20, 20)];
+		results.textColor = TEXTCOLOUR;
+		results.textAlignment = NSTextAlignmentLeft;
+		results.font = [UIFont fontWithType:Standard size:standard];
+		NSString *scoreText = NSLocalizedString(@"Your score:", nil);
+		NSString *resultsText = [NSString stringWithFormat:@"%@ %3.2f (%%)", scoreText, score];
+		results.text = resultsText;
+
+		[view addSubview:results];
+
+		UIView *starView = [[UIView alloc] initWithFrame:CGRectMake(0, 66, self.view.frame.size.width - 40, 17)];
+
+		CGFloat xOffset = starView.frame.origin.x;
+		CGFloat yOffset = 0;
+		CGFloat width = 17;
+		CGFloat height = 17;
+		float goldenRule = floorf(score / 20);
+		for (int i = 0; i < 5; ++i)
+		{
+			CGFloat x = xOffset + i * width + 10;
+			CGRect frame = CGRectMake(x, yOffset, width, height);
+			PWESStar *star = nil;
+			if (i < goldenRule)
+			{
+				star = [PWESStar starWithColourAndFrame:frame];
+			}
+			else
+			{
+				star = [PWESStar starWithoutColourAndFrame:frame];
+			}
+			[starView addSubview:star];
+		}
+		[view addSubview:starView];
+		return view;
+	}
+	else
+	{
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
+		label.text = NSLocalizedString(@"No Calender Available", nil);
+		label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20];
+		label.textAlignment = NSTextAlignmentCenter;
+		label.textColor = [UIColor redColor];
+		label.tag = kLabelViewTag;
+		return label;
+	}
+}
+
 #pragma mark PWESResultsDelegate methods
 - (void)updateCalendarWithSuccess:(BOOL)success
 {
@@ -186,6 +266,35 @@
 
 - (void)finishCalendarWithSuccess:(BOOL)success
 {
+	SeinfeldCalendar *calendar = self.currentCalendar;
+	NSSet *calendarEntries = calendar.entries;
+	double totalCount = (double)calendarEntries.count;
+	double days = (double)[[PWESCalendar sharedInstance] daysBetweenStartDate:calendar.startDate
+	                                                                  endDate:calendar.endDate];
+
+	double totalDays = abs(days);
+	double fractionMonitored = totalCount / totalDays;
+
+	__block NSUInteger counter = 0;
+	[calendarEntries enumerateObjectsUsingBlock: ^(SeinfeldCalendarEntry *entry, BOOL *stop) {
+	    if (nil != entry.hasTakenMeds)
+	    {
+	        if ([entry.hasTakenMeds boolValue])
+	        {
+	            counter++;
+			}
+		}
+	}];
+
+	double fractionTaken = counter / totalCount;
+	double result = (fractionTaken * fractionMonitored) * 100.0;
+	calendar.score = [NSNumber numberWithDouble:result];
+	calendar.isCompleted = [NSNumber numberWithBool:YES];
+	NSError *error = nil;
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
+
+	self.currentCalendar = nil;
+	[self configureCalenderScroller];
 }
 
 @end
