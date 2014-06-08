@@ -104,7 +104,7 @@
 	}
 	else
 	{
-		delta = currentTime - fireTime;
+		delta = fireTime - currentTime;
 	}
 
 	hour = delta / 3600;

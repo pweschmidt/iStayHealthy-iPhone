@@ -100,10 +100,10 @@
 //	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.contentView.backgroundColor = [UIColor clearColor];
 	cell.backgroundColor = [UIColor clearColor];
-	CGFloat offset = (self.tableView.rowHeight - 25) / 2;
+	CGFloat offset = (self.tableView.rowHeight - 42) / 2;
 
 	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(60, 0, 200, self.tableView.rowHeight);
+	label.frame = CGRectMake(65, 0, 200, self.tableView.rowHeight);
 	label.textAlignment = NSTextAlignmentLeft;
 	label.text = [self.menus objectAtIndex:indexPath.row];
 	label.textColor = [UIColor whiteColor];
@@ -119,7 +119,7 @@
 		if (nil != image)
 		{
 			UIImageView *medImageView = [[UIImageView alloc] init];
-			medImageView.frame = CGRectMake(20, offset, 25, 25);
+			medImageView.frame = CGRectMake(20, offset, 42, 42);
 			medImageView.backgroundColor = [UIColor clearColor];
 			medImageView.image = image;
 			[cell.contentView addSubview:medImageView];

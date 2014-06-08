@@ -210,21 +210,21 @@
 	static NSDictionary *colourDictionary = nil;
 	dispatch_once(&onceToken, ^{
 	    colourDictionary = @{
-	        kDashboardController : [UIImage imageNamed:@"charts.png"],
-	        kResultsController : [UIImage imageNamed:@"results.png"],
-	        kHIVMedsController : [UIImage imageNamed:@"combi.png"],
-	        kMissedController : [UIImage imageNamed:@"missed.png"],
-	        kAlertsController : [UIImage imageNamed:@"alarm.png"],
-	        kClinicsController : [UIImage imageNamed:@"doctor.png"],
-	        kSideEffectsController : [UIImage imageNamed:@"sideeffects.png"],
+	        kDashboardController : [UIImage imageNamed:@"charts-icon.png"],
+	        kResultsController : [UIImage imageNamed:@"results-icon.png"],
+	        kHIVMedsController : [UIImage imageNamed:@"combi-icon.png"],
+	        kMissedController : [UIImage imageNamed:@"missed-icon.png"],
+	        kAlertsController : [UIImage imageNamed:@"alarm-icon.png"],
+	        kClinicsController : [UIImage imageNamed:@"hospital-icon.png"],
+	        kSideEffectsController : [UIImage imageNamed:@"sideeffects-icon.png"],
 	        kDropboxController : [UIImage imageNamed:@"save.png"],
-	        kOtherMedsController : [UIImage imageNamed:@"cross.png"],
+	        kOtherMedsController : [UIImage imageNamed:@"cross-icon.png"],
 	        kInfoController : [UIImage imageNamed:@"info.png"],
 //	        kFeedbackController : [UIImage imageNamed:@"feedback.png"],
 	        kEmailController : [UIImage imageNamed:@"mail.png"],
-	        kProceduresController : [UIImage imageNamed:@"procedure.png"],
+	        kProceduresController : [UIImage imageNamed:@"procedure-icon.png"],
 	        kSettingsController : [UIImage imageNamed:@"lock.png"],
-	        kMedicationDiaryController : [UIImage imageNamed:@"diary.png"]
+	        kMedicationDiaryController : [UIImage imageNamed:@"diary-icon.png"]
 		};
 	});
 	return colourDictionary;
