@@ -45,6 +45,7 @@
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
 		0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */; };
 		0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */; };
+		0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
 		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
@@ -119,7 +120,6 @@
 		0BB5668E191E132F00731739 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		0BB5668F191E132F00731739 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		0BB56695191E132F00731739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BB56693191E132F00731739 /* InfoPlist.strings */; };
-		0BB56697191E132F00731739 /* iStayHealthy_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB56696191E132F00731739 /* iStayHealthy_Tests.m */; };
 		0BB566A9191E38F900731739 /* PWESCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A3191E38F900731739 /* PWESCalendar.m */; };
 		0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A5191E38F900731739 /* PWESMonthlyView.m */; };
 		0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */; };
@@ -398,6 +398,7 @@
 		0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsCollectionViewController.m; path = ViewControllersiPad/ResultsCollectionViewController.m; sourceTree = "<group>"; };
 		0B4C3B1C18B8E77300BF3BB5 /* ContentNavigationController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentNavigationController_iPad.h; path = ViewControllersiPad/ContentNavigationController_iPad.h; sourceTree = "<group>"; };
 		0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentNavigationController_iPad.m; path = ViewControllersiPad/ContentNavigationController_iPad.m; sourceTree = "<group>"; };
+		0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeCounterTests.m; sourceTree = "<group>"; };
 		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
 		0B6048521840D12B0092B5FB /* PWESDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataManager.m; path = Dashboard/PWESDataManager.m; sourceTree = "<group>"; };
 		0B6048531840D12B0092B5FB /* PWESDataNTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataNTuple.h; path = Dashboard/PWESDataNTuple.h; sourceTree = "<group>"; };
@@ -505,7 +506,6 @@
 		0BB5668C191E132F00731739 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0BB56692191E132F00731739 /* iStayHealthy Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iStayHealthy Tests-Info.plist"; sourceTree = "<group>"; };
 		0BB56694191E132F00731739 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0BB56696191E132F00731739 /* iStayHealthy_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iStayHealthy_Tests.m; sourceTree = "<group>"; };
 		0BB56698191E132F00731739 /* iStayHealthy Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iStayHealthy Tests-Prefix.pch"; sourceTree = "<group>"; };
 		0BB566A2191E38F900731739 /* PWESCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESCalendar.h; path = SeinfeldCalendar/PWESCalendar.h; sourceTree = "<group>"; };
 		0BB566A3191E38F900731739 /* PWESCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESCalendar.m; path = SeinfeldCalendar/PWESCalendar.m; sourceTree = "<group>"; };
@@ -969,8 +969,8 @@
 		0BB56690191E132F00731739 /* iStayHealthy Tests */ = {
 			isa = PBXGroup;
 			children = (
-				0BB56696191E132F00731739 /* iStayHealthy_Tests.m */,
 				0BB56691191E132F00731739 /* Supporting Files */,
+				0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */,
 			);
 			path = "iStayHealthy Tests";
 			sourceTree = "<group>";
@@ -1887,7 +1887,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BB56697191E132F00731739 /* iStayHealthy_Tests.m in Sources */,
+				0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

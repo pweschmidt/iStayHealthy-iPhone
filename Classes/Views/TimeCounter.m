@@ -94,25 +94,26 @@
 
 - (void)computeDeltaFromCurrentComponent:(NSDateComponents *)current fireComponent:(NSDateComponents *)fire
 {
-	NSTimeInterval currentTime  = 3600 * current.hour + 60 * current.minute + 60 * current.second;
-	NSTimeInterval fireTime     = 3600 * fire.hour + 60 * fire.minute + 60 * fire.second;
+	NSTimeInterval currentTime  = 3600 * current.hour + 60 * current.minute + current.second;
+	NSTimeInterval fireTime     = 3600 * fire.hour + 60 * fire.minute + fire.second;
 	NSTimeInterval day          = 3600 * 24;
-	NSTimeInterval delta = 0;
-	if (fireTime < currentTime)
-	{
-		delta = day - currentTime + fireTime;
-	}
-	else
-	{
-		delta = fireTime - currentTime;
-	}
+	NSTimeInterval delta = fireTime - currentTime;
+    if (0 > delta)
+    {
+        delta += day;
+    }
+    NSTimeInterval hourDelta = floor(delta/3600);
 
-	hour = delta / 3600;
-	minute = (delta - (hour * 3600)) / 60;
-	second = (delta - (hour * 3600) - (minute * 60)) / 60;
+    NSTimeInterval minuteDelta = delta - (hourDelta * 3600);
+    minuteDelta = floor(minuteDelta/60);
+    NSTimeInterval secondDelta = delta - (hourDelta * 3600) - (minuteDelta * 60);
+
+	hour = (NSInteger)hourDelta;
+	minute = (NSInteger)minuteDelta;
+	second = (NSInteger)secondDelta;
 }
 
-- (void)updateLabelWithTimer:(NSTimer *)timer;
+- (void)updateLabelWithTimer:(NSTimer *)timer
 {
 	second--;
 	if (0 > second)
@@ -135,7 +136,6 @@
 	}
 	self.timerLabel.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hour, (long)minute, (long)second];
 }
-
 
 - (void)stopTimer
 {

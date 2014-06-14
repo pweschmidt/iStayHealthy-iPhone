@@ -97,6 +97,14 @@
 	}
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	if (![Utilities isIPad])
+	{
+		return;
+	}
+}
+
 - (void)reloadSQLData:(NSNotification *)notification
 {
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:YES completion: ^(NSArray *results, NSError *resultsError) {
