@@ -104,6 +104,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kTimeFormatting                 @"HH:mm"
 #define kDefaultFontName                @"Helvetica"
 #define kShortDateFormatting            @"MMM-yy"
+#define kDiaryActivatedKey              @"MedicationDiaryActivate"
 
 /**
    Database and iCloud
@@ -114,7 +115,6 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kFaultyDataSource               @"iStayHealthyNoiCloud.sqlite"
 #define kUbiquitousKeyPath              @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
 #define kTeamId                         @"5Y4HL833A4.com.pweschmidt.iStayHealthy"
-
 /**
    App and Dropbox app definitions
  */

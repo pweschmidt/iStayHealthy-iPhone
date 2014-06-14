@@ -53,12 +53,7 @@
 		[self showReminder:reminderText];
 	}
 
-	NSInteger badges = application.applicationIconBadgeNumber - 1;
-	if (0 > badges)
-	{
-		badges = 0;
-	}
-	application.applicationIconBadgeNumber = badges;
+	application.applicationIconBadgeNumber = 0;
 
 	NSString *root = kDBRootDropbox;
 	DBSession *session = [[DBSession alloc]initWithAppKey:kDropboxConsumerKey

@@ -68,7 +68,7 @@
 - (void)save:(id)sender
 {
 	NSTimeInterval timeInterval = 24.0 / (double)frequencyIndex * 60.0 * 60.0;
-	NSString *alertText = @"iStayHealthy Alert";
+	NSString *alertText = NSLocalizedString(@"iStayHealthy Alert", nil);
 	UITextField *inputField = [self customTextFieldForTagNumber:[NSNumber numberWithInteger:0]];
 	if (nil != inputField)
 	{

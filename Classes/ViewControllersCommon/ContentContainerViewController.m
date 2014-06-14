@@ -39,9 +39,24 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	ContentNavigationController *navigationController = [self navigationControllerForName_iPhone:kDashboardController];
+
+	ContentNavigationController *navigationController = [self startController];
 	[self addChildViewController:navigationController];
 	[self moveToChildNavigationController:navigationController];
+}
+
+- (ContentNavigationController *)startController
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	BOOL medDiaryActivated = [defaults boolForKey:kDiaryActivatedKey];
+	if (medDiaryActivated)
+	{
+		return [self navigationControllerForName_iPhone:kMedicationDiaryController];
+	}
+	else
+	{
+		return [self navigationControllerForName_iPhone:kDashboardController];
+	}
 }
 
 - (void)didReceiveMemoryWarning

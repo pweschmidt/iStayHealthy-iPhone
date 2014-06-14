@@ -85,7 +85,8 @@
 		[alert show];
 		return;
 	}
-	if (nil != self.chartSelector && [self.chartSelector respondsToSelector:@selector(selectedCharts:)])
+	__strong id <ChartSelector> strongSelector = self.chartSelector;
+	if (nil != strongSelector && [strongSelector respondsToSelector:@selector(selectedCharts:)])
 	{
 		[self.chartSelector selectedCharts:self.selectedItems];
 		NSData *archivedSelector = [NSKeyedArchiver archivedDataWithRootObject:self.selectedItems];

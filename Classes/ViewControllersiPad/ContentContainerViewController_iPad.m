@@ -42,6 +42,20 @@
 	[self moveToChildNavigationController:navigationController];
 }
 
+- (ContentNavigationController_iPad *)startController
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	BOOL medDiaryActivated = [defaults boolForKey:kDiaryActivatedKey];
+	if (medDiaryActivated)
+	{
+		return [self navigationControllerForName_iPad:kMedicationDiaryController];
+	}
+	else
+	{
+		return [self navigationControllerForName_iPad:kDashboardController];
+	}
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];

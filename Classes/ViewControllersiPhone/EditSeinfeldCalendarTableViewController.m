@@ -73,20 +73,53 @@
 	self.calendarSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
 	self.calendarSegmentControl.selectedSegmentIndex = 2;
 	[self.calendarSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
+	if (self.isEditMode)
+	{
+		UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(showDeleteAlertView)];
+		self.navigationItem.rightBarButtonItems = @[trashButton];
+	}
 	[self indexDidChangeForSegment];
 }
 
 - (void)save:(id)sender
 {
+	if (self.isEditMode)
+	{
+		return;
+	}
 	SeinfeldCalendar *newCalendar = [[CoreDataManager sharedInstance] managedObjectForEntityName:kSeinfeldCalendar];
 	newCalendar.uID = [Utilities GUID];
 	newCalendar.startDate = self.date;
 	newCalendar.endDate = self.endDate;
 	newCalendar.isCompleted = [NSNumber numberWithBool:NO];
+	[self scheduleAlert];
 
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	[self popController];
+}
+
+- (void)scheduleAlert
+{
+	NSString *alertText = NSLocalizedString(@"Med. Diary Reminder", nil);
+
+	NSDictionary *userDictionary = @{ kAppNotificationIntervalKey: @"daily",
+		                              kAppNotificationKey : alertText };
+
+	UILocalNotification *medAlert = [[UILocalNotification alloc]init];
+	medAlert.fireDate = [NSDate date];
+	medAlert.timeZone = [NSTimeZone localTimeZone];
+	medAlert.repeatInterval = NSDayCalendarUnit;
+	medAlert.userInfo = userDictionary;
+	medAlert.alertBody = alertText;
+	medAlert.alertAction = @"Show me";
+	medAlert.soundName = UILocalNotificationDefaultSoundName;
+	medAlert.applicationIconBadgeNumber = 1;
+	[[UIApplication sharedApplication]scheduleLocalNotification:medAlert];
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setBool:YES forKey:kDiaryActivatedKey];
+	[defaults synchronize];
 }
 
 - (void)removeManagedObject
@@ -104,7 +137,11 @@
 
 - (void)showDeleteAlertView
 {
-	UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"End or Delete?", nil) message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"End", nil), NSLocalizedString(@"Delete", nil), nil];
+	UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"End or Delete?", nil)
+	                                               message:NSLocalizedString(@"Do you want to end or delete this entry?", nil)
+	                                              delegate:self
+	                                     cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+	                                     otherButtonTitles:NSLocalizedString(@"End", nil), NSLocalizedString(@"Delete", nil), nil];
 
 	[alert show];
 }
