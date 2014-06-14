@@ -31,6 +31,12 @@
 	self.markedNotification = nil;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	[self restartCounters];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[self stopCounters];
@@ -97,6 +103,7 @@
 	CGFloat rowHeight = self.tableView.rowHeight;
 	CGFloat scale = 1.6;
 	TimeView *timeView = [TimeView viewWithTime:notification.fireDate frame:CGRectMake(20, 0, rowHeight * scale, rowHeight)];
+	timeView.tag = indexPath.row;
 
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(25 + rowHeight * scale, 0, 180, rowHeight / 2)];
 
@@ -104,14 +111,27 @@
 	label.textAlignment = NSTextAlignmentLeft;
 	label.textColor = TEXTCOLOUR;
 	label.font = [UIFont fontWithType:Standard size:standard];
+	label.tag = indexPath.row * 10;
 
 	TimeCounter *counter = [TimeCounter viewWithTime:notification.fireDate notification:notification frame:CGRectMake(25 + rowHeight * scale, rowHeight / 2, 180, rowHeight / 2)];
-    [counter startTimer];
+//	[counter startTimer];
+	counter.tag = indexPath.row * 100;
 	[self.counterArray addObject:counter];
 
 	[cell.contentView addSubview:timeView];
 	[cell.contentView addSubview:label];
 	[cell.contentView addSubview:counter];
+}
+
+- (void)restartCounters
+{
+	if (nil == self.counterArray || 0 == self.counterArray.count)
+	{
+		return;
+	}
+	[self.counterArray enumerateObjectsUsingBlock: ^(TimeCounter *counter, NSUInteger idx, BOOL *stop) {
+	    [counter startTimer];
+	}];
 }
 
 #pragma mark - Table view delegate
@@ -181,6 +201,7 @@
 
 - (void)restartTimer
 {
+	[self restartCounters];
 }
 
 @end

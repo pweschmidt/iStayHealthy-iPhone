@@ -42,6 +42,13 @@
 
 - (void)configureWithDate:(NSDate *)date notification:(UILocalNotification *)notification
 {
+	NSArray *subviews = [self subviews];
+	if (nil != subviews && 0 < subviews.count)
+	{
+		[subviews enumerateObjectsUsingBlock: ^(UIView *obj, NSUInteger idx, BOOL *stop) {
+		    [obj removeFromSuperview];
+		}];
+	}
 	CGFloat width = self.frame.size.width / 3;
 	UILabel *intervalLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, self.frame.size.height)];
 	intervalLabel.backgroundColor = [UIColor clearColor];
@@ -98,15 +105,15 @@
 	NSTimeInterval fireTime     = 3600 * fire.hour + 60 * fire.minute + fire.second;
 	NSTimeInterval day          = 3600 * 24;
 	NSTimeInterval delta = fireTime - currentTime;
-    if (0 > delta)
-    {
-        delta += day;
-    }
-    NSTimeInterval hourDelta = floor(delta/3600);
+	if (0 > delta)
+	{
+		delta += day;
+	}
+	NSTimeInterval hourDelta = floor(delta / 3600);
 
-    NSTimeInterval minuteDelta = delta - (hourDelta * 3600);
-    minuteDelta = floor(minuteDelta/60);
-    NSTimeInterval secondDelta = delta - (hourDelta * 3600) - (minuteDelta * 60);
+	NSTimeInterval minuteDelta = delta - (hourDelta * 3600);
+	minuteDelta = floor(minuteDelta / 60);
+	NSTimeInterval secondDelta = delta - (hourDelta * 3600) - (minuteDelta * 60);
 
 	hour = (NSInteger)hourDelta;
 	minute = (NSInteger)minuteDelta;
