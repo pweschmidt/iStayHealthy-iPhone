@@ -121,7 +121,7 @@
 		{
 			contactNumber = contacts.ConsultantName;
 		}
-		[view configureViewWithImageName:@"doctor.png"
+		[view configureViewWithImageName:@"hospital.png"
 		                      isMedImage:NO
 		                      mainString:clinicID
 		                 secondaryString:contactNumber];

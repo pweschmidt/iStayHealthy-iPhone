@@ -77,7 +77,7 @@
 	UIImageView *medImageView = [[UIImageView alloc] init];
 	medImageView.frame = CGRectMake(20, 1, rowHeight, rowHeight);
 	medImageView.backgroundColor = [UIColor clearColor];
-	medImageView.image = [UIImage imageNamed:@"doctor.png"];
+	medImageView.image = [UIImage imageNamed:@"hospital.png"];
 
 
 	[cell.contentView addSubview:name];
