@@ -84,7 +84,7 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-	[self.collectionView setAlpha:0.0f];
+	self.collectionView.alpha = 0.0;
 	[self.collectionView.collectionViewLayout invalidateLayout];
 }
 
@@ -105,11 +105,12 @@
 		}
 		self.collectionView.frame = frame;
 		[UIView animateWithDuration:0.125f animations: ^{
-		    [self.collectionView setAlpha:1.0f];
+		    self.collectionView.alpha = 1.0;
+		} completion: ^(BOOL finished) {
+		    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 		}];
 //		[self.collectionViewLayout invalidateLayout];
 	}
-	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 - (void)hidePopover

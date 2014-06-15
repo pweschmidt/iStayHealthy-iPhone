@@ -71,6 +71,11 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
 	CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
+	{
+		toolbarFrame = CGRectMake(0, self.view.frame.size.width - 44, self.view.frame.size.height, 44);
+	}
+
 	CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
 	[self.view addSubview:toolbar];
 	self.customToolbar = toolbar;
@@ -82,6 +87,28 @@
 //		[self.view addSubview:toolbar];
 //		self.customToolbar = toolbar;
 //	}
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	[UIView animateWithDuration:duration animations: ^{
+	    self.customToolbar.alpha = 0.0f;
+	}];
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	if ([Utilities isIPad])
+	{
+		[UIView animateWithDuration:0.125f animations: ^{
+		    CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
+		    self.customToolbar.frame = toolbarFrame;
+		    self.customToolbar.alpha = 1.0f;
+		}];
+		//		[self.collectionViewLayout invalidateLayout];
+	}
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 - (void)disableRightBarButtons
@@ -308,29 +335,29 @@
 }
 
 #pragma mark - handle rotations (iPad only)
-- (BOOL)shouldAutorotate
-{
-	if ([Utilities isIPad])
-	{
-		return YES;
-	}
-	else
-	{
-		return NO;
-	}
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-	if ([Utilities isIPad])
-	{
-		return UIInterfaceOrientationMaskAll;
-	}
-	else
-	{
-		return UIInterfaceOrientationMaskPortrait;
-	}
-}
+//- (BOOL)shouldAutorotate
+//{
+//	if ([Utilities isIPad])
+//	{
+//		return YES;
+//	}
+//	else
+//	{
+//		return NO;
+//	}
+//}
+//
+//- (NSUInteger)supportedInterfaceOrientations
+//{
+//	if ([Utilities isIPad])
+//	{
+//		return UIInterfaceOrientationMaskAll;
+//	}
+//	else
+//	{
+//		return UIInterfaceOrientationMaskPortrait;
+//	}
+//}
 
 - (UIImage *)blankImage
 {

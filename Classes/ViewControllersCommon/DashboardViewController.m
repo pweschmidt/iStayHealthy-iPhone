@@ -88,6 +88,7 @@
 	{
 		return;
 	}
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	[UIView animateWithDuration:duration animations: ^{
 	    self.chartScroller.alpha = 0.0;
 	} completion: ^(BOOL finished) {
@@ -101,11 +102,13 @@
 	{
 		return;
 	}
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	self.chartScroller.alpha = 0.0;
 	[UIView animateWithDuration:1.0 animations: ^{
+	    self.chartScroller.alpha = 1.0;
 	} completion: ^(BOOL finished) {
 	    [self configureScrollView];
 	    [self resetPageController];
-	    self.chartScroller.alpha = 1.0f;
 	}];
 }
 
@@ -292,7 +295,6 @@
 	CGFloat scrollHeight = self.view.bounds.size.height - 188;
 	CGFloat scrollWidth = self.view.bounds.size.width;
 	CGFloat yPageOffset = yScrollOffset + scrollHeight + 5;
-
 	scrollFrame = CGRectMake(xOffset, yScrollOffset, scrollWidth, scrollHeight);
 	pageFrame = CGRectMake(xOffset, yPageOffset, scrollWidth, 36);
 	scrollView = [[UIScrollView alloc] initWithFrame:scrollFrame];
@@ -324,6 +326,31 @@
 	self.pageController.currentPage = 0;
 	[self.view addSubview:pager];
 	[self reloadSQLData:nil];
+}
+
+- (void)loadDashboardViewWithPage:(NSUInteger)page
+                          results:(NSArray *)results
+                      medications:(NSArray *)medications
+                            types:(PWESResultsTypes *)types
+{
+	CGFloat offset = 20;
+	NSUInteger viewIndex = 0;
+	NSError *error = nil;
+	PWESDataNTuple *ntuple = [PWESDataNTuple nTupleWithRawResults:results
+	                                               rawMedications:medications
+	                                         rawMissedMedications:nil
+	                                                        types:types
+	                                                        error:&error];
+	CGFloat x = self.chartScroller.frame.origin.x + self.chartScroller.frame.size.width * viewIndex + offset;
+	CGFloat y = 0;
+	CGFloat width = self.chartScroller.frame.size.width - 2 * offset;
+	CGFloat height = self.chartScroller.frame.size.height;
+	CGRect frame = CGRectMake(x, y, width, height);
+	PWESDashboardView *dashboard = [PWESDashboardView
+	                                dashboardViewWithFrame:frame
+	                                                nTuple:ntuple
+	                                                 types:types];
+	[self.chartScroller addSubview:dashboard];
 }
 
 @end
