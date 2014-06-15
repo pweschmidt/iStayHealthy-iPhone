@@ -19,6 +19,8 @@
 //#import "EditResultsTableViewController.h"
 #import "EditChartsTableViewController.h"
 
+#define kDashboardScrollViewTag 1001
+
 @interface DashboardViewController ()
 {
 	CGRect scrollFrame;
@@ -36,24 +38,7 @@
 {
 	[super viewDidLoad];
 	[self setTitleViewWithTitle:NSLocalizedString(@"Charts", nil)];
-//    self.navigationItem.title = NSLocalizedString(@"Charts", nil);
-	CGFloat xOffset = 0;
-	CGFloat yScrollOffset = 95;
-	CGFloat scrollHeight = self.view.bounds.size.height - 188;
-	CGFloat scrollWidth = self.view.bounds.size.width;
-	CGFloat yPageOffset = yScrollOffset + scrollHeight + 5;
-
-	scrollFrame = CGRectMake(xOffset, yScrollOffset, scrollWidth, scrollHeight);
-	pageFrame = CGRectMake(xOffset, yPageOffset, scrollWidth, 36);
-	UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:scrollFrame];
-	[self.view addSubview:scrollView];
-
-
-	self.chartScroller = scrollView;
-	self.chartScroller.backgroundColor = [UIColor clearColor];
-	self.chartScroller.delegate = self;
-	self.chartScroller.scrollsToTop = YES;
-	self.chartScroller.pagingEnabled = YES;
+	[self configureScrollView];
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSData *archivedData = [defaults objectForKey:kDashboardTypes];
@@ -97,12 +82,31 @@
 	}
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	if (![Utilities isIPad])
+	{
+		return;
+	}
+	[UIView animateWithDuration:duration animations: ^{
+	    self.chartScroller.alpha = 0.0;
+	} completion: ^(BOOL finished) {
+	    [self clearScrollView];
+	}];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	if (![Utilities isIPad])
 	{
 		return;
 	}
+	[UIView animateWithDuration:1.0 animations: ^{
+	} completion: ^(BOOL finished) {
+	    [self configureScrollView];
+	    [self resetPageController];
+	    self.chartScroller.alpha = 1.0f;
+	}];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification
@@ -267,6 +271,41 @@
 }
 
 #pragma mark private
+- (void)clearScrollView
+{
+	if (nil != self.chartScroller)
+	{
+		[self.chartScroller.subviews enumerateObjectsUsingBlock: ^(UIView *obj, NSUInteger idx, BOOL *stop) {
+		    [obj removeFromSuperview];
+		}];
+		[self.chartScroller removeFromSuperview];
+		self.chartScroller = nil;
+	}
+}
+
+- (void)configureScrollView
+{
+	UIScrollView *scrollView = [[UIScrollView alloc] init];
+
+	CGFloat xOffset = 0;
+	CGFloat yScrollOffset = 95;
+	CGFloat scrollHeight = self.view.bounds.size.height - 188;
+	CGFloat scrollWidth = self.view.bounds.size.width;
+	CGFloat yPageOffset = yScrollOffset + scrollHeight + 5;
+
+	scrollFrame = CGRectMake(xOffset, yScrollOffset, scrollWidth, scrollHeight);
+	pageFrame = CGRectMake(xOffset, yPageOffset, scrollWidth, 36);
+	scrollView = [[UIScrollView alloc] initWithFrame:scrollFrame];
+	[self.view addSubview:scrollView];
+
+
+	self.chartScroller = scrollView;
+	self.chartScroller.backgroundColor = [UIColor clearColor];
+	self.chartScroller.delegate = self;
+	self.chartScroller.scrollsToTop = YES;
+	self.chartScroller.pagingEnabled = YES;
+}
+
 - (void)resetPageController
 {
 	if (nil != self.pageController)
@@ -280,7 +319,7 @@
 	self.pageController.pageIndicatorTintColor = [UIColor lightGrayColor];
 	self.pageController.currentPageIndicatorTintColor = DARK_RED;
 	[self.pageController addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
-	self.chartScroller.contentSize = CGSizeMake(self.view.frame.size.width * self.dashboardTypes.count, self.chartScroller.frame.size.height);
+	self.chartScroller.contentSize = CGSizeMake(self.view.bounds.size.width * self.dashboardTypes.count, self.chartScroller.frame.size.height);
 	self.pageController.numberOfPages = self.dashboardTypes.count;
 	self.pageController.currentPage = 0;
 	[self.view addSubview:pager];
