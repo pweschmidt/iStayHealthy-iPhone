@@ -32,10 +32,8 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	[self populateValues];
 	self.tableView.backgroundColor = DEFAULT_BACKGROUND;
-	self.results = [self dashboardTypes];
-	self.immutableIndexPaths = [NSMutableArray array];
-	self.mutableIndexPaths = [NSMutableDictionary dictionary];
 	NSArray *barButtons = nil;
 	UIButton *save = [UIButton buttonWithType:UIButtonTypeCustom];
 	save.frame = CGRectMake(0, 0, 20, 20);
@@ -46,6 +44,27 @@
 	barButtons = @[saveButton];
 	self.navigationItem.rightBarButtonItems = barButtons;
 	self.settingsChanged = NO;
+}
+
+- (void)populateValues
+{
+	self.results = [self dashboardTypes];
+	self.immutableIndexPaths = [NSMutableArray array];
+	self.mutableIndexPaths = [NSMutableDictionary dictionary];
+	[self.results enumerateObjectsUsingBlock: ^(NSString *type, NSUInteger idx, BOOL *stop) {
+	    NSInteger section = 0;
+	    NSInteger row = idx;
+	    NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
+	    if (![type isEqualToString:kCD4AndVL])
+	    {
+	        BOOL checked = NO;
+	        if (nil != self.selectedItems && [self.selectedItems containsObject:type])
+	        {
+	            checked = YES;
+			}
+	        [self.mutableIndexPaths setObject:[NSNumber numberWithBool:checked] forKey:path];
+		}
+	}];
 }
 
 - (void)popController

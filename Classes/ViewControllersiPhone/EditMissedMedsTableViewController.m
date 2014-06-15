@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) NSIndexPath *selectedReasonPath;
 @property (nonatomic, strong) NSMutableDictionary *selectedMedPaths;
+@property (nonatomic, assign) BOOL hasOnlyOneMed;
 @end
 
 @implementation EditMissedMedsTableViewController
@@ -57,11 +58,21 @@
 	self.selectedReasonPath = nil;
 	self.selectedMedPaths = [NSMutableDictionary dictionary];
 	NSUInteger medSection = 2;
-	[self.currentMeds enumerateObjectsUsingBlock: ^(Medication *medication, NSUInteger index, BOOL *stop) {
-	    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:medSection];
-	    NSNumber *value = [NSNumber numberWithBool:NO];
-	    [self.selectedMedPaths setObject:value forKey:indexPath];
-	}];
+	if (1 == self.currentMeds.count)
+	{
+		self.hasOnlyOneMed = YES;
+		NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:2];
+		[self.selectedMedPaths setObject:[NSNumber numberWithBool:YES] forKey:path];
+	}
+	else
+	{
+		self.hasOnlyOneMed = NO;
+		[self.currentMeds enumerateObjectsUsingBlock: ^(Medication *medication, NSUInteger index, BOOL *stop) {
+		    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:medSection];
+		    NSNumber *value = [NSNumber numberWithBool:NO];
+		    [self.selectedMedPaths setObject:value forKey:indexPath];
+		}];
+	}
 
 	if (self.isEditMode)
 	{
@@ -325,7 +336,7 @@
 		self.selectedReasonPath = indexPath;
 		[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 	}
-	else if (2 == indexPath.section)
+	else if (2 == indexPath.section && !self.hasOnlyOneMed)
 	{
 		BOOL checkedValue = [[self.selectedMedPaths objectForKey:indexPath] boolValue];
 		BOOL checkedUnchecked = !checkedValue;
