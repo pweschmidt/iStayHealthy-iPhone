@@ -88,6 +88,7 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     self.collectionView.alpha = 0.0;
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
@@ -96,6 +97,7 @@
 {
     if ([Utilities isIPad])
     {
+        [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
         CGRect frame = self.view.bounds;
         CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
         self.toolbar.frame = toolbarFrame;
@@ -111,7 +113,6 @@
         [UIView animateWithDuration:0.125f animations: ^{
              self.collectionView.alpha = 1.0;
          } completion: ^(BOOL finished) {
-             [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
          }];
 //		[self.collectionViewLayout invalidateLayout];
     }

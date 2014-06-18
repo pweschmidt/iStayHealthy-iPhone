@@ -104,6 +104,8 @@
         return;
     }
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    CGRect frame = self.view.frame;
+    CGRect bounds = self.view.bounds;
     self.chartScroller.alpha = 0.0;
     [UIView animateWithDuration:1.0 animations: ^{
          self.chartScroller.alpha = 1.0;
@@ -294,16 +296,14 @@
 
     CGFloat xOffset = 0;
     CGFloat yScrollOffset = 95;
-    CGFloat scrollHeight = self.view.bounds.size.height;
+    CGFloat scrollHeight = self.view.bounds.size.height - 188;
     CGFloat scrollWidth = self.view.bounds.size.width;
 
     if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
     {
-        CGFloat tmpHeight = scrollWidth;
-        scrollWidth = scrollHeight;
-        scrollHeight = tmpHeight;
+        scrollWidth = self.view.frame.size.height;
+        scrollHeight = self.view.frame.size.width - 188;
     }
-    scrollHeight  -= 188;
     CGFloat yPageOffset = yScrollOffset + scrollHeight + 5;
 
     scrollFrame = CGRectMake(xOffset, yScrollOffset, scrollWidth, scrollHeight);
