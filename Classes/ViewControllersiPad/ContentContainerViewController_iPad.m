@@ -36,6 +36,15 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
+	{
+		CGRect frame = self.view.frame;
+		CGRect bounds = self.view.bounds;
+		if (self.view.frame.size.width < self.view.frame.size.height)
+		{
+			self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
+		}
+	}
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	ContentNavigationController_iPad *navigationController = [self navigationControllerForName_iPad:kDashboardController];
 	[self addChildViewController:navigationController];
@@ -56,17 +65,10 @@
 	}
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
-	{
-		if (self.view.frame.size.width < self.view.frame.size.height)
-		{
-			self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
-		}
-	}
-}
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//	[super viewWillAppear:animated];
+//}
 
 - (void)didReceiveMemoryWarning
 {

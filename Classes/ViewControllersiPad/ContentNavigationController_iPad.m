@@ -17,11 +17,6 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
 	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
 	{
 		if (self.view.frame.size.width < self.view.frame.size.height)
@@ -30,6 +25,11 @@
 		}
 	}
 }
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//	[super viewWillAppear:animated];
+//}
 
 - (void)didReceiveMemoryWarning
 {
