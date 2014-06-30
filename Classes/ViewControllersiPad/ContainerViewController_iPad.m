@@ -41,8 +41,8 @@
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
-	BOOL passwordIsTransferred = [defaults boolForKey:kPasswordTransferred];
-	if (isPasswordEnabled && passwordIsTransferred)
+	BOOL isPasswordReset = [defaults boolForKey:kPasswordReset];
+	if (isPasswordEnabled && !isPasswordReset)
 	{
 		NSLog(@"calling the login view controller");
 		[self.view addSubview:self.loginController.view];

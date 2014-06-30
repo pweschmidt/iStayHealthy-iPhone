@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface LoginViewController_iPad : UIViewController
+@interface LoginViewController_iPad : UIViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate>
 
 @end
