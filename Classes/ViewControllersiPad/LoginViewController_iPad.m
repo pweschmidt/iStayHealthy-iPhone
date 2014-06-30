@@ -54,7 +54,7 @@
 	UILabel *copyrightLabel = [UILabel standardLabel];
 	copyrightLabel.frame = CGRectMake(xOffset, 205, 280, 20);
 	copyrightLabel.backgroundColor = [UIColor clearColor];
-	copyrightLabel.text = @"Peter Schmidt, 2013";
+	copyrightLabel.text = @"Peter Schmidt, 2014";
 	copyrightLabel.textAlignment = NSTextAlignmentCenter;
 	copyrightLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:12];
 	[self.view addSubview:copyrightLabel];
