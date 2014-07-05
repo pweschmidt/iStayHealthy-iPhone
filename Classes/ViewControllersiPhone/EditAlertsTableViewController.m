@@ -7,6 +7,9 @@
 //
 
 #import "EditAlertsTableViewController.h"
+#import "SoundSelectionTableViewController.h"
+#import "UILabel+Standard.h"
+#import "Menus.h"
 
 @interface EditAlertsTableViewController ()
 {
@@ -17,6 +20,8 @@
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISegmentedControl *frequencyControl;
 @property (nonatomic, strong) UILocalNotification *currentNotification;
+@property (nonatomic, strong) NSString *selectedSoundName;
+@property (nonatomic, strong) UILabel *soundLabel;
 - (void)changeFrequency:(id)sender;
 @end
 
@@ -43,11 +48,26 @@
 		if (nil != self.currentNotification)
 		{
 			self.date = self.currentNotification.fireDate;
+			NSString *soundName = self.currentNotification.soundName;
+			__block NSString *soundText = nil;
+			[[Menus soundFiles] enumerateKeysAndObjectsUsingBlock: ^(NSString *key, NSString *filename, BOOL *stop) {
+			    if ([filename isEqualToString:soundName])
+			    {
+			        soundText = key;
+			        *stop = YES;
+				}
+			}];
+			if (nil == soundText)
+			{
+				soundText = NSLocalizedString(@"Default", nil);
+			}
+			self.selectedSoundName = soundText;
 		}
 	}
 	else
 	{
 		self.navigationItem.title = NSLocalizedString(@"New Alert", nil);
+		self.selectedSoundName = nil;
 	}
 	self.editMenu = @[kAlertLabel];
 	self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
@@ -74,6 +94,20 @@
 	{
 		alertText = inputField.text;
 	}
+	NSString *soundFile = nil;
+	if (nil == self.selectedSoundName)
+	{
+		soundFile = UILocalNotificationDefaultSoundName;
+	}
+	else
+	{
+		soundFile = [[Menus soundFiles] objectForKey:self.selectedSoundName];
+		if (nil == soundFile)
+		{
+			soundFile = UILocalNotificationDefaultSoundName;
+		}
+	}
+
 	for (int alarmIndex = 0; alarmIndex < frequencyIndex; alarmIndex++)
 	{
 		NSTimeInterval addedSeconds = alarmIndex * timeInterval;
@@ -87,7 +121,7 @@
 		medAlert.userInfo = userDictionary;
 		medAlert.alertBody = alertText;
 		medAlert.alertAction = @"Show me";
-		medAlert.soundName = UILocalNotificationDefaultSoundName;
+		medAlert.soundName = soundFile;
 
 		medAlert.applicationIconBadgeNumber = 1;
 		[[UIApplication sharedApplication]scheduleLocalNotification:medAlert];
@@ -124,7 +158,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 2;
+	return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -133,9 +167,13 @@
 	{
 		return ([self hasInlineDatePicker] ? 2 : 1);
 	}
-	else
+	else if (1 == section)
 	{
 		return self.editMenu.count;
+	}
+	else
+	{
+		return 1;
 	}
 }
 
@@ -175,7 +213,7 @@
 		}
 		return cell;
 	}
-	else
+	else if (1 == indexPath.section)
 	{
 		if (nil == cell)
 		{
@@ -189,6 +227,44 @@
 		       hasNumericalInput:NO];
 		return cell;
 	}
+	else
+	{
+		if (nil == cell)
+		{
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+		}
+		[self configureSoundCell:cell];
+		return cell;
+	}
+}
+
+- (void)configureSoundCell:(UITableViewCell *)cell
+{
+	UILabel *soundSelect = (UILabel *)[cell.contentView viewWithTag:10];
+	if (nil == soundSelect)
+	{
+		soundSelect = [UILabel standardLabel];
+		soundSelect.frame = CGRectMake(20, 0, 120, self.tableView.rowHeight);
+		soundSelect.text = NSLocalizedString(@"Alert Sound", nil);
+		soundSelect.tag = 10;
+		[cell.contentView addSubview:soundSelect];
+	}
+
+	UILabel *soundNameLabel = (UILabel *)[cell.contentView viewWithTag:11];
+	if (nil == soundNameLabel)
+	{
+		soundNameLabel = [UILabel standardLabel];
+		soundNameLabel.tag = 11;
+		soundNameLabel.frame = CGRectMake(150, 0, 140, self.tableView.rowHeight);
+		if (nil != self.selectedSoundName)
+		{
+			soundNameLabel.text = self.selectedSoundName;
+		}
+		[cell.contentView addSubview:soundNameLabel];
+	}
+	self.soundLabel = soundNameLabel;
+
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell
@@ -226,7 +302,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
 	UIView *footerView = [[UIView alloc] init];
-	if (0 == section)
+	if (2 > section)
 	{
 		footerView.frame = CGRectMake(0, 0, tableView.frame.size.width, 10);
 		footerView.backgroundColor = [UIColor clearColor];
@@ -253,6 +329,23 @@
 		UISegmentedControl *segmenter = (UISegmentedControl *)sender;
 		frequencyIndex = segmenter.selectedSegmentIndex + 1;
 	}
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (2 == indexPath.section)
+	{
+		SoundSelectionTableViewController *controller = [[SoundSelectionTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		controller.previousSound = self.selectedSoundName;
+		controller.soundDelegate = self;
+		[self.navigationController pushViewController:controller animated:YES];
+	}
+}
+
+- (void)selectedSound:(NSString *)soundName
+{
+	self.selectedSoundName = soundName;
+	self.soundLabel.text = soundName;
 }
 
 @end

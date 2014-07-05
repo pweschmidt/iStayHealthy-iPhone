@@ -14,6 +14,7 @@
 		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
+		0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */; };
 		0B35BF821944681200341AFB /* alarm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6A1944681200341AFB /* alarm-icon.png */; };
 		0B35BF831944681200341AFB /* alarm-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6B1944681200341AFB /* alarm-icon@2x.png */; };
 		0B35BF841944681200341AFB /* charts-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6C1944681200341AFB /* charts-icon.png */; };
@@ -306,7 +307,6 @@
 		C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2715F1432E00882416 /* UINavigationBar-Button.m */; };
 		C4C41A2E15F1432E00882416 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2915F1432E00882416 /* Utilities.m */; };
 		C4C41A3715F1445400882416 /* chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3015F1445400882416 /* chimes.caf */; };
-		C4C41A3815F1445400882416 /* doorbell.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3115F1445400882416 /* doorbell.caf */; };
 		C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3215F1445400882416 /* polyphonic1.caf */; };
 		C4C41A3A15F1445400882416 /* polyphonic2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3315F1445400882416 /* polyphonic2.caf */; };
 		C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3415F1445400882416 /* ringtone1.caf */; };
@@ -325,7 +325,6 @@
 		C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */; };
 		C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */; };
 		C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */; };
-		C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4EB207F12FD9DF900A8712D /* SoundList.plist */; };
 		C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE811D1306D9890097B903 /* AudioToolbox.framework */; };
 		C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */; };
 		C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */; };
@@ -359,6 +358,9 @@
 		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
 		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
 		0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditCurrentHIVMedsTableViewController.m; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.m; sourceTree = "<group>"; };
+		0B2DF7BA196827FE00BCB111 /* SoundSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundSelector.h; path = ViewControllersiPhone/SoundSelector.h; sourceTree = "<group>"; };
+		0B2DF7BB19682AD600BCB111 /* SoundSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundSelectionTableViewController.h; path = ViewControllersiPhone/SoundSelectionTableViewController.h; sourceTree = "<group>"; };
+		0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundSelectionTableViewController.m; path = ViewControllersiPhone/SoundSelectionTableViewController.m; sourceTree = "<group>"; };
 		0B35BF6A1944681200341AFB /* alarm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon.png"; path = "Classes/Assets/alarm-icon.png"; sourceTree = "<group>"; };
 		0B35BF6B1944681200341AFB /* alarm-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon@2x.png"; path = "Classes/Assets/alarm-icon@2x.png"; sourceTree = "<group>"; };
 		0B35BF6C1944681200341AFB /* charts-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-icon.png"; path = "Classes/Assets/charts-icon.png"; sourceTree = "<group>"; };
@@ -835,7 +837,6 @@
 		C4C41A2815F1432E00882416 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utilities.h; path = Utils/Utilities.h; sourceTree = "<group>"; };
 		C4C41A2915F1432E00882416 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utilities.m; path = Utils/Utilities.m; sourceTree = "<group>"; };
 		C4C41A3015F1445400882416 /* chimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chimes.caf; sourceTree = "<group>"; };
-		C4C41A3115F1445400882416 /* doorbell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = doorbell.caf; sourceTree = "<group>"; };
 		C4C41A3215F1445400882416 /* polyphonic1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = polyphonic1.caf; sourceTree = "<group>"; };
 		C4C41A3315F1445400882416 /* polyphonic2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = polyphonic2.caf; sourceTree = "<group>"; };
 		C4C41A3415F1445400882416 /* ringtone1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone1.caf; sourceTree = "<group>"; };
@@ -867,7 +868,6 @@
 		C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditContactsTableViewController.m; path = ViewControllersiPhone/EditContactsTableViewController.m; sourceTree = "<group>"; };
 		C4DF910915EE79560042211E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		C4EB207F12FD9DF900A8712D /* SoundList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SoundList.plist; sourceTree = "<group>"; };
 		C4EE811D1306D9890097B903 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1033,7 +1033,6 @@
 				C4C0151A134251B4005E889D /* HIVMedications.plist */,
 				2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */,
 				8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */,
-				C4EB207F12FD9DF900A8712D /* SoundList.plist */,
 				C4B8B79413DEAE1C00FA9893 /* Localizable.strings */,
 				C4897FC5140FD0360033C61C /* CombiMeds.plist */,
 				C4897FCB140FD04C0033C61C /* NRTI.plist */,
@@ -1272,6 +1271,9 @@
 				C45C27CF17DB5AC7001F6831 /* EditWellnessTableViewController.m */,
 				C4A49B2318005CD200FC1637 /* EffectsSelectionTableViewController.h */,
 				C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */,
+				0B2DF7BA196827FE00BCB111 /* SoundSelector.h */,
+				0B2DF7BB19682AD600BCB111 /* SoundSelectionTableViewController.h */,
+				0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */,
 			);
 			name = ViewControllersiPhone;
 			sourceTree = "<group>";
@@ -1615,7 +1617,6 @@
 			isa = PBXGroup;
 			children = (
 				C4C41A3015F1445400882416 /* chimes.caf */,
-				C4C41A3115F1445400882416 /* doorbell.caf */,
 				C4C41A3215F1445400882416 /* polyphonic1.caf */,
 				C4C41A3315F1445400882416 /* polyphonic2.caf */,
 				C4C41A3415F1445400882416 /* ringtone1.caf */,
@@ -1723,7 +1724,6 @@
 				0B8910F618F93CA500A49B95 /* crixivan.png in Resources */,
 				0B8910F718F93CA500A49B95 /* didanosine.png in Resources */,
 				0B89111518F93CA500A49B95 /* ziagen.png in Resources */,
-				C4EB208012FD9DF900A8712D /* SoundList.plist in Resources */,
 				0B89111318F93CA500A49B95 /* viread.png in Resources */,
 				C44D36D9180F3E5000EE9F5E /* missed.png in Resources */,
 				C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */,
@@ -1851,7 +1851,6 @@
 				0B8910FD18F93CA500A49B95 /* isentress.png in Resources */,
 				C44D36B6180F3E3600EE9F5E /* alarm@2x.png in Resources */,
 				C4C41A3715F1445400882416 /* chimes.caf in Resources */,
-				C4C41A3815F1445400882416 /* doorbell.caf in Resources */,
 				C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */,
 				0B8910BA18F9330A00A49B95 /* README.md in Resources */,
 				C44D36C6180F3E3600EE9F5E /* feedback@2x.png in Resources */,
@@ -1963,6 +1962,7 @@
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
 				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
+				0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */,
 				0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */,
 				0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */,
 				C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */,

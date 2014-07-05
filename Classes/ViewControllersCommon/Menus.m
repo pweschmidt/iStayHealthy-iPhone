@@ -230,6 +230,22 @@
 	return colourDictionary;
 }
 
++ (NSDictionary *)soundFiles
+{
+	static dispatch_once_t onceToken;
+	static NSDictionary *files = nil;
+	dispatch_once(&onceToken, ^{
+	    files = @{ NSLocalizedString(@"Default", nil) : UILocalNotificationDefaultSoundName,
+	               @"Chimes" : @"chimes.caf",
+	               @"Polyphonic 1" : @"polyphonic1.caf",
+	               @"Polyphonic 2" : @"polyphonic2.caf",
+	               @"Ringtone 1" : @"ringtone1.caf",
+	               @"Ringtone 2" : @"ringtone2.caf",
+	               @"Xylophone" : @"xylophone.caf" };
+	});
+	return files;
+}
+
 + (UIImageView *)buttonImageviewForTitle:(NSString *)title
 {
 	UIImage *image = nil;

@@ -20,5 +20,6 @@
                                     ignoreFirst:(BOOL)ignoreFirst;
 
 + (NSDictionary *)menuImages;
++ (NSDictionary *)soundFiles;
 + (UIImageView *)buttonImageviewForTitle:(NSString *)title;
 @end

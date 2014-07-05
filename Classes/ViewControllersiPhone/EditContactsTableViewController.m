@@ -18,6 +18,10 @@
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) NSMutableDictionary *valueMap;
+@property (nonatomic, strong) NSString *callNumber;
+@property (nonatomic, strong) NSString *emergencyNumber;
+@property (nonatomic, strong) NSString *webSite;
+@property (nonatomic, strong) NSString *email;
 @end
 
 @implementation EditContactsTableViewController
@@ -40,15 +44,60 @@
 	{
 		self.navigationItem.title = NSLocalizedString(@"Edit Clinic", nil);
 		self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44);
-		self.toolbar = [[UIToolbar alloc] init];
-		self.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
-		[self.view addSubview:self.toolbar];
+		if (![Utilities isIPad])
+		{
+			[self createToolbarButtons];
+		}
 	}
 	else
 	{
 		self.navigationItem.title = NSLocalizedString(@"New Clinic", nil);
 	}
 	self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
+}
+
+- (void)createToolbarButtons
+{
+	self.toolbar = [[UIToolbar alloc] init];
+	self.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+	UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc]
+	                                  initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+	                                                       target:self
+	                                                       action:nil];
+	NSMutableArray *buttons = [NSMutableArray array];
+	[buttons addObject:flexibleSpace];
+	Contacts *contacts = (Contacts *)self.managedObject;
+	NSUInteger realButtonCount = 0;
+	if (nil != contacts.ClinicContactNumber && 0 < contacts.ClinicContactNumber.length)
+	{
+		self.callNumber = contacts.ClinicContactNumber;
+		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Call", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callNumber)];
+		[buttons addObject:callButton];
+		[buttons addObject:flexibleSpace];
+		realButtonCount++;
+	}
+	if (nil != contacts.EmergencyContactNumber && 0 < contacts.EmergencyContactNumber.length)
+	{
+		self.emergencyNumber = contacts.EmergencyContactNumber;
+		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Emergency", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callEmergency)];
+		[buttons addObject:callButton];
+		[buttons addObject:flexibleSpace];
+		realButtonCount++;
+	}
+	if (nil != contacts.ClinicWebSite && 0 < contacts.ClinicWebSite.length)
+	{
+		self.webSite = contacts.ClinicWebSite;
+		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Website", nil) style:UIBarButtonItemStylePlain target:self action:@selector(gotoWebsite)];
+		[buttons addObject:callButton];
+		[buttons addObject:flexibleSpace];
+		realButtonCount++;
+	}
+	if (0 < realButtonCount)
+	{
+		self.toolbar.items = buttons;
+
+		[self.view addSubview:self.toolbar];
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -180,6 +229,35 @@
 	{
 		textField.textColor = [UIColor lightGrayColor];
 		textField.text = textField.placeholder;
+	}
+}
+
+#pragma mark toolbar button items
+- (void)callContact
+{
+	if (nil != self.callNumber && 0 < self.callNumber.length)
+	{
+		NSString *tel = [NSString stringWithFormat:@"tel:%@", self.callNumber];
+		NSURL *url = [NSURL URLWithString:tel];
+		[[UIApplication sharedApplication] openURL:url];
+	}
+}
+
+- (void)callEmergency
+{
+	if (nil != self.emergencyNumber && 0 < self.emergencyNumber.length)
+	{
+		NSString *tel = [NSString stringWithFormat:@"tel:%@", self.emergencyNumber];
+		NSURL *url = [NSURL URLWithString:tel];
+		[[UIApplication sharedApplication] openURL:url];
+	}
+}
+
+- (void)gotoWebsite
+{
+	if (nil != self.webSite && 0 < self.webSite.length)
+	{
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.webSite]];
 	}
 }
 

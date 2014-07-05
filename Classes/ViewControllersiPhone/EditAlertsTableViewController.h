@@ -8,8 +8,9 @@
 
 #import "BaseEditTableViewController.h"
 #import "NotificationsDelegate.h"
+#import "SoundSelector.h"
 
-@interface EditAlertsTableViewController : BaseEditTableViewController
+@interface EditAlertsTableViewController : BaseEditTableViewController <SoundSelector>
 @property (nonatomic, weak) id <NotificationsDelegate> notificationsDelegate;
 - (id)  initWithStyle:(UITableViewStyle)style
     localNotification:(UILocalNotification *)localNotification;

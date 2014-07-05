@@ -36,13 +36,17 @@
 	{
 		self.navigationItem.title = NSLocalizedString(@"Add HIV Drugs", nil);
 	}
-	UIBarButtonItem *save = [[UIBarButtonItem alloc]
-	                         initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-	                                              target:self action:@selector(save:)];
-	UIBarButtonItem *reload = [[UIBarButtonItem alloc]
-	                           initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadMedications:)];
 
-	self.navigationItem.rightBarButtonItems = @[save, reload];
+	/**
+	   in case we want to enable loading lists of meds dynamically in future
+	 */
+//	UIBarButtonItem *save = [[UIBarButtonItem alloc]
+//	                         initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+//	                                              target:self action:@selector(save:)];
+//	UIBarButtonItem *reload = [[UIBarButtonItem alloc]
+//	                           initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadMedications:)];
+
+//	self.navigationItem.rightBarButtonItems = @[save /*, reload */];
 	[self loadDrugs];
 }
 
@@ -81,6 +85,7 @@
 	[self popController];
 }
 
+#warning reloadMedications is not yet implemented
 - (void)reloadMedications:(id)sender
 {
 }
