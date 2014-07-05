@@ -15,6 +15,7 @@
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */; };
+		0B2DF7C019684C1C00BCB111 /* PWESDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */; };
 		0B35BF821944681200341AFB /* alarm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6A1944681200341AFB /* alarm-icon.png */; };
 		0B35BF831944681200341AFB /* alarm-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6B1944681200341AFB /* alarm-icon@2x.png */; };
 		0B35BF841944681200341AFB /* charts-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6C1944681200341AFB /* charts-icon.png */; };
@@ -61,9 +62,6 @@
 		0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */; };
 		0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */; };
 		0B81FB3919229D5500A458B0 /* MedView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B81FB3819229D5500A458B0 /* MedView_iPad.m */; };
-		0B8910B918F9330A00A49B95 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8910B318F9330A00A49B95 /* libTestFlight.a */; };
-		0B8910BA18F9330A00A49B95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910B418F9330A00A49B95 /* README.md */; };
-		0B8910BB18F9330A00A49B95 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910B518F9330A00A49B95 /* release_notes.md */; };
 		0B8910CA18F9363900A49B95 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910C918F9363900A49B95 /* Default-568h@2x.png */; };
 		0B8910F118F93CA500A49B95 /* aptivus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910CB18F93CA500A49B95 /* aptivus.png */; };
 		0B8910F218F93CA500A49B95 /* atripla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8910CC18F93CA500A49B95 /* atripla.png */; };
@@ -210,7 +208,6 @@
 		C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838917B675350042E63A /* BaseTableViewController.m */; };
 		C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838E17B6A61F0042E63A /* CoreXMLReader.m */; };
 		C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22817AD04F80037A6DF /* ContainerViewController.m */; };
-		C463742D17E9F17500D19B94 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C463742C17E9F17500D19B94 /* DashboardViewController.m */; };
 		C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */; };
 		C463743E17E9F2AF00D19B94 /* PWESDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743217E9F2AF00D19B94 /* PWESDashboardView.m */; };
 		C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743617E9F2AF00D19B94 /* PWESIndicatorView.m */; };
@@ -361,6 +358,8 @@
 		0B2DF7BA196827FE00BCB111 /* SoundSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundSelector.h; path = ViewControllersiPhone/SoundSelector.h; sourceTree = "<group>"; };
 		0B2DF7BB19682AD600BCB111 /* SoundSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundSelectionTableViewController.h; path = ViewControllersiPhone/SoundSelectionTableViewController.h; sourceTree = "<group>"; };
 		0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundSelectionTableViewController.m; path = ViewControllersiPhone/SoundSelectionTableViewController.m; sourceTree = "<group>"; };
+		0B2DF7BE19684C1C00BCB111 /* PWESDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDashboardViewController.h; path = ViewControllersCommon/PWESDashboardViewController.h; sourceTree = "<group>"; };
+		0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDashboardViewController.m; path = ViewControllersCommon/PWESDashboardViewController.m; sourceTree = "<group>"; };
 		0B35BF6A1944681200341AFB /* alarm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon.png"; path = "Classes/Assets/alarm-icon.png"; sourceTree = "<group>"; };
 		0B35BF6B1944681200341AFB /* alarm-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon@2x.png"; path = "Classes/Assets/alarm-icon@2x.png"; sourceTree = "<group>"; };
 		0B35BF6C1944681200341AFB /* charts-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-icon.png"; path = "Classes/Assets/charts-icon.png"; sourceTree = "<group>"; };
@@ -428,12 +427,6 @@
 		0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailViewController.m; path = ViewControllersCommon/EmailViewController.m; sourceTree = "<group>"; };
 		0B81FB3719229D5500A458B0 /* MedView_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MedView_iPad.h; path = Views/MedView_iPad.h; sourceTree = "<group>"; };
 		0B81FB3819229D5500A458B0 /* MedView_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MedView_iPad.m; path = Views/MedView_iPad.m; sourceTree = "<group>"; };
-		0B8910B318F9330A00A49B95 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlight/libTestFlight.a; sourceTree = "<group>"; };
-		0B8910B418F9330A00A49B95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = TestFlight/README.md; sourceTree = "<group>"; };
-		0B8910B518F9330A00A49B95 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = release_notes.md; path = TestFlight/release_notes.md; sourceTree = "<group>"; };
-		0B8910B618F9330A00A49B95 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlight/TestFlight.h; sourceTree = "<group>"; };
-		0B8910B718F9330A00A49B95 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlight/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		0B8910B818F9330A00A49B95 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlight/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		0B8910C918F9363900A49B95 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Classes/Assets/Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B8910CB18F93CA500A49B95 /* aptivus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aptivus.png; path = Classes/Assets/MedicationImages/aptivus.png; sourceTree = "<group>"; };
 		0B8910CC18F93CA500A49B95 /* atripla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = atripla.png; path = Classes/Assets/MedicationImages/atripla.png; sourceTree = "<group>"; };
@@ -648,8 +641,6 @@
 		C45F838D17B6A61F0042E63A /* CoreXMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreXMLReader.h; path = CoreXML/CoreXMLReader.h; sourceTree = "<group>"; };
 		C45F838E17B6A61F0042E63A /* CoreXMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLReader.m; path = CoreXML/CoreXMLReader.m; sourceTree = "<group>"; };
 		C46067E01472D5ED00FCA76D /* iStayHealthy 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 10.xcdatamodel"; sourceTree = "<group>"; };
-		C463742B17E9F17500D19B94 /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashboardViewController.h; path = ViewControllersCommon/DashboardViewController.h; sourceTree = "<group>"; };
-		C463742C17E9F17500D19B94 /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashboardViewController.m; path = ViewControllersCommon/DashboardViewController.m; sourceTree = "<group>"; };
 		C463742E17E9F2AF00D19B94 /* PWESChartsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESChartsConstants.h; path = Dashboard/PWESChartsConstants.h; sourceTree = "<group>"; };
 		C463742F17E9F2AF00D19B94 /* PWESDashboardSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDashboardSummaryView.h; path = Dashboard/PWESDashboardSummaryView.h; sourceTree = "<group>"; };
 		C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDashboardSummaryView.m; path = Dashboard/PWESDashboardSummaryView.m; sourceTree = "<group>"; };
@@ -904,7 +895,6 @@
 				C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */,
 				C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */,
 				C4574AE314939D2300793164 /* libm.dylib in Frameworks */,
-				0B8910B918F9330A00A49B95 /* libTestFlight.a in Frameworks */,
 				C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */,
 				C4FB103513A4BF05009270C5 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -930,7 +920,6 @@
 				C4B803C112D36E6700A5A38F /* DataModelClasses */,
 				0B9D0736191ABD9F00D293E0 /* SeinfeldCalendar */,
 				C45C27B617DB265F001F6831 /* TableCells */,
-				C4952D1917F21DA40022EFEF /* TestFlightSDK */,
 				C4C41A1F15F1421800882416 /* Utils */,
 				C47DB22E17AD05B40037A6DF /* ViewControllersiPad */,
 				C47DB22D17AD05A30037A6DF /* ViewControllersiPhone */,
@@ -1201,8 +1190,6 @@
 				C49A16B717B03C3B006BE980 /* ContentNavigationController.m */,
 				C47DB22717AD04F80037A6DF /* ContainerViewController.h */,
 				C47DB22817AD04F80037A6DF /* ContainerViewController.m */,
-				C463742B17E9F17500D19B94 /* DashboardViewController.h */,
-				C463742C17E9F17500D19B94 /* DashboardViewController.m */,
 				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
 				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
 				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
@@ -1225,6 +1212,8 @@
 				C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */,
 				C46EB5DA17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.h */,
 				C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */,
+				0B2DF7BE19684C1C00BCB111 /* PWESDashboardViewController.h */,
+				0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */,
 				0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */,
 				C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */,
 				C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */,
@@ -1464,19 +1453,6 @@
 				0B8910F018F93CA500A49B95 /* zidovudine.png */,
 			);
 			name = MedicationImages;
-			sourceTree = "<group>";
-		};
-		C4952D1917F21DA40022EFEF /* TestFlightSDK */ = {
-			isa = PBXGroup;
-			children = (
-				0B8910B318F9330A00A49B95 /* libTestFlight.a */,
-				0B8910B418F9330A00A49B95 /* README.md */,
-				0B8910B518F9330A00A49B95 /* release_notes.md */,
-				0B8910B618F9330A00A49B95 /* TestFlight.h */,
-				0B8910B718F9330A00A49B95 /* TestFlight+AsyncLogging.h */,
-				0B8910B818F9330A00A49B95 /* TestFlight+ManualSessions.h */,
-			);
-			name = TestFlightSDK;
 			sourceTree = "<group>";
 		};
 		C4B803C112D36E6700A5A38F /* DataModelClasses */ = {
@@ -1743,7 +1719,6 @@
 				C489868F18106E0D006F47F1 /* lock.png in Resources */,
 				0B89110618F93CA500A49B95 /* reyataz.png in Resources */,
 				0B8910F418F93CA500A49B95 /* combivir.png in Resources */,
-				0B8910BB18F9330A00A49B95 /* release_notes.md in Resources */,
 				C44D36C2180F3E3600EE9F5E /* diary@2x.png in Resources */,
 				C489868E18106E0D006F47F1 /* info@2x.png in Resources */,
 				0B65F95E1913917600523441 /* Images.xcassets in Resources */,
@@ -1852,7 +1827,6 @@
 				C44D36B6180F3E3600EE9F5E /* alarm@2x.png in Resources */,
 				C4C41A3715F1445400882416 /* chimes.caf in Resources */,
 				C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */,
-				0B8910BA18F9330A00A49B95 /* README.md in Resources */,
 				C44D36C6180F3E3600EE9F5E /* feedback@2x.png in Resources */,
 				C4C41A3A15F1445400882416 /* polyphonic2.caf in Resources */,
 				C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */,
@@ -2009,8 +1983,8 @@
 				C4C837EA16D104F0002D934F /* Wellness+Comparator.m in Sources */,
 				C4C837ED16D10514002D934F /* iStayHealthyRecord+Comparator.m in Sources */,
 				C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */,
-				C463742D17E9F17500D19B94 /* DashboardViewController.m in Sources */,
 				0B81FB3919229D5500A458B0 /* MedView_iPad.m in Sources */,
+				0B2DF7C019684C1C00BCB111 /* PWESDashboardViewController.m in Sources */,
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
 				0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */,
 				C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */,

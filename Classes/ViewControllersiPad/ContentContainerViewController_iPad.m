@@ -21,7 +21,7 @@
 #import "ContentNavigationController_iPad.h"
 #import "DropboxViewController.h"
 #import "Utilities.h"
-#import "DashboardViewController.h"
+#import "PWESDashboardViewController.h"
 #import "PWESSlideTransition.h"
 #import "CoreDataConstants.h"
 
@@ -174,7 +174,7 @@
 	}
 	else if ([kDashboardController isEqualToString:controllerName])
 	{
-		DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
+		PWESDashboardViewController *dashboardController = [[PWESDashboardViewController alloc] init];
 		navigationController = [[ContentNavigationController_iPad alloc] initWithRootViewController:dashboardController];
 	}
 	else if ([kDropboxController isEqualToString:controllerName])

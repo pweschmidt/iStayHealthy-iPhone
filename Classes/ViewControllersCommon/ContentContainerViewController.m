@@ -23,7 +23,7 @@
 #import "CoreDataConstants.h"
 #import "ContentNavigationController.h"
 #import "DropboxViewController.h"
-#import "DashboardViewController.h"
+#import "PWESDashboardViewController.h"
 #import "Utilities.h"
 #import "EmailViewController.h"
 #import "PWESZoomTransition.h"
@@ -163,7 +163,7 @@
 	ContentNavigationController *navigationController = nil;
 	if ([kDashboardController isEqualToString:controllerName])
 	{
-		DashboardViewController *dashboardController = [[DashboardViewController alloc] init];
+		PWESDashboardViewController *dashboardController = [[PWESDashboardViewController alloc] init];
 		navigationController  = [[ContentNavigationController alloc] initWithRootViewController:dashboardController];
 	}
 	else if ([kResultsController isEqualToString:controllerName])
