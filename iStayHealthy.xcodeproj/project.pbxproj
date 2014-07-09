@@ -294,7 +294,6 @@
 		C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */; };
 		C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */; };
 		C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */; };
-		C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */; };
 		C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */; };
 		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
 		C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C3494F130EF201004BE854 /* AVFoundation.framework */; };
@@ -811,7 +810,6 @@
 		C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = CoreDataManagement/CoreDataManager.h; sourceTree = "<group>"; };
 		C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = CoreDataManagement/CoreDataManager.m; sourceTree = "<group>"; };
 		C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataConstants.h; path = CoreDataManagement/CoreDataConstants.h; sourceTree = "<group>"; };
-		C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataConstants.m; path = CoreDataManagement/CoreDataConstants.m; sourceTree = "<group>"; };
 		C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = CoreDataManagement/CoreDataUtils.h; sourceTree = "<group>"; };
 		C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataUtils.m; path = CoreDataManagement/CoreDataUtils.m; sourceTree = "<group>"; };
 		C4C0151A134251B4005E889D /* HIVMedications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HIVMedications.plist; sourceTree = "<group>"; };
@@ -1541,7 +1539,6 @@
 				0BB566AF191E674A00731739 /* CoreCSVWriter.h */,
 				0BB566B0191E674A00731739 /* CoreCSVWriter.m */,
 				C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */,
-				C4BFAAB517B2D1430038D2A7 /* CoreDataConstants.m */,
 				C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */,
 				C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */,
 				C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */,
@@ -2006,7 +2003,6 @@
 				0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
-				C4BFAAB617B2D1430038D2A7 /* CoreDataConstants.m in Sources */,
 				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
 				0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,

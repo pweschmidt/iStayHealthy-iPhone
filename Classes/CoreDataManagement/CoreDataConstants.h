@@ -6,15 +6,18 @@
 //
 //
 
-extern NSString * const kPersistentMainStore;
-extern NSString * const kPersistentFallbackStore;
-extern NSString * const kUbiquitousPath;
-extern NSString * const kICloudTeamID;
-extern NSString * const kLoadedStoreNotificationKey;
-extern NSString * const kImportedDataFromFileKey;
-extern NSString * const kErrorStoreNotificationKey;
-extern NSString * const kErrorImportFromFileKey;
-extern NSString * const kUbiquityTokenKey;
-extern NSString * const kImportedDataAvailableKey;
-extern NSString * const kTmpFileKey;
-extern char * const kBackgroundQueueName;
+#define kPersistentiCloudMainStore          @"iStayHealthy-iCloud.sqlite"
+#define kNewUbiquitousPath                  @"5Y4HL833A4_com_pweschmidt_iStayHealthy_store"
+
+#define kPersistentMainStore                @"iStayHealthy.sqlite"
+#define kPersistentFallbackStore            @"iStayHealthyBackup.sqlite"
+#define kUbiquitousPath                     @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
+#define kICloudTeamID                       @"5Y4HL833A4.com.pweschmidt.iStayHealthy"
+#define kLoadedStoreNotificationKey         @"LoadedStore"
+#define kImportedDataFromFileKey            @"ImportedData"
+#define kErrorStoreNotificationKey          @"ErrorLoadingStore"
+#define kErrorImportFromFileKey             @"ErrorImportingFile"
+#define kUbiquityTokenKey                   @"com.pweschmidt.iStayHealthy.ubiquityToken"
+#define kImportedDataAvailableKey           @"ImportedDataAvailable"
+#define kTmpFileKey                         @"TemporaryFile"
+#define kBackgroundQueueName                "com.pweschmidt.iStayHealthy.background.queue"

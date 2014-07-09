@@ -226,6 +226,7 @@
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+	[self reloadSQLData:notification];
 	NSLog(@"MyHIVMedicationViewController:handleStoreChanged with name %@", notification.name);
 }
 

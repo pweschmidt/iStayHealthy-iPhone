@@ -140,6 +140,7 @@
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+	[self reloadSQLData:notification];
 }
 
 @end

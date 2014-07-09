@@ -12,6 +12,7 @@
 @interface CoreDataManager : NSObject
 @property (nonatomic, strong) NSManagedObjectContext *defaultContext;
 @property (nonatomic, assign) BOOL iCloudIsAvailable;
+@property (nonatomic, assign) BOOL iCloudEnabled;
 @property (nonatomic, assign) BOOL storeIsReady;
 @property (nonatomic, assign) BOOL hasDataForImport;
 @property (nonatomic, strong) NSData *xmlImportData;
@@ -20,6 +21,10 @@
 + (CoreDataManager *)sharedInstance;
 
 - (void)setUpCoreDataManager;
+
+- (BOOL)hasNewiCloudStore;
+
+- (void)migrateToNewiCloudStore:(iStayHealthySuccessBlock)error;
 
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error;
 

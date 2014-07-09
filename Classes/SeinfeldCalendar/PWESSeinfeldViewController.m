@@ -113,6 +113,7 @@
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+	[self reloadSQLData:notification];
 }
 
 #pragma mark private

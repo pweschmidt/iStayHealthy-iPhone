@@ -165,6 +165,7 @@
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+	[self reloadSQLData:notification];
 }
 
 #pragma mark - handle rotations (iPad only)

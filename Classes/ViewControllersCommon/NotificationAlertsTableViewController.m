@@ -190,6 +190,7 @@
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+	[self reloadSQLData:notification];
 }
 
 #pragma mark NotificationsDelegate methods

@@ -162,6 +162,7 @@
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+	[self reloadSQLData:notification];
 	NSLog(@"ResultsListTableViewController:handleStoreChanged with name %@", notification.name);
 }
 
