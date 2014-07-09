@@ -111,7 +111,9 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"ResultsCollectionViewController with name %@", notification.name);
+#endif
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -127,7 +129,9 @@
 	    {
 	        self.results = nil;
 	        self.results = array;
+#ifdef APPDEBUG
 	        NSLog(@"we have %lu results returned", (unsigned long)self.results.count);
+#endif
 	        dispatch_async(dispatch_get_main_queue(), ^{
 	            [self.collectionView reloadData];
 			});

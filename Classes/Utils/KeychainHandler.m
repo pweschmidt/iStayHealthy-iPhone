@@ -160,7 +160,9 @@
 	NSString *computedHashString = [NSString stringWithFormat:@"%@%lu%@", name, (unsigned long)pinHash, SALT_HASH];
 	// 3
 	NSString *finalHash = [self computeSHA256DigestForString:computedHashString];
+#ifdef APPDEBUG
 	NSLog(@"** Computed hash: %@ for SHA256 Digest: %@", computedHashString, finalHash);
+#endif
 	return finalHash;
 }
 

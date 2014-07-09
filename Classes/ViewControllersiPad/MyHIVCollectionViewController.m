@@ -141,7 +141,9 @@
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"MyHIVCollectionViewController:reloadSQLData with name %@", notification.name);
+#endif
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {

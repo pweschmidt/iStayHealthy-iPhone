@@ -124,7 +124,9 @@
 		}
 	    if (!finished)
 	    {
+#ifdef APPDEBUG
 	        NSLog(@"transition isn't finished yet");
+#endif
 		}
 	}];
 }

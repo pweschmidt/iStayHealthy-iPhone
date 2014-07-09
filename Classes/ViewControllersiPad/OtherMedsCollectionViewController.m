@@ -88,7 +88,6 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	NSLog(@"OtherMedsCollectionViewController with name %@", notification.name);
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kOtherMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -104,7 +103,6 @@
 	    {
 	        self.meds = nil;
 	        self.meds = array;
-	        NSLog(@"we have %lu meds returned", (unsigned long)self.meds.count);
 	        dispatch_async(dispatch_get_main_queue(), ^{
 	            [self.collectionView reloadData];
 			});

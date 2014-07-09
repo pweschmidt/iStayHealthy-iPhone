@@ -93,13 +93,14 @@
 
 	CGRect toFrame = toController.view.frame;
 	CGRect toBounds = toController.view.bounds;
-
+#ifdef APPDEBUG
 	NSLog(@"Container Frame = %@ ", NSStringFromCGRect(containerFrame));
 	NSLog(@"Container Bounds = %@ ", NSStringFromCGRect(containerBounds));
 	NSLog(@"From Frame = %@ ", NSStringFromCGRect(fromFrame));
 	NSLog(@"From Bounds = %@ ", NSStringFromCGRect(fromBounds));
 	NSLog(@"To Frame = %@ ", NSStringFromCGRect(toFrame));
 	NSLog(@"To Bounds = %@ ", NSStringFromCGRect(toBounds));
+#endif
 }
 
 @end

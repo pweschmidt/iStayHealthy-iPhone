@@ -50,7 +50,6 @@
 
 - (void)goToPOZSite
 {
-	NSLog(@"navigation button clicked");
 }
 
 - (void)didReceiveMemoryWarning

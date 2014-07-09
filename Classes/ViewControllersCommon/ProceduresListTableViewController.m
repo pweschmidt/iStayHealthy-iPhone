@@ -118,7 +118,6 @@
 	    {
 	        self.procedures = nil;
 	        self.procedures = [NSArray arrayWithArray:array];
-	        NSLog(@"we have %lu other meds returned", (unsigned long)self.procedures.count);
 	        [self.tableView reloadData];
 		}
 	}];

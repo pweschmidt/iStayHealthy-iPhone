@@ -123,7 +123,9 @@
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
+#endif
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:@"Results" predicate:nil sortTerm:@"ResultsDate" ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -139,7 +141,9 @@
 	    {
 	        self.results = nil;
 	        self.results = array;
+#ifdef APPDEBUG
 	        NSLog(@"we have %lu results returned", (unsigned long)self.results.count);
+#endif
 	        [self.tableView reloadData];
 		}
 	}];
@@ -147,23 +151,31 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"ResultsListTableViewController:startAnimation with name %@", notification.name);
+#endif
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"ResultsListTableViewController:stopAnimation with name %@", notification.name);
+#endif
 }
 
 - (void)handleError:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"ResultsListTableViewController:handleError with name %@", notification.name);
+#endif
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
 	[self reloadSQLData:notification];
+#ifdef APPDEBUG
 	NSLog(@"ResultsListTableViewController:handleStoreChanged with name %@", notification.name);
+#endif
 }
 
 #pragma mark - private methods

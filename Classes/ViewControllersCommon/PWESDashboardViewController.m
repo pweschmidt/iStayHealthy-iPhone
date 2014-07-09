@@ -105,7 +105,9 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"PWESDashboardViewController::reloadSQLData called with %@", notification.userInfo);
+#endif
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:YES completion: ^(NSArray *results, NSError *resultsError) {
 	    if (nil == results)
 	    {
@@ -191,22 +193,30 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"DashboardViewController:startAnimation with name %@", notification.name);
+#endif
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"DashboardViewController:stopAnimation with name %@", notification.name);
+#endif
 }
 
 - (void)handleError:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"DashboardViewController:handleError with name %@", notification.name);
+#endif
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"DashboardViewController:handleStoreChanged with name %@", notification.name);
+#endif
 	[self reloadSQLData:notification];
 }
 

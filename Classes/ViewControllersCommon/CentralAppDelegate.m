@@ -23,7 +23,9 @@
 @implementation CentralAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#ifdef APPDEBUG
 	NSLog(@"We got to the new CentralAppDelegate");
+#endif
 	self.window.tintColor = TEXTCOLOUR;
 
 	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: TEXTCOLOUR, NSFontAttributeName : [UIFont fontWithType:Standard size:17] }];
@@ -36,7 +38,9 @@
 	[[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
 	    if (error)
 	    {
+#ifdef APPDEBUG
 	        NSLog(@"Error occurred with code %ld and message %@", (long)[error code], [error localizedDescription]);
+#endif
 		}
 	}];
 //	[TestFlight takeOff:@"9aebed56-8c01-4c9c-8a16-8bfbede83f90"];
@@ -101,7 +105,9 @@
 	{
 		if ([[DBSession sharedSession] isLinked])
 		{
+#ifdef APPDEBUG
 			NSLog(@"App is linked");
+#endif
 		}
 		return YES;
 	}

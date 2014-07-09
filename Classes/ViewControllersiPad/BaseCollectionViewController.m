@@ -267,7 +267,9 @@
 
 - (void)goToPOZSite
 {
+#ifdef APPDEBUG
 	NSLog(@"navigation button clicked");
+#endif
 }
 
 #pragma mark Collection View delegate methods. Override in sub classes

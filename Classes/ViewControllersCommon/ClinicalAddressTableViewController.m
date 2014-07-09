@@ -121,7 +121,9 @@
 	    {
 	        self.clinics = nil;
 	        self.clinics = [NSArray arrayWithArray:array];
+#ifdef APPDEBUG
 	        NSLog(@"we have %lu clinics returned", (unsigned long)self.clinics.count);
+#endif
 	        [self.tableView reloadData];
 		}
 	}];

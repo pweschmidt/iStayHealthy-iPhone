@@ -173,7 +173,9 @@
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
+#ifdef APPDEBUG
 	NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
+#endif
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -211,23 +213,19 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
-	NSLog(@"MyHIVMedicationViewController:startAnimation with name %@", notification.name);
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
-	NSLog(@"MyHIVMedicationViewController:stopAnimation with name %@", notification.name);
 }
 
 - (void)handleError:(NSNotification *)notification
 {
-	NSLog(@"MyHIVMedicationViewController:handleError with name %@", notification.name);
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
 	[self reloadSQLData:notification];
-	NSLog(@"MyHIVMedicationViewController:handleStoreChanged with name %@", notification.name);
 }
 
 @end

@@ -109,7 +109,9 @@ static NSDictionary *csvAscDictionary()
                       ascending:(BOOL)ascending
                   nextDataModel:(NSString *)nextDataModel
 {
+#ifdef APPDEBUG
 	NSLog(@"Writing %@ and next model is %@", dataModel, nextDataModel);
+#endif
 	if (nil == dataModel || [dataModel isEqual:[NSNull null]])
 	{
 		if (nil != self.successBlock)

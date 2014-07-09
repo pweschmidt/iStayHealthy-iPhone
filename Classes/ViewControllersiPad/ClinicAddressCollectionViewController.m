@@ -120,7 +120,9 @@
 	    {
 	        self.clinics = nil;
 	        self.clinics = [NSArray arrayWithArray:array];
+#ifdef APPDEBUG
 	        NSLog(@"we have %lu clinics returned", (unsigned long)self.clinics.count);
+#endif
 	        dispatch_async(dispatch_get_main_queue(), ^{
 	            [self.collectionView reloadData];
 			});

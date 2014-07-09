@@ -87,7 +87,6 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	NSLog(@"ProceduresCollectionViewController with name %@", notification.name);
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -103,7 +102,6 @@
 	    {
 	        self.procedures = nil;
 	        self.procedures = array;
-	        NSLog(@"we have %lu procedures returned", (unsigned long)self.procedures.count);
 	        dispatch_async(dispatch_get_main_queue(), ^{
 	            [self.collectionView reloadData];
 			});

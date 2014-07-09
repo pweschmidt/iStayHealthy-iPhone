@@ -54,7 +54,9 @@
 
 - (void)setUpCoreDataManager
 {
+#ifdef APPDEBUG
 	NSLog(@"setUpCoreDataManager iOS7");
+#endif
 	self.storeIsReady = NO;
 	self.hasDataForImport = NO;
 	[self registerObservers];
@@ -210,7 +212,9 @@
 	if (NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted == transitionType)
 	{
 		dispatch_async(dispatch_get_main_queue(), ^{
+#ifdef APPDEBUG
 		    NSLog(@"import finished is getting fired");
+#endif
 		    NSNotification *notification = [NSNotification
 		                                    notificationWithName:kLoadedStoreNotificationKey
 		                                                  object:self];
@@ -327,7 +331,9 @@
 {
 	id currentToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
 	id formerToken = [CoreDataUtils ubiquityTokenFromArchive];
+#ifdef APPDEBUG
 	NSLog(@"CoreDataManager::iCloudStoreChanged %@", notification.userInfo);
+#endif
 
 	if (![formerToken isEqual:currentToken])
 	{
@@ -344,7 +350,9 @@
 	{
 		return;
 	}
+#ifdef APPDEBUG
 	NSLog(@"CoreDataManager::mergeFromiCloud %@", notification.userInfo);
+#endif
 	[context performBlockAndWait: ^{
 	    [context mergeChangesFromContextDidSaveNotification:notification];
 	    [context processPendingChanges];
@@ -616,15 +624,16 @@
 	{
 		return;
 	}
-	[[CoreXMLReader sharedInstance] parseXMLData:self.xmlImportData];
-	if ([[NSFileManager defaultManager] fileExistsAtPath:self.xmlTmpPath])
-	{
-		NSError *error = nil;
-		[[NSFileManager defaultManager] removeItemAtPath:self.xmlTmpPath error:&error];
-	}
-	self.hasDataForImport = NO;
-	self.xmlTmpPath = nil;
-	self.xmlImportData = nil;
+	[[CoreXMLReader sharedInstance] parseXMLData:self.xmlImportData completionBlock: ^(BOOL success, NSError *error) {
+	    if ([[NSFileManager defaultManager] fileExistsAtPath:self.xmlTmpPath])
+	    {
+	        NSError *error = nil;
+	        [[NSFileManager defaultManager] removeItemAtPath:self.xmlTmpPath error:&error];
+		}
+	    self.hasDataForImport = NO;
+	    self.xmlTmpPath = nil;
+	    self.xmlImportData = nil;
+	}];
 }
 
 @end

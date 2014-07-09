@@ -26,7 +26,8 @@
 @property (nonatomic, assign) BOOL isConnectAlert;
 @property (nonatomic, assign) BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UILabel *activityLabel;
 @property (nonatomic, strong) NSString *parentRevision;
 @end
 
@@ -121,7 +122,7 @@
 		{
 			if ([[DBSession sharedSession] isLinked])
 			{
-				[self.activityIndicator startAnimating];
+				[self startAnimation:nil];
 				NSString *dataPath = [self dropBoxFileTmpPath];
 				[self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
 				                    atRev:self.parentRevision
@@ -143,6 +144,35 @@
 		}
 		break;
 	}
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	if (0 == section)
+	{
+		return 40;
+	}
+	else
+		return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+	if (0 == section)
+	{
+		UILabel *label = [UILabel standardLabel];
+		label.text = @"";
+		label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 40);
+		[view addSubview:label];
+		self.activityLabel = label;
+		UIActivityIndicatorView *indicator = [UIActivityIndicatorView new];
+		indicator.hidesWhenStopped = YES;
+		indicator.frame = CGRectMake(20, 40, 40, 40);
+		[view addSubview:indicator];
+		self.activityIndicator = indicator;
+	}
+	return view;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -228,7 +258,7 @@
 		return;
 	}
 	NSString *dataPath = [self uploadFileTmpPath];
-	[self.activityIndicator startAnimating];
+	[self startAnimation:nil];
 	CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
 	[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
 	    if (nil != xmlString)
@@ -265,7 +295,25 @@
 {
 	NSString *dataPath = [self dropBoxFileTmpPath];
 	NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
-	[[CoreXMLReader sharedInstance] parseXMLData:xmlData];
+	[[CoreXMLReader sharedInstance] parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
+	    if (success)
+	    {
+	        [self stopAnimation:nil];
+	        [[[UIAlertView alloc]
+	          initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+	                       message:NSLocalizedString(@"Data were retrieved from DropBox.", nil)
+	                      delegate:nil
+	             cancelButtonTitle:@"OK" otherButtonTitles:nil]
+	         show];
+		}
+	    else
+	    {
+	        [[[UIAlertView alloc]
+	          initWithTitle:@"Error retrieving data" message:[error localizedDescription]
+	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+	         show];
+		}
+	}];
 }
 
 #pragma mark - DropBox DBRestClient methods
@@ -360,7 +408,7 @@
               from:(NSString *)srcPath
           metadata:(DBMetadata *)metadata
 {
-	[self.activityIndicator stopAnimating];
+	[self stopAnimation:nil];
 	[[[UIAlertView alloc]
 	  initWithTitle:NSLocalizedString(@"Backup Finished", @"Backup Finished") message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.xml.", nil)
 	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
@@ -369,7 +417,7 @@
 
 - (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error
 {
-	[self.activityIndicator stopAnimating];
+	[self stopAnimation:nil];
 	[[[UIAlertView alloc]
 	  initWithTitle:@"Error Uploading to DropBox" message:@"There was an error uploading data to DropBox."
 	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
@@ -383,7 +431,7 @@
 
 - (void)restClient:(DBRestClient *)client loadFileFailedWithError:(NSError *)error
 {
-	[self.activityIndicator stopAnimating];
+	[self stopAnimation:nil];
 	[[[UIAlertView alloc]
 	  initWithTitle:@"Error Loading file from DropBox" message:@"There was an error loading a file from DropBox."
 	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
@@ -397,10 +445,14 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
+	[self.activityIndicator startAnimating];
+	self.activityLabel.text = NSLocalizedString(@"Syncing data...", nil);
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
+	[self.activityIndicator stopAnimating];
+	self.activityLabel.text = @"";
 }
 
 - (void)handleError:(NSNotification *)notification

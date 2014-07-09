@@ -22,7 +22,9 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+#ifdef APPDEBUG
 	NSLog(@"We got to the ContainerViewController - hurrah");
+#endif
 	self.loginController = [self.storyboard
 	                        instantiateViewControllerWithIdentifier:@"loginController"];
 	if (nil != self.loginController)
@@ -43,7 +45,9 @@
 	BOOL isPasswordReset = [defaults boolForKey:kPasswordReset];
 	if (isPasswordEnabled && !isPasswordReset)
 	{
+#ifdef APPDEBUG
 		NSLog(@"calling the login view controller");
+#endif
 		[self.view addSubview:self.loginController.view];
 		self.currentController = self.loginController;
 	}
@@ -58,7 +62,9 @@
 			                                      otherButtonTitles:nil];
 			[alert show];
 		}
+#ifdef APPDEBUG
 		NSLog(@"Calling the content container view controller");
+#endif
 		[self.view addSubview:self.contentController.view];
 		self.currentController = self.contentController;
 	}
