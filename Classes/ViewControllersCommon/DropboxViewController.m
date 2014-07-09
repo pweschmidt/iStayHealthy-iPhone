@@ -166,7 +166,7 @@
 		label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 40);
 		[view addSubview:label];
 		self.activityLabel = label;
-		UIActivityIndicatorView *indicator = [UIActivityIndicatorView new];
+		UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 		indicator.hidesWhenStopped = YES;
 		indicator.frame = CGRectMake(20, 40, 40, 40);
 		[view addSubview:indicator];
