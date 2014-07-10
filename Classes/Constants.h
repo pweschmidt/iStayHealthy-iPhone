@@ -88,6 +88,7 @@ static NSUInteger DeviceSystemMajorVersion()
 /**
    Block Definitions
  */
+typedef void (^iStayHealthyVoidExecutionBlock)(void);
 typedef void (^iStayHealthyErrorBlock)(NSError *error);
 typedef void (^iStayHealthyXMLBlock)(NSString *xmlString, NSError *error);
 typedef void (^iStayHealthySuccessBlock)(BOOL success, NSError *error);

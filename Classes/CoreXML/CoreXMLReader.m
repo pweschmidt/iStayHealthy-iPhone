@@ -61,13 +61,15 @@
 		}
 		return;
 	}
-	[self setUpArrays];
-	[self loadData];
 	self.successBlock = completionBlock;
 	NSData *data = [xmlData copy];
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
 	parser.delegate = self;
-	[parser parse];
+	[self setUpArrays];
+	iStayHealthyVoidExecutionBlock executionBlock = ^{
+		[parser parse];
+	};
+	[self loadData:executionBlock];
 }
 
 - (void)setUpArrays
@@ -309,7 +311,7 @@
 #endif
 }
 
-- (void)loadData
+- (void)loadData:(iStayHealthyVoidExecutionBlock)executionBlock
 {
 	CoreDataManager *dataManager = [CoreDataManager sharedInstance];
 	[dataManager fetchiStayHealthyRecordWithCompletion: ^(iStayHealthyRecord *record, NSError *error) {
@@ -356,6 +358,10 @@
 	                                    if (nil != array)
 	                                    {
 	                                        self.contacts = array;
+										}
+	                                    if (nil != executionBlock)
+	                                    {
+	                                        executionBlock();
 										}
 									}];
 								}];

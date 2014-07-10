@@ -110,6 +110,11 @@
 	return cell;
 }
 
+- (void)deselect:(id)sender
+{
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	switch (indexPath.section)
@@ -144,6 +149,7 @@
 		}
 		break;
 	}
+	[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -168,9 +174,13 @@
 		self.activityLabel = label;
 		UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 		indicator.hidesWhenStopped = YES;
-		indicator.frame = CGRectMake(20, 40, 40, 40);
+		indicator.frame = CGRectMake(20, 0, 40, 40);
 		[view addSubview:indicator];
 		self.activityIndicator = indicator;
+		if ([[DBSession sharedSession] isLinked])
+		{
+			[self startAnimation:nil];
+		}
 	}
 	return view;
 }
@@ -205,6 +215,7 @@
 	{
 		self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
 		self.restClient.delegate = self;
+		[self.restClient loadMetadata:@"/"];
 	}
 }
 
@@ -331,6 +342,7 @@
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata
 {
 	NSString *path = [metadata path];
+	[self startAnimation:nil];
 	if ([path isEqualToString:@"/"])
 	{
 		for (DBMetadata *child in metadata.contents)
@@ -344,6 +356,10 @@
 		if (nil == self.iStayHealthyPath)
 		{
 			[self createIStayHealthyFolder];
+		}
+		else
+		{
+			[self.restClient loadMetadata:@"/iStayHealthy"];
 		}
 	}
 	if ([path isEqualToString:@"/iStayHealthy"])
@@ -365,15 +381,18 @@
 		{
 			self.parentRevision = nil;
 		}
+		[self stopAnimation:nil];
 	}
 }
 
 - (void)restClient:(DBRestClient *)client createdFolder:(DBMetadata *)folder
 {
+	[self stopAnimation:nil];
 }
 
 - (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error
 {
+	[self stopAnimation:nil];
 	UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 	[errorAlert show];
 }
@@ -445,14 +464,20 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
-	[self.activityIndicator startAnimating];
-	self.activityLabel.text = NSLocalizedString(@"Syncing data...", nil);
+	if (![self.activityIndicator isAnimating])
+	{
+		[self.activityIndicator startAnimating];
+		self.activityLabel.text = NSLocalizedString(@"Syncing data...", nil);
+	}
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
-	[self.activityIndicator stopAnimating];
-	self.activityLabel.text = @"";
+	if ([self.activityIndicator isAnimating])
+	{
+		[self.activityIndicator stopAnimating];
+		self.activityLabel.text = @"";
+	}
 }
 
 - (void)handleError:(NSNotification *)notification
