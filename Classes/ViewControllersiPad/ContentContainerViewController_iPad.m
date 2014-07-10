@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSDictionary *controllers;
 @property (nonatomic, strong) id currentController;
 @property (nonatomic, strong) id previousController;
+@property (nonatomic, strong) HamburgerMenuTableViewController *shownMenuController;
 @end
 
 @implementation ContentContainerViewController_iPad
@@ -38,13 +39,12 @@
 	[super viewDidLoad];
 	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
 	{
-		CGRect frame = self.view.frame;
-		CGRect bounds = self.view.bounds;
 		if (self.view.frame.size.width < self.view.frame.size.height)
 		{
 			self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
 		}
 	}
+	self.shownMenuController = nil;
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	ContentNavigationController_iPad *navigationController = [self navigationControllerForName_iPad:kDashboardController];
 	[self addChildViewController:navigationController];
@@ -65,11 +65,6 @@
 	}
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//	[super viewWillAppear:animated];
-//}
-
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
@@ -82,7 +77,17 @@
 	menuController.modalPresentationStyle = UIModalPresentationCustom;
 	menuController.transitioningDelegate = self;
 	menuController.transitionDelegate = self;
+	self.shownMenuController = menuController;
 	[self presentViewController:menuController animated:YES completion:nil];
+}
+
+- (void)hideMenu
+{
+	if (nil != self.shownMenuController)
+	{
+		[self.shownMenuController dismissViewControllerAnimated:YES completion:nil];
+		self.shownMenuController = nil;
+	}
 }
 
 #pragma mark PWESNavigationDelegate methods

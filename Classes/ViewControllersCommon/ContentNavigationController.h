@@ -12,6 +12,7 @@
 @interface ContentNavigationController : UINavigationController
 - (void)transitionToNavigationControllerWithName:(NSString *)name;
 - (void)showMenu;
+- (void)hideMenu;
 - (void)showMailController:(MFMailComposeViewController *)mailController;
 - (void)hideMailController:(MFMailComposeViewController *)mailController;
 @end

@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSDictionary *controllers;
 @property (nonatomic, strong) id currentController;
 @property (nonatomic, strong) id previousController;
+@property (nonatomic, strong) HamburgerMenuTableViewController *shownMenuController;
 @end
 
 @implementation ContentContainerViewController
@@ -39,6 +40,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	self.shownMenuController = nil;
 
 	ContentNavigationController *navigationController = [self startController];
 	[self addChildViewController:navigationController];
@@ -72,7 +74,17 @@
 	menuController.modalPresentationStyle = UIModalPresentationCustom;
 	menuController.transitioningDelegate = self;
 	menuController.transitionDelegate = self;
+	self.shownMenuController = menuController;
 	[self presentViewController:menuController animated:YES completion:nil];
+}
+
+- (void)hideMenu
+{
+	if (nil != self.shownMenuController)
+	{
+		[self.shownMenuController dismissViewControllerAnimated:YES completion:nil];
+		self.shownMenuController = nil;
+	}
 }
 
 - (void)showMailController:(MFMailComposeViewController *)mailController

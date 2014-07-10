@@ -25,6 +25,7 @@
 
 @interface BaseViewController ()
 @property (nonatomic, assign) BOOL isPopover;
+@property (nonatomic, assign) BOOL settingMenuShown;
 @end
 
 @implementation BaseViewController
@@ -54,6 +55,7 @@
 	[super viewDidLoad];
 	[self registerObservers];
 	self.view.backgroundColor = DEFAULT_BACKGROUND;
+	self.settingMenuShown = NO;
 	UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
 	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
 	menuView.backgroundColor = [UIColor clearColor];
@@ -316,11 +318,31 @@
 {
 	if ([self.parentViewController isKindOfClass:[ContentNavigationController_iPad class]])
 	{
-		[((ContentNavigationController_iPad *)self.parentViewController)showMenu];
+		ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *)self.parentViewController;
+		if (self.settingMenuShown)
+		{
+			[navController hideMenu];
+			self.settingMenuShown = NO;
+		}
+		else
+		{
+			[navController showMenu];
+			self.settingMenuShown = YES;
+		}
 	}
 	else if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
 	{
-		[((ContentNavigationController *)self.parentViewController)showMenu];
+		ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
+		if (self.settingMenuShown)
+		{
+			[navController hideMenu];
+			self.settingMenuShown = NO;
+		}
+		else
+		{
+			[navController showMenu];
+			self.settingMenuShown = YES;
+		}
 	}
 }
 

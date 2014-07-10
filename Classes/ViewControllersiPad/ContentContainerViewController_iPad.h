@@ -12,4 +12,5 @@
 @interface ContentContainerViewController_iPad : UIViewController <UIViewControllerTransitioningDelegate, PWESNavigationDelegate>
 @property (nonatomic, assign) TransitionType transitionType;
 - (void)showMenu;
+- (void)hideMenu;
 @end

@@ -51,4 +51,13 @@
 	}
 }
 
+- (void)hideMenu
+{
+	if ([self.parentViewController isKindOfClass:[ContentContainerViewController_iPad class]])
+	{
+		ContentContainerViewController_iPad *container = (ContentContainerViewController_iPad *)self.parentViewController;
+		[container hideMenu];
+	}
+}
+
 @end

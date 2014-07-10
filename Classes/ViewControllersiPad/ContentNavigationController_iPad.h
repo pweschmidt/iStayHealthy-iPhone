@@ -11,4 +11,5 @@
 @interface ContentNavigationController_iPad : UINavigationController
 - (void)transitionToNavigationControllerWithName:(NSString *)name;
 - (void)showMenu;
+- (void)hideMenu;
 @end

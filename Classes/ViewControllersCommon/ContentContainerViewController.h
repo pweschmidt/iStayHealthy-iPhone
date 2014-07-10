@@ -13,6 +13,7 @@
 @interface ContentContainerViewController : UIViewController <UIViewControllerTransitioningDelegate, PWESNavigationDelegate>
 @property (nonatomic, assign) TransitionType transitionType;
 - (void)showMenu;
+- (void)hideMenu;
 - (void)showMailController:(MFMailComposeViewController *)mailController;
 - (void)hideMailController:(MFMailComposeViewController *)mailController;
 @end

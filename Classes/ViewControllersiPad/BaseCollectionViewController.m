@@ -23,7 +23,7 @@
 #import "CoreCSVWriter.h"
 
 @interface BaseCollectionViewController ()
-
+@property (nonatomic, assign) BOOL settingMenuShown;
 @end
 
 @implementation BaseCollectionViewController
@@ -32,6 +32,7 @@
 {
 	[super viewDidLoad];
 	[self registerObservers];
+	self.settingMenuShown = NO;
 	self.customPopoverController = nil;
 	self.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
 	self.collectionViewLayout.itemSize = CGSizeMake(150, 150);
@@ -209,7 +210,16 @@
 	if ([self.parentViewController isKindOfClass:[ContentNavigationController_iPad class]])
 	{
 		ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *)self.parentViewController;
-		[navController showMenu];
+		if (self.settingMenuShown)
+		{
+			[navController hideMenu];
+			self.settingMenuShown = NO;
+		}
+		else
+		{
+			[navController showMenu];
+			self.settingMenuShown = YES;
+		}
 	}
 }
 

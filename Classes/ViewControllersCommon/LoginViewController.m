@@ -38,7 +38,7 @@
 	titleLabel.frame = CGRectMake(80, 100, 200, 35);
 	titleLabel.text = @"iStayHealthy";
 	titleLabel.textAlignment = NSTextAlignmentLeft;
-	titleLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:30];
+	titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:30];
 	[self.view addSubview:titleLabel];
 
 	UILabel *versionLabel = [UILabel standardLabel];
@@ -46,7 +46,7 @@
 	versionLabel.text = [[[NSBundle mainBundle] infoDictionary]
 	                     objectForKey:@"CFBundleShortVersionString"];
 	versionLabel.textAlignment = NSTextAlignmentCenter;
-	versionLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:12];
+	versionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
 	[self.view addSubview:versionLabel];
 
 
@@ -55,7 +55,7 @@
 	copyrightLabel.backgroundColor = [UIColor clearColor];
 	copyrightLabel.text = @"Peter Schmidt, 2013";
 	copyrightLabel.textAlignment = NSTextAlignmentCenter;
-	copyrightLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:12];
+	copyrightLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
 	[self.view addSubview:copyrightLabel];
 
 	UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(20, 220, 280, 40)];
