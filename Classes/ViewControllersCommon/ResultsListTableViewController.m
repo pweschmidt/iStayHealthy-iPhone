@@ -126,7 +126,7 @@
 #ifdef APPDEBUG
 	NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
 #endif
-	[[CoreDataManager sharedInstance] fetchDataForEntityName:@"Results" predicate:nil sortTerm:@"ResultsDate" ascending:NO completion: ^(NSArray *array, NSError *error) {
+	[[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
 	        UIAlertView *errorAlert = [[UIAlertView alloc]

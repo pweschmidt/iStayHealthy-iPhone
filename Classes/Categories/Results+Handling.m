@@ -7,6 +7,7 @@
 //
 
 #import "Results+Handling.h"
+#import "PWESCalendar.h"
 
 @implementation Results (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes
@@ -47,6 +48,24 @@
 	self.liverGammaGlutamylTranspeptidase = [self numberFromValue:[attributes objectForKey:kLiverGammaGlutamylTranspeptidase]];
 	self.hepBTiter = [NSNumber numberWithInt:-1];
 	self.hepCTiter = [NSNumber numberWithInt:-1];
+}
+
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return NO;
+	}
+	BOOL isSame = NO;
+	isSame = [self.UID isEqualToString:[self stringFromValue:[attributes objectForKey:kUID]]];
+	if (isSame)
+	{
+		return YES;
+	}
+
+	NSDate *date = [self dateFromValue:[attributes objectForKey:kResultsDate]];
+	isSame = [[PWESCalendar sharedInstance] datesAreWithinDays:1.0 date1:date date2:self.ResultsDate];
+	return isSame;
 }
 
 - (NSString *)xmlString

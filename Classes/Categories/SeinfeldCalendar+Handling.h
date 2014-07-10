@@ -14,4 +14,6 @@
 - (SeinfeldCalendarEntry *)entryForDay:(NSUInteger)day
                                  month:(NSUInteger)month
                                   year:(NSUInteger)year;
+- (void)importFromDictionary:(NSDictionary *)attributes;
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
 @end

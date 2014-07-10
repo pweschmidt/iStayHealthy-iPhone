@@ -7,6 +7,7 @@
 //
 
 #import "SideEffects+Handling.h"
+#import "PWESCalendar.h"
 
 @implementation SideEffects (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes
@@ -21,6 +22,30 @@
 	self.UID = [self stringFromValue:[attributes objectForKey:kUID]];
 	self.Drug = [self stringFromValue:[attributes objectForKey:kDrug]];
 	self.seriousness = [self stringFromValue:[attributes objectForKey:kSeriousness]];
+}
+
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return NO;
+	}
+	BOOL isSame = NO;
+	isSame = [self.UID isEqualToString:[self stringFromValue:[attributes objectForKey:kUID]]];
+
+	NSString *name = [self stringFromValue:[attributes objectForKey:kName]];
+	NSString *effect = [self stringFromValue:[attributes objectForKey:kSideEffect]];
+	NSDate *date = [self dateFromValue:[attributes objectForKey:kSideEffectDate]];
+
+	BOOL isSameEffect = ([effect caseInsensitiveCompare:self.SideEffect] == NSOrderedSame);
+	BOOL isSameDate = [[PWESCalendar sharedInstance] datesAreWithinDays:1.0 date1:date date2:self.SideEffectDate];
+	BOOL isSameDrug = ([name caseInsensitiveCompare:self.Name] == NSOrderedSame);
+	if (isSameEffect && isSameDate && isSameDrug)
+	{
+		return YES;
+	}
+
+	return isSame;
 }
 
 - (NSString *)csvString

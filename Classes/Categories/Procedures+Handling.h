@@ -12,6 +12,7 @@
 
 @interface Procedures (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
 - (void)addValueString:(NSString *)valueString type:(NSString *)type;
 - (NSString *)valueStringForType:(NSString *)type;
 @end

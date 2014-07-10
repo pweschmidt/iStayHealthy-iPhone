@@ -39,6 +39,35 @@
 	self.ClinicStreet = [self stringFromValue:[attributes objectForKey:kClinicStreet]];
 }
 
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return NO;
+	}
+	BOOL isSame = NO;
+	isSame = [self.UID isEqualToString:[self stringFromValue:[attributes objectForKey:kUID]]];
+	if (isSame)
+	{
+		return YES;
+	}
+	isSame = ([self.ClinicName caseInsensitiveCompare:[self stringFromValue:[attributes objectForKey:kClinicName]]] == NSOrderedSame);
+	if (isSame)
+	{
+		return YES;
+	}
+	if (nil != self.ClinicID && nil != [self stringFromValue:[attributes objectForKey:kClinicID]])
+	{
+		isSame = [self.ClinicID isEqualToString:[self stringFromValue:[attributes objectForKey:kClinicID]]];
+		if (isSame)
+		{
+			return YES;
+		}
+	}
+
+	return isSame;
+}
+
 - (NSString *)csvString
 {
 	NSMutableString *string = [NSMutableString string];

@@ -188,4 +188,26 @@
 	return [difference day];
 }
 
+- (BOOL)datesAreWithin48Hours:(NSDate *)date1 date2:(NSDate *)date2
+{
+	return [self datesAreWithinDays:2.0 date1:date1 date2:date2];
+}
+
+- (BOOL)datesAreWithinDays:(NSTimeInterval)days date1:(NSDate *)date1 date2:(NSDate *)date2
+{
+	NSTimeInterval date1Interval = [date1 timeIntervalSinceReferenceDate];
+	NSTimeInterval date2Interval = [date2 timeIntervalSinceReferenceDate];
+	NSTimeInterval daysBoundary = days * 24 * 60 * 20;
+
+	NSTimeInterval delta = abs(date1Interval - date2Interval);
+	if (delta <= daysBoundary)
+	{
+		return YES;
+	}
+	else
+	{
+		return NO;
+	}
+}
+
 @end

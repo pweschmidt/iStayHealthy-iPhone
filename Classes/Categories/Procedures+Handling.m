@@ -7,6 +7,7 @@
 //
 
 #import "Procedures+Handling.h"
+#import "PWESCalendar.h"
 
 @implementation Procedures (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes
@@ -26,6 +27,40 @@
 	self.Name = [self stringFromValue:[attributes objectForKey:kName]];
 	self.Notes = [self stringFromValue:[attributes objectForKey:kNotes]];
 	self.CausedBy = [self stringFromValue:[attributes objectForKey:kCausedBy]];
+}
+
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return NO;
+	}
+	BOOL isSame = NO;
+	isSame = [self.UID isEqualToString:[self stringFromValue:[attributes objectForKey:kUID]]];
+	NSString *name = [self stringFromValue:[attributes objectForKey:kName]];
+	NSString *illness = [self stringFromValue:[attributes objectForKey:kIllness]];
+	BOOL isSameName = NO;
+
+	if (nil != name && nil != self.Name)
+	{
+		isSameName = ([name caseInsensitiveCompare:self.Name] == NSOrderedSame);
+	}
+
+	if (!isSameName)
+	{
+		if (nil != illness && nil != self.Illness)
+		{
+			isSameName = ([illness caseInsensitiveCompare:self.Illness] == NSOrderedSame);
+		}
+	}
+
+	NSDate *date = [self dateFromValue:[attributes objectForKey:kDate]];
+	BOOL isSameDate = [[PWESCalendar sharedInstance] datesAreWithin48Hours:date date2:self.Date];
+	if (isSameName && isSameDate)
+	{
+		return YES;
+	}
+	return isSame;
 }
 
 - (NSString *)csvString

@@ -39,6 +39,17 @@
 	return foundEntry;
 }
 
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return NO;
+	}
+	BOOL isSame = NO;
+	isSame = [self.uID isEqualToString:[self stringFromValue:[attributes objectForKey:kUIDLowerCase]]];
+	return isSame;
+}
+
 - (NSString *)csvString
 {
 	NSMutableString *string = [NSMutableString string];

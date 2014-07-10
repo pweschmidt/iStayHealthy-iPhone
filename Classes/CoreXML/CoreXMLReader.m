@@ -21,13 +21,20 @@
 #import "CoreDataManager.h"
 
 @interface CoreXMLReader ()
-@property (nonatomic, strong, readwrite) NSString *filePath;
-@property (nonatomic, strong, readwrite) NSMutableDictionary *xmlData;
-@property (nonatomic, strong, readwrite) NSMutableArray *resultArray;
-@property (nonatomic, strong, readwrite) NSMutableArray *medicationArray;
-@property (nonatomic, strong, readwrite) NSArray *results;
-@property (nonatomic, strong, readwrite) NSArray *medications;
+@property (nonatomic, strong) NSString *filePath;
+@property (nonatomic, strong) NSMutableDictionary *xmlData;
+@property (nonatomic, strong) iStayHealthyRecord *masterRecord;
+@property (nonatomic, strong) NSArray *results;
+@property (nonatomic, strong) NSArray *medications;
+@property (nonatomic, strong) NSArray *missed;
+@property (nonatomic, strong) NSArray *previous;
+@property (nonatomic, strong) NSArray *other;
+@property (nonatomic, strong) NSArray *effects;
+@property (nonatomic, strong) NSArray *procedures;
+@property (nonatomic, strong) NSArray *contacts;
+@property (nonatomic, strong) NSArray *wellnesses;
 @property (nonatomic, strong) iStayHealthySuccessBlock successBlock;
+
 @end
 
 @implementation CoreXMLReader
@@ -54,11 +61,26 @@
 		}
 		return;
 	}
+	[self setUpArrays];
+	[self loadData];
 	self.successBlock = completionBlock;
 	NSData *data = [xmlData copy];
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
 	parser.delegate = self;
 	[parser parse];
+}
+
+- (void)setUpArrays
+{
+	self.results = [NSArray array];
+	self.medications = [NSArray array];
+	self.other = [NSArray array];
+	self.procedures = [NSArray array];
+	self.previous = [NSArray array];
+	self.missed = [NSArray array];
+	self.effects = [NSArray array];
+	self.contacts = [NSArray array];
+	self.wellnesses = [NSArray array];
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
@@ -102,58 +124,181 @@
 	}
 	if ([elementName isEqualToString:kResult])
 	{
-		Results *results = [[CoreDataManager sharedInstance]
-		                    managedObjectForEntityName:kResults];
-		[results importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kResults attributes:attributeDict];
+		if (!exists)
+		{
+			Results *results = [[CoreDataManager sharedInstance]
+			                    managedObjectForEntityName:kResults];
+			[results importFromDictionary:attributeDict];
+		}
 	}
 	else if ([elementName isEqualToString:kSideEffects])
 	{
-		SideEffects *effects = [[CoreDataManager sharedInstance]
-		                        managedObjectForEntityName:kSideEffects];
-		[effects importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kSideEffects attributes:attributeDict];
+		if (!exists)
+		{
+			SideEffects *effects = [[CoreDataManager sharedInstance]
+			                        managedObjectForEntityName:kSideEffects];
+			[effects importFromDictionary:attributeDict];
+		}
 	}
 	else if ([elementName isEqualToString:kMedication])
 	{
-		Medication *med = [[CoreDataManager sharedInstance]
-		                   managedObjectForEntityName:kMedication];
-		[med importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kMedication attributes:attributeDict];
+		if (!exists)
+		{
+			Medication *med = [[CoreDataManager sharedInstance]
+			                   managedObjectForEntityName:kMedication];
+			[med importFromDictionary:attributeDict];
+		}
 	}
 	else if ([elementName isEqualToString:kMissedMedication])
 	{
-		MissedMedication *missedMed = [[CoreDataManager sharedInstance]
-		                               managedObjectForEntityName:kMissedMedication];
-		[missedMed importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kMissedMedication attributes:attributeDict];
+		if (!exists)
+		{
+			MissedMedication *missedMed = [[CoreDataManager sharedInstance]
+			                               managedObjectForEntityName:kMissedMedication];
+			[missedMed importFromDictionary:attributeDict];
+		}
 	}
 	else if ([elementName isEqualToString:kOtherMedication])
 	{
-		OtherMedication *otherMed = [[CoreDataManager sharedInstance]
-		                             managedObjectForEntityName:kOtherMedication];
-		[otherMed importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kOtherMedication attributes:attributeDict];
+		if (!exists)
+		{
+			OtherMedication *otherMed = [[CoreDataManager sharedInstance]
+			                             managedObjectForEntityName:kOtherMedication];
+			[otherMed importFromDictionary:attributeDict];
+		}
 	}
 	else if ([elementName isEqualToString:kContacts])
 	{
-		Contacts *contacts = [[CoreDataManager sharedInstance]
-		                      managedObjectForEntityName:kContacts];
-		[contacts importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kContacts attributes:attributeDict];
+		if (!exists)
+		{
+			Contacts *contacts = [[CoreDataManager sharedInstance]
+			                      managedObjectForEntityName:kContacts];
+			[contacts importFromDictionary:attributeDict];
+		}
 	}
 	else if ([elementName isEqualToString:kProcedures])
 	{
-		Procedures *procedures = [[CoreDataManager sharedInstance]
-		                          managedObjectForEntityName:kProcedures];
-		[procedures importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kProcedures attributes:attributeDict];
+		if (!exists)
+		{
+			Procedures *procedures = [[CoreDataManager sharedInstance]
+			                          managedObjectForEntityName:kProcedures];
+			[procedures importFromDictionary:attributeDict];
+		}
 	}
 	else if ([elementName isEqualToString:kPreviousMedication])
 	{
-		PreviousMedication *prevMed = [[CoreDataManager sharedInstance]
-		                               managedObjectForEntityName:kPreviousMedication];
-		[prevMed importFromDictionary:attributeDict];
+		BOOL exists = [self entryExistsForEntityName:kPreviousMedication attributes:attributeDict];
+		if (!exists)
+		{
+			PreviousMedication *prevMed = [[CoreDataManager sharedInstance]
+			                               managedObjectForEntityName:kPreviousMedication];
+			[prevMed importFromDictionary:attributeDict];
+		}
 	}
-	else if ([elementName isEqualToString:kWellness])
+//	else if ([elementName isEqualToString:kWellness])
+//	{
+//        BOOL exists = [self entryExistsForEntityName:kWellness attributes:attributeDict];
+//        if (!exists)
+//        {
+//            Wellness *wellness = [[CoreDataManager sharedInstance]
+//                                  managedObjectForEntityName:kWellness];
+//            [wellness importFromDictionary:attributeDict];
+//        }
+//	}
+}
+
+- (BOOL)entryExistsForEntityName:(NSString *)entityName
+                      attributes:(NSDictionary *)attributes
+{
+	__block BOOL exists = NO;
+	if ([entityName isEqualToString:kResults])
 	{
-		Wellness *wellness = [[CoreDataManager sharedInstance]
-		                      managedObjectForEntityName:kWellness];
-		[wellness importFromDictionary:attributeDict];
+		[self.results enumerateObjectsUsingBlock: ^(Results *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
 	}
+	else if ([entityName isEqualToString:kMedication])
+	{
+		[self.medications enumerateObjectsUsingBlock: ^(Medication *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
+	}
+	else if ([entityName isEqualToString:kMissedMedication])
+	{
+		[self.missed enumerateObjectsUsingBlock: ^(MissedMedication *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
+	}
+	else if ([entityName isEqualToString:kPreviousMedication])
+	{
+		[self.previous enumerateObjectsUsingBlock: ^(PreviousMedication *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
+	}
+	else if ([entityName isEqualToString:kOtherMedication])
+	{
+		[self.other enumerateObjectsUsingBlock: ^(OtherMedication *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
+	}
+	else if ([entityName isEqualToString:kProcedures])
+	{
+		[self.procedures enumerateObjectsUsingBlock: ^(Procedures *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
+	}
+	else if ([entityName isEqualToString:kSideEffects])
+	{
+		[self.effects enumerateObjectsUsingBlock: ^(SideEffects *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
+	}
+	else if ([entityName isEqualToString:kContacts])
+	{
+		[self.contacts enumerateObjectsUsingBlock: ^(Contacts *obj, NSUInteger idx, BOOL *stop) {
+		    exists = [obj isEqualToDictionary:attributes];
+		    if (exists)
+		    {
+		        *stop = YES;
+			}
+		}];
+	}
+	return exists;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
@@ -162,6 +307,65 @@
 #ifdef APPDEBUG
 	NSLog(@"Error occurred while parsing XML file");
 #endif
+}
+
+- (void)loadData
+{
+	CoreDataManager *dataManager = [CoreDataManager sharedInstance];
+	[dataManager fetchiStayHealthyRecordWithCompletion: ^(iStayHealthyRecord *record, NSError *error) {
+	    if (nil != record)
+	    {
+	        self.masterRecord = record;
+		}
+	    [dataManager fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	        if (nil != array)
+	        {
+	            self.results = array;
+			}
+	        [dataManager fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	            if (nil != array)
+	            {
+	                self.medications = array;
+				}
+	            [dataManager fetchDataForEntityName:kOtherMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	                if (nil != array)
+	                {
+	                    self.other = array;
+					}
+	                [dataManager fetchDataForEntityName:kMissedMedication predicate:nil sortTerm:kMissedDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	                    if (nil != array)
+	                    {
+	                        self.missed = array;
+						}
+	                    [dataManager fetchDataForEntityName:kSideEffects predicate:nil sortTerm:kSideEffectDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	                        if (nil != array)
+	                        {
+	                            self.effects = array;
+							}
+	                        [dataManager fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
+	                            if (nil != array)
+	                            {
+	                                self.previous = array;
+								}
+	                            [dataManager fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+	                                if (nil != array)
+	                                {
+	                                    self.procedures = array;
+									}
+	                                [dataManager fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:YES completion: ^(NSArray *array, NSError *error) {
+	                                    if (nil != array)
+	                                    {
+	                                        self.contacts = array;
+										}
+									}];
+								}];
+							}];
+						}];
+					}];
+				}];
+			}];
+		}];
+	}];
 }
 
 @end

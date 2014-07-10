@@ -128,14 +128,20 @@ static NSDictionary *csvAscDictionary()
 	            if (isHeader && [obj respondsToSelector:@selector(csvRowHeader)])
 	            {
 	                NSString *header = [obj csvRowHeader];
-	                [self.csvString insertString:header atIndex:updatedPosition];
+	                if (nil != header)
+	                {
+	                    [self.csvString insertString:header atIndex:updatedPosition];
+					}
 	                updatedPosition += header.length;
 	                isHeader = NO;
 				}
 	            if ([obj respondsToSelector:@selector(csvString)])
 	            {
 	                NSString *elementString = [obj csvString];
-	                [self.csvString insertString:elementString atIndex:updatedPosition];
+	                if (nil != elementString)
+	                {
+	                    [self.csvString insertString:elementString atIndex:updatedPosition];
+					}
 	                updatedPosition += elementString.length;
 				}
 			}];

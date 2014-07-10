@@ -198,7 +198,10 @@ static NSDictionary *ascendingDictionary()
 	{
 		self.xmlString = [NSMutableString string];
 	}
-	[self.xmlString insertString:string atIndex:position];
+	if (nil != string)
+	{
+		[self.xmlString insertString:string atIndex:position];
+	}
 	return self.xmlString.length;
 }
 

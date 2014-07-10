@@ -11,4 +11,5 @@
 
 @interface Medication (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MissedMedication+Handling.h"
+#import "PWESCalendar.h"
 
 @implementation MissedMedication (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes
@@ -20,6 +21,30 @@
 	self.MissedDate = [self dateFromValue:[attributes objectForKey:kMissedDate]];
 	self.Drug = [self stringFromValue:[attributes objectForKey:kDrug]];
 	self.missedReason = [self stringFromValue:[attributes objectForKey:kMissedReason]];
+}
+
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return NO;
+	}
+	BOOL isSame = NO;
+	isSame = [self.UID isEqualToString:[self stringFromValue:[attributes objectForKey:kUID]]];
+	if (isSame)
+	{
+		return YES;
+	}
+	NSString *name = [self stringFromValue:[attributes objectForKey:kName]];
+	NSDate *date = [self dateFromValue:[attributes objectForKey:kMissedDate]];
+	BOOL isSameDate = [[PWESCalendar sharedInstance] datesAreWithinDays:0.5 date1:self.MissedDate date2:date];
+	BOOL isSameName = ([name caseInsensitiveCompare:kName] == NSOrderedSame);
+	if (isSameDate && isSameName)
+	{
+		return YES;
+	}
+
+	return isSame;
 }
 
 - (NSString *)csvString

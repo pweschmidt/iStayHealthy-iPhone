@@ -7,6 +7,7 @@
 //
 
 #import "OtherMedication+Handling.h"
+#import "PWESCalendar.h"
 
 @implementation OtherMedication (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes
@@ -27,6 +28,26 @@
 	self.Unit = [self stringFromValue:[attributes objectForKey:kUnit]];
 	self.MedicationForm = [self stringFromValue:[attributes objectForKey:kMedicationForm]];
 	self.Image = [attributes objectForKey:kImage];
+}
+
+- (BOOL)isEqualToDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return NO;
+	}
+	BOOL isSame = NO;
+	isSame = [self.UID isEqualToString:[self stringFromValue:[attributes objectForKey:kUID]]];
+	NSString *name = [self stringFromValue:[attributes objectForKey:kName]];
+	NSDate *date = [self dateFromValue:[attributes objectForKey:kStartDate]];
+
+	BOOL isSameName = ([name caseInsensitiveCompare:self.Name] == NSOrderedSame);
+	BOOL isSameDate = [[PWESCalendar sharedInstance] datesAreWithin48Hours:date date2:self.StartDate];
+	if (isSameName && isSameDate)
+	{
+		return YES;
+	}
+	return isSame;
 }
 
 - (NSString *)xmlString
