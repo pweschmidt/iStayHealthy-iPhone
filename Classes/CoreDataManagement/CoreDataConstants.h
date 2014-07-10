@@ -20,4 +20,5 @@
 #define kUbiquityTokenKey                   @"com.pweschmidt.iStayHealthy.ubiquityToken"
 #define kImportedDataAvailableKey           @"ImportedDataAvailable"
 #define kTmpFileKey                         @"TemporaryFile"
+#define kXMLBackupFile                      @"iStayHealthyBackup.xml"
 #define kBackgroundQueueName                "com.pweschmidt.iStayHealthy.background.queue"

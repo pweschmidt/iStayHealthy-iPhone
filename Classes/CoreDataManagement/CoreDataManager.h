@@ -30,6 +30,8 @@
 
 - (BOOL)saveContextAndWait:(NSError **)error;
 
+- (BOOL)saveAndBackup:(NSError **)error;
+
 - (BOOL)saveContext:(NSError **)error;
 
 - (NSURL *)applicationDocumentsDirectory;

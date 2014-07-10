@@ -11,6 +11,8 @@
 #import "CoreDataConstants.h"
 #import "CoreXMLReader.h"
 #import "iStayHealthyRecord+Handling.h"
+#import "CoreXMLWriter.h"
+
 @interface CoreDataManager ()
 {
 	NSManagedObjectContext *privateContext;
@@ -431,6 +433,30 @@
 }
 
 #pragma mark save and fetch
+- (BOOL)saveAndBackup:(NSError **)error
+{
+	__block BOOL saveSuccess = [self saveContextAndWait:error];
+	if (saveSuccess)
+	{
+		[[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+		    if (nil != xmlString)
+		    {
+		        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+		        NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
+		        NSFileManager *manager = [NSFileManager defaultManager];
+		        if ([manager fileExistsAtPath:[path path]])
+		        {
+		            NSError *removeError = nil;
+		            [manager removeItemAtURL:path error:&removeError];
+		            saveSuccess = (removeError == nil);
+				}
+		        [xmlData writeToURL:path atomically:YES];
+			}
+		}];
+	}
+	return saveSuccess;
+}
+
 - (BOOL)saveContext:(BOOL)wait error:(NSError **)error
 {
 	NSManagedObjectContext *context = self.defaultContext;

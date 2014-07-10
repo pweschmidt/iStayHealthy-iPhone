@@ -110,10 +110,7 @@
 				[strongPopoverDelegate hidePopover];
 			}
 		}
-		else
-		{
-			[self cancel];
-		}
+		[self cancel];
 	}
 	else
 	{

@@ -68,6 +68,8 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+//	NSError *error = nil;
+//	[[CoreDataManager sharedInstance] saveAndBackup:&error];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -93,6 +95,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	NSError *error = nil;
+//	[[CoreDataManager sharedInstance] saveAndBackup:&error];
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
 
