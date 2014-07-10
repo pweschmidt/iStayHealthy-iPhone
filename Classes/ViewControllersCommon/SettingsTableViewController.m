@@ -119,7 +119,7 @@
 		UIAlertView *isDone = [[UIAlertView alloc]
 		                       initWithTitle:NSLocalizedString(@"Password", @"Password")
 		                                    message:NSLocalizedString(@"PasswordSet", @"PasswordSet")
-		                                   delegate:nil
+		                                   delegate:self
 		                          cancelButtonTitle:NSLocalizedString(@"Ok", nil)
 		                          otherButtonTitles:nil];
 		[isDone show];
@@ -137,6 +137,23 @@
 	}
 
 	[defaults synchronize];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	[self hidePopover];
+}
+
+- (void)hidePopover
+{
+	__strong id <PWESPopoverDelegate> strongDelegate = self.popoverDelegate;
+	if (nil != strongDelegate)
+	{
+		if ([strongDelegate respondsToSelector:@selector(hidePopover)])
+		{
+			[strongDelegate hidePopover];
+		}
+	}
 }
 
 - (void)didReceiveMemoryWarning

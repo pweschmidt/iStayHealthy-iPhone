@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PWESPopoverDelegate.h"
+
 #import "BaseTableViewController.h"
-@interface SettingsTableViewController : BaseTableViewController <UITextFieldDelegate>
+@interface SettingsTableViewController : BaseTableViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@property (nonatomic, weak) id <PWESPopoverDelegate> popoverDelegate;
 @end

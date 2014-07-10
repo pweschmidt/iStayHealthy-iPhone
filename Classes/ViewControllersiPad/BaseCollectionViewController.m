@@ -341,6 +341,7 @@
 - (void)showPasswordControllerFromButton:(UIBarButtonItem *)button
 {
 	SettingsTableViewController *controller = [[SettingsTableViewController alloc] initAsPopoverController];
+	controller.popoverDelegate = self;
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];

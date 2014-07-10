@@ -394,10 +394,12 @@
 
 	if ([Utilities isIPad])
 	{
+		controller.popoverDelegate = self;
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
 	else
 	{
+		controller.popoverDelegate = nil;
 		[self.navigationController pushViewController:controller animated:YES];
 	}
 }
