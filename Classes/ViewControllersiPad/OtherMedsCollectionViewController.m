@@ -75,12 +75,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//	[self hidePopover];
 	OtherMedication *med = [self.meds objectAtIndex:indexPath.row];
 	EditOtherMedsTableViewController *editController = [[EditOtherMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
 	editController.preferredContentSize = CGSizeMake(320, 568);
-//	editController.customPopOverDelegate = self;
-	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
@@ -88,6 +85,7 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
+	[self startAnimation:notification];
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kOtherMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -104,22 +102,11 @@
 	        self.meds = nil;
 	        self.meds = array;
 	        dispatch_async(dispatch_get_main_queue(), ^{
+	            [self stopAnimation:notification];
 	            [self.collectionView reloadData];
 			});
 		}
 	}];
-}
-
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification

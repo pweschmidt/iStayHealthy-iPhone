@@ -146,4 +146,44 @@
 	self.markedIndexPath = nil;
 }
 
+#pragma mark animation
+
+- (void)createIndicatorsForHeaderView:(UIView *)headerView
+{
+	UILabel *label = [UILabel standardLabel];
+	label.text = @"";
+	label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 36);
+	[headerView addSubview:label];
+	self.tableActivityLabel = label;
+	UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	indicator.hidesWhenStopped = YES;
+	indicator.frame = CGRectMake(20, 0, 36, 36);
+	[headerView addSubview:indicator];
+	self.tableIndicatorView = indicator;
+}
+
+- (void)animateTableViewWithText:(NSString *)text
+{
+	if (nil != self.tableActivityLabel)
+	{
+		self.tableActivityLabel.text = text;
+	}
+	if (nil != self.tableIndicatorView && !self.tableIndicatorView.isAnimating)
+	{
+		[self.tableIndicatorView startAnimating];
+	}
+}
+
+- (void)stopAnimateTableViewWithText:(NSString *)text
+{
+	if (nil != self.tableActivityLabel)
+	{
+		self.tableActivityLabel.text = @"";
+	}
+	if (nil != self.tableIndicatorView && self.tableIndicatorView.isAnimating)
+	{
+		[self.tableIndicatorView stopAnimating];
+	}
+}
+
 @end

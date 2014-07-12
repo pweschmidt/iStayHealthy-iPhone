@@ -10,7 +10,7 @@
 #import "PWESNavigationDelegate.h"
 #import <MessageUI/MessageUI.h>
 
-@interface ContentContainerViewController : UIViewController <UIViewControllerTransitioningDelegate, PWESNavigationDelegate>
+@interface ContentContainerViewController : UIViewController <UIViewControllerTransitioningDelegate, PWESNavigationDelegate, UIAlertViewDelegate>
 @property (nonatomic, assign) TransitionType transitionType;
 - (void)showMenu;
 - (void)hideMenu;

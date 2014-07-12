@@ -15,7 +15,11 @@
 @property (nonatomic, strong) NSManagedObject *markedObject;
 @property (nonatomic, strong) NSIndexPath *markedIndexPath;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIActivityIndicatorView *tableIndicatorView;
+@property (nonatomic, strong) UILabel *tableActivityLabel;
 - (void)showDeleteAlertView;
 - (void)removeSQLEntry;
 - (void)deselect:(id)sender;
+- (void)animateTableViewWithText:(NSString *)text;
+- (void)stopAnimateTableViewWithText:(NSString *)text;
 @end

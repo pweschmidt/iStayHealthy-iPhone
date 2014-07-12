@@ -43,7 +43,6 @@
 #endif
 		}
 	}];
-//	[TestFlight takeOff:@"9aebed56-8c01-4c9c-8a16-8bfbede83f90"];
 
 
 	UILocalNotification *notification = [launchOptions objectForKey:
@@ -68,8 +67,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-//	NSError *error = nil;
-//	[[CoreDataManager sharedInstance] saveAndBackup:&error];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -95,7 +92,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	NSError *error = nil;
-//	[[CoreDataManager sharedInstance] saveAndBackup:&error];
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
 

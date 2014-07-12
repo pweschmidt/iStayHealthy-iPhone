@@ -45,6 +45,7 @@
 	ContentNavigationController *navigationController = [self startController];
 	[self addChildViewController:navigationController];
 	[self moveToChildNavigationController:navigationController];
+	[self createWarning];
 }
 
 - (ContentNavigationController *)startController
@@ -59,6 +60,43 @@
 	{
 		return [self navigationControllerForName_iPhone:kDashboardController];
 	}
+}
+
+- (void)createWarning
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	BOOL dontShowWarning = [defaults boolForKey:kDontShowWarning];
+	BOOL updatedVersion = [defaults boolForKey:kIsVersionUpdate400];
+	if (!dontShowWarning || !updatedVersion)
+	{
+		UIAlertView *warning = [[UIAlertView alloc]
+		                        initWithTitle:NSLocalizedString(@"Loading Data", nil)
+		                                     message:NSLocalizedString(@"It may take up to 2 min before all data are shown. Please wait.", nil)
+		                                    delegate:self
+		                           cancelButtonTitle:NSLocalizedString(@"Keep warning", nil)
+		                           otherButtonTitles:NSLocalizedString(@"Disable Warning!", nil), nil];
+		[warning show];
+	}
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+	if ([title isEqualToString:NSLocalizedString(@"Disable Warning!", nil)])
+	{
+		[defaults setBool:YES forKey:kDontShowWarning];
+	}
+	else
+	{
+		[defaults setBool:NO forKey:kDontShowWarning];
+	}
+	BOOL updatedVersion = [defaults boolForKey:kIsVersionUpdate400];
+	if (!updatedVersion)
+	{
+		[defaults setBool:YES forKey:kIsVersionUpdate400];
+	}
+	[defaults synchronize];
 }
 
 - (void)didReceiveMemoryWarning

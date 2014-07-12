@@ -55,6 +55,7 @@
 	[super viewDidLoad];
 	[self registerObservers];
 	self.view.backgroundColor = DEFAULT_BACKGROUND;
+	[self createIndicators];
 	self.settingMenuShown = NO;
 	UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
 	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
@@ -86,6 +87,20 @@
 	[self.view addSubview:toolbar];
 	self.customToolbar = toolbar;
 	self.customToolbar.customToolbarDelegate = self;
+}
+
+- (void)createIndicators
+{
+	UILabel *label = [UILabel standardLabel];
+	label.text = @"";
+	label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 36);
+	[self.view addSubview:label];
+	self.activityLabel = label;
+	UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	indicator.hidesWhenStopped = YES;
+	indicator.frame = CGRectMake(20, 0, 36, 36);
+	[self.view addSubview:indicator];
+	self.indicatorView = indicator;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -287,23 +302,18 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
-	@throw [NSException exceptionWithName:NSInternalInconsistencyException
-	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-	                             userInfo:nil];
+	[self animateViewWithText:NSLocalizedString(@"Loading data...", nil)];
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
-	@throw [NSException exceptionWithName:NSInternalInconsistencyException
-	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-	                             userInfo:nil];
+	[self stopAnimateView];
 }
 
 - (void)handleError:(NSNotification *)notification
 {
-	@throw [NSException exceptionWithName:NSInternalInconsistencyException
-	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-	                             userInfo:nil];
+	UIAlertView *view = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error loading data", nil) message:NSLocalizedString(@"An error occurred while loading data", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+	[view show];
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
@@ -311,6 +321,31 @@
 	@throw [NSException exceptionWithName:NSInternalInconsistencyException
 	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
 	                             userInfo:nil];
+}
+
+#pragma mark animation
+- (void)animateViewWithText:(NSString *)text
+{
+	if (nil != self.activityLabel)
+	{
+		self.activityLabel.text = text;
+	}
+	if (nil != self.indicatorView && !self.indicatorView.isAnimating)
+	{
+		[self.indicatorView startAnimating];
+	}
+}
+
+- (void)stopAnimateView
+{
+	if (nil != self.activityLabel)
+	{
+		self.activityLabel.text = @"";
+	}
+	if (nil != self.indicatorView && self.indicatorView.isAnimating)
+	{
+		[self.indicatorView stopAnimating];
+	}
 }
 
 #pragma mark - iPhone Menus
@@ -352,31 +387,6 @@
 	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
 	                             userInfo:nil];
 }
-
-#pragma mark - handle rotations (iPad only)
-// - (BOOL)shouldAutorotate
-// {
-//	if ([Utilities isIPad])
-//	{
-//		return YES;
-//	}
-//	else
-//	{
-//		return NO;
-//	}
-// }
-//
-// - (NSUInteger)supportedInterfaceOrientations
-// {
-//	if ([Utilities isIPad])
-//	{
-//		return UIInterfaceOrientationMaskAll;
-//	}
-//	else
-//	{
-//		return UIInterfaceOrientationMaskPortrait;
-//	}
-// }
 
 - (UIImage *)blankImage
 {

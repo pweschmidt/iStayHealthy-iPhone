@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
 @property (nonatomic, strong) CustomToolbar *customToolbar;
 @property (nonatomic, strong) UIPopoverController *customPopoverController;
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
+@property (nonatomic, strong) UILabel *activityLabel;
 - (id)initAsPopoverController;
 - (void)disableRightBarButtons;
 - (void)hamburgerMenu;
@@ -32,4 +34,8 @@
 - (void)stopAnimation:(NSNotification *)notification;
 - (void)handleError:(NSNotification *)notification;
 - (void)handleStoreChanged:(NSNotification *)notification;
+
+- (void)animateViewWithText:(NSString *)text;
+- (void)stopAnimateView;
+
 @end

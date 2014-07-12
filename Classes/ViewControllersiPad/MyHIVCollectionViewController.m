@@ -50,18 +50,6 @@
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	if (nil == self.customPopoverController)
-//	{
-//		EditHIVMedsTableViewController *editController = [[EditHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-//		editController.preferredContentSize = CGSizeMake(320, 568);
-//		editController.customPopOverDelegate = self;
-//		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-//		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
-//	}
-//	else
-//	{
-//		[self hidePopover];
-//	}
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -114,14 +102,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//	[self hidePopover];
 	UINavigationController *editNavCtrl = nil;
 	if (0 == indexPath.section)
 	{
 		Medication *med = [self.currentMeds objectAtIndex:indexPath.row];
 		EditCurrentHIVMedsTableViewController *editController = [[EditCurrentHIVMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
 		editController.preferredContentSize = CGSizeMake(320, 568);
-//		editController.customPopOverDelegate = self;
 		editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	}
 	else
@@ -129,18 +115,16 @@
 		PreviousMedication *med = [self.previousMeds objectAtIndex:indexPath.row];
 		EditPreviousMedsTableViewController *editController = [[EditPreviousMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:med hasNumericalInput:NO];
 		editController.preferredContentSize = CGSizeMake(320, 568);
-//		editController.customPopOverDelegate = self;
 		editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	}
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	[self presentPopoverWithController:editNavCtrl
-//	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
+	[self startAnimation:notification];
 #ifdef APPDEBUG
 	NSLog(@"MyHIVCollectionViewController:reloadSQLData with name %@", notification.name);
 #endif
@@ -173,24 +157,13 @@
 	            {
 	                self.previousMeds = prevarray;
 	                dispatch_async(dispatch_get_main_queue(), ^{
+	                    [self stopAnimation:notification];
 	                    [self.collectionView reloadData];
 					});
 				}
 			}];
 		}
 	}];
-}
-
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification

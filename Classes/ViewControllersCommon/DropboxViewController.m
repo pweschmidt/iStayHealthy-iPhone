@@ -607,13 +607,8 @@
 	}
 }
 
-- (void)handleError:(NSNotification *)notification
-{
-}
-
 - (void)handleStoreChanged:(NSNotification *)notification
 {
-	[self reloadSQLData:notification];
 }
 
 @end

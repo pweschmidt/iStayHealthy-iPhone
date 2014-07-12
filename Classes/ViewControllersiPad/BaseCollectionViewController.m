@@ -22,6 +22,8 @@
 #import "EmailViewController.h"
 #import "CoreCSVWriter.h"
 
+#define kHeaderViewIdentifier @"CollectionHeaderViewIdentifier"
+
 @interface BaseCollectionViewController ()
 @property (nonatomic, assign) BOOL settingMenuShown;
 @end
@@ -76,6 +78,8 @@
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
+
+	[self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderViewIdentifier];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -97,14 +101,6 @@
 		    CGRect frame = CGRectMake(20, 44, self.view.bounds.size.width - 40, self.view.bounds.size.height - 88);
 		    CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
 		    self.toolbar.frame = toolbarFrame;
-//		    if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
-//		    {
-//		        frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
-//			}
-//		    else
-//		    {
-//		        frame = CGRectMake(20, 44, frame.size.width - 40, frame.size.height - 88);
-//			}
 		    self.collectionView.frame = frame;
 		    [self.collectionView.collectionViewLayout invalidateLayout];
 		}];
@@ -301,6 +297,19 @@
 	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]                                 userInfo:nil];
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath
+{
+	UICollectionReusableView *view = nil;
+	if (UICollectionElementKindSectionHeader == kind)
+	{
+		UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderViewIdentifier forIndexPath:indexPath];
+	}
+
+	return view;
+}
+
 #pragma mark Core Data and other methods to override in subclasses
 - (void)reloadSQLData:(NSNotification *)notification
 {
@@ -311,23 +320,18 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
-	@throw [NSException exceptionWithName:NSInternalInconsistencyException
-	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-	                             userInfo:nil];
+	[self animateViewWithText:NSLocalizedString(@"Loading data...", nil)];
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
-	@throw [NSException exceptionWithName:NSInternalInconsistencyException
-	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-	                             userInfo:nil];
+	[self stopAnimateView];
 }
 
 - (void)handleError:(NSNotification *)notification
 {
-	@throw [NSException exceptionWithName:NSInternalInconsistencyException
-	                               reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
-	                             userInfo:nil];
+	UIAlertView *view = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error loading data", nil) message:NSLocalizedString(@"An error occurred while loading data", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+	[view show];
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
@@ -412,6 +416,45 @@
                         error:(NSError *)error
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark animating
+- (void)createIndicatorsInView:(UIView *)collectionView
+{
+	UILabel *label = [UILabel standardLabel];
+	label.text = @"";
+	label.frame = CGRectMake(80, 0, collectionView.bounds.size.width - 100, 36);
+	[collectionView addSubview:label];
+	self.activityLabel = label;
+	UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	indicator.hidesWhenStopped = YES;
+	indicator.frame = CGRectMake(20, 0, 36, 36);
+	[collectionView addSubview:indicator];
+	self.indicatorView = indicator;
+}
+
+- (void)animateViewWithText:(NSString *)text
+{
+	if (nil != self.activityLabel)
+	{
+		self.activityLabel.text = text;
+	}
+	if (nil != self.indicatorView && !self.indicatorView.isAnimating)
+	{
+		[self.indicatorView startAnimating];
+	}
+}
+
+- (void)stopAnimateView
+{
+	if (nil != self.activityLabel)
+	{
+		self.activityLabel.text = @"";
+	}
+	if (nil != self.indicatorView && self.indicatorView.isAnimating)
+	{
+		[self.indicatorView stopAnimating];
+	}
 }
 
 @end

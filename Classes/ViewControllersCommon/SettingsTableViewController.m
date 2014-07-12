@@ -357,21 +357,8 @@
 {
 }
 
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
-}
-
 - (void)handleStoreChanged:(NSNotification *)notification
 {
-	[self reloadSQLData:notification];
 }
 
 @end

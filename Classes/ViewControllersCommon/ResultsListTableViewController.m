@@ -149,27 +149,6 @@
 	}];
 }
 
-- (void)startAnimation:(NSNotification *)notification
-{
-#ifdef APPDEBUG
-	NSLog(@"ResultsListTableViewController:startAnimation with name %@", notification.name);
-#endif
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-#ifdef APPDEBUG
-	NSLog(@"ResultsListTableViewController:stopAnimation with name %@", notification.name);
-#endif
-}
-
-- (void)handleError:(NSNotification *)notification
-{
-#ifdef APPDEBUG
-	NSLog(@"ResultsListTableViewController:handleError with name %@", notification.name);
-#endif
-}
-
 - (void)handleStoreChanged:(NSNotification *)notification
 {
 	[self reloadSQLData:notification];

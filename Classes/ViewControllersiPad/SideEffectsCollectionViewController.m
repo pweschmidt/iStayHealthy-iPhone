@@ -87,6 +87,7 @@
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
+	[self startAnimation:notification];
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kSideEffects predicate:nil sortTerm:kSideEffectDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -118,24 +119,13 @@
 	                self.currentMeds = nil;
 	                self.currentMeds = [NSArray arrayWithArray:medsarray];
 	                dispatch_async(dispatch_get_main_queue(), ^{
+	                    [self stopAnimation:notification];
 	                    [self.collectionView reloadData];
 					});
 				}
 			}];
 		}
 	}];
-}
-
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification

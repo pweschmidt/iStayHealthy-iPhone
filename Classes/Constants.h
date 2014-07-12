@@ -108,6 +108,8 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kDefaultFontName                @"Helvetica"
 #define kShortDateFormatting            @"MMM-yy"
 #define kDiaryActivatedKey              @"MedicationDiaryActivate"
+#define kDontShowWarning                @"dontShowLoadWarning"
+#define kIsVersionUpdate400             @"updatedToVersion400"
 
 /**
    Database and iCloud

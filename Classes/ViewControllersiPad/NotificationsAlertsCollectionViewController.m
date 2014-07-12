@@ -44,19 +44,6 @@
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	if (nil == self.customPopoverController)
-//	{
-//		EditAlertsTableViewController *editController = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-//		editController.preferredContentSize = CGSizeMake(320, 568);
-//		editController.customPopOverDelegate = self;
-//		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-//        editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
-//        [self presentViewController:editNavCtrl animated:YES completion:nil];
-//	}
-//	else
-//	{
-//		[self hidePopover];
-//	}
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -92,19 +79,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//	[self hidePopover];
 	UILocalNotification *notification = (UILocalNotification *)[self.notifications
 	                                                            objectAtIndex:indexPath.row];
 	EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped
 	                                                                               localNotification:notification];
 	controller.preferredContentSize = CGSizeMake(320, 568);
-//	controller.customPopOverDelegate = self;
-	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:controller];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	[self presentPopoverWithController:editNavCtrl
-//	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
 - (void)removeSQLEntry
@@ -113,32 +95,17 @@
 	{
 		return;
 	}
-//    [self.tableView beginUpdates];
 	[[UIApplication sharedApplication] cancelLocalNotification:self.markedNotification];
 	self.notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
 	self.markedNotification = nil;
-//    [self.tableView endUpdates];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
 }
 
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
-}
-
 - (void)handleStoreChanged:(NSNotification *)notification
 {
-	[self reloadSQLData:notification];
 }
 
 @end

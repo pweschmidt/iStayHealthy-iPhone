@@ -191,27 +191,6 @@
 	}
 }
 
-- (void)startAnimation:(NSNotification *)notification
-{
-#ifdef APPDEBUG
-	NSLog(@"DashboardViewController:startAnimation with name %@", notification.name);
-#endif
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-#ifdef APPDEBUG
-	NSLog(@"DashboardViewController:stopAnimation with name %@", notification.name);
-#endif
-}
-
-- (void)handleError:(NSNotification *)notification
-{
-#ifdef APPDEBUG
-	NSLog(@"DashboardViewController:handleError with name %@", notification.name);
-#endif
-}
-
 - (void)handleStoreChanged:(NSNotification *)notification
 {
 #ifdef APPDEBUG

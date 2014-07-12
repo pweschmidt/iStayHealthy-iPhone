@@ -47,7 +47,6 @@
 		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 		editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 		[self presentViewController:editNavCtrl animated:YES completion:nil];
-//		[self presentPopoverWithController:editNavCtrl fromBarButton:(UIBarButtonItem *)sender];
 	}
 	else
 	{
@@ -105,12 +104,11 @@
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	[self presentPopoverWithController:editNavCtrl
-//	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
+	[self startAnimation:notification];
 #ifdef APPDEBUG
 	NSLog(@"ResultsCollectionViewController with name %@", notification.name);
 #endif
@@ -133,22 +131,11 @@
 	        NSLog(@"we have %lu results returned", (unsigned long)self.results.count);
 #endif
 	        dispatch_async(dispatch_get_main_queue(), ^{
+	            [self stopAnimation:notification];
 	            [self.collectionView reloadData];
 			});
 		}
 	}];
-}
-
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification

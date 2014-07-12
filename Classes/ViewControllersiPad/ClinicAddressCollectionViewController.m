@@ -89,22 +89,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//	[self hidePopover];
 	Contacts *clinic = [self.clinics objectAtIndex:indexPath.row];
 	EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:clinic hasNumericalInput:NO];
 	editController.preferredContentSize = CGSizeMake(320, 568);
-//	editController.customPopOverDelegate = self;
-	//	UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	[self presentPopoverWithController:editNavCtrl
-//	                          fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
 }
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification
 {
+	[self startAnimation:notification];
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -124,22 +120,11 @@
 	        NSLog(@"we have %lu clinics returned", (unsigned long)self.clinics.count);
 #endif
 	        dispatch_async(dispatch_get_main_queue(), ^{
+	            [self stopAnimation:notification];
 	            [self.collectionView reloadData];
 			});
 		}
 	}];
-}
-
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification

@@ -87,6 +87,7 @@
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
+	[self startAnimation:notification];
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)
 	    {
@@ -103,22 +104,11 @@
 	        self.procedures = nil;
 	        self.procedures = array;
 	        dispatch_async(dispatch_get_main_queue(), ^{
+	            [self stopAnimation:notification];
 	            [self.collectionView reloadData];
 			});
 		}
 	}];
-}
-
-- (void)startAnimation:(NSNotification *)notification
-{
-}
-
-- (void)stopAnimation:(NSNotification *)notification
-{
-}
-
-- (void)handleError:(NSNotification *)notification
-{
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
