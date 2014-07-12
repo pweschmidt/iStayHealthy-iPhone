@@ -292,6 +292,8 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kIsCompleted                    @"isCompleted"
 #define kDateLowerCase                  @"date"
 #define kHasTakenMeds                   @"hasTakenMeds"
+#define kScore                          @"score"
+#define kEntries                        @"entries"
 
 #define kSleepBarometer                 @"sleepBarometer"
 #define kMoodBarometer                  @"moodBarometer"

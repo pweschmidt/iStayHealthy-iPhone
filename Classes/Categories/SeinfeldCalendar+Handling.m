@@ -10,6 +10,24 @@
 #import "Utilities.h"
 
 @implementation SeinfeldCalendar (Handling)
+- (void)importFromDictionary:(NSDictionary *)attributes
+{
+	if (nil == attributes || [attributes allKeys].count == 0)
+	{
+		return;
+	}
+	self.uID = [self stringFromValue:[attributes objectForKey:kUIDLowerCase]];
+	self.score = [self numberFromValue:[attributes objectForKey:kScore]];
+	self.startDate = [self dateFromValue:[attributes objectForKey:kStartDateLowerCase]];
+	self.endDate = [self dateFromValue:[attributes objectForKey:kEndDateLowerCase]];
+	self.isCompleted = [self numberFromValue:[attributes objectForKey:kIsCompleted]];
+	NSArray *entries = [attributes objectForKey:kEntries];
+	if (nil != entries)
+	{
+		self.entries = [NSSet setWithArray:entries];
+	}
+}
+
 - (SeinfeldCalendarEntry *)entryForDay:(NSUInteger)day
                                  month:(NSUInteger)month
                                   year:(NSUInteger)year
@@ -69,6 +87,11 @@
 	        else if ([obj isKindOfClass:[NSString class]])
 	        {
 	            [dictionary setObject:obj forKey:key];
+			}
+	        else if ([key isEqualToString:kEntries])
+	        {
+	            NSSet *entries = (NSSet *)obj;
+	            [dictionary setObject:[entries allObjects] forKey:key];
 			}
 		}
 	}];
