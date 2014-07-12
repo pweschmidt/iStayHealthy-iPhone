@@ -32,6 +32,8 @@
 
 - (BOOL)saveAndBackup:(NSError **)error;
 
+- (void)restoreLocallyWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock;
+
 - (BOOL)saveContext:(NSError **)error;
 
 - (NSURL *)applicationDocumentsDirectory;

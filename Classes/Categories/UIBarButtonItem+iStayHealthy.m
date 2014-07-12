@@ -24,7 +24,7 @@
 		return nil;
 	}
 	UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	customButton.frame = CGRectMake(0, 0, 20, 20);
+	customButton.frame = CGRectMake(0, 0, 22, 22);
 	customButton.backgroundColor = [UIColor clearColor];
 	customButton.tag = buttonTag;
 	[customButton addSubview:buttonView];

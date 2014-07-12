@@ -15,5 +15,6 @@
                                  month:(NSUInteger)month
                                   year:(NSUInteger)year;
 - (void)importFromDictionary:(NSDictionary *)attributes;
+- (NSDictionary *)dictionaryForAttributes;
 - (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
 @end

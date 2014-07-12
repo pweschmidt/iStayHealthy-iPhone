@@ -255,7 +255,7 @@
 	}
 	else if ([title isEqualToString:NSLocalizedString(@"Backups", nil)])
 	{
-		image = [UIImage imageNamed:@"save.png"];
+		image = [UIImage imageNamed:@"backup.png"];
 	}
 	else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
 	{

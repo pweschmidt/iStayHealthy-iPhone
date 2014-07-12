@@ -63,6 +63,7 @@
 	}
 	self.successBlock = completionBlock;
 	NSData *data = [xmlData copy];
+	NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
 	parser.delegate = self;
 	[self setUpArrays];
@@ -307,7 +308,7 @@
 {
 	///TODO handle error apart from writing a DEBUG msg
 #ifdef APPDEBUG
-	NSLog(@"Error occurred while parsing XML file");
+	NSLog(@"Error occurred while parsing XML file %@", [parseError localizedDescription]);
 #endif
 }
 

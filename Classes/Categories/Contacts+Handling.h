@@ -14,4 +14,6 @@
 - (void)addValueString:(NSString *)valueString type:(NSString *)type;
 - (NSString *)valueStringForType:(NSString *)type;
 - (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
+
+- (NSDictionary *)dictionaryForAttributes;
 @end

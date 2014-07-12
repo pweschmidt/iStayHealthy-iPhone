@@ -17,6 +17,7 @@
 #import "UIFont+Standard.h"
 #import "CoreXMLReader.h"
 #import "CoreXMLWriter.h"
+#import "CoreDataManager.h"
 #import <DropboxSDK/DropboxSDK.h>
 
 @interface DropboxViewController () <DBRestClientDelegate>
@@ -37,7 +38,7 @@
 {
 	[super viewDidLoad];
 
-	self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
+	self.navigationItem.title = NSLocalizedString(@"Backup/Restore", nil);
 	[self disableRightBarButtons];
 	self.iStayHealthyPath = nil;
 	self.dropBoxFileExists = NO;
@@ -45,22 +46,6 @@
 	self.isBackup = NO;
 	self.parentRevision = nil;
 	[self createRestClient];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-	[super viewDidAppear:animated];
-	if (![[DBSession sharedSession] isLinked])
-	{
-		self.isConnectAlert = YES;
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Link?", @"Link?")
-		                                                message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
-		                                               delegate:self
-		                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-		                                      otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-		[alert show];
-	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,12 +57,34 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 3;
+	if ([[DBSession sharedSession]isLinked])
+	{
+		return 3;
+	}
+	return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 1;
+	if ([[DBSession sharedSession]isLinked])
+	{
+		if (2 > section)
+		{
+			return 2;
+		}
+		return 1;
+	}
+	else
+	{
+		if (0 == section)
+		{
+			return 2;
+		}
+		else
+		{
+			return 1;
+		}
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,22 +96,47 @@
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
 
+
 	UILabel *label = [UILabel standardLabel];
 	label.frame = CGRectMake(20, 0, 200, self.tableView.rowHeight);
-	switch (indexPath.section)
+	if (0 == indexPath.section)
 	{
-		case 0:
-			label.text = NSLocalizedString(@"Save to Dropbox", @"Save to Dropbox");
-			break;
+		switch (indexPath.row)
+		{
+			case 0:
+				label.text = NSLocalizedString(@"Save locally", nil);
+				break;
 
-		case 1:
-			label.text = NSLocalizedString(@"Get from Dropbox", @"Get from Dropbox");
-			break;
-
-		case 2:
-			label.text = NSLocalizedString(@"Unlink DropBox", @"Unlink DropBox");
-			break;
+			case 1:
+				label.text = NSLocalizedString(@"Restore locally", nil);
+				break;
+		}
 	}
+	else if (1 == indexPath.section)
+	{
+		if ([[DBSession sharedSession] isLinked])
+		{
+			switch (indexPath.row)
+			{
+				case 0:
+					label.text = NSLocalizedString(@"Save to Dropbox", @"Save to Dropbox");
+					break;
+
+				case 1:
+					label.text = NSLocalizedString(@"Get from Dropbox", @"Get from Dropbox");
+					break;
+			}
+		}
+		else
+		{
+			label.text = NSLocalizedString(@"Link with Dropbox", nil);
+		}
+	}
+	else
+	{
+		label.text = NSLocalizedString(@"Unlink DropBox", @"Unlink DropBox");
+	}
+
 	[cell.contentView addSubview:label];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	return cell;
@@ -117,70 +149,165 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	switch (indexPath.section)
+	if (0 == indexPath.section)
 	{
-		case 0:
-			[self backup];
-			break;
-
-		case 1:
+		if (0 == indexPath.row)
 		{
-			if ([[DBSession sharedSession] isLinked])
+			NSError *error = nil;
+			BOOL success = [[CoreDataManager sharedInstance] saveAndBackup:&error];
+			if (success)
 			{
-				[self startAnimation:nil];
-				NSString *dataPath = [self dropBoxFileTmpPath];
-				[self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
-				                    atRev:self.parentRevision
-				                 intoPath:dataPath];
+				[[[UIAlertView alloc]
+				  initWithTitle:NSLocalizedString(@"Save Finished", nil)
+				               message:NSLocalizedString(@"Data were saved locally.", nil)
+				              delegate:nil
+				     cancelButtonTitle:@"OK" otherButtonTitles:nil]
+				 show];
+			}
+			else
+			{
+				[[[UIAlertView alloc]
+				  initWithTitle:NSLocalizedString(@"Save Error", nil)
+				               message:NSLocalizedString(@"Data could not be saved locally.", nil)
+				              delegate:nil
+				     cancelButtonTitle:@"OK" otherButtonTitles:nil]
+				 show];
 			}
 		}
-		break;
-
-		case 2:
+		else
 		{
-			self.isConnectAlert = NO;
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
-			                                                message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
+			[[CoreDataManager sharedInstance] restoreLocallyWithCompletionBlock: ^(BOOL success, NSError *error) {
+			    if (success)
+			    {
+			        [[[UIAlertView alloc]
+			          initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+			                       message:NSLocalizedString(@"Data were retrieved locally.", nil)
+			                      delegate:nil
+			             cancelButtonTitle:@"OK" otherButtonTitles:nil]
+			         show];
+				}
+			    else
+			    {
+			        [[[UIAlertView alloc]
+			          initWithTitle:NSLocalizedString(@"Error restoring", nil)
+			                       message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
+			                      delegate:nil
+			             cancelButtonTitle:@"OK" otherButtonTitles:nil]
+			         show];
+				}
+			}];
+		}
+	}
+	else if (1 == indexPath.section)
+	{
+		if ([[DBSession sharedSession] isLinked])
+		{
+			switch (indexPath.row)
+			{
+				case 0:
+					[self backup];
+					break;
+
+				case 1:
+				{
+					if ([[DBSession sharedSession] isLinked])
+					{
+						[self startAnimation:nil];
+						NSString *dataPath = [self dropBoxFileTmpPath];
+						[self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
+						                    atRev:self.parentRevision
+						                 intoPath:dataPath];
+					}
+				}
+				break;
+			}
+		}
+		else
+		{
+			self.isConnectAlert = YES;
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Link?", @"Link?")
+			                                                message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
 			                                               delegate:self
 			                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
 			                                      otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
 
 			[alert show];
 		}
-		break;
+	}
+	else
+	{
+		self.isConnectAlert = NO;
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
+		                                                message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
+		                                               delegate:self
+		                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+		                                      otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+
+		[alert show];
 	}
 	[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+	return 20;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
+	UILabel *label = [UILabel standardLabel];
+	label.font = [UIFont fontWithType:Bold size:standard];
+	label.frame = CGRectMake(20, 0, self.view.bounds.size.width - 100, 20);
 	if (0 == section)
 	{
-		return 40;
+		label.text = NSLocalizedString(@"Local Backup/Restore", nil);
+	}
+	else if (1 == section)
+	{
+		label.text = NSLocalizedString(@"Dropbox", nil);
+	}
+	else
+	{
+		label.text = NSLocalizedString(@"Connection to Dropbox", nil);
+	}
+	[view addSubview:label];
+	return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+	if (2 == section)
+	{
+		return 36;
 	}
 	else
 		return 10;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
-	if (0 == section)
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+	if (2 == section)
 	{
 		UILabel *label = [UILabel standardLabel];
 		label.text = @"";
-		label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 40);
+		label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 36);
 		[view addSubview:label];
 		self.activityLabel = label;
 		UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 		indicator.hidesWhenStopped = YES;
-		indicator.frame = CGRectMake(20, 0, 40, 40);
+		indicator.frame = CGRectMake(20, 0, 36, 36);
 		[view addSubview:indicator];
 		self.activityIndicator = indicator;
 		if ([[DBSession sharedSession] isLinked])
 		{
 			[self startAnimation:nil];
 		}
+	}
+	else
+	{
+		view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 10);
 	}
 	return view;
 }

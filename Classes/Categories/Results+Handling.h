@@ -11,6 +11,7 @@
 
 @interface Results (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
+- (NSDictionary *)dictionaryForAttributes;
 - (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
 - (void)addValueString:(NSString *)valueString type:(NSString *)type;
 - (NSString *)valueStringForType:(NSString *)type;

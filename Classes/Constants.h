@@ -90,6 +90,8 @@ static NSUInteger DeviceSystemMajorVersion()
  */
 typedef void (^iStayHealthyVoidExecutionBlock)(void);
 typedef void (^iStayHealthyErrorBlock)(NSError *error);
+typedef void (^iStayHealthyJSONDataBlock)(NSData *jsonData, NSError *error);
+typedef void (^iStayHealthyJSONDictionaryBlock)(NSDictionary *jsonDictionary, NSError *error);
 typedef void (^iStayHealthyXMLBlock)(NSString *xmlString, NSError *error);
 typedef void (^iStayHealthySuccessBlock)(BOOL success, NSError *error);
 typedef void (^iStayHealthyArrayCompletionBlock)(NSArray *array, NSError *error);
@@ -169,6 +171,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 /**
    XML Group elements
  */
+#define kObservations                   @"Observations"
 #define kNoResult                       @"NoResult"
 #define kResults                        @"Results"
 #define kMedications                    @"Medications"

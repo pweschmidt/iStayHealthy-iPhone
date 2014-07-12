@@ -44,9 +44,9 @@ static NSDictionary *elementParentMap()
 			  kContacts : kClinicalContacts,
 			  kProcedures : kIllnessAndProcedures,
 			  kOtherMedication : kOtherMedications,
-			  kPreviousMedication : kPreviousMedications,
-			  kSeinfeldCalendar : kSeinfeldCalendars,
-			  kWellness : kWellnesses };
+			  kPreviousMedication : kPreviousMedications/*,
+		                                                   kSeinfeldCalendar : kSeinfeldCalendars,
+		                                                   kWellness : kWellnesses */};
 }
 
 static NSDictionary *elementChildMap()
@@ -59,8 +59,8 @@ static NSDictionary *elementChildMap()
 			  kProcedures : kProcedures,
 			  kOtherMedication : kOtherMedication,
 			  kPreviousMedication : kPreviousMedication,
-//			  kSeinfeldCalendar : kSeinfeldCalendar,
-			  kWellness : kWellnesses };
+/*			  kSeinfeldCalendar : kSeinfeldCalendar,
+              kWellness : kWellnesses*/};
 }
 
 static NSDictionary *sortTerms()
@@ -73,8 +73,8 @@ static NSDictionary *sortTerms()
 			  kOtherMedication : kStartDate,
 			  kProcedures : kDate,
 			  kContacts : kClinicName,
-//			  kSeinfeldCalendar : kStartDateLowerCase,
-			  kWellness : kDateLowerCase };
+/*			  kSeinfeldCalendar : kStartDateLowerCase,
+              kWellness : kDateLowerCase */};
 }
 
 static NSDictionary *ascendingDictionary()
@@ -208,7 +208,9 @@ static NSDictionary *ascendingDictionary()
 - (NSString *)rootElementOpen
 {
 	NSMutableString *string = [NSMutableString string];
-	[string appendString:kXMLElementRoot];
+	[string appendString:kXMLPreamble];
+	[string appendString:@"\r"];
+	[string appendString:[NSString stringWithFormat:@"<%@ ", kXMLElementRoot]];
 	NSString *dbVersion = [NSString stringWithFormat:@" dbVersion=\"%@\"", kXMLDBVersionString];
 	[string appendString:dbVersion];
 	[string appendString:@" fromDevice=\"iOS\""];
@@ -226,46 +228,55 @@ static NSDictionary *ascendingDictionary()
 
 - (NSString *)xmlOpenEnclosingElementForClass:(NSString *)className
 {
-	if ([className isEqualToString:kResults])
+	NSString *mappedParentName = [elementParentMap() objectForKey:className];
+	if (nil == mappedParentName)
 	{
-		return [NSString stringWithFormat:@"<%@>", kResults];
+		return [NSString stringWithFormat:@"<Unknown>"];
 	}
-	else if ([className isEqualToString:kSideEffects])
+	else
 	{
-		return [NSString stringWithFormat:@"<%@>", kHIVSideEffects];
+		return [NSString stringWithFormat:@"<%@>", mappedParentName];
 	}
-	else if ([className isEqualToString:kMedication])
-	{
-		return [NSString stringWithFormat:@"<%@>", kMedications];
-	}
-	else if ([className isEqualToString:kOtherMedication])
-	{
-		return [NSString stringWithFormat:@"<%@>", kOtherMedications];
-	}
-	else if ([className isEqualToString:kPreviousMedication])
-	{
-		return [NSString stringWithFormat:@"<%@>", kPreviousMedications];
-	}
-	else if ([className isEqualToString:kMissedMedication])
-	{
-		return [NSString stringWithFormat:@"<%@>", kMissedMedications];
-	}
-	else if ([className isEqualToString:kContacts])
-	{
-		return [NSString stringWithFormat:@"<%@>", kClinicalContacts];
-	}
-	else if ([className isEqualToString:kProcedures])
-	{
-		return [NSString stringWithFormat:@"<%@>", kIllnessAndProcedures];
-	}
-	else if ([className isEqualToString:kSeinfeldCalendar])
-	{
-		return [NSString stringWithFormat:@"<%@>", kSeinfeldCalendars];
-	}
-	else if ([className isEqualToString:kSeinfeldCalendarEntry])
-	{
-		return [NSString stringWithFormat:@"<%@>", kSeinfeldCalendarEntry];
-	}
+//	if ([className isEqualToString:kResults])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kResults];
+//	}
+//	else if ([className isEqualToString:kSideEffects])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kHIVSideEffects];
+//	}
+//	else if ([className isEqualToString:kMedication])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kMedications];
+//	}
+//	else if ([className isEqualToString:kOtherMedication])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kOtherMedications];
+//	}
+//	else if ([className isEqualToString:kPreviousMedication])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kPreviousMedications];
+//	}
+//	else if ([className isEqualToString:kMissedMedication])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kMissedMedications];
+//	}
+//	else if ([className isEqualToString:kContacts])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kClinicalContacts];
+//	}
+//	else if ([className isEqualToString:kProcedures])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kIllnessAndProcedures];
+//	}
+//	else if ([className isEqualToString:kSeinfeldCalendar])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kSeinfeldCalendars];
+//	}
+//	else if ([className isEqualToString:kSeinfeldCalendarEntry])
+//	{
+//		return [NSString stringWithFormat:@"<%@>", kSeinfeldCalendarEntry];
+//	}
 //	else if ([className isEqualToString:kWellness])
 //	{
 //		return [NSString stringWithFormat:@"<%@>", kWellnesses];
@@ -275,46 +286,55 @@ static NSDictionary *ascendingDictionary()
 
 - (NSString *)xmlCloseEnclosingElementForClass:(NSString *)className
 {
-	if ([className isEqualToString:kResults])
+	NSString *mappedParentName = [elementParentMap() objectForKey:className];
+	if (nil == mappedParentName)
 	{
-		return [NSString stringWithFormat:@"</%@>", kResults];
+		return [NSString stringWithFormat:@"</Unknown>"];
 	}
-	else if ([className isEqualToString:kSideEffects])
+	else
 	{
-		return [NSString stringWithFormat:@"</%@>", kHIVSideEffects];
+		return [NSString stringWithFormat:@"</%@>", mappedParentName];
 	}
-	else if ([className isEqualToString:kMedication])
-	{
-		return [NSString stringWithFormat:@"</%@>", kMedications];
-	}
-	else if ([className isEqualToString:kOtherMedication])
-	{
-		return [NSString stringWithFormat:@"</%@>", kOtherMedications];
-	}
-	else if ([className isEqualToString:kPreviousMedication])
-	{
-		return [NSString stringWithFormat:@"</%@>", kPreviousMedications];
-	}
-	else if ([className isEqualToString:kMissedMedication])
-	{
-		return [NSString stringWithFormat:@"</%@>", kMissedMedications];
-	}
-	else if ([className isEqualToString:kContacts])
-	{
-		return [NSString stringWithFormat:@"</%@>", kClinicalContacts];
-	}
-	else if ([className isEqualToString:kProcedures])
-	{
-		return [NSString stringWithFormat:@"</%@>", kIllnessAndProcedures];
-	}
-	else if ([className isEqualToString:kSeinfeldCalendar])
-	{
-		return [NSString stringWithFormat:@"</%@>", kSeinfeldCalendars];
-	}
-	else if ([className isEqualToString:kSeinfeldCalendarEntry])
-	{
-		return [NSString stringWithFormat:@"</%@>", kSeinfeldCalendarEntry];
-	}
+//	if ([className isEqualToString:kResults])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kResults];
+//	}
+//	else if ([className isEqualToString:kSideEffects])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kHIVSideEffects];
+//	}
+//	else if ([className isEqualToString:kMedication])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kMedications];
+//	}
+//	else if ([className isEqualToString:kOtherMedication])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kOtherMedications];
+//	}
+//	else if ([className isEqualToString:kPreviousMedication])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kPreviousMedications];
+//	}
+//	else if ([className isEqualToString:kMissedMedication])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kMissedMedications];
+//	}
+//	else if ([className isEqualToString:kContacts])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kClinicalContacts];
+//	}
+//	else if ([className isEqualToString:kProcedures])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kIllnessAndProcedures];
+//	}
+//	else if ([className isEqualToString:kSeinfeldCalendar])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kSeinfeldCalendars];
+//	}
+//	else if ([className isEqualToString:kSeinfeldCalendarEntry])
+//	{
+//		return [NSString stringWithFormat:@"</%@>", kSeinfeldCalendarEntry];
+//	}
 //	else if ([className isEqualToString:kWellness])
 //	{
 //		return [NSString stringWithFormat:@"</%@>", kWellnesses];

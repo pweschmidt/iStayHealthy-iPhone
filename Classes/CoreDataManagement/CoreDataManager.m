@@ -12,6 +12,7 @@
 #import "CoreXMLReader.h"
 #import "iStayHealthyRecord+Handling.h"
 #import "CoreXMLWriter.h"
+#import "CoreXMLReader.h"
 
 @interface CoreDataManager ()
 {
@@ -441,6 +442,7 @@
 		[[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
 		    if (nil != xmlString)
 		    {
+		        NSString *stringToPrint = xmlString;
 		        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
 		        NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
 		        NSFileManager *manager = [NSFileManager defaultManager];
@@ -455,6 +457,35 @@
 		}];
 	}
 	return saveSuccess;
+}
+
+- (void)restoreLocallyWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock
+{
+	NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[path path]])
+	{
+		CoreXMLReader *reader = [CoreXMLReader sharedInstance];
+		NSData *data = [[NSData alloc] initWithContentsOfFile:[path path]];
+		if (nil != data)
+		{
+			[reader parseXMLData:data completionBlock:completionBlock];
+		}
+		else
+		{
+			NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"Error reading backup file", nil) };
+			NSError *error = [NSError errorWithDomain:@"com.iStayHealthy" code:201 userInfo:userInfo];
+			completionBlock(NO, error);
+		}
+	}
+	else
+	{
+		if (nil != completionBlock)
+		{
+			NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"Local backup file not found", nil) };
+			NSError *error = [NSError errorWithDomain:@"com.iStayHealthy" code:200 userInfo:userInfo];
+			completionBlock(NO, error);
+		}
+	}
 }
 
 - (BOOL)saveContext:(BOOL)wait error:(NSError **)error

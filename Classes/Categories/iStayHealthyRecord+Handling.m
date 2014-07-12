@@ -70,6 +70,27 @@
 	return string;
 }
 
+- (NSDictionary *)dictionaryForAttributes
+{
+	__block NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSDictionary *attributes = [[self entity] attributesByName];
+	[attributes enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+	    if (nil != obj)
+	    {
+	        if ([obj isKindOfClass:[NSNumber class]])
+	        {
+	            NSNumber *number = (NSNumber *)obj;
+	            [dictionary setObject:[NSString stringWithFormat:@"%f", [number floatValue]] forKey:key];
+			}
+	        else if ([obj isKindOfClass:[NSString class]])
+	        {
+	            [dictionary setObject:obj forKey:key];
+			}
+		}
+	}];
+	return dictionary;
+}
+
 - (NSString *)xmlString
 {
 	NSMutableString *string = [NSMutableString string];

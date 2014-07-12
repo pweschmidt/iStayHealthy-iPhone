@@ -39,6 +39,42 @@
 	return foundEntry;
 }
 
+- (NSDictionary *)dictionaryForAttributes
+{
+	__block NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSDictionary *attributes = [[self entity] attributesByName];
+	[attributes enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+	    if (nil != obj)
+	    {
+	        if ([obj isKindOfClass:[NSNumber class]])
+	        {
+	            NSNumber *number = (NSNumber *)obj;
+	            if ([key isEqualToString:kIsCompleted])
+	            {
+	                NSString *trueOfFalse = ([number boolValue]) ? @"true" : @"false";
+	                [dictionary setObject:trueOfFalse forKey:key];
+				}
+	            else
+	            {
+	                [dictionary setObject:[NSString stringWithFormat:@"%f", [number floatValue]] forKey:key];
+				}
+			}
+	        else if ([obj isKindOfClass:[NSDate class]])
+	        {
+	            NSDate *date = (NSDate *)obj;
+	            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	            formatter.dateFormat = kDefaultDateFormatting;
+	            [dictionary setObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:date]] forKey:key];
+			}
+	        else if ([obj isKindOfClass:[NSString class]])
+	        {
+	            [dictionary setObject:obj forKey:key];
+			}
+		}
+	}];
+	return dictionary;
+}
+
 - (BOOL)isEqualToDictionary:(NSDictionary *)attributes
 {
 	if (nil == attributes || [attributes allKeys].count == 0)

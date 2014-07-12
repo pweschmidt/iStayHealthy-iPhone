@@ -11,6 +11,7 @@
 
 @interface MissedMedication (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
+- (NSDictionary *)dictionaryForAttributes;
 - (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
 - (NSString *)xmlString;
 @end

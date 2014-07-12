@@ -11,5 +11,6 @@
 
 @interface SideEffects (Handling)
 - (void)importFromDictionary:(NSDictionary *)attributes;
+- (NSDictionary *)dictionaryForAttributes;
 - (BOOL)isEqualToDictionary:(NSDictionary *)attributes;
 @end

@@ -12,11 +12,15 @@
 #import "Menus.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
+#import "Utilities.h"
 
 @interface HamburgerMenuTableViewController ()
 @property (nonatomic, strong) NSArray *menus;
 @property (nonatomic, strong) NSArray *controllers;
 @end
+
+#define kIconLabelViewTag 100
+#define kIconImageViewTag 101
 
 @implementation HamburgerMenuTableViewController
 
@@ -27,22 +31,6 @@
 	self.view.backgroundColor = kDarkBackgroundColor;
 	self.tableView.backgroundColor = kDarkBackgroundColor;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//	[self setTitleViewWithTitle:NSLocalizedString(@"Menu", nil)];
-//	[self disableRightBarButtons];
-////    self.navigationItem.title = NSLocalizedString(@"Menu", nil);
-//	UIImage *menuImage = [UIImage imageNamed:@"cancel.png"];
-//	UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
-//	menuView.backgroundColor = [UIColor clearColor];
-//	menuView.frame = CGRectMake(0, 0, 20, 20);
-//	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//	button.frame = CGRectMake(0, 0, 20, 20);
-//	button.backgroundColor = [UIColor clearColor];
-//	[button addSubview:menuView];
-//	[button addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
-//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-//                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-//                                             target:self action:@selector(cancel)];
 
 	self.menus = [Menus hamburgerMenus];
 	self.controllers = [Menus controllerMenu];
@@ -88,6 +76,15 @@
 	return self.menus.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if ([Utilities isIPad])
+	{
+		return 55;
+	}
+	return self.tableView.rowHeight;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *CellIdentifier = [NSString stringWithFormat:@"SettingsCell%ld", (long)indexPath.row];
@@ -96,22 +93,35 @@
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
-//	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.contentView.backgroundColor = [UIColor clearColor];
 	cell.backgroundColor = [UIColor clearColor];
 	CGFloat offset = (self.tableView.rowHeight - 42) / 2;
+	if ([Utilities isIPad])
+	{
+		offset = 8.5f;
+	}
 
-	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(65, 0, 200, self.tableView.rowHeight);
-	label.textAlignment = NSTextAlignmentLeft;
-	label.text = [self.menus objectAtIndex:indexPath.row];
-	label.textColor = [UIColor whiteColor];
-	label.font = [UIFont fontWithType:Bold size:standard];
-	[cell.contentView addSubview:label];
+
+	id labelObj = [cell.contentView viewWithTag:kIconLabelViewTag];
+	if (nil == labelObj)
+	{
+		CGFloat labelOffsetY = ([Utilities isIPad]) ? offset : 0.0f;
+		UILabel *label = [UILabel standardLabel];
+		label.frame = CGRectMake(65, labelOffsetY, 200, self.tableView.rowHeight);
+		label.textAlignment = NSTextAlignmentLeft;
+		label.text = [self.menus objectAtIndex:indexPath.row];
+		label.textColor = [UIColor whiteColor];
+		label.font = [UIFont fontWithType:Bold size:standard];
+		label.tag = kIconLabelViewTag;
+		[cell.contentView addSubview:label];
+	}
+	id imageObj = [cell.contentView viewWithTag:kIconImageViewTag];
+
+
 	NSString *controllerName = [Menus
 	                            controllerNameForRowIndexPath:indexPath
 	                                              ignoreFirst:NO];
-	if (nil != controllerName)
+	if (nil == imageObj && nil != controllerName)
 	{
 		NSDictionary *images = [Menus menuImages];
 		UIImage *image = [images objectForKey:controllerName];
@@ -121,6 +131,7 @@
 			medImageView.frame = CGRectMake(20, offset, 42, 42);
 			medImageView.backgroundColor = [UIColor clearColor];
 			medImageView.image = image;
+			medImageView.tag = kIconImageViewTag;
 			[cell.contentView addSubview:medImageView];
 		}
 	}
