@@ -132,10 +132,10 @@
 	    if (nil == array)
 	    {
 	        UIAlertView *errorAlert = [[UIAlertView alloc]
-	                                   initWithTitle:@"Error"
-	                                                message:@"Error loading data"
+	                                   initWithTitle:NSLocalizedString(@"Error", nil)
+	                                                message:NSLocalizedString(@"Error loading data", nil)
 	                                               delegate:nil
-	                                      cancelButtonTitle:@"Cancel"
+	                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 	                                      otherButtonTitles:nil];
 	        [errorAlert show];
 		}
@@ -146,10 +146,10 @@
 	            if (nil == prevarray)
 	            {
 	                UIAlertView *errorAlert = [[UIAlertView alloc]
-	                                           initWithTitle:@"Error"
-	                                                        message:@"Error loading data"
+	                                           initWithTitle:NSLocalizedString(@"Error", nil)
+	                                                        message:NSLocalizedString(@"Error loading data", nil)
 	                                                       delegate:nil
-	                                              cancelButtonTitle:@"Cancel"
+	                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 	                                              otherButtonTitles:nil];
 	                [errorAlert show];
 				}

@@ -374,7 +374,7 @@
 		return;
 	}
 	[[[UIAlertView alloc]
-	  initWithTitle:@"Error Loading DropBox data" message:@"There was an error loading data from DropBox."
+	  initWithTitle:NSLocalizedString(@"Error Loading Dropbox data", nil) message:NSLocalizedString(@"There was an error loading data from Dropbox.", nil)
 	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	 show];
 }
@@ -407,7 +407,7 @@
 	        if (writeError)
 	        {
 	            [[[UIAlertView alloc]
-	              initWithTitle:@"Error writing data to tmp directory" message:[error localizedDescription]
+	              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
 	                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	             show];
 			}
@@ -422,7 +422,7 @@
 	    else
 	    {
 	        [[[UIAlertView alloc]
-	          initWithTitle:@"Error retrieving data" message:[error localizedDescription]
+	          initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
 	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	         show];
 		}
@@ -439,7 +439,7 @@
 	        [self stopAnimation:nil];
 	        [[[UIAlertView alloc]
 	          initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-	                       message:NSLocalizedString(@"Data were retrieved from DropBox.", nil)
+	                       message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
 	                      delegate:nil
 	             cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	         show];
@@ -447,7 +447,7 @@
 	    else
 	    {
 	        [[[UIAlertView alloc]
-	          initWithTitle:@"Error retrieving data" message:[error localizedDescription]
+	          initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
 	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	         show];
 		}
@@ -556,7 +556,7 @@
 {
 	[self stopAnimation:nil];
 	[[[UIAlertView alloc]
-	  initWithTitle:NSLocalizedString(@"Backup Finished", @"Backup Finished") message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.xml.", nil)
+	  initWithTitle:NSLocalizedString(@"Save Finished", nil) message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
 	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	 show];
 }
@@ -565,7 +565,7 @@
 {
 	[self stopAnimation:nil];
 	[[[UIAlertView alloc]
-	  initWithTitle:@"Error Uploading to DropBox" message:@"There was an error uploading data to DropBox."
+	  initWithTitle:@"Error Uploading to Dropbox" message:@"There was an error uploading data to Dropbox."
 	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	 show];
 }
@@ -579,7 +579,7 @@
 {
 	[self stopAnimation:nil];
 	[[[UIAlertView alloc]
-	  initWithTitle:@"Error Loading file from DropBox" message:@"There was an error loading a file from DropBox."
+	  initWithTitle:@"Error Loading file from Dropbox" message:@"There was an error loading a file from Dropbox."
 	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	 show];
 }
