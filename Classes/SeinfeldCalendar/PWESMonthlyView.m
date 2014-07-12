@@ -197,15 +197,39 @@
 	return isToday;
 }
 
+/**
+   allow a time window of 1 day for users to select their entries
+ */
 - (BOOL)todayForComponent:(NSDateComponents *)components
 {
-	BOOL isToday = NO;
+	BOOL isValid = NO;
 	NSDateComponents *todaysComponents = [[PWESCalendar sharedInstance] dateComponentsForDate:self.today];
 	if (todaysComponents.day == components.day && todaysComponents.month == components.month && todaysComponents.year == components.year)
 	{
-		isToday = YES;
+		isValid = YES;
 	}
-	return isToday;
+
+	if (!isValid)
+	{
+		NSInteger lastMonth = todaysComponents.month;
+		NSInteger year = todaysComponents.year;
+		NSInteger yesterday = todaysComponents.day - 1;
+		if (0 >= yesterday)
+		{
+			lastMonth--;
+			if (0 >= lastMonth)
+			{
+				lastMonth = 12;
+				year--;
+			}
+			yesterday = [[PWESCalendar sharedInstance] daysInMonth:lastMonth inYear:year];
+		}
+		if (yesterday == components.day && lastMonth == components.month && year == components.year)
+		{
+			isValid = YES;
+		}
+	}
+	return isValid;
 }
 
 - (void)resetFrame
@@ -299,7 +323,7 @@
 	else
 	{
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Don't Cheat!", nil)
-		                                                    message:NSLocalizedString(@"Only today's entry can be changed.", nil)
+		                                                    message:NSLocalizedString(@"Only today's and yesterday's entries can be changed.", nil)
 		                                                   delegate:nil
 		                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
 		                                          otherButtonTitles:nil];
