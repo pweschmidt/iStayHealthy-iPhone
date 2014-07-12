@@ -120,8 +120,8 @@ static NSDictionary *jsonAscendingDictionary()
 		    {
 		        NSMutableArray *valueArray = [NSMutableArray array];
 		        [self createArrayOfDictionarysForModel:modelName array:valueArray];
-                NSString *parent = [jsonParentMap() objectForKey:modelName];
-                [self.jsonDictionary setObject:valueArray forKey:parent];
+		        NSString *parent = [jsonParentMap() objectForKey:modelName];
+		        [self.jsonDictionary setObject:valueArray forKey:parent];
 			}
 		    NSUInteger nextIndex = [jsonDataModels() indexOfObject:modelName] + 1;
 		    if (nextIndex < jsonDataModels().count)
