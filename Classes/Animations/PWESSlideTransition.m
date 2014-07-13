@@ -80,26 +80,26 @@
 
 - (void)logFramesAndOrientationForTransition:(id <UIViewControllerContextTransitioning> )transitionContext
 {
-	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+//	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+//	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+//
+//	UIView *containerView = [transitionContext containerView];
 
-	UIView *containerView = [transitionContext containerView];
-
-	CGRect containerFrame = containerView.frame;
-	CGRect containerBounds = containerView.bounds;
-
-	CGRect fromFrame = fromController.view.frame;
-	CGRect fromBounds = fromController.view.bounds;
-
-	CGRect toFrame = toController.view.frame;
-	CGRect toBounds = toController.view.bounds;
 #ifdef APPDEBUG
-	NSLog(@"Container Frame = %@ ", NSStringFromCGRect(containerFrame));
-	NSLog(@"Container Bounds = %@ ", NSStringFromCGRect(containerBounds));
-	NSLog(@"From Frame = %@ ", NSStringFromCGRect(fromFrame));
-	NSLog(@"From Bounds = %@ ", NSStringFromCGRect(fromBounds));
-	NSLog(@"To Frame = %@ ", NSStringFromCGRect(toFrame));
-	NSLog(@"To Bounds = %@ ", NSStringFromCGRect(toBounds));
+//	CGRect containerFrame = containerView.frame;
+//	CGRect containerBounds = containerView.bounds;
+//
+//	CGRect fromFrame = fromController.view.frame;
+//	CGRect fromBounds = fromController.view.bounds;
+//
+//	CGRect toFrame = toController.view.frame;
+//	CGRect toBounds = toController.view.bounds;
+//	NSLog(@"Container Frame = %@ ", NSStringFromCGRect(containerFrame));
+//	NSLog(@"Container Bounds = %@ ", NSStringFromCGRect(containerBounds));
+//	NSLog(@"From Frame = %@ ", NSStringFromCGRect(fromFrame));
+//	NSLog(@"From Bounds = %@ ", NSStringFromCGRect(fromBounds));
+//	NSLog(@"To Frame = %@ ", NSStringFromCGRect(toFrame));
+//	NSLog(@"To Bounds = %@ ", NSStringFromCGRect(toBounds));
 #endif
 }
 
