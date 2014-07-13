@@ -47,6 +47,26 @@
 	return self;
 }
 
+- (UIKeyboardType)adjustedKeyboardType
+{
+	if (nil == _inputField)
+	{
+		return UIKeyboardTypeDefault;
+	}
+	else
+	{
+		return _inputField.keyboardType;
+	}
+}
+
+- (void)setAdjustedKeyboardType:(UIKeyboardType)adjustedKeyboardType
+{
+	if (nil != _inputField)
+	{
+		_inputField.keyboardType = adjustedKeyboardType;
+	}
+}
+
 - (void)createContentWithTitle:(NSString *)title
                   textFieldTag:(NSInteger)textFieldTag
              textFieldDelegate:(id <UITextFieldDelegate> )textFieldDelegate
@@ -124,7 +144,7 @@
 	textField.tag = tag;
 	textField.delegate = textFieldDelegate;
 	textField.frame = CGRectMake(xMargin + labelWidth, yMargin, textFieldWidth, self.contentView.frame.size.height);
-	textField.clearsOnBeginEditing = YES;
+	textField.clearsOnBeginEditing = NO;
 	textField.font = [UIFont systemFontOfSize:15];
 	if (hasNumericalInput)
 	{

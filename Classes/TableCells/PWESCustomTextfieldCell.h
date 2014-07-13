@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UITextField *inputField;
 @property (nonatomic, strong) UIView *additionalView;
+@property (nonatomic, assign) UIKeyboardType adjustedKeyboardType;
 - (void)createContentWithTitle:(NSString *)title
                   textFieldTag:(NSInteger)textFieldTag
              textFieldDelegate:(id <UITextFieldDelegate> )textFieldDelegate

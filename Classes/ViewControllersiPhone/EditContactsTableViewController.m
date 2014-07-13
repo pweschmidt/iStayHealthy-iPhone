@@ -209,7 +209,10 @@
 	}
 }
 
-- (void)configureTableCell:(PWESCustomTextfieldCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
+- (void)configureTableCell:(PWESCustomTextfieldCell *)cell
+                     title:(NSString *)title
+                 indexPath:(NSIndexPath *)indexPath
+         hasNumericalInput:(BOOL)hasNumericalInput
 {
 	[super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
 	NSNumber *tagNumber = [self tagNumberForIndex:indexPath.row segment:0];
@@ -229,6 +232,14 @@
 	{
 		textField.textColor = [UIColor lightGrayColor];
 		textField.text = textField.placeholder;
+	}
+	if ([title isEqualToString:NSLocalizedString(kClinicEmailAddress, nil)])
+	{
+		cell.adjustedKeyboardType = UIKeyboardTypeEmailAddress;
+	}
+	else if ([title isEqualToString:NSLocalizedString(kClinicWebSite, nil)])
+	{
+		cell.adjustedKeyboardType = UIKeyboardTypeURL;
 	}
 }
 

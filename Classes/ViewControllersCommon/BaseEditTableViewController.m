@@ -303,9 +303,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	textField.text = @"";
 	textField.textColor = [UIColor blackColor];
-//	UIColor *backgroundColour = [UIColor colorWithRed:235.0f / 255.0f green:235.0f / 255.0f blue:235.0f / 255.0f alpha:0.8];
 
 	[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations: ^{
 	    [self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, PWESCustomTextfieldCell *cell, BOOL *stop) {
