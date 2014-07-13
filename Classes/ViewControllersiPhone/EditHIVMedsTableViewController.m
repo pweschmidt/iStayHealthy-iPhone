@@ -85,7 +85,6 @@
 	[self popController];
 }
 
-#warning reloadMedications is not yet implemented
 - (void)reloadMedications:(id)sender
 {
 }

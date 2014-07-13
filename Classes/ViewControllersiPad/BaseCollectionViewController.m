@@ -304,7 +304,7 @@
 	UICollectionReusableView *view = nil;
 	if (UICollectionElementKindSectionHeader == kind)
 	{
-		UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderViewIdentifier forIndexPath:indexPath];
+		view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderViewIdentifier forIndexPath:indexPath];
 	}
 
 	return view;

@@ -41,23 +41,9 @@
 {
 	EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
 	editController.preferredContentSize = CGSizeMake(320, 568);
-	////		editController.customPopOverDelegate = self;
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	if (nil == self.customPopoverController)
-//	{
-//		EditContactsTableViewController *editController = [[EditContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-//		editController.preferredContentSize = CGSizeMake(320, 568);
-////		editController.customPopOverDelegate = self;
-//		UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-//		editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
-//		[self presentViewController:editNavCtrl animated:YES completion:nil];
-//	}
-//	else
-//	{
-//		[self hidePopover];
-//	}
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

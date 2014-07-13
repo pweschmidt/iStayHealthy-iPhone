@@ -38,10 +38,9 @@
 
 - (void)addButtonPressed:(id)sender
 {
-	EditMissedMedsTableViewController *editController = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-	editController.preferredContentSize = CGSizeMake(320, 568);
-	editController.customPopOverDelegate = self;
-	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+	EditMissedMedsTableViewController *controller = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped currentMeds:self.currentMeds managedObject:nil];
+	controller.preferredContentSize = CGSizeMake(320, 568);
+	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:controller];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
 }

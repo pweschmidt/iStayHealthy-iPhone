@@ -442,7 +442,7 @@
 		[[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
 		    if (nil != xmlString)
 		    {
-		        NSString *stringToPrint = xmlString;
+//		        NSString *stringToPrint = xmlString;
 		        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
 		        NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
 		        NSFileManager *manager = [NSFileManager defaultManager];

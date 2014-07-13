@@ -28,8 +28,6 @@
 #endif
 	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
 	{
-		CGRect frame = self.view.frame;
-		CGRect bounds = self.view.bounds;
 		if (self.view.frame.size.width < self.view.frame.size.height)
 		{
 			self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
