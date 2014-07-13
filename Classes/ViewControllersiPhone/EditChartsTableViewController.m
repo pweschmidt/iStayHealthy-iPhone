@@ -219,7 +219,10 @@
 	                   kGlucose, kTotalCholesterol, kTriglyceride,
 	                   kHDL, kLDL, kCholesterolRatio, kHemoglobulin,
 	                   kWhiteBloodCells, kRedBloodCells, kPlatelet,
-	                   kWeight, kBMI, kSystole, kCardiacRiskFactor];
+	                   kWeight, kBMI, kSystole, kCardiacRiskFactor, kLiverAlanineTransaminase,
+	                   kLiverAspartateTransaminase,
+	                   kLiverAlkalinePhosphatase,
+	                   kLiverGammaGlutamylTranspeptidase];
 	return types;
 }
 

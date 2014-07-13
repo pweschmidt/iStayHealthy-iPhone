@@ -501,9 +501,6 @@
 	NSArray *liverMenu = @[kLiverAlanineTransaminase,
 	                       kLiverAspartateTransaminase,
 	                       kLiverAlkalinePhosphatase,
-	                       kLiverAlbumin,
-	                       kLiverAlanineTotalBilirubin,
-	                       kLiverAlanineDirectBilirubin,
 	                       kLiverGammaGlutamylTranspeptidase];
 	[self prepareSegmentMapForMenu:otherMenu segment:4];
 
