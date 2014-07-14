@@ -530,10 +530,12 @@
 
 		case DateAndTime:
 			datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+			datePicker.minuteInterval = 10;
 			break;
 
 		case TimeOnly:
 			datePicker.datePickerMode = UIDatePickerModeTime;
+			datePicker.minuteInterval = 5;
 			break;
 	}
 }

@@ -340,6 +340,10 @@
 		controller.soundDelegate = self;
 		[self.navigationController pushViewController:controller animated:YES];
 	}
+	else
+	{
+		[super tableView:tableView didSelectRowAtIndexPath:indexPath];
+	}
 }
 
 - (void)selectedSound:(NSString *)soundName
