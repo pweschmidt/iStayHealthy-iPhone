@@ -196,18 +196,17 @@
 "Select From List" = "Seleccionar de la lista";
 "SideEffect" = "Efectos";
 "General Info" = "Básicos VIH";
-"Testing" = "HIV Testing";
-"Prevention" = "How to stay safe";
-"Enter Effect" = "Editar";
 
 /**
    New
  */
+"Testing" = "VIH Testing";
+"Prevention" = "How to stay safe";
+"Enter Effect" = "Editar";
 "CD4" = "CD4";
 "ResultsDate" = "Date";
-"ViralLoad" = "Viral Load";
 "CD4Percent" = "CD4 %";
-"HepCViralLoad" = "VL (HepC)";
+"HepCViralLoad" = "CV (HepC)";
 "Glucose" = "Blood Sugar";
 "TotalCholesterol" = "Cholesterol";
 "LDL" = "LDL (Chol)";

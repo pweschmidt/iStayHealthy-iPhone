@@ -196,13 +196,13 @@
 "Select From List" = "Von Liste auswählen";
 "SideEffect" = "Nebenwirkung";
 "General Info" = "AIDS Hilfen in Deutschland";
-"Testing" = "HIV Testen";
-"Prevention" = "Wie man sich schützt";
-"Enter Effect" = "Eingabe";
 
 /**
    New
  */
+"Testing" = "HIV Testen";
+"Prevention" = "Wie man sich schützt";
+"Enter Effect" = "Eingabe";
 "CD4" = "CD4";
 "ResultsDate" = "Datum";
 "ViralLoad" = "Viruslast";
