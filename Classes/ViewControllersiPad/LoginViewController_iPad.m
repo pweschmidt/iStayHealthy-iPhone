@@ -137,6 +137,9 @@
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Wrong Password", nil) message:NSLocalizedString(@"Wrong Password! Try again", @"Wrong Password! Try again") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
 	}
+	passwordField.text = NSLocalizedString(@"Enter password", nil);
+	passwordField.textColor = [UIColor darkGrayColor];
+	passwordField.secureTextEntry = NO;
 }
 
 - (void)requestNewPassword:(id)sender
