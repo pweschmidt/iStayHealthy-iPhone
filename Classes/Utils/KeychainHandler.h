@@ -38,6 +38,7 @@
 
 // Generates an SHA256 (much more secure than MD5) hash.
 + (NSString *)securedSHA256DigestHashForPIN:(NSUInteger)pinHash;
-+ (NSString*)computeSHA256DigestForString:(NSString*)input;
++ (NSString *)computeSHA256DigestForString:(NSString *)input;
 
++ (void)resetPasswordAndFlags;
 @end

@@ -11,6 +11,7 @@
 #import "KeychainHandler.h"
 #import "ContentContainerViewController.h"
 #import "ContentNavigationController.h"
+#import "Utilities.h"
 
 @interface SettingsTableViewController ()
 @property (nonatomic, strong) UISwitch *passwordSwitch;
@@ -141,7 +142,14 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	[self hidePopover];
+	if ([Utilities isIPad])
+	{
+		[self hidePopover];
+	}
+	else
+	{
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 - (void)hidePopover

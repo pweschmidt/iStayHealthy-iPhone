@@ -13,6 +13,8 @@
 #import "ContainerViewController.h"
 #import "KeychainHandler.h"
 
+#define kPasswordFieldTag 100
+
 @interface LoginViewController ()
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) UILabel *wrongPasswordLabel;
@@ -25,6 +27,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	self.view.backgroundColor = DEFAULT_BACKGROUND;
 
 	UIImageView *logoView = [[UIImageView alloc]
 	                         initWithImage:[UIImage imageNamed:@"icon_50_flat.png"]];
@@ -65,6 +68,7 @@
 	passwordField.clearsOnBeginEditing = YES;
 	passwordField.textColor = [UIColor darkGrayColor];
 	passwordField.secureTextEntry = NO;
+	passwordField.tag = kPasswordFieldTag;
 	[self.view addSubview:passwordField];
 
 	UIButton *forgottonButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -79,6 +83,17 @@
 	[forgottonButton addSubview:forgottenLabel];
 	[self.view addSubview:forgottonButton];
 }
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//	[super viewWillAppear:animated];
+//	id view = [self.view viewWithTag:kPasswordFieldTag];
+//	if (nil != view)
+//	{
+//		UITextField *field = (UITextField *)view;
+//		field.text = @"";
+//	}
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -127,6 +142,9 @@
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Wrong Password", nil) message:NSLocalizedString(@"Wrong Password! Try again", @"Wrong Password! Try again") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
 	}
+	passwordField.text = NSLocalizedString(@"Enter password", nil);
+	passwordField.textColor = [UIColor darkGrayColor];
+	passwordField.secureTextEntry = NO;
 }
 
 - (void)requestNewPassword:(id)sender
@@ -144,41 +162,6 @@
 	[mail setSubject:@"I forgot my iStayHealthy password (iPhone)"];
 	[self presentViewController:mail animated:YES completion: ^{
 	}];
-}
-
-#pragma mark - override the notification handlers
-- (void)reloadSQLData:(NSNotification *)notification
-{
-}
-
-- (void)handleStoreChanged:(NSNotification *)notification
-{
-	[self reloadSQLData:notification];
-}
-
-#pragma mark - handle rotations (iPad only)
-- (BOOL)shouldAutorotate
-{
-	if ([Utilities isIPad])
-	{
-		return YES;
-	}
-	else
-	{
-		return NO;
-	}
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-	if ([Utilities isIPad])
-	{
-		return UIInterfaceOrientationMaskAll;
-	}
-	else
-	{
-		return UIInterfaceOrientationMaskPortrait;
-	}
 }
 
 #pragma mark TextField Delegate methods

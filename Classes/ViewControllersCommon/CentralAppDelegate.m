@@ -8,15 +8,17 @@
 
 #import "CentralAppDelegate.h"
 #import "ContainerViewController.h"
+#import "ContainerViewController_iPad.h"
 #import "Utilities.h"
 #import "CoreDataManager.h"
 #import "UIFont+Standard.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
+#import "KeychainHandler.h"
 
 
 @interface CentralAppDelegate ()
-@property (nonatomic, strong) ContainerViewController *containerController;
+@property (nonatomic, strong) id containerController;
 @end
 
 
@@ -33,7 +35,7 @@
 	[[UISegmentedControl appearance] setTintColor:TINTCOLOUR];
 	[[UISwitch appearance] setOnTintColor:TINTCOLOUR];
 
-	self.containerController = (ContainerViewController *)self.window.rootViewController;
+	self.containerController = self.window.rootViewController;
 	[[CoreDataManager sharedInstance] setUpCoreDataManager];
 	[[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
 	    if (error)

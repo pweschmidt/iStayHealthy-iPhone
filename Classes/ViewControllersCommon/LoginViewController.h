@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import "BaseViewController.h"
 
-@interface LoginViewController : BaseViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate>
+@interface LoginViewController : UIViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate>
 @end

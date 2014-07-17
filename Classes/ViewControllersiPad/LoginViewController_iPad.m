@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	self.view.backgroundColor = DEFAULT_BACKGROUND;
 	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
 	{
 		if (self.view.frame.size.width < self.view.frame.size.height)
