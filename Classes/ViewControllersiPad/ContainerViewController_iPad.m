@@ -11,6 +11,7 @@
 #import "ContentContainerViewController_iPad.h"
 #import "Constants.h"
 #import "Utilities.h"
+#import "KeychainHandler.h"
 
 @interface ContainerViewController_iPad ()
 @property (nonatomic, strong) LoginViewController_iPad *loginController;
@@ -50,8 +51,7 @@
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
-	BOOL isPasswordReset = [defaults boolForKey:kPasswordReset];
-	if (isPasswordEnabled && !isPasswordReset)
+	if (isPasswordEnabled)
 	{
 #ifdef APPDEBUG
 		NSLog(@"calling the login view controller");

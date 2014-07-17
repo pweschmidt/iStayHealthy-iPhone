@@ -137,7 +137,7 @@
 		0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771EE18F32D8C00523DF6 /* SideEffectsCollectionViewController.m */; };
 		0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */; };
 		0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */; };
-		0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BCBA8E018699B870098D2DA /* Settings.bundle */; };
+		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -527,7 +527,8 @@
 		0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAlertsCollectionViewController.m; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.m; sourceTree = "<group>"; };
 		0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPopoverDelegate.h; path = ViewControllersiPad/PWESPopoverDelegate.h; sourceTree = "<group>"; };
 		0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESToolbarDelegate.h; path = ViewControllersiPad/PWESToolbarDelegate.h; sourceTree = "<group>"; };
-		0BCBA8E018699B870098D2DA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		0BF338A119785D03004C3FB4 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ViewControllersCommon/HelpViewController.h; sourceTree = "<group>"; };
+		0BF338A219785D03004C3FB4 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ViewControllersCommon/HelpViewController.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* iStayHealthy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iStayHealthy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1014,7 +1015,6 @@
 				C4897FDD140FD0850033C61C /* EntryInhibitors.plist */,
 				C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */,
 				C43BE58E15F7CBE400108EF8 /* SideEffects.plist */,
-				0BCBA8E018699B870098D2DA /* Settings.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1181,6 +1181,8 @@
 				0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
+				0BF338A119785D03004C3FB4 /* HelpViewController.h */,
+				0BF338A219785D03004C3FB4 /* HelpViewController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
 				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
 				C46C5DE917EDA44500866DBD /* InformationTableViewController.h */,
@@ -1699,7 +1701,6 @@
 				C489868E18106E0D006F47F1 /* info@2x.png in Resources */,
 				0B65F95E1913917600523441 /* Images.xcassets in Resources */,
 				0B8910F318F93CA500A49B95 /* celsentri.png in Resources */,
-				0BCBA8E118699B870098D2DA /* Settings.bundle in Resources */,
 				0B35BF8C1944681200341AFB /* hospital-icon.png in Resources */,
 				0B8910CA18F9363900A49B95 /* Default-568h@2x.png in Resources */,
 				0B8910FC18F93CA500A49B95 /* invirase.png in Resources */,
@@ -1838,6 +1839,7 @@
 				C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */,
 				C46EB5DC17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m in Sources */,
 				C45C27C717DB5A5B001F6831 /* EditAlertsTableViewController.m in Sources */,
+				0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */,
 				C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */,
 				0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */,
 				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,

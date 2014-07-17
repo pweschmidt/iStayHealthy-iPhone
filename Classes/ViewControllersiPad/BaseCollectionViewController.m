@@ -410,6 +410,10 @@
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }
 
+- (void)showHelpControllerFromButton:(UIBarButtonItem *)button
+{
+}
+
 #pragma mark Mail composer callback
 - (void)mailComposeController:(MFMailComposeViewController *)controller
           didFinishWithResult:(MFMailComposeResult)result

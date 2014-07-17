@@ -190,4 +190,13 @@
 	return output;
 }
 
++ (void)resetPasswordAndFlags
+{
+	[[self class] deleteItemFromKeychainWithIdentifier:kIsPasswordEnabled];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setBool:NO forKey:kIsPasswordEnabled];
+	[defaults setBool:NO forKey:kPasswordReset];
+	[defaults synchronize];
+}
+
 @end

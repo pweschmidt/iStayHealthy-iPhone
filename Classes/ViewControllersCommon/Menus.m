@@ -22,7 +22,8 @@
 	            NSLocalizedString(@"Backups", nil),
 	            NSLocalizedString(@"Feedback", nil),
 	            NSLocalizedString(@"Email Data", nil),
-	            NSLocalizedString(@"Info", nil)
+	            NSLocalizedString(@"Info", nil),
+	            NSLocalizedString(@"Help", nil)
 	        ];
 	});
 	return items;
@@ -268,6 +269,10 @@
 	else if ([title isEqualToString:NSLocalizedString(@"Info", nil)])
 	{
 		image = [UIImage imageNamed:@"info.png"];
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"Help", nil)])
+	{
+		image = [UIImage imageNamed:@"question.png"];
 	}
 	else
 	{

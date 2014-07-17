@@ -11,6 +11,8 @@
 #import "ContentContainerViewController.h"
 #import "Constants.h"
 #import "Utilities.h"
+#import "KeychainHandler.h"
+
 @interface ContainerViewController ()
 @property (nonatomic, strong) LoginViewController *loginController;
 @property (nonatomic, strong) ContentContainerViewController *contentController;
@@ -42,8 +44,7 @@
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
-	BOOL isPasswordReset = [defaults boolForKey:kPasswordReset];
-	if (isPasswordEnabled && !isPasswordReset)
+	if (isPasswordEnabled)
 	{
 #ifdef APPDEBUG
 		NSLog(@"calling the login view controller");
@@ -53,15 +54,6 @@
 	}
 	else
 	{
-		if (isPasswordReset)
-		{
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
-			                                                message:NSLocalizedString(@"You reset your password", nil)
-			                                               delegate:nil
-			                                      cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-			                                      otherButtonTitles:nil];
-			[alert show];
-		}
 #ifdef APPDEBUG
 		NSLog(@"Calling the content container view controller");
 #endif

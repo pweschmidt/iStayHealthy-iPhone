@@ -58,6 +58,10 @@
 	    {
 	        barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openInfo:) buttonTag:index];
 		}
+	    else if ([title isEqualToString:NSLocalizedString(@"Help", nil)])
+	    {
+	        barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openHelp:) buttonTag:index];
+		}
 	    if (nil != barbutton)
 	    {
 	        [self.barButtons addObject:barbutton];
@@ -127,7 +131,7 @@
 		__strong id <PWESToolbarDelegate> strongDelegate = self.customToolbarDelegate;
 		if ([sender isKindOfClass:[UIBarButtonItem class]])
 		{
-			if ([strongDelegate respondsToSelector:@selector(showPasswordControllerFromButton:)])
+			if ([strongDelegate respondsToSelector:@selector(showInfoControllerFromButton:)])
 			{
 				[strongDelegate showInfoControllerFromButton:(UIBarButtonItem *)sender];
 			}
@@ -136,9 +140,33 @@
 		{
 			UIButton *button = (UIButton *)sender;
 			UIBarButtonItem *barButton = [self.barButtons objectAtIndex:button.tag];
-			if ([strongDelegate respondsToSelector:@selector(showPasswordControllerFromButton:)])
+			if ([strongDelegate respondsToSelector:@selector(showInfoControllerFromButton:)])
 			{
 				[strongDelegate showInfoControllerFromButton:barButton];
+			}
+		}
+	}
+}
+
+- (void)openHelp:(UIBarButtonItem *)sender
+{
+	if (nil != self.customToolbarDelegate && nil != sender)
+	{
+		__strong id <PWESToolbarDelegate> strongDelegate = self.customToolbarDelegate;
+		if ([sender isKindOfClass:[UIBarButtonItem class]])
+		{
+			if ([strongDelegate respondsToSelector:@selector(showHelpControllerFromButton:)])
+			{
+				[strongDelegate showHelpControllerFromButton:(UIBarButtonItem *)sender];
+			}
+		}
+		else if ([sender isKindOfClass:[UIButton class]])
+		{
+			UIButton *button = (UIButton *)sender;
+			UIBarButtonItem *barButton = [self.barButtons objectAtIndex:button.tag];
+			if ([strongDelegate respondsToSelector:@selector(showHelpControllerFromButton:)])
+			{
+				[strongDelegate showHelpControllerFromButton:barButton];
 			}
 		}
 	}

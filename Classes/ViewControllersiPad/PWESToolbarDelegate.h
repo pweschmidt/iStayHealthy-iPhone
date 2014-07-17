@@ -13,4 +13,5 @@
 - (void)showMailControllerHasAttachment:(BOOL)hasAttachment;
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button;
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button;
+- (void)showHelpControllerFromButton:(UIBarButtonItem *)button;
 @end
