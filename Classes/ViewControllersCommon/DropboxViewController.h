@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface DropboxViewController : BaseTableViewController <UIAlertViewDelegate>
+@interface DropboxViewController : BaseTableViewController <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 @end
