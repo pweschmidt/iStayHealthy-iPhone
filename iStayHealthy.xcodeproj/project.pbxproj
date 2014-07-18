@@ -551,6 +551,7 @@
 		C41EC32C180ED0EE00A49AE4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVMedicationViewController.h; path = ViewControllersCommon/MyHIVMedicationViewController.h; sourceTree = "<group>"; };
 		C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHIVMedicationViewController.m; path = ViewControllersCommon/MyHIVMedicationViewController.m; sourceTree = "<group>"; };
+		C42A493419795A0200194ACD /* HelpSubjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpSubjects.h; path = ViewControllersCommon/HelpSubjects.h; sourceTree = "<group>"; };
 		C431408B180C801D00EB5F5E /* PWESAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESAxis.h; path = Dashboard/PWESAxis.h; sourceTree = "<group>"; };
 		C431408C180C801D00EB5F5E /* PWESAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESAxis.m; path = Dashboard/PWESAxis.m; sourceTree = "<group>"; };
 		C43BE56D15F7C14400108EF8 /* iStayHealthy 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 13.xcdatamodel"; sourceTree = "<group>"; };
@@ -1181,6 +1182,7 @@
 				0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
+				C42A493419795A0200194ACD /* HelpSubjects.h */,
 				0BF338A119785D03004C3FB4 /* HelpViewController.h */,
 				0BF338A219785D03004C3FB4 /* HelpViewController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
