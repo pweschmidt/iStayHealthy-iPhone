@@ -197,7 +197,6 @@
 		C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27CC17DB5A9D001F6831 /* EditProceduresTableViewController.m */; };
 		C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27CF17DB5AC7001F6831 /* EditWellnessTableViewController.m */; };
 		C45D00F017BAB403001AE0CB /* EditResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45D00EF17BAB403001AE0CB /* EditResultsTableViewController.m */; };
-		C45E52F4182BFD1400C30061 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45E52F3182BFD1400C30061 /* EventKit.framework */; };
 		C45E52F7182BFE6400C30061 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45E52F6182BFE6400C30061 /* BaseCollectionViewController.m */; };
 		C45E52FA182BFF0400C30061 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45E52F9182BFF0400C30061 /* BaseCollectionViewCell.m */; };
 		C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F837D17B66CEF0042E63A /* BaseViewController.m */; };
@@ -216,7 +215,6 @@
 		C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DE717EDA2B300866DBD /* SideEffectsTableViewController.m */; };
 		C46C5DEB17EDA44500866DBD /* InformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DEA17EDA44500866DBD /* InformationTableViewController.m */; };
 		C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5DED17EDA5B200866DBD /* SettingsTableViewController.m */; };
-		C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46C5E0017EDAF9C00866DBD /* AdSupport.framework */; };
 		C46EB5DC17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DB17EB7AA300B9EA5A /* OtherMedicationsListTableViewController.m */; };
 		C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */; };
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
@@ -868,10 +866,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C45E52F4182BFD1400C30061 /* EventKit.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
 				0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */,
-				C46C5E0117EDAF9C00866DBD /* AdSupport.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
 				C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */,
