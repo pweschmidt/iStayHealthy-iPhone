@@ -7,7 +7,9 @@
 //
 
 #import "BaseEditTableViewController.h"
+@protocol PWESResultsDelegate;
 
 @interface EditSeinfeldCalendarTableViewController : BaseEditTableViewController
+@property (nonatomic, weak) id <PWESResultsDelegate> resultsDelegate;
 - (id)initWithStyle:(UITableViewStyle)style calendars:(NSArray *)calendars;
 @end

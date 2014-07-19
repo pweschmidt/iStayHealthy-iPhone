@@ -41,7 +41,8 @@
 	[self setTitleViewWithTitle:NSLocalizedString(@"Medication Diary", nil)];
 	UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
 	layout.itemSize = CGSizeMake(320, 200);
-	layout.headerReferenceSize = CGSizeMake(self.view.bounds.size.width - 40, 64);
+	layout.sectionInset = UIEdgeInsetsMake(10, 0, 20, 0);
+	layout.headerReferenceSize = CGSizeMake(self.view.bounds.size.width - 40, 74);
 	layout.minimumInteritemSpacing = 20;
 	layout.minimumLineSpacing = 20;
 
@@ -62,9 +63,10 @@
 
 - (void)addButtonPressed:(id)sender
 {
-	EditSeinfeldCalendarTableViewController *editController = [[EditSeinfeldCalendarTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+	EditSeinfeldCalendarTableViewController *editController = [[EditSeinfeldCalendarTableViewController alloc] initWithStyle:UITableViewStyleGrouped calendars:self.calendars];
 	editController.preferredContentSize = CGSizeMake(320, 568);
 	editController.customPopOverDelegate = self;
+	editController.resultsDelegate = self;
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentViewController:editNavCtrl animated:YES completion:nil];
@@ -271,6 +273,12 @@
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 
+	self.currentCalendar = nil;
+	[self reloadSQLData:nil];
+}
+
+- (void)removeCalendar
+{
 	self.currentCalendar = nil;
 	[self reloadSQLData:nil];
 }
