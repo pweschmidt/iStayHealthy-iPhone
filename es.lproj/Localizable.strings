@@ -324,3 +324,7 @@
 "You reset your password" = "You disabled your password. You can reenable it using the tools menu.";
 "Can't see your data?" = "Can't see your data?";
 "Try this. Exit app. Go to Settings on Home Screen. Select iCloud Option. In there go to Documents and Data. See that iStayHealthy is set to On." = "Try this. Exit app. Go to Settings on Home Screen. Select iCloud Option. In there go to Documents and Data. See that iStayHealthy is set to On.";
+"Medication Diary" = "Med. Tagebuch";
+"Other Medication" = "Allg. Med.";
+"Procedures" = "Procedures";
+"Clinics" = "Ärzte/Praxen";

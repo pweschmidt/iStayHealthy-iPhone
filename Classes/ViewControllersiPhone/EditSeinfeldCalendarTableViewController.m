@@ -96,12 +96,6 @@
 
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
-	__strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
-	if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
-	{
-		[resultsDelegate removeCalendar];
-	}
-
 	[self popController];
 }
 
@@ -138,6 +132,12 @@
 	[defaultContext deleteObject:self.currentCalendar];
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
+	__strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
+	if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
+	{
+		[resultsDelegate removeCalendar];
+	}
+
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -165,9 +165,15 @@
 	else if ([title isEqualToString:NSLocalizedString(@"End", nil)] && nil != self.currentCalendar)
 	{
 		self.currentCalendar.isCompleted = [NSNumber numberWithBool:YES];
-		self.currentCalendar.endDate = [NSDate date];
+		NSDate *now = [NSDate date];
+		self.currentCalendar.endDate = now;
 		NSError *error = nil;
 		[[CoreDataManager sharedInstance] saveContextAndWait:&error];
+		__strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
+		if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(finishCalendarWithEndDate:)])
+		{
+			[resultsDelegate finishCalendarWithEndDate:now];
+		}
 		[self.navigationController popViewControllerAnimated:YES];
 	}
 }

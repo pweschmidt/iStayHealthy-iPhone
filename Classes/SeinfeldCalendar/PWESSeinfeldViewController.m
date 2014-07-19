@@ -268,11 +268,16 @@
 
 - (void)finishCalendarWithSuccess:(BOOL)success
 {
+	[self finishCalendarWithEndDate:self.currentCalendar.endDate];
+}
+
+- (void)finishCalendarWithEndDate:(NSDate *)endDate;
+{
 	SeinfeldCalendar *calendar = self.currentCalendar;
 	NSSet *calendarEntries = calendar.entries;
 	double totalCount = (double)calendarEntries.count;
 	double days = (double)[[PWESCalendar sharedInstance] daysBetweenStartDate:calendar.startDate
-	                                                                  endDate:calendar.endDate];
+	                                                                  endDate:endDate];
 
 	double totalDays = abs(days);
 	double fractionMonitored = totalCount / totalDays;

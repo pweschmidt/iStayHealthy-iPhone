@@ -82,7 +82,7 @@
 		float value = [lastValue floatValue];
 		if ([tuple.type isEqualToString:kViralLoad] && 1 == value)
 		{
-			valueLabel.text = @"undetectable";
+			valueLabel.text = NSLocalizedString(@"undetectable", nil);
 		}
 		else
 		{
