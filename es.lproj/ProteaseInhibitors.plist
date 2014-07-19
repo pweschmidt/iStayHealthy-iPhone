@@ -15,6 +15,12 @@
 		<string>crixivan</string>
 	</array>
 	<array>
+		<string>Telaprevir</string>
+		<string>Incivek</string>
+		<string>PI</string>
+		<string>incivek</string>
+	</array>
+	<array>
 		<string>Saquinavir</string>
 		<string>Invirase</string>
 		<string>PI</string>
@@ -27,10 +33,10 @@
 		<string>lexiva</string>
 	</array>
 	<array>
-		<string>Ritonavir</string>
-		<string>Norvir</string>
+		<string>Simeprevir</string>
+		<string>Olysio</string>
 		<string>PI</string>
-		<string>norvir</string>
+		<string>olysio</string>
 	</array>
 	<array>
 		<string>Darunavir</string>
@@ -45,10 +51,16 @@
 		<string>reyataz</string>
 	</array>
 	<array>
-		<string>Cobicistat</string>
-		<string>Cobicistat/Tybost</string>
+		<string>Asunaprevir</string>
+		<string>Sunvepra</string>
 		<string>PI</string>
-		<string>tybost</string>
+		<string>FDA</string>
+	</array>
+	<array>
+		<string>Boceprevir</string>
+		<string>Victrelis</string>
+		<string>PI</string>
+		<string>victrelis</string>
 	</array>
 	<array>
 		<string>Nelfinavir</string>
