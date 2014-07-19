@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Ribavirin</string>
+		<string>Ribasphere/Virazole</string>
+		<string>RI</string>
+		<string>ribasphere</string>
+	</array>
+	<array>
+		<string>Sofosbuvir</string>
+		<string>Sovaldi</string>
+		<string>RI</string>
+		<string>sovaldi</string>
+	</array>
+	<array>
+		<string>Daclatasvir</string>
+		<string>Dalkinza</string>
+		<string>RI</string>
+		<string>FDA</string>
+	</array>
+</array>
+</plist>

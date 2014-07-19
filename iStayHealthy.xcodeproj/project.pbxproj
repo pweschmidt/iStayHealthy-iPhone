@@ -24,6 +24,24 @@
 		0B2EDDE3197A7D9900B72109 /* tybost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDDF197A7D9900B72109 /* tybost@2x.png */; };
 		0B2EDDE4197A7D9900B72109 /* vitekta.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE0197A7D9900B72109 /* vitekta.png */; };
 		0B2EDDE5197A7D9900B72109 /* vitekta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE1197A7D9900B72109 /* vitekta@2x.png */; };
+		0B2EDDF6197A90FF00B72109 /* FDA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE6197A90FF00B72109 /* FDA.png */; };
+		0B2EDDF7197A90FF00B72109 /* FDA@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE7197A90FF00B72109 /* FDA@2x.png */; };
+		0B2EDDF8197A90FF00B72109 /* incivek.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE8197A90FF00B72109 /* incivek.png */; };
+		0B2EDDF9197A90FF00B72109 /* incivek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE9197A90FF00B72109 /* incivek@2x.png */; };
+		0B2EDDFA197A90FF00B72109 /* olysio.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDEA197A90FF00B72109 /* olysio.png */; };
+		0B2EDDFB197A90FF00B72109 /* olysio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDEB197A90FF00B72109 /* olysio@2x.png */; };
+		0B2EDDFC197A90FF00B72109 /* pegasys.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDEC197A90FF00B72109 /* pegasys.png */; };
+		0B2EDDFD197A90FF00B72109 /* pegasys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDED197A90FF00B72109 /* pegasys@2x.png */; };
+		0B2EDDFE197A90FF00B72109 /* pegintron.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDEE197A90FF00B72109 /* pegintron.png */; };
+		0B2EDDFF197A90FF00B72109 /* pegintron@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDEF197A90FF00B72109 /* pegintron@2x.png */; };
+		0B2EDE00197A90FF00B72109 /* ribasphere.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDF0197A90FF00B72109 /* ribasphere.png */; };
+		0B2EDE01197A90FF00B72109 /* ribasphere@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDF1197A90FF00B72109 /* ribasphere@2x.png */; };
+		0B2EDE02197A90FF00B72109 /* sovaldi.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDF2197A90FF00B72109 /* sovaldi.png */; };
+		0B2EDE03197A90FF00B72109 /* sovaldi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDF3197A90FF00B72109 /* sovaldi@2x.png */; };
+		0B2EDE04197A90FF00B72109 /* victrelis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDF4197A90FF00B72109 /* victrelis.png */; };
+		0B2EDE05197A90FF00B72109 /* victrelis@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDF5197A90FF00B72109 /* victrelis@2x.png */; };
+		0B2EDE0A197A919800B72109 /* Booster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDE0C197A919800B72109 /* Booster.plist */; };
+		0B2EDE10197A91A700B72109 /* GeneralInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDE12197A91A700B72109 /* GeneralInhibitors.plist */; };
 		0B35BF821944681200341AFB /* alarm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6A1944681200341AFB /* alarm-icon.png */; };
 		0B35BF831944681200341AFB /* alarm-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6B1944681200341AFB /* alarm-icon@2x.png */; };
 		0B35BF841944681200341AFB /* charts-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6C1944681200341AFB /* charts-icon.png */; };
@@ -365,6 +383,30 @@
 		0B2EDDDF197A7D9900B72109 /* tybost@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tybost@2x.png"; path = "Classes/Assets/MedicationImages/tybost@2x.png"; sourceTree = "<group>"; };
 		0B2EDDE0197A7D9900B72109 /* vitekta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vitekta.png; path = Classes/Assets/MedicationImages/vitekta.png; sourceTree = "<group>"; };
 		0B2EDDE1197A7D9900B72109 /* vitekta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vitekta@2x.png"; path = "Classes/Assets/MedicationImages/vitekta@2x.png"; sourceTree = "<group>"; };
+		0B2EDDE6197A90FF00B72109 /* FDA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FDA.png; path = Classes/Assets/MedicationImages/FDA.png; sourceTree = "<group>"; };
+		0B2EDDE7197A90FF00B72109 /* FDA@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FDA@2x.png"; path = "Classes/Assets/MedicationImages/FDA@2x.png"; sourceTree = "<group>"; };
+		0B2EDDE8197A90FF00B72109 /* incivek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incivek.png; path = Classes/Assets/MedicationImages/incivek.png; sourceTree = "<group>"; };
+		0B2EDDE9197A90FF00B72109 /* incivek@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "incivek@2x.png"; path = "Classes/Assets/MedicationImages/incivek@2x.png"; sourceTree = "<group>"; };
+		0B2EDDEA197A90FF00B72109 /* olysio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = olysio.png; path = Classes/Assets/MedicationImages/olysio.png; sourceTree = "<group>"; };
+		0B2EDDEB197A90FF00B72109 /* olysio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "olysio@2x.png"; path = "Classes/Assets/MedicationImages/olysio@2x.png"; sourceTree = "<group>"; };
+		0B2EDDEC197A90FF00B72109 /* pegasys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pegasys.png; path = Classes/Assets/MedicationImages/pegasys.png; sourceTree = "<group>"; };
+		0B2EDDED197A90FF00B72109 /* pegasys@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pegasys@2x.png"; path = "Classes/Assets/MedicationImages/pegasys@2x.png"; sourceTree = "<group>"; };
+		0B2EDDEE197A90FF00B72109 /* pegintron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pegintron.png; path = Classes/Assets/MedicationImages/pegintron.png; sourceTree = "<group>"; };
+		0B2EDDEF197A90FF00B72109 /* pegintron@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pegintron@2x.png"; path = "Classes/Assets/MedicationImages/pegintron@2x.png"; sourceTree = "<group>"; };
+		0B2EDDF0197A90FF00B72109 /* ribasphere.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ribasphere.png; path = Classes/Assets/MedicationImages/ribasphere.png; sourceTree = "<group>"; };
+		0B2EDDF1197A90FF00B72109 /* ribasphere@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ribasphere@2x.png"; path = "Classes/Assets/MedicationImages/ribasphere@2x.png"; sourceTree = "<group>"; };
+		0B2EDDF2197A90FF00B72109 /* sovaldi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sovaldi.png; path = Classes/Assets/MedicationImages/sovaldi.png; sourceTree = "<group>"; };
+		0B2EDDF3197A90FF00B72109 /* sovaldi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sovaldi@2x.png"; path = "Classes/Assets/MedicationImages/sovaldi@2x.png"; sourceTree = "<group>"; };
+		0B2EDDF4197A90FF00B72109 /* victrelis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = victrelis.png; path = Classes/Assets/MedicationImages/victrelis.png; sourceTree = "<group>"; };
+		0B2EDDF5197A90FF00B72109 /* victrelis@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "victrelis@2x.png"; path = "Classes/Assets/MedicationImages/victrelis@2x.png"; sourceTree = "<group>"; };
+		0B2EDE0B197A919800B72109 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Booster.plist; sourceTree = "<group>"; };
+		0B2EDE0D197A919D00B72109 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/Booster.plist; sourceTree = "<group>"; };
+		0B2EDE0E197A919E00B72109 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Booster.plist; sourceTree = "<group>"; };
+		0B2EDE0F197A919F00B72109 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/Booster.plist; sourceTree = "<group>"; };
+		0B2EDE11197A91A700B72109 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/GeneralInhibitors.plist; sourceTree = "<group>"; };
+		0B2EDE13197A91AA00B72109 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/GeneralInhibitors.plist; sourceTree = "<group>"; };
+		0B2EDE14197A91AB00B72109 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/GeneralInhibitors.plist; sourceTree = "<group>"; };
+		0B2EDE15197A91AB00B72109 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/GeneralInhibitors.plist; sourceTree = "<group>"; };
 		0B35BF6A1944681200341AFB /* alarm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon.png"; path = "Classes/Assets/alarm-icon.png"; sourceTree = "<group>"; };
 		0B35BF6B1944681200341AFB /* alarm-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon@2x.png"; path = "Classes/Assets/alarm-icon@2x.png"; sourceTree = "<group>"; };
 		0B35BF6C1944681200341AFB /* charts-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-icon.png"; path = "Classes/Assets/charts-icon.png"; sourceTree = "<group>"; };
@@ -1028,6 +1070,8 @@
 				C4897FDD140FD0850033C61C /* EntryInhibitors.plist */,
 				C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */,
 				C43BE58E15F7CBE400108EF8 /* SideEffects.plist */,
+				0B2EDE0C197A919800B72109 /* Booster.plist */,
+				0B2EDE12197A91A700B72109 /* GeneralInhibitors.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1404,6 +1448,22 @@
 		C48B9BFC180949E7007CF6DE /* MedicationImages */ = {
 			isa = PBXGroup;
 			children = (
+				0B2EDDE6197A90FF00B72109 /* FDA.png */,
+				0B2EDDE7197A90FF00B72109 /* FDA@2x.png */,
+				0B2EDDE8197A90FF00B72109 /* incivek.png */,
+				0B2EDDE9197A90FF00B72109 /* incivek@2x.png */,
+				0B2EDDEA197A90FF00B72109 /* olysio.png */,
+				0B2EDDEB197A90FF00B72109 /* olysio@2x.png */,
+				0B2EDDEC197A90FF00B72109 /* pegasys.png */,
+				0B2EDDED197A90FF00B72109 /* pegasys@2x.png */,
+				0B2EDDEE197A90FF00B72109 /* pegintron.png */,
+				0B2EDDEF197A90FF00B72109 /* pegintron@2x.png */,
+				0B2EDDF0197A90FF00B72109 /* ribasphere.png */,
+				0B2EDDF1197A90FF00B72109 /* ribasphere@2x.png */,
+				0B2EDDF2197A90FF00B72109 /* sovaldi.png */,
+				0B2EDDF3197A90FF00B72109 /* sovaldi@2x.png */,
+				0B2EDDF4197A90FF00B72109 /* victrelis.png */,
+				0B2EDDF5197A90FF00B72109 /* victrelis@2x.png */,
 				0B2EDDDE197A7D9900B72109 /* tybost.png */,
 				0B2EDDDF197A7D9900B72109 /* tybost@2x.png */,
 				0B2EDDE0197A7D9900B72109 /* vitekta.png */,
@@ -1711,9 +1771,11 @@
 				0B2EDDD0197A6AEC00B72109 /* charts-barbutton@2x.png in Resources */,
 				0B35BF851944681200341AFB /* charts-icon@2x.png in Resources */,
 				C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */,
+				0B2EDDFE197A90FF00B72109 /* pegintron.png in Resources */,
 				C489868618105D78006F47F1 /* save@2x.png in Resources */,
 				C44D36B5180F3E3600EE9F5E /* alarm.png in Resources */,
 				0B35BF911944681200341AFB /* missed-icon@2x.png in Resources */,
+				0B2EDDFD197A90FF00B72109 /* pegasys@2x.png in Resources */,
 				C4595942180EF8D50082559E /* pozicon.png in Resources */,
 				0B2EDDE2197A7D9900B72109 /* tybost.png in Resources */,
 				C481FD2117FDEBDE0058EE9D /* icon_57_flat.png in Resources */,
@@ -1722,6 +1784,7 @@
 				0B89110618F93CA500A49B95 /* reyataz.png in Resources */,
 				0B8910F418F93CA500A49B95 /* combivir.png in Resources */,
 				C44D36C2180F3E3600EE9F5E /* diary@2x.png in Resources */,
+				0B2EDDF8197A90FF00B72109 /* incivek.png in Resources */,
 				C489868E18106E0D006F47F1 /* info@2x.png in Resources */,
 				0B65F95E1913917600523441 /* Images.xcassets in Resources */,
 				0B8910F318F93CA500A49B95 /* celsentri.png in Resources */,
@@ -1740,6 +1803,7 @@
 				C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */,
 				C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */,
 				0B8910FF18F93CA500A49B95 /* kivexa.png in Resources */,
+				0B2EDE10197A91A700B72109 /* GeneralInhibitors.plist in Resources */,
 				C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */,
 				C44D36BC180F3E3600EE9F5E /* charts@2x.png in Resources */,
 				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
@@ -1750,16 +1814,20 @@
 				C44D36DF180F3E5000EE9F5E /* sideeffects.png in Resources */,
 				0B35BF871944681200341AFB /* combi-icon@2x.png in Resources */,
 				0B35BF861944681200341AFB /* combi-icon.png in Resources */,
+				0B2EDDF9197A90FF00B72109 /* incivek@2x.png in Resources */,
 				C48B9BEB18094675007CF6DE /* icon_40_flat@2x.png in Resources */,
 				C48B9BEC18094675007CF6DE /* icon_50_flat@2x.png in Resources */,
 				0B8910FA18F93CA500A49B95 /* fuzeon.png in Resources */,
 				0B8910F918F93CA500A49B95 /* epivir.png in Resources */,
 				0B89110118F93CA500A49B95 /* lexiva.png in Resources */,
 				C44D36C1180F3E3600EE9F5E /* diary.png in Resources */,
+				0B2EDE02197A90FF00B72109 /* sovaldi.png in Resources */,
+				0B2EDE0A197A919800B72109 /* Booster.plist in Resources */,
 				0B89110A18F93CA500A49B95 /* telzir.png in Resources */,
 				C44D36DC180F3E5000EE9F5E /* procedure@2x.png in Resources */,
 				0B35BF961944681200341AFB /* stop-icon.png in Resources */,
 				0B8910FB18F93CA500A49B95 /* intelence.png in Resources */,
+				0B2EDE05197A90FF00B72109 /* victrelis@2x.png in Resources */,
 				0B8910F118F93CA500A49B95 /* aptivus.png in Resources */,
 				C44D36B9180F3E3600EE9F5E /* cancel.png in Resources */,
 				0B89110D18F93CA500A49B95 /* triomune.png in Resources */,
@@ -1769,8 +1837,10 @@
 				0B6E0ACC19711D5900D80FA6 /* question.png in Resources */,
 				0B2EDDD9197A78F600B72109 /* triumeq@2x.png in Resources */,
 				0B35BF981944681200341AFB /* stop.png in Resources */,
+				0B2EDDF6197A90FF00B72109 /* FDA.png in Resources */,
 				0B35BF9D19446A1800341AFB /* results-icon@2x.png in Resources */,
 				C48B9BF918094972007CF6DE /* Default-768h@2x.png in Resources */,
+				0B2EDDFF197A90FF00B72109 /* pegintron@2x.png in Resources */,
 				C44D36BF180F3E3600EE9F5E /* cross.png in Resources */,
 				C481FD3617FDEF7B0058EE9D /* icon_29.png in Resources */,
 				C48B9BEF18094675007CF6DE /* icon_76_flat@2x.png in Resources */,
@@ -1782,6 +1852,9 @@
 				C48B9BF818094972007CF6DE /* Default-768h.png in Resources */,
 				0B89111218F93CA500A49B95 /* viramune.png in Resources */,
 				C489868518105D78006F47F1 /* save.png in Resources */,
+				0B2EDDF7197A90FF00B72109 /* FDA@2x.png in Resources */,
+				0B2EDE03197A90FF00B72109 /* sovaldi@2x.png in Resources */,
+				0B2EDDFB197A90FF00B72109 /* olysio@2x.png in Resources */,
 				0B35BF8E1944681200341AFB /* hospital.png in Resources */,
 				0B89110218F93CA500A49B95 /* norvir.png in Resources */,
 				0B35BF841944681200341AFB /* charts-icon.png in Resources */,
@@ -1802,11 +1875,13 @@
 				C48B9BED18094675007CF6DE /* icon_57_flat@2x.png in Resources */,
 				0B35BF8B1944681200341AFB /* diary-icon@2x.png in Resources */,
 				0B89110518F93CA500A49B95 /* retrovir.png in Resources */,
+				0B2EDDFC197A90FF00B72109 /* pegasys.png in Resources */,
 				C489869018106E0D006F47F1 /* lock@2x.png in Resources */,
 				C44D36C0180F3E3600EE9F5E /* cross@2x.png in Resources */,
 				0B8910F818F93CA500A49B95 /* emtriva.png in Resources */,
 				0B6E0ACB19711D5900D80FA6 /* backup@2x.png in Resources */,
 				0B89110C18F93CA500A49B95 /* tivicay@2x.png in Resources */,
+				0B2EDDFA197A90FF00B72109 /* olysio.png in Resources */,
 				C481FD2C17FDEE540058EE9D /* icon_40_flat.png in Resources */,
 				0B2EDDE5197A7D9900B72109 /* vitekta@2x.png in Resources */,
 				0B35BF881944681200341AFB /* cross-icon.png in Resources */,
@@ -1814,7 +1889,10 @@
 				C481FD2217FDEBDE0058EE9D /* icon_72_flat.png in Resources */,
 				0B89110718F93CA500A49B95 /* stavudine.png in Resources */,
 				C44D36BB180F3E3600EE9F5E /* charts.png in Resources */,
+				0B2EDE00197A90FF00B72109 /* ribasphere.png in Resources */,
+				0B2EDE04197A90FF00B72109 /* victrelis.png in Resources */,
 				0B89110018F93CA500A49B95 /* lamivudine.png in Resources */,
+				0B2EDE01197A90FF00B72109 /* ribasphere@2x.png in Resources */,
 				0B35BF931944681200341AFB /* procedure-icon@2x.png in Resources */,
 				C44D36C8180F3E3600EE9F5E /* mail@2x.png in Resources */,
 				0B35BF821944681200341AFB /* alarm-icon.png in Resources */,
@@ -2024,6 +2102,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0B2EDE0C197A919800B72109 /* Booster.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B2EDE0B197A919800B72109 /* en */,
+				0B2EDE0D197A919D00B72109 /* de */,
+				0B2EDE0E197A919E00B72109 /* es */,
+				0B2EDE0F197A919F00B72109 /* fr */,
+			);
+			name = Booster.plist;
+			sourceTree = "<group>";
+		};
+		0B2EDE12197A91A700B72109 /* GeneralInhibitors.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B2EDE11197A91A700B72109 /* en */,
+				0B2EDE13197A91AA00B72109 /* de */,
+				0B2EDE14197A91AB00B72109 /* es */,
+				0B2EDE15197A91AB00B72109 /* fr */,
+			);
+			name = GeneralInhibitors.plist;
+			sourceTree = "<group>";
+		};
 		0BB56693191E132F00731739 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

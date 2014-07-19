@@ -115,6 +115,16 @@
 	NSArray *protease = [[NSArray alloc]initWithContentsOfFile:proteasePath];
 	[self.medicationListings setObject:protease forKey:[NSNumber numberWithInteger:6]];
 
+
+	NSString *boosterPath = [[NSBundle mainBundle] pathForResource:@"Booster" ofType:@"plist"];
+	NSArray *boosters = [[NSArray alloc] initWithContentsOfFile:boosterPath];
+	[self.medicationListings setObject:boosters forKey:[NSNumber numberWithInteger:7]];
+
+
+	NSString *generaPath = [[NSBundle mainBundle] pathForResource:@"GeneralInhibitors" ofType:@"plist"];
+	NSArray *generals = [[NSArray alloc] initWithContentsOfFile:generaPath];
+	[self.medicationListings setObject:generals forKey:[NSNumber numberWithInteger:8]];
+
 	self.startDate = [NSDate date];
 }
 
@@ -128,7 +138,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 7;
+	return 9;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -206,6 +216,14 @@
 
 		case 6:
 			text = NSLocalizedString(@"Protease Inhibitors", nil);
+			break;
+
+		case 7:
+			text = NSLocalizedString(@"Boosters/Inteferon", nil);
+			break;
+
+		case 8:
+			text = NSLocalizedString(@"Other Inhibitors", nil);
 			break;
 	}
 	return text;

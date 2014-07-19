@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Ritonavir</string>
+		<string>Norvir</string>
+		<string>PI</string>
+		<string>norvir</string>
+	</array>
+	<array>
+		<string>Peg Interferon alfa-2b</string>
+		<string>PegIntron</string>
+		<string>Interferon</string>
+		<string>pegintron</string>
+	</array>
+	<array>
+		<string>Peg Interferon alfa-2a</string>
+		<string>Pegasys</string>
+		<string>Interferon</string>
+		<string>pegasys</string>
+	</array>
+	<array>
+		<string>Cobicistat</string>
+		<string>Tybost</string>
+		<string>PI</string>
+		<string>tybost</string>
+	</array>
+</array>
+</plist>
