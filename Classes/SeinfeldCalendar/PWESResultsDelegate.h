@@ -13,4 +13,5 @@
 @protocol PWESResultsDelegate <NSObject>
 - (void)updateCalendarWithSuccess:(BOOL)success;
 - (void)finishCalendarWithSuccess:(BOOL)success;
+- (void)removeCalendar;
 @end

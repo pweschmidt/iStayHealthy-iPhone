@@ -48,6 +48,7 @@
 {
 	EditSeinfeldCalendarTableViewController *calendarCtrl = [[EditSeinfeldCalendarTableViewController alloc]
 	                                                         initWithStyle:UITableViewStyleGrouped calendars:self.calendars];
+	calendarCtrl.resultsDelegate = self;
 	[self.navigationController pushViewController:calendarCtrl animated:YES];
 }
 
@@ -294,6 +295,12 @@
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 
+	self.currentCalendar = nil;
+	[self reloadSQLData:nil];
+}
+
+- (void)removeCalendar
+{
 	self.currentCalendar = nil;
 	[self reloadSQLData:nil];
 }

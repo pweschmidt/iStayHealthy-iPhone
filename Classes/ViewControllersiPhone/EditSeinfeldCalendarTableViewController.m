@@ -14,6 +14,7 @@
 #import "Utilities.h"
 #import "PWESStar.h"
 #import "DateView.h"
+#import "PWESResultsDelegate.h"
 
 @interface EditSeinfeldCalendarTableViewController ()
 @property (nonatomic, strong) UISegmentedControl *calendarSegmentControl;
@@ -63,16 +64,15 @@
 
 - (void)viewDidLoad
 {
-	[self populateCalendars];
 	[super viewDidLoad];
+	[self populateCalendars];
 	self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
 	NSArray *menuTitles = @[@"1", @"2", @"3"];
+
 	self.calendarSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
-	CGFloat width = self.tableView.bounds.size.width;
-	CGFloat segmentWidth = width - 2 * 20;
-	self.calendarSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
-	self.calendarSegmentControl.selectedSegmentIndex = 2;
+	self.calendarSegmentControl.selectedSegmentIndex = 0;
 	[self.calendarSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
+
 	if (self.isEditMode)
 	{
 		UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(showDeleteAlertView)];
@@ -96,6 +96,12 @@
 
 	NSError *error = nil;
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
+	__strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
+	if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
+	{
+		[resultsDelegate removeCalendar];
+	}
+
 	[self popController];
 }
 
@@ -159,6 +165,7 @@
 	else if ([title isEqualToString:NSLocalizedString(@"End", nil)] && nil != self.currentCalendar)
 	{
 		self.currentCalendar.isCompleted = [NSNumber numberWithBool:YES];
+		self.currentCalendar.endDate = [NSDate date];
 		NSError *error = nil;
 		[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 		[self.navigationController popViewControllerAnimated:YES];
@@ -272,6 +279,40 @@
 	[cell.contentView addSubview:starView];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+	if (0 == section)
+	{
+		return 50;
+	}
+	else
+	{
+		return 40;
+	}
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+	UIView *footer = [[UIView alloc] init];
+	if (0 == section)
+	{
+		footer.frame = CGRectMake(0, 0, tableView.frame.size.width, 50);
+		UILabel *label = [UILabel standardLabel];
+		label.frame = CGRectMake(20, 0, tableView.bounds.size.width - 40, 20);
+		label.text = NSLocalizedString(@"For how many months?", nil);
+		[footer addSubview:label];
+		self.calendarSegmentControl.frame = CGRectMake(20, 23, tableView.bounds.size.width - 40, 30);
+		[footer addSubview:self.calendarSegmentControl];
+	}
+	else
+	{
+		footer.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
+		footer.backgroundColor = [UIColor clearColor];
+		return footer;
+	}
+	return footer;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	if (0 == section)
@@ -282,25 +323,6 @@
 	{
 		return 60;
 	}
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-	UIView *footer = [[UIView alloc] init];
-	if (0 < section || nil != self.currentCalendar)
-	{
-		footer.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
-		footer.backgroundColor = [UIColor clearColor];
-		return footer;
-	}
-	footer.frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
-	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(20, 10, tableView.bounds.size.width - 40, 20);
-	label.text = NSLocalizedString(@"For how many months?", nil);
-	[footer addSubview:label];
-	self.calendarSegmentControl.frame = CGRectMake(20, 35, tableView.bounds.size.width - 40, 25);
-	[footer addSubview:self.calendarSegmentControl];
-	return footer;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
