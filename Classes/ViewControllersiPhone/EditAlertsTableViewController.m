@@ -141,7 +141,12 @@
 		return;
 	}
 	[[UIApplication sharedApplication] cancelLocalNotification:self.currentNotification];
-	[self.navigationController popViewControllerAnimated:YES];
+	__strong id <NotificationsDelegate> strongDelegate = self.notificationsDelegate;
+	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateLocalNotifications)])
+	{
+		[strongDelegate updateLocalNotifications];
+	}
+	[self popController];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -16,6 +16,8 @@
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */; };
 		0B2DF7C019684C1C00BCB111 /* PWESDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */; };
+		0B2EDDCF197A6AEC00B72109 /* charts-barbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDCD197A6AEC00B72109 /* charts-barbutton.png */; };
+		0B2EDDD0197A6AEC00B72109 /* charts-barbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDCE197A6AEC00B72109 /* charts-barbutton@2x.png */; };
 		0B35BF821944681200341AFB /* alarm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6A1944681200341AFB /* alarm-icon.png */; };
 		0B35BF831944681200341AFB /* alarm-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6B1944681200341AFB /* alarm-icon@2x.png */; };
 		0B35BF841944681200341AFB /* charts-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6C1944681200341AFB /* charts-icon.png */; };
@@ -349,6 +351,8 @@
 		0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundSelectionTableViewController.m; path = ViewControllersiPhone/SoundSelectionTableViewController.m; sourceTree = "<group>"; };
 		0B2DF7BE19684C1C00BCB111 /* PWESDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDashboardViewController.h; path = ViewControllersCommon/PWESDashboardViewController.h; sourceTree = "<group>"; };
 		0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDashboardViewController.m; path = ViewControllersCommon/PWESDashboardViewController.m; sourceTree = "<group>"; };
+		0B2EDDCD197A6AEC00B72109 /* charts-barbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-barbutton.png"; path = "Classes/Assets/charts-barbutton.png"; sourceTree = "<group>"; };
+		0B2EDDCE197A6AEC00B72109 /* charts-barbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-barbutton@2x.png"; path = "Classes/Assets/charts-barbutton@2x.png"; sourceTree = "<group>"; };
 		0B35BF6A1944681200341AFB /* alarm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon.png"; path = "Classes/Assets/alarm-icon.png"; sourceTree = "<group>"; };
 		0B35BF6B1944681200341AFB /* alarm-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon@2x.png"; path = "Classes/Assets/alarm-icon@2x.png"; sourceTree = "<group>"; };
 		0B35BF6C1944681200341AFB /* charts-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-icon.png"; path = "Classes/Assets/charts-icon.png"; sourceTree = "<group>"; };
@@ -1294,6 +1298,8 @@
 		C47DB23817AD43B80037A6DF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0B2EDDCD197A6AEC00B72109 /* charts-barbutton.png */,
+				0B2EDDCE197A6AEC00B72109 /* charts-barbutton@2x.png */,
 				0B6E0AC619711D5900D80FA6 /* backup.png */,
 				0B6E0AC719711D5900D80FA6 /* backup@2x.png */,
 				0B6E0AC819711D5900D80FA6 /* question.png */,
@@ -1684,6 +1690,7 @@
 				C44D36C7180F3E3600EE9F5E /* mail.png in Resources */,
 				0B89110818F93CA500A49B95 /* stribild.png in Resources */,
 				0B35BF9C19446A1800341AFB /* results-icon.png in Resources */,
+				0B2EDDD0197A6AEC00B72109 /* charts-barbutton@2x.png in Resources */,
 				0B35BF851944681200341AFB /* charts-icon@2x.png in Resources */,
 				C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */,
 				C489868618105D78006F47F1 /* save@2x.png in Resources */,
@@ -1746,6 +1753,7 @@
 				C44D36BF180F3E3600EE9F5E /* cross.png in Resources */,
 				C481FD3617FDEF7B0058EE9D /* icon_29.png in Resources */,
 				C48B9BEF18094675007CF6DE /* icon_76_flat@2x.png in Resources */,
+				0B2EDDCF197A6AEC00B72109 /* charts-barbutton.png in Resources */,
 				0B89111418F93CA500A49B95 /* zerit.png in Resources */,
 				0B89110B18F93CA500A49B95 /* tivicay.png in Resources */,
 				0B8910F218F93CA500A49B95 /* atripla.png in Resources */,
