@@ -18,6 +18,12 @@
 		0B2DF7C019684C1C00BCB111 /* PWESDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */; };
 		0B2EDDCF197A6AEC00B72109 /* charts-barbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDCD197A6AEC00B72109 /* charts-barbutton.png */; };
 		0B2EDDD0197A6AEC00B72109 /* charts-barbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDCE197A6AEC00B72109 /* charts-barbutton@2x.png */; };
+		0B2EDDD8197A78F600B72109 /* triumeq.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDD2197A78F600B72109 /* triumeq.png */; };
+		0B2EDDD9197A78F600B72109 /* triumeq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDD3197A78F600B72109 /* triumeq@2x.png */; };
+		0B2EDDE2197A7D9900B72109 /* tybost.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDDE197A7D9900B72109 /* tybost.png */; };
+		0B2EDDE3197A7D9900B72109 /* tybost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDDF197A7D9900B72109 /* tybost@2x.png */; };
+		0B2EDDE4197A7D9900B72109 /* vitekta.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE0197A7D9900B72109 /* vitekta.png */; };
+		0B2EDDE5197A7D9900B72109 /* vitekta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDDE1197A7D9900B72109 /* vitekta@2x.png */; };
 		0B35BF821944681200341AFB /* alarm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6A1944681200341AFB /* alarm-icon.png */; };
 		0B35BF831944681200341AFB /* alarm-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6B1944681200341AFB /* alarm-icon@2x.png */; };
 		0B35BF841944681200341AFB /* charts-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF6C1944681200341AFB /* charts-icon.png */; };
@@ -353,6 +359,12 @@
 		0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDashboardViewController.m; path = ViewControllersCommon/PWESDashboardViewController.m; sourceTree = "<group>"; };
 		0B2EDDCD197A6AEC00B72109 /* charts-barbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-barbutton.png"; path = "Classes/Assets/charts-barbutton.png"; sourceTree = "<group>"; };
 		0B2EDDCE197A6AEC00B72109 /* charts-barbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-barbutton@2x.png"; path = "Classes/Assets/charts-barbutton@2x.png"; sourceTree = "<group>"; };
+		0B2EDDD2197A78F600B72109 /* triumeq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = triumeq.png; path = Classes/Assets/MedicationImages/triumeq.png; sourceTree = "<group>"; };
+		0B2EDDD3197A78F600B72109 /* triumeq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "triumeq@2x.png"; path = "Classes/Assets/MedicationImages/triumeq@2x.png"; sourceTree = "<group>"; };
+		0B2EDDDE197A7D9900B72109 /* tybost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tybost.png; path = Classes/Assets/MedicationImages/tybost.png; sourceTree = "<group>"; };
+		0B2EDDDF197A7D9900B72109 /* tybost@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tybost@2x.png"; path = "Classes/Assets/MedicationImages/tybost@2x.png"; sourceTree = "<group>"; };
+		0B2EDDE0197A7D9900B72109 /* vitekta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vitekta.png; path = Classes/Assets/MedicationImages/vitekta.png; sourceTree = "<group>"; };
+		0B2EDDE1197A7D9900B72109 /* vitekta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vitekta@2x.png"; path = "Classes/Assets/MedicationImages/vitekta@2x.png"; sourceTree = "<group>"; };
 		0B35BF6A1944681200341AFB /* alarm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon.png"; path = "Classes/Assets/alarm-icon.png"; sourceTree = "<group>"; };
 		0B35BF6B1944681200341AFB /* alarm-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm-icon@2x.png"; path = "Classes/Assets/alarm-icon@2x.png"; sourceTree = "<group>"; };
 		0B35BF6C1944681200341AFB /* charts-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "charts-icon.png"; path = "Classes/Assets/charts-icon.png"; sourceTree = "<group>"; };
@@ -1392,6 +1404,12 @@
 		C48B9BFC180949E7007CF6DE /* MedicationImages */ = {
 			isa = PBXGroup;
 			children = (
+				0B2EDDDE197A7D9900B72109 /* tybost.png */,
+				0B2EDDDF197A7D9900B72109 /* tybost@2x.png */,
+				0B2EDDE0197A7D9900B72109 /* vitekta.png */,
+				0B2EDDE1197A7D9900B72109 /* vitekta@2x.png */,
+				0B2EDDD2197A78F600B72109 /* triumeq.png */,
+				0B2EDDD3197A78F600B72109 /* triumeq@2x.png */,
 				0B8910CB18F93CA500A49B95 /* aptivus.png */,
 				0B8910CC18F93CA500A49B95 /* atripla.png */,
 				0B8910CD18F93CA500A49B95 /* celsentri.png */,
@@ -1697,6 +1715,7 @@
 				C44D36B5180F3E3600EE9F5E /* alarm.png in Resources */,
 				0B35BF911944681200341AFB /* missed-icon@2x.png in Resources */,
 				C4595942180EF8D50082559E /* pozicon.png in Resources */,
+				0B2EDDE2197A7D9900B72109 /* tybost.png in Resources */,
 				C481FD2117FDEBDE0058EE9D /* icon_57_flat.png in Resources */,
 				C48B9BEE18094675007CF6DE /* icon_72_flat@2x.png in Resources */,
 				C489868F18106E0D006F47F1 /* lock.png in Resources */,
@@ -1725,6 +1744,7 @@
 				C44D36BC180F3E3600EE9F5E /* charts@2x.png in Resources */,
 				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
 				C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */,
+				0B2EDDE4197A7D9900B72109 /* vitekta.png in Resources */,
 				C44D36BD180F3E3600EE9F5E /* combi.png in Resources */,
 				C48B9BFA18094972007CF6DE /* Default-1024h.png in Resources */,
 				C44D36DF180F3E5000EE9F5E /* sideeffects.png in Resources */,
@@ -1747,6 +1767,7 @@
 				0B6E0ACA19711D5900D80FA6 /* backup.png in Resources */,
 				C48B9BF618094972007CF6DE /* Default-480h@2x.png in Resources */,
 				0B6E0ACC19711D5900D80FA6 /* question.png in Resources */,
+				0B2EDDD9197A78F600B72109 /* triumeq@2x.png in Resources */,
 				0B35BF981944681200341AFB /* stop.png in Resources */,
 				0B35BF9D19446A1800341AFB /* results-icon@2x.png in Resources */,
 				C48B9BF918094972007CF6DE /* Default-768h@2x.png in Resources */,
@@ -1765,6 +1786,7 @@
 				0B89110218F93CA500A49B95 /* norvir.png in Resources */,
 				0B35BF841944681200341AFB /* charts-icon.png in Resources */,
 				C44D36D8180F3E5000EE9F5E /* menu@2x.png in Resources */,
+				0B2EDDD8197A78F600B72109 /* triumeq.png in Resources */,
 				0B8910F518F93CA500A49B95 /* complera.png in Resources */,
 				0B89110E18F93CA500A49B95 /* trizivir.png in Resources */,
 				0B89111118F93CA500A49B95 /* viracept.png in Resources */,
@@ -1786,7 +1808,9 @@
 				0B6E0ACB19711D5900D80FA6 /* backup@2x.png in Resources */,
 				0B89110C18F93CA500A49B95 /* tivicay@2x.png in Resources */,
 				C481FD2C17FDEE540058EE9D /* icon_40_flat.png in Resources */,
+				0B2EDDE5197A7D9900B72109 /* vitekta@2x.png in Resources */,
 				0B35BF881944681200341AFB /* cross-icon.png in Resources */,
+				0B2EDDE3197A7D9900B72109 /* tybost@2x.png in Resources */,
 				C481FD2217FDEBDE0058EE9D /* icon_72_flat.png in Resources */,
 				0B89110718F93CA500A49B95 /* stavudine.png in Resources */,
 				C44D36BB180F3E3600EE9F5E /* charts.png in Resources */,

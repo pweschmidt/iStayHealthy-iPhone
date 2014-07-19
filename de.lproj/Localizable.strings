@@ -36,11 +36,11 @@
 "Start Date" = "Vom";
 "Combination Tablet" = "Kombinationspräparat";
 "Combination Tablets" = "Kombinationspräparate";
-"Fusion/Entry Inhibitors" = "Entry-Inhibitoren";
-"Integrase Inhibitors" = "Integrase-Inhibitoren";
+"Fusion/Entry Inhibitors" = "Entry-Hemmer";
+"Integrase Inhibitors" = "Integrase-Hemmer";
 "non-Nucleoside Reverse Transcriptase Inhibitors" = "Nicht-Nukleosidale Reverse-Transkriptase-Inhibitoren (NNRTI)";
 "Nucleos(t)ide Reverse Transcriptase Inhibitors" = "Nukleosidanaloge/Nukleotidanaloge Reverse-Transkriptase-Inhibitoren (NRTI)";
-"Protease Inhibitors" = "Protease-Inhibitoren (PI)";
+"Protease Inhibitors" = "Protease-Hemmer (PI)";
 "Not Listed Above" = "Nicht in Liste";
 "Drug Name" = "Medikament";
 "Enter Name" = "Namenseingabe";
@@ -324,3 +324,7 @@
 "You reset your password" = "Dass Kennwort wurde gelöscht. Es kann in den Einstellungen neu gesetzt werden.";
 "Can't see your data?" = "Keine Daten sichtbar?";
 "Try this. Exit app. Go to Settings on Home Screen. Select iCloud Option. In there go to Documents and Data. See that iStayHealthy is set to On." = "Versuch folgendes: app schliessen. Öffne Einstellungen auf dem Home Screen. iCloud Option auswählen. Darin die Sektion Dokumente und Daten auswählen. iStayHealthy sollte auf On sein.";
+"Medication Diary" = "Med. Tagebuch";
+"Other Medication" = "Allg. Med.";
+"Procedures" = "Procedures";
+"Clinics" = "Ärzte/Praxen";

@@ -269,7 +269,9 @@
 
 	NSString *imageName = [description objectAtIndex:3];
 	NSString *path = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
-
+#ifdef APPDEBUG
+	NSLog(@"IMAGE NAME IS %@ - with path at %@", imageName, path);
+#endif
 	UIImageView *imageView = [[UIImageView alloc]init];
 	imageView.backgroundColor = [UIColor clearColor];
 	imageView.frame = CGRectMake(20, 3, 55, 55);

@@ -45,6 +45,12 @@
 		<string>truvada</string>
 	</array>
 	<array>
+		<string>Lamivudine, Dolutegravir, Abacavir</string>
+		<string>Triumeq</string>
+		<string>Integrase Inhibitor, NRTI, NRTI</string>
+		<string>triumeq</string>
+	</array>
+	<array>
 		<string>Elvitegravir, Tenofovir, Emtricitabine, Cobicistat</string>
 		<string>Stribild</string>
 		<string>NRTI, NRTI, Integrase Inhibitor, Booster</string>
