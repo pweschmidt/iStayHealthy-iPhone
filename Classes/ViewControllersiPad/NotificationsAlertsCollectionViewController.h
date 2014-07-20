@@ -7,7 +7,8 @@
 //
 
 #import "BaseCollectionViewController.h"
+#import "NotificationsDelegate.h"
 
-@interface NotificationsAlertsCollectionViewController : BaseCollectionViewController
+@interface NotificationsAlertsCollectionViewController : BaseCollectionViewController <NotificationsDelegate>
 
 @end
