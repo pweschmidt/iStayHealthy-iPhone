@@ -14,8 +14,8 @@
 "Results Date" = "Werte vom";
 "Yes" = "Ja";
 "No" = "Nein";
-"Current HIV Drugs" = "Aktuelle HIV Therapie";
-"Edit HIV Drugs" = "HIV Therapie Bearbeiten";
+"Current HIV Drugs" = "Aktuelle Antivirale Med.";
+"Edit HIV Drugs" = "Therapie Bearbeiten";
 "Missed a dose of" = "Versäumte Dosis";
 "Enter Date" = "Datumseingabe";
 "Enter Number" = "Werteeingabe";
@@ -74,7 +74,7 @@
 "POZ Magazine" = "Deutsche AIDS-Hilfe";
 "Charts" = "Überblick";
 "Results" = "Werte";
-"HIV Drugs" = "HIV Behandlung";
+"HIV Drugs" = "Antivirale Med.";
 "Alerts" = "Wecker";
 "Other Meds" = "Allg. Med.";
 "Backup" = "Sichern";
@@ -129,7 +129,7 @@
 "Set" = "Eingabe";
 "Viral Load HepC" = "Hep. C Viruslast";
 "Glossary" = "Hilfe/Links";
-"Manage HIV Drugs" = "HIV Medikamente";
+"Manage HIV Drugs" = "Antivirale Med.";
 "Password too short" = "Kennwort ist zu kurz";
 "Try Again" = "Nochmal versuchen";
 "Confirm" = "Bestätigen";
@@ -328,7 +328,7 @@
 "Other Medication" = "Allg. Med.";
 "Procedures" = "Krankheiten/OPs";
 "Clinics" = "Ärzte/Praxen";
-"HIV Medications" = "Antivirus Therapien";
+"HIV Medications" = "Antivirale Therapien";
 "Missed Meds" = "Versäumte Med.";
 "Boosters/Inteferon" = "Booster/Inteferon";
 "Other Inhibitors" = "Allg. Hemmer";

@@ -18,13 +18,15 @@
 @interface NotificationsAlertsCollectionViewController ()
 @property (nonatomic, strong) NSArray *notifications;
 @property (nonatomic, strong) UILocalNotification *markedNotification;
+@property (nonatomic, strong) NSMutableArray *counterArray;
 @end
 
 @implementation NotificationsAlertsCollectionViewController
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.notifications = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];
+	self.counterArray = [NSMutableArray array];
+	[self retrieveLocalNotifications];
 	[self setTitleViewWithTitle:NSLocalizedString(@"Alerts", nil)];
 	self.markedNotification = nil;
 	[self.collectionView registerClass:[BaseCollectionViewCell class]
@@ -71,6 +73,12 @@
 
 		TimeView_iPad *view = [TimeView_iPad viewWithNotification:notification frame:CGRectMake(0, 2, 150, 130)];
 		[view startTimer];
+		NSInteger tag = indexPath.row * 100;
+		if (![self.counterArray containsObject:view])
+		{
+			view.tag = tag;
+			[self.counterArray addObject:view];
+		}
 		[cell addView:view];
 	}
 	return cell;
@@ -105,6 +113,34 @@
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
+}
+
+- (void)retrieveLocalNotifications
+{
+	self.notifications = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];
+}
+
+- (void)restartCounters
+{
+	if (nil == self.counterArray || 0 == self.counterArray.count)
+	{
+		return;
+	}
+	[self.counterArray enumerateObjectsUsingBlock: ^(TimeCounter *counter, NSUInteger idx, BOOL *stop) {
+	    [counter startTimer];
+	}];
+}
+
+#pragma mark NotificationsDelegate methods
+- (void)updateLocalNotifications
+{
+	[self retrieveLocalNotifications];
+	[self.collectionView reloadData];
+}
+
+- (void)restartTimer
+{
+//	[self restartCounters];
 }
 
 @end
