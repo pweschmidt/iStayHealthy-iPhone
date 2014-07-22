@@ -204,7 +204,7 @@
 	label.textColor = TEXTCOLOUR;
 	label.textAlignment = NSTextAlignmentCenter;
 	label.font = [UIFont systemFontOfSize:15];
-	self.passwordSwitch.frame = CGRectMake(180, 2, 80, 36);
+	self.passwordSwitch.frame = CGRectMake(180, 4, 80, 36);
 	[headerView addSubview:label];
 	[headerView addSubview:self.passwordSwitch];
 	return headerView;
