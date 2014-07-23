@@ -335,7 +335,7 @@
 {
 	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
 
-	if (nil == self.tappedLayer || [title isEqualToString:@"Cancel"])
+	if (nil == self.tappedLayer || [title isEqualToString:NSLocalizedString(@"Cancel", nil)])
 	{
 		return;
 	}
@@ -345,13 +345,13 @@
 	NSInteger day = [self.layers indexOfObject:self.tappedLayer] + self.seinfeldMonth.startDay;
 
 	BOOL hasTakenMeds = NO;
-	if ([title isEqualToString:@"Yes"])
+	if ([title isEqualToString:NSLocalizedString(@"Yes", nil)])
 	{
 		[self addBackgroundLayerForDay:day colour:DARK_GREEN tappedLayer:tappedLayer];
 		hasTakenMeds = YES;
 		[self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
 	}
-	else if ([title isEqualToString:@"No"])
+	else if ([title isEqualToString:NSLocalizedString(@"No", nil)])
 	{
 		[self addBackgroundLayerForDay:day colour:DARK_RED tappedLayer:tappedLayer];
 		hasTakenMeds = NO;

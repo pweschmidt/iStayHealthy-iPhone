@@ -60,7 +60,13 @@
 	titleLabel.backgroundColor  = [UIColor clearColor];
 	titleLabel.font             = font;
 	NSDictionary *typeDictionary = [Utilities resultsTypeDictionary];
-	titleLabel.text             = [typeDictionary objectForKey:tuple.type];
+	NSString *resultType = [typeDictionary objectForKey:tuple.type];
+	if (nil == resultType)
+	{
+		resultType = @"";
+	}
+	NSString *localizedType = NSLocalizedString(resultType, nil);
+	titleLabel.text             = localizedType;
 	[titleView addSubview:titleLabel];
 	NSDictionary *colourDictionary = [Utilities colourTypeDictionary];
 	titleLabel.textColor        = [colourDictionary objectForKey:tuple.type];

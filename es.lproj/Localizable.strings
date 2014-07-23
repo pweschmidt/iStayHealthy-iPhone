@@ -331,3 +331,16 @@
 "Missed Meds" = "Med. Perdidas";
 "Boosters/Inteferon" = "Amplificador/Interferón";
 "Other Inhibitors" = "Otros Inhibidores";
+"CD4AndVL" = "CD4, Carga Viral";
+"CD4PercentAndVL" = "CD4%, Carga Viral";
+"Reason is missing" = "Falta motivo";
+"Please select a reason" = "Por favor seleccione un motivo";
+"Med is missing" = "Faltan medicamentos";
+"Please select a medication" = "Por favor seleccione un medicamento";
+"No changes" = "Sin cambios";
+"There are no changes to your settings" = "No existen cambios a la configuración";
+"Dashboard" = "Sumario";
+"Your dashboard settings changed" = "Su configuración Sumario cambiada";
+"Select Unit" = "Seleccione unidad";
+"Nothing to save" = "Sin cambios";
+"There is nothing to save" = "No existen cambios a la configuración";
