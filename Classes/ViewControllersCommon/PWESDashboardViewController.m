@@ -49,8 +49,7 @@
 	else
 	{
 		selected = (NSMutableArray *)@[kCD4AndVL,
-		                               kCD4PercentAndVL,
-		                               kTotalCholesterol];
+		                               kCD4PercentAndVL];
 	}
 	[self selectedCharts:selected];
 //    [self configureScrollViewIsRotated:NO];

@@ -332,3 +332,16 @@
 "Missed Meds" = "Versäumte Med.";
 "Boosters/Inteferon" = "Booster/Inteferon";
 "Other Inhibitors" = "Allg. Hemmer";
+"CD4AndVL" = "CD4, Viruslast";
+"CD4PercentAndVL" = "CD4%, Viruslast";
+"Reason is missing" = "Kein Grund Angegeben";
+"Please select a reason" = "Bitte einen Grund auswählen.";
+"Med is missing" = "Keine Medikamente Angegeben";
+"Please select a medication" = "Bitte ein Medikament auswählen";
+"No changes" = "Keine Änderungen";
+"There are no changes to your settings" = "Die Einstellungen sind unverändert";
+"Dashboard" = "Übersicht";
+"Your dashboard settings changed" = "Die Übersicht Einstellungen wurden geändert";
+"Select Unit" = "Einheiten auswählen";
+"Nothing to save" = "Keine Änderungen";
+"There is nothing to save" = "Es gibt keine Änderungen";

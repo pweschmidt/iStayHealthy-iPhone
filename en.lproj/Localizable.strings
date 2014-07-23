@@ -326,3 +326,16 @@
 "Missed Meds" = "Missed Meds";
 "Boosters/Inteferon" = "Boosters/Inteferon";
 "Other Inhibitors" = "Other Inhibitors";
+"CD4AndVL" = "CD4, Viral Load";
+"CD4PercentAndVL" = "CD4%, Viral Load";
+"Reason is missing" = "Reason is missing";
+"Please select a reason" = "Please select a reason";
+"Med is missing" = "Med is missing";
+"Please select a medication" = "Please select a medication";
+"No changes" = "No changes";
+"There are no changes to your settings" = "There are no changes to your settings";
+"Dashboard" = "Dashboard";
+"Your dashboard settings changed" = "Your dashboard settings changed";
+"Select Unit" = "Select Unit";
+"Nothing to save" = "Nothing to save";
+"There is nothing to save" = "There is nothing to save";
