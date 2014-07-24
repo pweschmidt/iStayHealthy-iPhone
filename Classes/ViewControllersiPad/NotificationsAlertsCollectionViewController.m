@@ -41,6 +41,7 @@
 - (void)addButtonPressed:(id)sender
 {
 	EditAlertsTableViewController *editController = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+	editController.notificationsDelegate = self;
 	editController.preferredContentSize = CGSizeMake(320, 568);
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -90,6 +91,7 @@
 	                                                            objectAtIndex:indexPath.row];
 	EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc] initWithStyle:UITableViewStyleGrouped
 	                                                                               localNotification:notification];
+	controller.notificationsDelegate = self;
 	controller.preferredContentSize = CGSizeMake(320, 568);
 	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:controller];
 	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
