@@ -32,9 +32,6 @@
 
     [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: TEXTCOLOUR, NSFontAttributeName : [UIFont fontWithType:Standard size:17] }];
 
-    [[UISegmentedControl appearance] setTintColor:TINTCOLOUR];
-    [[UISwitch appearance] setOnTintColor:TINTCOLOUR];
-
     self.window.tintColor = TINTCOLOUR;
     self.containerController = self.window.rootViewController;
     [[CoreDataManager sharedInstance] setUpCoreDataManager];
