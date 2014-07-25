@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
     [self registerObservers];
-    self.navigationController.navigationBar.tintColor = DARK_BLUE;
+    self.navigationController.navigationBar.tintColor = TEXTCOLOUR;
     self.settingMenuShown = NO;
     self.customPopoverController = nil;
     self.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -155,51 +155,51 @@
 - (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter]
-         addObserver:self
-            selector:@selector(reloadSQLData:)
-                name:kLoadedStoreNotificationKey
-              object:nil];
+     addObserver:self
+        selector:@selector(reloadSQLData:)
+            name:kLoadedStoreNotificationKey
+          object:nil];
 
     [[NSNotificationCenter defaultCenter]
-         addObserver:self
-            selector:@selector(handleError:)
-                name:kErrorStoreNotificationKey
-              object:nil];
+     addObserver:self
+        selector:@selector(handleError:)
+            name:kErrorStoreNotificationKey
+          object:nil];
 
     [[NSNotificationCenter defaultCenter]
-         addObserver:self
-            selector:@selector(handleStoreChanged:)
-                name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-              object:nil];
+     addObserver:self
+        selector:@selector(handleStoreChanged:)
+            name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+          object:nil];
 
     [[NSNotificationCenter defaultCenter]
-         addObserver:self
-            selector:@selector(reloadSQLData:)
-                name:NSManagedObjectContextDidSaveNotification
-              object:nil];
+     addObserver:self
+        selector:@selector(reloadSQLData:)
+            name:NSManagedObjectContextDidSaveNotification
+          object:nil];
 }
 
 - (void)unregisterObservers
 {
     [[NSNotificationCenter defaultCenter]
-         removeObserver:self
-                   name:kLoadedStoreNotificationKey
-                 object:nil];
+     removeObserver:self
+               name:kLoadedStoreNotificationKey
+             object:nil];
 
     [[NSNotificationCenter defaultCenter]
-         removeObserver:self
-                   name:kErrorStoreNotificationKey
-                 object:nil];
+     removeObserver:self
+               name:kErrorStoreNotificationKey
+             object:nil];
 
     [[NSNotificationCenter defaultCenter]
-         removeObserver:self
-                   name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-                 object:nil];
+     removeObserver:self
+               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+             object:nil];
 
     [[NSNotificationCenter defaultCenter]
-         removeObserver:self
-                   name:NSManagedObjectContextDidSaveNotification
-                 object:nil];
+     removeObserver:self
+               name:NSManagedObjectContextDidSaveNotification
+             object:nil];
 }
 
 - (void)settingsMenu
@@ -266,8 +266,8 @@
 
     [button addSubview:titleLabel];
     [button addTarget:self
-                   action:@selector(goToPOZSite)
-         forControlEvents:UIControlEventTouchUpInside];
+               action:@selector(goToPOZSite)
+     forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:button];
     self.navigationItem.titleView = titleView;
 }
@@ -379,9 +379,9 @@
                  if (writeError)
                  {
                      [[[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                              show];
+                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                      show];
                  }
                  else
                  {

@@ -52,7 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = DARK_BLUE;
+    self.navigationController.navigationBar.tintColor = TEXTCOLOUR;
     cellWidth = self.tableView.bounds.size.width;
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     NSArray *barButtons = nil;
@@ -312,15 +312,15 @@
 
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations: ^{
          [self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, PWESCustomTextfieldCell *cell, BOOL *stop) {
-                  if (textField != cell.inputField)
-                  {
-                      [cell shade];
-                  }
-                  else
-                  {
-                      [cell partialShade];
-                  }
-              }];
+              if (textField != cell.inputField)
+              {
+                  [cell shade];
+              }
+              else
+              {
+                  [cell partialShade];
+              }
+          }];
      } completion:nil];
 }
 
@@ -328,8 +328,8 @@
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations: ^{
          [self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, PWESCustomTextfieldCell *cell, BOOL *stop) {
-                  [cell unshade];
-              }];
+              [cell unshade];
+          }];
      } completion:nil];
 }
 
@@ -479,8 +479,8 @@
         datePicker.tag = kBaseDateCellTag;
 //        datePicker.datePickerMode = UIDatePickerModeDate;
         [datePicker addTarget:self
-                           action:@selector(dateAction:)
-                 forControlEvents:UIControlEventValueChanged];
+                       action:@selector(dateAction:)
+             forControlEvents:UIControlEventValueChanged];
         [checkDatePickerCell.contentView addSubview:datePicker];
 
         if (nil != datePicker)
