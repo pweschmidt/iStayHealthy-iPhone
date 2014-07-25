@@ -20,7 +20,7 @@
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
-#import "CoreCSVWriter.h"
+#import "CoreXMLWriter.h"
 
 #define kHeaderViewIdentifier @"CollectionHeaderViewIdentifier"
 
@@ -363,29 +363,62 @@
 	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
 	if (hasAttachment)
 	{
-		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
-		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
-		    dispatch_async(dispatch_get_main_queue(), ^{
-		        if (nil != csvString)
-		        {
-		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
-				}
-		        else
+		CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+		NSString *dataPath = [self uploadFileTmpPath];
+
+		[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+		    if (nil != xmlString)
+		    {
+		        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+		        NSError *writeError = nil;
+		        [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
+		        if (writeError)
 		        {
 		            [[[UIAlertView alloc]
-		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
+		              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
 		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 		             show];
 				}
-		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-			});
+		        else
+		        {
+		            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+
+		            mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+		            mailController.mailComposeDelegate = self;
+		            [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
+		            [mailController setSubject:@"iStayHealthy Data (attached)"];
+		            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+				}
+			}
 		}];
+//		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
+//		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
+//		    dispatch_async(dispatch_get_main_queue(), ^{
+//		        if (nil != csvString)
+//		        {
+//		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
+//		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
+//				}
+//		        else
+//		        {
+//		            [[[UIAlertView alloc]
+//		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
+//		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+//		             show];
+//				}
+//		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
+//			});
+//		}];
 	}
 	else
 	{
 		[self.navigationController presentViewController:mailController animated:YES completion:nil];
 	}
+}
+
+- (NSString *)uploadFileTmpPath
+{
+	return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];
 }
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
