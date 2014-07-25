@@ -7,6 +7,7 @@
 //
 
 #import "EmailViewController.h"
+#import "CoreXMLWriter.h"
 #import "ContentNavigationController.h"
 
 @interface EmailViewController ()
@@ -96,17 +97,50 @@
 
 - (void)startMailController
 {
-	MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-	mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-	mailController.mailComposeDelegate = self;
-	self.mailController = mailController;
-	[mailController setSubject:@"iStayHealthy Data (attached)"];
-	self.mailController = mailController;
-	//    [mailController setMessageBody:msgBody isHTML:NO];
-	//    [mailController addAttachmentData:xmlData mimeType:@"text/xml" fileName:tmpXMLFile];
-	ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-	[navController showMailController:mailController];
-//	[self.navigationController presentViewController:mailController animated:YES completion:nil];
+	CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+	NSString *dataPath = [self uploadFileTmpPath];
+
+	[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+	    if (nil != xmlString)
+	    {
+	        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+	        NSError *writeError = nil;
+	        [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
+	        if (writeError)
+	        {
+	            [[[UIAlertView alloc]
+	              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+	                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+	             show];
+			}
+	        else
+	        {
+	            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+
+	            mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+	            mailController.mailComposeDelegate = self;
+	            [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
+	            self.mailController = mailController;
+	            [mailController setSubject:@"iStayHealthy Data (attached)"];
+	            self.mailController = mailController;
+	            ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
+	            [navController showMailController:mailController];
+			}
+		}
+	}];
+//	MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+//	mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+//	mailController.mailComposeDelegate = self;
+//	self.mailController = mailController;
+//	[mailController setSubject:@"iStayHealthy Data (attached)"];
+//	self.mailController = mailController;
+//	ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
+//	[navController showMailController:mailController];
+}
+
+- (NSString *)uploadFileTmpPath
+{
+	return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];
 }
 
 - (void)startFeedbackController
@@ -131,7 +165,6 @@
 		ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
 		[navController hideMailController:self.mailController];
 	}
-//	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

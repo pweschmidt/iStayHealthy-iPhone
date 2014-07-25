@@ -36,6 +36,7 @@ static NSDictionary *helpSubjects()
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	self.navigationItem.title = NSLocalizedString(@"Help", nil);
 	self.view.backgroundColor = DEFAULT_BACKGROUND;
 	__block CGFloat offset = 75;
 	NSDictionary *subjects = helpSubjects();
