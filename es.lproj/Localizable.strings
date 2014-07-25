@@ -205,6 +205,7 @@
 "Enter Effect" = "Editar";
 "CD4" = "CD4";
 "ResultsDate" = "Fecha";
+"ViralLoad" = "Carga Viral";
 "CD4Percent" = "CD4 %";
 "HepCViralLoad" = "CV (HepC)";
 "Glucose" = "Glicemia";
@@ -345,3 +346,9 @@
 "Nothing to save" = "Sin cambios";
 "There is nothing to save" = "No existen cambios a la configuración";
 "Help" = "Sugerencia";
+"HIV" = "VIH";
+"Bloods" = "Sangre";
+"Cells" = "Células";
+"Other" = "Otro";
+"Liver" = "Hígado";
+"VL" = "CV";
