@@ -73,6 +73,8 @@
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
 		0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */; };
 		0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */; };
+		0B4CE7351983B528009E9B16 /* icon_29_rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4CE7331983B528009E9B16 /* icon_29_rounded.png */; };
+		0B4CE7361983B528009E9B16 /* icon_29_rounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4CE7341983B528009E9B16 /* icon_29_rounded@2x.png */; };
 		0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
 		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
@@ -445,6 +447,8 @@
 		0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsCollectionViewController.m; path = ViewControllersiPad/ResultsCollectionViewController.m; sourceTree = "<group>"; };
 		0B4C3B1C18B8E77300BF3BB5 /* ContentNavigationController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentNavigationController_iPad.h; path = ViewControllersiPad/ContentNavigationController_iPad.h; sourceTree = "<group>"; };
 		0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentNavigationController_iPad.m; path = ViewControllersiPad/ContentNavigationController_iPad.m; sourceTree = "<group>"; };
+		0B4CE7331983B528009E9B16 /* icon_29_rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_29_rounded.png; path = Classes/Assets/icon_29_rounded.png; sourceTree = "<group>"; };
+		0B4CE7341983B528009E9B16 /* icon_29_rounded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_29_rounded@2x.png"; path = "Classes/Assets/icon_29_rounded@2x.png"; sourceTree = "<group>"; };
 		0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeCounterTests.m; sourceTree = "<group>"; };
 		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
 		0B6048521840D12B0092B5FB /* PWESDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataManager.m; path = Dashboard/PWESDataManager.m; sourceTree = "<group>"; };
@@ -1354,6 +1358,8 @@
 		C47DB23817AD43B80037A6DF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0B4CE7331983B528009E9B16 /* icon_29_rounded.png */,
+				0B4CE7341983B528009E9B16 /* icon_29_rounded@2x.png */,
 				0B2EDDCD197A6AEC00B72109 /* charts-barbutton.png */,
 				0B2EDDCE197A6AEC00B72109 /* charts-barbutton@2x.png */,
 				0B6E0AC619711D5900D80FA6 /* backup.png */,
@@ -1831,6 +1837,7 @@
 				0B8910F118F93CA500A49B95 /* aptivus.png in Resources */,
 				C44D36B9180F3E3600EE9F5E /* cancel.png in Resources */,
 				0B89110D18F93CA500A49B95 /* triomune.png in Resources */,
+				0B4CE7361983B528009E9B16 /* icon_29_rounded@2x.png in Resources */,
 				0B35BF901944681200341AFB /* missed-icon.png in Resources */,
 				0B6E0ACA19711D5900D80FA6 /* backup.png in Resources */,
 				C48B9BF618094972007CF6DE /* Default-480h@2x.png in Resources */,
@@ -1913,6 +1920,7 @@
 				C4C41A3C15F1445400882416 /* ringtone2.caf in Resources */,
 				C44D36DB180F3E5000EE9F5E /* procedure.png in Resources */,
 				C4C41A3D15F1445400882416 /* xylophone.caf in Resources */,
+				0B4CE7351983B528009E9B16 /* icon_29_rounded.png in Resources */,
 				0B35BF991944681200341AFB /* stop@2x.png in Resources */,
 				C489868D18106E0D006F47F1 /* info.png in Resources */,
 				0B89110918F93CA500A49B95 /* sustiva.png in Resources */,
