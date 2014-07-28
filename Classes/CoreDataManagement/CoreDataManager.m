@@ -105,6 +105,94 @@
 	[self setDefaultContext:mainContext];
 }
 
+- (void)switchStoreWithCompletionBlock:(iStayHealthyErrorBlock)completionBlock
+{
+	//first find out which store we have
+	if (nil == self.persistentStoreCoordinator)
+	{
+		if (nil != completionBlock)
+		{
+			NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: NSLocalizedString(@"The data storage is not configured", nil) };
+			NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:100 userInfo:userInfo];
+			completionBlock(error);
+		}
+		return;
+	}
+
+	NSURL *mainURL = [[self applicationDocumentsDirectory]
+	                  URLByAppendingPathComponent:kPersistentMainStore];
+	NSURL *fallbackURL = [[self applicationDocumentsDirectory]
+	                      URLByAppendingPathComponent:kPersistentFallbackStore];
+
+	NSPersistentStore *store = [self.persistentStoreCoordinator persistentStoreForURL:mainURL];
+	BOOL isICloud = YES;
+	if (nil == store)
+	{
+		store = [self.persistentStoreCoordinator persistentStoreForURL:fallbackURL];
+		isICloud = NO;
+	}
+
+	if (nil == store)
+	{
+		if (nil != completionBlock)
+		{
+			NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: NSLocalizedString(@"There is no data storage present", nil) };
+			NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:200 userInfo:userInfo];
+			completionBlock(error);
+		}
+		return;
+	}
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (nil != completionBlock)
+		{
+			completionBlock(saveError);
+		}
+		return;
+	}
+
+	NSError *storeError = nil;
+	[self.persistentStoreCoordinator removePersistentStore:store error:&storeError];
+	if (nil != storeError)
+	{
+		if (nil != completionBlock)
+		{
+			completionBlock(storeError);
+		}
+		return;
+	}
+
+	NSError *addStoreError = nil;
+	NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
+	NSDictionary *defaultStoreOptions = [CoreDataUtils localStoreOptions];
+	if (!isICloud)
+	{
+		//try to switch to iCloud store
+		if (self.iCloudIsAvailable && self.iCloudEnabled)
+		{
+			[self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:mainURL options:iCloudOptions error:&addStoreError];
+		}
+		else
+		{
+			[self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:fallbackURL options:defaultStoreOptions error:&addStoreError];
+		}
+	}
+	else
+	{
+		[self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:fallbackURL options:defaultStoreOptions error:&addStoreError];
+	}
+	completionBlock(addStoreError);
+	if (nil == addStoreError)
+	{
+		NSNotification *notification = [NSNotification
+		                                notificationWithName:kLoadedStoreNotificationKey
+		                                              object:self];
+		[[NSNotificationCenter defaultCenter] postNotification:notification];
+	}
+}
+
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error
 {
 	dispatch_async(storeQueue, ^{
@@ -503,24 +591,24 @@
 	}
 
 	void (^savePrivateContext) (void) = ^{
-        [privateContext save:error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-                if (nil != xmlString)
-                {
-                    NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-                    NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
-                    NSFileManager *manager = [NSFileManager defaultManager];
-                    if ([manager fileExistsAtPath:[path path]])
-                    {
-                        NSError *removeError = nil;
-                        [manager removeItemAtURL:path error:&removeError];
-                    }
-                    [xmlData writeToURL:path atomically:YES];
-                }
-            }];
-        });
-    };
+		[privateContext save:error];
+		dispatch_async(dispatch_get_main_queue(), ^{
+		    [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+		        if (nil != xmlString)
+		        {
+		            NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+		            NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
+		            NSFileManager *manager = [NSFileManager defaultManager];
+		            if ([manager fileExistsAtPath:[path path]])
+		            {
+		                NSError *removeError = nil;
+		                [manager removeItemAtURL:path error:&removeError];
+					}
+		            [xmlData writeToURL:path atomically:YES];
+				}
+			}];
+		});
+	};
 
 	if ([privateContext hasChanges])
 	{

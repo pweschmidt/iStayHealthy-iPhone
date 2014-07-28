@@ -28,6 +28,8 @@
 
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error;
 
+- (void)switchStoreWithCompletionBlock:(iStayHealthyErrorBlock)completionBlock;
+
 - (BOOL)saveContextAndWait:(NSError **)error;
 
 - (BOOL)saveAndBackup:(NSError **)error;
