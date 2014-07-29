@@ -42,6 +42,19 @@
 	        NSPersistentStoreUbiquitousContentURLKey, nil];
 }
 
++ (NSDictionary *)noiCloudStoreOptions
+{
+	NSDictionary *options = [[self class] iCloudStoreOptions];
+	if (nil == options)
+	{
+		return nil;
+	}
+	NSMutableDictionary *noniCloud = [NSMutableDictionary dictionaryWithDictionary:options];
+	[noniCloud setObject:@(YES) forKey:NSPersistentStoreRemoveUbiquitousMetadataOption];
+
+	return (NSDictionary *)noniCloud;
+}
+
 + (NSDictionary *)newiCloudStoreOptions
 {
 	NSFileManager *fileManager = [[NSFileManager alloc] init];

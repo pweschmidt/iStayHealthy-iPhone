@@ -26,9 +26,15 @@
 
 - (void)migrateToNewiCloudStore:(iStayHealthySuccessBlock)error;
 
+- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
+
+- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock;
+
+- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
+
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error;
 
-- (void)switchStoreWithCompletionBlock:(iStayHealthyErrorBlock)completionBlock;
+- (void)resetContextsAndWait;
 
 - (BOOL)saveContextAndWait:(NSError **)error;
 

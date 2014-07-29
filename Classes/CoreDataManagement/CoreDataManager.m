@@ -105,94 +105,6 @@
 	[self setDefaultContext:mainContext];
 }
 
-- (void)switchStoreWithCompletionBlock:(iStayHealthyErrorBlock)completionBlock
-{
-	//first find out which store we have
-	if (nil == self.persistentStoreCoordinator)
-	{
-		if (nil != completionBlock)
-		{
-			NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: NSLocalizedString(@"The data storage is not configured", nil) };
-			NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:100 userInfo:userInfo];
-			completionBlock(error);
-		}
-		return;
-	}
-
-	NSURL *mainURL = [[self applicationDocumentsDirectory]
-	                  URLByAppendingPathComponent:kPersistentMainStore];
-	NSURL *fallbackURL = [[self applicationDocumentsDirectory]
-	                      URLByAppendingPathComponent:kPersistentFallbackStore];
-
-	NSPersistentStore *store = [self.persistentStoreCoordinator persistentStoreForURL:mainURL];
-	BOOL isICloud = YES;
-	if (nil == store)
-	{
-		store = [self.persistentStoreCoordinator persistentStoreForURL:fallbackURL];
-		isICloud = NO;
-	}
-
-	if (nil == store)
-	{
-		if (nil != completionBlock)
-		{
-			NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: NSLocalizedString(@"There is no data storage present", nil) };
-			NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:200 userInfo:userInfo];
-			completionBlock(error);
-		}
-		return;
-	}
-	NSError *saveError = nil;
-	[self saveContextAndWait:&saveError];
-	if (nil != saveError)
-	{
-		if (nil != completionBlock)
-		{
-			completionBlock(saveError);
-		}
-		return;
-	}
-
-	NSError *storeError = nil;
-	[self.persistentStoreCoordinator removePersistentStore:store error:&storeError];
-	if (nil != storeError)
-	{
-		if (nil != completionBlock)
-		{
-			completionBlock(storeError);
-		}
-		return;
-	}
-
-	NSError *addStoreError = nil;
-	NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
-	NSDictionary *defaultStoreOptions = [CoreDataUtils localStoreOptions];
-	if (!isICloud)
-	{
-		//try to switch to iCloud store
-		if (self.iCloudIsAvailable && self.iCloudEnabled)
-		{
-			[self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:mainURL options:iCloudOptions error:&addStoreError];
-		}
-		else
-		{
-			[self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:fallbackURL options:defaultStoreOptions error:&addStoreError];
-		}
-	}
-	else
-	{
-		[self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:fallbackURL options:defaultStoreOptions error:&addStoreError];
-	}
-	completionBlock(addStoreError);
-	if (nil == addStoreError)
-	{
-		NSNotification *notification = [NSNotification
-		                                notificationWithName:kLoadedStoreNotificationKey
-		                                              object:self];
-		[[NSNotificationCenter defaultCenter] postNotification:notification];
-	}
-}
-
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error
 {
 	dispatch_async(storeQueue, ^{
@@ -274,6 +186,98 @@
 			}
 		});
 	});
+}
+
+- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
+{
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, saveError);
+		}
+	}
+	NSPersistentStore *currentStore = [self currentPersistentStore];
+	if (nil == currentStore)
+	{
+		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"No data storage available", nil) };
+		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:100 userInfo:userInfo];
+		if (completionBlock)
+		{
+			completionBlock(NO, error);
+		}
+		return;
+	}
+	BOOL isAlreadyLocal = [self currentStoreIsLocal:currentStore];
+	if (isAlreadyLocal)
+	{
+		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"Store is already local", nil) };
+		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:101 userInfo:userInfo];
+		if (completionBlock)
+		{
+			completionBlock(NO, error);
+		}
+		return;
+	}
+}
+
+- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock
+{
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, saveError);
+		}
+	}
+}
+
+- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
+{
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, saveError);
+		}
+	}
+}
+
+- (BOOL)currentStoreIsLocal:(NSPersistentStore *)store
+{
+	NSURL *fallbackURL = [[self applicationDocumentsDirectory]
+	                      URLByAppendingPathComponent:kPersistentFallbackStore];
+
+	BOOL isSame = NO;
+	if ([store.URL isEqual:fallbackURL])
+	{
+		isSame = YES;
+	}
+	else if ([[store.URL path] compare:[fallbackURL path]] == NSOrderedSame)
+	{
+		isSame = YES;
+	}
+	return isSame;
+}
+
+- (NSPersistentStore *)currentPersistentStore
+{
+	if (nil == self.persistentStoreCoordinator)
+	{
+		return nil;
+	}
+	NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+	if (nil != stores && 0 < stores.count)
+	{
+		return [stores firstObject];
+	}
+	return nil;
 }
 
 - (void)storesWillChange:(NSNotification *)notification
@@ -573,6 +577,18 @@
 			completionBlock(NO, error);
 		}
 	}
+}
+
+- (void)resetContextsAndWait
+{
+	NSManagedObjectContext *context = self.defaultContext;
+	[context performBlockAndWait: ^{
+	    [context reset];
+	}];
+
+	[privateContext performBlockAndWait: ^{
+	    [privateContext reset];
+	}];
 }
 
 - (BOOL)saveContext:(BOOL)wait error:(NSError **)error
