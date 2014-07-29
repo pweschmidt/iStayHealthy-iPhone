@@ -21,6 +21,12 @@
 + (NSDictionary *)iCloudStoreOptions;
 
 /**
+   @return dictionary containing the iCloud store options with an additional to remove the ubiquity metadata.
+   This is so we can migrate the iCloud store to non-iCloud environment if users so wish
+ */
++ (NSDictionary *)noiCloudStoreOptions;
+
+/**
    we need to modify the iCloud option so that the Ubiquity path no longer contains '.'
    as opposed to Apple's very own example code
  */

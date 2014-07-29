@@ -188,6 +188,98 @@
 	});
 }
 
+- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
+{
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, saveError);
+		}
+	}
+	NSPersistentStore *currentStore = [self currentPersistentStore];
+	if (nil == currentStore)
+	{
+		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"No data storage available", nil) };
+		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:100 userInfo:userInfo];
+		if (completionBlock)
+		{
+			completionBlock(NO, error);
+		}
+		return;
+	}
+	BOOL isAlreadyLocal = [self currentStoreIsLocal:currentStore];
+	if (isAlreadyLocal)
+	{
+		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"Store is already local", nil) };
+		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:101 userInfo:userInfo];
+		if (completionBlock)
+		{
+			completionBlock(NO, error);
+		}
+		return;
+	}
+}
+
+- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock
+{
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, saveError);
+		}
+	}
+}
+
+- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
+{
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, saveError);
+		}
+	}
+}
+
+- (BOOL)currentStoreIsLocal:(NSPersistentStore *)store
+{
+	NSURL *fallbackURL = [[self applicationDocumentsDirectory]
+	                      URLByAppendingPathComponent:kPersistentFallbackStore];
+
+	BOOL isSame = NO;
+	if ([store.URL isEqual:fallbackURL])
+	{
+		isSame = YES;
+	}
+	else if ([[store.URL path] compare:[fallbackURL path]] == NSOrderedSame)
+	{
+		isSame = YES;
+	}
+	return isSame;
+}
+
+- (NSPersistentStore *)currentPersistentStore
+{
+	if (nil == self.persistentStoreCoordinator)
+	{
+		return nil;
+	}
+	NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+	if (nil != stores && 0 < stores.count)
+	{
+		return [stores firstObject];
+	}
+	return nil;
+}
+
 - (void)storesWillChange:(NSNotification *)notification
 {
 	NSError *error = nil;
@@ -487,6 +579,18 @@
 	}
 }
 
+- (void)resetContextsAndWait
+{
+	NSManagedObjectContext *context = self.defaultContext;
+	[context performBlockAndWait: ^{
+	    [context reset];
+	}];
+
+	[privateContext performBlockAndWait: ^{
+	    [privateContext reset];
+	}];
+}
+
 - (BOOL)saveContext:(BOOL)wait error:(NSError **)error
 {
 	NSManagedObjectContext *context = self.defaultContext;
@@ -503,24 +607,24 @@
 	}
 
 	void (^savePrivateContext) (void) = ^{
-        [privateContext save:error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-                if (nil != xmlString)
-                {
-                    NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-                    NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
-                    NSFileManager *manager = [NSFileManager defaultManager];
-                    if ([manager fileExistsAtPath:[path path]])
-                    {
-                        NSError *removeError = nil;
-                        [manager removeItemAtURL:path error:&removeError];
-                    }
-                    [xmlData writeToURL:path atomically:YES];
-                }
-            }];
-        });
-    };
+		[privateContext save:error];
+		dispatch_async(dispatch_get_main_queue(), ^{
+		    [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+		        if (nil != xmlString)
+		        {
+		            NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+		            NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
+		            NSFileManager *manager = [NSFileManager defaultManager];
+		            if ([manager fileExistsAtPath:[path path]])
+		            {
+		                NSError *removeError = nil;
+		                [manager removeItemAtURL:path error:&removeError];
+					}
+		            [xmlData writeToURL:path atomically:YES];
+				}
+			}];
+		});
+	};
 
 	if ([privateContext hasChanges])
 	{
