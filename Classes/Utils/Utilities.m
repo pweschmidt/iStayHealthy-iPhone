@@ -443,6 +443,19 @@
 	return isiPadIdiom;
 }
 
++ (BOOL)isSimulator
+{
+	static dispatch_once_t token;
+	static BOOL isSimulator = NO;
+	dispatch_once(&token, ^{
+	    NSString *model = [UIDevice currentDevice].model;
+	    model = [model lowercaseString];
+	    isSimulator = ([model rangeOfString:@"simulator"].location != NSNotFound);
+	});
+
+	return isSimulator;
+}
+
 + (NSString *)imageNameFromMedName:(NSString *)medName
 {
 	NSArray *stringArray = [medName componentsSeparatedByString:@"/"];

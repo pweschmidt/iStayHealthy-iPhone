@@ -165,6 +165,8 @@
 		0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771EE18F32D8C00523DF6 /* SideEffectsCollectionViewController.m */; };
 		0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */; };
 		0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */; };
+		0BC7E55F198825040017ED15 /* HelpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E55E198825040017ED15 /* HelpTableViewController.m */; };
+		0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E561198827CA0017ED15 /* LocalBackupController.m */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -587,6 +589,10 @@
 		0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAlertsCollectionViewController.m; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.m; sourceTree = "<group>"; };
 		0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPopoverDelegate.h; path = ViewControllersiPad/PWESPopoverDelegate.h; sourceTree = "<group>"; };
 		0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESToolbarDelegate.h; path = ViewControllersiPad/PWESToolbarDelegate.h; sourceTree = "<group>"; };
+		0BC7E55D198825040017ED15 /* HelpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpTableViewController.h; path = ViewControllersCommon/HelpTableViewController.h; sourceTree = "<group>"; };
+		0BC7E55E198825040017ED15 /* HelpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpTableViewController.m; path = ViewControllersCommon/HelpTableViewController.m; sourceTree = "<group>"; };
+		0BC7E560198827CA0017ED15 /* LocalBackupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalBackupController.h; path = ViewControllersCommon/LocalBackupController.h; sourceTree = "<group>"; };
+		0BC7E561198827CA0017ED15 /* LocalBackupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalBackupController.m; path = ViewControllersCommon/LocalBackupController.m; sourceTree = "<group>"; };
 		0BF338A119785D03004C3FB4 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ViewControllersCommon/HelpViewController.h; sourceTree = "<group>"; };
 		0BF338A219785D03004C3FB4 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ViewControllersCommon/HelpViewController.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1243,8 +1249,12 @@
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C42A493419795A0200194ACD /* HelpSubjects.h */,
+				0BC7E55D198825040017ED15 /* HelpTableViewController.h */,
+				0BC7E55E198825040017ED15 /* HelpTableViewController.m */,
 				0BF338A119785D03004C3FB4 /* HelpViewController.h */,
 				0BF338A219785D03004C3FB4 /* HelpViewController.m */,
+				0BC7E560198827CA0017ED15 /* LocalBackupController.h */,
+				0BC7E561198827CA0017ED15 /* LocalBackupController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
 				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
 				C46C5DE917EDA44500866DBD /* InformationTableViewController.h */,
@@ -1974,6 +1984,7 @@
 				C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */,
 				0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */,
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
+				0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */,
 				0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */,
 				0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */,
 				0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */,
@@ -2019,6 +2030,7 @@
 				0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
+				0BC7E55F198825040017ED15 /* HelpTableViewController.m in Sources */,
 				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
 				0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */,
