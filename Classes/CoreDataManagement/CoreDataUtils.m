@@ -44,15 +44,16 @@
 
 + (NSDictionary *)noiCloudStoreOptions
 {
-	NSDictionary *options = [[self class] iCloudStoreOptions];
-	if (nil == options)
-	{
-		return nil;
-	}
-	NSMutableDictionary *noniCloud = [NSMutableDictionary dictionaryWithDictionary:options];
-	[noniCloud setObject:@(YES) forKey:NSPersistentStoreRemoveUbiquitousMetadataOption];
-
-	return (NSDictionary *)noniCloud;
+	return [NSDictionary
+	        dictionaryWithObjectsAndKeys:
+	        [NSNumber numberWithBool:YES],
+	        NSMigratePersistentStoresAutomaticallyOption,
+	        [NSNumber numberWithBool:YES],
+	        NSInferMappingModelAutomaticallyOption,
+	        kUbiquitousPath,
+	        NSPersistentStoreUbiquitousContentNameKey,
+	        [NSNumber numberWithBool:@(YES)],
+	        NSPersistentStoreRemoveUbiquitousMetadataOption, nil];
 }
 
 + (NSDictionary *)newiCloudStoreOptions

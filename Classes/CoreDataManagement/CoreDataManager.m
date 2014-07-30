@@ -119,6 +119,7 @@
 	                             fileExistsAtPath:[fallbackURL absoluteString]];
 
 	    NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
+	    NSDictionary *noniCloudOptions = [CoreDataUtils noiCloudStoreOptions];
 	    NSDictionary *defaultStoreOptions = [CoreDataUtils localStoreOptions];
 
 	    NSURL *whichStoreURL = nil;
@@ -146,6 +147,7 @@
 			}
 	        else
 	        {
+	            whichOptions = noniCloudOptions;
 	            whichStoreURL = mainURL;
 			}
 		}
