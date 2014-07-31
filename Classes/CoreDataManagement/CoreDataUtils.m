@@ -12,95 +12,98 @@
 @implementation CoreDataUtils
 + (NSDictionary *)localStoreOptions
 {
-	return [NSDictionary
-	        dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
-	        NSMigratePersistentStoresAutomaticallyOption,
-	        [NSNumber numberWithBool:YES],
-	        NSInferMappingModelAutomaticallyOption, nil];
+    return [NSDictionary
+            dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
+            NSMigratePersistentStoresAutomaticallyOption,
+            [NSNumber numberWithBool:YES],
+            NSInferMappingModelAutomaticallyOption, nil];
 }
 
 + (NSDictionary *)iCloudStoreOptions
 {
-	NSFileManager *fileManager = [[NSFileManager alloc] init];
-	NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kICloudTeamID];
-	if (nil == ubiquityContainer)
-	{
-		return nil;
-	}
-	NSString *coreDataCloudContent = [[ubiquityContainer path]
-	                                  stringByAppendingPathComponent:@"data"];
-	NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-	return [NSDictionary
-	        dictionaryWithObjectsAndKeys:
-	        [NSNumber numberWithBool:YES],
-	        NSMigratePersistentStoresAutomaticallyOption,
-	        [NSNumber numberWithBool:YES],
-	        NSInferMappingModelAutomaticallyOption,
-	        kUbiquitousPath,
-	        NSPersistentStoreUbiquitousContentNameKey,
-	        amendedCloudURL,
-	        NSPersistentStoreUbiquitousContentURLKey, nil];
+//	NSFileManager *fileManager = [[NSFileManager alloc] init];
+//	NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kICloudTeamID];
+//	if (nil == ubiquityContainer)
+//	{
+//		return nil;
+//	}
+//	NSString *coreDataCloudContent = [[ubiquityContainer path]
+//	                                  stringByAppendingPathComponent:@"data"];
+//	NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+    return [NSDictionary
+            dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithBool:YES],
+            NSMigratePersistentStoresAutomaticallyOption,
+            [NSNumber numberWithBool:YES],
+            NSInferMappingModelAutomaticallyOption,
+            kUbiquitousPath,
+            NSPersistentStoreUbiquitousContentNameKey/*,
+                                                        amendedCloudURL,
+                                                        NSPersistentStoreUbiquitousContentURLKey*/, nil];
 }
 
 + (NSDictionary *)noiCloudStoreOptions
 {
-	NSDictionary *options = [[self class] iCloudStoreOptions];
-	if (nil == options)
-	{
-		return nil;
-	}
-	NSMutableDictionary *noniCloud = [NSMutableDictionary dictionaryWithDictionary:options];
-	[noniCloud setObject:@(YES) forKey:NSPersistentStoreRemoveUbiquitousMetadataOption];
+    NSDictionary *options = [[self class] iCloudStoreOptions];
 
-	return (NSDictionary *)noniCloud;
+    if (nil == options)
+    {
+        return nil;
+    }
+    NSMutableDictionary *noniCloud = [NSMutableDictionary dictionaryWithDictionary:options];
+    [noniCloud setObject:@(YES) forKey:NSPersistentStoreRemoveUbiquitousMetadataOption];
+
+    return (NSDictionary *) noniCloud;
 }
 
 + (NSDictionary *)newiCloudStoreOptions
 {
-	NSFileManager *fileManager = [[NSFileManager alloc] init];
-	NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kICloudTeamID];
-	if (nil == ubiquityContainer)
-	{
-		return nil;
-	}
-	NSString *coreDataCloudContent = [[ubiquityContainer path]
-	                                  stringByAppendingPathComponent:@"data"];
-	NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-	return [NSDictionary
-	        dictionaryWithObjectsAndKeys:
-	        [NSNumber numberWithBool:YES],
-	        NSMigratePersistentStoresAutomaticallyOption,
-	        [NSNumber numberWithBool:YES],
-	        NSInferMappingModelAutomaticallyOption,
-	        kNewUbiquitousPath,
-	        NSPersistentStoreUbiquitousContentNameKey,
-	        amendedCloudURL,
-	        NSPersistentStoreUbiquitousContentURLKey, nil];
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:kICloudTeamID];
+
+    if (nil == ubiquityContainer)
+    {
+        return nil;
+    }
+    NSString *coreDataCloudContent = [[ubiquityContainer path]
+                                      stringByAppendingPathComponent:@"data"];
+    NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+    return [NSDictionary
+            dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithBool:YES],
+            NSMigratePersistentStoresAutomaticallyOption,
+            [NSNumber numberWithBool:YES],
+            NSInferMappingModelAutomaticallyOption,
+            kNewUbiquitousPath,
+            NSPersistentStoreUbiquitousContentNameKey,
+            amendedCloudURL,
+            NSPersistentStoreUbiquitousContentURLKey, nil];
 }
 
 + (void)archiveUbiquityToken:(id)token
 {
-	if (nil == token)
-	{
-		[CoreDataUtils dropUbiquityToken];
-		return;
-	}
-	NSData *currentTokenData = [NSKeyedArchiver archivedDataWithRootObject:token];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:currentTokenData forKey:kUbiquityTokenKey];
-	[defaults synchronize];
+    if (nil == token)
+    {
+        [CoreDataUtils dropUbiquityToken];
+        return;
+    }
+    NSData *currentTokenData = [NSKeyedArchiver archivedDataWithRootObject:token];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:currentTokenData forKey:kUbiquityTokenKey];
+    [defaults synchronize];
 }
 
 + (id)ubiquityTokenFromArchive
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSData *formerTokenData = [defaults objectForKey:kUbiquityTokenKey];
-	return [NSKeyedUnarchiver unarchiveObjectWithData:formerTokenData];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *formerTokenData = [defaults objectForKey:kUbiquityTokenKey];
+
+    return [NSKeyedUnarchiver unarchiveObjectWithData:formerTokenData];
 }
 
 + (void)dropUbiquityToken
 {
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kUbiquityTokenKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUbiquityTokenKey];
 }
 
 @end
