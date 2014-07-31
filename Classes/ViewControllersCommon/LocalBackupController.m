@@ -56,6 +56,7 @@
 	cell.contentView.backgroundColor = [UIColor whiteColor];
 	cell.textLabel.textColor = TEXTCOLOUR;
 	cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	if (0 == indexPath.section)
 	{
 		cell.textLabel.text = NSLocalizedString(@"Save locally", nil);

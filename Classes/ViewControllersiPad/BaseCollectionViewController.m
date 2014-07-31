@@ -22,6 +22,7 @@
 #import "EmailViewController.h"
 #import "CoreXMLWriter.h"
 #import "HelpTableViewController.h"
+#import "LocalBackupController.h"
 
 #define kHeaderViewIdentifier @"CollectionHeaderViewIdentifier"
 
@@ -451,6 +452,13 @@
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
 	HelpTableViewController *controller = [[HelpTableViewController alloc] initAsPopoverController];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+}
+
+- (void)showLocalBackupControllerFromButton:(UIBarButtonItem *)button
+{
+	LocalBackupController *controller = [[LocalBackupController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }

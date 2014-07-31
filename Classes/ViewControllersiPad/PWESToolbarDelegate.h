@@ -14,4 +14,5 @@
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button;
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button;
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button;
+- (void)showLocalBackupControllerFromButton:(UIBarButtonItem *)button;
 @end

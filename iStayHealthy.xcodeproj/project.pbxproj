@@ -12,6 +12,13 @@
 		0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCF2189D53AE00008590 /* SideEffects.m */; };
 		0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */; };
 		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
+		0B1276B4198AC6D400D389FA /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276B2198AC6D400D389FA /* settings.png */; };
+		0B1276B5198AC6D400D389FA /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276B3198AC6D400D389FA /* settings@2x.png */; };
+		0B1276B8198ACDB700D389FA /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276B6198ACDB700D389FA /* dropbox.png */; };
+		0B1276B9198ACDB700D389FA /* dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276B7198ACDB700D389FA /* dropbox@2x.png */; };
+		0B1276BC198AD05B00D389FA /* IconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1276BB198AD05B00D389FA /* IconsTableViewController.m */; };
+		0B1276BF198AD2B900D389FA /* results.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276BD198AD2B900D389FA /* results.png */; };
+		0B1276C0198AD2B900D389FA /* results@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276BE198AD2B900D389FA /* results@2x.png */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */; };
@@ -370,6 +377,14 @@
 		0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+iStayHealthy.m"; path = "Categories/UIBarButtonItem+iStayHealthy.m"; sourceTree = "<group>"; };
 		0B0C4F6918A664B300D22990 /* CustomToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomToolbar.h; path = ViewControllersiPad/CustomToolbar.h; sourceTree = "<group>"; };
 		0B0C4F6A18A664B300D22990 /* CustomToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomToolbar.m; path = ViewControllersiPad/CustomToolbar.m; sourceTree = "<group>"; };
+		0B1276B2198AC6D400D389FA /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Classes/Assets/settings.png; sourceTree = "<group>"; };
+		0B1276B3198AC6D400D389FA /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Classes/Assets/settings@2x.png"; sourceTree = "<group>"; };
+		0B1276B6198ACDB700D389FA /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dropbox.png; path = Classes/Assets/dropbox.png; sourceTree = "<group>"; };
+		0B1276B7198ACDB700D389FA /* dropbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropbox@2x.png"; path = "Classes/Assets/dropbox@2x.png"; sourceTree = "<group>"; };
+		0B1276BA198AD05B00D389FA /* IconsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsTableViewController.h; path = ViewControllersCommon/IconsTableViewController.h; sourceTree = "<group>"; };
+		0B1276BB198AD05B00D389FA /* IconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IconsTableViewController.m; path = ViewControllersCommon/IconsTableViewController.m; sourceTree = "<group>"; };
+		0B1276BD198AD2B900D389FA /* results.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = results.png; path = Classes/Assets/results.png; sourceTree = "<group>"; };
+		0B1276BE198AD2B900D389FA /* results@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "results@2x.png"; path = "Classes/Assets/results@2x.png"; sourceTree = "<group>"; };
 		0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEndDateTableViewController.h; path = ViewControllersCommon/BaseEndDateTableViewController.h; sourceTree = "<group>"; };
 		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
 		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
@@ -1257,6 +1272,8 @@
 				0BC7E561198827CA0017ED15 /* LocalBackupController.m */,
 				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
 				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
+				0B1276BA198AD05B00D389FA /* IconsTableViewController.h */,
+				0B1276BB198AD05B00D389FA /* IconsTableViewController.m */,
 				C46C5DE917EDA44500866DBD /* InformationTableViewController.h */,
 				C46C5DEA17EDA44500866DBD /* InformationTableViewController.m */,
 				C4A6E21B17C7770C0020FC2A /* Menus.h */,
@@ -1368,6 +1385,12 @@
 		C47DB23817AD43B80037A6DF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0B1276BD198AD2B900D389FA /* results.png */,
+				0B1276BE198AD2B900D389FA /* results@2x.png */,
+				0B1276B6198ACDB700D389FA /* dropbox.png */,
+				0B1276B7198ACDB700D389FA /* dropbox@2x.png */,
+				0B1276B2198AC6D400D389FA /* settings.png */,
+				0B1276B3198AC6D400D389FA /* settings@2x.png */,
 				0B4CE7331983B528009E9B16 /* icon_29_rounded.png */,
 				0B4CE7341983B528009E9B16 /* icon_29_rounded@2x.png */,
 				0B2EDDCD197A6AEC00B72109 /* charts-barbutton.png */,
@@ -1789,6 +1812,7 @@
 				C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */,
 				0B2EDDFE197A90FF00B72109 /* pegintron.png in Resources */,
 				C489868618105D78006F47F1 /* save@2x.png in Resources */,
+				0B1276BF198AD2B900D389FA /* results.png in Resources */,
 				C44D36B5180F3E3600EE9F5E /* alarm.png in Resources */,
 				0B35BF911944681200341AFB /* missed-icon@2x.png in Resources */,
 				0B2EDDFD197A90FF00B72109 /* pegasys@2x.png in Resources */,
@@ -1803,12 +1827,15 @@
 				0B2EDDF8197A90FF00B72109 /* incivek.png in Resources */,
 				C489868E18106E0D006F47F1 /* info@2x.png in Resources */,
 				0B65F95E1913917600523441 /* Images.xcassets in Resources */,
+				0B1276B4198AC6D400D389FA /* settings.png in Resources */,
 				0B8910F318F93CA500A49B95 /* celsentri.png in Resources */,
 				0B35BF8C1944681200341AFB /* hospital-icon.png in Resources */,
 				0B8910CA18F9363900A49B95 /* Default-568h@2x.png in Resources */,
 				0B8910FC18F93CA500A49B95 /* invirase.png in Resources */,
+				0B1276B8198ACDB700D389FA /* dropbox.png in Resources */,
 				C481FD2517FDEBDE0058EE9D /* icon_120_flat.png in Resources */,
 				0B89110418F93CA500A49B95 /* rescriptor.png in Resources */,
+				0B1276B5198AC6D400D389FA /* settings@2x.png in Resources */,
 				C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */,
 				C44D36C5180F3E3600EE9F5E /* feedback.png in Resources */,
 				C481FD2D17FDEE540058EE9D /* icon_50_flat.png in Resources */,
@@ -1823,6 +1850,7 @@
 				C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */,
 				C44D36BC180F3E3600EE9F5E /* charts@2x.png in Resources */,
 				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
+				0B1276B9198ACDB700D389FA /* dropbox@2x.png in Resources */,
 				C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */,
 				0B2EDDE4197A7D9900B72109 /* vitekta.png in Resources */,
 				C44D36BD180F3E3600EE9F5E /* combi.png in Resources */,
@@ -1833,6 +1861,7 @@
 				0B2EDDF9197A90FF00B72109 /* incivek@2x.png in Resources */,
 				C48B9BEB18094675007CF6DE /* icon_40_flat@2x.png in Resources */,
 				C48B9BEC18094675007CF6DE /* icon_50_flat@2x.png in Resources */,
+				0B1276C0198AD2B900D389FA /* results@2x.png in Resources */,
 				0B8910FA18F93CA500A49B95 /* fuzeon.png in Resources */,
 				0B8910F918F93CA500A49B95 /* epivir.png in Resources */,
 				0B89110118F93CA500A49B95 /* lexiva.png in Resources */,
@@ -2069,6 +2098,7 @@
 				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
 				C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */,
 				C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */,
+				0B1276BC198AD05B00D389FA /* IconsTableViewController.m in Sources */,
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,

@@ -19,6 +19,7 @@
 	dispatch_once(&onceToken, ^{
 	    items = @[
 	            NSLocalizedString(@"Settings", nil),
+	            NSLocalizedString(@"LocalBackups", nil),
 	            NSLocalizedString(@"Backups", nil),
 	            NSLocalizedString(@"Feedback", nil),
 	            NSLocalizedString(@"Email Data", nil),
@@ -256,7 +257,7 @@
 	}
 	else if ([title isEqualToString:NSLocalizedString(@"Backups", nil)])
 	{
-		image = [UIImage imageNamed:@"backup.png"];
+		image = [UIImage imageNamed:@"dropbox.png"];
 	}
 	else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
 	{
@@ -269,6 +270,10 @@
 	else if ([title isEqualToString:NSLocalizedString(@"Info", nil)])
 	{
 		image = [UIImage imageNamed:@"info.png"];
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"LocalBackups", nil)])
+	{
+		image = [UIImage imageNamed:@"settings.png"];
 	}
 	else if ([title isEqualToString:NSLocalizedString(@"Help", nil)])
 	{

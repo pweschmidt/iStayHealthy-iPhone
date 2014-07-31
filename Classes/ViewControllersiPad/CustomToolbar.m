@@ -58,6 +58,10 @@
 	    {
 	        barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openInfo:) buttonTag:index];
 		}
+	    else if ([title isEqualToString:NSLocalizedString(@"LocalBackups", nil)])
+	    {
+	        barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openLocalBackup:) buttonTag:index];
+		}
 	    else if ([title isEqualToString:NSLocalizedString(@"Help", nil)])
 	    {
 	        barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openHelp:) buttonTag:index];
@@ -191,6 +195,31 @@
 			if ([strongDelegate respondsToSelector:@selector(showPasswordControllerFromButton:)])
 			{
 				[strongDelegate showDropboxControllerFromButton:barButton];
+			}
+		}
+	}
+}
+
+- (void)openLocalBackup:(UIBarButtonItem *)sender
+{
+	if (nil != self.customToolbarDelegate && nil != sender)
+	{
+		__strong id <PWESToolbarDelegate> strongDelegate = self.customToolbarDelegate;
+		if ([sender isKindOfClass:[UIBarButtonItem class]])
+		{
+			if ([strongDelegate respondsToSelector:@selector(showLocalBackupControllerFromButton:)])
+			{
+				[strongDelegate showLocalBackupControllerFromButton:(UIBarButtonItem *)sender];
+			}
+		}
+		else if ([sender isKindOfClass:[UIButton class]])
+		{
+			UIButton *button = (UIButton *)sender;
+			UIBarButtonItem *barButton = [self.barButtons objectAtIndex:button.tag];
+			if (nil != barButton &&
+			    [strongDelegate respondsToSelector:@selector(showLocalBackupControllerFromButton:)])
+			{
+				[strongDelegate showLocalBackupControllerFromButton:barButton];
 			}
 		}
 	}

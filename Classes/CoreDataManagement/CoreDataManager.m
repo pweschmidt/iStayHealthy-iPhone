@@ -121,7 +121,6 @@
 
 	    BOOL hasFallbackStore = [defaultManager
 	                             fileExistsAtPath:[fallbackURL absoluteString]];
-	    BOOL hasMainStore = [defaultManager fileExistsAtPath:[mainURL absoluteString]];
 
 	    NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
 	    NSDictionary *noniCloudOptions = [CoreDataUtils noiCloudStoreOptions];
@@ -155,12 +154,8 @@
 			}
 	        else
 	        {
-#warning set a flag in NSUSerDefaults if using noniCloudOptions
-	            if (hasMainStore)
-	            {
-	                whichOptions = noniCloudOptions;
-	                storeLoaded = MainStoreWithoutiCloud;
-				}
+	            whichOptions = noniCloudOptions;
+	            storeLoaded = MainStoreWithoutiCloud;
 	            whichStoreURL = mainURL;
 			}
 		}
