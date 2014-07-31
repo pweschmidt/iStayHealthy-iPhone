@@ -17,6 +17,13 @@ typedef NS_ENUM (NSUInteger, TransitionType)
 	kControllerTransition
 };
 
+typedef NS_ENUM (int, LoadedStore)
+{
+	MainStoreWithiCloud = 0,
+	MainStoreWithoutiCloud,
+	FallbackStore
+};
+
 typedef NS_ENUM (int, DateType)
 {
 	DateOnly = 0,
@@ -110,6 +117,8 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kDiaryActivatedKey              @"MedicationDiaryActivate"
 #define kDontShowWarning                @"dontShowLoadWarning"
 #define kIsVersionUpdate400             @"updatedToVersion400"
+#define kIsVersionUpdate401             @"updatedToVersion401"
+#define kStoreLoadingKey                @"StoreLoaded"
 
 /**
    Database and iCloud
