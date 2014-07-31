@@ -120,7 +120,11 @@
 
 
 	    BOOL hasFallbackStore = [defaultManager
-	                             fileExistsAtPath:[fallbackURL absoluteString]];
+	                             fileExistsAtPath:[fallbackURL path]];
+
+	    BOOL hasMainStore = [defaultManager
+	                         fileExistsAtPath:[mainURL path]];
+
 
 	    NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
 	    NSDictionary *noniCloudOptions = [CoreDataUtils noiCloudStoreOptions];
