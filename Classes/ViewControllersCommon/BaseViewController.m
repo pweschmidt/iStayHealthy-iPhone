@@ -14,6 +14,7 @@
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "HelpTableViewController.h"
+#import "LocalBackupController.h"
 //#import "HelpViewController.h"
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
@@ -563,6 +564,21 @@
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
 	HelpTableViewController *controller = [[HelpTableViewController alloc] initAsPopoverController];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+
+	if ([Utilities isIPad])
+	{
+		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+	}
+	else
+	{
+		[self.navigationController pushViewController:controller animated:YES];
+	}
+}
+
+- (void)showLocalBackupControllerFromButton:(UIBarButtonItem *)button
+{
+	LocalBackupController *controller = [[LocalBackupController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 
 	if ([Utilities isIPad])

@@ -39,7 +39,7 @@
 {
 	[super viewDidLoad];
 
-	self.navigationItem.title = NSLocalizedString(@"Backup/Restore", nil);
+	self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
 	[self disableRightBarButtons];
 	self.iStayHealthyPath = nil;
 	self.dropBoxFileExists = NO;
@@ -60,9 +60,9 @@
 {
 	if ([[DBSession sharedSession]isLinked])
 	{
-		return 3;
+		return 2;
 	}
-	return 2;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -77,10 +77,6 @@
 				break;
 
 			case 1:
-				rows = 2;
-				break;
-
-			case 2:
 				rows = 1;
 				break;
 		}
@@ -88,18 +84,7 @@
 	}
 	else
 	{
-		NSInteger rows = 1;
-		switch (section)
-		{
-			case 0:
-				rows = 2;
-				break;
-
-			case 1:
-				rows = 1;
-				break;
-		}
-		return rows;
+		return 1;
 	}
 }
 
@@ -117,24 +102,7 @@
 
 	UILabel *label = [UILabel standardLabel];
 	label.frame = CGRectMake(20, 0, 200, self.tableView.rowHeight);
-//	if (0 == indexPath.section)
-//	{
-//		label.text = NSLocalizedString(@"Email results", nil);
-//	}
 	if (0 == indexPath.section)
-	{
-		switch (indexPath.row)
-		{
-			case 0:
-				label.text = NSLocalizedString(@"Save locally", nil);
-				break;
-
-			case 1:
-				label.text = NSLocalizedString(@"Restore locally", nil);
-				break;
-		}
-	}
-	else if (1 == indexPath.section)
 	{
 		if ([[DBSession sharedSession] isLinked])
 		{
@@ -176,55 +144,6 @@
 //		[self startMailController];
 //	}
 	if (0 == indexPath.section)
-	{
-		if (0 == indexPath.row)
-		{
-			NSError *error = nil;
-			BOOL success = [[CoreDataManager sharedInstance] saveAndBackup:&error];
-			if (success)
-			{
-				[[[UIAlertView alloc]
-				  initWithTitle:NSLocalizedString(@"Save Finished", nil)
-				               message:NSLocalizedString(@"Data were saved locally.", nil)
-				              delegate:nil
-				     cancelButtonTitle:@"OK" otherButtonTitles:nil]
-				 show];
-			}
-			else
-			{
-				[[[UIAlertView alloc]
-				  initWithTitle:NSLocalizedString(@"Save Error", nil)
-				               message:NSLocalizedString(@"Data could not be saved locally.", nil)
-				              delegate:nil
-				     cancelButtonTitle:@"OK" otherButtonTitles:nil]
-				 show];
-			}
-		}
-		else
-		{
-			[[CoreDataManager sharedInstance] restoreLocallyWithCompletionBlock: ^(BOOL success, NSError *error) {
-			    if (success)
-			    {
-			        [[[UIAlertView alloc]
-			          initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-			                       message:NSLocalizedString(@"Data were retrieved locally.", nil)
-			                      delegate:nil
-			             cancelButtonTitle:@"OK" otherButtonTitles:nil]
-			         show];
-				}
-			    else
-			    {
-			        [[[UIAlertView alloc]
-			          initWithTitle:NSLocalizedString(@"Error restoring", nil)
-			                       message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
-			                      delegate:nil
-			             cancelButtonTitle:@"OK" otherButtonTitles:nil]
-			         show];
-				}
-			}];
-		}
-	}
-	else if (1 == indexPath.section)
 	{
 		if ([[DBSession sharedSession] isLinked])
 		{
@@ -288,14 +207,6 @@
 	label.frame = CGRectMake(20, 2, self.view.bounds.size.width - 100, 20);
 	if (0 == section)
 	{
-		label.text = NSLocalizedString(@"Export data", nil);
-	}
-	else if (1 == section)
-	{
-		label.text = NSLocalizedString(@"Local Backup/Restore", nil);
-	}
-	else if (1 == section)
-	{
 		label.text = NSLocalizedString(@"Dropbox", nil);
 	}
 	else
@@ -308,7 +219,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-	if (3 == section)
+	if (1 == section)
 	{
 		return 36;
 	}
@@ -322,7 +233,7 @@
 {
 	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
 
-	if ([[DBSession sharedSession] isLinked] && 2 == section)
+	if ([[DBSession sharedSession] isLinked] && 1 == section)
 	{
 		UILabel *label = [UILabel standardLabel];
 		label.text = @"";
