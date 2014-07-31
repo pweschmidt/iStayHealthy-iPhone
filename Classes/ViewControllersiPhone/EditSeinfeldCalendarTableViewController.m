@@ -158,6 +158,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+	[self removeAlert];
 	if ([title isEqualToString:NSLocalizedString(@"Delete", @"Delete")])
 	{
 		[self removeManagedObject];
@@ -176,6 +177,20 @@
 		}
 		[self.navigationController popViewControllerAnimated:YES];
 	}
+}
+
+- (void)removeAlert
+{
+	NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+	[notifications enumerateObjectsUsingBlock: ^(UILocalNotification *notification, NSUInteger idx, BOOL *stop) {
+	    NSDictionary *userInfo = notification.userInfo;
+
+	    NSString *alertText = [userInfo objectForKey:kAppNotificationKey];
+	    if (nil != alertText && [alertText isEqualToString:NSLocalizedString(@"Med. Diary Reminder", nil)])
+	    {
+	        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+		}
+	}];
 }
 
 - (void)didReceiveMemoryWarning

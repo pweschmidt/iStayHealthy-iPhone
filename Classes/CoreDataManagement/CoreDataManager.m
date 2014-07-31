@@ -107,6 +107,10 @@
 
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSNumber *storeLoadedNumber = [defaults objectForKey:kStoreLoadingKey];
+	__block int storeLoaded = (nil != storeLoadedNumber) ? [storeLoadedNumber intValue] : -1;
+
 	dispatch_async(storeQueue, ^{
 	    NSFileManager *defaultManager = [NSFileManager defaultManager];
 
@@ -117,8 +121,10 @@
 
 	    BOOL hasFallbackStore = [defaultManager
 	                             fileExistsAtPath:[fallbackURL absoluteString]];
+	    BOOL hasMainStore = [defaultManager fileExistsAtPath:[mainURL absoluteString]];
 
 	    NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
+	    NSDictionary *noniCloudOptions = [CoreDataUtils noiCloudStoreOptions];
 	    NSDictionary *defaultStoreOptions = [CoreDataUtils localStoreOptions];
 
 	    NSURL *whichStoreURL = nil;
@@ -130,22 +136,31 @@
 	        {
 	            whichOptions = iCloudOptions;
 	            whichStoreURL = mainURL;
+	            storeLoaded = MainStoreWithiCloud;
 			}
 	        else
 	        {
 	            whichOptions = defaultStoreOptions;
 	            whichStoreURL = fallbackURL;
+	            storeLoaded = FallbackStore;
 			}
 		}
 	    else
 	    {
 	        whichOptions = defaultStoreOptions;
+	        storeLoaded = FallbackStore;
 	        if (hasFallbackStore)
 	        {
 	            whichStoreURL = fallbackURL;
 			}
 	        else
 	        {
+#warning set a flag in NSUSerDefaults if using noniCloudOptions
+	            if (hasMainStore)
+	            {
+	                whichOptions = noniCloudOptions;
+	                storeLoaded = MainStoreWithoutiCloud;
+				}
 	            whichStoreURL = mainURL;
 			}
 		}
@@ -179,6 +194,9 @@
 	            {
 	                error(nil);
 				}
+	            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	            [defaults setObject:[NSNumber numberWithInt:storeLoaded] forKey:kStoreLoadingKey];
+	            [defaults synchronize];
 	            NSNotification *notification = [NSNotification
 	                                            notificationWithName:kLoadedStoreNotificationKey
 	                                                          object:self];
