@@ -120,7 +120,7 @@
 
 
 	    BOOL hasFallbackStore = [defaultManager
-	                             fileExistsAtPath:[fallbackURL path]];
+	                             fileExistsAtPath:[fallbackURL absoluteString]];
 
 	    BOOL hasMainStore = [defaultManager
 	                         fileExistsAtPath:[mainURL path]];
