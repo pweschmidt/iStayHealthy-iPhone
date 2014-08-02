@@ -410,6 +410,7 @@
 
 	if ([Utilities isIPad])
 	{
+		controller.hasNavHeader = YES;
 		controller.popoverDelegate = self;
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
@@ -533,6 +534,7 @@
 		UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 		if ([Utilities isIPad])
 		{
+			controller.hasNavHeader = YES;
 			[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 		}
 		else
@@ -553,6 +555,7 @@
 
 	if ([Utilities isIPad])
 	{
+		controller.hasNavHeader = YES;
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
 	else
@@ -583,6 +586,7 @@
 
 	if ([Utilities isIPad])
 	{
+		controller.hasNavHeader = YES;
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
 	else

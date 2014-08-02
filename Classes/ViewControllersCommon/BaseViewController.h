@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIPopoverController *customPopoverController;
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) UILabel *activityLabel;
+@property (nonatomic, assign) BOOL hasNavHeader;
 - (id)initAsPopoverController;
 - (void)disableRightBarButtons;
 - (void)hamburgerMenu;

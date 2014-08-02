@@ -63,7 +63,7 @@
 	}
 	self.successBlock = completionBlock;
 	NSData *data = [xmlData copy];
-	NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//	NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
 	parser.delegate = self;
 	[self setUpArrays];

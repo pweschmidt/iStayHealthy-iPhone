@@ -15,7 +15,6 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
 #import "KeychainHandler.h"
-#import "AppSettings.h"
 
 
 @interface CentralAppDelegate ()
@@ -33,11 +32,6 @@
 	self.window.tintColor = TEXTCOLOUR;
 
 	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: TEXTCOLOUR, NSFontAttributeName : [UIFont fontWithType:Standard size:17] }];
-
-	if (![[AppSettings sharedInstance] hasUpdated])
-	{
-		[[AppSettings sharedInstance] disablePasswordForUpdate];
-	}
 
 	self.window.tintColor = TINTCOLOUR;
 	self.containerController = self.window.rootViewController;

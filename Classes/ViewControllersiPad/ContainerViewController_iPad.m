@@ -50,6 +50,7 @@
 		[self addChildViewController:self.contentController];
 	}
 
+	[[AppSettings sharedInstance] disablePasswordForUpdate];
 	BOOL isPasswordEnabled = [[AppSettings sharedInstance] hasPasswordEnabled];
 	if (isPasswordEnabled)
 	{

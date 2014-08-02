@@ -17,4 +17,6 @@
 - (NSString *)updateMessage;
 - (void)saveUbiquityURL:(NSURL *)ubiquityURL;
 - (NSString *)ubiquityContentName;
+- (NSString *)versionString;
+- (NSString *)buildNumberString;
 @end

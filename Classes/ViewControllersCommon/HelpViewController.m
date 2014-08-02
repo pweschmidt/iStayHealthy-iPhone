@@ -38,7 +38,12 @@ static NSDictionary *helpSubjects()
 	[super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Help", nil);
 	self.view.backgroundColor = DEFAULT_BACKGROUND;
-	__block CGFloat offset = 75;
+
+	__block CGFloat offset = 10;
+	if (![Utilities isIPad])
+	{
+		offset = 70;
+	}
 	NSDictionary *subjects = helpSubjects();
 	[subjects enumerateKeysAndObjectsUsingBlock: ^(NSString *key, NSString *obj, BOOL *stop) {
 	    UIView *header = [self headlineViewWithOffset:offset subject:key];

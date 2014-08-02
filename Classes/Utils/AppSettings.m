@@ -95,7 +95,7 @@
 	NSString *ubiquityURL = [defaults objectForKey:kStoreUbiquityPathKey];
 	if (nil != ubiquityURL)
 	{
-		NSString *string = [self cleanedContentNameFromFullPathString:ubiquityURL];
+//		NSString *string = [self cleanedContentNameFromFullPathString:ubiquityURL];
 	}
 
 	return kUbiquitousPath;
@@ -116,6 +116,18 @@
 	}];
 
 	return path;
+}
+
+- (NSString *)versionString
+{
+	NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+	return version;
+}
+
+- (NSString *)buildNumberString
+{
+	NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+	return version;
 }
 
 @end
