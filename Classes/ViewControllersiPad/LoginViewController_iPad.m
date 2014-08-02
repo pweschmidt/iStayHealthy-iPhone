@@ -118,7 +118,7 @@
 		[defaults synchronize];
 		[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password Reset", nil)
 		                            message:NSLocalizedString(@"Please reset password", nil)
-		                           delegate:self
+		                           delegate:nil
 		                  cancelButtonTitle:@"Ok"
 		                  otherButtonTitles:nil] show];
 	}

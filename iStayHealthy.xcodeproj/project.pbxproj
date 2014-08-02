@@ -12,6 +12,7 @@
 		0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCF2189D53AE00008590 /* SideEffects.m */; };
 		0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */; };
 		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
+		0B11346B198CBEC700685046 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B11346A198CBEC700685046 /* AppSettings.m */; };
 		0B1276B4198AC6D400D389FA /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276B2198AC6D400D389FA /* settings.png */; };
 		0B1276B5198AC6D400D389FA /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276B3198AC6D400D389FA /* settings@2x.png */; };
 		0B1276B8198ACDB700D389FA /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1276B6198ACDB700D389FA /* dropbox.png */; };
@@ -377,6 +378,8 @@
 		0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+iStayHealthy.m"; path = "Categories/UIBarButtonItem+iStayHealthy.m"; sourceTree = "<group>"; };
 		0B0C4F6918A664B300D22990 /* CustomToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomToolbar.h; path = ViewControllersiPad/CustomToolbar.h; sourceTree = "<group>"; };
 		0B0C4F6A18A664B300D22990 /* CustomToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomToolbar.m; path = ViewControllersiPad/CustomToolbar.m; sourceTree = "<group>"; };
+		0B113469198CBEC700685046 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSettings.h; path = Utils/AppSettings.h; sourceTree = "<group>"; };
+		0B11346A198CBEC700685046 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSettings.m; path = Utils/AppSettings.m; sourceTree = "<group>"; };
 		0B1276B2198AC6D400D389FA /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Classes/Assets/settings.png; sourceTree = "<group>"; };
 		0B1276B3198AC6D400D389FA /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Classes/Assets/settings@2x.png"; sourceTree = "<group>"; };
 		0B1276B6198ACDB700D389FA /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dropbox.png; path = Classes/Assets/dropbox.png; sourceTree = "<group>"; };
@@ -1653,6 +1656,8 @@
 		C4C41A1F15F1421800882416 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0B113469198CBEC700685046 /* AppSettings.h */,
+				0B11346A198CBEC700685046 /* AppSettings.m */,
 				C4C837F416D1057E002D934F /* Contacts+Comparator.h */,
 				C4C837F516D1057E002D934F /* Contacts+Comparator.m */,
 				C4C41A2015F1432E00882416 /* GradientButton.h */,
@@ -2124,6 +2129,7 @@
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
+				0B11346B198CBEC700685046 /* AppSettings.m in Sources */,
 				0B89111D18F9407D00A49B95 /* PWESSlideTransition.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */,

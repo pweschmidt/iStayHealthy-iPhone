@@ -21,7 +21,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
 #import "CoreXMLWriter.h"
-#import "HelpTableViewController.h"
+#import "HelpViewController.h"
 #import "LocalBackupController.h"
 
 #define kHeaderViewIdentifier @"CollectionHeaderViewIdentifier"
@@ -451,7 +451,7 @@
 
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
-	HelpTableViewController *controller = [[HelpTableViewController alloc] initAsPopoverController];
+	HelpViewController *controller = [[HelpViewController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }

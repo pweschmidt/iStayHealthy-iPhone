@@ -13,6 +13,7 @@
 #import "iStayHealthyRecord+Handling.h"
 #import "CoreXMLWriter.h"
 #import "CoreXMLReader.h"
+#import "AppSettings.h"
 
 @interface CoreDataManager ()
 {
@@ -20,6 +21,7 @@
 	dispatch_queue_t storeQueue;
 }
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, strong) NSData *importedXMLData;
 - (void)unregisterObservers;
 - (void)registerObservers;
 - (void)mergeFromiCloud:(NSNotification *)notification;
@@ -44,6 +46,8 @@
 	if (nil != self)
 	{
 		storeQueue = dispatch_queue_create(kBackgroundQueueName, NULL);
+		_importedXMLData = nil;
+		_importedFilePath = nil;
 	}
 	return self;
 }
@@ -77,16 +81,6 @@
 	self.persistentStoreCoordinator = psc;
 
 	[self setUpContextsForCoordinator];
-//	BOOL hasNewStore = [self hasNewiCloudStore];
-//	if (!hasNewStore)
-//	{
-//		[self migrateToNewiCloudStore: ^(BOOL success, NSError *error) {
-//		    [self setUpContextsForCoordinator];
-//		}];
-//	}
-//	else
-//	{
-//	}
 }
 
 - (void)setUpContextsForCoordinator
@@ -110,6 +104,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSNumber *storeLoadedNumber = [defaults objectForKey:kStoreLoadingKey];
 	__block int storeLoaded = (nil != storeLoadedNumber) ? [storeLoadedNumber intValue] : -1;
+	__block BOOL isUsingiCloud = NO;
 
 	dispatch_async(storeQueue, ^{
 	    NSFileManager *defaultManager = [NSFileManager defaultManager];
@@ -122,9 +117,6 @@
 	    BOOL hasFallbackStore = [defaultManager
 	                             fileExistsAtPath:[fallbackURL absoluteString]];
 
-	    BOOL hasMainStore = [defaultManager
-	                         fileExistsAtPath:[mainURL path]];
-
 
 	    NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
 	    NSDictionary *noniCloudOptions = [CoreDataUtils noiCloudStoreOptions];
@@ -133,6 +125,7 @@
 	    NSURL *whichStoreURL = nil;
 	    NSDictionary *whichOptions = nil;
 
+
 	    if (self.iCloudEnabled)
 	    {
 	        if (self.iCloudIsAvailable)
@@ -140,6 +133,7 @@
 	            whichOptions = iCloudOptions;
 	            whichStoreURL = mainURL;
 	            storeLoaded = MainStoreWithiCloud;
+	            isUsingiCloud = YES;
 			}
 	        else
 	        {
@@ -179,6 +173,7 @@
 	    {
 	        createdStore = [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:whichStoreURL options:whichOptions error:&creationError];
 		}
+
 	    dispatch_async(dispatch_get_main_queue(), ^{
 	        if (nil == createdStore)
 	        {
@@ -189,13 +184,17 @@
 			}
 	        else
 	        {
+//	            NSDictionary *metadata = [createdStore metadata];
+	            self.storeIsReady = YES;
+	            NSURL *storeURL = [createdStore URL];
+	            if (isUsingiCloud)
+	            {
+	                [[AppSettings sharedInstance] saveUbiquityURL:storeURL];
+				}
 	            if (error)
 	            {
 	                error(nil);
 				}
-	            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	            [defaults setObject:[NSNumber numberWithInt:storeLoaded] forKey:kStoreLoadingKey];
-	            [defaults synchronize];
 	            NSNotification *notification = [NSNotification
 	                                            notificationWithName:kLoadedStoreNotificationKey
 	                                                          object:self];
@@ -203,67 +202,6 @@
 			}
 		});
 	});
-}
-
-- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
-{
-	NSError *saveError = nil;
-	[self saveContextAndWait:&saveError];
-	if (nil != saveError)
-	{
-		if (completionBlock)
-		{
-			completionBlock(NO, saveError);
-		}
-	}
-	NSPersistentStore *currentStore = [self currentPersistentStore];
-	if (nil == currentStore)
-	{
-		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"No data storage available", nil) };
-		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:100 userInfo:userInfo];
-		if (completionBlock)
-		{
-			completionBlock(NO, error);
-		}
-		return;
-	}
-	BOOL isAlreadyLocal = [self currentStoreIsLocal:currentStore];
-	if (isAlreadyLocal)
-	{
-		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"Store is already local", nil) };
-		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:101 userInfo:userInfo];
-		if (completionBlock)
-		{
-			completionBlock(NO, error);
-		}
-		return;
-	}
-}
-
-- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock
-{
-	NSError *saveError = nil;
-	[self saveContextAndWait:&saveError];
-	if (nil != saveError)
-	{
-		if (completionBlock)
-		{
-			completionBlock(NO, saveError);
-		}
-	}
-}
-
-- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
-{
-	NSError *saveError = nil;
-	[self saveContextAndWait:&saveError];
-	if (nil != saveError)
-	{
-		if (completionBlock)
-		{
-			completionBlock(NO, saveError);
-		}
-	}
 }
 
 - (BOOL)currentStoreIsLocal:(NSPersistentStore *)store
@@ -299,6 +237,19 @@
 
 - (void)storesWillChange:(NSNotification *)notification
 {
+	if (nil == notification)
+	{
+		return;
+	}
+	NSDictionary *userInfo = notification.userInfo;
+	if (nil == userInfo)
+	{
+		return;
+	}
+	NSPersistentStoreUbiquitousTransitionType transitionType = [[userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
+
+	NSLog(@"transition type %ld", (long)transitionType);
+
 	NSError *error = nil;
 	[self saveContextAndWait:&error];
 	if (nil == error)
@@ -319,7 +270,8 @@
 		return;
 	}
 
-	NSPersistentStoreUbiquitousTransitionType transitionType = [userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey];
+	NSPersistentStoreUbiquitousTransitionType transitionType = [[userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
+	NSLog(@"transition type %ld", (long)transitionType);
 
 	if (NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted == transitionType)
 	{
@@ -774,61 +726,173 @@
 	{
 		return NO;
 	}
-	NSString *dstPath = [NSString stringWithFormat:@"%@/%@", NSTemporaryDirectory(), [sourceURL lastPathComponent]];
-	NSString *sourcePath = [sourceURL absoluteString];
-	[[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:dstPath error:error];
-	if (nil == error && [[NSFileManager defaultManager] fileExistsAtPath:dstPath])
-	{
-		NSData *xmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:dstPath]];
-		NSDictionary *importData = @{ kImportedDataFromFileKey : xmlData,
-			                          kTmpFileKey : dstPath };
-		self.hasDataForImport = YES;
-		NSNotification *notification = [NSNotification
-		                                notificationWithName:kImportedDataAvailableKey
-		                                              object:self
-		                                            userInfo:importData];
-		[[NSNotificationCenter defaultCenter] postNotification:notification];
-		return YES;
-	}
-	else
+	NSData *xmlData = [NSData dataWithContentsOfURL:sourceURL];
+	if (nil == xmlData)
 	{
 		return NO;
 	}
+	self.importedXMLData = xmlData;
+	self.hasDataForImport = YES;
+	NSNotification *notification = [NSNotification
+	                                notificationWithName:kImportedDataAvailableKey
+	                                              object:self
+	                                            userInfo:nil];
+	[[NSNotificationCenter defaultCenter] postNotification:notification];
+	return YES;
 }
 
 - (void)importWhenReady:(NSNotification *)notification
 {
-	if (nil == notification)
-	{
-		return;
-	}
-	NSString *tmpFilePath = [notification.userInfo objectForKey:kTmpFileKey];
-	NSData *xmlData = [notification.userInfo objectForKey:kImportedDataAvailableKey];
-	self.hasDataForImport = YES;
-	self.xmlTmpPath = tmpFilePath;
-	self.xmlImportData = xmlData;
 	if (self.storeIsReady)
 	{
 		[self importWithData];
+	}
+	else
+	{
+		if (nil != self.importedXMLData)
+		{
+			NSString *tmpFileName = [NSString stringWithFormat:@"%@.isth", [[NSUUID UUID] UUIDString]];
+			NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:tmpFileName];
+			NSURL *tmpURL = [[NSURL alloc] initFileURLWithPath:tmpPath];
+			NSFileManager *fileManager = [NSFileManager defaultManager];
+			if ([fileManager fileExistsAtPath:tmpPath])
+			{
+				NSError *error = nil;
+				[fileManager removeItemAtPath:tmpPath error:&error];
+			}
+			NSData *tmpXML = self.importedXMLData;
+			[tmpXML writeToURL:tmpURL atomically:YES];
+			self.importedFilePath = tmpPath;
+			dispatch_async(dispatch_get_main_queue(), ^{
+			    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import Delayed", nil) message:NSLocalizedString(@"ImportDelayMessage", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+			    [alert show];
+			});
+			self.importedXMLData = nil;
+		}
 	}
 }
 
 - (void)importWithData
 {
-	if (nil == self.xmlImportData || nil == self.xmlTmpPath)
+	if (nil == self.importedXMLData)
 	{
 		return;
 	}
-	[[CoreXMLReader sharedInstance] parseXMLData:self.xmlImportData completionBlock: ^(BOOL success, NSError *error) {
-	    if ([[NSFileManager defaultManager] fileExistsAtPath:self.xmlTmpPath])
-	    {
-	        NSError *error = nil;
-	        [[NSFileManager defaultManager] removeItemAtPath:self.xmlTmpPath error:&error];
-		}
+	[[CoreXMLReader sharedInstance] parseXMLData:self.importedXMLData completionBlock: ^(BOOL success, NSError *error) {
 	    self.hasDataForImport = NO;
-	    self.xmlTmpPath = nil;
-	    self.xmlImportData = nil;
+	    self.importedXMLData = nil;
+	    self.importedFilePath = nil;
+	    dispatch_async(dispatch_get_main_queue(), ^{
+	        if (success)
+	        {
+	            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import Succeeded", nil) message:NSLocalizedString(@"Your Data were successfully imported. Only unique entries were saved", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+	            [alert show];
+			}
+	        else
+	        {
+	            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import Error", nil) message:NSLocalizedString(@"Your data could not be imported due to an error.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+	            [alert show];
+			}
+		});
 	}];
 }
+
+- (void)importFromTmpFileURL
+{
+	if (nil == self.importedFilePath)
+	{
+		return;
+	}
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	if ([fileManager fileExistsAtPath:self.importedFilePath])
+	{
+		NSData *data = [NSData dataWithContentsOfFile:self.importedFilePath];
+		if (nil != data)
+		{
+			[[CoreXMLReader sharedInstance] parseXMLData:data completionBlock: ^(BOOL success, NSError *error) {
+			    self.hasDataForImport = NO;
+			    self.importedXMLData = nil;
+			    self.importedFilePath = nil;
+			    dispatch_async(dispatch_get_main_queue(), ^{
+			        if (success)
+			        {
+			            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import Succeeded", nil) message:NSLocalizedString(@"Your Data were successfully imported. Only unique entries were saved", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+			            [alert show];
+					}
+			        else
+			        {
+			            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import Error", nil) message:NSLocalizedString(@"Your data could not be imported due to an error.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+			            [alert show];
+					}
+				});
+			}];
+		}
+	}
+}
+
+#pragma mark possibly for later
+/**************************************
+**************************************/
+//- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
+//{
+//	NSError *saveError = nil;
+//	[self saveContextAndWait:&saveError];
+//	if (nil != saveError)
+//	{
+//		if (completionBlock)
+//		{
+//			completionBlock(NO, saveError);
+//		}
+//	}
+//	NSPersistentStore *currentStore = [self currentPersistentStore];
+//	if (nil == currentStore)
+//	{
+//		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"No data storage available", nil) };
+//		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:100 userInfo:userInfo];
+//		if (completionBlock)
+//		{
+//			completionBlock(NO, error);
+//		}
+//		return;
+//	}
+//	BOOL isAlreadyLocal = [self currentStoreIsLocal:currentStore];
+//	if (isAlreadyLocal)
+//	{
+//		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"Store is already local", nil) };
+//		NSError *error = [NSError errorWithDomain:@"com.pweschmidt.istayhealthy" code:101 userInfo:userInfo];
+//		if (completionBlock)
+//		{
+//			completionBlock(NO, error);
+//		}
+//		return;
+//	}
+//}
+
+//- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock
+//{
+//	NSError *saveError = nil;
+//	[self saveContextAndWait:&saveError];
+//	if (nil != saveError)
+//	{
+//		if (completionBlock)
+//		{
+//			completionBlock(NO, saveError);
+//		}
+//	}
+//}
+
+//- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
+//{
+//	NSError *saveError = nil;
+//	[self saveContextAndWait:&saveError];
+//	if (nil != saveError)
+//	{
+//		if (completionBlock)
+//		{
+//			completionBlock(NO, saveError);
+//		}
+//	}
+//}
+//
 
 @end

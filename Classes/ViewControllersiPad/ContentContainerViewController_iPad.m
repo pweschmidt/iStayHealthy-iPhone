@@ -24,6 +24,7 @@
 #import "PWESDashboardViewController.h"
 #import "PWESSlideTransition.h"
 #import "CoreDataConstants.h"
+#import "AppSettings.h"
 
 @interface ContentContainerViewController_iPad ()
 @property (nonatomic, strong) NSDictionary *controllers;
@@ -49,24 +50,26 @@
 	ContentNavigationController_iPad *navigationController = [self navigationControllerForName_iPad:kDashboardController];
 	[self addChildViewController:navigationController];
 	[self moveToChildNavigationController:navigationController];
-	[self createWarning];
+	if (![[AppSettings sharedInstance] hasUpdated])
+	{
+		[self createWarning];
+	}
 }
 
 - (void)createWarning
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL dontShowWarning = [defaults boolForKey:kDontShowWarning];
-	BOOL updatedVersion = [defaults boolForKey:kIsVersionUpdate400];
-	if (!dontShowWarning || !updatedVersion)
+	NSString *message = [[AppSettings sharedInstance] updateMessage];
+	if (nil != message)
 	{
 		UIAlertView *warning = [[UIAlertView alloc]
-		                        initWithTitle:NSLocalizedString(@"Loading Data", nil)
-		                                     message:NSLocalizedString(@"It may take up to 2 min before all data are shown. Please wait.", nil)
-		                                    delegate:self
-		                           cancelButtonTitle:NSLocalizedString(@"Keep warning", nil)
-		                           otherButtonTitles:NSLocalizedString(@"Disable Warning!", nil), nil];
+		                        initWithTitle:NSLocalizedString(@"Upgraded", nil)
+		                                     message:message
+		                                    delegate:nil
+		                           cancelButtonTitle:NSLocalizedString(@"OK", nil)
+		                           otherButtonTitles:nil];
 		[warning show];
 	}
+	[[AppSettings sharedInstance] resetUpdateSettings];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

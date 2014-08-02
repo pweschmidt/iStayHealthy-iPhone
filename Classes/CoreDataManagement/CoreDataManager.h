@@ -15,8 +15,7 @@
 @property (nonatomic, assign) BOOL iCloudEnabled;
 @property (nonatomic, assign) BOOL storeIsReady;
 @property (nonatomic, assign) BOOL hasDataForImport;
-@property (nonatomic, strong) NSData *xmlImportData;
-@property (nonatomic, strong) NSString *xmlTmpPath;
+@property (nonatomic, strong) NSString *importedFilePath;
 
 + (CoreDataManager *)sharedInstance;
 
@@ -25,12 +24,6 @@
 - (BOOL)hasNewiCloudStore;
 
 - (void)migrateToNewiCloudStore:(iStayHealthySuccessBlock)error;
-
-- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
-
-- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock;
-
-- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
 
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error;
 
@@ -60,9 +53,20 @@
 
 - (void)importWhenReady:(NSNotification *)notification;
 - (void)importWithData;
+- (void)importFromTmpFileURL;
 
 - (id)managedObjectForEntityName:(NSString *)entityName;
 
 - (NSDictionary *)attributesForEntityName:(NSString *)entityName;
+
+/**
+   We may want to do this part later. 2 August 2014
+ */
+//- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
+
+//- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock;
+
+//- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
+
 
 @end

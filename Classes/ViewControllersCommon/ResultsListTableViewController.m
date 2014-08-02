@@ -88,14 +88,17 @@
 
 	ResultsView_iPhone *hivView = [ResultsView_iPhone viewForResults:results resultsType:HIVResultsType frame:CGRectMake(70, 1, 70, rowHeight)];
 
-	ResultsView_iPhone *bloodView = [ResultsView_iPhone viewForResults:results resultsType:BloodResultsType frame:CGRectMake(145, 1, 60, rowHeight)];
+	ResultsView_iPhone *bloodView = [ResultsView_iPhone viewForResults:results resultsType:BloodResultsType frame:CGRectMake(140, 1, 50, rowHeight)];
 
-	ResultsView_iPhone *otherView = [ResultsView_iPhone viewForResults:results resultsType:OtherResultsType frame:CGRectMake(210, 1, 60, rowHeight)];
+	ResultsView_iPhone *otherView = [ResultsView_iPhone viewForResults:results resultsType:OtherResultsType frame:CGRectMake(195, 1, 40, rowHeight)];
+
+	ResultsView_iPhone *liverView = [ResultsView_iPhone viewForResults:results resultsType:LiverResultsType frame:CGRectMake(240, 1, 40, rowHeight)];
 
 	[cell.contentView addSubview:dateView];
 	[cell.contentView addSubview:hivView];
 	[cell.contentView addSubview:bloodView];
 	[cell.contentView addSubview:otherView];
+	[cell.contentView addSubview:liverView];
 	[cell.contentView setNeedsDisplay];
 }
 

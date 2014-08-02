@@ -8,6 +8,7 @@
 
 #import "CoreDataUtils.h"
 #import "CoreDataConstants.h"
+#import "AppSettings.h"
 
 @implementation CoreDataUtils
 + (NSDictionary *)localStoreOptions
@@ -30,6 +31,9 @@
 	NSString *coreDataCloudContent = [[ubiquityContainer path]
 	                                  stringByAppendingPathComponent:@"data"];
 	NSURL *amendedCloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+
+//	NSString *ubiquityContentName = [[AppSettings sharedInstance] ubiquityContentName];
+
 	return [NSDictionary
 	        dictionaryWithObjectsAndKeys:
 	        [NSNumber numberWithBool:YES],

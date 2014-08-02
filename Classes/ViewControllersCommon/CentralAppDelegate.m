@@ -15,6 +15,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
 #import "KeychainHandler.h"
+#import "AppSettings.h"
 
 
 @interface CentralAppDelegate ()
@@ -32,6 +33,11 @@
 	self.window.tintColor = TEXTCOLOUR;
 
 	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: TEXTCOLOUR, NSFontAttributeName : [UIFont fontWithType:Standard size:17] }];
+
+	if (![[AppSettings sharedInstance] hasUpdated])
+	{
+		[[AppSettings sharedInstance] disablePasswordForUpdate];
+	}
 
 	self.window.tintColor = TINTCOLOUR;
 	self.containerController = self.window.rootViewController;
@@ -66,19 +72,16 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-	NSLog(@"Will resign active");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
 	NSError *error = nil;
 
-	[[CoreDataManager sharedInstance] saveAndBackup:&error];
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	if (nil != error)
 	{
-		NSLog(@"An error occurred while trying to save and backup");
 	}
-//	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

@@ -13,9 +13,9 @@
 #import "ContentNavigationController_iPad.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
-#import "HelpTableViewController.h"
+//#import "HelpTableViewController.h"
 #import "LocalBackupController.h"
-//#import "HelpViewController.h"
+#import "HelpViewController.h"
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
@@ -563,7 +563,7 @@
 
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
-	HelpTableViewController *controller = [[HelpTableViewController alloc] initAsPopoverController];
+	HelpViewController *controller = [[HelpViewController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 
 	if ([Utilities isIPad])

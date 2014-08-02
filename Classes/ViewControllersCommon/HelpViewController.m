@@ -83,7 +83,7 @@ static NSDictionary *helpSubjects()
 	{
 		width = 270;
 	}
-	view.frame = CGRectMake(20, offset, width, 150);
+	view.frame = CGRectMake(20, offset, width, 320);
 	view.backgroundColor = [UIColor clearColor];
 	view.layer.backgroundColor = [UIColor whiteColor].CGColor;
 	view.layer.cornerRadius = 10.0f;
@@ -91,7 +91,7 @@ static NSDictionary *helpSubjects()
 	view.layer.borderWidth = 1.0f;
 
 	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(10, 5, width - 20, 100);
+	label.frame = CGRectMake(10, 5, width - 20, 300);
 	label.text = explanation;
 	label.textAlignment = NSTextAlignmentLeft;
 	label.numberOfLines = 0;

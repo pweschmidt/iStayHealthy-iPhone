@@ -35,7 +35,8 @@ typedef NS_ENUM (int, ResultsType)
 {
 	HIVResultsType = 0,
 	BloodResultsType,
-	OtherResultsType
+	OtherResultsType,
+	LiverResultsType
 };
 
 
@@ -119,6 +120,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kIsVersionUpdate400             @"updatedToVersion400"
 #define kIsVersionUpdate401             @"updatedToVersion401"
 #define kStoreLoadingKey                @"StoreLoaded"
+#define kStoreUbiquityPathKey           @"RealUbiquityPath"
 
 /**
    Database and iCloud

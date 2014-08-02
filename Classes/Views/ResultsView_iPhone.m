@@ -37,6 +37,10 @@
 		case OtherResultsType:
 			[view addSubview:[view otherResultsView]];
 			break;
+
+		case LiverResultsType:
+			[view addSubview:[view liverResultsView]];
+			break;
 	}
 	return view;
 }
@@ -140,6 +144,30 @@
 	if (hasOther)
 	{
 		label.textColor = DARK_GREEN;
+		label.font = [UIFont boldSystemFontOfSize:15];
+	}
+	else
+	{
+		label.textColor = [UIColor lightGrayColor];
+		label.font = [UIFont systemFontOfSize:15];
+	}
+	return label;
+}
+
+- (UIView *)liverResultsView
+{
+	UILabel *label = [[UILabel alloc] init];
+	label.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+	label.backgroundColor = [UIColor clearColor];
+	label.text = NSLocalizedString(@"Liver", nil);
+	label.textAlignment = NSTextAlignmentCenter;
+	BOOL hasOther = ([self.results.liverAlanineTransaminase floatValue] > 0 ||
+	                 [self.results.liverAspartateTransaminase floatValue] > 0 ||
+	                 [self.results.liverAlkalinePhosphatase floatValue] > 0 ||
+	                 [self.results.liverGammaGlutamylTranspeptidase floatValue] > 0);
+	if (hasOther)
+	{
+		label.textColor = [UIColor brownColor];
 		label.font = [UIFont boldSystemFontOfSize:15];
 	}
 	else

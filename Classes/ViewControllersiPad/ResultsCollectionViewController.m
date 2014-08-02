@@ -77,19 +77,22 @@
 	[cell addDateToTitle:results.ResultsDate];
 	ResultsView_iPad *hivResults = [ResultsView_iPad viewForResults:results
 	                                                    resultsType:HIVResultsType
-	                                                          frame:CGRectMake(0, 40, 150, 50)];
+	                                                          frame:CGRectMake(0, 21, 150, 50)];
 
 	ResultsView_iPad *bloods = [ResultsView_iPad viewForResults:results
 	                                                resultsType:BloodResultsType
-	                                                      frame:CGRectMake(0, 90, 150, 20)];
+	                                                      frame:CGRectMake(0, 75, 150, 20)];
 
 	ResultsView_iPad *other = [ResultsView_iPad viewForResults:results
 	                                               resultsType:OtherResultsType
-	                                                     frame:CGRectMake(0, 115, 150, 20)];
+	                                                     frame:CGRectMake(0, 100, 150, 20)];
+
+	ResultsView_iPad *liver = [ResultsView_iPad viewForResults:results resultsType:LiverResultsType frame:CGRectMake(0, 125, 150, 20)];
 
 	[cell.contentView addSubview:hivResults];
 	[cell.contentView addSubview:bloods];
 	[cell.contentView addSubview:other];
+	[cell.contentView addSubview:liver];
 	return cell;
 }
 

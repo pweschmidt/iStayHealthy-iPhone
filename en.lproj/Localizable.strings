@@ -317,8 +317,8 @@
 "Syncing data..." = "Syncing data...";
 "Error" = "Error";
 "You reset your password" = "You disabled your password. You can reenable it using the tools menu.";
-"Can't see your data?" = "Can't see your data?";
-"Try this. Exit app. Go to Settings on Home Screen. Select iCloud Option. In there go to Documents and Data. See that iStayHealthy is set to On." = "Try this. Exit app. Go to Settings on Home Screen. Select iCloud Option. In there go to Documents and Data. See that iStayHealthy is set to On.";
+"DataInvisible?" = "Can't see your data?";
+"DataRecovery" = "Try this: Change the iCloud settings for iStayHealthy. This can be done as follows:\r\nExit the app and open the Settings app. In there select the 'iCloud' option. \r\nIf iCloud is enabled for your device select the 'Documents & 'Data' option. \r\n\r\nIf 'Documents & Data' is turned 'On' you will see iStayHealthy. Turn the switch to change the settings.\r\nThen restart the app \r\n\r\nIf you want to reenable iCloud, make sure both 'Documents & Data' and 'iStayHealthy' are 'On'.";
 "Medication Diary" = "Medication Diary";
 "Other Medication" = "Other Medication";
 "Procedures" = "Procedures";
@@ -350,3 +350,6 @@
 "Show Icons" = "Show Icons";
 "Where are my data?" = "Where are my data?";
 "Icons Explained" = "iStayHealthy Icons Explained";
+"Upgraded" = "iStayHealthy Upgraded";
+"Please reset password after upgrade" = "Please reset password after upgrading iStayHealthy";
+"DataVisibility" = "If you can't see your data, go to the (?) help menu in the toolbar for tips.";

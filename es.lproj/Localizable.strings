@@ -322,8 +322,8 @@
 "Syncing data..." = "Sincronización datos...";
 "Error" = "Error";
 "You reset your password" = "Usted discapacitado su contraseña. Usted puede activar usando el menú Herramientas.";
-"Can't see your data?" = "¿No puedes ver tus datos?";
-"Try this. Exit app. Go to Settings on Home Screen. Select iCloud Option. In there go to Documents and Data. See that iStayHealthy is set to On." = "Pruebe esto. Salida app. Vaya a configuración de pantalla de inicio. Seleccione la opción de iCloud. De ahí a los documentos y datos. Ver que esa iStayHealthy está ajustado en On.";
+"DataInvisible?" = "¿No puedes ver tus datos?";
+"DataRecovery" = "Pruebe esto. Salida app. Vaya a configuración de pantalla de inicio. Seleccione la opción de iCloud. De ahí a los documentos y datos. Ver que esa iStayHealthy está ajustado en On.";
 "Medication Diary" = "Diario de Med.";
 "Other Medication" = "Otros Med.";
 "Procedures" = "Enfermedades";
@@ -356,3 +356,6 @@
 "Show Icons" = "Mostrar Iconos";
 "Where are my data?" = "¿Dónde están mis datos?";
 "Icons Explained" = "iStayHealthy Iconos";
+"Upgraded" = "iStayHealthy Upgraded";
+"Please reset password after upgrade" = "Please reset password after upgrading iStayHealthy";
+"DataVisibility" = "If you can't see your data, go to the (?) help menu in the toolbar for tips.";

@@ -36,6 +36,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+	BOOL hasImportData = [CoreDataManager sharedInstance].hasDataForImport;
+	if (hasImportData)
+	{
+		return 3;
+	}
 	return 2;
 }
 
@@ -55,15 +60,21 @@
 
 	cell.contentView.backgroundColor = [UIColor whiteColor];
 	cell.textLabel.textColor = TEXTCOLOUR;
-	cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	if (0 == indexPath.section)
 	{
+		cell.textLabel.font = [UIFont fontWithType:Bold size:standard];
+		cell.textLabel.text = NSLocalizedString(@"Restore locally", nil);
+	}
+	else if (1 == indexPath.section)
+	{
+		cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
 		cell.textLabel.text = NSLocalizedString(@"Save locally", nil);
 	}
 	else
 	{
-		cell.textLabel.text = NSLocalizedString(@"Restore locally", nil);
+		cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
+		cell.textLabel.text = NSLocalizedString(@"Import Data", nil);
 	}
 	return cell;
 }
@@ -71,6 +82,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (0 == indexPath.section)
+	{
+		[[CoreDataManager sharedInstance] restoreLocallyWithCompletionBlock: ^(BOOL success, NSError *error) {
+		    if (success)
+		    {
+		        [[[UIAlertView alloc]
+		          initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+		                       message:NSLocalizedString(@"Data were retrieved locally.", nil)
+		                      delegate:nil
+		             cancelButtonTitle:@"OK" otherButtonTitles:nil]
+		         show];
+			}
+		    else
+		    {
+		        [[[UIAlertView alloc]
+		          initWithTitle:NSLocalizedString(@"Error restoring", nil)
+		                       message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
+		                      delegate:nil
+		             cancelButtonTitle:@"OK" otherButtonTitles:nil]
+		         show];
+			}
+		}];
+	}
+	else if (1 == indexPath.section)
 	{
 		NSError *error = nil;
 		BOOL success = [[CoreDataManager sharedInstance] saveAndBackup:&error];
@@ -95,27 +129,9 @@
 	}
 	else
 	{
-		[[CoreDataManager sharedInstance] restoreLocallyWithCompletionBlock: ^(BOOL success, NSError *error) {
-		    if (success)
-		    {
-		        [[[UIAlertView alloc]
-		          initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-		                       message:NSLocalizedString(@"Data were retrieved locally.", nil)
-		                      delegate:nil
-		             cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		         show];
-			}
-		    else
-		    {
-		        [[[UIAlertView alloc]
-		          initWithTitle:NSLocalizedString(@"Error restoring", nil)
-		                       message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
-		                      delegate:nil
-		             cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		         show];
-			}
-		}];
+		[[CoreDataManager sharedInstance] importFromTmpFileURL];
 	}
+	[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
 
 #pragma mark - override the notification handlers
