@@ -357,5 +357,8 @@
 "Where are my data?" = "Wo sind meine Daten?";
 "Icons Explained" = "iStayHealthy Symbole";
 "Upgraded" = "iStayHealthy Upgraded";
-"Please reset password after upgrade" = "Bitte das Kennwort nach dem Update neu einstellen";
+"Please reset password after upgrade" = "Bitte das Kennwort nach dem Update neu einstellen.";
 "DataVisibility" = "Sollten die Daten nicht sichtbar sein - das (?) Menü im Toolbar hat Hinweise.";
+"Import Succeeded" = "Daten Importiert";
+"Your Data were successfully imported. Only unique entries were saved" = "Die Daten wurden importiert. Duplikate wurden ignoriert.";
+"Your data could not be imported due to an error." = "Es gab einen Fehler beim Importieren der Daten.";

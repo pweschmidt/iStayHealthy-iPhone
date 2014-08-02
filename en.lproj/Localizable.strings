@@ -351,5 +351,8 @@
 "Where are my data?" = "Where are my data?";
 "Icons Explained" = "iStayHealthy Icons Explained";
 "Upgraded" = "iStayHealthy Upgraded";
-"Please reset password after upgrade" = "Please reset password after upgrading iStayHealthy";
+"Please reset password after upgrade" = "Please reset password after upgrading iStayHealthy.";
 "DataVisibility" = "If you can't see your data, go to the (?) help menu in the toolbar for tips.";
+"Import Succeeded" = "Import Succeeded";
+"Your Data were successfully imported. Only unique entries were saved" = "Your Data were successfully imported. Only unique entries were saved";
+"Your data could not be imported due to an error." = "Your data could not be imported due to an error.";

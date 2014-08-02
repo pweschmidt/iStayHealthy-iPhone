@@ -69,6 +69,7 @@
 			[helpString appendString:passReset];
 		}
 		NSString *data = NSLocalizedString(@"DataVisibility", nil);
+		[helpString appendString:@" "];
 		[helpString appendString:data];
 		return helpString;
 	}
