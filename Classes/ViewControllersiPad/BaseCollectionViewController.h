@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UIPopoverController *customPopoverController;
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) UILabel *activityLabel;
+@property (nonatomic, assign) BOOL hasNavHeader;
 - (void)reloadSQLData:(NSNotification *)notification;
 - (void)startAnimation:(NSNotification *)notification;
 - (void)stopAnimation:(NSNotification *)notification;

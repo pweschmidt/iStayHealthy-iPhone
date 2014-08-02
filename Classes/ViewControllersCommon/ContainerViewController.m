@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "Utilities.h"
 #import "KeychainHandler.h"
+#import "AppSettings.h"
 
 @interface ContainerViewController ()
 @property (nonatomic, strong) LoginViewController *loginController;
@@ -42,8 +43,8 @@
 		[self addChildViewController:self.contentController];
 	}
 
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
+	[[AppSettings sharedInstance] disablePasswordForUpdate];
+	BOOL isPasswordEnabled = [[AppSettings sharedInstance] hasPasswordEnabled];
 	if (isPasswordEnabled)
 	{
 #ifdef APPDEBUG

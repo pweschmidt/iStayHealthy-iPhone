@@ -21,7 +21,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
 #import "CoreXMLWriter.h"
-#import "HelpTableViewController.h"
+#import "HelpViewController.h"
 #import "LocalBackupController.h"
 
 #define kHeaderViewIdentifier @"CollectionHeaderViewIdentifier"
@@ -45,11 +45,17 @@
 	self.collectionViewLayout.minimumInteritemSpacing = 20;
 	self.collectionViewLayout.minimumLineSpacing = 20;
 
-	CGRect frame = CGRectMake(20, 44, self.view.frame.size.width - 40, self.view.frame.size.height - 88);
+	CGFloat yOffset = 44;
+	if (self.hasNavHeader)
+	{
+		yOffset = 0;
+	}
+
+	CGRect frame = CGRectMake(20, yOffset, self.view.frame.size.width - 40, self.view.frame.size.height - 88);
 	CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
 	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
 	{
-		frame = CGRectMake(20, 44, frame.size.height - 88, frame.size.width - 40);
+		frame = CGRectMake(20, yOffset, frame.size.height - 88, frame.size.width - 40);
 		toolbarFrame = CGRectMake(0, self.view.frame.size.width - 44, self.view.frame.size.height, 44);
 	}
 
@@ -350,7 +356,7 @@
 - (void)showPasswordControllerFromButton:(UIBarButtonItem *)button
 {
 	SettingsTableViewController *controller = [[SettingsTableViewController alloc] initAsPopoverController];
-
+	controller.hasNavHeader = YES;
 	controller.popoverDelegate = self;
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 
@@ -432,6 +438,7 @@
 	if ([[DBSession sharedSession] isLinked])
 	{
 		DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
+		controller.hasNavHeader = YES;
 		UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
@@ -444,6 +451,7 @@
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button
 {
 	InformationTableViewController *controller = [[InformationTableViewController alloc] initAsPopoverController];
+	controller.hasNavHeader = YES;
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
@@ -451,7 +459,7 @@
 
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
-	HelpTableViewController *controller = [[HelpTableViewController alloc] initAsPopoverController];
+	HelpViewController *controller = [[HelpViewController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }
@@ -459,6 +467,7 @@
 - (void)showLocalBackupControllerFromButton:(UIBarButtonItem *)button
 {
 	LocalBackupController *controller = [[LocalBackupController alloc] initAsPopoverController];
+	controller.hasNavHeader = YES;
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }

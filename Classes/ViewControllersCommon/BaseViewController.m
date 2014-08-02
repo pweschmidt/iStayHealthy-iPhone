@@ -13,9 +13,9 @@
 #import "ContentNavigationController_iPad.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
-#import "HelpTableViewController.h"
+//#import "HelpTableViewController.h"
 #import "LocalBackupController.h"
-//#import "HelpViewController.h"
+#import "HelpViewController.h"
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
@@ -410,6 +410,7 @@
 
 	if ([Utilities isIPad])
 	{
+		controller.hasNavHeader = YES;
 		controller.popoverDelegate = self;
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
@@ -533,6 +534,7 @@
 		UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 		if ([Utilities isIPad])
 		{
+			controller.hasNavHeader = YES;
 			[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 		}
 		else
@@ -553,6 +555,7 @@
 
 	if ([Utilities isIPad])
 	{
+		controller.hasNavHeader = YES;
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
 	else
@@ -563,7 +566,7 @@
 
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
-	HelpTableViewController *controller = [[HelpTableViewController alloc] initAsPopoverController];
+	HelpViewController *controller = [[HelpViewController alloc] initAsPopoverController];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 
 	if ([Utilities isIPad])
@@ -583,6 +586,7 @@
 
 	if ([Utilities isIPad])
 	{
+		controller.hasNavHeader = YES;
 		[self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 	}
 	else

@@ -13,6 +13,7 @@
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
 #import "Utilities.h"
+#import "AppSettings.h"
 
 @interface HamburgerMenuTableViewController ()
 @property (nonatomic, strong) NSArray *menus;
@@ -48,13 +49,24 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	return 64;
+	return 84;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 84)];
 	view.backgroundColor = kDarkBackgroundColor;
+
+	NSString *version = [[AppSettings sharedInstance] versionString];
+	NSString *name = [NSString stringWithFormat:@"iStayHealthy %@", version];
+	UILabel *versionLabel = [UILabel standardLabel];
+	versionLabel.frame = CGRectMake(20, 64, self.view.bounds.size.width, 20);
+	versionLabel.text = name;
+	versionLabel.font = [UIFont fontWithType:BoldItalic size:standard];
+	versionLabel.textAlignment = NSTextAlignmentLeft;
+	versionLabel.textColor = [UIColor whiteColor];
+	[view addSubview:versionLabel];
+
 	return view;
 }
 

@@ -66,19 +66,16 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-	NSLog(@"Will resign active");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
 	NSError *error = nil;
 
-	[[CoreDataManager sharedInstance] saveAndBackup:&error];
+	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 	if (nil != error)
 	{
-		NSLog(@"An error occurred while trying to save and backup");
 	}
-//	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

@@ -322,8 +322,8 @@
 "Syncing data..." = "Synchronisation de données...";
 "Error" = "Erreur";
 "You reset your password" = "Vous avez désactivé votre mot de passe. Vous pouvez réactiver à l'aide du menu Outils.";
-"Can't see your data?" = "Ne peut pas voir vos données ?";
-"Try this. Exit app. Go to Settings on Home Screen. Select iCloud Option. In there go to Documents and Data. See that iStayHealthy is set to On." = "Essayez ceci. Sortie app. Allez dans réglages sur l'écran d'accueil. Sélectionnez l'Option d'iCloud. En il aller aux Documents et de données. Voir qu'iStayHealthy est définie sur On.";
+"DataInvisible?" = "Ne peut pas voir vos données ?";
+"DataRecovery" = "Essayez ceci : modifier les paramètres d'iCloud pour iStayHealthy. Cela peut se faire comme suit : \r\nExit iStayHealthy et ouvrez Réglages. Sélectionnez iCloud. Si iCloud est activé pour votre appareil sélectionnez l'option 'Documents et Data'\r\n\r\nSi 'Documents et données' est activée 'On' vous verrez iStayHealthy. \r\nTournez le commutateur pour modifier les paramètres. Quitter l'application et redémarrer iStayHealthy";
 "Medication Diary" = "Journal Méd.";
 "Other Medication" = "Autres Méd.";
 "Procedures" = "Maladies";
@@ -356,3 +356,9 @@
 "Show Icons" = "Afficher les icônes";
 "Where are my data?" = "Où sont mes données ?";
 "Icons Explained" = "Icônes d'iStayHealthy";
+"Upgraded" = "iStayHealthy Mis à Jour";
+"Please reset password after upgrade" = "Réinitialiser mot de passe après la mise à niveau d'iStayHealthy.";
+"DataVisibility" = "Si vous ne voyez pas vos données, accédez au menu aide (?) dans la barre d'outils pour obtenir des conseils.";
+"Import Succeeded" = "Importer Réussi";
+"Your Data were successfully imported. Only unique entries were saved" = "Vos données ont été importées avec succès. Seules les inscriptions uniques ont été enregistrés.";
+"Your data could not be imported due to an error." = "Vos données n'ont pas pu être importés en raison d'une erreur.";
