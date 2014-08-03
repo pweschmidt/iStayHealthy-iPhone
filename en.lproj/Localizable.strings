@@ -262,7 +262,7 @@
 "No" = "No";
 "Don't Cheat!" = "Don't Cheat!";
 "Only today's and yesterday's entries can be changed." = "Only today's and yesterday's entries can be changed.";
-"No results available" = "No results available";
+"No results available" = "No results available.";
 "My Current Medication Diary" = "My Current Medication Diary";
 "No Diary Available" = "No Diary Available";
 "Last diary ending" = "Last diary ending";
@@ -359,3 +359,4 @@
 "Get stored data set - if available" = "Get stored data set - if available";
 "Saving current data set." = "Saving current data set.";
 "There are data to import." = "There are data to import.";
+"iCloudLoading" = "If iCloud is On - loading of data can take several minutes.";

@@ -267,7 +267,7 @@
 "No" = "No";
 "Don't Cheat!" = "No hagas trampa!";
 "Only today's and yesterday's entries can be changed." = "Se pueden cambiar sólo las entradas de ayer y de hoy.";
-"No results available" = "No hay resultados disponibles";
+"No results available" = "No hay resultados disponibles.";
 "My Current Medication Diary" = "Mi diario de medicación actual";
 "No Diary Available" = "No hay diario disponible";
 "Last diary ending" = "Última entrada en el diario";
@@ -365,3 +365,4 @@
 "Get stored data set - if available" = "Obtener el conjunto de datos.";
 "Saving current data set." = "Ahorro actual conjunto de datos.";
 "There are data to import." = "No hay datos para importar.";
+"iCloudLoading" = "Si iCloud es sobre - carga de datos puede tardar varios minutos.";

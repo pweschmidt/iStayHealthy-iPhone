@@ -267,7 +267,7 @@
 "No" = "Nein";
 "Don't Cheat!" = "Nicht Schummeln!";
 "Only today's and yesterday's entries can be changed." = "Nur heute oder gestern können gesichert werden.";
-"No results available" = "Keine Werte";
+"No results available" = "Keine Werte.";
 "My Current Medication Diary" = "Aktuelles Tagebuch";
 "No Diary Available" = "Kein Tagebuch";
 "Last diary ending" = "Letzter Tagebuch Eintrag";
@@ -365,3 +365,4 @@
 "Get stored data set - if available" = "Lokale Daten (sofern vorhanden) Einlese";
 "Saving current data set." = "Aktuelle Daten lokal sichern.";
 "There are data to import." = "Es gibt Daten zum Importieren.";
+"iCloudLoading" = "Falls iCloud 'On' - bitte warten bis Daten geladen sind!";

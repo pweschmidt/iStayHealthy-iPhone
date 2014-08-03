@@ -182,6 +182,8 @@ static NSDictionary *defaultiPadAxisAttributes()
 	emptyLabel.backgroundColor = [UIColor clearColor];
 	emptyLabel.textAlignment = NSTextAlignmentCenter;
 	emptyLabel.textColor = TEXTCOLOUR;
+	emptyLabel.numberOfLines = 0;
+	emptyLabel.lineBreakMode = NSLineBreakByWordWrapping;
 	emptyLabel.font = [UIFont fontWithType:Light size:20];
 	emptyLabel.text = NSLocalizedString(@"No results available", nil);
 	return emptyLabel;
