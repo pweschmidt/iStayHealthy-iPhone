@@ -305,7 +305,7 @@
 "Restore Finished" = "Laden Beendet";
 "Data were retrieved locally." = "Daten wurden lokal geladen.";
 "Error restoring" = "Fehler beim Laden";
-"There was an error when retrieving data locally." = "Es gab ein Fehler beim Laden lokaler Daten.";
+"There was an error when retrieving data locally." = "Entweder gab es keine Daten zum Laden, oder es gab ein Fehler bei der Dateneinlese.";
 "Link?" = "Verbinden?";
 "You are not linked to Dropbox account. Do you want to link it up now?" = "Es gibt keine Verbindung zu Dropbox. Herstellen?";
 "Unlink?" = "Verbindung Löschen?";
@@ -323,7 +323,7 @@
 "Error" = "Fehler";
 "You reset your password" = "Dass Kennwort wurde gelöscht. Es kann in den Einstellungen neu gesetzt werden.";
 "DataInvisible?" = "Keine Daten sichtbar?";
-"DataRecovery" = "Versuch die iCloud Einstellung für iStayHealthy zu ändern. Das geht wie folgt:\r\niStayHealthy schließen und die Einstellungs app öffnen. Darin die 'iCloud' auswählen. \r\nSofern iCloud eingestellt ist die 'Dokumente & Daten' Einstellung auswählen . \r\n\r\nWenn 'Dokumente & Daten' 'On' ist kann man iStayHealthy sehen und die iCloud Einstellung ändern.\r\niStayHealthy neu starten \r\n\r\nMan iCloud für die app wieder auf Ein stellen. Dabei müssen sowohl die 'Dokumente & Daten' wie auch die 'iStayHealthy' Einstellungen auf 'On' sein.";
+"DataRecovery" = "Versuch die iCloud Einstellung für iStayHealthy zu ändern. Das geht wie folgt:\r\niStayHealthy schließen und die Einstellungs app öffnen. Darin die 'iCloud' auswählen. \r\nSofern iCloud eingestellt ist die 'Dokumente & Daten' Einstellung auswählen . \r\n\r\nWenn 'Dokumente & Daten' 'On' ist kann man iStayHealthy sehen und die iCloud Einstellung ändern.\r\niStayHealthy neu starten.";
 "Medication Diary" = "Med. Tagebuch";
 "Other Medication" = "Allg. Med.";
 "Procedures" = "Krankheiten/OPs";
@@ -362,3 +362,6 @@
 "Import Succeeded" = "Daten Importiert";
 "Your Data were successfully imported. Only unique entries were saved" = "Die Daten wurden importiert. Duplikate wurden ignoriert.";
 "Your data could not be imported due to an error." = "Es gab einen Fehler beim Importieren der Daten.";
+"Get stored data set - if available" = "Lokale Daten (sofern vorhanden) Einlese";
+"Saving current data set." = "Aktuelle Daten lokal sichern.";
+"There are data to import." = "Es gibt Daten zum Importieren.";

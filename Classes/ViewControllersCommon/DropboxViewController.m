@@ -356,6 +356,7 @@
 	              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
 	                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	             show];
+	            [self stopAnimation:nil];
 			}
 	        else
 	        {
@@ -367,8 +368,9 @@
 		}
 	    else
 	    {
+	        [self stopAnimation:nil];
 	        [[[UIAlertView alloc]
-	          initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
+	          initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
 	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	         show];
 		}
@@ -393,6 +395,7 @@
 		}
 	    else
 	    {
+	        [self stopAnimation:nil];
 	        [[[UIAlertView alloc]
 	          initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
 	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]

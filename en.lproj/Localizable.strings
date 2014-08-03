@@ -300,7 +300,7 @@
 "Restore Finished" = "Restore Finished";
 "Data were retrieved locally." = "Data were retrieved locally.";
 "Error restoring" = "Error restoring";
-"There was an error when retrieving data locally." = "There was an error when retrieving data locally.";
+"There was an error when retrieving data locally." = "There were no data to restore - or an error occurred during restore.";
 "Link?" = "Link?";
 "You are not linked to Dropbox account. Do you want to link it up now?" = "You are not linked to Dropbox account. Do you want to link it up now?";
 "Unlink?" = "Unlink?";
@@ -318,7 +318,7 @@
 "Error" = "Error";
 "You reset your password" = "You disabled your password. You can reenable it using the tools menu.";
 "DataInvisible?" = "Can't see your data?";
-"DataRecovery" = "Try this: Change the iCloud settings for iStayHealthy. This can be done as follows:\r\nExit the app and open the Settings app. In there select the 'iCloud' option. \r\nIf iCloud is enabled for your device select the 'Documents & 'Data' option. \r\n\r\nIf 'Documents & Data' is turned 'On' you will see iStayHealthy. Turn the switch to change the settings.\r\nThen restart the app \r\n\r\nIf you want to reenable iCloud, make sure both 'Documents & Data' and 'iStayHealthy' are 'On'.";
+"DataRecovery" = "Try this: Change the iCloud settings for iStayHealthy. This can be done as follows:\r\nExit the app and open the Settings app. In there select the 'iCloud' option. \r\nIf iCloud is enabled for your device select the 'Documents & 'Data' option. \r\n\r\nIf 'Documents & Data' is turned 'On' you will see iStayHealthy. Turn the switch to change the iCloud settings for iStayHealthy.\r\nThen restart the app.";
 "Medication Diary" = "Medication Diary";
 "Other Medication" = "Other Medication";
 "Procedures" = "Procedures";
@@ -356,3 +356,6 @@
 "Import Succeeded" = "Import Succeeded";
 "Your Data were successfully imported. Only unique entries were saved" = "Your Data were successfully imported. Only unique entries were saved";
 "Your data could not be imported due to an error." = "Your data could not be imported due to an error.";
+"Get stored data set - if available" = "Get stored data set - if available";
+"Saving current data set." = "Saving current data set.";
+"There are data to import." = "There are data to import.";
