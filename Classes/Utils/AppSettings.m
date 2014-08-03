@@ -68,6 +68,9 @@
 			NSString *passReset = NSLocalizedString(@"Please reset password after upgrade", nil);
 			[helpString appendString:passReset];
 		}
+		NSString *iCloud = NSLocalizedString(@"iCloudLoading", nil);
+		[helpString appendString:@" "];
+		[helpString appendString:iCloud];
 		NSString *data = NSLocalizedString(@"DataVisibility", nil);
 		[helpString appendString:@" "];
 		[helpString appendString:data];

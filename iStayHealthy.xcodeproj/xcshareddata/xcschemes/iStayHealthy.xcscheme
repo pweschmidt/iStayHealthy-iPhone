@@ -37,6 +37,14 @@
                BlueprintName = "iStayHealthy Tests"
                ReferencedContainer = "container:iStayHealthy.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "TimeCounterTests">
+               </Test>
+               <Test
+                  Identifier = "XMLTests/testHasPreamble">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

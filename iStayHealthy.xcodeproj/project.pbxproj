@@ -155,6 +155,9 @@
 		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
 		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
 		0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */; };
+		0BB02F17198E4205003B5959 /* XMLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB02F16198E4205003B5959 /* XMLTests.m */; };
+		0BB02F1A198E433B003B5959 /* CoreXMLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB02F19198E433B003B5959 /* CoreXMLTools.m */; };
+		0BB02F1B198E433B003B5959 /* CoreXMLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB02F19198E433B003B5959 /* CoreXMLTools.m */; };
 		0BB084E51928E181007C83E5 /* PWESResultsTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB084E41928E181007C83E5 /* PWESResultsTypes.m */; };
 		0BB084E81929130B007C83E5 /* PWESMedPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB084E71929130B007C83E5 /* PWESMedPlotArea.m */; };
 		0BB5668D191E132F00731739 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB5668C191E132F00731739 /* XCTest.framework */; };
@@ -175,6 +178,8 @@
 		0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */; };
 		0BC7E55F198825040017ED15 /* HelpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E55E198825040017ED15 /* HelpTableViewController.m */; };
 		0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E561198827CA0017ED15 /* LocalBackupController.m */; };
+		0BD057D0198E3C5A00D7D142 /* Conflict.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CE198E3C5A00D7D142 /* Conflict.isth */; };
+		0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -571,6 +576,9 @@
 		0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSeinfeldCalendarTableViewController.m; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.m; sourceTree = "<group>"; };
 		0BACE94C18F02DDA008F4D13 /* PWESCustomTextfieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESCustomTextfieldCell.h; path = TableCells/PWESCustomTextfieldCell.h; sourceTree = "<group>"; };
 		0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESCustomTextfieldCell.m; path = TableCells/PWESCustomTextfieldCell.m; sourceTree = "<group>"; };
+		0BB02F16198E4205003B5959 /* XMLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTests.m; sourceTree = "<group>"; };
+		0BB02F18198E433B003B5959 /* CoreXMLTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreXMLTools.h; path = CoreXML/CoreXMLTools.h; sourceTree = "<group>"; };
+		0BB02F19198E433B003B5959 /* CoreXMLTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLTools.m; path = CoreXML/CoreXMLTools.m; sourceTree = "<group>"; };
 		0BB084E31928E181007C83E5 /* PWESResultsTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESResultsTypes.h; path = Dashboard/PWESResultsTypes.h; sourceTree = "<group>"; };
 		0BB084E41928E181007C83E5 /* PWESResultsTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESResultsTypes.m; path = Dashboard/PWESResultsTypes.m; sourceTree = "<group>"; };
 		0BB084E61929130B007C83E5 /* PWESMedPlotArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESMedPlotArea.h; path = Dashboard/PWESMedPlotArea.h; sourceTree = "<group>"; };
@@ -611,6 +619,8 @@
 		0BC7E55E198825040017ED15 /* HelpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpTableViewController.m; path = ViewControllersCommon/HelpTableViewController.m; sourceTree = "<group>"; };
 		0BC7E560198827CA0017ED15 /* LocalBackupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalBackupController.h; path = ViewControllersCommon/LocalBackupController.h; sourceTree = "<group>"; };
 		0BC7E561198827CA0017ED15 /* LocalBackupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalBackupController.m; path = ViewControllersCommon/LocalBackupController.m; sourceTree = "<group>"; };
+		0BD057CE198E3C5A00D7D142 /* Conflict.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Conflict.isth; sourceTree = "<group>"; };
+		0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iStayHealthy.isth; sourceTree = "<group>"; };
 		0BF338A119785D03004C3FB4 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ViewControllersCommon/HelpViewController.h; sourceTree = "<group>"; };
 		0BF338A219785D03004C3FB4 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ViewControllersCommon/HelpViewController.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1025,6 +1035,7 @@
 			children = (
 				0BB56691191E132F00731739 /* Supporting Files */,
 				0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */,
+				0BB02F16198E4205003B5959 /* XMLTests.m */,
 			);
 			path = "iStayHealthy Tests";
 			sourceTree = "<group>";
@@ -1032,6 +1043,8 @@
 		0BB56691191E132F00731739 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0BD057CE198E3C5A00D7D142 /* Conflict.isth */,
+				0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */,
 				0BB56692191E132F00731739 /* iStayHealthy Tests-Info.plist */,
 				0BB56693191E132F00731739 /* InfoPlist.strings */,
 				0BB56698191E132F00731739 /* iStayHealthy Tests-Prefix.pch */,
@@ -1187,6 +1200,8 @@
 				C45F838E17B6A61F0042E63A /* CoreXMLReader.m */,
 				C4BCF0B517B7C4D600F1E0F7 /* CoreXMLWriter.h */,
 				C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */,
+				0BB02F18198E433B003B5959 /* CoreXMLTools.h */,
+				0BB02F19198E433B003B5959 /* CoreXMLTools.m */,
 			);
 			name = CoreXML;
 			sourceTree = "<group>";
@@ -1793,7 +1808,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */,
 				0BB56695191E132F00731739 /* InfoPlist.strings in Resources */,
+				0BD057D0198E3C5A00D7D142 /* Conflict.isth in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1984,6 +2001,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */,
+				0BB02F17198E4205003B5959 /* XMLTests.m in Sources */,
+				0BB02F1B198E433B003B5959 /* CoreXMLTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2141,6 +2160,7 @@
 				0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
+				0BB02F1A198E433B003B5959 /* CoreXMLTools.m in Sources */,
 				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
 				0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,

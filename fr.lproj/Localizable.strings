@@ -82,9 +82,9 @@
 "Suggestions?" = "Suggestions?";
 "Feedback?" = "Remarques?";
 "Email Results" = "Résultats par Email";
-"Unlink DropBox" = "Séparer de DropBox";
-"Save to DropBox" = "Sauvegarder sur DropBox";
-"Get from DropBox" = "Restaurer à partir DropBox";
+"Unlink Dropbox" = "Séparer de DropBox";
+"Save to Dropbox" = "Sauvegarder sur DropBox";
+"Get from Dropbox" = "Restaurer à partir DropBox";
 "Backup Started" = "Sauvegarde terminée";
 "Data were sent to DropBox iStayHealthy.xml." = "Données sont copiées sur DropBox iStayHealthy.isth.";
 "Restore Data" = "Restauration terminée";
@@ -267,7 +267,7 @@
 "No" = "No";
 "Don't Cheat!" = "Ne trichez pas !";
 "Only today's and yesterday's entries can be changed." = "Seules les inscriptions d'hier et d'aujourd'hui peuvent être modifiées.";
-"No results available" = "Aucun résultat disponible";
+"No results available" = "Aucun résultat disponible.";
 "My Current Medication Diary" = "Journal actuel";
 "No Diary Available" = "Aucun journal disponible";
 "Last diary ending" = "Dernière entrée du journal";
@@ -305,7 +305,7 @@
 "Restore Finished" = "Restauration est terminée";
 "Data were retrieved locally." = "Données ont été extraites.";
 "Error restoring" = "Erreur pendant la restauration";
-"There was an error when retrieving data locally." = "Il y a une erreur pendant la restauration des données.";
+"There was an error when retrieving data locally." = "Il n'y a pas de données à restaurer - ou une erreur est survenue pendant la restauration.";
 "Link?" = "Link?";
 "You are not linked to Dropbox account. Do you want to link it up now?" = "Vous ne sont pas liés au compte Dropbox. Vous voulez lier maintenant ?";
 "Unlink?" = "Supprimer le lien?";
@@ -362,3 +362,7 @@
 "Import Succeeded" = "Importer Réussi";
 "Your Data were successfully imported. Only unique entries were saved" = "Vos données ont été importées avec succès. Seules les inscriptions uniques ont été enregistrés.";
 "Your data could not be imported due to an error." = "Vos données n'ont pas pu être importés en raison d'une erreur.";
+"Get stored data set - if available" = "Obtenir l'ensemble des données.";
+"Saving current data set." = "Enregistrer le jeu de données actuel.";
+"There are data to import." = "Il y a des données à importer.";
+"iCloudLoading" = "Si iCloud est sur - chargement de données peut prendre plusieurs minutes.";

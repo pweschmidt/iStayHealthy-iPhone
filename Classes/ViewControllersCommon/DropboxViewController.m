@@ -109,11 +109,11 @@
 			switch (indexPath.row)
 			{
 				case 0:
-					label.text = NSLocalizedString(@"Save to Dropbox", @"Save to Dropbox");
+					label.text = NSLocalizedString(@"Save to Dropbox", nil);
 					break;
 
 				case 1:
-					label.text = NSLocalizedString(@"Get from Dropbox", @"Get from Dropbox");
+					label.text = NSLocalizedString(@"Get from Dropbox", nil);
 					break;
 			}
 		}
@@ -124,7 +124,7 @@
 	}
 	else
 	{
-		label.text = NSLocalizedString(@"Unlink DropBox", @"Unlink DropBox");
+		label.text = NSLocalizedString(@"Unlink Dropbox", @"Unlink DropBox");
 	}
 
 	[cell.contentView addSubview:label];
@@ -356,6 +356,7 @@
 	              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
 	                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	             show];
+	            [self stopAnimation:nil];
 			}
 	        else
 	        {
@@ -367,8 +368,9 @@
 		}
 	    else
 	    {
+	        [self stopAnimation:nil];
 	        [[[UIAlertView alloc]
-	          initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
+	          initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
 	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
 	         show];
 		}
@@ -393,6 +395,7 @@
 		}
 	    else
 	    {
+	        [self stopAnimation:nil];
 	        [[[UIAlertView alloc]
 	          initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
 	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]

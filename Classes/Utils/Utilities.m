@@ -11,6 +11,16 @@
 #import <math.h>
 #import <QuartzCore/QuartzCore.h>
 
+static NSDictionary *medNameMap()
+{
+	NSDictionary *map = @{ @"trii" : @"triumeq",
+		                   @"sunvepra" : @"FDA",
+		                   @"elvitegravir" : @"vitekta",
+		                   @"cobicistat" : @"tybost",
+		                   @"dalkinza" : @"FDA" };
+	return map;
+}
+
 @implementation Utilities
 
 + (CGRect)frameFromSize:(CGSize)size
@@ -462,7 +472,14 @@
 	NSString *imageName = [(NSString *)[stringArray objectAtIndex:0] lowercaseString];
 	NSArray *finalArray = [imageName componentsSeparatedByString:@" "];
 
-	return [(NSString *)[finalArray objectAtIndex:0] lowercaseString];
+	NSString *revisedImageName = (NSString *)[[finalArray objectAtIndex:0] lowercaseString];
+	NSString *foundMappedName = [medNameMap() objectForKey:revisedImageName];
+	if (nil != foundMappedName)
+	{
+		revisedImageName = foundMappedName;
+	}
+
+	return revisedImageName;
 }
 
 + (UIImage *)imageFromMedName:(NSString *)medName

@@ -19,6 +19,7 @@
 #import "Contacts+Handling.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
+#import "CoreXMLTools.h"
 
 @interface CoreXMLReader ()
 @property (nonatomic, strong) NSString *filePath;
@@ -63,7 +64,20 @@
 	}
 	self.successBlock = completionBlock;
 	NSData *data = [xmlData copy];
-//	NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	NSError *error = nil;
+	NSData *cleanedData = [self validXMLDataForData:data error:&error];
+	if (nil == cleanedData)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, error);
+		}
+		return;
+	}
+#ifdef APPDEBUG
+	NSString *xmlString = [[NSString alloc] initWithData:cleanedData encoding:NSUTF8StringEncoding];
+	NSLog(@"**** XMLString \r\n %@ \r\n ****", xmlString);
+#endif
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
 	parser.delegate = self;
 	[self setUpArrays];
@@ -71,6 +85,24 @@
 		[parser parse];
 	};
 	[self loadData:executionBlock];
+}
+
+- (NSData *)validXMLDataForData:(NSData *)xmlData error:(NSError **)error
+{
+	NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
+	BOOL isValidXML = [CoreXMLTools validateXMLString:xmlString error:error];
+	NSData *cleanedData = nil;
+
+	if (isValidXML)
+	{
+		return xmlData;
+	}
+	else
+	{
+		NSString *cleanedString = [CoreXMLTools cleanedXMLString:xmlString error:error];
+		isValidXML = [CoreXMLTools validateXMLString:cleanedString error:error];
+		return cleanedData;
+	}
 }
 
 - (void)setUpArrays

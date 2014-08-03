@@ -79,6 +79,22 @@
 	return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+	if (0 == section)
+	{
+		return NSLocalizedString(@"Get stored data set - if available", nil);
+	}
+	else if (1 == section)
+	{
+		return NSLocalizedString(@"Saving current data set.", nil);
+	}
+	else
+	{
+		return NSLocalizedString(@"There are data to import.", nil);
+	}
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (0 == indexPath.section)
