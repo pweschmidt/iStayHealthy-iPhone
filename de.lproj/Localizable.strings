@@ -82,9 +82,9 @@
 "Suggestions?" = "Vorschläge?";
 "Feedback?" = "Kommentare?";
 "Email Results" = "Werte versenden";
-"Unlink DropBox" = "DropBox Verbindung löschen";
-"Save to DropBox" = "Daten Sichern";
-"Get from DropBox" = "Daten herunterladen";
+"Unlink Dropbox" = "DropBox Verbindung löschen";
+"Save to Dropbox" = "Daten Sichern";
+"Get from Dropbox" = "Daten herunterladen";
 "Backup Finished" = "Backup Beendet";
 "Data were sent to DropBox iStayHealthy.xml." = "Daten werden nach DropBox iStayHealthy.isth kopiert.";
 "Restore Data" = "Datenwiederherstellung beendet";

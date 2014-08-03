@@ -82,9 +82,9 @@
 "Suggestions?" = "Suggestions?";
 "Feedback?" = "Remarques?";
 "Email Results" = "Résultats par Email";
-"Unlink DropBox" = "Séparer de DropBox";
-"Save to DropBox" = "Sauvegarder sur DropBox";
-"Get from DropBox" = "Restaurer à partir DropBox";
+"Unlink Dropbox" = "Séparer de DropBox";
+"Save to Dropbox" = "Sauvegarder sur DropBox";
+"Get from Dropbox" = "Restaurer à partir DropBox";
 "Backup Started" = "Sauvegarde terminée";
 "Data were sent to DropBox iStayHealthy.xml." = "Données sont copiées sur DropBox iStayHealthy.isth.";
 "Restore Data" = "Restauration terminée";
