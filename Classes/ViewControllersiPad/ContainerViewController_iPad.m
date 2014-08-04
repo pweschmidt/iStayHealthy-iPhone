@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	[[AppSettings sharedInstance] disablePasswordForUpdate];
 #ifdef APPDEBUG
 	NSLog(@"We got to the ContainerViewController for iPad - hurrah");
 #endif
@@ -50,7 +51,6 @@
 		[self addChildViewController:self.contentController];
 	}
 
-	[[AppSettings sharedInstance] disablePasswordForUpdate];
 	BOOL isPasswordEnabled = [[AppSettings sharedInstance] hasPasswordEnabled];
 	if (isPasswordEnabled)
 	{

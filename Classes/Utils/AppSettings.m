@@ -23,7 +23,7 @@
 
 - (void)disablePasswordForUpdate
 {
-	if ([self hasUpdated] && [self hasPasswordEnabled])
+	if (![self hasUpdated] && [self hasPasswordEnabled])
 	{
 		[KeychainHandler resetPasswordAndFlags];
 		BOOL hasPassword = [self hasPasswordEnabled];
