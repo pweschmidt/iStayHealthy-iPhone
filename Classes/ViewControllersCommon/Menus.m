@@ -86,7 +86,8 @@
 	              NSLocalizedString(@"Alerts", nil),
 	              NSLocalizedString(@"Other Medication", nil),
 	              NSLocalizedString(@"Clinics", nil),
-	              NSLocalizedString(@"Procedures", nil)];
+	              NSLocalizedString(@"Procedures", nil),
+	              NSLocalizedString(@"POZ Magazine", nil)];
 	});
 	return menus;
 }
