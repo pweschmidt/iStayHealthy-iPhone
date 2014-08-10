@@ -165,6 +165,13 @@
 	NSString *menuName = [self.menus objectAtIndex:indexPath.row];
 	if ([menuName isEqualToString:NSLocalizedString(@"POZ Magazine", nil)])
 	{
+		NSString *urlString = NSLocalizedString(@"BannerURL", nil);
+
+		if ([urlString hasPrefix:@"http"])
+		{
+			NSURL *url = [NSURL URLWithString:urlString];
+			[[UIApplication sharedApplication] openURL:url];
+		}
 	}
 	else
 	{
