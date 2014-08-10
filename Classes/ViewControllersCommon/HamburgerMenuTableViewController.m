@@ -115,13 +115,14 @@
 
 
 	id labelObj = [cell.contentView viewWithTag:kIconLabelViewTag];
+	NSString *menuName = [self.menus objectAtIndex:indexPath.row];
 	if (nil == labelObj)
 	{
 		CGFloat labelOffsetY = ([Utilities isIPad]) ? offset : 0.0f;
 		UILabel *label = [UILabel standardLabel];
 		label.frame = CGRectMake(65, labelOffsetY, 200, self.tableView.rowHeight);
 		label.textAlignment = NSTextAlignmentLeft;
-		label.text = [self.menus objectAtIndex:indexPath.row];
+		label.text = menuName;
 		label.textColor = [UIColor whiteColor];
 		label.font = [UIFont fontWithType:Bold size:standard];
 		label.tag = kIconLabelViewTag;
@@ -133,19 +134,23 @@
 	NSString *controllerName = [Menus
 	                            controllerNameForRowIndexPath:indexPath
 	                                              ignoreFirst:NO];
-	if (nil == imageObj && nil != controllerName)
+	if (nil == imageObj)
 	{
-		NSDictionary *images = [Menus menuImages];
-		UIImage *image = [images objectForKey:controllerName];
-		if (nil != image)
+		UIImageView *medImageView = [[UIImageView alloc] init];
+		medImageView.backgroundColor = [UIColor clearColor];
+		if (nil != controllerName)
 		{
-			UIImageView *medImageView = [[UIImageView alloc] init];
+			NSDictionary *images = [Menus menuImages];
 			medImageView.frame = CGRectMake(20, offset, 42, 42);
-			medImageView.backgroundColor = [UIColor clearColor];
-			medImageView.image = image;
-			medImageView.tag = kIconImageViewTag;
-			[cell.contentView addSubview:medImageView];
+			medImageView.image = [images objectForKey:controllerName];
 		}
+		else
+		{
+			medImageView.frame = CGRectMake(20, 3, 42, 29);
+			medImageView.image = [UIImage imageNamed:@"pozicon.png"];
+		}
+		medImageView.tag = kIconImageViewTag;
+		[cell.contentView addSubview:medImageView];
 	}
 
 
@@ -157,13 +162,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString *toControllerName = [self.controllers objectAtIndex:indexPath.row];
-	__strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
-	if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(changeTransitionType:)]
-	    && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
+	NSString *menuName = [self.menus objectAtIndex:indexPath.row];
+	if ([menuName isEqualToString:NSLocalizedString(@"POZ Magazine", nil)])
 	{
-		[strongDelegate changeTransitionType:kControllerTransition];
-		[strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
+	}
+	else
+	{
+		NSString *toControllerName = [self.controllers objectAtIndex:indexPath.row];
+		__strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
+		if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(changeTransitionType:)]
+		    && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
+		{
+			[strongDelegate changeTransitionType:kControllerTransition];
+			[strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
+		}
 	}
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
