@@ -402,7 +402,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 
 
 #define kNumberOfChartViews             14
-
+#define kDaysOfMedicationsMarginInPlot  7
 
 #define kEnlargeFactor                  1.25
 #define kZoomFactor                     0.45
