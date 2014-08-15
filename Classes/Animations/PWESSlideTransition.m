@@ -50,6 +50,7 @@
 		endContentFrame = CGRectMake(kSlideLength, 0, CGRectGetWidth(fromController.view.bounds), CGRectGetHeight(fromController.view.bounds));
 		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:fromController.view];
 
+        [containerView addSubview:fromController.view];
 		[containerView insertSubview:toController.view belowSubview:fromController.view];
 
 		[UIView animateWithDuration:duration animations: ^{
@@ -66,13 +67,16 @@
 
 		endContentFrame = CGRectMake(0, 0, CGRectGetWidth(toController.view.bounds), CGRectGetHeight(toController.view.bounds));
 		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:toController.view];
+        
+        [containerView addSubview:fromController.view];
+        [containerView insertSubview:toController.view belowSubview:fromController.view];
 
 		[UIView animateWithDuration:duration animations: ^{
 		    toController.view.frame = transformedEndFrame;
 		    fromController.view.alpha = 0.0;
 		} completion: ^(BOOL finished) {
-		    [fromController.view removeFromSuperview];
-		    [toController.view removeFromSuperview];
+//		    [fromController.view removeFromSuperview];
+//		    [toController.view removeFromSuperview];
 		    [transitionContext completeTransition:finished];
 		}];
 	}

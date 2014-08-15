@@ -42,6 +42,8 @@
 		toController.view.alpha = 0;
 		toController.view.frame = containerView.bounds;
 		toController.view.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
+        [containerView addSubview:fromController.view];
+//        [containerView addSubview:toController.view];
 		[containerView insertSubview:toController.view belowSubview:fromController.view];
 		[UIView animateWithDuration:duration animations: ^{
 		    toController.view.alpha = 1.0;
@@ -64,6 +66,8 @@
 
 		fromController.view.alpha = 1.0;
 		fromController.view.layer.transform = CATransform3DIdentity;
+        [containerView addSubview:fromController.view];
+        [containerView addSubview:toController.view];
 		[UIView animateWithDuration:duration animations: ^{
 		    fromController.view.alpha = 0.0;
 		    fromController.view.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
@@ -74,7 +78,6 @@
 		} completion: ^(BOOL finished) {
 		    fromController.view.alpha = 1.0;
 		    fromController.view.layer.transform = CATransform3DIdentity;
-		    [fromController.view removeFromSuperview];
 		    [transitionContext completeTransition:finished];
 		}];
 	}
