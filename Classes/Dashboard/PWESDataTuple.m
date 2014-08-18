@@ -7,6 +7,9 @@
 //
 
 #import "PWESDataTuple.h"
+#import "Medication.h"
+#import "MissedMedication.h"
+#import "PWESCalendar.h"
 
 @interface PWESDataTuple ()
 @property (nonatomic, strong, readwrite) NSArray *valueTuple;
@@ -27,7 +30,8 @@
 + (PWESDataTuple *)medTupleWithMedicationArray:(NSArray *)medication
 {
 	PWESDataTuple *tuple = [[PWESDataTuple alloc] init];
-	[tuple addMedTypeArray:medication dateType:kStartDate];
+	[tuple addMeds:medication dateKey:kStartDate];
+//	[tuple addMedTypeArray:medication dateType:kStartDate];
 	tuple.type = kMedication;
 	return tuple;
 }
@@ -35,7 +39,8 @@
 + (PWESDataTuple *)missedMedTupleWithMissedMedicationArray:(NSArray *)medication
 {
 	PWESDataTuple *tuple = [[PWESDataTuple alloc] init];
-	[tuple addMedTypeArray:medication dateType:kMissedDate];
+	[tuple addMeds:medication dateKey:kMissedDate];
+//	[tuple addMedTypeArray:medication dateType:kMissedDate];
 	tuple.type = kMissedMedication;
 	return tuple;
 }
@@ -90,6 +95,47 @@
 	else
 	{
 		self.valueTuple = [NSArray array];
+	}
+}
+
+- (void)addMeds:(NSArray *)meds dateKey:(NSString *)dateKey
+{
+	if (nil == meds || 0 == meds.count)
+	{
+		self.valueTuple = [NSArray array];
+		self.dateTuple = [NSArray array];
+		return;
+	}
+	__block NSMutableArray *cleanedMeds = [NSMutableArray array];
+	__block NSDate *previousDate = nil;
+	[meds enumerateObjectsUsingBlock: ^(id medObject, NSUInteger idx, BOOL *stop) {
+	    NSDate *date = [medObject valueForKey:dateKey];
+	    if (nil != previousDate)
+	    {
+	        BOOL isWithinMargin = [[PWESCalendar sharedInstance] datesAreWithinDays:kDaysOfMedicationsMarginInPlot
+	                                                                          date1:previousDate
+	                                                                          date2:date];
+	        if (!isWithinMargin)
+	        {
+	            [cleanedMeds addObject:medObject];
+	            previousDate = date;
+			}
+		}
+	    else
+	    {
+	        [cleanedMeds addObject:medObject];
+	        previousDate = date;
+		}
+	}];
+	if (0 < cleanedMeds.count)
+	{
+		self.valueTuple = [cleanedMeds valueForKey:kName];
+		self.dateTuple = [cleanedMeds valueForKey:kStartDate];
+	}
+	else
+	{
+		self.valueTuple = [NSArray array];
+		self.dateTuple = [NSArray array];
 	}
 }
 

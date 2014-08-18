@@ -163,6 +163,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *menuName = [self.menus objectAtIndex:indexPath.row];
+	NSString *toControllerName = [self.controllers objectAtIndex:indexPath.row];
+	__strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
+	BOOL doTransition = NO;
 	if ([menuName isEqualToString:NSLocalizedString(@"POZ Magazine", nil)])
 	{
 		NSString *urlString = NSLocalizedString(@"BannerURL", nil);
@@ -175,16 +178,20 @@
 	}
 	else
 	{
-		NSString *toControllerName = [self.controllers objectAtIndex:indexPath.row];
-		__strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
+		doTransition = YES;
 		if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(changeTransitionType:)]
 		    && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
 		{
 			[strongDelegate changeTransitionType:kControllerTransition];
-			[strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
+//			[strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
 		}
 	}
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self dismissViewControllerAnimated:YES completion: ^{
+	    if (nil != toControllerName && doTransition && nil != strongDelegate && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
+	    {
+	        [strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
+		}
+	}];
 }
 
 - (void)startMailController

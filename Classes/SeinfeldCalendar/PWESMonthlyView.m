@@ -246,7 +246,7 @@
 	layer.fontSize = 22.f;
 	layer.string = monthName;
 	layer.alignmentMode = kCAAlignmentLeft;
-	layer.frame = CGRectMake(20, 0, self.bounds.size.width - 40, 24);
+	layer.frame = CGRectMake(20, 0, self.bounds.size.width - 40, 28);
 	layer.foregroundColor = [UIColor darkGrayColor].CGColor;
 	heightOfEndFrame += layer.frame.size.height;
 	CFRelease(fontRef);
