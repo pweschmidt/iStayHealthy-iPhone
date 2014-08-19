@@ -43,15 +43,16 @@
 		toController.view.frame = containerView.bounds;
 		toController.view.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
         [containerView addSubview:fromController.view];
-//        [containerView addSubview:toController.view];
-		[containerView insertSubview:toController.view belowSubview:fromController.view];
+        [containerView addSubview:toController.view];
+        [containerView bringSubviewToFront:fromController.view];
+//		[containerView insertSubview:toController.view belowSubview:fromController.view];
 		[UIView animateWithDuration:duration animations: ^{
 		    toController.view.alpha = 1.0;
 		    toController.view.layer.transform = CATransform3DIdentity;
 		    fromController.view.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
 		    CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromController.view.layer.bounds.size.width * kZoomFactor / 2;
 		    fromController.view.layer.position = CGPointMake(zoomedXOffset, fromController.view.layer.position.y);
-//		    fromController.view.alpha = 0.6;
+		    fromController.view.alpha = 0.6;
 		    [transitionContext finalFrameForViewController:fromController];
 		} completion: ^(BOOL finished) {
 		    [transitionContext completeTransition:finished];
@@ -62,19 +63,20 @@
 		toController.view.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
 		CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromController.view.layer.bounds.size.width * kZoomFactor / 2;
 		toController.view.layer.position = CGPointMake(zoomedXOffset, fromController.view.layer.position.y);
-//		toController.view.alpha = 0.6;
+		toController.view.alpha = 0.6;
 
 		fromController.view.alpha = 1.0;
 		fromController.view.layer.transform = CATransform3DIdentity;
         [containerView addSubview:fromController.view];
         [containerView addSubview:toController.view];
+        [containerView bringSubviewToFront:toController.view];
 		[UIView animateWithDuration:duration animations: ^{
 		    fromController.view.alpha = 0.0;
 		    fromController.view.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
 		    fromController.view.frame = containerView.bounds;
 		    toController.view.layer.transform = CATransform3DIdentity;
 		    toController.view.layer.position = CGPointMake(containerView.bounds.size.width / 2, containerView.bounds.size.height / 2);
-//		    toController.view.alpha = 1.0;
+		    toController.view.alpha = 1.0;
 		} completion: ^(BOOL finished) {
 		    fromController.view.alpha = 1.0;
 		    fromController.view.layer.transform = CATransform3DIdentity;
