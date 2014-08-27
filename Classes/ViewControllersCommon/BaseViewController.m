@@ -140,58 +140,50 @@
 	{
 		return;
 	}
-	self.navigationItem.title = titleString;
-//	CGFloat width = 180;
-//	CGFloat height = 44;
-//	CGFloat logoWidth = 29;
-//	CGFloat pozWidth = 45;
-//	CGFloat labelWidth = 180 - 29 - 45;
-//	CGFloat topOffset = (44 - 29) / 2;
-//	UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-//	if (self.isPopover)
-//	{
-//		UILabel *titleLabel = [UILabel standardLabel];
-//		titleLabel.text = titleString;
-//		titleLabel.frame = titleView.frame;
-//		titleLabel.textAlignment = NSTextAlignmentCenter;
-//		titleLabel.font = [UIFont fontWithType:Standard size:17];
-//		titleLabel.numberOfLines = 0;
-//		titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//		[titleView addSubview:titleLabel];
-//	}
-//	else
-//	{
-//		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//		button.frame = CGRectMake(0, 0, width, height);
-//
-//		UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_29.png"]];
-//		logo.frame = CGRectMake(0, topOffset, logoWidth, logoWidth);
-//		logo.layer.cornerRadius = 6;
-//		logo.layer.masksToBounds = YES;
-//		UIImageView *poz = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pozicon.png"]];
-//		poz.frame = CGRectMake(width - pozWidth, topOffset, pozWidth, logoWidth);
-//		poz.layer.cornerRadius = 6;
-//		poz.layer.masksToBounds = YES;
-//
-//		[button addSubview:logo];
-//		[button addSubview:poz];
-//
-//		UILabel *titleLabel = [UILabel standardLabel];
-//		titleLabel.text = titleString;
-//		titleLabel.frame = CGRectMake(logoWidth, 0, labelWidth, height);
-//		titleLabel.textAlignment = NSTextAlignmentCenter;
-//		titleLabel.font = [UIFont fontWithType:Standard size:17];
-//		titleLabel.numberOfLines = 0;
-//		titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//
-//		[button addSubview:titleLabel];
-//		[button    addTarget:self
-//		              action:@selector(goToPOZSite)
-//		    forControlEvents:UIControlEventTouchUpInside];
-//		[titleView addSubview:button];
-//	}
-//
-//	self.navigationItem.titleView = titleView;
+	CGFloat width = 180;
+	CGFloat height = 44;
+	CGFloat logoWidth = 29;
+	CGFloat pozWidth = 45;
+	CGFloat labelWidth = 180 - 29 - 45;
+	CGFloat topOffset = (44 - 29) / 2;
+	UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+	if (self.isPopover)
+	{
+		UILabel *titleLabel = [UILabel standardLabel];
+		titleLabel.text = titleString;
+		titleLabel.frame = titleView.frame;
+		titleLabel.textAlignment = NSTextAlignmentCenter;
+		titleLabel.font = [UIFont fontWithType:Standard size:17];
+		titleLabel.numberOfLines = 0;
+		titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+		[titleView addSubview:titleLabel];
+	}
+	else
+	{
+		UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_29.png"]];
+		logo.frame = CGRectMake(0, topOffset, logoWidth, logoWidth);
+		logo.layer.cornerRadius = 6;
+		logo.layer.masksToBounds = YES;
+		UIImageView *poz = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pozicon.png"]];
+		poz.frame = CGRectMake(width - pozWidth, topOffset, pozWidth, logoWidth);
+		poz.layer.cornerRadius = 6;
+		poz.layer.masksToBounds = YES;
+
+		[titleView addSubview:logo];
+		[titleView addSubview:poz];
+
+		UILabel *titleLabel = [UILabel standardLabel];
+		titleLabel.text = titleString;
+		titleLabel.frame = CGRectMake(logoWidth, 0, labelWidth, height);
+		titleLabel.textAlignment = NSTextAlignmentCenter;
+		titleLabel.font = [UIFont fontWithType:Standard size:17];
+		titleLabel.numberOfLines = 0;
+		titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+
+		[titleView addSubview:titleLabel];
+	}
+
+	self.navigationItem.titleView = titleView;
 }
 
 - (void)goToPOZSite
