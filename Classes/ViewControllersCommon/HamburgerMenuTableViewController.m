@@ -110,7 +110,7 @@
 	CGFloat offset = (self.tableView.rowHeight - 42) / 2;
 	if ([Utilities isIPad])
 	{
-		offset = 8.5f;
+		offset = 5.5f;
 	}
 
 
@@ -118,9 +118,8 @@
 	NSString *menuName = [self.menus objectAtIndex:indexPath.row];
 	if (nil == labelObj)
 	{
-		CGFloat labelOffsetY = ([Utilities isIPad]) ? offset : 0.0f;
 		UILabel *label = [UILabel standardLabel];
-		label.frame = CGRectMake(65, labelOffsetY, 200, self.tableView.rowHeight);
+		label.frame = CGRectMake(65, 0, 200, self.tableView.rowHeight);
 		label.textAlignment = NSTextAlignmentLeft;
 		label.text = menuName;
 		label.textColor = [UIColor whiteColor];
@@ -183,7 +182,6 @@
 		    && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
 		{
 			[strongDelegate changeTransitionType:kControllerTransition];
-//			[strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
 		}
 	}
 	[self dismissViewControllerAnimated:YES completion: ^{

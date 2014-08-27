@@ -107,6 +107,11 @@
 			soundFile = UILocalNotificationDefaultSoundName;
 		}
 	}
+	if (self.isEditMode && nil != self.currentNotification)
+	{
+		[[UIApplication sharedApplication] cancelLocalNotification:self.currentNotification];
+		self.currentNotification = nil;
+	}
 
 	for (int alarmIndex = 0; alarmIndex < frequencyIndex; alarmIndex++)
 	{
