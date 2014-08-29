@@ -353,6 +353,7 @@
 		C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F516D1057E002D934F /* Contacts+Comparator.m */; };
 		C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */; };
 		C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */; };
+		C4E2FA5319B0D9EB00D446DF /* TestSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E2FA5219B0D9EB00D446DF /* TestSwift.swift */; };
 		C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */; };
 		C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE811D1306D9890097B903 /* AudioToolbox.framework */; };
 		C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */; };
@@ -938,6 +939,8 @@
 		C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditContactsTableViewController.h; path = ViewControllersiPhone/EditContactsTableViewController.h; sourceTree = "<group>"; };
 		C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditContactsTableViewController.m; path = ViewControllersiPhone/EditContactsTableViewController.m; sourceTree = "<group>"; };
 		C4DF910915EE79560042211E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		C4E2FA5119B0D9EA00D446DF /* iStayHealthy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iStayHealthy-Bridging-Header.h"; sourceTree = "<group>"; };
+		C4E2FA5219B0D9EB00D446DF /* TestSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSwift.swift; path = iOS8/TestSwift.swift; sourceTree = "<group>"; };
 		C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4EE811D1306D9890097B903 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -989,6 +992,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C4E2FA5019B0D9AA00D446DF /* iOS8 */,
 				0BB8F4F218E36C9600C3CCBA /* Animations */,
 				C47DB23817AD43B80037A6DF /* Assets */,
 				C4BCF08D17B7A32100F1E0F7 /* Categories */,
@@ -1722,6 +1726,15 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		C4E2FA5019B0D9AA00D446DF /* iOS8 */ = {
+			isa = PBXGroup;
+			children = (
+				C4E2FA5219B0D9EB00D446DF /* TestSwift.swift */,
+				C4E2FA5119B0D9EA00D446DF /* iStayHealthy-Bridging-Header.h */,
+			);
+			name = iOS8;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2036,6 +2049,7 @@
 				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
 				C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */,
 				0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */,
+				C4E2FA5319B0D9EB00D446DF /* TestSwift.swift in Sources */,
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
 				0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */,
 				0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */,
@@ -2430,6 +2444,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
@@ -2446,7 +2461,8 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
@@ -2460,6 +2476,8 @@
 				PRODUCT_NAME = iStayHealthy;
 				PROVISIONING_PROFILE = "845d0f28-c54c-48b3-8043-196bf49a8e51";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "845d0f28-c54c-48b3-8043-196bf49a8e51";
+				SWIFT_OBJC_BRIDGING_HEADER = "Classes/iStayHealthy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2471,6 +2489,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
@@ -2485,7 +2504,8 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
@@ -2497,6 +2517,7 @@
 				);
 				PRODUCT_NAME = iStayHealthy;
 				PROVISIONING_PROFILE = "0faa1827-0f03-479a-9ae8-3c3b7771bd47";
+				SWIFT_OBJC_BRIDGING_HEADER = "Classes/iStayHealthy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -2573,6 +2594,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
@@ -2586,7 +2608,8 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
@@ -2599,6 +2622,7 @@
 				PRODUCT_NAME = iStayHealthy;
 				PROVISIONING_PROFILE = "EAC7A1E3-65D9-4B6C-8076-FF629118A527";
 				"PROVISIONING_PROFILE[sdk=*]" = "EAC7A1E3-65D9-4B6C-8076-FF629118A527";
+				SWIFT_OBJC_BRIDGING_HEADER = "Classes/iStayHealthy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
