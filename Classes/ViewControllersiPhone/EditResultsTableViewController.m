@@ -314,6 +314,20 @@
 }
 
 #pragma mark - textfield delegate overrides
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [super textFieldDidBeginEditing:textField];
+    if (nil == textField.text || [textField.text isEqualToString:@""])
+    {
+        return;
+    }
+    if ([textField.text isEqualToString:NSLocalizedString(@"Enter Value", nil)])
+    {
+        textField.text = @"";
+    }
+
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [super textFieldDidEndEditing:textField];
@@ -326,7 +340,6 @@
     {
         return;
     }
-    NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
     NSNumber *foundTag = [NSNumber numberWithInteger:textField.tag];
 //	for (NSNumber *tag in self.textViews.allKeys)
 //	{
@@ -343,8 +356,70 @@
     NSString *attribute = [self.segmentMap objectForKey:foundTag];
     if (nil != attribute)
     {
-        [self.valueMap setObject:value forKey:attribute];
+        NSString *textValue = textField.text;
+        if ([attribute isEqualToString:kBloodPressure])
+        {
+            [self createBloodPressureValuesFromString:textValue];
+        }
+        else
+        {
+            NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
+            [self.valueMap setObject:value forKey:attribute];
+        }
     }
+}
+
+- (void)createBloodPressureValuesFromString:(NSString *)bloodPressureString
+{
+    if (nil == bloodPressureString || 0 == bloodPressureString.length || [bloodPressureString isEqualToString:@""] ||
+        [bloodPressureString isEqualToString:NSLocalizedString(@"Enter Value", nil)])
+    {
+        return;
+    }
+
+    NSArray *components = [bloodPressureString componentsSeparatedByString:@"/"];
+    if (2 != components.count)
+    { // try again
+        components = [bloodPressureString componentsSeparatedByString:@" "];
+    }
+    if (2 == components.count)
+    {
+        NSString *systoleText = components[0];
+        NSString *diastoleText = components[1];
+
+        NSNumber *systole = [NSNumber numberWithFloat:[systoleText floatValue]];
+        NSNumber *diastole = [NSNumber numberWithFloat:[diastoleText floatValue]];
+
+        if (nil != systole)
+        {
+            [self.valueMap setObject:systole forKey:kSystole];
+        }
+        if (nil != diastole)
+        {
+            [self.valueMap setObject:diastole forKey:kDiastole];
+        }
+    }
+
+}
+
+- (NSString *)bloodPressureString
+{
+    NSNumber *systole = [self.valueMap objectForKey:kSystole];
+    NSNumber *diastole = [self.valueMap objectForKey:kDiastole];
+
+    NSMutableString *string = [NSMutableString string];
+
+    if (nil != systole)
+    {
+        NSString *systoleText = [NSString stringWithFormat:@"%d", [systole intValue]];
+        [string appendString:systoleText];
+    }
+    if (nil != diastole)
+    {
+        NSString *diastoleText = [NSString stringWithFormat:@"/%d", [diastole intValue]];
+        [string appendString:diastoleText];
+    }
+    return [NSString stringWithString:string];
 }
 
 #pragma mark - private methods
@@ -361,27 +436,41 @@
     NSString *attribute = [self.segmentMap objectForKey:tagNumber];
     if (nil != attribute && nil != textField)
     {
-        NSNumber *value = [self.valueMap objectForKey:attribute];
-        if (0 < [value floatValue])
+        if ([attribute isEqualToString:kBloodPressure])
         {
-            if ([attribute isEqualToString:kViralLoad] && 1 >= [value floatValue])
+            NSString *bloodPressure = [self bloodPressureString];
+            if (nil != bloodPressure)
             {
-                textField.text = NSLocalizedString(@"undetectable", nil);
-                textField.textColor = [UIColor blackColor];
-                textField.enabled = NO;
-            }
-            else
-            {
-                textField.text = [NSString stringWithFormat:@"%9.2f", [value floatValue]];
+                textField.text = bloodPressure;
                 textField.textColor = [UIColor blackColor];
                 textField.enabled = YES;
             }
         }
         else
         {
-            textField.text = NSLocalizedString(@"Enter Value", nil);
-            textField.textColor = [UIColor lightGrayColor];
-            textField.enabled = YES;
+            NSNumber *value = [self.valueMap objectForKey:attribute];
+            if (0 < [value floatValue])
+            {
+                if ([attribute isEqualToString:kViralLoad] && 1 >= [value floatValue])
+                {
+                    textField.text = NSLocalizedString(@"undetectable", nil);
+                    textField.textColor = [UIColor blackColor];
+                    textField.enabled = NO;
+                }
+                else
+                {
+                    textField.text = [NSString stringWithFormat:@"%9.2f", [value floatValue]];
+                    textField.textColor = [UIColor blackColor];
+                    textField.enabled = YES;
+                }
+            }
+            else
+            {
+                textField.text = NSLocalizedString(@"Enter Value", nil);
+                textField.textColor = [UIColor lightGrayColor];
+                textField.enabled = YES;
+            }
+
         }
     }
 }
