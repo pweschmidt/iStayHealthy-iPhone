@@ -227,6 +227,7 @@
 		C44D36DC180F3E5000EE9F5E /* procedure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D0180F3E5000EE9F5E /* procedure@2x.png */; };
 		C44D36DF180F3E5000EE9F5E /* sideeffects.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D3180F3E5000EE9F5E /* sideeffects.png */; };
 		C44D36E0180F3E5000EE9F5E /* sideeffects@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44D36D4180F3E5000EE9F5E /* sideeffects@2x.png */; };
+		C4547DDE19B9FF4B006A868C /* PWESBloodPressureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
 		C4595942180EF8D50082559E /* pozicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4595940180EF8D50082559E /* pozicon.png */; };
 		C4595943180EF8D50082559E /* pozicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4595941180EF8D50082559E /* pozicon@2x.png */; };
@@ -691,6 +692,8 @@
 		C44D36D0180F3E5000EE9F5E /* procedure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "procedure@2x.png"; path = "Classes/Assets/procedure@2x.png"; sourceTree = "<group>"; };
 		C44D36D3180F3E5000EE9F5E /* sideeffects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sideeffects.png; path = Classes/Assets/sideeffects.png; sourceTree = "<group>"; };
 		C44D36D4180F3E5000EE9F5E /* sideeffects@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sideeffects@2x.png"; path = "Classes/Assets/sideeffects@2x.png"; sourceTree = "<group>"; };
+		C4547DDC19B9FF4B006A868C /* PWESBloodPressureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESBloodPressureCell.h; path = TableCells/PWESBloodPressureCell.h; sourceTree = "<group>"; };
+		C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESBloodPressureCell.m; path = TableCells/PWESBloodPressureCell.m; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
 		C4595940180EF8D50082559E /* pozicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pozicon.png; path = Classes/Assets/pozicon.png; sourceTree = "<group>"; };
 		C4595941180EF8D50082559E /* pozicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pozicon@2x.png"; path = "Classes/Assets/pozicon@2x.png"; sourceTree = "<group>"; };
@@ -1171,6 +1174,8 @@
 		C45C27B617DB265F001F6831 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				C4547DDC19B9FF4B006A868C /* PWESBloodPressureCell.h */,
+				C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */,
 				0BACE94C18F02DDA008F4D13 /* PWESCustomTextfieldCell.h */,
 				0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */,
 				C45C27B817DB2678001F6831 /* iPad */,
@@ -2038,6 +2043,7 @@
 				0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */,
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
 				0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */,
+				C4547DDE19B9FF4B006A868C /* PWESBloodPressureCell.m in Sources */,
 				0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */,
 				0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */,
 				0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */,

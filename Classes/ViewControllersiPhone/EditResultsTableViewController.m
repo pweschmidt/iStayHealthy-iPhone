@@ -11,6 +11,7 @@
 #import "CoreDataManager.h"
 #import "Results+Handling.h"
 #import "Utilities.h"
+#import "PWESBloodPressureCell.h"
 
 @interface EditResultsTableViewController ()
 {
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) NSMutableDictionary *segmentMap;
 @property (nonatomic, strong) NSMutableDictionary *valueMap;
 @property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
+@property (nonatomic, assign) BOOL bloodPressureHasChanged;
 @end
 
 @implementation EditResultsTableViewController
@@ -45,6 +47,7 @@
 - (void)populateValueMap
 {
     self.valueMap = [NSMutableDictionary dictionary];
+    self.bloodPressureHasChanged = NO;
     if (!self.isEditMode)
     {
         return;
@@ -243,13 +246,31 @@
     }
     else
     {
-        if (nil == cell)
-        {
-            cell = [[PWESCustomTextfieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        }
+        BOOL isBloodPressure = [self isBloodPressureForIndexPath:indexPath];
         NSString *resultsString = [self.editResultsMenu objectAtIndex:indexPath.row];
         NSString *text = NSLocalizedString(resultsString, nil);
-        [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
+        if (nil == cell)
+        {
+            if (isBloodPressure)
+            {
+                cell = [[PWESBloodPressureCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                    reuseIdentifier:identifier];
+            }
+            else
+            {
+                cell = [[PWESCustomTextfieldCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                      reuseIdentifier:identifier];
+            }
+        }
+
+        if (isBloodPressure)
+        {
+            [self configureBloodPressureCell:cell title:text indexPath:indexPath];
+        }
+        else
+        {
+            [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
+        }
         return cell;
     }
 }
@@ -316,7 +337,7 @@
 #pragma mark - textfield delegate overrides
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [super textFieldDidBeginEditing:textField];
+    [self animateCellWithTextField:textField];
     if (nil == textField.text || [textField.text isEqualToString:@""])
     {
         return;
@@ -325,6 +346,41 @@
     {
         textField.text = @"";
     }
+
+}
+
+- (void)animateCellWithTextField:(UITextField *)textField
+{
+    textField.textColor = [UIColor blackColor];
+
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations: ^{
+         [self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, id cell, BOOL *stop) {
+              if ([cell isKindOfClass:[PWESCustomTextfieldCell class]])
+              {
+                  PWESCustomTextfieldCell *customCell = (PWESCustomTextfieldCell *) cell;
+                  if (textField != customCell.inputField)
+                  {
+                      [customCell shade];
+                  }
+                  else
+                  {
+                      [customCell partialShade];
+                  }
+              }
+              else if ([cell isKindOfClass:[PWESBloodPressureCell class]])
+              {
+                  PWESBloodPressureCell *bpCell = (PWESBloodPressureCell *) cell;
+                  if (textField != bpCell.systoleField && textField != bpCell.diastoleField)
+                  {
+                      [bpCell shade];
+                  }
+                  else
+                  {
+                      [bpCell partialShade];
+                  }
+              }
+          }];
+     } completion:nil];
 
 }
 
@@ -356,10 +412,21 @@
     NSString *attribute = [self.segmentMap objectForKey:foundTag];
     if (nil != attribute)
     {
-        NSString *textValue = textField.text;
         if ([attribute isEqualToString:kBloodPressure])
         {
-            [self createBloodPressureValuesFromString:textValue];
+            if (textField.tag == kSystoleFieldTag)
+            {
+                NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
+                [self.valueMap setObject:value forKey:kSystole];
+                self.bloodPressureHasChanged = YES;
+            }
+            if (textField.tag == kDiastoleFieldTag)
+            {
+                NSNumber *value = [NSNumber numberWithFloat:[textField.text floatValue]];
+                [self.valueMap setObject:value forKey:kDiastole];
+                self.bloodPressureHasChanged = YES;
+            }
+//            [self createBloodPressureValuesFromString:textValue bloodPressureTag:textField.tag];
         }
         else
         {
@@ -370,16 +437,16 @@
 }
 
 - (void)createBloodPressureValuesFromString:(NSString *)bloodPressureString
+                           bloodPressureTag:(NSInteger)bloodPressureTag
 {
-    if (nil == bloodPressureString || 0 == bloodPressureString.length || [bloodPressureString isEqualToString:@""] ||
-        [bloodPressureString isEqualToString:NSLocalizedString(@"Enter Value", nil)])
+    if (nil == bloodPressureString || 0 == bloodPressureString.length || [bloodPressureString isEqualToString:@""])
     {
         return;
     }
 
     NSArray *components = [bloodPressureString componentsSeparatedByString:@"/"];
     if (2 != components.count)
-    { // try again
+    {
         components = [bloodPressureString componentsSeparatedByString:@" "];
     }
     if (2 == components.count)
@@ -474,6 +541,59 @@
         }
     }
 }
+
+- (void)configureBloodPressureCell:(PWESBloodPressureCell *)cell
+                             title:(NSString *)title
+                         indexPath:(NSIndexPath *)indexPath
+{
+    NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row
+                                                 segment:self.resultsSegmentControl.selectedSegmentIndex];
+
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    PWESBloodPressureCell *retrievedCell = [self.cellDictionary objectForKey:taggedViewNumber];
+    CGRect adjustedCellFrame = CGRectMake(0, 0, self.tableView.bounds.size.width, cell.contentView.frame.size.height);
+    if (nil != retrievedCell)
+    {
+        [cell clear];
+    }
+    [cell createContentWithTitle:title textFieldDelegate:self contentFrame:adjustedCellFrame];
+    [self.cellDictionary setObject:cell forKey:taggedViewNumber];
+
+    NSString *attribute = [self.segmentMap objectForKey:taggedViewNumber];
+    if (![attribute isEqualToString:kBloodPressure])
+    {
+        return;
+    }
+    NSNumber *systole = [self.valueMap objectForKey:kSystole];
+    NSNumber *diastole = [self.valueMap objectForKey:kDiastole];
+    if (nil != systole && 0 < [systole floatValue])
+    {
+        retrievedCell.systoleField.text = [NSString stringWithFormat:@"%d", [systole intValue]];
+        retrievedCell.systoleField.enabled = YES;
+        retrievedCell.systoleField.textColor = [UIColor blackColor];
+    }
+    else
+    {
+        retrievedCell.systoleField.text = @"120";
+        retrievedCell.systoleField.enabled = YES;
+        retrievedCell.systoleField.textColor = [UIColor lightGrayColor];
+    }
+    if (nil != diastole && 0 < [diastole floatValue])
+    {
+        retrievedCell.diastoleField.text = [NSString stringWithFormat:@"%d", [diastole intValue]];
+        retrievedCell.diastoleField.enabled = YES;
+        retrievedCell.diastoleField.textColor = [UIColor blackColor];
+    }
+    else
+    {
+        retrievedCell.diastoleField.text = @"80";
+        retrievedCell.diastoleField.enabled = YES;
+        retrievedCell.diastoleField.textColor = [UIColor lightGrayColor];
+    }
+
+
+}
+
 
 - (NSString *)identifierForIndexPath:(NSIndexPath *)indexPath
 {
@@ -625,4 +745,24 @@
     return pow(10, self.resultsSegmentControl.selectedSegmentIndex) + indexPath.row;
 }
 
+- (BOOL)isBloodPressureForIndexPath:(NSIndexPath *)indexPath
+{
+    if (3 != self.resultsSegmentControl.selectedSegmentIndex)
+    {
+        return NO;
+    }
+    BOOL isBP = NO;
+    NSArray *bloods = [self.menus objectForKey:@"Other"];
+    if (nil == bloods)
+    {
+        return isBP;
+    }
+    NSUInteger foundIndex = [bloods indexOfObject:kBloodPressure];
+    if (bloods.count > foundIndex && indexPath.row == foundIndex)
+    {
+        isBP = YES;
+    }
+
+    return isBP;
+}
 @end
