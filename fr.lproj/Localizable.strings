@@ -154,6 +154,7 @@
 "Platelet" = "Plaquettes";
 "Oxygen" = "Niveau d'oxygène";
 "Heart Rate" = "Fréquence cardiaque";
+"BloodPressure" = "Tension artérielle";
 "Blood Pressure" = "Tension artérielle";
 "Gender" = "Sexe";
 "DOB" = "Date de Naissance";

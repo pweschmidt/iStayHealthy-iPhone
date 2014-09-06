@@ -146,6 +146,7 @@
 "Platelet" = "Red Blood Cells";
 "Oxygen" = "Oxygen Level";
 "Heart Rate" = "Heart Rate";
+"BloodPressure" = "Blood Pressure";
 "Blood Pressure" = "Blood Pressure";
 "Gender" = "Sex";
 "DOB" = "Date of Birth";
