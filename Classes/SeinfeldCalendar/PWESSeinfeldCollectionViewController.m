@@ -251,6 +251,12 @@
 
 - (void)finishCalendarWithEndDate:(NSDate *)endDate;
 {
+	[self completeCalendarWithEndDate:endDate];
+	[self reloadSQLData:nil];
+}
+
+- (void)completeCalendarWithEndDate:(NSDate *)endDate
+{
 	SeinfeldCalendar *calendar = self.currentCalendar;
 	NSSet *calendarEntries = calendar.entries;
 	double totalCount = (double)calendarEntries.count;
@@ -279,7 +285,6 @@
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 
 	self.currentCalendar = nil;
-	[self reloadSQLData:nil];
 }
 
 - (void)removeCalendar
