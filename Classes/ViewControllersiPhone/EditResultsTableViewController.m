@@ -265,11 +265,13 @@
 
 		if (isBloodPressure)
 		{
-			[self configureBloodPressureCell:cell title:text indexPath:indexPath];
+			PWESBloodPressureCell *bpCell = (PWESBloodPressureCell *)cell;
+			[self configureBloodPressureCell:bpCell title:text indexPath:indexPath];
 		}
 		else
 		{
-			[self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:YES];
+			PWESCustomTextfieldCell *customCell = (PWESCustomTextfieldCell *)cell;
+			[self configureTableCell:customCell title:text indexPath:indexPath hasNumericalInput:YES];
 		}
 		return cell;
 	}
@@ -592,7 +594,8 @@
 	}
 	else
 	{
-		identifier = [NSString stringWithFormat:@"ResultsCell%ld", (long)indexPath.row];
+		NSInteger indexForRow = [self tagForIndex:indexPath];
+		identifier = [NSString stringWithFormat:@"ResultsCell%ld", (long)indexForRow];
 	}
 	return identifier;
 }
