@@ -483,7 +483,7 @@
 	{
 		return nil;
 	}
-	NSNumber *tagNumber = [self tagNumberForIndex:0 segment:1];
+	NSNumber *tagNumber = [self tagNumberForIndex:0 segment:0];
 	PWESCustomTextfieldCell *customCell = [self.cellDictionary objectForKey:tagNumber];
 	return customCell.inputField;
 }
