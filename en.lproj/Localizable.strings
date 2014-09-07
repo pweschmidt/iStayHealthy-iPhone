@@ -361,3 +361,5 @@
 "Saving current data set." = "Saving current data set.";
 "There are data to import." = "There are data to import.";
 "iCloudLoading" = "If iCloud is On - loading of data can take several minutes.";
+"No Calls possible" = "No Calls Possible";
+"This device doesn't support calls" = "This device doesn't support phone calls";

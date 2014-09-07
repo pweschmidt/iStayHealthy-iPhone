@@ -71,7 +71,7 @@
 	if (nil != contacts.ClinicContactNumber && 0 < contacts.ClinicContactNumber.length)
 	{
 		self.callNumber = contacts.ClinicContactNumber;
-		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Call", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callNumber)];
+		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Call", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callContact)];
 		[buttons addObject:callButton];
 		[buttons addObject:flexibleSpace];
 		realButtonCount++;
@@ -237,6 +237,10 @@
 	{
 		cell.adjustedKeyboardType = UIKeyboardTypeEmailAddress;
 	}
+	else if ([title isEqualToString:NSLocalizedString(kClinicContactNumber, nil)] || [title isEqualToString:NSLocalizedString(kEmergencyContactNumber, nil)])
+	{
+		cell.adjustedKeyboardType = UIKeyboardTypeNumbersAndPunctuation;
+	}
 	else if ([title isEqualToString:NSLocalizedString(kClinicWebSite, nil)])
 	{
 		cell.adjustedKeyboardType = UIKeyboardTypeURL;
@@ -250,7 +254,15 @@
 	{
 		NSString *tel = [NSString stringWithFormat:@"tel:%@", self.callNumber];
 		NSURL *url = [NSURL URLWithString:tel];
-		[[UIApplication sharedApplication] openURL:url];
+		BOOL supportsCall = [[UIApplication sharedApplication] canOpenURL:url];
+		if (supportsCall)
+		{
+			[[UIApplication sharedApplication] openURL:url];
+		}
+		else
+		{
+			[self showNoCallFeatureEnabledAlert];
+		}
 	}
 }
 
@@ -260,7 +272,11 @@
 	{
 		NSString *tel = [NSString stringWithFormat:@"tel:%@", self.emergencyNumber];
 		NSURL *url = [NSURL URLWithString:tel];
-		[[UIApplication sharedApplication] openURL:url];
+		BOOL supportsCall = [[UIApplication sharedApplication] canOpenURL:url];
+		if (supportsCall)
+		{
+			[[UIApplication sharedApplication] openURL:url];
+		}
 	}
 }
 
@@ -270,6 +286,17 @@
 	{
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.webSite]];
 	}
+	else
+	{
+		[self showNoCallFeatureEnabledAlert];
+	}
+}
+
+- (void)showNoCallFeatureEnabledAlert
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Calls possible", nil) message:NSLocalizedString(@"This device doesn't support calls", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+
+	[alert show];
 }
 
 @end

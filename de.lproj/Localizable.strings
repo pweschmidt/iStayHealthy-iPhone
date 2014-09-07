@@ -367,3 +367,5 @@
 "Saving current data set." = "Aktuelle Daten lokal sichern.";
 "There are data to import." = "Es gibt Daten zum Importieren.";
 "iCloudLoading" = "Falls iCloud 'On' - bitte warten bis Daten geladen sind!";
+"No Calls possible" = "Anruf nicht möglich";
+"This device doesn't support calls" = "Dieses Gerät unterstützt keine Telefonanrufe";
