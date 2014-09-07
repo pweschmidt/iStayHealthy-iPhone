@@ -109,22 +109,6 @@
 
 	[self prepareMenus];
 
-//	self.defaultValues = @[@"400-1500",
-//	                       @"20.0 - 50.0",
-//	                       @"10 - 10000000",
-//	                       @"4.0 - 7.0",
-//	                       @"3.0 - 6.0",
-//	                       @"1.0 - 2.2"
-//	                       @"2.0 - 3.4",
-//	                       @"1.8 - 2.7",
-//	                       @"3.5 - 11",
-//	                       @"11.5 - 14.5",
-//	                       @"150 - 450",
-//	                       @"Enter your weight",
-//	                       @"25",
-//	                       @"120/80",
-//	                       @"0.0 - 10.0"];
-
 	self.titleStrings = [NSMutableArray arrayWithCapacity:self.editResultsMenu.count];
 	self.undetectableSwitch = [[UISwitch alloc] init];
 	[self.undetectableSwitch addTarget:self action:@selector(switchUndetectable:) forControlEvents:UIControlEventValueChanged];
@@ -356,19 +340,7 @@
 
 	[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations: ^{
 	    [self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, id cell, BOOL *stop) {
-	        if ([cell isKindOfClass:[PWESCustomTextfieldCell class]])
-	        {
-	            PWESCustomTextfieldCell *customCell = (PWESCustomTextfieldCell *)cell;
-	            if (textField != customCell.inputField)
-	            {
-	                [customCell shade];
-				}
-	            else
-	            {
-	                [customCell partialShade];
-				}
-			}
-	        else if ([cell isKindOfClass:[PWESBloodPressureCell class]])
+	        if ([cell isKindOfClass:[PWESBloodPressureCell class]])
 	        {
 	            PWESBloodPressureCell *bpCell = (PWESBloodPressureCell *)cell;
 	            if (textField != bpCell.systoleField && textField != bpCell.diastoleField)
@@ -378,6 +350,18 @@
 	            else
 	            {
 	                [bpCell partialShade];
+				}
+			}
+	        else if ([cell isKindOfClass:[PWESCustomTextfieldCell class]])
+	        {
+	            PWESCustomTextfieldCell *customCell = (PWESCustomTextfieldCell *)cell;
+	            if (textField != customCell.inputField)
+	            {
+	                [customCell shade];
+				}
+	            else
+	            {
+	                [customCell partialShade];
 				}
 			}
 		}];
@@ -490,40 +474,27 @@
 	NSString *attribute = [self.segmentMap objectForKey:tagNumber];
 	if (nil != attribute && nil != textField)
 	{
-		if ([attribute isEqualToString:kBloodPressure])
+		NSNumber *value = [self.valueMap objectForKey:attribute];
+		if (0 < [value floatValue])
 		{
-			NSString *bloodPressure = [self bloodPressureString];
-			if (nil != bloodPressure)
+			if ([attribute isEqualToString:kViralLoad] && 1 >= [value floatValue])
 			{
-				textField.text = bloodPressure;
+				textField.text = NSLocalizedString(@"undetectable", nil);
+				textField.textColor = [UIColor blackColor];
+				textField.enabled = NO;
+			}
+			else
+			{
+				textField.text = [NSString stringWithFormat:@"%9.2f", [value floatValue]];
 				textField.textColor = [UIColor blackColor];
 				textField.enabled = YES;
 			}
 		}
 		else
 		{
-			NSNumber *value = [self.valueMap objectForKey:attribute];
-			if (0 < [value floatValue])
-			{
-				if ([attribute isEqualToString:kViralLoad] && 1 >= [value floatValue])
-				{
-					textField.text = NSLocalizedString(@"undetectable", nil);
-					textField.textColor = [UIColor blackColor];
-					textField.enabled = NO;
-				}
-				else
-				{
-					textField.text = [NSString stringWithFormat:@"%9.2f", [value floatValue]];
-					textField.textColor = [UIColor blackColor];
-					textField.enabled = YES;
-				}
-			}
-			else
-			{
-				textField.text = NSLocalizedString(@"Enter Value", nil);
-				textField.textColor = [UIColor lightGrayColor];
-				textField.enabled = YES;
-			}
+			textField.text = NSLocalizedString(@"Enter Value", nil);
+			textField.textColor = [UIColor lightGrayColor];
+			textField.enabled = YES;
 		}
 	}
 }
