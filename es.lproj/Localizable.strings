@@ -367,3 +367,5 @@
 "Saving current data set." = "Ahorro actual conjunto de datos.";
 "There are data to import." = "No hay datos para importar.";
 "iCloudLoading" = "Si iCloud es sobre - carga de datos puede tardar varios minutos.";
+"No Calls possible" = "Nada de llamadas compatibles";
+"This device doesn't support calls" = "Este dispositivo no admite llamadas telefónicas";
