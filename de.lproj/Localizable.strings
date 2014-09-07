@@ -324,7 +324,7 @@
 "Error" = "Fehler";
 "You reset your password" = "Dass Kennwort wurde gelöscht. Es kann in den Einstellungen neu gesetzt werden.";
 "DataInvisible?" = "Keine Daten sichtbar?";
-"DataRecovery" = "Versuch die iCloud Einstellung für iStayHealthy zu ändern. Das geht wie folgt:\r\niStayHealthy schließen und die Einstellungs app öffnen. Darin die 'iCloud' auswählen. \r\nSofern iCloud eingestellt ist die 'Dokumente & Daten' Einstellung auswählen . \r\n\r\nWenn 'Dokumente & Daten' 'On' ist kann man iStayHealthy sehen und die iCloud Einstellung ändern.\r\niStayHealthy neu starten.";
+"DataRecovery" = "Versuch die iCloud Einstellung für iStayHealthy zu ändern. Das geht wie folgt:\r\n 'Einstellungen' app auf dem home screen öffnen. Darin die 'iCloud' auswählen. \r\nSofern iCloud eingestellt ist die 'Dokumente & Daten' Einstellung auswählen . \r\n\r\nDen Schalter für iStayHealthy auf 'Aus' stellen.\r\niStayHealthy neu starten.";
 "Medication Diary" = "Med. Tagebuch";
 "Other Medication" = "Allg. Med.";
 "Procedures" = "Krankheiten/OPs";
