@@ -243,18 +243,18 @@
 	}
 	__block BOOL isFound = NO;
 	[self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(NSNumber *key, id cell, BOOL *stop) {
-	    if ([cell isKindOfClass:[PWESCustomTextfieldCell class]])
+	    if ([cell isKindOfClass:[PWESBloodPressureCell class]])
 	    {
-	        PWESCustomTextfieldCell *customCell = (PWESCustomTextfieldCell *)cell;
-	        if ([textField isEqual:customCell.inputField])
+	        PWESBloodPressureCell *bpCell = (PWESBloodPressureCell *)cell;
+	        if ([textField isEqual:bpCell.systoleField] || [textField isEqual:bpCell.diastoleField])
 	        {
 	            isFound = YES;
 			}
 		}
-	    else if ([cell isKindOfClass:[PWESBloodPressureCell class]])
+	    else if ([cell isKindOfClass:[PWESCustomTextfieldCell class]])
 	    {
-	        PWESBloodPressureCell *bpCell = (PWESBloodPressureCell *)cell;
-	        if ([textField isEqual:bpCell.systoleField] || [textField isEqual:bpCell.diastoleField])
+	        PWESCustomTextfieldCell *customCell = (PWESCustomTextfieldCell *)cell;
+	        if ([textField isEqual:customCell.inputField])
 	        {
 	            isFound = YES;
 			}
