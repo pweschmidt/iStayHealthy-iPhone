@@ -12,13 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface PWESBloodPressureCell ()
-{
-	CGFloat xMargin, yMargin, labelWidth, textFieldWidth;
-	CGRect additionalViewFrame;
-}
-@property (nonatomic, strong) UIView *mainContentView;
-@property (nonatomic, strong) UIColor *shadingColour;
-@property (nonatomic, strong) UIColor *normalColour;
 @end
 
 @implementation PWESBloodPressureCell
@@ -27,22 +20,7 @@
 	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 	if (self)
 	{
-		_normalColour = [UIColor whiteColor];
-		self.contentView.backgroundColor = [UIColor clearColor];
-		xMargin = 20.0f;
-		yMargin = 5.0f;
-		labelWidth = 100.0f;
 		textFieldWidth = 80.0;
-		additionalViewFrame = CGRectZero;
-		_shadingColour = [UIColor colorWithRed:235.0f / 255.0f
-		                                 green:235.0f / 255.0f
-		                                  blue:235.0f / 255.0f
-		                                 alpha:0.8];
-		//		if ([Utilities isIPad])
-		//		{
-		//			labelWidth = 160.0f;
-		//			additionalViewFrame = CGRectMake(xMargin + labelWidth + textFieldWidth + xMargin, yMargin, self.contentView.frame.size.width - 3 * xMargin - labelWidth - textFieldWidth, self.contentView.frame.size.height);
-		//		}
 	}
 	return self;
 }
@@ -65,6 +43,11 @@
 	{
 		_systoleField.keyboardType = adjustedKeyboardType;
 	}
+}
+
+- (void)createContentWithTitle:(NSString *)title textFieldTag:(NSInteger)textFieldTag textFieldDelegate:(id <UITextFieldDelegate> )textFieldDelegate hasNumericalInput:(BOOL)hasNumericalInput contentFrame:(CGRect)contentFrame
+{
+	[self createContentWithTitle:title textFieldDelegate:textFieldDelegate contentFrame:contentFrame];
 }
 
 - (void)createContentWithTitle:(NSString *)title
@@ -108,25 +91,6 @@
 	self.additionalView = additionalView;
 }
 
-- (void)adjustCellWidth:(CGFloat)newWidth;
-{
-	CGRect currentFrame = self.contentView.frame;
-	CGRect newFrame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, newWidth, currentFrame.size.height);
-	self.contentView.frame = newFrame;
-	self.mainContentView.frame = newFrame;
-	CGFloat widthDelta = newWidth - currentFrame.size.width;
-	CGRect newAdditionalViewFrame = CGRectMake(self.additionalView.frame.origin.x, self.additionalView.frame.origin.y, self.additionalView.frame.size.width + widthDelta, self.additionalView.frame.size.height);
-	self.additionalView.frame = newAdditionalViewFrame;
-}
-
-
-- (void)clear
-{
-	[self.contentView.subviews enumerateObjectsUsingBlock: ^(UIView *obj, NSUInteger idx, BOOL *stop) {
-	    [obj removeFromSuperview];
-	}];
-}
-
 - (void)partialShade
 {
 	self.mainContentView.backgroundColor = self.shadingColour;
@@ -139,7 +103,6 @@
 	self.mainContentView.backgroundColor = self.shadingColour;
 	self.systoleField.backgroundColor = self.shadingColour;
 	self.diastoleField.backgroundColor = self.shadingColour;
-	//	self.inputField.alpha = 1.0;
 }
 
 - (void)unshade
@@ -168,29 +131,6 @@
 	textField.returnKeyType = UIReturnKeyDone;
 	textField.placeholder = NSLocalizedString(@"Enter Value", nil);
 	return textField;
-}
-
-- (UILabel *)leftLabelWithTitle:(NSString *)title
-{
-	UILabel *label = [[UILabel alloc] init];
-
-	label.backgroundColor = [UIColor clearColor];
-	label.frame = CGRectMake(xMargin, yMargin, labelWidth, self.contentView.frame.size.height);
-	label.text = title;
-	label.textColor = TEXTCOLOUR;
-	label.font = [UIFont fontWithType:Standard size:standard];
-	label.textAlignment = NSTextAlignmentLeft;
-	label.numberOfLines = 0;
-	label.lineBreakMode = NSLineBreakByWordWrapping;
-	return label;
-}
-
-- (UIView *)rightContentView
-{
-	UIView *view = [[UIView alloc] initWithFrame:additionalViewFrame];
-
-	view.backgroundColor = [UIColor clearColor];
-	return view;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

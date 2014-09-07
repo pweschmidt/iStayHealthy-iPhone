@@ -310,7 +310,7 @@
 		}
 		index++;
 	}
-	if (nil != foundLayer && canChangeValue)
+	if (nil != foundLayer /*&& canChangeValue*/)
 	{
 		self.tappedLayer = foundLayer;
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Meds Taken?", nil)
@@ -320,15 +320,15 @@
 		                                          otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil];
 		[alertView show];
 	}
-	else
-	{
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Don't Cheat!", nil)
-		                                                    message:NSLocalizedString(@"Only today's and yesterday's entries can be changed.", nil)
-		                                                   delegate:nil
-		                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
-		                                          otherButtonTitles:nil];
-		[alertView show];
-	}
+//	else
+//	{
+//		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Don't Cheat!", nil)
+//		                                                    message:NSLocalizedString(@"Only today's and yesterday's entries can be changed.", nil)
+//		                                                   delegate:nil
+//		                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+//		                                          otherButtonTitles:nil];
+//		[alertView show];
+//	}
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

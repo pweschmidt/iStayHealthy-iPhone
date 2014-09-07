@@ -136,6 +136,14 @@
 		[self.view addSubview:label];
 		return;
 	}
+	BOOL calendarExpired = [self calendarExpired];
+	if (calendarExpired)
+	{
+		[self completeCalendarWithEndDate:self.currentCalendar.endDate];
+		UIView *label = [self calendarLabel];
+		[self.view addSubview:label];
+		return;
+	}
 
 	UIScrollView *scrollView = [[UIScrollView alloc] init];
 	scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 70, self.view.bounds.size.width, self.view.bounds.size.height - 120);
@@ -251,6 +259,24 @@
 	}
 }
 
+- (BOOL)calendarExpired
+{
+	if (nil == self.currentCalendar)
+	{
+		return YES;
+	}
+	if (nil == self.currentCalendar.endDate)
+	{
+		return YES;
+	}
+	NSDate *currentDate = [NSDate date];
+	if (NSOrderedDescending == [currentDate compare:self.currentCalendar.endDate])
+	{
+		return YES;
+	}
+	return NO;
+}
+
 #pragma mark PWESResultsDelegate methods
 - (void)updateCalendarWithSuccess:(BOOL)success
 {
@@ -272,6 +298,12 @@
 }
 
 - (void)finishCalendarWithEndDate:(NSDate *)endDate;
+{
+	[self completeCalendarWithEndDate:endDate];
+	[self reloadSQLData:nil];
+}
+
+- (void)completeCalendarWithEndDate:(NSDate *)endDate
 {
 	SeinfeldCalendar *calendar = self.currentCalendar;
 	NSSet *calendarEntries = calendar.entries;
@@ -301,7 +333,6 @@
 	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
 
 	self.currentCalendar = nil;
-	[self reloadSQLData:nil];
 }
 
 - (void)removeCalendar

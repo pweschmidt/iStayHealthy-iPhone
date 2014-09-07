@@ -306,7 +306,7 @@
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell title:(NSString *)title indexPath:(NSIndexPath *)indexPath hasNumericalInput:(BOOL)hasNumericalInput
 {
-	[super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+	[super configureTableCell:cell title:title indexPath:indexPath segmentIndex:0 hasNumericalInput:hasNumericalInput];
 	NSString *value = [self.valueMap objectForKey:kSideEffect];
 	NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
 	UITextField *textField = [self customTextFieldForTagNumber:taggedViewNumber];
