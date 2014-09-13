@@ -76,6 +76,25 @@
 		0B35BF991944681200341AFB /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF811944681200341AFB /* stop@2x.png */; };
 		0B35BF9C19446A1800341AFB /* results-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF9A19446A1800341AFB /* results-icon.png */; };
 		0B35BF9D19446A1800341AFB /* results-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B35BF9B19446A1800341AFB /* results-icon@2x.png */; };
+		0B36922319C4785600C269AD /* PWESHealth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B36922119C4785600C269AD /* PWESHealth.xcdatamodeld */; };
+		0B36924D19C491C600C269AD /* PWESMigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36924B19C491C600C269AD /* PWESMigrationManager.swift */; };
+		0B36924E19C491C600C269AD /* PWESPersistentStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36924C19C491C600C269AD /* PWESPersistentStoreManager.swift */; };
+		0B36925E19C491D700C269AD /* PWESAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36924F19C491D700C269AD /* PWESAlert.swift */; };
+		0B36925F19C491D700C269AD /* PWESClinicAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925019C491D700C269AD /* PWESClinicAddress.swift */; };
+		0B36926019C491D700C269AD /* PWESClinicalContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925119C491D700C269AD /* PWESClinicalContact.swift */; };
+		0B36926119C491D700C269AD /* PWESClinicContactRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925219C491D700C269AD /* PWESClinicContactRole.swift */; };
+		0B36926219C491D700C269AD /* PWESClinicPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925319C491D700C269AD /* PWESClinicPhone.swift */; };
+		0B36926319C491D700C269AD /* PWESHealthObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925419C491D700C269AD /* PWESHealthObject.swift */; };
+		0B36926419C491D700C269AD /* PWESMedicalIntervention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925519C491D700C269AD /* PWESMedicalIntervention.swift */; };
+		0B36926519C491D700C269AD /* PWESMedication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925619C491D700C269AD /* PWESMedication.swift */; };
+		0B36926619C491D700C269AD /* PWESObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925719C491D700C269AD /* PWESObservation.swift */; };
+		0B36926719C491D700C269AD /* PWESObservationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925819C491D700C269AD /* PWESObservationType.swift */; };
+		0B36926819C491D700C269AD /* PWESSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925919C491D700C269AD /* PWESSideEffects.swift */; };
+		0B36926919C491D700C269AD /* PWESTreatment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925A19C491D700C269AD /* PWESTreatment.swift */; };
+		0B36926A19C491D700C269AD /* PWESTreatmentCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925B19C491D700C269AD /* PWESTreatmentCalendar.swift */; };
+		0B36926B19C491D700C269AD /* PWESTreatmentCalendarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925C19C491D700C269AD /* PWESTreatmentCalendarEntry.swift */; };
+		0B36926C19C491D700C269AD /* PWESTreatmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36925D19C491D700C269AD /* PWESTreatmentType.swift */; };
+		0B36926F19C4922800C269AD /* PWESMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */; };
 		0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F19461866F9F00091704C /* EditChartsTableViewController.m */; };
 		0B4064B61893C36100F858BB /* SeinfeldCalendar+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4064B51893C36100F858BB /* SeinfeldCalendar+Handling.m */; };
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
@@ -354,7 +373,6 @@
 		C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F516D1057E002D934F /* Contacts+Comparator.m */; };
 		C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */; };
 		C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */; };
-		C4E2FA5319B0D9EB00D446DF /* TestSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E2FA5219B0D9EB00D446DF /* TestSwift.swift */; };
 		C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */; };
 		C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE811D1306D9890097B903 /* AudioToolbox.framework */; };
 		C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */; };
@@ -462,6 +480,25 @@
 		0B35BF811944681200341AFB /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stop@2x.png"; path = "Classes/Assets/stop@2x.png"; sourceTree = "<group>"; };
 		0B35BF9A19446A1800341AFB /* results-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "results-icon.png"; path = "Classes/Assets/results-icon.png"; sourceTree = "<group>"; };
 		0B35BF9B19446A1800341AFB /* results-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "results-icon@2x.png"; path = "Classes/Assets/results-icon@2x.png"; sourceTree = "<group>"; };
+		0B36922219C4785600C269AD /* PWESHealth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PWESHealth.xcdatamodel; sourceTree = "<group>"; };
+		0B36924B19C491C600C269AD /* PWESMigrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESMigrationManager.swift; path = iOS8/DataManagement/PWESMigrationManager.swift; sourceTree = "<group>"; };
+		0B36924C19C491C600C269AD /* PWESPersistentStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESPersistentStoreManager.swift; path = iOS8/DataManagement/PWESPersistentStoreManager.swift; sourceTree = "<group>"; };
+		0B36924F19C491D700C269AD /* PWESAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlert.swift; path = iOS8/DataModel/PWESAlert.swift; sourceTree = "<group>"; };
+		0B36925019C491D700C269AD /* PWESClinicAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESClinicAddress.swift; path = iOS8/DataModel/PWESClinicAddress.swift; sourceTree = "<group>"; };
+		0B36925119C491D700C269AD /* PWESClinicalContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESClinicalContact.swift; path = iOS8/DataModel/PWESClinicalContact.swift; sourceTree = "<group>"; };
+		0B36925219C491D700C269AD /* PWESClinicContactRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESClinicContactRole.swift; path = iOS8/DataModel/PWESClinicContactRole.swift; sourceTree = "<group>"; };
+		0B36925319C491D700C269AD /* PWESClinicPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESClinicPhone.swift; path = iOS8/DataModel/PWESClinicPhone.swift; sourceTree = "<group>"; };
+		0B36925419C491D700C269AD /* PWESHealthObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESHealthObject.swift; path = iOS8/DataModel/PWESHealthObject.swift; sourceTree = "<group>"; };
+		0B36925519C491D700C269AD /* PWESMedicalIntervention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESMedicalIntervention.swift; path = iOS8/DataModel/PWESMedicalIntervention.swift; sourceTree = "<group>"; };
+		0B36925619C491D700C269AD /* PWESMedication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESMedication.swift; path = iOS8/DataModel/PWESMedication.swift; sourceTree = "<group>"; };
+		0B36925719C491D700C269AD /* PWESObservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESObservation.swift; path = iOS8/DataModel/PWESObservation.swift; sourceTree = "<group>"; };
+		0B36925819C491D700C269AD /* PWESObservationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESObservationType.swift; path = iOS8/DataModel/PWESObservationType.swift; sourceTree = "<group>"; };
+		0B36925919C491D700C269AD /* PWESSideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESSideEffects.swift; path = iOS8/DataModel/PWESSideEffects.swift; sourceTree = "<group>"; };
+		0B36925A19C491D700C269AD /* PWESTreatment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESTreatment.swift; path = iOS8/DataModel/PWESTreatment.swift; sourceTree = "<group>"; };
+		0B36925B19C491D700C269AD /* PWESTreatmentCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESTreatmentCalendar.swift; path = iOS8/DataModel/PWESTreatmentCalendar.swift; sourceTree = "<group>"; };
+		0B36925C19C491D700C269AD /* PWESTreatmentCalendarEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESTreatmentCalendarEntry.swift; path = iOS8/DataModel/PWESTreatmentCalendarEntry.swift; sourceTree = "<group>"; };
+		0B36925D19C491D700C269AD /* PWESTreatmentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESTreatmentType.swift; path = iOS8/DataModel/PWESTreatmentType.swift; sourceTree = "<group>"; };
+		0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PWESMainStoryboard.storyboard; path = iOS8/UserInterface/PWESMainStoryboard.storyboard; sourceTree = "<group>"; };
 		0B3F19451866F9F00091704C /* EditChartsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditChartsTableViewController.h; path = ViewControllersiPhone/EditChartsTableViewController.h; sourceTree = "<group>"; };
 		0B3F19461866F9F00091704C /* EditChartsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditChartsTableViewController.m; path = ViewControllersiPhone/EditChartsTableViewController.m; sourceTree = "<group>"; };
 		0B3F19481867044D0091704C /* ChartSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChartSelector.h; path = ViewControllersiPhone/ChartSelector.h; sourceTree = "<group>"; };
@@ -943,7 +980,6 @@
 		C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditContactsTableViewController.m; path = ViewControllersiPhone/EditContactsTableViewController.m; sourceTree = "<group>"; };
 		C4DF910915EE79560042211E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C4E2FA5119B0D9EA00D446DF /* iStayHealthy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iStayHealthy-Bridging-Header.h"; sourceTree = "<group>"; };
-		C4E2FA5219B0D9EB00D446DF /* TestSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSwift.swift; path = iOS8/TestSwift.swift; sourceTree = "<group>"; };
 		C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4EE811D1306D9890097B903 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1013,6 +1049,46 @@
 				C4DF910915EE79560042211E /* Constants.h */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		0B36921F19C477AC00C269AD /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				0B36924F19C491D700C269AD /* PWESAlert.swift */,
+				0B36925019C491D700C269AD /* PWESClinicAddress.swift */,
+				0B36925119C491D700C269AD /* PWESClinicalContact.swift */,
+				0B36925219C491D700C269AD /* PWESClinicContactRole.swift */,
+				0B36925319C491D700C269AD /* PWESClinicPhone.swift */,
+				0B36925419C491D700C269AD /* PWESHealthObject.swift */,
+				0B36925519C491D700C269AD /* PWESMedicalIntervention.swift */,
+				0B36925619C491D700C269AD /* PWESMedication.swift */,
+				0B36925719C491D700C269AD /* PWESObservation.swift */,
+				0B36925819C491D700C269AD /* PWESObservationType.swift */,
+				0B36925919C491D700C269AD /* PWESSideEffects.swift */,
+				0B36925A19C491D700C269AD /* PWESTreatment.swift */,
+				0B36925B19C491D700C269AD /* PWESTreatmentCalendar.swift */,
+				0B36925C19C491D700C269AD /* PWESTreatmentCalendarEntry.swift */,
+				0B36925D19C491D700C269AD /* PWESTreatmentType.swift */,
+				0B36922119C4785600C269AD /* PWESHealth.xcdatamodeld */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		0B36924619C4853900C269AD /* DataManagement */ = {
+			isa = PBXGroup;
+			children = (
+				0B36924B19C491C600C269AD /* PWESMigrationManager.swift */,
+				0B36924C19C491C600C269AD /* PWESPersistentStoreManager.swift */,
+			);
+			name = DataManagement;
+			sourceTree = "<group>";
+		};
+		0B36926D19C491ED00C269AD /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */,
+			);
+			name = UserInterface;
 			sourceTree = "<group>";
 		};
 		0B9D0736191ABD9F00D293E0 /* SeinfeldCalendar */ = {
@@ -1734,7 +1810,9 @@
 		C4E2FA5019B0D9AA00D446DF /* iOS8 */ = {
 			isa = PBXGroup;
 			children = (
-				C4E2FA5219B0D9EB00D446DF /* TestSwift.swift */,
+				0B36926D19C491ED00C269AD /* UserInterface */,
+				0B36924619C4853900C269AD /* DataManagement */,
+				0B36921F19C477AC00C269AD /* DataModel */,
 				C4E2FA5119B0D9EA00D446DF /* iStayHealthy-Bridging-Header.h */,
 			);
 			name = iOS8;
@@ -1950,6 +2028,7 @@
 				0B89110E18F93CA500A49B95 /* trizivir.png in Resources */,
 				0B89111118F93CA500A49B95 /* viracept.png in Resources */,
 				0B89110F18F93CA500A49B95 /* truvada.png in Resources */,
+				0B36926F19C4922800C269AD /* PWESMainStoryboard.storyboard in Resources */,
 				0B35BF8F1944681200341AFB /* hospital@2x.png in Resources */,
 				C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */,
 				0B35BF941944681200341AFB /* sideeffects-icon.png in Resources */,
@@ -2041,6 +2120,7 @@
 				0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */,
 				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
 				0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */,
+				0B36926919C491D700C269AD /* PWESTreatment.swift in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
 				0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */,
 				0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */,
@@ -2050,11 +2130,12 @@
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */,
 				C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */,
+				0B36926C19C491D700C269AD /* PWESTreatmentType.swift in Sources */,
 				C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */,
 				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
+				0B36926219C491D700C269AD /* PWESClinicPhone.swift in Sources */,
 				C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */,
 				0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */,
-				C4E2FA5319B0D9EB00D446DF /* TestSwift.swift in Sources */,
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
 				0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */,
 				C4547DDE19B9FF4B006A868C /* PWESBloodPressureCell.m in Sources */,
@@ -2070,13 +2151,16 @@
 				C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */,
 				0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */,
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
+				0B36925F19C491D700C269AD /* PWESClinicAddress.swift in Sources */,
 				0B8DDBF4194322E300055E4C /* TimeView_iPad.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
 				0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */,
+				0B36926019C491D700C269AD /* PWESClinicalContact.swift in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
 				C45E52F7182BFE6400C30061 /* BaseCollectionViewController.m in Sources */,
 				0BB084E81929130B007C83E5 /* PWESMedPlotArea.m in Sources */,
 				C4A49AD918002CD400FC1637 /* TimeView.m in Sources */,
+				0B36925E19C491D700C269AD /* PWESAlert.swift in Sources */,
 				C45E52FA182BFF0400C30061 /* BaseCollectionViewCell.m in Sources */,
 				0BB771EC18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m in Sources */,
 				0BB566A9191E38F900731739 /* PWESCalendar.m in Sources */,
@@ -2098,6 +2182,8 @@
 				C431408D180C801D00EB5F5E /* PWESAxis.m in Sources */,
 				0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */,
 				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
+				0B36926519C491D700C269AD /* PWESMedication.swift in Sources */,
+				0B36926319C491D700C269AD /* PWESHealthObject.swift in Sources */,
 				0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */,
 				0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */,
 				0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */,
@@ -2109,6 +2195,7 @@
 				0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */,
 				0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */,
 				0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */,
+				0B36926819C491D700C269AD /* PWESSideEffects.swift in Sources */,
 				C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
@@ -2122,6 +2209,7 @@
 				0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */,
 				C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */,
 				C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */,
+				0B36926419C491D700C269AD /* PWESMedicalIntervention.swift in Sources */,
 				C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */,
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
 				0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */,
@@ -2130,7 +2218,9 @@
 				C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */,
 				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,
 				0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */,
+				0B36924D19C491C600C269AD /* PWESMigrationManager.swift in Sources */,
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
+				0B36926B19C491D700C269AD /* PWESTreatmentCalendarEntry.swift in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
 				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
 				C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */,
@@ -2142,11 +2232,14 @@
 				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
 				C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */,
 				C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */,
+				0B36926719C491D700C269AD /* PWESObservationType.swift in Sources */,
 				0B1276BC198AD05B00D389FA /* IconsTableViewController.m in Sources */,
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */,
+				0B36922319C4785600C269AD /* PWESHealth.xcdatamodeld in Sources */,
 				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
 				0B7326D419323032001E6601 /* PWESResultDatesPlotArea.m in Sources */,
+				0B36926A19C491D700C269AD /* PWESTreatmentCalendar.swift in Sources */,
 				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
@@ -2161,6 +2254,7 @@
 				0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */,
 				C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */,
 				0B6E0AD319714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m in Sources */,
+				0B36926119C491D700C269AD /* PWESClinicContactRole.swift in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
 				0B9D073C191ABE4100D293E0 /* PWESSeinfeldViewController.m in Sources */,
 				C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */,
@@ -2168,6 +2262,7 @@
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
+				0B36926619C491D700C269AD /* PWESObservation.swift in Sources */,
 				0B11346B198CBEC700685046 /* AppSettings.m in Sources */,
 				0B89111D18F9407D00A49B95 /* PWESSlideTransition.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
@@ -2177,6 +2272,7 @@
 				0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */,
 				0B7326D719324E75001E6601 /* PWESLabelPlotArea.m in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
+				0B36924E19C491C600C269AD /* PWESPersistentStoreManager.swift in Sources */,
 				0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */,
 				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
@@ -2480,8 +2576,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "845d0f28-c54c-48b3-8043-196bf49a8e51";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "845d0f28-c54c-48b3-8043-196bf49a8e51";
+				PROVISIONING_PROFILE = "9B13BFDC-9F9B-4110-8C88-A6DAD7737CC0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9B13BFDC-9F9B-4110-8C88-A6DAD7737CC0";
 				SWIFT_OBJC_BRIDGING_HEADER = "Classes/iStayHealthy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2522,7 +2618,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "0faa1827-0f03-479a-9ae8-3c3b7771bd47";
+				PROVISIONING_PROFILE = "47A7C3F0-23CE-4633-B6C9-04C4958928C7";
 				SWIFT_OBJC_BRIDGING_HEADER = "Classes/iStayHealthy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2671,6 +2767,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		0B36922119C4785600C269AD /* PWESHealth.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B36922219C4785600C269AD /* PWESHealth.xcdatamodel */,
+			);
+			currentVersion = 0B36922219C4785600C269AD /* PWESHealth.xcdatamodel */;
+			path = PWESHealth.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
