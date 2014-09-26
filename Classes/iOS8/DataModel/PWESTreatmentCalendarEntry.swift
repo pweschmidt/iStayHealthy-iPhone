@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class PWESTreatmentCalendarEntry: PWESHealthObject {
+class PWESTreatmentCalendarEntry: iStayHealthy.PWESHealthObject {
 
     @NSManaged var entryIndex: NSNumber
     @NSManaged var calendar: PWESTreatmentCalendar

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class PWESClinicalContact: PWESHealthObject {
+class PWESClinicalContact: iStayHealthy.PWESHealthObject {
 
     @NSManaged var name: String
     @NSManaged var clinicIdentifier: String

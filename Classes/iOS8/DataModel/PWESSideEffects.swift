@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class PWESSideEffects: PWESHealthObject {
+class PWESSideEffects: iStayHealthy.PWESHealthObject {
 
     @NSManaged var effectName: String
     @NSManaged var seriousIndex: NSNumber

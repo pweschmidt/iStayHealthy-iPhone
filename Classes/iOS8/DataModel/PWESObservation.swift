@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class PWESObservation: PWESHealthObject {
+class PWESObservation: iStayHealthy.PWESHealthObject {
 
     @NSManaged var observationValue: NSNumber
     @NSManaged var observationType: String

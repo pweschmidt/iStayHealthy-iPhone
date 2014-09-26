@@ -14,6 +14,7 @@ let sqliteStoreName = "PWESiStayHealthy.sqlite"
 class PWESPersistentStoreManager : NSObject
 {
     let persistentStoreCoordinator: NSPersistentStoreCoordinator
+    let hasLoadedStore: Bool
 
     class var defaultManager : PWESPersistentStoreManager{
         struct Static
@@ -35,11 +36,16 @@ class PWESPersistentStoreManager : NSObject
         
         let error:NSErrorPointer = nil
         
-        let success = persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: sqliteURL, options: options, error: error)
+        let store = persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: sqliteURL, options: options, error: error)
         
-        if success == true
+        if (nil != store)
         {
             mainContext.persistentStoreCoordinator = persistentStoreCoordinator
+            hasLoadedStore = true
+        }
+        else
+        {
+            hasLoadedStore = false
         }
     }
     
@@ -77,6 +83,16 @@ class PWESPersistentStoreManager : NSObject
             }
         }
     }
+    
+    func createHealthObject(className: NSString, error: NSErrorPointer) -> NSManagedObject
+    {
+        let entityDescription = NSEntityDescription.entityForName(className, inManagedObjectContext: mainContext)
+        
+        let healthObject = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: mainContext)
+        
+        return healthObject
+    }
+    
     
     func deleteObject(object: NSManagedObject) {
         let context = mainContext
