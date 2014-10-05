@@ -199,6 +199,8 @@
 		0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E561198827CA0017ED15 /* LocalBackupController.m */; };
 		0BD057D0198E3C5A00D7D142 /* Conflict.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CE198E3C5A00D7D142 /* Conflict.isth */; };
 		0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */; };
+		0BD7433D19E156B400F7C94B /* PWESContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7433C19E156B400F7C94B /* PWESContainerViewController.swift */; };
+		0BD7433F19E1573200F7C94B /* PWESSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7433E19E1573200F7C94B /* PWESSplitViewController.swift */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
 		0BFFCD5219D9DB93008C4C70 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BFFCD5119D9DB93008C4C70 /* HealthKit.framework */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -661,6 +663,8 @@
 		0BC7E561198827CA0017ED15 /* LocalBackupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalBackupController.m; path = ViewControllersCommon/LocalBackupController.m; sourceTree = "<group>"; };
 		0BD057CE198E3C5A00D7D142 /* Conflict.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Conflict.isth; sourceTree = "<group>"; };
 		0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iStayHealthy.isth; sourceTree = "<group>"; };
+		0BD7433C19E156B400F7C94B /* PWESContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContainerViewController.swift; path = iOS8/UserInterface/PWESContainerViewController.swift; sourceTree = "<group>"; };
+		0BD7433E19E1573200F7C94B /* PWESSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESSplitViewController.swift; path = iOS8/UserInterface/PWESSplitViewController.swift; sourceTree = "<group>"; };
 		0BF338A119785D03004C3FB4 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ViewControllersCommon/HelpViewController.h; sourceTree = "<group>"; };
 		0BF338A219785D03004C3FB4 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ViewControllersCommon/HelpViewController.m; sourceTree = "<group>"; };
 		0BFFCD5119D9DB93008C4C70 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -1090,6 +1094,8 @@
 			isa = PBXGroup;
 			children = (
 				0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */,
+				0BD7433C19E156B400F7C94B /* PWESContainerViewController.swift */,
+				0BD7433E19E1573200F7C94B /* PWESSplitViewController.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -2163,6 +2169,7 @@
 				0B36925F19C491D700C269AD /* PWESClinicAddress.swift in Sources */,
 				0B8DDBF4194322E300055E4C /* TimeView_iPad.m in Sources */,
 				C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */,
+				0BD7433F19E1573200F7C94B /* PWESSplitViewController.swift in Sources */,
 				0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */,
 				0B36926019C491D700C269AD /* PWESClinicalContact.swift in Sources */,
 				C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */,
@@ -2223,6 +2230,7 @@
 				C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */,
 				0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */,
 				C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */,
+				0BD7433D19E156B400F7C94B /* PWESContainerViewController.swift in Sources */,
 				C45D00F017BAB403001AE0CB /* EditResultsTableViewController.m in Sources */,
 				C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */,
 				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,
