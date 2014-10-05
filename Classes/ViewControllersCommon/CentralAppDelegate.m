@@ -29,6 +29,7 @@
 #ifdef APPDEBUG
 	NSLog(@"We got to the new CentralAppDelegate");
 #endif
+    [self registerUserNotifications:application];
 	self.window.tintColor = TEXTCOLOUR;
 
 	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: TEXTCOLOUR, NSFontAttributeName : [UIFont fontWithType:Standard size:17] }];
@@ -62,6 +63,32 @@
 	                                                 root:root];
 	[DBSession setSharedSession:session];
 	return YES;
+}
+
+- (void)registerUserNotifications:(UIApplication *)application
+{
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotifications:)])
+    {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
+        
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

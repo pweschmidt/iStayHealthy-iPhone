@@ -2561,6 +2561,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2573,6 +2574,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
@@ -2584,8 +2586,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "3147be42-48c6-407f-8104-b65d3030dd59";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3147be42-48c6-407f-8104-b65d3030dd59";
+				PROVISIONING_PROFILE = "09cdfb10-6714-4473-93a3-f95637f8fa38";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09cdfb10-6714-4473-93a3-f95637f8fa38";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2603,6 +2605,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2613,6 +2616,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
@@ -2623,8 +2627,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "9b34d0af-8c52-4508-a8c6-93cd39ece169";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9b34d0af-8c52-4508-a8c6-93cd39ece169";
+				PROVISIONING_PROFILE = "0af48e8b-bc37-466b-86f4-429bfa6f9941";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0af48e8b-bc37-466b-86f4-429bfa6f9941";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -2707,6 +2711,7 @@
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2717,6 +2722,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Classes",
@@ -2727,8 +2733,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "bffe5812-463e-4de0-9746-98fd8b829859";
+				PROVISIONING_PROFILE = "0f011564-77d2-46ed-b57d-551dd9722914";
+				"PROVISIONING_PROFILE[sdk=*]" = "0f011564-77d2-46ed-b57d-551dd9722914";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
