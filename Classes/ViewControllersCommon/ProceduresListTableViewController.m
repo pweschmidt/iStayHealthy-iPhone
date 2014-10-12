@@ -70,7 +70,7 @@
 	    [view removeFromSuperview];
 	}];
 	Procedures *procedures = (Procedures *)[self.procedures objectAtIndex:indexPath.row];
-	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath] - 2;
 	UILabel *name = [UILabel standardLabel];
 	name.text = procedures.Illness;
 	name.frame = CGRectMake(20 + rowHeight + 10, 1, 170, rowHeight / 2);

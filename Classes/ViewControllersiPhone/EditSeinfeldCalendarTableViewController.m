@@ -204,11 +204,11 @@
 {
 	if (0 == indexPath.section)
 	{
-		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : 44);
 	}
 	else
 	{
-		return self.tableView.rowHeight;
+		return 44;
 	}
 }
 
@@ -261,7 +261,7 @@
 {
 	SeinfeldCalendar *calendar = (SeinfeldCalendar *)[self.completedCalendars objectAtIndex:indexPath.row];
 	float score = [calendar.score floatValue];
-	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath] - 2;
 	DateView *dateView = [DateView viewWithDate:calendar.endDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
 	[cell.contentView addSubview:dateView];
 

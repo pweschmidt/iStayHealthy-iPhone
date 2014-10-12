@@ -239,7 +239,7 @@
 		}
 		else
 		{
-			return self.tableView.rowHeight;
+			return 44.0;
 		}
 	}
 	return 60.0;

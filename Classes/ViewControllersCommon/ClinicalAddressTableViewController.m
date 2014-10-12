@@ -49,6 +49,17 @@
 	return self.clinics.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	static NSString *CellIdentifier = @"Cell";
@@ -69,7 +80,7 @@
 	    [view removeFromSuperview];
 	}];
 	Contacts *contact = (Contacts *)[self.clinics objectAtIndex:indexPath.row];
-	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	CGFloat rowHeight = [self tableView:self.tableView estimatedHeightForRowAtIndexPath:indexPath] - 2;
 	UILabel *name = [UILabel standardLabel];
 	name.text = contact.ClinicName;
 	name.frame = CGRectMake(20 + rowHeight + 10, 1, 170, rowHeight);

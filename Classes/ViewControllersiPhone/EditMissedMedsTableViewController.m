@@ -177,11 +177,11 @@
 {
 	if (0 == indexPath.section)
 	{
-		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : 44);
 	}
 	else if (1 == indexPath.section)
 	{
-		return self.tableView.rowHeight;
+		return 44;
 	}
 	else
 	{
@@ -268,7 +268,8 @@
 {
 	cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(20, 0, 200, self.tableView.rowHeight);
+    NSInteger rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath];
+	label.frame = CGRectMake(20, 0, 200, rowHeight);
 	label.text = text;
 	if (nil != self.selectedReasonPath)
 	{
@@ -286,6 +287,7 @@
 {
 	cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	NSNumber *checked = [self.selectedMedPaths objectForKey:indexPath];
+    NSInteger rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath];
 	if (nil == checked)
 	{
 	}
@@ -310,7 +312,7 @@
 
 	UILabel *label = [UILabel standardLabel];
 	label.text = med.Name;
-	label.frame = CGRectMake(80, 0, 180, self.tableView.rowHeight);
+	label.frame = CGRectMake(80, 0, 180, rowHeight);
 
 	[cell.contentView addSubview:imageView];
 	[cell.contentView addSubview:label];

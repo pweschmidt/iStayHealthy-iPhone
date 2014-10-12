@@ -115,7 +115,8 @@
 {
 	self.transitionType = kMenuTransition;
 	HamburgerMenuTableViewController *menuController = [[HamburgerMenuTableViewController alloc] init];
-	menuController.modalPresentationStyle = UIModalPresentationCustom;
+        //	menuController.modalPresentationStyle = UIModalPresentationCustom;
+    menuController.modalPresentationStyle = [Utilities modalPresentationStyle];
 	menuController.transitioningDelegate = self;
 	menuController.transitionDelegate = self;
 	self.shownMenuController = menuController;

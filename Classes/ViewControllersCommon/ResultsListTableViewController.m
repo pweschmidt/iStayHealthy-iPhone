@@ -18,6 +18,7 @@
 
 @interface ResultsListTableViewController ()
 @property (nonatomic, strong) NSArray *results;
+@property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
 @end
 
 @implementation ResultsListTableViewController
@@ -27,6 +28,22 @@
 	[super viewDidLoad];
 	self.results = [NSArray array]; //init with empty array
 	[self setTitleViewWithTitle:NSLocalizedString(@"Results", nil)];
+    NSArray *menuTitles = @[NSLocalizedString(@"All", nil),
+                            NSLocalizedString(@"HIV", nil),
+                            NSLocalizedString(@"Bloods", nil),
+                            NSLocalizedString(@"Cells", nil),
+                            NSLocalizedString(@"Other", nil),
+                            NSLocalizedString(@"Liver", nil)];
+    self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
+    CGFloat width = self.tableView.bounds.size.width;
+    if (320 < width)
+    {
+        width = 320;
+    }
+    CGFloat segmentWidth = width - 2 * 10;
+    self.resultsSegmentControl.frame = CGRectMake(10, 3, segmentWidth, 30);
+    self.resultsSegmentControl.selectedSegmentIndex = 0;
+    [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,6 +62,21 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	return self.results.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = nil;
+    
+    headerView = [[UIView alloc]
+                  initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
+    [headerView addSubview:self.resultsSegmentControl];
+    return headerView;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -83,7 +115,7 @@
 	    [view removeFromSuperview];
 	}];
 	Results *results = [self.results objectAtIndex:indexPath.row];
-	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath] - 2;
 	DateView *dateView = [DateView viewWithDate:results.ResultsDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
 
 	ResultsView_iPhone *hivView = [ResultsView_iPhone viewForResults:results resultsType:HIVResultsType frame:CGRectMake(70, 1, 70, rowHeight)];
@@ -161,6 +193,8 @@
 }
 
 #pragma mark - private methods
-
+- (void)indexDidChangeForSegment
+{
+}
 
 @end

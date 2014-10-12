@@ -72,7 +72,7 @@
 	    [view removeFromSuperview];
 	}];
 	MissedMedication *missed = (MissedMedication *)[self.missed objectAtIndex:indexPath.row];
-	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath] - 2;
 	DateView *dateView = [DateView viewWithDate:missed.MissedDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
 
 	UILabel *nameLabel = [UILabel standardLabel];

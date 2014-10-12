@@ -35,11 +35,11 @@
 {
 	if (0 == indexPath.section)
 	{
-		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : 44);
 	}
 	else
 	{
-		return self.tableView.rowHeight;
+		return 44;
 	}
 }
 

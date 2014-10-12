@@ -95,12 +95,21 @@
     {
         return 55;
     }
-    return self.tableView.rowHeight;
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([Utilities isIPad])
+    {
+        return 55;
+    }
+    return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"SettingsCell%ld", (long) indexPath.row];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"SettingsCell"];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     if (nil == cell)
@@ -109,19 +118,20 @@
     }
     cell.contentView.backgroundColor = [UIColor clearColor];
     cell.backgroundColor = [UIColor clearColor];
-    CGFloat offset = (self.tableView.rowHeight - 42) / 2;
+
+    NSInteger rowHeight = [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    CGFloat offset = (rowHeight - 42) / 2;
     if ([Utilities isIPad])
     {
         offset = 5.5f;
     }
-
-
+    
     id labelObj = [cell.contentView viewWithTag:kIconLabelViewTag];
     NSString *menuName = [self.menus objectAtIndex:indexPath.row];
     if (nil == labelObj)
     {
         UILabel *label = [UILabel standardLabel];
-        label.frame = CGRectMake(65, 0, 200, self.tableView.rowHeight);
+        label.frame = CGRectMake(75, 0, 200, rowHeight);
         label.textAlignment = NSTextAlignmentLeft;
         label.text = menuName;
         label.textColor = [UIColor whiteColor];

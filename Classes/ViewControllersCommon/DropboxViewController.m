@@ -101,7 +101,7 @@
 
 
 	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(20, 0, 200, self.tableView.rowHeight);
+	label.frame = CGRectMake(20, 0, 200, [self tableView:self.tableView estimatedHeightForRowAtIndexPath:indexPath]);
 	if (0 == indexPath.section)
 	{
 		if ([[DBSession sharedSession] isLinked])

@@ -91,11 +91,11 @@
 {
 	if (0 == indexPath.section)
 	{
-		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : 44);
 	}
 	else
 	{
-		return ([self indexPathHasEndDatePicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+		return ([self indexPathHasEndDatePicker:indexPath] ? kBaseDateCellRowHeight : 44);
 	}
 }
 

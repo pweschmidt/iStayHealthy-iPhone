@@ -100,7 +100,7 @@
 	    [view removeFromSuperview];
 	}];
 	UILocalNotification *notification = [self.notifications objectAtIndex:indexPath.row];
-	CGFloat rowHeight = self.tableView.rowHeight;
+	CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath];
 	CGFloat scale = 1.6;
 	TimeView *timeView = [TimeView viewWithTime:notification.fireDate frame:CGRectMake(20, 0, rowHeight * scale, rowHeight)];
 	timeView.tag = indexPath.row;

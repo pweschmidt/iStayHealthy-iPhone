@@ -158,11 +158,11 @@
 {
 	if (0 == indexPath.section)
 	{
-		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : self.tableView.rowHeight);
+		return ([self indexPathHasPicker:indexPath] ? kBaseDateCellRowHeight : 44);
 	}
 	else
 	{
-		return self.tableView.rowHeight;
+		return 44;
 	}
 }
 
@@ -243,18 +243,18 @@
 		{
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 		}
-		[self configureSoundCell:cell];
+		[self configureSoundCell:cell indexPath:indexPath];
 		return cell;
 	}
 }
 
-- (void)configureSoundCell:(UITableViewCell *)cell
+- (void)configureSoundCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
 	UILabel *soundSelect = (UILabel *)[cell.contentView viewWithTag:10];
 	if (nil == soundSelect)
 	{
 		soundSelect = [UILabel standardLabel];
-		soundSelect.frame = CGRectMake(20, 0, 120, self.tableView.rowHeight);
+		soundSelect.frame = CGRectMake(20, 0, 120, [self tableView:self.tableView heightForRowAtIndexPath:indexPath]);
 		soundSelect.text = NSLocalizedString(@"Alert Sound", nil);
 		soundSelect.tag = 10;
 		[cell.contentView addSubview:soundSelect];
@@ -265,7 +265,7 @@
 	{
 		soundNameLabel = [UILabel standardLabel];
 		soundNameLabel.tag = 11;
-		soundNameLabel.frame = CGRectMake(150, 0, 140, self.tableView.rowHeight);
+		soundNameLabel.frame = CGRectMake(150, 0, 140, [self tableView:self.tableView heightForRowAtIndexPath:indexPath]);
 		if (nil != self.selectedSoundName)
 		{
 			soundNameLabel.text = self.selectedSoundName;

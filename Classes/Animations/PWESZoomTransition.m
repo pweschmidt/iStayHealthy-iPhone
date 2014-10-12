@@ -29,30 +29,32 @@
 - (void)animateTransition:(id <UIViewControllerContextTransitioning> )transitionContext
 {
 	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 
 	NSTimeInterval duration = [self transitionDuration:transitionContext];
 	UIView *containerView = [transitionContext containerView];
+    
+    UIView *fromControllerView = [self viewForTransitioningContext:transitionContext isToController:NO];
+    UIView *toControllerView = [self viewForTransitioningContext:transitionContext isToController:YES];
 
 	containerView.backgroundColor = [UIColor lightGrayColor];
 	if (kMenuTransition == self.transitionType)
 	{
-		fromController.view.layer.transform = CATransform3DIdentity;
-		fromController.view.layer.position = CGPointMake(containerView.bounds.size.width / 2, containerView.bounds.size.height / 2);
-		toController.view.alpha = 0;
-		toController.view.frame = containerView.bounds;
-		toController.view.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
-        [containerView addSubview:fromController.view];
-        [containerView addSubview:toController.view];
-        [containerView bringSubviewToFront:fromController.view];
-//		[containerView insertSubview:toController.view belowSubview:fromController.view];
+		fromControllerView.layer.transform = CATransform3DIdentity;
+		fromControllerView.layer.position = CGPointMake(containerView.bounds.size.width / 2, containerView.bounds.size.height / 2);
+		toControllerView.alpha = 0;
+		toControllerView.frame = containerView.bounds;
+		toControllerView.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
+        [containerView addSubview:fromControllerView];
+        [containerView addSubview:toControllerView];
+        [containerView bringSubviewToFront:fromControllerView];
+//		[containerView insertSubview:toControllerView belowSubview:fromControllerView];
 		[UIView animateWithDuration:duration animations: ^{
-		    toController.view.alpha = 1.0;
-		    toController.view.layer.transform = CATransform3DIdentity;
-		    fromController.view.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
-		    CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromController.view.layer.bounds.size.width * kZoomFactor / 2;
-		    fromController.view.layer.position = CGPointMake(zoomedXOffset, fromController.view.layer.position.y);
-		    fromController.view.alpha = 0.6;
+		    toControllerView.alpha = 1.0;
+		    toControllerView.layer.transform = CATransform3DIdentity;
+		    fromControllerView.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
+		    CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromControllerView.layer.bounds.size.width * kZoomFactor / 2;
+		    fromControllerView.layer.position = CGPointMake(zoomedXOffset, fromControllerView.layer.position.y);
+		    fromControllerView.alpha = 0.6;
 		    [transitionContext finalFrameForViewController:fromController];
 		} completion: ^(BOOL finished) {
 		    [transitionContext completeTransition:finished];
@@ -60,29 +62,62 @@
 	}
 	else if (kControllerTransition == self.transitionType)
 	{
-		toController.view.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
-		CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromController.view.layer.bounds.size.width * kZoomFactor / 2;
-		toController.view.layer.position = CGPointMake(zoomedXOffset, fromController.view.layer.position.y);
-		toController.view.alpha = 0.6;
+		toControllerView.layer.transform = CATransform3DMakeScale(kZoomFactor, kZoomFactor, 1.0);
+		CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromControllerView.layer.bounds.size.width * kZoomFactor / 2;
+		toControllerView.layer.position = CGPointMake(zoomedXOffset, fromControllerView.layer.position.y);
+		toControllerView.alpha = 0.6;
 
-		fromController.view.alpha = 1.0;
-		fromController.view.layer.transform = CATransform3DIdentity;
-        [containerView addSubview:fromController.view];
-        [containerView addSubview:toController.view];
-        [containerView bringSubviewToFront:toController.view];
+		fromControllerView.alpha = 1.0;
+		fromControllerView.layer.transform = CATransform3DIdentity;
+        [containerView addSubview:fromControllerView];
+        [containerView addSubview:toControllerView];
+        [containerView bringSubviewToFront:toControllerView];
 		[UIView animateWithDuration:duration animations: ^{
-		    fromController.view.alpha = 0.0;
-		    fromController.view.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
-		    fromController.view.frame = containerView.bounds;
-		    toController.view.layer.transform = CATransform3DIdentity;
-		    toController.view.layer.position = CGPointMake(containerView.bounds.size.width / 2, containerView.bounds.size.height / 2);
-		    toController.view.alpha = 1.0;
+		    fromControllerView.alpha = 0.0;
+		    fromControllerView.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
+		    fromControllerView.frame = containerView.bounds;
+		    toControllerView.layer.transform = CATransform3DIdentity;
+		    toControllerView.layer.position = CGPointMake(containerView.bounds.size.width / 2, containerView.bounds.size.height / 2);
+		    toControllerView.alpha = 1.0;
 		} completion: ^(BOOL finished) {
-		    fromController.view.alpha = 1.0;
-		    fromController.view.layer.transform = CATransform3DIdentity;
+		    fromControllerView.alpha = 1.0;
+		    fromControllerView.layer.transform = CATransform3DIdentity;
 		    [transitionContext completeTransition:finished];
 		}];
 	}
+}
+
+- (UIView *)viewForTransitioningContext:(id<UIViewControllerContextTransitioning>)transitionContext
+                         isToController:(BOOL)isToController
+{
+    UIView *controllerView = nil;
+    UIViewController *controller = nil;
+    if (isToController)
+    {
+        controller = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        if ([transitionContext respondsToSelector:@selector(viewForKey:)])
+        {
+            controllerView = [transitionContext viewForKey:UITransitionContextToViewKey];
+        }
+        else
+        {
+            controllerView = controller.view;
+        }
+    }
+    else
+    {
+        controller = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        if ([transitionContext respondsToSelector:@selector(viewForKey:)])
+        {
+            controllerView = [transitionContext viewForKey:UITransitionContextFromViewKey];
+        }
+        else
+        {
+            controllerView = controller.view;
+        }
+    }
+    
+    return controllerView;
 }
 
 @end

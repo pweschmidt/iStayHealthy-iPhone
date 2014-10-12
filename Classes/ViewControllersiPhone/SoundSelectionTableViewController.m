@@ -44,6 +44,12 @@
 	return self.sounds.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *identifier = @"identifier";
@@ -56,8 +62,9 @@
 
 	if (nil == label)
 	{
+        NSInteger rowHeight = [self tableView:tableView heightForRowAtIndexPath:indexPath];
 		label = [UILabel standardLabel];
-		label.frame = CGRectMake(20, 0, 180, self.tableView.rowHeight);
+		label.frame = CGRectMake(20, 0, 180, rowHeight);
 		label.text = [self.sounds objectAtIndex:indexPath.row];
 		label.tag = 10;
 		[cell.contentView addSubview:label];

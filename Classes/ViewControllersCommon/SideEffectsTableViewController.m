@@ -72,7 +72,7 @@
 	    [view removeFromSuperview];
 	}];
 	SideEffects *effects = [self.effects objectAtIndex:indexPath.row];
-	CGFloat rowHeight = self.tableView.rowHeight - 2;
+	CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath] - 2;
 	DateView *dateView = [DateView viewWithDate:effects.SideEffectDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
 
 	UILabel *nameLabel = [UILabel standardLabel];

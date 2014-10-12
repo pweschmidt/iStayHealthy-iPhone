@@ -589,4 +589,14 @@ static NSDictionary *medNameMap()
 	return CGRectZero;
 }
 
++ (UIModalPresentationStyle)modalPresentationStyle
+{
+#ifdef __IPHONE_8_0
+    return UIModalPresentationFullScreen;
+#else
+    return UIModalPresentationCustom;
+#endif
+}
+
+
 @end

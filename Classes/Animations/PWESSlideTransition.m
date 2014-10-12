@@ -32,8 +32,8 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning> )transitionContext
 {
-	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        //	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        //	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
 	NSTimeInterval duration = [self transitionDuration:transitionContext];
 
@@ -41,45 +41,81 @@
 	CGRect transformedEndFrame = CGRectZero;
 	CGRect transformedMenuFrame = CGRectZero;
 
+    UIView *fromControllerView = [self viewForTransitioningContext:transitionContext isToController:NO];
+    UIView *toControllerView = [self viewForTransitioningContext:transitionContext isToController:YES];
+
 	if (kMenuTransition == self.transitionType)
 	{
-		toController.view.alpha = 0.0;
+		toControllerView.alpha = 0.0;
 		transformedMenuFrame = [[transitionContext containerView]
-		                        convertRect:CGRectMake(0, 0, CGRectGetWidth(fromController.view.bounds), CGRectGetHeight(fromController.view.bounds)) fromView:fromController.view];
-		toController.view.frame = transformedMenuFrame;
-		endContentFrame = CGRectMake(kSlideLength, 0, CGRectGetWidth(fromController.view.bounds), CGRectGetHeight(fromController.view.bounds));
-		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:fromController.view];
+		                        convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
+		toControllerView.frame = transformedMenuFrame;
+		endContentFrame = CGRectMake(kSlideLength, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds));
+		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:fromControllerView];
 
-        [containerView addSubview:fromController.view];
-		[containerView insertSubview:toController.view belowSubview:fromController.view];
+        [containerView addSubview:fromControllerView];
+		[containerView insertSubview:toControllerView belowSubview:fromControllerView];
 
 		[UIView animateWithDuration:duration animations: ^{
-		    toController.view.alpha = 1.0;
-		    fromController.view.frame = transformedEndFrame;
+		    toControllerView.alpha = 1.0;
+		    fromControllerView.frame = transformedEndFrame;
 		} completion: ^(BOOL finished) {
 		    [transitionContext completeTransition:finished];
 		}];
 	}
 	else
 	{
-		fromController.view.alpha = 1.0;
-		transformedMenuFrame = [[transitionContext containerView] convertRect:CGRectMake(0, 0, CGRectGetWidth(fromController.view.bounds), CGRectGetHeight(fromController.view.bounds)) fromView:fromController.view];
+		fromControllerView.alpha = 1.0;
+		transformedMenuFrame = [[transitionContext containerView] convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
 
-		endContentFrame = CGRectMake(0, 0, CGRectGetWidth(toController.view.bounds), CGRectGetHeight(toController.view.bounds));
-		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:toController.view];
+		endContentFrame = CGRectMake(0, 0, CGRectGetWidth(toControllerView.bounds), CGRectGetHeight(toControllerView.bounds));
+		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:toControllerView];
         
-        [containerView addSubview:fromController.view];
-        [containerView insertSubview:toController.view belowSubview:fromController.view];
+        [containerView addSubview:fromControllerView];
+        [containerView insertSubview:toControllerView belowSubview:fromControllerView];
 
 		[UIView animateWithDuration:duration animations: ^{
-		    toController.view.frame = transformedEndFrame;
-		    fromController.view.alpha = 0.0;
+		    toControllerView.frame = transformedEndFrame;
+		    fromControllerView.alpha = 0.0;
 		} completion: ^(BOOL finished) {
-//		    [fromController.view removeFromSuperview];
-//		    [toController.view removeFromSuperview];
+//		    [fromControllerView removeFromSuperview];
+//		    [toControllerView removeFromSuperview];
 		    [transitionContext completeTransition:finished];
 		}];
 	}
+}
+
+- (UIView *)viewForTransitioningContext:(id<UIViewControllerContextTransitioning>)transitionContext
+                         isToController:(BOOL)isToController
+{
+    UIView *controllerView = nil;
+    UIViewController *controller = nil;
+    if (isToController)
+    {
+        controller = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        if ([transitionContext respondsToSelector:@selector(viewForKey:)])
+        {
+            controllerView = [transitionContext viewForKey:UITransitionContextToViewKey];
+        }
+        else
+        {
+            controllerView = controller.view;
+        }
+    }
+    else
+    {
+        controller = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        if ([transitionContext respondsToSelector:@selector(viewForKey:)])
+        {
+            controllerView = [transitionContext viewForKey:UITransitionContextFromViewKey];
+        }
+        else
+        {
+            controllerView = controller.view;
+        }
+    }
+    
+    return controllerView;
 }
 
 - (void)logFramesAndOrientationForTransition:(id <UIViewControllerContextTransitioning> )transitionContext
@@ -93,11 +129,11 @@
 //	CGRect containerFrame = containerView.frame;
 //	CGRect containerBounds = containerView.bounds;
 //
-//	CGRect fromFrame = fromController.view.frame;
-//	CGRect fromBounds = fromController.view.bounds;
+//	CGRect fromFrame = fromControllerView.frame;
+//	CGRect fromBounds = fromControllerView.bounds;
 //
-//	CGRect toFrame = toController.view.frame;
-//	CGRect toBounds = toController.view.bounds;
+//	CGRect toFrame = toControllerView.frame;
+//	CGRect toBounds = toControllerView.bounds;
 //	NSLog(@"Container Frame = %@ ", NSStringFromCGRect(containerFrame));
 //	NSLog(@"Container Bounds = %@ ", NSStringFromCGRect(containerBounds));
 //	NSLog(@"From Frame = %@ ", NSStringFromCGRect(fromFrame));

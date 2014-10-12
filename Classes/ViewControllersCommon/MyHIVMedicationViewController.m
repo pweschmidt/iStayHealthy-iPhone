@@ -94,7 +94,7 @@
 	[subviews enumerateObjectsUsingBlock: ^(UIView *view, NSUInteger index, BOOL *stop) {
 	    [view removeFromSuperview];
 	}];
-	CGFloat rowHeight = self.tableView.rowHeight - 2;
+    CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath] - 2;
 	UIImageView *medImageView = [[UIImageView alloc] init];
 	medImageView.frame = CGRectMake(20 + rowHeight + 170, 1, rowHeight, rowHeight);
 	medImageView.backgroundColor = [UIColor clearColor];
