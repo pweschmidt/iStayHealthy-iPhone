@@ -14,7 +14,7 @@
 		<string>https://github.com/pweschmidt/iStayHealthy-iPhone</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iStayHealthy.xcodeproj/project.xcworkspace</string>
+	<string>iStayHealthy.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>139C23FEB8A7297C0CC4811A94CBD9C8ADA71EE8</key>

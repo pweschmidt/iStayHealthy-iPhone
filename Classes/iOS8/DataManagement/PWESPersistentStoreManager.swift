@@ -68,7 +68,7 @@ class PWESPersistentStoreManager : NSObject
     {
         let path:NSURL = NSBundle.mainBundle().URLForResource("PWESHealth", withExtension: "momd")!
         let model = NSManagedObjectModel(contentsOfURL: path)
-        return model
+        return model!
     }()
     
     func save()

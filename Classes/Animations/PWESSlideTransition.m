@@ -32,8 +32,7 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning> )transitionContext
 {
-        //	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-        //	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
 	NSTimeInterval duration = [self transitionDuration:transitionContext];
 
@@ -58,7 +57,9 @@
 
 		[UIView animateWithDuration:duration animations: ^{
 		    toControllerView.alpha = 1.0;
-		    fromControllerView.frame = transformedEndFrame;
+		    fromControllerView.frame = endContentFrame;
+            CGRect finalFrame = [transitionContext finalFrameForViewController:fromController];
+            finalFrame = endContentFrame;
 		} completion: ^(BOOL finished) {
 		    [transitionContext completeTransition:finished];
 		}];
@@ -66,20 +67,18 @@
 	else
 	{
 		fromControllerView.alpha = 1.0;
-		transformedMenuFrame = [[transitionContext containerView] convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
+            //		transformedMenuFrame = [[transitionContext containerView] convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
 
-		endContentFrame = CGRectMake(0, 0, CGRectGetWidth(toControllerView.bounds), CGRectGetHeight(toControllerView.bounds));
-		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:toControllerView];
+            //		endContentFrame = CGRectMake(0, 0, CGRectGetWidth(toControllerView.bounds), CGRectGetHeight(toControllerView.bounds));
+            //		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:toControllerView];
         
         [containerView addSubview:fromControllerView];
         [containerView insertSubview:toControllerView belowSubview:fromControllerView];
 
 		[UIView animateWithDuration:duration animations: ^{
-		    toControllerView.frame = transformedEndFrame;
+		    toControllerView.frame = containerView.bounds;
 		    fromControllerView.alpha = 0.0;
 		} completion: ^(BOOL finished) {
-//		    [fromControllerView removeFromSuperview];
-//		    [toControllerView removeFromSuperview];
 		    [transitionContext completeTransition:finished];
 		}];
 	}
