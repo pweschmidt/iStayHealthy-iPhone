@@ -8,9 +8,10 @@
 
 #import "BaseViewController.h"
 #import "ChartSelector.h"
+#import <MessageUI/MessageUI.h>
 
 
-@interface PWESDashboardViewController : BaseViewController <UIScrollViewDelegate, ChartSelector>
+@interface PWESDashboardViewController : BaseViewController <UIScrollViewDelegate, ChartSelector, MFMailComposeViewControllerDelegate>
 @property (nonatomic, weak) UIScrollView *chartScroller;
 @property (nonatomic, weak) UIPageControl *pageController;
 @property (nonatomic, weak) UIBarButtonItem *syncButton;

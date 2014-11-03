@@ -15,7 +15,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
 #import "KeychainHandler.h"
-
+#import "iStayHealthy-Swift.h"
 
 @interface CentralAppDelegate ()
 @property (nonatomic, strong) id containerController;
@@ -67,27 +67,30 @@
 
 - (void)registerUserNotifications:(UIApplication *)application
 {
-    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotifications:)])
-    {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
-        
-        [application registerUserNotificationSettings:settings];
-        [application registerForRemoteNotifications];
-    }
+    UIUserNotificationType notificationTypes = UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+    
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
+    UIAlertView *receivedAlert = [[UIAlertView alloc] initWithTitle:@"Received notification" message:@"Hurrah we received a notification" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [receivedAlert show];
     
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    
+    NSLog(@"Device token is %@", deviceToken);
+    TokenCertificate *certificate = [TokenCertificate sharedToken];
+    certificate.deviceToken = deviceToken;
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
+    NSLog(@"did register notification");
     
 }
 
