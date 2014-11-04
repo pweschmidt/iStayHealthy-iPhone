@@ -433,9 +433,10 @@
         [mail setToRecipients:toRecipient];
         [mail setSubject:@"Confirm iStayHealthy Registration"];
         
-        NSString *token = [certificate deviceTokenAsString];
-        
-        NSString *message = [NSString stringWithFormat:@"The device token is %@", token];
+            //        NSString *token = [certificate deviceTokenAsString];
+        NSString *tokenString = [self hexadecimalStringFromToken:token];
+        NSLog(@"The token is %@", tokenString);
+        NSString *message = [NSString stringWithFormat:@"The device token is %@", tokenString];
         
         [mail setMessageBody:message isHTML:YES];
         
@@ -451,6 +452,22 @@
     }];
 }
 
-
+- (NSString *)hexadecimalStringFromToken:(NSData *)tokenData
+{
+    const unsigned char *dataBuffer = (const unsigned char *)[tokenData bytes];
+    
+    if (!dataBuffer) {
+        return [NSString string];
+    }
+    
+    NSUInteger          dataLength  = [tokenData length];
+    NSMutableString     *hexString  = [NSMutableString stringWithCapacity:(dataLength * 2)];
+    
+    for (int i = 0; i < dataLength; ++i) {
+        [hexString appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
+    }
+    
+    return hexString;
+}
 
 @end
