@@ -13,6 +13,7 @@
 #import "CoreDataManager.h"
 #import "DateView.h"
 #import "ResultsView_iPhone.h"
+#import "ResultsViewWithValue_iPhone.h"
 #import "Results.h"
 #import "EditResultsTableViewController.h"
 #import "PWESDataManager.h"
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) NSArray *otherMenu;
 @property (nonatomic, strong) NSArray *liverMenu;
 @property (nonatomic, strong) NSPredicate *currentPredicate;
+@property (nonatomic, strong) NSArray *displayArray;
 @end
 
 @implementation ResultsListTableViewController
@@ -116,7 +118,14 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    [self configureResultsCell:cell indexPath:indexPath];
+    if (0 == self.resultsSegmentControl.selectedSegmentIndex)
+    {
+        [self configureResultsCell:cell indexPath:indexPath];
+    }
+    else
+    {
+        [self configureResultsCellsWithValue:cell indexPath:indexPath];
+    }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -145,6 +154,36 @@
     [cell.contentView addSubview:bloodView];
     [cell.contentView addSubview:otherView];
     [cell.contentView addSubview:liverView];
+    [cell.contentView setNeedsDisplay];
+}
+
+- (void)configureResultsCellsWithValue:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    NSArray *subviews = cell.contentView.subviews;
+
+    [subviews enumerateObjectsUsingBlock: ^(UIView *view, NSUInteger index, BOOL *stop) {
+         [view removeFromSuperview];
+     }];
+    Results *results = [self.results objectAtIndex:indexPath.row];
+    CGFloat rowHeight = [self tableView:self.tableView heightForRowAtIndexPath:indexPath] - 2;
+    DateView *dateView = [DateView viewWithDate:results.ResultsDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
+    CGFloat width = 210;
+    CGFloat viewWidth = (nil != self.displayArray) ? (width / self.displayArray.count) : 0;
+
+    if (nil != self.displayArray)
+    {
+        __block NSUInteger xOffset = 70;
+        [self.displayArray enumerateObjectsUsingBlock:^(NSString *resultsType, NSUInteger idx, BOOL *stop) {
+             CGRect frame = CGRectMake(xOffset, 0, viewWidth, rowHeight);
+             ResultsViewWithValue_iPhone *view = [ResultsViewWithValue_iPhone viewForResults:results
+                                                                                 resultsType:resultsType
+                                                                                       frame:frame];
+             xOffset += viewWidth;
+             [cell.contentView addSubview:view];
+         }];
+    }
+
+    [cell.contentView addSubview:dateView];
     [cell.contentView setNeedsDisplay];
 }
 
@@ -216,24 +255,31 @@
     {
         case 0:
             self.currentPredicate = nil;
+            self.displayArray = nil;
             break;
         case 1: // HIV
             self.currentPredicate = [dataManager filterForTypesArray:self.hivMenu];
+            self.displayArray = self.hivMenu;
             break;
         case 2: // Bloods
             self.currentPredicate = [dataManager filterForTypesArray:self.bloodMenu];
+            self.displayArray = @[kGlucose, kTotalCholesterol, kCholesterolRatio];
             break;
         case 3: // Cell
             self.currentPredicate = [dataManager filterForTypesArray:self.cellMenu];
+            self.displayArray = self.cellMenu;
             break;
         case 4: // Other
             self.currentPredicate = [dataManager filterForTypesArray:self.otherMenu];
+            self.displayArray = @[kWeight, kBMI, kBloodPressure, kCardiacRiskFactor];
             break;
         case 5: // Liver
             self.currentPredicate = [dataManager filterForTypesArray:self.liverMenu];
+            self.displayArray = self.liverMenu;
             break;
         default:
             self.currentPredicate = nil;
+            self.displayArray = nil;
             break;
     }
     [self reloadSQLData:nil];
@@ -273,4 +319,5 @@
                        kLiverGammaGlutamylTranspeptidase];
 
 }
+
 @end

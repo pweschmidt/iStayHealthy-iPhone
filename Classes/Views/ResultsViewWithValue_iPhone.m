@@ -42,7 +42,18 @@
 
 - (void)configureView
 {
-    NSString *valueString = [self.results valueStringForType:self.resultsType];
+    NSString *valueString = @"--";
+
+    if (![self.resultsType isEqualToString:kBloodPressure])
+    {
+        valueString = [self.results valueStringForType:self.resultsType];
+    }
+    else if (0 < self.results.Systole && 0 < self.results.Diastole)
+    {
+        {
+            valueString = [NSString stringWithFormat:@"%@/%@", self.results.Systole, self.results.Diastole];
+        }
+    }
 
     if ([valueString isEqualToString:NSLocalizedString(@"Enter Value", nil)])
     {
@@ -52,8 +63,8 @@
     UIColor *colour = [self colorForResultsTypeWithValueString:valueString];
     NSString *title = NSLocalizedString(self.resultsType, nil);
 
-    CGRect titleFrame = CGRectMake(0, 2, self.frame.size.width, self.frame.size.height - 2);
-    CGRect valueFrame = CGRectMake(0, self.frame.size.height / 2, self.frame.size.width, self.frame.size.height / 2 - 2);
+    CGRect titleFrame = CGRectMake(0, 4, self.frame.size.width, self.frame.size.height / 2 - 4);
+    CGRect valueFrame = CGRectMake(0, self.frame.size.height / 2 + 4, self.frame.size.width, self.frame.size.height / 2 - 4);
 
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -92,6 +103,7 @@
     else if ([self.resultsType isEqualToString:kBMI] ||
              [self.resultsType isEqualToString:kSystole] ||
              [self.resultsType isEqualToString:kDiastole] ||
+             [self.resultsType isEqualToString:kBloodPressure] ||
              [self.resultsType isEqualToString:kWeight] ||
              [self.resultsType isEqualToString:kCardiacRiskFactor])
     {
