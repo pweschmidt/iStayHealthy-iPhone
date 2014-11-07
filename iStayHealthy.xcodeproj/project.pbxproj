@@ -124,6 +124,7 @@
 		C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58115F7C5CE00108EF8 /* Procedures.m */; };
 		C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */; };
 		C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43BE58E15F7CBE400108EF8 /* SideEffects.plist */; };
+		C45138F01A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45138EF1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m */; };
 		C4547DDE19B9FF4B006A868C /* PWESBloodPressureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
 		C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E417EEE3BA004E13C7 /* DateView.m */; };
@@ -460,6 +461,8 @@
 		C43BE58F15F7CBEE00108EF8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/SideEffects.plist; sourceTree = "<group>"; };
 		C43BE59015F7CBF400108EF8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/SideEffects.plist; sourceTree = "<group>"; };
 		C43BE59115F7CBFD00108EF8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/SideEffects.plist; sourceTree = "<group>"; };
+		C45138EE1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsViewWithValue_iPhone.h; path = Views/ResultsViewWithValue_iPhone.h; sourceTree = "<group>"; };
+		C45138EF1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsViewWithValue_iPhone.m; path = Views/ResultsViewWithValue_iPhone.m; sourceTree = "<group>"; };
 		C4547DDC19B9FF4B006A868C /* PWESBloodPressureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESBloodPressureCell.h; path = TableCells/PWESBloodPressureCell.h; sourceTree = "<group>"; };
 		C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESBloodPressureCell.m; path = TableCells/PWESBloodPressureCell.m; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
@@ -964,6 +967,8 @@
 				0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */,
 				C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */,
 				C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */,
+				C45138EE1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.h */,
+				C45138EF1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m */,
 				0B7063FF193A1FB900CD2073 /* TimeCounter.h */,
 				0B706400193A1FB900CD2073 /* TimeCounter.m */,
 				C4A49AD718002CD300FC1637 /* TimeView.h */,
@@ -1540,6 +1545,7 @@
 				0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */,
 				0B36926919C491D700C269AD /* PWESTreatment.swift in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
+				C45138F01A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m in Sources */,
 				0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */,
 				0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */,
 				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,

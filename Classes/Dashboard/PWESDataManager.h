@@ -39,7 +39,7 @@
                                             error:(NSError **)error;
 
 /**
-   @param types an array of strings for which a predicate will be created
+   @param types a PWESResultsTypes object for which a predicate will be created
    @return a predicate to filter an array with
  */
 - (NSPredicate *)filterPredicateFromTypes:(PWESResultsTypes *)types;
@@ -50,5 +50,8 @@
  */
 - (NSString *)filterStringForType:(NSString *)type;
 
-
+/**
+   @param types an array of strings for which a predicate will be created
+ */
+- (NSPredicate *)filterForTypesArray:(NSArray *)resultsTypes;
 @end
