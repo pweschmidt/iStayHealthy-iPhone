@@ -18,70 +18,72 @@
 
 - (id)init
 {
-	self = [super init];
-	if (nil != self)
-	{
-	}
-	return self;
+    self = [super init];
+    if (nil != self)
+    {
+    }
+    return self;
 }
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning> )transitionContext
 {
-	return 0.25;
+    return 0.25;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning> )transitionContext
 {
-    UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	UIView *containerView = [transitionContext containerView];
-	NSTimeInterval duration = [self transitionDuration:transitionContext];
+//    UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIView *containerView = transitionContext.containerView;
+    NSTimeInterval duration = [self transitionDuration:transitionContext];
 
-	CGRect endContentFrame = CGRectZero;
-	CGRect transformedEndFrame = CGRectZero;
-	CGRect transformedMenuFrame = CGRectZero;
+    CGRect endContentFrame = CGRectZero;
+    CGRect transformedEndFrame = CGRectZero;
+    CGRect transformedMenuFrame = CGRectZero;
 
     UIView *fromControllerView = [self viewForTransitioningContext:transitionContext isToController:NO];
     UIView *toControllerView = [self viewForTransitioningContext:transitionContext isToController:YES];
 
-	if (kMenuTransition == self.transitionType)
-	{
-		toControllerView.alpha = 0.0;
-		transformedMenuFrame = [[transitionContext containerView]
-		                        convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
-		toControllerView.frame = transformedMenuFrame;
-		endContentFrame = CGRectMake(kSlideLength, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds));
-		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:fromControllerView];
+    if (kMenuTransition == self.transitionType)
+    {
+        toControllerView.alpha = 0.0;
+        transformedMenuFrame = [[transitionContext containerView]
+                                convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
+        toControllerView.frame = transformedMenuFrame;
+        endContentFrame = CGRectMake(kSlideLength, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds));
+        transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:fromControllerView];
 
-        [containerView addSubview:fromControllerView];
-		[containerView insertSubview:toControllerView belowSubview:fromControllerView];
+//        [containerView addSubview:fromControllerView];
+        [containerView addSubview:toControllerView];
+//        [containerView insertSubview:toControllerView belowSubview:fromControllerView];
 
-		[UIView animateWithDuration:duration animations: ^{
-		    toControllerView.alpha = 1.0;
-		    fromControllerView.frame = endContentFrame;
-            CGRect finalFrame = [transitionContext finalFrameForViewController:fromController];
-            finalFrame = endContentFrame;
-		} completion: ^(BOOL finished) {
-		    [transitionContext completeTransition:finished];
-		}];
-	}
-	else
-	{
-		fromControllerView.alpha = 1.0;
-            //		transformedMenuFrame = [[transitionContext containerView] convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
+        [UIView animateWithDuration:duration animations: ^{
+             toControllerView.alpha = 1.0;
+             fromControllerView.frame = endContentFrame;
+             fromControllerView.alpha = 1.0;
+//             CGRect finalFrame = [transitionContext finalFrameForViewController:fromController];
+//             finalFrame = endContentFrame;
+         } completion: ^(BOOL finished) {
+             [transitionContext completeTransition:finished];
+         }];
+    }
+    else
+    {
+        fromControllerView.alpha = 1.0;
+        //		transformedMenuFrame = [[transitionContext containerView] convertRect:CGRectMake(0, 0, CGRectGetWidth(fromControllerView.bounds), CGRectGetHeight(fromControllerView.bounds)) fromView:fromControllerView];
 
-            //		endContentFrame = CGRectMake(0, 0, CGRectGetWidth(toControllerView.bounds), CGRectGetHeight(toControllerView.bounds));
-            //		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:toControllerView];
-        
+        //		endContentFrame = CGRectMake(0, 0, CGRectGetWidth(toControllerView.bounds), CGRectGetHeight(toControllerView.bounds));
+        //		transformedEndFrame = [[transitionContext containerView] convertRect:endContentFrame fromView:toControllerView];
+
         [containerView addSubview:fromControllerView];
         [containerView insertSubview:toControllerView belowSubview:fromControllerView];
 
-		[UIView animateWithDuration:duration animations: ^{
-		    toControllerView.frame = containerView.bounds;
-		    fromControllerView.alpha = 0.0;
-		} completion: ^(BOOL finished) {
-		    [transitionContext completeTransition:finished];
-		}];
-	}
+        [UIView animateWithDuration:duration animations: ^{
+             toControllerView.frame = containerView.bounds;
+             fromControllerView.alpha = 0.0;
+         } completion: ^(BOOL finished) {
+             [transitionContext completeTransition:finished];
+         }];
+    }
 }
 
 - (UIView *)viewForTransitioningContext:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -89,6 +91,7 @@
 {
     UIView *controllerView = nil;
     UIViewController *controller = nil;
+
     if (isToController)
     {
         controller = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -113,7 +116,7 @@
             controllerView = controller.view;
         }
     }
-    
+
     return controllerView;
 }
 
