@@ -508,9 +508,7 @@ static NSDictionary * medNameMap()
         return nil;
     }
     NSString *imageName = [[self class] imageNameFromMedName:medName];
-    NSString *pillPath = [[NSBundle mainBundle]
-                          pathForResource:[imageName lowercaseString] ofType:@"png"];
-    return [UIImage imageWithContentsOfFile:pillPath];
+    return [UIImage imageNamed:imageName];
 }
 
 + (NSDictionary *)resultsTypeDictionary

@@ -62,9 +62,12 @@
 	[save addTarget:self action:@selector(addButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *changeButton = [[UIBarButtonItem alloc] initWithCustomView:save];
     
-    
-    UIBarButtonItem *sendToken = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(registerDeviceToken)];
-    NSArray *buttons = @[sendToken, changeButton];
+    /**
+     the following 2 lines are ONLY for testing push notifications. Not to be used in the published version
+     */
+//    UIBarButtonItem *sendToken = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(registerDeviceToken)];
+//    NSArray *buttons = @[sendToken, changeButton];
+    NSArray *buttons = @[changeButton];
 	self.navigationItem.rightBarButtonItems = buttons;
 	self.chartBarButton = changeButton;
 }

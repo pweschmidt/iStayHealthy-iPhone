@@ -28,7 +28,7 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning> )transitionContext
 {
-	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        //	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 
 	NSTimeInterval duration = [self transitionDuration:transitionContext];
 	UIView *containerView = [transitionContext containerView];
@@ -44,10 +44,10 @@
 		toControllerView.alpha = 0;
 		toControllerView.frame = containerView.bounds;
 		toControllerView.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
-        [containerView addSubview:fromControllerView];
+            //        [containerView addSubview:fromControllerView];
         [containerView addSubview:toControllerView];
-        [containerView bringSubviewToFront:fromControllerView];
-//		[containerView insertSubview:toControllerView belowSubview:fromControllerView];
+            //        [containerView bringSubviewToFront:fromControllerView];
+            //		[containerView insertSubview:toControllerView belowSubview:fromControllerView];
 		[UIView animateWithDuration:duration animations: ^{
 		    toControllerView.alpha = 1.0;
 		    toControllerView.layer.transform = CATransform3DIdentity;
@@ -55,7 +55,7 @@
 		    CGFloat zoomedXOffset = containerView.bounds.size.width * 0.75 + fromControllerView.layer.bounds.size.width * kZoomFactor / 2;
 		    fromControllerView.layer.position = CGPointMake(zoomedXOffset, fromControllerView.layer.position.y);
 		    fromControllerView.alpha = 0.6;
-		    [transitionContext finalFrameForViewController:fromController];
+                //		    [transitionContext finalFrameForViewController:fromController];
 		} completion: ^(BOOL finished) {
 		    [transitionContext completeTransition:finished];
 		}];
@@ -70,8 +70,8 @@
 		fromControllerView.alpha = 1.0;
 		fromControllerView.layer.transform = CATransform3DIdentity;
         [containerView addSubview:fromControllerView];
-        [containerView addSubview:toControllerView];
-        [containerView bringSubviewToFront:toControllerView];
+//        [containerView addSubview:toControllerView];
+//        [containerView bringSubviewToFront:toControllerView];
 		[UIView animateWithDuration:duration animations: ^{
 		    fromControllerView.alpha = 0.0;
 		    fromControllerView.layer.transform = CATransform3DMakeScale(kEnlargeFactor, kEnlargeFactor, 1);
