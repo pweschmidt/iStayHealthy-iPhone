@@ -71,7 +71,7 @@
 	self.startDay = components.day;
 	self.startWeekDay = components.weekday;
 	self.endDay = daysInMonth;
-	self.startWeek = components.week;
+	self.startWeek = components.weekOfYear;
 	self.weeksToShow = weeks;
 	if (0 == weeks)
 	{
@@ -80,7 +80,7 @@
 	[self endParametersForDay:components.day
 	                   endday:daysInMonth
 	                  weekday:components.weekday
-	                     week:components.week];
+	                     week:components.weekOfYear];
 
 	self.month = components.month;
 	self.year = components.year;
@@ -101,11 +101,11 @@
 	self.startDay = 1;
 	[self startParametersForDay:components.day
 	                    weekday:components.weekday
-	                       week:components.week];
+	                       week:components.weekOfYear];
 	[self endParametersForDay:components.day
 	                   endday:daysInMonth
 	                  weekday:components.weekday
-	                     week:components.week];
+	                     week:components.weekOfYear];
 	self.endDay = daysInMonth;
 
 	self.weeksToShow = daysInMonth / 7;
@@ -127,14 +127,14 @@
 	self.startDay = 1;
 	[self startParametersForDay:components.day
 	                    weekday:components.weekday
-	                       week:components.week];
+	                       week:components.weekOfYear];
 	self.weeksToShow = components.day / 7;
 	if (0 < restDaysFromStart)
 	{
 		self.weeksToShow++;
 	}
 	self.endDay = components.day;
-	self.endWeek = components.week;
+	self.endWeek = components.weekOfYear;
 	self.endWeekDay = components.weekday;
 	self.month = components.month;
 	self.year = components.year;

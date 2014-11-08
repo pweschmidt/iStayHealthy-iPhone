@@ -110,7 +110,7 @@
 
     medAlert.fireDate = [NSDate date];
     medAlert.timeZone = [NSTimeZone localTimeZone];
-    medAlert.repeatInterval = NSDayCalendarUnit;
+    medAlert.repeatInterval = NSCalendarUnitDay;
     medAlert.userInfo = userDictionary;
     medAlert.alertBody = alertText;
     medAlert.alertAction = @"Show me";

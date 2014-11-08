@@ -49,13 +49,13 @@
 - (NSUInteger)daysInMonth
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:self];
+    NSRange days = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self];
     return days.length;
 }
 
 + (NSDate *)dateFromDay:(NSUInteger)day month:(NSUInteger)month year:(NSUInteger)year
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.day = day;
     components.month = month;

@@ -98,7 +98,7 @@
     if (nil != self.date)
     {
         NSDateComponents *components = [[NSCalendar currentCalendar]
-                                        components:NSYearCalendarUnit
+                                        components:NSCalendarUnitYear
                                           fromDate:self.date];
         int year = (int) [components year];
 
@@ -124,7 +124,7 @@
     if (nil != self.date)
     {
         NSDateComponents *components = [[NSCalendar currentCalendar]
-                                        components:NSDayCalendarUnit
+                                        components:NSCalendarUnitDay
                                           fromDate:self.date];
         int day = (int) [components day];
         label.text = [NSString stringWithFormat:@"%d", day];

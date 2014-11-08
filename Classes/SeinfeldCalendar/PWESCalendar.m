@@ -75,7 +75,7 @@
 	{
 		return date;
 	}
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 	NSDateComponents *components = [[NSDateComponents alloc] init];
 	components.month = months;
 	return [calendar dateByAddingComponents:components toDate:date options:0];
@@ -84,8 +84,8 @@
 - (NSInteger)weeksLeftInMonthInclusive:(NSDateComponents *)components date:(NSDate *)date
 {
 	NSInteger weeksLeft = 0;
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSRange weekRange = [calendar rangeOfUnit:NSWeekCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSRange weekRange = [calendar rangeOfUnit:NSCalendarUnitWeekOfYear inUnit:NSCalendarUnitMonth forDate:date];
 	NSInteger currentWeek = components.weekOfMonth;
 	weeksLeft = weekRange.length - currentWeek + 1;
 	return weeksLeft;
@@ -102,8 +102,8 @@
 
 - (NSDateComponents *)dateComponentsForDate:(NSDate *)date
 {
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	return [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSWeekOfMonthCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	return [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond
 	                   fromDate:date];
 }
 
@@ -123,7 +123,7 @@
 
 - (NSInteger)daysInMonth:(NSInteger)month inYear:(NSInteger)inYear
 {
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 	if (1 > month)
 	{
 		month = 1;
@@ -138,7 +138,7 @@
 	[components setYear:inYear];
 
 	NSDate *date = [calendar dateFromComponents:components];
-	NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+	NSRange days = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
 	return days.length;
 }
 
@@ -178,12 +178,12 @@
 
 - (NSInteger)daysBetweenStartDate:(NSDate *)startDate endDate:(NSDate *)endDate
 {
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 	NSDate *fromDate = nil;
 	NSDate *toDate = nil;
-	[calendar rangeOfUnit:NSDayCalendarUnit startDate:&fromDate interval:NULL forDate:startDate];
-	[calendar rangeOfUnit:NSDayCalendarUnit startDate:&toDate interval:NULL forDate:endDate];
-	NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+	[calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate interval:NULL forDate:startDate];
+	[calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate interval:NULL forDate:endDate];
+	NSDateComponents *difference = [calendar components:NSCalendarUnitDay
 	                                           fromDate:fromDate toDate:toDate options:0];
 	return [difference day];
 }

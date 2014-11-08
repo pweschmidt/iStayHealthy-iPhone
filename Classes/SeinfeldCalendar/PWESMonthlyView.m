@@ -399,7 +399,7 @@
 	NSDateComponents *components = [[PWESCalendar sharedInstance] dateFromDay:day
 	                                                                    month:self.seinfeldMonth.month
 	                                                                     year:self.seinfeldMonth.year];
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 	record.date = [calendar dateFromComponents:components];
 	record.hasTakenMeds = [NSNumber numberWithBool:hasTakenMeds];
 	[self saveRecord:record recordExists:recordExists hasTakenMeds:hasTakenMeds];

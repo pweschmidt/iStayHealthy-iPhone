@@ -362,9 +362,9 @@ static NSDictionary * medNameMap()
 
 + (NSDateComponents *)dateComponentsForDate:(NSDate *)date
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 
-    return [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSWeekOfMonthCalendarUnit
+    return [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitWeekOfMonth
                        fromDate:date];
 }
 
@@ -388,7 +388,7 @@ static NSDictionary * medNameMap()
 
 + (NSInteger)daysInMonth:(NSInteger)month inYear:(NSInteger)inYear
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 
     if (1 > month)
     {
@@ -404,7 +404,7 @@ static NSDictionary * medNameMap()
     [components setYear:inYear];
 
     NSDate *date = [calendar dateFromComponents:components];
-    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+    NSRange days = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
     return days.length;
 }
 
