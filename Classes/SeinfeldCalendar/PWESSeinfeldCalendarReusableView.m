@@ -62,6 +62,14 @@
 - (UIView *)viewWithScoreFromCalendar:(SeinfeldCalendar *)calendar
 {
 	float score = [calendar.score floatValue];
+    if (100 < score)
+    {
+        score = 100.f;
+    }
+    else if (0 > 100)
+    {
+        score = 0.f;
+    }
 	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.frame.size.width - 40, self.frame.size.height)];
 	view.tag = kViewTag;
 	view.layer.cornerRadius = 10;

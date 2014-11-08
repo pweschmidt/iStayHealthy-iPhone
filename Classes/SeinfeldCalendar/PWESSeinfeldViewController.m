@@ -192,6 +192,14 @@
 	{
 		SeinfeldCalendar *lastEntry = [self.calendars objectAtIndex:0];
 		float score = [lastEntry.score floatValue];
+        if (100 < score)
+        {
+            score = 100.f;
+        }
+        else if (0 > 100)
+        {
+            score = 0.f;
+        }
 		UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
 		view.tag = kLabelViewTag;
 		view.layer.cornerRadius = 10;
