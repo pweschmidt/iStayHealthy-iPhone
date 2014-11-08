@@ -46,10 +46,10 @@
 	ContentNavigationController *navigationController = [self startController];
 	[self addChildViewController:navigationController];
 	[self moveToChildNavigationController:navigationController];
-	if (![[AppSettings sharedInstance] hasUpdated])
-	{
-		[self createWarning];
-	}
+//	if (![[AppSettings sharedInstance] hasUpdated])
+//	{
+//		[self createWarning];
+//	}
 }
 
 - (ContentNavigationController *)startController

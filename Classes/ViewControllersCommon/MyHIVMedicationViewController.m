@@ -174,7 +174,7 @@
 - (void)reloadSQLData:(NSNotification *)notification
 {
 #ifdef APPDEBUG
-	NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
+	NSLog(@"MyHIVMedicationViewController with name %@", notification.name);
 #endif
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion: ^(NSArray *array, NSError *error) {
 	    if (nil == array)

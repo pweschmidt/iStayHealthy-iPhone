@@ -50,10 +50,10 @@
 	ContentNavigationController_iPad *navigationController = [self navigationControllerForName_iPad:kDashboardController];
 	[self addChildViewController:navigationController];
 	[self moveToChildNavigationController:navigationController];
-	if (![[AppSettings sharedInstance] hasUpdated])
-	{
-		[self createWarning];
-	}
+//	if (![[AppSettings sharedInstance] hasUpdated])
+//	{
+//		[self createWarning];
+//	}
 }
 
 - (void)createWarning
