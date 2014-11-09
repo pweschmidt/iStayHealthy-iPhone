@@ -452,12 +452,10 @@
 	UIImageView *imageView = [[UIImageView alloc] init];
 	imageView.backgroundColor = [UIColor clearColor];
 	imageView.frame = CGRectMake(20, 2, 55, 55);
-	NSString *pathName = [Utilities imageNameFromMedName:med.Name];
-	if (nil != pathName)
+	UIImage *image = [Utilities imageFromMedName:med.Name];
+	if (nil != image)
 	{
-		NSString *pillPath = [[NSBundle mainBundle]
-		                      pathForResource:[pathName lowercaseString] ofType:@"png"];
-		imageView.image = [UIImage imageWithContentsOfFile:pillPath];
+		imageView.image = image;
 	}
 
 	UILabel *label = [UILabel standardLabel];
