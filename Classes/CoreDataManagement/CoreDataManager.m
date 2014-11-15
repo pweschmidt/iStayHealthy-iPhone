@@ -595,6 +595,10 @@
 		[[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
 		    if (nil != xmlString)
 		    {
+                
+                NSLog(@"RESULTS from WRITING XML ****\r\n");
+                NSLog(@"%@",xmlString);
+                
 		        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
 		        NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
 		        NSFileManager *manager = [NSFileManager defaultManager];
