@@ -94,10 +94,102 @@
 
 	NSManagedObjectContext *mainContext = [[NSManagedObjectContext alloc]
 	                                       initWithConcurrencyType:NSMainQueueConcurrencyType];
-
-	[mainContext setParentContext:privateContext];
-	[self setDefaultContext:mainContext];
+    mainContext.parentContext = privateContext;
+    self.defaultContext = mainContext;
 }
+
+- (BOOL)setUpStoreAsLocalStoreWithError:(NSError **)error
+{
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    NSDictionary *noniCloudOptions = [CoreDataUtils noiCloudStoreOptions];
+    
+    NSURL *mainURL = [[self applicationDocumentsDirectory]
+                      URLByAppendingPathComponent:kPersistentMainStore];
+    BOOL hasStore = [defaultManager fileExistsAtPath:[mainURL path]];
+    
+    if (!hasStore)
+    {
+            //for newly created stores always take local store options
+        noniCloudOptions = [CoreDataUtils localStoreOptions];
+    }
+    
+    NSPersistentStore *createdStore = [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                                 configuration:nil
+                                                                           URL:mainURL
+                                                                       options:noniCloudOptions
+                                                                         error:error];
+    
+    BOOL success = (nil != createdStore);
+    if (success)
+    {
+        NSNotification *notification = [NSNotification
+                                        notificationWithName:kLoadedStoreNotificationKey
+                                        object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    }
+    
+    return success;
+}
+
+- (void)setUpStoreAsiCloudStoreWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock
+{
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    
+    NSURL *mainURL = [[self applicationDocumentsDirectory]
+                      URLByAppendingPathComponent:kPersistentMainStore];
+    BOOL hasStore = [defaultManager fileExistsAtPath:[mainURL path]];
+    if (!hasStore)
+    {
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"iCloud is no longer supported for newly created stores"};
+        NSError *error = [NSError errorWithDomain:@"com.iStayHealthy" code:3001 userInfo:userInfo];
+        if (nil != completionBlock)
+        {
+            completionBlock(NO, error);
+        }
+        return;
+    }
+    
+    
+    dispatch_async(storeQueue, ^{
+        NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
+        
+        
+        if (self.iCloudEnabled && self.iCloudIsAvailable)
+        {
+            NSError *creationError = nil;
+            NSPersistentStore *createdStore = [self.persistentStoreCoordinator
+                                               persistentStoreForURL:mainURL];
+            if (nil == createdStore)
+            {
+                createdStore = [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:mainURL options:iCloudOptions error:&creationError];
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (nil != createdStore)
+                {
+                    if (nil != completionBlock)
+                    {
+                        completionBlock(NO, creationError);
+                    }
+                }
+                else
+                {
+                    if (nil != completionBlock)
+                    {
+                        completionBlock(YES, nil);
+                    }
+                    NSNotification *notification = [NSNotification
+                                                    notificationWithName:kLoadedStoreNotificationKey
+                                                    object:self];
+                    [[NSNotificationCenter defaultCenter] postNotification:notification];
+                
+                }
+            });
+        }
+    });
+}
+
 
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error
 {
@@ -868,18 +960,57 @@
 //	}
 //}
 
-//- (void)migrateiCloudStoreToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock
-//{
-//	NSError *saveError = nil;
-//	[self saveContextAndWait:&saveError];
-//	if (nil != saveError)
-//	{
-//		if (completionBlock)
-//		{
-//			completionBlock(NO, saveError);
-//		}
-//	}
-//}
+- (void)migrateToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock
+{
+	NSError *saveError = nil;
+	[self saveContextAndWait:&saveError];
+	if (nil != saveError)
+	{
+		if (completionBlock)
+		{
+			completionBlock(NO, saveError);
+		}
+	}
+    NSError *storeError = nil;
+    if (nil == self.persistentStoreCoordinator)
+    {
+        [self setUpCoreDataManager];
+        [self setUpStoreAsLocalStoreWithError:&storeError];
+        BOOL success = (nil == storeError);
+        if (nil != completionBlock)
+        {
+            completionBlock(success, storeError);
+        }
+        return;
+    }
+    
+    [self.defaultContext lock];
+    [self.defaultContext reset];
+    
+    [privateContext performBlockAndWait:^{
+        [privateContext lock];
+        [privateContext reset];
+        NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+        for (NSPersistentStore *store in stores)
+        {
+            [self.persistentStoreCoordinator removePersistentStore:store error:nil];
+        }
+        
+        [privateContext unlock];
+    }];
+    [self.defaultContext unlock];
+    
+    self.defaultContext = nil;
+    privateContext = nil;
+    
+    [self setUpCoreDataManager];
+    [self setUpStoreAsLocalStoreWithError:&storeError];
+    BOOL success = (nil == storeError);
+    if (nil != completionBlock)
+    {
+        completionBlock(success, storeError);
+    }
+}
 
 //- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock
 //{
