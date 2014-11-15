@@ -65,7 +65,7 @@
 {
 	EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
 	                                             initWithStyle:UITableViewStyleGrouped
-	                                                                                               localNotification:nil];
+                                                 localNotification:nil];
 	controller.notificationsDelegate = self;
 	[self.navigationController pushViewController:controller animated:YES];
 }
@@ -153,11 +153,10 @@
 	{
 		return;
 	}
-	[self.tableView beginUpdates];
 	[[UIApplication sharedApplication] cancelLocalNotification:self.markedNotification];
 	self.notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
 	self.markedNotification = nil;
-	[self.tableView endUpdates];
+	[self.tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -166,7 +165,7 @@
 	                                                            objectAtIndex:indexPath.row];
 	EditAlertsTableViewController *controller = [[EditAlertsTableViewController alloc]
 	                                             initWithStyle:UITableViewStyleGrouped
-	                                                                                               localNotification:notification];
+                                                 localNotification:notification];
 	controller.notificationsDelegate = self;
 	[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 	[self.navigationController pushViewController:controller animated:YES];
@@ -185,7 +184,7 @@
 - (void)updateLocalNotifications
 {
 	[self retrieveLocalNotifications];
-	[self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)restartTimer

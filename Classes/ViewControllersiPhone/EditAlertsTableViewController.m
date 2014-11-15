@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UILocalNotification *currentNotification;
 @property (nonatomic, strong) NSString *selectedSoundName;
 @property (nonatomic, strong) UILabel *soundLabel;
+@property (nonatomic, strong) NSNumber *alertTagNumber;
 - (void)changeFrequency:(id)sender;
 @end
 
@@ -34,6 +35,7 @@
 	if (nil != self)
 	{
 		_currentNotification = localNotification;
+        _alertTagNumber = [NSNumber numberWithInteger:0];
 		self.isEditMode = (nil != localNotification);
 	}
 	return self;
@@ -89,7 +91,7 @@
 {
 	NSTimeInterval timeInterval = 24.0 / (double)frequencyIndex * 60.0 * 60.0;
 	NSString *alertText = NSLocalizedString(@"iStayHealthy Alert", nil);
-	UITextField *inputField = [self customTextFieldForTagNumber:[NSNumber numberWithInteger:0]];
+	UITextField *inputField = [self customTextFieldForTagNumber:self.alertTagNumber];
 	if (nil != inputField)
 	{
 		alertText = inputField.text;
@@ -289,6 +291,7 @@
 		value = self.currentNotification.alertBody;
 	}
 	NSNumber *taggedViewNumber = [self tagNumberForIndex:indexPath.row segment:0];
+    self.alertTagNumber = taggedViewNumber;
 	UITextField *textField = [self customTextFieldForTagNumber:taggedViewNumber];
 	if (nil != textField && nil != value)
 	{

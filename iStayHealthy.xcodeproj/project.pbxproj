@@ -10,7 +10,6 @@
 		0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B06DCDF189D209E00008590 /* DropboxSDK.framework */; };
 		0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCEF189D53AE00008590 /* SeinfeldCalendar.m */; };
 		0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCF2189D53AE00008590 /* SideEffects.m */; };
-		0B07F1D51A0F6C5600AD761A /* PWESFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07F1D41A0F6C5600AD761A /* PWESFetchedResultsManager.swift */; };
 		0B07F1D71A0F739200AD761A /* PWESTableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */; };
 		0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */; };
 		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
@@ -254,7 +253,6 @@
 		0B06DCEF189D53AE00008590 /* SeinfeldCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendar.m; path = DataModelClasses/SeinfeldCalendar.m; sourceTree = "<group>"; };
 		0B06DCF1189D53AE00008590 /* SideEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideEffects.h; path = DataModelClasses/SideEffects.h; sourceTree = "<group>"; };
 		0B06DCF2189D53AE00008590 /* SideEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideEffects.m; path = DataModelClasses/SideEffects.m; sourceTree = "<group>"; };
-		0B07F1D41A0F6C5600AD761A /* PWESFetchedResultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESFetchedResultsManager.swift; path = iOS8/DataManagement/PWESFetchedResultsManager.swift; sourceTree = "<group>"; };
 		0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESTableViewUpdater.swift; path = iOS8/DataManagement/PWESTableViewUpdater.swift; sourceTree = "<group>"; };
 		0B0C4F6618A657B900D22990 /* UIBarButtonItem+iStayHealthy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+iStayHealthy.h"; path = "Categories/UIBarButtonItem+iStayHealthy.h"; sourceTree = "<group>"; };
 		0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+iStayHealthy.m"; path = "Categories/UIBarButtonItem+iStayHealthy.m"; sourceTree = "<group>"; };
@@ -791,7 +789,6 @@
 			children = (
 				0B36924B19C491C600C269AD /* PWESMigrationManager.swift */,
 				0B36924C19C491C600C269AD /* PWESPersistentStoreManager.swift */,
-				0B07F1D41A0F6C5600AD761A /* PWESFetchedResultsManager.swift */,
 				0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */,
 			);
 			name = DataManagement;
@@ -1625,7 +1622,6 @@
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
 				0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */,
 				0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */,
-				0B07F1D51A0F6C5600AD761A /* PWESFetchedResultsManager.swift in Sources */,
 				0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */,
 				0B36926819C491D700C269AD /* PWESSideEffects.swift in Sources */,
 				C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */,
