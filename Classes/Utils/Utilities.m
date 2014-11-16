@@ -553,6 +553,48 @@ static NSDictionary * medNameMap()
     return dictionary;
 }
 
++ (NSDictionary *)resultsTypeWithShortNamesDictionary
+{
+    static dispatch_once_t onceToken;
+    static NSDictionary *dictionary = nil;
+    
+    dispatch_once(&onceToken, ^{
+        dictionary = @{
+                       kCD4 : NSLocalizedString(kCD4, nil),
+                       kViralLoad : NSLocalizedString(@"VL", nil),
+                       kCD4Percent : NSLocalizedString(kCD4Percent, nil),
+                       kHepCViralLoad : NSLocalizedString(@"HepC", nil),
+                       kGlucose : NSLocalizedString(@"Sugar", nil),
+                       kTotalCholesterol : NSLocalizedString(@"Chol.", nil),
+                       kLDL : NSLocalizedString(kLDL, nil),
+                       kHDL : NSLocalizedString(kHDL, nil),
+                       kTriglyceride : NSLocalizedString(@"Tri.", nil),
+                       kHeartRate : NSLocalizedString(@"Rate", nil),
+                       kSystole : NSLocalizedString(kSystole, nil),
+                       kDiastole : NSLocalizedString(kDiastole, nil),
+                       kBloodPressure : NSLocalizedString(@"BP", nil),
+                       kOxygenLevel : NSLocalizedString(@"Oxy.", nil),
+                       kWeight : NSLocalizedString(@"Weight", nil),
+                       kBMI : NSLocalizedString(kBMI, nil),
+                       kHemoglobulin : NSLocalizedString(@"Hemo", nil),
+                       kPlatelet : NSLocalizedString(@"Plat.", nil),
+                       kWhiteBloodCells : NSLocalizedString(@"Leuk.", nil),
+                       kRedBloodCells : NSLocalizedString(@"Red C.", nil),
+                       kCholesterolRatio : NSLocalizedString(@"Chol%", nil),
+                       kCardiacRiskFactor : NSLocalizedString(@"Risk", nil),
+                       kLiverAlanineTransaminase : NSLocalizedString(@"ALT", nil),
+                       kLiverAspartateTransaminase : NSLocalizedString(@"AST", nil),
+                       kLiverAlkalinePhosphatase : NSLocalizedString(@"ALP", nil),
+                       kLiverAlbumin : NSLocalizedString(@"Alb.", nil),
+                       kLiverAlanineTotalBilirubin : NSLocalizedString(@"Bilir.", nil),
+                       kLiverAlanineDirectBilirubin : NSLocalizedString(@"Bilir.", nil),
+                       kLiverGammaGlutamylTranspeptidase : NSLocalizedString(@"GGT", nil)
+                       };
+    });
+    return dictionary;
+}
+
+
 + (NSDictionary *)colourTypeDictionary
 {
     static dispatch_once_t onceToken;

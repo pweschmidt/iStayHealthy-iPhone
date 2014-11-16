@@ -9,6 +9,7 @@
 #import "ResultsViewWithValue_iPhone.h"
 #import "PWESDataManager.h"
 #import "Results+Handling.h"
+#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ResultsViewWithValue_iPhone ()
@@ -44,16 +45,31 @@
 {
     NSString *valueString = @"--";
 
-    if (![self.resultsType isEqualToString:kBloodPressure])
+    if ([self.resultsType isEqualToString:kBloodPressure])
+    {
+        if (0 < [self.results.Systole floatValue] && 0 < [self.results.Diastole floatValue])
+        {
+            {
+                valueString = [NSString stringWithFormat:@"%d/%d", [self.results.Systole intValue], [self.results.Diastole intValue]];
+            }
+        }
+    }
+    else if ([self.resultsType isEqualToString:kViralLoad])
+    {
+        if (1 == [self.results.ViralLoad floatValue] && 0 <= [self.results.ViralLoad floatValue])
+        {
+            valueString = NSLocalizedString(@"und.", nil);
+        }
+        else
+        {
+            valueString = [self.results valueStringForType:self.resultsType];
+        }
+    }
+    else
     {
         valueString = [self.results valueStringForType:self.resultsType];
     }
-    else if (0 < self.results.Systole && 0 < self.results.Diastole)
-    {
-        {
-            valueString = [NSString stringWithFormat:@"%@/%@", self.results.Systole, self.results.Diastole];
-        }
-    }
+    
 
     if ([valueString isEqualToString:NSLocalizedString(@"Enter Value", nil)])
     {
@@ -61,7 +77,11 @@
     }
 
     UIColor *colour = [self colorForResultsTypeWithValueString:valueString];
-    NSString *title = NSLocalizedString(self.resultsType, nil);
+    NSString *title = [[Utilities resultsTypeWithShortNamesDictionary] objectForKey:self.resultsType];
+    if (nil == title)
+    {
+        title = @"";
+    }
 
     CGRect titleFrame = CGRectMake(0, 4, self.frame.size.width, self.frame.size.height / 2 - 4);
     CGRect valueFrame = CGRectMake(0, self.frame.size.height / 2 + 4, self.frame.size.width, self.frame.size.height / 2 - 4);

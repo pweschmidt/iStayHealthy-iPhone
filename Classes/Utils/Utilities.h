@@ -38,6 +38,7 @@
 + (NSString *)imageNameFromMedName:(NSString *)medName;
 + (UIImage *)imageFromMedName:(NSString *)medName;
 + (NSDictionary *)resultsTypeDictionary;
++ (NSDictionary *)resultsTypeWithShortNamesDictionary;
 + (NSDictionary *)colourTypeDictionary;
 + (NSInteger)daysInMonth:(NSInteger)month inYear:(NSInteger)inYear;
 + (NSUInteger)monthsToMonitorFromStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;

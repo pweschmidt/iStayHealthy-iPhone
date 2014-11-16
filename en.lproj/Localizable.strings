@@ -363,3 +363,24 @@
 "iCloudLoading" = "If iCloud is On - loading of data can take several minutes.";
 "No Calls possible" = "No Calls Possible";
 "This device doesn't support calls" = "This device doesn't support phone calls";
+"VL" = "VL";
+"HepC"="HepC";
+"Sugar" = "Sugar";
+"Chol." = "Chol.";
+"Tri." = "Tri.";
+"Rate" = "Rate";
+"BP" = "BP";
+"Oxy." = "Oxy.";
+"Hemo" = "Hemo";
+"Plat." = "Plat.";
+"Leuk." = "White";
+"Red C." = "Red";
+"Chol%" = "Chol%";
+"Risk" = "Risk";
+"ALT" = "ALT";
+"AST" = "AST";
+"ALP" = "ALP";
+"Alb." = "Alb.";
+"Bilir." = "Bilir.";
+"GGT" = "GGT";
+
