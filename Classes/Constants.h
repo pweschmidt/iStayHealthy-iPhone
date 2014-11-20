@@ -78,17 +78,17 @@ typedef NS_ENUM (int, MenuType)
     AddMenuType
 };
 
-static NSUInteger DeviceSystemMajorVersion()
-{
-    static NSUInteger _deviceSystemMajorVersion = -1;
-    static dispatch_once_t onceToken;
-
-    dispatch_once(&onceToken, ^{
-                      _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
-                  });
-
-    return _deviceSystemMajorVersion;
-}
+//static NSUInteger DeviceSystemMajorVersion()
+//{
+//    static NSUInteger _deviceSystemMajorVersion = -1;
+//    static dispatch_once_t onceToken;
+//
+//    dispatch_once(&onceToken, ^{
+//                      _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
+//                  });
+//
+//    return _deviceSystemMajorVersion;
+//}
 
 #define EMBEDDED_DATE_PICKER (DeviceSystemMajorVersion() >= 7)
 
@@ -408,4 +408,4 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kDaysOfMedicationsMarginInPlot    7
 
 #define kEnlargeFactor                    1.25
-#define kZoomFactor                       0.45
+#define kZoomFactor                       0.80

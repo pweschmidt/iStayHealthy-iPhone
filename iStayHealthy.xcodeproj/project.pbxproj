@@ -98,6 +98,8 @@
 		0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E561198827CA0017ED15 /* LocalBackupController.m */; };
 		0BD057D0198E3C5A00D7D142 /* Conflict.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CE198E3C5A00D7D142 /* Conflict.isth */; };
 		0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */; };
+		0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */; };
+		0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */; };
 		0BD7433D19E156B400F7C94B /* PWESContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7433C19E156B400F7C94B /* PWESContainerViewController.swift */; };
 		0BD7433F19E1573200F7C94B /* PWESSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7433E19E1573200F7C94B /* PWESSplitViewController.swift */; };
 		0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BED04921A0525FD0033942A /* TokenCertificate.swift */; };
@@ -413,6 +415,8 @@
 		0BC7E561198827CA0017ED15 /* LocalBackupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalBackupController.m; path = ViewControllersCommon/LocalBackupController.m; sourceTree = "<group>"; };
 		0BD057CE198E3C5A00D7D142 /* Conflict.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Conflict.isth; sourceTree = "<group>"; };
 		0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iStayHealthy.isth; sourceTree = "<group>"; };
+		0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContentContainerController.swift; path = iOS8/UserInterface/PWESContentContainerController.swift; sourceTree = "<group>"; };
+		0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContentMenuHandler.swift; path = iOS8/UserInterface/PWESContentMenuHandler.swift; sourceTree = "<group>"; };
 		0BD7433C19E156B400F7C94B /* PWESContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContainerViewController.swift; path = iOS8/UserInterface/PWESContainerViewController.swift; sourceTree = "<group>"; };
 		0BD7433E19E1573200F7C94B /* PWESSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESSplitViewController.swift; path = iOS8/UserInterface/PWESSplitViewController.swift; sourceTree = "<group>"; };
 		0BED04921A0525FD0033942A /* TokenCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenCertificate.swift; path = "iOS8/Push Notification/TokenCertificate.swift"; sourceTree = "<group>"; };
@@ -800,6 +804,8 @@
 				0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */,
 				0BD7433C19E156B400F7C94B /* PWESContainerViewController.swift */,
 				0BD7433E19E1573200F7C94B /* PWESSplitViewController.swift */,
+				0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */,
+				0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1603,6 +1609,7 @@
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
 				0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */,
 				0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */,
+				0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */,
 				C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */,
 				C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */,
 				C4C41A2E15F1432E00882416 /* Utilities.m in Sources */,
@@ -1652,6 +1659,7 @@
 				0B36926B19C491D700C269AD /* PWESTreatmentCalendarEntry.swift in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
 				0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */,
+				0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */,
 				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
 				C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */,
 				C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */,
