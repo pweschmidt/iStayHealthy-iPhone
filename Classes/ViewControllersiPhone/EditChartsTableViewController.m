@@ -32,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.toolbarHidden = YES;
     [self populateValues];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     NSArray *barButtons = nil;
