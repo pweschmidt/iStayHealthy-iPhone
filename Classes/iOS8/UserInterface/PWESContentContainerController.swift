@@ -274,7 +274,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
         var navigationController: UINavigationController?
         if controllerName == kResultsController
         {
-            var controller: ResultsCollectionViewController = ResultsCollectionViewController()
+            var controller: ResultsListTableViewController = ResultsListTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
@@ -292,49 +292,49 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
         }
         else if controllerName == kHIVMedsController
         {
-            var controller: MyHIVCollectionViewController = MyHIVCollectionViewController()
+            var controller: MyHIVMedicationViewController = MyHIVMedicationViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kOtherMedsController
         {
-            var controller: OtherMedsCollectionViewController = OtherMedsCollectionViewController()
+            var controller: OtherMedicationsListTableViewController = OtherMedicationsListTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kSideEffectsController
         {
-            var controller: SideEffectsCollectionViewController = SideEffectsCollectionViewController()
+            var controller: SideEffectsTableViewController = SideEffectsTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMissedController
         {
-            var controller: MissedMedicationCollectionViewController = MissedMedicationCollectionViewController()
+            var controller: MissedMedicationsTableViewController = MissedMedicationsTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMedicationDiaryController
         {
-            var controller: PWESSeinfeldCollectionViewController = PWESSeinfeldCollectionViewController()
+            var controller: PWESSeinfeldViewController = PWESSeinfeldViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kProceduresController
         {
-            var controller: ProceduresCollectionViewController = ProceduresCollectionViewController()
+            var controller: ProceduresListTableViewController = ProceduresListTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kClinicsController
         {
-            var controller: ClinicAddressCollectionViewController = ClinicAddressCollectionViewController()
+            var controller: ClinicalAddressTableViewController = ClinicalAddressTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kAlertsController
         {
-            var controller: NotificationsAlertsCollectionViewController = NotificationsAlertsCollectionViewController()
+            var controller: NotificationAlertsTableViewController = NotificationAlertsTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
