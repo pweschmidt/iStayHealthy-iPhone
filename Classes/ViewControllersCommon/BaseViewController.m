@@ -89,10 +89,21 @@
         }
     }
 
-    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
-    [self.view addSubview:toolbar];
+    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self];
+    NSArray *items = toolbar.customItems;
+    [self setToolbarItems:items];
     self.customToolbar = toolbar;
-    self.customToolbar.customToolbarDelegate = self;
+
+//    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
+//    [self.view addSubview:toolbar];
+//    self.customToolbar = toolbar;
+//    self.customToolbar.customToolbarDelegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.toolbarHidden = NO;
 }
 
 - (void)createIndicators
@@ -110,16 +121,17 @@
     self.indicatorView = indicator;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
+/*
+   - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+   {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [UIView animateWithDuration:duration animations: ^{
          self.customToolbar.alpha = 0.0f;
      }];
-}
+   }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
+   - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+   {
     if ([Utilities isIPad])
     {
         [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
@@ -129,7 +141,8 @@
              self.customToolbar.alpha = 1.0f;
          }];
     }
-}
+   }
+ */
 
 - (void)disableRightBarButtons
 {

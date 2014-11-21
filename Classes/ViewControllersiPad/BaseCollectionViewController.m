@@ -72,10 +72,15 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
 
-    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
-    [self.view addSubview:toolbar];
+    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self];
+    NSArray *items = toolbar.customItems;
+    [self setToolbarItems:items];
+    self.navigationController.toolbarHidden = NO;
     self.toolbar = toolbar;
-    self.toolbar.customToolbarDelegate = self;
+//    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
+//    [self.view addSubview:toolbar];
+//    self.toolbar = toolbar;
+//    self.toolbar.customToolbarDelegate = self;
 
     UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
     UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
@@ -105,13 +110,13 @@
         [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
         [UIView animateWithDuration:0.25 animations: ^{
              self.collectionView.alpha = 0.0;
-             self.toolbar.alpha = 0.0;
+//             self.toolbar.alpha = 0.0;
          } completion: ^(BOOL finished) {
              self.collectionView.alpha = 1.0;
-             self.toolbar.alpha = 1.0;
+//             self.toolbar.alpha = 1.0;
              CGRect frame = CGRectMake(20, 44, self.view.bounds.size.width - 40, self.view.bounds.size.height - 88);
-             CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
-             self.toolbar.frame = toolbarFrame;
+//             CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
+//             self.toolbar.frame = toolbarFrame;
              self.collectionView.frame = frame;
              [self.collectionView.collectionViewLayout invalidateLayout];
          }];

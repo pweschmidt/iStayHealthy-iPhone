@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PWESToolbarDelegate.h"
-@interface CustomToolbar : UIToolbar
-@property (nonatomic, weak) id <PWESToolbarDelegate> customToolbarDelegate;
+// @interface CustomToolbar : UIToolbar
+@interface CustomToolbar : NSObject
+@property (nonatomic, strong) NSArray *customItems;
+
+- (instancetype)initWithToolbarManager:(id<PWESToolbarDelegate>)toolbarManager;
 @end
