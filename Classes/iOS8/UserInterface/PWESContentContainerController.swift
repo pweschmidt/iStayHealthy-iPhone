@@ -20,6 +20,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
         var dashboardController: PWESDashboardViewController = PWESDashboardViewController()
         dashboardController.menuHandler = self
         self.customNavigationController = UINavigationController(rootViewController: dashboardController)

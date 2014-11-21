@@ -75,7 +75,13 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                 duration:(NSTimeInterval)duration
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    __strong id<PWESContentMenuHandler>strongHandler = self.menuHandler;
+
+    if (nil != strongHandler)
+    {
+        [strongHandler dismissMenuPanel:nil];
+    }
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
