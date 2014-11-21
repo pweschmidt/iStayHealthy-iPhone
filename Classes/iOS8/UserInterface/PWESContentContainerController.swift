@@ -26,7 +26,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
         view.addSubview(self.customNavigationController.view)
         self.customNavigationController.didMoveToParentViewController(self)
     }
-
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -128,7 +128,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
             isCollapsed = false
             if isRegular
             {
-                animateCenterPanelXPosition(targetPosition: customNavigationController.view.frame.origin.x + 180.0)
+                animateCenterPanelXPosition(targetPosition: customNavigationController.view.frame.origin.x + 210.0)
             }
             else
             {
@@ -166,8 +166,8 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
     func zoomOutMainController(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil)
     {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-//            self.customNavigationController.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
-//            self.customNavigationController.view.frame.origin.x = targetPosition
+            self.customNavigationController.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            self.customNavigationController.view.frame.origin.x = targetPosition
             }, completion: completion)
         
     }
@@ -181,8 +181,8 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
         }
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
             
-//            self.customNavigationController.view.transform = CGAffineTransformIdentity
-//            self.customNavigationController.view.frame.origin.x = self.view.frame.origin.x
+            self.customNavigationController.view.transform = CGAffineTransformIdentity
+            self.customNavigationController.view.frame.origin.x = self.view.frame.origin.x
             }, completion: completion)
     }
     
@@ -203,56 +203,67 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
         if controllerName == kResultsController
         {
             var controller: ResultsCollectionViewController = ResultsCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kDashboardController
         {
             var controller: PWESDashboardViewController = PWESDashboardViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kDropboxController
         {
             var controller: DropboxViewController = DropboxViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kHIVMedsController
         {
             var controller: MyHIVCollectionViewController = MyHIVCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kOtherMedsController
         {
             var controller: OtherMedsCollectionViewController = OtherMedsCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kSideEffectsController
         {
             var controller: SideEffectsCollectionViewController = SideEffectsCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMissedController
         {
             var controller: MissedMedicationCollectionViewController = MissedMedicationCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMedicationDiaryController
         {
             var controller: PWESSeinfeldCollectionViewController = PWESSeinfeldCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kProceduresController
         {
             var controller: ProceduresCollectionViewController = ProceduresCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kClinicsController
         {
             var controller: ClinicAddressCollectionViewController = ClinicAddressCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kAlertsController
         {
             var controller: NotificationsAlertsCollectionViewController = NotificationsAlertsCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         return navigationController
@@ -306,11 +317,13 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
         else if controllerName == kMedicationDiaryController
         {
             var controller: PWESSeinfeldCollectionViewController = PWESSeinfeldCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kProceduresController
         {
             var controller: ProceduresCollectionViewController = ProceduresCollectionViewController()
+            controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kClinicsController

@@ -38,6 +38,7 @@
     [super viewDidLoad];
     [self registerObservers];
     self.navigationController.navigationBar.tintColor = TEXTCOLOUR;
+    self.view.backgroundColor = DEFAULT_BACKGROUND;
     self.settingMenuShown = NO;
     self.customPopoverController = nil;
     self.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];

@@ -18,92 +18,94 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-	self = [super initWithFrame:frame];
-	if (self)
-	{
-		// Initialization code
-	}
-	return self;
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        // Initialization code
+    }
+    return self;
 }
 
 + (PWESResultsSummaryView *)resultsSummaryViewWithFrame:(CGRect)frame
                                               dataTuple:(PWESDataTuple *)dataTuple
 {
-	PWESResultsSummaryView *resultsSummaryView = [[PWESResultsSummaryView alloc]
-	                                              initWithFrame:frame];
-	[resultsSummaryView buildResultsSummaryViewForTuple:dataTuple];
-	return resultsSummaryView;
+    PWESResultsSummaryView *resultsSummaryView = [[PWESResultsSummaryView alloc]
+                                                  initWithFrame:frame];
+
+    [resultsSummaryView buildResultsSummaryViewForTuple:dataTuple];
+    return resultsSummaryView;
 }
 
 - (void)buildResultsSummaryViewForTuple:(PWESDataTuple *)tuple
 {
-	CGFloat marginX = 20;
-	CGFloat margin  = 0;
-	CGFloat totalHeight     = self.bounds.size.height;
-	CGFloat componentWidth = (self.bounds.size.width - marginX) / 3;
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    CGFloat marginX = 20;
+    CGFloat margin  = 0;
+    CGFloat totalHeight     = self.bounds.size.height;
+    CGFloat componentWidth = (self.bounds.size.width - marginX) / 3;
 
-	CGFloat titleOffsetX        = marginX;
-	CGFloat valueOffsetX        = titleOffsetX + componentWidth;
-	CGFloat indicatorOffsetX    = valueOffsetX + componentWidth;
-	CGFloat yOffset             = margin;
-	CGRect titleRect            = CGRectMake(titleOffsetX, yOffset, componentWidth, totalHeight);
-	CGRect valueRect            = CGRectMake(valueOffsetX, yOffset, componentWidth, totalHeight);
-	CGRect indicatorFrame       = CGRectMake(indicatorOffsetX, yOffset + 10, componentWidth - 10, totalHeight - 20);
-
-
-	UIFont *font = [UIFont fontWithType:Bold size:13];
-
-	UIView *titleView           = [[UIView alloc] initWithFrame:titleRect];
-	titleView.backgroundColor   = [UIColor clearColor];
-
-	UILabel *titleLabel         = [[UILabel alloc] initWithFrame:CGRectMake(titleView.bounds.origin.x, titleView.bounds.origin.y, titleView.bounds.size.width, titleView.bounds.size.height)];
-	titleLabel.backgroundColor  = [UIColor clearColor];
-	titleLabel.font             = font;
-	NSDictionary *typeDictionary = [Utilities resultsTypeDictionary];
-	NSString *resultType = [typeDictionary objectForKey:tuple.type];
-	if (nil == resultType)
-	{
-		resultType = @"";
-	}
-	NSString *localizedType = NSLocalizedString(resultType, nil);
-	titleLabel.text             = localizedType;
-	[titleView addSubview:titleLabel];
-	NSDictionary *colourDictionary = [Utilities colourTypeDictionary];
-	titleLabel.textColor        = [colourDictionary objectForKey:tuple.type];
-	[self addSubview:titleView];
-
-	UIView *valueView           = [[UIView alloc] initWithFrame:valueRect];
-	valueView.backgroundColor   = [UIColor clearColor];
-	UILabel *valueLabel         = [[UILabel alloc] initWithFrame:CGRectMake(valueView.bounds.origin.x, valueView.bounds.origin.y, valueView.bounds.size.width, valueView.bounds.size.height)];
-	valueLabel.backgroundColor  = [UIColor clearColor];
-	valueLabel.font             = font;
-
-	if (0 == tuple.valueTuple.count)
-	{
-		valueLabel.text = @"";
-	}
-	else
-	{
-		NSNumber *lastValue = [tuple.valueTuple lastObject];
-		float value = [lastValue floatValue];
-		if ([tuple.type isEqualToString:kViralLoad] && 1 == value)
-		{
-			valueLabel.text = NSLocalizedString(@"undetectable", nil);
-		}
-		else
-		{
-			valueLabel.text = [PWESIndicatorView valueStringForValue:[lastValue floatValue]
-			                                                    type:tuple.type
-			                                             hasPlusSign:NO];
-		}
-	}
-
-	[valueView addSubview:valueLabel];
-	[self addSubview:valueView];
+    CGFloat titleOffsetX        = marginX;
+    CGFloat valueOffsetX        = titleOffsetX + componentWidth;
+    CGFloat indicatorOffsetX    = valueOffsetX + componentWidth;
+    CGFloat yOffset             = margin;
+    CGRect titleRect            = CGRectMake(titleOffsetX, yOffset, componentWidth, totalHeight);
+    CGRect valueRect            = CGRectMake(valueOffsetX, yOffset, componentWidth, totalHeight);
+    CGRect indicatorFrame       = CGRectMake(indicatorOffsetX, yOffset + 10, componentWidth - 10, totalHeight - 20);
 
 
-	PWESIndicatorView *indicator = [PWESIndicatorView initWithFrame:indicatorFrame tupel:tuple];
-	[self addSubview:indicator];
+    UIFont *font = [UIFont fontWithType:Bold size:13];
+
+    UIView *titleView           = [[UIView alloc] initWithFrame:titleRect];
+    titleView.backgroundColor   = [UIColor clearColor];
+
+    UILabel *titleLabel         = [[UILabel alloc] initWithFrame:CGRectMake(titleView.bounds.origin.x, titleView.bounds.origin.y, titleView.bounds.size.width, titleView.bounds.size.height)];
+    titleLabel.backgroundColor  = [UIColor clearColor];
+    titleLabel.font             = font;
+    NSDictionary *typeDictionary = [Utilities resultsTypeDictionary];
+    NSString *resultType = [typeDictionary objectForKey:tuple.type];
+    if (nil == resultType)
+    {
+        resultType = @"";
+    }
+    NSString *localizedType = NSLocalizedString(resultType, nil);
+    titleLabel.text             = localizedType;
+    [titleView addSubview:titleLabel];
+    NSDictionary *colourDictionary = [Utilities colourTypeDictionary];
+    titleLabel.textColor        = [colourDictionary objectForKey:tuple.type];
+    [self addSubview:titleView];
+
+    UIView *valueView           = [[UIView alloc] initWithFrame:valueRect];
+    valueView.backgroundColor   = [UIColor clearColor];
+    UILabel *valueLabel         = [[UILabel alloc] initWithFrame:CGRectMake(valueView.bounds.origin.x, valueView.bounds.origin.y, valueView.bounds.size.width, valueView.bounds.size.height)];
+    valueLabel.backgroundColor  = [UIColor clearColor];
+    valueLabel.font             = font;
+
+    if (0 == tuple.valueTuple.count)
+    {
+        valueLabel.text = @"";
+    }
+    else
+    {
+        NSNumber *lastValue = [tuple.valueTuple lastObject];
+        float value = [lastValue floatValue];
+        if ([tuple.type isEqualToString:kViralLoad] && 1 == value)
+        {
+            valueLabel.text = NSLocalizedString(@"undetectable", nil);
+        }
+        else
+        {
+            valueLabel.text = [PWESIndicatorView valueStringForValue:[lastValue floatValue]
+                                                                type:tuple.type
+                                                         hasPlusSign:NO];
+        }
+    }
+
+    [valueView addSubview:valueLabel];
+    [self addSubview:valueView];
+
+
+    PWESIndicatorView *indicator = [PWESIndicatorView initWithFrame:indicatorFrame tupel:tuple];
+    [self addSubview:indicator];
 }
 
 @end
