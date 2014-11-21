@@ -14,6 +14,7 @@
 #import "UIFont+Standard.h"
 #import "Utilities.h"
 #import "AppSettings.h"
+#import "iStayhealthy-Swift.h"
 
 @interface HamburgerMenuTableViewController ()
 @property (nonatomic, strong) NSArray *menus;
@@ -125,7 +126,7 @@
     {
         offset = 5.5f;
     }
-    
+
     id labelObj = [cell.contentView viewWithTag:kIconLabelViewTag];
     NSString *menuName = [self.menus objectAtIndex:indexPath.row];
     if (nil == labelObj)
@@ -175,8 +176,10 @@
 {
     NSString *menuName = [self.menus objectAtIndex:indexPath.row];
     NSString *toControllerName = [self.controllers objectAtIndex:indexPath.row];
-    __strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
-    BOOL doTransition = NO;
+
+//    __strong id <PWESNavigationDelegate> strongDelegate = self.transitionDelegate;
+
+//    BOOL doTransition = NO;
 
     if ([menuName isEqualToString:NSLocalizedString(@"POZ Magazine", nil)])
     {
@@ -190,15 +193,22 @@
     }
     else
     {
-        doTransition = YES;
-        if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(changeTransitionType:)]
-            && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
+        __strong id<PWESContentMenuHandler>strongHandler = self.menuHandler;
+        if (nil != strongHandler)
         {
-            [strongDelegate changeTransitionType:kControllerTransition];
-            [strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
+            [strongHandler dismissMenuPanel:toControllerName];
         }
+
+
+//        doTransition = YES;
+//        if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(changeTransitionType:)]
+//            && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
+//        {
+//            [strongDelegate changeTransitionType:kControllerTransition];
+//            [strongDelegate transitionToNavigationControllerWithName:toControllerName completion:nil];
+//        }
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 //	[self dismissViewControllerAnimated:YES completion: ^{
 //	    if (nil != toControllerName && doTransition && nil != strongDelegate && [strongDelegate respondsToSelector:@selector(transitionToNavigationControllerWithName:completion:)])
 //	    {
@@ -284,8 +294,8 @@
 
     [button addSubview:titleLabel];
     [button addTarget:self
-                   action:@selector(goToPOZSite)
-         forControlEvents:UIControlEventTouchUpInside];
+               action:@selector(goToPOZSite)
+     forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:button];
 
     self.navigationItem.titleView = titleView;

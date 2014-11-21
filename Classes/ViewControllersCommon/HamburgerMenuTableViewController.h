@@ -12,8 +12,11 @@
 #import "ContentNavigationController.h"
 #import "PWESNavigationDelegate.h"
 
+@protocol PWESContentMenuHandler;
+
 @interface HamburgerMenuTableViewController : UITableViewController
-	<MFMailComposeViewControllerDelegate>
+    <MFMailComposeViewControllerDelegate>
 @property (nonatomic, weak) id <PWESNavigationDelegate> transitionDelegate;
 @property (nonatomic, strong) NSString *currentController;
+@property (nonatomic, weak) id<PWESContentMenuHandler>menuHandler;
 @end

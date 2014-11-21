@@ -10,6 +10,8 @@
 #import "PWESPopoverDelegate.h"
 #import "PWESToolbarDelegate.h"
 #import <MessageUI/MessageUI.h>
+
+@protocol PWESContentMenuHandler;
 @class CustomToolbar;
 
 @interface BaseCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PWESPopoverDelegate, PWESToolbarDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate>
@@ -22,6 +24,8 @@
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) UILabel *activityLabel;
 @property (nonatomic, assign) BOOL hasNavHeader;
+@property (nonatomic, weak) id<PWESContentMenuHandler> menuHandler;
+
 - (void)reloadSQLData:(NSNotification *)notification;
 - (void)startAnimation:(NSNotification *)notification;
 - (void)stopAnimation:(NSNotification *)notification;
