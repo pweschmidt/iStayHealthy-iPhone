@@ -11,7 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+Standard.h"
 #import "KeychainHandler.h"
-#import "ContainerViewController_iPad.h"
+    //#import "ContainerViewController_iPad.h"
 
 @interface LoginViewController_iPad ()
 @property (nonatomic, strong) NSString *password;
@@ -124,14 +124,14 @@
 	}
 	if (isValidated)
 	{
-		if ([self.parentViewController isKindOfClass:[ContainerViewController_iPad class]])
-		{
-			ContainerViewController_iPad *container = (ContainerViewController_iPad *)self.parentViewController;
-			if ([container respondsToSelector:@selector(transitionToContentController:)])
-			{
-				[container transitionToContentController:self];
-			}
-		}
+//		if ([self.parentViewController isKindOfClass:[ContainerViewController_iPad class]])
+//		{
+//			ContainerViewController_iPad *container = (ContainerViewController_iPad *)self.parentViewController;
+//			if ([container respondsToSelector:@selector(transitionToContentController:)])
+//			{
+//				[container transitionToContentController:self];
+//			}
+//		}
 	}
 	else
 	{

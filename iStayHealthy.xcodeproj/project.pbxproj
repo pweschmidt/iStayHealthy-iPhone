@@ -44,7 +44,6 @@
 		0B4064B61893C36100F858BB /* SeinfeldCalendar+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4064B51893C36100F858BB /* SeinfeldCalendar+Handling.m */; };
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
 		0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */; };
-		0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */; };
 		0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
 		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
@@ -111,8 +110,6 @@
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
-		C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */; };
-		C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */; };
 		C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
 		C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */; };
@@ -143,7 +140,6 @@
 		C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F837D17B66CEF0042E63A /* BaseViewController.m */; };
 		C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838917B675350042E63A /* BaseTableViewController.m */; };
 		C45F838F17B6A61F0042E63A /* CoreXMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F838E17B6A61F0042E63A /* CoreXMLReader.m */; };
-		C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22817AD04F80037A6DF /* ContainerViewController.m */; };
 		C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743017E9F2AF00D19B94 /* PWESDashboardSummaryView.m */; };
 		C463743E17E9F2AF00D19B94 /* PWESDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743217E9F2AF00D19B94 /* PWESDashboardView.m */; };
 		C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463743617E9F2AF00D19B94 /* PWESIndicatorView.m */; };
@@ -171,15 +167,11 @@
 		C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250814DD62BF00BDD906 /* StoreKit.framework */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
 		C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */; };
-		C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B717B03C3B006BE980 /* ContentNavigationController.m */; };
 		C4A49AD918002CD400FC1637 /* TimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49AD818002CD400FC1637 /* TimeView.m */; };
 		C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1C180031C400FC1637 /* UIFont+Standard.m */; };
 		C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1F1800549500FC1637 /* UILabel+Standard.m */; };
 		C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */; };
 		C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A6E21C17C7770C0020FC2A /* Menus.m */; };
-		C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */; };
-		C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */; };
-		C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */; };
 		C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */; };
 		C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF829180DC05C00107966 /* PWESDraw.m */; };
 		C4AEF82D180DCAB800107966 /* PWESPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF82C180DCAB800107966 /* PWESPlotArea.m */; };
@@ -308,8 +300,6 @@
 		0B47527318422D2F0079A239 /* NSString+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extras.m"; path = "Categories/NSString+Extras.m"; sourceTree = "<group>"; };
 		0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsCollectionViewController.h; path = ViewControllersiPad/ResultsCollectionViewController.h; sourceTree = "<group>"; };
 		0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsCollectionViewController.m; path = ViewControllersiPad/ResultsCollectionViewController.m; sourceTree = "<group>"; };
-		0B4C3B1C18B8E77300BF3BB5 /* ContentNavigationController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentNavigationController_iPad.h; path = ViewControllersiPad/ContentNavigationController_iPad.h; sourceTree = "<group>"; };
-		0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentNavigationController_iPad.m; path = ViewControllersiPad/ContentNavigationController_iPad.m; sourceTree = "<group>"; };
 		0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeCounterTests.m; sourceTree = "<group>"; };
 		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
 		0B6048521840D12B0092B5FB /* PWESDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataManager.m; path = Dashboard/PWESDataManager.m; sourceTree = "<group>"; };
@@ -432,10 +422,6 @@
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
 		C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHIVMedsTableViewController.h; path = ViewControllersiPhone/EditHIVMedsTableViewController.h; sourceTree = "<group>"; };
 		C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHIVMedsTableViewController.m; path = ViewControllersiPhone/EditHIVMedsTableViewController.m; sourceTree = "<group>"; };
-		C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewController_iPad.h; path = ViewControllersiPad/ContainerViewController_iPad.h; sourceTree = "<group>"; };
-		C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController_iPad.m; path = ViewControllersiPad/ContainerViewController_iPad.m; sourceTree = "<group>"; };
-		C41D8B1A17D22EE3008EC822 /* ContentContainerViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentContainerViewController_iPad.h; path = ViewControllersiPad/ContentContainerViewController_iPad.h; sourceTree = "<group>"; };
-		C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentContainerViewController_iPad.m; path = ViewControllersiPad/ContentContainerViewController_iPad.m; sourceTree = "<group>"; };
 		C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController_iPad.h; path = ViewControllersiPad/LoginViewController_iPad.h; sourceTree = "<group>"; };
 		C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController_iPad.m; path = ViewControllersiPad/LoginViewController_iPad.m; sourceTree = "<group>"; };
 		C41EC32C180ED0EE00A49AE4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -536,8 +522,6 @@
 		C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicalAddressTableViewController.m; path = ViewControllersCommon/ClinicalAddressTableViewController.m; sourceTree = "<group>"; };
 		C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProceduresListTableViewController.h; path = ViewControllersCommon/ProceduresListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresListTableViewController.m; path = ViewControllersCommon/ProceduresListTableViewController.m; sourceTree = "<group>"; };
-		C47DB22717AD04F80037A6DF /* ContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ContainerViewController.h; path = ViewControllersCommon/ContainerViewController.h; sourceTree = "<group>"; };
-		C47DB22817AD04F80037A6DF /* ContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ContainerViewController.m; path = ViewControllersCommon/ContainerViewController.m; sourceTree = "<group>"; };
 		C47DB22A17AD05630037A6DF /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllersCommon/LoginViewController.h; sourceTree = "<group>"; };
 		C47DB22B17AD05630037A6DF /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllersCommon/LoginViewController.m; sourceTree = "<group>"; };
 		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
@@ -573,8 +557,6 @@
 		C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 3.xcdatamodel"; sourceTree = "<group>"; };
 		C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsListTableViewController.h; path = ViewControllersCommon/ResultsListTableViewController.h; sourceTree = "<group>"; };
 		C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsListTableViewController.m; path = ViewControllersCommon/ResultsListTableViewController.m; sourceTree = "<group>"; };
-		C49A16B617B03C3B006BE980 /* ContentNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentNavigationController.h; path = ViewControllersCommon/ContentNavigationController.h; sourceTree = "<group>"; };
-		C49A16B717B03C3B006BE980 /* ContentNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentNavigationController.m; path = ViewControllersCommon/ContentNavigationController.m; sourceTree = "<group>"; };
 		C4A49AD718002CD300FC1637 /* TimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeView.h; path = Views/TimeView.h; sourceTree = "<group>"; };
 		C4A49AD818002CD400FC1637 /* TimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeView.m; path = Views/TimeView.m; sourceTree = "<group>"; };
 		C4A49B1B180031C400FC1637 /* UIFont+Standard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Standard.h"; path = "Categories/UIFont+Standard.h"; sourceTree = "<group>"; };
@@ -584,13 +566,8 @@
 		C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsSelectionDataSource.h; path = ViewControllersCommon/EffectsSelectionDataSource.h; sourceTree = "<group>"; };
 		C4A49B2318005CD200FC1637 /* EffectsSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectsSelectionTableViewController.h; path = ViewControllersiPhone/EffectsSelectionTableViewController.h; sourceTree = "<group>"; };
 		C4A49B2418005CD200FC1637 /* EffectsSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectsSelectionTableViewController.m; path = ViewControllersiPhone/EffectsSelectionTableViewController.m; sourceTree = "<group>"; };
-		C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerViewControllerDelegate.h; path = ViewControllersiPad/ContainerViewControllerDelegate.h; sourceTree = "<group>"; };
 		C4A6E21B17C7770C0020FC2A /* Menus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menus.h; path = ViewControllersCommon/Menus.h; sourceTree = "<group>"; };
 		C4A6E21C17C7770C0020FC2A /* Menus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menus.m; path = ViewControllersCommon/Menus.m; sourceTree = "<group>"; };
-		C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = Classes/Assets/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPad.storyboard; path = Classes/Assets/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		C4A8244517AD4B9B00E8CA8C /* ContentContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentContainerViewController.h; path = ViewControllersCommon/ContentContainerViewController.h; sourceTree = "<group>"; };
-		C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentContainerViewController.m; path = ViewControllersCommon/ContentContainerViewController.m; sourceTree = "<group>"; };
 		C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HamburgerMenuTableViewController.h; path = ViewControllersCommon/HamburgerMenuTableViewController.h; sourceTree = "<group>"; };
 		C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HamburgerMenuTableViewController.m; path = ViewControllersCommon/HamburgerMenuTableViewController.m; sourceTree = "<group>"; };
 		C4ACF8531476DD4D00FA5E80 /* iStayHealthy 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 11.xcdatamodel"; sourceTree = "<group>"; };
@@ -1084,12 +1061,6 @@
 				C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */,
 				C46EB5E017EB7E6100B9EA5A /* ClinicalAddressTableViewController.h */,
 				C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */,
-				C4A8244517AD4B9B00E8CA8C /* ContentContainerViewController.h */,
-				C4A8244617AD4B9B00E8CA8C /* ContentContainerViewController.m */,
-				C49A16B617B03C3B006BE980 /* ContentNavigationController.h */,
-				C49A16B717B03C3B006BE980 /* ContentNavigationController.m */,
-				C47DB22717AD04F80037A6DF /* ContainerViewController.h */,
-				C47DB22817AD04F80037A6DF /* ContainerViewController.m */,
 				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
 				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
 				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
@@ -1185,13 +1156,6 @@
 				C45E52F6182BFE6400C30061 /* BaseCollectionViewController.m */,
 				0BB771EA18F32B5A00523DF6 /* ClinicAddressCollectionViewController.h */,
 				0BB771EB18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m */,
-				C4A6E21A17C76E6B0020FC2A /* ContainerViewControllerDelegate.h */,
-				C41D8B1717D22E41008EC822 /* ContainerViewController_iPad.h */,
-				C41D8B1817D22E41008EC822 /* ContainerViewController_iPad.m */,
-				C41D8B1A17D22EE3008EC822 /* ContentContainerViewController_iPad.h */,
-				C41D8B1B17D22EE3008EC822 /* ContentContainerViewController_iPad.m */,
-				0B4C3B1C18B8E77300BF3BB5 /* ContentNavigationController_iPad.h */,
-				0B4C3B1D18B8E77300BF3BB5 /* ContentNavigationController_iPad.m */,
 				0B0C4F6918A664B300D22990 /* CustomToolbar.h */,
 				0B0C4F6A18A664B300D22990 /* CustomToolbar.m */,
 				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
@@ -1219,8 +1183,6 @@
 		C47DB23817AD43B80037A6DF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				C4A8244117AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard */,
-				C4A8244317AD460B00E8CA8C /* MainStoryboard_iPad.storyboard */,
 			);
 			name = Assets;
 			path = ..;
@@ -1511,8 +1473,6 @@
 				C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */,
 				C4C41A3C15F1445400882416 /* ringtone2.caf in Resources */,
 				C4C41A3D15F1445400882416 /* xylophone.caf in Resources */,
-				C4A8244217AD45E400E8CA8C /* MainStoryboard_iPhone.storyboard in Resources */,
-				C4A8244417AD460B00E8CA8C /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1573,10 +1533,8 @@
 				0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */,
 				C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */,
 				0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */,
-				C49A16B817B03C3B006BE980 /* ContentNavigationController.m in Sources */,
 				0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */,
 				C45C27C117DB5A1E001F6831 /* EditMissedMedsTableViewController.m in Sources */,
-				0B4C3B1E18B8E77300BF3BB5 /* ContentNavigationController_iPad.m in Sources */,
 				C4BCF0A517B7A9F300F1E0F7 /* MissedMedication+Handling.m in Sources */,
 				0B36925F19C491D700C269AD /* PWESClinicAddress.swift in Sources */,
 				0B8DDBF4194322E300055E4C /* TimeView_iPad.m in Sources */,
@@ -1618,7 +1576,6 @@
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
 				0BC7E55F198825040017ED15 /* HelpTableViewController.m in Sources */,
-				C41D8B1917D22E41008EC822 /* ContainerViewController_iPad.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
 				0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */,
 				0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */,
@@ -1682,7 +1639,6 @@
 				0B2DF7C019684C1C00BCB111 /* PWESDashboardViewController.m in Sources */,
 				C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */,
 				0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */,
-				C41D8B1C17D22EE3008EC822 /* ContentContainerViewController_iPad.m in Sources */,
 				0B6E0AD319714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m in Sources */,
 				0B36926119C491D700C269AD /* PWESClinicContactRole.swift in Sources */,
 				C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */,
@@ -1705,10 +1661,8 @@
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				0B36924E19C491C600C269AD /* PWESPersistentStoreManager.swift in Sources */,
 				0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */,
-				C46227F317AD529C001BDFA1 /* ContainerViewController.m in Sources */,
 				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
 				0BB02F1A198E433B003B5959 /* CoreXMLTools.m in Sources */,
-				C4A8244717AD4B9B00E8CA8C /* ContentContainerViewController.m in Sources */,
 				0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,
 			);

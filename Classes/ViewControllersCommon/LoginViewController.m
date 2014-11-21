@@ -10,7 +10,7 @@
 #import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+Standard.h"
-#import "ContainerViewController.h"
+    //#import "ContainerViewController.h"
 #import "KeychainHandler.h"
 
 #define kPasswordFieldTag 100
@@ -128,14 +128,14 @@
 	}
 	if (isValidated)
 	{
-		if ([self.parentViewController isKindOfClass:[ContainerViewController class]])
-		{
-			ContainerViewController *container = (ContainerViewController *)self.parentViewController;
-			if ([container respondsToSelector:@selector(transitionToContentController:)])
-			{
-				[container transitionToContentController:self];
-			}
-		}
+//		if ([self.parentViewController isKindOfClass:[ContainerViewController class]])
+//		{
+//			ContainerViewController *container = (ContainerViewController *)self.parentViewController;
+//			if ([container respondsToSelector:@selector(transitionToContentController:)])
+//			{
+//				[container transitionToContentController:self];
+//			}
+//		}
 	}
 	else
 	{

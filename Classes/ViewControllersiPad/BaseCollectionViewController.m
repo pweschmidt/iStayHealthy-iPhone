@@ -13,7 +13,7 @@
 #import "CustomToolbar.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
-#import "ContentNavigationController_iPad.h"
+    //#import "ContentNavigationController_iPad.h"
 #import "Utilities.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"

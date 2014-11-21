@@ -8,7 +8,7 @@
 
 #import "EmailViewController.h"
 #import "CoreXMLWriter.h"
-#import "ContentNavigationController.h"
+    //#import "ContentNavigationController.h"
 
 @interface EmailViewController ()
 @property (nonatomic, strong) MFMailComposeViewController *mailController;
@@ -41,11 +41,11 @@
 
 - (void)hamburgerMenu
 {
-	if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
-	{
-		ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-		[navController showMenu];
-	}
+//	if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
+//	{
+//		UINavigationController *navController = (UINavigationController *)self.parentViewController;
+//		[navController showMenu];
+//	}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -123,8 +123,10 @@
 	            self.mailController = mailController;
 	            [mailController setSubject:@"iStayHealthy Data (attached)"];
 	            self.mailController = mailController;
-	            ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-	            [navController showMailController:mailController];
+                
+	            UINavigationController *navController = (UINavigationController *)self.parentViewController;
+                [navController presentViewController:mailController animated:YES completion:nil];
+                    //	            [navController showMailController:mailController];
 			}
 		}
 	}];
@@ -152,19 +154,15 @@
 	mailController.mailComposeDelegate = self;
 	[mailController setToRecipients:toRecipient];
 	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
-	ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-	[navController showMailController:mailController];
+	UINavigationController *navController = (UINavigationController *)self.parentViewController;
+    [navController presentViewController:mailController animated:YES completion:nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError *)error
 {
-	if (nil != self.mailController)
-	{
-		ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-		[navController hideMailController:self.mailController];
-	}
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

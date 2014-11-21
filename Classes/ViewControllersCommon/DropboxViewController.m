@@ -7,9 +7,9 @@
 //
 
 #import "DropboxViewController.h"
-#import "ContentContainerViewController.h"
-#import "ContentNavigationController.h"
-#import "ContentNavigationController_iPad.h"
+//#import "ContentContainerViewController.h"
+//#import "ContentNavigationController.h"
+//#import "ContentNavigationController_iPad.h"
 #import "Constants.h"
 #import "Utilities.h"
 #import "Menus.h"
@@ -19,6 +19,7 @@
 #import "CoreXMLWriter.h"
 #import "CoreDataManager.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "iStayHealthy-Swift.h"
 
 @interface DropboxViewController () <DBRestClientDelegate>
 @property (nonatomic, strong) MFMailComposeViewController *mailController;
@@ -275,8 +276,8 @@
         }
         else
         {
-            ContentNavigationController *navController = (ContentNavigationController *) self.parentViewController;
-            ContentContainerViewController *contentController = (ContentContainerViewController *) navController.parentViewController;
+            UINavigationController *navController = (UINavigationController *)self.parentViewController;
+            PWESContentContainerController *contentController = (PWESContentContainerController *)navController.parentViewController;
             [[DBSession sharedSession] linkFromController:contentController];
         }
     }
@@ -600,13 +601,16 @@
                  self.mailController = mailController;
                  if ([Utilities isIPad])
                  {
-                     ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *) self.parentViewController;
+//                     ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *) self.parentViewController;
 //                     [navController showMailController:mailController];
                  }
                  else
                  {
-                     ContentNavigationController *navController = (ContentNavigationController *) self.parentViewController;
-                     [navController showMailController:mailController];
+                     UINavigationController *navController = (UINavigationController *) self.parentViewController;
+                     PWESContentContainerController *contentController = (PWESContentContainerController *)navController;
+                     contentController.modalPresentationStyle = UIModalTransitionStyleCoverVertical;
+                     [contentController presentViewController:mailController animated:YES completion:nil];
+                         //                     [navController showMailController:mailController];
                  }
              }
          }

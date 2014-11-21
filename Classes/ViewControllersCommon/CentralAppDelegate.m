@@ -7,8 +7,8 @@
 //
 
 #import "CentralAppDelegate.h"
-#import "ContainerViewController.h"
-#import "ContainerViewController_iPad.h"
+//#import "ContainerViewController.h"
+//#import "ContainerViewController_iPad.h"
 #import "Utilities.h"
 #import "CoreDataManager.h"
 #import "UIFont+Standard.h"
@@ -121,7 +121,7 @@
 
     if (isPasswordEnabled)
     {
-        [self.containerController transitionToLoginController:self];
+            //        [self.containerController transitionToLoginController:self];
     }
 }
 
