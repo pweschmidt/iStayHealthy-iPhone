@@ -91,7 +91,7 @@
 
     CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self];
     NSArray *items = toolbar.customItems;
-    [self setToolbarItems:items];
+    [self setToolbarItems:items animated:NO];
     self.customToolbar = toolbar;
 
 //    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];

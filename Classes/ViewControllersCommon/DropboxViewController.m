@@ -37,104 +37,110 @@
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
 
-	self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
-	[self disableRightBarButtons];
-	self.iStayHealthyPath = nil;
-	self.dropBoxFileExists = NO;
-	self.newDropboxFileExists = NO;
-	self.isBackup = NO;
-	self.parentRevision = nil;
-	[self createRestClient];
+    self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
+    [self disableRightBarButtons];
+    self.iStayHealthyPath = nil;
+    self.dropBoxFileExists = NO;
+    self.newDropboxFileExists = NO;
+    self.isBackup = NO;
+    self.parentRevision = nil;
+    [self createRestClient];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.toolbarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
-	[super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	if ([[DBSession sharedSession]isLinked])
-	{
-		return 2;
-	}
-	return 1;
+    if ([[DBSession sharedSession]isLinked])
+    {
+        return 2;
+    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if ([[DBSession sharedSession]isLinked])
-	{
-		NSInteger rows = 1;
-		switch (section)
-		{
-			case 0:
-				rows = 2;
-				break;
+    if ([[DBSession sharedSession]isLinked])
+    {
+        NSInteger rows = 1;
+        switch (section)
+        {
+            case 0:
+                rows = 2;
+                break;
 
-			case 1:
-				rows = 1;
-				break;
-		}
-		return rows;
-	}
-	else
-	{
-		return 1;
-	}
+            case 1:
+                rows = 1;
+                break;
+        }
+        return rows;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString *cellIdentifier = [NSString stringWithFormat:@"DropboxCell"];
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"DropboxCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-	if (nil == cell)
-	{
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	cell.contentView.backgroundColor = [UIColor whiteColor];
+    if (nil == cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.contentView.backgroundColor = [UIColor whiteColor];
 
 
-	UILabel *label = [UILabel standardLabel];
-	label.frame = CGRectMake(20, 0, 200, [self tableView:self.tableView estimatedHeightForRowAtIndexPath:indexPath]);
-	if (0 == indexPath.section)
-	{
-		if ([[DBSession sharedSession] isLinked])
-		{
-			switch (indexPath.row)
-			{
-				case 0:
-					label.text = NSLocalizedString(@"Save to Dropbox", nil);
-					break;
+    UILabel *label = [UILabel standardLabel];
+    label.frame = CGRectMake(20, 0, 200, [self tableView:self.tableView estimatedHeightForRowAtIndexPath:indexPath]);
+    if (0 == indexPath.section)
+    {
+        if ([[DBSession sharedSession] isLinked])
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                    label.text = NSLocalizedString(@"Save to Dropbox", nil);
+                    break;
 
-				case 1:
-					label.text = NSLocalizedString(@"Get from Dropbox", nil);
-					break;
-			}
-		}
-		else
-		{
-			label.text = NSLocalizedString(@"Link with Dropbox", nil);
-		}
-	}
-	else
-	{
-		label.text = NSLocalizedString(@"Unlink Dropbox", @"Unlink DropBox");
-	}
+                case 1:
+                    label.text = NSLocalizedString(@"Get from Dropbox", nil);
+                    break;
+            }
+        }
+        else
+        {
+            label.text = NSLocalizedString(@"Link with Dropbox", nil);
+        }
+    }
+    else
+    {
+        label.text = NSLocalizedString(@"Unlink Dropbox", @"Unlink DropBox");
+    }
 
-	[cell.contentView addSubview:label];
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	return cell;
+    [cell.contentView addSubview:label];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
 }
 
 - (void)deselect:(id)sender
 {
-	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,163 +149,163 @@
 //	{
 //		[self startMailController];
 //	}
-	if (0 == indexPath.section)
-	{
-		if ([[DBSession sharedSession] isLinked])
-		{
-			switch (indexPath.row)
-			{
-				case 0:
-					[self backup];
-					break;
+    if (0 == indexPath.section)
+    {
+        if ([[DBSession sharedSession] isLinked])
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                    [self backup];
+                    break;
 
-				case 1:
-				{
-					if ([[DBSession sharedSession] isLinked])
-					{
-						[self startAnimation:nil];
-						NSString *dataPath = [self dropBoxFileTmpPath];
-						[self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
-						                    atRev:self.parentRevision
-						                 intoPath:dataPath];
-					}
-				}
-				break;
-			}
-		}
-		else
-		{
-			self.isConnectAlert = YES;
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Link?", @"Link?")
-			                                                message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
-			                                               delegate:self
-			                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-			                                      otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+                case 1:
+                {
+                    if ([[DBSession sharedSession] isLinked])
+                    {
+                        [self startAnimation:nil];
+                        NSString *dataPath = [self dropBoxFileTmpPath];
+                        [self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
+                                                    atRev:self.parentRevision
+                                                 intoPath:dataPath];
+                    }
+                }
+                break;
+            }
+        }
+        else
+        {
+            self.isConnectAlert = YES;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Link?", @"Link?")
+                                                            message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                                  otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
 
-			[alert show];
-		}
-	}
-	else
-	{
-		self.isConnectAlert = NO;
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
-		                                                message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
-		                                               delegate:self
-		                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-		                                      otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+            [alert show];
+        }
+    }
+    else
+    {
+        self.isConnectAlert = NO;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
+                                                        message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                              otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
 
-		[alert show];
-	}
-	[self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+        [alert show];
+    }
+    [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	return 20;
+    return 20;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
-	UILabel *label = [UILabel standardLabel];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
+    UILabel *label = [UILabel standardLabel];
 
-	label.font = [UIFont fontWithType:Bold size:standard];
-	label.frame = CGRectMake(20, 2, self.view.bounds.size.width - 100, 20);
-	if (0 == section)
-	{
-		label.text = NSLocalizedString(@"Dropbox", nil);
-	}
-	else
-	{
-		label.text = NSLocalizedString(@"Connection to Dropbox", nil);
-	}
-	[view addSubview:label];
-	return view;
+    label.font = [UIFont fontWithType:Bold size:standard];
+    label.frame = CGRectMake(20, 2, self.view.bounds.size.width - 100, 20);
+    if (0 == section)
+    {
+        label.text = NSLocalizedString(@"Dropbox", nil);
+    }
+    else
+    {
+        label.text = NSLocalizedString(@"Connection to Dropbox", nil);
+    }
+    [view addSubview:label];
+    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-	if (1 == section)
-	{
-		return 36;
-	}
-	else
-	{
-		return 10;
-	}
+    if (1 == section)
+    {
+        return 36;
+    }
+    else
+    {
+        return 10;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
 
-	if ([[DBSession sharedSession] isLinked] && 1 == section)
-	{
-		UILabel *label = [UILabel standardLabel];
-		label.text = @"";
-		label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 36);
-		[view addSubview:label];
-		self.activityLabel = label;
-		UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-		indicator.hidesWhenStopped = YES;
-		indicator.frame = CGRectMake(20, 0, 36, 36);
-		[view addSubview:indicator];
-		self.activityIndicator = indicator;
-		if ([[DBSession sharedSession] isLinked])
-		{
-			[self startAnimation:nil];
-		}
-	}
-	else
-	{
-		view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 10);
-	}
-	return view;
+    if ([[DBSession sharedSession] isLinked] && 1 == section)
+    {
+        UILabel *label = [UILabel standardLabel];
+        label.text = @"";
+        label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 36);
+        [view addSubview:label];
+        self.activityLabel = label;
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        indicator.hidesWhenStopped = YES;
+        indicator.frame = CGRectMake(20, 0, 36, 36);
+        [view addSubview:indicator];
+        self.activityIndicator = indicator;
+        if ([[DBSession sharedSession] isLinked])
+        {
+            [self startAnimation:nil];
+        }
+    }
+    else
+    {
+        view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 10);
+    }
+    return view;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
 
-	if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
-	{
-		if (!self.isConnectAlert)
-		{
-			[self unlinkDropBox];
-		}
-		else
-		{
-			ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-			ContentContainerViewController *contentController = (ContentContainerViewController *)navController.parentViewController;
-			[[DBSession sharedSession] linkFromController:contentController];
-		}
-	}
+    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
+    {
+        if (!self.isConnectAlert)
+        {
+            [self unlinkDropBox];
+        }
+        else
+        {
+            ContentNavigationController *navController = (ContentNavigationController *) self.parentViewController;
+            ContentContainerViewController *contentController = (ContentContainerViewController *) navController.parentViewController;
+            [[DBSession sharedSession] linkFromController:contentController];
+        }
+    }
 }
 
 #pragma mark - DropBox actions
 
 - (void)createRestClient
 {
-	if (![[DBSession sharedSession] isLinked])
-	{
-		return;
-	}
-	else
-	{
-		self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-		self.restClient.delegate = self;
-		[self.restClient loadMetadata:@"/"];
-	}
+    if (![[DBSession sharedSession] isLinked])
+    {
+        return;
+    }
+    else
+    {
+        self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        self.restClient.delegate = self;
+        [self.restClient loadMetadata:@"/"];
+    }
 }
 
 - (NSString *)dropBoxFileTmpPath
 {
-	return [NSTemporaryDirectory() stringByAppendingPathComponent:@"fromDropBox.xml"];
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:@"fromDropBox.xml"];
 }
 
 - (NSString *)uploadFileTmpPath
 {
-	return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];
 }
 
 /**
@@ -307,7 +313,7 @@
  */
 - (void)unlinkDropBox
 {
-	[[DBSession sharedSession] unlinkAll];
+    [[DBSession sharedSession] unlinkAll];
 }
 
 /**
@@ -315,181 +321,181 @@
  */
 - (void)showDBError
 {
-	if (![[DBSession sharedSession]isLinked])
-	{
-		return;
-	}
-	[[[UIAlertView alloc]
-	  initWithTitle:NSLocalizedString(@"Error Loading Dropbox data", nil) message:NSLocalizedString(@"There was an error loading data from Dropbox.", nil)
-	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	 show];
+    if (![[DBSession sharedSession]isLinked])
+    {
+        return;
+    }
+    [[[UIAlertView alloc]
+      initWithTitle:NSLocalizedString(@"Error Loading Dropbox data", nil) message:NSLocalizedString(@"There was an error loading data from Dropbox.", nil)
+           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+     show];
 }
 
 - (void)createIStayHealthyFolder
 {
-	[self.restClient createFolder:@"/iStayHealthy"];
+    [self.restClient createFolder:@"/iStayHealthy"];
 }
 
 - (void)copyOldFileToNew
 {
-	[self.restClient copyFrom:@"/iStayHealthy/iStayHealthy.xml" toPath:@"/iStayHealthy/iStayHealthy.isth"];
+    [self.restClient copyFrom:@"/iStayHealthy/iStayHealthy.xml" toPath:@"/iStayHealthy/iStayHealthy.isth"];
 }
 
 - (void)backup
 {
-	if (![[DBSession sharedSession]isLinked])
-	{
-		return;
-	}
-	NSString *dataPath = [self uploadFileTmpPath];
-	[self startAnimation:nil];
-	CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
-	[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-	    if (nil != xmlString)
-	    {
-	        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-	        NSError *writeError = nil;
-	        [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
-	        if (writeError)
-	        {
-	            [[[UIAlertView alloc]
-	              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-	                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	             show];
-	            [self stopAnimation:nil];
-			}
-	        else
-	        {
-	            [self.restClient uploadFile:@"iStayHealthy.isth"
-	                                 toPath:@"/iStayHealthy"
-	                          withParentRev:self.parentRevision
-	                               fromPath:dataPath];
-			}
-		}
-	    else
-	    {
-	        [self stopAnimation:nil];
-	        [[[UIAlertView alloc]
-	          initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
-	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	         show];
-		}
-	}];
+    if (![[DBSession sharedSession]isLinked])
+    {
+        return;
+    }
+    NSString *dataPath = [self uploadFileTmpPath];
+    [self startAnimation:nil];
+    CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+    [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+         if (nil != xmlString)
+         {
+             NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+             NSError *writeError = nil;
+             [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
+             if (writeError)
+             {
+                 [[[UIAlertView alloc]
+                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                      show];
+                 [self stopAnimation:nil];
+             }
+             else
+             {
+                 [self.restClient     uploadFile:@"iStayHealthy.isth"
+                                          toPath:@"/iStayHealthy"
+                                   withParentRev:self.parentRevision
+                                        fromPath:dataPath];
+             }
+         }
+         else
+         {
+             [self stopAnimation:nil];
+             [[[UIAlertView alloc]
+                   initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
+                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                  show];
+         }
+     }];
 }
 
 - (void)restore
 {
-	NSString *dataPath = [self dropBoxFileTmpPath];
-	NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
+    NSString *dataPath = [self dropBoxFileTmpPath];
+    NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
 
-	[[CoreXMLReader sharedInstance] parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
-	    if (success)
-	    {
-	        [self stopAnimation:nil];
-	        [[[UIAlertView alloc]
-	          initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-	                       message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
-	                      delegate:nil
-	             cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	         show];
-		}
-	    else
-	    {
-	        [self stopAnimation:nil];
-	        [[[UIAlertView alloc]
-	          initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
-	               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	         show];
-		}
-	}];
+    [[CoreXMLReader sharedInstance] parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
+         if (success)
+         {
+             [self stopAnimation:nil];
+             [[[UIAlertView alloc]
+                   initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+                             message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
+                            delegate:nil
+                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                  show];
+         }
+         else
+         {
+             [self stopAnimation:nil];
+             [[[UIAlertView alloc]
+                   initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
+                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                  show];
+         }
+     }];
 }
 
 #pragma mark - DropBox DBRestClient methods
 - (DBRestClient *)restClient
 {
-	if (!_restClient)
-	{
-		_restClient =
-		    [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-		_restClient.delegate = self;
-	}
-	return _restClient;
+    if (!_restClient)
+    {
+        _restClient =
+            [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        _restClient.delegate = self;
+    }
+    return _restClient;
 }
 
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata
 {
-	NSString *path = [metadata path];
+    NSString *path = [metadata path];
 
-	[self startAnimation:nil];
-	if ([path isEqualToString:@"/"])
-	{
-		for (DBMetadata *child in metadata.contents)
-		{
-			NSString *pathName = [child path];
-			if ([child isDirectory] && [pathName isEqualToString:@"/iStayHealthy"])
-			{
-				self.iStayHealthyPath = pathName;
-			}
-		}
-		if (nil == self.iStayHealthyPath)
-		{
-			[self createIStayHealthyFolder];
-		}
-		else
-		{
-			[self.restClient loadMetadata:@"/iStayHealthy"];
-		}
-	}
-	if ([path isEqualToString:@"/iStayHealthy"])
-	{
-		DBMetadata *backupFile = nil;
-		for (DBMetadata *child in metadata.contents)
-		{
-			NSString *pathName = [child path];
-			if ([pathName hasSuffix:@"iStayHealthy.isth"])
-			{
-				backupFile = child;
-			}
-		}
-		if (nil != backupFile)
-		{
-			self.parentRevision = backupFile.rev;
-		}
-		else
-		{
-			self.parentRevision = nil;
-		}
-		[self stopAnimation:nil];
-	}
+    [self startAnimation:nil];
+    if ([path isEqualToString:@"/"])
+    {
+        for (DBMetadata *child in metadata.contents)
+        {
+            NSString *pathName = [child path];
+            if ([child isDirectory] && [pathName isEqualToString:@"/iStayHealthy"])
+            {
+                self.iStayHealthyPath = pathName;
+            }
+        }
+        if (nil == self.iStayHealthyPath)
+        {
+            [self createIStayHealthyFolder];
+        }
+        else
+        {
+            [self.restClient loadMetadata:@"/iStayHealthy"];
+        }
+    }
+    if ([path isEqualToString:@"/iStayHealthy"])
+    {
+        DBMetadata *backupFile = nil;
+        for (DBMetadata *child in metadata.contents)
+        {
+            NSString *pathName = [child path];
+            if ([pathName hasSuffix:@"iStayHealthy.isth"])
+            {
+                backupFile = child;
+            }
+        }
+        if (nil != backupFile)
+        {
+            self.parentRevision = backupFile.rev;
+        }
+        else
+        {
+            self.parentRevision = nil;
+        }
+        [self stopAnimation:nil];
+    }
 }
 
 - (void)restClient:(DBRestClient *)client createdFolder:(DBMetadata *)folder
 {
-	[self stopAnimation:nil];
+    [self stopAnimation:nil];
 }
 
 - (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error
 {
-	[self stopAnimation:nil];
-	UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-	[errorAlert show];
+    [self stopAnimation:nil];
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [errorAlert show];
 }
 
 - (void)restClient:(DBRestClient *)client
         copiedPath:(NSString *)fromPath
                 to:(DBMetadata *)to
 {
-	if ([fromPath isEqualToString:@"/iStayHealthy/iStayHealthy.xml"] && [[to path] isEqualToString:@"/iStayHealthy/iStayHealthy.isth"])
-	{
-		self.newDropboxFileExists = YES;
-	}
+    if ([fromPath isEqualToString:@"/iStayHealthy/iStayHealthy.xml"] && [[to path] isEqualToString:@"/iStayHealthy/iStayHealthy.isth"])
+    {
+        self.newDropboxFileExists = YES;
+    }
 }
 
 - (void)restClient:(DBRestClient *)client copyPathFailedWithError:(NSError *)error
 {
-	UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Copy error" message:[NSString stringWithFormat:@"Error copying file %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Copy error" message:[NSString stringWithFormat:@"Error copying file %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 
-	[errorAlert show];
+    [errorAlert show];
 }
 
 - (void)restClient:(DBRestClient *)client metadataUnchangedAtPath:(NSString *)path
@@ -498,7 +504,7 @@
 
 - (void)restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error
 {
-	[self showDBError];
+    [self showDBError];
 }
 
 - (void)restClient:(DBRestClient *)client
@@ -506,34 +512,34 @@
               from:(NSString *)srcPath
           metadata:(DBMetadata *)metadata
 {
-	[self stopAnimation:nil];
-	[[[UIAlertView alloc]
-	  initWithTitle:NSLocalizedString(@"Save Finished", nil) message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
-	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	 show];
+    [self stopAnimation:nil];
+    [[[UIAlertView alloc]
+      initWithTitle:NSLocalizedString(@"Save Finished", nil) message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
+           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+     show];
 }
 
 - (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error
 {
-	[self stopAnimation:nil];
-	[[[UIAlertView alloc]
-	  initWithTitle:@"Error Uploading to Dropbox" message:@"There was an error uploading data to Dropbox."
-	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	 show];
+    [self stopAnimation:nil];
+    [[[UIAlertView alloc]
+      initWithTitle:@"Error Uploading to Dropbox" message:@"There was an error uploading data to Dropbox."
+           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+     show];
 }
 
 - (void)restClient:(DBRestClient *)client loadedFile:(NSString *)localPath
 {
-	[self restore];
+    [self restore];
 }
 
 - (void)restClient:(DBRestClient *)client loadFileFailedWithError:(NSError *)error
 {
-	[self stopAnimation:nil];
-	[[[UIAlertView alloc]
-	  initWithTitle:@"Error Loading file from Dropbox" message:@"There was an error loading a file from Dropbox."
-	       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	 show];
+    [self stopAnimation:nil];
+    [[[UIAlertView alloc]
+      initWithTitle:@"Error Loading file from Dropbox" message:@"There was an error loading a file from Dropbox."
+           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+     show];
 }
 
 #pragma mark BaseTableViewController methods
@@ -543,20 +549,20 @@
 
 - (void)startAnimation:(NSNotification *)notification
 {
-	if (![self.activityIndicator isAnimating])
-	{
-		[self.activityIndicator startAnimating];
-		self.activityLabel.text = NSLocalizedString(@"Syncing data...", nil);
-	}
+    if (![self.activityIndicator isAnimating])
+    {
+        [self.activityIndicator startAnimating];
+        self.activityLabel.text = NSLocalizedString(@"Syncing data...", nil);
+    }
 }
 
 - (void)stopAnimation:(NSNotification *)notification
 {
-	if ([self.activityIndicator isAnimating])
-	{
-		[self.activityIndicator stopAnimating];
-		self.activityLabel.text = @"";
-	}
+    if ([self.activityIndicator isAnimating])
+    {
+        [self.activityIndicator stopAnimating];
+        self.activityLabel.text = @"";
+    }
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
@@ -566,45 +572,45 @@
 #pragma mark mail stuff
 - (void)startMailController
 {
-	CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
-	NSString *dataPath = [self uploadFileTmpPath];
+    CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+    NSString *dataPath = [self uploadFileTmpPath];
 
-	[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-	    if (nil != xmlString)
-	    {
-	        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-	        NSError *writeError = nil;
-	        [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
-	        if (writeError)
-	        {
-	            [[[UIAlertView alloc]
-	              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-	                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-	             show];
-			}
-	        else
-	        {
-	            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+         if (nil != xmlString)
+         {
+             NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+             NSError *writeError = nil;
+             [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
+             if (writeError)
+             {
+                 [[[UIAlertView alloc]
+                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                      show];
+             }
+             else
+             {
+                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
 
-	            mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-	            mailController.mailComposeDelegate = self;
-	            [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
-	            self.mailController = mailController;
-	            [mailController setSubject:@"iStayHealthy Data (attached)"];
-	            self.mailController = mailController;
-	            if ([Utilities isIPad])
-	            {
-	                ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *)self.parentViewController;
+                 mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+                 mailController.mailComposeDelegate = self;
+                 [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
+                 self.mailController = mailController;
+                 [mailController setSubject:@"iStayHealthy Data (attached)"];
+                 self.mailController = mailController;
+                 if ([Utilities isIPad])
+                 {
+                     ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *) self.parentViewController;
 //                     [navController showMailController:mailController];
-				}
-	            else
-	            {
-	                ContentNavigationController *navController = (ContentNavigationController *)self.parentViewController;
-	                [navController showMailController:mailController];
-				}
-			}
-		}
-	}];
+                 }
+                 else
+                 {
+                     ContentNavigationController *navController = (ContentNavigationController *) self.parentViewController;
+                     [navController showMailController:mailController];
+                 }
+             }
+         }
+     }];
 }
 
 @end
