@@ -8,24 +8,29 @@
 
 import UIKit
 
-class PWESContentContainerController: UIViewController, PWESContentMenuHandler
+class PWESContentContainerController: UIViewController, PWESContentMenuHandler, PWESLoginHandler
 {
     var customNavigationController: UINavigationController!
     var isCollapsed: Bool = true
     var menuController: HamburgerMenuTableViewController?
-    var loginController_iPad: LoginViewController_iPad?
-    var loginController: LoginViewController?
+    var defaultLoginController: PWESLoginViewController?
     
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
-        var dashboardController: PWESDashboardViewController = PWESDashboardViewController()
-        dashboardController.menuHandler = self
-        self.customNavigationController = UINavigationController(rootViewController: dashboardController)
-        view.addSubview(self.customNavigationController.view)
-        self.customNavigationController.didMoveToParentViewController(self)
+        loadDefaultController()
+//        
+//        let settings: AppSettings = AppSettings()
+//        if settings.hasPasswordEnabled()
+//        {
+//            loadLoginController()
+//        }
+//        else
+//        {
+//            loadDefaultController()
+//        }
     }
     
     override func didReceiveMemoryWarning()
@@ -34,9 +39,25 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
         // Dispose of any resources that can be recreated.
     }
     
-    func transitionToLoginController()
+    func loadLoginController()
     {
+        var loginController: PWESLoginViewController = PWESLoginViewController()
+        loginController.loginHandler = self
+        self.defaultLoginController = loginController        
+        self.view.addSubview(loginController.view)
+        //        addChildViewController(loginController)
+        loginController.didMoveToParentViewController(self)
         
+    }
+    
+    func loadDefaultController()
+    {
+        var dashboardController: PWESDashboardViewController = PWESDashboardViewController()
+        dashboardController.menuHandler = self
+        self.customNavigationController = UINavigationController(rootViewController: dashboardController)
+        view.addSubview(self.customNavigationController.view)
+        addChildViewController(self.customNavigationController)
+        self.customNavigationController.didMoveToParentViewController(self)
     }
     
 
@@ -340,6 +361,17 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler
             navigationController = UINavigationController(rootViewController: controller)
         }
         return navigationController
+    }
+    
+    func didLogin()
+    {
+        self.defaultLoginController?.removeFromParentViewController()
+        self.defaultLoginController = nil
+        loadDefaultController()
+    }
+    
+    func didLoginFailed()
+    {
     }
     
 }

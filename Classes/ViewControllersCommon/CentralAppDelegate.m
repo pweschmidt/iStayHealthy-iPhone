@@ -26,9 +26,6 @@
 @implementation CentralAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#ifdef APPDEBUG
-    NSLog(@"We got to the new CentralAppDelegate");
-#endif
     [self registerUserNotifications:application];
     self.window.tintColor = TEXTCOLOUR;
 
@@ -85,15 +82,12 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"Device token is %@", deviceToken);
     TokenCertificate *certificate = [TokenCertificate sharedToken];
     certificate.deviceToken = deviceToken;
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-    NSLog(@"did register notification");
-
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
