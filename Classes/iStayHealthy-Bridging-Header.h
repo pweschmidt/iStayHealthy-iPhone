@@ -4,8 +4,6 @@
 @import CoreData;
 #import "Constants.h"
 #import "HamburgerMenuTableViewController.h"
-#import "LoginViewController.h"
-#import "LoginViewController_iPad.h"
 #import "ResultsCollectionViewController.h"
 #import "PWESDashboardViewController.h"
 #import "DropboxViewController.h"

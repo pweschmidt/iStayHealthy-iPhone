@@ -110,7 +110,6 @@
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
-		C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
 		C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */; };
 		C431408D180C801D00EB5F5E /* PWESAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = C431408C180C801D00EB5F5E /* PWESAxis.m */; };
@@ -156,7 +155,6 @@
 		C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */; };
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
 		C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */; };
-		C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB22B17AD05630037A6DF /* LoginViewController.m */; };
 		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
@@ -420,8 +418,6 @@
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
 		C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHIVMedsTableViewController.h; path = ViewControllersiPhone/EditHIVMedsTableViewController.h; sourceTree = "<group>"; };
 		C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHIVMedsTableViewController.m; path = ViewControllersiPhone/EditHIVMedsTableViewController.m; sourceTree = "<group>"; };
-		C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController_iPad.h; path = ViewControllersiPad/LoginViewController_iPad.h; sourceTree = "<group>"; };
-		C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController_iPad.m; path = ViewControllersiPad/LoginViewController_iPad.m; sourceTree = "<group>"; };
 		C41EC32C180ED0EE00A49AE4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		C42783C217C8B5E700CF9F48 /* MyHIVMedicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVMedicationViewController.h; path = ViewControllersCommon/MyHIVMedicationViewController.h; sourceTree = "<group>"; };
 		C42783C317C8B5E700CF9F48 /* MyHIVMedicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHIVMedicationViewController.m; path = ViewControllersCommon/MyHIVMedicationViewController.m; sourceTree = "<group>"; };
@@ -520,8 +516,6 @@
 		C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicalAddressTableViewController.m; path = ViewControllersCommon/ClinicalAddressTableViewController.m; sourceTree = "<group>"; };
 		C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProceduresListTableViewController.h; path = ViewControllersCommon/ProceduresListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresListTableViewController.m; path = ViewControllersCommon/ProceduresListTableViewController.m; sourceTree = "<group>"; };
-		C47DB22A17AD05630037A6DF /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllersCommon/LoginViewController.h; sourceTree = "<group>"; };
-		C47DB22B17AD05630037A6DF /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllersCommon/LoginViewController.m; sourceTree = "<group>"; };
 		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
 		C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CentralAppDelegate.m; path = ViewControllersCommon/CentralAppDelegate.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
@@ -1062,8 +1056,6 @@
 				0BF338A219785D03004C3FB4 /* HelpViewController.m */,
 				0BC7E560198827CA0017ED15 /* LocalBackupController.h */,
 				0BC7E561198827CA0017ED15 /* LocalBackupController.m */,
-				C47DB22A17AD05630037A6DF /* LoginViewController.h */,
-				C47DB22B17AD05630037A6DF /* LoginViewController.m */,
 				0B1276BA198AD05B00D389FA /* IconsTableViewController.h */,
 				0B1276BB198AD05B00D389FA /* IconsTableViewController.m */,
 				C46C5DE917EDA44500866DBD /* InformationTableViewController.h */,
@@ -1145,8 +1137,6 @@
 				0BB771EB18F32B5A00523DF6 /* ClinicAddressCollectionViewController.m */,
 				0B0C4F6918A664B300D22990 /* CustomToolbar.h */,
 				0B0C4F6A18A664B300D22990 /* CustomToolbar.m */,
-				C41D8B1D17D22F1E008EC822 /* LoginViewController_iPad.h */,
-				C41D8B1E17D22F1E008EC822 /* LoginViewController_iPad.m */,
 				0BB771F018F32DA600523DF6 /* MissedMedicationCollectionViewController.h */,
 				0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */,
 				0BB771E418F324FA00523DF6 /* MyHIVCollectionViewController.h */,
@@ -1483,7 +1473,6 @@
 				0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */,
 				C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */,
 				0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */,
-				C41D8B1F17D22F1E008EC822 /* LoginViewController_iPad.m in Sources */,
 				0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */,
 				0B36926919C491D700C269AD /* PWESTreatment.swift in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
@@ -1603,7 +1592,6 @@
 				C4C837E416D104AF002D934F /* PreviousMedication+Comparator.m in Sources */,
 				0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */,
 				0B36922319C4785600C269AD /* PWESHealth.xcdatamodeld in Sources */,
-				C47DB22C17AD05630037A6DF /* LoginViewController.m in Sources */,
 				0B7326D419323032001E6601 /* PWESResultDatesPlotArea.m in Sources */,
 				0B36926A19C491D700C269AD /* PWESTreatmentCalendar.swift in Sources */,
 				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,

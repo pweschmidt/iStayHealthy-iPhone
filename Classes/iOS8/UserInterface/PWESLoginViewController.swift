@@ -63,6 +63,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
         passwordField?.text = NSLocalizedString("Enter password", tableName: nil, bundle: NSBundle.mainBundle(), value: "Enter password", comment: "Enter password")
         passwordField?.textColor = UIColor.darkGrayColor()
         passwordField?.secureTextEntry = false
+        passwordField?.delegate = self
     }
     
     func login(password: String)
