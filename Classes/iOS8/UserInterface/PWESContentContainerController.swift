@@ -20,17 +20,16 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
-        loadDefaultController()
-//        
-//        let settings: AppSettings = AppSettings()
-//        if settings.hasPasswordEnabled()
-//        {
-//            loadLoginController()
-//        }
-//        else
-//        {
-//            loadDefaultController()
-//        }
+        
+        let settings: AppSettings = AppSettings()
+        if settings.hasPasswordEnabled()
+        {
+            loadLoginController()
+        }
+        else
+        {
+            loadDefaultController()
+        }
     }
     
     override func didReceiveMemoryWarning()
@@ -41,7 +40,9 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     func loadLoginController()
     {
-        var loginController: PWESLoginViewController = PWESLoginViewController()
+        var storyboard: UIStoryboard = UIStoryboard(name: "PWESMainStoryboard", bundle: nil)
+        
+        var loginController: PWESLoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as PWESLoginViewController
         loginController.loginHandler = self
         self.defaultLoginController = loginController        
         self.view.addSubview(loginController.view)
