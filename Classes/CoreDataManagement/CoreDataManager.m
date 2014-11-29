@@ -247,9 +247,9 @@
 		return;
 	}
 	NSPersistentStoreUbiquitousTransitionType transitionType = [[userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
-
+#ifdef APPDEBUG
 	NSLog(@"transition type %ld", (long)transitionType);
-
+#endif
 	NSError *error = nil;
 	[self saveContextAndWait:&error];
 	if (nil == error)
@@ -271,8 +271,9 @@
 	}
 
 	NSPersistentStoreUbiquitousTransitionType transitionType = [[userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
+#ifdef APPDEBUG
 	NSLog(@"transition type %ld", (long)transitionType);
-
+#endif
 	if (NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted == transitionType)
 	{
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -690,17 +691,35 @@
 	[context performBlockAndWait: ^{
 	    NSError *error = nil;
 	    NSArray *fetchedObjects = nil;
-	    fetchedObjects = [context executeFetchRequest:request error:&error];
-	    dispatch_async(dispatch_get_main_queue(), ^{
-	        if (nil == fetchedObjects)
-	        {
-	            completion(nil, error);
-			}
-	        else
-	        {
-	            completion(fetchedObjects, nil);
-			}
-		});
+	    NSUInteger count = [context countForFetchRequest:request error:&error];
+	    if (0 == count || NSNotFound == count)
+	    {
+	        fetchedObjects = [NSArray array];
+	        dispatch_async(dispatch_get_main_queue(), ^{
+	            if (nil == fetchedObjects)
+	            {
+	                completion(nil, error);
+				}
+	            else
+	            {
+	                completion(fetchedObjects, nil);
+				}
+			});
+		}
+	    else
+	    {
+	        fetchedObjects = [context executeFetchRequest:request error:&error];
+	        dispatch_async(dispatch_get_main_queue(), ^{
+	            if (nil == fetchedObjects)
+	            {
+	                completion(nil, error);
+				}
+	            else
+	            {
+	                completion(fetchedObjects, nil);
+				}
+			});
+		}
 	}];
 }
 
