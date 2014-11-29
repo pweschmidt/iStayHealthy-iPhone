@@ -13,81 +13,81 @@ typedef void (^finishBlock)(void);
 
 typedef NS_ENUM (NSUInteger, TransitionType)
 {
-    kMenuTransition = 0,
-    kControllerTransition
+	kMenuTransition = 0,
+	kControllerTransition
 };
 
 typedef NS_ENUM (int, LoadedStore)
 {
-    MainStoreWithiCloud = 0,
-    MainStoreWithoutiCloud,
-    FallbackStore
+	MainStoreWithiCloud = 0,
+	MainStoreWithoutiCloud,
+	FallbackStore
 };
 
 typedef NS_ENUM (int, DateType)
 {
-    DateOnly = 0,
-    DateAndTime,
-    TimeOnly
+	DateOnly = 0,
+	DateAndTime,
+	TimeOnly
 };
 
 typedef NS_ENUM (int, ResultsType)
 {
-    HIVResultsType = 0,
-    BloodResultsType,
-    OtherResultsType,
-    LiverResultsType
+	HIVResultsType = 0,
+	BloodResultsType,
+	OtherResultsType,
+	LiverResultsType
 };
 
 
 typedef NS_ENUM (int, InputType)
 {
-    DefaultInput = 0,
-    NumericalInput,
-    PercentageInput,
-    BloodPressureInput,
-    TextInput,
-    EmailInput,
-    WebInput
+	DefaultInput = 0,
+	NumericalInput,
+	PercentageInput,
+	BloodPressureInput,
+	TextInput,
+	EmailInput,
+	WebInput
 };
 
 typedef NS_ENUM (int, FontType)
 {
-    Standard = 0,
-    Light,
-    LightItalic,
-    Bold,
-    BoldItalic
+	Standard = 0,
+	Light,
+	LightItalic,
+	Bold,
+	BoldItalic
 };
 
 typedef NS_ENUM (int, FontSize)
 {
-    veryTiny = 9,
-    tiny = 10,
-    small = 10,
-    medium = 12,
-    standard = 15,
-    large = 17,
-    xLarge = 20
+	veryTiny = 9,
+	tiny = 10,
+	small = 10,
+	medium = 12,
+	standard = 15,
+	large = 17,
+	xLarge = 20
 };
 
 
 typedef NS_ENUM (int, MenuType)
 {
-    HamburgerMenuType = 0,
-    AddMenuType
+	HamburgerMenuType = 0,
+	AddMenuType
 };
 
 static NSUInteger DeviceSystemMajorVersion()
 {
-    static NSUInteger _deviceSystemMajorVersion = -1;
-    static dispatch_once_t onceToken;
+	static NSUInteger _deviceSystemMajorVersion = -1;
+	static dispatch_once_t onceToken;
 
-    dispatch_once(&onceToken, ^{
-                      _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
-                  });
+	dispatch_once(&onceToken, ^{
+	    _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
+	});
 
-    return _deviceSystemMajorVersion;
+	return _deviceSystemMajorVersion;
 }
 
 #define EMBEDDED_DATE_PICKER (DeviceSystemMajorVersion() >= 7)
@@ -181,6 +181,8 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kXMLDBVersionString               @"15"
 #define kXMLPreamble                      @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 #define kXMLElementRoot                   @"iStayHealthyRecord"
+#define kiStayHealthyClosingStatement     @"</iStayHealthyRecord>"
+#define kiStayHealthyOpeningStatement     @"<iStayHealthyRecord"
 
 /**
    XML Group elements

@@ -577,22 +577,22 @@
 
 	void (^savePrivateContext) (void) = ^{
 		[privateContext save:error];
-		dispatch_async(dispatch_get_main_queue(), ^{
-		    [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-		        if (nil != xmlString)
-		        {
-		            NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-		            NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
-		            NSFileManager *manager = [NSFileManager defaultManager];
-		            if ([manager fileExistsAtPath:[path path]])
-		            {
-		                NSError *removeError = nil;
-		                [manager removeItemAtURL:path error:&removeError];
-					}
-		            [xmlData writeToURL:path atomically:YES];
-				}
-			}];
-		});
+//		dispatch_async(dispatch_get_main_queue(), ^{
+//		    [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+//		        if (nil != xmlString)
+//		        {
+//		            NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+//		            NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
+//		            NSFileManager *manager = [NSFileManager defaultManager];
+//		            if ([manager fileExistsAtPath:[path path]])
+//		            {
+//		                NSError *removeError = nil;
+//		                [manager removeItemAtURL:path error:&removeError];
+//					}
+//		            [xmlData writeToURL:path atomically:YES];
+//				}
+//			}];
+//		});
 	};
 
 	if ([privateContext hasChanges])
@@ -687,7 +687,7 @@
 		[request setSortDescriptors:@[descriptor]];
 	}
 
-	[context performBlock: ^{
+	[context performBlockAndWait: ^{
 	    NSError *error = nil;
 	    NSArray *fetchedObjects = nil;
 	    fetchedObjects = [context executeFetchRequest:request error:&error];

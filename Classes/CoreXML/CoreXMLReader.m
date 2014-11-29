@@ -99,8 +99,12 @@
 	}
 	else
 	{
-		NSString *cleanedString = [CoreXMLTools cleanedXMLString:xmlString error:error];
+		NSString *cleanedString = [CoreXMLTools correctedStringFromString:xmlString];
 		isValidXML = [CoreXMLTools validateXMLString:cleanedString error:error];
+		if (isValidXML)
+		{
+			cleanedData = [cleanedString dataUsingEncoding:NSUTF8StringEncoding];
+		}
 		return cleanedData;
 	}
 }
@@ -339,6 +343,12 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
 	///TODO handle error apart from writing a DEBUG msg
+	if (self.successBlock)
+	{
+		iStayHealthySuccessBlock localBlock = self.successBlock;
+		localBlock(NO, parseError);
+	}
+	self.successBlock = nil;
 #ifdef APPDEBUG
 	NSLog(@"Error occurred while parsing XML file %@", [parseError localizedDescription]);
 #endif
