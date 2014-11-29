@@ -7,9 +7,6 @@
 //
 
 #import "DropboxViewController.h"
-//#import "ContentContainerViewController.h"
-//#import "ContentNavigationController.h"
-//#import "ContentNavigationController_iPad.h"
 #import "Constants.h"
 #import "Utilities.h"
 #import "Menus.h"
@@ -21,17 +18,23 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "iStayHealthy-Swift.h"
 
+#define kiStayHealthyPath @"/iStayHealthy"
+#define kiStayHealthyUploadFile @"iStayHealthy_upload.isth"
+#define kiStayHealthyFile @"iStayHealthy.isth"
+#define kiStayHealthyFilePath @"/iStayHealthy/iStayHealthy.isth"
+#define kiStayHealthyNewFilePath @"/iStayHealthy/iStayHealthy_upload.isth"
+#define kBackupDateFormat @"ddMMMyyyy'_'HHmmss"
+
 @interface DropboxViewController () <DBRestClientDelegate>
-@property (nonatomic, strong) MFMailComposeViewController *mailController;
 @property (nonatomic, strong) DBRestClient *restClient;
 @property (nonatomic, assign) BOOL dropBoxFileExists;
-@property (nonatomic, assign) BOOL newDropboxFileExists;
 @property (nonatomic, assign) BOOL isConnectAlert;
 @property (nonatomic, assign) BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UILabel *activityLabel;
-@property (nonatomic, strong) NSString *parentRevision;
+@property (nonatomic, assign) BOOL backupStarted;
+@property (nonatomic, strong) NSMutableArray *backupFiles;
 @end
 
 @implementation DropboxViewController
@@ -44,9 +47,9 @@
     [self disableRightBarButtons];
     self.iStayHealthyPath = nil;
     self.dropBoxFileExists = NO;
-    self.newDropboxFileExists = NO;
     self.isBackup = NO;
-    self.parentRevision = nil;
+    self.backupStarted = NO;
+    self.backupFiles = [NSMutableArray array];
     [self createRestClient];
 }
 
@@ -146,10 +149,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//	if (0 == indexPath.section)
-//	{
-//		[self startMailController];
-//	}
     if (0 == indexPath.section)
     {
         if ([[DBSession sharedSession] isLinked])
@@ -162,13 +161,13 @@
 
                 case 1:
                 {
+                    self.backupStarted = NO;
                     if ([[DBSession sharedSession] isLinked])
                     {
                         [self startAnimation:nil];
                         NSString *dataPath = [self dropBoxFileTmpPath];
-                        [self.restClient loadFile:@"/iStayHealthy/iStayHealthy.isth"
-                                                    atRev:self.parentRevision
-                                                 intoPath:dataPath];
+                        [self.restClient loadFile:kiStayHealthyFilePath
+                                         intoPath:dataPath];
                     }
                 }
                 break;
@@ -306,7 +305,14 @@
 
 - (NSString *)uploadFileTmpPath
 {
-    return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];
+    NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:kiStayHealthyFile];
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    if ([defaultManager fileExistsAtPath:tmpPath])
+    {
+        [defaultManager removeItemAtPath:tmpPath error:&error];
+    }
+    return tmpPath;
 }
 
 /**
@@ -334,12 +340,7 @@
 
 - (void)createIStayHealthyFolder
 {
-    [self.restClient createFolder:@"/iStayHealthy"];
-}
-
-- (void)copyOldFileToNew
-{
-    [self.restClient copyFrom:@"/iStayHealthy/iStayHealthy.xml" toPath:@"/iStayHealthy/iStayHealthy.isth"];
+    [self.restClient createFolder:kiStayHealthyPath];
 }
 
 - (void)backup
@@ -354,6 +355,9 @@
     [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
          if (nil != xmlString)
          {
+#ifdef APPDEBUG
+             NSLog(@"XML DATA STRING TO SEND TO DROPBOX \r\n\r\n%@",xmlString);
+#endif
              NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
              NSError *writeError = nil;
              [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
@@ -367,10 +371,11 @@
              }
              else
              {
-                 [self.restClient     uploadFile:@"iStayHealthy.isth"
-                                          toPath:@"/iStayHealthy"
-                                   withParentRev:self.parentRevision
-                                        fromPath:dataPath];
+                 self.backupStarted = YES;
+                 [self.restClient uploadFile:kiStayHealthyUploadFile
+                                      toPath:kiStayHealthyPath
+                               withParentRev:nil
+                                    fromPath:dataPath];
              }
          }
          else
@@ -433,7 +438,7 @@
         for (DBMetadata *child in metadata.contents)
         {
             NSString *pathName = [child path];
-            if ([child isDirectory] && [pathName isEqualToString:@"/iStayHealthy"])
+            if ([child isDirectory] && [pathName isEqualToString:kiStayHealthyPath])
             {
                 self.iStayHealthyPath = pathName;
             }
@@ -444,27 +449,25 @@
         }
         else
         {
-            [self.restClient loadMetadata:@"/iStayHealthy"];
+            [self.restClient loadMetadata:kiStayHealthyPath];
         }
     }
-    if ([path isEqualToString:@"/iStayHealthy"])
+    if ([path isEqualToString:kiStayHealthyPath])
     {
         DBMetadata *backupFile = nil;
         for (DBMetadata *child in metadata.contents)
         {
             NSString *pathName = [child path];
-            if ([pathName hasSuffix:@"iStayHealthy.isth"])
+            if ([pathName hasSuffix:kiStayHealthyFile])
             {
                 backupFile = child;
+                self.dropBoxFileExists = YES;
             }
-        }
-        if (nil != backupFile)
-        {
-            self.parentRevision = backupFile.rev;
-        }
-        else
-        {
-            self.parentRevision = nil;
+            if ([pathName hasSuffix:@".isth"])
+            {
+                NSLog(@"**** backup file found %@ ****",pathName);
+                [self.backupFiles addObject:pathName];
+            }
         }
         [self stopAnimation:nil];
     }
@@ -482,22 +485,6 @@
     [errorAlert show];
 }
 
-- (void)restClient:(DBRestClient *)client
-        copiedPath:(NSString *)fromPath
-                to:(DBMetadata *)to
-{
-    if ([fromPath isEqualToString:@"/iStayHealthy/iStayHealthy.xml"] && [[to path] isEqualToString:@"/iStayHealthy/iStayHealthy.isth"])
-    {
-        self.newDropboxFileExists = YES;
-    }
-}
-
-- (void)restClient:(DBRestClient *)client copyPathFailedWithError:(NSError *)error
-{
-    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Copy error" message:[NSString stringWithFormat:@"Error copying file %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-
-    [errorAlert show];
-}
 
 - (void)restClient:(DBRestClient *)client metadataUnchangedAtPath:(NSString *)path
 {
@@ -518,6 +505,21 @@
       initWithTitle:NSLocalizedString(@"Save Finished", nil) message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
      show];
+    
+    NSString *olderBackupFilePath = [self backedUpFileName];
+#ifdef APPDEBUG
+    NSLog(@"uploaded file to %@ . the existing file will be renamed to %@", destPath, olderBackupFilePath);
+#endif
+    if (self.dropBoxFileExists)
+    {
+        [self.restClient moveFrom:kiStayHealthyFilePath toPath:olderBackupFilePath];
+    }
+    else
+    {
+        [self.restClient moveFrom:destPath toPath:kiStayHealthyFilePath];
+    }
+    
+    
 }
 
 - (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error
@@ -542,6 +544,49 @@
            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
      show];
 }
+
+- (void)restClient:(DBRestClient *)client movedPath:(NSString *)from_path to:(DBMetadata *)result
+{
+#ifdef APPDEBUG
+#endif
+    if (self.backupStarted)
+    {
+#ifdef APPDEBUG
+        NSLog(@"we completed the moved from path %@ to %@",from_path, result.path);
+#endif
+        
+        if ([from_path isEqualToString:kiStayHealthyFilePath])
+        {
+#ifdef APPDEBUG
+            NSLog(@"we completed first part of the move, i.e the move of the existing backup file to its new name/path");
+#endif
+            [self.restClient moveFrom:kiStayHealthyNewFilePath toPath:kiStayHealthyFilePath];
+        }
+        else if ([from_path isEqualToString:kiStayHealthyNewFilePath])
+        {
+#ifdef APPDEBUG
+            NSLog(@"we are done with the backup as we moved the new upload file to its proper location");
+#endif
+            self.backupStarted = NO;
+        }
+    }
+}
+
+- (void)restClient:(DBRestClient *)client movePathFailedWithError:(NSError *)error
+{
+#ifdef APPDEBUG
+    NSLog(@"The move to the filepath failed due to %@ with error code %lu", error.localizedDescription, (long)error.code);
+#endif
+    if (self.backupStarted)
+    {
+#ifdef APPDEBUG
+        NSLog(@"move to path failed, but we started a backup. so we are trying to move the new file to the proper path");
+#endif
+        [self.restClient moveFrom:kiStayHealthyNewFilePath toPath:kiStayHealthyFilePath];
+    }
+    self.backupStarted = NO;
+}
+
 
 #pragma mark BaseTableViewController methods
 - (void)reloadSQLData:(NSNotification *)notification
@@ -570,51 +615,23 @@
 {
 }
 
-#pragma mark mail stuff
-- (void)startMailController
+- (NSString *)backedUpFileName
 {
-    CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
-    NSString *dataPath = [self uploadFileTmpPath];
-
-    [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-         if (nil != xmlString)
-         {
-             NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-             NSError *writeError = nil;
-             [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
-             if (writeError)
-             {
-                 [[[UIAlertView alloc]
-                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                      show];
-             }
-             else
-             {
-                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-
-                 mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-                 mailController.mailComposeDelegate = self;
-                 [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
-                 self.mailController = mailController;
-                 [mailController setSubject:@"iStayHealthy Data (attached)"];
-                 self.mailController = mailController;
-                 if ([Utilities isIPad])
-                 {
-//                     ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *) self.parentViewController;
-//                     [navController showMailController:mailController];
-                 }
-                 else
-                 {
-                     UINavigationController *navController = (UINavigationController *) self.parentViewController;
-                     PWESContentContainerController *contentController = (PWESContentContainerController *)navController;
-                     contentController.modalPresentationStyle = UIModalTransitionStyleCoverVertical;
-                     [contentController presentViewController:mailController animated:YES completion:nil];
-                         //                     [navController showMailController:mailController];
-                 }
-             }
-         }
-     }];
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = kBackupDateFormat;
+    NSDate *date = [NSDate date];
+    NSString *formattedDate = [formatter stringFromDate:date];
+    NSString *filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@.isth",kiStayHealthyPath,formattedDate];
+#ifdef APPDEBUG
+    NSLog(@"The backup file will be called %@", filePath);
+#endif
+    if ([self.backupFiles containsObject:filePath])
+    {
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@_%@.isth",kiStayHealthyPath,formattedDate,uuid];
+    }
+    return filePath;
+    
 }
 
 @end

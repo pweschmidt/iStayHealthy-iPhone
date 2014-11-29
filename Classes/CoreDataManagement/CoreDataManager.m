@@ -783,7 +783,7 @@
 		[request setSortDescriptors:@[descriptor]];
 	}
 
-	[context performBlock: ^{
+	[context performBlockAndWait: ^{
 	    NSError *error = nil;
 	    NSArray *fetchedObjects = nil;
 	    fetchedObjects = [context executeFetchRequest:request error:&error];

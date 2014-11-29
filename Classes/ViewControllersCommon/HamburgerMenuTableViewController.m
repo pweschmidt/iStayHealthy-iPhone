@@ -230,8 +230,6 @@
     mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
     mailController.mailComposeDelegate = self;
     [mailController setSubject:@"iStayHealthy Data (attached)"];
-//    [mailController setMessageBody:msgBody isHTML:NO];
-//    [mailController addAttachmentData:xmlData mimeType:@"text/xml" fileName:tmpXMLFile];
     [self.navigationController presentViewController:mailController animated:YES completion: ^{
      }];
 }

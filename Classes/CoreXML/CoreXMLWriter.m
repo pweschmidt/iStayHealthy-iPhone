@@ -123,9 +123,6 @@ static NSDictionary *ascendingDictionary()
 	NSNumber *number = [ascendingDictionary() objectForKey:firstModel];
 	BOOL ascending = (nil != number && [number boolValue]) ? YES : NO;
     
-    
-    NSLog(@"rootElement %@", rootElement);
-    
 	[self writeXMLElementForDataModel:firstModel
 	                         position:position
 	                         sortTerm:sortTerm
@@ -139,7 +136,6 @@ static NSDictionary *ascendingDictionary()
                           ascending:(BOOL)ascending
                       nextDataModel:(NSString *)nextDataModel
 {
-    NSLog(@"writeXMLElementForDataModel: dataModel=%@ , nextDataModel=%@", dataModel, nextDataModel);
 	[[CoreDataManager sharedInstance] fetchDataForEntityName:dataModel predicate:nil sortTerm:sortTerm ascending:ascending completion: ^(NSArray *array, NSError *error) {
 	    if (nil != array)
 	    {
@@ -159,16 +155,12 @@ static NSDictionary *ascendingDictionary()
 	        NSString *closeElement = [self xmlCloseEnclosingElementForClass:dataModel];
 	        [self.xmlString insertString:closeElement atIndex:updatedPosition];
             
-            NSLog(@"** currentXML String = %@ **", self.xmlString);
-            
-            
 	        updatedPosition += closeElement.length;
 
 
 	        if (nil == nextDataModel) // reached the end
 	        {
 	            [self.xmlString insertString:[self rootElementClose] atIndex:updatedPosition];
-                NSLog(@"** final XML String = %@ **", self.xmlString);
 	            if (nil != self.successBlock)
 	            {
 	                self.successBlock(self.xmlString, nil);
