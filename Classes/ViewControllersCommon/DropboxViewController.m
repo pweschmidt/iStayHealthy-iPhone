@@ -156,18 +156,24 @@
 			switch (indexPath.row)
 			{
 				case 0:
-					[self backup];
-					break;
+				{
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Backup?", nil)
+					                                                message:NSLocalizedString(@"You are about to store your data externally. Click Backup if you want to continue.", nil)
+					                                               delegate:self
+					                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+					                                      otherButtonTitles:NSLocalizedString(@"Backup", nil), nil];
+					[alert show];
+				}
+				break;
 
 				case 1:
 				{
-					if ([[DBSession sharedSession] isLinked])
-					{
-						[self startAnimation:nil];
-						NSString *dataPath = [self dropBoxFileTmpPath];
-						[self.restClient loadFile:kiStayHealthyFilePath
-						                 intoPath:dataPath];
-					}
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Restore?", nil)
+					                                                message:NSLocalizedString(@"You are about to download  data from an external storage. Click Restore if you want to continue.", nil)
+					                                               delegate:self
+					                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+					                                      otherButtonTitles:NSLocalizedString(@"Restore", nil), nil];
+					[alert show];
 				}
 				break;
 			}
@@ -278,6 +284,14 @@
 			ContentContainerViewController *contentController = (ContentContainerViewController *)navController.parentViewController;
 			[[DBSession sharedSession] linkFromController:contentController];
 		}
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"Backup", nil)])
+	{
+		[self backup];
+	}
+	else if ([title isEqualToString:NSLocalizedString(@"Restore", nil)])
+	{
+		[self restoreFromDropbox];
 	}
 }
 
@@ -391,6 +405,17 @@
 	         show];
 		}
 	}];
+}
+
+- (void)restoreFromDropbox
+{
+	if ([[DBSession sharedSession] isLinked])
+	{
+		[self startAnimation:nil];
+		NSString *dataPath = [self dropBoxFileTmpPath];
+		[self.restClient loadFile:kiStayHealthyFilePath
+		                 intoPath:dataPath];
+	}
 }
 
 - (void)restore

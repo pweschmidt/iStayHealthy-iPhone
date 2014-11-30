@@ -363,3 +363,9 @@
 "iCloudLoading" = "If iCloud is On - loading of data can take several minutes.";
 "No Calls possible" = "No Calls Possible";
 "This device doesn't support calls" = "This device doesn't support phone calls";
+"Send data?" = "Email your data?";
+"You are about to email data. Click Yes if you want to continue." = "You are about to email data to someone else. Click Yes if you want to continue.";
+"Restore?" = "Restore?";
+"You are about to download  data from an external storage. Click Restore if you want to continue." = "You are about to download  data from an external storage. Click Restore if you want to continue.";
+"Backup?" = "Backup?";
+"You are about to store your data externally. Click Backup if you want to continue." = "You are about to store your data externally. Click Backup if you want to continue.";

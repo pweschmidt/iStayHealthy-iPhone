@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "PWESToolbarDelegate.h"
-@interface CustomToolbar : UIToolbar
+@interface CustomToolbar : UIToolbar <UIAlertViewDelegate>
 @property (nonatomic, weak) id <PWESToolbarDelegate> customToolbarDelegate;
 @end

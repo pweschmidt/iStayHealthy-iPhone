@@ -369,3 +369,9 @@
 "iCloudLoading" = "Si iCloud es sobre - carga de datos puede tardar varios minutos.";
 "No Calls possible" = "Nada de llamadas compatibles";
 "This device doesn't support calls" = "Este dispositivo no admite llamadas telefónicas";
+"Send data?" = "¿Email sus datos?";
+"You are about to email data. Click Yes if you want to continue." = "Vas a enviar por correo electrónico los datos a otra persona. Haga clic en Sí si desea continuar.";
+"Restore?" = "¿Restaurar?";
+"You are about to download  data from an external storage. Click Restore if you want to continue." = "Vas a descargar datos de un almacenamiento externo. Haga clic en Restaurar si desea continuar.";
+"Backup?" = "¿Copia Seguridad?";
+"You are about to store your data externally. Click Backup if you want to continue." = "Vas a almacenar sus datos externamente. Click Copia Seguridad si desea continuar.";

@@ -688,7 +688,7 @@
 		[request setSortDescriptors:@[descriptor]];
 	}
 
-	[context performBlockAndWait: ^{
+	[context performBlock: ^{
 	    NSError *error = nil;
 	    NSArray *fetchedObjects = nil;
 	    NSUInteger count = [context countForFetchRequest:request error:&error];

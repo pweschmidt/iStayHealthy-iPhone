@@ -92,16 +92,31 @@
 	}
 }
 
-- (void)openMailWithAttachment
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (nil != self.customToolbarDelegate)
+	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+
+	if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
 	{
-		__strong id <PWESToolbarDelegate> strongDelegate = self.customToolbarDelegate;
-		if ([strongDelegate respondsToSelector:@selector(showMailControllerHasAttachment:)])
+		if (nil != self.customToolbarDelegate)
 		{
-			[strongDelegate showMailControllerHasAttachment:YES];
+			__strong id <PWESToolbarDelegate> strongDelegate = self.customToolbarDelegate;
+			if ([strongDelegate respondsToSelector:@selector(showMailControllerHasAttachment:)])
+			{
+				[strongDelegate showMailControllerHasAttachment:YES];
+			}
 		}
 	}
+}
+
+- (void)openMailWithAttachment
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Send data?", nil)
+	                                                message:NSLocalizedString(@"You are about to email data. Click Yes if you want to continue.", nil)
+	                                               delegate:self
+	                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+	                                      otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
+	[alert show];
 }
 
 - (void)openSettings:(id)sender
