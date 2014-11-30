@@ -192,6 +192,10 @@
 	{
 		SeinfeldCalendar *lastEntry = [self.calendars objectAtIndex:0];
 		float score = [lastEntry.score floatValue];
+		if (100 < score)
+		{
+			score = 100;
+		}
 		UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
 		view.tag = kLabelViewTag;
 		view.layer.cornerRadius = 10;
@@ -327,6 +331,10 @@
 
 	double fractionTaken = counter / totalCount;
 	double result = (fractionTaken * fractionMonitored) * 100.0;
+	if (100.0 < result)
+	{
+		result = 100.0;
+	}
 	calendar.score = [NSNumber numberWithDouble:result];
 	calendar.isCompleted = [NSNumber numberWithBool:YES];
 	NSError *error = nil;

@@ -261,6 +261,10 @@
 {
 	SeinfeldCalendar *calendar = (SeinfeldCalendar *)[self.completedCalendars objectAtIndex:indexPath.row];
 	float score = [calendar.score floatValue];
+	if (100 < score)
+	{
+		score = 100;
+	}
 	CGFloat rowHeight = self.tableView.rowHeight - 2;
 	DateView *dateView = [DateView viewWithDate:calendar.endDate frame:CGRectMake(20, 1, rowHeight, rowHeight)];
 	[cell.contentView addSubview:dateView];
