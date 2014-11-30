@@ -39,16 +39,6 @@
 @end
 
 @implementation CoreXMLReader
-+ (id)sharedInstance
-{
-	static CoreXMLReader *reader = nil;
-	static dispatch_once_t token;
-	dispatch_once(&token, ^{
-	    reader = [[CoreXMLReader alloc] init];
-	});
-	return reader;
-}
-
 - (void)parseXMLData:(NSData *)xmlData
      completionBlock:(iStayHealthySuccessBlock)completionBlock
 {

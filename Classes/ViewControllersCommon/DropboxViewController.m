@@ -355,7 +355,7 @@
 	}
 	NSString *dataPath = [self uploadFileTmpPath];
 	[self startAnimation:nil];
-	CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+	CoreXMLWriter *writer = [CoreXMLWriter new];
 	[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
 	    if (nil != xmlString)
 	    {
@@ -397,8 +397,8 @@
 {
 	NSString *dataPath = [self dropBoxFileTmpPath];
 	NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
-
-	[[CoreXMLReader sharedInstance] parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
+	CoreXMLReader *reader = [CoreXMLReader new];
+	[reader parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
 	    if (success)
 	    {
 	        [self stopAnimation:nil];
@@ -635,7 +635,7 @@
 #pragma mark mail stuff
 - (void)startMailController
 {
-	CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+	CoreXMLWriter *writer = [CoreXMLWriter new];
 	NSString *dataPath = [self uploadFileTmpPath];
 
 	[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {

@@ -426,7 +426,7 @@
 	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
 	if (hasAttachment)
 	{
-		CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+		CoreXMLWriter *writer = [CoreXMLWriter new];
 		NSString *dataPath = [self uploadFileTmpPath];
 
 		[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {

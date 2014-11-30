@@ -9,6 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface CoreXMLReader : NSObject <NSXMLParserDelegate>
-+ (id)sharedInstance;
 - (void)parseXMLData:(NSData *)xmlData completionBlock:(iStayHealthySuccessBlock)completionBlock;
 @end
