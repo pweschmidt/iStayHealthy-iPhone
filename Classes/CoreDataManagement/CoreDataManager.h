@@ -25,6 +25,8 @@
 
 - (void)migrateToNewiCloudStore:(iStayHealthySuccessBlock)error;
 
+- (void)parseStorageContainersWithCompletionBlock:(iStayHealthyArrayCompletionBlock)completionBlock;
+
 - (BOOL)setUpStoreAsLocalStoreWithError:(NSError **)error;
 
 - (void)setUpStoreAsiCloudStoreWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock;
@@ -69,8 +71,6 @@
 //- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
 
 - (void)migrateToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock;
-
-- (void)migrateToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
 
 
 @end

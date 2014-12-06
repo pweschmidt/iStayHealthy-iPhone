@@ -35,14 +35,16 @@
     self.window.tintColor = TINTCOLOUR;
     self.containerController = self.window.rootViewController;
     [[CoreDataManager sharedInstance] setUpCoreDataManager];
+    
     [[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
-         if (error)
-         {
+        if (error)
+        {
 #ifdef APPDEBUG
-             NSLog(@"Error occurred with code %ld and message %@", (long) [error code], [error localizedDescription]);
+            NSLog(@"Error occurred with code %ld and message %@", (long) [error code], [error localizedDescription]);
 #endif
-         }
-     }];
+        }
+    }];
+    
     UILocalNotification *notification = [launchOptions objectForKey:
                                          UIApplicationLaunchOptionsLocalNotificationKey];
 

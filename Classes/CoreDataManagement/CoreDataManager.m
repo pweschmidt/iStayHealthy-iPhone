@@ -59,6 +59,23 @@
 	[self unregisterObservers];
 }
 
+- (void)parseStorageContainersWithCompletionBlock:(iStayHealthyArrayCompletionBlock)completionBlock
+{
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    dispatch_async(storeQueue, ^{
+        NSURL *ubiquityURL = [defaultManager URLForUbiquityContainerIdentifier:kTeamId];
+        NSURL *documentURL = [self applicationDocumentsDirectory];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"ubiquityURL is %@", ubiquityURL);
+            NSLog(@"document lib is %@", documentURL);
+        });
+        
+    });
+    
+}
+
+
 - (void)setUpCoreDataManager
 {
 #ifdef APPDEBUG
@@ -785,7 +802,7 @@
 		[request setSortDescriptors:@[descriptor]];
 	}
 
-	[context performBlockAndWait: ^{
+	[context performBlock: ^{
 	    NSError *error = nil;
 	    NSArray *fetchedObjects = nil;
 	    fetchedObjects = [context executeFetchRequest:request error:&error];
@@ -970,54 +987,54 @@
 
 - (void)migrateToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock
 {
-	NSError *saveError = nil;
-	[self saveContextAndWait:&saveError];
-	if (nil != saveError)
-	{
-		if (completionBlock)
-		{
-			completionBlock(NO, saveError);
-		}
-	}
-    NSError *storeError = nil;
-    if (nil == self.persistentStoreCoordinator)
-    {
-        [self setUpCoreDataManager];
-        [self setUpStoreAsLocalStoreWithError:&storeError];
-        BOOL success = (nil == storeError);
-        if (nil != completionBlock)
-        {
-            completionBlock(success, storeError);
-        }
-        return;
-    }
-    
-    [self.defaultContext lock];
-    [self.defaultContext reset];
-    
-    [privateContext performBlockAndWait:^{
-        [privateContext lock];
-        [privateContext reset];
-        NSArray *stores = [self.persistentStoreCoordinator persistentStores];
-        for (NSPersistentStore *store in stores)
-        {
-            [self.persistentStoreCoordinator removePersistentStore:store error:nil];
-        }
-        
-        [privateContext unlock];
-    }];
-    [self.defaultContext unlock];
-    
-    self.defaultContext = nil;
-    privateContext = nil;
-    
-    [self setUpCoreDataManager];
-    [self setUpStoreAsLocalStoreWithError:&storeError];
-    BOOL success = (nil == storeError);
-    if (nil != completionBlock)
-    {
-        completionBlock(success, storeError);
-    }
+//	NSError *saveError = nil;
+//	[self saveContextAndWait:&saveError];
+//	if (nil != saveError)
+//	{
+//		if (completionBlock)
+//		{
+//			completionBlock(NO, saveError);
+//		}
+//	}
+//    NSError *storeError = nil;
+//    if (nil == self.persistentStoreCoordinator)
+//    {
+//        [self setUpCoreDataManager];
+//        [self setUpStoreAsLocalStoreWithError:&storeError];
+//        BOOL success = (nil == storeError);
+//        if (nil != completionBlock)
+//        {
+//            completionBlock(success, storeError);
+//        }
+//        return;
+//    }
+//    
+//    [self.defaultContext lock];
+//    [self.defaultContext reset];
+//    
+//    [privateContext performBlockAndWait:^{
+//        [privateContext lock];
+//        [privateContext reset];
+//        NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+//        for (NSPersistentStore *store in stores)
+//        {
+//            [self.persistentStoreCoordinator removePersistentStore:store error:nil];
+//        }
+//        
+//        [privateContext unlock];
+//    }];
+//    [self.defaultContext unlock];
+//    
+//    self.defaultContext = nil;
+//    privateContext = nil;
+//    
+//    [self setUpCoreDataManager];
+//    [self setUpStoreAsLocalStoreWithError:&storeError];
+//    BOOL success = (nil == storeError);
+//    if (nil != completionBlock)
+//    {
+//        completionBlock(success, storeError);
+//    }
 }
 
 //- (void)migrateLocalStoreToiCloudStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock

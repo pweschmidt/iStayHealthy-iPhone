@@ -69,7 +69,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
     func login(password: String)
     {
         var isValidated: Bool = false
-        var stringHash: UInt = UInt(password.hashValue)
+        var stringHash: UInt = UInt(password.hash)
         
         isValidated = KeychainHandler.compareKeychainValueForMatchingPIN(stringHash)
         if password == kSecretKey
@@ -140,11 +140,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
 
     func textFieldDidEndEditing(textField: UITextField)
     {
-        var password: String? = textField.text
-        if password != nil
-        {
-            self.login(password!)
-        }
+        self.login(textField.text)
         textField.resignFirstResponder()
     }
 
