@@ -592,7 +592,8 @@
 	__block BOOL saveSuccess = [self saveContextAndWait:error];
 	if (saveSuccess)
 	{
-		[[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+        CoreXMLWriter *writer = [CoreXMLWriter new];
+		[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
 		    if (nil != xmlString)
 		    {
                 
@@ -620,7 +621,7 @@
 	NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[path path]])
 	{
-		CoreXMLReader *reader = [CoreXMLReader sharedInstance];
+		CoreXMLReader *reader = [CoreXMLReader new];
 		NSData *data = [[NSData alloc] initWithContentsOfFile:[path path]];
 		if (nil != data)
 		{
@@ -671,10 +672,11 @@
 		}];
 	}
 
+    __strong CoreXMLWriter *writer = [CoreXMLWriter new];
 	void (^savePrivateContext) (void) = ^{
 		[privateContext save:error];
 		dispatch_async(dispatch_get_main_queue(), ^{
-		    [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+		    [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
 		        if (nil != xmlString)
 		        {
 		            NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
@@ -874,7 +876,8 @@
 	{
 		return;
 	}
-	[[CoreXMLReader sharedInstance] parseXMLData:self.importedXMLData completionBlock: ^(BOOL success, NSError *error) {
+    CoreXMLReader *reader = [CoreXMLReader new];
+	[reader parseXMLData:self.importedXMLData completionBlock: ^(BOOL success, NSError *error) {
 	    self.hasDataForImport = NO;
 	    self.importedXMLData = nil;
 	    self.importedFilePath = nil;
@@ -905,7 +908,8 @@
 		NSData *data = [NSData dataWithContentsOfFile:self.importedFilePath];
 		if (nil != data)
 		{
-			[[CoreXMLReader sharedInstance] parseXMLData:data completionBlock: ^(BOOL success, NSError *error) {
+            CoreXMLReader *reader = [CoreXMLReader new];
+			[reader parseXMLData:data completionBlock: ^(BOOL success, NSError *error) {
 			    self.hasDataForImport = NO;
 			    self.importedXMLData = nil;
 			    self.importedFilePath = nil;

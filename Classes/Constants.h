@@ -181,6 +181,8 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kXMLDBVersionString               @"15"
 #define kXMLPreamble                      @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 #define kXMLElementRoot                   @"iStayHealthyRecord"
+#define kiStayHealthyClosingStatement     @"</iStayHealthyRecord>"
+#define kiStayHealthyOpeningStatement     @"<iStayHealthyRecord"
 
 /**
    XML Group elements

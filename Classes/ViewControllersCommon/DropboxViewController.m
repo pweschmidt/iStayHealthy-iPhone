@@ -28,14 +28,14 @@
 @interface DropboxViewController () <DBRestClientDelegate>
 @property (nonatomic, strong) DBRestClient *restClient;
 @property (nonatomic, assign) BOOL dropBoxFileExists;
+@property (nonatomic, assign) BOOL newDropboxFileExists;
 @property (nonatomic, assign) BOOL isConnectAlert;
 @property (nonatomic, assign) BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UILabel *activityLabel;
 @property (nonatomic, assign) BOOL backupStarted;
-@property (nonatomic, strong) NSMutableArray *backupFiles;
-@end
+@property (nonatomic, strong) NSMutableArray *backupFiles;@end
 
 @implementation DropboxViewController
 
@@ -156,21 +156,26 @@
             switch (indexPath.row)
             {
                 case 0:
-                    [self backup];
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Backup?", nil)
+                                                                    message:NSLocalizedString(@"You are about to store your data externally. Click Backup if you want to continue.", nil)
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                                          otherButtonTitles:NSLocalizedString(@"Backup", nil), nil];
+                    [alert show];
+                }
                     break;
-
+                    
                 case 1:
                 {
-                    self.backupStarted = NO;
-                    if ([[DBSession sharedSession] isLinked])
-                    {
-                        [self startAnimation:nil];
-                        NSString *dataPath = [self dropBoxFileTmpPath];
-                        [self.restClient loadFile:kiStayHealthyFilePath
-                                         intoPath:dataPath];
-                    }
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Restore?", nil)
+                                                                    message:NSLocalizedString(@"You are about to download  data from an external storage. Click Restore if you want to continue.", nil)
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                                          otherButtonTitles:NSLocalizedString(@"Restore", nil), nil];
+                    [alert show];
                 }
-                break;
+                    break;
             }
         }
         else
@@ -181,7 +186,7 @@
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
                                                   otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
+            
             [alert show];
         }
     }
@@ -193,7 +198,7 @@
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
                                               otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
+        
         [alert show];
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
@@ -280,6 +285,14 @@
             [[DBSession sharedSession] linkFromController:contentController];
         }
     }
+    else if ([title isEqualToString:NSLocalizedString(@"Backup", nil)])
+    {
+        [self backup];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"Restore", nil)])
+    {
+        [self restoreFromDropbox];
+    }
 }
 
 #pragma mark - DropBox actions
@@ -351,7 +364,7 @@
     }
     NSString *dataPath = [self uploadFileTmpPath];
     [self startAnimation:nil];
-    CoreXMLWriter *writer = [CoreXMLWriter sharedInstance];
+    CoreXMLWriter *writer = [CoreXMLWriter new];
     [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
          if (nil != xmlString)
          {
@@ -389,12 +402,23 @@
      }];
 }
 
+- (void)restoreFromDropbox
+{
+    if ([[DBSession sharedSession] isLinked])
+    {
+        [self startAnimation:nil];
+        NSString *dataPath = [self dropBoxFileTmpPath];
+        [self.restClient loadFile:kiStayHealthyFilePath
+                         intoPath:dataPath];
+    }
+}
+
 - (void)restore
 {
     NSString *dataPath = [self dropBoxFileTmpPath];
     NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
-
-    [[CoreXMLReader sharedInstance] parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
+    CoreXMLReader *reader = [CoreXMLReader new];
+    [reader parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
          if (success)
          {
              [self stopAnimation:nil];

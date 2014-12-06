@@ -58,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,18 +82,23 @@
     switch (indexPath.row)
     {
         case 0:
+            label.text = NSLocalizedString(@"Disclaimer", nil);
+            label.font = [UIFont boldSystemFontOfSize:15];
+            break;
+            
+        case 1:
             label.text = NSLocalizedString(@"General Info", nil);
             break;
-
-        case 1:
+            
+        case 2:
             label.text = NSLocalizedString(@"Testing", nil);
             break;
-
-        case 2:
+            
+        case 3:
             label.text = NSLocalizedString(@"Prevention", nil);
             break;
-
-        case 3:
+            
+        case 4:
             label.text = NSLocalizedString(@"HIV Drugs", nil);
             break;
     }
@@ -110,21 +115,26 @@
     switch (indexPath.row)
     {
         case 0:
+            urlString = @"http://www.istayhealthy.uk.com/get-started/disclaimer";
+            title = NSLocalizedString(@"Disclaimer", nil);
+            break;
+            
+        case 1:
             urlString = [Utilities generalInfoURLFromLocale];
             title = NSLocalizedString(@"General Info", nil);
             break;
-
-        case 1:
+            
+        case 2:
             urlString = [Utilities testingInfoURLFromLocale];
             title = NSLocalizedString(@"Testing", nil);
             break;
-
-        case 2:
+            
+        case 3:
             urlString = [Utilities preventionURLFromLocale];
             title = NSLocalizedString(@"Prevention", nil);
             break;
-
-        case 3:
+            
+        case 4:
             urlString = [Utilities medListURLFromLocale];
             title = NSLocalizedString(@"HIV Drugs", nil);
             break;

@@ -383,4 +383,11 @@
 "Alb." = "Alb.";
 "Bilir." = "Bilir.";
 "GGT" = "GGT";
+"Send data?" = "Email your data?";
+"You are about to email data. Click Yes if you want to continue." = "You are about to email data to someone else. Click Yes if you want to continue.";
+"Restore?" = "Restore?";
+"You are about to download  data from an external storage. Click Restore if you want to continue." = "You are about to download  data from an external storage. Click Restore if you want to continue.";
+"Backup?" = "Backup?";
+"You are about to store your data externally. Click Backup if you want to continue." = "You are about to store your data externally. Click Backup if you want to continue.";
+
 

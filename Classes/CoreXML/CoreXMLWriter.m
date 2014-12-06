@@ -100,15 +100,6 @@ static NSDictionary *ascendingDictionary()
 @end
 
 @implementation CoreXMLWriter
-+ (id)sharedInstance
-{
-	static CoreXMLWriter *reader = nil;
-	static dispatch_once_t token;
-	dispatch_once(&token, ^{
-	    reader = [[CoreXMLWriter alloc] init];
-	});
-	return reader;
-}
 
 - (void)writeWithCompletionBlock:(iStayHealthyXMLBlock)completionBlock
 {

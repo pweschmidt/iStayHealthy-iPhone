@@ -39,15 +39,6 @@
 @end
 
 @implementation CoreXMLReader
-+ (id)sharedInstance
-{
-	static CoreXMLReader *reader = nil;
-	static dispatch_once_t token;
-	dispatch_once(&token, ^{
-	    reader = [[CoreXMLReader alloc] init];
-	});
-	return reader;
-}
 
 - (void)parseXMLData:(NSData *)xmlData
      completionBlock:(iStayHealthySuccessBlock)completionBlock
@@ -78,7 +69,7 @@
 	NSString *xmlString = [[NSString alloc] initWithData:cleanedData encoding:NSUTF8StringEncoding];
 	NSLog(@"**** XMLString \r\n %@ \r\n ****", xmlString);
 #endif
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:cleanedData];
 	parser.delegate = self;
 	[self setUpArrays];
 	iStayHealthyVoidExecutionBlock executionBlock = ^{
@@ -89,20 +80,29 @@
 
 - (NSData *)validXMLDataForData:(NSData *)xmlData error:(NSError **)error
 {
-	NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
-	BOOL isValidXML = [CoreXMLTools validateXMLString:xmlString error:error];
-	NSData *cleanedData = nil;
-
-	if (isValidXML)
-	{
-		return xmlData;
-	}
-	else
-	{
-		NSString *cleanedString = [CoreXMLTools cleanedXMLString:xmlString error:error];
-		isValidXML = [CoreXMLTools validateXMLString:cleanedString error:error];
-		return cleanedData;
-	}
+    NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
+    BOOL isValidXML = [CoreXMLTools validateXMLString:xmlString error:error];
+    
+    if (isValidXML)
+    {
+        return xmlData;
+    }
+    else
+    {
+        NSData *cleanedXMLData = nil;
+        NSString *cleanedString = [CoreXMLTools correctedStringFromString:xmlString];
+        
+        isValidXML = [CoreXMLTools validateXMLString:cleanedString error:error];
+        if (isValidXML)
+        {
+            cleanedXMLData = [cleanedString dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        else
+        {
+            cleanedXMLData = [kXMLPreamble dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        return cleanedXMLData;
+    }
 }
 
 - (void)setUpArrays

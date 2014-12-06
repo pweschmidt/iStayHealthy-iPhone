@@ -10,7 +10,6 @@
 #import "Constants.h"
 
 @interface CoreXMLWriter : NSObject
-+ (id)sharedInstance;
 
 - (void)writeWithCompletionBlock:(iStayHealthyXMLBlock)completionBlock;
 
