@@ -10,13 +10,17 @@ import Foundation
 import CoreData
 
 let sqliteStoreName = "PWESiStayHealthy.sqlite"
+let backupFileName = "iStayHealthyBackup.xml"
+let jsonBackUpFile = "PWESHealth.json"
+let oldStoreName = "iStayHealthy.sqlite"
 
 class PWESPersistentStoreManager : NSObject
 {
     let persistentStoreCoordinator: NSPersistentStoreCoordinator
     let hasLoadedStore: Bool
 
-    class var defaultManager : PWESPersistentStoreManager{
+    class var defaultManager : PWESPersistentStoreManager
+    {
         struct Static
         {
             static let instance : PWESPersistentStoreManager = PWESPersistentStoreManager()
