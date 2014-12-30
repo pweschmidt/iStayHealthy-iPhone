@@ -7,8 +7,6 @@
 //
 
 #import "CentralAppDelegate.h"
-//#import "ContainerViewController.h"
-//#import "ContainerViewController_iPad.h"
 #import "Utilities.h"
 #import "CoreDataManager.h"
 #import "UIFont+Standard.h"
@@ -62,6 +60,24 @@
                                                 appSecret:kDropboxSecretKey
                                                      root:root];
     [DBSession setSharedSession:session];
+    
+    PWESPersistentStoreManager *defaultManager = [PWESPersistentStoreManager defaultManager];
+    StorageType storageType = [defaultManager findStorageType];
+    switch (storageType)
+    {
+        case hasNewDataBaseFile:
+            NSLog(@"It appears we have a new database file. No need to migrate then.\r\n");
+            break;
+        case hasOldDataBaseAndBackupFile:
+            NSLog(@"We have old database file AND backup file.\r\n");
+            break;
+        case hasOldDataBaseFileNoBackupFile:
+            NSLog(@"We have old database file but NO backup file. \r\n");
+            break;
+        case isNewUser:
+            NSLog(@"Looks like this is a new user");
+            break;
+    }
     return YES;
 }
 

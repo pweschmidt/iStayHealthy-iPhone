@@ -389,5 +389,5 @@
 "You are about to download  data from an external storage. Click Restore if you want to continue." = "You are about to download  data from an external storage. Click Restore if you want to continue.";
 "Backup?" = "Backup?";
 "You are about to store your data externally. Click Backup if you want to continue." = "You are about to store your data externally. Click Backup if you want to continue.";
-
+"HouseKeeping" = "iStayHealthy needs to do some housekeeping in the way your data are stored. This is to avoid any future data loss e.g. due to changes to iCloud.";
 

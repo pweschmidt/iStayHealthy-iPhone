@@ -395,4 +395,5 @@
 "You are about to download  data from an external storage. Click Restore if you want to continue." = "Vas a descargar datos de un almacenamiento externo. Haga clic en Restaurar si desea continuar.";
 "Backup?" = "¿Copia Seguridad?";
 "You are about to store your data externally. Click Backup if you want to continue." = "Vas a almacenar sus datos externamente. Click Copia Seguridad si desea continuar.";
+"HouseKeeping" = "iStayHealthy is doing some housekeeping in the way your data are stored on your device. This is to avoid any future data loss.";
 

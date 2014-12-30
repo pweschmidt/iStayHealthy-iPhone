@@ -395,4 +395,5 @@
 "You are about to download  data from an external storage. Click Restore if you want to continue." = "Sollen die Daten von Dropbox runtergeladen werden? Wiederherstellen auswählen um fortzufahren.";
 "Backup?" = "Daten Sichern?";
 "You are about to store your data externally. Click Backup if you want to continue." = "Sollen die Daten extern auf Dropbox gespeichert werden? Sichern auswählen um fortzufahren.";
+"HouseKeeping" = "iStayHealthy muss ein wenig aufräumen um zukünftigen Datenverlust (z.B. durch iCloud) zu vermeiden.";
 

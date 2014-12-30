@@ -68,27 +68,68 @@ class PWESPersistentStoreManager : NSObject
     
     func hasBackupFile() -> Bool
     {
-        let searchResult = foundFileInDocumentDirectory(backupFileName)
-        let found:Bool = searchResult.0
-        return found
+        var path: String?
+        path = filePathInDocumentDirectory(backupFileName)
+        if nil != path
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    func hasNewDatabase() -> Bool
+    {
+        var path: String?
+        var libraryPath: NSURL = appLibraryDirectory()
+        var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
+        if nil != newPath.path
+        {
+            if self.fileManager.fileExistsAtPath(newPath.path!)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func findStorageType() -> Int
+    {
+        if hasNewDatabase()
+        {
+            return 3
+        }
+        let hasBackup = hasBackupFile()
+        var result: Int = hasBackup ? 2 : 1
+        
+        var oldPath: String? = pathOldDataStore()
+        if nil != oldPath
+        {
+            return result
+        }
+        else
+        {
+            var paths: NSMutableArray = NSMutableArray()
+            searchPathForOldDataStore(oldStoreName, foundPaths: paths)
+            if 0 < paths.count
+            {
+                return result
+            }
+        }
+        return 0
     }
     
     
     func pathOldDataStore() -> String?
     {
-        let searchResult = foundFileInDocumentDirectory(oldStoreName)
-        let found:Bool = searchResult.0
         var path: String?
-        if found
-        {
-            return searchResult.1
-        }
-        else
-        {
-            
-        }
+        path = filePathInDocumentDirectory(oldStoreName)
         return path
     }
+    
+    
     
     
     func searchPathForOldDataStore(path: String, foundPaths:NSMutableArray)
@@ -118,21 +159,20 @@ class PWESPersistentStoreManager : NSObject
     }
     
     
-    func foundFileInDocumentDirectory(filename: String) -> (Bool, String?)
+    func filePathInDocumentDirectory(filename: String) -> String?
     {
-        var found = false
         var path: String?
-        
         var docPathURL: NSURL = appDocumentDirectory()
         var backupPath = docPathURL.URLByAppendingPathComponent(filename)
-        path = backupPath.path
-        if nil != path
+        if nil != backupPath.path
         {
-            found = self.fileManager.fileExistsAtPath(path!)
+            if self.fileManager.fileExistsAtPath(backupPath.path!)
+            {
+                path = backupPath.path
+            }
         }
-        return (found, path)
+        return path
     }
-    
     
     func appDocumentDirectory() -> NSURL
     {

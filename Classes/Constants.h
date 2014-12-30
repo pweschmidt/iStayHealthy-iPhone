@@ -39,6 +39,13 @@ typedef NS_ENUM (int, ResultsType)
     LiverResultsType
 };
 
+typedef NS_ENUM (NSInteger, StorageType)
+{
+    isNewUser = 0,
+    hasOldDataBaseFileNoBackupFile = 1,
+    hasOldDataBaseAndBackupFile = 2,
+    hasNewDataBaseFile = 3
+};
 
 typedef NS_ENUM (int, InputType)
 {
@@ -132,6 +139,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kFaultyDataSource                 @"iStayHealthyNoiCloud.sqlite"
 #define kUbiquitousKeyPath                @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
 #define kTeamId                           @"5Y4HL833A4.com.pweschmidt.iStayHealthy"
+#define kHouseKeeping                     @"HouseKeeping"
 /**
    App and Dropbox app definitions
  */
