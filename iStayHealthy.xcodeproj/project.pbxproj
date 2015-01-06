@@ -108,6 +108,7 @@
 		C45138F01A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45138EF1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m */; };
 		C4547DDE19B9FF4B006A868C /* PWESBloodPressureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
+		C458E3121A5C3F6D00163204 /* PWESCoreXMLImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C458E3111A5C3F6D00163204 /* PWESCoreXMLImporter.swift */; };
 		C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E417EEE3BA004E13C7 /* DateView.m */; };
 		C45A98E817EEFCE2004E13C7 /* ResultsView_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45A98E717EEFCE2004E13C7 /* ResultsView_iPhone.m */; };
 		C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45C27BA17DB3DC2001F6831 /* BaseEditTableViewController.m */; };
@@ -416,6 +417,7 @@
 		C4547DDC19B9FF4B006A868C /* PWESBloodPressureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESBloodPressureCell.h; path = TableCells/PWESBloodPressureCell.h; sourceTree = "<group>"; };
 		C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESBloodPressureCell.m; path = TableCells/PWESBloodPressureCell.m; sourceTree = "<group>"; };
 		C4574AE214939D2300793164 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
+		C458E3111A5C3F6D00163204 /* PWESCoreXMLImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCoreXMLImporter.swift; path = iOS8/DataManagement/PWESCoreXMLImporter.swift; sourceTree = "<group>"; };
 		C45A98E317EEE3BA004E13C7 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateView.h; path = Views/DateView.h; sourceTree = "<group>"; };
 		C45A98E417EEE3BA004E13C7 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateView.m; path = Views/DateView.m; sourceTree = "<group>"; };
 		C45A98E617EEFCE2004E13C7 /* ResultsView_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsView_iPhone.h; path = Views/ResultsView_iPhone.h; sourceTree = "<group>"; };
@@ -701,6 +703,7 @@
 			children = (
 				0B36924C19C491C600C269AD /* PWESPersistentStoreManager.swift */,
 				0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */,
+				C458E3111A5C3F6D00163204 /* PWESCoreXMLImporter.swift */,
 			);
 			name = DataManagement;
 			sourceTree = "<group>";
@@ -1429,6 +1432,7 @@
 				C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */,
 				C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */,
 				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
+				C458E3121A5C3F6D00163204 /* PWESCoreXMLImporter.swift in Sources */,
 				C45C27CD17DB5A9D001F6831 /* EditProceduresTableViewController.m in Sources */,
 				0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */,
 				C4A6E21D17C7770C0020FC2A /* Menus.m in Sources */,
