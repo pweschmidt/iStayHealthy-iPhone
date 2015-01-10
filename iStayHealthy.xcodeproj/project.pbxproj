@@ -17,6 +17,10 @@
 		0B1276BC198AD05B00D389FA /* IconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1276BB198AD05B00D389FA /* IconsTableViewController.m */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
+		0B2DAF821A6141C900F9F317 /* XMLImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DAF811A6141C900F9F317 /* XMLImporterTests.swift */; };
+		0B2DAF851A614D1600F9F317 /* PWESDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DAF841A614D1600F9F317 /* PWESDefines.swift */; };
+		0B2DAF861A61550F00F9F317 /* PWESCoreXMLImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C458E3111A5C3F6D00163204 /* PWESCoreXMLImporter.swift */; };
+		0B2DAF871A61552300F9F317 /* PWESDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DAF841A614D1600F9F317 /* PWESDefines.swift */; };
 		0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */; };
 		0B2DF7C019684C1C00BCB111 /* PWESDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */; };
 		0B2EDE0A197A919800B72109 /* Booster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDE0C197A919800B72109 /* Booster.plist */; };
@@ -241,6 +245,9 @@
 		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
 		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
 		0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditCurrentHIVMedsTableViewController.m; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.m; sourceTree = "<group>"; };
+		0B2DAF801A6141C900F9F317 /* iStayHealthy Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iStayHealthy Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		0B2DAF811A6141C900F9F317 /* XMLImporterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLImporterTests.swift; sourceTree = "<group>"; };
+		0B2DAF841A614D1600F9F317 /* PWESDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDefines.swift; path = iOS8/Utilities/PWESDefines.swift; sourceTree = "<group>"; };
 		0B2DF7BA196827FE00BCB111 /* SoundSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundSelector.h; path = ViewControllersiPhone/SoundSelector.h; sourceTree = "<group>"; };
 		0B2DF7BB19682AD600BCB111 /* SoundSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundSelectionTableViewController.h; path = ViewControllersiPhone/SoundSelectionTableViewController.h; sourceTree = "<group>"; };
 		0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundSelectionTableViewController.m; path = ViewControllersiPhone/SoundSelectionTableViewController.m; sourceTree = "<group>"; };
@@ -698,6 +705,14 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		0B2DAF831A614CD900F9F317 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0B2DAF841A614D1600F9F317 /* PWESDefines.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		0B36924619C4853900C269AD /* DataManagement */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +764,8 @@
 				0BB56691191E132F00731739 /* Supporting Files */,
 				0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */,
 				0BB02F16198E4205003B5959 /* XMLTests.m */,
+				0B2DAF811A6141C900F9F317 /* XMLImporterTests.swift */,
+				0B2DAF801A6141C900F9F317 /* iStayHealthy Tests-Bridging-Header.h */,
 			);
 			path = "iStayHealthy Tests";
 			sourceTree = "<group>";
@@ -1260,6 +1277,7 @@
 		C4E2FA5019B0D9AA00D446DF /* iOS8 */ = {
 			isa = PBXGroup;
 			children = (
+				0B2DAF831A614CD900F9F317 /* Utilities */,
 				0BED04911A0525D80033942A /* HealthKit */,
 				0BED04901A0525CD0033942A /* Push Notification */,
 				0B36926D19C491ED00C269AD /* UserInterface */,
@@ -1402,6 +1420,9 @@
 				0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */,
 				0BB02F17198E4205003B5959 /* XMLTests.m in Sources */,
 				0BB02F1B198E433B003B5959 /* CoreXMLTools.m in Sources */,
+				0B2DAF861A61550F00F9F317 /* PWESCoreXMLImporter.swift in Sources */,
+				0B2DAF821A6141C900F9F317 /* XMLImporterTests.swift in Sources */,
+				0B2DAF871A61552300F9F317 /* PWESDefines.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1510,6 +1531,7 @@
 				0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */,
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
+				0B2DAF851A614D1600F9F317 /* PWESDefines.swift in Sources */,
 				0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */,
 				0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */,
 				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
@@ -1738,7 +1760,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "iStayHealthy Tests/iStayHealthy Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iStayHealthy Tests/iStayHealthy Tests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1777,7 +1802,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "iStayHealthy Tests/iStayHealthy Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iStayHealthy Tests/iStayHealthy Tests-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;
@@ -1817,7 +1844,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "iStayHealthy Tests/iStayHealthy Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iStayHealthy Tests/iStayHealthy Tests-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;

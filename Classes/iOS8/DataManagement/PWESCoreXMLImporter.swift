@@ -20,9 +20,9 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     var clinics:NSMutableArray = NSMutableArray()
     var missedMeds:NSMutableArray = NSMutableArray()
     
-    var completion: (Bool, NSMutableDictionary -> ())?
+    var completion: PWESSuccessWithDictionaryClosure?
     
-    func openImporterWithData(xmlData: NSData, completionBlock: (Bool, NSMutableDictionary -> ()))
+    func importWithData(xmlData: NSData, completionBlock: PWESSuccessWithDictionaryClosure)
     {
         self.completion = completionBlock
         let xmlParser: NSXMLParser = NSXMLParser(data: xmlData)
@@ -47,6 +47,7 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
         self.records.setValue(self.missedMeds, forKey: "MissedMedications")
         if nil != self.completion
         {
+            self.completion!(success: true, dictionary: self.records, error: nil)
         }
     }
     
@@ -89,7 +90,10 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     func parser(parser: NSXMLParser!, parseErrorOccurred parseError: NSError!)
     {
-        let result: Bool = false
+        if nil != self.completion
+        {
+            self.completion!(success: false, dictionary: nil, error: parseError)
+        }
     }
     
 }
