@@ -26,10 +26,9 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     {
         self.completion = completionBlock
         let xmlParser: NSXMLParser = NSXMLParser(data: xmlData)
+        xmlParser.delegate = self
         xmlParser.parse()
     }
-    
-    
     
     func parserDidStartDocument(parser: NSXMLParser!)
     {

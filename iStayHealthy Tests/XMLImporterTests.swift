@@ -12,6 +12,7 @@ import XCTest
 class XMLImporterTests: XCTestCase {
 
     var normalXML: String?
+    var normalXMLData: NSData?
     
     override func setUp()
     {
@@ -27,6 +28,7 @@ class XMLImporterTests: XCTestCase {
                 println("XML \(parsedString)")
             }
             normalXML = parsedString
+            normalXMLData = normalData
         }
     }
     
@@ -37,7 +39,36 @@ class XMLImporterTests: XCTestCase {
 
     func testXMLImporter()
     {
+        XCTAssertNotNil(self.normalXMLData, "The XML data should not be nil")
+        if nil == self.normalXMLData
+        {
+            return
+        }
+        
         var importer: PWESCoreXMLImporter = PWESCoreXMLImporter()
+        importer.importWithData(normalXMLData!, completionBlock: { (success, dictionary, error) -> Void in
+            if success
+            {
+                println("We got SUCCESS")
+            }
+            else
+            {
+                println("We got a FAILURE")
+            }
+            
+            if nil != dictionary
+            {
+                let dict: NSDictionary = dictionary!
+                var result: NSMutableArray? = dict.valueForKey("Results") as? NSMutableArray
+                if nil != result
+                {
+                    let count: Int = result!.count
+                    XCTAssertTrue(0 < count, "We expected more than 0 results")
+                    println("We got a results array back and it has \(count) entries")
+                }
+            }
+            
+        })
        XCTAssert(true, "Pass")
     }
 
