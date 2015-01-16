@@ -33,16 +33,16 @@
     self.window.tintColor = TINTCOLOUR;
     self.containerController = self.window.rootViewController;
     [[CoreDataManager sharedInstance] setUpCoreDataManager];
-    
+
     [[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
-        if (error)
-        {
+         if (error)
+         {
 #ifdef APPDEBUG
-            NSLog(@"Error occurred with code %ld and message %@", (long) [error code], [error localizedDescription]);
+             NSLog(@"Error occurred with code %ld and message %@", (long) [error code], [error localizedDescription]);
 #endif
-        }
-    }];
-    
+         }
+     }];
+
     UILocalNotification *notification = [launchOptions objectForKey:
                                          UIApplicationLaunchOptionsLocalNotificationKey];
 
@@ -60,7 +60,7 @@
                                                 appSecret:kDropboxSecretKey
                                                      root:root];
     [DBSession setSharedSession:session];
-    
+
     PWESPersistentStoreManager *defaultManager = [PWESPersistentStoreManager defaultManager];
     StorageType storageType = [defaultManager findStorageType];
     switch (storageType)
@@ -101,6 +101,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     TokenCertificate *certificate = [TokenCertificate sharedToken];
+
     certificate.deviceToken = deviceToken;
 }
 
@@ -133,7 +134,7 @@
 
     if (isPasswordEnabled)
     {
-            //        [self.containerController transitionToLoginController:self];
+        //        [self.containerController transitionToLoginController:self];
     }
 }
 
@@ -167,6 +168,10 @@
     {
         return [self handleFileImport:url];
     }
+    else
+    {
+        [self handleImportFromLinkURL:url];
+    }
     return YES;
 }
 
@@ -191,6 +196,12 @@
         return NO;
     }
     return YES;
+}
+
+- (void)handleImportFromLinkURL:(NSURL *)url
+{
+
+    NSLog(@"We handle the following URL: %@", url);
 }
 
 - (void)showReminder:(NSString *)text
