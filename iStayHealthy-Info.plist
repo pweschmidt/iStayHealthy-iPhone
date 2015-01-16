@@ -61,7 +61,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-sekt4gbt7526j0y</string>
-				<string>com.pweschmidt.iStayHealthy</string>
+				<string>iStayHealthy</string>
 			</array>
 		</dict>
 	</array>
