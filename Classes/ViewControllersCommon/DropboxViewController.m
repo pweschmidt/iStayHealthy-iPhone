@@ -415,16 +415,6 @@
     }
 }
 
-- (void)restoreFromDropbox
-{
-	if ([[DBSession sharedSession] isLinked])
-	{
-		[self startAnimation:nil];
-		NSString *dataPath = [self dropBoxFileTmpPath];
-		[self.restClient loadFile:kiStayHealthyFilePath
-		                 intoPath:dataPath];
-	}
-}
 
 - (void)restore
 {
@@ -669,26 +659,6 @@
     }
     return filePath;
     
-}
-
-- (NSString *)backedUpFileName
-{
-	NSDateFormatter *formatter = [NSDateFormatter new];
-	formatter.dateFormat = kBackupDateFormat;
-	NSLocale *enforcedPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-	formatter.locale = enforcedPOSIXLocale;
-	NSDate *date = [NSDate date];
-	NSString *formattedDate = [formatter stringFromDate:date];
-	NSString *filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@.isth", kiStayHealthyPath, formattedDate];
-#ifdef APPDEBUG
-	NSLog(@"The backup file will be called %@", filePath);
-#endif
-	if ([self.backupFiles containsObject:filePath])
-	{
-		NSString *uuid = [[NSUUID UUID] UUIDString];
-		filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@_%@.isth", kiStayHealthyPath, formattedDate, uuid];
-	}
-	return filePath;
 }
 
 @end
