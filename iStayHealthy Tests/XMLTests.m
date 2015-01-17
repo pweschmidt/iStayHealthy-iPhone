@@ -54,6 +54,17 @@
 	XCTAssertTrue([cleanedString isEqualToString:self.normalXML], @"The cleaned string should be identical to the normal string");
 }
 
+- (void)testCorrectXMLStringToNormalXML
+{
+	NSString *corrected = [CoreXMLTools correctedStringFromString:self.conflictedXML];
+	XCTAssertNotNil(corrected, @"We should get back a valid not nil string");
+
+	NSError *error = nil;
+	BOOL isValid = [CoreXMLTools validateXMLString:corrected error:&error];
+	XCTAssertTrue(isValid, @"The cleaned string should be a valid XML string");
+	XCTAssertNil(error, @"the error should still be nil");
+}
+
 - (void)testCleanXMLStringForConflictedXML
 {
 	NSError *error = nil;

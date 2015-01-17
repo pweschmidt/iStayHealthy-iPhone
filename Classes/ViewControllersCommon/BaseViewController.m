@@ -437,67 +437,67 @@
 
 - (void)showMailControllerHasAttachment:(BOOL)hasAttachment
 {
-    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+	MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
 
-    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+	mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
 
-    NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
-    mailController.mailComposeDelegate = self;
-    [mailController setToRecipients:toRecipient];
-    [mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
-    if (hasAttachment)
-    {
-        CoreXMLWriter *writer = [CoreXMLWriter new];
-        NSString *dataPath = [self uploadFileTmpPath];
+	NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
+	mailController.mailComposeDelegate = self;
+	[mailController setToRecipients:toRecipient];
+	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
+	if (hasAttachment)
+	{
+		CoreXMLWriter *writer = [CoreXMLWriter new];
+		NSString *dataPath = [self uploadFileTmpPath];
 
-        [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-             if (nil != xmlString)
-             {
-                 NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-                 NSError *writeError = nil;
-                 [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
-                 if (writeError)
-                 {
-                     [[[UIAlertView alloc]
-                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                      show];
-                 }
-                 else
-                 {
-                     MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+		[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+		    if (nil != xmlString)
+		    {
+		        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+		        NSError *writeError = nil;
+		        [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
+		        if (writeError)
+		        {
+		            [[[UIAlertView alloc]
+		              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+		             show];
+				}
+		        else
+		        {
+		            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
 
-                     mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-                     mailController.mailComposeDelegate = self;
-                     [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
-                     [mailController setSubject:@"iStayHealthy Data (attached)"];
-                     [self.navigationController presentViewController:mailController animated:YES completion:nil];
-                 }
-             }
-         }];
-        //		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
-        //		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
-        //		    dispatch_async(dispatch_get_main_queue(), ^{
-        //		        if (nil != csvString)
-        //		        {
-        //		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-        //		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
-        //				}
-        //		        else
-        //		        {
-        //		            [[[UIAlertView alloc]
-        //		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
-        //		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-        //		             show];
-        //				}
-        //		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-        //			});
-        //		}];
-    }
-    else
-    {
-        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-    }
+		            mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+		            mailController.mailComposeDelegate = self;
+		            [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
+		            [mailController setSubject:@"iStayHealthy Data (attached)"];
+		            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+				}
+			}
+		}];
+		//		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
+		//		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
+		//		    dispatch_async(dispatch_get_main_queue(), ^{
+		//		        if (nil != csvString)
+		//		        {
+		//		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
+		//		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
+		//				}
+		//		        else
+		//		        {
+		//		            [[[UIAlertView alloc]
+		//		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
+		//		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+		//		             show];
+		//				}
+		//		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
+		//			});
+		//		}];
+	}
+	else
+	{
+		[self.navigationController presentViewController:mailController animated:YES completion:nil];
+	}
 }
 
 - (NSString *)uploadFileTmpPath

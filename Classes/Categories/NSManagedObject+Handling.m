@@ -22,8 +22,13 @@
 	}
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	dateFormatter.dateFormat = @"dd-MMM-yy HH:mm:ss";
+	NSDate *formattedDate = [dateFormatter dateFromString:valueString];
+	if (nil == formattedDate || NULL == formattedDate || [NSNull class] == formattedDate)
+	{
+		formattedDate = [NSDate date];
+	}
 
-	return [dateFormatter dateFromString:valueString];
+	return formattedDate;
 }
 
 - (NSNumber *)numberFromValue:(id)value

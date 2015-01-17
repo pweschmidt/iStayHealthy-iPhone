@@ -89,7 +89,7 @@ static NSDateFormatter *shortResultsDate()
         inContext:(CGContextRef)context
 {
 	NSDate *firstDate = self.ntuple.firstResultsDate;
-	if (nil == firstDate)
+	if (nil == firstDate || NULL == firstDate || [NSNull class] == firstDate)
 	{
 		return;
 	}
@@ -97,7 +97,10 @@ static NSDateFormatter *shortResultsDate()
 	if (1 < self.ntuple.maxNumberOfResults)
 	{
 		NSDate *lastDate = self.ntuple.lastResultsDate;
-		[self drawDate:context date:lastDate xValue:xEnd yValue:self.plotLayer.frame.size.height - 5];
+		if (nil != lastDate && NULL != lastDate && [NSNull class] == lastDate)
+		{
+			[self drawDate:context date:lastDate xValue:xEnd yValue:self.plotLayer.frame.size.height - 5];
+		}
 	}
 }
 

@@ -12,38 +12,38 @@
 @implementation NSDate (Extras)
 - (NSString *)stringFromCustomDate
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = kDefaultDateFormatting;
-    return [formatter stringFromDate:self];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = kDefaultDateFormatting;
+	return [formatter stringFromDate:self];
 }
 
 - (NSDate *)dateFromCustomDateString:(NSString *)dateString
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = kDefaultDateFormatting;
-    return [formatter dateFromString:dateString];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = kDefaultDateFormatting;
+	return [formatter dateFromString:dateString];
 }
 
 - (NSDate *)dateByAddingDays:(NSUInteger)days
 {
-    return [self dateByAddingTimeInterval:3600 * 24 * days];
+	return [self dateByAddingTimeInterval:3600 * 24 * days];
 }
 
 - (NSUInteger)timeDifferenceInDays:(NSDate *)comparedDate
 {
-    NSTimeInterval thisTimeInterval = [self timeIntervalSince1970];
-    NSTimeInterval comparedTimeInterval = [comparedDate timeIntervalSince1970];
-    NSTimeInterval difference = 0.0;
-    if (comparedTimeInterval > thisTimeInterval)
-    {
-        difference = comparedTimeInterval - thisTimeInterval;
-    }
-    else
-    {
-        difference = thisTimeInterval - comparedTimeInterval;
-    }
-    NSTimeInterval diffInDays = difference / (3600 * 24);
-    return round(diffInDays);
+	NSTimeInterval thisTimeInterval = [self timeIntervalSince1970];
+	NSTimeInterval comparedTimeInterval = [comparedDate timeIntervalSince1970];
+	NSTimeInterval difference = 0.0;
+	if (comparedTimeInterval > thisTimeInterval)
+	{
+		difference = comparedTimeInterval - thisTimeInterval;
+	}
+	else
+	{
+		difference = thisTimeInterval - comparedTimeInterval;
+	}
+	NSTimeInterval diffInDays = difference / (3600 * 24);
+	return round(diffInDays);
 }
 
 - (NSUInteger)daysInMonth
@@ -66,6 +66,5 @@
     
     return [calendar dateFromComponents:components];
 }
-
 
 @end

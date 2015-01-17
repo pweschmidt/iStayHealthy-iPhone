@@ -18,6 +18,10 @@
 	}
 	self.uID = [self stringFromValue:[attributes objectForKey:kUIDLowerCase]];
 	self.score = [self numberFromValue:[attributes objectForKey:kScore]];
+	if (nil != self.score && 100 < self.score.floatValue)
+	{
+		self.score = [NSNumber numberWithFloat:100];
+	}
 	self.startDate = [self dateFromValue:[attributes objectForKey:kStartDateLowerCase]];
 	self.endDate = [self dateFromValue:[attributes objectForKey:kEndDateLowerCase]];
 	self.isCompleted = [self numberFromValue:[attributes objectForKey:kIsCompleted]];

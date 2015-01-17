@@ -12,7 +12,6 @@
 #import "CoreXMLReader.h"
 #import "iStayHealthyRecord+Handling.h"
 #import "CoreXMLWriter.h"
-#import "CoreXMLReader.h"
 #import "AppSettings.h"
 
 @interface CoreDataManager ()
@@ -356,9 +355,9 @@
 		return;
 	}
 	NSPersistentStoreUbiquitousTransitionType transitionType = [[userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
-
+#ifdef APPDEBUG
 	NSLog(@"transition type %ld", (long)transitionType);
-
+#endif
 	NSError *error = nil;
 	[self saveContextAndWait:&error];
 	if (nil == error)
@@ -380,8 +379,9 @@
 	}
 
 	NSPersistentStoreUbiquitousTransitionType transitionType = [[userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
+#ifdef APPDEBUG
 	NSLog(@"transition type %ld", (long)transitionType);
-
+#endif
 	if (NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted == transitionType)
 	{
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -692,22 +692,22 @@
     __strong CoreXMLWriter *writer = [CoreXMLWriter new];
 	void (^savePrivateContext) (void) = ^{
 		[privateContext save:error];
-		dispatch_async(dispatch_get_main_queue(), ^{
-		    [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-		        if (nil != xmlString)
-		        {
-		            NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-		            NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
-		            NSFileManager *manager = [NSFileManager defaultManager];
-		            if ([manager fileExistsAtPath:[path path]])
-		            {
-		                NSError *removeError = nil;
-		                [manager removeItemAtURL:path error:&removeError];
-					}
-		            [xmlData writeToURL:path atomically:YES];
-				}
-			}];
-		});
+//		dispatch_async(dispatch_get_main_queue(), ^{
+//		    [[CoreXMLWriter sharedInstance] writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+//		        if (nil != xmlString)
+//		        {
+//		            NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+//		            NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
+//		            NSFileManager *manager = [NSFileManager defaultManager];
+//		            if ([manager fileExistsAtPath:[path path]])
+//		            {
+//		                NSError *removeError = nil;
+//		                [manager removeItemAtURL:path error:&removeError];
+//					}
+//		            [xmlData writeToURL:path atomically:YES];
+//				}
+//			}];
+//		});
 	};
 
 	if ([privateContext hasChanges])
@@ -805,17 +805,35 @@
 	[context performBlock: ^{
 	    NSError *error = nil;
 	    NSArray *fetchedObjects = nil;
-	    fetchedObjects = [context executeFetchRequest:request error:&error];
-	    dispatch_async(dispatch_get_main_queue(), ^{
-	        if (nil == fetchedObjects)
-	        {
-	            completion(nil, error);
-			}
-	        else
-	        {
-	            completion(fetchedObjects, nil);
-			}
-		});
+	    NSUInteger count = [context countForFetchRequest:request error:&error];
+	    if (0 == count || NSNotFound == count)
+	    {
+	        fetchedObjects = [NSArray array];
+	        dispatch_async(dispatch_get_main_queue(), ^{
+	            if (nil == fetchedObjects)
+	            {
+	                completion(nil, error);
+				}
+	            else
+	            {
+	                completion(fetchedObjects, nil);
+				}
+			});
+		}
+	    else
+	    {
+	        fetchedObjects = [context executeFetchRequest:request error:&error];
+	        dispatch_async(dispatch_get_main_queue(), ^{
+	            if (nil == fetchedObjects)
+	            {
+	                completion(nil, error);
+				}
+	            else
+	            {
+	                completion(fetchedObjects, nil);
+				}
+			});
+		}
 	}];
 }
 
@@ -919,13 +937,13 @@
 	{
 		return;
 	}
+	CoreXMLReader *reader = [CoreXMLReader new];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	if ([fileManager fileExistsAtPath:self.importedFilePath])
 	{
 		NSData *data = [NSData dataWithContentsOfFile:self.importedFilePath];
 		if (nil != data)
 		{
-            CoreXMLReader *reader = [CoreXMLReader new];
 			[reader parseXMLData:data completionBlock: ^(BOOL success, NSError *error) {
 			    self.hasDataForImport = NO;
 			    self.importedXMLData = nil;

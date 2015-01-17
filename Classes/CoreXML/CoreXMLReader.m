@@ -157,6 +157,9 @@
 	{
 		elementName = qName;
 	}
+	if ([elementName isEqualToString:kiStayHealthyRecord])
+	{
+	}
 	if ([elementName isEqualToString:kResult])
 	{
 		BOOL exists = [self entryExistsForEntityName:kResults attributes:attributeDict];
@@ -253,7 +256,11 @@
                       attributes:(NSDictionary *)attributes
 {
 	__block BOOL exists = NO;
-	if ([entityName isEqualToString:kResults])
+	if ([entityName isEqualToString:kiStayHealthyRecord] && self.masterRecord)
+	{
+		exists = [self.masterRecord isEqualToDictionary:attributes];
+	}
+	else if ([entityName isEqualToString:kResults])
 	{
 		[self.results enumerateObjectsUsingBlock: ^(Results *obj, NSUInteger idx, BOOL *stop) {
 		    exists = [obj isEqualToDictionary:attributes];
@@ -339,6 +346,12 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
 	///TODO handle error apart from writing a DEBUG msg
+	if (self.successBlock)
+	{
+		iStayHealthySuccessBlock localBlock = self.successBlock;
+		localBlock(NO, parseError);
+	}
+	self.successBlock = nil;
 #ifdef APPDEBUG
 	NSLog(@"Error occurred while parsing XML file %@", [parseError localizedDescription]);
 #endif
@@ -352,45 +365,45 @@
 	    {
 	        self.masterRecord = record;
 		}
-	    [dataManager fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-	        if (nil != array)
+	    [dataManager fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *results, NSError *resultsError) {
+	        if (nil != results)
 	        {
-	            self.results = array;
+	            self.results = results;
 			}
-	        [dataManager fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-	            if (nil != array)
+	        [dataManager fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *meds, NSError *medError) {
+	            if (nil != meds)
 	            {
-	                self.medications = array;
+	                self.medications = meds;
 				}
-	            [dataManager fetchDataForEntityName:kOtherMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-	                if (nil != array)
+	            [dataManager fetchDataForEntityName:kOtherMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *other, NSError *otherError) {
+	                if (nil != other)
 	                {
-	                    self.other = array;
+	                    self.other = other;
 					}
-	                [dataManager fetchDataForEntityName:kMissedMedication predicate:nil sortTerm:kMissedDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-	                    if (nil != array)
+	                [dataManager fetchDataForEntityName:kMissedMedication predicate:nil sortTerm:kMissedDate ascending:NO completion: ^(NSArray *missed, NSError *missedError) {
+	                    if (nil != missed)
 	                    {
-	                        self.missed = array;
+	                        self.missed = missed;
 						}
-	                    [dataManager fetchDataForEntityName:kSideEffects predicate:nil sortTerm:kSideEffectDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-	                        if (nil != array)
+	                    [dataManager fetchDataForEntityName:kSideEffects predicate:nil sortTerm:kSideEffectDate ascending:NO completion: ^(NSArray *effects, NSError *effectError) {
+	                        if (nil != effects)
 	                        {
-	                            self.effects = array;
+	                            self.effects = effects;
 							}
-	                        [dataManager fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
-	                            if (nil != array)
+	                        [dataManager fetchDataForEntityName:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:NO completion: ^(NSArray *prev, NSError *prevError) {
+	                            if (nil != prev)
 	                            {
-	                                self.previous = array;
+	                                self.previous = prev;
 								}
-	                            [dataManager fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-	                                if (nil != array)
+	                            [dataManager fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *procs, NSError *procsError) {
+	                                if (nil != procs)
 	                                {
-	                                    self.procedures = array;
+	                                    self.procedures = procs;
 									}
-	                                [dataManager fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:YES completion: ^(NSArray *array, NSError *error) {
-	                                    if (nil != array)
+	                                [dataManager fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:YES completion: ^(NSArray *contacts, NSError *contactError) {
+	                                    if (nil != contacts)
 	                                    {
-	                                        self.contacts = array;
+	                                        self.contacts = contacts;
 										}
 	                                    if (nil != executionBlock)
 	                                    {

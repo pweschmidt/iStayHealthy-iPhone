@@ -138,6 +138,16 @@
     [alert show];
 }
 
+- (void)openMailWithAttachment
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Send data?", nil)
+	                                                message:NSLocalizedString(@"You are about to email data. Click Yes if you want to continue.", nil)
+	                                               delegate:self
+	                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+	                                      otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
+	[alert show];
+}
+
 - (void)openSettings:(id)sender
 {
     if (nil != self.toolbarManager && nil != sender)

@@ -108,7 +108,7 @@
 	{
 		NSDate *first = [tuple.dateTuple objectAtIndex:0];
 		NSDate *last = [tuple.dateTuple lastObject];
-		if (nil == self.firstResultsDate)
+		if (nil == self.firstResultsDate || NULL == self.firstResultsDate || [NSNull class] == self.firstResultsDate)
 		{
 			self.firstResultsDate = first;
 		}
@@ -116,7 +116,7 @@
 		{
 			self.firstResultsDate = first;
 		}
-		if (nil == self.lastResultsDate)
+		if (nil == self.lastResultsDate || NULL == self.firstResultsDate || [NSNull class] == self.lastResultsDate)
 		{
 			self.lastResultsDate = last;
 		}

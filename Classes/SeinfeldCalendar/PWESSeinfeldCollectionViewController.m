@@ -279,6 +279,10 @@
 
 	double fractionTaken = counter / totalCount;
 	double result = (fractionTaken * fractionMonitored) * 100.0;
+	if (100.0 < result)
+	{
+		result = 100.0;
+	}
 	calendar.score = [NSNumber numberWithDouble:result];
 	calendar.isCompleted = [NSNumber numberWithBool:YES];
 	NSError *error = nil;

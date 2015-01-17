@@ -35,7 +35,8 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UILabel *activityLabel;
 @property (nonatomic, assign) BOOL backupStarted;
-@property (nonatomic, strong) NSMutableArray *backupFiles;@end
+@property (nonatomic, strong) NSMutableArray *backupFiles;
+@end
 
 @implementation DropboxViewController
 
@@ -43,14 +44,15 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
-    [self disableRightBarButtons];
-    self.iStayHealthyPath = nil;
-    self.dropBoxFileExists = NO;
-    self.isBackup = NO;
-    self.backupStarted = NO;
-    self.backupFiles = [NSMutableArray array];
-    [self createRestClient];
+	self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
+	[self disableRightBarButtons];
+	self.iStayHealthyPath = nil;
+	self.dropBoxFileExists = NO;
+	self.newDropboxFileExists = NO;
+	self.isBackup = NO;
+	self.backupStarted = NO;
+	self.backupFiles = [NSMutableArray array];
+	[self createRestClient];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -413,6 +415,17 @@
     }
 }
 
+- (void)restoreFromDropbox
+{
+	if ([[DBSession sharedSession] isLinked])
+	{
+		[self startAnimation:nil];
+		NSString *dataPath = [self dropBoxFileTmpPath];
+		[self.restClient loadFile:kiStayHealthyFilePath
+		                 intoPath:dataPath];
+	}
+}
+
 - (void)restore
 {
     NSString *dataPath = [self dropBoxFileTmpPath];
@@ -656,6 +669,26 @@
     }
     return filePath;
     
+}
+
+- (NSString *)backedUpFileName
+{
+	NSDateFormatter *formatter = [NSDateFormatter new];
+	formatter.dateFormat = kBackupDateFormat;
+	NSLocale *enforcedPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+	formatter.locale = enforcedPOSIXLocale;
+	NSDate *date = [NSDate date];
+	NSString *formattedDate = [formatter stringFromDate:date];
+	NSString *filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@.isth", kiStayHealthyPath, formattedDate];
+#ifdef APPDEBUG
+	NSLog(@"The backup file will be called %@", filePath);
+#endif
+	if ([self.backupFiles containsObject:filePath])
+	{
+		NSString *uuid = [[NSUUID UUID] UUIDString];
+		filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@_%@.isth", kiStayHealthyPath, formattedDate, uuid];
+	}
+	return filePath;
 }
 
 @end
