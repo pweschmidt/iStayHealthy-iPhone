@@ -81,6 +81,8 @@
 		0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771EE18F32D8C00523DF6 /* SideEffectsCollectionViewController.m */; };
 		0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */; };
 		0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */; };
+		0BC677771A6BC6D1009B233B /* PWESCoreURLImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */; };
+		0BC677791A6BE02D009B233B /* URLImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC677781A6BE02D009B233B /* URLImporterTests.swift */; };
 		0BC7E55F198825040017ED15 /* HelpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E55E198825040017ED15 /* HelpTableViewController.m */; };
 		0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E561198827CA0017ED15 /* LocalBackupController.m */; };
 		0BD057D0198E3C5A00D7D142 /* Conflict.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CE198E3C5A00D7D142 /* Conflict.isth */; };
@@ -369,6 +371,8 @@
 		0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAlertsCollectionViewController.m; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.m; sourceTree = "<group>"; };
 		0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPopoverDelegate.h; path = ViewControllersiPad/PWESPopoverDelegate.h; sourceTree = "<group>"; };
 		0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESToolbarDelegate.h; path = ViewControllersiPad/PWESToolbarDelegate.h; sourceTree = "<group>"; };
+		0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCoreURLImporter.swift; path = iOS8/DataManagement/PWESCoreURLImporter.swift; sourceTree = "<group>"; };
+		0BC677781A6BE02D009B233B /* URLImporterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImporterTests.swift; sourceTree = "<group>"; };
 		0BC7E55D198825040017ED15 /* HelpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpTableViewController.h; path = ViewControllersCommon/HelpTableViewController.h; sourceTree = "<group>"; };
 		0BC7E55E198825040017ED15 /* HelpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpTableViewController.m; path = ViewControllersCommon/HelpTableViewController.m; sourceTree = "<group>"; };
 		0BC7E560198827CA0017ED15 /* LocalBackupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalBackupController.h; path = ViewControllersCommon/LocalBackupController.h; sourceTree = "<group>"; };
@@ -719,6 +723,7 @@
 				0B36924C19C491C600C269AD /* PWESPersistentStoreManager.swift */,
 				0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */,
 				C458E3111A5C3F6D00163204 /* PWESCoreXMLImporter.swift */,
+				0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */,
 			);
 			name = DataManagement;
 			sourceTree = "<group>";
@@ -766,6 +771,7 @@
 				0BB02F16198E4205003B5959 /* XMLTests.m */,
 				0B2DAF811A6141C900F9F317 /* XMLImporterTests.swift */,
 				0B2DAF801A6141C900F9F317 /* iStayHealthy Tests-Bridging-Header.h */,
+				0BC677781A6BE02D009B233B /* URLImporterTests.swift */,
 			);
 			path = "iStayHealthy Tests";
 			sourceTree = "<group>";
@@ -1417,6 +1423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BC677791A6BE02D009B233B /* URLImporterTests.swift in Sources */,
 				0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */,
 				0BB02F17198E4205003B5959 /* XMLTests.m in Sources */,
 				0BB02F1B198E433B003B5959 /* CoreXMLTools.m in Sources */,
@@ -1550,6 +1557,7 @@
 				0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */,
 				0B7326D419323032001E6601 /* PWESResultDatesPlotArea.m in Sources */,
 				0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */,
+				0BC677771A6BC6D1009B233B /* PWESCoreURLImporter.swift in Sources */,
 				C4C837E716D104D2002D934F /* OtherMedication+Comparator.m in Sources */,
 				C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */,
 				C4BCF09F17B7A9C000F1E0F7 /* PreviousMedication+Handling.m in Sources */,

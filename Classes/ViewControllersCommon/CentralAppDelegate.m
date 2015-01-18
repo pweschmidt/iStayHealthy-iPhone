@@ -170,9 +170,8 @@
     }
     else
     {
-        [self handleImportFromLinkURL:url];
+        return [self handleImportFromLinkURL:url];
     }
-    return YES;
 }
 
 #pragma mark - private
@@ -198,10 +197,19 @@
     return YES;
 }
 
-- (void)handleImportFromLinkURL:(NSURL *)url
+- (BOOL)handleImportFromLinkURL:(NSURL *)url
 {
 
+    if (nil == url || nil == url.query)
+    {
+        return NO;
+    }
     NSLog(@"We handle the following URL: %@", url);
+    NSString *queryString = url.query;
+    PWESCoreURLImporter *urlImporter = [PWESCoreURLImporter new];
+    NSDictionary *results = [urlImporter resultsFromURLQueryString:queryString];
+    
+    return YES;
 }
 
 - (void)showReminder:(NSString *)text
