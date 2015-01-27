@@ -209,6 +209,13 @@
     PWESCoreURLImporter *urlImporter = [PWESCoreURLImporter new];
     NSDictionary *results = [urlImporter resultsFromURLQueryString:queryString];
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PWESMainStoryboard" bundle:nil];
+    PWESContentContainerController *mainController = [storyboard instantiateViewControllerWithIdentifier:@"contentContainer"];
+    if (nil != mainController && nil != results && 0 != results.allKeys.count)
+    {
+        [mainController replaceMainController:kResultsController importedAttributes:results];
+    }
+    
     return YES;
 }
 

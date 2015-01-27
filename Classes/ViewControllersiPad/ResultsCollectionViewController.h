@@ -9,5 +9,5 @@
 #import "BaseCollectionViewController.h"
 
 @interface ResultsCollectionViewController : BaseCollectionViewController
-
+@property (nonatomic, strong) NSDictionary *importedAttributes;
 @end

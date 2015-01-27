@@ -10,5 +10,5 @@
 #import "BaseTableViewController.h"
 
 @interface ResultsListTableViewController : BaseTableViewController 
-
+@property (nonatomic, strong) NSDictionary *importedAttributes;
 @end

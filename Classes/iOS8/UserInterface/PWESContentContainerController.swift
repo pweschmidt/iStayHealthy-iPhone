@@ -78,7 +78,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     func dismissMenuPanel(controllerName: String)
     {
         animateLeftPanel(shouldExpand: false)
-        replaceMainController(controllerName)
+        replaceMainController(controllerName,importedAttributes: nil)
     }
     
     func addMenuController(menuController: HamburgerMenuTableViewController)
@@ -89,14 +89,15 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         menuController.didMoveToParentViewController(self)
     }
     
-    func replaceMainController(controllerName: String)
+    
+    func replaceMainController(controllerName: String, importedAttributes: NSDictionary?)
     {
         self.customNavigationController!.view.removeFromSuperview()
         self.customNavigationController = nil
         
         if self.traitCollection.horizontalSizeClass == .Regular
         {
-            var navController: UINavigationController? = navigationControllerForiPad(controllerName)
+            var navController: UINavigationController? = navigationControllerForiPad(controllerName, attributes: importedAttributes)
             if navController == nil
             {
                 return
@@ -118,7 +119,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
         else
         {
-            var navController: UINavigationController? = navigationControllerForiPhone(controllerName)
+            var navController: UINavigationController? = navigationControllerForiPhone(controllerName, attributes: importedAttributes)
             if navController == nil
             {
                 return
@@ -220,12 +221,16 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     }
     
     
-    func navigationControllerForiPad(controllerName: String) -> UINavigationController?
+    func navigationControllerForiPad(controllerName: String, attributes: NSDictionary?) -> UINavigationController?
     {
         var navigationController: UINavigationController?
         if controllerName == kResultsController
         {
             var controller: ResultsCollectionViewController = ResultsCollectionViewController()
+            if nil != attributes
+            {
+                controller.importedAttributes = attributes!
+            }
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
@@ -292,12 +297,16 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         return navigationController
     }
 
-    func navigationControllerForiPhone(controllerName: String) -> UINavigationController?
+    func navigationControllerForiPhone(controllerName: String, attributes: NSDictionary?) -> UINavigationController?
     {
         var navigationController: UINavigationController?
         if controllerName == kResultsController
         {
             var controller: ResultsListTableViewController = ResultsListTableViewController()
+            if nil != attributes
+            {
+                controller.importedAttributes = attributes!
+            }
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }

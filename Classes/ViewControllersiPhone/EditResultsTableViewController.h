@@ -10,4 +10,5 @@
 #import "BaseEditTableViewController.h"
 
 @interface EditResultsTableViewController : BaseEditTableViewController
+@property (nonatomic, strong) NSDictionary *importedAttributes;
 @end

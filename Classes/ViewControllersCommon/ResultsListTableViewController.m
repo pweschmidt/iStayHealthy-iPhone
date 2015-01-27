@@ -55,6 +55,10 @@
     self.resultsSegmentControl.frame = CGRectMake(10, 12, segmentWidth, 30);
     self.resultsSegmentControl.selectedSegmentIndex = 0;
     [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
+    if (nil != self.importedAttributes)
+    {
+        [self importData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,6 +104,14 @@
     {
         return @"";
     }
+}
+
+- (void)importData
+{
+    EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
+    editController.importedAttributes = self.importedAttributes;
+    [self.navigationController pushViewController:editController animated:YES];
+    
 }
 
 - (void)addButtonPressed:(id)sender
