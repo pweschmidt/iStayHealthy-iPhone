@@ -14,11 +14,16 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     var isCollapsed: Bool = true
     var menuController: HamburgerMenuTableViewController?
     var defaultLoginController: PWESLoginViewController?
+    let kImportNotificationKey = "URLImportKey"
+    let notificationCenter = NSNotificationCenter.defaultCenter()
+    
     
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        notificationCenter.addObserver(self, selector: "importDataFromURLDictionary:", name: kImportNotificationKey, object: nil)
+        
         view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
         
         let settings: AppSettings = AppSettings()
@@ -49,6 +54,12 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         //        addChildViewController(loginController)
         loginController.didMoveToParentViewController(self)
         
+    }
+    
+    func importDataFromURLDictionary(notification:NSNotification)
+    {
+        let importAttributes: Dictionary<String, AnyObject!>  = notification.userInfo as Dictionary<String, AnyObject!>
+        replaceMainController(kResultsController, importedAttributes: importAttributes)
     }
     
     func loadDefaultController()
