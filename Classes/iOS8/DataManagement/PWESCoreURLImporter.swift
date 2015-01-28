@@ -22,7 +22,7 @@ class PWESCoreURLImporter: NSObject
             {
                 var keyString = individualComponent[0]
                 var valueString = individualComponent[1]
-                
+                resultsAttributeDictionary(keyString, valueString: valueString)
             }
         }
         return results
@@ -30,59 +30,50 @@ class PWESCoreURLImporter: NSObject
     
     func resultsAttributeDictionary(keyString: String, valueString: String)
     {
-        if "CD4" == keyString
-        {
-        }
-        else if "CD4Percent" == keyString
-        {
-            
-        }
-        else if "ViralLoad" == keyString
-        {
-            
-        }
-        else if "ResultsDate" == keyString
-        {
-            
-        }
-        else if "BMI" == keyString
-        {
-            
-        }
-        else if "BloodPressure" == keyString
+        if "BloodPressure" == keyString
         {
             bloodPressureFromString(valueString)
         }
-        else if "Cholesterol" == keyString
+        else if "ResultsDate" == keyString
         {
-            
+            dateFromStringValue(valueString)
         }
-        else if "CardiacRisk" == keyString
+        else
         {
-            
+            numberFromStringValue(keyString, valueString: valueString)
         }
     }
     
-    func numberFromStringValue(valueString: String) -> NSNumber?
+    func numberFromStringValue(keyString: String, valueString: String)
     {
-        if "undetectable" == valueString
+        if "CD4" != keyString || "CD4Percent" != keyString || "ViralLoad" != keyString || "Cholesterol" != keyString || "CardiacRisk" != keyString || "BMI" != keyString
         {
-            return NSNumber(float: 1)
+            return
         }
         var value:NSNumber?
+        if "undetectable" == valueString
+        {
+            value = NSNumber(float: 1)
+        }
         var candidate: Float = (valueString as NSString).floatValue
         value = NSNumber(float: candidate)
-        return value
+        if nil != value
+        {
+            results.setValue(value, forUndefinedKey: keyString)
+        }
     }
     
-    func dateFromStringValue(dateString: String) -> NSDate?
+    func dateFromStringValue(dateString: String)
     {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMMyyyy"
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         
         var value: NSDate? = formatter.dateFromString(dateString)
-        return value
+        if nil != value
+        {
+            results.setValue(value, forUndefinedKey: "ResultsDate")
+        }
     }
     
     func bloodPressureFromString(bloodPressureString: String)
@@ -92,8 +83,13 @@ class PWESCoreURLImporter: NSObject
         {
             let systoleString = components[0]
             let diastoleString = components[1]
-            var systole = numberFromStringValue(systoleString)
-            var diastole = numberFromStringValue(diastoleString)
+            var systole:NSNumber?
+            var diastole:NSNumber?
+            var candidate: Float = (systoleString as NSString).floatValue
+            systole = NSNumber(float: candidate)
+            candidate = (diastoleString as NSString).floatValue
+            diastole = NSNumber(float: candidate)
+            
             if nil != systole && nil != diastole
             {
                 results.setValue(systole, forUndefinedKey: "Systole")
