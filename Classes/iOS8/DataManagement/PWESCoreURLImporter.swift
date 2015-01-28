@@ -20,9 +20,9 @@ class PWESCoreURLImporter: NSObject
             let individualComponent = component.componentsSeparatedByString("=")
             if 2 == individualComponent.count
             {
-                var keyString = individualComponent[0]
+                var mappedKeyString: String = mapResultsType(individualComponent[0])
                 var valueString = individualComponent[1]
-                resultsAttributeDictionary(keyString, valueString: valueString)
+                resultsAttributeDictionary(mappedKeyString, valueString: valueString)
             }
         }
         return results
@@ -46,7 +46,7 @@ class PWESCoreURLImporter: NSObject
     
     func numberFromStringValue(keyString: String, valueString: String)
     {
-        if "CD4" != keyString || "CD4Percent" != keyString || "ViralLoad" != keyString || "Cholesterol" != keyString || "CardiacRisk" != keyString || "BMI" != keyString
+        if "CD4" != keyString || "CD4Percent" != keyString || "ViralLoad" != keyString || "TotalCholesterol" != keyString || "cardiacRiskFactor" != keyString || "bmi" != keyString
         {
             return
         }
@@ -101,5 +101,45 @@ class PWESCoreURLImporter: NSObject
     func addResultsData(keyString: String, value: AnyObject?)
     {
         results.setValue(value, forUndefinedKey: keyString)
+    }
+    
+    func mapResultsType(type:String) -> String
+    {
+        if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CD4")
+        {
+            return "CD4";
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CD4Percent")
+        {
+            return "CD4Percent"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ViralLoad")
+        {
+            return "ViralLoad"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ResultsDate") ||
+       NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ResultDate") ||
+        NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("date")
+        {
+            return "ResultsDate"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("BloodPressure")
+        {
+            return "BloodPressure"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("BMI")
+        {
+            return "bmi"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CardiacRisk")
+        {
+            return "cardiacRiskFactor"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("Cholesterol")
+        {
+            return "TotalCholesterol"
+        }
+        
+        return "Unknown"
     }
 }
