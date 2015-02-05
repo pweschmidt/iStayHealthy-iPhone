@@ -56,11 +56,13 @@
 
     CGRect frame = CGRectMake(20, yOffset, self.view.frame.size.width - 40, self.view.frame.size.height - 88);
     CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
-    if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
-    {
-        frame = CGRectMake(20, yOffset, frame.size.height - 88, frame.size.width - 40);
-        toolbarFrame = CGRectMake(0, self.view.frame.size.width - 44, self.view.frame.size.height, 44);
-    }
+#warning rotation disabled. What will it do?
+//
+//    if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
+//    {
+//        frame = CGRectMake(20, yOffset, frame.size.height - 88, frame.size.width - 40);
+//        toolbarFrame = CGRectMake(0, self.view.frame.size.width - 44, self.view.frame.size.height, 44);
+//    }
 
     self.collectionView = [[UICollectionView alloc] initWithFrame:frame
                                              collectionViewLayout:self.collectionViewLayout];
