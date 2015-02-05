@@ -20,9 +20,9 @@ class PWESCoreURLImporter: NSObject
             let individualComponent = component.componentsSeparatedByString("=")
             if 2 == individualComponent.count
             {
-                var keyString = individualComponent[0]
+                var mappedKeyString: String = mapResultsType(individualComponent[0])
                 var valueString = individualComponent[1]
-                
+                resultsAttributeDictionary(mappedKeyString, valueString: valueString)
             }
         }
         return results
@@ -30,59 +30,50 @@ class PWESCoreURLImporter: NSObject
     
     func resultsAttributeDictionary(keyString: String, valueString: String)
     {
-        if "CD4" == keyString
-        {
-        }
-        else if "CD4Percent" == keyString
-        {
-            
-        }
-        else if "ViralLoad" == keyString
-        {
-            
-        }
-        else if "ResultsDate" == keyString
-        {
-            
-        }
-        else if "BMI" == keyString
-        {
-            
-        }
-        else if "BloodPressure" == keyString
+        if "BloodPressure" == keyString
         {
             bloodPressureFromString(valueString)
         }
-        else if "Cholesterol" == keyString
+        else if "ResultsDate" == keyString
         {
-            
+            dateFromStringValue(valueString)
         }
-        else if "CardiacRisk" == keyString
+        else
         {
-            
+            numberFromStringValue(keyString, valueString: valueString)
         }
     }
     
-    func numberFromStringValue(valueString: String) -> NSNumber?
+    func numberFromStringValue(keyString: String, valueString: String)
     {
-        if "undetectable" == valueString
+        if "CD4" != keyString || "CD4Percent" != keyString || "ViralLoad" != keyString || "TotalCholesterol" != keyString || "cardiacRiskFactor" != keyString || "bmi" != keyString
         {
-            return NSNumber(float: 1)
+            return
         }
         var value:NSNumber?
+        if "undetectable" == valueString
+        {
+            value = NSNumber(float: 1)
+        }
         var candidate: Float = (valueString as NSString).floatValue
         value = NSNumber(float: candidate)
-        return value
+        if nil != value
+        {
+            results.setValue(value, forUndefinedKey: keyString)
+        }
     }
     
-    func dateFromStringValue(dateString: String) -> NSDate?
+    func dateFromStringValue(dateString: String)
     {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMMyyyy"
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         
         var value: NSDate? = formatter.dateFromString(dateString)
-        return value
+        if nil != value
+        {
+            results.setValue(value, forUndefinedKey: "ResultsDate")
+        }
     }
     
     func bloodPressureFromString(bloodPressureString: String)
@@ -92,8 +83,13 @@ class PWESCoreURLImporter: NSObject
         {
             let systoleString = components[0]
             let diastoleString = components[1]
-            var systole = numberFromStringValue(systoleString)
-            var diastole = numberFromStringValue(diastoleString)
+            var systole:NSNumber?
+            var diastole:NSNumber?
+            var candidate: Float = (systoleString as NSString).floatValue
+            systole = NSNumber(float: candidate)
+            candidate = (diastoleString as NSString).floatValue
+            diastole = NSNumber(float: candidate)
+            
             if nil != systole && nil != diastole
             {
                 results.setValue(systole, forUndefinedKey: "Systole")
@@ -105,5 +101,45 @@ class PWESCoreURLImporter: NSObject
     func addResultsData(keyString: String, value: AnyObject?)
     {
         results.setValue(value, forUndefinedKey: keyString)
+    }
+    
+    func mapResultsType(type:String) -> String
+    {
+        if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CD4")
+        {
+            return "CD4";
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CD4Percent")
+        {
+            return "CD4Percent"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ViralLoad")
+        {
+            return "ViralLoad"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ResultsDate") ||
+       NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ResultDate") ||
+        NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("date")
+        {
+            return "ResultsDate"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("BloodPressure")
+        {
+            return "BloodPressure"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("BMI")
+        {
+            return "bmi"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CardiacRisk")
+        {
+            return "cardiacRiskFactor"
+        }
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("Cholesterol")
+        {
+            return "TotalCholesterol"
+        }
+        
+        return "Unknown"
     }
 }
