@@ -10,13 +10,14 @@ import UIKit
 
 class PWESContentContainerController: UIViewController, PWESContentMenuHandler, PWESLoginHandler
 {
-    var customNavigationController: UINavigationController!
+    var customNavigationController: UINavigationController?
     var isCollapsed: Bool = true
     var menuController: HamburgerMenuTableViewController?
     var defaultLoginController: PWESLoginViewController?
     let kImportNotificationKey = "URLImportKey"
     let notificationCenter = NSNotificationCenter.defaultCenter()
-    
+    var importedURLAttributes: NSDictionary?
+    var isImport: Bool = false
     
 
     override func viewDidLoad()
@@ -33,7 +34,14 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
         else
         {
-            loadDefaultController()
+            if isImport && nil != self.importedURLAttributes
+            {
+                loadResultsViewController(self.importedURLAttributes)
+            }
+            else
+            {
+                loadDefaultController()
+            }
         }
     }
     
@@ -64,14 +72,52 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     func loadDefaultController()
     {
+        println("loading the default controller - PWESDashboardViewController")
         var dashboardController: PWESDashboardViewController = PWESDashboardViewController()
         dashboardController.menuHandler = self
         self.customNavigationController = UINavigationController(rootViewController: dashboardController)
-        view.addSubview(self.customNavigationController.view)
-        addChildViewController(self.customNavigationController)
-        self.customNavigationController.didMoveToParentViewController(self)
+        if nil != self.customNavigationController
+        {
+            view.addSubview(self.customNavigationController!.view)
+            addChildViewController(self.customNavigationController!)
+            self.customNavigationController!.didMoveToParentViewController(self)
+        }
     }
     
+    func loadResultsViewController(importedAttributes: NSDictionary?)
+    {
+        if nil == importedAttributes
+        {
+            return
+        }
+        if nil != self.customNavigationController
+        {
+            self.customNavigationController!.view.removeFromSuperview()
+        }
+        self.customNavigationController = nil
+        println("Replacing the controller with ResultsController")
+        var navController: UINavigationController?
+        if self.traitCollection.horizontalSizeClass == .Regular
+        {
+            navController = navigationControllerForiPad(kResultsController, attributes: importedAttributes)
+        }
+        else
+        {
+            navController = navigationControllerForiPhone(kResultsController, attributes: importedAttributes)
+        }
+        if navController == nil
+        {
+            return
+        }
+        self.customNavigationController = navController
+        if nil != self.customNavigationController
+        {
+            view.addSubview(self.customNavigationController!.view)
+            addChildViewController(self.customNavigationController!)
+            self.customNavigationController!.didMoveToParentViewController(self)
+        }
+        
+    }
 
     func showMenuPanel()
     {
@@ -103,8 +149,12 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     func replaceMainController(controllerName: String, importedAttributes: NSDictionary?)
     {
-        self.customNavigationController!.view.removeFromSuperview()
+        if nil != self.customNavigationController
+        {
+            self.customNavigationController!.view.removeFromSuperview()
+        }
         self.customNavigationController = nil
+        println("Replacing the controller with \(controllerName)")
         
         if self.traitCollection.horizontalSizeClass == .Regular
         {
@@ -115,9 +165,9 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             }
             self.customNavigationController = navController
             
-            self.customNavigationController.view.frame.origin.x = customNavigationController.view.frame.origin.x + 180.0
-            self.view.addSubview(self.customNavigationController.view)
-            self.customNavigationController.didMoveToParentViewController(self)
+            self.customNavigationController!.view.frame.origin.x = customNavigationController!.view.frame.origin.x + 180.0
+            self.view.addSubview(self.customNavigationController!.view)
+            self.customNavigationController!.didMoveToParentViewController(self)
             animateCenterPanelXPosition(targetPosition: 0) { finished in
                 self.isCollapsed = true
                 
@@ -136,10 +186,10 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
                 return
             }
             self.customNavigationController = navController
-            self.customNavigationController.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            self.customNavigationController.view.frame.origin.x = CGRectGetWidth(customNavigationController.view.frame) - 80
-            self.view.addSubview(self.customNavigationController.view)
-            self.customNavigationController.didMoveToParentViewController(self)
+            self.customNavigationController!.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            self.customNavigationController!.view.frame.origin.x = CGRectGetWidth(customNavigationController!.view.frame) - 80
+            self.view.addSubview(self.customNavigationController!.view)
+            self.customNavigationController!.didMoveToParentViewController(self)
             zoomInMainController(targetPosition: 0) { finished in
                 self.isCollapsed = true
                 if self.menuController != nil
@@ -163,11 +213,11 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             isCollapsed = false
             if isRegular
             {
-                animateCenterPanelXPosition(targetPosition: customNavigationController.view.frame.origin.x + 210.0)
+                animateCenterPanelXPosition(targetPosition: customNavigationController!.view.frame.origin.x + 210.0)
             }
             else
             {
-                zoomOutMainController(targetPosition: CGRectGetWidth(customNavigationController.view.frame) - 80)
+                zoomOutMainController(targetPosition: CGRectGetWidth(customNavigationController!.view.frame) - 80)
             }
         }
         else
@@ -201,8 +251,8 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     func zoomOutMainController(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil)
     {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-            self.customNavigationController.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            self.customNavigationController.view.frame.origin.x = targetPosition
+            self.customNavigationController!.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            self.customNavigationController!.view.frame.origin.x = targetPosition
             }, completion: completion)
         
     }
@@ -216,8 +266,8 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
             
-            self.customNavigationController.view.transform = CGAffineTransformIdentity
-            self.customNavigationController.view.frame.origin.x = self.view.frame.origin.x
+            self.customNavigationController!.view.transform = CGAffineTransformIdentity
+            self.customNavigationController!.view.frame.origin.x = self.view.frame.origin.x
             }, completion: completion)
     }
     
@@ -227,7 +277,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     func animateCenterPanelXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil)
     {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-            self.customNavigationController.view.frame.origin.x = targetPosition
+            self.customNavigationController!.view.frame.origin.x = targetPosition
             }, completion: completion)
     }
     

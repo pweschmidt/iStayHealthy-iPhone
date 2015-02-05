@@ -12,6 +12,7 @@ import XCTest
 class URLImporterTests: XCTestCase {
 
     let testStringShort = "iStayHealthy://results?CD4=555&ResultsDate=16Jan2015"
+    let testURL = "https://www.dropbox.com/s/d3bvjfp5e9jcqtw/TestiStayHealthyLink.html?dl=0"
     
     override func setUp() {
         super.setUp()

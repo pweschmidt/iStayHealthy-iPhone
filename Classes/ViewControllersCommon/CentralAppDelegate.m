@@ -24,6 +24,7 @@
 @implementation CentralAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"**** didFinishLaunchingWithOptions");
     [self registerUserNotifications:application];
     self.window.tintColor = TEXTCOLOUR;
 
@@ -125,6 +126,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    NSLog(@"**** applicationWillEnterForeground");
     if (0 < application.applicationIconBadgeNumber)
     {
         application.applicationIconBadgeNumber = 0;
@@ -213,7 +215,10 @@
     PWESContentContainerController *mainController = [storyboard instantiateViewControllerWithIdentifier:@"contentContainer"];
     if (nil != mainController && nil != results && 0 != results.allKeys.count)
     {
-        [mainController replaceMainController:kResultsController importedAttributes:results];
+        mainController.isImport = YES;
+        mainController.importedURLAttributes = results;
+            //        [mainController loadResultsViewController:results];
+            //        [mainController replaceMainController:kResultsController importedAttributes:results];
     }
     
     return YES;

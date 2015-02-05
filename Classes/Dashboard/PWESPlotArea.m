@@ -181,7 +181,12 @@
 
 - (CGFloat)logYOffsetForValue:(NSNumber *)value
 {
-	CGFloat y =  log10f([value floatValue]) * self.pxTickDistance;
+    CGFloat logmin = [value floatValue];
+    if (0 == logmin)
+    {
+        logmin = 1;
+    }
+	CGFloat y =  log10f(logmin) * self.pxTickDistance;
 	CGFloat min = [self.valueRange.minValue floatValue];
 	if (1 > min)
 	{

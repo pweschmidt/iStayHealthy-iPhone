@@ -79,17 +79,6 @@
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
-#warning rotation disabled. What will it do?
-//    CGRect toolbarFrame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
-//    if (UIDeviceOrientationIsLandscape(self.interfaceOrientation))
-//    {
-//        toolbarFrame = CGRectMake(0, self.view.frame.size.width - 44, self.view.frame.size.height, 44);
-//        if (self.view.frame.size.width < self.view.frame.size.height)
-//        {
-//            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
-//        }
-//    }
-
     CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self];
     NSArray *items = toolbar.customItems;
     [self setToolbarItems:items animated:NO];

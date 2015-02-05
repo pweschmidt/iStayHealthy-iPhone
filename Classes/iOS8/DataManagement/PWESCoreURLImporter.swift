@@ -22,6 +22,7 @@ class PWESCoreURLImporter: NSObject
             {
                 var mappedKeyString: String = mapResultsType(individualComponent[0])
                 var valueString = individualComponent[1]
+                println("key = \(mappedKeyString) and value = \(valueString)")
                 resultsAttributeDictionary(mappedKeyString, valueString: valueString)
             }
         }
@@ -59,7 +60,7 @@ class PWESCoreURLImporter: NSObject
         value = NSNumber(float: candidate)
         if nil != value
         {
-            results.setValue(value, forUndefinedKey: keyString)
+            results.setObject(value!, forKey: keyString)
         }
     }
     
@@ -70,9 +71,10 @@ class PWESCoreURLImporter: NSObject
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         
         var value: NSDate? = formatter.dateFromString(dateString)
+        println("found date = \(value)")
         if nil != value
         {
-            results.setValue(value, forUndefinedKey: "ResultsDate")
+            results.setObject(value!, forKey: "ResultsDate")
         }
     }
     
@@ -92,15 +94,15 @@ class PWESCoreURLImporter: NSObject
             
             if nil != systole && nil != diastole
             {
-                results.setValue(systole, forUndefinedKey: "Systole")
-                results.setValue(diastole, forUndefinedKey: "Diastole")
+                results.setObject(systole!, forKey: "Systole")
+                results.setObject(diastole!, forKey: "Diastole")
             }
         }
     }
     
     func addResultsData(keyString: String, value: AnyObject?)
     {
-        results.setValue(value, forUndefinedKey: keyString)
+        results.setObject(value!, forKey: keyString)
     }
     
     func mapResultsType(type:String) -> String
