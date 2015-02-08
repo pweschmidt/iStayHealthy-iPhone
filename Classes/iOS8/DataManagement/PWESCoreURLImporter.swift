@@ -22,7 +22,7 @@ class PWESCoreURLImporter: NSObject
             {
                 var mappedKeyString: String = mapResultsType(individualComponent[0])
                 var valueString = individualComponent[1]
-                println("key = \(mappedKeyString) and value = \(valueString)")
+                //                println("key = \(mappedKeyString) and value = \(valueString)")
                 resultsAttributeDictionary(mappedKeyString, valueString: valueString)
             }
         }
@@ -51,12 +51,12 @@ class PWESCoreURLImporter: NSObject
     
     func numberFromStringValue(keyString: String, valueString: String)
     {
-        println("***** numberFromStringValue with key='\(keyString)' and value=\(valueString)")
+        //        println("***** numberFromStringValue with key='\(keyString)' and value=\(valueString)")
         var value:NSNumber?
         if "undetectable" == valueString
         {
             value = NSNumber(float: 1)
-            println("we have undetectable = \(value)")
+            //            println("we have undetectable = \(value)")
             results.setObject(value!, forKey: keyString)
             return
         }
@@ -65,13 +65,13 @@ class PWESCoreURLImporter: NSObject
         value = NSNumber(float: candidate)
         if nil != value
         {
-            println("added value \(value) to dictionary")
+            //            println("added value \(value) to dictionary")
             results.setObject(value!, forKey: keyString)
         }
-        else
-        {
-            println("couldn't add valuestring to dictionary")
-        }
+//        else
+//        {
+//            println("couldn't add valuestring to dictionary")
+//        }
     }
     
     func dateFromStringValue(dateString: String)
@@ -81,7 +81,7 @@ class PWESCoreURLImporter: NSObject
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         
         var value: NSDate? = formatter.dateFromString(dateString)
-        println("found date = \(value)")
+        //        println("found date = \(value)")
         if nil != value
         {
             results.setObject(value!, forKey: kResultsDate)
