@@ -79,10 +79,13 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         animateLeftPanel(shouldExpand: self.isCollapsed)
     }
 
-    func dismissMenuPanel(controllerName: String)
+    func dismissMenuPanel(controllerName: String?)
     {
         animateLeftPanel(shouldExpand: false)
-        replaceMainController(controllerName,importedAttributes: nil)
+        if nil != controllerName
+        {
+            replaceMainController(controllerName!,importedAttributes: nil)
+        }
     }
     
     func addMenuController(menuController: HamburgerMenuTableViewController)

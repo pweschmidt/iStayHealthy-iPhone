@@ -13,5 +13,5 @@ import UIKit
 protocol PWESContentMenuHandler
 {
     optional func showMenuPanel()
-    optional func dismissMenuPanel(controllerName: String)
+    optional func dismissMenuPanel(controllerName: String?)
 }
