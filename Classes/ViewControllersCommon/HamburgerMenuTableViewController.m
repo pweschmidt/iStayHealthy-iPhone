@@ -50,19 +50,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 84;
+    return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 84)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
 
     view.backgroundColor = kDarkBackgroundColor;
 
     NSString *version = [[AppSettings sharedInstance] versionString];
     NSString *name = [NSString stringWithFormat:@"iStayHealthy %@", version];
     UILabel *versionLabel = [UILabel standardLabel];
-    versionLabel.frame = CGRectMake(20, 64, self.view.bounds.size.width, 20);
+    versionLabel.frame = CGRectMake(20, 10, self.view.bounds.size.width, 20);
     versionLabel.text = name;
     versionLabel.font = [UIFont fontWithType:BoldItalic size:standard];
     versionLabel.textAlignment = NSTextAlignmentLeft;

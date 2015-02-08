@@ -28,6 +28,7 @@
 {
 	[super viewDidLoad];
 	CGRect frame = self.view.bounds;
+    frame = CGRectMake(frame.origin.x, frame.origin.y + 64, frame.size.width, frame.size.height - 64);
 	UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
 	tableView.backgroundColor = DEFAULT_BACKGROUND;
 	[self.view addSubview:tableView];
