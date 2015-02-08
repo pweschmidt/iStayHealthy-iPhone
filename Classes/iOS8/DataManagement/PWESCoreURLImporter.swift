@@ -31,6 +31,10 @@ class PWESCoreURLImporter: NSObject
     
     func resultsAttributeDictionary(keyString: String, valueString: String)
     {
+        if keyString == "Unknown"
+        {
+            return
+        }
         if "BloodPressure" == keyString
         {
             bloodPressureFromString(valueString)
@@ -47,20 +51,26 @@ class PWESCoreURLImporter: NSObject
     
     func numberFromStringValue(keyString: String, valueString: String)
     {
-        if "CD4" != keyString || "CD4Percent" != keyString || "ViralLoad" != keyString || "TotalCholesterol" != keyString || "cardiacRiskFactor" != keyString || "bmi" != keyString
-        {
-            return
-        }
+        println("***** numberFromStringValue with key='\(keyString)' and value=\(valueString)")
         var value:NSNumber?
         if "undetectable" == valueString
         {
             value = NSNumber(float: 1)
+            println("we have undetectable = \(value)")
+            results.setObject(value!, forKey: keyString)
+            return
         }
+
         var candidate: Float = (valueString as NSString).floatValue
         value = NSNumber(float: candidate)
         if nil != value
         {
+            println("added value \(value) to dictionary")
             results.setObject(value!, forKey: keyString)
+        }
+        else
+        {
+            println("couldn't add valuestring to dictionary")
         }
     }
     

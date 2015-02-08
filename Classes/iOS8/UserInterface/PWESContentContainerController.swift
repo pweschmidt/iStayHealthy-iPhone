@@ -14,17 +14,11 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     var isCollapsed: Bool = true
     var menuController: HamburgerMenuTableViewController?
     var defaultLoginController: PWESLoginViewController?
-    let kImportNotificationKey = "URLImportKey"
-    let notificationCenter = NSNotificationCenter.defaultCenter()
-    var importedURLAttributes: NSDictionary?
-    var isImport: Bool = false
     
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        notificationCenter.addObserver(self, selector: "importDataFromURLDictionary:", name: kImportNotificationKey, object: nil)
-        
         view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
         
         let settings: AppSettings = AppSettings()
@@ -34,14 +28,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
         else
         {
-            if isImport && nil != self.importedURLAttributes
-            {
-                loadResultsViewController(self.importedURLAttributes)
-            }
-            else
-            {
-                loadDefaultController()
-            }
+            loadDefaultController()
         }
     }
     
@@ -63,13 +50,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         loginController.didMoveToParentViewController(self)
         
     }
-    
-    func importDataFromURLDictionary(notification:NSNotification)
-    {
-        let importAttributes: Dictionary<String, AnyObject!>  = notification.userInfo as Dictionary<String, AnyObject!>
-        replaceMainController(kResultsController, importedAttributes: importAttributes)
-    }
-    
+        
     func loadDefaultController()
     {
         println("loading the default controller - PWESDashboardViewController")
@@ -84,40 +65,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
     }
     
-    func loadResultsViewController(importedAttributes: NSDictionary?)
-    {
-        if nil == importedAttributes
-        {
-            return
-        }
-        if nil != self.customNavigationController
-        {
-            self.customNavigationController!.view.removeFromSuperview()
-        }
-        self.customNavigationController = nil
-        println("Replacing the controller with ResultsController")
-        var navController: UINavigationController?
-        if self.traitCollection.horizontalSizeClass == .Regular
-        {
-            navController = navigationControllerForiPad(kResultsController, attributes: importedAttributes)
-        }
-        else
-        {
-            navController = navigationControllerForiPhone(kResultsController, attributes: importedAttributes)
-        }
-        if navController == nil
-        {
-            return
-        }
-        self.customNavigationController = navController
-        if nil != self.customNavigationController
-        {
-            view.addSubview(self.customNavigationController!.view)
-            addChildViewController(self.customNavigationController!)
-            self.customNavigationController!.didMoveToParentViewController(self)
-        }
-        
-    }
 
     func showMenuPanel()
     {
@@ -288,10 +235,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         if controllerName == kResultsController
         {
             var controller: ResultsCollectionViewController = ResultsCollectionViewController()
-            if nil != attributes
-            {
-                controller.importedAttributes = attributes!
-            }
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
@@ -364,10 +307,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         if controllerName == kResultsController
         {
             var controller: ResultsListTableViewController = ResultsListTableViewController()
-            if nil != attributes
-            {
-                controller.importedAttributes = attributes!
-            }
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }

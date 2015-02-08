@@ -10,5 +10,7 @@
 #import "BaseEditTableViewController.h"
 
 @interface EditResultsTableViewController : BaseEditTableViewController
-@property (nonatomic, strong) NSDictionary *importedAttributes;
+- (id)  initWithStyle:(UITableViewStyle)style
+   importedAttributes:(NSDictionary *)importedAttributes
+    hasNumericalInput:(BOOL)hasNumericalInput;
 @end

@@ -30,10 +30,6 @@
 	[self setTitleViewWithTitle:NSLocalizedString(@"Results", nil)];
 	[self.collectionView registerClass:[BaseCollectionViewCell class]
 	        forCellWithReuseIdentifier:kResultsCollectionCellIdentifier];
-    if (nil != self.importedAttributes)
-    {
-        [self importData];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,17 +94,6 @@
 	[cell.contentView addSubview:other];
 	[cell.contentView addSubview:liver];
 	return cell;
-}
-
-
-- (void)importData
-{
-    EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
-    editController.preferredContentSize = CGSizeMake(320, 568);
-    editController.importedAttributes = self.importedAttributes;
-    UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-    editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:editNavCtrl animated:YES completion:nil];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

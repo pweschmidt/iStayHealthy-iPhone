@@ -28,9 +28,24 @@
 @property (nonatomic, strong) NSMutableDictionary *valueMap;
 @property (nonatomic, strong) UISegmentedControl *resultsSegmentControl;
 @property (nonatomic, assign) BOOL bloodPressureHasChanged;
+@property (nonatomic, strong) NSDictionary *importedAttributes;
+@property (nonatomic, assign) BOOL hasImportedData;
 @end
 
 @implementation EditResultsTableViewController
+
+- (id)  initWithStyle:(UITableViewStyle)style
+   importedAttributes:(NSDictionary *)importedAttributes
+    hasNumericalInput:(BOOL)hasNumericalInput
+{
+    self = [super initWithStyle:style managedObject:nil hasNumericalInput:hasNumericalInput];
+    if (nil != self)
+    {
+        _importedAttributes = importedAttributes;
+        [self populateValueMapFromImportedAttributes];
+    }
+    return self;
+}
 
 - (id)  initWithStyle:(UITableViewStyle)style
         managedObject:(NSManagedObject *)managedObject
@@ -39,6 +54,7 @@
     self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
     if (nil != self)
     {
+        _hasImportedData = NO;
         [self populateValueMap];
     }
     return self;
@@ -92,16 +108,13 @@
              }
          }
      }];
-
-    UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Imported Data", nil) message:NSLocalizedString(@"Review your imported data and 'Save' when done", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-    [importAlert show];
+    self.hasImportedData = YES;
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self populateValueMapFromImportedAttributes];
     labelFrame = CGRectMake(20, 0, 115, 44);
     separatorFrame = CGRectMake(117, 4, 2, 40);
     textViewFrame = CGRectMake(120, 0, 150, 44);
@@ -152,6 +165,13 @@
         }
     }
     self.menuDelegate = nil;
+    if (self.hasImportedData)
+    {
+        UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Imported Data", nil) message:NSLocalizedString(@"Review your imported data and 'Save' when done", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+        [importAlert show];
+                
+        self.hasImportedData = NO;
+    }
 }
 
 - (void)save:(id)sender

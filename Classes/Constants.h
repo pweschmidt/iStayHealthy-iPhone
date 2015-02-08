@@ -129,7 +129,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kIsVersionUpdate401               @"updatedToVersion401"
 #define kStoreLoadingKey                  @"StoreLoaded"
 #define kStoreUbiquityPathKey             @"RealUbiquityPath"
-
+#define kImportNotificationKey            @"URLImportKey"
 /**
    Database and iCloud
  */

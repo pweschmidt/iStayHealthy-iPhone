@@ -17,6 +17,7 @@
 #import "LocalBackupController.h"
 #import "HelpViewController.h"
 #import "DropboxViewController.h"
+#import "EditResultsTableViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
 #import "Utilities.h"
@@ -271,6 +272,12 @@
         selector:@selector(reloadSQLData:)
             name:NSManagedObjectContextDidSaveNotification
           object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(importURLData:)
+     name:kImportNotificationKey
+     object:nil];
 }
 
 - (void)unregisterObservers
@@ -284,6 +291,11 @@
      removeObserver:self
                name:kErrorStoreNotificationKey
              object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:kImportNotificationKey
+     object:nil];
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
@@ -301,6 +313,17 @@
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
                                  userInfo:nil];
+}
+
+- (void)importURLData:(NSNotification *)notification
+{
+    if (nil == notification || nil == notification.userInfo
+        || 0 == notification.userInfo.allKeys.count)
+    {
+        return;
+    }
+    EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped importedAttributes:notification.userInfo hasNumericalInput:YES];
+    [self.navigationController pushViewController:editController animated:YES];
 }
 
 - (void)startAnimation:(NSNotification *)notification

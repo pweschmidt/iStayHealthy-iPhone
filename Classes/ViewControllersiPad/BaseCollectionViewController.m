@@ -17,6 +17,7 @@
 #import "Utilities.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
+#import "EditResultsTableViewController.h"
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "EmailViewController.h"
@@ -187,6 +188,12 @@
         selector:@selector(reloadSQLData:)
             name:NSManagedObjectContextDidSaveNotification
           object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(importURLData:)
+     name:kImportNotificationKey
+     object:nil];
 }
 
 - (void)unregisterObservers
@@ -200,6 +207,11 @@
      removeObserver:self
                name:kErrorStoreNotificationKey
              object:nil];
+
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:kImportNotificationKey
+     object:nil];
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
@@ -327,6 +339,22 @@
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass of %@", NSStringFromSelector(_cmd), NSStringFromClass([self class])]
                                  userInfo:nil];
+}
+
+- (void)importURLData:(NSNotification *)notification
+{
+    if (nil == notification || nil == notification.userInfo
+        || 0 == notification.userInfo.allKeys.count)
+    {
+        return;
+    }
+    EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped importedAttributes:notification.userInfo hasNumericalInput:YES];
+
+    [self.navigationController pushViewController:editController animated:YES];
+//    editController.preferredContentSize = CGSizeMake(320, 568);
+//    UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+//    editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+//    [self presentViewController:editNavCtrl animated:YES completion:nil];
 }
 
 - (void)startAnimation:(NSNotification *)notification

@@ -210,17 +210,10 @@
     NSString *queryString = url.query;
     PWESCoreURLImporter *urlImporter = [PWESCoreURLImporter new];
     NSDictionary *results = [urlImporter resultsFromURLQueryString:queryString];
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PWESMainStoryboard" bundle:nil];
-    PWESContentContainerController *mainController = [storyboard instantiateViewControllerWithIdentifier:@"contentContainer"];
-    if (nil != mainController && nil != results && 0 != results.allKeys.count)
+    if (nil != results && 0 < results.allKeys.count)
     {
-        mainController.isImport = YES;
-        mainController.importedURLAttributes = results;
-            //        [mainController loadResultsViewController:results];
-            //        [mainController replaceMainController:kResultsController importedAttributes:results];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kImportNotificationKey object:nil userInfo:results];
     }
-    
     return YES;
 }
 
