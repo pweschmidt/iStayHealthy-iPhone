@@ -39,7 +39,7 @@ class PWESCoreURLImporter: NSObject
         {
             bloodPressureFromString(valueString)
         }
-        else if "ResultsDate" == keyString
+        else if kResultsDate == keyString
         {
             dateFromStringValue(valueString)
         }
@@ -84,7 +84,7 @@ class PWESCoreURLImporter: NSObject
         println("found date = \(value)")
         if nil != value
         {
-            results.setObject(value!, forKey: "ResultsDate")
+            results.setObject(value!, forKey: kResultsDate)
         }
     }
     
@@ -104,8 +104,8 @@ class PWESCoreURLImporter: NSObject
             
             if nil != systole && nil != diastole
             {
-                results.setObject(systole!, forKey: "Systole")
-                results.setObject(diastole!, forKey: "Diastole")
+                results.setObject(systole!, forKey: kSystole)
+                results.setObject(diastole!, forKey: kDiastole)
             }
         }
     }
@@ -117,39 +117,39 @@ class PWESCoreURLImporter: NSObject
     
     func mapResultsType(type:String) -> String
     {
-        if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CD4")
+        if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kCD4)
         {
-            return "CD4";
+            return kCD4;
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CD4Percent")
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kCD4Percent)
         {
-            return "CD4Percent"
+            return kCD4Percent
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ViralLoad")
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kViralLoad)
         {
-            return "ViralLoad"
+            return kViralLoad
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ResultsDate") ||
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kResultsDate) ||
        NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ResultDate") ||
         NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("date")
         {
-            return "ResultsDate"
+            return kResultsDate
         }
         else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("BloodPressure")
         {
             return "BloodPressure"
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("BMI")
+        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kBMI)
         {
-            return "bmi"
+            return kBMI
         }
         else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CardiacRisk")
         {
-            return "cardiacRiskFactor"
+            return kCardiacRiskFactor
         }
         else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("Cholesterol")
         {
-            return "TotalCholesterol"
+            return kTotalCholesterol
         }
         
         return "Unknown"

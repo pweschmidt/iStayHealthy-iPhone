@@ -36,14 +36,14 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     func parserDidEndDocument(parser: NSXMLParser!)
     {
-        self.records.setValue(self.results, forKey: "Results")
-        self.records.setValue(self.meds, forKey: "Medications")
-        self.records.setValue(self.otherMeds, forKey: "OtherMedications")
-        self.records.setValue(self.procedures, forKey: "Illnesses")
-        self.records.setValue(self.previousMeds, forKey: "PreviousMedications")
-        self.records.setValue(self.effects, forKey: "HIVSideEffects")
-        self.records.setValue(self.clinics, forKey: "ClinicalContacts")
-        self.records.setValue(self.missedMeds, forKey: "MissedMedications")
+        self.records.setObject(self.results, forKey: kResults)
+        self.records.setObject(self.meds, forKey: kMedications)
+        self.records.setObject(self.otherMeds, forKey: kOtherMedications)
+        self.records.setObject(self.procedures, forKey: kIllnessAndProcedures)
+        self.records.setObject(self.previousMeds, forKey: kPreviousMedications)
+        self.records.setObject(self.effects, forKey: kHIVSideEffects)
+        self.records.setObject(self.clinics, forKey: kClinicalContacts)
+        self.records.setObject(self.missedMeds, forKey: kMissedMedications)
         if nil != self.completion
         {
             self.completion!(success: true, dictionary: self.records, error: nil)
@@ -52,35 +52,35 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!)
     {
-        if elementName == "Result"
+        if elementName == kResult
         {
             self.results.addObject(attributeDict)
         }
-        if elementName == "Medication"
+        if elementName == kMedication
         {
             self.meds.addObject(attributeDict)
         }
-        if elementName == "MissedMedication"
+        if elementName == kMissedMedication
         {
             self.missedMeds.addObject(attributeDict)
         }
-        if elementName == "OtherMedication"
+        if elementName == kOtherMedication
         {
             self.otherMeds.addObject(attributeDict)
         }
-        if elementName == "Contacts"
+        if elementName == kContacts
         {
             self.clinics.addObject(attributeDict)
         }
-        if elementName == "Procedures"
+        if elementName == kProcedures
         {
             self.procedures.addObject(attributeDict)
         }
-        if elementName == "SideEffects"
+        if elementName == kSideEffects
         {
             self.effects.addObject(attributeDict)
         }
-        if elementName == "PreviousMedication"
+        if elementName == kPreviousMedication
         {
             self.previousMeds.addObject(attributeDict)
         }

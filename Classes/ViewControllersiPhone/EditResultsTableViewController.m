@@ -38,7 +38,9 @@
    importedAttributes:(NSDictionary *)importedAttributes
     hasNumericalInput:(BOOL)hasNumericalInput
 {
-    self = [super initWithStyle:style managedObject:nil hasNumericalInput:hasNumericalInput];
+    self = [super initWithStyle:style
+                  managedObject:nil
+              hasNumericalInput:hasNumericalInput];
     if (nil != self)
     {
         _importedAttributes = importedAttributes;
@@ -51,7 +53,9 @@
         managedObject:(NSManagedObject *)managedObject
     hasNumericalInput:(BOOL)hasNumericalInput
 {
-    self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
+    self = [super initWithStyle:style
+                  managedObject:managedObject
+              hasNumericalInput:hasNumericalInput];
     if (nil != self)
     {
         _hasImportedData = NO;
@@ -90,8 +94,12 @@
 
 - (void)populateValueMapFromImportedAttributes
 {
+    self.valueMap = [NSMutableDictionary dictionary];
+    self.bloodPressureHasChanged = NO;
     if (nil == self.importedAttributes || 0 == self.importedAttributes.allKeys.count)
     {
+        self.hasImportedData = NO;
+        self.isEditMode = NO;
         return;
     }
     [self.importedAttributes enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
@@ -108,6 +116,7 @@
              }
          }
      }];
+    self.isEditMode = YES;
     self.hasImportedData = YES;
 }
 
@@ -169,8 +178,6 @@
     {
         UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Imported Data", nil) message:NSLocalizedString(@"Review your imported data and 'Save' when done", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
         [importAlert show];
-                
-        self.hasImportedData = NO;
     }
 }
 
@@ -178,7 +185,7 @@
 {
     Results *results = nil;
 
-    if (!self.isEditMode)
+    if (nil == self.managedObject)
     {
         results = [[CoreDataManager sharedInstance]
                    managedObjectForEntityName:kResults];
@@ -219,8 +226,28 @@
 
     NSError *error = nil;
     [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-    [self popController];
+    if (self.hasImportedData && self.isEditMode)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self popController];
+    }
 }
+
+- (void)cancel
+{
+    if (self.hasImportedData && self.isEditMode)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [super cancel];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
