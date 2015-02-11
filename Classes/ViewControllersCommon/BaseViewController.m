@@ -8,9 +8,9 @@
 
 #import "BaseViewController.h"
 #import "CoreDataConstants.h"
-    //#import "ContentContainerViewController.h"
-    //#import "ContentNavigationController.h"
-    //#import "ContentNavigationController_iPad.h"
+// #import "ContentContainerViewController.h"
+// #import "ContentNavigationController.h"
+// #import "ContentNavigationController_iPad.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 // #import "HelpTableViewController.h"
@@ -146,50 +146,51 @@
     {
         return;
     }
-    CGFloat width = 180;
-    CGFloat height = 44;
-    CGFloat logoWidth = 29;
-    CGFloat pozWidth = 45;
-    CGFloat labelWidth = 180 - 29 - 45;
-    CGFloat topOffset = (44 - 29) / 2;
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    if (self.isPopover)
-    {
-        UILabel *titleLabel = [UILabel standardLabel];
-        titleLabel.text = titleString;
-        titleLabel.frame = titleView.frame;
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [UIFont fontWithType:Standard size:17];
-        titleLabel.numberOfLines = 0;
-        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        [titleView addSubview:titleLabel];
-    }
-    else
-    {
-        UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_29.png"]];
-        logo.frame = CGRectMake(0, topOffset, logoWidth, logoWidth);
-        logo.layer.cornerRadius = 6;
-        logo.layer.masksToBounds = YES;
-        UIImageView *poz = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pozicon.png"]];
-        poz.frame = CGRectMake(width - pozWidth, topOffset, pozWidth, logoWidth);
-        poz.layer.cornerRadius = 6;
-        poz.layer.masksToBounds = YES;
-
-        [titleView addSubview:logo];
-        [titleView addSubview:poz];
-
-        UILabel *titleLabel = [UILabel standardLabel];
-        titleLabel.text = titleString;
-        titleLabel.frame = CGRectMake(logoWidth, 0, labelWidth, height);
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [UIFont fontWithType:Standard size:17];
-        titleLabel.numberOfLines = 0;
-        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-
-        [titleView addSubview:titleLabel];
-    }
-
-    self.navigationItem.titleView = titleView;
+    self.navigationItem.title = titleString;
+//    CGFloat width = 180;
+//    CGFloat height = 44;
+//    CGFloat logoWidth = 29;
+//    CGFloat pozWidth = 45;
+//    CGFloat labelWidth = 180 - 29 - 45;
+//    CGFloat topOffset = (44 - 29) / 2;
+//    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+//    if (self.isPopover)
+//    {
+//        UILabel *titleLabel = [UILabel standardLabel];
+//        titleLabel.text = titleString;
+//        titleLabel.frame = titleView.frame;
+//        titleLabel.textAlignment = NSTextAlignmentCenter;
+//        titleLabel.font = [UIFont fontWithType:Standard size:17];
+//        titleLabel.numberOfLines = 0;
+//        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//        [titleView addSubview:titleLabel];
+//    }
+//    else
+//    {
+//        UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_29.png"]];
+//        logo.frame = CGRectMake(0, topOffset, logoWidth, logoWidth);
+//        logo.layer.cornerRadius = 6;
+//        logo.layer.masksToBounds = YES;
+//        UIImageView *poz = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pozicon.png"]];
+//        poz.frame = CGRectMake(width - pozWidth, topOffset, pozWidth, logoWidth);
+//        poz.layer.cornerRadius = 6;
+//        poz.layer.masksToBounds = YES;
+//
+//        [titleView addSubview:logo];
+//        [titleView addSubview:poz];
+//
+//        UILabel *titleLabel = [UILabel standardLabel];
+//        titleLabel.text = titleString;
+//        titleLabel.frame = CGRectMake(logoWidth, 0, labelWidth, height);
+//        titleLabel.textAlignment = NSTextAlignmentCenter;
+//        titleLabel.font = [UIFont fontWithType:Standard size:17];
+//        titleLabel.numberOfLines = 0;
+//        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//
+//        [titleView addSubview:titleLabel];
+//    }
+//
+//    self.navigationItem.titleView = titleView;
 }
 
 - (void)goToPOZSite
@@ -272,12 +273,12 @@
         selector:@selector(reloadSQLData:)
             name:NSManagedObjectContextDidSaveNotification
           object:nil];
-    
+
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(importURLData:)
-     name:kImportNotificationKey
-     object:nil];
+        selector:@selector(importURLData:)
+            name:kImportNotificationKey
+          object:nil];
 }
 
 - (void)unregisterObservers
@@ -291,11 +292,11 @@
      removeObserver:self
                name:kErrorStoreNotificationKey
              object:nil];
-    
+
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
-     name:kImportNotificationKey
-     object:nil];
+               name:kImportNotificationKey
+             object:nil];
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
@@ -450,67 +451,67 @@
 
 - (void)showMailControllerHasAttachment:(BOOL)hasAttachment
 {
-	MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
 
-	mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
 
-	NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
-	mailController.mailComposeDelegate = self;
-	[mailController setToRecipients:toRecipient];
-	[mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
-	if (hasAttachment)
-	{
-		CoreXMLWriter *writer = [CoreXMLWriter new];
-		NSString *dataPath = [self uploadFileTmpPath];
+    NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
+    mailController.mailComposeDelegate = self;
+    [mailController setToRecipients:toRecipient];
+    [mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
+    if (hasAttachment)
+    {
+        CoreXMLWriter *writer = [CoreXMLWriter new];
+        NSString *dataPath = [self uploadFileTmpPath];
 
-		[writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-		    if (nil != xmlString)
-		    {
-		        NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-		        NSError *writeError = nil;
-		        [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
-		        if (writeError)
-		        {
-		            [[[UIAlertView alloc]
-		              initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		             show];
-				}
-		        else
-		        {
-		            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+        [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+             if (nil != xmlString)
+             {
+                 NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+                 NSError *writeError = nil;
+                 [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
+                 if (writeError)
+                 {
+                     [[[UIAlertView alloc]
+                               initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+                                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                              show];
+                 }
+                 else
+                 {
+                     MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
 
-		            mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-		            mailController.mailComposeDelegate = self;
-		            [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
-		            [mailController setSubject:@"iStayHealthy Data (attached)"];
-		            [self.navigationController presentViewController:mailController animated:YES completion:nil];
-				}
-			}
-		}];
-		//		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
-		//		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
-		//		    dispatch_async(dispatch_get_main_queue(), ^{
-		//		        if (nil != csvString)
-		//		        {
-		//		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-		//		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
-		//				}
-		//		        else
-		//		        {
-		//		            [[[UIAlertView alloc]
-		//		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
-		//		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-		//		             show];
-		//				}
-		//		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-		//			});
-		//		}];
-	}
-	else
-	{
-		[self.navigationController presentViewController:mailController animated:YES completion:nil];
-	}
+                     mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+                     mailController.mailComposeDelegate = self;
+                     [mailController addAttachmentData:xmlData mimeType:@"application/xml" fileName:dataPath];
+                     [mailController setSubject:@"iStayHealthy Data (attached)"];
+                     [self.navigationController presentViewController:mailController animated:YES completion:nil];
+                 }
+             }
+         }];
+        //		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
+        //		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
+        //		    dispatch_async(dispatch_get_main_queue(), ^{
+        //		        if (nil != csvString)
+        //		        {
+        //		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
+        //		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
+        //				}
+        //		        else
+        //		        {
+        //		            [[[UIAlertView alloc]
+        //		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
+        //		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+        //		             show];
+        //				}
+        //		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
+        //			});
+        //		}];
+    }
+    else
+    {
+        [self.navigationController presentViewController:mailController animated:YES completion:nil];
+    }
 }
 
 - (NSString *)uploadFileTmpPath
