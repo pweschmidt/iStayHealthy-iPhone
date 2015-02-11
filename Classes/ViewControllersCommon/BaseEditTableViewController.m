@@ -62,7 +62,10 @@
     save.backgroundColor = [UIColor clearColor];
     [save setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
     [save addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
+//    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", nil) style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
+
+
     if (self.isEditMode)
     {
         UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(showDeleteAlertView)];
@@ -325,15 +328,15 @@
 
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations: ^{
          [self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, PWESCustomTextfieldCell *cell, BOOL *stop) {
-                  if (textField != cell.inputField)
-                  {
-                      [cell shade];
-                  }
-                  else
-                  {
-                      [cell partialShade];
-                  }
-              }];
+              if (textField != cell.inputField)
+              {
+                  [cell shade];
+              }
+              else
+              {
+                  [cell partialShade];
+              }
+          }];
      } completion:nil];
 }
 
@@ -341,9 +344,9 @@
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations: ^{
          [self.cellDictionary enumerateKeysAndObjectsUsingBlock: ^(id key, PWESCustomTextfieldCell *cell, BOOL *stop) {
-                  [cell unshade];
-                  textField.textColor = [UIColor blackColor];
-              }];
+              [cell unshade];
+              textField.textColor = [UIColor blackColor];
+          }];
      } completion:nil];
 }
 
@@ -493,8 +496,8 @@
         datePicker.tag = kBaseDateCellTag;
 //        datePicker.datePickerMode = UIDatePickerModeDate;
         [datePicker addTarget:self
-                           action:@selector(dateAction:)
-                 forControlEvents:UIControlEventValueChanged];
+                       action:@selector(dateAction:)
+             forControlEvents:UIControlEventValueChanged];
         [checkDatePickerCell.contentView addSubview:datePicker];
 
         if (nil != datePicker)

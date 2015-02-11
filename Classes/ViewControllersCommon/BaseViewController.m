@@ -73,7 +73,8 @@
     button.backgroundColor = [UIColor clearColor];
     [button addSubview:menuView];
     [button addTarget:self action:@selector(hamburgerMenu) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Menu", nil) style:UIBarButtonItemStylePlain target:self action:@selector(hamburgerMenu)];
     if (!self.isPopover)
     {
         self.navigationItem.leftBarButtonItem = menuButton;
@@ -473,9 +474,9 @@
                  if (writeError)
                  {
                      [[[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                              show];
+                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                      show];
                  }
                  else
                  {
