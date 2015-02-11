@@ -66,7 +66,8 @@
 {
     [super viewDidLoad];
     [self populateCalendars];
-    self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
+    [self setTitleViewWithTitle:NSLocalizedString(@"Configure Med. Diary", nil)];
+        //    self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
     NSArray *menuTitles = @[@"1", @"2", @"3"];
 
     self.calendarSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];

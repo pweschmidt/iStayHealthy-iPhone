@@ -42,11 +42,13 @@
 	[super viewDidLoad];
 	if (self.isEditMode)
 	{
-		self.navigationItem.title = NSLocalizedString(@"Edit Other Medication", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"Edit Other Medication", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"Edit Other Medication", nil);
 	}
 	else
 	{
-		self.navigationItem.title = NSLocalizedString(@"New Other Medication", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"New Other Medication", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"New Other Medication", nil);
 	}
 }
 

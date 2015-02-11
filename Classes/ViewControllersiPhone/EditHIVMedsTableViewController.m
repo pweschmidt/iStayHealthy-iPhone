@@ -30,11 +30,13 @@
 	self.medicationListings = [NSMutableDictionary dictionary];
 	if (self.isEditMode)
 	{
-		self.navigationItem.title = NSLocalizedString(@"Edit HIV Drugs", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"Edit HIV Drugs", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"Edit HIV Drugs", nil);
 	}
 	else
 	{
-		self.navigationItem.title = NSLocalizedString(@"Add HIV Drugs", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"Add HIV Drugs", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"Add HIV Drugs", nil);
 	}
 
 	/**

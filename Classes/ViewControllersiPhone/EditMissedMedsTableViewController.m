@@ -103,7 +103,8 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.navigationItem.title = NSLocalizedString(@"New Missed Medication", nil);
+    [self setTitleViewWithTitle:NSLocalizedString(@"New Missed Medication", nil)];
+        //	self.navigationItem.title = NSLocalizedString(@"New Missed Medication", nil);
 }
 
 - (void)didReceiveMemoryWarning

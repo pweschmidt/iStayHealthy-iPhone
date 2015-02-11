@@ -69,6 +69,7 @@
 - (void)changeDate:(NSIndexPath *)indexPath;
 - (BOOL)hasInlineDatePicker;
 - (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath;
+- (void)setTitleViewWithTitle:(NSString *)titleString;
 - (UIImage *)blankImage;
 - (NSNumber *)tagNumberForIndex:(NSUInteger)index segment:(NSUInteger)segment;
 @end

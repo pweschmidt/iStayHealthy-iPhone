@@ -42,7 +42,8 @@
 	[super viewDidLoad];
 	if (self.isEditMode)
 	{
-		self.navigationItem.title = NSLocalizedString(@"Edit Clinic", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"Edit Clinic", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"Edit Clinic", nil);
 		self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44);
 		if (![Utilities isIPad])
 		{
@@ -51,7 +52,8 @@
 	}
 	else
 	{
-		self.navigationItem.title = NSLocalizedString(@"New Clinic", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"New Clinic", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"New Clinic", nil);
 	}
 	self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
 }

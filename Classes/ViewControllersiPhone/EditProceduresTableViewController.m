@@ -37,11 +37,13 @@
 	[super viewDidLoad];
 	if (self.isEditMode)
 	{
-		self.navigationItem.title = NSLocalizedString(@"Edit Illness", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"Edit Illness", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"Edit Illness", nil);
 	}
 	else
 	{
-		self.navigationItem.title = NSLocalizedString(@"New Illness", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"New Illness", nil)];
+            //		self.navigationItem.title = NSLocalizedString(@"New Illness", nil);
 	}
 }
 

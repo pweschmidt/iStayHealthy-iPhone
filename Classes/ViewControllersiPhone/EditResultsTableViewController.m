@@ -131,11 +131,13 @@
 
     if (self.isEditMode)
     {
-        self.navigationItem.title = NSLocalizedString(@"Edit Result", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"Edit Result", nil)];
+            //        self.navigationItem.title = NSLocalizedString(@"Edit Result", nil);
     }
     else
     {
-        self.navigationItem.title = NSLocalizedString(@"New Result", nil);
+        [self setTitleViewWithTitle: NSLocalizedString(@"New Result", nil)];
+            //        self.navigationItem.title = NSLocalizedString(@"New Result", nil);
     }
 
 

@@ -46,7 +46,8 @@
 	[super viewDidLoad];
 	if (self.isEditMode)
 	{
-		self.navigationItem.title = NSLocalizedString(@"Edit Alert", nil);
+            //		self.navigationItem.title = NSLocalizedString(@"Edit Alert", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"Edit Alert", nil)];
 		if (nil != self.currentNotification)
 		{
 			self.date = self.currentNotification.fireDate;

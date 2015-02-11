@@ -11,6 +11,8 @@
 #import "NSDate+Extras.h"
 #import "UIFont+Standard.h"
 #import "CoreDataManager.h"
+#import "UILabel+Standard.h"
+#import "UIFont+Standard.h"
 
 #define kContentOffsetX            20.0f
 #define kLabelWidthIPhone          100.0f
@@ -96,6 +98,25 @@
     self.cellDictionary = [NSMutableDictionary dictionary];
     self.inputTypeForTextView = [NSMutableDictionary dictionary];
 }
+
+- (void)setTitleViewWithTitle:(NSString *)titleString
+{
+    if (nil == titleString)
+    {
+        return;
+    }
+    CGRect titleFrame = CGRectMake(0, 0, 110, 44);
+    UILabel *titleView = [UILabel standardLabel];
+    titleView.frame = titleFrame;
+    titleView.font = [UIFont fontWithType:Standard size:17];
+    titleView.numberOfLines = 0;
+    titleView.lineBreakMode = NSLineBreakByWordWrapping;
+    titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.text = titleString;
+    
+    self.navigationItem.titleView = titleView;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
