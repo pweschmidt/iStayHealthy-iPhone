@@ -18,59 +18,75 @@
 @property (nonatomic, strong) NSString *importedFilePath;
 
 + (CoreDataManager *)sharedInstance;
-
+/**
+   sets up the CoreData Manager
+ */
 - (void)setUpCoreDataManager;
 
-- (BOOL)hasNewiCloudStore;
-
-- (void)migrateToNewiCloudStore:(iStayHealthySuccessBlock)error;
-
-- (void)parseStorageContainersWithCompletionBlock:(iStayHealthyArrayCompletionBlock)completionBlock;
-
-- (BOOL)setUpStoreAsLocalStoreWithError:(NSError **)error;
-
-- (void)setUpStoreAsiCloudStoreWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock;
-
+/**
+   sets up the persistent store and storage coordinator in an asynchronous manner
+   This is to enable searching for the Uibiquity container content, ie SQLite DB
+   with iCloud enabled
+ */
 - (void)setUpStoreWithError:(iStayHealthyErrorBlock)error;
 
-- (void)resetContextsAndWait;
-
+/**
+   saves the NSManagedObjectContext using a performBlockAndWait
+ */
 - (BOOL)saveContextAndWait:(NSError **)error;
 
+/**
+   saves the NSManagedObjectContext and backs up the data to local XML
+ */
 - (BOOL)saveAndBackup:(NSError **)error;
 
+/**
+   restores data from a local XML backup file
+ */
 - (void)restoreLocallyWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock;
 
+/**
+   saves the NSManagedObjectContext using a performBlock method
+ */
 - (BOOL)saveContext:(NSError **)error;
 
+/**
+   the application documents directory in the apps sandbox
+ */
 - (NSURL *)applicationDocumentsDirectory;
 
+/**
+   adds a file to be imported to the import list
+ */
 - (BOOL)addFileToImportList:(NSURL *)sourceURL error:(NSError **)error;
 
+/**
+   fetches the iStayHealthy master record
+ */
 - (void)fetchiStayHealthyRecordWithCompletion:(iStayHealthyRecordCompletionBlock)completion;
 
+/**
+   a general method to obtain a record of entity with name, predicate and sort term
+ */
 - (void)fetchDataForEntityName:(NSString *)entityName
                      predicate:(NSPredicate *)predicate
                       sortTerm:(NSString *)sortTerm
                      ascending:(BOOL)ascending
                     completion:(iStayHealthyArrayCompletionBlock)completion;
 
+/**
+   get the managed object for a specified entity with name
+ */
+- (id)managedObjectForEntityName:(NSString *)entityName;
+/**
+   notification when the iCloud storage has changed
+ */
 - (void)iCloudStoreChanged:(NSNotification *)notification;
+
 
 - (void)importWhenReady:(NSNotification *)notification;
 - (void)importWithData;
 - (void)importFromTmpFileURL;
-
-- (id)managedObjectForEntityName:(NSString *)entityName;
-
-- (NSDictionary *)attributesForEntityName:(NSString *)entityName;
-
-/**
-   We may want to do this part later. 2 August 2014
- */
-//- (void)replaceStoreWithLocalFallbackStoreWithCompletion:(iStayHealthySuccessBlock)completionBlock;
-
-- (void)migrateToLocalWithCompletion:(iStayHealthySuccessBlock)completionBlock;
 
 
 @end

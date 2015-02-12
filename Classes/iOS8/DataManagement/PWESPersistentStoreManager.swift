@@ -11,7 +11,7 @@ import CoreData
 
 let sqliteStoreName = "PWESiStayHealthy.sqlite"
 let backupFileName = "iStayHealthyBackup.xml"
-let jsonBackUpFile = "PWESHealth.json"
+let jsonBackUpFile = "PWESHealthy.json"
 let oldStoreName = "iStayHealthy.sqlite"
 let coreDataPath = "CoreDataUbiquitySupport"
 
