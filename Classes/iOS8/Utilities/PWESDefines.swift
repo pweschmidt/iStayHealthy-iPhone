@@ -13,6 +13,7 @@ typealias PWESArrayClosure = (array: NSArray?, error: NSError?) -> Void
 
 let kUbiquitousPath                   = "5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
 let kICloudTeamID                     = "5Y4HL833A4.com.pweschmidt.iStayHealthy"
+let kBackgroundQueueName              = "com.pweschmidt.iStayHealthy.background.queue"
 /**
 XML Group elements
 */

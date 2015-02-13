@@ -98,6 +98,27 @@ class PWESPersistentStoreManager : NSObject
     
     func setUpLegacyStore()
     {
+        let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
+        let manager = NSFileManager.defaultManager()
+        
+        
+        dispatch_async(queue, { () -> Void in
+            
+            let iCloudStoreURL: NSURL? = manager.URLForUbiquityContainerIdentifier(kICloudTeamID)
+            if nil != iCloudStoreURL
+            {
+                
+            }
+
+            
+            var iCloudOptions = CoreDataUtils.iCloudStoreOptions()
+            let noniCloudOptions = CoreDataUtils.noiCloudStoreOptions()
+            let localOptions = CoreDataUtils.localStoreOptions()
+            let storeURLs = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+            let storeURL = (storeURLs[storeURLs.endIndex - 1]).URLByAppendingPathComponent(oldStoreName)
+            
+            let iCloudAvailable = (nil != manager.ubiquityIdentityToken)
+        })
         
     }
     
