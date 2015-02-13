@@ -17,6 +17,7 @@ let coreDataPath = "CoreDataUbiquitySupport"
 
 class PWESPersistentStoreManager : NSObject
 {
+    var foundDatabasePaths: NSMutableArray = NSMutableArray()
     var persistentStoreCoordinator: NSPersistentStoreCoordinator?
     var defaultContext: NSManagedObjectContext?
     var hasLoadedStore: Bool?
@@ -60,7 +61,11 @@ class PWESPersistentStoreManager : NSObject
     
     func setUpCoreDataStack()
     {
-        if hasNewDatabase()
+        let hasNewDB = hasNewDatabase()
+        let hasOldDB = hasLegacyDatabase()
+        
+        let useNewDB = hasNewDB || (!hasNewDB && !hasOldDB)
+        if useNewDB
         {
             setUpNewStore()
         }
@@ -68,6 +73,7 @@ class PWESPersistentStoreManager : NSObject
         {
             setUpLegacyStore()
         }
+        
     }
     
     func setUpNewStore()
@@ -208,6 +214,32 @@ class PWESPersistentStoreManager : NSObject
             }
         }
         return false
+    }
+    
+    func hasLegacyDatabase() -> Bool
+    {
+        var path: String?
+        var libraryPath: NSURL = appLibraryDirectory()
+        var newPath = libraryPath.URLByAppendingPathComponent(oldStoreName)
+        if nil != newPath.path
+        {
+            if self.fileManager.fileExistsAtPath(newPath.path!)
+            {
+                self.foundDatabasePaths.addObject(newPath)
+                return true
+            }
+            else
+            {
+                var paths: NSMutableArray = NSMutableArray()
+                searchPathForOldDataStore(oldStoreName, foundPaths: paths)
+                if 0 < paths.count
+                {
+                    self.foundDatabasePaths = paths
+                    return true
+                }
+            }
+        }
+        return false;
     }
     
     func findStorageType() -> Int
