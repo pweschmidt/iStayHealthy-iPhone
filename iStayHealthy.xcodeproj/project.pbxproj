@@ -1870,8 +1870,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peter Schmidt (48S892KGWD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
@@ -1899,8 +1899,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "97d963b2-0983-4f52-89fd-c7fab119ff6b";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97d963b2-0983-4f52-89fd-c7fab119ff6b";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bf7d04c5-34b2-4f71-82e3-07d194fe2dee";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1916,8 +1916,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
@@ -1942,7 +1942,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "1c0627c9-2a19-4fe4-af71-36f90de0c920";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -1966,8 +1966,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DAPPDEBUG";
-				PROVISIONING_PROFILE = "97d963b2-0983-4f52-89fd-c7fab119ff6b";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97d963b2-0983-4f52-89fd-c7fab119ff6b";
+				PROVISIONING_PROFILE = "bf7d04c5-34b2-4f71-82e3-07d194fe2dee";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bf7d04c5-34b2-4f71-82e3-07d194fe2dee";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 			};
@@ -1988,8 +1988,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "47b8329d-76f5-46e7-beef-e84365e6af5f";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47b8329d-76f5-46e7-beef-e84365e6af5f";
+				PROVISIONING_PROFILE = "2ac73ce6-b702-47f7-8e11-e1828447bd06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2ac73ce6-b702-47f7-8e11-e1828447bd06";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 			};
@@ -2010,8 +2010,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "412167ba-0eac-4983-aa02-ed84799013c0";
-				"PROVISIONING_PROFILE[sdk=*]" = "412167ba-0eac-4983-aa02-ed84799013c0";
+				PROVISIONING_PROFILE = "97abfe53-4618-4b3c-9f64-46629e9f471d";
+				"PROVISIONING_PROFILE[sdk=*]" = "97abfe53-4618-4b3c-9f64-46629e9f471d";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 			};
@@ -2027,7 +2027,7 @@
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
@@ -2052,8 +2052,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "412167ba-0eac-4983-aa02-ed84799013c0";
-				"PROVISIONING_PROFILE[sdk=*]" = "412167ba-0eac-4983-aa02-ed84799013c0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "97abfe53-4618-4b3c-9f64-46629e9f471d";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
