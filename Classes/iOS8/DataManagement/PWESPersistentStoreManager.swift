@@ -72,50 +72,21 @@ class PWESPersistentStoreManager : NSObject
     
     func setUpNewStore()
     {
+        if nil == persistentStoreCoordinator
+        {
+            return
+        }
         var path: String?
         var libraryPath: NSURL = appLibraryDirectory()
         var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
         if nil != persistentStoreCoordinator
         {
             let coordinator = persistentStoreCoordinator!
-            var store = coordinator.persistentStoreForURL(newPath)
-            if nil == store
-            {
-                var creationError:NSError?
-                let localOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
-                    NSInferMappingModelAutomaticallyOption:true]
-                store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
-            }
+            let localOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
+                NSInferMappingModelAutomaticallyOption:true]
+            var creationError:NSError?
+            var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
         }
-    }
-    
-    func cloudOptions() -> NSDictionary?
-    {
-        let manager = NSFileManager.defaultManager()
-        let ubiquity = manager.URLForUbiquityContainerIdentifier(kICloudTeamID)
-        if nil == ubiquity
-        {
-            return nil
-        }
-        
-        let cloudContent = ubiquity?.path?.stringByAppendingPathComponent("data")
-        let amendedCloudURL = NSURL.fileURLWithPath(cloudContent!)
-        
-        let optionTrue = true
-        let optionValue: NSNumber = optionTrue
-        let iCloudOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
-            NSInferMappingModelAutomaticallyOption:true,
-            NSPersistentStoreUbiquitousContentNameKey: kUbiquitousKeyPath]
-        return iCloudOptions
-    }
-    
-    func disabledCloudOptions() -> NSDictionary
-    {
-        let iCloudOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
-            NSInferMappingModelAutomaticallyOption:true,
-            NSPersistentStoreRemoveUbiquitousMetadataOption: true,
-            NSPersistentStoreUbiquitousContentNameKey: kUbiquitousKeyPath]
-        return iCloudOptions
     }
     
     
@@ -125,7 +96,7 @@ class PWESPersistentStoreManager : NSObject
     }
     
 
-    func saveContextAndWait(error: NSErrorPointer) -> Bool
+    func saveContext(error: NSErrorPointer) -> Bool
     {
         if nil == self.defaultContext
         {
@@ -138,37 +109,31 @@ class PWESPersistentStoreManager : NSObject
         }
         
         var success = true
-        
-        context.performBlockAndWait { () -> Void in
-            success = context.save(error)
-        }
-        
-        if success
+        success = context.save(error)
+        if !success
         {
-            let writer:CoreXMLWriter = CoreXMLWriter()
-            writer.writeWithCompletionBlock({ (xmlString: String?, xmlError: NSError?) -> Void in
-                if nil != xmlString
-                {
-                    success = false
-                }
-                else
-                {
-                    let xml:NSString = xmlString!
-                    let xmlData: NSData = xml.dataUsingEncoding(NSUTF8StringEncoding)!
-                    let docPath:NSURL = self.appDocumentDirectory()
-                    var filePath = docPath.URLByAppendingPathComponent(backupFileName)
-                    let manager:NSFileManager = NSFileManager.defaultManager()
-                    if manager.fileExistsAtPath(filePath.path!)
-                    {
-                        var fileError: NSError?
-                        manager.removeItemAtURL(filePath, error: &fileError)
-                    }
-                    xmlData.writeToURL(filePath, atomically: true)
-                }
-            })
+            return false
         }
         
-        return false
+        let writer:CoreXMLWriter = CoreXMLWriter()
+        writer.writeWithCompletionBlock({ (xmlString: String?, xmlError: NSError?) -> Void in
+            if nil != xmlString
+            {
+                let xml:NSString = xmlString!
+                let xmlData: NSData = xml.dataUsingEncoding(NSUTF8StringEncoding)!
+                let docPath:NSURL = self.appDocumentDirectory()
+                var filePath = docPath.URLByAppendingPathComponent(backupFileName)
+                let manager:NSFileManager = NSFileManager.defaultManager()
+                if manager.fileExistsAtPath(filePath.path!)
+                {
+                    var fileError: NSError?
+                    manager.removeItemAtURL(filePath, error: &fileError)
+                }
+                xmlData.writeToURL(filePath, atomically: true)
+            }
+        })
+        
+        return true
     }
     
     func fetchMasterRecord(completion: PWESArrayClosure)
