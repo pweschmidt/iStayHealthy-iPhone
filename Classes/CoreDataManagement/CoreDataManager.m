@@ -15,16 +15,9 @@
 #import "AppSettings.h"
 
 @interface CoreDataManager ()
-{
-    NSManagedObjectContext *privateContext;
-    dispatch_queue_t storeQueue;
-}
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong) NSData *importedXMLData;
-- (void)unregisterObservers;
-- (void)registerObservers;
 - (void)mergeFromiCloud:(NSNotification *)notification;
-- (BOOL)saveContext:(BOOL)wait error:(NSError **)error;
 @end
 
 @implementation CoreDataManager
@@ -44,7 +37,6 @@
     self = [super init];
     if (nil != self)
     {
-        storeQueue = dispatch_queue_create(kBackgroundQueueName, NULL);
         _importedXMLData = nil;
         _importedFilePath = nil;
     }
@@ -60,9 +52,6 @@
 
 - (void)setUpCoreDataManager
 {
-#ifdef APPDEBUG
-    NSLog(@"setUpCoreDataManager iOS7");
-#endif
     self.storeIsReady = NO;
     self.hasDataForImport = NO;
     [self registerObservers];
@@ -87,14 +76,11 @@
     NSMergePolicy *policy = [[NSMergePolicy alloc]
                              initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType];
 
-    privateContext = [[NSManagedObjectContext alloc]
-                      initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [privateContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
-    [privateContext setMergePolicy:policy];
-
     NSManagedObjectContext *mainContext = [[NSManagedObjectContext alloc]
                                            initWithConcurrencyType:NSMainQueueConcurrencyType];
-    mainContext.parentContext = privateContext;
+
+    mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    mainContext.mergePolicy = policy;
     self.defaultContext = mainContext;
 }
 
@@ -104,6 +90,7 @@
     NSNumber *storeLoadedNumber = [defaults objectForKey:kStoreLoadingKey];
     __block int storeLoaded = (nil != storeLoadedNumber) ? [storeLoadedNumber intValue] : -1;
     __block BOOL isUsingiCloud = NO;
+    dispatch_queue_t storeQueue = dispatch_queue_create(kBackgroundQueueName, NULL);
 
     dispatch_async(storeQueue, ^{
                        NSFileManager *defaultManager = [NSFileManager defaultManager];
@@ -414,35 +401,6 @@
 }
 
 #pragma mark save and fetch
-- (BOOL)saveAndBackup:(NSError **)error
-{
-    __block BOOL saveSuccess = [self saveContextAndWait:error];
-
-    if (saveSuccess)
-    {
-        CoreXMLWriter *writer = [CoreXMLWriter new];
-        [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-             if (nil != xmlString)
-             {
-
-                 NSLog(@"RESULTS from WRITING XML ****\r\n");
-                 NSLog(@"%@", xmlString);
-
-                 NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-                 NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
-                 NSFileManager *manager = [NSFileManager defaultManager];
-                 if ([manager fileExistsAtPath:[path path]])
-                 {
-                     NSError *removeError = nil;
-                     [manager removeItemAtURL:path error:&removeError];
-                     saveSuccess = (removeError == nil);
-                 }
-                 [xmlData writeToURL:path atomically:YES];
-             }
-         }];
-    }
-    return saveSuccess;
-}
 
 - (void)restoreLocallyWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock
 {
@@ -474,7 +432,7 @@
     }
 }
 
-- (BOOL)saveContext:(BOOL)wait error:(NSError **)error
+- (BOOL)saveContextAndWait:(NSError **)error
 {
     NSManagedObjectContext *context = self.defaultContext;
 
@@ -486,67 +444,24 @@
     {
         [context performBlockAndWait: ^{
              [context save:error];
+             CoreXMLWriter *writer = [CoreXMLWriter new];
+             [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
+                  if (nil != xmlString)
+                  {
+                      NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+                      NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
+                      NSFileManager *manager = [NSFileManager defaultManager];
+                      if ([manager fileExistsAtPath:[path path]])
+                      {
+                          NSError *removeError = nil;
+                          [manager removeItemAtURL:path error:&removeError];
+                      }
+                      [xmlData writeToURL:path atomically:YES];
+                  }
+              }];
          }];
     }
-
-    __strong CoreXMLWriter *writer = [CoreXMLWriter new];
-    void (^ savePrivateContext) (void) = ^{
-        [privateContext save:error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-                           [writer writeWithCompletionBlock: ^(NSString *xmlString, NSError *error) {
-                                if (nil != xmlString)
-                                {
-                                    NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
-                                    NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kXMLBackupFile];
-                                    NSFileManager *manager = [NSFileManager defaultManager];
-                                    if ([manager fileExistsAtPath:[path path]])
-                                    {
-                                        NSError *removeError = nil;
-                                        [manager removeItemAtURL:path error:&removeError];
-                                    }
-                                    [xmlData writeToURL:path atomically:YES];
-                                }
-                            }];
-                       });
-    };
-
-    if ([privateContext hasChanges])
-    {
-        if (wait)
-        {
-            [privateContext performBlockAndWait:savePrivateContext];
-        }
-        else
-        {
-            [privateContext performBlock:savePrivateContext];
-        }
-    }
     return YES;
-}
-
-- (BOOL)saveContextAndWait:(NSError **)error
-{
-    [self saveContext:YES error:error];
-    if (NULL != error)
-    {
-        if (nil != *error)
-        {
-            return NO;
-        }
-        else
-        {
-            return YES;
-        }
-    }
-    else
-    {
-        return YES;
-    }
-}
-
-- (BOOL)saveContext:(NSError **)error
-{
-    return [self saveContext:NO error:error];
 }
 
 - (void)fetchiStayHealthyRecordWithCompletion:(iStayHealthyRecordCompletionBlock)completion

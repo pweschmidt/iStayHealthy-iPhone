@@ -13,30 +13,30 @@ typedef void (^finishBlock)(void);
 
 typedef NS_ENUM (NSUInteger, TransitionType)
 {
-	kMenuTransition = 0,
-	kControllerTransition
+    kMenuTransition = 0,
+    kControllerTransition
 };
 
 typedef NS_ENUM (int, LoadedStore)
 {
-	MainStoreWithiCloud = 0,
-	MainStoreWithoutiCloud,
-	FallbackStore
+    MainStoreWithiCloud = 0,
+    MainStoreWithoutiCloud,
+    FallbackStore
 };
 
 typedef NS_ENUM (int, DateType)
 {
-	DateOnly = 0,
-	DateAndTime,
-	TimeOnly
+    DateOnly = 0,
+    DateAndTime,
+    TimeOnly
 };
 
 typedef NS_ENUM (int, ResultsType)
 {
-	HIVResultsType = 0,
-	BloodResultsType,
-	OtherResultsType,
-	LiverResultsType
+    HIVResultsType = 0,
+    BloodResultsType,
+    OtherResultsType,
+    LiverResultsType
 };
 
 typedef NS_ENUM (NSInteger, StorageType)
@@ -49,44 +49,44 @@ typedef NS_ENUM (NSInteger, StorageType)
 
 typedef NS_ENUM (int, InputType)
 {
-	DefaultInput = 0,
-	NumericalInput,
-	PercentageInput,
-	BloodPressureInput,
-	TextInput,
-	EmailInput,
-	WebInput
+    DefaultInput = 0,
+    NumericalInput,
+    PercentageInput,
+    BloodPressureInput,
+    TextInput,
+    EmailInput,
+    WebInput
 };
 
 typedef NS_ENUM (int, FontType)
 {
-	Standard = 0,
-	Light,
-	LightItalic,
-	Bold,
-	BoldItalic
+    Standard = 0,
+    Light,
+    LightItalic,
+    Bold,
+    BoldItalic
 };
 
 typedef NS_ENUM (int, FontSize)
 {
-	veryTiny = 9,
-	tiny = 10,
-	small = 10,
-	medium = 12,
-	standard = 15,
-	large = 17,
-	xLarge = 20
+    veryTiny = 9,
+    tiny = 10,
+    small = 10,
+    medium = 12,
+    standard = 15,
+    large = 17,
+    xLarge = 20
 };
 
 
 typedef NS_ENUM (int, MenuType)
 {
-	HamburgerMenuType = 0,
-	AddMenuType
+    HamburgerMenuType = 0,
+    AddMenuType
 };
 
-//static NSUInteger DeviceSystemMajorVersion()
-//{
+// static NSUInteger DeviceSystemMajorVersion()
+// {
 //    static NSUInteger _deviceSystemMajorVersion = -1;
 //    static dispatch_once_t onceToken;
 //
@@ -95,7 +95,7 @@ typedef NS_ENUM (int, MenuType)
 //                  });
 //
 //    return _deviceSystemMajorVersion;
-//}
+// }
 
 #define EMBEDDED_DATE_PICKER (DeviceSystemMajorVersion() >= 7)
 
@@ -133,6 +133,9 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 /**
    Database and iCloud
  */
+#define kUbiquityCoreDataPath             @"CoreDataUbiquitySupport"
+#define kLocalXMLBackupFile               @"iStayHealthyBackup.xml"
+#define kNewSQLiteStore                   @"PWESiStayHealthy.sqlite"
 #define kMainDataSource                   @"iStayHealthy.sqlite"
 #define kBackupDataSource                 @"iStayHealthyBackup.sqlite"
 #define kiCloudDataSource                 @"iStayHealthyiCloud.sqlite"

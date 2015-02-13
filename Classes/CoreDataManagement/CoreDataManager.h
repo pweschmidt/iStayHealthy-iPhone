@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *importedFilePath;
 
 + (CoreDataManager *)sharedInstance;
+
 /**
    sets up the CoreData Manager
  */
@@ -36,19 +37,9 @@
 - (BOOL)saveContextAndWait:(NSError **)error;
 
 /**
-   saves the NSManagedObjectContext and backs up the data to local XML
- */
-- (BOOL)saveAndBackup:(NSError **)error;
-
-/**
    restores data from a local XML backup file
  */
 - (void)restoreLocallyWithCompletionBlock:(iStayHealthySuccessBlock)completionBlock;
-
-/**
-   saves the NSManagedObjectContext using a performBlock method
- */
-- (BOOL)saveContext:(NSError **)error;
 
 /**
    the application documents directory in the apps sandbox
@@ -83,9 +74,21 @@
  */
 - (void)iCloudStoreChanged:(NSNotification *)notification;
 
-
+/**
+   puts the import data in a queue and will process them when ready
+   @param notification
+ */
 - (void)importWhenReady:(NSNotification *)notification;
+
+/**
+   bit of a misnomer: imports the data made available previously via a notification
+   see importWhenReady
+ */
 - (void)importWithData;
+
+/**
+   imports the data from a temporary file URL
+ */
 - (void)importFromTmpFileURL;
 
 

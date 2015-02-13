@@ -109,27 +109,27 @@
              if (success)
              {
                  [[[UIAlertView alloc]
-                           initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-                                     message:NSLocalizedString(@"Data were retrieved locally.", nil)
-                                    delegate:nil
-                           cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                          show];
+                   initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+                             message:NSLocalizedString(@"Data were retrieved locally.", nil)
+                            delegate:nil
+                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                  show];
              }
              else
              {
                  [[[UIAlertView alloc]
-                           initWithTitle:NSLocalizedString(@"Error restoring", nil)
-                                     message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
-                                    delegate:nil
-                           cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                          show];
+                   initWithTitle:NSLocalizedString(@"Error restoring", nil)
+                             message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
+                            delegate:nil
+                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                  show];
              }
          }];
     }
     else if (1 == indexPath.section)
     {
         NSError *error = nil;
-        BOOL success = [[CoreDataManager sharedInstance] saveAndBackup:&error];
+        BOOL success = [[CoreDataManager sharedInstance] saveContextAndWait:&error];
         if (success)
         {
             [[[UIAlertView alloc]

@@ -31,3 +31,5 @@
 #import "UILabel+Standard.h"
 #import "KeychainHandler.h"
 #import "AppSettings.h"
+#import "CoreXMLWriter.h"
+#import "CoreXMLReader.h"

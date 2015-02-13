@@ -18,6 +18,7 @@ let coreDataPath = "CoreDataUbiquitySupport"
 class PWESPersistentStoreManager : NSObject
 {
     var persistentStoreCoordinator: NSPersistentStoreCoordinator?
+    var defaultContext: NSManagedObjectContext?
     var hasLoadedStore: Bool?
     let fileManager = NSFileManager.defaultManager()
 
@@ -30,40 +31,189 @@ class PWESPersistentStoreManager : NSObject
         return Static.instance
     }
     
-//    override init()
-//    {
-//        persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-//        let fileManager = NSFileManager.defaultManager()
-//        let paths = fileManager.URLsForDirectory(NSSearchPathDirectory.LibraryDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
-//        let sqlPath:NSURL = paths[paths.count - 1] as NSURL
-//        
-//        let sqliteURL = sqlPath.URLByAppendingPathComponent(sqliteStoreName)
-//        let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
-//        
-//        let error:NSErrorPointer = nil
-//        
-//        let store = persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: sqliteURL, options: options, error: error)
-//        
-//        if (nil != store)
-//        {
-//            mainContext.persistentStoreCoordinator = persistentStoreCoordinator
-//            hasLoadedStore = true
-//        }
-//        else
-//        {
-//            hasLoadedStore = false
-//        }
-//    }
+    func configureStoreManager() -> Bool
+    {
+        let path:NSURL = NSBundle.mainBundle().URLForResource("iStayHealthy", withExtension: "momd")!
+        let model = NSManagedObjectModel(contentsOfURL: path)
+        if nil != model
+        {
+            persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model!)
+            return configureContextForStore()
+        }
+        return false
+    }
+    
+    func configureContextForStore() -> Bool
+    {
+        let type: NSMergePolicyType = NSMergePolicyType.MergeByPropertyObjectTrumpMergePolicyType
+        let policy: NSMergePolicy = NSMergePolicy(mergeType: type)
+        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        if nil != persistentStoreCoordinator
+        {
+            context.persistentStoreCoordinator = persistentStoreCoordinator
+            context.mergePolicy = policy
+            defaultContext = context
+            return true
+        }
+        return false
+    }
+    
+    func setUpCoreDataStack()
+    {
+        if hasNewDatabase()
+        {
+            setUpNewStore()
+        }
+        else
+        {
+            setUpLegacyStore()
+        }
+    }
     
     func setUpNewStore()
     {
-        var model = self.iStayHealthyModel
-        self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-        if nil == self.persistentStoreCoordinator
+        var path: String?
+        var libraryPath: NSURL = appLibraryDirectory()
+        var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
+        if nil != persistentStoreCoordinator
         {
-            
-            
+            let coordinator = persistentStoreCoordinator!
+            var store = coordinator.persistentStoreForURL(newPath)
+            if nil == store
+            {
+                var creationError:NSError?
+                let localOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
+                    NSInferMappingModelAutomaticallyOption:true]
+                store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
+            }
         }
+    }
+    
+    func cloudOptions() -> NSDictionary?
+    {
+        let manager = NSFileManager.defaultManager()
+        let ubiquity = manager.URLForUbiquityContainerIdentifier(kICloudTeamID)
+        if nil == ubiquity
+        {
+            return nil
+        }
+        
+        let cloudContent = ubiquity?.path?.stringByAppendingPathComponent("data")
+        let amendedCloudURL = NSURL.fileURLWithPath(cloudContent!)
+        
+        let optionTrue = true
+        let optionValue: NSNumber = optionTrue
+        let iCloudOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption:true,
+            NSPersistentStoreUbiquitousContentNameKey: kUbiquitousKeyPath]
+        return iCloudOptions
+    }
+    
+    func disabledCloudOptions() -> NSDictionary
+    {
+        let iCloudOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption:true,
+            NSPersistentStoreRemoveUbiquitousMetadataOption: true,
+            NSPersistentStoreUbiquitousContentNameKey: kUbiquitousKeyPath]
+        return iCloudOptions
+    }
+    
+    
+    func setUpLegacyStore()
+    {
+        
+    }
+    
+
+    func saveContextAndWait(error: NSErrorPointer) -> Bool
+    {
+        if nil == self.defaultContext
+        {
+            return false
+        }
+        let context: NSManagedObjectContext = defaultContext!
+        if !context.hasChanges
+        {
+            return true
+        }
+        
+        var success = true
+        
+        context.performBlockAndWait { () -> Void in
+            success = context.save(error)
+        }
+        
+        if success
+        {
+            let writer:CoreXMLWriter = CoreXMLWriter()
+            writer.writeWithCompletionBlock({ (xmlString: String?, xmlError: NSError?) -> Void in
+                if nil != xmlString
+                {
+                    success = false
+                }
+                else
+                {
+                    let xml:NSString = xmlString!
+                    let xmlData: NSData = xml.dataUsingEncoding(NSUTF8StringEncoding)!
+                    let docPath:NSURL = self.appDocumentDirectory()
+                    var filePath = docPath.URLByAppendingPathComponent(backupFileName)
+                    let manager:NSFileManager = NSFileManager.defaultManager()
+                    if manager.fileExistsAtPath(filePath.path!)
+                    {
+                        var fileError: NSError?
+                        manager.removeItemAtURL(filePath, error: &fileError)
+                    }
+                    xmlData.writeToURL(filePath, atomically: true)
+                }
+            })
+        }
+        
+        return false
+    }
+    
+    func fetchMasterRecord(completion: PWESArrayClosure)
+    {
+        fetchData(kiStayHealthyRecord, predicate: nil, sortTerm: nil, ascending: false, completion: completion)
+    }
+    
+    func fetchData(entityName: String?, predicate: NSPredicate?, sortTerm: String?, ascending: Bool, completion: PWESArrayClosure)
+    {
+        if nil == self.defaultContext || nil == entityName
+        {
+            var coreDataError: NSError = NSError(domain: "CoreDataError", code: 100, userInfo: nil)
+            completion(array:nil, error:coreDataError)
+        }
+        
+        let entity: NSEntityDescription = NSEntityDescription.entityForName(entityName!, inManagedObjectContext: self.defaultContext!)!
+        let request: NSFetchRequest = NSFetchRequest()
+        request.entity = entity
+        
+        if nil != predicate
+        {
+            request.predicate = predicate
+        }
+        
+        if nil != sortTerm
+        {
+            let descriptor: NSSortDescriptor = NSSortDescriptor(key: sortTerm!, ascending: ascending)
+            request.sortDescriptors = [descriptor]
+        }
+        
+        self.defaultContext?.performBlock({ () -> Void in
+            var fetchError: NSError?
+            let count = self.defaultContext?.countForFetchRequest(request, error: &fetchError)
+            if 0 == count || NSNotFound == count
+            {
+                let emptyData = []
+                completion(array: emptyData, error: nil)
+            }
+            else
+            {
+                let fetchedObjects = self.defaultContext?.executeFetchRequest(request, error: &fetchError)
+                completion(array: fetchedObjects, error: fetchError)
+            }
+        })
+        
     }
     
     func hasBackupFile() -> Bool
@@ -188,26 +338,12 @@ class PWESPersistentStoreManager : NSObject
         return path
     }
     
-    ///in case we want to create a context hierarchy as before
-//    let parentContext: NSManagedObjectContext =
-//    {
-//        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
-//        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-//        return context
-//    }()
-    
     let context: NSManagedObjectContext =
     {
         let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         return context
     }()
     
-    let iStayHealthyModel:NSManagedObjectModel =
-    {
-        let path:NSURL = NSBundle.mainBundle().URLForResource("iStayHealthy", withExtension: "momd")!
-        let model = NSManagedObjectModel(contentsOfURL: path)
-        return model!
-    }()
     
     func save()
     {
