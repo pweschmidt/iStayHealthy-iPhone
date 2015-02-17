@@ -110,8 +110,9 @@ class PWESPersistentStoreManager : NSObject
                 
             }
 
+            var path = CoreDataUtils.ubiquityPath()
             
-            var iCloudOptions = CoreDataUtils.iCloudStoreOptions()
+            var iCloudOptions = CoreDataUtils.iCloudStoreOptionsWithPath(path)
             let noniCloudOptions = CoreDataUtils.noiCloudStoreOptions()
             let localOptions = CoreDataUtils.localStoreOptions()
             let storeURLs = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)

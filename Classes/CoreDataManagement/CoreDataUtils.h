@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface CoreDataUtils : NSObject
+
+/**
+   @return the URL path to the iCloud storage area
+ */
+
++ (NSURL *)ubiquityPath;
+
 /**
    @return options for a store local to the device
  */
@@ -18,8 +25,10 @@
    @return dictionary containing iCloud store options. Returns nil if iCloud
    is disabled for device/user
  */
-+ (NSDictionary *)iCloudStoreOptions;
++ (NSDictionary *)iCloudStoreOptionsWithPath:(NSURL *)path;
 
+
++ (NSURL *)iCloudPathFromPath:(NSURL *)path;
 /**
    @return dictionary containing the iCloud store options with an additional to remove the ubiquity metadata.
    This is so we can migrate the iCloud store to non-iCloud environment if users so wish

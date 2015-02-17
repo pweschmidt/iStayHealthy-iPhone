@@ -102,9 +102,8 @@
 
                        BOOL hasFallbackStore = [defaultManager
                                                 fileExistsAtPath:[fallbackURL absoluteString]];
+                       NSURL *iCloud = [CoreDataUtils ubiquityPath];
 
-
-                       NSDictionary *iCloudOptions = [CoreDataUtils iCloudStoreOptions];
                        NSDictionary *noniCloudOptions = [CoreDataUtils noiCloudStoreOptions];
                        NSDictionary *defaultStoreOptions = [CoreDataUtils localStoreOptions];
 
@@ -112,11 +111,13 @@
                        NSDictionary *whichOptions = nil;
 
 
-                       if (self.iCloudEnabled)
+                       if (nil != iCloud)
                        {
                            if (self.iCloudIsAvailable)
                            {
-                               whichOptions = iCloudOptions;
+                               whichOptions = [CoreDataUtils iCloudStoreOptionsWithPath:iCloud];
+                               NSURL *url = [CoreDataUtils iCloudPathFromPath:iCloud];
+
                                whichStoreURL = mainURL;
                                storeLoaded = MainStoreWithiCloud;
                                isUsingiCloud = YES;
@@ -283,11 +284,11 @@
     return _iCloudIsAvailable;
 }
 
-- (BOOL)iCloudEnabled
-{
-    _iCloudEnabled = (nil != [CoreDataUtils iCloudStoreOptions]);
-    return _iCloudEnabled;
-}
+// - (BOOL)iCloudEnabled
+// {
+//    _iCloudEnabled = (nil != [CoreDataUtils iCloudStoreOptions]);
+//    return _iCloudEnabled;
+// }
 
 - (NSURL *)applicationDocumentsDirectory
 {

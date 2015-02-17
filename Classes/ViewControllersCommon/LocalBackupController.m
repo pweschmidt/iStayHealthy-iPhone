@@ -74,8 +74,8 @@
     }
     else if (1 == indexPath.section)
     {
-        cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
-        cell.textLabel.text = NSLocalizedString(@"Save locally", nil);
+        cell.textLabel.font = [UIFont fontWithType:Bold size:standard];
+        cell.textLabel.text = NSLocalizedString(@"Disable iCloud", nil);
     }
     else
     {
@@ -93,7 +93,7 @@
     }
     else if (1 == section)
     {
-        return NSLocalizedString(@"Saving current data set.", nil);
+        return NSLocalizedString(@"Disable iCloud for iStayHealthy", nil);
     }
     else
     {
@@ -128,26 +128,6 @@
     }
     else if (1 == indexPath.section)
     {
-        NSError *error = nil;
-        BOOL success = [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-        if (success)
-        {
-            [[[UIAlertView alloc]
-              initWithTitle:NSLocalizedString(@"Save Finished", nil)
-                        message:NSLocalizedString(@"Data were saved locally.", nil)
-                       delegate:nil
-              cancelButtonTitle:@"OK" otherButtonTitles:nil]
-             show];
-        }
-        else
-        {
-            [[[UIAlertView alloc]
-              initWithTitle:NSLocalizedString(@"Save Error", nil)
-                        message:NSLocalizedString(@"Data could not be saved locally.", nil)
-                       delegate:nil
-              cancelButtonTitle:@"OK" otherButtonTitles:nil]
-             show];
-        }
     }
     else
     {
