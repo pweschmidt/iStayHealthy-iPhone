@@ -111,6 +111,7 @@
 		C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58115F7C5CE00108EF8 /* Procedures.m */; };
 		C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */; };
 		C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43BE58E15F7CBE400108EF8 /* SideEffects.plist */; };
+		C4454C951A971E3100901385 /* PWESPasswordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4454C941A971E3100901385 /* PWESPasswordStore.swift */; };
 		C45138F01A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45138EF1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m */; };
 		C4547DDE19B9FF4B006A868C /* PWESBloodPressureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
@@ -423,6 +424,7 @@
 		C43BE58F15F7CBEE00108EF8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/SideEffects.plist; sourceTree = "<group>"; };
 		C43BE59015F7CBF400108EF8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/SideEffects.plist; sourceTree = "<group>"; };
 		C43BE59115F7CBFD00108EF8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/SideEffects.plist; sourceTree = "<group>"; };
+		C4454C941A971E3100901385 /* PWESPasswordStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESPasswordStore.swift; path = iOS8/Utilities/PWESPasswordStore.swift; sourceTree = "<group>"; };
 		C45138EE1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsViewWithValue_iPhone.h; path = Views/ResultsViewWithValue_iPhone.h; sourceTree = "<group>"; };
 		C45138EF1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsViewWithValue_iPhone.m; path = Views/ResultsViewWithValue_iPhone.m; sourceTree = "<group>"; };
 		C4547DDC19B9FF4B006A868C /* PWESBloodPressureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESBloodPressureCell.h; path = TableCells/PWESBloodPressureCell.h; sourceTree = "<group>"; };
@@ -712,6 +714,7 @@
 		0B2DAF831A614CD900F9F317 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C4454C941A971E3100901385 /* PWESPasswordStore.swift */,
 				0B2DAF841A614D1600F9F317 /* PWESDefines.swift */,
 			);
 			name = Utilities;
@@ -1496,6 +1499,7 @@
 				C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */,
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
 				0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */,
+				C4454C951A971E3100901385 /* PWESPasswordStore.swift in Sources */,
 				0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */,
 				0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */,
 				C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */,
