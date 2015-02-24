@@ -207,6 +207,7 @@
 		C4C837F016D10537002D934F /* Medication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837EF16D10536002D934F /* Medication+Comparator.m */; };
 		C4C837F316D10554002D934F /* MissedMedication+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F216D10554002D934F /* MissedMedication+Comparator.m */; };
 		C4C837F616D1057E002D934F /* Contacts+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837F516D1057E002D934F /* Contacts+Comparator.m */; };
+		C4C8E87F1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */; };
 		C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */; };
 		C4CF467517FC699E00A4A5AA /* EditContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF467417FC699E00A4A5AA /* EditContactsTableViewController.m */; };
 		C4E8D4E213EC373B00BCAE4A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E8D4E113EC373B00BCAE4A /* MessageUI.framework */; };
@@ -635,6 +636,7 @@
 		C4C837F216D10554002D934F /* MissedMedication+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MissedMedication+Comparator.m"; path = "Utils/MissedMedication+Comparator.m"; sourceTree = "<group>"; };
 		C4C837F416D1057E002D934F /* Contacts+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contacts+Comparator.h"; path = "Utils/Contacts+Comparator.h"; sourceTree = "<group>"; };
 		C4C837F516D1057E002D934F /* Contacts+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contacts+Comparator.m"; path = "Utils/Contacts+Comparator.m"; sourceTree = "<group>"; };
+		C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESFeedbackTableViewController.swift; path = iOS8/UserInterface/PWESFeedbackTableViewController.swift; sourceTree = "<group>"; };
 		C4CF467017FC696E00A4A5AA /* EditPreviousMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditPreviousMedsTableViewController.h; path = ViewControllersiPhone/EditPreviousMedsTableViewController.h; sourceTree = "<group>"; };
 		C4CF467117FC696E00A4A5AA /* EditPreviousMedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditPreviousMedsTableViewController.m; path = ViewControllersiPhone/EditPreviousMedsTableViewController.m; sourceTree = "<group>"; };
 		C4CF467317FC699E00A4A5AA /* EditContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditContactsTableViewController.h; path = ViewControllersiPhone/EditContactsTableViewController.h; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */,
 				0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */,
 				0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */,
+				C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1457,6 +1460,7 @@
 				0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */,
 				0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */,
 				C4BCF0A817B7AA1400F1E0F7 /* OtherMedication+Handling.m in Sources */,
+				C4C8E87F1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift in Sources */,
 				C4BCF0A217B7A9DA00F1E0F7 /* SideEffects+Handling.m in Sources */,
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */,

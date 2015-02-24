@@ -67,7 +67,7 @@
          }
          else if ([title isEqualToString:NSLocalizedString(@"Email Data", nil)])
          {
-             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openMailWithAttachment) buttonTag:index];
+             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(showFeedbackController:) buttonTag:index];
          }
          else if ([title isEqualToString:NSLocalizedString(@"Info", nil)])
          {
@@ -98,6 +98,31 @@
 //    [self setItems:buttons];
 }
 
+- (void)showFeedbackController:(id)sender
+{
+    if (nil != self.toolbarManager && nil != sender)
+    {
+        __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
+        if ([sender isKindOfClass:[UIBarButtonItem class]])
+        {
+            if ([strongDelegate respondsToSelector:@selector(showMailSelectionControllerFromButton::)])
+            {
+                [strongDelegate showMailSelectionControllerFromButton:(UIBarButtonItem *) sender];
+            }
+        }
+        else if ([sender isKindOfClass:[UIButton class]])
+        {
+            UIButton *button = (UIButton *) sender;
+            UIBarButtonItem *barButton = [self.barButtons objectAtIndex:button.tag];
+            if ([strongDelegate respondsToSelector:@selector(showMailSelectionControllerFromButton:)])
+            {
+                [strongDelegate showMailSelectionControllerFromButton:barButton];
+            }
+        }
+    }
+
+}
+
 - (void)openFeedback
 {
     if (nil != self.toolbarManager)
@@ -113,7 +138,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    
+
     if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
     {
         if (nil != self.toolbarManager)
@@ -135,6 +160,7 @@
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
                                           otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
+
     [alert show];
 }
 

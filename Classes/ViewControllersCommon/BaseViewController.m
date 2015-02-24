@@ -388,6 +388,20 @@
 }
 
 #pragma mark PWESToolbar delegate methods
+- (void)showMailSelectionControllerFromButton:(UIBarButtonItem *)button
+{
+    PWESFeedbackTableViewController *controller = [[PWESFeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+
+    if ([Utilities isIPad])
+    {
+    }
+    else
+    {
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
+
 - (void)showPasswordControllerFromButton:(UIBarButtonItem *)button
 {
     SettingsTableViewController *controller = [[SettingsTableViewController alloc] initAsPopoverController];
