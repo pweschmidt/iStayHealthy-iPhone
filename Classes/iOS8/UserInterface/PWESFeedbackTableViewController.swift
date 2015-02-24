@@ -67,10 +67,9 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         
         if MFMailComposeViewController.canSendMail()
         {
-            self.presentViewController(controller, animated: true, completion: nil)
-//            var navigationController = self.parentViewController
-//            navigationController?.presentViewController(controller, animated: true, completion: { () -> Void in
-//            })
+            var navigationController = self.parentViewController
+            navigationController?.presentViewController(controller, animated: true, completion: { () -> Void in
+            })
             
         }
     }
