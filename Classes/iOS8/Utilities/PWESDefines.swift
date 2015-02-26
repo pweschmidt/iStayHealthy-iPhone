@@ -7,13 +7,20 @@
 //
 
 import Foundation
+import UIKit
 
 typealias PWESSuccessWithDictionaryClosure = (success: Bool, dictionary: NSDictionary?, error: NSError?) -> Void
 typealias PWESArrayClosure = (array: NSArray?, error: NSError?) -> Void
 
+let kDefaultBackground = UIColor(red: 253.0/255.0, green: 1.0, blue: 240.0/255.0, alpha: 1.0)
+//[UIColor colorWithRed:253.0 / 255.0 green:255.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]
 let kUbiquitousPath                   = "5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
 let kICloudTeamID                     = "5Y4HL833A4.com.pweschmidt.iStayHealthy"
 let kBackgroundQueueName              = "com.pweschmidt.iStayHealthy.background.queue"
+let kLoadedStoreNotificationKey       = "LoadedStore"
+let kImportedDataFromFileKey          = "ImportedData"
+let kErrorStoreNotificationKey        = "ErrorLoadingStore"
+let kErrorImportFromFileKey           = "ErrorImportingFile"
 /**
 XML Group elements
 */
