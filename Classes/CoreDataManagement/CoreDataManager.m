@@ -115,10 +115,12 @@
                        {
                            if (self.iCloudIsAvailable)
                            {
+                               NSArray *foundDB = [self foundCoreDataSQLitePaths];
+                               NSURL *url = [self selectDBURLFromPaths:foundDB defaultURL:mainURL];
                                whichOptions = [CoreDataUtils iCloudStoreOptionsWithPath:iCloud];
-                               NSURL *url = [CoreDataUtils iCloudPathFromPath:iCloud];
+                                   //                               NSURL *url = [CoreDataUtils iCloudPathFromPath:iCloud];
 
-                               whichStoreURL = mainURL;
+                               whichStoreURL = url;
                                storeLoaded = MainStoreWithiCloud;
                                isUsingiCloud = YES;
                            }
@@ -189,6 +191,40 @@
                                           }
                                       });
                    });
+}
+
+- (NSURL *)selectDBURLFromPaths:(NSArray *)paths defaultURL:(NSURL *)defaultURL
+{
+    if (nil == paths || 0 == paths.count)
+    {
+        return defaultURL;
+    }
+    NSString *firstFound = [paths firstObject];
+    NSURL *cloudDirectory = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataUbiquitySupport"];
+    NSURL *dbPath = [cloudDirectory URLByAppendingPathComponent:firstFound];
+    return dbPath;
+}
+
+- (NSArray *)foundCoreDataSQLitePaths
+{
+    NSURL *cloudDirectory = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataUbiquitySupport"];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:[cloudDirectory path]])
+    {
+        return [NSArray array];
+    }
+    
+    NSMutableArray *foundPaths = [NSMutableArray array];
+    NSDirectoryEnumerator *enumerator = [manager enumeratorAtPath:[cloudDirectory path]];
+    NSString *foundDB = nil;
+    while (foundDB = [enumerator nextObject])
+    {
+        if ([foundDB hasSuffix:kPersistentMainStore])
+        {
+            [foundPaths addObject:foundDB];
+        }
+    }
+    return foundPaths;
 }
 
 - (BOOL)currentStoreIsLocal:(NSPersistentStore *)store
