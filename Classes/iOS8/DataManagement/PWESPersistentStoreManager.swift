@@ -88,8 +88,7 @@ class PWESPersistentStoreManager : NSObject
         if nil != persistentStoreCoordinator
         {
             let coordinator = persistentStoreCoordinator!
-            let localOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
-                NSInferMappingModelAutomaticallyOption:true]
+            let localOptions = CoreDataUtils.localStoreOptions()
             var creationError:NSError?
             var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
         }
@@ -98,27 +97,52 @@ class PWESPersistentStoreManager : NSObject
     
     func setUpLegacyStore()
     {
-        let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
         let manager = NSFileManager.defaultManager()
         
+        var iCloudToken = manager.ubiquityIdentityToken
+        if nil != iCloudToken
+        {
+            self.setUpiCloudStore()
+        }
+        
+        
+    }
+    
+    func setUpiCloudStore()
+    {
+        let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
+        let manager = NSFileManager.defaultManager()
+        var cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(oldStoreName)
+        
+        if !manager.fileExistsAtPath(cloudPath.path!)
+        {
+            var paths: NSMutableArray = NSMutableArray()
+            self.searchPathForOldDataStore(oldStoreName, foundPaths: paths)
+            if 0 < paths.count
+            {
+                var firstFound = paths.firstObject as String
+                cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(firstFound)
+            }
+        }
         
         dispatch_async(queue, { () -> Void in
             
             let iCloudStoreURL: NSURL? = manager.URLForUbiquityContainerIdentifier(kICloudTeamID)
-            if nil != iCloudStoreURL
+            var options: NSDictionary?
+            if nil == iCloudStoreURL
             {
-                
+                options = CoreDataUtils.noiCloudStoreOptions()
             }
-
-            var path = CoreDataUtils.ubiquityPath()
-            
-            var iCloudOptions = CoreDataUtils.iCloudStoreOptionsWithPath(path)
-            let noniCloudOptions = CoreDataUtils.noiCloudStoreOptions()
-            let localOptions = CoreDataUtils.localStoreOptions()
-            let storeURLs = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-            let storeURL = (storeURLs[storeURLs.endIndex - 1]).URLByAppendingPathComponent(oldStoreName)
-            
-            let iCloudAvailable = (nil != manager.ubiquityIdentityToken)
+            else
+            {
+                options = CoreDataUtils.iCloudStoreOptionsWithPath(iCloudStoreURL)
+            }
+            var creationError:NSError?
+            var store = self.persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: cloudPath, options: options, error: &creationError)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let notification = NSNotification(name: kLoadedStoreNotificationKey, object: self)
+                NSNotificationCenter.defaultCenter().postNotification(notification)
+            })
         })
         
     }

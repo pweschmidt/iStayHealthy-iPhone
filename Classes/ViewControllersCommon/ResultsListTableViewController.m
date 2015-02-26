@@ -7,8 +7,8 @@
 //
 
 #import "ResultsListTableViewController.h"
-//#import "ContentContainerViewController.h"
-//#import "ContentNavigationController.h"
+// #import "ContentContainerViewController.h"
+// #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "CoreDataManager.h"
 #import "DateView.h"
@@ -17,6 +17,7 @@
 #import "Results.h"
 #import "EditResultsTableViewController.h"
 #import "PWESDataManager.h"
+#import "iStayHealthy-Swift.h"
 
 @interface ResultsListTableViewController ()
 @property (nonatomic, strong) NSArray *results;
@@ -215,6 +216,7 @@
 #ifdef APPDEBUG
     NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
 #endif
+    PWESPersistentStoreManager *storeManager = [PWESPersistentStoreManager defaultManager];
     [[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:self.currentPredicate sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
@@ -230,9 +232,9 @@
          {
              self.results = nil;
              self.results = array;
-#ifdef APPDEBUG
+ #ifdef APPDEBUG
              NSLog(@"we have %lu results returned", (unsigned long) self.results.count);
-#endif
+ #endif
              [self.tableView reloadData];
          }
      }];
