@@ -21,6 +21,12 @@
 		<string>complera</string>
 	</array>
 	<array>
+		<string>Atazanavir, Cobicistat</string>
+		<string>Evotaz</string>
+		<string>PI, Booster</string>
+		<string>evotaz</string>
+	</array>
+	<array>
 		<string>Lopinavir, Ritonavir</string>
 		<string>Kaletra/Aluvia</string>
 		<string>PI, PI</string>
@@ -31,6 +37,12 @@
 		<string>Kivexa/Epzicom</string>
 		<string>NRTI, NRTI</string>
 		<string>kivexa</string>
+	</array>
+	<array>
+		<string>Rezolsta, Darunavir, Cobocostat</string>
+		<string>Prezcobix</string>
+		<string>PI, Booster</string>
+		<string>prezcobix</string>
 	</array>
 	<array>
 		<string>Zidovudine, Lamivudine, Abacavir</string>

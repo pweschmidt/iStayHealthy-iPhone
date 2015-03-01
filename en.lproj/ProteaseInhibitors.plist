@@ -15,6 +15,12 @@
 		<string>crixivan</string>
 	</array>
 	<array>
+		<string>Atazanavir, Cobicistat</string>
+		<string>Evotaz</string>
+		<string>PI, Booster</string>
+		<string>evotaz</string>
+	</array>
+	<array>
 		<string>Telaprevir</string>
 		<string>Incivek</string>
 		<string>PI</string>
@@ -37,6 +43,12 @@
 		<string>Olysio</string>
 		<string>PI</string>
 		<string>olysio</string>
+	</array>
+	<array>
+		<string>Rezolsta, Darunavir, Cobocostat</string>
+		<string>Prezcobix</string>
+		<string>PI, Booster</string>
+		<string>prezcobix</string>
 	</array>
 	<array>
 		<string>Darunavir</string>
