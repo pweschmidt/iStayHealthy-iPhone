@@ -8,7 +8,7 @@
 
 #import "CentralAppDelegate.h"
 #import "Utilities.h"
-#import "CoreDataManager.h"
+// #import "CoreDataManager.h"
 #import "UIFont+Standard.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
@@ -33,16 +33,18 @@
 
     self.window.tintColor = TINTCOLOUR;
     self.containerController = self.window.rootViewController;
-    [[CoreDataManager sharedInstance] setUpCoreDataManager];
 
-    [[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
-         if (error)
-         {
-#ifdef APPDEBUG
-             NSLog(@"Error occurred with code %ld and message %@", (long) [error code], [error localizedDescription]);
-#endif
-         }
-     }];
+
+//    [[CoreDataManager sharedInstance] setUpCoreDataManager];
+//
+//    [[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
+//         if (error)
+//         {
+// #ifdef APPDEBUG
+//             NSLog(@"Error occurred with code %ld and message %@", (long) [error code], [error localizedDescription]);
+// #endif
+//         }
+//     }];
 
     UILocalNotification *notification = [launchOptions objectForKey:
                                          UIApplicationLaunchOptionsLocalNotificationKey];
@@ -62,23 +64,29 @@
                                                      root:root];
     [DBSession setSharedSession:session];
 
-    PWESPersistentStoreManager *defaultManager = [PWESPersistentStoreManager defaultManager];
-    StorageType storageType = [defaultManager findStorageType];
-    switch (storageType)
+    PWESPersistentStoreManager *storeManager = [PWESPersistentStoreManager defaultManager];
+    BOOL successfullySetUp = [storeManager setUpCoreDataStack];
+    if (!successfullySetUp)
     {
-        case hasNewDataBaseFile:
-            NSLog(@"It appears we have a new database file. No need to migrate then.\r\n");
-            break;
-        case hasOldDataBaseAndBackupFile:
-            NSLog(@"We have old database file AND backup file.\r\n");
-            break;
-        case hasOldDataBaseFileNoBackupFile:
-            NSLog(@"We have old database file but NO backup file. \r\n");
-            break;
-        case isNewUser:
-            NSLog(@"Looks like this is a new user");
-            break;
+
     }
+//    PWESPersistentStoreManager *defaultManager = [PWESPersistentStoreManager defaultManager];
+//    StorageType storageType = [defaultManager findStorageType];
+//    switch (storageType)
+//    {
+//        case hasNewDataBaseFile:
+//            NSLog(@"It appears we have a new database file. No need to migrate then.\r\n");
+//            break;
+//        case hasOldDataBaseAndBackupFile:
+//            NSLog(@"We have old database file AND backup file.\r\n");
+//            break;
+//        case hasOldDataBaseFileNoBackupFile:
+//            NSLog(@"We have old database file but NO backup file. \r\n");
+//            break;
+//        case isNewUser:
+//            NSLog(@"Looks like this is a new user");
+//            break;
+//    }
     return YES;
 }
 
@@ -116,12 +124,14 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    NSError *error = nil;
+//    NSError *error = nil;
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-    if (nil != error)
-    {
-    }
+    [manager save];
+//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+//    if (nil != error)
+//    {
+//    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -146,9 +156,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    NSError *error = nil;
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [manager save];
+//    NSError *error = nil;
+//
+//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
 
 - (BOOL)  application:(UIApplication *)application
@@ -183,19 +196,22 @@
     {
         return NO;
     }
-    NSError *error = nil;
-    [[CoreDataManager sharedInstance] addFileToImportList:url error:&error];
-    if (nil != error)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Import Error", nil)
-                                            message:NSLocalizedString(@"Error importing file", nil)
-                                           delegate:nil
-                                  cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                  otherButtonTitles:nil];
-        [alertView show];
-        return NO;
-    }
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+
+//    [manager save];
+//    NSError *error = nil;
+//    [[CoreDataManager sharedInstance] addFileToImportList:url error:&error];
+//    if (nil != error)
+//    {
+//        UIAlertView *alertView = [[UIAlertView alloc]
+//                                  initWithTitle:NSLocalizedString(@"Import Error", nil)
+//                                            message:NSLocalizedString(@"Error importing file", nil)
+//                                           delegate:nil
+//                                  cancelButtonTitle:NSLocalizedString(@"OK", nil)
+//                                  otherButtonTitles:nil];
+//        [alertView show];
+//        return NO;
+//    }
     return YES;
 }
 

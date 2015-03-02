@@ -59,8 +59,13 @@ class PWESPersistentStoreManager : NSObject
         return false
     }
     
-    func setUpCoreDataStack()
+    func setUpCoreDataStack() -> Bool
     {
+        let hasSetUpManager = configureStoreManager()
+        if !hasSetUpManager
+        {
+            return false
+        }
         let hasNewDB = hasNewDatabase()
         let hasOldDB = hasLegacyDatabase()
         
@@ -73,7 +78,7 @@ class PWESPersistentStoreManager : NSObject
         {
             setUpLegacyStore()
         }
-        
+        return true
     }
     
     func setUpNewStore()
