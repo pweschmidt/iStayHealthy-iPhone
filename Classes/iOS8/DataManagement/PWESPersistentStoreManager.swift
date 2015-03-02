@@ -22,6 +22,7 @@ class PWESPersistentStoreManager : NSObject
     var defaultContext: NSManagedObjectContext?
     var hasLoadedStore: Bool?
     let fileManager = NSFileManager.defaultManager()
+    var iCloudEnabled: Bool?
 
     class var defaultManager : PWESPersistentStoreManager
     {
@@ -72,10 +73,12 @@ class PWESPersistentStoreManager : NSObject
         let useNewDB = hasNewDB || (!hasNewDB && !hasOldDB)
         if useNewDB
         {
+            iCloudEnabled = false
             setUpNewStore()
         }
         else
         {
+            iCloudEnabled = true
             setUpLegacyStore()
         }
         return true
@@ -392,14 +395,48 @@ class PWESPersistentStoreManager : NSObject
         return context
     }()
     
-    
-    func save()
+    func disableiCloudStore(error: NSErrorPointer) -> Bool
     {
-        let error: NSErrorPointer = nil
-        if self.context.hasChanges && !self.context.save(error)
+        if nil == defaultContext
         {
-            
+            return false
         }
+        defaultContext?.lock()
+        defaultContext?.reset()
+
+        let stores = persistentStoreCoordinator?.persistentStores as [NSPersistentStore];
+        for store in stores
+        {
+            persistentStoreCoordinator?.removePersistentStore(store, error: nil)
+        }
+        
+        defaultContext = nil
+        persistentStoreCoordinator = nil
+        
+        configureStoreManager()
+        defaultContext?.unlock()
+        
+        setUpNewStore()
+        if hasBackupFile()
+        {
+            let reader = CoreXMLReader()
+            let docPath:NSURL = self.appDocumentDirectory()
+            var filePath = docPath.URLByAppendingPathComponent(backupFileName)
+            let xmlData = NSData(contentsOfURL: filePath)
+        }
+        
+        return true;
+    }
+    
+    func removeManagedObject(managedObject: NSManagedObject?, error: NSErrorPointer) -> Bool
+    {
+        if nil == managedObject
+        {
+            return true
+        }
+        self.context.deleteObject(managedObject!)
+        let success = self.saveContext(error)
+        return success
     }
     
     func createHealthObject(className: NSString, error: NSErrorPointer) -> NSManagedObject
@@ -412,13 +449,9 @@ class PWESPersistentStoreManager : NSObject
     }
     
     
-    func deleteObject(object: NSManagedObject) {
-        self.context.deleteObject(object)
-    }
-    
     deinit
     {
-        save()
+        saveContext(nil)
     }
     
 }
