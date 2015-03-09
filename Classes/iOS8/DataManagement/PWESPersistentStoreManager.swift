@@ -241,6 +241,21 @@ class PWESPersistentStoreManager : NSObject
         
     }
     
+    func managedObjectForEntityName(entityName: String?) -> NSManagedObject?
+    {
+        if nil == self.defaultContext
+        {
+            return nil
+        }
+        if nil == entityName
+        {
+            return nil
+        }
+        var managedObject: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(entityName!, inManagedObjectContext: self.defaultContext!)
+        return managedObject as? NSManagedObject
+    }
+    
+    
     func hasBackupFile() -> Bool
     {
         var path: String?

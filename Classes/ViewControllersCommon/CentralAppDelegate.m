@@ -124,10 +124,10 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-//    NSError *error = nil;
+    NSError *error = nil;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [manager save];
+    [manager saveContext:&error];
 //    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
 //    if (nil != error)
 //    {
@@ -158,7 +158,9 @@
 {
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [manager save];
+    NSError *error = nil;
+
+    [manager saveContext:&error];
 //    NSError *error = nil;
 //
 //    [[CoreDataManager sharedInstance] saveContextAndWait:&error];

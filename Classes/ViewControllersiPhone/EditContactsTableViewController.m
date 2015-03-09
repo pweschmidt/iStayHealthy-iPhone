@@ -8,10 +8,11 @@
 
 #import "EditContactsTableViewController.h"
 #import "Constants.h"
-#import "CoreDataManager.h"
+// #import "CoreDataManager.h"
 #import "Contacts+Handling.h"
 #import "Utilities.h"
 #import "UILabel+Standard.h"
+#import "iStayHealthy-Swift.h"
 
 @interface EditContactsTableViewController ()
 @property (nonatomic, strong) NSArray *editMenu;
@@ -29,186 +30,195 @@
         managedObject:(NSManagedObject *)managedObject
     hasNumericalInput:(BOOL)hasNumericalInput
 {
-	self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
-	if (nil != self)
-	{
-		[self populateValueMap];
-	}
-	return self;
+    self = [super initWithStyle:style managedObject:managedObject hasNumericalInput:hasNumericalInput];
+    if (nil != self)
+    {
+        [self populateValueMap];
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
-	if (self.isEditMode)
-	{
+    [super viewDidLoad];
+    if (self.isEditMode)
+    {
         [self setTitleViewWithTitle:NSLocalizedString(@"Edit Clinic", nil)];
-            //		self.navigationItem.title = NSLocalizedString(@"Edit Clinic", nil);
-		self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44);
-		if (![Utilities isIPad])
-		{
-			[self createToolbarButtons];
-		}
-	}
-	else
-	{
+        //		self.navigationItem.title = NSLocalizedString(@"Edit Clinic", nil);
+        self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44);
+        if (![Utilities isIPad])
+        {
+            [self createToolbarButtons];
+        }
+    }
+    else
+    {
         [self setTitleViewWithTitle:NSLocalizedString(@"New Clinic", nil)];
-            //		self.navigationItem.title = NSLocalizedString(@"New Clinic", nil);
-	}
-	self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
+        //		self.navigationItem.title = NSLocalizedString(@"New Clinic", nil);
+    }
+    self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
 }
 
 - (void)createToolbarButtons
 {
-	self.toolbar = [[UIToolbar alloc] init];
-	self.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
-	UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc]
-	                                  initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-	                                                       target:self
-	                                                       action:nil];
-	NSMutableArray *buttons = [NSMutableArray array];
-	[buttons addObject:flexibleSpace];
-	Contacts *contacts = (Contacts *)self.managedObject;
-	NSUInteger realButtonCount = 0;
-	if (nil != contacts.ClinicContactNumber && 0 < contacts.ClinicContactNumber.length)
-	{
-		self.callNumber = contacts.ClinicContactNumber;
-		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Call", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callContact)];
-		[buttons addObject:callButton];
-		[buttons addObject:flexibleSpace];
-		realButtonCount++;
-	}
-	if (nil != contacts.EmergencyContactNumber && 0 < contacts.EmergencyContactNumber.length)
-	{
-		self.emergencyNumber = contacts.EmergencyContactNumber;
-		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Emergency", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callEmergency)];
-		[buttons addObject:callButton];
-		[buttons addObject:flexibleSpace];
-		realButtonCount++;
-	}
-	if (nil != contacts.ClinicWebSite && 0 < contacts.ClinicWebSite.length)
-	{
-		self.webSite = contacts.ClinicWebSite;
-		UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Website", nil) style:UIBarButtonItemStylePlain target:self action:@selector(gotoWebsite)];
-		[buttons addObject:callButton];
-		[buttons addObject:flexibleSpace];
-		realButtonCount++;
-	}
-	if (0 < realButtonCount)
-	{
-		self.toolbar.items = buttons;
+    self.toolbar = [[UIToolbar alloc] init];
+    self.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                           target:self
+                                                           action:nil];
+    NSMutableArray *buttons = [NSMutableArray array];
+    [buttons addObject:flexibleSpace];
+    Contacts *contacts = (Contacts *) self.managedObject;
+    NSUInteger realButtonCount = 0;
+    if (nil != contacts.ClinicContactNumber && 0 < contacts.ClinicContactNumber.length)
+    {
+        self.callNumber = contacts.ClinicContactNumber;
+        UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Call", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callContact)];
+        [buttons addObject:callButton];
+        [buttons addObject:flexibleSpace];
+        realButtonCount++;
+    }
+    if (nil != contacts.EmergencyContactNumber && 0 < contacts.EmergencyContactNumber.length)
+    {
+        self.emergencyNumber = contacts.EmergencyContactNumber;
+        UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Emergency", nil) style:UIBarButtonItemStylePlain target:self action:@selector(callEmergency)];
+        [buttons addObject:callButton];
+        [buttons addObject:flexibleSpace];
+        realButtonCount++;
+    }
+    if (nil != contacts.ClinicWebSite && 0 < contacts.ClinicWebSite.length)
+    {
+        self.webSite = contacts.ClinicWebSite;
+        UIBarButtonItem *callButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Website", nil) style:UIBarButtonItemStylePlain target:self action:@selector(gotoWebsite)];
+        [buttons addObject:callButton];
+        [buttons addObject:flexibleSpace];
+        realButtonCount++;
+    }
+    if (0 < realButtonCount)
+    {
+        self.toolbar.items = buttons;
 
-		[self.view addSubview:self.toolbar];
-	}
+        [self.view addSubview:self.toolbar];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
-	[super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning];
 }
 
 - (void)populateValueMap
 {
-	self.valueMap = [NSMutableDictionary dictionary];
-	self.editMenu = @[kClinicName,
-	                  kClinicID,
-	                  kClinicWebSite,
-	                  kClinicEmailAddress,
-	                  kClinicContactNumber,
-	                  kEmergencyContactNumber];
-	if (!self.isEditMode)
-	{
-		return;
-	}
-	Contacts *contacts = (Contacts *)self.managedObject;
-	NSDictionary *attributes = [[contacts entity] attributesByName];
-	for (NSString *attribute in attributes)
-	{
-		if (![attribute isEqualToString:kUID])
-		{
-			id value = [contacts valueForKey:attribute];
-			if (nil != value && [self.editMenu containsObject:attribute])
-			{
-				[self.valueMap setObject:value forKey:attribute];
-			}
-		}
-	}
+    self.valueMap = [NSMutableDictionary dictionary];
+    self.editMenu = @[kClinicName,
+                      kClinicID,
+                      kClinicWebSite,
+                      kClinicEmailAddress,
+                      kClinicContactNumber,
+                      kEmergencyContactNumber];
+    if (!self.isEditMode)
+    {
+        return;
+    }
+    Contacts *contacts = (Contacts *) self.managedObject;
+    NSDictionary *attributes = [[contacts entity] attributesByName];
+    for (NSString *attribute in attributes)
+    {
+        if (![attribute isEqualToString:kUID])
+        {
+            id value = [contacts valueForKey:attribute];
+            if (nil != value && [self.editMenu containsObject:attribute])
+            {
+                [self.valueMap setObject:value forKey:attribute];
+            }
+        }
+    }
 }
 
 - (void)save:(id)sender
 {
-	Contacts *contact = nil;
-	if (self.isEditMode)
-	{
-		contact = (Contacts *)self.managedObject;
-	}
-	else
-	{
-		contact = [[CoreDataManager sharedInstance] managedObjectForEntityName:kContacts];
-	}
-	contact.UID = [Utilities GUID];
-	NSDictionary *attributes = [[contact entity] attributesByName];
-	for (NSString *attribute in attributes.allKeys)
-	{
-		if ([attribute isEqualToString:kUID])
-		{
-			contact.UID = [Utilities GUID];
-		}
-		else if ([self.editMenu containsObject:attribute])
-		{
-			NSString *value = [self.valueMap objectForKey:attribute];
-			if (nil != value && ![value isEqualToString:@""])
-			{
-				[contact setValue:value forKey:attribute];
-			}
-		}
-	}
+    Contacts *contact = nil;
 
-	NSError *error = nil;
-	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
-	[self popController];
+    if (self.isEditMode)
+    {
+        contact = (Contacts *) self.managedObject;
+    }
+    else
+    {
+        PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+        contact = (Contacts *) [manager managedObjectForEntityName:kContacts];
+        if (nil == contact)
+        {
+            [self popController];
+        }
+//        contact = [[CoreDataManager sharedInstance] managedObjectForEntityName:kContacts];
+    }
+    contact.UID = [Utilities GUID];
+    NSDictionary *attributes = [[contact entity] attributesByName];
+    for (NSString *attribute in attributes.allKeys)
+    {
+        if ([attribute isEqualToString:kUID])
+        {
+            contact.UID = [Utilities GUID];
+        }
+        else if ([self.editMenu containsObject:attribute])
+        {
+            NSString *value = [self.valueMap objectForKey:attribute];
+            if (nil != value && ![value isEqualToString:@""])
+            {
+                [contact setValue:value forKey:attribute];
+            }
+        }
+    }
+
+    NSError *error = nil;
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    [manager saveContext:&error];
+    [self popController];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 1;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return self.editMenu.count;
+    return self.editMenu.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString *identifier = @"ContactCell";
-	PWESCustomTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-	if (nil == cell)
-	{
-		cell = [[PWESCustomTextfieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-	}
-	NSString *resultsString = [self.editMenu objectAtIndex:indexPath.row];
-	NSString *text = NSLocalizedString(resultsString, nil);
-	[self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:NO];
-	return cell;
+    NSString *identifier = @"ContactCell";
+    PWESCustomTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+
+    if (nil == cell)
+    {
+        cell = [[PWESCustomTextfieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    NSString *resultsString = [self.editMenu objectAtIndex:indexPath.row];
+    NSString *text = NSLocalizedString(resultsString, nil);
+    [self configureTableCell:cell title:text indexPath:indexPath hasNumericalInput:NO];
+    return cell;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-	[super textFieldDidEndEditing:textField];
-	if (nil == textField.text
-	    || [textField.text isEqualToString:@""]
-	    || [textField.text isEqualToString:textField.placeholder])
-	{
-		return;
-	}
-	//for segment = 0 we have 10^0 + indexPath.row as tag, i.e. tag - 1 gives us the index path
-	NSInteger tag = textField.tag - 1;
-	if (0 <= tag && self.editMenu.count > tag)
-	{
-		NSString *attribute = [self.editMenu objectAtIndex:tag];
-		[self.valueMap setObject:textField.text forKey:attribute];
-	}
+    [super textFieldDidEndEditing:textField];
+    if (nil == textField.text
+        || [textField.text isEqualToString:@""]
+        || [textField.text isEqualToString:textField.placeholder])
+    {
+        return;
+    }
+    // for segment = 0 we have 10^0 + indexPath.row as tag, i.e. tag - 1 gives us the index path
+    NSInteger tag = textField.tag - 1;
+    if (0 <= tag && self.editMenu.count > tag)
+    {
+        NSString *attribute = [self.editMenu objectAtIndex:tag];
+        [self.valueMap setObject:textField.text forKey:attribute];
+    }
 }
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell
@@ -216,89 +226,89 @@
                  indexPath:(NSIndexPath *)indexPath
          hasNumericalInput:(BOOL)hasNumericalInput
 {
-	[super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
-	NSNumber *tagNumber = [self tagNumberForIndex:indexPath.row segment:0];
-	UITextField *textField = [self customTextFieldForTagNumber:tagNumber];
-	if (nil == textField)
-	{
-		return;
-	}
-	NSString *attribute = [self.editMenu objectAtIndex:indexPath.row];
-	NSString *value = [self.valueMap objectForKey:attribute];
-	if (nil != value && ![value isEqualToString:@""])
-	{
-		textField.text = value;
-		textField.textColor = [UIColor blackColor];
-	}
-	else
-	{
-		textField.textColor = [UIColor lightGrayColor];
-		textField.text = textField.placeholder;
-	}
-	if ([title isEqualToString:NSLocalizedString(kClinicEmailAddress, nil)])
-	{
-		cell.adjustedKeyboardType = UIKeyboardTypeEmailAddress;
-	}
-	else if ([title isEqualToString:NSLocalizedString(kClinicContactNumber, nil)] || [title isEqualToString:NSLocalizedString(kEmergencyContactNumber, nil)])
-	{
-		cell.adjustedKeyboardType = UIKeyboardTypeNumbersAndPunctuation;
-	}
-	else if ([title isEqualToString:NSLocalizedString(kClinicWebSite, nil)])
-	{
-		cell.adjustedKeyboardType = UIKeyboardTypeURL;
-	}
+    [super configureTableCell:cell title:title indexPath:indexPath hasNumericalInput:hasNumericalInput];
+    NSNumber *tagNumber = [self tagNumberForIndex:indexPath.row segment:0];
+    UITextField *textField = [self customTextFieldForTagNumber:tagNumber];
+    if (nil == textField)
+    {
+        return;
+    }
+    NSString *attribute = [self.editMenu objectAtIndex:indexPath.row];
+    NSString *value = [self.valueMap objectForKey:attribute];
+    if (nil != value && ![value isEqualToString:@""])
+    {
+        textField.text = value;
+        textField.textColor = [UIColor blackColor];
+    }
+    else
+    {
+        textField.textColor = [UIColor lightGrayColor];
+        textField.text = textField.placeholder;
+    }
+    if ([title isEqualToString:NSLocalizedString(kClinicEmailAddress, nil)])
+    {
+        cell.adjustedKeyboardType = UIKeyboardTypeEmailAddress;
+    }
+    else if ([title isEqualToString:NSLocalizedString(kClinicContactNumber, nil)] || [title isEqualToString:NSLocalizedString(kEmergencyContactNumber, nil)])
+    {
+        cell.adjustedKeyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    }
+    else if ([title isEqualToString:NSLocalizedString(kClinicWebSite, nil)])
+    {
+        cell.adjustedKeyboardType = UIKeyboardTypeURL;
+    }
 }
 
 #pragma mark toolbar button items
 - (void)callContact
 {
-	if (nil != self.callNumber && 0 < self.callNumber.length)
-	{
-		NSString *tel = [NSString stringWithFormat:@"tel:%@", self.callNumber];
-		NSURL *url = [NSURL URLWithString:tel];
-		BOOL supportsCall = [[UIApplication sharedApplication] canOpenURL:url];
-		if (supportsCall)
-		{
-			[[UIApplication sharedApplication] openURL:url];
-		}
-		else
-		{
-			[self showNoCallFeatureEnabledAlert];
-		}
-	}
+    if (nil != self.callNumber && 0 < self.callNumber.length)
+    {
+        NSString *tel = [NSString stringWithFormat:@"tel:%@", self.callNumber];
+        NSURL *url = [NSURL URLWithString:tel];
+        BOOL supportsCall = [[UIApplication sharedApplication] canOpenURL:url];
+        if (supportsCall)
+        {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        else
+        {
+            [self showNoCallFeatureEnabledAlert];
+        }
+    }
 }
 
 - (void)callEmergency
 {
-	if (nil != self.emergencyNumber && 0 < self.emergencyNumber.length)
-	{
-		NSString *tel = [NSString stringWithFormat:@"tel:%@", self.emergencyNumber];
-		NSURL *url = [NSURL URLWithString:tel];
-		BOOL supportsCall = [[UIApplication sharedApplication] canOpenURL:url];
-		if (supportsCall)
-		{
-			[[UIApplication sharedApplication] openURL:url];
-		}
-	}
+    if (nil != self.emergencyNumber && 0 < self.emergencyNumber.length)
+    {
+        NSString *tel = [NSString stringWithFormat:@"tel:%@", self.emergencyNumber];
+        NSURL *url = [NSURL URLWithString:tel];
+        BOOL supportsCall = [[UIApplication sharedApplication] canOpenURL:url];
+        if (supportsCall)
+        {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
 }
 
 - (void)gotoWebsite
 {
-	if (nil != self.webSite && 0 < self.webSite.length)
-	{
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.webSite]];
-	}
-	else
-	{
-		[self showNoCallFeatureEnabledAlert];
-	}
+    if (nil != self.webSite && 0 < self.webSite.length)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.webSite]];
+    }
+    else
+    {
+        [self showNoCallFeatureEnabledAlert];
+    }
 }
 
 - (void)showNoCallFeatureEnabledAlert
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Calls possible", nil) message:NSLocalizedString(@"This device doesn't support calls", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Calls possible", nil) message:NSLocalizedString(@"This device doesn't support calls", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
 
-	[alert show];
+    [alert show];
 }
 
 @end

@@ -8,13 +8,14 @@
 
 #import "EditSeinfeldCalendarTableViewController.h"
 #import "Constants.h"
-#import "CoreDataManager.h"
+// #import "CoreDataManager.h"
 #import "SeinfeldCalendar.h"
 #import "UILabel+Standard.h"
 #import "Utilities.h"
 #import "PWESStar.h"
 #import "DateView.h"
 #import "PWESResultsDelegate.h"
+#import "iStayHealthy-Swift.h"
 
 @interface EditSeinfeldCalendarTableViewController ()
 @property (nonatomic, strong) UISegmentedControl *calendarSegmentControl;
@@ -67,7 +68,7 @@
     [super viewDidLoad];
     [self populateCalendars];
     [self setTitleViewWithTitle:NSLocalizedString(@"Configure Med. Diary", nil)];
-        //    self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
+    //    self.navigationItem.title = NSLocalizedString(@"Configure Med. Diary", nil);
     NSArray *menuTitles = @[@"1", @"2", @"3"];
 
     self.calendarSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
@@ -88,7 +89,8 @@
     {
         return;
     }
-    SeinfeldCalendar *newCalendar = [[CoreDataManager sharedInstance] managedObjectForEntityName:kSeinfeldCalendar];
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    SeinfeldCalendar *newCalendar = (SeinfeldCalendar *) [manager managedObjectForEntityName:kSeinfeldCalendar];
     newCalendar.uID = [Utilities GUID];
     newCalendar.startDate = self.date;
     newCalendar.endDate = self.endDate;
@@ -96,7 +98,7 @@
     [self scheduleAlert];
 
     NSError *error = nil;
-    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [manager saveContext:&error];
     [self popController];
 }
 
@@ -130,10 +132,12 @@
     {
         return;
     }
-    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
-    [defaultContext deleteObject:self.currentCalendar];
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+//    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
+//    [defaultContext deleteObject:self.currentCalendar];
     NSError *error = nil;
-    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [manager removeManagedObject:self.currentCalendar error:&error];
+    [manager saveContext:&error];
     __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
     if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
     {
@@ -171,8 +175,9 @@
         self.currentCalendar.isCompleted = [NSNumber numberWithBool:YES];
         NSDate *now = [NSDate date];
         self.currentCalendar.endDate = now;
+        PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
         NSError *error = nil;
-        [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+        [manager saveContext:&error];
         __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
         if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(finishCalendarWithEndDate:)])
         {
@@ -266,6 +271,7 @@
 {
     SeinfeldCalendar *calendar = (SeinfeldCalendar *) [self.completedCalendars objectAtIndex:indexPath.row];
     float score = [calendar.score floatValue];
+
     if (100 < score)
     {
         score = 100.f;

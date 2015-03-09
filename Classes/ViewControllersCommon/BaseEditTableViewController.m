@@ -10,9 +10,10 @@
 #import "Utilities.h"
 #import "NSDate+Extras.h"
 #import "UIFont+Standard.h"
-#import "CoreDataManager.h"
+// #import "CoreDataManager.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
+#import "iStayHealthy-Swift.h"
 
 #define kContentOffsetX            20.0f
 #define kLabelWidthIPhone          100.0f
@@ -113,7 +114,7 @@
     titleView.lineBreakMode = NSLineBreakByWordWrapping;
     titleView.textAlignment = NSTextAlignmentCenter;
     titleView.text = titleString;
-    
+
     self.navigationItem.titleView = titleView;
 }
 
@@ -157,11 +158,19 @@
 
 - (void)removeManagedObject
 {
-    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
-
-    [defaultContext deleteObject:self.managedObject];
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+
+    [manager removeManagedObject:self.managedObject error:&error];
+    if (nil == error)
+    {
+        [manager saveContext:&error];
+    }
+//    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
+//
+//    [defaultContext deleteObject:self.managedObject];
+//    NSError *error = nil;
+//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self popController];
 }
 

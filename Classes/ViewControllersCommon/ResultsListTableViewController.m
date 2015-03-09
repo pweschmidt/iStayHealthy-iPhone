@@ -216,8 +216,8 @@
 #ifdef APPDEBUG
     NSLog(@"ResultsListTableViewController:reloadSQLData with name %@", notification.name);
 #endif
-    PWESPersistentStoreManager *storeManager = [PWESPersistentStoreManager defaultManager];
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:self.currentPredicate sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    [manager fetchData:kResults predicate:self.currentPredicate sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
              UIAlertView *errorAlert = [[UIAlertView alloc]

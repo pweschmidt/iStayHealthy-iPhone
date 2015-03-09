@@ -8,10 +8,11 @@
 
 #import "EditResultsTableViewController.h"
 #import "Constants.h"
-#import "CoreDataManager.h"
+// #import "CoreDataManager.h"
 #import "Results+Handling.h"
 #import "Utilities.h"
 #import "PWESBloodPressureCell.h"
+#import "iStayHealthy-Swift.h"
 
 @interface EditResultsTableViewController ()
 {
@@ -34,9 +35,9 @@
 
 @implementation EditResultsTableViewController
 
-- (id)  initWithStyle:(UITableViewStyle)style
-   importedAttributes:(NSDictionary *)importedAttributes
-    hasNumericalInput:(BOOL)hasNumericalInput
+- (id)   initWithStyle:(UITableViewStyle)style
+    importedAttributes:(NSDictionary *)importedAttributes
+     hasNumericalInput:(BOOL)hasNumericalInput
 {
     self = [super initWithStyle:style
                   managedObject:nil
@@ -132,12 +133,12 @@
     if (self.isEditMode)
     {
         [self setTitleViewWithTitle:NSLocalizedString(@"Edit Result", nil)];
-            //        self.navigationItem.title = NSLocalizedString(@"Edit Result", nil);
+        //        self.navigationItem.title = NSLocalizedString(@"Edit Result", nil);
     }
     else
     {
-        [self setTitleViewWithTitle: NSLocalizedString(@"New Result", nil)];
-            //        self.navigationItem.title = NSLocalizedString(@"New Result", nil);
+        [self setTitleViewWithTitle:NSLocalizedString(@"New Result", nil)];
+        //        self.navigationItem.title = NSLocalizedString(@"New Result", nil);
     }
 
 
@@ -186,11 +187,12 @@
 - (void)save:(id)sender
 {
     Results *results = nil;
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
     if (nil == self.managedObject)
     {
-        results = [[CoreDataManager sharedInstance]
-                   managedObjectForEntityName:kResults];
+        results = (Results *) [manager
+                               managedObjectForEntityName:kResults];
     }
     else
     {
@@ -227,7 +229,7 @@
     }
 
     NSError *error = nil;
-    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
+    [manager saveContext:&error];
     if (self.hasImportedData && self.isEditMode)
     {
         [self.navigationController popViewControllerAnimated:YES];

@@ -7,12 +7,13 @@
 //
 
 #import "ProceduresCollectionViewController.h"
-#import "CoreDataManager.h"
+// #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
 #import "Procedures+Handling.h"
 #import "EditProceduresTableViewController.h"
 #import "UILabel+Standard.h"
 #import "MedView_iPad.h"
+#import "iStayHealthy-Swift.h"
 
 #define kProceduresCollectionCellIdentifier @"ProceduresCollectionCellIdentifier"
 
@@ -25,94 +26,98 @@
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
-	self.procedures = [NSArray array];
-	[self setTitleViewWithTitle:NSLocalizedString(@"Illness", nil)];
-	[self.collectionView registerClass:[BaseCollectionViewCell class]
-	        forCellWithReuseIdentifier:kProceduresCollectionCellIdentifier];
+    [super viewDidLoad];
+    self.procedures = [NSArray array];
+    [self setTitleViewWithTitle:NSLocalizedString(@"Illness", nil)];
+    [self.collectionView registerClass:[BaseCollectionViewCell class]
+            forCellWithReuseIdentifier:kProceduresCollectionCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning
 {
-	[super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning];
 }
 
 - (void)addButtonPressed:(id)sender
 {
-	EditProceduresTableViewController *editController = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
-	editController.preferredContentSize = CGSizeMake(320, 568);
-	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
-	[self presentViewController:editNavCtrl animated:YES completion:nil];
+    EditProceduresTableViewController *editController = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:NO];
+
+    editController.preferredContentSize = CGSizeMake(320, 568);
+    UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+    editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:editNavCtrl animated:YES completion:nil];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return self.procedures.count;
+    return self.procedures.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-	return 1;
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	Procedures *procs = [self.procedures objectAtIndex:indexPath.row];
-	BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kProceduresCollectionCellIdentifier
-	                                                                         forIndexPath:indexPath];
-	if (nil != procs)
-	{
-		[cell setManagedObject:procs];
-	}
+    Procedures *procs = [self.procedures objectAtIndex:indexPath.row];
+    BaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kProceduresCollectionCellIdentifier
+                                                                             forIndexPath:indexPath];
 
-	[cell addDateToTitle:procs.Date];
+    if (nil != procs)
+    {
+        [cell setManagedObject:procs];
+    }
 
-	MedView_iPad *view = [MedView_iPad viewForProcedures:procs frame:CGRectMake(0, 2, 150, 130)];
-	[cell addView:view];
-	return cell;
+    [cell addDateToTitle:procs.Date];
+
+    MedView_iPad *view = [MedView_iPad viewForProcedures:procs frame:CGRectMake(0, 2, 150, 130)];
+    [cell addView:view];
+    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	Procedures *procs = [self.procedures objectAtIndex:indexPath.row];
-	EditProceduresTableViewController *editController = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:procs hasNumericalInput:NO];
-	editController.preferredContentSize = CGSizeMake(320, 568);
-	UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
-	editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
-	[self presentViewController:editNavCtrl animated:YES completion:nil];
+    Procedures *procs = [self.procedures objectAtIndex:indexPath.row];
+    EditProceduresTableViewController *editController = [[EditProceduresTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:procs hasNumericalInput:NO];
+
+    editController.preferredContentSize = CGSizeMake(320, 568);
+    UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
+    editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:editNavCtrl animated:YES completion:nil];
 }
 
 - (void)reloadSQLData:(NSNotification *)notification
 {
-	[self startAnimation:notification];
-	[[CoreDataManager sharedInstance] fetchDataForEntityName:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-	    if (nil == array)
-	    {
-	        UIAlertView *errorAlert = [[UIAlertView alloc]
-	                                   initWithTitle:NSLocalizedString(@"Error", nil)
-	                                                message:NSLocalizedString(@"Error loading data", nil)
-	                                               delegate:nil
-	                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-	                                      otherButtonTitles:nil];
-	        [errorAlert show];
-		}
-	    else
-	    {
-	        self.procedures = nil;
-	        self.procedures = array;
-	        dispatch_async(dispatch_get_main_queue(), ^{
-	            [self stopAnimation:notification];
-	            [self.collectionView reloadData];
-			});
-		}
-	}];
+    [self startAnimation:notification];
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    [manager fetchData:kProcedures predicate:nil sortTerm:kDate ascending:NO completion: ^(NSArray *array, NSError *error) {
+         if (nil == array)
+         {
+             UIAlertView *errorAlert = [[UIAlertView alloc]
+                                        initWithTitle:NSLocalizedString(@"Error", nil)
+                                                  message:NSLocalizedString(@"Error loading data", nil)
+                                                 delegate:nil
+                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                        otherButtonTitles:nil];
+             [errorAlert show];
+         }
+         else
+         {
+             self.procedures = nil;
+             self.procedures = array;
+             dispatch_async(dispatch_get_main_queue(), ^{
+                                [self stopAnimation:notification];
+                                [self.collectionView reloadData];
+                            });
+         }
+     }];
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
 {
-	[self reloadSQLData:notification];
+    [self reloadSQLData:notification];
 }
 
 @end

@@ -13,7 +13,7 @@
 #import "PWESDataManager.h"
 #import "PWESDataNTuple.h"
 #import "PWESResultsTypes.h"
-#import "CoreDataManager.h"
+// #import "CoreDataManager.h"
 #import "Utilities.h"
 #import "EditChartsTableViewController.h"
 #import "iStayHealthy-Swift.h"
@@ -128,7 +128,8 @@
 #ifdef APPDEBUG
     NSLog(@"PWESDashboardViewController::reloadSQLData called with %@", notification.userInfo);
 #endif
-    [[CoreDataManager sharedInstance] fetchDataForEntityName:kResults predicate:nil sortTerm:kResultsDate ascending:YES completion: ^(NSArray *results, NSError *resultsError) {
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    [manager fetchData:kResults predicate:nil sortTerm:kResultsDate ascending:YES completion: ^(NSArray *results, NSError *resultsError) {
          if (nil == results)
          {
              UIAlertView *errorAlert = [[UIAlertView alloc]
@@ -142,7 +143,7 @@
          else
          {
              self.results = [NSArray arrayWithArray:results];
-             [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion: ^(NSArray *meds, NSError *medError) {
+             [manager fetchData:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion: ^(NSArray *meds, NSError *medError) {
                   if (nil == meds)
                   {
                       UIAlertView *errorAlert = [[UIAlertView alloc]
