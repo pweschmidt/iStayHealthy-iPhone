@@ -34,18 +34,6 @@
     self.window.tintColor = TINTCOLOUR;
     self.containerController = self.window.rootViewController;
 
-
-//    [[CoreDataManager sharedInstance] setUpCoreDataManager];
-//
-//    [[CoreDataManager sharedInstance] setUpStoreWithError: ^(NSError *error) {
-//         if (error)
-//         {
-// #ifdef APPDEBUG
-//             NSLog(@"Error occurred with code %ld and message %@", (long) [error code], [error localizedDescription]);
-// #endif
-//         }
-//     }];
-
     UILocalNotification *notification = [launchOptions objectForKey:
                                          UIApplicationLaunchOptionsLocalNotificationKey];
 
@@ -70,23 +58,6 @@
     {
 
     }
-//    PWESPersistentStoreManager *defaultManager = [PWESPersistentStoreManager defaultManager];
-//    StorageType storageType = [defaultManager findStorageType];
-//    switch (storageType)
-//    {
-//        case hasNewDataBaseFile:
-//            NSLog(@"It appears we have a new database file. No need to migrate then.\r\n");
-//            break;
-//        case hasOldDataBaseAndBackupFile:
-//            NSLog(@"We have old database file AND backup file.\r\n");
-//            break;
-//        case hasOldDataBaseFileNoBackupFile:
-//            NSLog(@"We have old database file but NO backup file. \r\n");
-//            break;
-//        case isNewUser:
-//            NSLog(@"Looks like this is a new user");
-//            break;
-//    }
     return YES;
 }
 
@@ -128,10 +99,6 @@
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
     [manager saveContext:&error];
-//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
-//    if (nil != error)
-//    {
-//    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -161,9 +128,6 @@
     NSError *error = nil;
 
     [manager saveContext:&error];
-//    NSError *error = nil;
-//
-//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
 }
 
 - (BOOL)  application:(UIApplication *)application

@@ -150,11 +150,6 @@
     {
         [manager saveContext:&error];
     }
-//	NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
-//	[defaultContext deleteObject:self.markedObject];
-//    [self.tableView deleteRowsAtIndexPaths:@[self.markedIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
-//	NSError *error = nil;
-//	[[CoreDataManager sharedInstance] saveContextAndWait:&error];
     self.markedObject = nil;
     self.markedIndexPath = nil;
 }

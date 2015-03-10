@@ -406,7 +406,6 @@
     if (nil == record)
     {
         record = (SeinfeldCalendarEntry *) [manager managedObjectForEntityName:kSeinfeldCalendarEntry];
-//        record = [[CoreDataManager sharedInstance] managedObjectForEntityName:kSeinfeldCalendarEntry];
         record.uID = [Utilities GUID];
         recordExists = NO;
     }

@@ -129,44 +129,6 @@
               }];
          }
      }];
-//    [[CoreDataManager sharedInstance] fetchDataForEntityName:kMissedMedication predicate:nil sortTerm:kMissedDate ascending:NO completion: ^(NSArray *array, NSError *error) {
-//         if (nil == array)
-//         {
-//             UIAlertView *errorAlert = [[UIAlertView alloc]
-//                                            initWithTitle:NSLocalizedString(@"Error", nil)
-//                                                      message:NSLocalizedString(@"Error loading data", nil)
-//                                                     delegate:nil
-//                                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-//                                            otherButtonTitles:nil];
-//             [errorAlert show];
-//         }
-//         else
-//         {
-//             self.missed = nil;
-//             self.missed = [NSArray arrayWithArray:array];
-//             [[CoreDataManager sharedInstance] fetchDataForEntityName:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *medsarray, NSError *innererror) {
-//                      if (nil == medsarray)
-//                      {
-//                          UIAlertView *errorAlert = [[UIAlertView alloc]
-//                                                    initWithTitle:NSLocalizedString(@"Error", nil)
-//                                                              message:NSLocalizedString(@"Error loading data", nil)
-//                                                             delegate:nil
-//                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-//                                                    otherButtonTitles:nil];
-//                          [errorAlert show];
-//                      }
-//                      else
-//                      {
-//                          self.currentMeds = nil;
-//                          self.currentMeds = [NSArray arrayWithArray:medsarray];
-//                          dispatch_async(dispatch_get_main_queue(), ^{
-//                                             [self stopAnimation:notification];
-//                                             [self.collectionView reloadData];
-//                                         });
-//                      }
-//                  }];
-//         }
-//     }];
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification

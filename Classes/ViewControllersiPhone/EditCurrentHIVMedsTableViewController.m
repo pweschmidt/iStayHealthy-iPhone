@@ -60,13 +60,11 @@
         return;
     }
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-//    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
     Medication *med = (Medication *) self.managedObject;
     BOOL isSave = NO;
     if (self.endDateIsSet)
     {
         PreviousMedication *previous = (PreviousMedication *) [manager managedObjectForEntityName:kPreviousMedication];
-//        PreviousMedication *previous = [[CoreDataManager sharedInstance] managedObjectForEntityName:kPreviousMedication];
         previous.uID = [Utilities GUID];
         previous.startDate = med.StartDate;
         previous.endDate = self.endDate;
@@ -74,7 +72,6 @@
         previous.drug = med.Drug;
         NSError *error = nil;
         [manager removeManagedObject:med error:&error];
-//        [defaultContext deleteObject:med];
         isSave = YES;
     }
     else if (self.dateIsChanged)
@@ -87,7 +84,6 @@
     {
         NSError *error = nil;
         [manager saveContext:&error];
-//        [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     }
     [self popController];
 }

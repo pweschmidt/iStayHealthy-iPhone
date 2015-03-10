@@ -166,11 +166,6 @@
     {
         [manager saveContext:&error];
     }
-//    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
-//
-//    [defaultContext deleteObject:self.managedObject];
-//    NSError *error = nil;
-//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self popController];
 }
 

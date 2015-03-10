@@ -133,8 +133,6 @@
         return;
     }
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-//    NSManagedObjectContext *defaultContext = [[CoreDataManager sharedInstance] defaultContext];
-//    [defaultContext deleteObject:self.currentCalendar];
     NSError *error = nil;
     [manager removeManagedObject:self.currentCalendar error:&error];
     [manager saveContext:&error];

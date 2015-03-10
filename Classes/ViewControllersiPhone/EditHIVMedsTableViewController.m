@@ -77,8 +77,6 @@
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     [selectedMeds enumerateObjectsUsingBlock: ^(NSArray *medDescription, NSUInteger index, BOOL *stop) {
          Medication *medication = (Medication *) [manager managedObjectForEntityName:kMedication];
-//         Medication *medication = [[CoreDataManager sharedInstance]
-//                                       managedObjectForEntityName:kMedication];
          medication.UID = [Utilities GUID];
          medication.StartDate = self.date;
          medication.Drug = [medDescription objectAtIndex:0];
@@ -88,7 +86,6 @@
 
     NSError *error = nil;
     [manager saveContext:&error];
-//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self popController];
 }
 
@@ -181,7 +178,7 @@
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:identifier];
+                                      reuseIdentifier :identifier];
     }
     if (0 == indexPath.section)
     {

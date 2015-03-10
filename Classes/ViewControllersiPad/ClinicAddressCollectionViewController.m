@@ -111,35 +111,11 @@
              NSLog(@"we have %lu clinics returned", (unsigned long) self.clinics.count);
 #endif
              dispatch_async(dispatch_get_main_queue(), ^{
-                                [self stopAnimation:notification];
-                                [self.collectionView reloadData];
-                            });
+                [self stopAnimation:notification];
+                [self.collectionView reloadData];
+            });
          }
      }];
-//    [[CoreDataManager sharedInstance] fetchDataForEntityName:kContacts predicate:nil sortTerm:kClinicName ascending:NO completion: ^(NSArray *array, NSError *error) {
-//         if (nil == array)
-//         {
-//             UIAlertView *errorAlert = [[UIAlertView alloc]
-//                                            initWithTitle:NSLocalizedString(@"Error", nil)
-//                                                      message:NSLocalizedString(@"Error loading data", nil)
-//                                                     delegate:nil
-//                                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-//                                            otherButtonTitles:nil];
-//             [errorAlert show];
-//         }
-//         else
-//         {
-//             self.clinics = nil;
-//             self.clinics = [NSArray arrayWithArray:array];
-// #ifdef APPDEBUG
-//             NSLog(@"we have %lu clinics returned", (unsigned long) self.clinics.count);
-// #endif
-//             dispatch_async(dispatch_get_main_queue(), ^{
-//                                [self stopAnimation:notification];
-//                                [self.collectionView reloadData];
-//                            });
-//         }
-//     }];
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification

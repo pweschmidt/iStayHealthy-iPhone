@@ -145,7 +145,6 @@
     else
     {
         med = (MissedMedication *) [manager managedObjectForEntityName:kMissedMedication];
-//        med = [[CoreDataManager sharedInstance] managedObjectForEntityName:kMissedMedication];
     }
     med.UID = [Utilities GUID];
     med.MissedDate = self.date;
@@ -174,7 +173,6 @@
     }
     NSError *error = nil;
     [manager saveContext:&error];
-//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self popController];
 }
 

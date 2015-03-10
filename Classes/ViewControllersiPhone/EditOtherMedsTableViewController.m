@@ -123,7 +123,6 @@
     if (!self.isEditMode)
     {
         med = (OtherMedication *) [manager managedObjectForEntityName:kOtherMedication];
-//        med = [[CoreDataManager sharedInstance] managedObjectForEntityName:kOtherMedication];
     }
     else
     {
@@ -138,7 +137,6 @@
     NSError *error = nil;
     [manager saveContext:&error];
 
-//    [[CoreDataManager sharedInstance] saveContextAndWait:&error];
     [self popController];
 }
 

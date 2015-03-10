@@ -152,7 +152,6 @@
         {
             [self popController];
         }
-//        contact = [[CoreDataManager sharedInstance] managedObjectForEntityName:kContacts];
     }
     contact.UID = [Utilities GUID];
     NSDictionary *attributes = [[contact entity] attributesByName];
