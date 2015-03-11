@@ -22,10 +22,40 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     var completion: PWESSuccessWithDictionaryClosure?
     
-    func importWithData(xmlData: NSData, completionBlock: PWESSuccessWithDictionaryClosure)
+    func importWithURL(url: NSURL, completionBlock: PWESSuccessWithDictionaryClosure)
     {
+        if !url.isFileReferenceURL()
+        {
+            let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
+            completionBlock(success: false, dictionary: nil, error: error)
+            return
+        }
+        
+        let xmlData = NSData(contentsOfURL: url)
+        if nil != xmlData
+        {
+            importWithData(xmlData, completionBlock: completionBlock)
+        }
+    }
+    
+    
+    func importWithData(xmlData: NSData?, completionBlock: PWESSuccessWithDictionaryClosure)
+    {
+        if nil == xmlData
+        {
+            let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
+            completionBlock(success: false, dictionary: nil, error: error)
+            return
+        }
         self.completion = completionBlock
-        let xmlParser: NSXMLParser = NSXMLParser(data: xmlData)
+        var validationError: NSError?
+        let cleanedXMLData = CoreXMLTools.validatedXMLDataFromData(xmlData, error: &validationError)
+        if nil != validationError || nil == cleanedXMLData
+        {
+            completionBlock(success: false, dictionary: nil, error: validationError)
+            return
+        }
+        let xmlParser: NSXMLParser = NSXMLParser(data: cleanedXMLData)
         xmlParser.delegate = self
         xmlParser.parse()
     }

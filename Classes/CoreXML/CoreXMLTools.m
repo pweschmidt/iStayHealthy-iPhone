@@ -10,6 +10,32 @@
 
 @implementation CoreXMLTools
 
++ (NSData *)validatedXMLDataFromData:(NSData *)xmlData error:(NSError **)error
+{
+    NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
+    BOOL isValid = [[self class] validateXMLString:xmlString error:error];
+
+    if (isValid)
+    {
+        return xmlData;
+    }
+    NSData *cleanedXMLData = nil;
+    NSString *cleanedString = [[self class] correctedStringFromString:xmlString];
+
+    isValid = [[self class] validateXMLString:cleanedString error:error];
+    if (isValid)
+    {
+        cleanedXMLData = [cleanedString dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    else
+    {
+        cleanedXMLData = [kXMLPreamble dataUsingEncoding:NSUTF8StringEncoding];
+    }
+
+    return cleanedXMLData;
+}
+
+
 + (NSString *)cleanedXMLString:(NSString *)string error:(NSError *__autoreleasing *)error
 {
     if (nil == string || 0 == string.length)
@@ -18,45 +44,46 @@
     }
     NSMutableString *cleanedString = [NSMutableString string];
     NSArray *components = [string componentsSeparatedByString:kXMLPreamble];
-    if (2 == components.count) //we should have exactly 2 components
+    if (2 == components.count) // we should have exactly 2 components
     {
 #ifdef APPDEBUG
         NSLog(@"****NOTHING TO CLEAN UP****");
 #endif
         return string;
     }
-    
+
     [cleanedString appendString:kXMLPreamble];
     NSString *restOfXML = components.lastObject;
     NSArray *xmlContentArray = [restOfXML componentsSeparatedByString:kiStayHealthyClosingStatement];
     __block NSString *xmlContentString = nil;
     [xmlContentArray enumerateObjectsUsingBlock: ^(NSString *component, NSUInteger idx, BOOL *stop) {
 #ifdef APPDEBUG
-        NSLog(@"Component found %@", component);
+         NSLog(@"Component found %@", component);
 #endif
-        NSRange recordRange = [component rangeOfString:kXMLElementRoot];
-        if (recordRange.location != NSNotFound)
-        {
-            xmlContentString = component;
-            *stop = YES;
-        }
-    }];
-    
+         NSRange recordRange = [component rangeOfString:kXMLElementRoot];
+         if (recordRange.location != NSNotFound)
+         {
+             xmlContentString = component;
+             *stop = YES;
+         }
+     }];
+
     if (nil != xmlContentString)
     {
         [cleanedString appendString:xmlContentString];
         [cleanedString appendString:@"</iStayHealthyRecord>"];
     }
-    
+
 #ifdef APPDEBUG
     NSLog(@"Cleaned up XML string is %@", cleanedString);
 #endif
-    return (NSString *)cleanedString;
+    return (NSString *) cleanedString;
 }
 
 + (BOOL)validateXMLString:(NSString *)xmlString error:(NSError **)error
 {
     NSDictionary *userInfo = nil;
+
     if (nil == xmlString || 0 == xmlString.length)
     {
         userInfo = @{ NSLocalizedDescriptionKey : NSLocalizedString(@"There are no XML data", nil) };
@@ -84,7 +111,7 @@
         }
         return NO;
     }
-    
+
     NSArray *preambleComponents = [xmlString componentsSeparatedByString:kXMLPreamble];
     NSArray *closingComponents = [xmlString componentsSeparatedByString:kiStayHealthyClosingStatement];
     if (2 == preambleComponents.count && 2 == closingComponents.count)
@@ -112,7 +139,7 @@
     NSMutableString *string = [NSMutableString string];
     NSArray *endStatements = [xmlString componentsSeparatedByString:kiStayHealthyClosingStatement];
     [string appendString:kXMLPreamble];
-    
+
     if (nil != endStatements && 1 < endStatements.count)
     {
         NSString *firstComponent = endStatements[0];
@@ -129,7 +156,7 @@
             }
             index++;
         }
-        
+
         if (foundIndex < xmlStatements.count)
         {
             NSString *xmlAddedString = xmlStatements[foundIndex];
@@ -137,7 +164,7 @@
             [string appendString:kiStayHealthyClosingStatement];
         }
     }
-    
+
     return string;
 }
 

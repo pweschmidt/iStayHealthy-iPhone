@@ -24,6 +24,7 @@ class PWESPersistentStoreManager : NSObject
     let fileManager = NSFileManager.defaultManager()
     var iCloudEnabled: Bool?
 
+    // MARK: init/declare
     class var defaultManager : PWESPersistentStoreManager
     {
         struct Static
@@ -33,6 +34,22 @@ class PWESPersistentStoreManager : NSObject
         return Static.instance
     }
     
+    deinit
+    {
+        saveContext(nil)
+    }
+    
+    func registerObservers()
+    {
+        
+    }
+    
+    func unregisterObservers()
+    {
+        
+    }
+    
+    // MARK: configure the persistent store manager
     func configureStoreManager() -> Bool
     {
         let path:NSURL = NSBundle.mainBundle().URLForResource("iStayHealthy", withExtension: "momd")!
@@ -60,6 +77,7 @@ class PWESPersistentStoreManager : NSObject
         return false
     }
     
+    // MARK: sets up the core data stack
     func setUpCoreDataStack() -> Bool
     {
         let hasSetUpManager = configureStoreManager()
@@ -155,7 +173,174 @@ class PWESPersistentStoreManager : NSObject
         
     }
     
+    func hasBackupFile() -> Bool
+    {
+        var path: String?
+        path = filePathInDocumentDirectory(backupFileName)
+        if nil != path
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    func hasNewDatabase() -> Bool
+    {
+        var path: String?
+        var libraryPath: NSURL = appLibraryDirectory()
+        var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
+        if nil != newPath.path
+        {
+            if self.fileManager.fileExistsAtPath(newPath.path!)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func hasLegacyDatabase() -> Bool
+    {
+        var path: String?
+        var libraryPath: NSURL = appLibraryDirectory()
+        var newPath = libraryPath.URLByAppendingPathComponent(oldStoreName)
+        if nil != newPath.path
+        {
+            if self.fileManager.fileExistsAtPath(newPath.path!)
+            {
+                self.foundDatabasePaths.addObject(newPath)
+                return true
+            }
+            else
+            {
+                var paths: NSMutableArray = NSMutableArray()
+                searchPathForOldDataStore(oldStoreName, foundPaths: paths)
+                if 0 < paths.count
+                {
+                    self.foundDatabasePaths = paths
+                    return true
+                }
+            }
+        }
+        return false;
+    }
+    
+    func pathOldDataStore() -> String?
+    {
+        var path: String?
+        path = filePathInDocumentDirectory(oldStoreName)
+        return path
+    }
+    
+    func searchPathForOldDataStore(path: String, foundPaths:NSMutableArray)
+    {
+        var docPathURL: NSURL = appDocumentDirectory()
+        var cloudPath = docPathURL.URLByAppendingPathComponent(coreDataPath)
+        var path: String? = cloudPath.path
+        var found = false
+        if nil != path
+        {
+            found = self.fileManager.fileExistsAtPath(path!)
+        }
+        
+        if found
+        {
+            let directoryEnumerator = self.fileManager.enumeratorAtPath(path!)
+            
+            while let element = directoryEnumerator?.nextObject() as? String
+            {
+                if element.hasSuffix(oldStoreName)
+                {
+                    foundPaths.addObject(element)
+                }
+            }
+            
+        }
+    }
+    
+    
+    func filePathInDocumentDirectory(filename: String) -> String?
+    {
+        var path: String?
+        var docPathURL: NSURL = appDocumentDirectory()
+        var backupPath = docPathURL.URLByAppendingPathComponent(filename)
+        if nil != backupPath.path
+        {
+            if self.fileManager.fileExistsAtPath(backupPath.path!)
+            {
+                path = backupPath.path
+            }
+        }
+        return path
+    }
+    
+    func appDocumentDirectory() -> NSURL
+    {
+        let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
+        let path = paths[paths.count - 1] as NSURL
+        return path
+    }
+    
+    func appLibraryDirectory() -> NSURL
+    {
+        let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.LibraryDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
+        let path = paths[paths.count - 1] as NSURL
+        return path
+    }
+    
+    let context: NSManagedObjectContext =
+    {
+        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        return context
+        }()
+    
+    func disableiCloudStore(error: NSErrorPointer) -> Bool
+    {
+        if nil == defaultContext
+        {
+            return false
+        }
+        defaultContext?.lock()
+        defaultContext?.reset()
+        
+        let stores = persistentStoreCoordinator?.persistentStores as [NSPersistentStore];
+        for store in stores
+        {
+            persistentStoreCoordinator?.removePersistentStore(store, error: nil)
+        }
+        
+        defaultContext = nil
+        persistentStoreCoordinator = nil
+        
+        configureStoreManager()
+        defaultContext?.unlock()
+        
+        
+        return true;
+    }
+    
+    func setUpNewStoreWithBackupData(error: NSErrorPointer)
+    {
+        setUpNewStore()
+        if hasBackupFile()
+        {
+            let docPath:NSURL = self.appDocumentDirectory()
+            var filePath = docPath.URLByAppendingPathComponent(backupFileName)
+            let importer = PWESCoreXMLImporter()
+            importer.importWithURL(filePath, completionBlock: { (success, dictionary, error) -> Void in
+                if success
+                {
+                    
+                }
+            })
+        }
+    }
+    
 
+    // MARK: Core data main functions
     func saveContext(error: NSErrorPointer) -> Bool
     {
         if nil == self.defaultContext
@@ -256,192 +441,6 @@ class PWESPersistentStoreManager : NSObject
     }
     
     
-    func hasBackupFile() -> Bool
-    {
-        var path: String?
-        path = filePathInDocumentDirectory(backupFileName)
-        if nil != path
-        {
-            return true
-        }
-        else
-        {
-            return false
-        }
-    }
-    
-    func hasNewDatabase() -> Bool
-    {
-        var path: String?
-        var libraryPath: NSURL = appLibraryDirectory()
-        var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
-        if nil != newPath.path
-        {
-            if self.fileManager.fileExistsAtPath(newPath.path!)
-            {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func hasLegacyDatabase() -> Bool
-    {
-        var path: String?
-        var libraryPath: NSURL = appLibraryDirectory()
-        var newPath = libraryPath.URLByAppendingPathComponent(oldStoreName)
-        if nil != newPath.path
-        {
-            if self.fileManager.fileExistsAtPath(newPath.path!)
-            {
-                self.foundDatabasePaths.addObject(newPath)
-                return true
-            }
-            else
-            {
-                var paths: NSMutableArray = NSMutableArray()
-                searchPathForOldDataStore(oldStoreName, foundPaths: paths)
-                if 0 < paths.count
-                {
-                    self.foundDatabasePaths = paths
-                    return true
-                }
-            }
-        }
-        return false;
-    }
-    
-    func findStorageType() -> Int
-    {
-        if hasNewDatabase()
-        {
-            return 3
-        }
-        let hasBackup = hasBackupFile()
-        var result: Int = hasBackup ? 2 : 1
-        
-        var oldPath: String? = pathOldDataStore()
-        if nil != oldPath
-        {
-            return result
-        }
-        else
-        {
-            var paths: NSMutableArray = NSMutableArray()
-            searchPathForOldDataStore(oldStoreName, foundPaths: paths)
-            if 0 < paths.count
-            {
-                return result
-            }
-        }
-        return 0
-    }
-    
-    
-    func pathOldDataStore() -> String?
-    {
-        var path: String?
-        path = filePathInDocumentDirectory(oldStoreName)
-        return path
-    }
-    
-    
-    
-    
-    func searchPathForOldDataStore(path: String, foundPaths:NSMutableArray)
-    {
-        var docPathURL: NSURL = appDocumentDirectory()
-        var cloudPath = docPathURL.URLByAppendingPathComponent(coreDataPath)
-        var path: String? = cloudPath.path
-        var found = false
-        if nil != path
-        {
-            found = self.fileManager.fileExistsAtPath(path!)
-        }
-        
-        if found
-        {
-            let directoryEnumerator = self.fileManager.enumeratorAtPath(path!)
-            
-            while let element = directoryEnumerator?.nextObject() as? String
-            {
-                if element.hasSuffix(oldStoreName)
-                {
-                    foundPaths.addObject(element)
-                }
-            }
-            
-        }
-    }
-    
-    
-    func filePathInDocumentDirectory(filename: String) -> String?
-    {
-        var path: String?
-        var docPathURL: NSURL = appDocumentDirectory()
-        var backupPath = docPathURL.URLByAppendingPathComponent(filename)
-        if nil != backupPath.path
-        {
-            if self.fileManager.fileExistsAtPath(backupPath.path!)
-            {
-                path = backupPath.path
-            }
-        }
-        return path
-    }
-    
-    func appDocumentDirectory() -> NSURL
-    {
-        let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
-        let path = paths[paths.count - 1] as NSURL
-        return path
-    }
-    
-    func appLibraryDirectory() -> NSURL
-    {
-        let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.LibraryDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
-        let path = paths[paths.count - 1] as NSURL
-        return path
-    }
-    
-    let context: NSManagedObjectContext =
-    {
-        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
-        return context
-    }()
-    
-    func disableiCloudStore(error: NSErrorPointer) -> Bool
-    {
-        if nil == defaultContext
-        {
-            return false
-        }
-        defaultContext?.lock()
-        defaultContext?.reset()
-
-        let stores = persistentStoreCoordinator?.persistentStores as [NSPersistentStore];
-        for store in stores
-        {
-            persistentStoreCoordinator?.removePersistentStore(store, error: nil)
-        }
-        
-        defaultContext = nil
-        persistentStoreCoordinator = nil
-        
-        configureStoreManager()
-        defaultContext?.unlock()
-        
-        setUpNewStore()
-        if hasBackupFile()
-        {
-            let reader = CoreXMLReader()
-            let docPath:NSURL = self.appDocumentDirectory()
-            var filePath = docPath.URLByAppendingPathComponent(backupFileName)
-            let xmlData = NSData(contentsOfURL: filePath)
-        }
-        
-        return true;
-    }
     
     func removeManagedObject(managedObject: NSManagedObject?, error: NSErrorPointer) -> Bool
     {
@@ -454,19 +453,5 @@ class PWESPersistentStoreManager : NSObject
         return success
     }
     
-    func createHealthObject(className: NSString, error: NSErrorPointer) -> NSManagedObject
-    {
-        let entityDescription = NSEntityDescription.entityForName(className, inManagedObjectContext: self.context)
-        
-        let healthObject = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: self.context)
-        
-        return healthObject
-    }
-    
-    
-    deinit
-    {
-        saveContext(nil)
-    }
     
 }

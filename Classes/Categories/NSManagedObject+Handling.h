@@ -9,6 +9,7 @@
 #import <CoreData/CoreData.h>
 
 @interface NSManagedObject (Handling)
+- (void)importFromDictionary:(NSDictionary *)attributes;
 - (NSDate *)dateFromValue:(id)value;
 - (NSNumber *)numberFromValue:(id)value;
 - (NSString *)stringFromValue:(id)value;

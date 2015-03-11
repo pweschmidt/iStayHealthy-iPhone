@@ -216,6 +216,7 @@
 		C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */; };
 		C4F337EF14D43B4700C4F573 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337EE14D43B4700C4F573 /* SystemConfiguration.framework */; };
 		C4F337F114D43B6B00C4F573 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F337F014D43B6B00C4F573 /* libz.dylib */; };
+		C4F569A61AB0843900D57250 /* PWESCoreDictionaryImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F569A51AB0843900D57250 /* PWESCoreDictionaryImporter.swift */; };
 		C4FB103513A4BF05009270C5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB103413A4BF05009270C5 /* Security.framework */; };
 /* End PBXBuildFile section */
 
@@ -649,6 +650,7 @@
 		C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C4F337EE14D43B4700C4F573 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C4F337F014D43B6B00C4F573 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		C4F569A51AB0843900D57250 /* PWESCoreDictionaryImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCoreDictionaryImporter.swift; path = iOS8/DataManagement/PWESCoreDictionaryImporter.swift; sourceTree = "<group>"; };
 		C4FB103413A4BF05009270C5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -729,6 +731,7 @@
 				0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */,
 				C458E3111A5C3F6D00163204 /* PWESCoreXMLImporter.swift */,
 				0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */,
+				C4F569A51AB0843900D57250 /* PWESCoreDictionaryImporter.swift */,
 			);
 			name = DataManagement;
 			sourceTree = "<group>";
@@ -1465,6 +1468,7 @@
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */,
 				C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */,
+				C4F569A61AB0843900D57250 /* PWESCoreDictionaryImporter.swift in Sources */,
 				C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */,
 				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
 				C458E3121A5C3F6D00163204 /* PWESCoreXMLImporter.swift in Sources */,
