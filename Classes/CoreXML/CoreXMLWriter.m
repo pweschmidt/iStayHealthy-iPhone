@@ -235,50 +235,6 @@ static NSDictionary * ascendingDictionary()
     {
         return [NSString stringWithFormat:@"<%@>", mappedParentName];
     }
-//	if ([className isEqualToString:kResults])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kResults];
-//	}
-//	else if ([className isEqualToString:kSideEffects])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kHIVSideEffects];
-//	}
-//	else if ([className isEqualToString:kMedication])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kMedications];
-//	}
-//	else if ([className isEqualToString:kOtherMedication])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kOtherMedications];
-//	}
-//	else if ([className isEqualToString:kPreviousMedication])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kPreviousMedications];
-//	}
-//	else if ([className isEqualToString:kMissedMedication])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kMissedMedications];
-//	}
-//	else if ([className isEqualToString:kContacts])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kClinicalContacts];
-//	}
-//	else if ([className isEqualToString:kProcedures])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kIllnessAndProcedures];
-//	}
-//	else if ([className isEqualToString:kSeinfeldCalendar])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kSeinfeldCalendars];
-//	}
-//	else if ([className isEqualToString:kSeinfeldCalendarEntry])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kSeinfeldCalendarEntry];
-//	}
-//	else if ([className isEqualToString:kWellness])
-//	{
-//		return [NSString stringWithFormat:@"<%@>", kWellnesses];
-//	}
     return nil;
 }
 
@@ -294,50 +250,6 @@ static NSDictionary * ascendingDictionary()
     {
         return [NSString stringWithFormat:@"</%@>", mappedParentName];
     }
-//	if ([className isEqualToString:kResults])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kResults];
-//	}
-//	else if ([className isEqualToString:kSideEffects])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kHIVSideEffects];
-//	}
-//	else if ([className isEqualToString:kMedication])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kMedications];
-//	}
-//	else if ([className isEqualToString:kOtherMedication])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kOtherMedications];
-//	}
-//	else if ([className isEqualToString:kPreviousMedication])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kPreviousMedications];
-//	}
-//	else if ([className isEqualToString:kMissedMedication])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kMissedMedications];
-//	}
-//	else if ([className isEqualToString:kContacts])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kClinicalContacts];
-//	}
-//	else if ([className isEqualToString:kProcedures])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kIllnessAndProcedures];
-//	}
-//	else if ([className isEqualToString:kSeinfeldCalendar])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kSeinfeldCalendars];
-//	}
-//	else if ([className isEqualToString:kSeinfeldCalendarEntry])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kSeinfeldCalendarEntry];
-//	}
-//	else if ([className isEqualToString:kWellness])
-//	{
-//		return [NSString stringWithFormat:@"</%@>", kWellnesses];
-//	}
     return nil;
 }
 

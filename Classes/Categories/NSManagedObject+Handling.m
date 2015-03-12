@@ -10,16 +10,6 @@
 #import "Constants.h"
 @implementation NSManagedObject (Handling)
 
-- (void)importFromDictionary:(NSDictionary *)attributes
-{
-    /// empty implementation - is implemented by subclasses
-    if (nil == attributes || [attributes allKeys].count == 0)
-    {
-        return;
-    }
-
-}
-
 - (NSDate *)dateFromValue:(id)value
 {
     if (nil == value || [NSNull class] == value || ![value isKindOfClass:[NSString class]])

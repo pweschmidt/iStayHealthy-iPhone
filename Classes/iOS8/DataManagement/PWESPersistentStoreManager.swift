@@ -34,19 +34,33 @@ class PWESPersistentStoreManager : NSObject
         return Static.instance
     }
     
+    override init()
+    {
+        super.init()
+        registerObservers()
+    }
+    
     deinit
     {
         saveContext(nil)
+        unregisterObservers()
     }
     
     func registerObservers()
     {
-        
+        println("REGISTERING OBSERVERS")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeDidChange:", name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mergeFromiCloud:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreChanged:", name: NSUbiquityIdentityDidChangeNotification, object: nil)
     }
     
     func unregisterObservers()
     {
-        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSUbiquityIdentityDidChangeNotification, object: nil)
     }
     
     // MARK: configure the persistent store manager
@@ -333,7 +347,9 @@ class PWESPersistentStoreManager : NSObject
             importer.importWithURL(filePath, completionBlock: { (success, dictionary, error) -> Void in
                 if success
                 {
-                    
+                    let dbImporter = PWESCoreDictionaryImporter()
+                    var saveError: NSError?
+                    dbImporter.saveToCoreData(dictionary, error: &saveError)
                 }
             })
         }
@@ -453,5 +469,72 @@ class PWESPersistentStoreManager : NSObject
         return success
     }
     
+    //MARK: notification responses
+    func storeWillChange(notification: NSNotification?)
+    {
+        if nil == self.defaultContext || nil == notification
+        {
+            return
+        }
+        let userInfo: Dictionary<String, AnyObject>? = notification?.userInfo as? Dictionary<String, AnyObject>
+        if nil == userInfo
+        {
+            return
+        }
+        let transitionType = userInfo?[NSPersistentStoreUbiquitousTransitionTypeKey] as? UInt
+        
+        let type = NSPersistentStoreUbiquitousTransitionType(rawValue: transitionType!)
+        if NSPersistentStoreUbiquitousTransitionType.InitialImportCompleted == type
+        {
+            
+        }
+        var error: NSError?
+        saveContext(&error)
+    }
+    
+    func storeDidChange(notification: NSNotification?)
+    {
+        if nil == self.defaultContext || nil == notification
+        {
+            return
+        }
+        let userInfo: Dictionary<String, AnyObject>? = notification?.userInfo as? Dictionary<String, AnyObject>
+        if nil == userInfo
+        {
+            return
+        }
+        let transitionType = userInfo?[NSPersistentStoreUbiquitousTransitionTypeKey] as? UInt
+        
+        let type = NSPersistentStoreUbiquitousTransitionType(rawValue: transitionType!)
+        if NSPersistentStoreUbiquitousTransitionType.InitialImportCompleted == type
+        {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let localNotification = NSNotification(name: kLoadedStoreNotificationKey, object: self)
+                NSNotificationCenter.defaultCenter().postNotification(localNotification)
+            })
+        }
+    }
+    
+    
+    func mergeFromiCloud(notification: NSNotification?)
+    {
+        if nil == self.defaultContext || nil == notification
+        {
+            return
+        }
+        defaultContext?.mergeChangesFromContextDidSaveNotification(notification!)
+        defaultContext?.processPendingChanges()
+        var error: NSError?
+        saveContext(&error)
+    }
+    
+    func iCloudStoreChanged(notification: NSNotification?)
+    {
+        if nil == self.defaultContext || nil == notification
+        {
+            return
+        }
+        
+    }
     
 }
