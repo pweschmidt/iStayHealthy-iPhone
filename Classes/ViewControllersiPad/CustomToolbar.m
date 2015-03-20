@@ -61,10 +61,10 @@
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openBackup:) buttonTag:index];
          }
-         else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
-         {
-             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openFeedback) buttonTag:index];
-         }
+//         else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
+//         {
+//             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openFeedback) buttonTag:index];
+//         }
          else if ([title isEqualToString:NSLocalizedString(@"Email Data", nil)])
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(showFeedbackController:) buttonTag:index];
@@ -77,10 +77,10 @@
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openLocalBackup:) buttonTag:index];
          }
-         else if ([title isEqualToString:NSLocalizedString(@"Help", nil)])
-         {
-             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openHelp:) buttonTag:index];
-         }
+//         else if ([title isEqualToString:NSLocalizedString(@"Help", nil)])
+//         {
+//             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openHelp:) buttonTag:index];
+//         }
          if (nil != barbutton)
          {
              [self.barButtons addObject:barbutton];

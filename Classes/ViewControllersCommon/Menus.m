@@ -98,7 +98,7 @@
                                 NSLocalizedString(@"Alerts", nil),
                                 NSLocalizedString(@"Other Medication", nil),
                                 NSLocalizedString(@"Clinics", nil),
-                                NSLocalizedString(@"Procedures", nil),
+                                NSLocalizedString(@"Illness", nil),
                                 NSLocalizedString(@"POZ Magazine", nil)];
                   });
     return menus;
@@ -176,7 +176,7 @@
     {
         return kClinicsController;
     }
-    else if ([menuName isEqualToString:NSLocalizedString(@"Procedures", nil)])
+    else if ([menuName isEqualToString:NSLocalizedString(@"Illness", nil)])
     {
         return kProceduresController;
     }

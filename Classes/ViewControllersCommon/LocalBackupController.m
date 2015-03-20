@@ -7,7 +7,8 @@
 //
 
 #import "LocalBackupController.h"
-#import "CoreDataManager.h"
+#import "iStayHealthy-Swift.h"
+    //#import "CoreDataManager.h"
 #import "UIFont+Standard.h"
 
 @interface LocalBackupController ()
@@ -40,13 +41,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    BOOL hasImportData = [CoreDataManager sharedInstance].hasDataForImport;
-
-    if (hasImportData)
+    NSUInteger sections = 1;
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    if ([manager storeIsiCloudEnabled])
     {
-        return 3;
+        sections = 2;
     }
-    return 2;
+//    BOOL hasImportData = [CoreDataManager sharedInstance].hasDataForImport;
+//
+//    if (hasImportData)
+//    {
+//        return 3;
+//    }
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -77,11 +84,11 @@
         cell.textLabel.font = [UIFont fontWithType:Bold size:standard];
         cell.textLabel.text = NSLocalizedString(@"Disable iCloud", nil);
     }
-    else
-    {
-        cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
-        cell.textLabel.text = NSLocalizedString(@"Import Data", nil);
-    }
+//    else
+//    {
+//        cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
+//        cell.textLabel.text = NSLocalizedString(@"Import Data", nil);
+//    }
     return cell;
 }
 
@@ -105,35 +112,64 @@
 {
     if (0 == indexPath.section)
     {
-        [[CoreDataManager sharedInstance] restoreLocallyWithCompletionBlock: ^(BOOL success, NSError *error) {
-             if (success)
-             {
-                 [[[UIAlertView alloc]
-                   initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-                             message:NSLocalizedString(@"Data were retrieved locally.", nil)
-                            delegate:nil
-                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                  show];
-             }
-             else
-             {
-                 [[[UIAlertView alloc]
-                   initWithTitle:NSLocalizedString(@"Error restoring", nil)
-                             message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
-                            delegate:nil
-                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                  show];
-             }
-         }];
+        PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+        [manager loadDataFromBackupFile:^(BOOL success, NSError *error) {
+                             if (success)
+                             {
+                                 [[[UIAlertView alloc]
+                                   initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+                                             message:NSLocalizedString(@"Data were retrieved locally.", nil)
+                                            delegate:nil
+                                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                                  show];
+                             }
+                             else
+                             {
+                                 [[[UIAlertView alloc]
+                                   initWithTitle:NSLocalizedString(@"Error restoring", nil)
+                                             message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
+                                            delegate:nil
+                                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                                  show];
+                             }
+            
+        }];
     }
-    else if (1 == indexPath.section)
+    else if (1 == indexPath.section) // disabling icloud
     {
+        UIAlertView *warning = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DisableiCloud", nil) message:NSLocalizedString(@"", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Proceed", nil), nil];
+        [warning show];
     }
-    else
-    {
-        [[CoreDataManager sharedInstance] importFromTmpFileURL];
-    }
+//    else
+//    {
+//        [[CoreDataManager sharedInstance] importFromTmpFileURL];
+//    }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:NSLocalizedString(@"Proceed", nil)])
+    {
+        PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+        NSError *error = nil;
+        BOOL success = [manager disableiCloudStore:&error];
+        if (success)
+        {
+            success = [manager configureStoreManager];
+            [manager setUpNewStore];
+            if (success)
+            {
+                [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError *loadError) {
+                    if (!loadSuccess)
+                    {
+                            ///TODO error handling
+                    }
+                }];
+            }
+        }
+    }
 }
 
 #pragma mark - override the notification handlers

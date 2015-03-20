@@ -37,6 +37,7 @@ class PWESPersistentStoreManager : NSObject
     override init()
     {
         super.init()
+        iCloudEnabled = false;
         registerObservers()
     }
     
@@ -49,16 +50,16 @@ class PWESPersistentStoreManager : NSObject
     func registerObservers()
     {
         println("REGISTERING OBSERVERS")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeDidChange:", name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeDidChange:", name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mergeFromiCloud:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreChanged:", name: NSUbiquityIdentityDidChangeNotification, object: nil)
     }
     
     func unregisterObservers()
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSUbiquityIdentityDidChangeNotification, object: nil)
     }
@@ -125,13 +126,10 @@ class PWESPersistentStoreManager : NSObject
         var path: String?
         var libraryPath: NSURL = appLibraryDirectory()
         var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
-        if nil != persistentStoreCoordinator
-        {
-            let coordinator = persistentStoreCoordinator!
-            let localOptions = CoreDataUtils.localStoreOptions()
-            var creationError:NSError?
-            var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
-        }
+        let coordinator = persistentStoreCoordinator!
+        let localOptions = CoreDataUtils.localStoreOptions()
+        var creationError:NSError?
+        var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
     }
     
     
@@ -355,6 +353,14 @@ class PWESPersistentStoreManager : NSObject
         }
     }
     
+    func storeIsiCloudEnabled() -> Bool
+    {
+        if nil == iCloudEnabled
+        {
+            return false
+        }
+        return iCloudEnabled!
+    }
 
     // MARK: Core data main functions
     func saveContext(error: NSErrorPointer) -> Bool
@@ -469,6 +475,43 @@ class PWESPersistentStoreManager : NSObject
         return success
     }
     
+    func loadDataFromBackupFile(completionBlock: PWESSuccessClosure)
+    {
+        var path: String?
+        path = filePathInDocumentDirectory(backupFileName)
+        if nil == path
+        {
+            let info = [NSLocalizedDescriptionKey : "No backup file found"]
+            let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 102, userInfo: info)
+            completionBlock(success: false, error: error)
+            return
+        }
+        
+        let pathURL = NSURL(fileURLWithPath: path!)
+        if nil == pathURL
+        {
+            let info = [NSLocalizedDescriptionKey : "No backup file found"]
+            let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 102, userInfo: info)
+            completionBlock(success: false, error: error)
+            return
+        }
+        let importer = PWESCoreXMLImporter()
+        importer.importWithURL(pathURL!, completionBlock: { (success, dictionary, error) -> Void in
+            if !success || nil == dictionary
+            {
+                completionBlock(success: false, error: error)
+            }
+            else
+            {
+                let importSaver = PWESCoreDictionaryImporter()
+                var importError: NSError?
+                let importSuccess = importSaver.saveToCoreData(dictionary, error: &importError)
+                completionBlock(success: importSuccess, error: importError)
+            }
+        })
+    }
+    
+    
     //MARK: notification responses
     func storeWillChange(notification: NSNotification?)
     {
@@ -494,7 +537,7 @@ class PWESPersistentStoreManager : NSObject
     
     func storeDidChange(notification: NSNotification?)
     {
-        if nil == self.defaultContext || nil == notification
+        if nil == defaultContext || nil == notification
         {
             return
         }
