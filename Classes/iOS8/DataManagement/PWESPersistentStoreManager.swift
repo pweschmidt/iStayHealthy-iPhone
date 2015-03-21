@@ -470,7 +470,7 @@ class PWESPersistentStoreManager : NSObject
         {
             return true
         }
-        self.context.deleteObject(managedObject!)
+        defaultContext!.deleteObject(managedObject!)
         let success = self.saveContext(error)
         return success
     }
@@ -515,7 +515,7 @@ class PWESPersistentStoreManager : NSObject
     //MARK: notification responses
     func storeWillChange(notification: NSNotification?)
     {
-        if nil == self.defaultContext || nil == notification
+        if nil == notification
         {
             return
         }
@@ -537,7 +537,7 @@ class PWESPersistentStoreManager : NSObject
     
     func storeDidChange(notification: NSNotification?)
     {
-        if nil == defaultContext || nil == notification
+        if nil == notification
         {
             return
         }
@@ -565,15 +565,15 @@ class PWESPersistentStoreManager : NSObject
         {
             return
         }
-        defaultContext?.mergeChangesFromContextDidSaveNotification(notification!)
-        defaultContext?.processPendingChanges()
+        defaultContext!.mergeChangesFromContextDidSaveNotification(notification!)
+        defaultContext!.processPendingChanges()
         var error: NSError?
         saveContext(&error)
     }
     
     func iCloudStoreChanged(notification: NSNotification?)
     {
-        if nil == self.defaultContext || nil == notification
+        if nil == notification
         {
             return
         }
