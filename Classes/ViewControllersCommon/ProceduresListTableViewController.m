@@ -7,11 +7,8 @@
 //
 
 #import "ProceduresListTableViewController.h"
-// #import "ContentContainerViewController.h"
-// #import "ContentNavigationController.h"
 #import "Constants.h"
 #import "DateView.h"
-// #import "CoreDataManager.h"
 #import "EditProceduresTableViewController.h"
 #import "Procedures+Handling.h"
 #import "UILabel+Standard.h"
@@ -92,6 +89,15 @@
 }
 
 #pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle)
+    {
+        self.markedIndexPath = indexPath;
+        self.markedObject = [self.procedures objectAtIndex:indexPath.row];
+        [self showDeleteAlertView];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

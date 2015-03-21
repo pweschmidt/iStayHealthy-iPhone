@@ -60,12 +60,6 @@
     cellWidth = self.tableView.bounds.size.width;
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     NSArray *barButtons = nil;
-    UIButton *save = [UIButton buttonWithType:UIButtonTypeCustom];
-    save.frame = CGRectMake(0, 0, 20, 20);
-    save.backgroundColor = [UIColor clearColor];
-    [save setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
-    [save addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", nil) style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
 
 

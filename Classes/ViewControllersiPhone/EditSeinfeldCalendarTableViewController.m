@@ -420,24 +420,24 @@
 
 - (void)indexDidChangeForSegment
 {
-//	NSDateComponents *components = [Utilities dateComponentsForDate:self.date];
-//	NSUInteger startDay = components.day;
-//	NSUInteger startMonth = components.month;
-//	NSUInteger startYear = components.year;
-//	NSUInteger length = self.calendarSegmentControl.selectedSegmentIndex + 1;
-//	NSUInteger endMonth = startMonth + length;
-//	NSUInteger endYear = startYear;
-//	if (12 < endMonth)
-//	{
-//		endMonth -= 12;
-//		endYear++;
-//	}
-//	NSDateComponents *endComponents = [[NSDateComponents alloc] init];
-//	[endComponents setDay:startDay];
-//	[endComponents setMonth:endMonth];
-//	[endComponents setYear:endYear];
-//	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//	self.endDate = [gregorianCalendar dateFromComponents:endComponents];
+	NSDateComponents *components = [Utilities dateComponentsForDate:self.date];
+	NSUInteger startDay = components.day;
+	NSUInteger startMonth = components.month;
+	NSUInteger startYear = components.year;
+	NSUInteger length = self.calendarSegmentControl.selectedSegmentIndex + 1;
+	NSUInteger endMonth = startMonth + length;
+	NSUInteger endYear = startYear;
+	if (12 < endMonth)
+	{
+		endMonth -= 12;
+		endYear++;
+	}
+	NSDateComponents *endComponents = [[NSDateComponents alloc] init];
+	[endComponents setDay:startDay];
+	[endComponents setMonth:endMonth];
+	[endComponents setYear:endYear];
+	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	self.endDate = [gregorianCalendar dateFromComponents:endComponents];
 }
 
 @end
