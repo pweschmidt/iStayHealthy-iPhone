@@ -197,6 +197,7 @@
 		C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3415F1445400882416 /* ringtone1.caf */; };
 		C4C41A3C15F1445400882416 /* ringtone2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3515F1445400882416 /* ringtone2.caf */; };
 		C4C41A3D15F1445400882416 /* xylophone.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3615F1445400882416 /* xylophone.caf */; };
+		C4C627231AC4744E007E390A /* PWESCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C627221AC4744E007E390A /* PWESCredentials.swift */; };
 		C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837DA16D1041C002D934F /* Results+Comparator.m */; };
 		C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837DD16D10475002D934F /* SideEffects+Comparator.m */; };
 		C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837E016D10493002D934F /* Procedures+Comparator.m */; };
@@ -617,6 +618,7 @@
 		C4C41A3415F1445400882416 /* ringtone1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone1.caf; sourceTree = "<group>"; };
 		C4C41A3515F1445400882416 /* ringtone2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone2.caf; sourceTree = "<group>"; };
 		C4C41A3615F1445400882416 /* xylophone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = xylophone.caf; sourceTree = "<group>"; };
+		C4C627221AC4744E007E390A /* PWESCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCredentials.swift; path = iOS8/DataManagement/PWESCredentials.swift; sourceTree = "<group>"; };
 		C4C837D916D1041C002D934F /* Results+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Results+Comparator.h"; path = "Utils/Results+Comparator.h"; sourceTree = "<group>"; };
 		C4C837DA16D1041C002D934F /* Results+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Results+Comparator.m"; path = "Utils/Results+Comparator.m"; sourceTree = "<group>"; };
 		C4C837DC16D10475002D934F /* SideEffects+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SideEffects+Comparator.h"; path = "Utils/SideEffects+Comparator.h"; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 				C458E3111A5C3F6D00163204 /* PWESCoreXMLImporter.swift */,
 				0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */,
 				C4F569A51AB0843900D57250 /* PWESCoreDictionaryImporter.swift */,
+				C4C627221AC4744E007E390A /* PWESCredentials.swift */,
 			);
 			name = DataManagement;
 			sourceTree = "<group>";
@@ -1590,6 +1593,7 @@
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
+				C4C627231AC4744E007E390A /* PWESCredentials.swift in Sources */,
 				0B11346B198CBEC700685046 /* AppSettings.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */,
