@@ -24,6 +24,8 @@
 @property (nonatomic, strong) SeinfeldCalendar *currentCalendar;
 @property (nonatomic, assign) BOOL hasCalendarRunning;
 @property (nonatomic, strong) NSDate *endDate;
+@property (nonatomic, strong) NSIndexPath *markedIndexPath;
+@property (nonatomic, strong) NSManagedObject *markedObject;
 @end
 
 @implementation EditSeinfeldCalendarTableViewController
@@ -37,6 +39,8 @@
         _currentCalendar = nil;
         _endDate = nil;
         _hasCalendarRunning = NO;
+        _markedIndexPath = nil;
+        _markedObject = nil;
     }
     return self;
 }
@@ -128,21 +132,32 @@
 
 - (void)removeManagedObject
 {
-    if (nil == self.currentCalendar)
+    if (nil == self.currentCalendar && nil == self.markedObject)
     {
         return;
     }
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    [manager removeManagedObject:self.currentCalendar error:&error];
-    [manager saveContext:&error];
-    __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
-    if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
+    if (nil != self.markedObject && nil != self.markedIndexPath)
     {
-        [resultsDelegate removeCalendar];
+        // swipe
+        [manager removeManagedObject:self.markedObject error:&error];
+        [manager saveContext:&error];
+        self.markedObject = nil;
+        self.markedIndexPath = nil;
+    }
+    else if (nil != self.currentCalendar)
+    {
+        [manager removeManagedObject:self.currentCalendar error:&error];
+        [manager saveContext:&error];
+        __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
+        if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
+        {
+            [resultsDelegate removeCalendar];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
 
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)showDeleteAlertView
@@ -318,6 +333,21 @@
     [cell.contentView addSubview:starView];
 }
 
+- (void)     tableView:(UITableView *)tableView
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+     forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle &&
+        0 < indexPath.section &&
+        0 < self.completedCalendars.count)
+    {
+        self.markedIndexPath = indexPath;
+        self.markedObject = [self.completedCalendars objectAtIndex:indexPath.row];
+        [self showDeleteAlertView];
+    }
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (0 == section)
@@ -420,24 +450,25 @@
 
 - (void)indexDidChangeForSegment
 {
-	NSDateComponents *components = [Utilities dateComponentsForDate:self.date];
-	NSUInteger startDay = components.day;
-	NSUInteger startMonth = components.month;
-	NSUInteger startYear = components.year;
-	NSUInteger length = self.calendarSegmentControl.selectedSegmentIndex + 1;
-	NSUInteger endMonth = startMonth + length;
-	NSUInteger endYear = startYear;
-	if (12 < endMonth)
-	{
-		endMonth -= 12;
-		endYear++;
-	}
-	NSDateComponents *endComponents = [[NSDateComponents alloc] init];
-	[endComponents setDay:startDay];
-	[endComponents setMonth:endMonth];
-	[endComponents setYear:endYear];
-	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-	self.endDate = [gregorianCalendar dateFromComponents:endComponents];
+    NSDateComponents *components = [Utilities dateComponentsForDate:self.date];
+    NSUInteger startDay = components.day;
+    NSUInteger startMonth = components.month;
+    NSUInteger startYear = components.year;
+    NSUInteger length = self.calendarSegmentControl.selectedSegmentIndex + 1;
+    NSUInteger endMonth = startMonth + length;
+    NSUInteger endYear = startYear;
+
+    if (12 < endMonth)
+    {
+        endMonth -= 12;
+        endYear++;
+    }
+    NSDateComponents *endComponents = [[NSDateComponents alloc] init];
+    [endComponents setDay:startDay];
+    [endComponents setMonth:endMonth];
+    [endComponents setYear:endYear];
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    self.endDate = [gregorianCalendar dateFromComponents:endComponents];
 }
 
 @end
