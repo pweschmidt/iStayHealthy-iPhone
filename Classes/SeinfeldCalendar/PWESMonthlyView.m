@@ -327,7 +327,7 @@
                                                             message:NSLocalizedString(@"Have I taken my meds today?", nil)
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                  otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil];
+                                                  otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), NSLocalizedString(@"Reset", nil), nil];
         [alertView show];
     }
 //	else
@@ -364,6 +364,12 @@
     else if ([title isEqualToString:NSLocalizedString(@"No", nil)])
     {
         [self addBackgroundLayerForDay:day colour:DARK_RED tappedLayer:tappedLayer];
+        hasTakenMeds = NO;
+        [self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"Reset", nil)])
+    {
+        [self addBackgroundLayerForDay:day colour:[UIColor clearColor] tappedLayer:tappedLayer];
         hasTakenMeds = NO;
         [self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
     }
