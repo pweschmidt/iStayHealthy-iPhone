@@ -24,8 +24,10 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     func importWithURL(url: NSURL, completionBlock: PWESSuccessWithDictionaryClosure)
     {
-        if !url.isFileReferenceURL()
+        //        println("importWithURL")
+        if !url.fileURL
         {
+            //            println("is NOT a file reference URL")
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
             completionBlock(success: false, dictionary: nil, error: error)
             return
@@ -36,6 +38,12 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
         {
             importWithData(xmlData, completionBlock: completionBlock)
         }
+        else
+        {
+            let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
+            completionBlock(success: false, dictionary: nil, error: error)
+            //            println("xmlData are nil")
+        }
     }
     
     
@@ -43,6 +51,7 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     {
         if nil == xmlData
         {
+            //            println("the data are NIL")
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
             completionBlock(success: false, dictionary: nil, error: error)
             return
@@ -52,20 +61,24 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
         let cleanedXMLData = CoreXMLTools.validatedXMLDataFromData(xmlData, error: &validationError)
         if nil != validationError || nil == cleanedXMLData
         {
+            //            println("the data cannot be validated")
             completionBlock(success: false, dictionary: nil, error: validationError)
             return
         }
         let xmlParser: NSXMLParser = NSXMLParser(data: cleanedXMLData)
         xmlParser.delegate = self
         xmlParser.parse()
+        //        println("parse")
     }
     
     func parserDidStartDocument(parser: NSXMLParser)
     {
+        //        println("Start parsing document")
     }
     
     func parserDidEndDocument(parser: NSXMLParser)
     {
+        //        println("End parsing document")
         self.records.setObject(self.results, forKey: kResults)
         self.records.setObject(self.meds, forKey: kMedications)
         self.records.setObject(self.otherMeds, forKey: kOtherMedications)
@@ -119,6 +132,7 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError)
     {
+        //        println("PARSER ERROR OCCURRED \(parseError)")
         if nil != self.completion
         {
             self.completion!(success: false, dictionary: nil, error: parseError)

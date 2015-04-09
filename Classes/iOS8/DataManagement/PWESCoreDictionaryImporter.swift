@@ -64,7 +64,7 @@ class PWESCoreDictionaryImporter: NSObject
         {
             if kResult == type
             {
-                let results = manager.managedObjectForEntityName(kResult) as! Results
+                let results = manager.managedObjectForEntityName(kResults) as! Results
                 results.importFromDictionary(attributes)
             }
             else if kMedication == type

@@ -15,7 +15,8 @@ typealias PWESArrayClosure = (array: NSArray?, error: NSError?) -> Void
 typealias PWESSuccessClosure = (success: Bool, error: NSError?) -> Void
 
 let kDefaultBackground = UIColor(red: 253.0/255.0, green: 1.0, blue: 240.0/255.0, alpha: 1.0)
-//[UIColor colorWithRed:253.0 / 255.0 green:255.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]
+let kDarkGreen =  UIColor(red:0.0 / 255.0, green:102.0 / 255.0, blue:0.0 / 255.0, alpha:1.0)
+let kDarkRed =    UIColor(red:204.0 / 255.0, green:0.0 / 255.0, blue:0.0 / 255.0, alpha:1.0)
 let kUbiquitousPath                   = "5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
 let kICloudTeamID                     = "5Y4HL833A4.com.pweschmidt.iStayHealthy"
 let kBackgroundQueueName              = "com.pweschmidt.iStayHealthy.background.queue"

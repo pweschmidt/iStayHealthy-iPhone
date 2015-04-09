@@ -96,8 +96,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
         {
             if loginHandler != nil
             {
-                let strongHandler: PWESLoginHandler = self.loginHandler!
-                strongHandler.didLogin!()
+                loginHandler?.didLogin!()
             }
         }
     }
@@ -140,7 +139,9 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
 
     func textFieldDidEndEditing(textField: UITextField)
     {
-        self.login(textField.text)
+        var enteredPassword: String = textField.text
+        println("entered password is \(enteredPassword)")
+        self.login(enteredPassword)
         textField.resignFirstResponder()
     }
 

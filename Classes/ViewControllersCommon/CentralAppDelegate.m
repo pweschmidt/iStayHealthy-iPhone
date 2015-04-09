@@ -103,7 +103,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    NSLog(@"**** applicationWillEnterForeground");
     if (0 < application.applicationIconBadgeNumber)
     {
         application.applicationIconBadgeNumber = 0;
@@ -113,7 +112,11 @@
 
     if (isPasswordEnabled)
     {
-        //        [self.containerController transitionToLoginController:self];
+        if ([self.containerController respondsToSelector:@selector(resetToLoginController)])
+        {
+            PWESContentContainerController *controller = (PWESContentContainerController *)self.containerController;
+            [controller resetToLoginController];
+        }
     }
 }
 

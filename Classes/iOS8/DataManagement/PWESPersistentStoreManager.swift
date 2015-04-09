@@ -49,17 +49,12 @@ class PWESPersistentStoreManager : NSObject
     
     func registerObservers()
     {
-        println("REGISTERING OBSERVERS")
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeDidChange:", name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mergeFromiCloud:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreChanged:", name: NSUbiquityIdentityDidChangeNotification, object: nil)
     }
     
     func unregisterObservers()
     {
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSUbiquityIdentityDidChangeNotification, object: nil)
     }
@@ -130,6 +125,7 @@ class PWESPersistentStoreManager : NSObject
         let localOptions = CoreDataUtils.localStoreOptions()
         var creationError:NSError? = nil
         var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
+        println("WE ARE SETTING UP THE NEW STORE IN THE LIBRARY FOLDER \(newPath)")
     }
     
     
@@ -148,6 +144,7 @@ class PWESPersistentStoreManager : NSObject
     
     func setUpiCloudStore()
     {
+        println("WE ARE SETTING UP THE LEGACY ICLOUD STORE")
         let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
         let manager = NSFileManager.defaultManager()
         var cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(oldStoreName)
@@ -316,20 +313,22 @@ class PWESPersistentStoreManager : NSObject
         {
             return false
         }
-        defaultContext?.lock()
+//        defaultContext?.lock()
+//        defaultContext?.reset()
+        defaultContext?.performBlockAndWait({ () -> Void in
+            let stores = self.persistentStoreCoordinator?.persistentStores as! [NSPersistentStore];
+            for store in stores
+            {
+                self.persistentStoreCoordinator?.removePersistentStore(store, error: nil)
+            }
+        })
         defaultContext?.reset()
-        
-        let stores = persistentStoreCoordinator?.persistentStores as! [NSPersistentStore];
-        for store in stores
-        {
-            persistentStoreCoordinator?.removePersistentStore(store, error: nil)
-        }
         
         defaultContext = nil
         persistentStoreCoordinator = nil
         
         configureStoreManager()
-        defaultContext?.unlock()
+        //        defaultContext?.unlock()
         
         
         return true;

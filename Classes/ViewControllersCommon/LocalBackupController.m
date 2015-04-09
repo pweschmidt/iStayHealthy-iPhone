@@ -137,13 +137,9 @@
     }
     else if (1 == indexPath.section) // disabling icloud
     {
-        UIAlertView *warning = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DisableiCloud", nil) message:NSLocalizedString(@"", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Proceed", nil), nil];
+        UIAlertView *warning = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DisableiCloud", nil) message:NSLocalizedString(@"Irreversible", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Proceed", nil), nil];
         [warning show];
     }
-//    else
-//    {
-//        [[CoreDataManager sharedInstance] importFromTmpFileURL];
-//    }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
 
@@ -152,23 +148,8 @@
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if ([title isEqualToString:NSLocalizedString(@"Proceed", nil)])
     {
-        PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-        NSError *error = nil;
-        BOOL success = [manager disableiCloudStore:&error];
-        if (success)
-        {
-            success = [manager configureStoreManager];
-            [manager setUpNewStore];
-            if (success)
-            {
-                [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError *loadError) {
-                    if (!loadSuccess)
-                    {
-                            ///TODO error handling
-                    }
-                }];
-            }
-        }
+        PWESTransferDBViewController *transferController = [PWESTransferDBViewController new];
+        [self.navigationController pushViewController:transferController animated:YES];
     }
 }
 

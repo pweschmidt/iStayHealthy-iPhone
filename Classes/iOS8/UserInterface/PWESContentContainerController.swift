@@ -20,7 +20,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
-        
         let settings: AppSettings = AppSettings()
         if settings.hasPasswordEnabled()
         {
@@ -30,12 +29,28 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         {
             loadDefaultController()
         }
+        
     }
+    
     
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func resetToLoginController()
+    {
+        let settings: AppSettings = AppSettings()
+        if settings.hasPasswordEnabled()
+        {
+            if nil != customNavigationController
+            {
+                customNavigationController!.view.removeFromSuperview()
+                customNavigationController!.removeFromParentViewController()
+            }
+            loadLoginController()
+        }
     }
     
     func loadLoginController()
@@ -53,7 +68,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         
     func loadDefaultController()
     {
-        println("loading the default controller - PWESDashboardViewController")
         var dashboardController: PWESDashboardViewController = PWESDashboardViewController()
         dashboardController.menuHandler = self
         self.customNavigationController = UINavigationController(rootViewController: dashboardController)
@@ -104,7 +118,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             self.customNavigationController!.view.removeFromSuperview()
         }
         self.customNavigationController = nil
-        println("Replacing the controller with \(controllerName)")
         
         if self.traitCollection.horizontalSizeClass == .Regular
         {
@@ -378,7 +391,12 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     func didLogin()
     {
-        self.defaultLoginController?.removeFromParentViewController()
+        if nil == defaultLoginController
+        {
+            return
+        }
+        defaultLoginController!.view.removeFromSuperview()
+        defaultLoginController!.removeFromParentViewController()
         self.defaultLoginController = nil
         loadDefaultController()
     }
