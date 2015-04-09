@@ -199,7 +199,7 @@
 	NSTimeInterval date2Interval = [date2 timeIntervalSinceReferenceDate];
 	NSTimeInterval daysBoundary = days * 24 * 60 * 20;
 
-	NSTimeInterval delta = abs(date1Interval - date2Interval);
+	NSTimeInterval delta = fabs(date1Interval - date2Interval);
 	if (delta <= daysBoundary)
 	{
 		return YES;

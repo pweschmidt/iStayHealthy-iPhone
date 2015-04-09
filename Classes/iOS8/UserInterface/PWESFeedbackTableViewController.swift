@@ -81,7 +81,7 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MailCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MailCell", forIndexPath: indexPath) as! UITableViewCell
         if 0 == indexPath.section
         {
             cell.textLabel?.text = NSLocalizedString("Feedback",  comment: "Feedback")

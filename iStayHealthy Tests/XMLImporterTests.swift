@@ -27,8 +27,8 @@ class XMLImporterTests: XCTestCase {
             {
                 println("XML \(parsedString)")
             }
-            normalXML = parsedString
-            normalXMLData = normalData
+            normalXML = parsedString as? String
+            self.normalXMLData = normalData
         }
     }
     

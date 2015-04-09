@@ -128,7 +128,7 @@ class PWESPersistentStoreManager : NSObject
         var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
         let coordinator = persistentStoreCoordinator!
         let localOptions = CoreDataUtils.localStoreOptions()
-        var creationError:NSError?
+        var creationError:NSError? = nil
         var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
     }
     
@@ -158,7 +158,7 @@ class PWESPersistentStoreManager : NSObject
             self.searchPathForOldDataStore(oldStoreName, foundPaths: paths)
             if 0 < paths.count
             {
-                var firstFound = paths.firstObject as String
+                var firstFound = paths.firstObject as! String
                 cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(firstFound)
             }
         }
@@ -166,7 +166,7 @@ class PWESPersistentStoreManager : NSObject
         dispatch_async(queue, { () -> Void in
             
             let iCloudStoreURL: NSURL? = manager.URLForUbiquityContainerIdentifier(kICloudTeamID)
-            var options: NSDictionary?
+            var options: [NSObject : AnyObject]?
             if nil == iCloudStoreURL
             {
                 options = CoreDataUtils.noiCloudStoreOptions()
@@ -175,8 +175,9 @@ class PWESPersistentStoreManager : NSObject
             {
                 options = CoreDataUtils.iCloudStoreOptionsWithPath(iCloudStoreURL)
             }
-            var creationError:NSError?
-            var store = self.persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: cloudPath, options: options, error: &creationError)
+            var creationError: NSError?
+            let coordinator = self.persistentStoreCoordinator!
+            coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: cloudPath, options: options, error: &creationError)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 let notification = NSNotification(name: kLoadedStoreNotificationKey, object: self)
                 NSNotificationCenter.defaultCenter().postNotification(notification)
@@ -292,14 +293,14 @@ class PWESPersistentStoreManager : NSObject
     func appDocumentDirectory() -> NSURL
     {
         let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
-        let path = paths[paths.count - 1] as NSURL
+        let path = paths[paths.count - 1] as! NSURL
         return path
     }
     
     func appLibraryDirectory() -> NSURL
     {
         let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.LibraryDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
-        let path = paths[paths.count - 1] as NSURL
+        let path = paths[paths.count - 1] as! NSURL
         return path
     }
     
@@ -318,7 +319,7 @@ class PWESPersistentStoreManager : NSObject
         defaultContext?.lock()
         defaultContext?.reset()
         
-        let stores = persistentStoreCoordinator?.persistentStores as [NSPersistentStore];
+        let stores = persistentStoreCoordinator?.persistentStores as! [NSPersistentStore];
         for store in stores
         {
             persistentStoreCoordinator?.removePersistentStore(store, error: nil)

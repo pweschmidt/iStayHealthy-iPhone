@@ -64,48 +64,48 @@ class PWESCoreDictionaryImporter: NSObject
         {
             if kResult == type
             {
-                let results = manager.managedObjectForEntityName(kResult) as Results
+                let results = manager.managedObjectForEntityName(kResult) as! Results
                 results.importFromDictionary(attributes)
             }
             else if kMedication == type
             {
-                let meds = manager.managedObjectForEntityName(kMedication) as Medication
+                let meds = manager.managedObjectForEntityName(kMedication) as! Medication
                 meds.importFromDictionary(attributes)
                 
             }
             else if kOtherMedication == type
             {
-                let meds = manager.managedObjectForEntityName(kOtherMedication) as OtherMedication
+                let meds = manager.managedObjectForEntityName(kOtherMedication) as! OtherMedication
                 meds.importFromDictionary(attributes)
                 
             }
             else if kProcedures == type
             {
-                let procedures = manager.managedObjectForEntityName(kProcedures) as Procedures
+                let procedures = manager.managedObjectForEntityName(kProcedures) as! Procedures
                 procedures.importFromDictionary(attributes)
                 
             }
             else if kPreviousMedication == type
             {
-                let previous = manager.managedObjectForEntityName(kPreviousMedication) as PreviousMedication
+                let previous = manager.managedObjectForEntityName(kPreviousMedication) as! PreviousMedication
                 previous.importFromDictionary(attributes)
                 
             }
             else if kSideEffects == type
             {
-                let effects = manager.managedObjectForEntityName(kSideEffects) as SideEffects
+                let effects = manager.managedObjectForEntityName(kSideEffects) as! SideEffects
                 effects.importFromDictionary(attributes)
                 
             }
             else if kMissedMedication == type
             {
-                let missed = manager.managedObjectForEntityName(kMissedMedication) as MissedMedication
+                let missed = manager.managedObjectForEntityName(kMissedMedication) as! MissedMedication
                 missed.importFromDictionary(attributes)
                 
             }
             else if kContacts == type
             {
-                let contacts = manager.managedObjectForEntityName(kContacts) as Contacts
+                let contacts = manager.managedObjectForEntityName(kContacts) as! Contacts
                 contacts.importFromDictionary(attributes)
                 
             }

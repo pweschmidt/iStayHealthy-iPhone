@@ -60,11 +60,11 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
         xmlParser.parse()
     }
     
-    func parserDidStartDocument(parser: NSXMLParser!)
+    func parserDidStartDocument(parser: NSXMLParser)
     {
     }
     
-    func parserDidEndDocument(parser: NSXMLParser!)
+    func parserDidEndDocument(parser: NSXMLParser)
     {
         self.records.setObject(self.results, forKey: kResults)
         self.records.setObject(self.meds, forKey: kMedications)
@@ -80,7 +80,7 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
         }
     }
     
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!)
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject])
     {
         if elementName == kResult
         {
@@ -117,7 +117,7 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     }
     
     
-    func parser(parser: NSXMLParser!, parseErrorOccurred parseError: NSError!)
+    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError)
     {
         if nil != self.completion
         {

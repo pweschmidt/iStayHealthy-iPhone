@@ -120,7 +120,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
         var recipients: NSArray = ["istayhealthy.app@gmail.com"]
         let subject: String = "I forgot my iStayHealthy password (iPhone)"
         mailController.mailComposeDelegate = self
-        mailController.setToRecipients(recipients)
+        mailController.setToRecipients(recipients as [AnyObject])
         mailController.setSubject(subject)
         self.presentViewController(mailController, animated: true) { () -> Void in
         }

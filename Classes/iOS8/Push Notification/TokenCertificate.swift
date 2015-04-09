@@ -42,7 +42,7 @@ class TokenCertificate: NSObject
         
         for value in byteArray
         {
-            string += NSString(format: "%2X", value)
+            string += NSString(format: "%2X", value) as String
         }
         
         return string

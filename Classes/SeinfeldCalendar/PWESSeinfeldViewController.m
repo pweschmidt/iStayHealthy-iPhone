@@ -325,7 +325,7 @@
     double days = (double) [[PWESCalendar sharedInstance] daysBetweenStartDate:calendar.startDate
                                                                        endDate:endDate];
 
-    double totalDays = abs(days);
+    double totalDays = fabs(days);
     double fractionMonitored = totalCount / totalDays;
 
     __block NSUInteger counter = 0;

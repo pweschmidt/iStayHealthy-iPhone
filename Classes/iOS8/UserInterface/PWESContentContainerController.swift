@@ -42,7 +42,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     {
         var storyboard: UIStoryboard = UIStoryboard(name: "PWESMainStoryboard", bundle: nil)
         
-        var loginController: PWESLoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as PWESLoginViewController
+        var loginController: PWESLoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! PWESLoginViewController
         loginController.loginHandler = self
         self.defaultLoginController = loginController        
         self.view.addSubview(loginController.view)
