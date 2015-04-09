@@ -92,7 +92,6 @@
 		0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */; };
 		0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BED04921A0525FD0033942A /* TokenCertificate.swift */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
-		0BFFCD5219D9DB93008C4C70 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BFFCD5119D9DB93008C4C70 /* HealthKit.framework */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -388,7 +387,6 @@
 		0BED04921A0525FD0033942A /* TokenCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenCertificate.swift; path = "iOS8/Push Notification/TokenCertificate.swift"; sourceTree = "<group>"; };
 		0BF338A119785D03004C3FB4 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ViewControllersCommon/HelpViewController.h; sourceTree = "<group>"; };
 		0BF338A219785D03004C3FB4 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ViewControllersCommon/HelpViewController.m; sourceTree = "<group>"; };
-		0BFFCD5119D9DB93008C4C70 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* iStayHealthy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iStayHealthy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -676,7 +674,6 @@
 				C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */,
 				C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */,
 				C4F337F114D43B6B00C4F573 /* libz.dylib in Frameworks */,
-				0BFFCD5219D9DB93008C4C70 /* HealthKit.framework in Frameworks */,
 				C4F337EF14D43B4700C4F573 /* SystemConfiguration.framework in Frameworks */,
 				C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */,
 				C4F337EB14D43B1E00C4F573 /* CFNetwork.framework in Frameworks */,
@@ -869,7 +866,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0BFFCD5119D9DB93008C4C70 /* HealthKit.framework */,
 				0B06DCDF189D209E00008590 /* DropboxSDK.framework */,
 				C45E52F3182BFD1400C30061 /* EventKit.framework */,
 				C41EC32C180ED0EE00A49AE4 /* CoreText.framework */,
@@ -1355,7 +1351,7 @@
 						DevelopmentTeam = 5Y4HL833A4;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1928,8 +1924,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
@@ -1968,7 +1964,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
-				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos4.3]" = "";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1991,7 +1987,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos4.3]" = "";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -2013,7 +2009,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos4.3]" = "";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				GCC_C_LANGUAGE_STANDARD = c99;
