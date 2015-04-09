@@ -132,33 +132,38 @@
 
 - (void)removeManagedObject
 {
-    if (nil == self.currentCalendar && nil == self.markedObject)
+    if (nil == self.currentCalendar)
     {
         return;
     }
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    if (nil != self.markedObject && nil != self.markedIndexPath)
+    [manager removeManagedObject:self.currentCalendar error:&error];
+    [manager saveContext:&error];
+    __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
+    if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
     {
-        // swipe
-        [manager removeManagedObject:self.markedObject error:&error];
-        [manager saveContext:&error];
-        self.markedObject = nil;
-        self.markedIndexPath = nil;
+        [resultsDelegate removeCalendar];
     }
-    else if (nil != self.currentCalendar)
-    {
-        [manager removeManagedObject:self.currentCalendar error:&error];
-        [manager saveContext:&error];
-        __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
-        if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
-        {
-            [resultsDelegate removeCalendar];
-        }
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)removeMarkedObject
+{
+    if (nil == self.markedObject || nil == self.markedIndexPath)
+    {
+        return;
+    }
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    NSError *error = nil;
+    [manager removeManagedObject:self.markedObject error:&error];
+    [manager saveContext:&error];
+    self.markedObject = nil;
+    self.markedIndexPath = nil;
+    [self populateCalendars];
+    [self.tableView reloadData];
+}
+
 
 - (void)showDeleteAlertView
 {
@@ -168,6 +173,17 @@
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                          otherButtonTitles:NSLocalizedString(@"End", nil), NSLocalizedString(@"Delete", nil), nil];
 
+    [alert show];
+}
+
+- (void)showDeleteCalendarAlertView
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", nil)
+                                                   message:NSLocalizedString(@"Do you want to delete this calendar?", nil)
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                         otherButtonTitles:NSLocalizedString(@"Delete Calendar", nil), nil];
+    
     [alert show];
 }
 
@@ -182,6 +198,10 @@
     if ([title isEqualToString:NSLocalizedString(@"Delete", @"Delete")])
     {
         [self removeManagedObject];
+    }
+    else if ([title isEqualToString:NSLocalizedString(@"Delete Calendar", nil)])
+    {
+        [self removeMarkedObject];
     }
     else if ([title isEqualToString:NSLocalizedString(@"End", nil)] && nil != self.currentCalendar)
     {
@@ -343,7 +363,7 @@
     {
         self.markedIndexPath = indexPath;
         self.markedObject = [self.completedCalendars objectAtIndex:indexPath.row];
-        [self showDeleteAlertView];
+        [self showDeleteCalendarAlertView];
     }
 }
 

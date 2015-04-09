@@ -32,6 +32,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecogniser;
 @property (nonatomic, strong) SeinfeldCalendar *calender;
 @property (nonatomic, strong) NSArray *entriesForMonth;
+@property (nonatomic, assign) BOOL lastHasTakenMeds;
 @end
 
 @implementation PWESMonthlyView
@@ -344,7 +345,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-
+    
     if (nil == self.tappedLayer || [title isEqualToString:NSLocalizedString(@"Cancel", nil)])
     {
         return;
@@ -369,9 +370,7 @@
     }
     else if ([title isEqualToString:NSLocalizedString(@"Reset", nil)])
     {
-        [self addBackgroundLayerForDay:day colour:[UIColor clearColor] tappedLayer:tappedLayer];
-        hasTakenMeds = NO;
-        [self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
+        [self removeRecordForDay:day tappedLayer:tappedLayer];
     }
     NSInteger endDay = self.seinfeldMonth.endDay;
     if (day == endDay && self.seinfeldMonth.isLastMonth)
@@ -422,6 +421,27 @@
     record.date = [calendar dateFromComponents:components];
     record.hasTakenMeds = [NSNumber numberWithBool:hasTakenMeds];
     [self saveRecord:record recordExists:recordExists hasTakenMeds:hasTakenMeds];
+}
+
+- (void)removeRecordForDay:(NSInteger)day tappedLayer:(CATextLayer *)tappedLayer
+{
+    SeinfeldCalendarEntry *record = [self calendarEntryForDay:day seinfeldMonth:self.seinfeldMonth];
+    if (nil == record || nil == self.calender)
+    {
+        return;
+    }
+    [self addBackgroundLayerForDay:day colour:[UIColor clearColor] tappedLayer:tappedLayer];
+    [self.calender removeEntriesObject:record];
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    NSError *error = nil;
+    [manager removeManagedObject:record error:&error];
+    [manager saveContext:&error];
+    __strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
+    if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendarWithSuccess:)])
+    {
+        [strongDelegate updateCalendarWithSuccess:NO];
+    }
+    
 }
 
 - (void)saveRecord:(SeinfeldCalendarEntry *)record recordExists:(BOOL)recordExists hasTakenMeds:(BOOL)hasTakenMeds
