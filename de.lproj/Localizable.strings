@@ -396,13 +396,12 @@
 "Backup?" = "Daten Sichern?";
 "You are about to store your data externally. Click Backup if you want to continue." = "Sollen die Daten extern auf Dropbox gespeichert werden? Sichern auswählen um fortzufahren.";
 "HouseKeeping" = "iStayHealthy muss ein wenig aufräumen um zukünftigen Datenverlust (z.B. durch iCloud) zu vermeiden.";
-
-"Send data?" = "Daten Senden?";
-"You are about to email data. Click Yes if you want to continue." = "Sollen die Daten per Email Anhang versendet werden?";
-"Restore?" = "Daten Laden?";
-"You are about to download  data from an external storage. Click Restore if you want to continue." = "Sollen die Daten von Dropbox runtergeladen werden? Wiederherstellen auswählen um fortzufahren.";
-"Backup?" = "Daten Sichern?";
-"You are about to store your data externally. Click Backup if you want to continue." = "Sollen die Daten extern auf Dropbox gespeichert werden? Sichern auswählen um fortzufahren.";
 "Save"="Sichern";
 "Menu"="Menü";
-
+"DisableiCloud" = "Disable iCloud?";
+"Irreversible" = "If you choose to disable iCloud, your data will be stored locally. This step cannot be reversed.";
+"Proceed" = "Proceed";
+"Reset"="Reset";
+"TransferSucceeded"="The data transfer succeeded.";
+"LoadFailed"="Loading backup data failed. Try again later using the 'Restore locallly' option.";
+"ResettingFailed"="Resetting the store failed. Don't worry, you can still use the current version.";

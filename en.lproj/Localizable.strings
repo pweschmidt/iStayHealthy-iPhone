@@ -397,3 +397,6 @@
 "Irreversible" = "If you choose to disable iCloud, your data will be stored locally. This step cannot be reversed.";
 "Proceed" = "Proceed";
 "Reset"="Reset";
+"TransferSucceeded"="Success. You are now using the iCloud disabled version of iStayHealthy.";
+"LoadFailed"="Loading backup data failed. Try again later using the 'Restore locallly' option.";
+"ResettingFailed"="Resetting the store failed. Don't worry, you can still use the current version.";

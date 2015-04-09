@@ -8,11 +8,12 @@
 
 #import "LocalBackupController.h"
 #import "iStayHealthy-Swift.h"
-    //#import "CoreDataManager.h"
 #import "UIFont+Standard.h"
+#import "UILabel+Standard.h"
+#import "Utilities.h"
 
 @interface LocalBackupController ()
-
+@property (nonatomic, strong) UILabel *progressLabel;
 @end
 
 @implementation LocalBackupController
@@ -47,12 +48,6 @@
     {
         sections = 2;
     }
-//    BOOL hasImportData = [CoreDataManager sharedInstance].hasDataForImport;
-//
-//    if (hasImportData)
-//    {
-//        return 3;
-//    }
     return sections;
 }
 
@@ -84,11 +79,6 @@
         cell.textLabel.font = [UIFont fontWithType:Bold size:standard];
         cell.textLabel.text = NSLocalizedString(@"Disable iCloud", nil);
     }
-//    else
-//    {
-//        cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
-//        cell.textLabel.text = NSLocalizedString(@"Import Data", nil);
-//    }
     return cell;
 }
 
@@ -104,8 +94,27 @@
     }
     else
     {
-        return NSLocalizedString(@"There are data to import.", nil);
+        return @"";
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    if (1 == section)
+    {
+        view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 60.0f);
+        view.backgroundColor = [UIColor clearColor];
+        UILabel *progress = [UILabel standardLabel];
+        progress.frame = CGRectMake(20.0f, 0.0f, view.frame.size.width - 40.0f, 60.0f);
+        progress.textAlignment = NSTextAlignmentLeft;
+        progress.textColor = TEXTCOLOUR;
+        progress.numberOfLines = 0;
+        progress.font = [UIFont fontWithType:Bold size:15];
+        [view addSubview:progress];
+        self.progressLabel = progress;
+    }
+    return view;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -148,8 +157,65 @@
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if ([title isEqualToString:NSLocalizedString(@"Proceed", nil)])
     {
-        PWESTransferDBViewController *transferController = [PWESTransferDBViewController new];
-        [self.navigationController pushViewController:transferController animated:YES];
+        if (nil != self.progressLabel)
+        {
+            self.progressLabel.text = NSLocalizedString(@"ResettingStore", nil);
+        }
+        [self transferDataFromiCloud];
+    }
+}
+
+- (void)transferDataFromiCloud
+{
+    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+    NSError *error = nil;
+    BOOL success = [manager disableiCloudStore:&error];
+    success = [manager configureStoreManager];
+    
+    if (!success)
+    {
+        self.progressLabel.textColor = DARK_RED;
+        self.progressLabel.text = NSLocalizedString(@"ResettingFailed", nil);
+            //we have to reinit the core data stack
+        [manager setUpCoreDataStack];
+    }
+    else
+    {
+        [manager setUpNewStore];
+        BOOL hasStoredBackup = [manager hasBackupFile];
+        if (hasStoredBackup)
+        {
+            [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError * loadError) {
+                if (success)
+                {
+                    self.progressLabel.textColor = DARK_GREEN;
+                    self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
+                }
+                else
+                {
+                    self.progressLabel.textColor = DARK_RED;
+                    self.progressLabel.text = NSLocalizedString(@"LoadFailed", nil);
+                }
+            }];
+        }
+        else
+        {
+            self.progressLabel.textColor = DARK_GREEN;
+            self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
+        }
+    }
+    
+}
+
+- (void)closeController
+{
+    if ([Utilities isIPad])
+    {
+        [self hidePopover];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
