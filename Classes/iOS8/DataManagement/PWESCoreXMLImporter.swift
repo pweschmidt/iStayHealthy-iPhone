@@ -24,10 +24,8 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     func importWithURL(url: NSURL, completionBlock: PWESSuccessWithDictionaryClosure)
     {
-        //        println("importWithURL")
         if !url.fileURL
         {
-            //            println("is NOT a file reference URL")
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
             completionBlock(success: false, dictionary: nil, error: error)
             return
@@ -42,7 +40,6 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
         {
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
             completionBlock(success: false, dictionary: nil, error: error)
-            //            println("xmlData are nil")
         }
     }
     

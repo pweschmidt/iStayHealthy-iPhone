@@ -236,6 +236,12 @@
         selector:@selector(importURLData:)
             name:kImportNotificationKey
           object:nil];
+
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(importCollectionFromURL:)
+     name:kImportCollectionNotificationKey
+     object:nil];
 }
 
 - (void)unregisterObservers
@@ -254,6 +260,11 @@
      removeObserver:self
                name:kImportNotificationKey
              object:nil];
+
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:kImportCollectionNotificationKey
+     object:nil];
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
@@ -282,6 +293,19 @@
     }
     EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped importedAttributes:notification.userInfo hasNumericalInput:YES];
     [self.navigationController pushViewController:editController animated:YES];
+}
+
+- (void)importCollectionFromURL:(NSNotification *)notification
+{
+    if (nil == notification || nil == notification.userInfo
+        || 0 == notification.userInfo.allKeys.count)
+    {
+        return;
+    }
+    PWESDataImportViewController *importController = [[PWESDataImportViewController alloc]
+                                                      initWithNotification:notification];
+    [self.navigationController pushViewController:importController animated:YES];
+    
 }
 
 - (void)startAnimation:(NSNotification *)notification

@@ -32,6 +32,7 @@
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
 		0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */; };
 		0B4CD7A71A52C350000042CF /* PWESTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */; };
+		0B51F02E1AD6D0B400226CCD /* PWESDataImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B51F02D1AD6D0B400226CCD /* PWESDataImportViewController.swift */; };
 		0B5D8BBA194C3DBF0071FB4B /* TimeCounterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */; };
 		0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048521840D12B0092B5FB /* PWESDataManager.m */; };
 		0B6048581840D12B0092B5FB /* PWESDataNTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048541840D12B0092B5FB /* PWESDataNTuple.m */; };
@@ -278,6 +279,7 @@
 		0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsCollectionViewController.h; path = ViewControllersiPad/ResultsCollectionViewController.h; sourceTree = "<group>"; };
 		0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsCollectionViewController.m; path = ViewControllersiPad/ResultsCollectionViewController.m; sourceTree = "<group>"; };
 		0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESTransitionViewController.swift; path = iOS8/UserInterface/PWESTransitionViewController.swift; sourceTree = "<group>"; };
+		0B51F02D1AD6D0B400226CCD /* PWESDataImportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataImportViewController.swift; path = iOS8/UserInterface/PWESDataImportViewController.swift; sourceTree = "<group>"; };
 		0B5D8BB9194C3DBF0071FB4B /* TimeCounterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeCounterTests.m; sourceTree = "<group>"; };
 		0B6048511840D12B0092B5FB /* PWESDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESDataManager.h; path = Dashboard/PWESDataManager.h; sourceTree = "<group>"; };
 		0B6048521840D12B0092B5FB /* PWESDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESDataManager.m; path = Dashboard/PWESDataManager.m; sourceTree = "<group>"; };
@@ -743,6 +745,7 @@
 				0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */,
 				0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */,
 				C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */,
+				0B51F02D1AD6D0B400226CCD /* PWESDataImportViewController.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1555,6 +1558,7 @@
 				C46C5DE517ED9CCC00866DBD /* MissedMedicationsTableViewController.m in Sources */,
 				C45C27C417DB5A3F001F6831 /* EditSideEffectsTableViewController.m in Sources */,
 				0B4064B61893C36100F858BB /* SeinfeldCalendar+Handling.m in Sources */,
+				0B51F02E1AD6D0B400226CCD /* PWESDataImportViewController.swift in Sources */,
 				C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */,
 				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
 				0BA51CAB1A20982400B46D6D /* PWESLoginViewController.swift in Sources */,

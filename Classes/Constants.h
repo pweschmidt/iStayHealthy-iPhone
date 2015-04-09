@@ -130,6 +130,8 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kStoreLoadingKey                  @"StoreLoaded"
 #define kStoreUbiquityPathKey             @"RealUbiquityPath"
 #define kImportNotificationKey            @"URLImportKey"
+#define kImportCollectionNotificationKey  @"ImportDataCollectionKey"
+#define kURLFilePathKey                   @"URLFilePathKey"
 /**
    Database and iCloud
  */

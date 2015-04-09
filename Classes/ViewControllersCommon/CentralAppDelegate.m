@@ -165,22 +165,11 @@
     {
         return NO;
     }
-    PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-
-//    [manager save];
-//    NSError *error = nil;
-//    [[CoreDataManager sharedInstance] addFileToImportList:url error:&error];
-//    if (nil != error)
-//    {
-//        UIAlertView *alertView = [[UIAlertView alloc]
-//                                  initWithTitle:NSLocalizedString(@"Import Error", nil)
-//                                            message:NSLocalizedString(@"Error importing file", nil)
-//                                           delegate:nil
-//                                  cancelButtonTitle:NSLocalizedString(@"OK", nil)
-//                                  otherButtonTitles:nil];
-//        [alertView show];
-//        return NO;
-//    }
+    NSDictionary *info = @{kURLFilePathKey : url};
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:kImportCollectionNotificationKey
+     object:nil
+     userInfo:info];
     return YES;
 }
 
@@ -197,7 +186,10 @@
     NSDictionary *results = [urlImporter resultsFromURLQueryString:queryString];
     if (nil != results && 0 < results.allKeys.count)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kImportNotificationKey object:nil userInfo:results];
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:kImportNotificationKey
+         object:nil
+         userInfo:results];
     }
     return YES;
 }
