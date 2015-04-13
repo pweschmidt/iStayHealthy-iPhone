@@ -41,6 +41,7 @@
     if (nil != self)
     {
         _isPopover = NO;
+        [self registerObservers];
     }
     return self;
 }
@@ -51,6 +52,7 @@
     if (nil != self)
     {
         _isPopover = YES;
+        [self registerObservers];
     }
     return self;
 }
@@ -59,7 +61,6 @@
 {
     [super viewDidLoad];
     [self reloadSQLData:nil];
-    [self registerObservers];
     self.navigationController.navigationBar.tintColor = TEXTCOLOUR;
     self.view.backgroundColor = DEFAULT_BACKGROUND;
     [self createIndicators];

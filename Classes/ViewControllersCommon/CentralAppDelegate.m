@@ -175,7 +175,6 @@
 
 - (BOOL)handleImportFromLinkURL:(NSURL *)url
 {
-
     if (nil == url || nil == url.query)
     {
         return NO;

@@ -15,5 +15,6 @@
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button;
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button;
 - (void)showLocalBackupControllerFromButton:(UIBarButtonItem *)button;
+@optional
 - (void)showMailSelectionControllerFromButton:(UIBarButtonItem *)button;
 @end

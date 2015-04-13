@@ -34,11 +34,27 @@
 
 @implementation BaseCollectionViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (nil != self)
+    {
+        [self registerObservers];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [self unregisterObservers];
+}
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self reloadSQLData:nil];
-    [self registerObservers];
     self.navigationController.navigationBar.tintColor = TEXTCOLOUR;
     self.view.backgroundColor = DEFAULT_BACKGROUND;
     self.settingMenuShown = NO;
@@ -156,11 +172,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc
-{
-    [self unregisterObservers];
 }
 
 - (void)registerObservers
