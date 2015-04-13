@@ -405,3 +405,6 @@
 "TransferSucceeded"="The data transfer succeeded.";
 "LoadFailed"="Loading backup data failed. Try again later using the 'Restore locallly' option.";
 "ResettingFailed"="Resetting the store failed. Don't worry, you can still use the current version.";
+"ImportedData"="Import Data?";
+"ReviewAndSave"="Review your imported data and 'Save' when done";
+"ImportFromFile" = "Import from File";

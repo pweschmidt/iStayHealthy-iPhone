@@ -51,7 +51,7 @@ class PWESDataImportViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         var objectArray: NSArray?
-        var count: Int?
+        var count: Int? = 0
         var text: String = ""
         switch(indexPath.row)
         {
@@ -90,6 +90,10 @@ class PWESDataImportViewController: UITableViewController {
             break;
         default:
             break;
+        }
+        if nil == count
+        {
+            count = 0
         }
 
         text += " \(count)"

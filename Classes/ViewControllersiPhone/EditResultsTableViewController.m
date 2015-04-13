@@ -179,7 +179,7 @@
     self.menuDelegate = nil;
     if (self.hasImportedData)
     {
-        UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Imported Data", nil) message:NSLocalizedString(@"Review your imported data and 'Save' when done", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+        UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ImportedData", nil) message:NSLocalizedString(@"ReviewAndSave", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
         [importAlert show];
     }
 }
