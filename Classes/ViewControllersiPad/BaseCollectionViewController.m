@@ -13,7 +13,7 @@
 #import "CustomToolbar.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
-    //#import "ContentNavigationController_iPad.h"
+// #import "ContentNavigationController_iPad.h"
 #import "Utilities.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
@@ -74,7 +74,7 @@
     CGRect frame = CGRectMake(20, yOffset, self.view.frame.size.width - 40, self.view.frame.size.height - 88);
 
     self.collectionView = [[UICollectionView alloc] initWithFrame:frame
-                                             collectionViewLayout:self.collectionViewLayout];
+                                             collectionViewLayout      :self.collectionViewLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.bounces = YES;
@@ -94,16 +94,17 @@
 //    self.toolbar = toolbar;
 //    self.toolbar.customToolbarDelegate = self;
 
-    UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
-    UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
-    menuView.backgroundColor = [UIColor clearColor];
-    menuView.frame = CGRectMake(0, 0, 20, 20);
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 20, 20);
-    button.backgroundColor = [UIColor clearColor];
-    [button addSubview:menuView];
-    [button addTarget:self action:@selector(settingsMenu) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
+//    UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
+//    menuView.backgroundColor = [UIColor clearColor];
+//    menuView.frame = CGRectMake(0, 0, 20, 20);
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.frame = CGRectMake(0, 0, 20, 20);
+//    button.backgroundColor = [UIColor clearColor];
+//    [button addSubview:menuView];
+//    [button addTarget:self action:@selector(settingsMenu) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Menu", nil) style:UIBarButtonItemStylePlain target:self action:@selector(hamburgerMenu)];
+    self.navigationItem.leftBarButtonItem = menuButton;
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
@@ -199,18 +200,18 @@
         selector:@selector(reloadSQLData:)
             name:NSManagedObjectContextDidSaveNotification
           object:nil];
-    
+
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(importURLData:)
-     name:kImportNotificationKey
-     object:nil];
-    
+        selector:@selector(importURLData:)
+            name:kImportNotificationKey
+          object:nil];
+
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(importCollectionFromURL:)
-     name:kImportCollectionNotificationKey
-     object:nil];
+        selector:@selector(importCollectionFromURL:)
+            name:kImportCollectionNotificationKey
+          object:nil];
 }
 
 - (void)unregisterObservers
@@ -227,15 +228,15 @@
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
-     name:kImportNotificationKey
-     object:nil];
+               name:kImportNotificationKey
+             object:nil];
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
-     name:kImportCollectionNotificationKey
-     object:nil];
-    
-    
+               name:kImportCollectionNotificationKey
+             object:nil];
+
+
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
                name:NSPersistentStoreCoordinatorStoresDidChangeNotification
