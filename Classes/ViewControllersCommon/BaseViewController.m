@@ -8,12 +8,8 @@
 
 #import "BaseViewController.h"
 #import "CoreDataConstants.h"
-// #import "ContentContainerViewController.h"
-// #import "ContentNavigationController.h"
-// #import "ContentNavigationController_iPad.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
-// #import "HelpTableViewController.h"
 #import "LocalBackupController.h"
 #import "HelpViewController.h"
 #import "DropboxViewController.h"
@@ -240,9 +236,9 @@
 
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(importCollectionFromURL:)
-     name:kImportCollectionNotificationKey
-     object:nil];
+        selector:@selector(importCollectionFromURL:)
+            name:kImportCollectionNotificationKey
+          object:nil];
 }
 
 - (void)unregisterObservers
@@ -264,8 +260,8 @@
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
-     name:kImportCollectionNotificationKey
-     object:nil];
+               name:kImportCollectionNotificationKey
+             object:nil];
 
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
@@ -306,7 +302,7 @@
     PWESDataImportViewController *importController = [[PWESDataImportViewController alloc]
                                                       initWithNotification:notification];
     [self.navigationController pushViewController:importController animated:YES];
-    
+
 }
 
 - (void)startAnimation:(NSNotification *)notification

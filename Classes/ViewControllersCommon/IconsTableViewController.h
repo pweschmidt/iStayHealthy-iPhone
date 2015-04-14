@@ -8,6 +8,6 @@
 
 #import "BaseTableViewController.h"
 
-@interface IconsTableViewController : BaseTableViewController
+@interface IconsTableViewController : UITableViewController
 
 @end

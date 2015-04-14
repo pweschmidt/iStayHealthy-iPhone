@@ -144,7 +144,6 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kFaultyDataSource                 @"iStayHealthyNoiCloud.sqlite"
 #define kUbiquitousKeyPath                @"5Y4HL833A4.com.pweschmidt.iStayHealthy.store"
 #define kTeamId                           @"5Y4HL833A4.com.pweschmidt.iStayHealthy"
-#define kHouseKeeping                     @"HouseKeeping"
 /**
    App and Dropbox app definitions
  */

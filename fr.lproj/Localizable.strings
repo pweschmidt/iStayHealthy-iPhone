@@ -395,7 +395,6 @@
 "You are about to download  data from an external storage. Click Restore if you want to continue." = "Vous êtes sur le point de télécharger des données à partir d'un stockage externe. Cliquez sur Restaurer si vous voulez continuer.";
 "Backup?" = "Sauvegarder?";
 "You are about to store your data externally. Click Backup if you want to continue." = "Vous êtes sur le point de stocker vos données externe. Cliquez sur Sauvegarder si vous souhaitez continuer.";
-"HouseKeeping" = "iStayHealthy is doing some housekeeping in the way your data are stored on your device. This is to avoid any future data loss.";
 
 "Save"="Sauver";
 "Menu"="Menu";
@@ -409,3 +408,4 @@
 "ImportedData"="Import Data?";
 "ReviewAndSave"="Review your imported data and 'Save' when done";
 "ImportFromFile" = "Import from File";
+"to import" = "to import";

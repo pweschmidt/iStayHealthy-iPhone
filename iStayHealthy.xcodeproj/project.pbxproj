@@ -84,7 +84,6 @@
 		0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */; };
 		0BC677771A6BC6D1009B233B /* PWESCoreURLImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */; };
 		0BC677791A6BE02D009B233B /* URLImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC677781A6BE02D009B233B /* URLImporterTests.swift */; };
-		0BC7E55F198825040017ED15 /* HelpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E55E198825040017ED15 /* HelpTableViewController.m */; };
 		0BC7E562198827CA0017ED15 /* LocalBackupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7E561198827CA0017ED15 /* LocalBackupController.m */; };
 		0BD057D0198E3C5A00D7D142 /* Conflict.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CE198E3C5A00D7D142 /* Conflict.isth */; };
 		0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */; };
@@ -376,8 +375,6 @@
 		0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESToolbarDelegate.h; path = ViewControllersiPad/PWESToolbarDelegate.h; sourceTree = "<group>"; };
 		0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCoreURLImporter.swift; path = iOS8/DataManagement/PWESCoreURLImporter.swift; sourceTree = "<group>"; };
 		0BC677781A6BE02D009B233B /* URLImporterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImporterTests.swift; sourceTree = "<group>"; };
-		0BC7E55D198825040017ED15 /* HelpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpTableViewController.h; path = ViewControllersCommon/HelpTableViewController.h; sourceTree = "<group>"; };
-		0BC7E55E198825040017ED15 /* HelpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpTableViewController.m; path = ViewControllersCommon/HelpTableViewController.m; sourceTree = "<group>"; };
 		0BC7E560198827CA0017ED15 /* LocalBackupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalBackupController.h; path = ViewControllersCommon/LocalBackupController.h; sourceTree = "<group>"; };
 		0BC7E561198827CA0017ED15 /* LocalBackupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalBackupController.m; path = ViewControllersCommon/LocalBackupController.m; sourceTree = "<group>"; };
 		0BD057CE198E3C5A00D7D142 /* Conflict.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Conflict.isth; sourceTree = "<group>"; };
@@ -1026,8 +1023,6 @@
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C42A493419795A0200194ACD /* HelpSubjects.h */,
-				0BC7E55D198825040017ED15 /* HelpTableViewController.h */,
-				0BC7E55E198825040017ED15 /* HelpTableViewController.m */,
 				0BF338A119785D03004C3FB4 /* HelpViewController.h */,
 				0BF338A219785D03004C3FB4 /* HelpViewController.m */,
 				0BC7E560198827CA0017ED15 /* LocalBackupController.h */,
@@ -1517,7 +1512,6 @@
 				0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */,
 				C43BE57015F7C5B600108EF8 /* Contacts.m in Sources */,
 				C43BE57315F7C5CD00108EF8 /* iStayHealthyRecord.m in Sources */,
-				0BC7E55F198825040017ED15 /* HelpTableViewController.m in Sources */,
 				C4BCF09917B7A94000F1E0F7 /* Wellness+Handling.m in Sources */,
 				0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */,
 				0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */,

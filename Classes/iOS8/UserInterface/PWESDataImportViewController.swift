@@ -61,30 +61,37 @@ class PWESDataImportViewController: UITableViewController {
             count = objectArray?.count
             break;
         case 1:
+            text += NSLocalizedString(kMedication, tableName: nil, bundle: NSBundle.mainBundle(), value: kMedication, comment: "")
             objectArray = dataCollection?.objectForKey(kMedications) as? NSArray
             count = objectArray?.count
             break;
         case 2:
+            text += NSLocalizedString(kOtherMedication, tableName: nil, bundle: NSBundle.mainBundle(), value: kOtherMedication, comment: "")
             objectArray = dataCollection?.objectForKey(kOtherMedications) as? NSArray
             count = objectArray?.count
             break;
         case 3:
+            text += NSLocalizedString(kProcedures, tableName: nil, bundle: NSBundle.mainBundle(), value: kProcedures, comment: "")
             objectArray = dataCollection?.objectForKey(kIllnessAndProcedures) as? NSArray
             count = objectArray?.count
             break;
         case 4:
+            text += NSLocalizedString(kPreviousMedication, tableName: nil, bundle: NSBundle.mainBundle(), value: kPreviousMedication, comment: "")
             objectArray = dataCollection?.objectForKey(kPreviousMedications) as? NSArray
             count = objectArray?.count
             break;
         case 5:
+            text += NSLocalizedString(kSideEffects, tableName: nil, bundle: NSBundle.mainBundle(), value: kSideEffects, comment: "")
             objectArray = dataCollection?.objectForKey(kHIVSideEffects) as? NSArray
             count = objectArray?.count
             break;
         case 6:
+            text += NSLocalizedString(kContacts, tableName: nil, bundle: NSBundle.mainBundle(), value: kContacts, comment: "")
             objectArray = dataCollection?.objectForKey(kClinicalContacts) as? NSArray
             count = objectArray?.count
             break;
         case 7:
+            text += NSLocalizedString(kMissedMedication, tableName: nil, bundle: NSBundle.mainBundle(), value: kMissedMedication, comment: "")
             objectArray = dataCollection?.objectForKey(kMissedMedications) as? NSArray
             count = objectArray?.count
             break;
@@ -96,7 +103,8 @@ class PWESDataImportViewController: UITableViewController {
             count = 0
         }
 
-        text += " \(count)"
+        text += ": \(count)"
+        text += NSLocalizedString("to import", tableName: nil, bundle: NSBundle.mainBundle(), value: "to import", comment: "")
         cell.textLabel?.textColor = kTextColour
         cell.textLabel?.text = text
         return cell
@@ -111,6 +119,7 @@ class PWESDataImportViewController: UITableViewController {
         let dbImporter = PWESCoreDictionaryImporter()
         var saveError: NSError?
         dbImporter.saveToCoreData(dataCollection!, error: &saveError)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     

@@ -11,6 +11,8 @@
 // #import "ContentNavigationController.h"
 #import "UILabel+Standard.h"
 #import "Utilities.h"
+#import "IconsTableViewController.h"
+#import "HelpViewController.h"
 // #import "WebViewController.h"
 
 @interface InformationTableViewController ()
@@ -73,7 +75,7 @@
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
+                                      reuseIdentifier :CellIdentifier];
     }
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -138,6 +140,18 @@
                 urlString = @"http://www.istayhealthy.uk.com/get-started/disclaimer";
                 title = NSLocalizedString(@"Disclaimer", nil);
                 break;
+            case 1:
+            {
+                HelpViewController *helpController = [[HelpViewController alloc] init];
+                [self.navigationController pushViewController:helpController animated:YES];
+            }
+            break;
+            case 2:
+            {
+                IconsTableViewController *iconsController = [[IconsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                [self.navigationController pushViewController:iconsController animated:YES];
+            }
+            break;
         }
     }
     else
