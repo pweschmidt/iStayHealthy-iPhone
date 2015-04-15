@@ -115,34 +115,36 @@ static NSArray * toolbarIconText()
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = @"CellIdentifier";
+    NSString *CellIdentifier = [NSString stringWithFormat:@"CellIdentifier%lu", (long) (indexPath.row + indexPath.section * 10)];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    NSUInteger imageViewTag = indexPath.row + indexPath.section * 10 + 100;
-    NSUInteger labelTag = imageViewTag + 1000;
-    UIImageView *imageView = nil;
-    UILabel *standardLabel = nil;
 
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier :CellIdentifier];
+    }
+    NSUInteger imageViewTag = indexPath.row + indexPath.section * 10 + 100;
+    NSUInteger labelTag = imageViewTag + 1000;
+    UIImageView *imageView = nil;
+    UILabel *standardLabel = nil;
+
+    imageView = (UIImageView *) [cell.contentView viewWithTag:imageViewTag];
+    standardLabel = (UILabel *) [cell.contentView viewWithTag:labelTag];
+    if (nil == imageView)
+    {
         imageView = [[UIImageView alloc] init];
         imageView.tag = imageViewTag;
-        standardLabel = [UILabel standardLabel];
-        standardLabel.frame = CGRectMake(70.f, 0, cell.contentView.frame.size.width - 80.0f, cell.contentView.frame.size.height);
-        standardLabel.tag = labelTag;
-        [cell.contentView addSubview:imageView];
-        [cell.contentView addSubview:standardLabel];
     }
-    else
+    if (nil == standardLabel)
     {
-        imageView = (UIImageView *) [cell.contentView viewWithTag:imageViewTag];
-        standardLabel = (UILabel *) [cell.contentView viewWithTag:labelTag];
+        standardLabel = [UILabel standardLabel];
+        standardLabel.tag = labelTag;
     }
 
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    standardLabel.frame = CGRectMake(70.f, 0, cell.contentView.frame.size.width - 80.0f, cell.contentView.frame.size.height);
 
     switch (indexPath.section)
     {
@@ -165,6 +167,8 @@ static NSArray * toolbarIconText()
             break;
     }
 
+    [cell.contentView addSubview:imageView];
+    [cell.contentView addSubview:standardLabel];
 
     return cell;
 }
