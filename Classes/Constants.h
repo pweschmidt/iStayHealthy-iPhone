@@ -152,7 +152,15 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kDropboxConsumerKey               @"sekt4gbt7526j0y"
 #define kDropboxSecretKey                 @"drg5hompcf9vbd2"
 
-
+/**
+   String keys
+ */
+#define kManageData                       @"ManageData?"
+#define kManageDataOptions                @"ManageDataOptions"
+#define kChangeiCloud                     @"ChangeiCloud"
+#define kDisable_iCloud                   @"Disable_iCloud"
+#define kRecoverLocally                   @"RecoverLocally"
+#define kRecoverDropbox                   @"RecoverDropbox"
 /**
    Controllers
  */

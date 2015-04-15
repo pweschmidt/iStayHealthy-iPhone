@@ -146,6 +146,8 @@
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
 		C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */; };
 		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
+		C48519251ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */; };
+		C48519271ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48519261ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
 		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
@@ -499,6 +501,8 @@
 		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
 		C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CentralAppDelegate.m; path = ViewControllersCommon/CentralAppDelegate.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
+		C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataRecoveryHelpViewController.swift; path = iOS8/UserInterface/PWESDataRecoveryHelpViewController.swift; sourceTree = "<group>"; };
+		C48519261ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataHelpOptionsViewController.swift; path = iOS8/UserInterface/PWESDataHelpOptionsViewController.swift; sourceTree = "<group>"; };
 		C4897FC4140FD0360033C61C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC6140FD03F0033C61C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/CombiMeds.plist; sourceTree = "<group>"; };
 		C4897FC7140FD0410033C61C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/CombiMeds.plist; sourceTree = "<group>"; };
@@ -735,11 +739,13 @@
 				0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */,
 				0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */,
 				0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */,
-				0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */,
-				0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */,
-				0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */,
-				C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */,
+				C48519261ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift */,
 				0B51F02D1AD6D0B400226CCD /* PWESDataImportViewController.swift */,
+				C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */,
+				C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */,
+				0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */,
+				0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */,
+				0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1449,6 +1455,7 @@
 				C463744117E9F2AF00D19B94 /* PWESPlotView.m in Sources */,
 				0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */,
 				0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */,
+				C48519271ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift in Sources */,
 				C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */,
 				C45138F01A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m in Sources */,
 				0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */,
@@ -1520,6 +1527,7 @@
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
 				0B6E0AD01971438A00D80FA6 /* CoreJSONManager.m in Sources */,
+				C48519251ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift in Sources */,
 				C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */,
 				C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */,
 				C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */,

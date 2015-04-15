@@ -13,6 +13,7 @@
 #import "Utilities.h"
 #import "IconsTableViewController.h"
 #import "HelpViewController.h"
+#import "iStayHealthy-Swift.h"
 // #import "WebViewController.h"
 
 @interface InformationTableViewController ()
@@ -94,7 +95,7 @@
                 label.font = [UIFont boldSystemFontOfSize:15];
                 break;
             case 1:
-                label.text = NSLocalizedString(@"Where is my stuff?", nil);
+                label.text = NSLocalizedString(kManageData, nil);
                 break;
             case 2:
                 label.text = NSLocalizedString(@"What do the icons mean?", nil);
@@ -142,7 +143,8 @@
                 break;
             case 1:
             {
-                HelpViewController *helpController = [[HelpViewController alloc] init];
+                PWESDataRecoveryHelpViewController *helpController = [[PWESDataRecoveryHelpViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//                HelpViewController *helpController = [[HelpViewController alloc] init];
                 [self.navigationController pushViewController:helpController animated:YES];
             }
             break;

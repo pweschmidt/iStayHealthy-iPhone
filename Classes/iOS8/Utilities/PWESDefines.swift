@@ -25,6 +25,13 @@ let kLoadedStoreNotificationKey       = "LoadedStore"
 let kImportedDataFromFileKey          = "ImportedData"
 let kErrorStoreNotificationKey        = "ErrorLoadingStore"
 let kErrorImportFromFileKey           = "ErrorImportingFile"
+let kManageData                       = "ManageData?"
+let kManageDataOptions                = "ManageDataOptions"
+let kChangeiCloud                     = "ChangeiCloud"
+let kDisable_iCloud                   = "Disable_iCloud"
+let kRecoverLocally                   = "RecoverLocally"
+let kRecoverDropbox                   = "RecoverDropbox"
+
 /**
 XML Group elements
 */
