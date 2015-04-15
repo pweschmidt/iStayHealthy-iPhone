@@ -8,6 +8,7 @@
 
 #import "IconsTableViewController.h"
 #import "UIFont+Standard.h"
+#import "UILabel+Standard.h"
 
 static NSArray * mainIcons()
 {
@@ -114,46 +115,54 @@ static NSArray * toolbarIconText()
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = @"CellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    NSUInteger imageViewTag = indexPath.row + indexPath.section * 10 + 100;
+    NSUInteger labelTag = imageViewTag + 1000;
+    UIImageView *imageView = nil;
+    UILabel *standardLabel = nil;
 
     if (nil == cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier :CellIdentifier];
+        imageView = [[UIImageView alloc] init];
+        imageView.tag = imageViewTag;
+        standardLabel = [UILabel standardLabel];
+        standardLabel.frame = CGRectMake(70.f, 0, cell.contentView.frame.size.width - 80.0f, cell.contentView.frame.size.height);
+        standardLabel.tag = labelTag;
+        [cell.contentView addSubview:imageView];
+        [cell.contentView addSubview:standardLabel];
     }
+    else
+    {
+        imageView = (UIImageView *) [cell.contentView viewWithTag:imageViewTag];
+        standardLabel = (UILabel *) [cell.contentView viewWithTag:labelTag];
+    }
+
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    UIImage *image = nil;
-    NSString *text = nil;
     switch (indexPath.section)
     {
         case 0:
-            image = [mainIcons() objectAtIndex:indexPath.row];
-            text = [mainIconText() objectAtIndex:indexPath.row];
+            imageView.frame = CGRectMake(20, 2, 40, 40);
+            imageView.image = [mainIcons() objectAtIndex:indexPath.row];
+            standardLabel.text = [mainIconText() objectAtIndex:indexPath.row];
             break;
 
         case 1:
-            image = [navIcons() objectAtIndex:indexPath.row];
-            text = [navIconText() objectAtIndex:indexPath.row];
+            imageView.frame = CGRectMake(20, 11, 22, 22);
+            imageView.image = [navIcons() objectAtIndex:indexPath.row];
+            standardLabel.text = [navIconText() objectAtIndex:indexPath.row];
             break;
 
         case 2:
-            image = [toolbarIcons() objectAtIndex:indexPath.row];
-            text = [toolbarIconText() objectAtIndex:indexPath.row];
+            imageView.frame = CGRectMake(20, 11, 22, 22);
+            imageView.image = [toolbarIcons() objectAtIndex:indexPath.row];
+            standardLabel.text = [toolbarIconText() objectAtIndex:indexPath.row];
             break;
-    }
-
-    cell.textLabel.textColor = TEXTCOLOUR;
-    cell.textLabel.font = [UIFont fontWithType:Standard size:standard];
-    if (nil != text)
-    {
-        cell.textLabel.text = text;
-    }
-    if (nil != image)
-    {
-        cell.imageView.image = image;
     }
 
 
