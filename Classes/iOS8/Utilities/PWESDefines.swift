@@ -31,6 +31,16 @@ let kChangeiCloud                     = "ChangeiCloud"
 let kDisable_iCloud                   = "Disable_iCloud"
 let kRecoverLocally                   = "RecoverLocally"
 let kRecoverDropbox                   = "RecoverDropbox"
+let kOpenSettings                     = "OpenSettings"
+let kOpeniCloud                       = "OpeniCloud"
+let kSelectiStayHealthy               = "SelectiStayHealthy"
+let kChangeSwitch                     = "ChangeSwitch"
+let kOpenLocalBackup                  = "OpenLocalBackup"
+let kCheckiCloudEnabled               = "CheckiCloudEnabled"
+let kSelectRecoverLocally             = "SelectRecoverLocally"
+let kSelectDropboxIcon                = "SelectDropboxIcon"
+let kSelectRestore                    = "SelectRestore"
+
 
 /**
 XML Group elements

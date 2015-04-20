@@ -145,6 +145,7 @@
 		C46EB5DF17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5DE17EB7C5F00B9EA5A /* NotificationAlertsTableViewController.m */; };
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
 		C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */; };
+		C4742B7F1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */; };
 		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
 		C48519251ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */; };
 		C48519271ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48519261ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift */; };
@@ -498,6 +499,7 @@
 		C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicalAddressTableViewController.m; path = ViewControllersCommon/ClinicalAddressTableViewController.m; sourceTree = "<group>"; };
 		C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProceduresListTableViewController.h; path = ViewControllersCommon/ProceduresListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresListTableViewController.m; path = ViewControllersCommon/ProceduresListTableViewController.m; sourceTree = "<group>"; };
+		C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataRecoveryStepsTableViewController.swift; path = iOS8/UserInterface/PWESDataRecoveryStepsTableViewController.swift; sourceTree = "<group>"; };
 		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
 		C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CentralAppDelegate.m; path = ViewControllersCommon/CentralAppDelegate.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 				C48519261ADE996F000B1DC6 /* PWESDataHelpOptionsViewController.swift */,
 				0B51F02D1AD6D0B400226CCD /* PWESDataImportViewController.swift */,
 				C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */,
+				C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */,
 				C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */,
 				0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */,
 				0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */,
@@ -1514,6 +1517,7 @@
 				C431408D180C801D00EB5F5E /* PWESAxis.m in Sources */,
 				0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */,
 				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
+				C4742B7F1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift in Sources */,
 				0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */,
 				0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */,
 				0BB771F218F32DA600523DF6 /* MissedMedicationCollectionViewController.m in Sources */,

@@ -409,3 +409,12 @@
 "Disable_iCloud" = "Disable iCloud";
 "RecoverLocally" = "Recover your data from a local backup";
 "RecoverDropbox" = "Recover data from Dropbox";
+"OpenSettings" = "Open Settings app on Homescreen";
+"OpeniCloud" = "In Settings select iCloud, then iCloud Drive";
+"SelectiStayHealthy" = "Select iStayHealthy";
+"ChangeSwitch" = "Change the iCloud settings and restart iStayHealthy";
+"OpenLocalBackup" = "In toolbar tap on:";
+"CheckiCloudEnabled" = "If iCloud enabled, select 'Disable iCloud'";
+"SelectRecoverLocally" = "Select 'Recover locally'";
+"SelectDropboxIcon" = "In toolbar tap on:";
+"SelectRestore"="Select 'Restore from Dropbox'";
