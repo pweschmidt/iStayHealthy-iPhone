@@ -26,7 +26,6 @@
 #import "InformationTableViewController.h"
 #import "PWESSeinfeldViewController.h"
 #import "SettingsTableViewController.h"
-#import "EmailViewController.h"
 #import "Utilities.h"
 #import "UILabel+Standard.h"
 #import "KeychainHandler.h"

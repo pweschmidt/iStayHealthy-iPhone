@@ -10,19 +10,19 @@
 #import "PWESCustomTextfieldCell.h"
 
 @interface PWESBloodPressureCell : PWESCustomTextfieldCell
-//@property (nonatomic, strong) UILabel *titleLabel;
+// @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UITextField *systoleField;
 @property (nonatomic, strong) UITextField *diastoleField;
-@property (nonatomic, strong) UIView *additionalView;
+// @property (nonatomic, strong) UIView *additionalView;
 @property (nonatomic, assign) UIKeyboardType adjustedKeyboardType;
 
 - (void)createContentWithTitle:(NSString *)title
              textFieldDelegate:(id <UITextFieldDelegate> )textFieldDelegate
                   contentFrame:(CGRect)contentFrame;
-//- (void)clear;
-//- (void)partialShade;
-//- (void)shade;
-//- (void)unshade;
-//- (void)adjustCellWidth:(CGFloat)newWidth;
+// - (void)clear;
+// - (void)partialShade;
+// - (void)shade;
+// - (void)unshade;
+// - (void)adjustCellWidth:(CGFloat)newWidth;
 
 @end

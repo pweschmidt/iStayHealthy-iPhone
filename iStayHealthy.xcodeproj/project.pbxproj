@@ -48,7 +48,6 @@
 		0B7326D419323032001E6601 /* PWESResultDatesPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326D319323032001E6601 /* PWESResultDatesPlotArea.m */; };
 		0B7326D719324E75001E6601 /* PWESLabelPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326D619324E75001E6601 /* PWESLabelPlotArea.m */; };
 		0B778D5A18BA229B00C1F010 /* ResultsView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */; };
-		0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */; };
 		0B81FB3919229D5500A458B0 /* MedView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B81FB3819229D5500A458B0 /* MedView_iPad.m */; };
 		0B8DDBF4194322E300055E4C /* TimeView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DDBF3194322E300055E4C /* TimeView_iPad.m */; };
 		0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DDC3A19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m */; };
@@ -310,8 +309,6 @@
 		0B7326D619324E75001E6601 /* PWESLabelPlotArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESLabelPlotArea.m; path = Dashboard/PWESLabelPlotArea.m; sourceTree = "<group>"; };
 		0B778D5818BA229B00C1F010 /* ResultsView-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ResultsView-iPad.h"; path = "Views/ResultsView-iPad.h"; sourceTree = "<group>"; };
 		0B778D5918BA229B00C1F010 /* ResultsView-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ResultsView-iPad.m"; path = "Views/ResultsView-iPad.m"; sourceTree = "<group>"; };
-		0B7DF43F18E6FF5A00870BB1 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailViewController.h; path = ViewControllersCommon/EmailViewController.h; sourceTree = "<group>"; };
-		0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailViewController.m; path = ViewControllersCommon/EmailViewController.m; sourceTree = "<group>"; };
 		0B81FB3719229D5500A458B0 /* MedView_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MedView_iPad.h; path = Views/MedView_iPad.h; sourceTree = "<group>"; };
 		0B81FB3819229D5500A458B0 /* MedView_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MedView_iPad.m; path = Views/MedView_iPad.m; sourceTree = "<group>"; };
 		0B89111F18F940E100A49B95 /* PWESNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESNavigationDelegate.h; path = ViewControllersCommon/PWESNavigationDelegate.h; sourceTree = "<group>"; };
@@ -1027,8 +1024,6 @@
 				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
 				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
 				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
-				0B7DF43F18E6FF5A00870BB1 /* EmailViewController.h */,
-				0B7DF44018E6FF5A00870BB1 /* EmailViewController.m */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
 				C42A493419795A0200194ACD /* HelpSubjects.h */,
@@ -1594,7 +1589,6 @@
 				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
 				0B11346B198CBEC700685046 /* AppSettings.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
-				0B7DF44118E6FF5A00870BB1 /* EmailViewController.m in Sources */,
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
 				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
 				0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */,

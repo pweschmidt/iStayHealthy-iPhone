@@ -55,7 +55,7 @@ static NSArray * toolbarIcons()
     return @[[UIImage imageNamed:@"lock.png"],
              [UIImage imageNamed:@"settings.png"],
              [UIImage imageNamed:@"dropbox.png"],
-             [UIImage imageNamed:@"feedback.png"],
+             [UIImage imageNamed:@"mail.png"],
              [UIImage imageNamed:@"info.png"]];
 }
 

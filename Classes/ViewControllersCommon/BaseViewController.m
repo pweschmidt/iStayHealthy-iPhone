@@ -15,7 +15,7 @@
 #import "DropboxViewController.h"
 #import "EditResultsTableViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
-#import "EmailViewController.h"
+// #import "EmailViewController.h"
 #import "Utilities.h"
 #import "Menus.h"
 #import "UILabel+Standard.h"
@@ -61,16 +61,6 @@
     self.view.backgroundColor = DEFAULT_BACKGROUND;
     [self createIndicators];
     self.settingMenuShown = NO;
-    UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
-    UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
-    menuView.backgroundColor = [UIColor clearColor];
-    menuView.frame = CGRectMake(0, 0, 20, 20);
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 20, 20);
-    button.backgroundColor = [UIColor clearColor];
-    [button addSubview:menuView];
-    [button addTarget:self action:@selector(hamburgerMenu) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Menu", nil) style:UIBarButtonItemStylePlain target:self action:@selector(hamburgerMenu)];
     if (!self.isPopover)
     {
@@ -82,11 +72,6 @@
     NSArray *items = toolbar.customItems;
     [self setToolbarItems:items animated:NO];
     self.customToolbar = toolbar;
-
-//    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
-//    [self.view addSubview:toolbar];
-//    self.customToolbar = toolbar;
-//    self.customToolbar.customToolbarDelegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated

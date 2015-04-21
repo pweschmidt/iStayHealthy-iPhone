@@ -18,12 +18,12 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "iStayHealthy-Swift.h"
 
-#define kiStayHealthyPath @"/iStayHealthy"
-#define kiStayHealthyUploadFile @"iStayHealthy_upload.isth"
-#define kiStayHealthyFile @"iStayHealthy.isth"
-#define kiStayHealthyFilePath @"/iStayHealthy/iStayHealthy.isth"
+#define kiStayHealthyPath        @"/iStayHealthy"
+#define kiStayHealthyUploadFile  @"iStayHealthy_upload.isth"
+#define kiStayHealthyFile        @"iStayHealthy.isth"
+#define kiStayHealthyFilePath    @"/iStayHealthy/iStayHealthy.isth"
 #define kiStayHealthyNewFilePath @"/iStayHealthy/iStayHealthy_upload.isth"
-#define kBackupDateFormat @"ddMMMyyyy'_'HHmmss"
+#define kBackupDateFormat        @"ddMMMyyyy'_'HHmmss"
 
 @interface DropboxViewController () <DBRestClientDelegate>
 @property (nonatomic, strong) DBRestClient *restClient;
@@ -33,7 +33,7 @@
 @property (nonatomic, assign) BOOL isBackup;
 @property (nonatomic, strong) NSString *iStayHealthyPath;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, strong) UILabel *activityLabel;
+@property (nonatomic, strong) UILabel *activityIndicatorLabel;
 @property (nonatomic, assign) BOOL backupStarted;
 @property (nonatomic, strong) NSMutableArray *backupFiles;
 @end
@@ -44,15 +44,15 @@
 {
     [super viewDidLoad];
 
-	self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
-	[self disableRightBarButtons];
-	self.iStayHealthyPath = nil;
-	self.dropBoxFileExists = NO;
-	self.newDropboxFileExists = NO;
-	self.isBackup = NO;
-	self.backupStarted = NO;
-	self.backupFiles = [NSMutableArray array];
-	[self createRestClient];
+    self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
+    [self disableRightBarButtons];
+    self.iStayHealthyPath = nil;
+    self.dropBoxFileExists = NO;
+    self.newDropboxFileExists = NO;
+    self.isBackup = NO;
+    self.backupStarted = NO;
+    self.backupFiles = [NSMutableArray array];
+    [self createRestClient];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -166,8 +166,8 @@
                                                           otherButtonTitles:NSLocalizedString(@"Backup", nil), nil];
                     [alert show];
                 }
-                    break;
-                    
+                break;
+
                 case 1:
                 {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Restore?", nil)
@@ -177,7 +177,7 @@
                                                           otherButtonTitles:NSLocalizedString(@"Restore", nil), nil];
                     [alert show];
                 }
-                    break;
+                break;
             }
         }
         else
@@ -188,7 +188,7 @@
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
                                                   otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-            
+
             [alert show];
         }
     }
@@ -200,7 +200,7 @@
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
                                               otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-        
+
         [alert show];
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
@@ -252,7 +252,7 @@
         label.text = @"";
         label.frame = CGRectMake(80, 0, self.view.bounds.size.width - 100, 36);
         [view addSubview:label];
-        self.activityLabel = label;
+        self.activityIndicatorLabel = label;
         UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         indicator.hidesWhenStopped = YES;
         indicator.frame = CGRectMake(20, 0, 36, 36);
@@ -282,8 +282,8 @@
         }
         else
         {
-            UINavigationController *navController = (UINavigationController *)self.parentViewController;
-            PWESContentContainerController *contentController = (PWESContentContainerController *)navController.parentViewController;
+            UINavigationController *navController = (UINavigationController *) self.parentViewController;
+            PWESContentContainerController *contentController = (PWESContentContainerController *) navController.parentViewController;
             [[DBSession sharedSession] linkFromController:contentController];
         }
     }
@@ -323,6 +323,7 @@
     NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:kiStayHealthyFile];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
     NSError *error = nil;
+
     if ([defaultManager fileExistsAtPath:tmpPath])
     {
         [defaultManager removeItemAtPath:tmpPath error:&error];
@@ -371,17 +372,17 @@
          if (nil != xmlString)
          {
 #ifdef APPDEBUG
-             NSLog(@"XML DATA STRING TO SEND TO DROPBOX \r\n\r\n%@",xmlString);
+             NSLog(@"XML DATA STRING TO SEND TO DROPBOX \r\n\r\n%@", xmlString);
 #endif
-             NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
+             NSData * xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding];
              NSError *writeError = nil;
              [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
              if (writeError)
              {
                  [[[UIAlertView alloc]
-                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                      show];
+                   initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
+                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                  show];
                  [self stopAnimation:nil];
              }
              else
@@ -397,9 +398,9 @@
          {
              [self stopAnimation:nil];
              [[[UIAlertView alloc]
-                   initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
-                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                  show];
+               initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
+                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+              show];
          }
      }];
 }
@@ -421,24 +422,25 @@
     NSString *dataPath = [self dropBoxFileTmpPath];
     NSData *xmlData = [[NSData alloc]initWithContentsOfFile:dataPath];
     CoreXMLReader *reader = [CoreXMLReader new];
+
     [reader parseXMLData:xmlData completionBlock: ^(BOOL success, NSError *error) {
          if (success)
          {
              [self stopAnimation:nil];
              [[[UIAlertView alloc]
-                   initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-                             message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
-                            delegate:nil
-                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                  show];
+               initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+                      message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
+                     delegate:nil
+            cancelButtonTitle:@"OK" otherButtonTitles:nil]
+              show];
          }
          else
          {
              [self stopAnimation:nil];
              [[[UIAlertView alloc]
-                   initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
-                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                  show];
+               initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
+                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+              show];
          }
      }];
 }
@@ -492,7 +494,7 @@
             }
             if ([pathName hasSuffix:@".isth"])
             {
-                NSLog(@"**** backup file found %@ ****",pathName);
+                NSLog(@"**** backup file found %@ ****", pathName);
                 [self.backupFiles addObject:pathName];
             }
         }
@@ -532,7 +534,7 @@
       initWithTitle:NSLocalizedString(@"Save Finished", nil) message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
      show];
-    
+
     NSString *olderBackupFilePath = [self backedUpFileName];
 #ifdef APPDEBUG
     NSLog(@"uploaded file to %@ . the existing file will be renamed to %@", destPath, olderBackupFilePath);
@@ -545,8 +547,8 @@
     {
         [self.restClient moveFrom:destPath toPath:kiStayHealthyFilePath];
     }
-    
-    
+
+
 }
 
 - (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error
@@ -579,9 +581,9 @@
     if (self.backupStarted)
     {
 #ifdef APPDEBUG
-        NSLog(@"we completed the moved from path %@ to %@",from_path, result.path);
+        NSLog(@"we completed the moved from path %@ to %@", from_path, result.path);
 #endif
-        
+
         if ([from_path isEqualToString:kiStayHealthyFilePath])
         {
 #ifdef APPDEBUG
@@ -602,7 +604,7 @@
 - (void)restClient:(DBRestClient *)client movePathFailedWithError:(NSError *)error
 {
 #ifdef APPDEBUG
-    NSLog(@"The move to the filepath failed due to %@ with error code %lu", error.localizedDescription, (long)error.code);
+    NSLog(@"The move to the filepath failed due to %@ with error code %lu", error.localizedDescription, (long) error.code);
 #endif
     if (self.backupStarted)
     {
@@ -625,7 +627,7 @@
     if (![self.activityIndicator isAnimating])
     {
         [self.activityIndicator startAnimating];
-        self.activityLabel.text = NSLocalizedString(@"Syncing data...", nil);
+        self.activityIndicatorLabel.text = NSLocalizedString(@"Syncing data...", nil);
     }
 }
 
@@ -634,7 +636,7 @@
     if ([self.activityIndicator isAnimating])
     {
         [self.activityIndicator stopAnimating];
-        self.activityLabel.text = @"";
+        self.activityIndicatorLabel.text = @"";
     }
 }
 
@@ -645,20 +647,21 @@
 - (NSString *)backedUpFileName
 {
     NSDateFormatter *formatter = [NSDateFormatter new];
+
     formatter.dateFormat = kBackupDateFormat;
     NSDate *date = [NSDate date];
     NSString *formattedDate = [formatter stringFromDate:date];
-    NSString *filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@.isth",kiStayHealthyPath,formattedDate];
+    NSString *filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@.isth", kiStayHealthyPath, formattedDate];
 #ifdef APPDEBUG
     NSLog(@"The backup file will be called %@", filePath);
 #endif
     if ([self.backupFiles containsObject:filePath])
     {
         NSString *uuid = [[NSUUID UUID] UUIDString];
-        filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@_%@.isth",kiStayHealthyPath,formattedDate,uuid];
+        filePath = [NSString stringWithFormat:@"%@/iStayHealthy_%@_%@.isth", kiStayHealthyPath, formattedDate, uuid];
     }
     return filePath;
-    
+
 }
 
 @end

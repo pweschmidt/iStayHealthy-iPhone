@@ -20,7 +20,7 @@
 #import "EditResultsTableViewController.h"
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
-#import "EmailViewController.h"
+// #import "EmailViewController.h"
 #import "CoreXMLWriter.h"
 #import "HelpViewController.h"
 #import "LocalBackupController.h"
@@ -89,20 +89,6 @@
     [self setToolbarItems:items];
     self.navigationController.toolbarHidden = NO;
     self.toolbar = toolbar;
-//    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithFrame:toolbarFrame];
-//    [self.view addSubview:toolbar];
-//    self.toolbar = toolbar;
-//    self.toolbar.customToolbarDelegate = self;
-
-//    UIImage *menuImage = [UIImage imageNamed:@"menu.png"];
-//    UIImageView *menuView = [[UIImageView alloc] initWithImage:menuImage];
-//    menuView.backgroundColor = [UIColor clearColor];
-//    menuView.frame = CGRectMake(0, 0, 20, 20);
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    button.frame = CGRectMake(0, 0, 20, 20);
-//    button.backgroundColor = [UIColor clearColor];
-//    [button addSubview:menuView];
-//    [button addTarget:self action:@selector(settingsMenu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Menu", nil) style:UIBarButtonItemStylePlain target:self action:@selector(hamburgerMenu)];
     self.navigationItem.leftBarButtonItem = menuButton;
 
