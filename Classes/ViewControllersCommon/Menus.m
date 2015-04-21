@@ -235,13 +235,8 @@
                           kAlertsController : [UIImage imageNamed:@"alarm-icon.png"],
                           kClinicsController : [UIImage imageNamed:@"hospital-icon.png"],
                           kSideEffectsController : [UIImage imageNamed:@"sideeffects-icon.png"],
-                          kDropboxController : [UIImage imageNamed:@"save.png"],
                           kOtherMedsController : [UIImage imageNamed:@"cross-icon.png"],
-                          kInfoController : [UIImage imageNamed:@"info.png"],
-//	        kFeedbackController : [UIImage imageNamed:@"feedback.png"],
-                          kEmailController : [UIImage imageNamed:@"mail.png"],
                           kProceduresController : [UIImage imageNamed:@"procedure-icon.png"],
-                          kSettingsController : [UIImage imageNamed:@"lock.png"],
                           kMedicationDiaryController : [UIImage imageNamed:@"diary-icon.png"]
                       };
                   });
