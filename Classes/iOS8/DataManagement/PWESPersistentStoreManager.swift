@@ -144,7 +144,6 @@ class PWESPersistentStoreManager : NSObject
     
     func setUpiCloudStore()
     {
-        println("WE ARE SETTING UP THE LEGACY ICLOUD STORE")
         let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
         let manager = NSFileManager.defaultManager()
         var cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(oldStoreName)
@@ -353,6 +352,11 @@ class PWESPersistentStoreManager : NSObject
         }
     }
     
+    func setiCloudEnabled(iCloud: Bool)
+    {
+        iCloudEnabled = iCloud
+    }
+    
     func storeIsiCloudEnabled() -> Bool
     {
         if nil == iCloudEnabled
@@ -362,6 +366,43 @@ class PWESPersistentStoreManager : NSObject
         return iCloudEnabled!
     }
 
+    func saveAndExport(error: NSErrorPointer, completionBlock: PWESSuccessClosure) -> Bool
+    {
+        if nil == defaultContext
+        {
+            return false
+        }
+        let context: NSManagedObjectContext = defaultContext!
+        var success = true
+        success = context.save(error)
+        
+        let writer:CoreXMLWriter = CoreXMLWriter()
+        writer.writeWithCompletionBlock({ (xmlString: String?, xmlError: NSError?) -> Void in
+            if nil != xmlString
+            {
+                let xml:NSString = xmlString!
+                let xmlData: NSData = xml.dataUsingEncoding(NSUTF8StringEncoding)!
+                let docPath:NSURL = self.appDocumentDirectory()
+                var filePath = docPath.URLByAppendingPathComponent(backupFileName)
+                let manager:NSFileManager = NSFileManager.defaultManager()
+                if manager.fileExistsAtPath(filePath.path!)
+                {
+                    var fileError: NSError?
+                    manager.removeItemAtURL(filePath, error: &fileError)
+                }
+                xmlData.writeToURL(filePath, atomically: true)
+                completionBlock(success: true, error: nil)
+            }
+            else
+            {
+                completionBlock(success: false, error: xmlError)
+            }
+        })
+        
+        return true
+    }
+    
+    
     // MARK: Core data main functions
     func saveContext(error: NSErrorPointer) -> Bool
     {
@@ -561,7 +602,7 @@ class PWESPersistentStoreManager : NSObject
     
     func mergeFromiCloud(notification: NSNotification?)
     {
-        if nil == self.defaultContext || nil == notification
+        if nil == defaultContext || nil == notification
         {
             return
         }

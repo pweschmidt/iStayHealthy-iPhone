@@ -69,7 +69,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
     func login(password: String)
     {
         var isValidated: Bool = false
-        var stringHash: UInt = UInt(password.hash)
+        var stringHash  = password.hash
         
         isValidated = KeychainHandler.compareKeychainValueForMatchingPIN(stringHash)
         if password == kSecretKey

@@ -147,7 +147,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 /**
    App and Dropbox app definitions
  */
-#define APP_NAME                          [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
+#define APP_NAME                          @"com.pweschmidt.iStayHealthy"
 #define SALT_HASH                         @"FvTivqTqZXsgLLx1v3P8TGRyVHaSOB1pvfm02wvGadj7RLHV8GrfxaZ84oGA8RsKdNRpxdAojXYg9iAj"
 #define kDropboxConsumerKey               @"sekt4gbt7526j0y"
 #define kDropboxSecretKey                 @"drg5hompcf9vbd2"

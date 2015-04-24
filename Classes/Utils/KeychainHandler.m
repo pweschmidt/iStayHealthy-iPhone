@@ -131,7 +131,7 @@
 	SecItemDelete(dictionary);
 }
 
-+ (BOOL)compareKeychainValueForMatchingPIN:(NSUInteger)pinHash
++ (BOOL)compareKeychainValueForMatchingPIN:(NSInteger)pinHash
 {
 	if ([[self keychainStringFromMatchingIdentifier:kIsPasswordEnabled] isEqualToString:[self securedSHA256DigestHashForPIN:pinHash]])
 	{
@@ -154,7 +154,7 @@
 + (NSString *)securedSHA256DigestHashForPIN:(NSUInteger)pinHash
 {
 	// 1
-	NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:APP_NAME];
+	NSString *name = @"(null)";
 	name = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	// 2
 	NSString *computedHashString = [NSString stringWithFormat:@"%@%lu%@", name, (unsigned long)pinHash, SALT_HASH];

@@ -169,41 +169,84 @@
 {
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    BOOL success = [manager disableiCloudStore:&error];
-    success = [manager configureStoreManager];
-    
-    if (!success)
-    {
-        self.progressLabel.textColor = DARK_RED;
-        self.progressLabel.text = NSLocalizedString(@"ResettingFailed", nil);
-            //we have to reinit the core data stack
-        [manager setUpCoreDataStack];
-    }
-    else
-    {
-        [manager setUpNewStore];
-        BOOL hasStoredBackup = [manager hasBackupFile];
-        if (hasStoredBackup)
+    [manager saveAndExport:&error completionBlock:^(BOOL success, NSError * exportError) {
+        if (success)
         {
-            [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError * loadError) {
-                if (success)
+            NSError *innerError = nil;
+            BOOL innersuccess = [manager disableiCloudStore:&innerError];
+            innersuccess = [manager configureStoreManager];
+            if (!innersuccess)
+            {
+                self.progressLabel.textColor = DARK_RED;
+                self.progressLabel.text = NSLocalizedString(@"ResettingFailed", nil);
+                    //we have to reinit the core data stack
+                [manager setUpCoreDataStack];
+            }
+            else
+            {
+                [manager setUpNewStore];
+                [manager setiCloudEnabled:NO];
+                BOOL hasStoredBackup = [manager hasBackupFile];
+                if (hasStoredBackup)
+                {
+                    [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError * loadError) {
+                        if (success)
+                        {
+                            self.progressLabel.textColor = DARK_GREEN;
+                            self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
+                        }
+                        else
+                        {
+                            self.progressLabel.textColor = DARK_RED;
+                            self.progressLabel.text = NSLocalizedString(@"LoadFailed", nil);
+                        }
+                    }];
+                }
+                else
                 {
                     self.progressLabel.textColor = DARK_GREEN;
                     self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
                 }
-                else
-                {
-                    self.progressLabel.textColor = DARK_RED;
-                    self.progressLabel.text = NSLocalizedString(@"LoadFailed", nil);
-                }
-            }];
+            }
         }
-        else
-        {
-            self.progressLabel.textColor = DARK_GREEN;
-            self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
-        }
-    }
+    }];
+    
+    
+//    [manager saveContext:&error];
+//    BOOL success = [manager disableiCloudStore:&error];
+//    success = [manager configureStoreManager];
+//    
+//    if (!success)
+//    {
+//        self.progressLabel.textColor = DARK_RED;
+//        self.progressLabel.text = NSLocalizedString(@"ResettingFailed", nil);
+//        [manager setUpCoreDataStack];
+//    }
+//    else
+//    {
+//        [manager setUpNewStore];
+//        BOOL hasStoredBackup = [manager hasBackupFile];
+//        if (hasStoredBackup)
+//        {
+//            [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError * loadError) {
+//                if (success)
+//                {
+//                    self.progressLabel.textColor = DARK_GREEN;
+//                    self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
+//                }
+//                else
+//                {
+//                    self.progressLabel.textColor = DARK_RED;
+//                    self.progressLabel.text = NSLocalizedString(@"LoadFailed", nil);
+//                }
+//            }];
+//        }
+//        else
+//        {
+//            self.progressLabel.textColor = DARK_GREEN;
+//            self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
+//        }
+//    }
     
 }
 
