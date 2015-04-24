@@ -366,15 +366,23 @@ class PWESPersistentStoreManager : NSObject
         return iCloudEnabled!
     }
 
+    // MARK: Core data main functions
     func saveAndExport(error: NSErrorPointer, completionBlock: PWESSuccessClosure) -> Bool
     {
         if nil == defaultContext
         {
+            completionBlock(success: false, error: nil)
             return false
         }
         let context: NSManagedObjectContext = defaultContext!
         var success = true
         success = context.save(error)
+        var hasBackup = hasBackupFile()
+        if hasBackup
+        {
+            completionBlock(success: true, error: nil)
+            return true
+        }
         
         let writer:CoreXMLWriter = CoreXMLWriter()
         writer.writeWithCompletionBlock({ (xmlString: String?, xmlError: NSError?) -> Void in
@@ -403,7 +411,6 @@ class PWESPersistentStoreManager : NSObject
     }
     
     
-    // MARK: Core data main functions
     func saveContext(error: NSErrorPointer) -> Bool
     {
         if nil == self.defaultContext
