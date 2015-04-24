@@ -52,7 +52,9 @@ class PWESDataRecoveryHelpViewController: UITableViewController
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let text: String = options[indexPath.row]
-        let helpViewer = PWESDataHelpOptionsViewController(option: text)
+        let index: UInt = UInt(indexPath.row)
+        let helpViewer = PWESDataRecoveryStepsTableViewController(style: UITableViewStyle.Grouped)
+        helpViewer.selectedOption = index
         self.navigationController?.pushViewController(helpViewer, animated: true)
     }
 

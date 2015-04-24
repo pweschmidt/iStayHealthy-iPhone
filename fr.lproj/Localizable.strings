@@ -418,9 +418,10 @@
 "OpenSettings" = "Open Settings app on Homescreen";
 "OpeniCloud" = "In Settings select iCloud, then iCloud Drive";
 "SelectiStayHealthy" = "Select iStayHealthy";
-"ChangeSwitch" = "Change the iCloud settings and restart iStayHealthy";
-"OpenLocalBackup" = "In toolbar tap on:";
-"CheckiCloudEnabled" = "If iCloud enabled, select 'Disable iCloud'";
+"ChangeSwitch" = "Change the iCloud settings";
+"RestartApp" = "Restart iStayHealthy";
+"OpenLocalBackup" = "Select in toolbar";
+"CheckiCloudEnabled" = "Select 'Disable iCloud' if shown";
 "SelectRecoverLocally" = "Select 'Recover locally'";
-"SelectDropboxIcon" = "In toolbar tap on:";
+"SelectDropboxIcon" = "Select in toolbar";
 "SelectRestore"="Select 'Restore from Dropbox'";

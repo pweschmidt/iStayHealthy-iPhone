@@ -13,23 +13,12 @@ class PWESDataRecoveryStepsTableViewController: UITableViewController {
     var selectedOption: UInt = 0
     var selectedTitle: String = kChangeiCloud
     let cellIdentifier = "HelpStepCellIdentifier"
-    let changeiCloudOptions = [kOpenSettings,kOpeniCloud,kSelectiStayHealthy,kChangeSwitch]
+    let changeiCloudOptions = [kOpenSettings,kOpeniCloud,kSelectiStayHealthy,kChangeSwitch, kRestartApp]
     let disableiCloudOptions = [kOpenLocalBackup, kCheckiCloudEnabled]
     let recoverLocallyOptions = [kOpenLocalBackup, kSelectRecoverLocally]
     let dropboxOptions = [kSelectDropboxIcon, kSelectRestore]
 
-    
-    init(selectedHelpOption: UInt)
-    {
-        super.init(style: UITableViewStyle.Grouped)
-        selectedOption = selectedHelpOption
-    }
-
-    required init!(coder aDecoder: NSCoder!)
-    {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString(selectedTitle, tableName: nil, bundle: NSBundle.mainBundle(), value: selectedTitle, comment: "")
@@ -49,13 +38,47 @@ class PWESDataRecoveryStepsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        var rows = 0
+        switch selectedOption
+        {
+        case 0:
+            rows = changeiCloudOptions.count
+        case 1:
+            rows = disableiCloudOptions.count
+        case 2:
+            rows = recoverLocallyOptions.count
+        case 3:
+            rows = dropboxOptions.count
+        default:
+            rows = 0
+        }
+        return rows
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
+        var currentOption: String? = nil
+        switch selectedOption
+        {
+        case 0:
+            currentOption = changeiCloudOptions[indexPath.row]
+        case 1:
+            currentOption = disableiCloudOptions[indexPath.row]
+        case 2:
+            currentOption = recoverLocallyOptions[indexPath.row]
+        case 3:
+            currentOption = dropboxOptions[indexPath.row]
+        default:
+            currentOption = nil
+        }
+        if nil != currentOption
+        {
+            var localizedText = NSLocalizedString(currentOption!, tableName: nil, bundle: NSBundle.mainBundle(), value: currentOption!, comment: "")
+            cell.textLabel?.text = localizedText
+            cell.textLabel?.textColor = kTextColour
+            cell.textLabel?.font = UIFont.systemFontOfSize(15)
+        }
 
         return cell
     }
