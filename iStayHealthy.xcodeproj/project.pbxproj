@@ -1907,8 +1907,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "af3ba21c-7f1f-4e5a-be3a-494886587837";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "af3ba21c-7f1f-4e5a-be3a-494886587837";
+				PROVISIONING_PROFILE = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1950,7 +1950,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "2ac73ce6-b702-47f7-8e11-e1828447bd06";
+				PROVISIONING_PROFILE = "bcfd316c-38bc-42eb-8ab9-ff559e242cac";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -1974,8 +1974,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DAPPDEBUG";
-				PROVISIONING_PROFILE = "af3ba21c-7f1f-4e5a-be3a-494886587837";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "af3ba21c-7f1f-4e5a-be3a-494886587837";
+				PROVISIONING_PROFILE = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 			};
@@ -1996,8 +1996,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "2ac73ce6-b702-47f7-8e11-e1828447bd06";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2ac73ce6-b702-47f7-8e11-e1828447bd06";
+				PROVISIONING_PROFILE = "bcfd316c-38bc-42eb-8ab9-ff559e242cac";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bcfd316c-38bc-42eb-8ab9-ff559e242cac";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 			};
@@ -2018,8 +2018,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "97abfe53-4618-4b3c-9f64-46629e9f471d";
-				"PROVISIONING_PROFILE[sdk=*]" = "97abfe53-4618-4b3c-9f64-46629e9f471d";
+				PROVISIONING_PROFILE = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
+				"PROVISIONING_PROFILE[sdk=*]" = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 			};
@@ -2060,8 +2060,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "97abfe53-4618-4b3c-9f64-46629e9f471d";
+				PROVISIONING_PROFILE = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
+				"PROVISIONING_PROFILE[sdk=*]" = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
