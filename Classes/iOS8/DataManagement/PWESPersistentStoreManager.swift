@@ -196,6 +196,24 @@ class PWESPersistentStoreManager : NSObject
         }
     }
     
+    func getBackupFilePath() -> String?
+    {
+        var path: String?
+        path = filePathInDocumentDirectory(backupFileName)
+        return path
+    }
+    
+    func getDataFromPath(path: String?) -> NSData?
+    {
+        if nil == path
+        {
+            return nil
+        }
+        var data: NSData? = NSData(contentsOfFile: path!)
+        
+        return data
+    }
+    
     func hasNewDatabase() -> Bool
     {
         var path: String?

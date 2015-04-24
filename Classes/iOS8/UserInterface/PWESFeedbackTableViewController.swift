@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewControllerDelegate
+class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewControllerDelegate, UIAlertViewDelegate
 {
 
     override func viewDidLoad()
@@ -49,12 +49,56 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         }
         else
         {
-            sendResults()
+            let manager = PWESPersistentStoreManager.defaultManager
+            if manager.hasBackupFile()
+            {
+                let title = NSLocalizedString("Send data?", tableName: nil, bundle: NSBundle.mainBundle(), value: "Send data?", comment: "")
+                let message = NSLocalizedString("You are about to email data. Click Yes if you want to continue.", tableName: nil, bundle: NSBundle.mainBundle(), value: "You are about to email data. Click Yes if you want to continue.", comment: "")
+                let cancel = NSLocalizedString("Cancel", tableName: nil, bundle: NSBundle.mainBundle(), value: "Cancel", comment: "")
+                let yes = NSLocalizedString("Yes", tableName: nil, bundle: NSBundle.mainBundle(), value: "Yes", comment: "")
+                let alert = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: cancel, otherButtonTitles: yes)
+                alert.show()
+            }
+            else
+            {
+                let alert = UIAlertView()
+                let title = NSLocalizedString("No data to send", tableName: nil, bundle: NSBundle.mainBundle(), value: "No data to send", comment: "")
+                let message = NSLocalizedString("There are no backed up data to send", tableName: nil, bundle: NSBundle.mainBundle(), value: "There are no backed up data to send", comment: "")
+                alert.title = title
+                alert.message = message
+                alert.show()
+            }
         }
     }
     
     func sendResults()
     {
+        let controller = MFMailComposeViewController()
+        controller.mailComposeDelegate = self
+        controller.setToRecipients(["istayhealthy.app@gmail.com"])
+        controller.setSubject("Results for iStayHealthy iPhone app")
+        let manager = PWESPersistentStoreManager.defaultManager
+        var data:NSData? = nil
+        var path = manager.getBackupFilePath()
+        var canSend = false
+        if nil != path
+        {
+            data = manager.getDataFromPath(path)
+            if nil != data
+            {
+                controller.addAttachmentData(data!, mimeType: "application/xml", fileName: "iStayHealthy.isth")
+                canSend = true
+            }
+        }
+        
+        
+        if MFMailComposeViewController.canSendMail() && canSend
+        {
+            var navigationController = self.parentViewController
+            navigationController?.presentViewController(controller, animated: true, completion: { () -> Void in
+            })
+            
+        }
         
     }
     
@@ -93,4 +137,14 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         return cell
     }
 
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
+    {
+        let yes = NSLocalizedString("Yes", tableName: nil, bundle: NSBundle.mainBundle(), value: "Yes", comment: "")
+        let title = alertView.buttonTitleAtIndex(buttonIndex)
+        if title == yes
+        {
+            sendResults()
+        }
+    }
+    
 }
