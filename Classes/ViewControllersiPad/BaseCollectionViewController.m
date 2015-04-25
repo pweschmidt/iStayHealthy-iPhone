@@ -122,6 +122,16 @@
     }
 }
 
+- (void)hamburgerMenu
+{
+    __strong id<PWESContentMenuHandler>strongHandler = self.menuHandler;
+    
+    if (nil != strongHandler)
+    {
+        [strongHandler showMenuPanel];
+    }
+}
+
 - (void)hidePopover
 {
     if (nil != self.customPopoverController)
@@ -497,6 +507,15 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
 }
+
+- (void)showMailSelectionControllerFromButton:(UIBarButtonItem *)button
+{
+    PWESFeedbackTableViewController *controller = [[PWESFeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];    
+    controller.popoverDelegate = self;
+    [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+}
+
 
 #pragma mark Mail composer callback
 - (void)mailComposeController:(MFMailComposeViewController *)controller

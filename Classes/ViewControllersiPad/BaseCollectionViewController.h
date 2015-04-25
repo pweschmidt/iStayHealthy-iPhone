@@ -26,6 +26,7 @@
 @property (nonatomic, assign) BOOL hasNavHeader;
 @property (nonatomic, weak) id<PWESContentMenuHandler> menuHandler;
 
+- (void)hamburgerMenu;
 - (void)reloadSQLData:(NSNotification *)notification;
 - (void)startAnimation:(NSNotification *)notification;
 - (void)stopAnimation:(NSNotification *)notification;

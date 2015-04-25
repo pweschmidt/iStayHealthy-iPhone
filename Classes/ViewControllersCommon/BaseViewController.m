@@ -397,9 +397,13 @@
 - (void)showMailSelectionControllerFromButton:(UIBarButtonItem *)button
 {
     PWESFeedbackTableViewController *controller = [[PWESFeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 
     if ([Utilities isIPad])
     {
+        controller.popoverDelegate = self;
+        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+        
     }
     else
     {

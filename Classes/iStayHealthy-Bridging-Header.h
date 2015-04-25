@@ -52,4 +52,5 @@
 #import "SeinfeldCalendarEntry+Handling.h"
 #import "SideEffects+Handling.h"
 #import "Wellness+Handling.h"
+#import "PWESPopoverDelegate.h"
 

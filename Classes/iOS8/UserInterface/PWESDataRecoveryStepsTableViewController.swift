@@ -64,10 +64,22 @@ class PWESDataRecoveryStepsTableViewController: UITableViewController {
         case 0:
             currentOption = changeiCloudOptions[indexPath.row]
         case 1:
+            if 0 == indexPath.row
+            {
+                cell.imageView?.image = UIImage(named: "settings.png")
+            }
             currentOption = disableiCloudOptions[indexPath.row]
         case 2:
+            if 0 == indexPath.row
+            {
+                cell.imageView?.image = UIImage(named: "settings.png")
+            }
             currentOption = recoverLocallyOptions[indexPath.row]
         case 3:
+            if 0 == indexPath.row
+            {
+                cell.imageView?.image = UIImage(named: "dropbox.png")
+            }
             currentOption = dropboxOptions[indexPath.row]
         default:
             currentOption = nil
