@@ -25,16 +25,9 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.counterArray = [NSMutableArray array];
 	[self retrieveLocalNotifications];
 	[self setTitleViewWithTitle:NSLocalizedString(@"Alerts", nil)];
 	self.markedNotification = nil;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-	[super viewDidAppear:animated];
-	[self restartCounters];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -53,6 +46,22 @@
 - (void)retrieveLocalNotifications
 {
 	self.notifications = (NSArray *)[[UIApplication sharedApplication]scheduledLocalNotifications];
+    [self.counterArray removeAllObjects];
+    self.counterArray = nil;
+    self.counterArray = [NSMutableArray array];
+    NSUInteger row = 0;
+    CGFloat rowHeight = 44;
+    CGFloat scale = 1.6;
+    CGRect frame = CGRectMake(25 + rowHeight * scale, rowHeight / 2, 180, rowHeight / 2);
+    for (UILocalNotification *notification in self.notifications)
+    {
+        
+        TimeCounter *counter = [TimeCounter viewWithTime:notification.fireDate notification:notification frame:frame];
+        counter.tag = row * 100;
+        [self.counterArray addObject:counter];
+        row++;
+    }
+    [self restartCounters];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,11 +122,7 @@
 	label.font = [UIFont fontWithType:Standard size:standard];
 	label.tag = indexPath.row * 10;
 
-	TimeCounter *counter = [TimeCounter viewWithTime:notification.fireDate notification:notification frame:CGRectMake(25 + rowHeight * scale, rowHeight / 2, 180, rowHeight / 2)];
-//	[counter startTimer];
-	counter.tag = indexPath.row * 100;
-	[self.counterArray addObject:counter];
-
+    TimeCounter *counter = [self.counterArray objectAtIndex:indexPath.row];
 	[cell.contentView addSubview:timeView];
 	[cell.contentView addSubview:label];
 	[cell.contentView addSubview:counter];
@@ -183,8 +188,10 @@
 #pragma mark NotificationsDelegate methods
 - (void)updateLocalNotifications
 {
-	[self retrieveLocalNotifications];
-    [self.tableView reloadData];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self retrieveLocalNotifications];
+        [self.tableView reloadData];
+    });
 }
 
 - (void)restartTimer

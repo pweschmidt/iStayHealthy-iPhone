@@ -141,6 +141,10 @@
 	{
 		self.timerLabel.textColor = DARK_RED;
 	}
+    else
+    {
+        self.timerLabel.textColor = TEXTCOLOUR;
+    }
 	self.timerLabel.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hour, (long)minute, (long)second];
 }
 
