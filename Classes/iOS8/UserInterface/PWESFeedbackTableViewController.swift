@@ -85,7 +85,6 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
     {
         let controller = MFMailComposeViewController()
         controller.mailComposeDelegate = self
-        controller.setToRecipients(["istayhealthy.app@gmail.com"])
         controller.setSubject("Results for iStayHealthy iPhone app")
         let manager = PWESPersistentStoreManager.defaultManager
         var data:NSData? = nil

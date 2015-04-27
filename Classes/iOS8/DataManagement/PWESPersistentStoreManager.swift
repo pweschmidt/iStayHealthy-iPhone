@@ -182,6 +182,23 @@ class PWESPersistentStoreManager : NSObject
         
     }
     
+    func hasBackupFileWithContent() -> Bool
+    {
+        if !hasBackupFile()
+        {
+            return false
+        }
+        var filePath = getBackupFilePath()
+        if nil == filePath
+        {
+            return false
+        }
+        let xmlReader = CoreXMLReader()
+        var hasContent = xmlReader.hasContentForXMLWithPath(filePath)
+        return hasContent
+    }
+    
+    
     func hasBackupFile() -> Bool
     {
         var path: String?
@@ -395,7 +412,7 @@ class PWESPersistentStoreManager : NSObject
         let context: NSManagedObjectContext = defaultContext!
         var success = true
         success = context.save(error)
-        var hasBackup = hasBackupFile()
+        var hasBackup = hasBackupFileWithContent()
         if hasBackup
         {
             completionBlock(success: true, error: nil)

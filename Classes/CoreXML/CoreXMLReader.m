@@ -41,6 +41,68 @@
 
 @implementation CoreXMLReader
 
+- (BOOL)hasContentForXMLWithPath:(NSString *)filePath;
+{
+
+    if (nil == filePath)
+    {
+        return NO;
+    }
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:filePath])
+    {
+        return NO;
+    }
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSError *error = nil;
+    NSData *cleanedData = [self validXMLDataForData:data error:&error];
+    if (nil == cleanedData)
+    {
+        return NO;
+    }
+    NSString *xmlString = [[NSString alloc] initWithData:cleanedData encoding:NSUTF8StringEncoding];
+    NSArray *results = [xmlString componentsSeparatedByString:@"<Result "];
+    NSArray *meds = [xmlString componentsSeparatedByString:@"<Medication "];
+    NSArray *missed = [xmlString componentsSeparatedByString:@"<MissedMedication "];
+    NSArray *other = [xmlString componentsSeparatedByString:@"<OtherMedication "];
+    NSArray *procs = [xmlString componentsSeparatedByString:@"<Procedures "];
+    NSArray *contacts = [xmlString componentsSeparatedByString:@"<Contacts "];
+    NSArray *effects = [xmlString componentsSeparatedByString:@"<SideEffects "];
+
+    BOOL hasContent = NO;
+    if (1 < results.count)
+    {
+        hasContent = YES;
+    }
+    else if (1 < meds.count)
+    {
+        hasContent = YES;
+    }
+    else if (1 < missed.count)
+    {
+        hasContent = YES;
+    }
+    else if (1 < other.count)
+    {
+        hasContent = YES;
+    }
+    else if (1 < procs.count)
+    {
+        hasContent = YES;
+    }
+    else if (1 < contacts.count)
+    {
+        hasContent = YES;
+    }
+    else if (1 < effects.count)
+    {
+        hasContent = YES;
+    }
+
+    return NO;
+}
+
+
 - (void)parseXMLData:(NSData *)xmlData
      completionBlock:(iStayHealthySuccessBlock)completionBlock
 {
