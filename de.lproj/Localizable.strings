@@ -403,7 +403,7 @@
 "Reset"="Zurücksetzen";
 "TransferSucceeded"="Datentransfer erfolgreich.";
 "LoadFailed"="Fehler bei Datenwiederherstellung. Try again later using the 'Restore locallly' option.";
-"ResettingFailed"="Ein kleiner Fehler beim Datentransfer. Der urspr";
+"ResettingFailed"="Ein kleiner Fehler beim Datentransfer.";
 "ImportedData"="Daten importieren?";
 "ReviewAndSave"="Importierte Daten überprüfen. Sichern auswählen wenn fertig.";
 "ImportFromFile" = "Von Datei importieren";
@@ -423,4 +423,6 @@
 "CheckiCloudEnabled" = "'iCloud Ausschalten' falls sichtbar";
 "SelectRecoverLocally" = "'Vom Gerät laden' auswählen";
 "SelectDropboxIcon" = "In Toolbar auswählen";
-"SelectRestore"="Select 'Restore from Dropbox'";
+"SelectRestore"="'Daten herunterladen' auswählen";
+"No data to send"="Keine Daten zu versenden";
+"There are no backed up data to send"="Es gibt z.Z. keine lokal gesicherten Daten zu versenden.";

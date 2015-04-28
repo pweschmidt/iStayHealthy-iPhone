@@ -425,3 +425,5 @@
 "SelectRecoverLocally" = "Select 'Recover locally'";
 "SelectDropboxIcon" = "Select in toolbar";
 "SelectRestore"="Select 'Restore from Dropbox'";
+"No data to send"="No data to send";
+"There are no backed up data to send"="There are no backed up data to send";
