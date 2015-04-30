@@ -85,14 +85,14 @@
 			</array>
 			<key>UTTypeDescription</key>
 			<string>iStayHealthy Document</string>
-			<key>UTTypeIconFile</key>
-			<string>icon-rounded-small-flat.png</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.pweschmidt.iStayHealthy.isth</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
-				<string>isth</string>
+				<array>
+					<string>isth</string>
+				</array>
 				<key>public.mime-type</key>
 				<string>application/iStayHealthy</string>
 			</dict>
