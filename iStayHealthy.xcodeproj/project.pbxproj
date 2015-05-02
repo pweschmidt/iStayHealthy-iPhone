@@ -13,11 +13,12 @@
 		0B07F1D71A0F739200AD761A /* PWESTableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */; };
 		0B0C4F6818A657B900D22990 /* UIBarButtonItem+iStayHealthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */; };
 		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
-		0B0D321D1AF1F62F00407B87 /* icon_UTI.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0D321A1AF1F62F00407B87 /* icon_UTI.png */; };
-		0B0D321E1AF1F62F00407B87 /* icon_UTI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0D321B1AF1F62F00407B87 /* icon_UTI@2x.png */; };
-		0B0D321F1AF1F62F00407B87 /* icon_UTI@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0D321C1AF1F62F00407B87 /* icon_UTI@3x.png */; };
 		0B11346B198CBEC700685046 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B11346A198CBEC700685046 /* AppSettings.m */; };
 		0B1276BC198AD05B00D389FA /* IconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1276BB198AD05B00D389FA /* IconsTableViewController.m */; };
+		0B263A1F1AF4D71A0037984B /* icon_UTI_large_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A1D1AF4D71A0037984B /* icon_UTI_large_iPhone.png */; };
+		0B263A201AF4D71A0037984B /* icon_UTI_small_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A1E1AF4D71A0037984B /* icon_UTI_small_iPhone.png */; };
+		0B263A231AF4D7390037984B /* icon_UTI_large_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A211AF4D7390037984B /* icon_UTI_large_iPad.png */; };
+		0B263A241AF4D7390037984B /* icon_UTI_small_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A221AF4D7390037984B /* icon_UTI_small_iPad.png */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B2DAF821A6141C900F9F317 /* XMLImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DAF811A6141C900F9F317 /* XMLImporterTests.swift */; };
@@ -244,13 +245,14 @@
 		0B0C4F6718A657B900D22990 /* UIBarButtonItem+iStayHealthy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+iStayHealthy.m"; path = "Categories/UIBarButtonItem+iStayHealthy.m"; sourceTree = "<group>"; };
 		0B0C4F6918A664B300D22990 /* CustomToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomToolbar.h; path = ViewControllersiPad/CustomToolbar.h; sourceTree = "<group>"; };
 		0B0C4F6A18A664B300D22990 /* CustomToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomToolbar.m; path = ViewControllersiPad/CustomToolbar.m; sourceTree = "<group>"; };
-		0B0D321A1AF1F62F00407B87 /* icon_UTI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_UTI.png; sourceTree = "<group>"; };
-		0B0D321B1AF1F62F00407B87 /* icon_UTI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_UTI@2x.png"; sourceTree = "<group>"; };
-		0B0D321C1AF1F62F00407B87 /* icon_UTI@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_UTI@3x.png"; sourceTree = "<group>"; };
 		0B113469198CBEC700685046 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSettings.h; path = Utils/AppSettings.h; sourceTree = "<group>"; };
 		0B11346A198CBEC700685046 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSettings.m; path = Utils/AppSettings.m; sourceTree = "<group>"; };
 		0B1276BA198AD05B00D389FA /* IconsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsTableViewController.h; path = ViewControllersCommon/IconsTableViewController.h; sourceTree = "<group>"; };
 		0B1276BB198AD05B00D389FA /* IconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IconsTableViewController.m; path = ViewControllersCommon/IconsTableViewController.m; sourceTree = "<group>"; };
+		0B263A1D1AF4D71A0037984B /* icon_UTI_large_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_UTI_large_iPhone.png; sourceTree = "<group>"; };
+		0B263A1E1AF4D71A0037984B /* icon_UTI_small_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_UTI_small_iPhone.png; sourceTree = "<group>"; };
+		0B263A211AF4D7390037984B /* icon_UTI_large_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_UTI_large_iPad.png; sourceTree = "<group>"; };
+		0B263A221AF4D7390037984B /* icon_UTI_small_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_UTI_small_iPad.png; sourceTree = "<group>"; };
 		0B289FFA18758379000A67EF /* BaseEndDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEndDateTableViewController.h; path = ViewControllersCommon/BaseEndDateTableViewController.h; sourceTree = "<group>"; };
 		0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseEndDateTableViewController.m; path = ViewControllersCommon/BaseEndDateTableViewController.m; sourceTree = "<group>"; };
 		0B289FFD187589AB000A67EF /* EditCurrentHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCurrentHIVMedsTableViewController.h; path = ViewControllersiPhone/EditCurrentHIVMedsTableViewController.h; sourceTree = "<group>"; };
@@ -850,9 +852,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0B0D321A1AF1F62F00407B87 /* icon_UTI.png */,
-				0B0D321B1AF1F62F00407B87 /* icon_UTI@2x.png */,
-				0B0D321C1AF1F62F00407B87 /* icon_UTI@3x.png */,
+				0B263A211AF4D7390037984B /* icon_UTI_large_iPad.png */,
+				0B263A221AF4D7390037984B /* icon_UTI_small_iPad.png */,
+				0B263A1D1AF4D71A0037984B /* icon_UTI_large_iPhone.png */,
+				0B263A1E1AF4D71A0037984B /* icon_UTI_small_iPhone.png */,
 				0B65F95D1913917600523441 /* Images.xcassets */,
 				C4B41FB7141E5EF2009B0694 /* iStayHealthy.entitlements */,
 				C4C0151A134251B4005E889D /* HIVMedications.plist */,
@@ -1110,6 +1113,7 @@
 		C47DB22E17AD05B40037A6DF /* ViewControllersiPad */ = {
 			isa = PBXGroup;
 			children = (
+				0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */,
 				C45E52F8182BFF0400C30061 /* BaseCollectionViewCell.h */,
 				C45E52F9182BFF0400C30061 /* BaseCollectionViewCell.m */,
 				C45E52F5182BFE6400C30061 /* BaseCollectionViewController.h */,
@@ -1123,7 +1127,6 @@
 				0BB771E418F324FA00523DF6 /* MyHIVCollectionViewController.h */,
 				0BB771E518F324FA00523DF6 /* MyHIVCollectionViewController.m */,
 				0BB771F318F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.h */,
-				0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */,
 				0BB771E118F321C600523DF6 /* OtherMedsCollectionViewController.h */,
 				0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */,
 				0BB771E718F3292E00523DF6 /* ProceduresCollectionViewController.h */,
@@ -1405,19 +1408,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */,
-				0B0D321D1AF1F62F00407B87 /* icon_UTI.png in Resources */,
 				0B65F95E1913917600523441 /* Images.xcassets in Resources */,
+				0B263A1F1AF4D71A0037984B /* icon_UTI_large_iPhone.png in Resources */,
 				C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */,
-				0B0D321E1AF1F62F00407B87 /* icon_UTI@2x.png in Resources */,
+				0B263A201AF4D71A0037984B /* icon_UTI_small_iPhone.png in Resources */,
 				C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */,
 				C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */,
-				0B0D321F1AF1F62F00407B87 /* icon_UTI@3x.png in Resources */,
 				C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */,
 				0B2EDE10197A91A700B72109 /* GeneralInhibitors.plist in Resources */,
 				C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */,
 				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
 				C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */,
 				0B2EDE0A197A919800B72109 /* Booster.plist in Resources */,
+				0B263A241AF4D7390037984B /* icon_UTI_small_iPad.png in Resources */,
+				0B263A231AF4D7390037984B /* icon_UTI_large_iPad.png in Resources */,
 				0B36926F19C4922800C269AD /* PWESMainStoryboard.storyboard in Resources */,
 				C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */,
 				C4C41A3715F1445400882416 /* chimes.caf in Resources */,

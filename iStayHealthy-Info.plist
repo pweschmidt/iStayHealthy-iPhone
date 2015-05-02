@@ -11,7 +11,10 @@
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
 			<array>
-				<string>icon_29_rounded.png</string>
+				<string>icon_UTI_small_iPhone.png</string>
+				<string>icon_UTI_large_iPhone.png</string>
+				<string>icon_UTI_large_iPad.png</string>
+				<string>icon_UTI_small_iPad.png</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>iStayHealthy Document</string>
@@ -54,7 +57,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>41000</string>
+	<string>40908</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>
