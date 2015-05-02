@@ -356,7 +356,8 @@
         return;
     }
     PWESDataImportViewController *importController = [[PWESDataImportViewController alloc]
-                                                      initWithNotification:notification];
+                                                      initWithStyle:UITableViewStyleGrouped];
+    importController.userDataNotification = notification;
     [self.navigationController pushViewController:importController animated:YES];
 }
 

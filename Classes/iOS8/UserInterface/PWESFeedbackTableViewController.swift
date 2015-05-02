@@ -95,7 +95,7 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
             data = manager.getDataFromPath(path)
             if nil != data
             {
-                controller.addAttachmentData(data!, mimeType: "application/xml", fileName: "iStayHealthy.isth")
+                controller.addAttachmentData(data!, mimeType: "application/istayhealthy", fileName: "iStayHealthy.isth")
                 canSend = true
             }
         }

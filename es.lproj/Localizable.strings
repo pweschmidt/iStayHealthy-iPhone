@@ -427,3 +427,15 @@
 "SelectRestore"="Seleccione 'Restaurar de Dropbox'";
 "No data to send"="No hay datos para enviar";
 "There are no backed up data to send"="Allí no están respaldados datos para enviar";
+"NoResult" = "Sin resultados";
+"Results" = "Resultados";
+"Medication" = "Med. Antiviral";
+"MissedMedication" = "Med. Perdidas";
+"OtherMedication" = "Otros Med.";
+"Contacts" = "Médicos";
+"Procedures" = "Enfermedad";
+"SideEffects" = "Efectos Adversos";
+"PreviousMedication" = "Tratamiento previo";
+"Wellnesses" = "Wellness";
+"SeinfeldCalendars" = "Diarios";
+"SeinfeldCalendarEntries" = "Entradas del diario";

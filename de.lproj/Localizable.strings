@@ -426,3 +426,15 @@
 "SelectRestore"="'Daten herunterladen' auswählen";
 "No data to send"="Keine Daten zu versenden";
 "There are no backed up data to send"="Es gibt z.Z. keine lokal gesicherten Daten zu versenden.";
+"NoResult" = "Keine Werte";
+"Results" = "Werte";
+"Medication" = "Antivirale Med.";
+"MissedMedication" = "Versäumte Med.";
+"OtherMedication" = "Allg. Med.";
+"Contacts" = "Ärzte";
+"Procedures" = "Krankeiten";
+"SideEffects" = "Nebenwirkungen";
+"PreviousMedication" = "Vorherige Behandl.";
+"Wellnesses" = "Wohlbefinden";
+"SeinfeldCalendars" = "Tagebücher";
+"SeinfeldCalendarEntries" = "Tagebuch Einträge";

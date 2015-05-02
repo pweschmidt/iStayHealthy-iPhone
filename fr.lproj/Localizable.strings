@@ -427,3 +427,15 @@
 "SelectRestore"="Sélectionnez 'Restaurer à partir DropBox'";
 "No data to send"="Aucune donnée à envoyer";
 "There are no backed up data to send"="Il ne sont sauvegardés données à envoyer";
+"NoResult" = "Aucun Résultats";
+"Results" = "Résultats";
+"Medication" = "Méd. Antivirale";
+"MissedMedication" = "Méd. Manqués";
+"OtherMedication" = "Autres Méd.";
+"Contacts" = "Cliniques";
+"Procedures" = "Maladies";
+"SideEffects" = "Effets Indésirables";
+"PreviousMedication" = "Traitement antérieur";
+"Wellnesses" = "Wellness";
+"SeinfeldCalendars" = "Journals";
+"SeinfeldCalendarEntries" = "Entrées de journal";

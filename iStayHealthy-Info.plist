@@ -57,7 +57,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>40908</string>
+	<string>40910</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>
@@ -97,7 +97,7 @@
 					<string>isth</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>application/iStayHealthy</string>
+				<string>application/istayhealthy</string>
 			</dict>
 		</dict>
 	</array>
