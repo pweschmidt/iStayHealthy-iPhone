@@ -159,6 +159,7 @@
 		C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */; };
 		C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250814DD62BF00BDD906 /* StoreKit.framework */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
+		C491E2311B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt in Resources */ = {isa = PBXBuildFile; fileRef = C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */; };
 		C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */; };
 		C4A49AD918002CD400FC1637 /* TimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49AD818002CD400FC1637 /* TimeView.m */; };
 		C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1C180031C400FC1637 /* UIFont+Standard.m */; };
@@ -535,6 +536,7 @@
 		C48CC47A137C3BA30051D7FA /* iStayHealthy 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 5.xcdatamodel"; sourceTree = "<group>"; };
 		C490250814DD62BF00BDD906 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C490250A14DD630700BDD906 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iStayHealthy-Customer-Conflict.isth.txt"; sourceTree = "<group>"; };
 		C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 3.xcdatamodel"; sourceTree = "<group>"; };
 		C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsListTableViewController.h; path = ViewControllersCommon/ResultsListTableViewController.h; sourceTree = "<group>"; };
 		C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsListTableViewController.m; path = ViewControllersCommon/ResultsListTableViewController.m; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 		0BB56691191E132F00731739 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */,
 				0BD057CE198E3C5A00D7D142 /* Conflict.isth */,
 				0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */,
 				0BB56692191E132F00731739 /* iStayHealthy Tests-Info.plist */,
@@ -1399,6 +1402,7 @@
 			files = (
 				0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */,
 				0BB56695191E132F00731739 /* InfoPlist.strings in Resources */,
+				C491E2311B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt in Resources */,
 				0BD057D0198E3C5A00D7D142 /* Conflict.isth in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
