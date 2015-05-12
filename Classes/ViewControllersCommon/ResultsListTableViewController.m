@@ -310,7 +310,8 @@
                        kBMI,
                        kSystole,
                        kDiastole,
-                       kCardiacRiskFactor];
+                       kCardiacRiskFactor,
+                       kKidneyGFR];
 
 
     self.liverMenu = @[kLiverAlanineTransaminase,
