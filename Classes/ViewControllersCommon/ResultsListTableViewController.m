@@ -271,7 +271,7 @@
             break;
         case 4: // Other
             self.currentPredicate = [dataManager filterForTypesArray:self.otherMenu];
-            self.displayArray = @[kWeight, kBMI, kBloodPressure, kCardiacRiskFactor];
+            self.displayArray = @[kWeight, kBMI, kBloodPressure, kCardiacRiskFactor, kKidneyGFR];
             break;
         case 5: // Liver
             self.currentPredicate = [dataManager filterForTypesArray:self.liverMenu];

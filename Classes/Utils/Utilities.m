@@ -434,8 +434,8 @@ static NSDictionary * medNameMap()
 
     if (isStartDate)
     {
-        NSUInteger days = [date daysInMonth] - components.day + 1;         // including the start day
-        NSInteger weekday = components.weekday - 1;         // start Monday not Sunday
+        NSUInteger days = [date daysInMonth] - components.day + 1; // including the start day
+        NSInteger weekday = components.weekday - 1;                // start Monday not Sunday
         if (7 >= days)
         {
             weeks = (7 < weekday + days) ? 2 : 1;
@@ -465,8 +465,8 @@ static NSDictionary * medNameMap()
     static BOOL isiPadIdiom = NO;
 
     dispatch_once(&token, ^{
-                      isiPadIdiom = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
-                  });
+        isiPadIdiom = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
+    });
     return isiPadIdiom;
 }
 
@@ -476,10 +476,10 @@ static NSDictionary * medNameMap()
     static BOOL isSimulator = NO;
 
     dispatch_once(&token, ^{
-                      NSString *model = [UIDevice currentDevice].model;
-                      model = [model lowercaseString];
-                      isSimulator = ([model rangeOfString:@"simulator"].location != NSNotFound);
-                  });
+        NSString *model = [UIDevice currentDevice].model;
+        model = [model lowercaseString];
+        isSimulator = ([model rangeOfString:@"simulator"].location != NSNotFound);
+    });
 
     return isSimulator;
 }
@@ -517,39 +517,40 @@ static NSDictionary * medNameMap()
     static NSDictionary *dictionary = nil;
 
     dispatch_once(&onceToken, ^{
-                      dictionary = @{
-                          kCD4 : NSLocalizedString(kCD4, nil),
-                          kViralLoad : NSLocalizedString(kViralLoad, nil),
-                          kCD4Percent : NSLocalizedString(kCD4Percent, nil),
-                          kHepCViralLoad : NSLocalizedString(kHepCViralLoad, nil),
-                          kGlucose : NSLocalizedString(kGlucose, nil),
-                          kTotalCholesterol : NSLocalizedString(kTotalCholesterol, nil),
-                          kLDL : NSLocalizedString(kLDL, nil),
-                          kHDL : NSLocalizedString(kHDL, nil),
-                          kTriglyceride : NSLocalizedString(kTriglyceride, nil),
-                          kHeartRate : NSLocalizedString(kHeartRate, nil),
-                          kSystole : NSLocalizedString(kSystole, nil),
-                          kDiastole : NSLocalizedString(kDiastole, nil),
-                          kBloodPressure : NSLocalizedString(kBloodPressure, nil),
-                          kOxygenLevel : NSLocalizedString(kOxygenLevel, nil),
-                          kWeight : NSLocalizedString(kWeight, nil),
-                          kBMI : NSLocalizedString(kBMI, nil),
-                          kHemoglobulin : NSLocalizedString(kHemoglobulin, nil),
-                          kPlatelet : NSLocalizedString(kPlatelet, nil),
-                          kWhiteBloodCells : NSLocalizedString(kWhiteBloodCells, nil),
-                          kRedBloodCells : NSLocalizedString(kRedBloodCells, nil),
-                          kCholesterolRatio : NSLocalizedString(kCholesterolRatio, nil),
-                          kCardiacRiskFactor : NSLocalizedString(kCardiacRiskFactor, nil),
-                          kCholesterolRatio : NSLocalizedString(kCholesterolRatio, nil),
-                          kLiverAlanineTransaminase : NSLocalizedString(kLiverAlanineTransaminase, nil),
-                          kLiverAspartateTransaminase : NSLocalizedString(kLiverAspartateTransaminase, nil),
-                          kLiverAlkalinePhosphatase : NSLocalizedString(kLiverAlkalinePhosphatase, nil),
-                          kLiverAlbumin : NSLocalizedString(kLiverAlbumin, nil),
-                          kLiverAlanineTotalBilirubin : NSLocalizedString(kLiverAlanineTotalBilirubin, nil),
-                          kLiverAlanineDirectBilirubin : NSLocalizedString(kLiverAlanineDirectBilirubin, nil),
-                          kLiverGammaGlutamylTranspeptidase : NSLocalizedString(kLiverGammaGlutamylTranspeptidase, nil)
-                      };
-                  });
+        dictionary = @{
+            kCD4 : NSLocalizedString(kCD4, nil),
+            kViralLoad : NSLocalizedString(kViralLoad, nil),
+            kCD4Percent : NSLocalizedString(kCD4Percent, nil),
+            kHepCViralLoad : NSLocalizedString(kHepCViralLoad, nil),
+            kGlucose : NSLocalizedString(kGlucose, nil),
+            kTotalCholesterol : NSLocalizedString(kTotalCholesterol, nil),
+            kLDL : NSLocalizedString(kLDL, nil),
+            kHDL : NSLocalizedString(kHDL, nil),
+            kTriglyceride : NSLocalizedString(kTriglyceride, nil),
+            kHeartRate : NSLocalizedString(kHeartRate, nil),
+            kSystole : NSLocalizedString(kSystole, nil),
+            kDiastole : NSLocalizedString(kDiastole, nil),
+            kBloodPressure : NSLocalizedString(kBloodPressure, nil),
+            kOxygenLevel : NSLocalizedString(kOxygenLevel, nil),
+            kWeight : NSLocalizedString(kWeight, nil),
+            kBMI : NSLocalizedString(kBMI, nil),
+            kHemoglobulin : NSLocalizedString(kHemoglobulin, nil),
+            kPlatelet : NSLocalizedString(kPlatelet, nil),
+            kWhiteBloodCells : NSLocalizedString(kWhiteBloodCells, nil),
+            kRedBloodCells : NSLocalizedString(kRedBloodCells, nil),
+            kCholesterolRatio : NSLocalizedString(kCholesterolRatio, nil),
+            kCardiacRiskFactor : NSLocalizedString(kCardiacRiskFactor, nil),
+            kCholesterolRatio : NSLocalizedString(kCholesterolRatio, nil),
+            kKidneyGFR : NSLocalizedString(kKidneyGFR, nil),
+            kLiverAlanineTransaminase : NSLocalizedString(kLiverAlanineTransaminase, nil),
+            kLiverAspartateTransaminase : NSLocalizedString(kLiverAspartateTransaminase, nil),
+            kLiverAlkalinePhosphatase : NSLocalizedString(kLiverAlkalinePhosphatase, nil),
+            kLiverAlbumin : NSLocalizedString(kLiverAlbumin, nil),
+            kLiverAlanineTotalBilirubin : NSLocalizedString(kLiverAlanineTotalBilirubin, nil),
+            kLiverAlanineDirectBilirubin : NSLocalizedString(kLiverAlanineDirectBilirubin, nil),
+            kLiverGammaGlutamylTranspeptidase : NSLocalizedString(kLiverGammaGlutamylTranspeptidase, nil)
+        };
+    });
     return dictionary;
 }
 
@@ -557,39 +558,40 @@ static NSDictionary * medNameMap()
 {
     static dispatch_once_t onceToken;
     static NSDictionary *dictionary = nil;
-    
+
     dispatch_once(&onceToken, ^{
         dictionary = @{
-                       kCD4 : NSLocalizedString(kCD4, nil),
-                       kViralLoad : NSLocalizedString(@"VL", nil),
-                       kCD4Percent : NSLocalizedString(kCD4Percent, nil),
-                       kHepCViralLoad : NSLocalizedString(@"HepC", nil),
-                       kGlucose : NSLocalizedString(@"Sugar", nil),
-                       kTotalCholesterol : NSLocalizedString(@"Chol.", nil),
-                       kLDL : NSLocalizedString(kLDL, nil),
-                       kHDL : NSLocalizedString(kHDL, nil),
-                       kTriglyceride : NSLocalizedString(@"Tri.", nil),
-                       kHeartRate : NSLocalizedString(@"Rate", nil),
-                       kSystole : NSLocalizedString(kSystole, nil),
-                       kDiastole : NSLocalizedString(kDiastole, nil),
-                       kBloodPressure : NSLocalizedString(@"BP", nil),
-                       kOxygenLevel : NSLocalizedString(@"Oxy.", nil),
-                       kWeight : NSLocalizedString(@"Weight", nil),
-                       kBMI : NSLocalizedString(kBMI, nil),
-                       kHemoglobulin : NSLocalizedString(@"Hemo", nil),
-                       kPlatelet : NSLocalizedString(@"Plat.", nil),
-                       kWhiteBloodCells : NSLocalizedString(@"Leuk.", nil),
-                       kRedBloodCells : NSLocalizedString(@"Red C.", nil),
-                       kCholesterolRatio : NSLocalizedString(@"Chol%", nil),
-                       kCardiacRiskFactor : NSLocalizedString(@"Risk", nil),
-                       kLiverAlanineTransaminase : NSLocalizedString(@"ALT", nil),
-                       kLiverAspartateTransaminase : NSLocalizedString(@"AST", nil),
-                       kLiverAlkalinePhosphatase : NSLocalizedString(@"ALP", nil),
-                       kLiverAlbumin : NSLocalizedString(@"Alb.", nil),
-                       kLiverAlanineTotalBilirubin : NSLocalizedString(@"Bilir.", nil),
-                       kLiverAlanineDirectBilirubin : NSLocalizedString(@"Bilir.", nil),
-                       kLiverGammaGlutamylTranspeptidase : NSLocalizedString(@"GGT", nil)
-                       };
+            kCD4 : NSLocalizedString(kCD4, nil),
+            kViralLoad : NSLocalizedString(@"VL", nil),
+            kCD4Percent : NSLocalizedString(kCD4Percent, nil),
+            kHepCViralLoad : NSLocalizedString(@"HepC", nil),
+            kGlucose : NSLocalizedString(@"Sugar", nil),
+            kTotalCholesterol : NSLocalizedString(@"Chol.", nil),
+            kLDL : NSLocalizedString(kLDL, nil),
+            kHDL : NSLocalizedString(kHDL, nil),
+            kTriglyceride : NSLocalizedString(@"Tri.", nil),
+            kHeartRate : NSLocalizedString(@"Rate", nil),
+            kSystole : NSLocalizedString(kSystole, nil),
+            kDiastole : NSLocalizedString(kDiastole, nil),
+            kBloodPressure : NSLocalizedString(@"BP", nil),
+            kOxygenLevel : NSLocalizedString(@"Oxy.", nil),
+            kWeight : NSLocalizedString(@"Weight", nil),
+            kBMI : NSLocalizedString(kBMI, nil),
+            kHemoglobulin : NSLocalizedString(@"Hemo", nil),
+            kPlatelet : NSLocalizedString(@"Plat.", nil),
+            kWhiteBloodCells : NSLocalizedString(@"Leuk.", nil),
+            kRedBloodCells : NSLocalizedString(@"Red C.", nil),
+            kCholesterolRatio : NSLocalizedString(@"Chol%", nil),
+            kCardiacRiskFactor : NSLocalizedString(@"Risk", nil),
+            kLiverAlanineTransaminase : NSLocalizedString(@"ALT", nil),
+            kLiverAspartateTransaminase : NSLocalizedString(@"AST", nil),
+            kLiverAlkalinePhosphatase : NSLocalizedString(@"ALP", nil),
+            kLiverAlbumin : NSLocalizedString(@"Alb.", nil),
+            kLiverAlanineTotalBilirubin : NSLocalizedString(@"Bilir.", nil),
+            kLiverAlanineDirectBilirubin : NSLocalizedString(@"Bilir.", nil),
+            kLiverGammaGlutamylTranspeptidase : NSLocalizedString(@"GGT", nil),
+            kKidneyGFR : NSLocalizedString(@"Kidney", nil)
+        };
     });
     return dictionary;
 }
@@ -601,39 +603,39 @@ static NSDictionary * medNameMap()
     static NSDictionary *colourDictionary = nil;
 
     dispatch_once(&onceToken, ^{
-                      colourDictionary = @{
-                          kCD4 : DARK_YELLOW,
-                          kViralLoad : DARK_BLUE,
-                          kCD4Percent : DARK_YELLOW,
-                          kHepCViralLoad : DARK_RED,
-                          kGlucose : DARK_RED,
-                          kTotalCholesterol : DARK_RED,
-                          kLDL : DARK_RED,
-                          kHDL : DARK_RED,
-                          kTriglyceride : DARK_RED,
-                          kHeartRate : DARK_GREEN,
-                          kSystole : DARK_GREEN,
-                          kDiastole : DARK_GREEN,
-                          kBloodPressure : DARK_GREEN,
-                          kOxygenLevel : DARK_GREEN,
-                          kWeight : DARK_GREEN,
-                          kBMI : DARK_GREEN,
-                          kHemoglobulin : DARK_RED,
-                          kPlatelet : DARK_RED,
-                          kWhiteBloodCells : DARK_RED,
-                          kRedBloodCells : DARK_RED,
-                          kCholesterolRatio : DARK_RED,
-                          kCardiacRiskFactor : DARK_GREEN,
-                          kCholesterolRatio : DARK_RED,
-                          kLiverAlanineTransaminase : DARK_RED,
-                          kLiverAspartateTransaminase : DARK_RED,
-                          kLiverAlkalinePhosphatase : DARK_RED,
-                          kLiverAlbumin : DARK_RED,
-                          kLiverAlanineTotalBilirubin : DARK_RED,
-                          kLiverAlanineDirectBilirubin : DARK_RED,
-                          kLiverGammaGlutamylTranspeptidase : DARK_RED
-                      };
-                  });
+        colourDictionary = @{
+            kCD4 : DARK_YELLOW,
+            kViralLoad : DARK_BLUE,
+            kCD4Percent : DARK_YELLOW,
+            kHepCViralLoad : DARK_RED,
+            kGlucose : DARK_RED,
+            kTotalCholesterol : DARK_RED,
+            kLDL : DARK_RED,
+            kHDL : DARK_RED,
+            kTriglyceride : DARK_RED,
+            kHeartRate : DARK_GREEN,
+            kSystole : DARK_GREEN,
+            kDiastole : DARK_GREEN,
+            kBloodPressure : DARK_GREEN,
+            kOxygenLevel : DARK_GREEN,
+            kWeight : DARK_GREEN,
+            kBMI : DARK_GREEN,
+            kHemoglobulin : DARK_RED,
+            kPlatelet : DARK_RED,
+            kWhiteBloodCells : DARK_RED,
+            kRedBloodCells : DARK_RED,
+            kCholesterolRatio : DARK_RED,
+            kCardiacRiskFactor : DARK_GREEN,
+            kCholesterolRatio : DARK_RED,
+            kLiverAlanineTransaminase : DARK_RED,
+            kLiverAspartateTransaminase : DARK_RED,
+            kLiverAlkalinePhosphatase : DARK_RED,
+            kLiverAlbumin : DARK_RED,
+            kLiverAlanineTotalBilirubin : DARK_RED,
+            kLiverAlanineDirectBilirubin : DARK_RED,
+            kLiverGammaGlutamylTranspeptidase : DARK_RED
+        };
+    });
     return colourDictionary;
 }
 

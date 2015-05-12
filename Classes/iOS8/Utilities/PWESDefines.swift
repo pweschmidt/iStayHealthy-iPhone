@@ -123,6 +123,7 @@ let kLiverAlanineTransaminase         = "liverAlanineTransaminase"
 let kLiverAspartateTransaminase       = "liverAspartateTransaminase"
 let kLiverAlkalinePhosphatase         = "liverAlkalinePhosphatase"
 let kLiverAlbumin                     = "liverAlbumin"
+let kKidneyGFR                        = "kidneyGFR"
 
 let kLiverAlanineTotalBilirubin       = "liverAlanineTotalBilirubin"
 let kLiverAlanineDirectBilirubin      = "liverAlanineDirectBilirubin"

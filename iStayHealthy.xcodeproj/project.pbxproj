@@ -61,7 +61,6 @@
 		0BA51CDB1A20D79B00B46D6D /* PWESLoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
-		0BAC2F181876E7B500D452A7 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F171876E7B500D452A7 /* Results.m */; };
 		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
 		0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BACE94D18F02DDA008F4D13 /* PWESCustomTextfieldCell.m */; };
 		0BB02F17198E4205003B5959 /* XMLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB02F16198E4205003B5959 /* XMLTests.m */; };
@@ -160,6 +159,7 @@
 		C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250814DD62BF00BDD906 /* StoreKit.framework */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
 		C491E2311B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt in Resources */ = {isa = PBXBuildFile; fileRef = C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */; };
+		C491E2441B01ECF1005936B0 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C491E2431B01ECF1005936B0 /* Results.m */; };
 		C49A16B517B0265D006BE980 /* ResultsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */; };
 		C4A49AD918002CD400FC1637 /* TimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49AD818002CD400FC1637 /* TimeView.m */; };
 		C4A49B1D180031C400FC1637 /* UIFont+Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A49B1C180031C400FC1637 /* UIFont+Standard.m */; };
@@ -336,8 +336,6 @@
 		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
 		0BAC2F131876E7B500D452A7 /* SeinfeldCalendarEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeinfeldCalendarEntry.h; path = DataModelClasses/SeinfeldCalendarEntry.h; sourceTree = "<group>"; };
 		0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeinfeldCalendarEntry.m; path = DataModelClasses/SeinfeldCalendarEntry.m; sourceTree = "<group>"; };
-		0BAC2F161876E7B500D452A7 /* Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Results.h; path = DataModelClasses/Results.h; sourceTree = "<group>"; };
-		0BAC2F171876E7B500D452A7 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
 		0BAC2F191876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditSeinfeldCalendarTableViewController.h; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.h; sourceTree = "<group>"; };
 		0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSeinfeldCalendarTableViewController.m; path = ViewControllersiPhone/EditSeinfeldCalendarTableViewController.m; sourceTree = "<group>"; };
 		0BACE94C18F02DDA008F4D13 /* PWESCustomTextfieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESCustomTextfieldCell.h; path = TableCells/PWESCustomTextfieldCell.h; sourceTree = "<group>"; };
@@ -537,6 +535,9 @@
 		C490250814DD62BF00BDD906 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C490250A14DD630700BDD906 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iStayHealthy-Customer-Conflict.isth.txt"; sourceTree = "<group>"; };
+		C491E23B1B01EAA7005936B0 /* iStayHealthy 16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 16.xcdatamodel"; sourceTree = "<group>"; };
+		C491E2421B01ECF1005936B0 /* Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Results.h; path = DataModelClasses/Results.h; sourceTree = "<group>"; };
+		C491E2431B01ECF1005936B0 /* Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Results.m; path = DataModelClasses/Results.m; sourceTree = "<group>"; };
 		C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 3.xcdatamodel"; sourceTree = "<group>"; };
 		C49A16B317B0265D006BE980 /* ResultsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultsListTableViewController.h; path = ViewControllersCommon/ResultsListTableViewController.h; sourceTree = "<group>"; };
 		C49A16B417B0265D006BE980 /* ResultsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultsListTableViewController.m; path = ViewControllersCommon/ResultsListTableViewController.m; sourceTree = "<group>"; };
@@ -1161,8 +1162,8 @@
 				C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */,
 				C43BE58015F7C5CE00108EF8 /* Procedures.h */,
 				C43BE58115F7C5CE00108EF8 /* Procedures.m */,
-				0BAC2F161876E7B500D452A7 /* Results.h */,
-				0BAC2F171876E7B500D452A7 /* Results.m */,
+				C491E2421B01ECF1005936B0 /* Results.h */,
+				C491E2431B01ECF1005936B0 /* Results.m */,
 				0B06DCEE189D53AE00008590 /* SeinfeldCalendar.h */,
 				0B06DCEF189D53AE00008590 /* SeinfeldCalendar.m */,
 				0BAC2F131876E7B500D452A7 /* SeinfeldCalendarEntry.h */,
@@ -1512,7 +1513,7 @@
 				C463743E17E9F2AF00D19B94 /* PWESDashboardView.m in Sources */,
 				C4AEF82D180DCAB800107966 /* PWESPlotArea.m in Sources */,
 				C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */,
-				0BAC2F181876E7B500D452A7 /* Results.m in Sources */,
+				C491E2441B01ECF1005936B0 /* Results.m in Sources */,
 				C4BCF09617B7A87500F1E0F7 /* NSNumber+Handling.m in Sources */,
 				0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */,
 				C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */,
@@ -2124,6 +2125,7 @@
 		2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				C491E23B1B01EAA7005936B0 /* iStayHealthy 16.xcdatamodel */,
 				0B06DCE1189D50E300008590 /* iStayHealthy 15.xcdatamodel */,
 				0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */,
 				C4ACF8531476DD4D00FA5E80 /* iStayHealthy 11.xcdatamodel */,
@@ -2140,7 +2142,7 @@
 				C4B803DE12D3700700A5A38F /* iStayHealthy 2.xcdatamodel */,
 				C4920C0912D8ED5200A6B1AD /* iStayHealthy 3.xcdatamodel */,
 			);
-			currentVersion = 0B06DCE1189D50E300008590 /* iStayHealthy 15.xcdatamodel */;
+			currentVersion = C491E23B1B01EAA7005936B0 /* iStayHealthy 16.xcdatamodel */;
 			path = iStayHealthy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

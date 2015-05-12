@@ -221,7 +221,8 @@
                        kGlucose, kTotalCholesterol, kTriglyceride,
                        kHDL, kLDL, kCholesterolRatio, kHemoglobulin,
                        kWhiteBloodCells, kRedBloodCells, kPlatelet,
-                       kWeight, kBMI, kSystole, kCardiacRiskFactor, kLiverAlanineTransaminase,
+                       kWeight, kBMI, kSystole, kCardiacRiskFactor, kKidneyGFR,
+                       kLiverAlanineTransaminase,
                        kLiverAspartateTransaminase,
                        kLiverAlkalinePhosphatase,
                        kLiverGammaGlutamylTranspeptidase];

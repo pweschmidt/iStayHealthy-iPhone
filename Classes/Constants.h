@@ -284,7 +284,7 @@ typedef void (^iStayHealthyRecordCompletionBlock)(iStayHealthyRecord *record, NS
 #define kLiverAspartateTransaminase       @"liverAspartateTransaminase"
 #define kLiverAlkalinePhosphatase         @"liverAlkalinePhosphatase"
 #define kLiverAlbumin                     @"liverAlbumin"
-
+#define kKidneyGFR                        @"kidneyGFR"
 #define kLiverAlanineTotalBilirubin       @"liverAlanineTotalBilirubin"
 #define kLiverAlanineDirectBilirubin      @"liverAlanineDirectBilirubin"
 #define kLiverGammaGlutamylTranspeptidase @"liverGammaGlutamylTranspeptidase"

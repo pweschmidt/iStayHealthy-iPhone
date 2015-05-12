@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Contacts" representedClassName="Contacts" syncable="YES">
+        <attribute name="AppointmentContactNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicContactNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicCountry" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicEmailAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicNurseName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicPostcode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicStreet" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ClinicWebSite" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ConsultantName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ContactName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="EmergencyContactNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="EmergencyContactNumber2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="InsuranceAuthorisationCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="InsuranceContactNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="InsuranceID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="InsuranceName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="InsuranceWebSite" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ResultsContactNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="contacts" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="iStayHealthyRecord" representedClassName="iStayHealthyRecord" syncable="YES">
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDiabetic" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isPasswordEnabled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isSmoker" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="Name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yearOfBirth" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contacts" inverseName="record" inverseEntity="Contacts" indexed="YES" syncable="YES"/>
+        <relationship name="medications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Medication" inverseName="record" inverseEntity="Medication" indexed="YES" syncable="YES"/>
+        <relationship name="missedMedications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MissedMedication" inverseName="record" inverseEntity="MissedMedication" indexed="YES" syncable="YES"/>
+        <relationship name="otherMedications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OtherMedication" inverseName="record" inverseEntity="OtherMedication" indexed="YES" syncable="YES"/>
+        <relationship name="previousMedications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PreviousMedication" inverseName="record" inverseEntity="PreviousMedication" indexed="YES" syncable="YES"/>
+        <relationship name="procedures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Procedures" inverseName="record" inverseEntity="Procedures" indexed="YES" syncable="YES"/>
+        <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Results" inverseName="record" inverseEntity="Results" indexed="YES" syncable="YES"/>
+        <relationship name="sideeffects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SideEffects" inverseName="record" inverseEntity="SideEffects" indexed="YES" syncable="YES"/>
+        <relationship name="wellness" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Wellness" inverseName="record" inverseEntity="Wellness" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="Medication" representedClassName="Medication" syncable="YES">
+        <attribute name="Dose" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="Drug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="EndDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="MedicationForm" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="StartDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="medications" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="MissedMedication" representedClassName="MissedMedication" syncable="YES">
+        <attribute name="Drug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="MissedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="missedReason" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="missedMedications" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="OtherMedication" representedClassName="OtherMedication" syncable="YES">
+        <attribute name="Dose" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="EndDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="Image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="MedicationForm" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="StartDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Unit" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="otherMedications" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="PreviousMedication" representedClassName="PreviousMedication" syncable="YES">
+        <attribute name="drug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="isART" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reasonEnded" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="previousMedications" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="Procedures" representedClassName="Procedures" syncable="YES">
+        <attribute name="CausedBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="EndDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="Illness" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="procedures" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="Results" representedClassName="Results" syncable="YES">
+        <attribute name="bmi" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="cardiacRiskFactor" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="CD4" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="CD4Percent" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="cholesterolRatio" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="Diastole" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="Glucose" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="HDL" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="HeartRate" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="Hemoglobulin" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="hepBTiter" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="hepCTiter" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="HepCViralLoad" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="kidneyGFR" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="LDL" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="liverAlanineDirectBilirubin" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="liverAlanineTotalBilirubin" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="liverAlanineTransaminase" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="liverAlbumin" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="liverAlkalinePhosphatase" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="liverAspartateTransaminase" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="liverGammaGlutamylTranspeptidase" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="OxygenLevel" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="PlateletCount" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="redBloodCellCount" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="ResultsDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="Systole" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="TotalCholesterol" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="Triglyceride" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ViralLoad" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="Weight" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="WhiteBloodCellCount" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="results" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="SeinfeldCalendar" representedClassName="SeinfeldCalendar" syncable="YES">
+        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SeinfeldCalendarEntry" inverseName="calendar" inverseEntity="SeinfeldCalendarEntry" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="SeinfeldCalendarEntry" representedClassName="SeinfeldCalendarEntry" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="hasTakenMeds" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="uID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeinfeldCalendar" inverseName="entries" inverseEntity="SeinfeldCalendar" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="SideEffects" representedClassName="SideEffects" syncable="YES">
+        <attribute name="Drug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="frequency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="Name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seriousness" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="SideEffect" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="SideEffectDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="UID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="sideeffects" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="Wellness" representedClassName="Wellness" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="moodBarometer" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sleepBarometer" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="uID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wellnessBarometer" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="iStayHealthyRecord" inverseName="wellness" inverseEntity="iStayHealthyRecord" indexed="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Contacts" positionX="322" positionY="369" width="128" height="390"/>
+        <element name="iStayHealthyRecord" positionX="234" positionY="54" width="128" height="298"/>
+        <element name="Medication" positionX="511" positionY="15" width="128" height="165"/>
+        <element name="MissedMedication" positionX="45" positionY="9" width="128" height="133"/>
+        <element name="OtherMedication" positionX="727" positionY="329" width="128" height="178"/>
+        <element name="PreviousMedication" positionX="241" positionY="-153" width="128" height="163"/>
+        <element name="Procedures" positionX="583" positionY="197" width="128" height="163"/>
+        <element name="Results" positionX="-36" positionY="171" width="128" height="553"/>
+        <element name="SeinfeldCalendar" positionX="448" positionY="-135" width="128" height="133"/>
+        <element name="SeinfeldCalendarEntry" positionX="637" positionY="-133" width="128" height="103"/>
+        <element name="SideEffects" positionX="187" positionY="560" width="128" height="148"/>
+        <element name="Wellness" positionX="36" positionY="-153" width="128" height="133"/>
+    </elements>
+</model>

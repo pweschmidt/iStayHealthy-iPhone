@@ -316,12 +316,12 @@
             if (isBloodPressure)
             {
                 cell = [[PWESBloodPressureCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                    reuseIdentifier:identifier];
+                                                    reuseIdentifier :identifier];
             }
             else
             {
                 cell = [[PWESCustomTextfieldCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                      reuseIdentifier:identifier];
+                                                      reuseIdentifier :identifier];
             }
         }
 
@@ -743,7 +743,8 @@
     NSArray *otherMenu = @[kWeight,
                            kBMI,
                            kBloodPressure,
-                           kCardiacRiskFactor];
+                           kCardiacRiskFactor,
+                           kKidneyGFR];
 
     [self prepareSegmentMapForMenu:otherMenu segment:3];
 
