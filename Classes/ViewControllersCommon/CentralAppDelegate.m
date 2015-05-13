@@ -24,7 +24,9 @@
 @implementation CentralAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#ifdef APPDEBUG
     NSLog(@"**** didFinishLaunchingWithOptions");
+#endif
     [self registerUserNotifications:application];
     self.window.tintColor = TEXTCOLOUR;
 
@@ -179,7 +181,9 @@
     {
         return NO;
     }
+#ifdef APPDEBUG
     NSLog(@"We handle the following URL: %@", url);
+#endif
     NSString *queryString = url.query;
     PWESCoreURLImporter *urlImporter = [PWESCoreURLImporter new];
     NSDictionary *results = [urlImporter resultsFromURLQueryString:queryString];

@@ -176,7 +176,9 @@
 
 - (void)changePage:(id)sender
 {
+#ifdef APPDEBUG
     NSLog(@"We are about to change the page");
+#endif
 //    [self loadPage];
     long page = self.pageController.currentPage;
     CGRect frame = self.chartScroller.frame;
@@ -440,7 +442,9 @@
 
         //        NSString *token = [certificate deviceTokenAsString];
         NSString *tokenString = [self hexadecimalStringFromToken:token];
+#ifdef APPDEBUG
         NSLog(@"The token is %@", tokenString);
+#endif
         NSString *message = [NSString stringWithFormat:@"The device token is %@", tokenString];
 
         [mail setMessageBody:message isHTML:YES];

@@ -116,7 +116,10 @@
 
 	NSArray *storeComponents = [pathString componentsSeparatedByString:@"/"];
 	[storeComponents enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+        
+#ifdef APPDEBUG
 	    NSLog(@"Path component %@", obj);
+#endif
 	}];
 
 	return path;

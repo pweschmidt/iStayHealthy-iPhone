@@ -494,7 +494,9 @@
             }
             if ([pathName hasSuffix:@".isth"])
             {
+#ifdef APPDEBUG
                 NSLog(@"**** backup file found %@ ****", pathName);
+#endif
                 [self.backupFiles addObject:pathName];
             }
         }
@@ -576,8 +578,6 @@
 
 - (void)restClient:(DBRestClient *)client movedPath:(NSString *)from_path to:(DBMetadata *)result
 {
-#ifdef APPDEBUG
-#endif
     if (self.backupStarted)
     {
 #ifdef APPDEBUG

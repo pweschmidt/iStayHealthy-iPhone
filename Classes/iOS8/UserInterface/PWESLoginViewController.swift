@@ -140,7 +140,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
     func textFieldDidEndEditing(textField: UITextField)
     {
         var enteredPassword: String = textField.text
-        println("entered password is \(enteredPassword)")
+        //        println("entered password is \(enteredPassword)")
         self.login(enteredPassword)
         textField.resignFirstResponder()
     }
