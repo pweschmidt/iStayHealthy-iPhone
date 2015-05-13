@@ -249,8 +249,8 @@ class PWESPersistentStoreManager : NSObject
     func hasLegacyDatabase() -> Bool
     {
         var path: String?
-        var libraryPath: NSURL = appLibraryDirectory()
-        var newPath = libraryPath.URLByAppendingPathComponent(oldStoreName)
+        var documentPath: NSURL = appDocumentDirectory()
+        var newPath = documentPath.URLByAppendingPathComponent(oldStoreName)
         if nil != newPath.path
         {
             if self.fileManager.fileExistsAtPath(newPath.path!)
