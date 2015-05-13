@@ -101,12 +101,10 @@ class PWESPersistentStoreManager : NSObject
         let useNewDB = hasNewDB || (!hasNewDB && !hasOldDB)
         if useNewDB
         {
-            iCloudEnabled = false
             setUpNewStore()
         }
         else
         {
-            iCloudEnabled = true
             setUpLegacyStore()
         }
         return true
@@ -118,6 +116,7 @@ class PWESPersistentStoreManager : NSObject
         {
             return
         }
+        iCloudEnabled = false
         var path: String?
         var libraryPath: NSURL = appLibraryDirectory()
         var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
@@ -125,7 +124,6 @@ class PWESPersistentStoreManager : NSObject
         let localOptions = CoreDataUtils.localStoreOptions()
         var creationError:NSError? = nil
         var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
-        println("WE ARE SETTING UP THE NEW STORE IN THE LIBRARY FOLDER \(newPath)")
     }
     
     
@@ -136,7 +134,11 @@ class PWESPersistentStoreManager : NSObject
         var iCloudToken = manager.ubiquityIdentityToken
         if nil != iCloudToken
         {
-            self.setUpiCloudStore()
+            setUpiCloudStore()
+        }
+        else
+        {
+            setUpNewStore()
         }
         
         
@@ -144,6 +146,7 @@ class PWESPersistentStoreManager : NSObject
     
     func setUpiCloudStore()
     {
+        iCloudEnabled = true
         let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
         let manager = NSFileManager.defaultManager()
         var cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(oldStoreName)
