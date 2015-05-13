@@ -23,6 +23,8 @@ class PWESPersistentStoreManager : NSObject
     var hasLoadedStore: Bool?
     let fileManager = NSFileManager.defaultManager()
     var iCloudEnabled: Bool?
+    var isNewStore: Bool?
+    var usesiCloudOptions: Bool?
 
     // MARK: init/declare
     class var defaultManager : PWESPersistentStoreManager
@@ -37,7 +39,9 @@ class PWESPersistentStoreManager : NSObject
     override init()
     {
         super.init()
-        iCloudEnabled = false;
+        iCloudEnabled = false
+        usesiCloudOptions = false
+        isNewStore = true
         registerObservers()
     }
     
@@ -101,12 +105,10 @@ class PWESPersistentStoreManager : NSObject
         let useNewDB = hasNewDB || (!hasNewDB && !hasOldDB)
         if useNewDB
         {
-            iCloudEnabled = false
             setUpNewStore()
         }
         else
         {
-            iCloudEnabled = true
             setUpLegacyStore()
         }
         return true
@@ -118,6 +120,9 @@ class PWESPersistentStoreManager : NSObject
         {
             return
         }
+        isNewStore = true
+        iCloudEnabled = false
+        usesiCloudOptions = false
         var path: String?
         var libraryPath: NSURL = appLibraryDirectory()
         var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
@@ -138,12 +143,18 @@ class PWESPersistentStoreManager : NSObject
         {
             self.setUpiCloudStore()
         }
+        else
+        {
+            self.setUpNewStore()
+        }
         
         
     }
     
     func setUpiCloudStore()
     {
+        isNewStore = false
+        iCloudEnabled = true
         let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
         let manager = NSFileManager.defaultManager()
         var cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(oldStoreName)
@@ -166,10 +177,12 @@ class PWESPersistentStoreManager : NSObject
             if nil == iCloudStoreURL
             {
                 options = CoreDataUtils.noiCloudStoreOptions()
+                self.usesiCloudOptions = false
             }
             else
             {
                 options = CoreDataUtils.iCloudStoreOptionsWithPath(iCloudStoreURL)
+                self.usesiCloudOptions = true
             }
             var creationError: NSError?
             let coordinator = self.persistentStoreCoordinator!
@@ -387,6 +400,8 @@ class PWESPersistentStoreManager : NSObject
         }
     }
     
+    
+    
     func setiCloudEnabled(iCloud: Bool)
     {
         iCloudEnabled = iCloud
@@ -401,6 +416,15 @@ class PWESPersistentStoreManager : NSObject
         return iCloudEnabled!
     }
 
+    func storeStatus() -> Bool
+    {
+        if nil == isNewStore
+        {
+            return false
+        }
+        return isNewStore!
+    }
+    
     // MARK: Core data main functions
     func saveAndExport(error: NSErrorPointer, completionBlock: PWESSuccessClosure) -> Bool
     {

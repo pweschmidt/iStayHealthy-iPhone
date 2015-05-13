@@ -44,6 +44,7 @@
 {
     NSUInteger sections = 1;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+
     if ([manager storeIsiCloudEnabled])
     {
         sections = 2;
@@ -53,6 +54,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (0 == section)
+    {
+        return 2;
+    }
     return 1;
 }
 
@@ -71,8 +76,16 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (0 == indexPath.section)
     {
-        cell.textLabel.font = [UIFont fontWithType:Bold size:standard];
-        cell.textLabel.text = NSLocalizedString(@"Restore locally", nil);
+        if (0 == indexPath.row)
+        {
+            cell.textLabel.font = [UIFont fontWithType:Bold size:standard];
+            cell.textLabel.text = NSLocalizedString(@"Restore locally", nil);
+        }
+        else
+        {
+            cell.textLabel.font = [UIFont fontWithType:Bold size:standard];
+            cell.textLabel.text = NSLocalizedString(@"Check Data Storage", nil);
+        }
     }
     else if (1 == indexPath.section)
     {
@@ -101,6 +114,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+
     if (1 == section)
     {
         view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 60.0f);
@@ -121,28 +135,56 @@
 {
     if (0 == indexPath.section)
     {
-        PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-        [manager loadDataFromBackupFile:^(BOOL success, NSError *error) {
-                             if (success)
-                             {
-                                 [[[UIAlertView alloc]
-                                   initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-                                             message:NSLocalizedString(@"Data were retrieved locally.", nil)
-                                            delegate:nil
-                                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                                  show];
-                             }
-                             else
-                             {
-                                 [[[UIAlertView alloc]
-                                   initWithTitle:NSLocalizedString(@"Error restoring", nil)
-                                             message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
-                                            delegate:nil
-                                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                                  show];
-                             }
-            
-        }];
+        if (0 == indexPath.row)
+        {
+            PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+            [manager loadDataFromBackupFile:^(BOOL success, NSError *error) {
+                 if (success)
+                 {
+                     [[[UIAlertView alloc]
+                       initWithTitle:NSLocalizedString(@"Restore Finished", nil)
+                              message:NSLocalizedString(@"Data were retrieved locally.", nil)
+                             delegate:nil
+                    cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                      show];
+                 }
+                 else
+                 {
+                     [[[UIAlertView alloc]
+                       initWithTitle:NSLocalizedString(@"Error restoring", nil)
+                              message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
+                             delegate:nil
+                    cancelButtonTitle:@"OK" otherButtonTitles:nil]
+                      show];
+                 }
+
+             }];
+        }
+        else
+        {
+            PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+            BOOL isNewStore = [manager storeStatus];
+            NSString *title = nil;
+            NSString *message = nil;
+            NSString *cancel = NSLocalizedString(@"Ok", nil);
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:nil];
+            if (isNewStore)
+            {
+                title = NSLocalizedString(@"NewStore", nil);
+                message = NSLocalizedString(@"NewStoreUsed", nil);
+            }
+            else
+            {
+                title = NSLocalizedString(@"LegacyStore", nil);
+                message = NSLocalizedString(@"LegacyStoreUsed", nil);
+            }
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                           message:message
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:cancelAction];
+            [self presentViewController:alert animated:YES completion:nil];
+
+        }
     }
     else if (1 == indexPath.section) // disabling icloud
     {
@@ -155,6 +197,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+
     if ([title isEqualToString:NSLocalizedString(@"Proceed", nil)])
     {
         if (nil != self.progressLabel)
@@ -169,53 +212,54 @@
 {
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    [manager saveAndExport:&error completionBlock:^(BOOL success, NSError * exportError) {
-        if (success)
-        {
-            NSError *innerError = nil;
-            BOOL innersuccess = [manager disableiCloudStore:&innerError];
-            innersuccess = [manager configureStoreManager];
-            if (!innersuccess)
-            {
-                self.progressLabel.textColor = DARK_RED;
-                self.progressLabel.text = NSLocalizedString(@"ResettingFailed", nil);
-                    //we have to reinit the core data stack
-                [manager setUpCoreDataStack];
-            }
-            else
-            {
-                [manager setUpNewStore];
-                [manager setiCloudEnabled:NO];
-                BOOL hasStoredBackup = [manager hasBackupFile];
-                if (hasStoredBackup)
-                {
-                    [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError * loadError) {
-                        if (success)
-                        {
-                            self.progressLabel.textColor = DARK_GREEN;
-                            self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
-                        }
-                        else
-                        {
-                            self.progressLabel.textColor = DARK_RED;
-                            self.progressLabel.text = NSLocalizedString(@"LoadFailed", nil);
-                        }
-                    }];
-                }
-                else
-                {
-                    self.progressLabel.textColor = DARK_GREEN;
-                    self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
-                }
-            }
-        }
-    }];
-    
-    
+
+    [manager saveAndExport:&error completionBlock:^(BOOL success, NSError *exportError) {
+         if (success)
+         {
+             NSError *innerError = nil;
+             BOOL innersuccess = [manager disableiCloudStore:&innerError];
+             innersuccess = [manager configureStoreManager];
+             if (!innersuccess)
+             {
+                 self.progressLabel.textColor = DARK_RED;
+                 self.progressLabel.text = NSLocalizedString(@"ResettingFailed", nil);
+                 // we have to reinit the core data stack
+                 [manager setUpCoreDataStack];
+             }
+             else
+             {
+                 [manager setUpNewStore];
+                 [manager setiCloudEnabled:NO];
+                 BOOL hasStoredBackup = [manager hasBackupFile];
+                 if (hasStoredBackup)
+                 {
+                     [manager loadDataFromBackupFile:^(BOOL loadSuccess, NSError *loadError) {
+                          if (success)
+                          {
+                              self.progressLabel.textColor = DARK_GREEN;
+                              self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
+                          }
+                          else
+                          {
+                              self.progressLabel.textColor = DARK_RED;
+                              self.progressLabel.text = NSLocalizedString(@"LoadFailed", nil);
+                          }
+                      }];
+                 }
+                 else
+                 {
+                     self.progressLabel.textColor = DARK_GREEN;
+                     self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
+                 }
+             }
+         }
+     }];
+
+
 //    [manager saveContext:&error];
 //    BOOL success = [manager disableiCloudStore:&error];
 //    success = [manager configureStoreManager];
-//    
+//
 //    if (!success)
 //    {
 //        self.progressLabel.textColor = DARK_RED;
@@ -247,7 +291,7 @@
 //            self.progressLabel.text = NSLocalizedString(@"TransferSucceeded", nil);
 //        }
 //    }
-    
+
 }
 
 - (void)closeController
