@@ -138,11 +138,14 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         if 0 == indexPath.section
         {
             cell.textLabel?.text = NSLocalizedString("Feedback",  comment: "Feedback")
+            cell.textLabel?.textColor = kTextColour
         }
         else
         {
             cell.textLabel?.text = NSLocalizedString("Email results",  comment: "Feedback")
         }
+        cell.textLabel?.textColor = kTextColour
+        cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: 15)
         return cell
     }
     
