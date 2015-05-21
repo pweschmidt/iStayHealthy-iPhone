@@ -51,6 +51,11 @@
     __block NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:buttonTypes.count];
 
     [buttons addObject:initialSpace];
+    UIView *customView = [self customAddMenuView];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithCustomView:customView];
+    [buttons addObject:addButton];
+    [buttons addObject:initialSpace];
+    [buttons addObject:initialSpace];
     [buttonTypes enumerateObjectsUsingBlock: ^(NSString *title, NSUInteger index, BOOL *stop) {
          UIBarButtonItem *barbutton = nil;
          if ([title isEqualToString:NSLocalizedString(@"Settings", nil)])
@@ -97,6 +102,34 @@
 
 //    [self setItems:buttons];
 }
+
+- (UIView *)customAddMenuView
+{
+    UIView *view = [UIView new];
+    view.frame = CGRectMake(0, 0, 44, 44);
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, -18, 60, 60);
+    button.backgroundColor = DARK_BLUE;
+    button.layer.cornerRadius = 30.0;
+    button.layer.borderWidth = 1.0;
+    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    [button addTarget:self action:@selector(showAddMenu:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UILabel *label = [UILabel new];
+    label.frame = CGRectMake(0, 0, 60, 60);
+    label.font = [UIFont boldSystemFontOfSize:24.0];
+    label.text = NSLocalizedString(@"Add", nil);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    
+    [button addSubview:label];
+    [view addSubview:button];
+    return view;
+}
+
+
 
 - (void)showFeedbackController:(id)sender
 {
@@ -284,6 +317,12 @@
             }
         }
     }
+}
+
+
+- (void)showAddMenu:(UIBarButtonItem *)sender
+{
+    
 }
 
 @end
