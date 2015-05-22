@@ -51,13 +51,9 @@
     __block NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:buttonTypes.count];
 
     [buttons addObject:initialSpace];
-    UIView *customView = [self customAddMenuView];
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithCustomView:customView];
-    [buttons addObject:addButton];
-    [buttons addObject:initialSpace];
-    [buttons addObject:initialSpace];
     [buttonTypes enumerateObjectsUsingBlock: ^(NSString *title, NSUInteger index, BOOL *stop) {
          UIBarButtonItem *barbutton = nil;
+        BOOL insertAddButton = NO;
          if ([title isEqualToString:NSLocalizedString(@"Settings", nil)])
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openSettings:) buttonTag:index];
@@ -65,6 +61,7 @@
          else if ([title isEqualToString:NSLocalizedString(@"Backups", nil)])
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openBackup:) buttonTag:index];
+             insertAddButton = YES;
          }
 //         else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
 //         {
@@ -96,7 +93,20 @@
              [buttons addObject:barbutton];
              [buttons addObject:flexibleSpace];
          }
+        if (insertAddButton)
+        {
+            UIView *customView = [self customAddMenuView];
+            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithCustomView:customView];
+            [buttons addObject:addButton];
+            [buttons addObject:flexibleSpace];
+            [buttons addObject:flexibleSpace];
+            
+            insertAddButton = NO;
+        }
      }];
+    
+
+    
 
     self.customItems = buttons;
 
