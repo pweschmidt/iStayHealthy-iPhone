@@ -10,6 +10,6 @@ import UIKit
 
 @objc
 protocol PWESTableViewUpdater {
-    optional func didChangeResultsForCell(cell: UITableViewCell, indexPath: NSIndexPath)
-    optional func didChangeFetchResultsControllerForSection(section: UInt64)
+    @objc optional func didChangeResultsForCell(_ cell: UITableViewCell, indexPath: IndexPath)
+    @objc optional func didChangeFetchResultsControllerForSection(_ section: UInt64)
 }

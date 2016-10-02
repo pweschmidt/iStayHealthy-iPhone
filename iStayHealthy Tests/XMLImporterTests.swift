@@ -12,17 +12,17 @@ import XCTest
 class XMLImporterTests: XCTestCase {
 
     var normalXML: String?
-    var normalXMLData: NSData?
+    var normalXMLData: Data?
     
     override func setUp()
     {
         super.setUp()
-        let bundle = NSBundle(forClass: XMLImporterTests.self)
-        var normalPath = bundle.pathForResource("iStayHealthy.isth", ofType: nil)
+        let bundle = Bundle(for: XMLImporterTests.self)
+        var normalPath = bundle.path(forResource: "iStayHealthy.isth", ofType: nil)
         if nil != normalPath
         {
-            var normalData = NSData.init(contentsOfFile: normalPath!)
-            var parsedString = NSString(data: normalData!, encoding:NSUTF8StringEncoding)
+            var normalData = try? Data.init(contentsOf: URL(fileURLWithPath: normalPath!))
+            var parsedString = NSString(data: normalData!, encoding:String.Encoding.utf8.rawValue)
             if nil != parsedString
             {
                 println("XML \(parsedString)")
@@ -59,7 +59,7 @@ class XMLImporterTests: XCTestCase {
             if nil != dictionary
             {
                 let dict: NSDictionary = dictionary!
-                var result: NSMutableArray? = dict.valueForKey("Results") as? NSMutableArray
+                var result: NSMutableArray? = dict.value(forKey: "Results") as? NSMutableArray
                 if nil != result
                 {
                     let count: Int = result!.count
@@ -74,7 +74,7 @@ class XMLImporterTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

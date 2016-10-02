@@ -12,6 +12,6 @@ import UIKit
 @objc
 protocol PWESLoginHandler
 {
-    optional func didLogin()
-    optional func didLoginFailed()
+    @objc optional func didLogin()
+    @objc optional func didLoginFailed()
 }

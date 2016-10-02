@@ -37,7 +37,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
         
         defaultTextFieldValues()
         
-        forgotButton?.titleLabel?.text = NSLocalizedString("Forgot Password", tableName: nil, bundle: NSBundle.mainBundle(), value: "Forgot Password", comment: "Forgot Password")
+        forgotButton?.titleLabel?.text = NSLocalizedString("Forgot Password", tableName: nil, bundle: Bundle.main, value: "Forgot Password", comment: "Forgot Password")
         
         forgotButton?.titleLabel?.textColor = UIColor(red: 204.0 / 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
     }
@@ -48,8 +48,8 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
     
     func versionString() -> String
     {
-        let infoDictionary: NSDictionary = NSBundle.mainBundle().infoDictionary!
-        var versionString: String? = infoDictionary.objectForKey("CFBundleShortVersionString") as? String
+        let infoDictionary: NSDictionary = Bundle.main.infoDictionary! as NSDictionary
+        var versionString: String? = infoDictionary.object(forKey: "CFBundleShortVersionString") as? String
         
         if versionString == nil
         {
@@ -60,35 +60,35 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
     
     func defaultTextFieldValues()
     {
-        passwordField?.text = NSLocalizedString("Enter password", tableName: nil, bundle: NSBundle.mainBundle(), value: "Enter password", comment: "Enter password")
-        passwordField?.textColor = UIColor.darkGrayColor()
-        passwordField?.secureTextEntry = false
+        passwordField?.text = NSLocalizedString("Enter password", tableName: nil, bundle: Bundle.main, value: "Enter password", comment: "Enter password")
+        passwordField?.textColor = UIColor.darkGray
+        passwordField?.isSecureTextEntry = false
         passwordField?.delegate = self
     }
     
-    func login(password: String)
+    func login(_ password: String)
     {
         var isValidated: Bool = false
-        var stringHash  = password.hash
+        let stringHash  = password.hash
         
-        isValidated = KeychainHandler.compareKeychainValueForMatchingPIN(stringHash)
+        isValidated = KeychainHandler.compareKeychainValueFor(matchingPIN: stringHash)
         if password == kSecretKey
         {
             isValidated = true
-            let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            defaults.setBool(false, forKey: kIsPasswordEnabled)
+            let defaults: UserDefaults = UserDefaults.standard
+            defaults.set(false, forKey: kIsPasswordEnabled)
             defaults.synchronize()
             defaultTextFieldValues()
             
-            let alertTitle: String = NSLocalizedString("Password Reset", tableName: nil, bundle: NSBundle.mainBundle(), value: "Password Reset", comment: "Password Reset")
-            let alertMessage: String = NSLocalizedString("Please reset password", tableName: nil, bundle: NSBundle.mainBundle(), value: "Please reset password", comment: "Please reset password")
+            let alertTitle: String = NSLocalizedString("Password Reset", tableName: nil, bundle: Bundle.main, value: "Password Reset", comment: "Password Reset")
+            let alertMessage: String = NSLocalizedString("Please reset password", tableName: nil, bundle: Bundle.main, value: "Please reset password", comment: "Please reset password")
             showAlert(alertTitle, message: alertMessage)
         }
         
         if !isValidated
         {
-            let alertTitle: String = NSLocalizedString("Wrong Password", tableName: nil, bundle: NSBundle.mainBundle(), value: "Wrong Password", comment: "Wrong Password")
-            let alertMessage: String = NSLocalizedString("Wrong Password! Try again", tableName: nil, bundle: NSBundle.mainBundle(), value: "Wrong Password! Try again", comment: "Wrong Password! Try again")
+            let alertTitle: String = NSLocalizedString("Wrong Password", tableName: nil, bundle: Bundle.main, value: "Wrong Password", comment: "Wrong Password")
+            let alertMessage: String = NSLocalizedString("Wrong Password! Try again", tableName: nil, bundle: Bundle.main, value: "Wrong Password! Try again", comment: "Wrong Password! Try again")
             showAlert(alertTitle, message: alertMessage)
             
         }
@@ -102,52 +102,52 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
     }
     
     
-    func showAlert(title: String, message: String)
+    func showAlert(_ title: String, message: String)
     {
         let alertView: UIAlertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "OK")
         alertView.show()
     }
     
-    @IBAction func forgotButtonPressed(sender: UIButton)
+    @IBAction func forgotButtonPressed(_ sender: UIButton)
     {
         if !MFMailComposeViewController.canSendMail()
         {
             return
         }
-        var mailController:MFMailComposeViewController = MFMailComposeViewController()
-        mailController.navigationController?.navigationBar.tintColor = UIColor.blackColor()
-        var recipients: NSArray = ["istayhealthy.app@gmail.com"]
+        let mailController:MFMailComposeViewController = MFMailComposeViewController()
+        mailController.navigationController?.navigationBar.tintColor = UIColor.black
+        let recipients: NSArray = ["istayhealthy.app@gmail.com"]
         let subject: String = "I forgot my iStayHealthy password (iPhone)"
         mailController.mailComposeDelegate = self
-        mailController.setToRecipients(recipients as [AnyObject])
+        mailController.setToRecipients(recipients as [AnyObject] as [AnyObject])
         mailController.setSubject(subject)
-        self.presentViewController(mailController, animated: true) { () -> Void in
+        self.present(mailController, animated: true) { () -> Void in
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField)
+    func textFieldDidBeginEditing(_ textField: UITextField)
     {
-        textField.textColor = UIColor.blackColor()
-        textField.secureTextEntry = true
+        textField.textColor = UIColor.black
+        textField.isSecureTextEntry = true
     }
 
-    func textFieldDidEndEditing(textField: UITextField)
+    func textFieldDidEndEditing(_ textField: UITextField)
     {
-        var enteredPassword: String = textField.text
+        let enteredPassword: String = textField.text!
         //        println("entered password is \(enteredPassword)")
         self.login(enteredPassword)
         textField.resignFirstResponder()
     }
 
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!)
+    func mailComposeController(_ controller: MFMailComposeViewController!, didFinishWith result: MFMailComposeResult, error: Error!)
     {
-        controller.dismissViewControllerAnimated(true, completion: { () -> Void in
+        controller.dismiss(animated: true, completion: { () -> Void in
         })
     }
 }

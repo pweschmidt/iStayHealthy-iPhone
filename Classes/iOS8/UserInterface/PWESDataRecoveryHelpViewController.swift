@@ -17,8 +17,8 @@ class PWESDataRecoveryHelpViewController: UITableViewController
     {
         super.viewDidLoad()
         self.tableView.backgroundColor = kDefaultBackground
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        self.navigationItem.title = NSLocalizedString(kManageDataOptions, tableName: nil, bundle: NSBundle.mainBundle(), value: kManageDataOptions, comment: "")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        self.navigationItem.title = NSLocalizedString(kManageDataOptions, tableName: nil, bundle: Bundle.main, value: kManageDataOptions, comment: "")
     }
 
     override func didReceiveMemoryWarning()
@@ -28,32 +28,32 @@ class PWESDataRecoveryHelpViewController: UITableViewController
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return options.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) 
 
-        let text: String = options[indexPath.row]
-        let localizedString = NSLocalizedString(text, tableName: nil, bundle: NSBundle.mainBundle(), value: text, comment: "")
+        let text: String = options[(indexPath as NSIndexPath).row]
+        let localizedString = NSLocalizedString(text, tableName: nil, bundle: Bundle.main, value: text, comment: "")
         cell.textLabel?.text = localizedString
         cell.textLabel?.textColor = kTextColour
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let text: String = options[indexPath.row]
-        let index: UInt = UInt(indexPath.row)
-        let helpViewer = PWESDataRecoveryStepsTableViewController(style: UITableViewStyle.Grouped)
+        let text: String = options[(indexPath as NSIndexPath).row]
+        let index: UInt = UInt((indexPath as NSIndexPath).row)
+        let helpViewer = PWESDataRecoveryStepsTableViewController(style: UITableViewStyle.grouped)
         helpViewer.selectedOption = index
         self.navigationController?.pushViewController(helpViewer, animated: true)
     }

@@ -11,7 +11,7 @@ import UIKit
 
 class TokenCertificate: NSObject
 {
-    var deviceToken : NSData
+    var deviceToken : Data
     
     class var sharedToken : TokenCertificate{
         struct Static
@@ -23,7 +23,7 @@ class TokenCertificate: NSObject
 
     override init()
     {
-        deviceToken = NSData()
+        deviceToken = Data()
         super.init()
     }
     
@@ -31,14 +31,14 @@ class TokenCertificate: NSObject
     func deviceTokenAsString() -> String
     {
         var string: String = ""
-        if 0 == deviceToken.length
+        if 0 == deviceToken.count
         {
             return "No Token available"
         }
         
-        var byteArray = [UInt8](count: deviceToken.length, repeatedValue: 0x0)
+        var byteArray = [UInt8](repeating: 0x0, count: deviceToken.count)
         
-        deviceToken.getBytes(&byteArray, length: deviceToken.length)
+        (deviceToken as NSData).getBytes(&byteArray, length: deviceToken.count)
         
         for value in byteArray
         {

@@ -21,9 +21,9 @@ class PWESDataRecoveryStepsTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = NSLocalizedString(selectedTitle, tableName: nil, bundle: NSBundle.mainBundle(), value: selectedTitle, comment: "")
+        self.navigationItem.title = NSLocalizedString(selectedTitle, tableName: nil, bundle: Bundle.main, value: selectedTitle, comment: "")
         self.view.backgroundColor = kDefaultBackground
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,11 +33,11 @@ class PWESDataRecoveryStepsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
         switch selectedOption
         {
@@ -55,41 +55,41 @@ class PWESDataRecoveryStepsTableViewController: UITableViewController {
         return rows
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) 
 
         var currentOption: String? = nil
         switch selectedOption
         {
         case 0:
-            currentOption = changeiCloudOptions[indexPath.row]
+            currentOption = changeiCloudOptions[(indexPath as NSIndexPath).row]
         case 1:
-            if 0 == indexPath.row
+            if 0 == (indexPath as NSIndexPath).row
             {
                 cell.imageView?.image = UIImage(named: "settings.png")
             }
-            currentOption = disableiCloudOptions[indexPath.row]
+            currentOption = disableiCloudOptions[(indexPath as NSIndexPath).row]
         case 2:
-            if 0 == indexPath.row
+            if 0 == (indexPath as NSIndexPath).row
             {
                 cell.imageView?.image = UIImage(named: "settings.png")
             }
-            currentOption = recoverLocallyOptions[indexPath.row]
+            currentOption = recoverLocallyOptions[(indexPath as NSIndexPath).row]
         case 3:
-            if 0 == indexPath.row
+            if 0 == (indexPath as NSIndexPath).row
             {
                 cell.imageView?.image = UIImage(named: "dropbox.png")
             }
-            currentOption = dropboxOptions[indexPath.row]
+            currentOption = dropboxOptions[(indexPath as NSIndexPath).row]
         default:
             currentOption = nil
         }
         if nil != currentOption
         {
-            var localizedText = NSLocalizedString(currentOption!, tableName: nil, bundle: NSBundle.mainBundle(), value: currentOption!, comment: "")
+            let localizedText = NSLocalizedString(currentOption!, tableName: nil, bundle: Bundle.main, value: currentOption!, comment: "")
             cell.textLabel?.text = localizedText
             cell.textLabel?.textColor = kTextColour
-            cell.textLabel?.font = UIFont.systemFontOfSize(15)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         }
 
         return cell

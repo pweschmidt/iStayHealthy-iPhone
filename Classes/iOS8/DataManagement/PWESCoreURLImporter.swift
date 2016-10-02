@@ -12,16 +12,16 @@ class PWESCoreURLImporter: NSObject
 {
     var results: NSMutableDictionary = NSMutableDictionary()
 
-    func resultsFromURLQueryString(queryString: String) -> NSDictionary
+    func resultsFromURLQueryString(_ queryString: String) -> NSDictionary
     {
-        let queryComponents = queryString.componentsSeparatedByString("&")
+        let queryComponents = queryString.components(separatedBy: "&")
         for component in queryComponents
         {
-            let individualComponent = component.componentsSeparatedByString("=")
+            let individualComponent = component.components(separatedBy: "=")
             if 2 == individualComponent.count
             {
-                var mappedKeyString: String = mapResultsType(individualComponent[0])
-                var valueString = individualComponent[1]
+                let mappedKeyString: String = mapResultsType(individualComponent[0])
+                let valueString = individualComponent[1]
                 //                println("key = \(mappedKeyString) and value = \(valueString)")
                 resultsAttributeDictionary(mappedKeyString, valueString: valueString)
             }
@@ -29,7 +29,7 @@ class PWESCoreURLImporter: NSObject
         return results
     }
     
-    func resultsAttributeDictionary(keyString: String, valueString: String)
+    func resultsAttributeDictionary(_ keyString: String, valueString: String)
     {
         if keyString == "Unknown"
         {
@@ -49,24 +49,24 @@ class PWESCoreURLImporter: NSObject
         }
     }
     
-    func numberFromStringValue(keyString: String, valueString: String)
+    func numberFromStringValue(_ keyString: String, valueString: String)
     {
         //        println("***** numberFromStringValue with key='\(keyString)' and value=\(valueString)")
         var value:NSNumber?
         if "undetectable" == valueString
         {
-            value = NSNumber(float: 1)
+            value = NSNumber(value: 1 as Float)
             //            println("we have undetectable = \(value)")
-            results.setObject(value!, forKey: keyString)
+            results.setObject(value!, forKey: keyString as NSCopying)
             return
         }
 
-        var candidate: Float = (valueString as NSString).floatValue
-        value = NSNumber(float: candidate)
+        let candidate: Float = (valueString as NSString).floatValue
+        value = NSNumber(value: candidate as Float)
         if nil != value
         {
             //            println("added value \(value) to dictionary")
-            results.setObject(value!, forKey: keyString)
+            results.setObject(value!, forKey: keyString as NSCopying)
         }
 //        else
 //        {
@@ -74,23 +74,23 @@ class PWESCoreURLImporter: NSObject
 //        }
     }
     
-    func dateFromStringValue(dateString: String)
+    func dateFromStringValue(_ dateString: String)
     {
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "ddMMMyyyy"
-        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         
-        var value: NSDate? = formatter.dateFromString(dateString)
+        let value: Date? = formatter.date(from: dateString)
         //        println("found date = \(value)")
         if nil != value
         {
-            results.setObject(value!, forKey: kResultsDate)
+            results.setObject(value!, forKey: kResultsDate as NSCopying)
         }
     }
     
-    func bloodPressureFromString(bloodPressureString: String)
+    func bloodPressureFromString(_ bloodPressureString: String)
     {
-        var components = bloodPressureString.componentsSeparatedByString("-")
+        var components = bloodPressureString.components(separatedBy: "-")
         if 2 == components.count
         {
             let systoleString = components[0]
@@ -98,56 +98,56 @@ class PWESCoreURLImporter: NSObject
             var systole:NSNumber?
             var diastole:NSNumber?
             var candidate: Float = (systoleString as NSString).floatValue
-            systole = NSNumber(float: candidate)
+            systole = NSNumber(value: candidate as Float)
             candidate = (diastoleString as NSString).floatValue
-            diastole = NSNumber(float: candidate)
+            diastole = NSNumber(value: candidate as Float)
             
             if nil != systole && nil != diastole
             {
-                results.setObject(systole!, forKey: kSystole)
-                results.setObject(diastole!, forKey: kDiastole)
+                results.setObject(systole!, forKey: kSystole as NSCopying)
+                results.setObject(diastole!, forKey: kDiastole as NSCopying)
             }
         }
     }
     
-    func addResultsData(keyString: String, value: AnyObject?)
+    func addResultsData(_ keyString: String, value: AnyObject?)
     {
-        results.setObject(value!, forKey: keyString)
+        results.setObject(value!, forKey: keyString as NSCopying)
     }
     
-    func mapResultsType(type:String) -> String
+    func mapResultsType(_ type:String) -> String
     {
-        if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kCD4)
+        if ComparisonResult.orderedSame == type.caseInsensitiveCompare(kCD4)
         {
             return kCD4;
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kCD4Percent)
+        else if ComparisonResult.orderedSame == type.caseInsensitiveCompare(kCD4Percent)
         {
             return kCD4Percent
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kViralLoad)
+        else if ComparisonResult.orderedSame == type.caseInsensitiveCompare(kViralLoad)
         {
             return kViralLoad
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kResultsDate) ||
-       NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("ResultDate") ||
-        NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("date")
+        else if ComparisonResult.orderedSame == type.caseInsensitiveCompare(kResultsDate) ||
+       ComparisonResult.orderedSame == type.caseInsensitiveCompare("ResultDate") ||
+        ComparisonResult.orderedSame == type.caseInsensitiveCompare("date")
         {
             return kResultsDate
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("BloodPressure")
+        else if ComparisonResult.orderedSame == type.caseInsensitiveCompare("BloodPressure")
         {
             return "BloodPressure"
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare(kBMI)
+        else if ComparisonResult.orderedSame == type.caseInsensitiveCompare(kBMI)
         {
             return kBMI
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("CardiacRisk")
+        else if ComparisonResult.orderedSame == type.caseInsensitiveCompare("CardiacRisk")
         {
             return kCardiacRiskFactor
         }
-        else if NSComparisonResult.OrderedSame == type.caseInsensitiveCompare("Cholesterol")
+        else if ComparisonResult.orderedSame == type.caseInsensitiveCompare("Cholesterol")
         {
             return kTotalCholesterol
         }

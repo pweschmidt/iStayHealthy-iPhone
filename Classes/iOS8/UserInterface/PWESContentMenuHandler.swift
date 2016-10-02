@@ -12,6 +12,6 @@ import UIKit
 @objc
 protocol PWESContentMenuHandler
 {
-    optional func showMenuPanel()
-    optional func dismissMenuPanel(controllerName: String?)
+    @objc optional func showMenuPanel()
+    @objc optional func dismissMenuPanel(_ controllerName: String?)
 }
