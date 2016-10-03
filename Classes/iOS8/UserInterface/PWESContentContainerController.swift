@@ -167,7 +167,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     
     
-    func animateLeftPanel(#shouldExpand: Bool)
+    func animateLeftPanel(shouldExpand: Bool)
     {
         let isRegular : Bool = self.traitCollection.horizontalSizeClass == .regular
         
@@ -211,7 +211,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     /**
     ZOOM in/out methods
     */
-    func zoomOutMainController(#targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
+    func zoomOutMainController(targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
     {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
             self.customNavigationController!.view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
@@ -220,7 +220,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         
     }
     
-    func zoomInMainController(#targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
+    func zoomInMainController(targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
     {
         var finalPosition: CGFloat = targetPosition
         if !isCollapsed
@@ -237,9 +237,9 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     /**
     sliding in/out
     */
-    func animateCenterPanelXPosition(#targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
+    func animateCenterPanelXPosition(targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
     {
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.customNavigationController!.view.frame.origin.x = targetPosition
             }, completion: completion)
     }

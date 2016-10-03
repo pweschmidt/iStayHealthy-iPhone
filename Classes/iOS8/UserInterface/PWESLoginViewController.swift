@@ -119,7 +119,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
         let recipients: NSArray = ["istayhealthy.app@gmail.com"]
         let subject: String = "I forgot my iStayHealthy password (iPhone)"
         mailController.mailComposeDelegate = self
-        mailController.setToRecipients(recipients as [AnyObject] as [AnyObject])
+        mailController.setToRecipients(recipients as? [String])
         mailController.setSubject(subject)
         self.present(mailController, animated: true) { () -> Void in
         }
@@ -145,7 +145,7 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
         textField.resignFirstResponder()
     }
 
-    func mailComposeController(_ controller: MFMailComposeViewController!, didFinishWith result: MFMailComposeResult, error: Error!)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
     {
         controller.dismiss(animated: true, completion: { () -> Void in
         })

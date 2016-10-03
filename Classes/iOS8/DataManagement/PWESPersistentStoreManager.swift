@@ -123,7 +123,13 @@ class PWESPersistentStoreManager : NSObject
         let coordinator = persistentStoreCoordinator!
         let localOptions = CoreDataUtils.localStoreOptions()
         var creationError:NSError? = nil
-        var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
+        
+        do {
+            _ = try persistentStoreCoordinator?.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: newPath, options: localOptions)
+        }catch{
+            
+        }
+        
     }
     
     
@@ -174,13 +180,15 @@ class PWESPersistentStoreManager : NSObject
             {
                 options = CoreDataUtils.iCloudStoreOptions(withPath: iCloudStoreURL)
             }
-            var creationError: NSError?
             let coordinator = self.persistentStoreCoordinator!
-            coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: cloudPath, options: options, error: &creationError)
-            DispatchQueue.main.async(execute: { () -> Void in
-                let notification = Notification(name: Notification.Name(rawValue: kLoadedStoreNotificationKey), object: self)
-                NotificationCenter.default.post(notification)
-            })
+            do {
+                try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: cloudPath, options: options)
+                DispatchQueue.main.async(execute: { () -> Void in
+                    let notification = Notification(name: Notification.Name(rawValue: kLoadedStoreNotificationKey), object: self)
+                    NotificationCenter.default.post(notification)
+                })
+                
+            }catch{}
         })
         
     }
@@ -352,11 +360,17 @@ class PWESPersistentStoreManager : NSObject
         }
 //        defaultContext?.lock()
 //        defaultContext?.reset()
+        
+        
+        
         defaultContext?.performAndWait({ () -> Void in
-            let stores = self.persistentStoreCoordinator?.persistentStores as! [NSPersistentStore];
-            for store in stores
-            {
-                self.persistentStoreCoordinator?.removePersistentStore(store, error: nil)
+            if let stores = self.persistentStoreCoordinator?.persistentStores {
+                for store in stores
+                {
+                    do {
+                        try self.persistentStoreCoordinator?.remove(store)
+                    }catch{}
+                }
             }
         })
         defaultContext?.reset()
@@ -364,7 +378,7 @@ class PWESPersistentStoreManager : NSObject
         defaultContext = nil
         persistentStoreCoordinator = nil
         
-        configureStoreManager()
+        _ = configureStoreManager()
         //        defaultContext?.unlock()
         
         
@@ -377,7 +391,7 @@ class PWESPersistentStoreManager : NSObject
         if hasBackupFile()
         {
             let docPath:URL = self.appDocumentDirectory()
-            var filePath = docPath.appendingPathComponent(backupFileName)
+            let filePath = docPath.appendingPathComponent(backupFileName)
             let importer = PWESCoreXMLImporter()
             importer.importWithURL(filePath, completionBlock: { (success, dictionary, error) -> Void in
                 if success
@@ -423,7 +437,7 @@ class PWESPersistentStoreManager : NSObject
         }
         
         let writer:CoreXMLWriter = CoreXMLWriter()
-        writer.write(completionBlock: { (xmlString: String?, xmlError: NSError?) -> Void in
+        writer.write(completionBlock: { (xmlString: String?, xmlError: Error?) -> Void in
             if nil != xmlString
             {
                 let xml:NSString = xmlString!
@@ -582,17 +596,17 @@ class PWESPersistentStoreManager : NSObject
             return
         }
         let importer = PWESCoreXMLImporter()
-        importer.importWithURL(pathURL!, completionBlock: { (success, dictionary, error) -> Void in
+        importer.importWithURL(pathURL, completionBlock: { (success, dictionary, error) -> Void in
             if !success || nil == dictionary
             {
-                completionBlock(success: false, error: error)
+                completionBlock(false, error)
             }
             else
             {
                 let importSaver = PWESCoreDictionaryImporter()
                 var importError: NSError?
                 let importSuccess = importSaver.saveToCoreData(dictionary, error: &importError)
-                completionBlock(success: importSuccess, error: importError)
+                completionBlock(importSuccess, importError)
             }
         })
     }

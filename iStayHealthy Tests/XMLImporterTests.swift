@@ -18,14 +18,14 @@ class XMLImporterTests: XCTestCase {
     {
         super.setUp()
         let bundle = Bundle(for: XMLImporterTests.self)
-        var normalPath = bundle.path(forResource: "iStayHealthy.isth", ofType: nil)
+        let normalPath = bundle.path(forResource: "iStayHealthy.isth", ofType: nil)
         if nil != normalPath
         {
             var normalData = try? Data.init(contentsOf: URL(fileURLWithPath: normalPath!))
             var parsedString = NSString(data: normalData!, encoding:String.Encoding.utf8.rawValue)
             if nil != parsedString
             {
-                println("XML \(parsedString)")
+                print("XML \(parsedString)")
             }
             normalXML = parsedString as? String
             self.normalXMLData = normalData
@@ -49,11 +49,11 @@ class XMLImporterTests: XCTestCase {
         importer.importWithData(normalXMLData!, completionBlock: { (success, dictionary, error) -> Void in
             if success
             {
-                println("We got SUCCESS")
+                print("We got SUCCESS")
             }
             else
             {
-                println("We got a FAILURE")
+                print("We got a FAILURE")
             }
             
             if nil != dictionary
@@ -64,7 +64,7 @@ class XMLImporterTests: XCTestCase {
                 {
                     let count: Int = result!.count
                     XCTAssertTrue(0 < count, "We expected more than 0 results")
-                    println("We got a results array back and it has \(count) entries")
+                    print("We got a results array back and it has \(count) entries")
                 }
             }
             

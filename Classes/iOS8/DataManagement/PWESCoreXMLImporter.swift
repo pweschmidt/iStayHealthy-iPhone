@@ -54,18 +54,15 @@ class PWESCoreXMLImporter: NSObject, XMLParserDelegate
             return
         }
         self.completion = completionBlock
-        var validationError: NSError?
-        let cleanedXMLData = CoreXMLTools.validatedXMLDataFromData(xmlData, error: &validationError)
-        if nil != validationError || nil == cleanedXMLData
-        {
-            //            println("the data cannot be validated")
-            completionBlock(false, nil, validationError)
-            return
+        
+        do {
+            let cleanedXMLData = try CoreXMLTools.validatedXMLData(from: xmlData!)
+            let xmlParser: XMLParser = XMLParser(data: cleanedXMLData)
+            xmlParser.delegate = self
+            xmlParser.parse()
+        }catch {
+            completionBlock(false, nil, nil)
         }
-        let xmlParser: XMLParser = XMLParser(data: cleanedXMLData)
-        xmlParser.delegate = self
-        xmlParser.parse()
-        //        println("parse")
     }
     
     func parserDidStartDocument(_ parser: XMLParser)
@@ -90,7 +87,7 @@ class PWESCoreXMLImporter: NSObject, XMLParserDelegate
         }
     }
     
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [AnyHashable: Any])
+    @nonobjc func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [AnyHashable: Any])
     {
         if elementName == kResult
         {
