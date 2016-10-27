@@ -483,40 +483,6 @@
     return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];
 }
 
-// - (void)showMailControllerHasAttachment:(BOOL)hasAttachment
-// {
-//    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-//
-//    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-//
-//    NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
-//    mailController.mailComposeDelegate = self;
-//    [mailController setToRecipients:toRecipient];
-//    [mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
-//    if (hasAttachment)
-//    {
-//        CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
-//        [writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
-//             if (nil != csvString)
-//             {
-//                 NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-//                 [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
-//             }
-//             else
-//             {
-//                 [[[UIAlertView alloc]
-//                   initWithTitle:@"Error adding attachment" message:[error localizedDescription]
-//                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-//                  show];
-//             }
-//             [self.navigationController presentViewController:mailController animated:YES completion:nil];
-//         }];
-//    }
-//    else
-//    {
-//        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-//    }
-// }
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
 {
