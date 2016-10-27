@@ -10,14 +10,6 @@
 #import <CoreText/CoreText.h>
 
 
-static NSDateFormatter *shortDate()
-{
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = kShortDateFormatting;
-	formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-	return formatter;
-}
-
 @interface PWESMedPlotArea ()
 {
 	CGFloat xStart;

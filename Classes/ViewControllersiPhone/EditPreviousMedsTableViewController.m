@@ -85,7 +85,7 @@
         med.endDate = self.endDate;
         PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
         NSError *error = nil;
-        [manager saveContext:&error];
+        [manager saveContextAndReturnError:&error];
         [self popController];
     }
 }

@@ -100,8 +100,11 @@ class PWESDataImportViewController: UITableViewController {
             return
         }
         let dbImporter = PWESCoreDictionaryImporter()
-        var saveError: NSError?
-        dbImporter.saveToCoreData(dataCollection!, error: &saveError)
+        do {
+            try dbImporter.saveToCoreData(dataCollection)
+        }catch {
+            
+        }
         self.navigationController?.popViewController(animated: true)
     }
     

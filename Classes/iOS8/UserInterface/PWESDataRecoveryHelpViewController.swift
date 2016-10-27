@@ -51,7 +51,7 @@ class PWESDataRecoveryHelpViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let text: String = options[(indexPath as NSIndexPath).row]
+//        let text: String = options[(indexPath as NSIndexPath).row]
         let index: UInt = UInt((indexPath as NSIndexPath).row)
         let helpViewer = PWESDataRecoveryStepsTableViewController(style: UITableViewStyle.grouped)
         helpViewer.selectedOption = index

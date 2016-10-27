@@ -186,7 +186,7 @@
     effects.seriousness = [self.seriousnessArray objectAtIndex:seriousnessIndex];
     effects.frequency = [self.frequencyArray objectAtIndex:frequencyIndex];
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     [self popController];
 }
 

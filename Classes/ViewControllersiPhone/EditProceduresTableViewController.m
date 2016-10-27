@@ -106,7 +106,7 @@
          [procedures addValueString:value type:attribute];
      }];
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     [self popController];
 }
 

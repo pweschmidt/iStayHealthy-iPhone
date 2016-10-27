@@ -168,8 +168,7 @@
 - (void)transferDataFromiCloud
 {
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-    NSError *error = nil;
-    [manager saveAndExport:&error completionBlock:^(BOOL success, NSError * exportError) {
+    [manager saveAndExport:^(BOOL success, NSError * exportError) {
         if (success)
         {
             NSError *innerError = nil;

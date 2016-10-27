@@ -34,18 +34,6 @@ static NSArray * csvModels()
              kPreviousMedication];
 }
 
-static NSDictionary * csvMap()
-{
-    return @{ kResults : kResults,
-              kMedication : kMedications,
-              kMissedMedication : kMissedMedications,
-              kSideEffects : kHIVSideEffects,
-              kContacts : kClinicalContacts,
-              kProcedures : kIllnessAndProcedures,
-              kOtherMedication : kOtherMedications,
-              kPreviousMedication : kPreviousMedications };
-}
-
 static NSDictionary * csvSortTerms()
 {
     return @{ kResults : kResultsDate,

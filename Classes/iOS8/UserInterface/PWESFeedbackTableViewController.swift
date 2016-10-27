@@ -88,7 +88,7 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         controller.setSubject("Results for iStayHealthy iPhone app")
         let manager = PWESPersistentStoreManager.defaultManager
         var data:Data? = nil
-        var path = manager.getBackupFilePath()
+        let path = manager.getBackupFilePath()
         var canSend = false
         if nil != path
         {
@@ -103,7 +103,7 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         
         if MFMailComposeViewController.canSendMail() && canSend
         {
-            var navigationController = self.parent
+            let navigationController = self.parent
             navigationController?.present(controller, animated: true, completion: { () -> Void in
             })
             
@@ -127,7 +127,7 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         }
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController!, didFinishWith result: MFMailComposeResult, error: Error!)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
     {
         controller.dismiss(animated: true) { () -> Void in
         }

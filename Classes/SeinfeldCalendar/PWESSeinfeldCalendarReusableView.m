@@ -66,7 +66,7 @@
     {
         score = 100.f;
     }
-    else if (0 > 100)
+    else if (/* DISABLES CODE */ (0) > 100)
     {
         score = 0.f;
     }
@@ -82,7 +82,7 @@
 	title.textAlignment = NSTextAlignmentLeft;
 	title.font = [UIFont fontWithType:Bold size:large];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateStyle = kDateFormatting;
+	formatter.dateFormat = kDateFormatting;
 	NSString *endString = [formatter stringFromDate:calendar.endDate];
 
 	NSString *text = NSLocalizedString(@"Last diary ending", nil);

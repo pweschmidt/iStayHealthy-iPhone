@@ -121,7 +121,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         
         if self.traitCollection.horizontalSizeClass == .regular
         {
-            var navController: UINavigationController? = navigationControllerForiPad(controllerName, attributes: importedAttributes)
+            let navController: UINavigationController? = navigationControllerForiPad(controllerName, attributes: importedAttributes)
             if navController == nil
             {
                 return
@@ -143,7 +143,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
         else
         {
-            var navController: UINavigationController? = navigationControllerForiPhone(controllerName, attributes: importedAttributes)
+            let navController: UINavigationController? = navigationControllerForiPhone(controllerName, attributes: importedAttributes)
             if navController == nil
             {
                 return
@@ -176,11 +176,11 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             isCollapsed = false
             if isRegular
             {
-                animateCenterPanelXPosition(customNavigationController!.view.frame.origin.x + 210.0)
+                animateCenterPanelXPosition(targetPosition:customNavigationController!.view.frame.origin.x + 210.0)
             }
             else
             {
-                zoomOutMainController((customNavigationController!.view.frame).width - 80)
+                zoomOutMainController(targetPosition:(customNavigationController!.view.frame).width - 80)
             }
         }
         else
@@ -222,11 +222,11 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     func zoomInMainController(targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
     {
-        var finalPosition: CGFloat = targetPosition
-        if !isCollapsed
-        {
-            finalPosition = targetPosition + 40.0
-        }
+//        var finalPosition: CGFloat = targetPosition
+//        if !isCollapsed
+//        {
+//            finalPosition = targetPosition + 40.0
+//        }
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
             
             self.customNavigationController!.view.transform = CGAffineTransform.identity

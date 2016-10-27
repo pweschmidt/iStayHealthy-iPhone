@@ -11,41 +11,41 @@ import UIKit
 class PWESCoreDictionaryImporter: NSObject
 {
     
-    func saveToCoreData(_ record: NSDictionary?, error: NSErrorPointer) -> Bool
+    func saveToCoreData(_ record: NSDictionary?) throws
     {
         if nil == record
         {
-            return false
+            let error = NSError(domain: "iStayHealthy", code: 101, userInfo: nil)
+            throw error
         }
-        var result:[[String:String]]? = record?.object(forKey: kResults) as? [[String:String]]
+        let result:[[String:String]]? = record?.object(forKey: kResults) as? [[String:String]]
         
         importFromArray(kResult, array: result)
         
-        var meds:[[String:String]]? = record?.object(forKey: kMedications)  as? [[String:String]]
+        let meds:[[String:String]]? = record?.object(forKey: kMedications)  as? [[String:String]]
         importFromArray(kMedication, array: meds)
 
-        var otherMeds:[[String:String]]? = record?.object(forKey: kOtherMedications) as? [[String:String]]
+        let otherMeds:[[String:String]]? = record?.object(forKey: kOtherMedications) as? [[String:String]]
         importFromArray(kOtherMedication, array: otherMeds)
 
-        var procedures:[[String:String]]? = record?.object(forKey: kIllnessAndProcedures) as? [[String:String]]
+        let procedures:[[String:String]]? = record?.object(forKey: kIllnessAndProcedures) as? [[String:String]]
         importFromArray(kProcedures, array: procedures)
 
-        var previousMeds:[[String:String]]? = record?.object(forKey: kPreviousMedications) as? [[String:String]]
+        let previousMeds:[[String:String]]? = record?.object(forKey: kPreviousMedications) as? [[String:String]]
         importFromArray(kPreviousMedication, array: previousMeds)
 
-        var effects:[[String:String]]? = record?.object(forKey: kHIVSideEffects) as? [[String:String]]
+        let effects:[[String:String]]? = record?.object(forKey: kHIVSideEffects) as? [[String:String]]
         importFromArray(kSideEffects, array: effects)
 
-        var clinics:[[String:String]]? = record?.object(forKey: kClinicalContacts) as? [[String:String]]
+        let clinics:[[String:String]]? = record?.object(forKey: kClinicalContacts) as? [[String:String]]
         importFromArray(kContacts, array: clinics)
 
-        var missedMeds:[[String:String]]? = record?.object(forKey: kMissedMedications) as? [[String:String]]
+        let missedMeds:[[String:String]]? = record?.object(forKey: kMissedMedications) as? [[String:String]]
         importFromArray(kMissedMedication, array: missedMeds)
         
         let manager = PWESPersistentStoreManager.defaultManager
-        manager.saveContext(error)
+        try! manager.saveContext()
         
-        return true
     }
     
     func importFromArray(_ type: String, array: [[String:String]]?)

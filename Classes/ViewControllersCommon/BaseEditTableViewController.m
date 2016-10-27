@@ -158,7 +158,7 @@
     [manager removeManagedObject:self.managedObject error:&error];
     if (nil == error)
     {
-        [manager saveContext:&error];
+        [manager saveContextAndReturnError:&error];
     }
     [self popController];
 }

@@ -85,7 +85,7 @@
      }];
 
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     [self popController];
 }
 

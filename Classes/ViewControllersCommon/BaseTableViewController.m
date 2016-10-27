@@ -104,7 +104,7 @@
     }
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([Utilities isIPad])
     {
@@ -148,7 +148,7 @@
     [manager removeManagedObject:self.markedObject error:&error];
     if (nil == error)
     {
-        [manager saveContext:&error];
+        [manager saveContextAndReturnError:&error];
     }
     self.markedObject = nil;
     self.markedIndexPath = nil;

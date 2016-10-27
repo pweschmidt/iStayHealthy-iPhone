@@ -202,9 +202,9 @@
         {
             score = 100.f;
         }
-        else if (0 > 100)
+        else if (0 > score)
         {
-            score = 0.f;
+            score = 0.0f;
         }
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
         view.tag = kLabelViewTag;
@@ -218,7 +218,7 @@
         title.textAlignment = NSTextAlignmentLeft;
         title.font = [UIFont fontWithType:Bold size:large];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateStyle = kDateFormatting;
+        formatter.dateFormat = kDateFormatting;
         NSString *endString = [formatter stringFromDate:lastEntry.endDate];
 
         NSString *text = NSLocalizedString(@"Last diary ending", nil);
@@ -350,7 +350,7 @@
     calendar.isCompleted = [NSNumber numberWithBool:YES];
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
 
     self.currentCalendar = nil;
 }

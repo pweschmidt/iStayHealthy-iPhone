@@ -105,7 +105,7 @@
         __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
         if ([sender isKindOfClass:[UIBarButtonItem class]])
         {
-            if ([strongDelegate respondsToSelector:@selector(showMailSelectionControllerFromButton::)])
+            if ([strongDelegate respondsToSelector:@selector(showMailSelectionControllerFromButton:)])
             {
                 [strongDelegate showMailSelectionControllerFromButton:(UIBarButtonItem *) sender];
             }

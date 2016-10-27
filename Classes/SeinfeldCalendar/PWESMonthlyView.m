@@ -435,7 +435,7 @@
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
     [manager removeManagedObject:record error:&error];
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     __strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
     if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendarWithSuccess:)])
     {
@@ -456,7 +456,7 @@
     }
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     __strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
     if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendarWithSuccess:)])
     {

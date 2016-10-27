@@ -193,7 +193,7 @@
     NSError *saveError = nil;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [manager saveContext:&saveError];
+    [manager saveContextAndReturnError:&saveError];
     if (nil  != saveError)
     {
 #ifdef APPDEBUG

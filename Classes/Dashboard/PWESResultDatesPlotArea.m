@@ -8,13 +8,6 @@
 
 #import "PWESResultDatesPlotArea.h"
 #import "PWESDataNTuple.h"
-static NSDateFormatter *shortResultsDate()
-{
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = kShortDateFormatting;
-	formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-	return formatter;
-}
 
 @interface PWESResultDatesPlotArea ()
 {

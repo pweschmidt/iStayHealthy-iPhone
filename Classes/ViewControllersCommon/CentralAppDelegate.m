@@ -100,7 +100,7 @@
     NSError *error = nil;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -132,7 +132,7 @@
 
     NSError *error = nil;
 
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
 }
 
 - (BOOL)  application:(UIApplication *)application

@@ -102,7 +102,7 @@
     [self scheduleAlert];
 
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     [self popController];
 }
 
@@ -139,7 +139,7 @@
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
     [manager removeManagedObject:self.currentCalendar error:&error];
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
     if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(removeCalendar)])
     {
@@ -157,7 +157,7 @@
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
     [manager removeManagedObject:self.markedObject error:&error];
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     self.markedObject = nil;
     self.markedIndexPath = nil;
     [self populateCalendars];
@@ -210,7 +210,7 @@
         self.currentCalendar.endDate = now;
         PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
         NSError *error = nil;
-        [manager saveContext:&error];
+        [manager saveContextAndReturnError:&error];
         __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
         if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(finishCalendarWithEndDate:)])
         {
@@ -309,7 +309,7 @@
     {
         score = 100.f;
     }
-    else if (0 > 100)
+    else if (0 > score)
     {
         score = 0.f;
     }

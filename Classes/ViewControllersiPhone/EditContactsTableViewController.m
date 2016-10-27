@@ -173,7 +173,7 @@
 
     NSError *error = nil;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     [self popController];
 }
 

@@ -50,20 +50,6 @@ static NSDictionary * elementParentMap()
                                                            kWellness : kWellnesses */};
 }
 
-static NSDictionary * elementChildMap()
-{
-    return @{ kResults : kResult,
-              kMedication : kMedication,
-              kMissedMedication : kMissedMedication,
-              kSideEffects : kSideEffects,
-              kContacts : kContacts,
-              kProcedures : kProcedures,
-              kOtherMedication : kOtherMedication,
-              kPreviousMedication : kPreviousMedication,
-/*			  kSeinfeldCalendar : kSeinfeldCalendar,
-              kWellness : kWellnesses*/};
-}
-
 static NSDictionary * sortTerms()
 {
     return @{ kResults : kResultsDate,
