@@ -456,7 +456,25 @@ class PWESPersistentStoreManager : NSObject
             }
             do {
                 try context.save()
-                
+                let writer = CoreXMLWriter()
+                writer.write(completionBlock: { (xmlString, xmlError) in
+                    if let xml = xmlString {
+                        let xmlData: Data = xml.data(using: String.Encoding.utf8)!
+                        let docPath:URL = self.appDocumentDirectory()
+                        let filePath = docPath.appendingPathComponent(backupFileName)
+                        let manager:FileManager = FileManager.default
+                        if manager.fileExists(atPath: filePath.path)
+                        {
+                            do {
+                                try manager.removeItem(at: filePath)
+                            }catch{
+                            }
+                        }
+                        try? xmlData.write(to: filePath, options: [.atomic])
+                        
+                    }
+                    
+                })
             }catch {
                 
             }
