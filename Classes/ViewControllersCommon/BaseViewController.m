@@ -471,24 +471,6 @@
                  }
              }
          }];
-        //		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
-        //		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
-        //		    dispatch_async(dispatch_get_main_queue(), ^{
-        //		        if (nil != csvString)
-        //		        {
-        //		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-        //		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
-        //				}
-        //		        else
-        //		        {
-        //		            [[[UIAlertView alloc]
-        //		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
-        //		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-        //		             show];
-        //				}
-        //		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-        //			});
-        //		}];
     }
     else
     {

@@ -44,7 +44,6 @@
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
 		0B65F95E1913917600523441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B65F95D1913917600523441 /* Images.xcassets */; };
-		0B6E0AD01971438A00D80FA6 /* CoreJSONManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E0ACF1971438A00D80FA6 /* CoreJSONManager.m */; };
 		0B6E0AD319714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E0AD219714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m */; };
 		0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B706400193A1FB900CD2073 /* TimeCounter.m */; };
 		0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */; };
@@ -76,7 +75,6 @@
 		0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A5191E38F900731739 /* PWESMonthlyView.m */; };
 		0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */; };
 		0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566AD191E392000731739 /* PWESSeinfeldCollectionViewController.m */; };
-		0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566B0191E674A00731739 /* CoreCSVWriter.m */; };
 		0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */; };
 		0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E518F324FA00523DF6 /* MyHIVCollectionViewController.m */; };
 		0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */; };
@@ -299,8 +297,6 @@
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
 		0B65F95D1913917600523441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iStayHealthy/Images.xcassets; sourceTree = "<group>"; };
-		0B6E0ACE1971438A00D80FA6 /* CoreJSONManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreJSONManager.h; path = CoreDataManagement/CoreJSONManager.h; sourceTree = "<group>"; };
-		0B6E0ACF1971438A00D80FA6 /* CoreJSONManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreJSONManager.m; path = CoreDataManagement/CoreJSONManager.m; sourceTree = "<group>"; };
 		0B6E0AD119714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SeinfeldCalendarEntry+Handling.h"; path = "Categories/SeinfeldCalendarEntry+Handling.h"; sourceTree = "<group>"; };
 		0B6E0AD219714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SeinfeldCalendarEntry+Handling.m"; path = "Categories/SeinfeldCalendarEntry+Handling.m"; sourceTree = "<group>"; };
 		0B7063BD193A040B00CD2073 /* NotificationsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsDelegate.h; path = ViewControllersCommon/NotificationsDelegate.h; sourceTree = "<group>"; };
@@ -360,8 +356,6 @@
 		0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldMonth.m; path = SeinfeldCalendar/PWESSeinfeldMonth.m; sourceTree = "<group>"; };
 		0BB566AC191E392000731739 /* PWESSeinfeldCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSeinfeldCollectionViewController.h; path = SeinfeldCalendar/PWESSeinfeldCollectionViewController.h; sourceTree = "<group>"; };
 		0BB566AD191E392000731739 /* PWESSeinfeldCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldCollectionViewController.m; path = SeinfeldCalendar/PWESSeinfeldCollectionViewController.m; sourceTree = "<group>"; };
-		0BB566AF191E674A00731739 /* CoreCSVWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreCSVWriter.h; path = CoreDataManagement/CoreCSVWriter.h; sourceTree = "<group>"; };
-		0BB566B0191E674A00731739 /* CoreCSVWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreCSVWriter.m; path = CoreDataManagement/CoreCSVWriter.m; sourceTree = "<group>"; };
 		0BB771E118F321C600523DF6 /* OtherMedsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedsCollectionViewController.h; path = ViewControllersiPad/OtherMedsCollectionViewController.h; sourceTree = "<group>"; };
 		0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedsCollectionViewController.m; path = ViewControllersiPad/OtherMedsCollectionViewController.m; sourceTree = "<group>"; };
 		0BB771E418F324FA00523DF6 /* MyHIVCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVCollectionViewController.h; path = ViewControllersiPad/MyHIVCollectionViewController.h; sourceTree = "<group>"; };
@@ -1225,13 +1219,9 @@
 		C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */ = {
 			isa = PBXGroup;
 			children = (
-				0BB566AF191E674A00731739 /* CoreCSVWriter.h */,
-				0BB566B0191E674A00731739 /* CoreCSVWriter.m */,
 				C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */,
 				C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */,
 				C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */,
-				0B6E0ACE1971438A00D80FA6 /* CoreJSONManager.h */,
-				0B6E0ACF1971438A00D80FA6 /* CoreJSONManager.m */,
 			);
 			name = CoreDataManagement;
 			sourceTree = "<group>";
@@ -1515,7 +1505,6 @@
 				C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */,
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
 				0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */,
-				0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */,
 				0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */,
 				C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */,
 				C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */,
@@ -1538,7 +1527,6 @@
 				C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
-				0B6E0AD01971438A00D80FA6 /* CoreJSONManager.m in Sources */,
 				C48519251ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift in Sources */,
 				C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */,
 				C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */,
