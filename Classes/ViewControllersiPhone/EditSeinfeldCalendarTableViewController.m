@@ -8,7 +8,6 @@
 
 #import "EditSeinfeldCalendarTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "SeinfeldCalendar.h"
 #import "UILabel+Standard.h"
 #import "Utilities.h"

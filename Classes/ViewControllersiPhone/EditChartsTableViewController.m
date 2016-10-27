@@ -9,6 +9,7 @@
 #import "EditChartsTableViewController.h"
 #import "UIFont+Standard.h"
 #import "Utilities.h"
+#import "iStayHealthy-Swift.h"
 
 @interface EditChartsTableViewController ()
 @property (nonatomic, strong) NSArray *results;
@@ -92,6 +93,10 @@
 {
     if (!self.settingsChanged)
     {
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithCancelButton:@"Error Loading file from Dropbox"
+         message:@"There was an error loading a file from Dropbox."
+         presentingController:self];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No changes", nil)
                                                         message:NSLocalizedString(@"There are no changes to your settings", nil)
                                                        delegate:nil

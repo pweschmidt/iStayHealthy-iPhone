@@ -12,7 +12,6 @@
 #import "SeinfeldCalendar+Handling.h"
 #import "SeinfeldCalendarEntry.h"
 #import "PWESResultsDelegate.h"
-// #import "CoreDataManager.h"
 #import "Utilities.h"
 #import "iStayHealthy-Swift.h"
 #import <QuartzCore/QuartzCore.h>
@@ -331,15 +330,6 @@
                                                   otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), NSLocalizedString(@"Reset", nil), nil];
         [alertView show];
     }
-//	else
-//	{
-//		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Don't Cheat!", nil)
-//		                                                    message:NSLocalizedString(@"Only today's and yesterday's entries can be changed.", nil)
-//		                                                   delegate:nil
-//		                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
-//		                                          otherButtonTitles:nil];
-//		[alertView show];
-//	}
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

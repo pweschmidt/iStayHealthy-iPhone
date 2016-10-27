@@ -9,6 +9,7 @@
 #import "CustomToolbar.h"
 #import "UIBarButtonItem+iStayHealthy.h"
 #import "Menus.h"
+#import "iStayHealthy-Swift.h"
 
 @interface CustomToolbar ()
 {

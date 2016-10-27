@@ -7,7 +7,6 @@
 //
 
 #import "ResultsCollectionViewController.h"
-// #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
 #import "Results+Handling.h"
 #import "EditResultsTableViewController.h"
@@ -119,13 +118,10 @@
     [manager fetchData:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
-             UIAlertView *errorAlert = [[UIAlertView alloc]
-                                        initWithTitle:NSLocalizedString(@"Error", nil)
-                                                  message:NSLocalizedString(@"Error loading data", nil)
-                                                 delegate:nil
-                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                        otherButtonTitles:nil];
-             [errorAlert show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+              message:NSLocalizedString(@"Error loading data", nil)
+              presentingController:self];
          }
          else
          {

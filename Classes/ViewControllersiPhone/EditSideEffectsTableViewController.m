@@ -8,7 +8,6 @@
 
 #import "EditSideEffectsTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "Medication+Handling.h"
 #import "Utilities.h"
 #import "SideEffects+Handling.h"

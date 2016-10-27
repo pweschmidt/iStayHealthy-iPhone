@@ -8,19 +8,16 @@
 
 #import "BaseCollectionViewController.h"
 #import "CoreDataConstants.h"
-#import "CoreDataManager.h"
 #import "Constants.h"
 #import "CustomToolbar.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
-// #import "ContentNavigationController_iPad.h"
 #import "Utilities.h"
 #import "SettingsTableViewController.h"
 #import "InformationTableViewController.h"
 #import "EditResultsTableViewController.h"
 #import "DropboxViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
-// #import "EmailViewController.h"
 #import "CoreXMLWriter.h"
 #import "HelpViewController.h"
 #import "LocalBackupController.h"
@@ -373,9 +370,10 @@
 
 - (void)handleError:(NSNotification *)notification
 {
-    UIAlertView *view = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error loading data", nil) message:NSLocalizedString(@"An error occurred while loading data", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-
-    [view show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithOKButton:NSLocalizedString(@"Error loading data", nil)
+     message:NSLocalizedString(@"An error occurred while loading data", nil)
+     presentingController:self];
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
@@ -420,10 +418,10 @@
                  [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
                  if (writeError)
                  {
-                     [[[UIAlertView alloc]
-                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                      show];
+                     [PWESAlertHandler.alertHandler
+                      showAlertViewWithOKButton:NSLocalizedString(@"Error writing data to tmp directory", nil)
+                      message:error.localizedDescription
+                      presentingController:self];
                  }
                  else
                  {

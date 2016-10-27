@@ -8,7 +8,6 @@
 
 #import "EditContactsTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "Contacts+Handling.h"
 #import "Utilities.h"
 #import "UILabel+Standard.h"
@@ -305,9 +304,10 @@
 
 - (void)showNoCallFeatureEnabledAlert
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Calls possible", nil) message:NSLocalizedString(@"This device doesn't support calls", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
-
-    [alert show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithOKButton:NSLocalizedString(@"No Calls possible", nil)
+     message:NSLocalizedString(@"This device doesn't support calls", nil)
+     presentingController:self];
 }
 
 @end

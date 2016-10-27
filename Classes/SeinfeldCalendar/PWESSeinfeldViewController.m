@@ -7,7 +7,6 @@
 //
 
 #import "PWESSeinfeldViewController.h"
-// #import "CoreDataManager.h"
 #import "SeinfeldCalendar.h"
 #import "SeinfeldCalendarEntry.h"
 #import "EditSeinfeldCalendarTableViewController.h"
@@ -62,13 +61,10 @@
     [manager fetchData:kSeinfeldCalendar predicate:nil sortTerm:kEndDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
-             UIAlertView *errorAlert = [[UIAlertView alloc]
-                                        initWithTitle:@"Error"
-                                                  message:@"Error loading data"
-                                                 delegate:nil
-                                        cancelButtonTitle:@"Cancel"
-                                        otherButtonTitles:nil];
-             [errorAlert show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+              message:NSLocalizedString(@"Error loading data", nil)
+              presentingController:self];
          }
          else
          {
@@ -86,13 +82,10 @@
              [manager fetchData:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *medsarray, NSError *innererror) {
                   if (nil == medsarray)
                   {
-                      UIAlertView *errorAlert = [[UIAlertView alloc]
-                                                 initWithTitle:@"Error"
-                                                           message:@"Error loading data"
-                                                          delegate:nil
-                                                 cancelButtonTitle:@"Cancel"
-                                                 otherButtonTitles:nil];
-                      [errorAlert show];
+                      [PWESAlertHandler.alertHandler
+                       showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+                       message:NSLocalizedString(@"Error loading data", nil)
+                       presentingController:self];
                   }
                   else
                   {

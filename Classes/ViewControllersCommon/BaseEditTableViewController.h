@@ -21,7 +21,7 @@
 #define kBaseDateCellRowIdentifier @"DateSelectionCell"
 
 @interface BaseEditTableViewController : UITableViewController
-    <UITextFieldDelegate, UIAlertViewDelegate>
+    <UITextFieldDelegate>
 @property (nonatomic, strong) NSDateFormatter *formatter;
 @property (nonatomic, strong) NSMutableDictionary *cellDictionary;
 @property (nonatomic, strong) NSMutableDictionary *inputTypeForTextView;

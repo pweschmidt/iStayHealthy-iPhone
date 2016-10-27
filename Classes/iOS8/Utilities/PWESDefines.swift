@@ -14,6 +14,8 @@ typealias PWESArrayClosure = (_ array: NSArray?, _ error: NSError?) -> Void
 
 typealias PWESSuccessClosure = (_ success: Bool, _ error: NSError?) -> Void
 
+typealias PWESAlertClosure = () -> Void
+
 let kDefaultBackground = UIColor(red: 253.0/255.0, green: 1.0, blue: 240.0/255.0, alpha: 1.0)
 let kDarkGreen =  UIColor(red:0.0 / 255.0, green:102.0 / 255.0, blue:0.0 / 255.0, alpha:1.0)
 let kDarkRed =    UIColor(red:204.0 / 255.0, green:0.0 / 255.0, blue:0.0 / 255.0, alpha:1.0)

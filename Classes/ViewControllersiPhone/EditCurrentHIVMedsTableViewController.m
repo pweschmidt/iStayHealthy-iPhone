@@ -9,7 +9,6 @@
 #import "EditCurrentHIVMedsTableViewController.h"
 #import "UITableViewCell+Extras.h"
 #import "NSDate+Extras.h"
-// #import "CoreDataManager.h"
 #import "Medication+Handling.h"
 #import "PreviousMedication+Handling.h"
 #import "UILabel+Standard.h"

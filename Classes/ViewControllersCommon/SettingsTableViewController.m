@@ -9,9 +9,8 @@
 #import "SettingsTableViewController.h"
 #import "UILabel+Standard.h"
 #import "KeychainHandler.h"
-//#import "ContentContainerViewController.h"
-//#import "ContentNavigationController.h"
 #import "Utilities.h"
+#import "iStayHealthy-Swift.h"
 
 @interface SettingsTableViewController ()
 @property (nonatomic, strong) UISwitch *passwordSwitch;
@@ -82,13 +81,10 @@
         [KeychainHandler deleteItemFromKeychainWithIdentifier:kIsPasswordEnabled];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
         [defaults synchronize];
-        UIAlertView *isDone = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Password Disabled", @"Password Disabled")
-                                         message:NSLocalizedString(@"No Password", @"No Password")
-                                        delegate:self
-                               cancelButtonTitle:@"Ok"
-                               otherButtonTitles:nil];
-        [isDone show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithOKButton:NSLocalizedString(@"Password Disabled", @"Password Disabled")
+         message:NSLocalizedString(@"No Password", @"No Password")
+         presentingController:self];
         return;
     }
     if (2 != self.textViews.allKeys.count)
@@ -125,29 +121,23 @@
 
     if (success)
     {
-        UIAlertView *isDone = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Password", @"Password")
-                                         message:NSLocalizedString(@"PasswordSet", @"PasswordSet")
-                                        delegate:self
-                               cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                               otherButtonTitles:nil];
-        [isDone show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithOKButton:NSLocalizedString(@"Password", @"Password")
+         message:NSLocalizedString(@"PasswordSet", @"PasswordSet")
+         presentingController:self];
     }
     else
     {
-        UIAlertView *isDone = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Password Error", nil)
-                                         message:NSLocalizedString(@"Password Problem", nil)
-                                        delegate:self
-                               cancelButtonTitle:@"Ok"
-                               otherButtonTitles:nil];
-        [isDone show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithOKButton:NSLocalizedString(@"Password Error", @"Password Error")
+         message:NSLocalizedString(@"Password Problem", @"Password Problem")
+         presentingController:self];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
     }
 
     [defaults synchronize];
 }
-
+#warning need to pass in action to AlertHandler!!
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if ([Utilities isIPad])
@@ -352,8 +342,10 @@
 {
     if (4 > textField.text.length)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password too short", @"Password too short") message:NSLocalizedString(@"Try Again", @"Try Again") delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithCancelButton:NSLocalizedString(@"Password too short", @"Password too short")
+         message:NSLocalizedString(@"Try Again", @"Try Again")
+         presentingController:self];
         return NO;
     }
 
@@ -363,8 +355,10 @@
 
     if (nil == otherPassword || ![otherPassword isEqualToString:textField.text])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Passwords don't match", nil) message:NSLocalizedString(@"Try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithCancelButton:NSLocalizedString(@"Passwords don't match", nil)
+         message:NSLocalizedString(@"Try Again", @"Try Again")
+         presentingController:self];
         textField.text = @"";
         return NO;
     }

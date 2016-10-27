@@ -8,7 +8,6 @@
 
 #import "EditProceduresTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "Procedures+Handling.h"
 #import "Utilities.h"
 #import "UILabel+Standard.h"

@@ -14,7 +14,6 @@
 #import "UIFont+Standard.h"
 #import "CoreXMLReader.h"
 #import "CoreXMLWriter.h"
-#import "CoreDataManager.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "iStayHealthy-Swift.h"
 
@@ -348,10 +347,10 @@
     {
         return;
     }
-    [[[UIAlertView alloc]
-      initWithTitle:NSLocalizedString(@"Error Loading Dropbox data", nil) message:NSLocalizedString(@"There was an error loading data from Dropbox.", nil)
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:NSLocalizedString(@"Error Loading Dropbox data", nil)
+     message:NSLocalizedString(@"There was an error loading data from Dropbox.", nil)
+     presentingController:self];
 }
 
 - (void)createIStayHealthyFolder
@@ -379,11 +378,10 @@
              [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
              if (writeError)
              {
-                 [[[UIAlertView alloc]
-                   initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                  show];
-                 [self stopAnimation:nil];
+                 [PWESAlertHandler.alertHandler
+                  showAlertViewWithCancelButton:NSLocalizedString(@"Error writing data to tmp directory", nil)
+                  message:error.description
+                  presentingController:self];
              }
              else
              {
@@ -397,10 +395,10 @@
          else
          {
              [self stopAnimation:nil];
-             [[[UIAlertView alloc]
-               initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
-                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-              show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error writing data", nil)
+              message:error.description
+              presentingController:self];
          }
      }];
 }
@@ -427,20 +425,18 @@
          if (success)
          {
              [self stopAnimation:nil];
-             [[[UIAlertView alloc]
-               initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-                      message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
-                     delegate:nil
-            cancelButtonTitle:@"OK" otherButtonTitles:nil]
-              show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithOKButton:NSLocalizedString(@"Restore Finished", nil)
+              message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
+              presentingController:self];
          }
          else
          {
              [self stopAnimation:nil];
-             [[[UIAlertView alloc]
-               initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
-                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-              show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error retrieving data", nil)
+              message:error.localizedDescription
+              presentingController:self];
          }
      }];
 }
@@ -512,8 +508,10 @@
 - (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error
 {
     [self stopAnimation:nil];
-    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [errorAlert show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:@"Dropbox Error"
+     message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@", [error localizedDescription]]
+     presentingController:self];
 }
 
 
@@ -532,10 +530,10 @@
           metadata:(DBMetadata *)metadata
 {
     [self stopAnimation:nil];
-    [[[UIAlertView alloc]
-      initWithTitle:NSLocalizedString(@"Save Finished", nil) message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithOKButton:NSLocalizedString(@"Save Finished", nil)
+     message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
+     presentingController:self];
 
     NSString *olderBackupFilePath = [self backedUpFileName];
 #ifdef APPDEBUG
@@ -556,10 +554,10 @@
 - (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error
 {
     [self stopAnimation:nil];
-    [[[UIAlertView alloc]
-      initWithTitle:@"Error Uploading to Dropbox" message:@"There was an error uploading data to Dropbox."
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:@"Error Uploading to Dropbox"
+     message:@"There was an error uploading data to Dropbox."
+     presentingController:self];
 }
 
 - (void)restClient:(DBRestClient *)client loadedFile:(NSString *)localPath
@@ -570,10 +568,10 @@
 - (void)restClient:(DBRestClient *)client loadFileFailedWithError:(NSError *)error
 {
     [self stopAnimation:nil];
-    [[[UIAlertView alloc]
-      initWithTitle:@"Error Loading file from Dropbox" message:@"There was an error loading a file from Dropbox."
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:@"Error Loading file from Dropbox"
+     message:@"There was an error loading a file from Dropbox."
+     presentingController:self];
 }
 
 - (void)restClient:(DBRestClient *)client movedPath:(NSString *)from_path to:(DBMetadata *)result

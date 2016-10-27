@@ -7,7 +7,6 @@
 //
 
 #import "MyHIVCollectionViewController.h"
-// #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
 #import "Medication+Handling.h"
 #import "PreviousMedication+Handling.h"
@@ -135,13 +134,10 @@
     [manager fetchData:kMedication predicate:nil sortTerm:kStartDate ascending:YES completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
-             UIAlertView *errorAlert = [[UIAlertView alloc]
-                                        initWithTitle:NSLocalizedString(@"Error", nil)
-                                                  message:NSLocalizedString(@"Error loading data", nil)
-                                                 delegate:nil
-                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                        otherButtonTitles:nil];
-             [errorAlert show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+              message:NSLocalizedString(@"Error loading data", nil)
+              presentingController:self];
          }
          else
          {
@@ -149,13 +145,10 @@
              [manager fetchData:kPreviousMedication predicate:nil sortTerm:kEndDateLowerCase ascending:YES completion: ^(NSArray *prevarray, NSError *error) {
                   if (nil == prevarray)
                   {
-                      UIAlertView *errorAlert = [[UIAlertView alloc]
-                                                 initWithTitle:NSLocalizedString(@"Error", nil)
-                                                           message:NSLocalizedString(@"Error loading data", nil)
-                                                          delegate:nil
-                                                 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                 otherButtonTitles:nil];
-                      [errorAlert show];
+                      [PWESAlertHandler.alertHandler
+                       showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+                       message:NSLocalizedString(@"Error loading data", nil)
+                       presentingController:self];
                   }
                   else
                   {

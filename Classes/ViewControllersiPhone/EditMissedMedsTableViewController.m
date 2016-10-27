@@ -8,7 +8,6 @@
 
 #import "EditMissedMedsTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "MissedMedication+Handling.h"
 #import "Medication+Handling.h"
 #import "Utilities.h"
@@ -117,8 +116,10 @@
 {
     if (nil == self.selectedReasonPath)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reason is missing", nil) message:NSLocalizedString(@"Please select a reason", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithOKButton:NSLocalizedString(@"Reason is missing", nil)
+         message:NSLocalizedString(@"Please select a reason", nil)
+         presentingController:self];
         return;
     }
     __block BOOL found = NO;
@@ -130,8 +131,10 @@
      }];
     if (!found)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Med is missing", nil) message:NSLocalizedString(@"Please select a medication", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithOKButton:NSLocalizedString(@"Med is missing", nil)
+         message:NSLocalizedString(@"Please select a medication", nil)
+         presentingController:self];
         return;
     }
 
