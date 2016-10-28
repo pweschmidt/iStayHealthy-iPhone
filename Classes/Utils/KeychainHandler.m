@@ -155,7 +155,9 @@
 {
 	// 1
 	NSString *name = @"(null)";
-	name = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
+    name = [name stringByAddingPercentEncodingWithAllowedCharacters:set];
+        //	name = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	// 2
 	NSString *computedHashString = [NSString stringWithFormat:@"%@%lu%@", name, (unsigned long)pinHash, SALT_HASH];
 	// 3
