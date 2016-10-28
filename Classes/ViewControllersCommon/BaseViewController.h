@@ -8,19 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "UINavigationBar-Button.h"
-//#import "PWESPopoverDelegate.h"
 #import "PWESToolbarDelegate.h"
 #import <MessageUI/MessageUI.h>
 
 @protocol PWESContentMenuHandler;
 @class CustomToolbar;
 
-@interface BaseViewController : UIViewController </*PWESPopoverDelegate,*/ PWESToolbarDelegate, /*UIPopoverControllerDelegate,*/ UIPopoverPresentationControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface BaseViewController : UIViewController <PWESToolbarDelegate, UIPopoverPresentationControllerDelegate, MFMailComposeViewControllerDelegate>
 @property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
 @property (nonatomic, strong) CustomToolbar *customToolbar;
 
-//@property (nonatomic, strong) UIPopoverController *customPopoverController;
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) UIPopoverPresentationController *popoverController;
 @property (nonatomic, strong) UILabel *activityLabel;

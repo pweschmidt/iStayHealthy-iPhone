@@ -148,19 +148,6 @@
     [defaults synchronize];
 }
 
-//- (void)hidePopover
-//{
-//    __strong id <PWESPopoverDelegate> strongDelegate = self.popoverDelegate;
-//
-//    if (nil != strongDelegate)
-//    {
-//        if ([strongDelegate respondsToSelector:@selector(hidePopover)])
-//        {
-//            [strongDelegate hidePopover];
-//        }
-//    }
-//}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

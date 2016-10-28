@@ -11,7 +11,6 @@ import MessageUI
 
 class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewControllerDelegate
 {
-//    var popoverDelegate: PWESPopoverDelegate?
     
     override func viewDidLoad()
     {
@@ -19,6 +18,7 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         self.navigationItem.title = NSLocalizedString("Feedback", tableName: nil, bundle: Bundle.main, value: "Feedback", comment: "")
         self.tableView.backgroundColor = kDefaultBackground
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MailCell")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(PWESFeedbackTableViewController.done))
     }
 
     override func didReceiveMemoryWarning()
@@ -26,7 +26,11 @@ class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewC
         super.didReceiveMemoryWarning()
     }
 
-
+    func done() {
+        dismiss(animated: true)
+    }
+    
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }

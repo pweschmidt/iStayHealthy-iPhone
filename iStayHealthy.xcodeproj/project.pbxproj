@@ -371,7 +371,6 @@
 		0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissedMedicationCollectionViewController.m; path = ViewControllersiPad/MissedMedicationCollectionViewController.m; sourceTree = "<group>"; };
 		0BB771F318F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsAlertsCollectionViewController.h; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.h; sourceTree = "<group>"; };
 		0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAlertsCollectionViewController.m; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.m; sourceTree = "<group>"; };
-		0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPopoverDelegate.h; path = ViewControllersiPad/PWESPopoverDelegate.h; sourceTree = "<group>"; };
 		0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESToolbarDelegate.h; path = ViewControllersiPad/PWESToolbarDelegate.h; sourceTree = "<group>"; };
 		0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCoreURLImporter.swift; path = iOS8/DataManagement/PWESCoreURLImporter.swift; sourceTree = "<group>"; };
 		0BC677781A6BE02D009B233B /* URLImporterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImporterTests.swift; sourceTree = "<group>"; };
@@ -1129,7 +1128,6 @@
 				0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */,
 				0BB771E718F3292E00523DF6 /* ProceduresCollectionViewController.h */,
 				0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */,
-				0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */,
 				0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */,
 				0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */,
 				0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */,

@@ -94,29 +94,6 @@
     self.indicatorView = indicator;
 }
 
-/*
-   - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-   {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [UIView animateWithDuration:duration animations: ^{
-         self.customToolbar.alpha = 0.0f;
-     }];
-   }
-
-   - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-   {
-    if ([Utilities isIPad])
-    {
-        [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-        [UIView animateWithDuration:0.125f animations: ^{
-             CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
-             self.customToolbar.frame = toolbarFrame;
-             self.customToolbar.alpha = 1.0f;
-         }];
-    }
-   }
- */
-
 - (void)disableRightBarButtons
 {
     self.navigationItem.rightBarButtonItem = nil;
@@ -149,37 +126,7 @@
 
 - (void)hidePopover
 {
-//    if (nil != self.customPopoverController)
-//    {
-//        [self.customPopoverController dismissPopoverAnimated:YES];
-//        self.customPopoverController = nil;
-//    }
 }
-
-//- (void)presentPopoverWithController:(UINavigationController *)controller
-//                            fromRect:(CGRect)frame
-//{
-//    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-//    self.customPopoverController.delegate = self;
-//    [self.customPopoverController presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-//}
-//
-//- (void)presentPopoverWithController:(UINavigationController *)controller
-//                       fromBarButton:(UIBarButtonItem *)barButton
-//{
-//    [self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionUp];
-//}
-//
-//- (void)presentPopoverWithController:(UINavigationController *)controller
-//                       fromBarButton:(UIBarButtonItem *)barButton
-//                           direction:(UIPopoverArrowDirection)direction
-//{
-//    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-//    self.customPopoverController.delegate = self;
-//    [self.customPopoverController presentPopoverFromBarButtonItem:barButton
-//                                         permittedArrowDirections:direction
-//                                                         animated:YES];
-//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -379,17 +326,6 @@
     popController.barButtonItem = button;
     self.popoverController = popController;
     [self presentViewController:navController animated:YES completion:nil];
-
-//    if ([Utilities isIPad])
-//    {
-//        controller.popoverDelegate = self;
-//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-//        
-//    }
-//    else
-//    {
-//        [self.navigationController pushViewController:controller animated:YES];
-//    }
 }
 
 
