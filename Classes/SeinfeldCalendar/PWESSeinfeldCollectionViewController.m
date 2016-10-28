@@ -118,6 +118,7 @@
     PWESSeinfeldMonth *seinfeld = [self.months objectAtIndex:monthIndex];
     PWESMonthlyView *month = [PWESMonthlyView monthlyViewForCalendar:self.currentCalendar
                                                        seinfeldMonth:seinfeld
+                                                presentingController:self
                                                                frame:cell.contentView.bounds];
     month.resultsDelegate = self;
     [cell.contentView addSubview:month];

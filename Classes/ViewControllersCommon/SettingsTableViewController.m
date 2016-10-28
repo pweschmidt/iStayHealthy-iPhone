@@ -119,35 +119,38 @@
                                          forIdentifier:kIsPasswordEnabled];
     }
 
+    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:^{
+        if ([Utilities isIPad])
+        {
+            [self hidePopover];
+        }
+        else
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    
+    
+    
     if (success)
     {
         [PWESAlertHandler.alertHandler
-         showAlertViewWithOKButton:NSLocalizedString(@"Password", @"Password")
+         showAlertView:NSLocalizedString(@"Password", @"Password")
          message:NSLocalizedString(@"PasswordSet", @"PasswordSet")
-         presentingController:self];
+         presentingController:self actions:@[ok]];
+        [defaults setBool:YES forKey:kIsPasswordEnabled];
+        
     }
     else
     {
         [PWESAlertHandler.alertHandler
-         showAlertViewWithOKButton:NSLocalizedString(@"Password Error", @"Password Error")
-         message:NSLocalizedString(@"Password Problem", @"Password Problem")
-         presentingController:self];
+         showAlertView:NSLocalizedString(@"Password Error", nil)
+         message:NSLocalizedString(@"Password Problem", nil)
+         presentingController:self actions:@[ok]];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
     }
 
     [defaults synchronize];
-}
-#warning need to pass in action to AlertHandler!!
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if ([Utilities isIPad])
-    {
-        [self hidePopover];
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 - (void)hidePopover

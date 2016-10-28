@@ -158,49 +158,52 @@
             {
                 case 0:
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Backup?", nil)
-                                                                    message:NSLocalizedString(@"You are about to store your data externally. Click Backup if you want to continue.", nil)
-                                                                   delegate:self
-                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                                          otherButtonTitles:NSLocalizedString(@"Backup", nil), nil];
-                    [alert show];
+                    PWESAlertAction *cancel = [self cancelAction];
+                    PWESAlertAction *backup = [self backupAction];
+                    [PWESAlertHandler.alertHandler
+                     showAlertView:NSLocalizedString(@"Backup?", nil)
+                     message:NSLocalizedString(@"You are about to store your data externally. Click Backup if you want to continue.", nil)
+                     presentingController:self
+                     actions:@[backup, cancel]];
                 }
                 break;
 
                 case 1:
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Restore?", nil)
-                                                                    message:NSLocalizedString(@"You are about to download  data from an external storage. Click Restore if you want to continue.", nil)
-                                                                   delegate:self
-                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                                          otherButtonTitles:NSLocalizedString(@"Restore", nil), nil];
-                    [alert show];
+                    PWESAlertAction *cancel = [self cancelAction];
+                    PWESAlertAction *restore = [self restoreAction];
+                    [PWESAlertHandler.alertHandler
+                     showAlertView:NSLocalizedString(@"Restore?", nil)
+                     message:NSLocalizedString(@"You are about to download  data from an external storage. Click Restore if you want to continue.", nil)
+                     presentingController:self
+                     actions:@[restore, cancel]];
                 }
                 break;
             }
         }
         else
         {
+            
             self.isConnectAlert = YES;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Link?", @"Link?")
-                                                            message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                                  otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-            [alert show];
+            PWESAlertAction *cancel = [self cancelAction];
+            PWESAlertAction *linkAction = [self confirmLinkUnlinkAction];
+            [PWESAlertHandler.alertHandler
+             showAlertView:NSLocalizedString(@"Link?", nil)
+             message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
+             presentingController:self
+             actions:@[linkAction, cancel]];
         }
     }
     else
     {
         self.isConnectAlert = NO;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
-                                                        message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                              otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-        [alert show];
+        PWESAlertAction *cancel = [self cancelAction];
+        PWESAlertAction *unlinkAction = [self confirmLinkUnlinkAction];
+        [PWESAlertHandler.alertHandler
+         showAlertView:NSLocalizedString(@"Unlink?", nil)
+         message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
+         presentingController:self
+         actions:@[unlinkAction, cancel]];
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
@@ -269,12 +272,30 @@
     return view;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (PWESAlertAction *)cancelAction
 {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    return [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
+}
 
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
-    {
+- (PWESAlertAction *)backupAction
+{
+    PWESAlertAction *action = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Backup", nil) style:UIAlertActionStyleDefault action:^{
+        [self backup];
+    }];
+    return action;
+}
+
+- (PWESAlertAction *)restoreAction
+{
+    PWESAlertAction *action = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Restore", nil) style:UIAlertActionStyleDefault action:^{
+        [self restoreFromDropbox];
+    }];
+    return action;
+}
+
+- (PWESAlertAction *)confirmLinkUnlinkAction
+{
+    PWESAlertAction *action = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault action:^{
         if (!self.isConnectAlert)
         {
             [self unlinkDropBox];
@@ -285,15 +306,8 @@
             PWESContentContainerController *contentController = (PWESContentContainerController *) navController.parentViewController;
             [[DBSession sharedSession] linkFromController:contentController];
         }
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Backup", nil)])
-    {
-        [self backup];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Restore", nil)])
-    {
-        [self restoreFromDropbox];
-    }
+    }];
+    return action;
 }
 
 #pragma mark - DropBox actions

@@ -98,6 +98,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */; };
+		72B9B43F1DC34D7E00926E0A /* PWESAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
@@ -392,6 +393,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
 		720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertHandler.swift; path = iOS8/Utilities/PWESAlertHandler.swift; sourceTree = "<group>"; };
+		72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertAction.swift; path = iOS8/Utilities/PWESAlertAction.swift; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -716,6 +718,7 @@
 			children = (
 				0B2DAF841A614D1600F9F317 /* PWESDefines.swift */,
 				720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */,
+				72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1587,6 +1590,7 @@
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
+				72B9B43F1DC34D7E00926E0A /* PWESAlertAction.swift in Sources */,
 				0B11346B198CBEC700685046 /* AppSettings.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,

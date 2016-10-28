@@ -160,6 +160,7 @@
                                                                   numberOfMonths:months];
         PWESMonthlyView *view = [PWESMonthlyView monthlyViewForCalendar:self.currentCalendar
                                                           seinfeldMonth:seinfeldMonth
+                                                   presentingController:self
                                                                   frame:monthFrame];
         view.resultsDelegate = self;
         contentHeight += view.frame.size.height;

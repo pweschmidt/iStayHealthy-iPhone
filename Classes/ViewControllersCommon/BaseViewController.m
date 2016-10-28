@@ -67,7 +67,7 @@
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
-    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self];
+    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self presentingController:self];
     NSArray *items = toolbar.customItems;
     [self setToolbarItems:items animated:NO];
     self.customToolbar = toolbar;

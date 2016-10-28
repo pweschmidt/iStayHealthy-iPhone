@@ -101,11 +101,9 @@ class PWESLoginViewController: UIViewController, UITextFieldDelegate, MFMailComp
         }
     }
     
-    
     func showAlert(_ title: String, message: String)
     {
-        let alertView: UIAlertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "OK")
-        alertView.show()
+        PWESAlertHandler.alertHandler.showAlertViewWithOKButton(title, message: message, presentingController: self)
     }
     
     @IBAction func forgotButtonPressed(_ sender: UIButton)

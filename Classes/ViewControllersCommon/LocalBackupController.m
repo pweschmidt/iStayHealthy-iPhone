@@ -136,23 +136,17 @@
     }
     else if (1 == indexPath.section) // disabling icloud
     {
-        UIAlertView *warning = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DisableiCloud", nil) message:NSLocalizedString(@"Irreversible", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Proceed", nil), nil];
-        [warning show];
+        PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
+        PWESAlertAction *proceed = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Proceed", nil) style:UIAlertActionStyleDefault action:^{
+            if (nil != self.progressLabel)
+            {
+                self.progressLabel.text = NSLocalizedString(@"ResettingStore", nil);
+            }
+            [self transferDataFromiCloud];
+        }];
+        [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"DisableiCloud", nil) message:NSLocalizedString(@"Irreversible", nil) presentingController:self actions:@[proceed, cancel]];
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([title isEqualToString:NSLocalizedString(@"Proceed", nil)])
-    {
-        if (nil != self.progressLabel)
-        {
-            self.progressLabel.text = NSLocalizedString(@"ResettingStore", nil);
-        }
-        [self transferDataFromiCloud];
-    }
 }
 
 - (void)transferDataFromiCloud

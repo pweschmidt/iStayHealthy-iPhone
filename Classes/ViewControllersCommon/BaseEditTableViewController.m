@@ -412,26 +412,14 @@
     return NO;
 }
 
-#pragma UIAlertViewDelegate methods
-
 - (void)showDeleteAlertView
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-    [alert show];
-}
-
-/**
-   if user really wants to delete the entry call removeSQLEntry
- */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
-    {
+    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIAlertActionStyleCancel action:nil];
+    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", @"Yes") style:UIAlertActionStyleCancel action:^{
         [self removeManagedObject];
-    }
+    }];
+    [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") presentingController:self actions:@[cancel, ok]];
+    
 }
 
 #pragma mark - ActionSheet delegate only used for iOS 6.x

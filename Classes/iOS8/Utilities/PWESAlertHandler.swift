@@ -25,42 +25,21 @@ class PWESAlertHandler: NSObject {
     
     func showSimpleAlertViewWithCancelButton(_ buttonTitle: String, title: String, message: String, presentingController: UIViewController)
     {
-        let cancelAction = UIAlertAction(title: buttonTitle, style: .cancel) { (action) in
-        }
-        
-//        let cancelAction = MCAlertAction(actionTitle: buttonTitle, actionStyle: MCAlertActionStyle.cancel)
-        let actions = [cancelAction]
-        createAndDisplay(title, message: message, preferredStyle: .alert, actions: actions, presentingController: presentingController, barButtonItem: nil, sourceView: nil)
+        let action = PWESAlertAction(alertButtonTitle: buttonTitle, style: .cancel, action: nil)
+        let actions = [action]
+        showAlertView(title, message: message, presentingController: presentingController, actions: actions)
     }
     
-    func createAndDisplay(_ title: String?, message: String?, preferredStyle: UIAlertControllerStyle, actions: [UIAlertAction]?, presentingController: UIViewController?, barButtonItem: UIBarButtonItem?, sourceView: UIView?)
-    {
-        let controller = UIAlertController(title: title, message: message, preferredStyle:preferredStyle)
-        
-        if nil == actions || 0 == actions!.count
-        {
+    func showAlertView(_ title: String, message: String, presentingController: UIViewController, actions: [PWESAlertAction]) {
+        guard 0 < actions.count else {
             return
         }
-        else
-        {
-            for action in actions!
-            {
-                controller.addAction(action)
-            }
+        let controller = UIAlertController(title: title, message: message, preferredStyle:UIAlertControllerStyle.alert)
+        for action in actions {
+            let uiAction = action.uiAlertAction
+            controller.addAction(uiAction)
         }
-        if nil != presentingController
-        {
-            if (preferredStyle == UIAlertControllerStyle.actionSheet && (nil != barButtonItem || nil != sourceView))
-            {
-                controller.popoverPresentationController?.barButtonItem = barButtonItem;
-                controller.popoverPresentationController?.sourceView = sourceView;
-                //                if (nil != sourceView)
-                //                {
-                //                    controller.popoverPresentationController?.permittedArrowDirections = []
-                //                }
-            }
-            presentingController!.present(controller, animated: true, completion: nil)
-        }
+        presentingController.present(controller, animated: true, completion: nil)
     }
-
+    
 }

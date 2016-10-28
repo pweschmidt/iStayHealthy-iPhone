@@ -15,5 +15,6 @@
 
 + (PWESMonthlyView *)monthlyViewForCalendar:(SeinfeldCalendar *)calendar
                               seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+                       presentingController:(UIViewController *)controller
                                       frame:(CGRect)frame;
 @end

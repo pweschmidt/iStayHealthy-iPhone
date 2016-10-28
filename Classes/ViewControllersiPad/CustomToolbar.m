@@ -17,16 +17,19 @@
 }
 @property (nonatomic, strong) NSMutableArray *barButtons;
 @property (nonatomic, weak) id <PWESToolbarDelegate> toolbarManager;
+@property (nonatomic, strong) UIViewController *controller;
 @end
 
 @implementation CustomToolbar
 
 - (instancetype)initWithToolbarManager:(id<PWESToolbarDelegate>)toolbarManager
+                  presentingController:(UIViewController *)controller
 {
     self = [super init];
     if (nil != self)
     {
         _toolbarManager = toolbarManager;
+        _controller = controller;
         [self addCustomBarbuttons];
     }
     return self;
@@ -136,12 +139,11 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
 
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
-    {
+- (void)openMailWithAttachment
+{
+    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIAlertActionStyleCancel action:nil];
+    PWESAlertAction *yes = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault action:^{
         if (nil != self.toolbarManager)
         {
             __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
@@ -150,19 +152,9 @@
                 [strongDelegate showMailControllerHasAttachment:NO];
             }
         }
-    }
-}
-
-
-- (void)openMailWithAttachment
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Send data?", nil)
-                                                    message:NSLocalizedString(@"You are about to email data. Click Yes if you want to continue.", nil)
-                                                   delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                          otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
-
-    [alert show];
+    }];
+    [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"Send data?", nil) message:NSLocalizedString(@"You are about to email data. Click Yes if you want to continue.", nil) presentingController:self.controller actions:@[yes, cancel]];
+    
 }
 
 

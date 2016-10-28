@@ -166,29 +166,48 @@
 
 - (void)showDeleteAlertView
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"End or Delete?", nil)
-                                                   message:NSLocalizedString(@"Do you want to end or delete this entry?", nil)
-                                                  delegate:self
-                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                         otherButtonTitles:NSLocalizedString(@"End", nil), NSLocalizedString(@"Delete", nil), nil];
-
-    [alert show];
+    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
+    PWESAlertAction *delete = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDestructive action:^{
+        [self removeManagedObject];
+    }];
+    PWESAlertAction *end = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDefault action:^{
+        self.currentCalendar.isCompleted = [NSNumber numberWithBool:YES];
+        NSDate *now = [NSDate date];
+        self.currentCalendar.endDate = now;
+        PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
+        NSError *error = nil;
+        [manager saveContextAndReturnError:&error];
+        __strong id <PWESResultsDelegate> resultsDelegate = self.resultsDelegate;
+        if (nil != resultsDelegate && [resultsDelegate respondsToSelector:@selector(finishCalendarWithEndDate:)])
+        {
+            [resultsDelegate finishCalendarWithEndDate:now];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
+    [PWESAlertHandler.alertHandler
+     showAlertView:NSLocalizedString(@"End or Delete?", nil)
+     message:NSLocalizedString(@"Do you want to end or delete this entry?", nil)
+     presentingController:self
+     actions:@[end, delete, cancel]];
+    
 }
 
 - (void)showDeleteCalendarAlertView
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", nil)
-                                                   message:NSLocalizedString(@"Do you want to delete this calendar?", nil)
-                                                  delegate:self
-                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                         otherButtonTitles:NSLocalizedString(@"Delete Calendar", nil), nil];
-    
-    [alert show];
+    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
+    PWESAlertAction *delete = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDestructive action:^{
+        [self removeMarkedObject];
+    }];
+    [PWESAlertHandler.alertHandler
+     showAlertView:NSLocalizedString(@"Delete?", nil)
+     message:NSLocalizedString(@"Do you want to delete this calendar?", nil)
+     presentingController:self
+     actions:@[delete, cancel]];
 }
 
 /**
    if user really wants to delete the entry call removeSQLEntry
- */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
@@ -218,6 +237,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+ */
 
 - (void)removeAlert
 {

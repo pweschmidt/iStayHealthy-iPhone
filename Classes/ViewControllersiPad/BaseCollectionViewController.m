@@ -81,7 +81,7 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
 
-    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self];
+    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self presentingController:self];
     NSArray *items = toolbar.customItems;
     [self setToolbarItems:items];
     self.navigationController.toolbarHidden = NO;

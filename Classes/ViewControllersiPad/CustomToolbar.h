@@ -13,5 +13,6 @@
 @interface CustomToolbar : NSObject
 @property (nonatomic, strong) NSArray *customItems;
 
-- (instancetype)initWithToolbarManager:(id<PWESToolbarDelegate>)toolbarManager;
+- (instancetype)initWithToolbarManager:(id<PWESToolbarDelegate>)toolbarManager
+                  presentingController:(UIViewController *)controller;
 @end
