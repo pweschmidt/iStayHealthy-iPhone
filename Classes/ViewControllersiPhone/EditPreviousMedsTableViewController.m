@@ -83,7 +83,7 @@
         PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
         NSError *error = nil;
         [manager saveContextAndReturnError:&error];
-        [self popController];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

@@ -231,14 +231,7 @@
 
     NSError *error = nil;
     [manager saveContextAndReturnError:&error];
-    if (self.hasImportedData && self.isEditMode)
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
-    {
-        [self popController];
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)cancel

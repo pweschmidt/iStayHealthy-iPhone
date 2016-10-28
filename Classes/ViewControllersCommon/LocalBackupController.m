@@ -23,8 +23,18 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     [self setTitleViewWithTitle:NSLocalizedString(@"Local Backup/Restore", nil)];
-    [self disableRightBarButtons];
+//    [self disableRightBarButtons];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                              target:self action:@selector(done:)];
 }
+
+- (void)done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -233,17 +243,17 @@
     
 }
 
-- (void)closeController
-{
-    if ([Utilities isIPad])
-    {
-        [self hidePopover];
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+//- (void)closeController
+//{
+//    if ([Utilities isIPad])
+//    {
+//        [self hidePopover];
+//    }
+//    else
+//    {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification

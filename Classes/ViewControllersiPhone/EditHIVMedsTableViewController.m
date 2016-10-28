@@ -85,7 +85,7 @@
 
     NSError *error = nil;
     [manager saveContextAndReturnError:&error];
-    [self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)reloadMedications:(id)sender

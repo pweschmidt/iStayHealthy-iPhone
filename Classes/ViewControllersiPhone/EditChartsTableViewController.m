@@ -66,21 +66,23 @@
 
 - (void)popController
 {
-    if ([Utilities isIPad])
-    {
-        if (nil != self.customPopOverDelegate)
-        {
-            __strong id <PWESPopoverDelegate> strongPopoverDelegate = self.customPopOverDelegate;
-            if ([strongPopoverDelegate respondsToSelector:@selector(hidePopover)])
-            {
-                [strongPopoverDelegate hidePopover];
-            }
-        }
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+//    if ([Utilities isIPad])
+//    {
+//        if (nil != self.customPopOverDelegate)
+//        {
+//            __strong id <PWESPopoverDelegate> strongPopoverDelegate = self.customPopOverDelegate;
+//            if ([strongPopoverDelegate respondsToSelector:@selector(hidePopover)])
+//            {
+//                [strongPopoverDelegate hidePopover];
+//            }
+//        }
+//    }
+//    else
+//    {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,7 +94,7 @@
 - (void)save:(id)sender
 {
     PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleCancel action:^{
-        [self popController];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
     if (!self.settingsChanged)
     {

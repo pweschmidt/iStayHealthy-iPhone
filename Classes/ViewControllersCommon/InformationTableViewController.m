@@ -36,7 +36,16 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     [self setTitleViewWithTitle:NSLocalizedString(@"Information", nil)];
-    [self disableRightBarButtons];
+//    [self disableRightBarButtons];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                              target:self action:@selector(done:)];
+}
+
+- (void)done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated

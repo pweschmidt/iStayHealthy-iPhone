@@ -149,7 +149,7 @@
         contact = (Contacts *) [manager managedObjectForEntityName:kContacts];
         if (nil == contact)
         {
-            [self popController];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
     contact.UID = [Utilities GUID];
@@ -173,7 +173,7 @@
     NSError *error = nil;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     [manager saveContextAndReturnError:&error];
-    [self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

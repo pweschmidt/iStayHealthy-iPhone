@@ -149,37 +149,37 @@
 
 - (void)hidePopover
 {
-    if (nil != self.customPopoverController)
-    {
-        [self.customPopoverController dismissPopoverAnimated:YES];
-        self.customPopoverController = nil;
-    }
+//    if (nil != self.customPopoverController)
+//    {
+//        [self.customPopoverController dismissPopoverAnimated:YES];
+//        self.customPopoverController = nil;
+//    }
 }
 
-- (void)presentPopoverWithController:(UINavigationController *)controller
-                            fromRect:(CGRect)frame
-{
-    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-    self.customPopoverController.delegate = self;
-    [self.customPopoverController presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-}
-
-- (void)presentPopoverWithController:(UINavigationController *)controller
-                       fromBarButton:(UIBarButtonItem *)barButton
-{
-    [self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionUp];
-}
-
-- (void)presentPopoverWithController:(UINavigationController *)controller
-                       fromBarButton:(UIBarButtonItem *)barButton
-                           direction:(UIPopoverArrowDirection)direction
-{
-    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-    self.customPopoverController.delegate = self;
-    [self.customPopoverController presentPopoverFromBarButtonItem:barButton
-                                         permittedArrowDirections:direction
-                                                         animated:YES];
-}
+//- (void)presentPopoverWithController:(UINavigationController *)controller
+//                            fromRect:(CGRect)frame
+//{
+//    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+//    self.customPopoverController.delegate = self;
+//    [self.customPopoverController presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+//}
+//
+//- (void)presentPopoverWithController:(UINavigationController *)controller
+//                       fromBarButton:(UIBarButtonItem *)barButton
+//{
+//    [self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionUp];
+//}
+//
+//- (void)presentPopoverWithController:(UINavigationController *)controller
+//                       fromBarButton:(UIBarButtonItem *)barButton
+//                           direction:(UIPopoverArrowDirection)direction
+//{
+//    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+//    self.customPopoverController.delegate = self;
+//    [self.customPopoverController presentPopoverFromBarButtonItem:barButton
+//                                         permittedArrowDirections:direction
+//                                                         animated:YES];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -349,34 +349,6 @@
     {
         [strongHandler showMenuPanel];
     }
-//    if ([self.parentViewController isKindOfClass:[ContentNavigationController_iPad class]])
-//    {
-//        ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *) self.parentViewController;
-//        if (self.settingMenuShown)
-//        {
-//            [navController hideMenu];
-//            self.settingMenuShown = NO;
-//        }
-//        else
-//        {
-//            [navController showMenu];
-//            self.settingMenuShown = YES;
-//        }
-//    }
-//    else if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
-//    {
-//        ContentNavigationController *navController = (ContentNavigationController *) self.parentViewController;
-//        if (self.settingMenuShown)
-//        {
-//            [navController hideMenu];
-//            self.settingMenuShown = NO;
-//        }
-//        else
-//        {
-//            [navController showMenu];
-//            self.settingMenuShown = YES;
-//        }
-//    }
 }
 
 - (void)addButtonPressed:(id)sender
@@ -394,22 +366,30 @@
     return blank;
 }
 
+
+
 #pragma mark PWESToolbar delegate methods
 - (void)showMailSelectionControllerFromButton:(UIBarButtonItem *)button
 {
     PWESFeedbackTableViewController *controller = [[PWESFeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 
-    if ([Utilities isIPad])
-    {
-        controller.popoverDelegate = self;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-        
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if ([Utilities isIPad])
+//    {
+//        controller.popoverDelegate = self;
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//        
+//    }
+//    else
+//    {
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 
@@ -417,18 +397,24 @@
 {
     SettingsTableViewController *controller = [[SettingsTableViewController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 
-    if ([Utilities isIPad])
-    {
-        controller.hasNavHeader = YES;
-        controller.popoverDelegate = self;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        controller.popoverDelegate = nil;
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if ([Utilities isIPad])
+//    {
+//        controller.hasNavHeader = YES;
+//        controller.popoverDelegate = self;
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        controller.popoverDelegate = nil;
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 - (void)showMailControllerHasAttachment:(BOOL)hasAttachment
@@ -490,15 +476,21 @@
     {
         DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-        if ([Utilities isIPad])
-        {
-            controller.hasNavHeader = YES;
-            [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-        }
-        else
-        {
-            [self.navigationController pushViewController:controller animated:YES];
-        }
+        navController.modalPresentationStyle = UIModalPresentationPopover;
+        UIPopoverPresentationController *popController = [navController popoverPresentationController];
+        popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        popController.barButtonItem = button;
+        self.popoverController = popController;
+        [self presentViewController:navController animated:YES completion:nil];
+//        if ([Utilities isIPad])
+//        {
+//            controller.hasNavHeader = YES;
+//            [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//        }
+//        else
+//        {
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }
     }
     else
     {
@@ -510,47 +502,64 @@
 {
     InformationTableViewController *controller = [[InformationTableViewController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 
-    if ([Utilities isIPad])
-    {
-        controller.hasNavHeader = YES;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if ([Utilities isIPad])
+//    {
+//        controller.hasNavHeader = YES;
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
     HelpViewController *controller = [[HelpViewController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-
-    if ([Utilities isIPad])
-    {
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
+//    if ([Utilities isIPad])
+//    {
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 - (void)showLocalBackupControllerFromButton:(UIBarButtonItem *)button
 {
     LocalBackupController *controller = [[LocalBackupController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 
-    if ([Utilities isIPad])
-    {
-        controller.hasNavHeader = YES;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if ([Utilities isIPad])
+//    {
+//        controller.hasNavHeader = YES;
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 #pragma mark Mail composer callback

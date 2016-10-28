@@ -44,7 +44,10 @@
     [super viewDidLoad];
 
     self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
-    [self disableRightBarButtons];
+//    [self disableRightBarButtons];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                              target:self action:@selector(done:)];
     self.iStayHealthyPath = nil;
     self.dropBoxFileExists = NO;
     self.newDropboxFileExists = NO;
@@ -54,6 +57,11 @@
     [self createRestClient];
 }
 
+- (void)done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

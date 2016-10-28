@@ -176,7 +176,7 @@
     }
     NSError *error = nil;
     [manager saveContextAndReturnError:&error];
-    [self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

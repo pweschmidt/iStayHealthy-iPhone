@@ -102,7 +102,7 @@
 
     NSError *error = nil;
     [manager saveContextAndReturnError:&error];
-    [self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)scheduleAlert
@@ -167,10 +167,10 @@
 - (void)showDeleteAlertView
 {
     PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
-    PWESAlertAction *delete = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDestructive action:^{
+    PWESAlertAction *delete = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Delete", nil) style:UIAlertActionStyleDestructive action:^{
         [self removeManagedObject];
     }];
-    PWESAlertAction *end = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDefault action:^{
+    PWESAlertAction *end = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"End", nil) style:UIAlertActionStyleDefault action:^{
         self.currentCalendar.isCompleted = [NSNumber numberWithBool:YES];
         NSDate *now = [NSDate date];
         self.currentCalendar.endDate = now;
@@ -196,7 +196,7 @@
 - (void)showDeleteCalendarAlertView
 {
     PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
-    PWESAlertAction *delete = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDestructive action:^{
+    PWESAlertAction *delete = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Delete", nil) style:UIAlertActionStyleDestructive action:^{
         [self removeMarkedObject];
     }];
     [PWESAlertHandler.alertHandler

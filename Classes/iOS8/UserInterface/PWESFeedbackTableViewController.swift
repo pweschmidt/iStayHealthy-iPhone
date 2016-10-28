@@ -11,7 +11,7 @@ import MessageUI
 
 class PWESFeedbackTableViewController: UITableViewController, MFMailComposeViewControllerDelegate
 {
-    var popoverDelegate: PWESPopoverDelegate?
+//    var popoverDelegate: PWESPopoverDelegate?
     
     override func viewDidLoad()
     {

@@ -118,25 +118,25 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)popController
-{
-    if ([Utilities isIPad])
-    {
-        if (nil != self.customPopOverDelegate)
-        {
-            __strong id <PWESPopoverDelegate> strongPopoverDelegate = self.customPopOverDelegate;
-            if ([strongPopoverDelegate respondsToSelector:@selector(hidePopover)])
-            {
-                [strongPopoverDelegate hidePopover];
-            }
-        }
-        [self cancel];
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+//- (void)popController
+//{
+//    if ([Utilities isIPad])
+//    {
+//        if (nil != self.customPopOverDelegate)
+//        {
+//            __strong id <PWESPopoverDelegate> strongPopoverDelegate = self.customPopOverDelegate;
+//            if ([strongPopoverDelegate respondsToSelector:@selector(hidePopover)])
+//            {
+//                [strongPopoverDelegate hidePopover];
+//            }
+//        }
+//        [self cancel];
+//    }
+//    else
+//    {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 - (void)cancel
 {
@@ -159,7 +159,8 @@
     {
         [manager saveContextAndReturnError:&error];
     }
-    [self popController];
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell

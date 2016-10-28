@@ -36,8 +36,7 @@ class PWESAlertHandler: NSObject {
         }
         let controller = UIAlertController(title: title, message: message, preferredStyle:UIAlertControllerStyle.alert)
         for action in actions {
-            let uiAction = action.uiAlertAction
-            controller.addAction(uiAction)
+            controller.addAction(action.uiAlertAction)
         }
         presentingController.present(controller, animated: true, completion: nil)
     }

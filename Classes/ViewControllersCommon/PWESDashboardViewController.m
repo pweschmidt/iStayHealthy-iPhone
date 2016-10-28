@@ -77,18 +77,8 @@
                                                  initWithSelectedItems:self.selectedItems];
 
     controller.chartSelector = self;
-    if ([Utilities isIPad])
-    {
-        controller.preferredContentSize = CGSizeMake(320, 568);
-        controller.customPopOverDelegate = self;
-        UINavigationController *navController = [[UINavigationController alloc]
-                                                 initWithRootViewController:controller];
-        [self presentPopoverWithController:navController fromBarButton:self.chartBarButton];
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+    [self.navigationController pushViewController:controller animated:YES];
+
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

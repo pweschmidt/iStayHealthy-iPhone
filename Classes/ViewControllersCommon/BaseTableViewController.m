@@ -43,16 +43,6 @@
     [super didReceiveMemoryWarning];
 }
 
-// - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-// {
-//	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-//	if ([Utilities isIPad])
-//	{
-//		CGRect frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-//		self.tableView.frame = frame;
-//	}
-// }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44;

@@ -66,7 +66,7 @@
     EditSeinfeldCalendarTableViewController *editController = [[EditSeinfeldCalendarTableViewController alloc] initWithStyle:UITableViewStyleGrouped calendars:self.calendars];
 
     editController.preferredContentSize = CGSizeMake(320, 568);
-    editController.customPopOverDelegate = self;
+//    editController.customPopOverDelegate = self;
     editController.resultsDelegate = self;
     UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:editController];
     editNavCtrl.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -228,18 +228,25 @@
     {
         return;
     }
-    if (nil == self.customPopoverController)
+    if (nil == self.popoverController)
     {
         EditMissedMedsTableViewController *controller = [[EditMissedMedsTableViewController alloc] initWithStyle:UITableViewStyleGrouped currentMeds:self.currentMeds managedObject:nil];
         controller.preferredContentSize = CGSizeMake(320, 568);
-        controller.customPopOverDelegate = self;
+//        controller.customPopOverDelegate = self;
         UINavigationController *editNavCtrl = [[UINavigationController alloc] initWithRootViewController:controller];
-        [self presentPopoverWithController:editNavCtrl
-                                  fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
+        editNavCtrl.modalPresentationStyle = UIModalPresentationPopover;
+        UIPopoverPresentationController *popController = [editNavCtrl popoverPresentationController];
+        popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        popController.sourceView  = self.view;
+        self.popoverController = popController;
+        [self presentViewController:editNavCtrl animated:YES completion:nil];
+        
+//        [self presentPopoverWithController:editNavCtrl
+//                                  fromRect:CGRectMake(self.view.frame.size.width / 2 - 160, 10, 320, 50)];
     }
     else
     {
-        [self hidePopover];
+//        [self hidePopover];
     }
 }
 

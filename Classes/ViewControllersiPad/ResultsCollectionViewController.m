@@ -39,7 +39,7 @@
 
 - (void)addButtonPressed:(id)sender
 {
-    if (nil == self.customPopoverController)
+    if (nil == self.popoverController)
     {
         EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
         editController.preferredContentSize = CGSizeMake(320, 568);
@@ -49,7 +49,7 @@
     }
     else
     {
-        [self hidePopover];
+//        [self hidePopover];
     }
 }
 
@@ -99,7 +99,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self hidePopover];
+//    [self hidePopover];
     Results *results = [self.results objectAtIndex:indexPath.row];
     EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
     editController.preferredContentSize = CGSizeMake(320, 568);

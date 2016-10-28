@@ -139,7 +139,7 @@
 	{
 		[strongDelegate updateLocalNotifications];
 	}
-	[self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)removeManagedObject
@@ -154,7 +154,7 @@
 	{
 		[strongDelegate updateLocalNotifications];
 	}
-	[self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
