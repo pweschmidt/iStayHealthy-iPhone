@@ -99,6 +99,10 @@
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */; };
 		72B9B43F1DC34D7E00926E0A /* PWESAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */; };
+		72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; };
+		72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7151DC7989E0090C801 /* Alamofire.framework */; };
+		72D0F7181DC7991D0090C801 /* DropboxSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
@@ -231,6 +235,20 @@
 			remoteInfo = iStayHealthy;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		72D0F7141DC7988A0090C801 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B06DCDF189D209E00008590 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
@@ -393,6 +411,9 @@
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
 		720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertHandler.swift; path = iOS8/Utilities/PWESAlertHandler.swift; sourceTree = "<group>"; };
 		72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertAction.swift; path = iOS8/Utilities/PWESAlertAction.swift; sourceTree = "<group>"; };
+		72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyDropbox.framework; path = Carthage/Build/iOS/SwiftyDropbox.framework; sourceTree = "<group>"; };
+		72D0F7151DC7989E0090C801 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxSyncController.swift; path = iOS8/UserInterface/DropboxSyncController.swift; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -667,9 +688,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
 				0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
+				72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
 				C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */,
 				C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */,
@@ -747,6 +770,7 @@
 				0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */,
 				0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */,
 				0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */,
+				72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -826,6 +850,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -875,6 +900,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72D0F7151DC7989E0090C801 /* Alamofire.framework */,
 				0B06DCDF189D209E00008590 /* DropboxSDK.framework */,
 				C45E52F3182BFD1400C30061 /* EventKit.framework */,
 				C41EC32C180ED0EE00A49AE4 /* CoreText.framework */,
@@ -1322,6 +1348,8 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				72D0F7101DC798220090C801 /* ShellScript */,
+				72D0F7141DC7988A0090C801 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1426,6 +1454,24 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		72D0F7101DC798220090C801 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyDropbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0BB56687191E132F00731739 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1500,6 +1546,7 @@
 				C4AEF82D180DCAB800107966 /* PWESPlotArea.m in Sources */,
 				C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */,
 				C491E2441B01ECF1005936B0 /* Results.m in Sources */,
+				72D0F7181DC7991D0090C801 /* DropboxSyncController.swift in Sources */,
 				C4BCF09617B7A87500F1E0F7 /* NSNumber+Handling.m in Sources */,
 				0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */,
 				C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */,
@@ -1894,6 +1941,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1942,6 +1990,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2101,6 +2150,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
