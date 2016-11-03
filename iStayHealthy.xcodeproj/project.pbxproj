@@ -91,7 +91,6 @@
 		0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */; };
 		0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BED04921A0525FD0033942A /* TokenCertificate.swift */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
-		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */; };
@@ -103,6 +102,7 @@
 		72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7151DC7989E0090C801 /* Alamofire.framework */; };
 		72D0F7181DC7991D0090C801 /* DropboxSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */; };
+		72D72DD61DCB8DC100A60DAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D72DD51DCB8DC100A60DAF /* main.m */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
@@ -407,13 +407,14 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28C3AD890F43EF2300507BA6 /* iStayHealthy.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = iStayHealthy.xcdatamodel; sourceTree = "<group>"; };
 		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
 		720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertHandler.swift; path = iOS8/Utilities/PWESAlertHandler.swift; sourceTree = "<group>"; };
 		72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertAction.swift; path = iOS8/Utilities/PWESAlertAction.swift; sourceTree = "<group>"; };
 		72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyDropbox.framework; path = Carthage/Build/iOS/SwiftyDropbox.framework; sourceTree = "<group>"; };
 		72D0F7151DC7989E0090C801 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxSyncController.swift; path = iOS8/UserInterface/DropboxSyncController.swift; sourceTree = "<group>"; };
+		72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iStayHealthyAppDelegate.swift; sourceTree = "<group>"; };
+		72D72DD51DCB8DC100A60DAF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -731,6 +732,7 @@
 				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
 				C45A98E217EEE35A004E13C7 /* Views */,
 				C4DF910915EE79560042211E /* Constants.h */,
+				72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -865,8 +867,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				72D72DD51DCB8DC100A60DAF /* main.m */,
 				32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -1492,7 +1494,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C46C5DEB17EDA44500866DBD /* InformationTableViewController.m in Sources */,
-				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */,
 				0BB084E51928E181007C83E5 /* PWESResultsTypes.m in Sources */,
 				C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */,
@@ -1562,6 +1563,7 @@
 				0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */,
 				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
 				720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */,
+				72D72DD61DCB8DC100A60DAF /* main.m in Sources */,
 				C4742B7F1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift in Sources */,
 				0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */,
 				0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */,
