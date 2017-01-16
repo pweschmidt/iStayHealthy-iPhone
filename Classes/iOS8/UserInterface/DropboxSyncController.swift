@@ -12,6 +12,7 @@ import SwiftyDropbox
 class DropboxSyncController: UITableViewController {
 
     let tmpURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+    let rootFolder = "/iStayHealthy"
     let dropBoxBackupPath = "/iStayHealthy/iStayHealthy.isth"
     let dropBoxUploadPath = "/iStayHealthy/toDropBox.xml"
     let dateFormatString = "ddMMMyyyy'_'HHmmss"
@@ -101,6 +102,46 @@ class DropboxSyncController: UITableViewController {
             
         }
     }
+    
+    fileprivate func checkBackupAvailability(_ completionBlock: @escaping PWESSuccessClosure) {
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.listFolder(path: rootFolder).response(completionHandler: { (folderResults, error) in
+                if nil != folderResults {
+                    completionBlock(true, nil)
+                }
+                else if let error = error {
+                    
+                }
+            })
+        }
+    }
+    
+    fileprivate func uploadBackupFile(_ data: Data, completionBlock: @escaping PWESSuccessClosure){
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.upload(path: self.dropBoxUploadPath, input: data).response(completionHandler: { (uploadResponse, error) in
+                if nil != uploadResponse {
+                    
+                }
+                else if let error = error {
+                    
+                }
+            })
+        }
+    }
+    
+    
+    fileprivate func createiStayHealthyFolder(_ completionBlock: @escaping PWESSuccessClosure) {
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.createFolder(path: "/iStayHealthy").response(completionHandler: { (folderMetadata, error) in
+                if nil != folderMetadata {
+                    completionBlock(true, nil)
+                }
+                else if let error = error {
+                }
+            })
+        }
+    }
+    
     
     fileprivate func backup() {
         let xmlWriter = CoreXMLWriter()
