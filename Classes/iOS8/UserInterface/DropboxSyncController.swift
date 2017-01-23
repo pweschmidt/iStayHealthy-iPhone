@@ -106,84 +106,6 @@ class DropboxSyncController: UITableViewController {
     }
     
     
-    fileprivate func checkBackupAvailability(_ completionBlock: @escaping PWESSuccessClosure) {
-        if let client = DropboxClientsManager.authorizedClient {
-            client.files.search(path: "/", query: "iStayHealthy").response(completionHandler: { (searchResult, error) in
-                if let result = searchResult {
-                    if 0 == result.matches.count {
-                        self.createiStayHealthyFolder({ (success, nsError) in
-                            completionBlock(success, nsError)
-                        })
-                    }
-                    else {
-                        completionBlock(true, nil)
-                    }
-                }
-                else if nil != error {
-                    self.createiStayHealthyFolder({ (success, nsError) in
-                        completionBlock(success, nsError)
-                    })
-                }
-            })
-        }
-    }
-    
-    fileprivate func uploadBackupFile(_ data: Data, completionBlock: @escaping PWESSuccessClosure){
-        if let client = DropboxClientsManager.authorizedClient {
-            client.files.upload(path: self.dropBoxUploadPath, input: data).response(completionHandler: { (uploadResponse, error) in
-                if nil != uploadResponse {
-                    
-                }
-                else if nil != error {
-                    completionBlock(false, nil)
-                }
-            })
-        }
-    }
-    
-    
-    fileprivate func createiStayHealthyFolder(_ completionBlock: @escaping PWESSuccessClosure) {
-        if let client = DropboxClientsManager.authorizedClient {
-            client.files.createFolder(path: "/iStayHealthy").response(completionHandler: { (folderMetadata, error) in
-                if nil != folderMetadata {
-                    completionBlock(true, nil)
-                }
-                else if nil != error {
-                    completionBlock(false, nil)
-                }
-            })
-        }
-    }
-    
-    fileprivate func renameCurrentBackupFile(_ completionBlock: @escaping PWESSuccessClosure) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = dateFormatString
-        let dateString = formatter.string(from: Date())
-        let movedFilenamePath = backupRootName + dateString + backupFileExtension
-        if let client = DropboxClientsManager.authorizedClient {
-            client.files.move(fromPath: dropBoxBackupPath, toPath: movedFilenamePath).response(completionHandler: { (response, error) in
-                if nil != response {
-                    self.renameUploadedFile(completionBlock)
-                }
-                else if nil != error {
-                    completionBlock(false, nil)
-                }
-            })
-        }
-    }
-    
-    fileprivate func renameUploadedFile(_ completionBlock: @escaping PWESSuccessClosure) {
-        if let client = DropboxClientsManager.authorizedClient {
-            client.files.move(fromPath: dropBoxUploadPath, toPath: dropBoxBackupPath).response(completionHandler: { (response, error) in
-                if nil != response {
-                    completionBlock(true, nil)
-                }
-                else if nil != error {
-                    completionBlock(false, nil)
-                }
-            })
-        }
-    }
     
     
     fileprivate func backup() {
@@ -194,7 +116,7 @@ class DropboxSyncController: UITableViewController {
                     do {
                         try data.write(to: self.uploadPath)
                     }catch {
-                        PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Error writing data to tmp directory", comment: ""), presentingController: self)
+                        PWESAlertHandler.alertHandler.showAlertViewWithCancelButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Error writing data to tmp directory", comment: ""), presentingController: self)
                     }
                     
                     self.checkBackupAvailability({ (success, error) in
@@ -239,28 +161,21 @@ class DropboxSyncController: UITableViewController {
     
     
     fileprivate func restore() {
-        let destination: (URL, HTTPURLResponse) -> URL = { temporaryURL, response in
-            return self.downloadPath
-        }
         checkBackupAvailability { (success, error) in
             if success {
-                
+                self.downloadBackupFile({ (success, error) in
+                    if success {
+                        PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Restore Finished", comment: ""), message: NSLocalizedString("Data were retrieved from Dropbox.", comment: ""), presentingController: self)
+                    }
+                    else {
+                        PWESAlertHandler.alertHandler.showAlertViewWithCancelButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Error retrieving data.", comment: ""), presentingController: self)
+                    }
+                })
+            }
+            else {
+                PWESAlertHandler.alertHandler.showAlertViewWithCancelButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Error retrieving data.", comment: ""), presentingController: self)
             }
             
-        }
-        
-        
-        if let client = DropboxClientsManager.authorizedClient {
-            client.files.download(path: dropBoxBackupPath).response(completionHandler: { (response, error) in
-                if let response = response {
-                    
-                }
-                else if let error = error {
-                    
-                }
-            }).progress({ (progressData) in
-                _ = progressData.totalUnitCount
-            })
         }
     }
     
@@ -274,6 +189,108 @@ class DropboxSyncController: UITableViewController {
     }
     
     
+    fileprivate func checkBackupAvailability(_ completionBlock: @escaping PWESSuccessClosure) {
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.search(path: "/", query: "iStayHealthy").response(completionHandler: { (searchResult, error) in
+                if let result = searchResult {
+                    if 0 == result.matches.count {
+                        self.createiStayHealthyFolder({ (success, nsError) in
+                            completionBlock(success, nsError)
+                        })
+                    }
+                    else {
+                        completionBlock(true, nil)
+                    }
+                }
+                else if nil != error {
+                    self.createiStayHealthyFolder({ (success, nsError) in
+                        completionBlock(success, nsError)
+                    })
+                }
+            })
+        }
+    }
+    
+    fileprivate func uploadBackupFile(_ data: Data, completionBlock: @escaping PWESSuccessClosure){
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.upload(path: self.dropBoxUploadPath, input: data).response(completionHandler: { (uploadResponse, error) in
+                if nil != uploadResponse {
+                    
+                }
+                else if nil != error {
+                    completionBlock(false, nil)
+                }
+            })
+        }
+    }
+    
+    fileprivate func downloadBackupFile(_ completionBlock: @escaping PWESSuccessClosure) {
+        let destination: (URL, HTTPURLResponse) -> URL = { temporaryURL, response in
+            return self.downloadPath
+        }
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.download(path: dropBoxBackupPath, destination: destination).response(completionHandler: { (response, error) in
+                if nil != response {
+                    do {
+                        let downloadedData = try Data(contentsOf: self.downloadPath)
+                        let reader = CoreXMLReader()
+                        reader.parseXMLData(downloadedData, completionBlock: { (success, xmlError) in
+                            completionBlock(true, nil)
+                        })
+                    } catch{
+                        completionBlock(false, nil)
+                    }
+                    
+                }
+                else if nil != error {
+                    completionBlock(false, nil)
+                }
+            })
+        }
+    }
+    
+    fileprivate func createiStayHealthyFolder(_ completionBlock: @escaping PWESSuccessClosure) {
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.createFolder(path: "/iStayHealthy").response(completionHandler: { (folderMetadata, error) in
+                if nil != folderMetadata {
+                    completionBlock(true, nil)
+                }
+                else if nil != error {
+                    completionBlock(false, nil)
+                }
+            })
+        }
+    }
+    
+    fileprivate func renameCurrentBackupFile(_ completionBlock: @escaping PWESSuccessClosure) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = dateFormatString
+        let dateString = formatter.string(from: Date())
+        let movedFilenamePath = backupRootName + dateString + backupFileExtension
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.move(fromPath: dropBoxBackupPath, toPath: movedFilenamePath).response(completionHandler: { (response, error) in
+                if nil != response {
+                    self.renameUploadedFile(completionBlock)
+                }
+                else if nil != error {
+                    completionBlock(false, nil)
+                }
+            })
+        }
+    }
+    
+    fileprivate func renameUploadedFile(_ completionBlock: @escaping PWESSuccessClosure) {
+        if let client = DropboxClientsManager.authorizedClient {
+            client.files.move(fromPath: dropBoxUploadPath, toPath: dropBoxBackupPath).response(completionHandler: { (response, error) in
+                if nil != response {
+                    completionBlock(true, nil)
+                }
+                else if nil != error {
+                    completionBlock(false, nil)
+                }
+            })
+        }
+    }
     
 
 }
