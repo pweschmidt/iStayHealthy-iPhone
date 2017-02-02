@@ -25,14 +25,7 @@ class PWESPersistentStoreManager : NSObject
     var iCloudEnabled: Bool?
 
     // MARK: init/declare
-    class var defaultManager : PWESPersistentStoreManager
-    {
-        struct Static
-        {
-            static let instance : PWESPersistentStoreManager = PWESPersistentStoreManager()
-        }
-        return Static.instance
-    }
+    static let defaultManager = PWESPersistentStoreManager()
     
     override init()
     {

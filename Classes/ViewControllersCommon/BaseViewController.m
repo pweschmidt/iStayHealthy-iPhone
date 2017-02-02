@@ -408,16 +408,17 @@
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
 {
-    if ([[DBSession sharedSession] isLinked])
-    {
-        DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-        navController.modalPresentationStyle = UIModalPresentationPopover;
-        UIPopoverPresentationController *popController = [navController popoverPresentationController];
-        popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        popController.barButtonItem = button;
-        self.popoverController = popController;
-        [self presentViewController:navController animated:YES completion:nil];
+    [DropboxAuthenicator.authenticator launchDropboxController:self barButton:button];
+//    if ([[DBSession sharedSession] isLinked])
+//    {
+//        DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
+//        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+//        navController.modalPresentationStyle = UIModalPresentationPopover;
+//        UIPopoverPresentationController *popController = [navController popoverPresentationController];
+//        popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+//        popController.barButtonItem = button;
+//        self.popoverController = popController;
+//        [self presentViewController:navController animated:YES completion:nil];
 //        if ([Utilities isIPad])
 //        {
 //            controller.hasNavHeader = YES;
@@ -427,11 +428,11 @@
 //        {
 //            [self.navigationController pushViewController:controller animated:YES];
 //        }
-    }
-    else
-    {
-        [[DBSession sharedSession] linkFromController:self];
-    }
+//    }
+//    else
+//    {
+//        [[DBSession sharedSession] linkFromController:self];
+//    }
 }
 
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button

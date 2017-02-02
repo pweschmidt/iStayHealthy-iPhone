@@ -5,7 +5,7 @@
 //  Created by Peter Schmidt on 07/11/2013.
 //
 //
-
+@import SwiftyDropbox;
 #import "BaseCollectionViewController.h"
 #import "CoreDataConstants.h"
 #import "Constants.h"
@@ -455,23 +455,7 @@
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
 {
-    if ([[DBSession sharedSession] isLinked])
-    {
-        DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
-        controller.hasNavHeader = YES;
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-        navController.modalPresentationStyle = UIModalPresentationPopover;
-        UIPopoverPresentationController *popController = [navController popoverPresentationController];
-        popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
-        popController.barButtonItem = button;
-        self.popoverController = popController;
-        [self presentViewController:navController animated:YES completion:nil];
-//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        [[DBSession sharedSession] linkFromController:self];
-    }
+    [DropboxAuthenicator.authenticator launchDropboxController:self barButton:button];
 }
 
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button

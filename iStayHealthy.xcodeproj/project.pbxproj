@@ -97,6 +97,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */; };
+		72607FD41E43548300CCA866 /* DropboxAuthenicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */; };
 		72B9B43F1DC34D7E00926E0A /* PWESAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */; };
 		72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; };
 		72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -408,6 +409,7 @@
 		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
 		720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertHandler.swift; path = iOS8/Utilities/PWESAlertHandler.swift; sourceTree = "<group>"; };
+		72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxAuthenicator.swift; path = iOS8/UserInterface/DropboxAuthenicator.swift; sourceTree = "<group>"; };
 		72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertAction.swift; path = iOS8/Utilities/PWESAlertAction.swift; sourceTree = "<group>"; };
 		72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyDropbox.framework; path = Carthage/Build/iOS/SwiftyDropbox.framework; sourceTree = "<group>"; };
 		72D0F7151DC7989E0090C801 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -772,6 +774,7 @@
 				0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */,
 				0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */,
 				72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */,
+				72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1513,6 +1516,7 @@
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */,
 				C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */,
+				72607FD41E43548300CCA866 /* DropboxAuthenicator.swift in Sources */,
 				C4F569A61AB0843900D57250 /* PWESCoreDictionaryImporter.swift in Sources */,
 				C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */,
 				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
