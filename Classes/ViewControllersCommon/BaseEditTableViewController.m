@@ -397,7 +397,7 @@
 - (void)showDeleteAlertView
 {
     PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIAlertActionStyleCancel action:nil];
-    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", @"Yes") style:UIAlertActionStyleCancel action:^{
+    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", @"Yes") style:UIAlertActionStyleDefault action:^{
         [self removeManagedObject];
     }];
     [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") presentingController:self actions:@[cancel, ok]];

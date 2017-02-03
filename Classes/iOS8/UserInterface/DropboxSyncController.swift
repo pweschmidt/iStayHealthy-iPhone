@@ -3,6 +3,19 @@
 //  iStayHealthy
 //
 //  Created by Schmidt, Peter (ELS) on 31/10/2016.
+// Here is what the backup/restore process looks like
+// Restore: probably the easiest
+// 1.) download the iStayHealthy/iStayHealthy.isth file from Dropbox to the temp directory
+// var downloadPath
+// 2.) fire up CoreXMLReader, which reads the backup file and stores data in DB
+// Backup:
+// 1.) extract the DB data and store as tmp XML file (uploadPath)
+// 2.) upload this fifle to a tmp file on Dropbox called toDropBox.xml (dropBoxUploadPath)
+// 3.) rename (move) the existing iStayHealthy.isth on Dropbox to a file called iStayHealthyddMMMyyyy_HHmmss.isth 
+// 4.) rename (move) the toDropBox.xml file to iStayHealthy.isth
+//
+// In each case
+// check if we are authorised and also if the folder exists. Otherwise, create the iStayHealthy folder in root.
 //
 //
 
@@ -49,10 +62,15 @@ class DropboxSyncController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(DropboxSyncController.done))
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "syncCell")
         view.backgroundColor = kDefaultBackground
         tableView.backgroundColor = kDefaultBackground
+    }
+    
+    func done () {
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

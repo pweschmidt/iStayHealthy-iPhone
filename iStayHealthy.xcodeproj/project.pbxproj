@@ -187,7 +187,6 @@
 		C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0AA17B7AA2D00F1E0F7 /* Medication+Handling.m */; };
 		C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0AD17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m */; };
 		C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */; };
-		C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */; };
 		C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */; };
 		C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */; };
 		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
@@ -1563,7 +1562,6 @@
 				C463744217E9F2AF00D19B94 /* PWESResultsSummaryView.m in Sources */,
 				C431408D180C801D00EB5F5E /* PWESAxis.m in Sources */,
 				0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */,
-				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
 				720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */,
 				C4742B7F1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift in Sources */,
 				0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */,

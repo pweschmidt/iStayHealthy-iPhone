@@ -445,6 +445,7 @@ class PWESPersistentStoreManager : NSObject
     func saveContext() throws {
         if let context = defaultContext {
             if !context.hasChanges {
+                print("**** context has no changes")
                 return
             }
             do {
@@ -461,6 +462,7 @@ class PWESPersistentStoreManager : NSObject
                             do {
                                 try manager.removeItem(at: filePath)
                             }catch{
+                                print("*** Error removing tmp file")
                             }
                         }
                         try? xmlData.write(to: filePath, options: [.atomic])
@@ -469,10 +471,11 @@ class PWESPersistentStoreManager : NSObject
                     
                 })
             }catch {
+                print("*** Error writing to XML")
                 
             }
         } else {
-            
+            print("*** It seems the default context is nil")
         }
     }
     
