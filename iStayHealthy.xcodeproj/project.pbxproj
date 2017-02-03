@@ -611,8 +611,6 @@
 		C4BCF0AD17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "iStayHealthyRecord+Handling.m"; path = "Categories/iStayHealthyRecord+Handling.m"; sourceTree = "<group>"; };
 		C4BCF0AF17B7AA6500F1E0F7 /* Contacts+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contacts+Handling.h"; path = "Categories/Contacts+Handling.h"; sourceTree = "<group>"; };
 		C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contacts+Handling.m"; path = "Categories/Contacts+Handling.m"; sourceTree = "<group>"; };
-		C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropboxViewController.h; path = ViewControllersCommon/DropboxViewController.h; sourceTree = "<group>"; };
-		C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropboxViewController.m; path = ViewControllersCommon/DropboxViewController.m; sourceTree = "<group>"; };
 		C4BCF0B517B7C4D600F1E0F7 /* CoreXMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreXMLWriter.h; path = CoreXML/CoreXMLWriter.h; sourceTree = "<group>"; };
 		C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLWriter.m; path = CoreXML/CoreXMLWriter.m; sourceTree = "<group>"; };
 		C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataConstants.h; path = CoreDataManagement/CoreDataConstants.h; sourceTree = "<group>"; };
@@ -1056,8 +1054,6 @@
 				C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */,
 				C46EB5E017EB7E6100B9EA5A /* ClinicalAddressTableViewController.h */,
 				C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */,
-				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
-				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
 				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
