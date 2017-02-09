@@ -160,7 +160,6 @@
 		C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD7140FD0730033C61C /* NNRTI.plist */; };
 		C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FDD140FD0850033C61C /* EntryInhibitors.plist */; };
 		C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */; };
-		C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250814DD62BF00BDD906 /* StoreKit.framework */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
 		C491E2311B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt in Resources */ = {isa = PBXBuildFile; fileRef = C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */; };
 		C491E2441B01ECF1005936B0 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C491E2431B01ECF1005936B0 /* Results.m */; };
@@ -549,7 +548,6 @@
 		C4897FE5140FD09C0033C61C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/IntegraseInhibitors.plist; sourceTree = "<group>"; };
 		C4897FE6140FD09F0033C61C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/IntegraseInhibitors.plist; sourceTree = "<group>"; };
 		C48CC47A137C3BA30051D7FA /* iStayHealthy 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 5.xcdatamodel"; sourceTree = "<group>"; };
-		C490250814DD62BF00BDD906 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C490250A14DD630700BDD906 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iStayHealthy-Customer-Conflict.isth.txt"; sourceTree = "<group>"; };
 		C491E23B1B01EAA7005936B0 /* iStayHealthy 16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 16.xcdatamodel"; sourceTree = "<group>"; };
@@ -694,7 +692,6 @@
 				72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
 				C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */,
-				C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */,
 				C4F337F114D43B6B00C4F573 /* libz.dylib in Frameworks */,
 				C4F337EF14D43B4700C4F573 /* SystemConfiguration.framework in Frameworks */,
 				C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */,
@@ -832,13 +829,6 @@
 			name = "Push Notification";
 			sourceTree = "<group>";
 		};
-		0BED04911A0525D80033942A /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = HealthKit;
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -909,7 +899,6 @@
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
 				C490250A14DD630700BDD906 /* CoreLocation.framework */,
-				C490250814DD62BF00BDD906 /* StoreKit.framework */,
 				C4F337EE14D43B4700C4F573 /* SystemConfiguration.framework */,
 				C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */,
 				C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */,
@@ -1310,7 +1299,6 @@
 			isa = PBXGroup;
 			children = (
 				0B2DAF831A614CD900F9F317 /* Utilities */,
-				0BED04911A0525D80033942A /* HealthKit */,
 				0BED04901A0525CD0033942A /* Push Notification */,
 				0B36926D19C491ED00C269AD /* UserInterface */,
 				0B36924619C4853900C269AD /* DataManagement */,
@@ -1376,6 +1364,12 @@
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
 								enabled = 0;
 							};
 						};
@@ -1930,7 +1924,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1979,7 +1972,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
@@ -2138,7 +2130,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
