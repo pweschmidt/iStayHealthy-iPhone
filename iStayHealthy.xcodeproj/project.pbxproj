@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B06DCDF189D209E00008590 /* DropboxSDK.framework */; };
 		0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCEF189D53AE00008590 /* SeinfeldCalendar.m */; };
 		0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCF2189D53AE00008590 /* SideEffects.m */; };
 		0B07F1D71A0F739200AD761A /* PWESTableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */; };
@@ -687,7 +686,6 @@
 			files = (
 				72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
-				0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
 				72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
@@ -1928,6 +1926,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5Y4HL833A4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1954,8 +1953,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pweschmidt.iStayHealthy;
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
+				PROVISIONING_PROFILE = "3cd584a0-c31f-4b37-9b6c-994b2f3caccf";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3cd584a0-c31f-4b37-9b6c-994b2f3caccf";
+				PROVISIONING_PROFILE_SPECIFIER = "iStayHealthy Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1976,6 +1976,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5Y4HL833A4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1999,7 +2000,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pweschmidt.iStayHealthy;
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "bcfd316c-38bc-42eb-8ab9-ff559e242cac";
+				PROVISIONING_PROFILE = "79044a08-4f6d-4333-be2b-617879c5ec5f";
+				PROVISIONING_PROFILE_SPECIFIER = "iStayHealthy Distribution";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
@@ -2135,6 +2137,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5Y4HL833A4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2158,8 +2161,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pweschmidt.iStayHealthy;
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
-				"PROVISIONING_PROFILE[sdk=*]" = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
+				PROVISIONING_PROFILE = "79044a08-4f6d-4333-be2b-617879c5ec5f";
+				"PROVISIONING_PROFILE[sdk=*]" = "79044a08-4f6d-4333-be2b-617879c5ec5f";
+				PROVISIONING_PROFILE_SPECIFIER = "iStayHealthy Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
