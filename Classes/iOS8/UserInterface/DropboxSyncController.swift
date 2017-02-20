@@ -83,7 +83,7 @@ class DropboxSyncController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,7 +97,12 @@ class DropboxSyncController: UITableViewController {
             else {
                 cell.textLabel?.textColor = UIColor.lightGray
             }
-            cell.textLabel?.text = NSLocalizedString("Sync with Dropbox", comment: "")
+            if 0 == indexPath.row {
+                cell.textLabel?.text = NSLocalizedString("Get from Dropbox", comment: "")
+            }
+            else {
+                cell.textLabel?.text = NSLocalizedString("Save to Dropbox", comment: "")
+            }
         }
         else {
             if nil != DropboxClientsManager.authorizedClient {
@@ -114,8 +119,12 @@ class DropboxSyncController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if 0 == indexPath.section {
             if nil != DropboxClientsManager.authorizedClient {
-                restore()
-                backup()
+                if 0 == indexPath.row {
+                    restore()
+                }
+                else {
+                    backup()
+                }
             }
         }
         else {
