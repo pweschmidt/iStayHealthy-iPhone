@@ -61,11 +61,6 @@
     [save addTarget:self action:@selector(addButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *changeButton = [[UIBarButtonItem alloc] initWithCustomView:save];
 
-    /**
-       the following 2 lines are ONLY for testing push notifications. Not to be used in the published version
-     */
-//    UIBarButtonItem *sendToken = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(registerDeviceToken)];
-//    NSArray *buttons = @[sendToken, changeButton];
     NSArray *buttons = @[changeButton];
     self.navigationItem.rightBarButtonItems = buttons;
     self.chartBarButton = changeButton;
@@ -407,34 +402,6 @@
     CGFloat yOffset = scrollHeight + 100;
 
     return CGRectMake(0, yOffset, width, height);
-}
-
-- (void)registerDeviceToken
-{
-    TokenCertificate *certificate = [TokenCertificate sharedToken];
-    NSData *token = certificate.deviceToken;
-
-    if (nil != token && 0 < token.length)
-    {
-        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
-        mail.navigationController.navigationBar.tintColor = [UIColor blackColor];
-        NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
-        mail.mailComposeDelegate = self;
-        [mail setToRecipients:toRecipient];
-        [mail setSubject:@"Confirm iStayHealthy Registration"];
-
-        //        NSString *token = [certificate deviceTokenAsString];
-        NSString *tokenString = [self hexadecimalStringFromToken:token];
-#ifdef APPDEBUG
-        NSLog(@"The token is %@", tokenString);
-#endif
-        NSString *message = [NSString stringWithFormat:@"The device token is %@", tokenString];
-
-        [mail setMessageBody:message isHTML:YES];
-
-        [self presentViewController:mail animated:YES completion: ^{
-         }];
-    }
 }
 
 #pragma mark Mail delegate methods

@@ -88,7 +88,6 @@
 		0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */; };
 		0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */; };
 		0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */; };
-		0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BED04921A0525FD0033942A /* TokenCertificate.swift */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -395,7 +394,6 @@
 		0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iStayHealthy.isth; sourceTree = "<group>"; };
 		0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContentContainerController.swift; path = iOS8/UserInterface/PWESContentContainerController.swift; sourceTree = "<group>"; };
 		0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContentMenuHandler.swift; path = iOS8/UserInterface/PWESContentMenuHandler.swift; sourceTree = "<group>"; };
-		0BED04921A0525FD0033942A /* TokenCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenCertificate.swift; path = "iOS8/Push Notification/TokenCertificate.swift"; sourceTree = "<group>"; };
 		0BF338A119785D03004C3FB4 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ViewControllersCommon/HelpViewController.h; sourceTree = "<group>"; };
 		0BF338A219785D03004C3FB4 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ViewControllersCommon/HelpViewController.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -518,8 +516,6 @@
 		C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProceduresListTableViewController.h; path = ViewControllersCommon/ProceduresListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresListTableViewController.m; path = ViewControllersCommon/ProceduresListTableViewController.m; sourceTree = "<group>"; };
 		C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataRecoveryStepsTableViewController.swift; path = iOS8/UserInterface/PWESDataRecoveryStepsTableViewController.swift; sourceTree = "<group>"; };
-		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
-		C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CentralAppDelegate.m; path = ViewControllersCommon/CentralAppDelegate.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
 		C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataRecoveryHelpViewController.swift; path = iOS8/UserInterface/PWESDataRecoveryHelpViewController.swift; sourceTree = "<group>"; };
 		C4897FC4140FD0360033C61C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/CombiMeds.plist; sourceTree = "<group>"; };
@@ -819,14 +815,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0BED04901A0525CD0033942A /* Push Notification */ = {
-			isa = PBXGroup;
-			children = (
-				0BED04921A0525FD0033942A /* TokenCertificate.swift */,
-			);
-			name = "Push Notification";
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1037,8 +1025,6 @@
 				C45F838917B675350042E63A /* BaseTableViewController.m */,
 				C45F837C17B66CEF0042E63A /* BaseViewController.h */,
 				C45F837D17B66CEF0042E63A /* BaseViewController.m */,
-				C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */,
-				C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */,
 				C46EB5E017EB7E6100B9EA5A /* ClinicalAddressTableViewController.h */,
 				C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */,
 				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
@@ -1297,7 +1283,6 @@
 			isa = PBXGroup;
 			children = (
 				0B2DAF831A614CD900F9F317 /* Utilities */,
-				0BED04901A0525CD0033942A /* Push Notification */,
 				0B36926D19C491ED00C269AD /* UserInterface */,
 				0B36924619C4853900C269AD /* DataManagement */,
 				C4E2FA5119B0D9EA00D446DF /* iStayHealthy-Bridging-Header.h */,
@@ -1584,7 +1569,6 @@
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
 				0B2DAF851A614D1600F9F317 /* PWESDefines.swift in Sources */,
-				0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */,
 				0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */,
 				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
 				C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */,

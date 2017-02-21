@@ -35,16 +35,6 @@
     return self;
 }
 
-// - (id)initWithFrame:(CGRect)frame
-// {
-//	self = [super initWithFrame:frame];
-//	if (self)
-//	{
-//		[self addCustomBarbuttons];
-//	}
-//	return self;
-// }
-
 - (void)addCustomBarbuttons
 {
     NSArray *buttonTypes = [Menus toolbarButtonItems];
@@ -65,10 +55,6 @@
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openBackup:) buttonTag:index];
          }
-//         else if ([title isEqualToString:NSLocalizedString(@"Feedback", nil)])
-//         {
-//             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openFeedback) buttonTag:index];
-//         }
          else if ([title isEqualToString:NSLocalizedString(@"Email Data", nil)])
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(showFeedbackController:) buttonTag:index];
@@ -77,15 +63,8 @@
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openInfo:) buttonTag:index];
          }
-         else if ([title isEqualToString:NSLocalizedString(@"LocalBackups", nil)])
-         {
-             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openLocalBackup:) buttonTag:index];
-         }
-//         else if ([title isEqualToString:NSLocalizedString(@"Help", nil)])
-//         {
-//             barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openHelp:) buttonTag:index];
-//         }
-         if (nil != barbutton)
+
+        if (nil != barbutton)
          {
              [self.barButtons addObject:barbutton];
          }
@@ -99,7 +78,6 @@
 
     self.customItems = buttons;
 
-//    [self setItems:buttons];
 }
 
 - (void)showFeedbackController:(id)sender
@@ -127,35 +105,35 @@
 
 }
 
-- (void)openFeedback
-{
-    if (nil != self.toolbarManager)
-    {
-        __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
-        if ([strongDelegate respondsToSelector:@selector(showMailControllerHasAttachment:)])
-        {
-            [strongDelegate showMailControllerHasAttachment:NO];
-        }
-    }
-}
-
-
-- (void)openMailWithAttachment
-{
-    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIAlertActionStyleCancel action:nil];
-    PWESAlertAction *yes = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault action:^{
-        if (nil != self.toolbarManager)
-        {
-            __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
-            if ([strongDelegate respondsToSelector:@selector(showMailControllerHasAttachment:)])
-            {
-                [strongDelegate showMailControllerHasAttachment:NO];
-            }
-        }
-    }];
-    [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"Send data?", nil) message:NSLocalizedString(@"You are about to email data. Click Yes if you want to continue.", nil) presentingController:self.controller actions:@[yes, cancel]];
-    
-}
+//- (void)openFeedback
+//{
+//    if (nil != self.toolbarManager)
+//    {
+//        __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
+//        if ([strongDelegate respondsToSelector:@selector(showMailControllerHasAttachment:)])
+//        {
+//            [strongDelegate showMailControllerHasAttachment:NO];
+//        }
+//    }
+//}
+//
+//
+//- (void)openMailWithAttachment
+//{
+//    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIAlertActionStyleCancel action:nil];
+//    PWESAlertAction *yes = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault action:^{
+//        if (nil != self.toolbarManager)
+//        {
+//            __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
+//            if ([strongDelegate respondsToSelector:@selector(showMailControllerHasAttachment:)])
+//            {
+//                [strongDelegate showMailControllerHasAttachment:NO];
+//            }
+//        }
+//    }];
+//    [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"Send data?", nil) message:NSLocalizedString(@"You are about to email data. Click Yes if you want to continue.", nil) presentingController:self.controller actions:@[yes, cancel]];
+//    
+//}
 
 
 - (void)openSettings:(id)sender
@@ -206,30 +184,6 @@
     }
 }
 
-- (void)openHelp:(UIBarButtonItem *)sender
-{
-    if (nil != self.toolbarManager && nil != sender)
-    {
-        __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
-        if ([sender isKindOfClass:[UIBarButtonItem class]])
-        {
-            if ([strongDelegate respondsToSelector:@selector(showHelpControllerFromButton:)])
-            {
-                [strongDelegate showHelpControllerFromButton:(UIBarButtonItem *) sender];
-            }
-        }
-        else if ([sender isKindOfClass:[UIButton class]])
-        {
-            UIButton *button = (UIButton *) sender;
-            UIBarButtonItem *barButton = [self.barButtons objectAtIndex:button.tag];
-            if ([strongDelegate respondsToSelector:@selector(showHelpControllerFromButton:)])
-            {
-                [strongDelegate showHelpControllerFromButton:barButton];
-            }
-        }
-    }
-}
-
 - (void)openBackup:(UIBarButtonItem *)sender
 {
     if (nil != self.toolbarManager && nil != sender)
@@ -249,31 +203,6 @@
             if ([strongDelegate respondsToSelector:@selector(showPasswordControllerFromButton:)])
             {
                 [strongDelegate showDropboxControllerFromButton:barButton];
-            }
-        }
-    }
-}
-
-- (void)openLocalBackup:(UIBarButtonItem *)sender
-{
-    if (nil != self.toolbarManager && nil != sender)
-    {
-        __strong id <PWESToolbarDelegate> strongDelegate = self.toolbarManager;
-        if ([sender isKindOfClass:[UIBarButtonItem class]])
-        {
-            if ([strongDelegate respondsToSelector:@selector(showLocalBackupControllerFromButton:)])
-            {
-                [strongDelegate showLocalBackupControllerFromButton:(UIBarButtonItem *) sender];
-            }
-        }
-        else if ([sender isKindOfClass:[UIButton class]])
-        {
-            UIButton *button = (UIButton *) sender;
-            UIBarButtonItem *barButton = [self.barButtons objectAtIndex:button.tag];
-            if (nil != barButton &&
-                [strongDelegate respondsToSelector:@selector(showLocalBackupControllerFromButton:)])
-            {
-                [strongDelegate showLocalBackupControllerFromButton:barButton];
             }
         }
     }

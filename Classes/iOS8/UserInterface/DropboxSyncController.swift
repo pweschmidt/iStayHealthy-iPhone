@@ -59,6 +59,47 @@ class DropboxSyncController: UITableViewController {
         }
     }
     
+    var backupAction: PWESAlertAction {
+        get {
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Backup", comment: ""), style: .default) {
+                self.backup()
+            }
+            return action
+        }
+    }
+    
+    var cancelAction: PWESAlertAction {
+        get {
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Cancel", comment: ""), style: .cancel, action: nil)
+            return action
+        }
+    }
+    
+    var restoreAction: PWESAlertAction {
+        get{
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Restore", comment: ""), style: .default) {
+                self.restore()
+            }
+            return action
+        }
+    }
+    
+    var linkAction: PWESAlertAction {
+        get{
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Yes", comment: ""), style: .default) {
+                self.link()
+            }
+            return action
+        }
+    }
+
+    var unlinkAction: PWESAlertAction {
+        get{
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Yes", comment: ""), style: .default) { self.unlink() }
+            return action
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +124,12 @@ class DropboxSyncController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if 0 == section {
+            return 2
+        }
+        else {
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,15 +166,24 @@ class DropboxSyncController: UITableViewController {
         if 0 == indexPath.section {
             if nil != DropboxClientsManager.authorizedClient {
                 if 0 == indexPath.row {
-                    restore()
+                    let actions = [restoreAction, cancelAction]
+                    PWESAlertHandler.alertHandler.showAlertView(NSLocalizedString("Restore?", comment:""), message: NSLocalizedString("You are about to download  data from an external storage. Click Restore if you want to continue.", comment:""), presentingController: self, actions: actions)
                 }
                 else {
-                    backup()
+                    let actions = [backupAction, cancelAction]
+                    PWESAlertHandler.alertHandler.showAlertView(NSLocalizedString("Backup?", comment:""), message: NSLocalizedString("You are about to store your data externally. Click Backup if you want to continue.", comment:""), presentingController: self, actions: actions)
                 }
             }
         }
         else {
-            
+            if nil != DropboxClientsManager.authorizedClient {
+                let actions = [unlinkAction, cancelAction]
+                PWESAlertHandler.alertHandler.showAlertView(NSLocalizedString("Unlink?", comment:""), message: NSLocalizedString("Do you want to unlink your Dropbox account?", comment:""), presentingController: self, actions: actions)
+            }
+            else {
+                let actions = [linkAction, cancelAction]
+                PWESAlertHandler.alertHandler.showAlertView(NSLocalizedString("Link?", comment:""), message: NSLocalizedString("You are not linked to Dropbox account. Do you want to link it up now?", comment:""), presentingController: self, actions: actions)
+            }
         }
     }
     
@@ -319,5 +374,6 @@ class DropboxSyncController: UITableViewController {
         }
     }
     
-
+    
+    
 }

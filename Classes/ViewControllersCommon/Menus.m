@@ -20,7 +20,7 @@
     dispatch_once(&onceToken, ^{
                       items = @[
                               NSLocalizedString(@"Settings", nil),
-                              NSLocalizedString(@"LocalBackups", nil),
+                              /*NSLocalizedString(@"LocalBackups", nil),*/
                               NSLocalizedString(@"Backups", nil),
                               NSLocalizedString(@"Email Data", nil),
                               NSLocalizedString(@"Info", nil)
