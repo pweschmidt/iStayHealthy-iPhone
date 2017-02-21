@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wrv-XT-ghV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wrv-XT-ghV">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Content Container Controller-->
@@ -13,9 +18,9 @@
                         <viewControllerLayoutGuide type="bottom" id="NkN-GE-8yU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GTz-Wu-l2z">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.99215686270000003" green="1" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99215686270000003" green="1" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xic-1K-ddP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -31,102 +36,14 @@
                         <viewControllerLayoutGuide type="bottom" id="zZa-tW-Aox"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M8X-Cy-deM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.99215686270000003" green="1" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99215686270000003" green="1" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDx-9t-SLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2369" y="460"/>
-        </scene>
-        <!--Login View Controller-->
-        <scene sceneID="4eP-cJ-h2Y">
-            <objects>
-                <viewController storyboardIdentifier="loginViewController" id="vCY-2R-y44" customClass="PWESLoginViewController" customModule="iStayHealthy" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2Hh-q3-xN1"/>
-                        <viewControllerLayoutGuide type="bottom" id="d5y-98-nNf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Yh4-RW-sYH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QqV-Vi-qro">
-                                <rect key="frame" x="132" y="80" width="300" height="110"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r0d-mq-6Ic">
-                                        <rect key="frame" x="1" y="11" width="50" height="50"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="iStayHealthy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5S-IG-ek3">
-                                        <rect key="frame" x="53" y="8" width="246.5" height="54"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="v1.0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ezu-wa-bPJ">
-                                        <rect key="frame" x="155" y="60" width="60" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLo-3l-0xa">
-                                <rect key="frame" x="132" y="198" width="300" height="82"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bLF-n4-liP">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6G-WN-fZh">
-                                        <rect key="frame" x="0.0" y="38" width="300" height="30"/>
-                                        <state key="normal" title="Forgot">
-                                            <color key="titleColor" red="0.99999928469999999" green="0.063990988149999997" blue="0.099229700700000006" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="forgotButtonPressed:" destination="vCY-2R-y44" eventType="touchUpInside" id="pvG-zP-U2P"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(c) Peter Schmidt, 2014" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikI-nc-WpB">
-                                <rect key="frame" x="150" y="518" width="300" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="mQr-oI-4vX"/>
-                                    <constraint firstAttribute="height" constant="21" id="rfh-1u-5aF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.99215686270000003" green="1" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="QqV-Vi-qro" secondAttribute="centerX" id="B5v-9u-SJn"/>
-                            <constraint firstAttribute="centerX" secondItem="ikI-nc-WpB" secondAttribute="centerX" id="MVV-OZ-gU8"/>
-                            <constraint firstItem="d5y-98-nNf" firstAttribute="top" secondItem="ikI-nc-WpB" secondAttribute="bottom" constant="50" id="Mqg-zW-D5u"/>
-                            <constraint firstAttribute="centerX" secondItem="nLo-3l-0xa" secondAttribute="centerX" id="Vpu-lH-LzL"/>
-                            <constraint firstItem="nLo-3l-0xa" firstAttribute="top" secondItem="QqV-Vi-qro" secondAttribute="bottom" constant="8" id="ybn-xM-kwv"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="copyrightLabel" destination="ikI-nc-WpB" id="Qh5-nm-kT8"/>
-                        <outlet property="forgotButton" destination="Z6G-WN-fZh" id="gJm-4V-RwY"/>
-                        <outlet property="icon" destination="r0d-mq-6Ic" id="myo-6S-XAo"/>
-                        <outlet property="passwordField" destination="bLF-n4-liP" id="ulx-ni-bgX"/>
-                        <outlet property="titleLabel" destination="f5S-IG-ek3" id="S44-Dl-2Cj"/>
-                        <outlet property="versionLabel" destination="Ezu-wa-bPJ" id="3nI-Yn-nC5"/>
-                        <outlet property="view" destination="Yh4-RW-sYH" id="Jzg-6b-uoo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RW5-AO-tuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2724" y="-224"/>
         </scene>
     </scenes>
 </document>

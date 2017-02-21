@@ -7,13 +7,34 @@
 //
 
 import UIKit
+import Messages
 
-class PWESContentContainerController: UIViewController, PWESContentMenuHandler, PWESLoginHandler
+class PWESContentContainerController: UIViewController, PWESContentMenuHandler,  MFMailComposeViewControllerDelegate
 {
     var customNavigationController: UINavigationController?
     var isCollapsed: Bool = true
     var menuController: HamburgerMenuTableViewController?
-    var defaultLoginController: PWESLoginViewController?
+//    var defaultLoginController: PWESLoginViewController?
+    var passwordTextField: UITextField?
+    
+    var passwordAction: PWESAlertAction {
+        get {
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Log in",comment: ""), style: .default) {
+                self.loadDefaultController()
+            }
+            return action
+        }
+    }
+
+    var forgotPasswordAction: PWESAlertAction {
+        get {
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Forgot Password?",comment: ""), style: .default) {
+                self.sendForgotEmail()
+            }
+            return action
+        }
+    }
+
     
 
     override func viewDidLoad()
@@ -53,16 +74,70 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
     }
     
-    func loadLoginController()
+    
+    fileprivate func sendForgotEmail() {
+        if !MFMailComposeViewController.canSendMail()
+        {
+            return
+        }
+        let mailController:MFMailComposeViewController = MFMailComposeViewController()
+        mailController.navigationController?.navigationBar.tintColor = UIColor.black
+        let recipients: NSArray = ["istayhealthy.app@gmail.com"]
+        let subject: String = "I forgot my iStayHealthy password (iPhone)"
+        mailController.mailComposeDelegate = self
+        mailController.setToRecipients(recipients as? [String])
+        mailController.setSubject(subject)
+        self.present(mailController, animated: true) { () -> Void in
+        }        
+    }
+    
+    
+    fileprivate func loadLoginController()
     {
-        let storyboard: UIStoryboard = UIStoryboard(name: "PWESMainStoryboard", bundle: nil)
+        let loginController = UIAlertController(title: NSLocalizedString("Login", comment: ""), message:"", preferredStyle: .alert)
         
-        let loginController: PWESLoginViewController = storyboard.instantiateViewController(withIdentifier: "loginViewController") as! PWESLoginViewController
-        loginController.loginHandler = self
-        self.defaultLoginController = loginController        
-        self.view.addSubview(loginController.view)
-        //        addChildViewController(loginController)
-        loginController.didMove(toParentViewController: self)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let loginAction = UIAlertAction(title: NSLocalizedString("Log in", comment: ""), style: .default) { (action) in
+            
+            if let field = self.passwordTextField {
+                if let passwordText = field.text {
+                    let hash = passwordText.hash
+                    let isValidated = KeychainHandler.compareKeychainValueFor(matchingPIN: hash)
+                    if isValidated {
+                        self.loadDefaultController()
+                    }
+                    else if passwordText == kSecretKey {
+                        self.loadDefaultController()
+                    }
+                    else {
+                        loginController.message = NSLocalizedString("Wrong Password! Try again", comment: "")
+                    }
+                }
+            }
+            
+        }
+        let forgotAction = UIAlertAction(title: NSLocalizedString("Forgot password?", comment: ""), style: .destructive) { (action) in
+        }
+        
+        loginController.addTextField { (textField) in
+            self.passwordTextField = textField
+            self.passwordTextField?.placeholder = NSLocalizedString("Password", comment: "")
+            self.passwordTextField?.isSecureTextEntry = true
+        }
+        loginController.addAction(loginAction)
+        loginController.addAction(forgotAction)
+        loginController.addAction(cancelAction)
+        
+        present(loginController, animated: true, completion: nil)
+        
+//        let storyboard: UIStoryboard = UIStoryboard(name: "PWESMainStoryboard", bundle: nil)
+//        
+//        let loginController: PWESLoginViewController = storyboard.instantiateViewController(withIdentifier: "loginViewController") as! PWESLoginViewController
+//        loginController.loginHandler = self
+//        self.defaultLoginController = loginController        
+//        self.view.addSubview(loginController.view)
+//        //        addChildViewController(loginController)
+//        loginController.didMove(toParentViewController: self)
         
     }
         
@@ -391,19 +466,19 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         return navigationController
     }
     
-    func didLogin()
-    {
-        if let loginController = defaultLoginController
-        {
-            loginController.view.removeFromSuperview()
-            loginController.removeFromParentViewController()
-            self.defaultLoginController = nil
-            loadDefaultController()
-        }
-    }
-    
-    func didLoginFailed()
-    {
-    }
+//    func didLogin()
+//    {
+//        if let loginController = defaultLoginController
+//        {
+//            loginController.view.removeFromSuperview()
+//            loginController.removeFromParentViewController()
+//            self.defaultLoginController = nil
+//            loadDefaultController()
+//        }
+//    }
+//    
+//    func didLoginFailed()
+//    {
+//    }
     
 }
