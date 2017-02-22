@@ -100,6 +100,7 @@
 		72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7151DC7989E0090C801 /* Alamofire.framework */; };
 		72D0F7181DC7991D0090C801 /* DropboxSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */; };
 		72D1A6CD1E36442500ED9E3E /* iStayHealthyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */; };
+		72F8FFD01E5DBDE5002AF84C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
@@ -407,6 +408,7 @@
 		72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxSyncController.swift; path = iOS8/UserInterface/DropboxSyncController.swift; sourceTree = "<group>"; };
 		72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iStayHealthyAppDelegate.swift; sourceTree = "<group>"; };
 		72D72DD51DCB8DC100A60DAF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */,
 				0B263A211AF4D7390037984B /* icon_UTI_large_iPad.png */,
 				0B263A221AF4D7390037984B /* icon_UTI_small_iPad.png */,
 				0B263A1D1AF4D71A0037984B /* icon_UTI_large_iPhone.png */,
@@ -1412,6 +1415,7 @@
 				0B263A241AF4D7390037984B /* icon_UTI_small_iPad.png in Resources */,
 				0B263A231AF4D7390037984B /* icon_UTI_large_iPad.png in Resources */,
 				0B36926F19C4922800C269AD /* PWESMainStoryboard.storyboard in Resources */,
+				72F8FFD01E5DBDE5002AF84C /* Settings.bundle in Resources */,
 				C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */,
 				C4C41A3715F1445400882416 /* chimes.caf in Resources */,
 				C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */,

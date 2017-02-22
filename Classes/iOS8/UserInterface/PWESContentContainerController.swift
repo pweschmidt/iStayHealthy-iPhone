@@ -44,10 +44,17 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         let settings: AppSettings = AppSettings()
         if settings.hasPasswordEnabled()
         {
+            if UserDefaults.standard.bool(forKey: "resetPassword") {
+                KeychainHandler.resetPasswordAndFlags()
+                UserDefaults.standard.set(false, forKey: "resetPassword")
+            }
             loadLoginController()
         }
         else
         {
+            if UserDefaults.standard.bool(forKey: "resetPassword") {
+                UserDefaults.standard.set(false, forKey: "resetPassword")
+            }
             loadDefaultController()
         }
         
@@ -65,12 +72,18 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         let settings: AppSettings = AppSettings()
         if settings.hasPasswordEnabled()
         {
-            if nil != customNavigationController
-            {
-                customNavigationController!.view.removeFromSuperview()
-                customNavigationController!.removeFromParentViewController()
+            if UserDefaults.standard.bool(forKey: "resetPassword") {
+                KeychainHandler.resetPasswordAndFlags()
+                UserDefaults.standard.set(false, forKey: "resetPassword")
             }
-            loadLoginController()
+            else {
+                if nil != customNavigationController
+                {
+                    customNavigationController!.view.removeFromSuperview()
+                    customNavigationController!.removeFromParentViewController()
+                }
+                loadLoginController()
+            }
         }
     }
     
@@ -129,15 +142,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         loginController.addAction(cancelAction)
         
         present(loginController, animated: true, completion: nil)
-        
-//        let storyboard: UIStoryboard = UIStoryboard(name: "PWESMainStoryboard", bundle: nil)
-//        
-//        let loginController: PWESLoginViewController = storyboard.instantiateViewController(withIdentifier: "loginViewController") as! PWESLoginViewController
-//        loginController.loginHandler = self
-//        self.defaultLoginController = loginController        
-//        self.view.addSubview(loginController.view)
-//        //        addChildViewController(loginController)
-//        loginController.didMove(toParentViewController: self)
         
     }
         
@@ -337,12 +341,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
-//        else if controllerName == kDropboxController
-//        {
-//            let controller: DropboxViewController = DropboxViewController()
-//            controller.menuHandler = self
-//            navigationController = UINavigationController(rootViewController: controller)
-//        }
         else if controllerName == kHIVMedsController
         {
             let controller: MyHIVCollectionViewController = MyHIVCollectionViewController()
@@ -409,12 +407,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
-//        else if controllerName == kDropboxController
-//        {
-//            let controller: DropboxViewController = DropboxViewController()
-//            controller.menuHandler = self
-//            navigationController = UINavigationController(rootViewController: controller)
-//        }
         else if controllerName == kHIVMedsController
         {
             let controller: MyHIVMedicationViewController = MyHIVMedicationViewController()
@@ -465,20 +457,5 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         }
         return navigationController
     }
-    
-//    func didLogin()
-//    {
-//        if let loginController = defaultLoginController
-//        {
-//            loginController.view.removeFromSuperview()
-//            loginController.removeFromParentViewController()
-//            self.defaultLoginController = nil
-//            loadDefaultController()
-//        }
-//    }
-//    
-//    func didLoginFailed()
-//    {
-//    }
     
 }

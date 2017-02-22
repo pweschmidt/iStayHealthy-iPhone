@@ -21,66 +21,66 @@
 	return handling;
 }
 
-- (void)disablePasswordForUpdate
-{
-	if (![self hasUpdated] && [self hasPasswordEnabled])
-	{
-		[KeychainHandler resetPasswordAndFlags];
-		BOOL hasPassword = [self hasPasswordEnabled];
-		if (hasPassword) // make damn sure
-		{
-			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-			[defaults setBool:NO forKey:kIsPasswordEnabled];
-			[defaults synchronize];
-		}
-	}
-}
+//- (void)disablePasswordForUpdate
+//{
+//	if (![self hasUpdated] && [self hasPasswordEnabled])
+//	{
+//		[KeychainHandler resetPasswordAndFlags];
+//		BOOL hasPassword = [self hasPasswordEnabled];
+//		if (hasPassword) // make damn sure
+//		{
+//			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//			[defaults setBool:NO forKey:kIsPasswordEnabled];
+//			[defaults synchronize];
+//		}
+//	}
+//}
 
-- (BOOL)hasUpdated
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL hasUpdatedToCurrentVersion = [defaults boolForKey:kIsVersionUpdate401];
-	return hasUpdatedToCurrentVersion;
-}
-
-- (void)resetUpdateSettings
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setBool:YES forKey:kIsVersionUpdate401];
-	[defaults synchronize];
-}
+//- (BOOL)hasUpdated
+//{
+//	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//	BOOL hasUpdatedToCurrentVersion = [defaults boolForKey:kIsVersionUpdate401];
+//	return hasUpdatedToCurrentVersion;
+//}
+//
+//- (void)resetUpdateSettings
+//{
+//	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//	[defaults setBool:YES forKey:kIsVersionUpdate401];
+//	[defaults synchronize];
+//}
 
 - (BOOL)hasPasswordEnabled
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	BOOL isPasswordEnabled = [defaults boolForKey:kIsPasswordEnabled];
-
 	return isPasswordEnabled;
 }
 
-- (NSString *)updateMessage
-{
-	if (![self hasUpdated])
-	{
-		NSMutableString *helpString = [NSMutableString string];
-		if ([self hasPasswordEnabled])
-		{
-			NSString *passReset = NSLocalizedString(@"Please reset password after upgrade", nil);
-			[helpString appendString:passReset];
-		}
-		NSString *iCloud = NSLocalizedString(@"iCloudLoading", nil);
-		[helpString appendString:@" "];
-		[helpString appendString:iCloud];
-		NSString *data = NSLocalizedString(@"DataVisibility", nil);
-		[helpString appendString:@" "];
-		[helpString appendString:data];
-		return helpString;
-	}
-	else
-	{
-		return nil;
-	}
-}
+
+//- (NSString *)updateMessage
+//{
+//	if (![self hasUpdated])
+//	{
+//		NSMutableString *helpString = [NSMutableString string];
+//		if ([self hasPasswordEnabled])
+//		{
+//			NSString *passReset = NSLocalizedString(@"Please reset password after upgrade", nil);
+//			[helpString appendString:passReset];
+//		}
+//		NSString *iCloud = NSLocalizedString(@"iCloudLoading", nil);
+//		[helpString appendString:@" "];
+//		[helpString appendString:iCloud];
+//		NSString *data = NSLocalizedString(@"DataVisibility", nil);
+//		[helpString appendString:@" "];
+//		[helpString appendString:data];
+//		return helpString;
+//	}
+//	else
+//	{
+//		return nil;
+//	}
+//}
 
 - (void)saveUbiquityURL:(NSURL *)ubiquityURL
 {
