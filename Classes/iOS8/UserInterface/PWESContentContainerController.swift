@@ -16,6 +16,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     var menuController: HamburgerMenuTableViewController?
 //    var defaultLoginController: PWESLoginViewController?
     var passwordTextField: UITextField?
+    var alertController: UIAlertController?
     
     var passwordAction: PWESAlertAction {
         get {
@@ -48,7 +49,9 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
                 KeychainHandler.resetPasswordAndFlags()
                 UserDefaults.standard.set(false, forKey: "resetPassword")
             }
-            loadLoginController()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                self.loadLoginController()
+            })
         }
         else
         {
@@ -107,7 +110,10 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     fileprivate func loadLoginController()
     {
-        let loginController = UIAlertController(title: NSLocalizedString("Login", comment: ""), message:"", preferredStyle: .alert)
+        alertController = UIAlertController(title: NSLocalizedString("Login", comment: ""), message:"", preferredStyle: .alert)
+        if nil == alertController {
+            return
+        }
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         let loginAction = UIAlertAction(title: NSLocalizedString("Log in", comment: ""), style: .default) { (action) in
@@ -123,7 +129,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
                         self.loadDefaultController()
                     }
                     else {
-                        loginController.message = NSLocalizedString("Wrong Password! Try again", comment: "")
+                        self.alertController!.message = NSLocalizedString("Wrong Password! Try again", comment: "")
                     }
                 }
             }
@@ -132,16 +138,16 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         let forgotAction = UIAlertAction(title: NSLocalizedString("Forgot password?", comment: ""), style: .destructive) { (action) in
         }
         
-        loginController.addTextField { (textField) in
+        alertController!.addTextField { (textField) in
             self.passwordTextField = textField
             self.passwordTextField?.placeholder = NSLocalizedString("Password", comment: "")
             self.passwordTextField?.isSecureTextEntry = true
         }
-        loginController.addAction(loginAction)
-        loginController.addAction(forgotAction)
-        loginController.addAction(cancelAction)
+        alertController!.addAction(loginAction)
+        alertController!.addAction(forgotAction)
+        alertController!.addAction(cancelAction)
         
-        present(loginController, animated: true, completion: nil)
+        present(alertController!, animated: true, completion: nil)
         
     }
         

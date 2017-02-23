@@ -77,7 +77,7 @@
 - (void)done:(id)sender
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:^{
+    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault action:^{
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
 
