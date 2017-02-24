@@ -7,7 +7,6 @@
 //
 
 #import "ResultsCollectionViewController.h"
-// #import "CoreDataManager.h"
 #import "BaseCollectionViewCell.h"
 #import "Results+Handling.h"
 #import "EditResultsTableViewController.h"
@@ -40,7 +39,7 @@
 
 - (void)addButtonPressed:(id)sender
 {
-    if (nil == self.customPopoverController)
+    if (nil == self.popoverController)
     {
         EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:nil hasNumericalInput:YES];
         editController.preferredContentSize = CGSizeMake(320, 568);
@@ -50,7 +49,7 @@
     }
     else
     {
-        [self hidePopover];
+//        [self hidePopover];
     }
 }
 
@@ -100,7 +99,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self hidePopover];
+//    [self hidePopover];
     Results *results = [self.results objectAtIndex:indexPath.row];
     EditResultsTableViewController *editController = [[EditResultsTableViewController alloc] initWithStyle:UITableViewStyleGrouped managedObject:results hasNumericalInput:YES];
     editController.preferredContentSize = CGSizeMake(320, 568);
@@ -119,13 +118,10 @@
     [manager fetchData:kResults predicate:nil sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
-             UIAlertView *errorAlert = [[UIAlertView alloc]
-                                        initWithTitle:NSLocalizedString(@"Error", nil)
-                                                  message:NSLocalizedString(@"Error loading data", nil)
-                                                 delegate:nil
-                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                        otherButtonTitles:nil];
-             [errorAlert show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+              message:NSLocalizedString(@"Error loading data", nil)
+              presentingController:self];
          }
          else
          {

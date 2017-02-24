@@ -9,7 +9,6 @@
 #import "EditPreviousMedsTableViewController.h"
 #import "UITableViewCell+Extras.h"
 #import "NSDate+Extras.h"
-// #import "CoreDataManager.h"
 #import "Medication+Handling.h"
 #import "PreviousMedication+Handling.h"
 #import "UILabel+Standard.h"
@@ -70,12 +69,10 @@
     }
     if (nothingToDo)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Nothing to save", nil)
-                                                        message:NSLocalizedString(@"There is nothing to save", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithOKButton:NSLocalizedString(@"Nothing to save", nil)
+         message:NSLocalizedString(@"There is nothing to save", nil)
+         presentingController:self];
     }
     else
     {
@@ -85,8 +82,8 @@
         med.endDate = self.endDate;
         PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
         NSError *error = nil;
-        [manager saveContext:&error];
-        [self popController];
+        [manager saveContextAndReturnError:&error];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

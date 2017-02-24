@@ -7,4 +7,6 @@ xcuserdata
 profile
 *.hmap
 DerivedData
+Carthage/Build
+Carthage/Checkouts
 

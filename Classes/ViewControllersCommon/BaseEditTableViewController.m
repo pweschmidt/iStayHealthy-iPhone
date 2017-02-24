@@ -10,7 +10,6 @@
 #import "Utilities.h"
 #import "NSDate+Extras.h"
 #import "UIFont+Standard.h"
-// #import "CoreDataManager.h"
 #import "UILabel+Standard.h"
 #import "UIFont+Standard.h"
 #import "iStayHealthy-Swift.h"
@@ -119,25 +118,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)popController
-{
-    if ([Utilities isIPad])
-    {
-        if (nil != self.customPopOverDelegate)
-        {
-            __strong id <PWESPopoverDelegate> strongPopoverDelegate = self.customPopOverDelegate;
-            if ([strongPopoverDelegate respondsToSelector:@selector(hidePopover)])
-            {
-                [strongPopoverDelegate hidePopover];
-            }
-        }
-        [self cancel];
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
 
 - (void)cancel
 {
@@ -158,9 +138,10 @@
     [manager removeManagedObject:self.managedObject error:&error];
     if (nil == error)
     {
-        [manager saveContext:&error];
+        [manager saveContextAndReturnError:&error];
     }
-    [self popController];
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell
@@ -413,26 +394,14 @@
     return NO;
 }
 
-#pragma UIAlertViewDelegate methods
-
 - (void)showDeleteAlertView
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-    [alert show];
-}
-
-/**
-   if user really wants to delete the entry call removeSQLEntry
- */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
-    {
+    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIAlertActionStyleCancel action:nil];
+    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", @"Yes") style:UIAlertActionStyleDefault action:^{
         [self removeManagedObject];
-    }
+    }];
+    [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") presentingController:self actions:@[cancel, ok]];
+    
 }
 
 #pragma mark - ActionSheet delegate only used for iOS 6.x

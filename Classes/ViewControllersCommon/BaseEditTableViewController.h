@@ -11,7 +11,6 @@
 #import "UIFont+Standard.h"
 #import "PWESCustomTextfieldCell.h"
 #import "PWESBloodPressureCell.h"
-#import "PWESPopoverDelegate.h"
 
 #define kBaseDateCellTag           99
 #define kBaseDateLabelTag          101
@@ -21,7 +20,7 @@
 #define kBaseDateCellRowIdentifier @"DateSelectionCell"
 
 @interface BaseEditTableViewController : UITableViewController
-    <UITextFieldDelegate, UIAlertViewDelegate>
+    <UITextFieldDelegate>
 @property (nonatomic, strong) NSDateFormatter *formatter;
 @property (nonatomic, strong) NSMutableDictionary *cellDictionary;
 @property (nonatomic, strong) NSMutableDictionary *inputTypeForTextView;
@@ -31,7 +30,6 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSIndexPath *datePickerIndexPath;
 @property (nonatomic, weak) id <AddMenuNavigationDelegate> menuDelegate;
-@property (nonatomic, weak) id <PWESPopoverDelegate> customPopOverDelegate;
 
 - (id)  initWithStyle:(UITableViewStyle)style
         managedObject:(NSManagedObject *)managedObject
@@ -60,7 +58,7 @@
 - (void)selectDatePickerMode:(UIDatePicker *)datePicker;
 - (UITextField *)customTextFieldForTagNumber:(NSNumber *)tagNumber;
 - (BOOL)textFieldIsInDictionary:(UITextField *)textField;
-- (void)popController;
+//- (void)popController;
 - (void)save:(id)sender;
 - (void)removeManagedObject;
 - (void)showDeleteAlertView;

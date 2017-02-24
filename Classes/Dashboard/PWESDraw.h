@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PWESDraw : NSObject
+@interface PWESDraw : NSObject<CALayerDelegate>
 {
 	CGFloat dashPattern[2];
 	CGFloat medDashPattern[2];

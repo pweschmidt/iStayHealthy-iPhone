@@ -8,7 +8,6 @@
 
 #import "EditResultsTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "Results+Handling.h"
 #import "Utilities.h"
 #import "PWESBloodPressureCell.h"
@@ -179,8 +178,10 @@
     self.menuDelegate = nil;
     if (self.hasImportedData)
     {
-        UIAlertView *importAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ImportedData", nil) message:NSLocalizedString(@"ReviewAndSave", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-        [importAlert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithOKButton:NSLocalizedString(@"ImportedData", nil)
+         message:NSLocalizedString(@"ReviewAndSave", nil)
+         presentingController:self];
     }
 }
 
@@ -229,15 +230,8 @@
     }
 
     NSError *error = nil;
-    [manager saveContext:&error];
-    if (self.hasImportedData && self.isEditMode)
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
-    {
-        [self popController];
-    }
+    [manager saveContextAndReturnError:&error];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)cancel

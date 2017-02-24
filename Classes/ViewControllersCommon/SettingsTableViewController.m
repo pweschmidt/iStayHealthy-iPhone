@@ -9,9 +9,8 @@
 #import "SettingsTableViewController.h"
 #import "UILabel+Standard.h"
 #import "KeychainHandler.h"
-//#import "ContentContainerViewController.h"
-//#import "ContentNavigationController.h"
 #import "Utilities.h"
+#import "iStayHealthy-Swift.h"
 
 @interface SettingsTableViewController ()
 @property (nonatomic, strong) UISwitch *passwordSwitch;
@@ -19,6 +18,7 @@
 @property (nonatomic, strong) NSMutableDictionary *textViews;
 @property (nonatomic, strong) NSMutableDictionary *passwordDictionary;
 @property (nonatomic, strong) NSMutableArray *passwordSetArray;
+@property (nonatomic, strong) PWESAlertHandler *handler;
 @end
 
 @implementation SettingsTableViewController
@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.handler = [PWESAlertHandler alertHandler];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     [self setTitleViewWithTitle:NSLocalizedString(@"Password", nil)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
@@ -76,19 +77,19 @@
 - (void)done:(id)sender
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault action:^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 
     if (!self.passwordSwitch.isOn)
     {
         [KeychainHandler deleteItemFromKeychainWithIdentifier:kIsPasswordEnabled];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
         [defaults synchronize];
-        UIAlertView *isDone = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Password Disabled", @"Password Disabled")
-                                         message:NSLocalizedString(@"No Password", @"No Password")
-                                        delegate:self
-                               cancelButtonTitle:@"Ok"
-                               otherButtonTitles:nil];
-        [isDone show];
+        [self.handler
+         showAlertView:NSLocalizedString(@"Password Disabled", @"Password Disabled")
+         message:NSLocalizedString(@"No Password", @"No Password")
+         presentingController:self actions:@[ok]];
         return;
     }
     if (2 != self.textViews.allKeys.count)
@@ -123,54 +124,28 @@
                                          forIdentifier:kIsPasswordEnabled];
     }
 
+    
+    
+    
     if (success)
     {
-        UIAlertView *isDone = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Password", @"Password")
-                                         message:NSLocalizedString(@"PasswordSet", @"PasswordSet")
-                                        delegate:self
-                               cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                               otherButtonTitles:nil];
-        [isDone show];
+        [self.handler
+         showAlertView:NSLocalizedString(@"Password", @"Password")
+         message:NSLocalizedString(@"PasswordSet", @"PasswordSet")
+         presentingController:self actions:@[ok]];
+        [defaults setBool:YES forKey:kIsPasswordEnabled];
+        
     }
     else
     {
-        UIAlertView *isDone = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Password Error", nil)
-                                         message:NSLocalizedString(@"Password Problem", nil)
-                                        delegate:self
-                               cancelButtonTitle:@"Ok"
-                               otherButtonTitles:nil];
-        [isDone show];
+        [self.handler
+         showAlertView:NSLocalizedString(@"Password Error", nil)
+         message:NSLocalizedString(@"Password Problem", nil)
+         presentingController:self actions:@[ok]];
         [defaults setBool:NO forKey:kIsPasswordEnabled];
     }
 
     [defaults synchronize];
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if ([Utilities isIPad])
-    {
-        [self hidePopover];
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
-- (void)hidePopover
-{
-    __strong id <PWESPopoverDelegate> strongDelegate = self.popoverDelegate;
-
-    if (nil != strongDelegate)
-    {
-        if ([strongDelegate respondsToSelector:@selector(hidePopover)])
-        {
-            [strongDelegate hidePopover];
-        }
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -352,8 +327,10 @@
 {
     if (4 > textField.text.length)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password too short", @"Password too short") message:NSLocalizedString(@"Try Again", @"Try Again") delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithCancelButton:NSLocalizedString(@"Password too short", @"Password too short")
+         message:NSLocalizedString(@"Try Again", @"Try Again")
+         presentingController:self];
         return NO;
     }
 
@@ -363,8 +340,10 @@
 
     if (nil == otherPassword || ![otherPassword isEqualToString:textField.text])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Passwords don't match", nil) message:NSLocalizedString(@"Try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertViewWithCancelButton:NSLocalizedString(@"Passwords don't match", nil)
+         message:NSLocalizedString(@"Try Again", @"Try Again")
+         presentingController:self];
         textField.text = @"";
         return NO;
     }

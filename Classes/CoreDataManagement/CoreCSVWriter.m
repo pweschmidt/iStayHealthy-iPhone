@@ -18,7 +18,6 @@
 #import "Wellness+Handling.h"
 #import "Contacts+Handling.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "NSDate+Extras.h"
 #import "iStayHealthy-Swift.h"
 
@@ -32,18 +31,6 @@ static NSArray * csvModels()
              kProcedures,
              kOtherMedication,
              kPreviousMedication];
-}
-
-static NSDictionary * csvMap()
-{
-    return @{ kResults : kResults,
-              kMedication : kMedications,
-              kMissedMedication : kMissedMedications,
-              kSideEffects : kHIVSideEffects,
-              kContacts : kClinicalContacts,
-              kProcedures : kIllnessAndProcedures,
-              kOtherMedication : kOtherMedications,
-              kPreviousMedication : kPreviousMedications };
 }
 
 static NSDictionary * csvSortTerms()

@@ -9,7 +9,6 @@
 #import "EditCurrentHIVMedsTableViewController.h"
 #import "UITableViewCell+Extras.h"
 #import "NSDate+Extras.h"
-// #import "CoreDataManager.h"
 #import "Medication+Handling.h"
 #import "PreviousMedication+Handling.h"
 #import "UILabel+Standard.h"
@@ -83,9 +82,9 @@
     if (isSave)
     {
         NSError *error = nil;
-        [manager saveContext:&error];
+        [manager saveContextAndReturnError:&error];
     }
-    [self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

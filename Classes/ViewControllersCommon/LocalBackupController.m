@@ -23,8 +23,18 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = DEFAULT_BACKGROUND;
     [self setTitleViewWithTitle:NSLocalizedString(@"Local Backup/Restore", nil)];
-    [self disableRightBarButtons];
+//    [self disableRightBarButtons];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                              target:self action:@selector(done:)];
 }
+
+- (void)done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -125,51 +135,34 @@
         [manager loadDataFromBackupFile:^(BOOL success, NSError *error) {
                              if (success)
                              {
-                                 [[[UIAlertView alloc]
-                                   initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-                                             message:NSLocalizedString(@"Data were retrieved locally.", nil)
-                                            delegate:nil
-                                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                                  show];
+                                 [PWESAlertHandler.alertHandler showAlertViewWithOKButton:NSLocalizedString(@"Restore Finished", nil) message:NSLocalizedString(@"Data were retrieved locally.", nil) presentingController:self];
                              }
                              else
                              {
-                                 [[[UIAlertView alloc]
-                                   initWithTitle:NSLocalizedString(@"Error restoring", nil)
-                                             message:NSLocalizedString(@"There was an error when retrieving data locally.", nil)
-                                            delegate:nil
-                                   cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                                  show];
+                                 [PWESAlertHandler.alertHandler showAlertViewWithCancelButton:NSLocalizedString(@"Error restoring", nil) message:NSLocalizedString(@"There was an error when retrieving data locally.", nil) presentingController:self];
                              }
             
         }];
     }
     else if (1 == indexPath.section) // disabling icloud
     {
-        UIAlertView *warning = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DisableiCloud", nil) message:NSLocalizedString(@"Irreversible", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Proceed", nil), nil];
-        [warning show];
+        PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
+        PWESAlertAction *proceed = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Proceed", nil) style:UIAlertActionStyleDefault action:^{
+            if (nil != self.progressLabel)
+            {
+                self.progressLabel.text = NSLocalizedString(@"ResettingStore", nil);
+            }
+            [self transferDataFromiCloud];
+        }];
+        [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"DisableiCloud", nil) message:NSLocalizedString(@"Irreversible", nil) presentingController:self actions:@[proceed, cancel]];
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([title isEqualToString:NSLocalizedString(@"Proceed", nil)])
-    {
-        if (nil != self.progressLabel)
-        {
-            self.progressLabel.text = NSLocalizedString(@"ResettingStore", nil);
-        }
-        [self transferDataFromiCloud];
-    }
 }
 
 - (void)transferDataFromiCloud
 {
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
-    NSError *error = nil;
-    [manager saveAndExport:&error completionBlock:^(BOOL success, NSError * exportError) {
+    [manager saveAndExport:^(BOOL success, NSError * exportError) {
         if (success)
         {
             NSError *innerError = nil;
@@ -250,17 +243,17 @@
     
 }
 
-- (void)closeController
-{
-    if ([Utilities isIPad])
-    {
-        [self hidePopover];
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+//- (void)closeController
+//{
+//    if ([Utilities isIPad])
+//    {
+//        [self hidePopover];
+//    }
+//    else
+//    {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 #pragma mark - override the notification handlers
 - (void)reloadSQLData:(NSNotification *)notification

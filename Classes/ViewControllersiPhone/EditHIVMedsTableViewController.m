@@ -9,7 +9,6 @@
 #import "EditHIVMedsTableViewController.h"
 #import "UITableViewCell+Extras.h"
 #import "NSDate+Extras.h"
-// #import "CoreDataManager.h"
 #import "Medication+Handling.h"
 #import "Utilities.h"
 #import "iStayHealthy-Swift.h"
@@ -85,8 +84,8 @@
      }];
 
     NSError *error = nil;
-    [manager saveContext:&error];
-    [self popController];
+    [manager saveContextAndReturnError:&error];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)reloadMedications:(id)sender

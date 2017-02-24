@@ -8,7 +8,6 @@
 
 #import "ResultsListTableViewController.h"
 #import "Constants.h"
-#import "CoreDataManager.h"
 #import "DateView.h"
 #import "ResultsView_iPhone.h"
 #import "ResultsViewWithValue_iPhone.h"
@@ -218,13 +217,10 @@
     [manager fetchData:kResults predicate:self.currentPredicate sortTerm:kResultsDate ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
-             UIAlertView *errorAlert = [[UIAlertView alloc]
-                                        initWithTitle:NSLocalizedString(@"Error", nil)
-                                                  message:NSLocalizedString(@"Error loading data", nil)
-                                                 delegate:nil
-                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                        otherButtonTitles:nil];
-             [errorAlert show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+              message:NSLocalizedString(@"Error loading data", nil)
+              presentingController:self];
          }
          else
          {

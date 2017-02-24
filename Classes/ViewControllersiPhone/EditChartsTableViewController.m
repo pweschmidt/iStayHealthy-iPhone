@@ -9,6 +9,7 @@
 #import "EditChartsTableViewController.h"
 #import "UIFont+Standard.h"
 #import "Utilities.h"
+#import "iStayHealthy-Swift.h"
 
 @interface EditChartsTableViewController ()
 @property (nonatomic, strong) NSArray *results;
@@ -65,21 +66,8 @@
 
 - (void)popController
 {
-    if ([Utilities isIPad])
-    {
-        if (nil != self.customPopOverDelegate)
-        {
-            __strong id <PWESPopoverDelegate> strongPopoverDelegate = self.customPopOverDelegate;
-            if ([strongPopoverDelegate respondsToSelector:@selector(hidePopover)])
-            {
-                [strongPopoverDelegate hidePopover];
-            }
-        }
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,14 +78,16 @@
 
 - (void)save:(id)sender
 {
+    PWESAlertAction *ok = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleCancel action:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
     if (!self.settingsChanged)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No changes", nil)
-                                                        message:NSLocalizedString(@"There are no changes to your settings", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertView:NSLocalizedString(@"No changes", nil)
+         message:NSLocalizedString(@"There are no changes to your settings", nil)
+         presentingController:self
+         actions:@[ok]];
         return;
     }
     __strong id <ChartSelector> strongSelector = self.chartSelector;
@@ -113,18 +103,12 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:archivedSelector forKey:kDashboardTypes];
         [defaults synchronize];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Dashboard", nil)
-                                                        message:NSLocalizedString(@"Your dashboard settings changed", nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
+        [PWESAlertHandler.alertHandler
+         showAlertView:NSLocalizedString(@"Dashboard", nil)
+         message:NSLocalizedString(@"Your dashboard settings changed", nil)
+         presentingController:self
+         actions:@[ok]];
     }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self popController];
 }
 
 #pragma mark - Table view data source

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B06DCDF189D209E00008590 /* DropboxSDK.framework */; };
 		0B06DCF0189D53AE00008590 /* SeinfeldCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCEF189D53AE00008590 /* SeinfeldCalendar.m */; };
 		0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B06DCF2189D53AE00008590 /* SideEffects.m */; };
 		0B07F1D71A0F739200AD761A /* PWESTableViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07F1D61A0F739200AD761A /* PWESTableViewUpdater.swift */; };
@@ -44,7 +43,6 @@
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
 		0B65F95E1913917600523441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B65F95D1913917600523441 /* Images.xcassets */; };
-		0B6E0AD01971438A00D80FA6 /* CoreJSONManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E0ACF1971438A00D80FA6 /* CoreJSONManager.m */; };
 		0B6E0AD319714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E0AD219714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m */; };
 		0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B706400193A1FB900CD2073 /* TimeCounter.m */; };
 		0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */; };
@@ -57,8 +55,6 @@
 		0B8DDC3B19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DDC3A19435AE000055E4C /* PWESSeinfeldCalendarReusableView.m */; };
 		0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D0738191ABDB900D293E0 /* PWESStar.m */; };
 		0B9D073C191ABE4100D293E0 /* PWESSeinfeldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9D073B191ABE4100D293E0 /* PWESSeinfeldViewController.m */; };
-		0BA51CAB1A20982400B46D6D /* PWESLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */; };
-		0BA51CDB1A20D79B00B46D6D /* PWESLoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */; };
 		0BAC2F0F1876E7B400D452A7 /* Wellness.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F0E1876E7B400D452A7 /* Wellness.m */; };
 		0BAC2F151876E7B500D452A7 /* SeinfeldCalendarEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */; };
 		0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC2F1A1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m */; };
@@ -76,7 +72,6 @@
 		0BB566AA191E38F900731739 /* PWESMonthlyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A5191E38F900731739 /* PWESMonthlyView.m */; };
 		0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */; };
 		0BB566AE191E392000731739 /* PWESSeinfeldCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566AD191E392000731739 /* PWESSeinfeldCollectionViewController.m */; };
-		0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB566B0191E674A00731739 /* CoreCSVWriter.m */; };
 		0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */; };
 		0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E518F324FA00523DF6 /* MyHIVCollectionViewController.m */; };
 		0BB771E918F3292E00523DF6 /* ProceduresCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */; };
@@ -91,14 +86,21 @@
 		0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */; };
 		0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */; };
 		0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */; };
-		0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BED04921A0525FD0033942A /* TokenCertificate.swift */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
-		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2819305F112F816700ECF9B4 /* iStayHealthy.xcdatamodeld */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
+		720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */; };
+		72607FD41E43548300CCA866 /* DropboxAuthenicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */; };
+		72B9B43F1DC34D7E00926E0A /* PWESAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */; };
+		72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; };
+		72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7151DC7989E0090C801 /* Alamofire.framework */; };
+		72D0F7181DC7991D0090C801 /* DropboxSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */; };
+		72D1A6CD1E36442500ED9E3E /* iStayHealthyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */; };
+		72F8FFD01E5DBDE5002AF84C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
@@ -148,7 +150,6 @@
 		C46EB5E217EB7E6100B9EA5A /* ClinicalAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */; };
 		C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */; };
 		C4742B7F1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */; };
-		C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */; };
 		C48519251ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */; };
 		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
 		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
@@ -156,7 +157,6 @@
 		C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD7140FD0730033C61C /* NNRTI.plist */; };
 		C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FDD140FD0850033C61C /* EntryInhibitors.plist */; };
 		C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */; };
-		C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250814DD62BF00BDD906 /* StoreKit.framework */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
 		C491E2311B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt in Resources */ = {isa = PBXBuildFile; fileRef = C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */; };
 		C491E2441B01ECF1005936B0 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C491E2431B01ECF1005936B0 /* Results.m */; };
@@ -170,7 +170,6 @@
 		C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF829180DC05C00107966 /* PWESDraw.m */; };
 		C4AEF82D180DCAB800107966 /* PWESPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF82C180DCAB800107966 /* PWESPlotArea.m */; };
 		C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4B8B79413DEAE1C00FA9893 /* Localizable.strings */; };
-		C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9DA7316CE221500703B67 /* SQLDataTableController.m */; };
 		C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BB8A1916D69166003D5B7A /* KeychainHandler.m */; };
 		C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF08F17B7A35A00F1E0F7 /* Results+Handling.m */; };
 		C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF09217B7A81500F1E0F7 /* NSManagedObject+Handling.m */; };
@@ -184,9 +183,7 @@
 		C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0AA17B7AA2D00F1E0F7 /* Medication+Handling.m */; };
 		C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0AD17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m */; };
 		C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */; };
-		C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */; };
 		C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */; };
-		C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */; };
 		C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */; };
 		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
 		C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C3494F130EF201004BE854 /* AVFoundation.framework */; };
@@ -233,6 +230,20 @@
 			remoteInfo = iStayHealthy;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		72D0F7141DC7988A0090C801 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B06DCDF189D209E00008590 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
@@ -300,8 +311,6 @@
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
 		0B65F95D1913917600523441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iStayHealthy/Images.xcassets; sourceTree = "<group>"; };
-		0B6E0ACE1971438A00D80FA6 /* CoreJSONManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreJSONManager.h; path = CoreDataManagement/CoreJSONManager.h; sourceTree = "<group>"; };
-		0B6E0ACF1971438A00D80FA6 /* CoreJSONManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreJSONManager.m; path = CoreDataManagement/CoreJSONManager.m; sourceTree = "<group>"; };
 		0B6E0AD119714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SeinfeldCalendarEntry+Handling.h"; path = "Categories/SeinfeldCalendarEntry+Handling.h"; sourceTree = "<group>"; };
 		0B6E0AD219714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SeinfeldCalendarEntry+Handling.m"; path = "Categories/SeinfeldCalendarEntry+Handling.m"; sourceTree = "<group>"; };
 		0B7063BD193A040B00CD2073 /* NotificationsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsDelegate.h; path = ViewControllersCommon/NotificationsDelegate.h; sourceTree = "<group>"; };
@@ -329,8 +338,6 @@
 		0B9D0738191ABDB900D293E0 /* PWESStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESStar.m; path = SeinfeldCalendar/PWESStar.m; sourceTree = "<group>"; };
 		0B9D073A191ABE4100D293E0 /* PWESSeinfeldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSeinfeldViewController.h; path = SeinfeldCalendar/PWESSeinfeldViewController.h; sourceTree = "<group>"; };
 		0B9D073B191ABE4100D293E0 /* PWESSeinfeldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldViewController.m; path = SeinfeldCalendar/PWESSeinfeldViewController.m; sourceTree = "<group>"; };
-		0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESLoginViewController.swift; path = iOS8/UserInterface/PWESLoginViewController.swift; sourceTree = "<group>"; };
-		0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESLoginHandler.swift; path = iOS8/UserInterface/PWESLoginHandler.swift; sourceTree = "<group>"; };
 		0BAC2F0C1876E33700D452A7 /* iStayHealthy 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 14.xcdatamodel"; sourceTree = "<group>"; };
 		0BAC2F0D1876E7B400D452A7 /* Wellness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wellness.h; path = DataModelClasses/Wellness.h; sourceTree = "<group>"; };
 		0BAC2F0E1876E7B400D452A7 /* Wellness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wellness.m; path = DataModelClasses/Wellness.m; sourceTree = "<group>"; };
@@ -361,8 +368,6 @@
 		0BB566A8191E38F900731739 /* PWESSeinfeldMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldMonth.m; path = SeinfeldCalendar/PWESSeinfeldMonth.m; sourceTree = "<group>"; };
 		0BB566AC191E392000731739 /* PWESSeinfeldCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESSeinfeldCollectionViewController.h; path = SeinfeldCalendar/PWESSeinfeldCollectionViewController.h; sourceTree = "<group>"; };
 		0BB566AD191E392000731739 /* PWESSeinfeldCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESSeinfeldCollectionViewController.m; path = SeinfeldCalendar/PWESSeinfeldCollectionViewController.m; sourceTree = "<group>"; };
-		0BB566AF191E674A00731739 /* CoreCSVWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreCSVWriter.h; path = CoreDataManagement/CoreCSVWriter.h; sourceTree = "<group>"; };
-		0BB566B0191E674A00731739 /* CoreCSVWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreCSVWriter.m; path = CoreDataManagement/CoreCSVWriter.m; sourceTree = "<group>"; };
 		0BB771E118F321C600523DF6 /* OtherMedsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OtherMedsCollectionViewController.h; path = ViewControllersiPad/OtherMedsCollectionViewController.h; sourceTree = "<group>"; };
 		0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OtherMedsCollectionViewController.m; path = ViewControllersiPad/OtherMedsCollectionViewController.m; sourceTree = "<group>"; };
 		0BB771E418F324FA00523DF6 /* MyHIVCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHIVCollectionViewController.h; path = ViewControllersiPad/MyHIVCollectionViewController.h; sourceTree = "<group>"; };
@@ -377,7 +382,6 @@
 		0BB771F118F32DA600523DF6 /* MissedMedicationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissedMedicationCollectionViewController.m; path = ViewControllersiPad/MissedMedicationCollectionViewController.m; sourceTree = "<group>"; };
 		0BB771F318F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsAlertsCollectionViewController.h; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.h; sourceTree = "<group>"; };
 		0BB771F418F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAlertsCollectionViewController.m; path = ViewControllersiPad/NotificationsAlertsCollectionViewController.m; sourceTree = "<group>"; };
-		0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESPopoverDelegate.h; path = ViewControllersiPad/PWESPopoverDelegate.h; sourceTree = "<group>"; };
 		0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWESToolbarDelegate.h; path = ViewControllersiPad/PWESToolbarDelegate.h; sourceTree = "<group>"; };
 		0BC677761A6BC6D1009B233B /* PWESCoreURLImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCoreURLImporter.swift; path = iOS8/DataManagement/PWESCoreURLImporter.swift; sourceTree = "<group>"; };
 		0BC677781A6BE02D009B233B /* URLImporterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImporterTests.swift; sourceTree = "<group>"; };
@@ -387,7 +391,6 @@
 		0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iStayHealthy.isth; sourceTree = "<group>"; };
 		0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContentContainerController.swift; path = iOS8/UserInterface/PWESContentContainerController.swift; sourceTree = "<group>"; };
 		0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESContentMenuHandler.swift; path = iOS8/UserInterface/PWESContentMenuHandler.swift; sourceTree = "<group>"; };
-		0BED04921A0525FD0033942A /* TokenCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenCertificate.swift; path = "iOS8/Push Notification/TokenCertificate.swift"; sourceTree = "<group>"; };
 		0BF338A119785D03004C3FB4 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = ViewControllersCommon/HelpViewController.h; sourceTree = "<group>"; };
 		0BF338A219785D03004C3FB4 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = ViewControllersCommon/HelpViewController.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -396,8 +399,16 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28C3AD890F43EF2300507BA6 /* iStayHealthy.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = iStayHealthy.xcdatamodel; sourceTree = "<group>"; };
 		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
+		720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertHandler.swift; path = iOS8/Utilities/PWESAlertHandler.swift; sourceTree = "<group>"; };
+		72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxAuthenicator.swift; path = iOS8/UserInterface/DropboxAuthenicator.swift; sourceTree = "<group>"; };
+		72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertAction.swift; path = iOS8/Utilities/PWESAlertAction.swift; sourceTree = "<group>"; };
+		72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyDropbox.framework; path = Carthage/Build/iOS/SwiftyDropbox.framework; sourceTree = "<group>"; };
+		72D0F7151DC7989E0090C801 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxSyncController.swift; path = iOS8/UserInterface/DropboxSyncController.swift; sourceTree = "<group>"; };
+		72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iStayHealthyAppDelegate.swift; sourceTree = "<group>"; };
+		72D72DD51DCB8DC100A60DAF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -503,8 +514,6 @@
 		C46EB5E317EB7FCF00B9EA5A /* ProceduresListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProceduresListTableViewController.h; path = ViewControllersCommon/ProceduresListTableViewController.h; sourceTree = "<group>"; };
 		C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProceduresListTableViewController.m; path = ViewControllersCommon/ProceduresListTableViewController.m; sourceTree = "<group>"; };
 		C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataRecoveryStepsTableViewController.swift; path = iOS8/UserInterface/PWESDataRecoveryStepsTableViewController.swift; sourceTree = "<group>"; };
-		C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CentralAppDelegate.h; path = ViewControllersCommon/CentralAppDelegate.h; sourceTree = "<group>"; };
-		C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CentralAppDelegate.m; path = ViewControllersCommon/CentralAppDelegate.m; sourceTree = "<group>"; };
 		C47EB1D814643C7200E09F2B /* iStayHealthy 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 7.xcdatamodel"; sourceTree = "<group>"; };
 		C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESDataRecoveryHelpViewController.swift; path = iOS8/UserInterface/PWESDataRecoveryHelpViewController.swift; sourceTree = "<group>"; };
 		C4897FC4140FD0360033C61C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/CombiMeds.plist; sourceTree = "<group>"; };
@@ -532,7 +541,6 @@
 		C4897FE5140FD09C0033C61C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/IntegraseInhibitors.plist; sourceTree = "<group>"; };
 		C4897FE6140FD09F0033C61C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/IntegraseInhibitors.plist; sourceTree = "<group>"; };
 		C48CC47A137C3BA30051D7FA /* iStayHealthy 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 5.xcdatamodel"; sourceTree = "<group>"; };
-		C490250814DD62BF00BDD906 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C490250A14DD630700BDD906 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iStayHealthy-Customer-Conflict.isth.txt"; sourceTree = "<group>"; };
 		C491E23B1B01EAA7005936B0 /* iStayHealthy 16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 16.xcdatamodel"; sourceTree = "<group>"; };
@@ -568,8 +576,6 @@
 		C4B8B79513DEAE2400FA9893 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C4B8B79613DEAE2700FA9893 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C4B8B79713DEAE2A00FA9893 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C4B9DA7216CE221500703B67 /* SQLDataTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLDataTableController.h; path = DataModelClasses/SQLDataTableController.h; sourceTree = "<group>"; };
-		C4B9DA7316CE221500703B67 /* SQLDataTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLDataTableController.m; path = DataModelClasses/SQLDataTableController.m; sourceTree = "<group>"; };
 		C4BB8A1816D69166003D5B7A /* KeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainHandler.h; path = Utils/KeychainHandler.h; sourceTree = "<group>"; };
 		C4BB8A1916D69166003D5B7A /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainHandler.m; path = Utils/KeychainHandler.m; sourceTree = "<group>"; };
 		C4BCF08E17B7A35A00F1E0F7 /* Results+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Results+Handling.h"; path = "Categories/Results+Handling.h"; sourceTree = "<group>"; };
@@ -596,12 +602,8 @@
 		C4BCF0AD17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "iStayHealthyRecord+Handling.m"; path = "Categories/iStayHealthyRecord+Handling.m"; sourceTree = "<group>"; };
 		C4BCF0AF17B7AA6500F1E0F7 /* Contacts+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contacts+Handling.h"; path = "Categories/Contacts+Handling.h"; sourceTree = "<group>"; };
 		C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contacts+Handling.m"; path = "Categories/Contacts+Handling.m"; sourceTree = "<group>"; };
-		C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropboxViewController.h; path = ViewControllersCommon/DropboxViewController.h; sourceTree = "<group>"; };
-		C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropboxViewController.m; path = ViewControllersCommon/DropboxViewController.m; sourceTree = "<group>"; };
 		C4BCF0B517B7C4D600F1E0F7 /* CoreXMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreXMLWriter.h; path = CoreXML/CoreXMLWriter.h; sourceTree = "<group>"; };
 		C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreXMLWriter.m; path = CoreXML/CoreXMLWriter.m; sourceTree = "<group>"; };
-		C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = CoreDataManagement/CoreDataManager.h; sourceTree = "<group>"; };
-		C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = CoreDataManagement/CoreDataManager.m; sourceTree = "<group>"; };
 		C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataConstants.h; path = CoreDataManagement/CoreDataConstants.h; sourceTree = "<group>"; };
 		C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = CoreDataManagement/CoreDataUtils.h; sourceTree = "<group>"; };
 		C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataUtils.m; path = CoreDataManagement/CoreDataUtils.m; sourceTree = "<group>"; };
@@ -676,12 +678,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
-				0B06DCE0189D209E00008590 /* DropboxSDK.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
+				72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
 				C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */,
-				C490250914DD62BF00BDD906 /* StoreKit.framework in Frameworks */,
 				C4F337F114D43B6B00C4F573 /* libz.dylib in Frameworks */,
 				C4F337EF14D43B4700C4F573 /* SystemConfiguration.framework in Frameworks */,
 				C4F337ED14D43B3D00C4F573 /* MobileCoreServices.framework in Frameworks */,
@@ -717,6 +719,7 @@
 				C47DB22617AD04D60037A6DF /* ViewControllersCommon */,
 				C45A98E217EEE35A004E13C7 /* Views */,
 				C4DF910915EE79560042211E /* Constants.h */,
+				72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -725,6 +728,8 @@
 			isa = PBXGroup;
 			children = (
 				0B2DAF841A614D1600F9F317 /* PWESDefines.swift */,
+				720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */,
+				72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -751,9 +756,9 @@
 				C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */,
 				C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */,
 				C4C8E87E1A9CC6CB002C4B61 /* PWESFeedbackTableViewController.swift */,
-				0BA51CDA1A20D79B00B46D6D /* PWESLoginHandler.swift */,
-				0BA51CAA1A20982400B46D6D /* PWESLoginViewController.swift */,
 				0B4CD7A61A52C350000042CF /* PWESTransitionViewController.swift */,
+				72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */,
+				72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -806,21 +811,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0BED04901A0525CD0033942A /* Push Notification */ = {
-			isa = PBXGroup;
-			children = (
-				0BED04921A0525FD0033942A /* TokenCertificate.swift */,
-			);
-			name = "Push Notification";
-			sourceTree = "<group>";
-		};
-		0BED04911A0525D80033942A /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = HealthKit;
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,6 +823,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -847,8 +838,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				72D72DD51DCB8DC100A60DAF /* main.m */,
 				32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -856,6 +847,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */,
 				0B263A211AF4D7390037984B /* icon_UTI_large_iPad.png */,
 				0B263A221AF4D7390037984B /* icon_UTI_small_iPad.png */,
 				0B263A1D1AF4D71A0037984B /* icon_UTI_large_iPhone.png */,
@@ -882,6 +874,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72D0F7151DC7989E0090C801 /* Alamofire.framework */,
 				0B06DCDF189D209E00008590 /* DropboxSDK.framework */,
 				C45E52F3182BFD1400C30061 /* EventKit.framework */,
 				C41EC32C180ED0EE00A49AE4 /* CoreText.framework */,
@@ -889,7 +882,6 @@
 				C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */,
 				C4F337F014D43B6B00C4F573 /* libz.dylib */,
 				C490250A14DD630700BDD906 /* CoreLocation.framework */,
-				C490250814DD62BF00BDD906 /* StoreKit.framework */,
 				C4F337EE14D43B4700C4F573 /* SystemConfiguration.framework */,
 				C4F337EC14D43B3D00C4F573 /* MobileCoreServices.framework */,
 				C4F337EA14D43B1E00C4F573 /* CFNetwork.framework */,
@@ -1030,12 +1022,8 @@
 				C45F838917B675350042E63A /* BaseTableViewController.m */,
 				C45F837C17B66CEF0042E63A /* BaseViewController.h */,
 				C45F837D17B66CEF0042E63A /* BaseViewController.m */,
-				C47DB23517AD41FC0037A6DF /* CentralAppDelegate.h */,
-				C47DB23617AD41FC0037A6DF /* CentralAppDelegate.m */,
 				C46EB5E017EB7E6100B9EA5A /* ClinicalAddressTableViewController.h */,
 				C46EB5E117EB7E6100B9EA5A /* ClinicalAddressTableViewController.m */,
-				C4BCF0B217B7BAE800F1E0F7 /* DropboxViewController.h */,
-				C4BCF0B317B7BAE800F1E0F7 /* DropboxViewController.m */,
 				C4A49B2118005B4800FC1637 /* EffectsSelectionDataSource.h */,
 				C4A8244817AD4C3C00E8CA8C /* HamburgerMenuTableViewController.h */,
 				C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */,
@@ -1135,7 +1123,6 @@
 				0BB771E218F321C600523DF6 /* OtherMedsCollectionViewController.m */,
 				0BB771E718F3292E00523DF6 /* ProceduresCollectionViewController.h */,
 				0BB771E818F3292E00523DF6 /* ProceduresCollectionViewController.m */,
-				0BBD2DB318F1553D006BCCF2 /* PWESPopoverDelegate.h */,
 				0BBD2DB418F16988006BCCF2 /* PWESToolbarDelegate.h */,
 				0B4C3B1918B8BCBC00BF3BB5 /* ResultsCollectionViewController.h */,
 				0B4C3B1A18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m */,
@@ -1170,8 +1157,6 @@
 				0BAC2F141876E7B500D452A7 /* SeinfeldCalendarEntry.m */,
 				0B06DCF1189D53AE00008590 /* SideEffects.h */,
 				0B06DCF2189D53AE00008590 /* SideEffects.m */,
-				C4B9DA7216CE221500703B67 /* SQLDataTableController.h */,
-				C4B9DA7316CE221500703B67 /* SQLDataTableController.m */,
 				0BAC2F0D1876E7B400D452A7 /* Wellness.h */,
 				0BAC2F0E1876E7B400D452A7 /* Wellness.m */,
 			);
@@ -1230,15 +1215,9 @@
 		C4BFAAA717B2CD950038D2A7 /* CoreDataManagement */ = {
 			isa = PBXGroup;
 			children = (
-				0BB566AF191E674A00731739 /* CoreCSVWriter.h */,
-				0BB566B0191E674A00731739 /* CoreCSVWriter.m */,
 				C4BFAAB417B2D1430038D2A7 /* CoreDataConstants.h */,
-				C4BFAAA817B2CDD60038D2A7 /* CoreDataManager.h */,
-				C4BFAAA917B2CDD60038D2A7 /* CoreDataManager.m */,
 				C4BFAABA17B2E5090038D2A7 /* CoreDataUtils.h */,
 				C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */,
-				0B6E0ACE1971438A00D80FA6 /* CoreJSONManager.h */,
-				0B6E0ACF1971438A00D80FA6 /* CoreJSONManager.m */,
 			);
 			name = CoreDataManagement;
 			sourceTree = "<group>";
@@ -1301,8 +1280,6 @@
 			isa = PBXGroup;
 			children = (
 				0B2DAF831A614CD900F9F317 /* Utilities */,
-				0BED04911A0525D80033942A /* HealthKit */,
-				0BED04901A0525CD0033942A /* Push Notification */,
 				0B36926D19C491ED00C269AD /* UserInterface */,
 				0B36924619C4853900C269AD /* DataManagement */,
 				C4E2FA5119B0D9EA00D446DF /* iStayHealthy-Bridging-Header.h */,
@@ -1338,6 +1315,8 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				72D0F7101DC798220090C801 /* ShellScript */,
+				72D0F7141DC7988A0090C801 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1354,15 +1333,23 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0800;
 				TargetAttributes = {
 					0BB5668A191E132F00731739 = {
+						LastSwiftMigration = 0800;
 						TestTargetID = 1D6058900D05DD3D006BFB54;
 					};
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 5Y4HL833A4;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
 								enabled = 0;
 							};
 						};
@@ -1428,6 +1415,7 @@
 				0B263A241AF4D7390037984B /* icon_UTI_small_iPad.png in Resources */,
 				0B263A231AF4D7390037984B /* icon_UTI_large_iPad.png in Resources */,
 				0B36926F19C4922800C269AD /* PWESMainStoryboard.storyboard in Resources */,
+				72F8FFD01E5DBDE5002AF84C /* Settings.bundle in Resources */,
 				C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */,
 				C4C41A3715F1445400882416 /* chimes.caf in Resources */,
 				C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */,
@@ -1439,6 +1427,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		72D0F7101DC798220090C801 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyDropbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0BB56687191E132F00731739 /* Sources */ = {
@@ -1460,7 +1466,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C46C5DEB17EDA44500866DBD /* InformationTableViewController.m in Sources */,
-				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				28193060112F816700ECF9B4 /* iStayHealthy.xcdatamodeld in Sources */,
 				0BB084E51928E181007C83E5 /* PWESResultsTypes.m in Sources */,
 				C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */,
@@ -1481,6 +1486,7 @@
 				C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */,
 				0BB566AB191E38F900731739 /* PWESSeinfeldMonth.m in Sources */,
 				C45C27BE17DB59FA001F6831 /* EditOtherMedsTableViewController.m in Sources */,
+				72607FD41E43548300CCA866 /* DropboxAuthenicator.swift in Sources */,
 				C4F569A61AB0843900D57250 /* PWESCoreDictionaryImporter.swift in Sources */,
 				C42783C417C8B5E700CF9F48 /* MyHIVMedicationViewController.m in Sources */,
 				0BB771EF18F32D8C00523DF6 /* SideEffectsCollectionViewController.m in Sources */,
@@ -1493,7 +1499,6 @@
 				0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */,
 				0BB771E318F321C600523DF6 /* OtherMedsCollectionViewController.m in Sources */,
 				0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */,
-				C47DB23717AD41FC0037A6DF /* CentralAppDelegate.m in Sources */,
 				0B6048571840D12B0092B5FB /* PWESDataManager.m in Sources */,
 				C4BCF0AE17B7AA4F00F1E0F7 /* iStayHealthyRecord+Handling.m in Sources */,
 				0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */,
@@ -1514,13 +1519,13 @@
 				C4AEF82D180DCAB800107966 /* PWESPlotArea.m in Sources */,
 				C4BCF0AB17B7AA2D00F1E0F7 /* Medication+Handling.m in Sources */,
 				C491E2441B01ECF1005936B0 /* Results.m in Sources */,
+				72D0F7181DC7991D0090C801 /* DropboxSyncController.swift in Sources */,
 				C4BCF09617B7A87500F1E0F7 /* NSNumber+Handling.m in Sources */,
 				0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */,
 				C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */,
 				C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */,
 				C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */,
 				0BAC2F1B1876F7FE00D452A7 /* EditSeinfeldCalendarTableViewController.m in Sources */,
-				0BB566B1191E674A00731739 /* CoreCSVWriter.m in Sources */,
 				0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */,
 				C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */,
 				C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */,
@@ -1528,7 +1533,7 @@
 				C463744217E9F2AF00D19B94 /* PWESResultsSummaryView.m in Sources */,
 				C431408D180C801D00EB5F5E /* PWESAxis.m in Sources */,
 				0B06DCF3189D53AE00008590 /* SideEffects.m in Sources */,
-				C4BCF0B417B7BAE800F1E0F7 /* DropboxViewController.m in Sources */,
+				720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */,
 				C4742B7F1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift in Sources */,
 				0B4C3B1B18B8BCBC00BF3BB5 /* ResultsCollectionViewController.m in Sources */,
 				0BB771E618F324FA00523DF6 /* MyHIVCollectionViewController.m in Sources */,
@@ -1542,7 +1547,6 @@
 				C46A6E4017DC80D900D99A3F /* UITableViewCell+Extras.m in Sources */,
 				C43BE57615F7C5CD00108EF8 /* Medication.m in Sources */,
 				C43BE57915F7C5CE00108EF8 /* OtherMedication.m in Sources */,
-				0B6E0AD01971438A00D80FA6 /* CoreJSONManager.m in Sources */,
 				C48519251ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift in Sources */,
 				C45F838A17B675350042E63A /* BaseTableViewController.m in Sources */,
 				C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */,
@@ -1559,12 +1563,10 @@
 				C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */,
 				C45D00F017BAB403001AE0CB /* EditResultsTableViewController.m in Sources */,
 				C4BCF09C17B7A95900F1E0F7 /* Procedures+Handling.m in Sources */,
-				C4B9DA7416CE221500703B67 /* SQLDataTableController.m in Sources */,
 				0B9D0739191ABDB900D293E0 /* PWESStar.m in Sources */,
 				C45F837E17B66CEF0042E63A /* BaseViewController.m in Sources */,
 				C463744017E9F2AF00D19B94 /* PWESIndicatorView.m in Sources */,
 				0B2DAF851A614D1600F9F317 /* PWESDefines.swift in Sources */,
-				0BED04931A0525FD0033942A /* TokenCertificate.swift in Sources */,
 				0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */,
 				C46C5DE817EDA2B300866DBD /* SideEffectsTableViewController.m in Sources */,
 				C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */,
@@ -1575,7 +1577,6 @@
 				0B51F02E1AD6D0B400226CCD /* PWESDataImportViewController.swift in Sources */,
 				C45C27BB17DB3DC2001F6831 /* BaseEditTableViewController.m in Sources */,
 				C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */,
-				0BA51CAB1A20982400B46D6D /* PWESLoginViewController.swift in Sources */,
 				C45C27D017DB5AC7001F6831 /* EditWellnessTableViewController.m in Sources */,
 				C463743D17E9F2AF00D19B94 /* PWESDashboardSummaryView.m in Sources */,
 				0B1276BC198AD05B00D389FA /* IconsTableViewController.m in Sources */,
@@ -1601,21 +1602,21 @@
 				C4CF467217FC696E00A4A5AA /* EditPreviousMedsTableViewController.m in Sources */,
 				C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */,
 				0B4CD7A71A52C350000042CF /* PWESTransitionViewController.swift in Sources */,
+				72D1A6CD1E36442500ED9E3E /* iStayHealthyAppDelegate.swift in Sources */,
 				C4A49B2518005CD200FC1637 /* EffectsSelectionTableViewController.m in Sources */,
 				C45A98E517EEE3BA004E13C7 /* DateView.m in Sources */,
 				0BB771F518F32DCA00523DF6 /* NotificationsAlertsCollectionViewController.m in Sources */,
+				72B9B43F1DC34D7E00926E0A /* PWESAlertAction.swift in Sources */,
 				0B11346B198CBEC700685046 /* AppSettings.m in Sources */,
 				C46A6E4617DC857A00D99A3F /* NSDate+Extras.m in Sources */,
 				C4A49B201800549500FC1637 /* UILabel+Standard.m in Sources */,
 				C46C5DEE17EDA5B200866DBD /* SettingsTableViewController.m in Sources */,
 				0BACE94E18F02DDA008F4D13 /* PWESCustomTextfieldCell.m in Sources */,
 				0B7326D719324E75001E6601 /* PWESLabelPlotArea.m in Sources */,
-				0BA51CDB1A20D79B00B46D6D /* PWESLoginHandler.swift in Sources */,
 				0B07F1D71A0F739200AD761A /* PWESTableViewUpdater.swift in Sources */,
 				C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */,
 				0B36924E19C491C600C269AD /* PWESPersistentStoreManager.swift in Sources */,
 				0B7326D119321E68001E6601 /* PWESHorizontalAxis.m in Sources */,
-				C4BFAAAA17B2CDD60038D2A7 /* CoreDataManager.m in Sources */,
 				0BB02F1A198E433B003B5959 /* CoreXMLTools.m in Sources */,
 				0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */,
 				C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */,
@@ -1792,11 +1793,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "iStayHealthy Tests/iStayHealthy Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pweschmidt.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iStayHealthy Tests/iStayHealthy Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1834,10 +1837,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "iStayHealthy Tests/iStayHealthy Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pweschmidt.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iStayHealthy Tests/iStayHealthy Tests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;
@@ -1876,10 +1881,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "iStayHealthy Tests/iStayHealthy Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pweschmidt.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iStayHealthy Tests/iStayHealthy Tests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;
@@ -1889,21 +1896,22 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				DEVELOPMENT_TEAM = 5Y4HL833A4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1911,7 +1919,7 @@
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1923,39 +1931,43 @@
 					"-lxslt",
 					"-lxml2",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pweschmidt.iStayHealthy;
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
+				PROVISIONING_PROFILE = "3cd584a0-c31f-4b37-9b6c-994b2f3caccf";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3cd584a0-c31f-4b37-9b6c-994b2f3caccf";
+				PROVISIONING_PROFILE_SPECIFIER = "iStayHealthy Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};
 			name = Debug;
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				DEVELOPMENT_TEAM = 5Y4HL833A4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1966,10 +1978,13 @@
 					"-lxslt",
 					"-lxml2",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pweschmidt.iStayHealthy;
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "bcfd316c-38bc-42eb-8ab9-ff559e242cac";
+				PROVISIONING_PROFILE = "79044a08-4f6d-4333-be2b-617879c5ec5f";
+				PROVISIONING_PROFILE_SPECIFIER = "iStayHealthy Distribution";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1977,18 +1992,34 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Schmidt (48S892KGWD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peter Schmidt (48S892KGWD)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DAPPDEBUG";
 				PROVISIONING_PROFILE = "47b7c8f6-2556-4e9c-a339-8cac5cebcf2e";
@@ -2001,39 +2032,70 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "bcfd316c-38bc-42eb-8ab9-ff559e242cac";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bcfd316c-38bc-42eb-8ab9-ff559e242cac";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
 		C4C3AA421316E071000FC699 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
 				"PROVISIONING_PROFILE[sdk=*]" = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
@@ -2045,27 +2107,28 @@
 		C4C3AA431316E071000FC699 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = iStayHealthy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peter Schmidt (5Y4HL833A4)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				DEVELOPMENT_TEAM = 5Y4HL833A4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iStayHealthy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2076,12 +2139,15 @@
 					"-lxslt",
 					"-lxml2",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pweschmidt.iStayHealthy;
 				PRODUCT_NAME = iStayHealthy;
-				PROVISIONING_PROFILE = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
-				"PROVISIONING_PROFILE[sdk=*]" = "b9456694-22aa-4ef6-b3a3-6a00505e7df0";
+				PROVISIONING_PROFILE = "79044a08-4f6d-4333-be2b-617879c5ec5f";
+				"PROVISIONING_PROFILE[sdk=*]" = "79044a08-4f6d-4333-be2b-617879c5ec5f";
+				PROVISIONING_PROFILE_SPECIFIER = "iStayHealthy Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Classes/iStayHealthy-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;

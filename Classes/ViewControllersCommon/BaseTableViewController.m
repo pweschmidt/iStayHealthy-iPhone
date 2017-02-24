@@ -8,9 +8,6 @@
 
 #import "BaseTableViewController.h"
 #import "CoreDataConstants.h"
-// #import "ContentContainerViewController.h"
-// #import "CoreDataManager.h"
-// #import "ContentNavigationController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import <QuartzCore/QuartzCore.h>
 #import "Utilities.h"
@@ -45,16 +42,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-// - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-// {
-//	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-//	if ([Utilities isIPad])
-//	{
-//		CGRect frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-//		self.tableView.frame = frame;
-//	}
-// }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -104,7 +91,7 @@
     }
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([Utilities isIPad])
     {
@@ -118,22 +105,13 @@
 
 - (void)showDeleteAlertView
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-    [alert show];
-}
-
-/**
-   if user really wants to delete the entry call removeSQLEntry
- */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
-    {
+    PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIAlertActionStyleCancel action:nil];
+    PWESAlertAction *delete = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", @"Yes") style:UIAlertActionStyleDestructive action:^{
         [self removeSQLEntry];
-    }
+    }];
+    
+    [PWESAlertHandler.alertHandler showAlertView:NSLocalizedString(@"Delete?", @"Delete?") message:NSLocalizedString(@"Do you want to delete this entry?", @"Do you want to delete this entry?") presentingController:self actions:@[cancel, delete]];
+    
 }
 
 - (void)removeSQLEntry
@@ -148,7 +126,7 @@
     [manager removeManagedObject:self.markedObject error:&error];
     if (nil == error)
     {
-        [manager saveContext:&error];
+        [manager saveContextAndReturnError:&error];
     }
     self.markedObject = nil;
     self.markedIndexPath = nil;

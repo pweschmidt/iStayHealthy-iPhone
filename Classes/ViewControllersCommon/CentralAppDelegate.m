@@ -8,7 +8,6 @@
 
 #import "CentralAppDelegate.h"
 #import "Utilities.h"
-// #import "CoreDataManager.h"
 #import "UIFont+Standard.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "ContentContainerViewController.h"
@@ -74,10 +73,6 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    UIAlertView *receivedAlert = [[UIAlertView alloc] initWithTitle:@"Received notification" message:@"Hurrah we received a notification" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-
-    [receivedAlert show];
-
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -100,7 +95,7 @@
     NSError *error = nil;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -132,7 +127,7 @@
 
     NSError *error = nil;
 
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
 }
 
 - (BOOL)  application:(UIApplication *)application
@@ -199,14 +194,6 @@
 
 - (void)showReminder:(NSString *)text
 {
-    UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"iStayHealthy Alert", nil)
-                                        message:text
-                                       delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                              otherButtonTitles:nil];
-
-    [alertView show];
 }
 
 @end

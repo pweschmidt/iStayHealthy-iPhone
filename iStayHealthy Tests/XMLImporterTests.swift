@@ -12,20 +12,20 @@ import XCTest
 class XMLImporterTests: XCTestCase {
 
     var normalXML: String?
-    var normalXMLData: NSData?
+    var normalXMLData: Data?
     
     override func setUp()
     {
         super.setUp()
-        let bundle = NSBundle(forClass: XMLImporterTests.self)
-        var normalPath = bundle.pathForResource("iStayHealthy.isth", ofType: nil)
+        let bundle = Bundle(for: XMLImporterTests.self)
+        let normalPath = bundle.path(forResource: "iStayHealthy.isth", ofType: nil)
         if nil != normalPath
         {
-            var normalData = NSData.init(contentsOfFile: normalPath!)
-            var parsedString = NSString(data: normalData!, encoding:NSUTF8StringEncoding)
+            var normalData = try? Data.init(contentsOf: URL(fileURLWithPath: normalPath!))
+            var parsedString = NSString(data: normalData!, encoding:String.Encoding.utf8.rawValue)
             if nil != parsedString
             {
-                println("XML \(parsedString)")
+                print("XML \(parsedString)")
             }
             normalXML = parsedString as? String
             self.normalXMLData = normalData
@@ -49,22 +49,22 @@ class XMLImporterTests: XCTestCase {
         importer.importWithData(normalXMLData!, completionBlock: { (success, dictionary, error) -> Void in
             if success
             {
-                println("We got SUCCESS")
+                print("We got SUCCESS")
             }
             else
             {
-                println("We got a FAILURE")
+                print("We got a FAILURE")
             }
             
             if nil != dictionary
             {
                 let dict: NSDictionary = dictionary!
-                var result: NSMutableArray? = dict.valueForKey("Results") as? NSMutableArray
+                var result: NSMutableArray? = dict.value(forKey: "Results") as? NSMutableArray
                 if nil != result
                 {
                     let count: Int = result!.count
                     XCTAssertTrue(0 < count, "We expected more than 0 results")
-                    println("We got a results array back and it has \(count) entries")
+                    print("We got a results array back and it has \(count) entries")
                 }
             }
             
@@ -74,7 +74,7 @@ class XMLImporterTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

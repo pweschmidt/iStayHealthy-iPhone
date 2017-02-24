@@ -8,7 +8,6 @@
 
 #import "EditSideEffectsTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "Medication+Handling.h"
 #import "Utilities.h"
 #import "SideEffects+Handling.h"
@@ -186,8 +185,8 @@
     effects.seriousness = [self.seriousnessArray objectAtIndex:seriousnessIndex];
     effects.frequency = [self.frequencyArray objectAtIndex:frequencyIndex];
     NSError *error = nil;
-    [manager saveContext:&error];
-    [self popController];
+    [manager saveContextAndReturnError:&error];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

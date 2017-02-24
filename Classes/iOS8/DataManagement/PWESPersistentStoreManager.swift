@@ -21,18 +21,11 @@ class PWESPersistentStoreManager : NSObject
     var persistentStoreCoordinator: NSPersistentStoreCoordinator?
     var defaultContext: NSManagedObjectContext?
     var hasLoadedStore: Bool?
-    let fileManager = NSFileManager.defaultManager()
+    let fileManager = FileManager.default
     var iCloudEnabled: Bool?
 
     // MARK: init/declare
-    class var defaultManager : PWESPersistentStoreManager
-    {
-        struct Static
-        {
-            static let instance : PWESPersistentStoreManager = PWESPersistentStoreManager()
-        }
-        return Static.instance
-    }
+    static let defaultManager = PWESPersistentStoreManager()
     
     override init()
     {
@@ -43,27 +36,29 @@ class PWESPersistentStoreManager : NSObject
     
     deinit
     {
-        saveContext(nil)
+        do {
+            try saveContext()
+        }catch {}
         unregisterObservers()
     }
     
     func registerObservers()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mergeFromiCloud:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreChanged:", name: NSUbiquityIdentityDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PWESPersistentStoreManager.mergeFromiCloud(_:)), name: NSNotification.Name.NSPersistentStoreDidImportUbiquitousContentChanges, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PWESPersistentStoreManager.iCloudStoreChanged(_:)), name: NSNotification.Name.NSUbiquityIdentityDidChange, object: nil)
     }
     
     func unregisterObservers()
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSUbiquityIdentityDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSPersistentStoreDidImportUbiquitousContentChanges, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSUbiquityIdentityDidChange, object: nil)
     }
     
     // MARK: configure the persistent store manager
     func configureStoreManager() -> Bool
     {
-        let path:NSURL = NSBundle.mainBundle().URLForResource("iStayHealthy", withExtension: "momd")!
-        let model = NSManagedObjectModel(contentsOfURL: path)
+        let path:URL = Bundle.main.url(forResource: "iStayHealthy", withExtension: "momd")!
+        let model = NSManagedObjectModel(contentsOf: path)
         if nil != model
         {
             persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model!)
@@ -74,9 +69,9 @@ class PWESPersistentStoreManager : NSObject
     
     func configureContextForStore() -> Bool
     {
-        let type: NSMergePolicyType = NSMergePolicyType.MergeByPropertyObjectTrumpMergePolicyType
-        let policy: NSMergePolicy = NSMergePolicy(mergeType: type)
-        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        let type: NSMergePolicyType = NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType
+        let policy: NSMergePolicy = NSMergePolicy(merge: type)
+        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
         if nil != persistentStoreCoordinator
         {
             context.persistentStoreCoordinator = persistentStoreCoordinator
@@ -117,21 +112,23 @@ class PWESPersistentStoreManager : NSObject
             return
         }
         iCloudEnabled = false
-        var path: String?
-        var libraryPath: NSURL = appLibraryDirectory()
-        var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
-        let coordinator = persistentStoreCoordinator!
+        let libraryPath: URL = appLibraryDirectory()
+        let newPath = libraryPath.appendingPathComponent(sqliteStoreName)
         let localOptions = CoreDataUtils.localStoreOptions()
-        var creationError:NSError? = nil
-        var store = persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: newPath, options: localOptions, error: &creationError)
+        do {
+            _ = try persistentStoreCoordinator?.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: newPath, options: localOptions)
+        }catch{
+            
+        }
+        
     }
     
     
     func setUpLegacyStore()
     {
-        let manager = NSFileManager.defaultManager()
+        let manager = FileManager.default
         
-        var iCloudToken = manager.ubiquityIdentityToken
+        let iCloudToken = manager.ubiquityIdentityToken
         if nil != iCloudToken
         {
             setUpiCloudStore()
@@ -147,40 +144,43 @@ class PWESPersistentStoreManager : NSObject
     func setUpiCloudStore()
     {
         iCloudEnabled = true
-        let queue: dispatch_queue_t = dispatch_queue_create(kBackgroundQueueName, nil)
-        let manager = NSFileManager.defaultManager()
-        var cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(oldStoreName)
+        let queue: DispatchQueue = DispatchQueue(label: kBackgroundQueueName, attributes: [])
+        let manager = FileManager.default
+        var cloudPath = self.appDocumentDirectory().appendingPathComponent(oldStoreName)
         
-        if !manager.fileExistsAtPath(cloudPath.path!)
+        if !manager.fileExists(atPath: cloudPath.path)
         {
-            var paths: NSMutableArray = NSMutableArray()
+            let paths: NSMutableArray = NSMutableArray()
             self.searchPathForOldDataStore(oldStoreName, foundPaths: paths)
             if 0 < paths.count
             {
-                var firstFound = paths.firstObject as! String
-                cloudPath = self.appDocumentDirectory().URLByAppendingPathComponent(firstFound)
+                if let firstFound = paths.firstObject as? String {
+                    cloudPath = self.appDocumentDirectory().appendingPathComponent(firstFound)
+                }
             }
         }
         
-        dispatch_async(queue, { () -> Void in
+        queue.async(execute: { () -> Void in
             
-            let iCloudStoreURL: NSURL? = manager.URLForUbiquityContainerIdentifier(kICloudTeamID)
-            var options: [NSObject : AnyObject]?
+            let iCloudStoreURL: URL? = manager.url(forUbiquityContainerIdentifier: kICloudTeamID)
+            var options: [AnyHashable: Any]?
             if nil == iCloudStoreURL
             {
                 options = CoreDataUtils.noiCloudStoreOptions()
             }
             else
             {
-                options = CoreDataUtils.iCloudStoreOptionsWithPath(iCloudStoreURL)
+                options = CoreDataUtils.iCloudStoreOptions(withPath: iCloudStoreURL)
             }
-            var creationError: NSError?
             let coordinator = self.persistentStoreCoordinator!
-            coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: cloudPath, options: options, error: &creationError)
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let notification = NSNotification(name: kLoadedStoreNotificationKey, object: self)
-                NSNotificationCenter.defaultCenter().postNotification(notification)
-            })
+            do {
+                try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: cloudPath, options: options)
+                DispatchQueue.main.async(execute: { () -> Void in
+                    let notification = Notification(name: Notification.Name(rawValue: kLoadedStoreNotificationKey), object: self)
+                    NotificationCenter.default.post(notification)
+                })
+                
+            }catch{}
         })
         
     }
@@ -191,13 +191,13 @@ class PWESPersistentStoreManager : NSObject
         {
             return false
         }
-        var filePath = getBackupFilePath()
+        let filePath = getBackupFilePath()
         if nil == filePath
         {
             return false
         }
         let xmlReader = CoreXMLReader()
-        var hasContent = xmlReader.hasContentForXMLWithPath(filePath)
+        let hasContent = xmlReader.hasContentForXML(withPath: filePath)
         return hasContent
     }
     
@@ -223,53 +223,41 @@ class PWESPersistentStoreManager : NSObject
         return path
     }
     
-    func getDataFromPath(path: String?) -> NSData?
+    func getDataFromPath(_ path: String?) -> Data?
     {
         if nil == path
         {
             return nil
         }
-        var data: NSData? = NSData(contentsOfFile: path!)
+        let data: Data? = try? Data(contentsOf: URL(fileURLWithPath: path!))
         
         return data
     }
     
     func hasNewDatabase() -> Bool
     {
-        var path: String?
-        var libraryPath: NSURL = appLibraryDirectory()
-        var newPath = libraryPath.URLByAppendingPathComponent(sqliteStoreName)
-        if nil != newPath.path
-        {
-            if self.fileManager.fileExistsAtPath(newPath.path!)
-            {
-                return true
-            }
-        }
-        return false
+        let libraryPath: URL = appLibraryDirectory()
+        let newPath = libraryPath.appendingPathComponent(sqliteStoreName).path
+        return fileManager.fileExists(atPath: newPath)
     }
     
     func hasLegacyDatabase() -> Bool
     {
-        var path: String?
-        var documentPath: NSURL = appDocumentDirectory()
-        var newPath = documentPath.URLByAppendingPathComponent(oldStoreName)
-        if nil != newPath.path
+        let documentPath: URL = appDocumentDirectory()
+        let newPath = documentPath.appendingPathComponent(oldStoreName).path
+        if self.fileManager.fileExists(atPath: newPath)
         {
-            if self.fileManager.fileExistsAtPath(newPath.path!)
+            self.foundDatabasePaths.add(newPath)
+            return true
+        }
+        else
+        {
+            let paths: NSMutableArray = NSMutableArray()
+            searchPathForOldDataStore(oldStoreName, foundPaths: paths)
+            if 0 < paths.count
             {
-                self.foundDatabasePaths.addObject(newPath)
+                self.foundDatabasePaths = paths
                 return true
-            }
-            else
-            {
-                var paths: NSMutableArray = NSMutableArray()
-                searchPathForOldDataStore(oldStoreName, foundPaths: paths)
-                if 0 < paths.count
-                {
-                    self.foundDatabasePaths = paths
-                    return true
-                }
             }
         }
         return false;
@@ -282,26 +270,26 @@ class PWESPersistentStoreManager : NSObject
         return path
     }
     
-    func searchPathForOldDataStore(path: String, foundPaths:NSMutableArray)
+    func searchPathForOldDataStore(_ path: String, foundPaths:NSMutableArray)
     {
-        var docPathURL: NSURL = appDocumentDirectory()
-        var cloudPath = docPathURL.URLByAppendingPathComponent(coreDataPath)
-        var path: String? = cloudPath.path
+        let docPathURL: URL = appDocumentDirectory()
+        let cloudPath = docPathURL.appendingPathComponent(coreDataPath)
+        let path: String? = cloudPath.path
         var found = false
         if nil != path
         {
-            found = self.fileManager.fileExistsAtPath(path!)
+            found = self.fileManager.fileExists(atPath: path!)
         }
         
         if found
         {
-            let directoryEnumerator = self.fileManager.enumeratorAtPath(path!)
+            let directoryEnumerator = self.fileManager.enumerator(atPath: path!)
             
             while let element = directoryEnumerator?.nextObject() as? String
             {
                 if element.hasSuffix(oldStoreName)
                 {
-                    foundPaths.addObject(element)
+                    foundPaths.add(element)
                 }
             }
             
@@ -309,42 +297,39 @@ class PWESPersistentStoreManager : NSObject
     }
     
     
-    func filePathInDocumentDirectory(filename: String) -> String?
+    func filePathInDocumentDirectory(_ filename: String) -> String?
     {
-        var path: String?
-        var docPathURL: NSURL = appDocumentDirectory()
-        var backupPath = docPathURL.URLByAppendingPathComponent(filename)
-        if nil != backupPath.path
-        {
-            if self.fileManager.fileExistsAtPath(backupPath.path!)
-            {
-                path = backupPath.path
-            }
+        let docPathURL: URL = appDocumentDirectory()
+        let backupPath = docPathURL.appendingPathComponent(filename).path
+        if fileManager.fileExists(atPath: backupPath) {
+            return backupPath
         }
+        else {
+            return nil
+        }
+    }
+    
+    func appDocumentDirectory() -> URL
+    {
+        let paths = fileManager.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
+        let path = paths[paths.count - 1] 
         return path
     }
     
-    func appDocumentDirectory() -> NSURL
+    func appLibraryDirectory() -> URL
     {
-        let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
-        let path = paths[paths.count - 1] as! NSURL
-        return path
-    }
-    
-    func appLibraryDirectory() -> NSURL
-    {
-        let paths = self.fileManager.URLsForDirectory(NSSearchPathDirectory.LibraryDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask)
-        let path = paths[paths.count - 1] as! NSURL
+        let paths = fileManager.urls(for: FileManager.SearchPathDirectory.libraryDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
+        let path = paths[paths.count - 1] 
         return path
     }
     
     let context: NSManagedObjectContext =
     {
-        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
         return context
         }()
     
-    func disableiCloudStore(error: NSErrorPointer) -> Bool
+    func disableiCloudStore(_ error: NSErrorPointer) -> Bool
     {
         if nil == defaultContext
         {
@@ -352,11 +337,17 @@ class PWESPersistentStoreManager : NSObject
         }
 //        defaultContext?.lock()
 //        defaultContext?.reset()
-        defaultContext?.performBlockAndWait({ () -> Void in
-            let stores = self.persistentStoreCoordinator?.persistentStores as! [NSPersistentStore];
-            for store in stores
-            {
-                self.persistentStoreCoordinator?.removePersistentStore(store, error: nil)
+        
+        
+        
+        defaultContext?.performAndWait({ () -> Void in
+            if let stores = self.persistentStoreCoordinator?.persistentStores {
+                for store in stores
+                {
+                    do {
+                        try self.persistentStoreCoordinator?.remove(store)
+                    }catch{}
+                }
             }
         })
         defaultContext?.reset()
@@ -364,33 +355,37 @@ class PWESPersistentStoreManager : NSObject
         defaultContext = nil
         persistentStoreCoordinator = nil
         
-        configureStoreManager()
+        _ = configureStoreManager()
         //        defaultContext?.unlock()
         
         
         return true;
     }
     
-    func setUpNewStoreWithBackupData(error: NSErrorPointer)
+    func setUpNewStoreWithBackupData(_ error: NSErrorPointer)
     {
         setUpNewStore()
         if hasBackupFile()
         {
-            let docPath:NSURL = self.appDocumentDirectory()
-            var filePath = docPath.URLByAppendingPathComponent(backupFileName)
+            let docPath:URL = self.appDocumentDirectory()
+            let filePath = docPath.appendingPathComponent(backupFileName)
             let importer = PWESCoreXMLImporter()
             importer.importWithURL(filePath, completionBlock: { (success, dictionary, error) -> Void in
                 if success
                 {
                     let dbImporter = PWESCoreDictionaryImporter()
-                    var saveError: NSError?
-                    dbImporter.saveToCoreData(dictionary, error: &saveError)
+                    do {
+                        try dbImporter.saveToCoreData(dictionary)
+                        
+                    }catch {
+                        
+                    }
                 }
             })
         }
     }
     
-    func setiCloudEnabled(iCloud: Bool)
+    func setiCloudEnabled(_ iCloud: Bool)
     {
         iCloudEnabled = iCloud
     }
@@ -405,105 +400,140 @@ class PWESPersistentStoreManager : NSObject
     }
 
     // MARK: Core data main functions
-    func saveAndExport(error: NSErrorPointer, completionBlock: PWESSuccessClosure) -> Bool
+    func saveAndExport(_ completionBlock: @escaping PWESSuccessClosure)
     {
-        if nil == defaultContext
-        {
-            completionBlock(success: false, error: nil)
-            return false
+        do {
+            try saveContext()
+        }catch {
+            let error = NSError(domain: "iStayHealthy", code: 103, userInfo: nil)
+            completionBlock(false, error)
         }
-        let context: NSManagedObjectContext = defaultContext!
-        var success = true
-        success = context.save(error)
-        var hasBackup = hasBackupFileWithContent()
+        let hasBackup = hasBackupFileWithContent()
         if hasBackup
         {
-            completionBlock(success: true, error: nil)
-            return true
+            completionBlock(true, nil)
+            return
         }
         
         let writer:CoreXMLWriter = CoreXMLWriter()
-        writer.writeWithCompletionBlock({ (xmlString: String?, xmlError: NSError?) -> Void in
+        writer.write(completionBlock: { (xmlString: String?, xmlError: Error?) -> Void in
             if nil != xmlString
             {
-                let xml:NSString = xmlString!
-                let xmlData: NSData = xml.dataUsingEncoding(NSUTF8StringEncoding)!
-                let docPath:NSURL = self.appDocumentDirectory()
-                var filePath = docPath.URLByAppendingPathComponent(backupFileName)
-                let manager:NSFileManager = NSFileManager.defaultManager()
-                if manager.fileExistsAtPath(filePath.path!)
+                let xml:NSString = xmlString! as NSString
+                let xmlData: Data = xml.data(using: String.Encoding.utf8.rawValue)!
+                let docPath:URL = self.appDocumentDirectory()
+                let filePath = docPath.appendingPathComponent(backupFileName)
+                let manager:FileManager = FileManager.default
+                if manager.fileExists(atPath: filePath.path)
                 {
-                    var fileError: NSError?
-                    manager.removeItemAtURL(filePath, error: &fileError)
+                    do {
+                        try manager.removeItem(at: filePath)
+                    }catch {}
                 }
-                xmlData.writeToURL(filePath, atomically: true)
-                completionBlock(success: true, error: nil)
+                try? xmlData.write(to: filePath, options: [.atomic])
+                completionBlock(true, nil)
             }
             else
             {
-                completionBlock(success: false, error: xmlError)
+                completionBlock(false, xmlError as NSError?)
             }
         })
         
-        return true
+        return
     }
     
-    
-    func saveContext(error: NSErrorPointer) -> Bool
-    {
-        if nil == self.defaultContext
-        {
-            return false
-        }
-        let context: NSManagedObjectContext = defaultContext!
-        if !context.hasChanges
-        {
-            return true
-        }
-        
-        var success = true
-        success = context.save(error)
-        if !success
-        {
-            return false
-        }
-        
-        let writer:CoreXMLWriter = CoreXMLWriter()
-        writer.writeWithCompletionBlock({ (xmlString: String?, xmlError: NSError?) -> Void in
-            if nil != xmlString
-            {
-                let xml:NSString = xmlString!
-                let xmlData: NSData = xml.dataUsingEncoding(NSUTF8StringEncoding)!
-                let docPath:NSURL = self.appDocumentDirectory()
-                var filePath = docPath.URLByAppendingPathComponent(backupFileName)
-                let manager:NSFileManager = NSFileManager.defaultManager()
-                if manager.fileExistsAtPath(filePath.path!)
-                {
-                    var fileError: NSError?
-                    manager.removeItemAtURL(filePath, error: &fileError)
-                }
-                xmlData.writeToURL(filePath, atomically: true)
+    func saveContext() throws {
+        if let context = defaultContext {
+            if !context.hasChanges {
+                print("**** context has no changes")
+                return
             }
-        })
-        
-        return true
+            do {
+                try context.save()
+                let writer = CoreXMLWriter()
+                writer.write(completionBlock: { (xmlString, xmlError) in
+                    if let xml = xmlString {
+                        let xmlData: Data = xml.data(using: String.Encoding.utf8)!
+                        let docPath:URL = self.appDocumentDirectory()
+                        let filePath = docPath.appendingPathComponent(backupFileName)
+                        let manager:FileManager = FileManager.default
+                        if manager.fileExists(atPath: filePath.path)
+                        {
+                            do {
+                                try manager.removeItem(at: filePath)
+                            }catch{
+                                print("*** Error removing tmp file")
+                            }
+                        }
+                        try? xmlData.write(to: filePath, options: [.atomic])
+                        
+                    }
+                    
+                })
+            }catch {
+                print("*** Error writing to XML")
+                
+            }
+        } else {
+            print("*** It seems the default context is nil")
+        }
     }
     
-    func fetchMasterRecord(completion: PWESArrayClosure)
+//    func saveContext(_ error: NSErrorPointer) -> Bool
+//    {
+//        if nil == self.defaultContext
+//        {
+//            return false
+//        }
+//        let context: NSManagedObjectContext = defaultContext!
+//        if !context.hasChanges
+//        {
+//            return true
+//        }
+//        
+//        var success = true
+//        success = context.save(error)
+//        if !success
+//        {
+//            return false
+//        }
+//        
+//        let writer:CoreXMLWriter = CoreXMLWriter()
+//        writer.write(completionBlock: { (xmlString: String?, xmlError: NSError?) -> Void in
+//            if nil != xmlString
+//            {
+//                let xml:NSString = xmlString!
+//                let xmlData: Data = xml.data(using: String.Encoding.utf8)!
+//                let docPath:URL = self.appDocumentDirectory()
+//                var filePath = docPath.appendingPathComponent(backupFileName)
+//                let manager:FileManager = FileManager.default
+//                if manager.fileExists(atPath: filePath.path!)
+//                {
+//                    var fileError: NSError?
+//                    manager.removeItemAtURL(filePath, error: &fileError)
+//                }
+//                try? xmlData.write(to: filePath, options: [.atomic])
+//            }
+//        })
+//        
+//        return true
+//    }
+    
+    func fetchMasterRecord(_ completion: @escaping PWESArrayClosure)
     {
         fetchData(kiStayHealthyRecord, predicate: nil, sortTerm: nil, ascending: false, completion: completion)
     }
     
-    func fetchData(entityName: String?, predicate: NSPredicate?, sortTerm: String?, ascending: Bool, completion: PWESArrayClosure)
+    func fetchData(_ entityName: String?, predicate: NSPredicate?, sortTerm: String?, ascending: Bool, completion: @escaping PWESArrayClosure)
     {
         if nil == self.defaultContext || nil == entityName
         {
-            var coreDataError: NSError = NSError(domain: "CoreDataError", code: 100, userInfo: nil)
-            completion(array:nil, error:coreDataError)
+            let coreDataError: NSError = NSError(domain: "CoreDataError", code: 100, userInfo: nil)
+            completion(nil, coreDataError)
         }
         
-        let entity: NSEntityDescription = NSEntityDescription.entityForName(entityName!, inManagedObjectContext: self.defaultContext!)!
-        let request: NSFetchRequest = NSFetchRequest()
+        let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: entityName!, in: self.defaultContext!)!
+        let request: NSFetchRequest = NSFetchRequest<NSFetchRequestResult>()
         request.entity = entity
         
         if nil != predicate
@@ -517,24 +547,25 @@ class PWESPersistentStoreManager : NSObject
             request.sortDescriptors = [descriptor]
         }
         
-        self.defaultContext?.performBlock({ () -> Void in
-            var fetchError: NSError?
-            let count = self.defaultContext?.countForFetchRequest(request, error: &fetchError)
-            if 0 == count || NSNotFound == count
-            {
-                let emptyData = []
-                completion(array: emptyData, error: nil)
-            }
-            else
-            {
-                let fetchedObjects = self.defaultContext?.executeFetchRequest(request, error: &fetchError)
-                completion(array: fetchedObjects, error: fetchError)
+        self.defaultContext?.perform({ () -> Void in
+            do {
+                let count = try self.defaultContext?.count(for: request)
+                if 0 == count || NSNotFound == count {
+                    completion([], nil)
+                }
+                else {
+                    let fetchData = try self.defaultContext?.fetch(request)
+                    completion(fetchData as NSArray?, nil)
+                }
+            } catch {
+                let coreDataError: NSError = NSError(domain: "CoreDataError", code: 100, userInfo: nil)
+                completion(nil, coreDataError)
             }
         })
         
     }
     
-    func managedObjectForEntityName(entityName: String?) -> NSManagedObject?
+    func managedObjectForEntityName(_ entityName: String?) -> NSManagedObject?
     {
         if nil == self.defaultContext
         {
@@ -544,24 +575,25 @@ class PWESPersistentStoreManager : NSObject
         {
             return nil
         }
-        var managedObject: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(entityName!, inManagedObjectContext: self.defaultContext!)
+        let managedObject: AnyObject = NSEntityDescription.insertNewObject(forEntityName: entityName!, into: self.defaultContext!)
         return managedObject as? NSManagedObject
     }
     
     
     
-    func removeManagedObject(managedObject: NSManagedObject?, error: NSErrorPointer) -> Bool
+    func removeManagedObject(_ managedObject: NSManagedObject?) throws
     {
-        if nil == managedObject
-        {
-            return true
+        if let rmObject = managedObject {
+            defaultContext?.delete(rmObject)
+            do {
+                try saveContext()
+            }catch {
+                
+            }
         }
-        defaultContext!.deleteObject(managedObject!)
-        let success = self.saveContext(error)
-        return success
     }
     
-    func loadDataFromBackupFile(completionBlock: PWESSuccessClosure)
+    func loadDataFromBackupFile(_ completionBlock: @escaping PWESSuccessClosure)
     {
         var path: String?
         path = filePathInDocumentDirectory(backupFileName)
@@ -569,43 +601,38 @@ class PWESPersistentStoreManager : NSObject
         {
             let info = [NSLocalizedDescriptionKey : "No backup file found"]
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 102, userInfo: info)
-            completionBlock(success: false, error: error)
+            completionBlock(false, error)
             return
         }
         
-        let pathURL = NSURL(fileURLWithPath: path!)
-        if nil == pathURL
-        {
-            let info = [NSLocalizedDescriptionKey : "No backup file found"]
-            let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 102, userInfo: info)
-            completionBlock(success: false, error: error)
-            return
-        }
+        let pathURL = URL(fileURLWithPath: path!)
         let importer = PWESCoreXMLImporter()
-        importer.importWithURL(pathURL!, completionBlock: { (success, dictionary, error) -> Void in
+        importer.importWithURL(pathURL, completionBlock: { (success, dictionary, error) -> Void in
             if !success || nil == dictionary
             {
-                completionBlock(success: false, error: error)
+                completionBlock(false, error)
             }
             else
             {
                 let importSaver = PWESCoreDictionaryImporter()
-                var importError: NSError?
-                let importSuccess = importSaver.saveToCoreData(dictionary, error: &importError)
-                completionBlock(success: importSuccess, error: importError)
+                do {
+                    try importSaver.saveToCoreData(dictionary)
+                } catch {
+                    completionBlock(false, NSError(domain: "iStayHealthy", code: 102, userInfo: nil))                    
+                }
             }
         })
     }
     
     
     //MARK: notification responses
-    func storeWillChange(notification: NSNotification?)
+    func storeWillChange(_ notification: Notification?)
     {
         if nil == notification
         {
             return
         }
-        let userInfo: Dictionary<String, AnyObject>? = notification?.userInfo as? Dictionary<String, AnyObject>
+        let userInfo: Dictionary<String, AnyObject>? = (notification as NSNotification?)?.userInfo as? Dictionary<String, AnyObject>
         if nil == userInfo
         {
             return
@@ -613,21 +640,23 @@ class PWESPersistentStoreManager : NSObject
         let transitionType = userInfo?[NSPersistentStoreUbiquitousTransitionTypeKey] as? UInt
         
         let type = NSPersistentStoreUbiquitousTransitionType(rawValue: transitionType!)
-        if NSPersistentStoreUbiquitousTransitionType.InitialImportCompleted == type
+        if NSPersistentStoreUbiquitousTransitionType.initialImportCompleted == type
         {
             
         }
-        var error: NSError?
-        saveContext(&error)
+        do {
+            try saveContext()
+        }catch {
+        }
     }
     
-    func storeDidChange(notification: NSNotification?)
+    func storeDidChange(_ notification: Notification?)
     {
         if nil == notification
         {
             return
         }
-        let userInfo: Dictionary<String, AnyObject>? = notification?.userInfo as? Dictionary<String, AnyObject>
+        let userInfo: Dictionary<String, AnyObject>? = (notification as NSNotification?)?.userInfo as? Dictionary<String, AnyObject>
         if nil == userInfo
         {
             return
@@ -635,29 +664,31 @@ class PWESPersistentStoreManager : NSObject
         let transitionType = userInfo?[NSPersistentStoreUbiquitousTransitionTypeKey] as? UInt
         
         let type = NSPersistentStoreUbiquitousTransitionType(rawValue: transitionType!)
-        if NSPersistentStoreUbiquitousTransitionType.InitialImportCompleted == type
+        if NSPersistentStoreUbiquitousTransitionType.initialImportCompleted == type
         {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let localNotification = NSNotification(name: kLoadedStoreNotificationKey, object: self)
-                NSNotificationCenter.defaultCenter().postNotification(localNotification)
+            DispatchQueue.main.async(execute: { () -> Void in
+                let localNotification = Notification(name: Notification.Name(rawValue: kLoadedStoreNotificationKey), object: self)
+                NotificationCenter.default.post(localNotification)
             })
         }
     }
     
     
-    func mergeFromiCloud(notification: NSNotification?)
+    func mergeFromiCloud(_ notification: Notification?)
     {
         if nil == defaultContext || nil == notification
         {
             return
         }
-        defaultContext!.mergeChangesFromContextDidSaveNotification(notification!)
-        defaultContext!.processPendingChanges()
-        var error: NSError?
-        saveContext(&error)
+        defaultContext?.mergeChanges(fromContextDidSave: notification!)
+        defaultContext?.processPendingChanges()
+        do {
+            try saveContext()
+        }catch {
+        }
     }
     
-    func iCloudStoreChanged(notification: NSNotification?)
+    func iCloudStoreChanged(_ notification: Notification?)
     {
         if nil == notification
         {

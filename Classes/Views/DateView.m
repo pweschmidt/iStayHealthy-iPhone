@@ -65,7 +65,7 @@
     CGFloat yearLabelYOffset = yearLabelWidth / 2 - yearLabelHeight / 2;
 
     yearLabelFrame = CGRectMake(yearLabelXOffset, yearLabelYOffset, yearLabelWidth, yearLabelHeight);
-    yearFontSize = yearLabelHeight - 1;
+    yearFontSize = yearLabelHeight - 2;
 
     CGFloat xOffset = yearWidth;
     CGFloat lWidth = width - yearWidth;
@@ -73,9 +73,9 @@
     CGFloat monthHeight = height / 3;
 
     dayFrame = CGRectMake(xOffset, 0, lWidth, dayHeight);
-    dayFontSize = dayHeight * 0.9;
+    dayFontSize = dayHeight * 0.7;
     monthFrame = CGRectMake(xOffset, dayHeight, lWidth, monthHeight);
-    monthFontSize = monthHeight - 1;
+    monthFontSize = monthHeight - 4;
 }
 
 - (void)drawDateLabels

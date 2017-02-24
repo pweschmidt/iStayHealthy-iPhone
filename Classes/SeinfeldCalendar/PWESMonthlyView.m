@@ -12,7 +12,6 @@
 #import "SeinfeldCalendar+Handling.h"
 #import "SeinfeldCalendarEntry.h"
 #import "PWESResultsDelegate.h"
-// #import "CoreDataManager.h"
 #import "Utilities.h"
 #import "iStayHealthy-Swift.h"
 #import <QuartzCore/QuartzCore.h>
@@ -33,6 +32,7 @@
 @property (nonatomic, strong) SeinfeldCalendar *calender;
 @property (nonatomic, strong) NSArray *entriesForMonth;
 @property (nonatomic, assign) BOOL lastHasTakenMeds;
+@property (nonatomic, strong) UIViewController *controller;
 @end
 
 @implementation PWESMonthlyView
@@ -52,12 +52,14 @@
 
 + (PWESMonthlyView *)monthlyViewForCalendar:(SeinfeldCalendar *)calendar
                               seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+                       presentingController:(UIViewController *)controller
                                       frame:(CGRect)frame
 {
     PWESMonthlyView *view = [[PWESMonthlyView alloc] initWithFrame:frame];
 
     view->heightOfEndFrame = 0.f;
     view.exclusiveTouch = YES;
+    view.controller = controller;
     [view configureViewWithSeinfeldMonth:seinfeldMonth calendar:calendar];
     [view resetFrame];
     return view;
@@ -324,61 +326,51 @@
     if (nil != foundLayer /*&& canChangeValue*/)
     {
         self.tappedLayer = foundLayer;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Meds Taken?", nil)
-                                                            message:NSLocalizedString(@"Have I taken my meds today?", nil)
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                  otherButtonTitles:NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), NSLocalizedString(@"Reset", nil), nil];
-        [alertView show];
-    }
-//	else
-//	{
-//		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Don't Cheat!", nil)
-//		                                                    message:NSLocalizedString(@"Only today's and yesterday's entries can be changed.", nil)
-//		                                                   delegate:nil
-//		                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
-//		                                          otherButtonTitles:nil];
-//		[alertView show];
-//	}
-}
+        PWESAlertAction *cancel = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
+        PWESAlertAction *yes = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault action:^{
+            if (nil != self.tappedLayer) {
+                CATextLayer *tappedLayer = self.tappedLayer;
+                NSInteger day = [self.layers indexOfObject:tappedLayer] + self.seinfeldMonth.startDay;
+                [self addBackgroundLayerForDay:day colour:DARK_GREEN tappedLayer:tappedLayer];
+                [self createOrUpdateRecordForDay:day hasTakenMeds:YES];
+                NSInteger endDay = self.seinfeldMonth.endDay;
+                if (day == endDay && self.seinfeldMonth.isLastMonth)
+                {
+                    [self completeCourseWithHasTakenMeds:YES];
+                }
+                self.tappedLayer = nil;
+            }
+        }];
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    
-    if (nil == self.tappedLayer || [title isEqualToString:NSLocalizedString(@"Cancel", nil)])
-    {
-        return;
+        PWESAlertAction *no = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"No", nil) style:UIAlertActionStyleDestructive action:^{
+            if (nil != self.tappedLayer) {
+                CATextLayer *tappedLayer = self.tappedLayer;
+                NSInteger day = [self.layers indexOfObject:tappedLayer] + self.seinfeldMonth.startDay;
+                [self addBackgroundLayerForDay:day colour:DARK_RED tappedLayer:tappedLayer];
+                [self createOrUpdateRecordForDay:day hasTakenMeds:NO];
+                NSInteger endDay = self.seinfeldMonth.endDay;
+                if (day == endDay && self.seinfeldMonth.isLastMonth)
+                {
+                    [self completeCourseWithHasTakenMeds:NO];
+                }
+                self.tappedLayer = nil;
+            }
+        }];
+        
+        PWESAlertAction *reset = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Reset", nil) style:UIAlertActionStyleDefault action:^{
+            if (nil != self.tappedLayer) {
+                CATextLayer *tappedLayer = self.tappedLayer;
+                NSInteger day = [self.layers indexOfObject:tappedLayer] + self.seinfeldMonth.startDay;
+                [self removeRecordForDay:day tappedLayer:tappedLayer];
+            }
+        }];
+        
+        [PWESAlertHandler.alertHandler
+         showAlertView:NSLocalizedString(@"Meds Taken?", nil)
+         message:NSLocalizedString(@"Have I taken my meds today?", nil)
+         presentingController:self.controller
+         actions:@[yes, no, reset, cancel]];
     }
-    CATextLayer *tappedLayer = self.tappedLayer;
-
-
-    NSInteger day = [self.layers indexOfObject:self.tappedLayer] + self.seinfeldMonth.startDay;
-
-    BOOL hasTakenMeds = NO;
-    if ([title isEqualToString:NSLocalizedString(@"Yes", nil)])
-    {
-        [self addBackgroundLayerForDay:day colour:DARK_GREEN tappedLayer:tappedLayer];
-        hasTakenMeds = YES;
-        [self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"No", nil)])
-    {
-        [self addBackgroundLayerForDay:day colour:DARK_RED tappedLayer:tappedLayer];
-        hasTakenMeds = NO;
-        [self createOrUpdateRecordForDay:day hasTakenMeds:hasTakenMeds];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Reset", nil)])
-    {
-        [self removeRecordForDay:day tappedLayer:tappedLayer];
-    }
-    NSInteger endDay = self.seinfeldMonth.endDay;
-    if (day == endDay && self.seinfeldMonth.isLastMonth)
-    {
-        [self completeCourseWithHasTakenMeds:hasTakenMeds];
-    }
-
-    self.tappedLayer = nil;
 }
 
 - (void)addBackgroundLayerForDay:(NSInteger)day colour:(UIColor *)colour tappedLayer:(CATextLayer *)tappedLayer
@@ -435,7 +427,7 @@
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
     [manager removeManagedObject:record error:&error];
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     __strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
     if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendarWithSuccess:)])
     {
@@ -456,7 +448,7 @@
     }
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
     __strong id <PWESResultsDelegate> strongDelegate = self.resultsDelegate;
     if (nil != strongDelegate && [strongDelegate respondsToSelector:@selector(updateCalendarWithSuccess:)])
     {

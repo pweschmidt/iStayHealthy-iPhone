@@ -15,6 +15,12 @@
 		<string>combivir</string>
 	</array>
 	<array>
+		<string>Emtricitabine, TAF</string>
+		<string>Descovy</string>
+		<string>NRTI, NRTI</string>
+		<string>descovy</string>
+	</array>
+	<array>
 		<string>Emtricitabin, Rilpivirin, Tenofovir</string>
 		<string>Complera/Eviplera</string>
 		<string>NRTI, NNRTI, NRTI</string>
@@ -27,6 +33,12 @@
 		<string>evotaz</string>
 	</array>
 	<array>
+		<string>Elvitegravir, TAF, Emtricitabine, Combistat</string>
+		<string>Genvoya</string>
+		<string>Integrase Inhibitor, NRTI, NRTI, Booster</string>
+		<string>genvoya</string>
+	</array>
+	<array>
 		<string>Lopinavir, Ritonavir</string>
 		<string>Kaletra/Aluvia</string>
 		<string>PI, PI</string>
@@ -37,6 +49,12 @@
 		<string>Kivexa(EU)/Epzicom(US)</string>
 		<string>NRTI, NRTI</string>
 		<string>kivexa</string>
+	</array>
+	<array>
+		<string>Rilpivirine, Emtricitabine, TAF</string>
+		<string>Odefsey</string>
+		<string>NNRTI, NRTI, NRTI</string>
+		<string>odefsey</string>
 	</array>
 	<array>
 		<string>Rezolsta, Darunavir, Cobocostat</string>

@@ -12,10 +12,9 @@
 #import "InformationTableViewController.h"
 #import "LocalBackupController.h"
 #import "HelpViewController.h"
-#import "DropboxViewController.h"
+//#import "DropboxViewController.h"
 #import "EditResultsTableViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
-// #import "EmailViewController.h"
 #import "Utilities.h"
 #import "Menus.h"
 #import "UILabel+Standard.h"
@@ -68,7 +67,7 @@
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
-    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self];
+    CustomToolbar *toolbar = [[CustomToolbar alloc] initWithToolbarManager:self presentingController:self];
     NSArray *items = toolbar.customItems;
     [self setToolbarItems:items animated:NO];
     self.customToolbar = toolbar;
@@ -94,29 +93,6 @@
     [self.view addSubview:indicator];
     self.indicatorView = indicator;
 }
-
-/*
-   - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-   {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [UIView animateWithDuration:duration animations: ^{
-         self.customToolbar.alpha = 0.0f;
-     }];
-   }
-
-   - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-   {
-    if ([Utilities isIPad])
-    {
-        [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-        [UIView animateWithDuration:0.125f animations: ^{
-             CGRect toolbarFrame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
-             self.customToolbar.frame = toolbarFrame;
-             self.customToolbar.alpha = 1.0f;
-         }];
-    }
-   }
- */
 
 - (void)disableRightBarButtons
 {
@@ -150,36 +126,6 @@
 
 - (void)hidePopover
 {
-    if (nil != self.customPopoverController)
-    {
-        [self.customPopoverController dismissPopoverAnimated:YES];
-        self.customPopoverController = nil;
-    }
-}
-
-- (void)presentPopoverWithController:(UINavigationController *)controller
-                            fromRect:(CGRect)frame
-{
-    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-    self.customPopoverController.delegate = self;
-    [self.customPopoverController presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-}
-
-- (void)presentPopoverWithController:(UINavigationController *)controller
-                       fromBarButton:(UIBarButtonItem *)barButton
-{
-    [self presentPopoverWithController:controller fromBarButton:barButton direction:UIPopoverArrowDirectionUp];
-}
-
-- (void)presentPopoverWithController:(UINavigationController *)controller
-                       fromBarButton:(UIBarButtonItem *)barButton
-                           direction:(UIPopoverArrowDirection)direction
-{
-    self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-    self.customPopoverController.delegate = self;
-    [self.customPopoverController presentPopoverFromBarButtonItem:barButton
-                                         permittedArrowDirections:direction
-                                                         animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -303,9 +249,10 @@
 
 - (void)handleError:(NSNotification *)notification
 {
-    UIAlertView *view = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error loading data", nil) message:NSLocalizedString(@"An error occurred while loading data", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-
-    [view show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithOKButton:NSLocalizedString(@"Error loading data", nil)
+     message:NSLocalizedString(@"An error occurred while loading data", nil)
+     presentingController:self];
 }
 
 - (void)handleStoreChanged:(NSNotification *)notification
@@ -349,34 +296,6 @@
     {
         [strongHandler showMenuPanel];
     }
-//    if ([self.parentViewController isKindOfClass:[ContentNavigationController_iPad class]])
-//    {
-//        ContentNavigationController_iPad *navController = (ContentNavigationController_iPad *) self.parentViewController;
-//        if (self.settingMenuShown)
-//        {
-//            [navController hideMenu];
-//            self.settingMenuShown = NO;
-//        }
-//        else
-//        {
-//            [navController showMenu];
-//            self.settingMenuShown = YES;
-//        }
-//    }
-//    else if ([self.parentViewController isKindOfClass:[ContentNavigationController class]])
-//    {
-//        ContentNavigationController *navController = (ContentNavigationController *) self.parentViewController;
-//        if (self.settingMenuShown)
-//        {
-//            [navController hideMenu];
-//            self.settingMenuShown = NO;
-//        }
-//        else
-//        {
-//            [navController showMenu];
-//            self.settingMenuShown = YES;
-//        }
-//    }
 }
 
 - (void)addButtonPressed:(id)sender
@@ -394,22 +313,19 @@
     return blank;
 }
 
+
+
 #pragma mark PWESToolbar delegate methods
 - (void)showMailSelectionControllerFromButton:(UIBarButtonItem *)button
 {
     PWESFeedbackTableViewController *controller = [[PWESFeedbackTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-
-    if ([Utilities isIPad])
-    {
-        controller.popoverDelegate = self;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-        
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -417,18 +333,24 @@
 {
     SettingsTableViewController *controller = [[SettingsTableViewController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 
-    if ([Utilities isIPad])
-    {
-        controller.hasNavHeader = YES;
-        controller.popoverDelegate = self;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        controller.popoverDelegate = nil;
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if ([Utilities isIPad])
+//    {
+//        controller.hasNavHeader = YES;
+//        controller.popoverDelegate = self;
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        controller.popoverDelegate = nil;
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 - (void)showMailControllerHasAttachment:(BOOL)hasAttachment
@@ -454,10 +376,10 @@
                  [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
                  if (writeError)
                  {
-                     [[[UIAlertView alloc]
-                       initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                      show];
+                     [PWESAlertHandler.alertHandler
+                      showAlertViewWithOKButton:NSLocalizedString(@"Error writing data to tmp directory", nil)
+                      message:error.localizedDescription
+                      presentingController:self];
                  }
                  else
                  {
@@ -471,24 +393,6 @@
                  }
              }
          }];
-        //		CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
-        //		[writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
-        //		    dispatch_async(dispatch_get_main_queue(), ^{
-        //		        if (nil != csvString)
-        //		        {
-        //		            NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-        //		            [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
-        //				}
-        //		        else
-        //		        {
-        //		            [[[UIAlertView alloc]
-        //		              initWithTitle:@"Error adding attachment" message:[error localizedDescription]
-        //		                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-        //		             show];
-        //				}
-        //		        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-        //			});
-        //		}];
     }
     else
     {
@@ -501,108 +405,98 @@
     return [NSTemporaryDirectory() stringByAppendingPathComponent:@"iStayHealthy.isth"];
 }
 
-// - (void)showMailControllerHasAttachment:(BOOL)hasAttachment
-// {
-//    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-//
-//    mailController.navigationController.navigationBar.tintColor = [UIColor blackColor];
-//
-//    NSArray *toRecipient = [NSArray arrayWithObjects:@"istayhealthy.app@gmail.com", nil];
-//    mailController.mailComposeDelegate = self;
-//    [mailController setToRecipients:toRecipient];
-//    [mailController setSubject:@"Feedback for iStayHealthy iPhone app"];
-//    if (hasAttachment)
-//    {
-//        CoreCSVWriter *writer = [CoreCSVWriter sharedInstance];
-//        [writer writeWithCompletionBlock: ^(NSString *csvString, NSError *error) {
-//             if (nil != csvString)
-//             {
-//                 NSData *data = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-//                 [mailController addAttachmentData:data mimeType:@"text/csv" fileName:@"iStayHealthy.csv"];
-//             }
-//             else
-//             {
-//                 [[[UIAlertView alloc]
-//                   initWithTitle:@"Error adding attachment" message:[error localizedDescription]
-//                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-//                  show];
-//             }
-//             [self.navigationController presentViewController:mailController animated:YES completion:nil];
-//         }];
-//    }
-//    else
-//    {
-//        [self.navigationController presentViewController:mailController animated:YES completion:nil];
-//    }
-// }
 
 - (void)showDropboxControllerFromButton:(UIBarButtonItem *)button
 {
-    if ([[DBSession sharedSession] isLinked])
-    {
-        DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-        if ([Utilities isIPad])
-        {
-            controller.hasNavHeader = YES;
-            [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-        }
-        else
-        {
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-    }
-    else
-    {
-        [[DBSession sharedSession] linkFromController:self];
-    }
+    [DropboxAuthenicator.authenticator launchDropboxController:self barButton:button];
+//    if ([[DBSession sharedSession] isLinked])
+//    {
+//        DropboxViewController *controller = [[DropboxViewController alloc] initAsPopoverController];
+//        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+//        navController.modalPresentationStyle = UIModalPresentationPopover;
+//        UIPopoverPresentationController *popController = [navController popoverPresentationController];
+//        popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+//        popController.barButtonItem = button;
+//        self.popoverController = popController;
+//        [self presentViewController:navController animated:YES completion:nil];
+//        if ([Utilities isIPad])
+//        {
+//            controller.hasNavHeader = YES;
+//            [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//        }
+//        else
+//        {
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }
+//    }
+//    else
+//    {
+//        [[DBSession sharedSession] linkFromController:self];
+//    }
 }
 
 - (void)showInfoControllerFromButton:(UIBarButtonItem *)button
 {
     InformationTableViewController *controller = [[InformationTableViewController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 
-    if ([Utilities isIPad])
-    {
-        controller.hasNavHeader = YES;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if ([Utilities isIPad])
+//    {
+//        controller.hasNavHeader = YES;
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 - (void)showHelpControllerFromButton:(UIBarButtonItem *)button
 {
     HelpViewController *controller = [[HelpViewController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-
-    if ([Utilities isIPad])
-    {
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
+//    if ([Utilities isIPad])
+//    {
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 - (void)showLocalBackupControllerFromButton:(UIBarButtonItem *)button
 {
     LocalBackupController *controller = [[LocalBackupController alloc] initAsPopoverController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popController = [navController popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    popController.barButtonItem = button;
+    self.popoverController = popController;
+    [self presentViewController:navController animated:YES completion:nil];
 
-    if ([Utilities isIPad])
-    {
-        controller.hasNavHeader = YES;
-        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
-    }
-    else
-    {
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if ([Utilities isIPad])
+//    {
+//        controller.hasNavHeader = YES;
+//        [self presentPopoverWithController:navController fromBarButton:button direction:UIPopoverArrowDirectionDown];
+//    }
+//    else
+//    {
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 
 #pragma mark Mail composer callback

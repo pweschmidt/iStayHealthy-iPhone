@@ -18,7 +18,6 @@
 #import "Wellness+Handling.h"
 #import "Contacts+Handling.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "CoreXMLTools.h"
 #import "iStayHealthy-Swift.h"
 
@@ -193,7 +192,7 @@
     NSError *saveError = nil;
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
 
-    [manager saveContext:&saveError];
+    [manager saveContextAndReturnError:&saveError];
     if (nil  != saveError)
     {
 #ifdef APPDEBUG

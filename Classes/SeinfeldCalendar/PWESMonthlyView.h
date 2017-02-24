@@ -10,10 +10,11 @@
 @class PWESSeinfeldMonth, SeinfeldCalendar;
 @protocol PWESResultsDelegate;
 
-@interface PWESMonthlyView : UIView <UIAlertViewDelegate>
+@interface PWESMonthlyView : UIView
 @property (nonatomic, weak) id <PWESResultsDelegate> resultsDelegate;
 
 + (PWESMonthlyView *)monthlyViewForCalendar:(SeinfeldCalendar *)calendar
                               seinfeldMonth:(PWESSeinfeldMonth *)seinfeldMonth
+                       presentingController:(UIViewController *)controller
                                       frame:(CGRect)frame;
 @end

@@ -7,13 +7,35 @@
 //
 
 import UIKit
+import Messages
 
-class PWESContentContainerController: UIViewController, PWESContentMenuHandler, PWESLoginHandler
+class PWESContentContainerController: UIViewController, PWESContentMenuHandler,  MFMailComposeViewControllerDelegate
 {
     var customNavigationController: UINavigationController?
     var isCollapsed: Bool = true
     var menuController: HamburgerMenuTableViewController?
-    var defaultLoginController: PWESLoginViewController?
+//    var defaultLoginController: PWESLoginViewController?
+    var passwordTextField: UITextField?
+    var alertController: UIAlertController?
+    
+    var passwordAction: PWESAlertAction {
+        get {
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Log in",comment: ""), style: .default) {
+                self.loadDefaultController()
+            }
+            return action
+        }
+    }
+
+    var forgotPasswordAction: PWESAlertAction {
+        get {
+            let action = PWESAlertAction(alertButtonTitle: NSLocalizedString("Forgot Password?",comment: ""), style: .default) {
+                self.sendForgotEmail()
+            }
+            return action
+        }
+    }
+
     
 
     override func viewDidLoad()
@@ -23,10 +45,19 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         let settings: AppSettings = AppSettings()
         if settings.hasPasswordEnabled()
         {
-            loadLoginController()
+            if UserDefaults.standard.bool(forKey: "resetPassword") {
+                KeychainHandler.resetPasswordAndFlags()
+                UserDefaults.standard.set(false, forKey: "resetPassword")
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                self.loadLoginController()
+            })
         }
         else
         {
+            if UserDefaults.standard.bool(forKey: "resetPassword") {
+                UserDefaults.standard.set(false, forKey: "resetPassword")
+            }
             loadDefaultController()
         }
         
@@ -44,38 +75,92 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         let settings: AppSettings = AppSettings()
         if settings.hasPasswordEnabled()
         {
-            if nil != customNavigationController
-            {
-                customNavigationController!.view.removeFromSuperview()
-                customNavigationController!.removeFromParentViewController()
+            if UserDefaults.standard.bool(forKey: "resetPassword") {
+                KeychainHandler.resetPasswordAndFlags()
+                UserDefaults.standard.set(false, forKey: "resetPassword")
             }
-            loadLoginController()
+            else {
+                if nil != customNavigationController
+                {
+                    customNavigationController!.view.removeFromSuperview()
+                    customNavigationController!.removeFromParentViewController()
+                }
+                loadLoginController()
+            }
         }
     }
     
-    func loadLoginController()
+    
+    fileprivate func sendForgotEmail() {
+        if !MFMailComposeViewController.canSendMail()
+        {
+            return
+        }
+        let mailController:MFMailComposeViewController = MFMailComposeViewController()
+        mailController.navigationController?.navigationBar.tintColor = UIColor.black
+        let recipients: NSArray = ["istayhealthy.app@gmail.com"]
+        let subject: String = "I forgot my iStayHealthy password (iPhone)"
+        mailController.mailComposeDelegate = self
+        mailController.setToRecipients(recipients as? [String])
+        mailController.setSubject(subject)
+        self.present(mailController, animated: true) { () -> Void in
+        }        
+    }
+    
+    
+    fileprivate func loadLoginController()
     {
-        var storyboard: UIStoryboard = UIStoryboard(name: "PWESMainStoryboard", bundle: nil)
+        alertController = UIAlertController(title: NSLocalizedString("Login", comment: ""), message:"", preferredStyle: .alert)
+        if nil == alertController {
+            return
+        }
         
-        var loginController: PWESLoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! PWESLoginViewController
-        loginController.loginHandler = self
-        self.defaultLoginController = loginController        
-        self.view.addSubview(loginController.view)
-        //        addChildViewController(loginController)
-        loginController.didMoveToParentViewController(self)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let loginAction = UIAlertAction(title: NSLocalizedString("Log in", comment: ""), style: .default) { (action) in
+            
+            if let field = self.passwordTextField {
+                if let passwordText = field.text {
+                    let hash = passwordText.hash
+                    let isValidated = KeychainHandler.compareKeychainValueFor(matchingPIN: hash)
+                    if isValidated {
+                        self.loadDefaultController()
+                    }
+                    else if passwordText == kSecretKey {
+                        self.loadDefaultController()
+                    }
+                    else {
+                        self.alertController!.message = NSLocalizedString("Wrong Password! Try again", comment: "")
+                    }
+                }
+            }
+            
+        }
+        let forgotAction = UIAlertAction(title: NSLocalizedString("Forgot password?", comment: ""), style: .destructive) { (action) in
+        }
+        
+        alertController!.addTextField { (textField) in
+            self.passwordTextField = textField
+            self.passwordTextField?.placeholder = NSLocalizedString("Password", comment: "")
+            self.passwordTextField?.isSecureTextEntry = true
+        }
+        alertController!.addAction(loginAction)
+        alertController!.addAction(forgotAction)
+        alertController!.addAction(cancelAction)
+        
+        present(alertController!, animated: true, completion: nil)
         
     }
         
     func loadDefaultController()
     {
-        var dashboardController: PWESDashboardViewController = PWESDashboardViewController()
+        let dashboardController: PWESDashboardViewController = PWESDashboardViewController()
         dashboardController.menuHandler = self
         self.customNavigationController = UINavigationController(rootViewController: dashboardController)
         if nil != self.customNavigationController
         {
             view.addSubview(self.customNavigationController!.view)
             addChildViewController(self.customNavigationController!)
-            self.customNavigationController!.didMoveToParentViewController(self)
+            self.customNavigationController!.didMove(toParentViewController: self)
         }
     }
     
@@ -93,73 +178,69 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         animateLeftPanel(shouldExpand: self.isCollapsed)
     }
 
-    func dismissMenuPanel(controllerName: String?)
+    func dismissMenuPanel(_ controllerName: String?)
     {
         animateLeftPanel(shouldExpand: false)
-        if nil != controllerName
+        if let name = controllerName
         {
-            replaceMainController(controllerName!,importedAttributes: nil)
+            replaceMainController(name, importedAttributes: nil)
         }
     }
     
-    func addMenuController(menuController: HamburgerMenuTableViewController)
+    func addMenuController(_ menuController: HamburgerMenuTableViewController)
     {
         menuController.menuHandler = self
-        view.insertSubview(menuController.view, atIndex: 0)
+        view.insertSubview(menuController.view, at: 0)
         addChildViewController(menuController)
-        menuController.didMoveToParentViewController(self)
+        menuController.didMove(toParentViewController: self)
     }
     
     
-    func replaceMainController(controllerName: String, importedAttributes: NSDictionary?)
+    func replaceMainController(_ controllerName: String, importedAttributes: NSDictionary?)
     {
-        if nil != self.customNavigationController
+        if nil != customNavigationController
         {
-            self.customNavigationController!.view.removeFromSuperview()
+            customNavigationController!.view.removeFromSuperview()
         }
-        self.customNavigationController = nil
+        customNavigationController = nil
         
-        if self.traitCollection.horizontalSizeClass == .Regular
+        if self.traitCollection.horizontalSizeClass == .regular
         {
-            var navController: UINavigationController? = navigationControllerForiPad(controllerName, attributes: importedAttributes)
-            if navController == nil
+            if let navController: UINavigationController = navigationControllerForiPad(controllerName, attributes: importedAttributes)
             {
-                return
-            }
-            self.customNavigationController = navController
-            
-            self.customNavigationController!.view.frame.origin.x = customNavigationController!.view.frame.origin.x + 180.0
-            self.view.addSubview(self.customNavigationController!.view)
-            self.customNavigationController!.didMoveToParentViewController(self)
-            animateCenterPanelXPosition(targetPosition: 0) { finished in
-                self.isCollapsed = true
+                self.customNavigationController = navController
                 
-                if self.menuController != nil
-                {
-                    self.menuController!.view.removeFromSuperview()
-                    self.menuController = nil;
+                navController.view.frame.origin.x = navController.view.frame.origin.x + 180.0
+                self.view.addSubview(navController.view)
+                navController.didMove(toParentViewController: self)
+                animateCenterPanelXPosition(targetPosition: 0) { finished in
+                    self.isCollapsed = true
+                    
+                    if let menu = self.menuController
+                    {
+                        menu.view.removeFromSuperview()
+                        self.menuController = nil;
+                    }
                 }
             }
         }
         else
         {
-            var navController: UINavigationController? = navigationControllerForiPhone(controllerName, attributes: importedAttributes)
-            if navController == nil
-            {
-                return
-            }
-            self.customNavigationController = navController
-            self.customNavigationController!.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            self.customNavigationController!.view.frame.origin.x = CGRectGetWidth(customNavigationController!.view.frame) - 80
-            self.view.addSubview(self.customNavigationController!.view)
-            self.customNavigationController!.didMoveToParentViewController(self)
-            zoomInMainController(targetPosition: 0) { finished in
-                self.isCollapsed = true
-                if self.menuController != nil
-                {
-                    self.menuController!.view.removeFromSuperview()
-                    self.menuController = nil;
+            if let navController: UINavigationController = navigationControllerForiPhone(controllerName, attributes: importedAttributes) {
+                self.customNavigationController = navController
+                navController.view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                navController.view.frame.origin.x = navController.view.frame.width - 80
+                self.view.addSubview(navController.view)
+                navController.didMove(toParentViewController: self)
+                zoomInMainController(targetPosition: 0) { finished in
+                    self.isCollapsed = true
+                    if let menu = self.menuController
+                    {
+                        menu.view.removeFromSuperview()
+                        self.menuController = nil;
+                    }
                 }
+                
             }
         }
         
@@ -167,20 +248,20 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     
     
     
-    func animateLeftPanel(#shouldExpand: Bool)
+    func animateLeftPanel(shouldExpand: Bool)
     {
-        let isRegular : Bool = self.traitCollection.horizontalSizeClass == .Regular
+        let isRegular : Bool = self.traitCollection.horizontalSizeClass == .regular
         
         if (shouldExpand)
         {
             isCollapsed = false
             if isRegular
             {
-                animateCenterPanelXPosition(targetPosition: customNavigationController!.view.frame.origin.x + 210.0)
+                animateCenterPanelXPosition(targetPosition:customNavigationController!.view.frame.origin.x + 210.0)
             }
             else
             {
-                zoomOutMainController(targetPosition: CGRectGetWidth(customNavigationController!.view.frame) - 80)
+                zoomOutMainController(targetPosition:(customNavigationController!.view.frame).width - 80)
             }
         }
         else
@@ -189,8 +270,9 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             {
                 animateCenterPanelXPosition(targetPosition: 0) { finished in
                     self.isCollapsed = true
-                    
-                    self.menuController!.view.removeFromSuperview()
+                    if let menu = self.menuController {
+                        menu.view.removeFromSuperview()
+                    }
                     self.menuController = nil;
                 }
             }
@@ -199,7 +281,9 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
                 zoomInMainController(targetPosition: 0) { finished in
                     self.isCollapsed = true
                     
-                    self.menuController!.view.removeFromSuperview()
+                    if let menu = self.menuController {
+                        menu.view.removeFromSuperview()
+                    }
                     self.menuController = nil;
                 }
             }
@@ -211,198 +295,173 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     /**
     ZOOM in/out methods
     */
-    func zoomOutMainController(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil)
+    func zoomOutMainController(targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
     {
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-            self.customNavigationController!.view.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            self.customNavigationController!.view.frame.origin.x = targetPosition
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
+            if let navController = self.customNavigationController {
+                navController.view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                navController.view.frame.origin.x = targetPosition
+            }
             }, completion: completion)
         
     }
     
-    func zoomInMainController(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil)
+    func zoomInMainController(targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
     {
-        var finalPosition: CGFloat = targetPosition
-        if !isCollapsed
-        {
-            finalPosition = targetPosition + 40.0
-        }
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
+            if let navController = self.customNavigationController {
+                navController.view.transform = CGAffineTransform.identity
+                navController.view.frame.origin.x = self.view.frame.origin.x
+
+            }
             
-            self.customNavigationController!.view.transform = CGAffineTransformIdentity
-            self.customNavigationController!.view.frame.origin.x = self.view.frame.origin.x
             }, completion: completion)
     }
     
     /**
     sliding in/out
     */
-    func animateCenterPanelXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil)
+    func animateCenterPanelXPosition(targetPosition: CGFloat, _ completion: ((Bool) -> Void)! = nil)
     {
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-            self.customNavigationController!.view.frame.origin.x = targetPosition
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            if let navController = self.customNavigationController {
+                navController.view.frame.origin.x = targetPosition
+    
+            }
             }, completion: completion)
     }
     
     
-    func navigationControllerForiPad(controllerName: String, attributes: NSDictionary?) -> UINavigationController?
+    func navigationControllerForiPad(_ controllerName: String, attributes: NSDictionary?) -> UINavigationController?
     {
         var navigationController: UINavigationController?
         if controllerName == kResultsController
         {
-            var controller: ResultsCollectionViewController = ResultsCollectionViewController()
+            let controller: ResultsCollectionViewController = ResultsCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kDashboardController
         {
-            var controller: PWESDashboardViewController = PWESDashboardViewController()
-            controller.menuHandler = self
-            navigationController = UINavigationController(rootViewController: controller)
-        }
-        else if controllerName == kDropboxController
-        {
-            var controller: DropboxViewController = DropboxViewController()
+            let controller: PWESDashboardViewController = PWESDashboardViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kHIVMedsController
         {
-            var controller: MyHIVCollectionViewController = MyHIVCollectionViewController()
+            let controller: MyHIVCollectionViewController = MyHIVCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kOtherMedsController
         {
-            var controller: OtherMedsCollectionViewController = OtherMedsCollectionViewController()
+            let controller: OtherMedsCollectionViewController = OtherMedsCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kSideEffectsController
         {
-            var controller: SideEffectsCollectionViewController = SideEffectsCollectionViewController()
+            let controller: SideEffectsCollectionViewController = SideEffectsCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMissedController
         {
-            var controller: MissedMedicationCollectionViewController = MissedMedicationCollectionViewController()
+            let controller: MissedMedicationCollectionViewController = MissedMedicationCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMedicationDiaryController
         {
-            var controller: PWESSeinfeldCollectionViewController = PWESSeinfeldCollectionViewController()
+            let controller: PWESSeinfeldCollectionViewController = PWESSeinfeldCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kProceduresController
         {
-            var controller: ProceduresCollectionViewController = ProceduresCollectionViewController()
+            let controller: ProceduresCollectionViewController = ProceduresCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kClinicsController
         {
-            var controller: ClinicAddressCollectionViewController = ClinicAddressCollectionViewController()
+            let controller: ClinicAddressCollectionViewController = ClinicAddressCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kAlertsController
         {
-            var controller: NotificationsAlertsCollectionViewController = NotificationsAlertsCollectionViewController()
+            let controller: NotificationsAlertsCollectionViewController = NotificationsAlertsCollectionViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         return navigationController
     }
 
-    func navigationControllerForiPhone(controllerName: String, attributes: NSDictionary?) -> UINavigationController?
+    func navigationControllerForiPhone(_ controllerName: String, attributes: NSDictionary?) -> UINavigationController?
     {
         var navigationController: UINavigationController?
         if controllerName == kResultsController
         {
-            var controller: ResultsListTableViewController = ResultsListTableViewController()
+            let controller: ResultsListTableViewController = ResultsListTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kDashboardController
         {
-            var controller: PWESDashboardViewController = PWESDashboardViewController()
-            controller.menuHandler = self
-            navigationController = UINavigationController(rootViewController: controller)
-        }
-        else if controllerName == kDropboxController
-        {
-            var controller: DropboxViewController = DropboxViewController()
+            let controller: PWESDashboardViewController = PWESDashboardViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kHIVMedsController
         {
-            var controller: MyHIVMedicationViewController = MyHIVMedicationViewController()
+            let controller: MyHIVMedicationViewController = MyHIVMedicationViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kOtherMedsController
         {
-            var controller: OtherMedicationsListTableViewController = OtherMedicationsListTableViewController()
+            let controller: OtherMedicationsListTableViewController = OtherMedicationsListTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kSideEffectsController
         {
-            var controller: SideEffectsTableViewController = SideEffectsTableViewController()
+            let controller: SideEffectsTableViewController = SideEffectsTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMissedController
         {
-            var controller: MissedMedicationsTableViewController = MissedMedicationsTableViewController()
+            let controller: MissedMedicationsTableViewController = MissedMedicationsTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kMedicationDiaryController
         {
-            var controller: PWESSeinfeldViewController = PWESSeinfeldViewController()
+            let controller: PWESSeinfeldViewController = PWESSeinfeldViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kProceduresController
         {
-            var controller: ProceduresListTableViewController = ProceduresListTableViewController()
+            let controller: ProceduresListTableViewController = ProceduresListTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kClinicsController
         {
-            var controller: ClinicalAddressTableViewController = ClinicalAddressTableViewController()
+            let controller: ClinicalAddressTableViewController = ClinicalAddressTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         else if controllerName == kAlertsController
         {
-            var controller: NotificationAlertsTableViewController = NotificationAlertsTableViewController()
+            let controller: NotificationAlertsTableViewController = NotificationAlertsTableViewController()
             controller.menuHandler = self
             navigationController = UINavigationController(rootViewController: controller)
         }
         return navigationController
-    }
-    
-    func didLogin()
-    {
-        if nil == defaultLoginController
-        {
-            return
-        }
-        defaultLoginController!.view.removeFromSuperview()
-        defaultLoginController!.removeFromParentViewController()
-        self.defaultLoginController = nil
-        loadDefaultController()
-    }
-    
-    func didLoginFailed()
-    {
     }
     
 }

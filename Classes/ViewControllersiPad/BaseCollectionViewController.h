@@ -6,21 +6,20 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-#import "PWESPopoverDelegate.h"
+@import UIKit;
+@import MessageUI;
 #import "PWESToolbarDelegate.h"
-#import <MessageUI/MessageUI.h>
 
 @protocol PWESContentMenuHandler;
 @class CustomToolbar;
 
-@interface BaseCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PWESPopoverDelegate, PWESToolbarDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface BaseCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PWESToolbarDelegate, UIPopoverPresentationControllerDelegate, MFMailComposeViewControllerDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *collectionViewLayout;
 @property (nonatomic, strong) CustomToolbar *toolbar;
 @property (nonatomic, strong) UIBarButtonItem *hamburgerMenuBarButton;
 @property (nonatomic, strong) UIBarButtonItem *addMenuBarButton;
-@property (nonatomic, strong) UIPopoverController *customPopoverController;
+@property (nonatomic, strong) UIPopoverPresentationController *popoverController;
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) UILabel *activityLabel;
 @property (nonatomic, assign) BOOL hasNavHeader;

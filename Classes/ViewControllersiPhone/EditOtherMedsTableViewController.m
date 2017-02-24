@@ -8,7 +8,6 @@
 
 #import "EditOtherMedsTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "OtherMedication+Handling.h"
 #import "Utilities.h"
 #import "iStayHealthy-Swift.h"
@@ -135,9 +134,9 @@
          [med addValueString:value type:attribute];
      }];
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
 
-    [self popController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

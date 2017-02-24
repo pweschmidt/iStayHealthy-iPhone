@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
+class PWESCoreXMLImporter: NSObject, XMLParserDelegate
 {
     var records: NSMutableDictionary = NSMutableDictionary()
     var results: NSMutableArray = NSMutableArray()
@@ -22,16 +22,16 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
     
     var completion: PWESSuccessWithDictionaryClosure?
     
-    func importWithURL(url: NSURL, completionBlock: PWESSuccessWithDictionaryClosure)
+    func importWithURL(_ url: URL, completionBlock: @escaping PWESSuccessWithDictionaryClosure)
     {
-        if !url.fileURL
+        if !url.isFileURL
         {
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
-            completionBlock(success: false, dictionary: nil, error: error)
+            completionBlock(false, nil, error)
             return
         }
         
-        let xmlData = NSData(contentsOfURL: url)
+        let xmlData = try? Data(contentsOf: url)
         if nil != xmlData
         {
             importWithData(xmlData, completionBlock: completionBlock)
@@ -39,100 +39,97 @@ class PWESCoreXMLImporter: NSObject, NSXMLParserDelegate
         else
         {
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
-            completionBlock(success: false, dictionary: nil, error: error)
+            completionBlock(false, nil, error)
         }
     }
     
     
-    func importWithData(xmlData: NSData?, completionBlock: PWESSuccessWithDictionaryClosure)
+    func importWithData(_ xmlData: Data?, completionBlock: @escaping PWESSuccessWithDictionaryClosure)
     {
         if nil == xmlData
         {
             //            println("the data are NIL")
             let error = NSError(domain: "com.pweschmidt.iStayHealthy", code: 100, userInfo: nil)
-            completionBlock(success: false, dictionary: nil, error: error)
+            completionBlock(false, nil, error)
             return
         }
         self.completion = completionBlock
-        var validationError: NSError?
-        let cleanedXMLData = CoreXMLTools.validatedXMLDataFromData(xmlData, error: &validationError)
-        if nil != validationError || nil == cleanedXMLData
-        {
-            //            println("the data cannot be validated")
-            completionBlock(success: false, dictionary: nil, error: validationError)
-            return
+        
+        do {
+            let cleanedXMLData = try CoreXMLTools.validatedXMLData(from: xmlData!)
+            let xmlParser: XMLParser = XMLParser(data: cleanedXMLData)
+            xmlParser.delegate = self
+            xmlParser.parse()
+        }catch {
+            completionBlock(false, nil, nil)
         }
-        let xmlParser: NSXMLParser = NSXMLParser(data: cleanedXMLData)
-        xmlParser.delegate = self
-        xmlParser.parse()
-        //        println("parse")
     }
     
-    func parserDidStartDocument(parser: NSXMLParser)
+    func parserDidStartDocument(_ parser: XMLParser)
     {
         //        println("Start parsing document")
     }
     
-    func parserDidEndDocument(parser: NSXMLParser)
+    func parserDidEndDocument(_ parser: XMLParser)
     {
         //        println("End parsing document")
-        self.records.setObject(self.results, forKey: kResults)
-        self.records.setObject(self.meds, forKey: kMedications)
-        self.records.setObject(self.otherMeds, forKey: kOtherMedications)
-        self.records.setObject(self.procedures, forKey: kIllnessAndProcedures)
-        self.records.setObject(self.previousMeds, forKey: kPreviousMedications)
-        self.records.setObject(self.effects, forKey: kHIVSideEffects)
-        self.records.setObject(self.clinics, forKey: kClinicalContacts)
-        self.records.setObject(self.missedMeds, forKey: kMissedMedications)
+        self.records.setObject(self.results, forKey: kResults as NSCopying)
+        self.records.setObject(self.meds, forKey: kMedications as NSCopying)
+        self.records.setObject(self.otherMeds, forKey: kOtherMedications as NSCopying)
+        self.records.setObject(self.procedures, forKey: kIllnessAndProcedures as NSCopying)
+        self.records.setObject(self.previousMeds, forKey: kPreviousMedications as NSCopying)
+        self.records.setObject(self.effects, forKey: kHIVSideEffects as NSCopying)
+        self.records.setObject(self.clinics, forKey: kClinicalContacts as NSCopying)
+        self.records.setObject(self.missedMeds, forKey: kMissedMedications as NSCopying)
         if nil != self.completion
         {
-            self.completion!(success: true, dictionary: self.records, error: nil)
+            self.completion!(true, self.records, nil)
         }
     }
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject])
+    @nonobjc func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [AnyHashable: Any])
     {
         if elementName == kResult
         {
-            self.results.addObject(attributeDict)
+            self.results.add(attributeDict)
         }
         if elementName == kMedication
         {
-            self.meds.addObject(attributeDict)
+            self.meds.add(attributeDict)
         }
         if elementName == kMissedMedication
         {
-            self.missedMeds.addObject(attributeDict)
+            self.missedMeds.add(attributeDict)
         }
         if elementName == kOtherMedication
         {
-            self.otherMeds.addObject(attributeDict)
+            self.otherMeds.add(attributeDict)
         }
         if elementName == kContacts
         {
-            self.clinics.addObject(attributeDict)
+            self.clinics.add(attributeDict)
         }
         if elementName == kProcedures
         {
-            self.procedures.addObject(attributeDict)
+            self.procedures.add(attributeDict)
         }
         if elementName == kSideEffects
         {
-            self.effects.addObject(attributeDict)
+            self.effects.add(attributeDict)
         }
         if elementName == kPreviousMedication
         {
-            self.previousMeds.addObject(attributeDict)
+            self.previousMeds.add(attributeDict)
         }
     }
     
     
-    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError)
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error)
     {
         //        println("PARSER ERROR OCCURRED \(parseError)")
         if nil != self.completion
         {
-            self.completion!(success: false, dictionary: nil, error: parseError)
+            self.completion!(false, nil, parseError as NSError?)
         }
     }
     

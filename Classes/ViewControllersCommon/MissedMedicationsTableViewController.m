@@ -7,10 +7,7 @@
 //
 
 #import "MissedMedicationsTableViewController.h"
-// #import "ContentContainerViewController.h"
-// #import "ContentNavigationController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "EditMissedMedsTableViewController.h"
 #import "MissedMedication+Handling.h"
 #import "DateView.h"
@@ -125,13 +122,10 @@
     [manager fetchData:kMissedMedication predicate:nil sortTerm:kMissedDate ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
-             UIAlertView *errorAlert = [[UIAlertView alloc]
-                                        initWithTitle:@"Error"
-                                                  message:@"Error loading data"
-                                                 delegate:nil
-                                        cancelButtonTitle:@"Cancel"
-                                        otherButtonTitles:nil];
-             [errorAlert show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+              message:NSLocalizedString(@"Error loading data", nil)
+              presentingController:self];
          }
          else
          {
@@ -140,13 +134,10 @@
              [manager fetchData:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *medsarray, NSError *innererror) {
                   if (nil == medsarray)
                   {
-                      UIAlertView *errorAlert = [[UIAlertView alloc]
-                                                 initWithTitle:NSLocalizedString(@"Error", nil)
-                                                           message:NSLocalizedString(@"Error loading data", nil)
-                                                          delegate:nil
-                                                 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                 otherButtonTitles:nil];
-                      [errorAlert show];
+                      [PWESAlertHandler.alertHandler
+                       showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+                       message:NSLocalizedString(@"Error loading data", nil)
+                       presentingController:self];
                   }
                   else
                   {

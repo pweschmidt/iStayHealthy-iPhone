@@ -11,7 +11,7 @@
 #import "UIFont+Standard.h"
 #import "UINavigationBar-Button.h"
 
-@interface BaseTableViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface BaseTableViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSManagedObject *markedObject;
 @property (nonatomic, strong) NSIndexPath *markedIndexPath;
 @property (nonatomic, strong) UITableView *tableView;

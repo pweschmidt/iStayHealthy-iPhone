@@ -10,11 +10,11 @@
 
 @interface AppSettings : NSObject
 + (AppSettings *)sharedInstance;
-- (BOOL)hasUpdated;
-- (void)disablePasswordForUpdate;
-- (void)resetUpdateSettings;
+//- (BOOL)hasUpdated;
+//- (void)disablePasswordForUpdate;
+//- (void)resetUpdateSettings;
 - (BOOL)hasPasswordEnabled;
-- (NSString *)updateMessage;
+//- (NSString *)updateMessage;
 - (void)saveUbiquityURL:(NSURL *)ubiquityURL;
 - (NSString *)ubiquityContentName;
 - (NSString *)versionString;

@@ -9,16 +9,6 @@
 #import "PWESHorizontalAxis.h"
 #import "PWESDataNTuple.h"
 
-static NSDictionary *defaultXAxisAttributes()
-{
-	NSDictionary *attributes = @{ kPlotAxisTitleFontSize : [NSNumber numberWithFloat:standard],
-		                          kPlotAxisTickLabelFontSize : [NSNumber numberWithFloat:tiny],
-		                          kPlotAxisTitleFontName : kDefaultLightFont,
-		                          kPlotAxisTickFontName : kDefaultBoldFont,
-		                          kPlotAxisTickLabelExpFontSize : [NSNumber numberWithFloat:veryTiny],
-		                          kPlotAxisTickDistance : [NSNumber numberWithFloat:kPXTickDistance] };
-	return attributes;
-}
 
 @interface PWESHorizontalAxis ()
 @property (nonatomic, assign) BOOL hasLabels;

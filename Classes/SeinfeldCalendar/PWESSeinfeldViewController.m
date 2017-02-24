@@ -7,7 +7,6 @@
 //
 
 #import "PWESSeinfeldViewController.h"
-// #import "CoreDataManager.h"
 #import "SeinfeldCalendar.h"
 #import "SeinfeldCalendarEntry.h"
 #import "EditSeinfeldCalendarTableViewController.h"
@@ -62,13 +61,10 @@
     [manager fetchData:kSeinfeldCalendar predicate:nil sortTerm:kEndDateLowerCase ascending:NO completion: ^(NSArray *array, NSError *error) {
          if (nil == array)
          {
-             UIAlertView *errorAlert = [[UIAlertView alloc]
-                                        initWithTitle:@"Error"
-                                                  message:@"Error loading data"
-                                                 delegate:nil
-                                        cancelButtonTitle:@"Cancel"
-                                        otherButtonTitles:nil];
-             [errorAlert show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+              message:NSLocalizedString(@"Error loading data", nil)
+              presentingController:self];
          }
          else
          {
@@ -86,13 +82,10 @@
              [manager fetchData:kMedication predicate:nil sortTerm:kStartDate ascending:NO completion: ^(NSArray *medsarray, NSError *innererror) {
                   if (nil == medsarray)
                   {
-                      UIAlertView *errorAlert = [[UIAlertView alloc]
-                                                 initWithTitle:@"Error"
-                                                           message:@"Error loading data"
-                                                          delegate:nil
-                                                 cancelButtonTitle:@"Cancel"
-                                                 otherButtonTitles:nil];
-                      [errorAlert show];
+                      [PWESAlertHandler.alertHandler
+                       showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+                       message:NSLocalizedString(@"Error loading data", nil)
+                       presentingController:self];
                   }
                   else
                   {
@@ -167,6 +160,7 @@
                                                                   numberOfMonths:months];
         PWESMonthlyView *view = [PWESMonthlyView monthlyViewForCalendar:self.currentCalendar
                                                           seinfeldMonth:seinfeldMonth
+                                                   presentingController:self
                                                                   frame:monthFrame];
         view.resultsDelegate = self;
         contentHeight += view.frame.size.height;
@@ -202,9 +196,9 @@
         {
             score = 100.f;
         }
-        else if (0 > 100)
+        else if (0 > score)
         {
-            score = 0.f;
+            score = 0.0f;
         }
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 100)];
         view.tag = kLabelViewTag;
@@ -218,7 +212,7 @@
         title.textAlignment = NSTextAlignmentLeft;
         title.font = [UIFont fontWithType:Bold size:large];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateStyle = kDateFormatting;
+        formatter.dateFormat = kDateFormatting;
         NSString *endString = [formatter stringFromDate:lastEntry.endDate];
 
         NSString *text = NSLocalizedString(@"Last diary ending", nil);
@@ -350,7 +344,7 @@
     calendar.isCompleted = [NSNumber numberWithBool:YES];
     PWESPersistentStoreManager *manager = [PWESPersistentStoreManager defaultManager];
     NSError *error = nil;
-    [manager saveContext:&error];
+    [manager saveContextAndReturnError:&error];
 
     self.currentCalendar = nil;
 }

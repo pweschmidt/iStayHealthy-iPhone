@@ -14,7 +14,6 @@
 #import "UIFont+Standard.h"
 #import "CoreXMLReader.h"
 #import "CoreXMLWriter.h"
-#import "CoreDataManager.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "iStayHealthy-Swift.h"
 
@@ -45,7 +44,10 @@
     [super viewDidLoad];
 
     self.navigationItem.title = NSLocalizedString(@"Dropbox", nil);
-    [self disableRightBarButtons];
+//    [self disableRightBarButtons];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                              target:self action:@selector(done:)];
     self.iStayHealthyPath = nil;
     self.dropBoxFileExists = NO;
     self.newDropboxFileExists = NO;
@@ -55,6 +57,11 @@
     [self createRestClient];
 }
 
+- (void)done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -159,49 +166,52 @@
             {
                 case 0:
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Backup?", nil)
-                                                                    message:NSLocalizedString(@"You are about to store your data externally. Click Backup if you want to continue.", nil)
-                                                                   delegate:self
-                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                                          otherButtonTitles:NSLocalizedString(@"Backup", nil), nil];
-                    [alert show];
+                    PWESAlertAction *cancel = [self cancelAction];
+                    PWESAlertAction *backup = [self backupAction];
+                    [PWESAlertHandler.alertHandler
+                     showAlertView:NSLocalizedString(@"Backup?", nil)
+                     message:NSLocalizedString(@"You are about to store your data externally. Click Backup if you want to continue.", nil)
+                     presentingController:self
+                     actions:@[backup, cancel]];
                 }
                 break;
 
                 case 1:
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Restore?", nil)
-                                                                    message:NSLocalizedString(@"You are about to download  data from an external storage. Click Restore if you want to continue.", nil)
-                                                                   delegate:self
-                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                                          otherButtonTitles:NSLocalizedString(@"Restore", nil), nil];
-                    [alert show];
+                    PWESAlertAction *cancel = [self cancelAction];
+                    PWESAlertAction *restore = [self restoreAction];
+                    [PWESAlertHandler.alertHandler
+                     showAlertView:NSLocalizedString(@"Restore?", nil)
+                     message:NSLocalizedString(@"You are about to download  data from an external storage. Click Restore if you want to continue.", nil)
+                     presentingController:self
+                     actions:@[restore, cancel]];
                 }
                 break;
             }
         }
         else
         {
+            
             self.isConnectAlert = YES;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Link?", @"Link?")
-                                                            message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                                  otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-            [alert show];
+            PWESAlertAction *cancel = [self cancelAction];
+            PWESAlertAction *linkAction = [self confirmLinkUnlinkAction];
+            [PWESAlertHandler.alertHandler
+             showAlertView:NSLocalizedString(@"Link?", nil)
+             message:NSLocalizedString(@"You are not linked to Dropbox account. Do you want to link it up now?", nil)
+             presentingController:self
+             actions:@[linkAction, cancel]];
         }
     }
     else
     {
         self.isConnectAlert = NO;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unlink?", @"Unlink?")
-                                                        message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-                                              otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
-
-        [alert show];
+        PWESAlertAction *cancel = [self cancelAction];
+        PWESAlertAction *unlinkAction = [self confirmLinkUnlinkAction];
+        [PWESAlertHandler.alertHandler
+         showAlertView:NSLocalizedString(@"Unlink?", nil)
+         message:NSLocalizedString(@"Do you want to unlink your Dropbox account?", nil)
+         presentingController:self
+         actions:@[unlinkAction, cancel]];
     }
     [self performSelector:@selector(deselect:) withObject:nil afterDelay:0.5f];
 }
@@ -270,12 +280,30 @@
     return view;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (PWESAlertAction *)cancelAction
 {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    return [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel action:nil];
+}
 
-    if ([title isEqualToString:NSLocalizedString(@"Yes", @"Yes")])
-    {
+- (PWESAlertAction *)backupAction
+{
+    PWESAlertAction *action = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Backup", nil) style:UIAlertActionStyleDefault action:^{
+        [self backup];
+    }];
+    return action;
+}
+
+- (PWESAlertAction *)restoreAction
+{
+    PWESAlertAction *action = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Restore", nil) style:UIAlertActionStyleDefault action:^{
+        [self restoreFromDropbox];
+    }];
+    return action;
+}
+
+- (PWESAlertAction *)confirmLinkUnlinkAction
+{
+    PWESAlertAction *action = [[PWESAlertAction alloc] initWithAlertButtonTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault action:^{
         if (!self.isConnectAlert)
         {
             [self unlinkDropBox];
@@ -286,15 +314,8 @@
             PWESContentContainerController *contentController = (PWESContentContainerController *) navController.parentViewController;
             [[DBSession sharedSession] linkFromController:contentController];
         }
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Backup", nil)])
-    {
-        [self backup];
-    }
-    else if ([title isEqualToString:NSLocalizedString(@"Restore", nil)])
-    {
-        [self restoreFromDropbox];
-    }
+    }];
+    return action;
 }
 
 #pragma mark - DropBox actions
@@ -348,10 +369,10 @@
     {
         return;
     }
-    [[[UIAlertView alloc]
-      initWithTitle:NSLocalizedString(@"Error Loading Dropbox data", nil) message:NSLocalizedString(@"There was an error loading data from Dropbox.", nil)
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:NSLocalizedString(@"Error Loading Dropbox data", nil)
+     message:NSLocalizedString(@"There was an error loading data from Dropbox.", nil)
+     presentingController:self];
 }
 
 - (void)createIStayHealthyFolder
@@ -379,11 +400,10 @@
              [xmlData writeToFile:dataPath options:NSDataWritingAtomic error:&writeError];
              if (writeError)
              {
-                 [[[UIAlertView alloc]
-                   initWithTitle:NSLocalizedString(@"Error writing data to tmp directory", nil) message:[error localizedDescription]
-                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-                  show];
-                 [self stopAnimation:nil];
+                 [PWESAlertHandler.alertHandler
+                  showAlertViewWithCancelButton:NSLocalizedString(@"Error writing data to tmp directory", nil)
+                  message:error.description
+                  presentingController:self];
              }
              else
              {
@@ -397,10 +417,10 @@
          else
          {
              [self stopAnimation:nil];
-             [[[UIAlertView alloc]
-               initWithTitle:NSLocalizedString(@"Error writing data", nil) message:[error localizedDescription]
-                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-              show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error writing data", nil)
+              message:error.description
+              presentingController:self];
          }
      }];
 }
@@ -427,20 +447,18 @@
          if (success)
          {
              [self stopAnimation:nil];
-             [[[UIAlertView alloc]
-               initWithTitle:NSLocalizedString(@"Restore Finished", nil)
-                      message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
-                     delegate:nil
-            cancelButtonTitle:@"OK" otherButtonTitles:nil]
-              show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithOKButton:NSLocalizedString(@"Restore Finished", nil)
+              message:NSLocalizedString(@"Data were retrieved from Dropbox.", nil)
+              presentingController:self];
          }
          else
          {
              [self stopAnimation:nil];
-             [[[UIAlertView alloc]
-               initWithTitle:NSLocalizedString(@"Error retrieving data", nil) message:[error localizedDescription]
-                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-              show];
+             [PWESAlertHandler.alertHandler
+              showAlertViewWithCancelButton:NSLocalizedString(@"Error retrieving data", nil)
+              message:error.localizedDescription
+              presentingController:self];
          }
      }];
 }
@@ -512,8 +530,10 @@
 - (void)restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error
 {
     [self stopAnimation:nil];
-    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Dropbox Error" message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [errorAlert show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:@"Dropbox Error"
+     message:[NSString stringWithFormat:@"Error creating iStayHealthy folder %@", [error localizedDescription]]
+     presentingController:self];
 }
 
 
@@ -532,10 +552,10 @@
           metadata:(DBMetadata *)metadata
 {
     [self stopAnimation:nil];
-    [[[UIAlertView alloc]
-      initWithTitle:NSLocalizedString(@"Save Finished", nil) message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithOKButton:NSLocalizedString(@"Save Finished", nil)
+     message:NSLocalizedString(@"Data were sent to DropBox iStayHealthy.isth.", nil)
+     presentingController:self];
 
     NSString *olderBackupFilePath = [self backedUpFileName];
 #ifdef APPDEBUG
@@ -556,10 +576,10 @@
 - (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error
 {
     [self stopAnimation:nil];
-    [[[UIAlertView alloc]
-      initWithTitle:@"Error Uploading to Dropbox" message:@"There was an error uploading data to Dropbox."
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:@"Error Uploading to Dropbox"
+     message:@"There was an error uploading data to Dropbox."
+     presentingController:self];
 }
 
 - (void)restClient:(DBRestClient *)client loadedFile:(NSString *)localPath
@@ -570,10 +590,10 @@
 - (void)restClient:(DBRestClient *)client loadFileFailedWithError:(NSError *)error
 {
     [self stopAnimation:nil];
-    [[[UIAlertView alloc]
-      initWithTitle:@"Error Loading file from Dropbox" message:@"There was an error loading a file from Dropbox."
-           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-     show];
+    [PWESAlertHandler.alertHandler
+     showAlertViewWithCancelButton:@"Error Loading file from Dropbox"
+     message:@"There was an error loading a file from Dropbox."
+     presentingController:self];
 }
 
 - (void)restClient:(DBRestClient *)client movedPath:(NSString *)from_path to:(DBMetadata *)result

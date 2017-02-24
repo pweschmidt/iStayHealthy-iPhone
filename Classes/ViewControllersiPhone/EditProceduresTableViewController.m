@@ -8,7 +8,6 @@
 
 #import "EditProceduresTableViewController.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "Procedures+Handling.h"
 #import "Utilities.h"
 #import "UILabel+Standard.h"
@@ -106,8 +105,8 @@
          [procedures addValueString:value type:attribute];
      }];
     NSError *error = nil;
-    [manager saveContext:&error];
-    [self popController];
+    [manager saveContextAndReturnError:&error];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

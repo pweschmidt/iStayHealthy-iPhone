@@ -18,7 +18,6 @@
 #import "Wellness+Handling.h"
 #import "Contacts+Handling.h"
 #import "Constants.h"
-// #import "CoreDataManager.h"
 #import "NSDate+Extras.h"
 #import "iStayHealthy-Swift.h"
 
@@ -48,20 +47,6 @@ static NSDictionary * elementParentMap()
               kPreviousMedication : kPreviousMedications/*,
                                                            kSeinfeldCalendar : kSeinfeldCalendars,
                                                            kWellness : kWellnesses */};
-}
-
-static NSDictionary * elementChildMap()
-{
-    return @{ kResults : kResult,
-              kMedication : kMedication,
-              kMissedMedication : kMissedMedication,
-              kSideEffects : kSideEffects,
-              kContacts : kContacts,
-              kProcedures : kProcedures,
-              kOtherMedication : kOtherMedication,
-              kPreviousMedication : kPreviousMedication,
-/*			  kSeinfeldCalendar : kSeinfeldCalendar,
-              kWellness : kWellnesses*/};
 }
 
 static NSDictionary * sortTerms()
