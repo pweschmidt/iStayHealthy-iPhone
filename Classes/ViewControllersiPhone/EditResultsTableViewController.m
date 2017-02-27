@@ -435,6 +435,23 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [super textFieldDidEndEditing:textField];
+    [self updateTextfieldMap:textField];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL success = [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
+    if (success)
+    {
+        [self updateTextfieldMap:textField];
+    }
+    
+    return success;
+}
+
+
+- (void)updateTextfieldMap:(UITextField *)textField
+{
     if (nil == textField.text || [textField.text isEqualToString:@""])
     {
         return;

@@ -19,9 +19,14 @@
 
 + (PWESDataTuple *)missedMedTupleWithMissedMedicationArray:(NSArray *)medication;
 
++ (PWESDataTuple *)previousMedTupleWithArray:(NSArray *)previous;
+
 - (NSUInteger)length;
 
 - (BOOL)isEmpty;
 
 - (id)valueForDate:(id)date;
+
+- (void)addAnotherMedicationTuple:(PWESDataTuple *)anotherMedTuple;
+
 @end

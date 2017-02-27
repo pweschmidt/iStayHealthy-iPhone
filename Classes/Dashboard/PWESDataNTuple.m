@@ -68,6 +68,62 @@
 }
 
 + (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
+                          rawMedications:(NSArray *)rawMedications
+                  rawPreviousMedications:(NSArray *)rawPreviousMedications
+                    rawMissedMedications:(NSArray *)rawMissedMedications
+                                   types:(PWESResultsTypes *)types
+                                   error:(NSError **)error
+{
+    if (nil == rawResults || nil == types)
+    {
+        if (NULL != error)
+        {
+            *error = [NSError errorWithDomain:@"com.pweschmidt.healthcharts" code:100 userInfo:nil];
+        }
+        return nil;
+    }
+    
+    PWESDataNTuple *ntuple = [[PWESDataNTuple alloc] init];
+    ntuple.maxNumberOfResults = 0;
+    [ntuple createTuplesForResults:rawResults types:types];
+    if (types.isDualType)
+    {
+        ntuple.dateLine = [[PWESDataManager sharedInstance]
+                           combinedTimelineForOrderedRawResults:rawResults
+                           types:types
+                           error:error];
+    }
+    else
+    {
+        PWESDataTuple *onlyTuple = [ntuple.tuples objectForKey:types.mainType];
+        ntuple.dateLine = onlyTuple.dateTuple;
+    }
+    
+    if (nil != rawMedications && 0 < rawMedications.count)
+    {
+        PWESDataTuple *medTuple = [PWESDataTuple medTupleWithMedicationArray:rawMedications];
+        [ntuple addMedicationTuple:medTuple];
+    }
+    
+    if (nil != rawMissedMedications && 0 < rawMissedMedications.count)
+    {
+        PWESDataTuple *medTuple = [PWESDataTuple missedMedTupleWithMissedMedicationArray:rawMissedMedications];
+        [ntuple addMissedMedicationTuple:medTuple];
+    }
+    
+    if (nil != rawPreviousMedications && 0 < rawPreviousMedications.count)
+    {
+        PWESDataTuple *medTuple = [PWESDataTuple previousMedTupleWithArray:rawPreviousMedications];
+        [ntuple addPreviousMedicationTuple:medTuple];
+    }
+    
+    
+    return ntuple;
+    
+}
+
+
++ (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
                                    types:(PWESResultsTypes *)types
                                    error:(NSError **)error
 {
@@ -134,15 +190,25 @@
 
 - (void)addMissedMedicationTuple:(PWESDataTuple *)missedTuple
 {
-	_missedMedicationTuple = missedTuple;
+	self.missedMedicationTuple = missedTuple;
 	[self addTupleToDateLine:missedTuple];
 }
 
 - (void)addMedicationTuple:(PWESDataTuple *)medTuple
 {
-	_medicationTuple = medTuple;
+	self.medicationTuple = medTuple;
 	[self addTupleToDateLine:medTuple];
 }
+
+- (void)addPreviousMedicationTuple:(PWESDataTuple *)previousTuple
+{
+    if (nil == self.medicationTuple || nil == self.medicationTuple.valueTuple || nil == self.medicationTuple.dateTuple) {
+        self.medicationTuple = previousTuple;
+    }
+    [self.medicationTuple addAnotherMedicationTuple:previousTuple];    
+    [self addTupleToDateLine:previousTuple];
+}
+
 
 - (PWESDataTuple *)resultsTupleForType:(NSString *)type
 {

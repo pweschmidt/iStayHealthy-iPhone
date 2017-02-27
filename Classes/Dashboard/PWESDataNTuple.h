@@ -35,6 +35,15 @@
                                    types:(PWESResultsTypes *)types
                                    error:(NSError **)error;
 
+
++ (PWESDataNTuple *)nTupleWithRawResults:(NSArray *)rawResults
+                          rawMedications:(NSArray *)rawMedications
+                  rawPreviousMedications:(NSArray *)rawPreviousMedications
+                    rawMissedMedications:(NSArray *)rawMissedMedications
+                                   types:(PWESResultsTypes *)types
+                                   error:(NSError **)error;
+
+
 /**
    initialises the tuple with rawresults and types
    a combined dateLine is created
@@ -74,6 +83,9 @@
    @param missedTuple
  */
 - (void)addMissedMedicationTuple:(PWESDataTuple *)missedTuple;
+
+- (void)addPreviousMedicationTuple:(PWESDataTuple *)previousTuple;
+
 
 /**
    @param type the desired tuple type

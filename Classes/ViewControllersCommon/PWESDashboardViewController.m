@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSArray *selectedItems;
 @property (nonatomic, strong) NSArray *results;
 @property (nonatomic, strong) NSArray *medications;
+@property (nonatomic, strong) NSArray *previous;
 @property (nonatomic, strong) NSMutableArray *dashboardControllers;
 @property (nonatomic, strong) UIBarButtonItem *chartBarButton;
 @end
@@ -135,12 +136,25 @@
                   else
                   {
                       self.medications = [NSArray arrayWithArray:meds];
+                      [manager fetchData:kPreviousMedication predicate:nil sortTerm:kStartDateLowerCase ascending:YES completion:^(NSArray * previousMeds, NSError * prevError) {
+                          if (nil == previousMeds)
+                          {
+                              [PWESAlertHandler.alertHandler
+                               showAlertViewWithCancelButton:NSLocalizedString(@"Error", nil)
+                               message:NSLocalizedString(@"Error loading data", nil)
+                               presentingController:self];
+                          }
+                          else
+                          {
+                              self.previous = [NSArray arrayWithArray:previousMeds];
+                              [self buildDashBoard];
+                          }
+                      }];
 //                      self.pageController.currentPage = 0;
 //                      [self loadDashboardViewWithPage:0];
 //                      [self loadDashboardViewWithPage:1];
 //                      [self loadDashboardViewWithPage:2];
 
-                      [self buildDashBoard];
                   }
               }];
          }
@@ -177,6 +191,7 @@
         NSError *error = nil;
         PWESDataNTuple *ntuple = [PWESDataNTuple nTupleWithRawResults:self.results
                                                        rawMedications:self.medications
+                                               rawPreviousMedications:self.previous
                                                  rawMissedMedications:nil
                                                                 types:types
                                                                 error:&error];

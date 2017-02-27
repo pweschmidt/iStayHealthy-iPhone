@@ -30,7 +30,7 @@
 + (PWESDataTuple *)medTupleWithMedicationArray:(NSArray *)medication
 {
 	PWESDataTuple *tuple = [[PWESDataTuple alloc] init];
-	[tuple addMeds:medication dateKey:kStartDate];
+    [tuple addMeds:medication dateKey:kStartDate nameKey:kName];
 //	[tuple addMedTypeArray:medication dateType:kStartDate];
 	tuple.type = kMedication;
 	return tuple;
@@ -39,11 +39,36 @@
 + (PWESDataTuple *)missedMedTupleWithMissedMedicationArray:(NSArray *)medication
 {
 	PWESDataTuple *tuple = [[PWESDataTuple alloc] init];
-	[tuple addMeds:medication dateKey:kMissedDate];
+	[tuple addMeds:medication dateKey:kMissedDate nameKey:kName];
 //	[tuple addMedTypeArray:medication dateType:kMissedDate];
 	tuple.type = kMissedMedication;
 	return tuple;
 }
+
++ (PWESDataTuple *)previousMedTupleWithArray:(NSArray *)previous
+{
+    PWESDataTuple *tuple = [PWESDataTuple new];
+    [tuple addMeds:previous dateKey:kStartDateLowerCase  nameKey:kNameLowerCase];
+    tuple.type = kPreviousMedication;
+    return tuple;
+}
+
+- (void)addAnotherMedicationTuple:(PWESDataTuple *)anotherMedTuple
+{
+    if(nil == anotherMedTuple.valueTuple || nil == anotherMedTuple.dateTuple)
+    {
+        return;
+    }
+    NSMutableArray *combinedValues = [NSMutableArray arrayWithArray:self.valueTuple];
+    [combinedValues addObjectsFromArray:anotherMedTuple.valueTuple];
+    NSMutableArray *combinedDates = [NSMutableArray arrayWithArray:self.dateTuple];
+    [combinedDates addObjectsFromArray:anotherMedTuple.dateTuple];
+    [combinedDates sortUsingSelector:@selector(compare:)];
+    
+    self.valueTuple = [NSArray arrayWithArray:combinedValues];
+    self.dateTuple = [NSArray arrayWithArray:combinedDates];
+}
+
 
 - (NSUInteger)length
 {
@@ -98,7 +123,7 @@
 	}
 }
 
-- (void)addMeds:(NSArray *)meds dateKey:(NSString *)dateKey
+- (void)addMeds:(NSArray *)meds dateKey:(NSString *)dateKey nameKey:(NSString *)nameKey
 {
 	if (nil == meds || 0 == meds.count)
 	{
@@ -129,8 +154,8 @@
 	}];
 	if (0 < cleanedMeds.count)
 	{
-		self.valueTuple = [cleanedMeds valueForKey:kName];
-		self.dateTuple = [cleanedMeds valueForKey:kStartDate];
+		self.valueTuple = [cleanedMeds valueForKey:nameKey];
+		self.dateTuple = [cleanedMeds valueForKey:dateKey];
 	}
 	else
 	{
@@ -138,5 +163,7 @@
 		self.dateTuple = [NSArray array];
 	}
 }
+
+
 
 @end
