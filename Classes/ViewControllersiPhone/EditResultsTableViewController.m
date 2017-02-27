@@ -20,7 +20,6 @@
     CGRect textViewFrame;
 }
 @property (nonatomic, strong) NSDictionary *menus;
-// @property (nonatomic, strong) NSArray *defaultValues;
 @property (nonatomic, strong) NSArray *editResultsMenu;
 @property (nonatomic, strong) NSMutableArray *titleStrings;
 @property (nonatomic, strong) UISwitch *undetectableSwitch;
@@ -132,12 +131,10 @@
     if (self.isEditMode)
     {
         [self setTitleViewWithTitle:NSLocalizedString(@"Edit Result", nil)];
-        //        self.navigationItem.title = NSLocalizedString(@"Edit Result", nil);
     }
     else
     {
         [self setTitleViewWithTitle:NSLocalizedString(@"New Result", nil)];
-        //        self.navigationItem.title = NSLocalizedString(@"New Result", nil);
     }
 
 
@@ -148,6 +145,7 @@
                             NSLocalizedString(@"Liver", nil)];
 
     self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
+    self.resultsSegmentControl.selectedSegmentIndex = 0;
     [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 
     [self prepareMenus];
@@ -175,19 +173,6 @@
          message:NSLocalizedString(@"ReviewAndSave", nil)
          presentingController:self];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    CGFloat width = self.view.frame.size.width;
-    if (320 < width)
-    {
-        width = 320;
-    }
-    CGFloat segmentWidth = width - 2 * 20;
-    self.resultsSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
-    self.resultsSegmentControl.selectedSegmentIndex = 0;
 }
 
 - (void)save:(id)sender
@@ -363,7 +348,9 @@
     if (1 == section)
     {
         headerView = [[UIView alloc]
-                      initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
+                      initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 36)];
+        CGFloat segmentWidth = headerView.frame.size.width - 2 * 10;
+        self.resultsSegmentControl.frame = CGRectMake(10, 0, segmentWidth, 30);
         [headerView addSubview:self.resultsSegmentControl];
     }
     else
