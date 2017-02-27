@@ -20,23 +20,11 @@
     dispatch_once(&onceToken, ^{
                       items = @[
                               NSLocalizedString(@"Settings", nil),
-                              /*NSLocalizedString(@"LocalBackups", nil),*/
                               NSLocalizedString(@"Backups", nil),
                               NSLocalizedString(@"Email Data", nil),
                               NSLocalizedString(@"Info", nil)
                           ];
                   });
-//	dispatch_once(&onceToken, ^{
-//	    items = @[
-//	            NSLocalizedString(@"Settings", nil),
-//	            NSLocalizedString(@"LocalBackups", nil),
-//	            NSLocalizedString(@"Backups", nil),
-//	            NSLocalizedString(@"Feedback", nil),
-//	            NSLocalizedString(@"Email Data", nil),
-//	            NSLocalizedString(@"Info", nil),
-//	            NSLocalizedString(@"Help", nil)
-//	        ];
-//	});
     return items;
 }
 
