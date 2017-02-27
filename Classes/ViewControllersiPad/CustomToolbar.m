@@ -47,7 +47,6 @@
     [buttons addObject:initialSpace];
     [buttonTypes enumerateObjectsUsingBlock: ^(NSString *title, NSUInteger index, BOOL *stop) {
          UIBarButtonItem *barbutton = nil;
-        BOOL insertAddButton = NO;
          if ([title isEqualToString:NSLocalizedString(@"Settings", nil)])
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openSettings:) buttonTag:index];
@@ -55,7 +54,6 @@
          else if ([title isEqualToString:NSLocalizedString(@"Backups", nil)])
          {
              barbutton = [UIBarButtonItem barButtonItemForTitle:title target:self action:@selector(openBackup:) buttonTag:index];
-             insertAddButton = YES;
          }
          else if ([title isEqualToString:NSLocalizedString(@"Email Data", nil)])
          {
@@ -76,16 +74,6 @@
              [buttons addObject:barbutton];
              [buttons addObject:flexibleSpace];
          }
-        if (insertAddButton)
-        {
-            UIView *customView = [self customAddMenuView];
-            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithCustomView:customView];
-            [buttons addObject:addButton];
-            [buttons addObject:flexibleSpace];
-            [buttons addObject:flexibleSpace];
-            
-            insertAddButton = NO;
-        }
      }];
     
 
@@ -93,32 +81,6 @@
 
     self.customItems = buttons;
 
-}
-
-- (UIView *)customAddMenuView
-{
-    UIView *view = [UIView new];
-    view.frame = CGRectMake(0, 0, 44, 44);
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, -18, 60, 60);
-    button.backgroundColor = DARK_BLUE;
-    button.layer.cornerRadius = 30.0;
-    button.layer.borderWidth = 1.0;
-    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    [button addTarget:self action:@selector(showAddMenu:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    UILabel *label = [UILabel new];
-    label.frame = CGRectMake(0, 0, 60, 60);
-    label.font = [UIFont boldSystemFontOfSize:24.0];
-    label.text = NSLocalizedString(@"Add", nil);
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    
-    [button addSubview:label];
-    [view addSubview:button];
-    return view;
 }
 
 
