@@ -38,11 +38,6 @@
 		                                 green:235.0f / 255.0f
 		                                  blue:235.0f / 255.0f
 		                                 alpha:0.8];
-//		if ([Utilities isIPad])
-//		{
-//			labelWidth = 160.0f;
-//			additionalViewFrame = CGRectMake(xMargin + labelWidth + textFieldWidth + xMargin, yMargin, self.contentView.frame.size.width - 3 * xMargin - labelWidth - textFieldWidth, self.contentView.frame.size.height);
-//		}
 	}
 	return self;
 }
