@@ -273,18 +273,21 @@ class DropboxSyncController: UITableViewController {
     
     fileprivate func checkBackupAvailability(_ completionBlock: @escaping PWESSuccessClosure) {
         if let client = DropboxClientsManager.authorizedClient {
-            client.files.search(path: "/", query: "iStayHealthy").response(completionHandler: { (searchResult, error) in
+            client.files.search(path: "", query: "iStayHealthy").response(completionHandler: { (searchResult, error) in
                 if let result = searchResult {
                     if 0 == result.matches.count {
+                        print("no matches for folder found")
                         self.createiStayHealthyFolder({ (success, nsError) in
                             completionBlock(success, nsError)
                         })
                     }
                     else {
+                        print("HURRAAAHHHH matches for folder found")
                         completionBlock(true, nil)
                     }
                 }
                 else if nil != error {
+                    print("seems we got an error \(error)")
                     self.createiStayHealthyFolder({ (success, nsError) in
                         completionBlock(success, nsError)
                     })
