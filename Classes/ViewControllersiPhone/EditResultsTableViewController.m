@@ -148,14 +148,6 @@
                             NSLocalizedString(@"Liver", nil)];
 
     self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
-    CGFloat width = self.tableView.bounds.size.width;
-    if (320 < width)
-    {
-        width = 320;
-    }
-    CGFloat segmentWidth = width - 2 * 20;
-    self.resultsSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
-    self.resultsSegmentControl.selectedSegmentIndex = 0;
     [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 
     [self prepareMenus];
@@ -183,6 +175,19 @@
          message:NSLocalizedString(@"ReviewAndSave", nil)
          presentingController:self];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    CGFloat width = self.view.frame.size.width;
+    if (320 < width)
+    {
+        width = 320;
+    }
+    CGFloat segmentWidth = width - 2 * 20;
+    self.resultsSegmentControl.frame = CGRectMake(20, 3, segmentWidth, 30);
+    self.resultsSegmentControl.selectedSegmentIndex = 0;
 }
 
 - (void)save:(id)sender

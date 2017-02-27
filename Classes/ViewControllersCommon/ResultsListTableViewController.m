@@ -44,15 +44,21 @@
                             NSLocalizedString(@"Other", nil),
                             NSLocalizedString(@"Liver", nil)];
     self.resultsSegmentControl = [[UISegmentedControl alloc] initWithItems:menuTitles];
-    CGFloat width = self.tableView.bounds.size.width;
+    self.resultsSegmentControl.selectedSegmentIndex = 0;
+    [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    CGFloat width = self.view.frame.size.width;
     if (320 < width)
     {
         width = 320;
     }
     CGFloat segmentWidth = width - 2 * 10;
     self.resultsSegmentControl.frame = CGRectMake(10, 12, segmentWidth, 30);
-    self.resultsSegmentControl.selectedSegmentIndex = 0;
-    [self.resultsSegmentControl addTarget:self action:@selector(indexDidChangeForSegment) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,7 +89,7 @@
     UIView *headerView = nil;
 
     headerView = [[UIView alloc]
-                  initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 36)];
+                  initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 36)];
     [headerView addSubview:self.resultsSegmentControl];
     return headerView;
 }
