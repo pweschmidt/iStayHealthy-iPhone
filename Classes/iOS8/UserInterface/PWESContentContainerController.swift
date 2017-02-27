@@ -14,7 +14,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     var customNavigationController: UINavigationController?
     var isCollapsed: Bool = true
     var menuController: HamburgerMenuTableViewController?
-//    var defaultLoginController: PWESLoginViewController?
     var passwordTextField: UITextField?
     var alertController: UIAlertController?
     
@@ -41,7 +40,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
+        view.backgroundColor = kDefaultBackground
         let settings: AppSettings = AppSettings()
         if settings.hasPasswordEnabled()
         {
@@ -50,7 +49,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
                 UserDefaults.standard.set(false, forKey: "resetPassword")
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                self.loadLoginController()
+                self.loadLoginController("")
             })
         }
         else
@@ -60,7 +59,6 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
             }
             loadDefaultController()
         }
-        
     }
     
     
@@ -85,7 +83,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
                     customNavigationController!.view.removeFromSuperview()
                     customNavigationController!.removeFromParentViewController()
                 }
-                loadLoginController()
+                loadLoginController("")
             }
         }
     }
@@ -94,6 +92,8 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     fileprivate func sendForgotEmail() {
         if !MFMailComposeViewController.canSendMail()
         {
+            PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Cannot send mail", comment: ""), message: NSLocalizedString("Make sure you set up your email account on your device!", comment: ""), presentingController: self)
+
             return
         }
         let mailController:MFMailComposeViewController = MFMailComposeViewController()
@@ -108,7 +108,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
     }
     
     
-    fileprivate func loadLoginController()
+    fileprivate func loadLoginController(_ message: String)
     {
         alertController = UIAlertController(title: NSLocalizedString("Login", comment: ""), message:"", preferredStyle: .alert)
         if nil == alertController {
@@ -129,13 +129,16 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
                         self.loadDefaultController()
                     }
                     else {
-                        self.alertController!.message = NSLocalizedString("Wrong Password! Try again", comment: "")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                            self.loadLoginController(NSLocalizedString("Wrong Password! Try again", comment: ""))
+                        })
                     }
                 }
             }
             
         }
         let forgotAction = UIAlertAction(title: NSLocalizedString("Forgot password?", comment: ""), style: .destructive) { (action) in
+            self.sendForgotEmail()
         }
         
         alertController!.addTextField { (textField) in
@@ -153,6 +156,7 @@ class PWESContentContainerController: UIViewController, PWESContentMenuHandler, 
         
     func loadDefaultController()
     {
+        view.backgroundColor = UIColor(red: 0.435294, green: 0.443137, blue: 0.47451, alpha: 1.0)
         let dashboardController: PWESDashboardViewController = PWESDashboardViewController()
         dashboardController.menuHandler = self
         self.customNavigationController = UINavigationController(rootViewController: dashboardController)
