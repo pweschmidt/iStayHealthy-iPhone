@@ -31,6 +31,8 @@ class DropboxSyncController: UITableViewController {
     let dropBoxBackupPath = "/iStayHealthy/iStayHealthy.isth"
     let dropBoxUploadPath = "/iStayHealthy/toDropBox.xml"
     let dateFormatString = "ddMMMyyyy'_'HHmmss"
+    let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    var indicatorLabel = UILabel.standard()
 
     var downloadPath: URL {
         get {
@@ -185,13 +187,32 @@ class DropboxSyncController: UITableViewController {
                 PWESAlertHandler.alertHandler.showAlertView(NSLocalizedString("Link?", comment:""), message: NSLocalizedString("You are not linked to Dropbox account. Do you want to link it up now?", comment:""), presentingController: self, actions: actions)
             }
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            tableView.deselectRow(at: indexPath, animated: true)
+        })
     }
     
-    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 36))
+        if nil != DropboxClientsManager.authorizedClient {
+            let label = UILabel.standard()
+            label?.text = ""
+            label?.frame = CGRect(x: 80, y: 0, width: self.view.bounds.size.width - 100, height: 36)
+            if nil != label {
+                footer.addSubview(label!)
+                indicatorLabel = label
+            }
+            indicator.hidesWhenStopped = true
+            indicator.frame = CGRect(x: 20, y: 0, width: 36, height: 36)
+            footer.addSubview(indicator)
+        }
+        return footer
+    }
     
     
     fileprivate func backup() {
         let xmlWriter = CoreXMLWriter()
+        startAnimation()
         xmlWriter.write { (xmlString, error) in
             if let xmlString = xmlString {
                 if let data = xmlString.data(using: .utf8, allowLossyConversion: false) {
@@ -206,28 +227,26 @@ class DropboxSyncController: UITableViewController {
                             self.uploadBackupFile(data, completionBlock: { (uploadSuccess, uploadError) in
                                 if uploadSuccess {
                                    self.renameCurrentBackupFile({ (renameSuccess, renameError) in
-                                    if renameSuccess {
-                                        self.renameUploadedFile({ (finalSuccess, finalError) in
-                                            if finalSuccess {
-                                                PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Save Finished", comment: ""), message: NSLocalizedString("Data were sent to DropBox iStayHealthy.isth.", comment: ""), presentingController: self)
-                                            }
-                                            else {
-                                                PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Something went wrong when renaming the backup file.", comment: ""), presentingController: self)
-                                            }
-                                        })
-                                    }
-                                    else {
-                                        PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Something went wrong after uploading.", comment: ""), presentingController: self)
-                                    }
+                                    self.renameUploadedFile({ (finalSuccess, finalError) in
+                                        if finalSuccess {
+                                            PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Save Finished", comment: ""), message: NSLocalizedString("Data were sent to DropBox iStayHealthy.isth.", comment: ""), presentingController: self)
+                                        }
+                                        else {
+                                            PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Something went wrong when renaming the backup file.", comment: ""), presentingController: self)
+                                        }
+                                        self.stopAnimation()
+                                    })
                                    })
                                 }
                                 else {
                                     PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Error Uploading to Dropbox", comment: ""), message: NSLocalizedString("There was an error uploading data to Dropbox.", comment: ""), presentingController: self)
+                                    self.stopAnimation()
                                 }
                             })
                         }
                         else {
                             PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Could not access the backup folder.", comment: ""), presentingController: self)
+                            self.stopAnimation()
                         }
                     })
                     
@@ -237,6 +256,7 @@ class DropboxSyncController: UITableViewController {
             }
             else if nil != error {
                 PWESAlertHandler.alertHandler.showAlertViewWithOKButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Could not create a valid backup file locally.", comment: ""), presentingController: self)
+                self.stopAnimation()
             }
         }
     }
@@ -252,10 +272,12 @@ class DropboxSyncController: UITableViewController {
                     else {
                         PWESAlertHandler.alertHandler.showAlertViewWithCancelButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Error retrieving data.", comment: ""), presentingController: self)
                     }
+                    self.stopAnimation()
                 })
             }
             else {
                 PWESAlertHandler.alertHandler.showAlertViewWithCancelButton(NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Error retrieving data.", comment: ""), presentingController: self)
+                self.stopAnimation()
             }
             
         }
@@ -276,18 +298,15 @@ class DropboxSyncController: UITableViewController {
             client.files.search(path: "", query: "iStayHealthy").response(completionHandler: { (searchResult, error) in
                 if let result = searchResult {
                     if 0 == result.matches.count {
-                        print("no matches for folder found")
                         self.createiStayHealthyFolder({ (success, nsError) in
                             completionBlock(success, nsError)
                         })
                     }
                     else {
-                        print("HURRAAAHHHH matches for folder found")
                         completionBlock(true, nil)
                     }
                 }
                 else if nil != error {
-                    print("seems we got an error \(error)")
                     self.createiStayHealthyFolder({ (success, nsError) in
                         completionBlock(success, nsError)
                     })
@@ -300,7 +319,7 @@ class DropboxSyncController: UITableViewController {
         if let client = DropboxClientsManager.authorizedClient {
             client.files.upload(path: self.dropBoxUploadPath, input: data).response(completionHandler: { (uploadResponse, error) in
                 if nil != uploadResponse {
-                    
+                    completionBlock(true, nil)
                 }
                 else if nil != error {
                     completionBlock(false, nil)
@@ -354,12 +373,7 @@ class DropboxSyncController: UITableViewController {
         let movedFilenamePath = backupRootName + dateString + backupFileExtension
         if let client = DropboxClientsManager.authorizedClient {
             client.files.move(fromPath: dropBoxBackupPath, toPath: movedFilenamePath).response(completionHandler: { (response, error) in
-                if nil != response {
-                    self.renameUploadedFile(completionBlock)
-                }
-                else if nil != error {
-                    completionBlock(false, nil)
-                }
+                completionBlock(true, nil)
             })
         }
     }
@@ -377,6 +391,18 @@ class DropboxSyncController: UITableViewController {
         }
     }
     
+    fileprivate func startAnimation () {
+        if !indicator.isAnimating {
+            indicator.startAnimating()
+            indicatorLabel?.text = NSLocalizedString("Syncing data...", comment: "")
+        }
+    }
     
+    fileprivate func stopAnimation() {
+        if indicator.isAnimating {
+            indicator.stopAnimating()
+            indicatorLabel?.text = ""
+        }
+    }
     
 }

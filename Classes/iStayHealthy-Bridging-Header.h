@@ -28,6 +28,7 @@
 #import "SettingsTableViewController.h"
 #import "Utilities.h"
 #import "UILabel+Standard.h"
+#import "UIFont+Standard.h"
 #import "KeychainHandler.h"
 #import "AppSettings.h"
 #import "CoreXMLWriter.h"
