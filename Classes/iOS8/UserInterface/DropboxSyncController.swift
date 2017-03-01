@@ -263,6 +263,7 @@ class DropboxSyncController: UITableViewController {
     
     
     fileprivate func restore() {
+        startAnimation()
         checkBackupAvailability { (success, error) in
             if success {
                 self.downloadBackupFile({ (success, error) in
