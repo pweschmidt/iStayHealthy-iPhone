@@ -140,8 +140,14 @@
     {
         [manager saveContextAndReturnError:&error];
     }
-    [self dismissViewControllerAnimated:YES completion:^{
-    }];
+    if ([Utilities isIPad])
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)configureTableCell:(PWESCustomTextfieldCell *)cell

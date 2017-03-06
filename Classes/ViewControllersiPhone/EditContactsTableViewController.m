@@ -54,7 +54,7 @@
     {
         [self setTitleViewWithTitle:NSLocalizedString(@"New Clinic", nil)];
         //		self.navigationItem.title = NSLocalizedString(@"New Clinic", nil);
-    }
+    }   
     self.titleStrings = [NSMutableArray arrayWithCapacity:self.editMenu.count];
 }
 
