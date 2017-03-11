@@ -35,6 +35,25 @@
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
+		0B6192C41E744AB1003D3AA1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */; };
+		0B6192C51E744AB1003D3AA1 /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
+		0B6192C61E744AB1003D3AA1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4B8B79413DEAE1C00FA9893 /* Localizable.strings */; };
+		0B6192C71E744AB1003D3AA1 /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
+		0B6192C81E744AB1003D3AA1 /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
+		0B6192C91E744AB1003D3AA1 /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
+		0B6192CA1E744AB1003D3AA1 /* NNRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD7140FD0730033C61C /* NNRTI.plist */; };
+		0B6192CB1E744AB1003D3AA1 /* EntryInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FDD140FD0850033C61C /* EntryInhibitors.plist */; };
+		0B6192CC1E744AB1003D3AA1 /* IntegraseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */; };
+		0B6192CD1E744AB1003D3AA1 /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43BE58E15F7CBE400108EF8 /* SideEffects.plist */; };
+		0B6192CE1E744AB1003D3AA1 /* Booster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDE0C197A919800B72109 /* Booster.plist */; };
+		0B6192CF1E744AB1003D3AA1 /* GeneralInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDE12197A91A700B72109 /* GeneralInhibitors.plist */; };
+		0B6192D01E744AB1003D3AA1 /* chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3015F1445400882416 /* chimes.caf */; };
+		0B6192D11E744AB1003D3AA1 /* polyphonic1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3215F1445400882416 /* polyphonic1.caf */; };
+		0B6192D21E744AB1003D3AA1 /* polyphonic2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3315F1445400882416 /* polyphonic2.caf */; };
+		0B6192D31E744AB1003D3AA1 /* ringtone1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3415F1445400882416 /* ringtone1.caf */; };
+		0B6192D41E744AB1003D3AA1 /* ringtone2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3515F1445400882416 /* ringtone2.caf */; };
+		0B6192D51E744AB1003D3AA1 /* xylophone.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3615F1445400882416 /* xylophone.caf */; };
+		0B6192D71E744BC0003D3AA1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6192D61E744BC0003D3AA1 /* Launch Screen.storyboard */; };
 		0B6E0AD319714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E0AD219714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m */; };
 		0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B706400193A1FB900CD2073 /* TimeCounter.m */; };
 		0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */; };
@@ -285,6 +304,7 @@
 		0B60485B1840D1BA0092B5FB /* PWESValueRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWESValueRange.m; path = Dashboard/PWESValueRange.m; sourceTree = "<group>"; };
 		0B60485D1840D5B30092B5FB /* NSArray+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extras.h"; path = "Categories/NSArray+Extras.h"; sourceTree = "<group>"; };
 		0B60485E1840D5B30092B5FB /* NSArray+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Extras.m"; path = "Categories/NSArray+Extras.m"; sourceTree = "<group>"; };
+		0B6192D61E744BC0003D3AA1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "iOS8/UserInterface/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0B65F95D1913917600523441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iStayHealthy/Images.xcassets; sourceTree = "<group>"; };
 		0B6E0AD119714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SeinfeldCalendarEntry+Handling.h"; path = "Categories/SeinfeldCalendarEntry+Handling.h"; sourceTree = "<group>"; };
 		0B6E0AD219714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SeinfeldCalendarEntry+Handling.m"; path = "Categories/SeinfeldCalendarEntry+Handling.m"; sourceTree = "<group>"; };
@@ -1267,6 +1287,7 @@
 		C4E2FA5019B0D9AA00D446DF /* iOS8 */ = {
 			isa = PBXGroup;
 			children = (
+				0B6192D61E744BC0003D3AA1 /* Launch Screen.storyboard */,
 				0B2DAF831A614CD900F9F317 /* Utilities */,
 				0B36926D19C491ED00C269AD /* UserInterface */,
 				0B36924619C4853900C269AD /* DataManagement */,
@@ -1303,10 +1324,10 @@
 				789E61FFC239BB9D6022B32A /* [CP] Check Pods Manifest.lock */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				0BF1D8FF1E74490F0000D25B /* Resources */,
 				72D0F7141DC7988A0090C801 /* Embed Frameworks */,
 				029569443B956B9174445F8B /* [CP] Embed Pods Frameworks */,
 				60B7EDF43F1A5BE2758710AD /* [CP] Copy Pods Resources */,
-				0BF1D8FF1E74490F0000D25B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1390,6 +1411,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B6192C41E744AB1003D3AA1 /* Settings.bundle in Resources */,
+				0B6192C51E744AB1003D3AA1 /* HIVMedications.plist in Resources */,
+				0B6192C61E744AB1003D3AA1 /* Localizable.strings in Resources */,
+				0B6192C71E744AB1003D3AA1 /* CombiMeds.plist in Resources */,
+				0B6192C81E744AB1003D3AA1 /* NRTI.plist in Resources */,
+				0B6192C91E744AB1003D3AA1 /* ProteaseInhibitors.plist in Resources */,
+				0B6192D71E744BC0003D3AA1 /* Launch Screen.storyboard in Resources */,
+				0B6192CA1E744AB1003D3AA1 /* NNRTI.plist in Resources */,
+				0B6192CB1E744AB1003D3AA1 /* EntryInhibitors.plist in Resources */,
+				0B6192CC1E744AB1003D3AA1 /* IntegraseInhibitors.plist in Resources */,
+				0B6192CD1E744AB1003D3AA1 /* SideEffects.plist in Resources */,
+				0B6192CE1E744AB1003D3AA1 /* Booster.plist in Resources */,
+				0B6192CF1E744AB1003D3AA1 /* GeneralInhibitors.plist in Resources */,
+				0B6192D01E744AB1003D3AA1 /* chimes.caf in Resources */,
+				0B6192D11E744AB1003D3AA1 /* polyphonic1.caf in Resources */,
+				0B6192D21E744AB1003D3AA1 /* polyphonic2.caf in Resources */,
+				0B6192D31E744AB1003D3AA1 /* ringtone1.caf in Resources */,
+				0B6192D41E744AB1003D3AA1 /* ringtone2.caf in Resources */,
+				0B6192D51E744AB1003D3AA1 /* xylophone.caf in Resources */,
 				0BF1D9011E7449300000D25B /* Images.xcassets in Resources */,
 				0BF1D9001E7449200000D25B /* PWESMainStoryboard.storyboard in Resources */,
 			);
@@ -1910,7 +1950,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1960,7 +1999,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
@@ -2121,7 +2159,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/piddie/Development/iStayHealthy-iPhone",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iStayHealthy_Prefix.pch;
