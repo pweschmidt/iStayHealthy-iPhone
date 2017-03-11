@@ -14,10 +14,6 @@
 		0B0C4F6B18A664B300D22990 /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C4F6A18A664B300D22990 /* CustomToolbar.m */; };
 		0B11346B198CBEC700685046 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B11346A198CBEC700685046 /* AppSettings.m */; };
 		0B1276BC198AD05B00D389FA /* IconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1276BB198AD05B00D389FA /* IconsTableViewController.m */; };
-		0B263A1F1AF4D71A0037984B /* icon_UTI_large_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A1D1AF4D71A0037984B /* icon_UTI_large_iPhone.png */; };
-		0B263A201AF4D71A0037984B /* icon_UTI_small_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A1E1AF4D71A0037984B /* icon_UTI_small_iPhone.png */; };
-		0B263A231AF4D7390037984B /* icon_UTI_large_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A211AF4D7390037984B /* icon_UTI_large_iPad.png */; };
-		0B263A241AF4D7390037984B /* icon_UTI_small_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B263A221AF4D7390037984B /* icon_UTI_small_iPad.png */; };
 		0B289FFC18758379000A67EF /* BaseEndDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFB18758379000A67EF /* BaseEndDateTableViewController.m */; };
 		0B289FFF187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B289FFE187589AB000A67EF /* EditCurrentHIVMedsTableViewController.m */; };
 		0B2DAF821A6141C900F9F317 /* XMLImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DAF811A6141C900F9F317 /* XMLImporterTests.swift */; };
@@ -26,10 +22,7 @@
 		0B2DAF871A61552300F9F317 /* PWESDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DAF841A614D1600F9F317 /* PWESDefines.swift */; };
 		0B2DF7BD19682AD600BCB111 /* SoundSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BC19682AD600BCB111 /* SoundSelectionTableViewController.m */; };
 		0B2DF7C019684C1C00BCB111 /* PWESDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2DF7BF19684C1C00BCB111 /* PWESDashboardViewController.m */; };
-		0B2EDE0A197A919800B72109 /* Booster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDE0C197A919800B72109 /* Booster.plist */; };
-		0B2EDE10197A91A700B72109 /* GeneralInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B2EDE12197A91A700B72109 /* GeneralInhibitors.plist */; };
 		0B36924E19C491C600C269AD /* PWESPersistentStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B36924C19C491C600C269AD /* PWESPersistentStoreManager.swift */; };
-		0B36926F19C4922800C269AD /* PWESMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */; };
 		0B3F19471866F9F00091704C /* EditChartsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F19461866F9F00091704C /* EditChartsTableViewController.m */; };
 		0B4064B61893C36100F858BB /* SeinfeldCalendar+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4064B51893C36100F858BB /* SeinfeldCalendar+Handling.m */; };
 		0B47527418422D2F0079A239 /* NSString+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47527318422D2F0079A239 /* NSString+Extras.m */; };
@@ -42,7 +35,6 @@
 		0B6048591840D12B0092B5FB /* PWESDataTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6048561840D12B0092B5FB /* PWESDataTuple.m */; };
 		0B60485C1840D1BA0092B5FB /* PWESValueRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485B1840D1BA0092B5FB /* PWESValueRange.m */; };
 		0B60485F1840D5B30092B5FB /* NSArray+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B60485E1840D5B30092B5FB /* NSArray+Extras.m */; };
-		0B65F95E1913917600523441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B65F95D1913917600523441 /* Images.xcassets */; };
 		0B6E0AD319714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E0AD219714B7000D80FA6 /* SeinfeldCalendarEntry+Handling.m */; };
 		0B706401193A1FB900CD2073 /* TimeCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B706400193A1FB900CD2073 /* TimeCounter.m */; };
 		0B7326CE19321E52001E6601 /* PWESVerticalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7326CD19321E52001E6601 /* PWESVerticalAxis.m */; };
@@ -86,6 +78,8 @@
 		0BD057D1198E3C5A00D7D142 /* iStayHealthy.isth in Resources */ = {isa = PBXBuildFile; fileRef = 0BD057CF198E3C5A00D7D142 /* iStayHealthy.isth */; };
 		0BD5D5301A1E77E500608AF4 /* PWESContentContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D52F1A1E77E500608AF4 /* PWESContentContainerController.swift */; };
 		0BD5D5321A1E783E00608AF4 /* PWESContentMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5D5311A1E783E00608AF4 /* PWESContentMenuHandler.swift */; };
+		0BF1D9001E7449200000D25B /* PWESMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B36926E19C4922800C269AD /* PWESMainStoryboard.storyboard */; };
+		0BF1D9011E7449300000D25B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B65F95D1913917600523441 /* Images.xcassets */; };
 		0BF338A319785D03004C3FB4 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF338A219785D03004C3FB4 /* HelpViewController.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -95,12 +89,9 @@
 		720BFE6B1DC232DB00373DDF /* PWESAlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */; };
 		72607FD41E43548300CCA866 /* DropboxAuthenicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */; };
 		72B9B43F1DC34D7E00926E0A /* PWESAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */; };
-		72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; };
-		72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D0F7151DC7989E0090C801 /* Alamofire.framework */; };
 		72D0F7181DC7991D0090C801 /* DropboxSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */; };
 		72D1A6CD1E36442500ED9E3E /* iStayHealthyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */; };
-		72F8FFD01E5DBDE5002AF84C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */; };
+		77ABA3AA3084A1F28C85DBEC /* Pods_iStayHealthy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33624D496D3E3B501546F371 /* Pods_iStayHealthy.framework */; };
 		C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */; };
 		C41D8B1617D22D92008EC822 /* EditHIVMedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D8B1517D22D92008EC822 /* EditHIVMedsTableViewController.m */; };
 		C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41EC32C180ED0EE00A49AE4 /* CoreText.framework */; };
@@ -113,7 +104,6 @@
 		C43BE57C15F7C5CE00108EF8 /* MissedMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE57B15F7C5CE00108EF8 /* MissedMedication.m */; };
 		C43BE58215F7C5CE00108EF8 /* Procedures.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58115F7C5CE00108EF8 /* Procedures.m */; };
 		C43BE58815F7C5CE00108EF8 /* PreviousMedication.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BE58715F7C5CE00108EF8 /* PreviousMedication.m */; };
-		C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43BE58E15F7CBE400108EF8 /* SideEffects.plist */; };
 		C45138F01A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C45138EF1A0D0BFF005A0339 /* ResultsViewWithValue_iPhone.m */; };
 		C4547DDE19B9FF4B006A868C /* PWESBloodPressureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4547DDD19B9FF4B006A868C /* PWESBloodPressureCell.m */; };
 		C4574AE314939D2300793164 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4574AE214939D2300793164 /* libm.dylib */; };
@@ -151,12 +141,6 @@
 		C46EB5E517EB7FCF00B9EA5A /* ProceduresListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EB5E417EB7FCF00B9EA5A /* ProceduresListTableViewController.m */; };
 		C4742B7F1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4742B7E1ADFCF0000B123CE /* PWESDataRecoveryStepsTableViewController.swift */; };
 		C48519251ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48519241ADE927B000B1DC6 /* PWESDataRecoveryHelpViewController.swift */; };
-		C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FC5140FD0360033C61C /* CombiMeds.plist */; };
-		C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FCB140FD04C0033C61C /* NRTI.plist */; };
-		C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD1140FD05F0033C61C /* ProteaseInhibitors.plist */; };
-		C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FD7140FD0730033C61C /* NNRTI.plist */; };
-		C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FDD140FD0850033C61C /* EntryInhibitors.plist */; };
-		C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4897FE3140FD0940033C61C /* IntegraseInhibitors.plist */; };
 		C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490250A14DD630700BDD906 /* CoreLocation.framework */; };
 		C491E2311B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt in Resources */ = {isa = PBXBuildFile; fileRef = C491E2301B00F745005936B0 /* iStayHealthy-Customer-Conflict.isth.txt */; };
 		C491E2441B01ECF1005936B0 /* Results.m in Sources */ = {isa = PBXBuildFile; fileRef = C491E2431B01ECF1005936B0 /* Results.m */; };
@@ -169,7 +153,6 @@
 		C4A8244A17AD4C3D00E8CA8C /* HamburgerMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8244917AD4C3C00E8CA8C /* HamburgerMenuTableViewController.m */; };
 		C4AEF82A180DC05C00107966 /* PWESDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF829180DC05C00107966 /* PWESDraw.m */; };
 		C4AEF82D180DCAB800107966 /* PWESPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AEF82C180DCAB800107966 /* PWESPlotArea.m */; };
-		C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4B8B79413DEAE1C00FA9893 /* Localizable.strings */; };
 		C4BB8A1A16D69166003D5B7A /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BB8A1916D69166003D5B7A /* KeychainHandler.m */; };
 		C4BCF09017B7A35A00F1E0F7 /* Results+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF08F17B7A35A00F1E0F7 /* Results+Handling.m */; };
 		C4BCF09317B7A81500F1E0F7 /* NSManagedObject+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF09217B7A81500F1E0F7 /* NSManagedObject+Handling.m */; };
@@ -185,19 +168,12 @@
 		C4BCF0B117B7AA6500F1E0F7 /* Contacts+Handling.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B017B7AA6500F1E0F7 /* Contacts+Handling.m */; };
 		C4BCF0B717B7C4D600F1E0F7 /* CoreXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BCF0B617B7C4D600F1E0F7 /* CoreXMLWriter.m */; };
 		C4BFAABC17B2E5090038D2A7 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAABB17B2E5090038D2A7 /* CoreDataUtils.m */; };
-		C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C0151A134251B4005E889D /* HIVMedications.plist */; };
 		C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C3494F130EF201004BE854 /* AVFoundation.framework */; };
 		C4C41A2A15F1432E00882416 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2115F1432E00882416 /* GradientButton.m */; };
 		C4C41A2B15F1432E00882416 /* NSArray-Set.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2315F1432E00882416 /* NSArray-Set.m */; };
 		C4C41A2C15F1432E00882416 /* UIImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2515F1432E00882416 /* UIImageResizer.m */; };
 		C4C41A2D15F1432E00882416 /* UINavigationBar-Button.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2715F1432E00882416 /* UINavigationBar-Button.m */; };
 		C4C41A2E15F1432E00882416 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C41A2915F1432E00882416 /* Utilities.m */; };
-		C4C41A3715F1445400882416 /* chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3015F1445400882416 /* chimes.caf */; };
-		C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3215F1445400882416 /* polyphonic1.caf */; };
-		C4C41A3A15F1445400882416 /* polyphonic2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3315F1445400882416 /* polyphonic2.caf */; };
-		C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3415F1445400882416 /* ringtone1.caf */; };
-		C4C41A3C15F1445400882416 /* ringtone2.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3515F1445400882416 /* ringtone2.caf */; };
-		C4C41A3D15F1445400882416 /* xylophone.caf in Resources */ = {isa = PBXBuildFile; fileRef = C4C41A3615F1445400882416 /* xylophone.caf */; };
 		C4C837DB16D1041C002D934F /* Results+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837DA16D1041C002D934F /* Results+Comparator.m */; };
 		C4C837DE16D10475002D934F /* SideEffects+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837DD16D10475002D934F /* SideEffects+Comparator.m */; };
 		C4C837E116D10493002D934F /* Procedures+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C837E016D10493002D934F /* Procedures+Comparator.m */; };
@@ -238,7 +214,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				72D0F7131DC7988A0090C801 /* SwiftyDropbox.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,16 +375,18 @@
 		28C3AD890F43EF2300507BA6 /* iStayHealthy.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = iStayHealthy.xcdatamodel; sourceTree = "<group>"; };
 		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* iStayHealthy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iStayHealthy_Prefix.pch; sourceTree = "<group>"; };
+		33624D496D3E3B501546F371 /* Pods_iStayHealthy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iStayHealthy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35056CAE8DE9A1A91A67F937 /* Pods-iStayHealthy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iStayHealthy.release.xcconfig"; path = "Pods/Target Support Files/Pods-iStayHealthy/Pods-iStayHealthy.release.xcconfig"; sourceTree = "<group>"; };
 		720BFE6A1DC232DB00373DDF /* PWESAlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertHandler.swift; path = iOS8/Utilities/PWESAlertHandler.swift; sourceTree = "<group>"; };
 		72607FD31E43548300CCA866 /* DropboxAuthenicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxAuthenicator.swift; path = iOS8/UserInterface/DropboxAuthenicator.swift; sourceTree = "<group>"; };
 		72B9B43E1DC34D7E00926E0A /* PWESAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESAlertAction.swift; path = iOS8/Utilities/PWESAlertAction.swift; sourceTree = "<group>"; };
-		72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyDropbox.framework; path = Carthage/Build/iOS/SwiftyDropbox.framework; sourceTree = "<group>"; };
 		72D0F7151DC7989E0090C801 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		72D0F7171DC7991D0090C801 /* DropboxSyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxSyncController.swift; path = iOS8/UserInterface/DropboxSyncController.swift; sourceTree = "<group>"; };
 		72D72DD31DCB8AD200A60DAF /* iStayHealthyAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iStayHealthyAppDelegate.swift; sourceTree = "<group>"; };
 		72D72DD51DCB8DC100A60DAF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		72F8FFCF1E5DBDE5002AF84C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iStayHealthy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iStayHealthy-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		AB2ACD06C684B2AA52FD6860 /* Pods-iStayHealthy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iStayHealthy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iStayHealthy/Pods-iStayHealthy.debug.xcconfig"; sourceTree = "<group>"; };
 		C4073E29157FCB4F00E3DDDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C40C7D48140E88D1008E2915 /* iStayHealthy 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iStayHealthy 6.xcdatamodel"; sourceTree = "<group>"; };
 		C41D8B1417D22D92008EC822 /* EditHIVMedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHIVMedsTableViewController.h; path = ViewControllersiPhone/EditHIVMedsTableViewController.h; sourceTree = "<group>"; };
@@ -661,6 +638,7 @@
 		C4F337F014D43B6B00C4F573 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C4F569A51AB0843900D57250 /* PWESCoreDictionaryImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWESCoreDictionaryImporter.swift; path = iOS8/DataManagement/PWESCoreDictionaryImporter.swift; sourceTree = "<group>"; };
 		C4FB103413A4BF05009270C5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F44E55DA74FB43F38B732C89 /* Pods-iStayHealthy.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iStayHealthy.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-iStayHealthy/Pods-iStayHealthy.distribution.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -678,10 +656,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72D0F7161DC7989E0090C801 /* Alamofire.framework in Frameworks */,
 				C41EC32D180ED0EE00A49AE4 /* CoreText.framework in Frameworks */,
 				C4EE811E1306D9890097B903 /* AudioToolbox.framework in Frameworks */,
-				72D0F7121DC7988A0090C801 /* SwiftyDropbox.framework in Frameworks */,
 				C4073E2A157FCB4F00E3DDDA /* QuartzCore.framework in Frameworks */,
 				C490250B14DD630700BDD906 /* CoreLocation.framework in Frameworks */,
 				C4F337F114D43B6B00C4F573 /* libz.dylib in Frameworks */,
@@ -696,6 +672,7 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				C4C34950130EF201004BE854 /* AVFoundation.framework in Frameworks */,
+				77ABA3AA3084A1F28C85DBEC /* Pods_iStayHealthy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,7 +800,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				72D0F7111DC7988A0090C801 /* SwiftyDropbox.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -831,6 +807,7 @@
 				0BB56690191E132F00731739 /* iStayHealthy Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				9FCDB5383AD3BBA8393DD46A /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -897,8 +874,19 @@
 				C4EE811D1306D9890097B903 /* AudioToolbox.framework */,
 				C4C3494F130EF201004BE854 /* AVFoundation.framework */,
 				0BB5668C191E132F00731739 /* XCTest.framework */,
+				33624D496D3E3B501546F371 /* Pods_iStayHealthy.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9FCDB5383AD3BBA8393DD46A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB2ACD06C684B2AA52FD6860 /* Pods-iStayHealthy.debug.xcconfig */,
+				35056CAE8DE9A1A91A67F937 /* Pods-iStayHealthy.release.xcconfig */,
+				F44E55DA74FB43F38B732C89 /* Pods-iStayHealthy.distribution.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		C45A98E217EEE35A004E13C7 /* Views */ = {
@@ -1312,11 +1300,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iStayHealthy" */;
 			buildPhases = (
-				1D60588D0D05DD3D006BFB54 /* Resources */,
+				789E61FFC239BB9D6022B32A /* [CP] Check Pods Manifest.lock */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				72D0F7101DC798220090C801 /* ShellScript */,
 				72D0F7141DC7988A0090C801 /* Embed Frameworks */,
+				029569443B956B9174445F8B /* [CP] Embed Pods Frameworks */,
+				60B7EDF43F1A5BE2758710AD /* [CP] Copy Pods Resources */,
+				0BF1D8FF1E74490F0000D25B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1374,6 +1364,7 @@
 				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1395,54 +1386,62 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+		0BF1D8FF1E74490F0000D25B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4C0151B134251B4005E889D /* HIVMedications.plist in Resources */,
-				0B65F95E1913917600523441 /* Images.xcassets in Resources */,
-				0B263A1F1AF4D71A0037984B /* icon_UTI_large_iPhone.png in Resources */,
-				C4B8B79213DEAE1C00FA9893 /* Localizable.strings in Resources */,
-				0B263A201AF4D71A0037984B /* icon_UTI_small_iPhone.png in Resources */,
-				C4897FC3140FD0360033C61C /* CombiMeds.plist in Resources */,
-				C4897FC9140FD04C0033C61C /* NRTI.plist in Resources */,
-				C4897FCF140FD05F0033C61C /* ProteaseInhibitors.plist in Resources */,
-				0B2EDE10197A91A700B72109 /* GeneralInhibitors.plist in Resources */,
-				C4897FD5140FD0730033C61C /* NNRTI.plist in Resources */,
-				C4897FDB140FD0850033C61C /* EntryInhibitors.plist in Resources */,
-				C4897FE1140FD0940033C61C /* IntegraseInhibitors.plist in Resources */,
-				0B2EDE0A197A919800B72109 /* Booster.plist in Resources */,
-				0B263A241AF4D7390037984B /* icon_UTI_small_iPad.png in Resources */,
-				0B263A231AF4D7390037984B /* icon_UTI_large_iPad.png in Resources */,
-				0B36926F19C4922800C269AD /* PWESMainStoryboard.storyboard in Resources */,
-				72F8FFD01E5DBDE5002AF84C /* Settings.bundle in Resources */,
-				C43BE58C15F7CBE400108EF8 /* SideEffects.plist in Resources */,
-				C4C41A3715F1445400882416 /* chimes.caf in Resources */,
-				C4C41A3915F1445400882416 /* polyphonic1.caf in Resources */,
-				C4C41A3A15F1445400882416 /* polyphonic2.caf in Resources */,
-				C4C41A3B15F1445400882416 /* ringtone1.caf in Resources */,
-				C4C41A3C15F1445400882416 /* ringtone2.caf in Resources */,
-				C4C41A3D15F1445400882416 /* xylophone.caf in Resources */,
+				0BF1D9011E7449300000D25B /* Images.xcassets in Resources */,
+				0BF1D9001E7449200000D25B /* PWESMainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		72D0F7101DC798220090C801 /* ShellScript */ = {
+		029569443B956B9174445F8B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyDropbox.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iStayHealthy/Pods-iStayHealthy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60B7EDF43F1A5BE2758710AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iStayHealthy/Pods-iStayHealthy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		789E61FFC239BB9D6022B32A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1895,8 +1894,8 @@
 		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB2ACD06C684B2AA52FD6860 /* Pods-iStayHealthy.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1945,8 +1944,8 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35056CAE8DE9A1A91A67F937 /* Pods-iStayHealthy.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2106,8 +2105,8 @@
 		};
 		C4C3AA431316E071000FC699 /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F44E55DA74FB43F38B732C89 /* Pods-iStayHealthy.distribution.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

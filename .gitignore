@@ -9,4 +9,6 @@ profile
 DerivedData
 Carthage/Build
 Carthage/Checkouts
-
+Pods
+Podfile.lock
+*.xcworkspacedata
